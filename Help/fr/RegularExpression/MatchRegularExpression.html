@@ -1,0 +1,57 @@
+<html><head><title>MatchRegularExpression</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MatchRegularExpression()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>MatchRegularExpression</b></font>(#ExpressionReguliere, Texte$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Teste si une chaîne de caractères correspond 
+à une expression régulière. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#ExpressionReguliere</i></td>
+<td width="90%"> 
+L'identifiant de l'expression régulière. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+La  chaîne de caractères à tester. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle s'il existe une 
+ou plusieurs correspondances, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cette expression repérera chaque mot de 3 lettres qui commence par une minuscule,</font>
+  <font color="#006666">; suivi du caractère 'b' et qui se termine par une majuscule. ex: abC</font>
+  <font color="#006666">;    </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;[a-z]b[A-Z]&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">MatchRegularExpression</font>(0, &quot;abC ABc zbA abc&quot;)
+      <b><font color="#006666">Debug</font></b> &quot;Le texte correspond !&quot;
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Aucun motif trouvé dans le texte&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createregularexpression.html">CreateRegularExpression()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isregularexpression.html>IsRegularExpression()</a> - <a href=index.html>RegularExpression Index</a> - <a href=nextregularexpressionmatch.html>NextRegularExpressionMatch()</a> -><br><br>
+
+</body></html>

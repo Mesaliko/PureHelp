@@ -1,0 +1,45 @@
+<html><head><title>SpriteOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpriteOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>SpriteOutput</b></font>(#Sprite)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt die OutputID des angegebenen Sprites, um darauf 
+<a href="../2ddrawing/index.html">2D-Zeichenoperationen</a> durchzuführen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Das Sprite, auf dem gezeichnet werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die OutputID - oder Null, wenn Zeichnen nicht möglich ist. Dieser Wert sollte direkt 
+an die <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> Funktion übergeben werden, um die Zeichenoperation zu starten. 
+Der Rückgabewert ist nur für eine Zeichenoperation gültig und kann nicht wiederverwendet 
+werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+SpriteOutput() muss im selben Thread aufgerufen werden, in dem <a href="../screen/openscreen.html">OpenScreen()</a> aufgerufen wurde. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  StartDrawing</font>(<font color="#006666">SpriteOutput</font>(<font color="#924B72">#Sprite</font>))
+    <font color="#006666">; hier folgen die Zeichenoperationen...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=spriteid.html>SpriteID()</a> - <a href=index.html>Sprite Inhaltsverzeichnis</a> - <a href=spritepixelcollision.html>SpritePixelCollision()</a> -><br><br>
+
+</body></html>

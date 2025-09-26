@@ -1,0 +1,64 @@
+<html><head><title>AddDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Date.q = <font color="#006666"><b>AddDate</b></font>(Date.q, Type, Value)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Add an amount of time to a date. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Date.q</i></td>
+<td width="90%"> 
+The date value to which the value should be added. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+The value type. It can be one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Year</font>   : Will add 'Value' Years to the date
+  <font color="#924B72">#PB_Date_Month</font>  : Will add 'Value' Months to the date
+  <font color="#924B72">#PB_Date_Week</font>   : Will add 'Value' Weeks to the date
+  <font color="#924B72">#PB_Date_Day</font>    : Will add 'Value' Days to the date
+  <font color="#924B72">#PB_Date_Hour</font>   : Will add 'Value' Hours to the date
+  <font color="#924B72">#PB_Date_Minute</font> : Will add 'Value' Minutes to the date
+  <font color="#924B72">#PB_Date_Second</font> : Will add 'Value' Seconds to the date
+</font></pre>
+
+Note: when <font color="#924B72">#PB_Date_Month</font> is used, it will automatically account for the fact that 
+the numbers of days per month varies, for example: if a month is added to '31 march 2008' the result 
+will be '30 april 2008', since april does not have 31 days. 
+
+</td></tr>
+<tr><td><i>Value</i></td>
+<td> 
+The value to add to the date. A negative value can be used to subtract a date. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the new date, -1 otherwise. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%yyyy/%mm/%dd&quot;,<font color="#006666"> AddDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_Year</font>, 2)) <font color="#006666">; Returns the current date + 2 years</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%mm/%dd/%yyyy&quot;,<font color="#006666"> AddDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_Year</font>, 2)) <font color="#006666">; Returns the current date + 2 years</font>
+
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="date.html">Date()</a>, <a href="formatdate.html">FormatDate()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Date Index</a> - <a href=convertdate.html>ConvertDate()</a> -><br><br>
+
+</body></html>

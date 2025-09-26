@@ -1,0 +1,56 @@
+<html><head><title>ReadProgramData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReadProgramData</b></font>(Program, *Buffer, Size)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Reads data from the given programs output (stdout) and puts it in the specified buffer. 
+This function waits until there is data available to read from the program. To prevent this wait, 
+<a href="availableprogramoutput.html">AvailableProgramOutput()</a> may be used first to check if there is 
+something to read. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to use. It must have been started before with <a href="runprogram.html">RunProgram()</a> and the <font color="#924B72">#PB_Program_Read</font> flag. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+The memory buffer to read the data into. A memory buffer can be created for example with <a href="../memory/allocatememory.html">AllocateMemory()</a>. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size to read, in bytes. The buffer should be large enough to handle this size. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The number of bytes actually read. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The function reads up to 'size' bytes, but also less if not that much is available 
+(but it will not return zero bytes because it always waits for some data to read). 
+<br>
+<br>
+However, the function remains blocked indefinitely if the program requests the 
+intervention of the user. For example, return a yes / no choice to the program to continue. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="readprogramstring.html">ReadProgramString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=programrunning.html>ProgramRunning()</a> - <a href=index.html>Process Index</a> - <a href=readprogramerror.html>ReadProgramError()</a> -><br><br>
+
+</body></html>

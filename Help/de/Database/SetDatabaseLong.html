@@ -1,0 +1,61 @@
+<html><head><title>SetDatabaseLong</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDatabaseLong()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDatabaseLong</b></font>(#Datenbank, StatementIndex, Wert)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Legt einen Long-Wert als Bindungsvariable (englisch &quot;bind variable&quot;) für den nächsten Aufruf 
+von <a href="databasequery.html">DatabaseQuery()</a> bzw. <a href="databaseupdate.html">DatabaseUpdate()</a> fest. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datenbank</i></td>
+<td width="90%"> 
+Die zu verwendende Datenbank. 
+
+</td></tr>
+<tr><td><i>StatementIndex</i></td>
+<td> 
+Der Index der Bindungsvariable innerhalb des Statements (der Anweisung). Die erste Variable 
+hat den Index 0. 
+
+</td></tr>
+<tr><td><i>Wert</i></td>
+<td> 
+Der für die Bindungsvariable zu verwendende Wert. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Bindungsvariablen machen das Erstellen von Statements mit variablen Daten leichter, denn 
+es gibt keine Notwendigkeit, diese Daten in den String einzufügen. Der Statement-String 
+kann die Platzhalter enthalten, und die Daten werden vor Ausführung der Anweisung 
+verknüpft (&quot;gebunden&quot;). Dieses Verfahren vermeidet auch Sicherheitslücken aufgrund von 
+möglicher &quot;SQL-Injection&quot;, welche auftreten können, wenn Daten (wie Strings) direkt in 
+den Anweisungstext eingefügt werden. Da die Anweisung nur den Platzhalter enthält, besteht 
+keine Gefahr. 
+<br>
+<br>
+Siehe <a href="databasequery.html">DatabaseQuery()</a> und <a href="databaseupdate.html">DatabaseUpdate()</a> für Beispiele, wie Bindungsvariablen in einer 
+SQL-Anweisung angegeben werden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setdatabasestring.html">SetDatabaseString()</a>, <a href="setdatabasequad.html">SetDatabaseQuad()</a>, <a href="setdatabasefloat.html">SetDatabaseFloat()</a>, <a href="setdatabasedouble.html">SetDatabaseDouble()</a> 
+<a href="setdatabaseblob.html">SetDatabaseBlob()</a>, <a href="setdatabasenull.html">SetDatabaseNull()</a>, <a href="databasequery.html">DatabaseQuery()</a>, <a href="databaseupdate.html">DatabaseUpdate()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setdatabasefloat.html>SetDatabaseFloat()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=setdatabasenull.html>SetDatabaseNull()</a> -><br><br>
+
+</body></html>

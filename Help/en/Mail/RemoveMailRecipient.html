@@ -1,0 +1,63 @@
+<html><head><title>RemoveMailRecipient</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RemoveMailRecipient()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>RemoveMailRecipient</b></font>(#Mail [, Address$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Remove a recipient from the specified mail. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+The mail to use. 
+
+</td></tr>
+<tr><td><i>Address$ (optional)</i></td>
+<td> 
+The address to remove. It must match an address from a call to <a href="addmailrecipient.html">AddMailRecipient()</a>. 
+If not specified, all the recipients are removed from the mail. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The categories from which to remove the recipient. It can be a combination of the 
+following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mail_To</font> : Main(s) recipient(s) of the mail
+  <font color="#924B72">#PB_Mail_Cc</font> : Recipient(s) which are in copy of the mail (and everybody see it)
+  <font color="#924B72">#PB_Mail_Bcc</font>: Recipient(s) which are in copy of the mail (but nobody see it)
+</font></pre>
+If not specified, all the categories are removed for the specified address. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, &quot;andre@purebasic.com&quot;, <font color="#924B72">#PB_Mail_To</font>) <font color="#006666">; Andre is the main recipient</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;fred@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Cc</font>)  <font color="#006666">; Fred is in copy</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;timo@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Bcc</font>) <font color="#006666">; Timo is in copy as well, but Andre and Fred are not aware of it</font>
+
+    <font color="#006666">; Ensure Fred is removed from every destination :-)</font>
+<font color="#006666">    RemoveMailRecipient</font>(0, &quot;fred@purebasic.com&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addmailrecipient.html">AddMailRecipient()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=mailprogress.html>MailProgress()</a> - <a href=index.html>Mail Index</a> - <a href=sendmail.html>SendMail()</a> -><br><br>
+
+</body></html>

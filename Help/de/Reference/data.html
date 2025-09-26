@@ -1,0 +1,250 @@
+<html><head><title>Data</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Data</font></b></p>
+
+<p><b>Einführung</b></p><blockquote>
+
+
+PureBasic erlaubt die Benutzung von <b><font color="#006666">Data</font></b>, um vordefinierte Blöcke mit Informationen 
+innerhalb Ihres Programms zu speichern. Dies ist sehr nützlich für Standard-Werte 
+eines Programms (Sprachen-Strings zum Beispiel) oder, in einem Spiel, zum Definieren 
+eines (vorberechneten) Sprite-Weges. 
+<br>
+<br>
+<b><font color="#006666">DataSection</font></b> muss zuerst aufgerufen werden, um den nachfolgenden Datenabschnitt (englisch &quot;Data section&quot;) anzukündigen. 
+Dies bedeutet, dass alle Sprungmarken (Labels) und Datenbestandteile in der <b><font color="#006666">DataSection</font></b> des 
+Programms gespeichert werden, welche einen viel schnelleren Zugriff als der Code-Abschnitt hat. 
+<b><font color="#006666">Data</font></b> wird benutzt zum Eingeben der Daten. <b><font color="#006666">EndDataSection</font></b> muss angegeben werden, wenn nach dem 
+Datenabschnitt weiterer Programmcode folgt. Einer der Vorteile ist, dass Sie ohne Probleme 
+verschiedene <b><font color="#006666">Datenabschnitte</font></b> in ihrem Code definieren können. Die <b><font color="#006666">Restore</font></b> und <b><font color="#006666">Read</font></b> Befehle werden 
+benutzt, um die Daten auszulesen. 
+<br>
+<br>
+Diese Funktionen sind nicht &quot;thread-sicher&quot;, verwenden Sie sie daher nicht innerhalb eines <a href="../thread/index.html">Threads</a>. 
+
+</blockquote>
+<p><b>Befehle</b></p><blockquote>
+
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+<b><font color="#006666">DataSection</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Beginnt einen Datenabschnitt (englisch &quot;Data section&quot;). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    NumerischeDaten:
+    <b><font color="#006666">Data</font></b>.w 120, 250, 645 <font color="#006666">; drei Zahlen der Größe 'Word'</font>
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+<b><font color="#006666">EndDataSection</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Beendet einen Datenabschnitt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    NumerischeDaten:
+    <b><font color="#006666">Data</font></b>.w 0, 1, 2
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+<b><font color="#006666">Data</font></b>.TypName
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Definiert Daten. Der Typ kann nur ein einfacher <a href="../reference/variables.html">Basic Typ</a> 
+(Integer, Long, Word, Byte, Ascii, Unicode, Float, Double, Quad, Character, String) 
+sein. Eine beliebige Anzahl Daten kann sich auf einer Zeile befinden, jede abgegrenzt durch 
+ein Komma ','. Eine String darf nicht länger als 8192 Zeichen sein. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    GemischteDaten:
+    <b><font color="#006666">Data</font></b>.l 100, 200, -250, -452, 145
+    <b><font color="#006666">Data</font></b>.s &quot;Hello&quot;, &quot;This&quot;, &quot;is &quot;, &quot;What ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+
+Für fortgeschrittene Programmierer: Es ist auch möglich, eine <a href="../reference/procedures.html">Prozedur</a>-<a href="../reference/memory.html">Adresse</a> 
+oder die <a href="../reference/memory.html">Adresse einer Sprungmarke</a> innerhalb eines <b><font color="#006666">Data</font></b>-Blocks zu speichern, 
+wenn dessen Typ auf Integer (.i) gesetzt wird. 
+(Die Verwendung des Typs 'Integer' speichert die (verschiedenen) Adressen in 32-Bit bzw. 64-Bit Umgebungen korrekt.) 
+Dies kann verwendet werden, um z.B. einfach virtuelle Funktionstabellen aufzubauen. 
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Max</font>(Number, Number2)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  Label:
+    
+  <b><font color="#006666">DataSection</font></b>
+    GemischteDaten:
+    <b><font color="#006666">Data</font></b>.i ?Label, @Max()
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Interface</font></b> MyObject
+<font color="#006666">    DoThis</font>()
+<font color="#006666">    DoThat</font>()
+  <b><font color="#006666">EndInterface</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">This</font>(*Self)
+<font color="#006666">    MessageRequester</font>(&quot;MyObject&quot;, &quot;This&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">That</font>(*Self)
+<font color="#006666">    MessageRequester</font>(&quot;MyObject&quot;, &quot;That&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  m.MyObject = ?VTable
+
+  m\<font color="#006666">DoThis</font>()
+  m\<font color="#006666">DoThat</font>()
+
+
+  <b><font color="#006666">DataSection</font></b>
+    VTable:
+      <b><font color="#006666">Data</font></b>.i ?Procedures
+    Procedures:
+      <b><font color="#006666">Data</font></b>.i @This(), @That()
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">  
+<b><font color="#006666">Restore</font></b> Label
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Dieses Schlüsselwort ist nützlich, um die Startposition für ein nachfolgendes <b><font color="#006666">Read</font></b> auf eine angegebene 
+Sprungmarke (Label) zu setzen. Alle für diesen Zweck verwendeten Sprungmarken sollten sich innerhalb einer 
+<b><font color="#006666">DataSection</font></b> (des Datenabschnitts) befinden, da die Daten beim Kompilieren als ein vom Programmcode separater Block 
+behandelt werden und möglicherweise von einer Sprungmarke getrennt werden, wenn die Sprungmarke außerhalb 
+der <b><font color="#006666">DataSection</font></b> platziert wurde. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Restore</font></b> StringData
+  <b><font color="#006666">Read</font></b>.s MyFirstData$
+  <b><font color="#006666">Read</font></b>.s MySecondData$
+  
+  <b><font color="#006666">Restore</font></b> NumericalData
+  <b><font color="#006666">Read</font></b>.l a
+  <b><font color="#006666">Read</font></b>.l b
+
+  <b><font color="#006666">Debug</font></b> MyFirstData$
+  <b><font color="#006666">Debug</font></b> a
+  
+  <b><font color="#006666">End</font></b>  
+  
+  <b><font color="#006666">DataSection</font></b>
+    NumericalData:    
+      <b><font color="#006666">Data</font></b>.l 100, 200, -250, -452, 145
+      
+    StringData:
+      <b><font color="#006666">Data</font></b>.s &quot;Hello&quot;, &quot;This&quot;, &quot;is &quot;, &quot;What ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+<b><font color="#006666">Read</font></b>[.&lt;Typ&gt;] &lt;Variable&gt;
+  </font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Liest die nächsten verfügbaren Daten ein. Die nächsten verfügbaren Daten können mittels des <b><font color="#006666">Restore</font></b> 
+Befehls geändert werden. Standardmäßig sind die nächsten verfügbaren Daten die zuerst deklarierten Daten. 
+Der Typ der zu lesenden Daten wird durch den 'Typ'-Suffix festgelegt. Der <a href="../reference/define.html">Standard-Typ</a> 
+wird verwendet, wenn dieser nicht angegeben wird. 
+<br>
+Es ist jedoch ratsam, den Ad-hoc-Typ zu verwenden, um eine Fehlermeldung beim Lesen des Daten-Strings zu 
+vermeiden, und um Verwirrung bzgl. des Integer-Typs zu vermeiden, der für 32-Bit-Compiler vom Typ 
+'Long' und für 64-Bit-Compiler vom Typ 'Quad' ist. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Restore</font></b> StringData
+  <b><font color="#006666">Read</font></b>.s MyFirstData$  
+  
+  <b><font color="#006666">Restore</font></b> NumericalData
+  <b><font color="#006666">Read</font></b> a   <font color="#006666">; Achtung, es wird eine Integer-Zahl gelesen (Long bei 32-Bit bzw. Quad bei 64-Bit-Compilern).</font>
+  <b><font color="#006666">Read</font></b>.q b
+  <b><font color="#006666">Read</font></b> c   <font color="#006666">; Achtung, es wird eine 'Quad'-Zahl bei 64-Bit-Compilern gelesen, auch wenn es sich bei den Daten um 'Long' handelt!</font>
+  <b><font color="#006666">Read</font></b>.l d
+  
+  <b><font color="#006666">Debug</font></b> MyFirstData$ <font color="#006666">; Zeigt 'Hello' an</font>
+  <b><font color="#006666">Debug</font></b> a  <font color="#006666">; Display 100</font>
+  <b><font color="#006666">Debug</font></b> b  <font color="#006666">; Display 111111111111111111</font>
+  <b><font color="#006666">Debug</font></b> c  <font color="#006666">; Achtung, die Anzeige hängt von Ihrem Compiler ab! : 200 bei 32-Bit bzw. 1288490189000 bei 64-Bit</font>
+  <b><font color="#006666">Debug</font></b> d  <font color="#006666">; ...analog: 300 bei 32-Bit bzw. 400 bei 64-Bit</font>
+  
+  <b><font color="#006666">End</font></b>  
+  
+  <b><font color="#006666">DataSection</font></b>
+    NumericalData:    
+      <b><font color="#006666">Data</font></b>.i 100
+      <b><font color="#006666">Data</font></b>.q 111111111111111111
+      <b><font color="#006666">Data</font></b>.l 200, 300, 400
+
+    StringData:
+      <b><font color="#006666">Data</font></b>.s &quot;Hello&quot;, &quot;This&quot;, &quot;is &quot;, &quot;What ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

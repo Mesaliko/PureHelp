@@ -1,0 +1,56 @@
+<html><head><title>StartVectorDrawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartVectorDrawing()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>StartVectorDrawing</b></font>(Output)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Prepares the vector drawing library to draw to the specified output. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Output</i></td>
+<td width="90%"> 
+The output to draw on. These functions can be used to get an output for vector drawing: 
+<br>
+<br>
+<a href="../window/windowvectoroutput.html">WindowVectorOutput()</a>: Drawing will be rendered directly on the Window 
+<br>
+<a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>: Drawing will be rendered directly on the Image data (see <a href="../image/createimage.html">CreateImage()</a>) 
+<br>
+<a href="../printer/printervectoroutput.html">PrinterVectorOutput()</a>: Drawing will be rendered directly on the Printer 
+<br>
+<a href="../gadget/canvasvectoroutput.html">CanvasVectorOutput()</a>: Drawing will be rendered directly on the <a href="../gadget/canvasgadget.html">CanvasGadget()</a> 
+<br>
+<a href="pdfvectoroutput.html">PdfVectorOutput()</a>: Drawing will be rendered to a PDF file 
+<br>
+<a href="svgvectoroutput.html">SvgVectorOutput()</a>: Drawing will be rendered to an SVG file 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if drawing is possible or zero if the operation failed. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Drawing must be finished with <a href="stopvectordrawing.html">StopVectorDrawing()</a>. 
+<br>
+<br>
+If &quot;Create thread-safe executable&quot; is enabled in the <a href="../reference/ide_compiler.html">compiler options</a> then 
+every thread has its own current drawing output, which means two threads can do drawing on separate 
+outputs at the same time. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="stopvectordrawing.html">StopVectorDrawing()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=skewcoordinates.html>SkewCoordinates()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=stopvectordrawing.html>StopVectorDrawing()</a> -><br><br>
+
+</body></html>

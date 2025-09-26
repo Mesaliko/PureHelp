@@ -1,0 +1,269 @@
+<html><head><title>Shaders.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Shader examples
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+<b><font color="#006666">IncludeFile</font></b> <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Screen3DRequester.pb&quot;
+
+<b><font color="#006666">Structure</font></b> PB_MeshVertexV
+    p.vector3
+    n.vector3
+    t.vector3
+    u.f
+    v.f
+    color.l
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Global</font></b> n=64,n2=n/2
+<b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">p0</font>.vector3(n,n)
+<b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">p1</font>.vector3(n,n)
+<b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">t</font>.PB_MeshVertexv(n,n) 
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, RollZ
+<b><font color="#006666">Define</font></b> cpt,co0,co1,co,cf,cf0,cf1,tx0,tx1, dt_trans=60*4,dt_tot=60*6
+<b><font color="#006666">Define</font></b>.f rx,ry,rz,trans 
+<b><font color="#006666">Define</font></b> ex, ey, i, j, fdf
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ColorBlend</font>(color1.l, color2.l, blend.f)
+    <b><font color="#006666">Protected</font></b> r.w,g.w,b.w,a.w
+    r=<font color="#006666">  Red</font>(color1) + (<font color="#006666">Red</font>(color2)     -<font color="#006666"> Red</font>(color1)) * blend
+    g=<font color="#006666">Green</font>(color1) + (<font color="#006666">Green</font>(color2) -<font color="#006666"> Green</font>(color1)) * blend
+    b=<font color="#006666"> Blue</font>(color1) + (<font color="#006666">Blue</font>(color2) -<font color="#006666">   Blue</font>(color1)) * blend
+    a=<font color="#006666">Alpha</font>(color1) + (<font color="#006666">Alpha</font>(color2) -<font color="#006666"> Alpha</font>(color1)) * blend
+    <b><font color="#006666">ProcedureReturn</font></b>  <font color="#006666">RGBA</font>(r,g,b,a)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">material</font>(n,tx,scale,culling,tx0=0,tx1=0)
+<font color="#006666">    CreateShaderMaterial</font>(n,0):<font color="#006666">MaterialShaderTexture</font>(n,<font color="#006666">TextureID</font>(tx0),<font color="#006666">TextureID</font>(tx1),0,0)
+<font color="#006666">    MaterialShininess</font>(n,256,$ffffff)
+    <b><font color="#006666">If</font></b> culling:<font color="#006666">MaterialCullingMode</font>(n,<font color="#924B72">#PB_Material_AntiClockWiseCull</font>):<b><font color="#006666">EndIf</font></b>
+<font color="#006666">    MaterialFilteringMode</font>(n,<font color="#924B72">#PB_Material_Anisotropic</font>,4)
+<font color="#006666">    ScaleMaterial</font>(n,1/scale,1/scale)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Mix3D</font>(*R.Vector3, *V1.Vector3, *V2.Vector3, r.f)
+    *R\x = *V1\x + r * (*V2\x - *V1\x)
+    *R\y = *V1\y + r * (*V2\y - *V1\y)
+    *R\z = *V1\z + r * (*V2\z - *V1\z)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">mesh_morph</font>(r.f)
+    <b><font color="#006666">Protected</font></b> i, j
+    
+    <b><font color="#006666">For</font></b> j=0 <b><font color="#006666">To</font></b> n
+        <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> n
+<font color="#006666">            Mix3D</font>(<font color="#006666">t</font>(i,j)\p,<font color="#006666">p0</font>(i,j),<font color="#006666">p1</font>(i,j) ,r)
+        <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+<font color="#006666">    CreateDataMesh</font>(0,<font color="#006666">t</font>(),8+2)
+<font color="#006666">    CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0),0,0,0)
+<font color="#006666">    CreateEntity</font>(1,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(1),0,0,0)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">geometry</font>(<b><font color="#006666">Array</font></b> <font color="#006666">p</font>.vector3(2),num,a.f,b.f,c.f,m=0)
+    <b><font color="#006666">Protected</font></b>.f u,v
+    <b><font color="#006666">Protected</font></b> i, j
+    
+    <b><font color="#006666">For</font></b> j=0 <b><font color="#006666">To</font></b> n
+        <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> n
+            <b><font color="#006666">With</font></b> <font color="#006666">p</font>(i,j)  
+                u=(j-n2*m)/n*2*<font color="#924B72">#PI</font>
+                v=(i-n2*m)/n*2*<font color="#924B72">#PI</font>   
+                <b><font color="#006666">Select</font></b> num
+                    <b><font color="#006666">Case</font></b> 0<font color="#006666">; double torre
+</font>                        \x=(a+b*(<font color="#006666">Cos</font>(u)*<font color="#006666">Sin</font>(v/2)-<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v)))*<font color="#006666">Cos</font>(u*2)
+                        \y=(a+b*(<font color="#006666">Cos</font>(u)*<font color="#006666">Sin</font>(v/2)-<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v)))*<font color="#006666">Sin</font>(u*2)
+                        \z=-b*4*(<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v/2)+<font color="#006666">Cos</font>(u)*<font color="#006666">Sin</font>(v))
+                    <b><font color="#006666">Case</font></b> 1<font color="#006666">; sphere
+</font>                        u/2
+                        \x=a*<font color="#006666">Sin</font>(u)*<font color="#006666">Cos</font>(v)
+                        \y=b*<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v)
+                        \z=c*<font color="#006666">Cos</font>(u)
+                    <b><font color="#006666">Case</font></b> 2<font color="#006666">; shell
+</font>                        u*4
+                        \x=(a+b*<font color="#006666">Cos</font>(v))*<font color="#006666">Exp</font>(c*u)*<font color="#006666">Cos</font>(u)
+                        \y=(a+b*<font color="#006666">Cos</font>(v))*<font color="#006666">Exp</font>(c*u)*<font color="#006666">Sin</font>(u)
+                        \z=(3*a+b*<font color="#006666">Sin</font>(v))*<font color="#006666">Exp</font>(c*u)-5
+                    <b><font color="#006666">Case</font></b> 3<font color="#006666">; pillow
+</font>                        u/2
+                        \x=a*<font color="#006666">Sin</font>(u)
+                        \y=b*<font color="#006666">Sin</font>(v)
+                        \z=c*<font color="#006666">Cos</font>(u)*<font color="#006666">Cos</font>(v)/<font color="#006666">Sqr</font>(2)
+                    <b><font color="#006666">Case</font></b> 4<font color="#006666">; tetraedra
+</font>                        \x=a*<font color="#006666">Cos</font>(u)
+                        \y=b*<font color="#006666">Cos</font>(v)
+                        \z=-c*<font color="#006666">Cos</font>(u+v)
+                    <b><font color="#006666">Case</font></b> 5<font color="#006666">; flower
+</font>                        \x=u*<font color="#006666">Cos</font>(v)
+                        \y=u*<font color="#006666">Sin</font>(v)
+                        \z=a*<font color="#006666">Cos</font>(b*v)
+                    <b><font color="#006666">Case</font></b> 6<font color="#006666">; hollow dice
+</font>                        \x=a*<font color="#006666">Sin</font>(u)
+                        \y=a*<font color="#006666">Sin</font>(v)
+                        \z=a*<font color="#006666">Sin</font>(u+v)
+                    <b><font color="#006666">Case</font></b> 7<font color="#006666">; thing
+</font>                        \x=a*(u/(1+u*u+v*v))
+                        \y=b*(v/(1+u*u+v*v))
+                        \z=-c*(u*v/(1+u*u+v*v))
+                    <b><font color="#006666">Case</font></b> 8<font color="#006666">; drop
+</font>                        u/2
+                        \x=b/2*a*<font color="#006666">Sin</font>(u)*<font color="#006666">Cos</font>(v)
+                        \y=b/2*a*<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v)
+                        \z=8-a*4*<font color="#006666">Sin</font>(u/2)
+                    <b><font color="#006666">Case</font></b> 9<font color="#006666">; octaedra
+</font>                        v/2
+                        \x=a*<font color="#006666">Pow</font>(<font color="#006666">Cos</font>(v),b)*<font color="#006666">Pow</font>(<font color="#006666">Cos</font>(u),c)
+                        \y=a*<font color="#006666">Pow</font>(<font color="#006666">Cos</font>(v),b)*<font color="#006666">Pow</font>(<font color="#006666">Sin</font>(u),c)
+                        \z=a*<font color="#006666">Pow</font>(<font color="#006666">Sin</font>(v),b)
+                    <b><font color="#006666">Case</font></b> 10<font color="#006666">; berlingo
+</font>                        u/<font color="#924B72">#PI</font>
+                        \x=b*a*(1+u)*<font color="#006666">Cos</font>(v)
+                        \y=b*a*(1-u)*<font color="#006666">Sin</font>(v)
+                        \z=-a*u
+                    <b><font color="#006666">Case</font></b> 11 <font color="#006666">;sort thing
+</font>                        u/(2*<font color="#924B72">#PI</font>)
+                        b=3*<font color="#006666">Cos</font>(u)/(<font color="#006666">Sqr</font>(2)-a*<font color="#006666">Sin</font>(2*u)*<font color="#006666">Sin</font>(3*v))
+                        \x=b*(<font color="#006666">Cos</font>(u)*<font color="#006666">Cos</font>(2*v)+<font color="#006666">Sqr</font>(2)*<font color="#006666">Sin</font>(u)*<font color="#006666">Cos</font>(v))
+                        \y=b*(<font color="#006666">Cos</font>(u)*<font color="#006666">Sin</font>(2*v)-<font color="#006666">Sqr</font>(2)*<font color="#006666">Sin</font>(u)*<font color="#006666">Sin</font>(v))
+                        \z=-b*3*<font color="#006666">Cos</font>(u)+8
+                <b><font color="#006666">EndSelect</font></b>
+            <b><font color="#006666">EndWith</font></b> 
+        <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">sample</font>(<b><font color="#006666">Array</font></b> <font color="#006666">p</font>.vector3(2),num)
+    <font color="#006666">;num=1;If Random(1):num=12:Else:num=2:EndIf
+</font>    <b><font color="#006666">Select</font></b> num
+        <b><font color="#006666">Case</font></b> 0:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),0,4,1,0,0)
+        <b><font color="#006666">Case</font></b> 1:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),1,8,6,3,0)
+        <b><font color="#006666">Case</font></b> 2:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),2,3,4,-0.1,0)
+        <b><font color="#006666">Case</font></b> 3:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),3,6,6,4,1)
+        <b><font color="#006666">Case</font></b> 4:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),4,4,4,5,1)
+        <b><font color="#006666">Case</font></b> 5:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),5,1,7,0,0)
+        <b><font color="#006666">Case</font></b> 6:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),6,4,0,0,0)
+        <b><font color="#006666">Case</font></b> 7:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),7,10,10,10,1)
+        <b><font color="#006666">Case</font></b> 8:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),8,3,4,0,0)
+        <b><font color="#006666">Case</font></b> 9:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),9,8,3,3,1)
+        <b><font color="#006666">Case</font></b> 10:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),10,6,0.5,0,1)
+        <b><font color="#006666">Case</font></b> 11:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),11,1,0,0,0)
+        <b><font color="#006666">Case</font></b> 12:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),2,4,3,-0.15,0)
+        <b><font color="#006666">Case</font></b> 13:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),5,2,3,0,0)
+        <b><font color="#006666">Case</font></b> 14:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),9,7,3,1,1)
+        <b><font color="#006666">Case</font></b> 15:<font color="#006666">geometry</font>(<font color="#006666">p</font>(),9,6,1,3,1)
+    <b><font color="#006666">EndSelect</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">InitEngine3D</font>()
+    
+<font color="#006666">    ExamineDesktops</font>()
+<font color="#006666">    InitSprite</font>()
+<font color="#006666">    InitKeyboard</font>()
+<font color="#006666">    InitMouse</font>()
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">Screen3DRequester</font>()
+        
+<font color="#006666">        Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">        Parse3DScripts</font>()
+<font color="#006666">        LoadTexture</font>(0, &quot;Dirt.jpg&quot;)
+<font color="#006666">        LoadTexture</font>(1, &quot;soil_wall.jpg&quot;)  
+<font color="#006666">        LoadTexture</font>(2, &quot;MRAMOR6X6.jpg&quot;)
+<font color="#006666">        LoadTexture</font>(3, &quot;Wood.jpg&quot;)
+<font color="#006666">        LoadTexture</font>(4, &quot;DosCarte.png&quot;)
+<font color="#006666">        LoadTexture</font>(5, &quot;RustySteel.jpg&quot;)
+<font color="#006666">        CreateCamera</font>(0, 0, 0, 100, 100):<font color="#006666">MoveCamera</font>(0,0,0,-18):<font color="#006666">CameraLookAt</font>(0,0,0,0)
+<font color="#006666">        CreateLight</font>(0,$ffffff, 100, 100, -100):<font color="#006666">SetLightColor</font>(0,<font color="#924B72">#PB_Light_SpecularColor</font>,$ffffff)
+<font color="#006666">        AmbientColor</font>($777777)
+        
+        <b><font color="#006666">Define</font></b> vert_pg.s=&quot;%%%#version 130%%uniform mat4 worldviewproj_matrix;//+24%uniform vec4 camera_pos_os;//+77%uniform vec4 light_pos_os;//+44 0%uniform vec4 light_att;//+41 0%uniform vec4 fog_params;//+31%%varying vec3 oviewdir;%varying vec3 olightdir;%varying vec3 onormal;%varying vec4 ovcolor;%varying float olightatt;%varying vec2 ouv;%%void main()%{%oviewdir=normalize(camera_pos_os.xyz-gl_Vertex.xyz);%olightdir=normalize(light_pos_os.xyz-gl_Vertex.xyz);%gl_Position=worldviewproj_matrix*gl_Vertex;%onormal=gl_Normal;%float Dist=distance(light_pos_os,gl_Vertex);%olightatt=1.0/(light_att.y+light_att.z*Dist+light_att.w*Dist*Dist);%ouv=(gl_TextureMatrix[0]*gl_MultiTexCoord0).xy;%ovcolor=gl_Color;%}%%%%&quot;
+        <b><font color="#006666">Define</font></b> frag_pg.s=&quot;%%%#version 130%%uniform vec4 diffuse_ml;//+69 0%uniform vec4 specular_ml;//+70 0%uniform vec4 ambient_ml;//+67 0%uniform float shininess;//+36%uniform float blend;//0.5%%uniform sampler2D tx1;//0%uniform sampler2D tx2;//1%%varying vec3 oviewdir;%varying vec3 olightdir;%varying vec3 onormal;%varying vec4 ovcolor;%varying float olightatt;%varying vec2 ouv;%%void main()%{%vec3 normal=normalize(onormal);if (gl_FrontFacing==false) normal*=-1;%vec3 viewdir=normalize(oviewdir);%vec3 lightdir=normalize(olightdir);%%vec4 tcolor=vec4(mix(texture(tx1,ouv),texture(tx2,ouv),blend))*ovcolor;%%float dif=max(dot(lightdir,normal),0)*olightatt;%float spe=pow(max(dot(normalize(lightdir+viewdir),normal),0),shininess);%gl_FragColor=vec4(tcolor.rgb,1)*(ambient_ml+diffuse_ml*dif)+specular_ml*tcolor.a*spe;%}%%%&quot;
+        
+<font color="#006666">        CreateShader</font>(0,vert_pg,frag_pg)
+        
+        
+        <b><font color="#006666">For</font></b> j=0 <b><font color="#006666">To</font></b> n
+            <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> n
+                <b><font color="#006666">With</font></b> <font color="#006666">t</font>(i,j)
+                    \u=i/n
+                    \v=j/n
+                    \color=$ffffffff
+                <b><font color="#006666">EndWith</font></b>
+            <b><font color="#006666">Next</font></b>
+        <b><font color="#006666">Next</font></b>
+        
+        
+        
+        <b><font color="#006666">Repeat</font></b>
+<font color="#006666">            Screen3DEvents</font>()
+            
+            <b><font color="#006666">If</font></b> cpt=0
+<font color="#006666">                CopyArray</font>(<font color="#006666">p1</font>(),<font color="#006666">p0</font>()):<font color="#006666">sample</font>(<font color="#006666">p1</font>(),<font color="#006666">Random</font>(15))
+                co0=co1:co1=<font color="#006666">RGB</font>(<font color="#006666">Random</font>(127),<font color="#006666">Random</font>(127),<font color="#006666">Random</font>(127))
+                cf0=cf1:cf1=<font color="#006666">RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666">Random</font>(255),<font color="#006666">Random</font>(255))
+                tx0=tx1:tx1=<font color="#006666">Random</font>(5)
+<font color="#006666">                material</font>(0,0,4,0,tx0,tx1)
+<font color="#006666">                material</font>(1,1,4,1,tx0,tx1)
+            <b><font color="#006666">EndIf</font></b>
+            
+            <b><font color="#006666">If</font></b> cpt&lt;=dt_trans
+                trans=(1-<font color="#006666">Cos</font>(cpt/dt_trans*<font color="#924B72">#PI</font>))/2
+<font color="#006666">                mesh_morph</font>(trans)
+<font color="#006666">                MaterialShaderParameter</font>(0,1,&quot;blend&quot;,<font color="#924B72">#PB_Shader_Float</font>,trans,0,0,0)
+<font color="#006666">                MaterialShaderParameter</font>(1,1,&quot;blend&quot;,<font color="#924B72">#PB_Shader_Float</font>,trans,0,0,0)
+                co=<font color="#006666">ColorBlend</font>(co0,co1,trans)
+<font color="#006666">                SetMaterialColor</font>(0,<font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>,$808080+co)
+<font color="#006666">                SetMaterialColor</font>(1,<font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>,$ffffff-co)
+                cf=<font color="#006666">ColorBlend</font>(cf0,cf1,trans)
+<font color="#006666">                CameraBackColor</font>(0,cf)
+            <b><font color="#006666">EndIf</font></b>
+            
+<font color="#006666">            ExamineMouse</font>()
+<font color="#006666">            ExamineKeyboard</font>()
+            
+            <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F12</font>):fdf=1-fdf:<b><font color="#006666">If</font></b> fdf:<font color="#006666">CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Wireframe</font>):<b><font color="#006666">Else</font></b>:<font color="#006666">CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Textured</font>):<b><font color="#006666">EndIf</font></b>:<b><font color="#006666">EndIf</font></b>
+            <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Space</font>)=0 <b><font color="#006666">And</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Right</font>)=0:cpt=(cpt+1)%dt_tot:<b><font color="#006666">EndIf</font></b>
+            
+            rx+0.8:ry+0.5:rz+0.6
+            
+<font color="#006666">            RotateEntity</font>(0,rx,ry,rz,0)
+<font color="#006666">            RotateEntity</font>(1,rx,ry,rz,0)
+<font color="#006666">            RenderWorld</font>()
+<font color="#006666">            FlipBuffers</font>() 
+            
+            <b><font color="#006666">While</font></b>  <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+            
+            <font color="#006666">; Speed down with a delay
+</font><font color="#006666">            Delay</font>(10)
+            
+        <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Middle</font>)
+    <b><font color="#006666">EndIf</font></b>
+    
+<b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Error&quot;, &quot;The 3D Engine can't be initialized&quot;, 0)
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>
+
+</font></pre>
+</body></html>

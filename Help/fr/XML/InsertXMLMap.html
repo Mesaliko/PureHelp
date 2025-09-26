@@ -1,0 +1,93 @@
+<html><head><title>InsertXMLMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertXMLMap()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>InsertXMLMap</b></font>(NoeudParent, Map() [, NoeudPrecedent])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Insère une map dans un noeud. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NoeudParent</i></td>
+<td width="90%"> 
+Le noeud dans lequel insérer le nouveau 
+noeud. 
+<br>
+<br>
+Pour insérer le nouveau noeud à la racine 
+de l'arbre, utiliser <a href="rootxmlnode.html">RootXMLNode()</a>. 
+
+</td></tr>
+<tr><td><i>Map()</i></td>
+<td> 
+La map à insérer. 
+
+</td></tr>
+<tr><td><i>NoeudPrecedent (optionnel)</i></td>
+<td> 
+Un noeud enfant du noeud parent après qui 
+le nouveau noeud doit être inséré. 
+<br>
+Si cette valeur est 0 ou non spécifiée, le 
+nouveau noeud est inséré comme premier 
+enfant de son parent. <br>
+Si cette valeur est -1, le noeud est 
+inséré comme dernier enfant de son parent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nouveau noeud XML s'il a été créé avec 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les règles spécifiées dans <a href="createxmlnode.html">CreateXMLNode()</a> pour 
+le cas où un nouveau noeud est inséré 
+s'appliquent également à cette fonction. 
+<br>
+<br>
+Le noeud inséré est nommé &quot;map&quot; et les 
+éléments de la liste sont insérés sous le 
+nom &quot;element&quot;. 
+Chaque noeud d'élément aura un attribut 
+nommé &quot;key&quot; contenant la clé de l'élément. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cet exemple produit l'arbre XML suivant:</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; &lt;map&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;DE&quot;&gt;Allemagne&lt;/element&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;US&quot;&gt;United States&lt;/element&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;FR&quot;&gt;France&lt;/element&gt;</font>
+  <font color="#006666">; &lt;/map&gt;</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+<font color="#006666">  Pays</font>(&quot;DE&quot;) = &quot;Allemagne&quot;
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;  
+<font color="#006666">  Pays</font>(&quot;US&quot;) = &quot;United States&quot;
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateXML</font>(0)
+<font color="#006666">    InsertXMLMap</font>(<font color="#006666">RootXMLNode</font>(0),<font color="#006666"> Pays</font>())
+<font color="#006666">    FormatXML</font>(0, <font color="#924B72">#PB_XML_ReFormat</font>)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeXML</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="extractxmlmap.html">ExtractXMLMap()</a>, <a href="insertxmlarray.html">InsertXMLArray()</a>, 
+<a href="insertxmllist.html">InsertXMLList()</a>, <a href="insertxmlstructure.html">InsertXMLStructure()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=insertxmllist.html>InsertXMLList()</a> - <a href=index.html>XML Index</a> - <a href=insertxmlstructure.html>InsertXMLStructure()</a> -><br><br>
+
+</body></html>

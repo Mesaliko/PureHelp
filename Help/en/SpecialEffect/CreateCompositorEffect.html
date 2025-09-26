@@ -1,0 +1,47 @@
+<html><head><title>CreateCompositorEffect</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateCompositorEffect()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateCompositorEffect</b></font>(#Effect, CameraID, EffectName$)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Create a new compositor effect. Once created, the effect is immediately applied to the rendering. It is possible 
+to hide the effect with <a href="hideeffect.html">HideEffect()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Effect</i></td>
+<td width="90%"> 
+The number to identify the new effect. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to 
+auto-generate this number. 
+
+</td></tr>
+<tr><td><i>CameraID</i></td>
+<td> 
+The camera to apply the effect. This effect will only affect this camera. 
+To get a valid 'CameraID', use <a href="../camera/cameraid.html">CameraID()</a>. 
+
+</td></tr>
+<tr><td><i>EffectName$</i></td>
+<td> 
+Name of effect, as described in the OGRE compositor file (usually a '.compositor' file). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the effect was created successfully and zero if there was an error. 
+If <font color="#924B72">#PB_Any</font> was used as the #Effect parameter then the new generated number is returned on success. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freeeffect.html">FreeEffect()</a>, <a href="hideeffect.html">HideEffect()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=compositoreffectparameter.html>CompositorEffectParameter()</a> - <a href=index.html>SpecialEffect Index</a> - <a href=createlensflareeffect.html>CreateLensFlareEffect()</a> -><br><br>
+
+</body></html>

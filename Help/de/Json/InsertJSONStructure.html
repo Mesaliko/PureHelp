@@ -1,0 +1,70 @@
+<html><head><title>InsertJSONStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertJSONStructure()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>InsertJSONStructure</b></font>(JSONWert, *Puffer, Struktur)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt den Inhalt des angegebenen Struktur-Speichers in den angegebenen JSON-Wert ein. 
+Der JSON-Wert wird auf den <a href="jsontype.html">Typ</a> <font color="#924B72">#PB_JSON_Object</font> geändert und 
+enthält dann ein Element (Mitglied) für jedes Struktur-Element. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONWert</i></td>
+<td width="90%"> 
+Der JSON-Wert. Der vorherige Inhalt des Werts wird auf den Inhalt der Struktur geändert. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Die Adresse der in den JSON-Wert einzufügenden <a href="../reference/structures.html">Struktur</a>. 
+
+</td></tr>
+<tr><td><i>Struktur</i></td>
+<td> 
+Der Typ der einzufügenden <a href="../reference/structures.html">Struktur</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    FirstName$
+    LastName$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Books</font>.s()
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Define</font></b> P.Person
+  P\FirstName$ = &quot;John&quot;
+  P\LastName$  = &quot;Smith&quot;
+  P\Age        = 42
+<font color="#006666">  AddElement</font>(P\<font color="#006666">Books</font>()): P\<font color="#006666">Books</font>() = &quot;Investing For Dummies&quot;
+<font color="#006666">  AddElement</font>(P\<font color="#006666">Books</font>()): P\<font color="#006666">Books</font>() = &quot;English Grammar For Dummies&quot;
+<font color="#006666">  AddElement</font>(P\<font color="#006666">Books</font>()): P\<font color="#006666">Books</font>() = &quot;A Little Bit of Everything For Dummies&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+<font color="#006666">    InsertJSONStructure</font>(<font color="#006666">JSONValue</font>(0), @P, Person)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0, <font color="#924B72">#PB_JSON_PrettyPrint</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="insertjsonarray.html">InsertJSONArray()</a>, <a href="insertjsonlist.html">InsertJSONList()</a>, <a href="insertjsonmap.html">InsertJSONMap()</a>, 
+<a href="extractjsonarray.html">ExtractJSONArray()</a>, <a href="extractjsonlist.html">ExtractJSONList()</a>, <a href="extractjsonmap.html">ExtractJSONMap()</a>, <a href="extractjsonstructure.html">ExtractJSONStructure()</a>, 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=insertjsonmap.html>InsertJSONMap()</a> - <a href=index.html>Json Inhaltsverzeichnis</a> - <a href=isjson.html>IsJSON()</a> -><br><br>
+
+</body></html>

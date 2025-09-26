@@ -1,0 +1,73 @@
+<html><head><title>ImageVectorOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageVectorOutput()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ImageVectorOutput</b></font>(#Image [, UniteDeMesure])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le numéro d'identification OutputID 
+d'une image afin d'effectuer des opérations 
+de <a href="../vectordrawing/index.html">dessin vectoriel</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à utiliser. 
+
+</td></tr>
+<tr><td><i>UniteDeMesure (optionnel)</i></td>
+<td> 
+Spécifie l'unité utilisée pour mesurer les distances sur le dessin.<br>
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Unit_Pixel</font>     : Les valeurs sont mesurées en pixels (Par défaut)(ou point (dots) pour les imprimantes)
+  <font color="#924B72">#PB_Unit_Point</font>     : Les valeurs sont mesurées en points (1/72 pouce = 25.4/72 mm = 0,352 778 mm)
+  <font color="#924B72">#PB_Unit_Inch</font>      : Les valeurs sont mesurées en pouces (25,4 millimètres)
+  <font color="#924B72">#PB_Unit_Millimeter</font>: Les valeurs sont mesurées en millimètres (0,039 370 pouce)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'identifiant ouputID ou zéro si le 
+dessin n'est pas possible. 
+<br>
+<br>
+Cette valeur doit être transmise directement 
+à la fonction <a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> pour lancer 
+l'opération de dessin. 
+<br>
+<br>
+La valeur de retour n'est valable que pour 
+une seule opération de dessin et ne peut pas 
+être réutilisée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si l'image est multi-image (multi-trame), l'image courante sera utilisée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  StartVectorDrawing</font>(<font color="#006666">ImageVectorOutput</font>(<font color="#924B72">#Image</font>, <font color="#924B72">#PB_Unit_Millimeter</font>))
+    <font color="#006666">; code de dessin ici ...</font>
+<font color="#006666">  StopVectorDrawing</font>()
+</font></pre>
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction ne peut pas être utilisée avec 
+les fichiers icône (*.ico). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a>, <a href="imageoutput.html">ImageOutput()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=imageoutput.html>ImageOutput()</a> - <a href=index.html>Image Index</a> - <a href=imagewidth.html>ImageWidth()</a> -><br><br>
+
+</body></html>

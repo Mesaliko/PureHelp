@@ -1,0 +1,72 @@
+<html><head><title>FreeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FreeImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FreeImage</b></font>(#Image)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprime une image et libère la mémoire 
+associée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à supprimer. 
+<br>
+<br>
+Si <font color="#924B72">#PB_All</font> est spécifié, toutes les images 
+restantes seront libérées. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Toutes les images restantes sont 
+automatiquement supprimées quand le programme 
+se termine. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 426, 128, &quot;FreeImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ImageGadget</font>(0, 0, 0, 128, 128,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples\Sources\Data\GeeBee2.bmp&quot;))
+<font color="#006666">    ButtonGadget</font>(1, 138, 50, 150, 30, &quot;Couper l'image en 2 -&gt;&quot;)
+<font color="#006666">    ImageGadget</font>(2, 298, 0, 128, 128, 0)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()          
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          <b><font color="#006666">Case</font></b> 1 
+            <b><font color="#006666">If</font></b> <font color="#006666">IsImage</font>(0)
+<font color="#006666">            GrabImage</font>(0, 1, 0, 0, 128, 64)<font color="#006666">; Coupe l'image</font>
+<font color="#006666">            SetGadgetState</font>(2,<font color="#006666"> ImageID</font>(1)) <font color="#006666">; Affichage</font>
+<font color="#006666">            SetGadgetState</font>(0, 0) <font color="#006666">; Efface l'image d'origine</font>
+<font color="#006666">            FreeImage</font>(0)         <font color="#006666">; Detruit l'image d'origine</font>
+          <b><font color="#006666">EndIf</font></b>
+          
+        <b><font color="#006666">EndSelect</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="loadimage.html">LoadImage()</a>, 
+<a href="catchimage.html">CatchImage()</a>, <a href="copyimage.html">CopyImage()</a>, 
+<a href="grabimage.html">GrabImage()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=encodeimage.html>EncodeImage()</a> - <a href=index.html>Image Index</a> - <a href=getimageframe.html>GetImageFrame()</a> -><br><br>
+
+</body></html>

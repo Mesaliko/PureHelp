@@ -1,0 +1,73 @@
+<html><head><title>DeleteMapElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeleteMapElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>DeleteMapElement</b></font>(Map() [, Key$])  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Entfernt das aktuelle Element oder das Element mit dem angegebenen Schlüssel (Key$) 
+aus der angegebenen Map. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+Die zu verwendende Map. 
+
+</td></tr>
+<tr><td><i>Key$ (optional)</i></td>
+<td> 
+Der Schlüssel (Key$) für den zu entfernenden Eintrag. Wird dieser nicht angegeben, 
+dann wird das aktuelle Element der Map gelöscht. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Speicheradresse des neuen aktuellen Elements in der Map zurück. 
+Falls die Map nach der Löschung kein aktuelles Element hat, ist das Ergebnis gleich 0. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Nach diesem Aufruf wird vorherige 
+Element (dasjenige vor dem gelöschten Element) zum neuen aktuellen Element. Dabei handelt 
+es sich um ein beliebiges Element, da eine Map nicht sortiert ist. Wenn dieses Element nicht 
+existiert (mit anderen Worten, Sie haben das erste Element in der Map gelöscht), dann gibt 
+es kein aktuelles Element mehr; Sie befinden sich vor dem ersten Element, wie nach einem 
+<a href="resetmap.html">ResetMap()</a>. Wenn sich nur ein Element in der Map befunden hat, wenn Sie dieses 
+gelöscht haben, dann bleiben Sie ohne ein aktuelles Element zurück! 
+<br>
+<br>
+Wenn der optionale Parameter 'Key$' (Schlüssel) angegeben wird, dann gibt es nach 
+diesem Aufruf kein aktuelles Element mehr. Verwenden Sie diesen Parameter daher nicht, wenn 
+der Befehl innerhalb einer <a href="../reference/foreach_next.html">ForEach : Next</a> Schleife verwendet wird! 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Country</font>.s()
+
+<font color="#006666">  Country</font>(&quot;US&quot;) = &quot;United States&quot;
+<font color="#006666">  Country</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Country</font>(&quot;GE&quot;) = &quot;Germany&quot;
+
+  <font color="#006666">; Löschen eines Landes</font>
+<font color="#006666">  DeleteMapElement</font>(<font color="#006666">Country</font>(), &quot;FR&quot;)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Country</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Country</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="addmapelement.html">AddMapElement()</a>, <a href="clearmap.html">ClearMap()</a>, <a href="mapsize.html">MapSize()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=copymap.html>CopyMap()</a> - <a href=index.html>Map Inhaltsverzeichnis</a> - <a href=findmapelement.html>FindMapElement()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,68 @@
+<html><head><title>PreviousDatabaseRow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PreviousDatabaseRow()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>PreviousDatabaseRow</b></font>(#BaseDeDonnees)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie les informations relatives à 
+l'enregistrement précédent. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BaseDeDonnees</i></td>
+<td width="90%"> 
+La base de données à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Si le résultat est zéro alors il n'y a 
+plus d'enregistrement précédent disponible 
+(début de fichier). 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Attention, l'option 
+<font color="#924B72">#PB_Database_DynamicCursor</font> doit être 
+spécifiée pour que la fonction 
+<a href="databasequery.html">DatabaseQuery()</a> puisse fonctionner. 
+<br>
+<br>
+Si cette commande renvoie zéro même s'il y 
+a des enregistrements avant l'enregistrement 
+courant, alors cette commande n'est pas 
+supportée par le driver ODBC. En effet, un 
+driver ODBC n'est pas obligé d'implémenter 
+cette commande (contrairement à 
+<a href="nextdatabaserow.html">NextDatabaseRow()</a>) pour être conforme à la 
+norme ODBC. Bien entendu, si cette commande 
+fonctionne correctement avec un driver, elle 
+fonctionnera correctement sur tous les 
+ordinateurs utilisant ce driver. 
+<br>
+<br>
+C'est une commande spécifique aux 
+<a href="useodbcdatabase.html">bases de données ODBC</a>. 
+Les <a href="usesqlitedatabase.html">bases de données SQLite</a> 
+ne supportent pas cette commande. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getdatabaseblob.html">GetDatabaseBlob()</a>, 
+<a href="getdatabasedouble.html">GetDatabaseDouble()</a>, 
+<a href="getdatabasefloat.html">GetDatabaseFloat()</a>, 
+<a href="getdatabaselong.html">GetDatabaseLong()</a>, 
+<a href="getdatabasequad.html">GetDatabaseQuad()</a>, 
+<a href="getdatabasestring.html">GetDatabaseString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=opendatabaserequester.html>OpenDatabaseRequester()</a> - <a href=index.html>Database Index</a> - <a href=setdatabaseblob.html>SetDatabaseBlob()</a> -><br><br>
+
+</body></html>

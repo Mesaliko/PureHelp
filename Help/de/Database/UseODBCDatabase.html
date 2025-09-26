@@ -1,0 +1,49 @@
+<html><head><title>UseODBCDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseODBCDatabase()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>UseODBCDatabase</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Initialisiert die ODBC Datenbank-Programmumgebung zur weiteren Benutzung. Es wird versucht, 
+den ODBC-Treiber zu laden und die benötigten Ressourcen zu reservieren. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ist das Ergebnis gleich 0, dann ist der ODBC-Treiber nicht verfügbar oder ist zu alt (ODBC 3.0 oder besser 
+wird benötigt) und alle Datenbank-Funktionsaufrufe sollten nicht verwendet werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Nach dem Aufruf von UseODBCDatabase() muss zuerst eine Datenbank mittels <a href="opendatabase.html">OpenDatabase()</a> und einem 
+registrierten ODBC-Datenbanknamen als Datenbank, oder mittels <a href="opendatabaserequester.html">OpenDatabaseRequester()</a> geöffnet werden, bevor 
+weitere Datenbank-Befehle verwendet werden können. 
+<br>
+<br>
+Es ist möglich, durch Aufruf der Funktion <a href="examinedatabasedrivers.html">ExamineDatabaseDrivers()</a> eine Liste 
+der verfügbaren Treiber zu erhalten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseODBCDatabase</font>()
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, &quot;MySQL-ODBC&quot;, &quot;user&quot;, &quot;password&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Connected to MySQL&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Connection failed: &quot;+<font color="#006666">DatabaseError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a>, <a href="usemysqldatabase.html">UseMySQLDatabase()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=usemysqldatabase.html>UseMySQLDatabase()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=usepostgresqldatabase.html>UsePostgreSQLDatabase()</a> -><br><br>
+
+</body></html>

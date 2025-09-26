@@ -1,0 +1,439 @@
+<html><head><title>Editing features</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Editing features</font></b></p>
+
+The PureBasic IDE acts like any other Text Editor when it comes to the basic editing features. 
+The cursor keys as well as Page Up/Page Down, Home and End keys can be used to navigate through the code. 
+Ctrl+Home navigates to the beginning of the file and Ctrl+End  to the End. 
+<br>
+<br>
+The default shortcuts Ctrl+C (copy), Ctrl+X (cut) and Ctrl+V (paste) can be used for editing. 
+The &quot;Insert&quot; key controls whether text is inserted or overwritten. The Delete key does a forward delete. 
+Holding down the Shift key and using the arrow keys selects text. 
+<br>
+<br>
+The shortcuts Ctrl+Shift+Up and Ctrl+Shift+Down allow you to move a line up or down. 
+<br>
+The shortcut Ctrl+D duplicates a selection. 
+<br>
+<br>
+In Windows, the shortcuts Ctrl+Plus and Ctrl+Minus allow you to zoom in and out 
+the display of all tabs and Ctrl+0 restores the default zoom. Linux and OSX users 
+can create them themselves. The shortcut Ctrl+mouse wheel only zooms the current 
+tab. 
+<br>
+<br>
+The shortcuts Ctrl+Tab and Ctrl+Shift+Tab allow you to move around the open tabs. 
+<br>
+<br>
+There are many shortcuts available, like Ctrl+Shift+U/L/X to change the case, etc. 
+Go to <a href="../reference/ide_preferences.html">Preferences</a> (menu &quot;Files&quot; / &quot;Preferences / General / Shortcuts&quot;. 
+<br>
+<br>
+Furthermore, the IDE has many extra editing features specific to programming or PureBasic. 
+<br>
+<br>
+
+
+<p><b>Indentation:</b></p><blockquote>
+
+When you press enter, the indentation (number of space/tab at the beginning of the line) of the current 
+and next line will be automatically corrected depending on the <a href="../reference/general_rules.html">keywords</a> that exist on these lines. 
+A &quot;block mode&quot; is also available where the new line simply gets the same indentation as the previous one. 
+The details of this feature can be customized in the  <a href="../reference/ide_preferences.html">preferences</a>. 
+
+
+</blockquote>
+<p><b>Tab characters:</b></p><blockquote>
+
+By default, the IDE does not insert a real tab when pressing the Tab key, as many 
+programmers see it as a bad thing to use real tabs in source code. 
+<br>
+<br>
+It instead inserts two spaces. This behavior can be changed in the Preferences. 
+See <a href="../reference/ide_preferences.html">Customizing the IDE</a> for more information. 
+
+
+</blockquote>
+<p><b>Special Tab behavior:</b></p><blockquote>
+
+When the Tab key is pressed while nothing or only a few characters are selected, 
+the Tab key acts as mentioned above (inserting a number of spaces, or a real tab if 
+configured that way). 
+<br>
+<br>
+However when one or more full lines are selected, the reaction is 
+different. In that case at the beginning of each selected line, it will insert spaces or 
+a tab (depending on the configuration). This increases the indentation of the whole selected block. 
+<br>
+<br>
+Marking several lines of text and pressing Shift+Tab reverses this behavior. It removes 
+spaces/tabs at the start of each line in order to reduce the indentation of the whole block. 
+
+
+</blockquote>
+<p><b>Indentation/Alignment of comments:</b></p><blockquote>
+
+Similar to the special tab behavior above, the keyboard shortcuts Ctrl+E and Ctrl+Shift+E 
+(CMD+E and CMD+Shift+E on OSX) can be used to change the indentation of only the comments 
+in a selected block of code. This helps in aligning comments at the end of code lines to 
+make the code more readable. The used shortcut can be configured in the 
+<a href="../reference/ide_preferences.html">preferences</a>. 
+
+
+</blockquote>
+<p><b>Selecting blocks of code:</b></p><blockquote>
+
+The shortcut Ctrl+M (CMD+M on OSX) can be used to select the block of code that 
+contains caret position (i.e. the surrounding If block, loop or procedure). 
+Repeated usage of the shortcut selects further surrounding code blocks. 
+<br>
+<br>
+The shortcut Ctrl+Shift+M (CMD+Shift+M on OSX) reverses the behavior and reverts the 
+selection to the block that was selected before the last usage of the Ctrl+M shortcut. 
+<br>
+<br>
+The used shortcuts can be configured in the <a href="../reference/ide_preferences.html">preferences</a>. 
+
+</blockquote>
+<p><b>Double-clicking on source text:</b></p><blockquote>
+
+Double-clicking on a word selects the whole word as usual. However in some cases, 
+double-clicking has a special meaning: 
+<br>
+<br>
+When double-clicking on the name of a <a href="../reference/procedures.html">procedure</a> call, while 
+holding down the Ctrl Key, the cursor automatically jumps to the declaration of this procedure 
+(the source containing this must currently open or part of the same project). 
+<br>
+<br>
+When double-clicking on an <a href="../reference/includes.html">IncludeFile</a> or 
+<a href="../reference/includes.html">XincludeFile</a> statement, the IDE will 
+try to open that file. (This is only possible if the included file is written 
+as a literal string, and not through for example a constant.) 
+<br>
+<br>
+In the same way, if you double-click on an IncludeBinary statement, the IDE will 
+try to display that file in the internal <a href="../reference/ide_tools.html">file viewer</a>. 
+
+</blockquote>
+<p><b>Marking of matching Braces and Keywords:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_match.png"></p>
+
+When the cursor is on an opening or closing brace the IDE will highlight the other brace that matches it. If a 
+matching brace could not be found (which is a syntax error in PureBasic) the IDE will highlight the current 
+brace in red. This same concept is applied to keywords. If the cursor is on a Keyword such as &quot;If&quot;, the IDE 
+will underline this keyword and all keywords that belong to it such as &quot;Else&quot; or &quot;EndIf&quot;. If there is a mismatch 
+in the keywords it will be underlined in red. The &quot;Goto matching Keyword&quot; menu entry described below can be 
+used to quickly move between the matching keywords. 
+<br>
+<br>
+The brace and keyword matching can be configured in the <a href="../reference/ide_preferences.html">Preferences</a>. 
+
+
+</blockquote>
+<p><b>Command help in the status bar:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_commandhelp.png"></p>
+
+While typing, the IDE will show the needed parameters for any PureBasic function 
+whose parameters you are currently typing. This makes it easy to see any more 
+parameters you still have to add to this function. This also works for <a href="../reference/procedures.html">procedures</a>, 
+<a href="../reference/prototypes.html">prototypes</a>, <a href="../reference/interfaces.html">interfaces</a> or 
+<a href="../reference/import_endimport.html">imported functions</a> in your code as long as they are declared in the same source 
+code or <a href="../reference/ide_projects.html">project</a>. 
+
+</blockquote>
+<p><b>Folding options:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_folding.png"></p>
+When special folding keywords are encountered (<b><font color="#006666">Procedure</font></b> / <b><font color="#006666">EndProcedure</font></b> by default. 
+More can be added), the IDE marks the region between these keywords on the left side 
+next to the line numbers with a [-] at the starting point, followed by a vertical line to the end point. 
+<br>
+<br>
+By clicking on the [-], you can hide (&quot;fold&quot;) that section of source code to keep a better 
+overview of larger source files. The [-] will turn into a [+]. By clicking again, the code will 
+again be shown (&quot;unfolded&quot;) again. 
+<br>
+<br>
+Note: Even though the state of these folded code lines is remembered when you save/reopen the file, 
+the actual created code file always contains all lines. This only affects the display of the code 
+in the IDE, not the code itself. 
+<br>
+<br>
+Another default fold keyword is &quot;;{&quot; and &quot;;}&quot;. Since &quot;;&quot; marks a comment in PB, these will be 
+totally ignored by the compiler. However, they provide the possibility to place custom fold 
+points that do not correspond to a specific PB keyword. 
+
+
+</blockquote>
+<p><b>Auto complete:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_autocomplete.png"></p>
+So that you do not have to remember the exact name of every command, there is the Auto complete 
+feature to make things easier. 
+<br>
+<br>
+After you have typed the beginning of a command, a list of possible matches to the word start 
+you have just typed will be displayed. A list of options is also displayed when you typed a 
+structured variable or interface followed by a &quot;\&quot;. 
+<br>
+<br>
+You can then select one of these words with the up/down keys and insert it at the point you 
+are by pressing the Tab key. You can also continue typing while the list is open. It will select the 
+first match that is still possible after what you typed, and close automatically when either 
+you have just typed an exact match or if there are no more possible matches in the list. 
+<br>
+<br>
+Escape closes the auto complete list at any time. It also closes if you click with the mouse 
+anywhere within the IDE. 
+<br>
+<br>
+Note: You can configure what is displayed in the Auto complete list, as well as turning off the 
+automatic popup (requiring a keyboard shortcut such as Ctrl+Space to open list) in the 
+Preferences. 
+See the Auto complete section of <a href="../reference/ide_preferences.html">Customizing the IDE</a> for more information. 
+
+
+</blockquote>
+<p><b>Tools Panel on the side:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_toolspanel.png"></p>
+Many tools to make navigating/editing the source code easier can be added to the Tools Panel 
+on the side of the editor window. For an overview of them and how to configure them, 
+see <a href="../reference/ide_tools.html">Built-in Tools</a>. 
+
+
+</blockquote>
+<p><b>The Edit Menu:</b></p><blockquote>
+
+Following is an explanation of the Items in the Edit menu. Note that many of the Edit 
+menu items are also accessible by right clicking on the source code, which opens a popup menu. 
+
+<p><img src="images/ide_menu_edit.png"></p>
+
+<b>Undo</b> 
+<br>
+Undoes the last done action in the code editing area. There is an undo buffer, 
+so several actions can be undone. 
+
+<br>
+<br>
+
+<b>Redo</b> 
+<br>
+Redo the last action undone by the undo function. 
+
+<br>
+<br>
+
+<b>Cut</b> 
+<br>
+Copy the selected part of the source code to the clipboard and remove it from the code. 
+
+<br>
+<br>
+
+<b>Copy</b> 
+<br>
+Copy the selected text to the Clipboard without deleting it from the code. 
+
+<br>
+<br>
+
+<b>Paste</b> 
+<br>
+Insert the content of the Clipboard at the current position in the code. If any text is 
+selected before this, it will be removed and replaced with the content of the Clipboard. 
+
+<br>
+<br>
+
+<b>Insert comments</b> 
+<br>
+Inserts a comment (&quot;;&quot;) before every line of the selected code block. This makes 
+commenting large blocks of code easier than putting the ; before each line manually. 
+
+<br>
+<br>
+
+<b>Remove comments</b> 
+<br>
+Removes the comment characters at the beginning of each selected line. This reverts the 
+&quot;Insert comments&quot; command, but also works on comments manually set. 
+
+<br>
+<br>
+
+<b>Format indentation</b> 
+<br>
+Reformats the indentation of the selected lines to align with the code above them and to 
+reflect the <a href="../reference/general_rules.html">keywords</a> that they contain. The rules for the indentation can be specified in the 
+<a href="../reference/ide_preferences.html">preferences</a>. 
+
+<br>
+<br>
+
+<b>Select all</b> 
+Selects the whole source code. 
+
+<br>
+<br>
+
+<b>Goto</b> 
+<br>
+This lets you jump to a specific line in your source code. 
+
+<br>
+<br>
+
+<b>Goto matching Keyword</b> 
+<br>
+If the cursor is currently on a keyword such as &quot;If&quot; this menu option jumps directly to the keyword 
+that matches it (in this case &quot;EndIf&quot;). 
+
+<br>
+<br>
+
+<b>Goto recent line</b> 
+<br>
+The IDE keeps track of the lines you view. For example if you switch to a different line 
+with the above Goto function, or with the <a href="../reference/ide_tools.html">Procedure Browser</a> tool. With this menu option 
+you can jump back to the previous position. 20 such past cursor positions are remembered. 
+<br>
+<br>
+Note that this only records greater jumps in the code. Not if you just move up/down a few 
+lines with the cursor keys. 
+
+<br>
+<br>
+
+<b>Toggle current fold</b> 
+<br>
+This opens/closes the fold point in which the cursor is currently located. 
+
+<br>
+<br>
+
+<b>Toggle all Folds</b> 
+<br>
+This opens/closes all fold points in the current source. Very useful to for example hide 
+all procedures in the code. Or to quickly see the whole code again when some of the code is folded. 
+
+<br>
+<br>
+
+<b>Add/Remove Marker</b> 
+<br>
+Markers act like Bookmarks in the source code. There presence is indicated by a little arrow 
+next to the line numbers. You can later jump to these markers with the &quot;Jump to marker&quot; command. 
+<br>
+<br>
+The &quot;Add/Remove Marker&quot; sets or removes a marker from the current line you are editing. 
+<br>
+<br>
+Note: You can also set/remove markers by holding down the Ctrl Key and clicking on the border that 
+holds the markers (not the Line-number part of it). 
+
+<br>
+<br>
+
+<b>Jump to Marker</b> 
+<br>
+This makes the cursor jump to the next marker position further down the code from the current 
+cursor position. If there is no marker after the cursor position, it jumps to the first on in the 
+source code. So by pressing the &quot;Jump to Marker&quot; shortcut (F2 by default) several times, you can 
+jump to all the markers in the code. 
+
+<br>
+<br>
+
+<b>Clear Markers</b> 
+This removes all markers from the current source code. 
+
+<br>
+<br>
+
+<b>Find/Replace</b> 
+
+<p><img src="images/ide_edit_search.png"></p>
+
+The find/replace dialog enables you to search for specific words in your code, and 
+also to replace them with something else. 
+<br>
+<br>
+The &quot;Find Next&quot; button starts the search. The search can be continued after a match is found with the 
+Find Next menu command (F3 by default). 
+<br>
+<br>
+You can make the search more specific by enabling one of the checkboxes: 
+<br>
+<u>Case Sensitive</u> : Only text that matches the exact case of the search word will be found. 
+<br>
+<u>Whole Words only</u> : Search for the given word as a whole word. Do not display results where the search word is part of another word. 
+<br>
+<u>Don't search in Comments</u> : Any match that is found inside a comment is ignored. 
+<br>
+<u>Don't search in Strings</u> : Any match that is found inside a literal string (in &quot; &quot;) is ignored. 
+<br>
+<u>Search inside Selection only</u> : Searches only the selected region of code. This is really useful 
+only together with the &quot;Replace All&quot; button, in which case it will replace any found match, but only inside the selected region. 
+<br>
+<br>
+By enabling the &quot;Replace with&quot; checkbox, you go into replace mode. &quot;Find Next&quot; will still only search, but 
+with each click on the &quot;Replace&quot; button, the next match of the search word will be replaced by whatever is 
+inside the &quot;Replace with&quot; box. 
+<br>
+<br>
+By clicking on &quot;Replace All&quot;, all matches from the current position downwards will be replaced 
+(unless &quot;Search inside Selection only&quot; is set). 
+
+<br>
+<br>
+
+<b>Find Next</b> 
+<br>
+This continues the search for the next match of the last search started by the Find/Replace dialog. 
+
+<br>
+<br>
+
+<b>Find Previous</b> 
+<br>
+This continues the search for the previous match of the last search started by the Find/Replace dialog. 
+
+<br>
+<br>
+
+<b>Find in Files</b> 
+
+<p><img src="images/ide_edit_searchfiles.png"></p>
+
+The Find in Files Dialog lets you carry out a search inside many files in a specific directory. 
+<br>
+<br>
+You have to specify a search keyword, as well as a base directory (&quot;root directory&quot;) in which to 
+search. You can customize the searched files by specifying extension filters. 
+Any number of filters can be given separated by &quot;,&quot;. (*.* or an empty extension field searches all files). 
+As with &quot;Find/Replace&quot;, there are checkboxes to make the search more specific. 
+<br>
+<br>
+The &quot;Include sub-directories&quot; checkbox makes it search (recursively) inside any subdirectory of the given root directory too. 
+<br>
+<br>
+When starting the search, a separate window will be opened displaying the search results, giving the file, 
+line number as well as the matched line of each result. 
+<br>
+<br>
+Double-clicking on an entry in the result window opens 
+that file in the IDE and jumps to the selected result line. 
+
+</blockquote>
+</font></body></html>

@@ -1,0 +1,77 @@
+<html><head><title>OpenConsole</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenConsole()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenConsole</b></font>([Titel$] [, Modus]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet ein Konsolen-Fenster. Diese Funktion muss vor den anderen Befehlen aus dieser Bibliothek 
+aufgerufen werden. Nur eine Konsole kann zur gleichen Zeit in einem PureBasic Programm geöffnet 
+werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titel$ (optional)</i></td>
+<td width="90%"> 
+Der Titel für das neue Konsolen-Fenster. Auf Windows ermöglicht das Angeben eines Titels das 
+Speichern benutzerdefinierter Konsolen-Parameter, wie Zeichensatz, Farbe, etc. Dies hat keinen 
+Effekt auf anderen OS. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der für die Konsolen-Ausgabe zu verwendende Modus. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>: Strings verwenden das UTF-8 Format, wenn sie auf der Konsole ausgegeben werden (Standard).
+  <font color="#924B72">#PB_Ascii</font>: Strings verwenden das ASCII-Format, wenn sie auf der Konsole ausgegeben werden.
+  <font color="#924B72">#PB_Unicode</font>: Strings verwenden das UTF-16 Format, wenn sie auf der Konsole ausgegeben werden.
+               Dies kann auf Windows nützlich sein, wenn String-Umleitung verwendet wird, und das
+               Zielprogramm einen UTF-16-Eingang erwartet. Hat keine Auswirkungen auf Linux oder
+               OS X (verwenden UTF-8).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ist das Ergebnis gleich 0, ist das Öffnen fehlgeschlagen und alle weiteren Aufrufe von 
+Console-Befehlen müssen deaktiviert werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Konsole kann mittels dem <a href="closeconsole.html">CloseConsole()</a> Befehl geschlossen werden. 
+<br>
+<br>
+Mit <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> kann die Konsole zwischen 
+Text- und Grafikmodus umgeschalten werden. 
+<br>
+<br>
+Unter Microsoft Windows gibt es zwei verschiedene &quot;Executable&quot; Formate (von ausführbaren 
+Programmen): Win32 und Console. Wenn Sie eine Standard-Konsolen-Applikation, wie 'Dir', 'Del' 
+etc. erstellen möchten, müssen Sie das Executable im Format &quot;Console&quot; (Menüeintrag 
+<a href="../reference/ide_compiler.html">Compiler-Optionen</a> im PureBasic-Editor) erstellen. 
+<br>
+<br>
+Auf Linux und OS X gibt es kein spezielles Konsolen-Format, jedoch wird das Einstellen 
+der Compiler-Option auf 'Console' automatisch ein Terminal-Fenster öffnen, wenn Sie Ihr 
+Programm aus der IDE heraus starten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  OpenConsole</font>()
+<font color="#006666">  PrintN</font>(&quot;Warte 5 Sekunden vor dem Beenden...&quot;)
+<font color="#006666">  Delay</font>(5000)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closeconsole.html">CloseConsole()</a>, <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=input.html>Input()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=print.html>Print()</a> -><br><br>
+
+</body></html>

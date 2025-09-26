@@ -1,0 +1,616 @@
+<html><head><title>Included debugging tools</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Included debugging tools</font></b></p>
+
+These tools provide many features to inspect your program while it is running. They can 
+not be used while you are editing the source code. These tools 
+are available in both the integrated Debugger and the standalone debugger. The console 
+debugger provides many of these features too, but through a debugger console. 
+
+<br>
+<br>
+
+Some of the tools include the viewing of variables. 
+Here is an explanation of the common fields of all these variable displays: 
+
+<br>
+<br>
+
+<b>Scope</b> 
+<br>
+The scope of a variable is the area in which it is valid. It can be 
+<a href="../reference/global.html">global</a>, <a href="../reference/procedures.html">local</a>, 
+<a href="../reference/shared.html">shared</a>, <a href="../reference/static.html">static</a> or 
+<a href="../reference/threaded.html">threaded</a>, 
+depending on how it is used in your source code. 'byref' (&quot;by reference&quot;, i.e. using the address) is used to indicate 
+an <a href="../reference/dim.html">Array</a> or <a href="../reference/newlist.html">List</a> that was passed 
+as parameter to a procedure. 
+
+<br>
+<br>
+
+<b>Variable type</b> 
+<br>
+The <a href="../reference/variables.html">variable type</a> is indicated through a colored icon: 
+<br>
+
+
+<table border=0>
+<tr>
+  <td><img src="../HelpPictures/debugger_byte.png"></td>
+  <td><font size=2>Byte</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_ascii.png"></td>
+  <td><font size=2>Ascii</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_char.png"></td>
+  <td><font size=2>Character</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_word.png"></td>
+  <td><font size=2>Word</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_unicode.png"></td>
+  <td><font size=2>Unicode</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_long.png"></td>
+  <td><font size=2>Long</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_integer.png"></td>
+  <td><font size=2>Integer</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_quad.png"></td>
+  <td><font size=2>Quad</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_float.png"></td>
+  <td><font size=2>Float</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_double.png"></td>
+  <td><font size=2>Double</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_string.png"></td>
+  <td><font size=2>String</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_fixed.png"></td>
+  <td><font size=2>Fixed length string</font></td>
+</tr>
+</table>
+<br>
+A <a href=../reference/structures.html>Structure</a> is either marked as a dot 
+<img src="../HelpPictures/debugger_struct.png">, or with an arrow
+<img src="../HelpPictures/debugger_struct1.png">. 
+
+
+If marked with an arrow, it can be expanded by double-clicking on it to view the members of this structure. 
+A down arrow marks an expanded structure. A Structure marked with a dot cannot be expanded 
+(usually because it is just a structure pointer). 
+
+<br>
+<br>
+Dynamic arrays inside structures are shown with the dimensions they are currently allocated with. Lists and 
+maps inside structures are shown with their size and their current element (if any). 
+
+
+<p><b>The Debug output window</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_output.png"></p>
+
+In this window, the output of the <b><font color="#006666">Debug</font></b> statement will be displayed. The Debug 
+statement is a quick and simply way to print messages for debugging purposes. 
+
+<br>
+<br>
+
+The debug window will automatically open at the first output is produced by your 
+program. If you then close it, it will not automatically open on subsequent messages, 
+however they will still be logged. You can copy this output to the clipboard or 
+save it to a file. There is also a button to clear the messages from the window. 
+
+<br>
+<br>
+
+The entry field at the bottom of the window allows an expression to be entered, which 
+will be evaluated and the result printed in the output box. This allows to quickly check 
+the state of variables or array fields without the need to look them up in one of the 
+debugger tools. The evaluation is started by pressing Enter or clicking on the &quot;Display&quot; button. 
+If the expression cannot be evaluated for some reason, an error-message is displayed 
+in the statusbar. 
+
+<br>
+<br>
+
+The expression can be any valid <a href="../reference/general_rules.html">PB expression</a> (not 
+including logical ones or containing <a href="../reference/reference.html">PB keywords</a>). 
+It can contain <a href="../reference/variables.html">variables</a>, <a href="../reference/dim.html">arrays</a>, 
+<a href="../list/index.html">lists</a>, <a href="../reference/general_rules.html">constants</a> and also some commands from the 
+<a href="../math/index.html">Math</a>, <a href="../memory/index.html">Memory</a> and <a href="../string/index.html">String</a> libraries. 
+
+
+</blockquote>
+<p><b>The Watchlist</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_observer.png"></p>
+
+The watchlist can be used to track changes in <a href="../reference/variables.html">variables</a> of your program in real 
+time, while the program is running. It can only display single variables 
+(no full <a href="../reference/structures.html">structures</a>), however, these variables can be a part of structures. 
+Elements of dynamic array, list or map inside structures can not be displayed in the watchlist. 
+
+<br>
+<br>
+
+To add a variable, select its <a href="../reference/procedures.html">procedure</a> (if it is a local variable) or 
+select &quot;--- Main ---&quot; if it is a <a href="../reference/global.html">global</a> variable or part of an 
+<a href="../reference/dim.html">array</a> or <a href="../reference/newlist.html">list</a>. 
+Then type the variable name, as you would access it in your source code into the Variable 
+field and press Add. 
+
+<br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  Examples:
+  MyVariable$                 - add a normal string variable
+  Array(1, 5)                 - add an array field
+  Structure\subfield[5]\value - add a variable inside a structure
+  MyList()\structuresubfield  - add a variable inside a structured list
+</font></pre>
+
+You can also add new watched variables from the VariableViewer, by right-clicking 
+on them and selecting &quot;add to watchlist&quot; 
+
+<br>
+<br>
+
+In the list you will see the values of the watched variables. If the value is 
+displayed as &quot;---&quot;, it means that this variable is not valid at the current point 
+in the source code; for example, this will occur if you watch a local variable, 
+or a list element and the list has no current element. 
+
+<br>
+<br>
+
+The watched variables are remembered between the debugging sessions, and even 
+saved with the compiler options, so you do not need to repopulate this list all the time. 
+
+
+
+</blockquote>
+<p><b>The Variable Viewer</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_variablelist.png"></p>
+
+The Variable viewer allows to examine the program's variables, <a href="../reference/dim.html">arrays</a>, 
+<a href="../reference/newlist.html">lists</a> and <a href="../reference/newmap.html">maps</a>. The individual tabs 
+show <a href="../reference/global.html">global</a> and <a href="../reference/threaded.html">threaded</a> items in the 
+top part and <a href="../reference/procedures.html">local</a>, <a href="../reference/shared.html">shared</a> and 
+<a href="../reference/static.html">static</a> items in the bottom part. 
+<br>
+<br>
+The &quot;Update&quot; Button can be used to get the most recent data from the program. 
+If the program is halted or in step mode, the content is updated on each step 
+automatically. By right-clicking on any variable or Array/List field, you can copy that variable, 
+or add it to the watchlist for real-time tracking of its value. 
+
+<br>
+<br>
+On Windows, the content of the Variable viewer can be sorted by name, scope or variable value by clicking on 
+the header of the appropriate column. 
+
+<br>
+<br>
+
+<b>The 'Variables' tab</b> 
+<br>
+This tab, shows the variables of the program. 
+By right-clicking on a variable, it is possible to add it to the watchlist. 
+
+<br>
+<br>
+
+<b>The 'Arrays' tab</b> 
+<br>
+This tab shows a list of all arrays in the program and the 
+dimensions in which they are currently defined (-1 means that <a href="../reference/dim.html">Dim</a> was not called yet). 
+By right-clicking on an array, the content of the array can be viewed in the &quot;View Array/List/Map&quot; tab. 
+
+<br>
+<br>
+
+<b>The 'Lists' tab</b> 
+<br>
+This tab shows a list of all Lists, the number of elements they 
+currently hold ( &quot;-&quot; indicates that <a href="../reference/newlist.html">NewList</a> was not called yet), as well as the 
+index of the current element of the list ( &quot;-&quot; indicates that there is no current element). 
+By right-clicking on a list, the content of the list can be viewed in the &quot;View Array/List/Map&quot; tab. 
+
+<br>
+<br>
+
+<b>The 'Maps' tab</b> 
+<br>
+This tab shows a list of all maps, the number of elements they 
+currently hold ( &quot;-&quot; indicates that <a href="../reference/newmap.html">NewMap</a> was not called yet), as well as the 
+key of the current element of the map ( &quot;-&quot; indicates that there is no current element). 
+By right-clicking on a map, the content of the map can be viewed in the &quot;View Array/List/Map&quot; tab. 
+
+<br>
+<br>
+
+<b>The 'View Array/List/Map' tab</b> 
+<br>
+This tab can be used to view individual entries of an array, a list or a map. This includes arrays, lists or maps 
+inside structures as well. 
+To do so enter the name of the array, map or list including a &quot;()&quot; at the end, select what 
+kind of items to display and press &quot;Display&quot;. Note that the content of the display is not automatically 
+updated when the program is in step mode. 
+<br>
+<br>
+&quot;Display all items&quot; simply displays everything. &quot;Display Non-zero items only&quot; will only display those items that do not 
+hold the value 0 or an empty string. This makes viewing large arrays/lists with only few valid items in them simpler. 
+A <a href="../reference/structures.html">structure</a> is considered &quot;zero&quot; if all of its items either hold the value 0 or an empty string. 
+<br>
+<br>
+&quot;Display Range&quot; allows displaying only a specific range of an array, a list or a map. The range can be given for each Array 
+dimension individually, separated by commas. If one dimension is not specified at all, all of its items will be displayed. 
+Here are a few examples for valid range input: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;1-2, 2-5, 2&quot; : first index between 1 and 2, a second index between 2 and 5 and a third index of 2.
+  &quot;1, 2-5&quot;      : first index of 1 and a second index between 2 and 5.
+  &quot;1, , 5&quot;      : first index of 1, any second index and a third index of 5.
+</font></pre>
+
+For list display, the &quot;Display Range&quot; option can be used to display a range of list elements by their index (zero based). 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;0&quot;     : first element
+  &quot;1-3&quot;   : second to the fourth element
+</font></pre>
+
+For map display, the &quot;Display Range&quot; option can be used to filter the keys to be displayed. It has to contain 
+a mask for the key string of the map elements (no quotation marks). A &quot;?&quot; matches one character, a &quot;*&quot; matches 
+any number of characters. Here are a few examples for valid mask input: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;hat&quot; : matches only the item with &quot;hat&quot; as key.
+  &quot;?at&quot; : matches items with &quot;hat&quot;, &quot;bat&quot; etc as key.
+  &quot;h*t&quot; : matches items with keys that start with &quot;h&quot; and end with &quot;t&quot; and anything in between.
+</font></pre>
+
+
+</blockquote>
+<p><b>The Profiler</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_profiler.png"></p>
+
+The profiler tool can count how often each line in the source code is executed. This collected data 
+can be used to identify which portions of the code are used most often and where improvements make 
+most sense. It also helps to identify problems where a piece of the code is executed too often as 
+a result of an error. 
+
+<br>
+<br>
+
+<b>Recording the data</b> 
+<br>
+The recording of the data can be controlled by the Start, Stop and Reset (to set all counts to 0) buttons 
+in the profiler window. The Update button can be used to update the graph while the program is running. 
+Each time the program is halted or in step mode, the data is updated automatically. By default, the profiler 
+is recording data from the start of the program. This can be changed in the <a href="../reference/ide_preferences.html">Preferences</a>. 
+
+<br>
+<br>
+
+<b>Examining the data</b> 
+<br>
+The recorded data is displayed as a graph, with the vertical axis showing the source line number and 
+the horizontal axis showing how often the lines were executed. If the running program consists of more 
+than one source file, a list of source files is presented below the graph. To display the graph for 
+a file either select it, or check its checkbox. Multiple files can be shown in the graph at once to better 
+compare them. Right-clicking on one of the filenames allows changing the color used to display that file in the graph. 
+
+<br>
+<br>
+
+<b>Mouse modes in the graph</b> 
+<br>
+Right-clicking inside the graph brings up a popupmenu which allows zooming in or out or to show the source line 
+that was clicked on in the IDE or code display of the debugger. The action taken by a left-click can be controlled 
+by the buttons on the left side: 
+<br>
+<br>
+
+
+<table border=0 cellspacing=2>
+<tr>
+  <td><img src="../HelpPictures/debugger_arrow.png"></td>
+  <td><font size=2>Left-clicking and dragging allows to scroll the graph display.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_select.png"></td>
+  <td><font size=2>Left-clicking and dragging allows selecting an area which will be zoomed in.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_cross.png"></td>
+  <td><font size=2>While this button is activated, moving the mouse on the graph displays a crosshair to better identify the line and call count under the mouse.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomin.png"></td>
+  <td><font size=2>Zoom in</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomout.png"></td>
+  <td><font size=2>Zoom out</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomall.png"></td>
+  <td><font size=2>Zoom out so all lines can be viewed</font></td>
+</tr>
+</table>
+
+
+</blockquote>
+<p><b>The Callstack viewer</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_callstats.png"></p>
+
+The callstack viewer shows which nested <a href="../reference/procedures.html">procedure</a> calls led to the current position 
+in the code. Each entry in the list means one procedure that is currently open. It 
+shows the line and file from which it was called, and the arguments used to 
+call the procedure. By clicking on the Variables button for each procedure, you can 
+look at the <a href="../reference/variables.html">variables</a> of that instance of the procedure. 
+
+<br>
+<br>
+
+This allows to easily trace, from which part of the code, a procedure was called. 
+The callstack view does only automatically update when you stop the program, 
+or use Step to execute single lines. While the program is running, you have to use 
+the Update button to update the view for the current code position. 
+
+<br>
+<br>
+
+The &quot;Statistics&quot; tab shows the number of times each procedure in the code was called. 
+You can reset the count for all procedures with &quot;Reset all&quot;, or for the currently marked 
+entry with the &quot;Reset&quot; button. Like with the callstack, the updates are not automatic 
+while the program is not stopped. Use the Update button for that. 
+
+
+
+</blockquote>
+<p><b>The Memory Viewer</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_memoryviewer.png"></p>
+
+The memory viewer lets you view a memory area in your program. 
+The range to view can be entered into the range fields as any valid PureBasic expression; 
+this can be a normal decimal value, a hex number preceded by the ’$’ character or 
+any other valid expression, including variables or pointers from the code. 
+If the content of the second range field starts with a &quot;+&quot; sign, the content is 
+interpreted as relative to the first field. 
+
+<br>
+<br>
+Example: &quot;*Buffer + 10&quot; to &quot;+30&quot; will display the 30 bytes of memory starting 
+at the location 10 bytes after what *Buffer points to. 
+
+<br>
+<br>
+
+If the memory  area is valid for viewing, it will be displayed in the area below. 
+If parts of the area are not valid for reading, you will get an error-message. 
+The type of display can be changed with the combo box in the lower left corner. 
+The following view modes are available: 
+
+<br>
+<br>
+
+<b>Hex View</b> 
+<br>
+The memory will be displayed like in any hex viewer, giving the memory location 
+in hex display on the left, followed by the hexadecimal byte values, and then 
+the string representation in the right column. 
+
+<br>
+<br>
+
+<b>Byte/Character/Word/Long/Quad/Float/Double table</b> 
+<br>
+The memory area will be shown as a table of the specified variable type. 
+Whether or not this table is single-column or multi-column can be set 
+in the Preferences (see <a href="../reference/ide_preferences.html">Configuring the IDE</a>). 
+Data will be shown as decimal, octal or hex via the next button that cycles the mode. 
+
+<br>
+<br>
+
+<b>String view ascii, unicode or utf-8</b> 
+<br>
+This displays the memory area as a string, with any non-string characters displayed 
+in [] (for example &quot;[NULL]&quot; for the 0 byte.) A linebreak is added after newline characters 
+and [NULL] to improve the readability of the output. The memory area can be interpreted as 
+an Ascii, Unicode or Utf8 string. 
+
+<br>
+<br>
+
+<b>Data</b> 
+<br>
+With the Data check box, you will export the table view formatted as a 
+<a href="../reference/data.html">Data Section</a> on copy or save. 
+
+<br>
+<br>
+You can also export the viewed memory area from the memory viewer: 
+
+<br>
+<br>
+
+<b>Copy (Text)</b>: Copies the displayed area as text to the clipboard. 
+<br>
+<b>Save (Text)</b>: Saves the displayed area as text to a file. 
+<br>
+<b>Save (Raw)</b>: Saves the memory area as raw binary to a file. 
+<br>
+
+
+</blockquote>
+<p><b>The Library Viewer</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_librarycalls.png"></p>
+
+The Library Viewer provides information about the objects created by some libraries. For example, it allows to 
+quickly check which images are currently loaded in the program, or which gadgets are created. 
+
+<br>
+<br>
+
+Once the program is started, the combobox on top of the window can be used to select the library to view. The 
+list below will then show all objects of the library that currently exist in the executable along with some 
+additional information on each object. The &quot;Update&quot; button will update this list of objects. Selecting an object 
+in the list will display more detailed information about it in the text area on the left, and if supported by 
+the library also a visual display of the object on the right (for Images, Sprites, and so on). 
+
+<br>
+<br>
+
+If the combobox displays &quot;No Information&quot;, this means that your executable has used no library that supports this feature. 
+
+<br>
+<br>
+
+Currently, the Library Viewer is supported by the following libraries: 
+<br>
+<a href="../thread/index.html">Thread</a> 
+<br>
+<a href="../gadget/index.html">Gadget</a> 
+<br>
+<a href="../window/index.html">Window</a> 
+<br>
+<a href="../file/index.html">File</a> 
+<br>
+<a href="../image/index.html">Image</a> 
+<br>
+<a href="../sprite/index.html">Sprite</a> 
+<br>
+<a href="../xml/index.html">XML</a> 
+<br>
+
+
+</blockquote>
+<p><b>The Assembly Debugger</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_asm.png"></p>
+
+The ASM debugger is provided for advanced programmers to examine and change the CPU register 
+content and to examine the programs stack for debugging of <a href="../reference/inlinedasm.html">inline ASM</a> code. 
+
+<br>
+<br>
+
+The Processor Register view is only available while the program execution is halted. 
+By changing any of the register values and clicking &quot;Set&quot;, you can modify the value in that register. 
+
+<br>
+<br>
+
+The Stack trace shows the content of the programs stack given in relation to the ESP 
+register. If the current stack position is not aligned at a 4 byte boundary, there can 
+be no information given about the content of the stack. In this case the stack is 
+shown as a hex display. 
+<br>
+<br>
+If the stack pointer is properly aligned, the stack contents are displayed with comments 
+about the meaning of the contained values (detailing the pushed registers and other 
+values on a PureBasic procedure call). 
+
+<br>
+<br>
+
+The stack trace is updated automatically when you stop the execution or step though the 
+program, unless you specify otherwise in the <a href="../reference/ide_preferences.html">Preferences</a>. If you 
+disable the automatic update, there will be an &quot;Update&quot; button displayed to do so manually. 
+
+<br>
+<br>
+
+Note: The Assembly debugger is currently not available on MacOS X. 
+
+
+</blockquote>
+<p><b>The Purifier</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_purifier.png"></p>
+
+The purifier can detect memory errors such as writing past the end of an allocated memory buffer or string. 
+Without the purifier some of these mistakes would lead to crashes and others would go unnoticed because the 
+write operation overwrites some other valid memory. 
+
+<br>
+<br>
+
+The purifier requires special output from the compiler to work, which is why it is only available if 
+the &quot;Enable Purifier&quot; option is set in the <a href="../reference/ide_compiler.html">compiler options</a> when 
+the program is compiled. 
+
+<br>
+<br>
+
+The purifier detects these errors by placing a special 'salt'-value around global and local variables, 
+strings and allocated memory buffers. These salt values are then checked at regular intervals and an 
+error is displayed if they were changed. These checks slow down the program execution considerably especially 
+for large programs, which is why the rate at which the checks are performed can be specified in the 
+purifier window: 
+
+<br>
+<br>
+
+<b>Global variable space</b> 
+<br>
+Defines the interval in source lines after which the global variables are checked. 
+
+<br>
+<br>
+
+<b>Local variable space</b> 
+<br>
+Defines the interval in source lines after which the local variables are checked. 
+
+<br>
+<br>
+
+<b>String variables</b> 
+<br>
+Defines the interval in source lines after which the memory used by string variables is checked. 
+
+<br>
+<br>
+
+<b>Allocated memory</b> 
+<br>
+Defines the interval in source lines after which the memory allocated by 
+<a href="../memory/allocatememory.html">AllocateMemory()</a> is checked. 
+
+
+
+
+
+
+</blockquote>
+</font></body></html>

@@ -1,0 +1,115 @@
+<html><head><title>RGBA</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RGBA()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>RGBA</b></font>(Rouge, Vert, Bleu, Alpha)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la valeur de la couleur 32 bits 
+correspondant aux valeurs Rouge, Verte, 
+Bleue et Alpha. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Rouge, Vert, Bleu</i></td>
+<td width="90%"> 
+La valeur des composantes rouge, verte et 
+bleue de la couleur. 
+<br>
+<br>
+Chaque valeur doit être comprise entre 0 et 
+255. 
+
+</td></tr>
+<tr><td><i>Alpha</i></td>
+<td> 
+La composante alpha (transparence) de la 
+couleur. 
+<br>
+<br>
+La valeur doit être comprise entre 0 et 255. 
+<br>
+<br>
+Une valeur de 0 signifie une transparence 
+complète et une valeur de 255 signifie une 
+opacité totale. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de la couleur. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Resultat varie de 0 à 4 294 967 295 teintes. 
+Il est donc conseillé d'utiliser un 'quad', (Resultat.q) et de mettre à zéro les octets 
+inutilisés. 
+En effet, sur un système d'exploitation 32 Bits, Resultat est un integer de type Long 
+(par défaut) dont la plage d'utilisation va de - 2 147 483 648 à + 2 147 483 647, 
+alors comparer deux couleurs est hasardeux. 
+<br>
+<br>
+Utiliser les commandes suivantes <a href="red.html">Red()</a>, <a href="green.html">Green()</a>, 
+<a href="blue.html">Blue()</a> et <a href="alpha.html">Alpha()</a> pour extraire la valeur d'une 
+des composantes 'Rouge', 'Verte', 'Bleue' ou 'Alpha'. 
+<br>
+<br>
+Un tableau représentant les couleurs les plus 
+communes est disponible 
+<a href="../reference/colortable.html">ici</a>. 
+Ces fonctions sont utiles lors des opérations 
+de <a href="../2ddrawing/index.html">dessin 2D</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Couleur.q =<font color="#006666"> RGBA</font>(255, 255, 255, 255) <font color="#006666">; Blanc totalement opaque</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">LSet</font>(<font color="#006666">Hex</font>(Couleur, <font color="#924B72">#PB_Quad</font>), 16, &quot;0&quot;)
+  Couleur = Couleur  &amp; $FFFFFFFF  <font color="#006666">; mise à zéro des octets inutilisés, </font>
+                                  <font color="#006666">; utile pour la comparaison de couleur</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">LSet</font>(<font color="#006666">Hex</font>(Couleur, <font color="#924B72">#PB_Quad</font>), 16, &quot;0&quot;)
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(0, 0, 0, 0)     <font color="#006666">; Noir totalement transparent </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(0, 0, 0, 128)   <font color="#006666">; Noir à moitié transparent</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(0, 0, 0, 255)   <font color="#006666">; Noir totalement opaque</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(255, 0, 0, 255) <font color="#006666">; Rouge totalement opaque</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(0, 0, 255, 0)   <font color="#006666">; Bleu totalement transparent</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(255, 255, 255, 255) <font color="#006666">; Blanc totalement opaque</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">HEX</font>(<font color="#006666">RGBA</font>(255, 255, 255, 255)) <font color="#006666">; Affiche FFFFFFFFFFFFFFFF</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Couleur 24 bits vers couleur 32 bits</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Alpha = 255 <font color="#006666">; de 0 à 255,  255 = aucune transparence (Opacité = 100 %)</font>
+  
+  <font color="#006666">; Pour les couleurs, il est conseillé d'utiliser des variables de type Quad (Voir remarques)</font>
+  Couleur24.q  =<font color="#006666"> ColorRequester</font>()
+  
+  Couleur32.q =<font color="#006666"> RGBA</font>(<font color="#006666">Red</font>(Couleur24),<font color="#006666"> Green</font>(Couleur24),<font color="#006666"> Blue</font>(Couleur24), alpha) 
+  Couleur32 = Couleur32 &amp; $FFFFFFFF <font color="#006666">; Mise à zéro des octets inutilisés</font>
+
+  <font color="#006666">; Il est aussi possible de remplacer les deux lignes ci-dessus par:</font>
+  <font color="#006666">; Couleur32 = Couleur24 | Alpha &lt;&lt; 24</font>
+  
+  <b><font color="#006666">Debug</font></b> &quot;Rouge &quot; +<font color="#006666"> Red</font>(Couleur32)
+  <b><font color="#006666">Debug</font></b> &quot;Vert  &quot; +<font color="#006666"> Green</font>(Couleur32)
+  <b><font color="#006666">Debug</font></b> &quot;Bleu  &quot; +<font color="#006666"> Blue</font>(Couleur32)
+  <b><font color="#006666">Debug</font></b> &quot;Opacité &quot; +<font color="#006666"> Alpha</font>(Couleur32)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="red.html">Red()</a>, <a href="green.html">Green()</a>, <a href="blue.html">Blue()</a>, <a href="alpha.html">Alpha()</a>, <a href="rgb.html">RGB()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=rgb.html>RGB()</a> - <a href=index.html>2DDrawing Index</a> - <a href=red.html>Red()</a> -><br><br>
+
+</body></html>

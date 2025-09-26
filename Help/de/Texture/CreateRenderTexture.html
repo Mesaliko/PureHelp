@@ -1,0 +1,78 @@
+<html><head><title>CreateRenderTexture</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateRenderTexture()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateRenderTexture</b></font>(#Textur, CameraID, Breite, Höhe [, Flags [, RenderTexturName$]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue &quot;Render-Textur&quot;. Die mit der Textur verknüpfte Kamera wird ihre Anzeige 
+direkt auf die Textur ausgeben (&quot;rendern&quot;), ohne sie auf dem Bildschirm darzustellen. 
+Dies kann sehr nützlich für Objekte sein, die nur einen Teil einer Szene (wie einen 
+TV-Bildschirm, einen Spiegel, etc.) darstellen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Textur</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren der neuen Textur. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>CameraID</i></td>
+<td> 
+Die ID der mit der Textur zu verknüpfenden Kamera. Diese ID kann mit Hilfe von 
+<a href="../camera/cameraid.html">CameraID()</a> ermittelt werden. 
+
+</td></tr>
+<tr><td><i>Breite</i></td>
+<td> 
+Die Breite der neuen Textur (in Pixel). 
+
+</td></tr>
+<tr><td><i>Höhe</i></td>
+<td> 
+Die Höhe der neuen Textur (in Pixel). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Texture_AutomaticUpdate</font>: die Textur wird bei jedem <a href="../engine3d/renderworld.html">RenderWorld()</a> automatisch aktualisiert (Standard)
+  <font color="#924B72">#PB_Texture_ManualUpdate</font>:    die Textur wird nicht automatisch aktualisiert, <a href="updaterendertexture.html">UpdateRenderTexture()</a> muss
+                               manuell aufgerufen werden.
+  <font color="#924B72">#PB_Texture_CameraViewPort</font>:  das Kamera-Ansichtsfenster (englisch &quot;Viewport&quot;) wird nicht entfernt - 
+                               nützlich, um immer noch ein &quot;Capture&quot; (Bild) von der Kamera zu machen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>RenderTexturName$ (optional)</i></td>
+<td> 
+Der Name der neuen Textur im OGRE-System. Dies ermöglicht die Verwendung dieses Namens 
+in einem Skript, um dieser Textur einen Shader zuzuweisen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn die Textur nicht erstellt werden kann. Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+als '#Texture' Parameter verwendet wurde, dann wird die neue Textur-Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+<a href="textureoutput.html">TextureOutput()</a> wird für gerenderte Texturen nicht unterstützt. <br>
+Die automatische Aktualisierung erfolgt nur, wenn <a href="../engine3d/renderworld.html">RenderWorld()</a> aufgerufen wird. 
+Wenn eine andere Textur denselben Namen hat, schlägt die Texturerstellung fehl. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="updaterendertexture.html">UpdateRenderTexture()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createcubictexture.html>CreateCubicTexture()</a> - <a href=index.html>Texture Inhaltsverzeichnis</a> - <a href=createtexture.html>CreateTexture()</a> -><br><br>
+
+</body></html>

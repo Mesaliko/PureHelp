@@ -1,0 +1,48 @@
+<html><head><title>AddSubMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddSubMesh()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddSubMesh</b></font>([Typ])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt ein neues Sub-Mesh (&quot;Unter-Objekt&quot; des Mesh) zum aktuellen Mesh hinzu, welches 
+zuvor mit <a href="createmesh.html">CreateMesh()</a> erstellt wurde. Ein Mesh kann eine beliebige Anzahl an 
+Sub-Meshs haben. Die Position eines Sub-Mesh ist relativ zur Position des Mesh. 
+Sobald ein Sub-Mesh erstellt wurde, verwenden Sie die folgenden Befehle zu dessen 
+Aufbau: <a href="meshvertexposition.html">MeshVertexPosition()</a>, <a href="meshface.html">MeshFace()</a> und <a href="meshindex.html">MeshIndex()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Typ (optional)</i></td>
+<td width="90%"> 
+Der Typ des neuen Sub-Mesh. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_TriangleList</font> : das Sub-Mesh wird aus einer Liste von Dreiecken zusammengesetzt (Standard).
+  <font color="#924B72">#PB_Mesh_TriangleStrip</font>: das Sub-Mesh wird aus einer Liste verbundener Dreiecke zusammengesetzt
+                          (Scheitelpunkte werden geteilt).
+  <font color="#924B72">#PB_Mesh_TriangleFan</font>  : das Sub-Mesh wird aus einer Liste verbundener Dreiecke zusammengesetzt,
+                          welche den gleichen zentralen Scheitelpunkt gemeinsam haben.
+  <font color="#924B72">#PB_Mesh_PointList</font>    : das Sub-Mesh wird aus einer Liste von Punkten zusammengesetzt.
+  <font color="#924B72">#PB_Mesh_LineList</font>     : das Sub-Mesh wird aus einer Liste von Linien zusammengesetzt.
+  <font color="#924B72">#PB_Mesh_LineStrip</font>    : das Sub-Mesh wird aus einer Liste verbundener Linien zusammengesetzt
+                          (Scheitelpunkte werden geteilt).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freemesh.html">FreeMesh()</a>, <a href="createmesh.html">CreateMesh()</a>, <a href="meshvertexposition.html">MeshVertexPosition()</a>, <a href="meshface.html">MeshFace()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addmeshmanuallod.html>AddMeshManualLOD()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=buildmeshlod.html>BuildMeshLOD()</a> -><br><br>
+
+</body></html>

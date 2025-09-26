@@ -1,0 +1,122 @@
+<html><head><title>Commandes de débogage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Commandes de débogage</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#CallDebugger"><u>CallDebugger</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Debug"><u>Debug</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#DebugLevel"><u>DebugLevel</u></a></td>
+  </tr>
+    <tr>
+    <td align="center" vAlign="center" nowrap><a href="#DisableDebugger"><u>DisableDebugger</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#EnableDebugger"><u>EnableDebugger</u></a></td>
+    <td align="center" vAlign="center" nowrap><u>...</u></td>
+  </tr>
+
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+La description complète des fonctionnalités du débogueur se trouve dans 
+les chapitres <a href="../reference/ide_debugger.html">Utilisation du débogueur</a> et 
+<a href="../reference/ide_debugtools.html">Utiliser les outils de déboguage</a>. 
+<br>
+<br>
+Une bibliothèque <a href="../debugger/index.html">Debugger</a> est également disponible 
+pour controler le comportement du débogueur à partir du code source. 
+<br>
+<br>
+
+<br><hr><br>
+<a name="CallDebugger"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CallDebugger</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Appel du &quot;débogueur&quot; et arrêt immédiat du programme au point courant du code. 
+<br>
+<br>
+
+<br><hr><br>
+<a name="Debug"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Debug</font></b> &lt;expression&gt; [, NiveauDebug]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Affiche la fenêtre DebugOutput et le résultat correspondant. L'expression peut être toute 
+expression valide en PureBasic, de forme numérique ou chaine. Un point important est que 
+toute commande <b><font color="#006666">Debug</font></b> et les expressions associées sont totalement ignorées (non compilées) 
+si le débogueur est désactivé. Cela singifie qu'il n'est pas nécessaire de passer les instruction 
+<b><font color="#006666">Debug</font></b> en commentaires lors de la création de l'exécutable final tout en ayant la possibilité 
+de tracer facilement l'exécution du programme pour le développeur. <br>
+<br>
+'NiveauDebug' est le niveau de priorité des messages du débogueur. Tous les messages (avec un niveau 
+non spécifié) sont affichés automatiquement. Lorsqu'un niveau est spécifié alors le message correspondant 
+ne sera affiché que si le niveau de debug courant est égal ou supérieur au niveau associé au message. 
+Cela permet de réaliser une traçabilité hiérarchisée en affichant des informations de plus en plus 
+précises en fonction de la valeur 'NiveauDebug' utilisée. 
+<br>
+<br>
+
+<br><hr><br>
+<a name="DebugLevel"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DebugLevel</font></b> &lt;expression constante &gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Fixe le niveau courant pour les messages 'Debug'. 
+<br>
+<br>
+Note: Le niveau est fixé au moment de la compilation, ce qui signifie que vous devez mettre la commande 
+<b><font color="#006666">DebugLevel</font></b> avant les commandes debug pour être sûr qu'elles seront bien toutes affectées. 
+<br>
+<br>
+
+<br><hr><br>
+<a name="DisableDebugger"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DisableDebugger</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Interromps l'utilisation du débogueur sur les lignes du code qui suivent cette commande. 
+Il ne désactive pas complètement le débogueur, donc les vérifications de performances ne doivent pas être 
+effectuées à l'aide de la commande DisableDebugger, mais en désactivant le débogueur avant de compiler le programme. 
+<br>
+<br>
+
+<br><hr><br>
+<a name="EnableDebugger"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">EnableDebugger</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Active l'utilisation du débogueur sur les lignes de code qui suivent cette commande (lorsque 
+le débogueur a été préalablement interrompu par la commande <b><font color="#006666">DisableDebugger</font></b>). 
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,116 @@
+<html><head><title>Interfaces</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Interfaces</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Interface</font></b> &lt;Name&gt; [<b><font color="#006666">Extends</font></b> &lt;Name&gt;]
+  &lt;Methode[.&lt;Typ&gt;]()&gt;
+  ...
+<b><font color="#006666">EndInterface</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Interfaces</font></b> werden benutzt, um auf objektorientierte Module wie COM (Component Object Model) oder DirectX 
+Dynamic Libraries (DLL) zuzugreifen. Diese Art von Bibliotheken (Libraries) werden unter Windows mehr 
+und mehr üblich und durch die Verwendung von Interfaces wird der einfache Zugriff auf diese Module (ohne 
+Performanz-Verlust) realisiert. 
+<br>
+Sie legen auch die Basis für objektorientiertes Programmieren innerhalb von PureBasic, erfordern zu dessen 
+Realisierung jedoch einige fortgeschrittene Kenntnisse. Die meisten der Standard Windows Interfaces 
+sind bereits in einer Resident-Datei implementiert, was die direkte Nutzung dieser Objekte ermöglicht. <br>
+<br>
+Der optionale <b><font color="#006666">Extends</font></b> Parameter kann verwendet werden, um ein Interface mit neuen Funktionen eines weiteren Interfaces 
+zu erweitern (diese Funktionen werden in objektorientierten (OO) Sprachen wie C++ oder Java üblicherweise 
+'Methoden' genannt). Alle im erweiterten (extended) Interface enthaltenen Funktionen werden im neuen 
+Interface verfügbar und werden vor die neuen Funktionen platziert. Dies ist nützlich, um grundlegende 
+Vererbung von Objekten durchzuführen. <br>
+<br>
+<a href="../reference/dim.html">Arrays</a> können mit Hilfe des <b><font color="#006666">Array</font></b> Schlüsselworts als Parameter übergeben werden, 
+<a href="../reference/newlist.html">Linked Lists</a> mittels des <b><font color="#006666">List</font></b> Schlüsselworts und <a href="../reference/newmap.html">Maps</a> 
+mittels des <b><font color="#006666">Map</font></b> Schlüsselworts. 
+<br>
+<br>
+Ein Rückgabewert-Typ kann in der Interface-Deklaration definiert werden, indem hinter der Methode der entsprechende 
+Typ ergänzt wird. 
+<br>
+<br>
+<a href="../reference/compilerfunctions.html">SizeOf</a> kann mit Interfaces benutzt werden, um die Größe des Interface zu ermitteln. 
+<a href="../reference/compilerfunctions.html">OffsetOf</a> kann verwendet werden, um den Index der angegebenen Funktion zu ermitteln. 
+<br>
+<br>
+Die <a href="../reference/pseudotypes.html">Pseudotypes</a> können für die Parameter der Funktion verwendet werden, jedoch 
+nicht für den Rückgabewert. 
+<br>
+<br>
+Hinweis: Das Konzept von Objekten und die innerhalb von PureBasic für ihre Verwendung vorgesehenen Möglichkeiten 
+wurde hauptsächlich für erfahrene Programmierer entwickelt. Allerdings ist das Verständnis dieser Konzepte 
+und Fähigkeiten in keiner Weise eine Voraussetzung für die Schaffung professioneller Software oder Spiele. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/Interface.pb.html">Interface.pb</a>
+<br><a href="../Examples/Interface_IUnknown.pb.html">Interface_IUnknown.pb</a>
+
+</blockquote><p><b>Beispiel:</b> Einfaches Beispiel eines Objekt-Aufrufs</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Um auf ein externes Objekt (in einer DLL zum Beispiel) zugreifen zu</font>
+  <font color="#006666">; können, muss zuerst das Objekt-Interface deklariert werden:</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Interface</font></b> MyObject
+<font color="#006666">    Move</font>(x,y)
+<font color="#006666">    MoveF</font>(x.f,y.f)
+<font color="#006666">    Destroy</font>()
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <font color="#006666">; CreateObject ist die Funktion, welche das Objekt (aus der DLL) erstellt,</font>
+  <font color="#006666">; dessen Interface gerade definiert wurde.</font>
+  <font color="#006666">; Erstelle das erste Objekt...</font>
+  <font color="#006666">;</font>
+  Object1.MyObject =<font color="#006666"> MyCreateObject</font>()
+  
+  <font color="#006666">; Und das zweite.</font>
+  <font color="#006666">;</font>
+  Object2.MyObject =<font color="#006666"> MyCreateObject</font>()
+  
+  <font color="#006666">; Dann können die gerade definierten Funktionen verwendet werden,</font>
+  <font color="#006666">; um auf das gewünschte Objekt zuzugreifen.</font>
+  <font color="#006666">;</font>
+  Object1\<font color="#006666">Move</font>(10, 20)
+  Object1\<font color="#006666">Destroy</font>()
+  
+  Object2\<font color="#006666">MoveF</font>(10.5, 20.1)
+  Object2\<font color="#006666">Destroy</font>()
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Beispiel mit 'Extends'</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Definieren eines einfachen Würfel Interface Objekts.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Interface</font></b> Cube
+<font color="#006666">    GetPosition</font>()
+<font color="#006666">    SetPosition</font>(x)
+<font color="#006666">    GetWidth</font>()
+<font color="#006666">    SetWidth</font>(Width)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <b><font color="#006666">Interface</font></b> ColoredCube <b><font color="#006666">Extends</font></b> Cube
+<font color="#006666">    GetColor</font>()
+<font color="#006666">    SetColor</font>(Color)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <b><font color="#006666">Interface</font></b> TexturedCube <b><font color="#006666">Extends</font></b> Cube
+<font color="#006666">    GetTexture</font>()
+<font color="#006666">    SetTexture</font>(TextureID)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <font color="#006666">; Die Interfaces für 3 verschiedene Objekte wurden jetzt definiert, diese Objekte beinhalten:</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; - 'Cube', welches die Get/SetPosition() und Get/SetWidth() Funktionen besitzt.</font>
+  <font color="#006666">; - 'ColoredCube', welches die Get/SetPosition(), Get/SetWidth() und Get/SetColor() Funktionen besitzt.</font>
+  <font color="#006666">; - 'TexturedCube', welches die Get/SetPosition(), Get/SetWidth() und Get/SetTexture() Funktionen besitzt.</font>
+  <font color="#006666">;</font>
+</font></pre>
+</blockquote>
+</font></body></html>

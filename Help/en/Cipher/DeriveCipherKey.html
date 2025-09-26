@@ -1,0 +1,91 @@
+<html><head><title>DeriveCipherKey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeriveCipherKey()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DeriveCipherKey</b></font>(Password$, Salt$, Iterations, *Key, KeyBits, Plugin [, PluginBits])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a cypher key with the specified number of bits from an input password for use in other cypher 
+functions like encryption or decryption. This function implements the PBKDF2 key derivation algorithm. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Password$</i></td>
+<td width="90%"> 
+The password for the key generation. 
+
+</td></tr>
+<tr><td><i>Salt$</i></td>
+<td> 
+A &quot;salt&quot; string to make the result of the function unique even if the same password is used. This makes 
+brute force attacks harder and prevents information disclosure in case of matching passwords. 
+<br>
+<br>
+This value does not have to be secret but it should be unique if possible. 
+
+</td></tr>
+<tr><td><i>Iterations</i></td>
+<td> 
+The number of iterations of the PBKDF2 key generation loop. A larger number increases the time/computations 
+needed to compute the key and therefore makes brute force attacks harder. 
+
+</td></tr>
+<tr><td><i>*Key</i></td>
+<td> 
+A pointer to the memory location that receives the generated key. The memory area must be at least KeyBits/8 bytes in size. 
+
+</td></tr>
+<tr><td><i>KeyBits</i></td>
+<td> 
+The size of the key to generate in bits. 
+
+</td></tr>
+<tr><td><i>Plugin</i></td>
+<td> 
+The plugin for the fingerprint function to use in the key computation. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_MD5</font>  : uses MD5 algorithm. <a href="usemd5fingerprint.html">UseMD5Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA1</font> : uses SHA1 algorithm. <a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA2</font> : uses SHA2 algorithm. <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : uses SHA3 algorithm. <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a> needs to be called before to register this plugin.
+</font></pre>
+
+</td></tr>
+<tr><td><i>PluginBits (optional)</i></td>
+<td> 
+The bits number to use for the fingerprint function. It is only supported for the following plugin: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_SHA2</font> : can be 224, 256 (default), 384 or 512.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : can be 224, 256 (default), 384 or 512.
+</font></pre>
+The number of bits for the fingerprint function is independent of the key size to generate. Any combination is allowed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the key was generated. Returns zero only if the plugin parameters were invalid. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseSHA2Fingerprint</font>()
+  *Key =<font color="#006666"> AllocateMemory</font>(32)
+
+  <font color="#006666">; Create a 256bit key using SHA-512 hash function and 500000 iterations</font>
+<font color="#006666">  DeriveCipherKey</font>(&quot;SecretPassword&quot;, &quot;NonSecretSalt&quot;, 500000, *Key, 256, <font color="#924B72">#PB_Cipher_SHA2</font>, 512)
+
+  <font color="#006666">; Show the key</font>
+<font color="#006666">  ShowMemoryViewer</font>(*Key, 32)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="aesencoder.html">AESEncoder()</a>, <a href="aesdecoder.html">AESDecoder()</a>, <a href="startaescipher.html">StartAESCipher()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=desfingerprint.html>DESFingerprint()</a> - <a href=index.html>Cipher Index</a> - <a href=filefingerprint.html>FileFingerprint()</a> -><br><br>
+
+</body></html>

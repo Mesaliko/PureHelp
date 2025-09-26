@@ -1,0 +1,97 @@
+<html><head><title>CreateVehicleBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateVehicleBody()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CreateVehicleBody</b></font>(#Entity, Masse.f, Restitution.f, Reibung.f [, AufhängungsSteifigkeit.f, Einfederung.f, FederungsDämpfung.f, MaxEinfederung.f, Reibung.f)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt einen mit dem Fahrzeug #Entity verknüpften physischen Körper (englisch &quot;body&quot;). 
+<br>
+<br>
+Um seine Kollisionen von der Physik-Engine verwaltet zu bekommen, muss ein Entity einen Körper 
+haben. Tatsächlich ist nur der Körper der Physik-Engine bekannt, welche alle Berechnungen zum 
+Entity erledigt, die Masse oder Reibung überprüft, und bei einer Kollision das tatsächliche 
+Entity zurückbewegt. 
+<br>
+<br>
+Um einen Effekt zu haben, muss die Physik-Engine mittels <a href="../engine3d/enableworldphysics.html">EnableWorldPhysics()</a> aktiviert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Das zu verwendende Fahrzeug-Entity. 
+
+</td></tr>
+<tr><td><i>Masse</i></td>
+<td> 
+Masse des Fahrzeugs. Verwenden Sie keine zu großen Werte, oder es könnte Physic-Unstimmigkeiten 
+geben (1 ist der bevorzugte Wert). 
+
+</td></tr>
+<tr><td><i>Restitution</i></td>
+<td> 
+Restitution des Fahrzeugs. Dieser Wert kann auch ermittelt bzw. gesetzt werden mittels 
+<a href="../entity/getentityattribute.html">GetEntityAttribute()</a> bzw. <a href="../entity/setentityattribute.html">SetEntityAttribute()</a>. 
+
+</td></tr>
+<tr><td><i>Reibung</i></td>
+<td> 
+Reibung des Fahrzeugs. Dieser Wert kann auch ermittelt bzw. gesetzt werden mittels 
+<a href="../entity/getentityattribute.html">GetEntityAttribute()</a> bzw. <a href="../entity/setentityattribute.html">SetEntityAttribute()</a>. 
+
+</td></tr>
+<tr><td><i>AufhängungsSteifigkeit (optional)</i></td>
+<td> (englisch &quot;suspension stiffness&quot;) 
+Der Steifigkeitswert für die Aufhängung (10: Offroad Buggy, 50: Sportauto , 200: F1 Auto). 
+
+</td></tr>
+<tr><td><i>Einfederung (optional)</i></td>
+<td> (englisch &quot;suspension compression&quot;) 
+Der zu verwendende Dämpfungskoeffizient, wenn die Aufhängung zusammengedrückt wird. 
+Setzen Sie den Wert auf * 2 * Quadratwurzel (AufhängungsSteifigkeit), sodass er proportional 
+zur kritischen Dämpfung ist. 
+Wert-Beispiele: 
+<pre><font face="Courier New, Courier, mono" size="2">  Wert = 0: ungedämpft &amp; federnd
+  Wert = 1: kritische Dämpfung
+</font></pre>
+Empfohlene Werte liegen zwischen 0.1 und 0.3. 
+
+</td></tr>
+<tr><td><i>FederungsDämpfung (optional)</i></td>
+<td> (englisch &quot;suspension damping&quot;) 
+Die Dämpfung, wenn die Aufhängung expandiert. Sehen Sie sich die Einfederung an, um zu wissen, 
+wie Sie diesen Wert setzen. Die Federungsdämpfung sollte etwas größer als die Einfederung sein. 
+Empfohlene Werte liegen zwischen 0.2 und 0.5. 
+
+</td></tr>
+<tr><td><i>MaxEinfederung (optional)</i></td>
+<td> (englisch &quot;maximum suspension compression&quot;) 
+Die Länge, um die die Federung zusammengedrückt werden kann (in Zentimeter). 
+
+</td></tr>
+<tr><td><i>Reibung (optional)</i></td>
+<td> (englisch &quot;friction&quot;) 
+Die Reibung zwischen dem Reifen und dem Boden. Sollte etwa 0.8 für realistische Autos sein, 
+kann aber für eine bessere Handhabung erhöht werden. 
+Ein großer Wert (10000.0) kann verwendet werden, um ein Handling wie bei Kartfahrern zu erhalten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../entity/freeentitybody.html">FreeEntityBody()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createvehicle.html>CreateVehicle()</a> - <a href=index.html>Vehicle Inhaltsverzeichnis</a> - <a href=getvehicleattribute.html>GetVehicleAttribute()</a> -><br><br>
+
+</body></html>

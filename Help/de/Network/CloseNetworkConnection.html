@@ -1,0 +1,45 @@
+<html><head><title>CloseNetworkConnection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseNetworkConnection()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CloseNetworkConnection</b></font>(Verbindung)</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Schließt die angegebene Verbindung. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Verbindung</i></td>
+<td width="90%"> 
+Die zu schließende Verbindung. Diese ist das Ergebnis eines Aufrufs 
+von entweder <a href="opennetworkconnection.html">OpenNetworkConnection()</a> oder <a href="eventclient.html">EventClient()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn ein Client diese Funktion aufruft, dann erhält der Server ein <font color="#924B72">#PB_NetworkEvent_Disconnect</font> Ereignis. 
+Wenn diese Funktion von einem Server aufgerufen wird, dann wird die Verbindung ohne weiteren Hinweis an den Client 
+geschlossen. Wenn ein Server ein <font color="#924B72">#PB_NetworkEvent_Disconnect</font> Ereignis empfängt, wird seine 
+zugehörige Client-Verbindung automatisch geschlossen und CloseNetworkConnection() muss in diesem 
+Fall nicht aufgerufen werden. 
+<br>
+<br>
+Alle noch offenen Verbindungen werden automatisch geschlossen, wenn das Programm endet. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a>, <a href="eventclient.html">EventClient()</a>, <a href="closenetworkserver.html">CloseNetworkServer()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Network Inhaltsverzeichnis</a> - <a href=closenetworkserver.html>CloseNetworkServer()</a> -><br><br>
+
+</body></html>

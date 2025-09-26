@@ -1,0 +1,68 @@
+<html><head><title>OpenLibrary</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenLibrary()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenLibrary</b></font>(#Bibliotheque, NomFichier$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une bibliothèque partagée afin que ses 
+fonctions puissent être consultées. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Bibliotheque</i></td>
+<td width="90%"> 
+La bibliothèque à tester. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé en tant que paramètre pour 
+générer automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Le nom du fichier de la bibliothèque à charger. 
+<blockquote>
+
+Si le nom de fichier ne comporte pas de chemin, 
+alors le système d'exploitation recherche la 
+bibliothèque dans ses dossiers systèmes, le 
+répertoire des applications et le répertoire 
+courant. Sous Linux et MacOS, pour charger la 
+bibliothèque à partir du répertoire courant, le 
+préfixe de chemin './' doit être spécifié. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la bibliothèque 
+a été ouverte avec succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé à la place de 
+#Bibliothèque alors le numéro généré pour le 
+bibliothèque est retourné en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il est obligatoire que l'exécutable PureBasic créé et la bibliothèque partagée utilisent 
+la même architecture (par exemple une DLL x86 ne peut pas être ouverte par les exécutables x64). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closelibrary.html">CloseLibrary()</a>, <a href="getfunction.html">GetFunction()</a>, 
+<a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextlibraryfunction.html>NextLibraryFunction()</a> - <a href=index.html>Library Index</a><br><br>
+</blockquote>
+</font></body></html>

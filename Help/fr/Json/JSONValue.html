@@ -1,0 +1,91 @@
+<html><head><title>JSONValue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">JSONValue()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>JSONValue</b></font>(#JSON)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la valeur des données #JSON 
+spécifiés. 
+<br>
+<br>
+Le type de la valeur peut être vérifié 
+avec <a href="jsontype.html">JSONType()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+Les données JSON. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La valeur JSON.<br>
+Le résultat n'est jamais nul pour un 
+ensemble de données #JSON valides. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Chaque donnée #JSON contient exactement 
+une valeur JSON (contenant des valeurs 
+éventuellement imbriquées).<br>
+Les données #JSON nouvellement créées 
+avec <a href="createjson.html">CreateJSON()</a> contiennent une valeur 
+de type <font color="#924B72">#PB_JSON_Null</font>. 
+<br>
+<br>
+Le type de la valeur JSON ou de son 
+contenu peut être modifié avec l'une des 
+fonctions suivantes: 
+<br>
+- <a href="setjsonarray.html">SetJSONArray()</a>:   Modifie la valeur en 
+un tableau (vide) 
+<br>
+- <a href="setjsonboolean.html">SetJSONBoolean()</a>: Modifie la valeur en 
+un booléen 
+<br>
+- <a href="setjsondouble.html">SetJSONDouble()</a>:  Modifie la valeur en 
+un nombre 'Double' 
+<br>
+- <a href="setjsonfloat.html">SetJSONFloat()</a>:   Modifie la valeur en 
+un nombre 'Float' 
+<br>
+- <a href="setjsoninteger.html">SetJSONInteger()</a>: Modifie la valeur en 
+un nombre entier 
+<br>
+- <a href="setjsonnull.html">SetJSONNull()</a>:    Modifie la valeur en 
+une valeur 'null' 
+<br>
+- <a href="setjsonobject.html">SetJSONObject()</a>:  Modifie la valeur en 
+un objet (vide) 
+<br>
+- <a href="setjsonstring.html">SetJSONString()</a>:  Modifie la valeur en 
+une chaîne de caractère 
+<br>
+- <a href="setjsonquad.html">SetJSONQuad()</a>:    Modifie la valeur en 
+un nombre 'Quad' 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ParseJSON</font>(0,<font color="#006666"> Chr</font>(34) + &quot;Le renard rapide saute par dessus le chien paresseux&quot; +<font color="#006666"> Chr</font>(34))
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONString</font>(<font color="#006666">JSONValue</font>(0)) 
+  
+  <font color="#006666">; Resultat : Le renard rapide saute par dessus le chien paresseux  </font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=jsontype.html>JSONType()</a> - <a href=index.html>Json Index</a> - <a href=loadjson.html>LoadJSON()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,85 @@
+<html><head><title>ScrollBarGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScrollBarGadget3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ScrollBarGadget3D</b></font>(#Gadget3D, x, y, Breite, Höhe, Minimum, Maximum, SeitenLänge [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein ScrollBar-Gadget (Schiebebalken) innerhalb der aktuellen Gadgetliste. 
+Es wird häufig verwendet, wenn nur ein Teil eines Objektes angezeigt wird. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen 3D-Gadgets. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Zahl 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+Der Bereich an Werten, welche der Schiebebalken annehmen kann. Diese Werte sollten 
+zwischen 0 und 10.000 liegen, um Einschränkungen auf manchen Betriebssystemen zu vermeiden. 
+
+</td></tr>
+<tr><td><i>SeitenLänge</i></td>
+<td> 
+Der Wertebereich, der zur gerade dargestellten &quot;Seite&quot; gehört. 
+<br>
+<br>
+Zum Beispiel: Sie haben ein Bild mit einer Breite von 100 Pixel 
+und Sie sehen nur 25 Pixel. Was Sie sehen, wird eine 'Seite' genannt - in diesem 
+Beispiel ist die Seitenlänge 25, der Minimum-Wert beträgt 0 und der Maximum-Wert 100. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Vertical</font> : Der Schiebebalken ist vertikal (anstelle von horizontal, was der Standard ist).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall einen Wert ungleich Null zurück, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Gadget3D Parameter verwendet wurde, dann enthält bei Erfolg der Rückgabewert 
+die automatisch generierte Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip3d.html">GadgetToolTip3D()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Funktionen können verwendet werden, um auf das Gadget zuzugreifen: 
+<br>
+<br>
+- <a href="getgadgetstate3d.html">GetGadgetState3D()</a>: Gibt die aktuelle Position des Schiebebalkens zurück (der Wert liegt innerhalb der Minimum-Maximum Spanne). <br>
+- <a href="setgadgetstate3d.html">SetGadgetState3D()</a>: Ändert die aktuelle Schiebebalken-Position. <br>
+- <a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Minimum</font>   : gibt die minimale Schiebebalken-Position zurück.
+  <font color="#924B72">#PB_ScrollBar3D_Maximum</font>   : gibt die maximale Schiebebalken-Position zurück.
+  <font color="#924B72">#PB_ScrollBar3D_PageLength</font>: gibt den Wert der Seitenlänge zurück.
+</font></pre>
+
+- <a href="setgadgetattribute3d.html">SetGadgetAttribute3D()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Minimum</font>   : ändert die minimale Schiebebalken-Position.
+  <font color="#924B72">#PB_ScrollBar3D_Maximum</font>   : ändert die maximale Schiebebalken-Position.
+  <font color="#924B72">#PB_ScrollBar3D_PageLength</font>: ändert den Wert der Seitenlänge.
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=scrollareagadget3d.html>ScrollAreaGadget3D()</a> - <a href=index.html>Gadget3D Inhaltsverzeichnis</a> - <a href=setactivegadget3d.html>SetActiveGadget3D()</a> -><br><br>
+
+</body></html>

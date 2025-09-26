@@ -1,0 +1,66 @@
+<html><head><title>CompareMemoryString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareMemoryString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CompareMemoryString</b></font>(*String1, *String2 [, Modus [, Länge [, Flags]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Vergleicht zwei Strings an den angegebenen Speicheradressen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*String1, *String2</i></td>
+<td width="90%"> 
+Die Adressen der zu vergleichenden Strings. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Modus des String-Vergleichs. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : String-Vergleich beachtet die Groß-/Kleinschreibung (a=a). Standard-Wert, wenn der Parameter weggelassen wird.
+  <font color="#924B72">#PB_String_NoCase</font>        : String-Vergleich erfolgt unabhängig von Groß-/Kleinschreibung unter Verwendung des kompletten Unicode-Zeichensatzes (ä=Ä).
+  <font color="#924B72">#PB_String_NoCaseAscii</font>   : String-Vergleich erfolgt unabhängig von Groß-/Kleinschreibung und nur unter Verwendung des ASCII-Zeichensatzes (a=A).
+                             Viel schneller als <font color="#924B72">#PB_String_NoCase</font>, wenn nicht der vollständige Unicode-Support benötigt wird.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Länge (optional)</i></td>
+<td> 
+Die Anzahl der zu vergleichenden Zeichen (Character). Wenn dieser Parameter nicht 
+angegeben wird oder den Wert -1 hat, werden die Strings bis zum Erreichen eines Null-Zeichens 
+verglichen. Wenn die Strings nicht null-terminiert sind, dann muss dieser Parameter angegeben 
+werden. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Das beim Vergleichen der Strings zu verwendende String-Format. 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Vergleicht die Strings als ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Vergleicht die Strings als UTF8
+  <font color="#924B72">#PB_Unicode</font>: Vergleicht die Strings als Unicode (Standard)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen der folgenden Werte zurück: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_Equal</font>  : wenn String1 gleich String2 ist
+  <font color="#924B72">#PB_String_Lower</font>  : wenn String1 kleiner als String2 ist
+  <font color="#924B72">#PB_String_Greater</font>: wenn String1 größer als String2 ist
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="pokes.html">PokeS()</a>, <a href="peeks.html">PeekS()</a>, <a href="memorystringlength.html">MemoryStringLength()</a>, <a href="copymemorystring.html">CopyMemoryString()</a>, <a href="comparememory.html">CompareMemory()</a>, <a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=comparememory.html>CompareMemory()</a> - <a href=index.html>Memory Inhaltsverzeichnis</a> - <a href=copymemory.html>CopyMemory()</a> -><br><br>
+
+</body></html>

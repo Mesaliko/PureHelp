@@ -1,0 +1,80 @@
+<html><head><title>DrawVectorText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawVectorText()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawVectorText</b></font>(Text$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Draw the given text at the current location of the <a href="movepathcursor.html">path cursor</a>. 
+The cursor will be moved horizontally to the end of the drawn text. The font to use 
+can be set with <a href="vectorfont.html">VectorFont()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+The text to draw (single line). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Only vector fonts are allowed, like TrueType, bitmap fonts are not allowed. 
+<br>
+<br>
+This function draws single lines of text only. Multiple calls must be made 
+to draw multiple lines. Use <a href="vectortextwidth.html">VectorTextWidth()</a> and <a href="vectortextheight.html">VectorTextHeight()</a> to determine 
+the dimensions of the text to draw in order to properly align the text with other content. 
+<br>
+<br>
+The <a href="drawvectorparagraph.html">DrawVectorParagraph()</a> function can be used to draw a larger block of text with automatic 
+layout such as line breaks. This function is more suited for drawing multiline text. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Impact&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 25)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 0, 80))
+      Text$ = &quot;The quick brown fox jumps over the lazy dog&quot;
+      
+      <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 6
+<font color="#006666">        MovePathCursor</font>(200 -<font color="#006666"> VectorTextWidth</font>(Text$)/2, 100 -<font color="#006666"> VectorTextHeight</font>(Text$)/2)
+<font color="#006666">        DrawVectorText</font>(Text$)
+<font color="#006666">        RotateCoordinates</font>(200, 100, 30)
+      <b><font color="#006666">Next</font></b> i
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/drawvectortext.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="vectortextwidth.html">VectorTextWidth()</a>, <a href="vectortextheight.html">VectorTextHeight()</a>, <a href="drawvectorparagraph.html">DrawVectorParagraph()</a>, <a href="addpathtext.html">AddPathText()</a>, <a href="vectorfont.html">VectorFont()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawvectorparagraph.html>DrawVectorParagraph()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=endvectorlayer.html>EndVectorLayer()</a> -><br><br>
+
+
+</body></html>

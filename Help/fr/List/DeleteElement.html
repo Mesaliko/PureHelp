@@ -1,0 +1,81 @@
+<html><head><title>DeleteElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeleteElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>DeleteElement</b></font>(Liste() [, Options])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprime l'élément courant de la liste. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Si ce paramètre est égal à 1 et que le premier élément est supprimé 
+alors le nouvel élément courant sera le second élément. 
+<br>
+Cette option veille à ce qu'il y ait toujours un élément en cours de validité 
+après une suppression aussi longtemps qu'il y a encore des éléments de la liste. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle qui est l'adresse du nouvel élément courant. 
+<br>
+Si la liste ne comporte aucun élément courant après la suppression, le résultat est 0. 
+<br>
+<br>
+La valeur renvoyée est un 
+<a href="../reference/memory.html">pointeur</a> sur le nouvel élément. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Fonctionnement: Après l'appel de cette fonction, le nouvel 
+élément courant est celui qui précédait 
+l'élément supprimé. Si l'élément supprimé 
+était le premier, alors il n'y a plus 
+d'élément courant (la position dans la 
+liste est avant le premier élément, comme 
+après un <a href="resetlist.html">ResetList()</a>) sauf si Option=1 car dans 
+ce cas le nouvel élément serait celui qui était en seconde 
+position. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">personnes</font>.s()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">personnes</font>()) :<font color="#006666"> personnes</font>() = &quot;Tom&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">personnes</font>()) :<font color="#006666"> personnes</font>() = &quot;Dick&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">personnes</font>()) :<font color="#006666"> personnes</font>() = &quot;Harry&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">personnes</font>()) :<font color="#006666"> personnes</font>() = &quot;Bob&quot;
+
+<font color="#006666">  FirstElement</font>(<font color="#006666">personnes</font>())     <font color="#006666">; se déplace sur &quot;Tom&quot;</font>
+<font color="#006666">  DeleteElement</font>(<font color="#006666">personnes</font>(),1)  <font color="#006666">; et le supprime. L'élément courant devient (paramètre 1 utilisé) celui qui suivait</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;La première personne de la liste est &quot;+<font color="#006666">personnes</font>(), <font color="#924B72">#PB_MessageRequester_OK</font>)
+
+<font color="#006666">  LastElement</font>(<font color="#006666">personnes</font>())      <font color="#006666">; se déplace vers &quot;Bob&quot;</font>
+<font color="#006666">  PreviousElement</font>(<font color="#006666">personnes</font>())  <font color="#006666">; se déplace vers &quot;Harry&quot;</font>
+<font color="#006666">  DeleteElement</font>(<font color="#006666">personnes</font>())    <font color="#006666">; et le supprime.Il y a un élément avant Harry, alors il devient l'élément courant</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;La personne actuellement pointée dans la liste est &quot;+<font color="#006666">personnes</font>(), <font color="#924B72">#PB_MessageRequester_OK</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addelement.html">AddElement()</a>, <a href="insertelement.html">InsertElement()</a>, 
+<a href="clearlist.html">ClearList()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=countlist.html>CountList()</a> - <a href=index.html>List Index</a> - <a href=firstelement.html>FirstElement()</a> -><br><br>
+
+</body></html>

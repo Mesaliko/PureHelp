@@ -1,0 +1,52 @@
+<html><head><title>Map.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Map example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">Structure</font></b> BasicStructure
+  Field1.b
+  Field2.w
+  Field3.l
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">NewMap</font></b> <font color="#006666">TestMap</font>.BasicStructure()
+
+<font color="#006666">;
+</font><font color="#006666">;-------- Add Elements and TestMaps --------
+</font><font color="#006666">;
+</font><font color="#006666">TestMap</font>(&quot;item1&quot;)\Field2 = 1
+<font color="#006666">TestMap</font>(&quot;item2&quot;)\Field2 = 2
+<font color="#006666">TestMap</font>(&quot;item3&quot;)\Field2 = 3
+<font color="#006666">TestMap</font>(&quot;item4&quot;)\Field2 = 4
+
+
+<b><font color="#006666">Debug</font></b> &quot;Number of elements in the Map: &quot; +<font color="#006666"> MapSize</font>(<font color="#006666">TestMap</font>())
+
+<font color="#006666">; First way to Map all the elements
+</font><font color="#006666">;
+</font><font color="#006666">ResetMap</font>(<font color="#006666">TestMap</font>())               <font color="#006666">; Reset the Map index before the first element.
+</font><b><font color="#006666">While</font></b> <font color="#006666">NextMapElement</font>(<font color="#006666">TestMap</font>())  <font color="#006666">; Process all the elements...
+</font>  <b><font color="#006666">Debug</font></b> &quot;ResetMap() - 'Field2' value: &quot; +<font color="#006666"> TestMap</font>()\Field2
+<b><font color="#006666">Wend</font></b>
+
+<font color="#006666">; Second way, with the help of ForEach
+</font><font color="#006666">;
+</font><b><font color="#006666">ForEach</font></b> <font color="#006666">TestMap</font>()       <font color="#006666">; Process all the elements...
+</font>  <b><font color="#006666">Debug</font></b> &quot;ForEach() - 'Field2' value: &quot; +<font color="#006666"> TestMap</font>()\Field2
+<b><font color="#006666">Next</font></b>
+
+
+<font color="#006666">; Go directly to the 3rd element
+</font><font color="#006666">FindMapElement</font>(<font color="#006666">TestMap</font>(), &quot;item3&quot;)
+
+<b><font color="#006666">Debug</font></b> &quot;3rd Element - 'Field2' value: &quot; +<font color="#006666"> TestMap</font>()\Field2
+
+<b><font color="#006666">End</font></b></font></pre>
+</body></html>

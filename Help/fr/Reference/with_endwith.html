@@ -1,0 +1,70 @@
+<html><head><title>With : EndWith</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">With : EndWith</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">With</font></b> &lt;expression&gt;
+  ...
+<b><font color="#006666">EndWith</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Le bloc <b><font color="#006666">With</font></b> : <b><font color="#006666">EndWith</font></b> permet de réduire la quantité de code à saisir et améliore sa lisibilité quand 
+beaucoup de champs d'une <a href="../reference/structures.html">structure</a> doivent être renseignés. L'&lt;expression&gt; spécifiée sera 
+automatiquement insérée avant chaque caractère anti-slash '\' qui suit un espace ou un opérateur. C'est une directive 
+de compilateur qui fonctionne de la même manière qu'une <a href="../reference/macros.html">macro</a>: la ligne complète est recréée lors 
+de la compilation, puis elle est traitée. Les blocs <b><font color="#006666">With</font></b> : <b><font color="#006666">EndWith</font></b> ne peuvent pas être 
+imbriqués, car cela pourrait générer des bugs difficiles à résoudre. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+    Taille.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  Ami.Personne
+  
+  <b><font color="#006666">With</font></b> Ami
+    \Nom$ = &quot;Yann&quot;
+    \Age   = 30
+    \Taille  = 196
+    
+    <b><font color="#006666">Debug</font></b> \Taille+\Taille
+  <b><font color="#006666">EndWith</font></b>
+    
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Corps
+    Poids.l
+    Couleur.l
+    Texture.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+    Corps.Corps[10]
+  <b><font color="#006666">EndStructure</font></b>
+
+  Ami.Personne
+  
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 9
+    <b><font color="#006666">With</font></b> Ami\Corps[k]
+      \Poids = 50
+      \Couleur  = 30
+      \Texture = \Couleur*k
+      
+      <b><font color="#006666">Debug</font></b> \Texture
+    <b><font color="#006666">EndWith</font></b>
+  <b><font color="#006666">Next</font></b>
+    
+</font></pre>
+
+</blockquote>
+</font></body></html>

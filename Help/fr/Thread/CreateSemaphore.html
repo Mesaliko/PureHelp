@@ -1,0 +1,139 @@
+<html><head><title>CreateSemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateSemaphore()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateSemaphore</b></font>([CompteurInitial])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau sémaphore. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>CompteurInitial (optionnel)</i></td>
+<td width="90%"> 
+Ce doit être une valeur positive 
+qui indique le  compteur initial 
+du sémaphore. S'il n'est pas spécifié, 
+le compteur initial vaudra 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nouveau sémaphore, ou zéro en cas 
+d'échec. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un sémaphore est un objet de synchronisation 
+de threads, qui contient un compteur 
+interne. Il gère deux types d'opérations: 
+<a href="waitsemaphore.html">attente</a> et 
+<a href="signalsemaphore.html">signalement</a>. 
+L'opération d'attente diminue la valeur 
+du compteur du sémaphore de un. Si le 
+compteur devait passer à une valeur 
+inférieure à 0, l'opération d'attente 
+sera bloquante, jusqu'à ce qu'une opération 
+de signalement soit faite. Cette dernière 
+augmente la valeur du compteur de un, 
+libérant le thread bloqué (si il y en a un). 
+Un sémaphore permet d'appliquer un comptage 
+minimum et maximum entre les threads par 
+exemple pour éviter à la file d'attente de 
+manquer d'éléments ou au contraire d'en 
+avoir trop. 
+<br>
+<br>
+Contrairement à un <a href="createmutex.html">mutex</a>, 
+un sémaphore n'appartient pas à un thread 
+particulier, ce qui permet aux opérations 
+d'attente/signalement d'être effectuées 
+depuis n'importe quel thread, ce qui n'est 
+pas le cas de <a href="lockmutex.html">LockMutex()</a> et <a href="unlockmutex.html">UnlockMutex()</a>. 
+Une utilisation courante des sémaphores est 
+la création d'un thread qui attend sur le 
+sémaphore avec <a href="waitsemaphore.html">WaitSemaphore()</a> et d'un autre 
+qui le débloque avec <a href="signalsemaphore.html">SignalSemaphore()</a>: 
+c'est le pattern producteur/consommateur. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+Cet exemple montre un thread &quot;producteur&quot; 
+qui ajoute des éléments à une liste et 
+un thread principal qui affiche la liste 
+au fur et à mesure que des éléments sont 
+ajoutés. Le sémaphore permet au thread 
+principal de se mettre en attente si la 
+liste ne contient aucun élément. A noter 
+que cela aurait pu aussi être effectué 
+avec un mutex, en testant à intervalle 
+régulier si la liste est vide ou non 
+(en utilisant <a href="../system/delay.html">Delay()</a>). Le sémaphore 
+est bien plus efficace, car il débloque 
+immédiatemment le thread lorsque le 
+signalement est effectué, et élimine 
+l'intervalle d'attente. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Assurez vous que l'option &quot;Activer la gestion des threads&quot; est sélectionnée</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Global</font></b> Semaphore =<font color="#006666"> CreateSemaphore</font>()
+  <b><font color="#006666">Global</font></b> Mutex     =<font color="#006666"> CreateMutex</font>()
+  <b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">Queue</font>()
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Producer</font>(Total)
+
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> Total
+<font color="#006666">      Delay</font>(<font color="#006666">Random</font>(750) + 250)
+    
+      <font color="#006666">; L'accès à la liste nécessite tout de même un mutex pour être threadsafe</font>
+<font color="#006666">      LockMutex</font>(Mutex)
+<font color="#006666">        LastElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        AddElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        Queue</font>() = i
+<font color="#006666">      UnlockMutex</font>(Mutex)    
+
+      <font color="#006666">; Envoie un signal pour indiquer qu'un nouvel élément est disponible</font>
+<font color="#006666">      SignalSemaphore</font>(Semaphore)
+    <b><font color="#006666">Next</font></b> i
+    
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateThread</font>(@Producer(), 30)
+
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30  
+      <font color="#006666">; Attente d'un nouvel élément</font>
+<font color="#006666">      WaitSemaphore</font>(Semaphore)
+    
+      <font color="#006666">; Affiche l'état de la liste</font>
+<font color="#006666">      LockMutex</font>(Mutex)
+        Queue$ = &quot;Queue:&quot;
+        <b><font color="#006666">ForEach</font></b> <font color="#006666">Queue</font>()
+          Queue$ + &quot; &quot; +<font color="#006666"> Str</font>(<font color="#006666">Queue</font>())
+        <b><font color="#006666">Next</font></b> <font color="#006666">Queue</font>()
+        <b><font color="#006666">Debug</font></b> Queue$
+    
+        <font color="#006666">; Efface le premier élément de la liste</font>
+<font color="#006666">        FirstElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        DeleteElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      UnlockMutex</font>(Mutex)
+    
+    <b><font color="#006666">Next</font></b> i
+
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freesemaphore.html">FreeSemaphore()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createmutex.html>CreateMutex()</a> - <a href=index.html>Thread Index</a> - <a href=createthread.html>CreateThread()</a> -><br><br>
+
+</body></html>

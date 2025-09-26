@@ -1,0 +1,121 @@
+<html><head><title>FetchOrientation.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono"size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Orientation
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#CameraSpeed</font> = 1
+
+<b><font color="#006666">IncludeFile</font></b> <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Screen3DRequester.pb&quot;
+
+<b><font color="#006666">Declare</font></b> <font color="#006666">ConvertLocalToWorld</font>(*N.Vector3, *P.Vector3, *Orientation.Vector4, *Position.Vector3)
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, RollZ, sens = -1
+<b><font color="#006666">Define</font></b> Pos.Vector3, Orientation.Vector4
+<b><font color="#006666">Define</font></b>.Vector3 Resultat, C1, C2
+
+C1\x = -25 : C1\y = -25 : C1\z = -25
+C2\x =  25 : C2\y =  25 : C2\z =  25
+
+<b><font color="#006666">If</font></b> <font color="#006666">InitEngine3D</font>()
+  
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">  Parse3DScripts</font>()
+  
+<font color="#006666">  InitSprite</font>()
+<font color="#006666">  InitKeyboard</font>()
+<font color="#006666">  InitMouse</font>()
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">Screen3DRequester</font>()
+    
+<font color="#006666">    CreateCube</font>(0, 50)
+<font color="#006666">    CreateSphere</font>(1, 5)
+    
+<font color="#006666">    CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">    CreateMaterial</font>(1,<font color="#006666"> LoadTexture</font>(1, &quot;Wood.jpg&quot;))
+    
+<font color="#006666">    CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+<font color="#006666">    CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1))
+<font color="#006666">    CreateEntity</font>(2,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1))
+
+<font color="#006666">    SkyBox</font>(&quot;stevecube.jpg&quot;)
+    
+<font color="#006666">    CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">    MoveCamera</font>(0, 90, 80, 150, <font color="#924B72">#PB_Absolute</font>)
+        
+    <b><font color="#006666">Repeat</font></b>
+<font color="#006666">      Screen3DEvents</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+        MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+        MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+        
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      RotateEntity</font>(0, 0, 0.4, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">      MoveEntity</font>(0, 0, 0, -1, <font color="#924B72">#PB_Local</font>)
+      
+      Pos\x =<font color="#006666"> EntityX</font>(0) : Pos\y =<font color="#006666"> EntityY</font>(0) :Pos\z =<font color="#006666"> EntityZ</font>(0)
+      
+<font color="#006666">      FetchOrientation</font>(<font color="#006666">EntityID</font>(0))
+      Orientation\x =<font color="#006666"> GetX</font>()
+      Orientation\y =<font color="#006666"> GetY</font>()
+      Orientation\z =<font color="#006666"> GetZ</font>()
+      Orientation\w =<font color="#006666"> GetW</font>()
+  
+<font color="#006666">      ConvertLocalToWorld</font>(@Resultat, @C1, @Orientation, @Pos)
+<font color="#006666">      MoveEntity</font>(1, Resultat\x, Resultat\y, Resultat\z, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">      ConvertLocalToWorld</font>(@Resultat, @C2, @Orientation, @Pos)
+<font color="#006666">      MoveEntity</font>(2, Resultat\x, Resultat\y, Resultat\z, <font color="#924B72">#PB_Absolute</font>)
+      
+<font color="#006666">      CameraLookAt</font>(0, Pos\x, Pos\y, Pos\z)
+<font color="#006666">      RenderWorld</font>()
+
+<font color="#006666">      FlipBuffers</font>()
+    <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">Else</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;The 3D Engine can't be initialized&quot;,0)
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">CROSS_PRODUCT</font>(N, V1, V2)
+  N\x = ((V1\y * V2\z) - (V1\z * V2\y))
+  N\y = ((V1\z * V2\x) - (V1\x * V2\z))
+  N\z = ((V1\x * V2\y) - (V1\y * V2\x))
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">QuaternionVector3</font>(*R.Vector3, *Q.Vector4, *P.Vector3)
+  <font color="#006666">; nVidia SDK implementation
+</font>  <b><font color="#006666">Protected</font></b>.Vector3 uv, uuv
+<font color="#006666">  CROSS_PRODUCT</font>(uv, *Q, *P)
+<font color="#006666">  CROSS_PRODUCT</font>(uuv, *Q, uv)
+  uv\x * (2.0 * *Q\w) : uv\y * (2.0 * *Q\w) : uv\z * (2.0 * *Q\w)
+  uuv\x * 2.0 : uuv\y * 2.0 : uuv\z * 2.0
+  *R\x = *P\x + uv\x + uuv\x
+  *R\y = *P\y + uv\y + uuv\y
+  *R\z = *P\z + uv\z + uuv\z
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ConvertLocalToWorld</font>(*N.Vector3, *P.Vector3, *Orientation.Vector4, *Position.Vector3)
+  <b><font color="#006666">Protected</font></b>.Vector3 R
+<font color="#006666">  QuaternionVector3</font>(@R, *Orientation, *P)
+  *N\x = R\x + *Position\x
+  *N\y = R\y + *Position\y
+  *N\z = R\z + *Position\z
+<b><font color="#006666">EndProcedure</font></b>��^</font></pre>
+</body></html>

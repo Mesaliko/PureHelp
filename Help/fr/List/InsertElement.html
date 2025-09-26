@@ -1,0 +1,79 @@
+<html><head><title>InsertElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>InsertElement</b></font>(Liste()) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Insère un nouvel élément avant l'élément 
+courant, ou au début de la liste si la 
+liste est vide. Ce nouvel élément devient 
+l'élément courant de la liste. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle qui est l'adresse du nouvel élément si le nouvel 
+élément a été créé, zéro sinon. 
+<br>
+La valeur renvoyée par cette commande est 
+un <a href="../reference/memory.html">pointeur</a> 
+vers les données du nouvel élément. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; La manière la plus simple d'utiliser InsertElement</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">simple</font>.w()
+<font color="#006666">  InsertElement</font>(<font color="#006666">simple</font>())    <font color="#006666">; Crée le premier élément de la liste</font>
+<font color="#006666">  simple</font>() = 23
+
+<font color="#006666">  InsertElement</font>(<font color="#006666">simple</font>())    <font color="#006666">; La position courante est le premier élément, nous ajoutons cet élément au début de la liste</font>
+<font color="#006666">  simple</font>() = 45              <font color="#006666">; L'ancien premier élément est maintenant le second élément de la liste</font>
+
+
+  <font color="#006666">; Ceci montre comment utiliser la valeur de retour de InsertElement</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">experimentes</font>.l()
+  <b><font color="#006666">If</font></b> <font color="#006666">InsertElement</font>(<font color="#006666">experimentes</font>()) &lt;&gt; 0
+<font color="#006666">    experimentes</font>() = 12345
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Erreur !&quot;, &quot;Impossible d'allouer de la mémoire pour le nouvel élément&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">EndIf</font></b>
+
+
+  <font color="#006666">; Une petite structure pour démontrer la description &quot;programmeurs expérimentés&quot; (ci-dessus)</font>
+  <b><font color="#006666">Structure</font></b> Programmeur
+    Nom.s
+    Talent.b
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">NewList</font></b> <font color="#006666">LesProgrammeurs</font>.Programmeur()  <font color="#006666">; La liste pour stocker les éléments</font>
+
+  *Element.Programmeur =<font color="#006666"> InsertElement</font>(<font color="#006666">LesProgrammeurs</font>())
+  <b><font color="#006666">If</font></b> *Element&lt;&gt;0
+    *Element\Nom = &quot;Dave&quot;
+    *Element\Talent = 3   <font color="#006666">; Celui-là, c'est un féru de PureBasic ! ;)</font>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Erreur !&quot;, &quot;Impossible d'allouer de la mémoire pour le nouvel élément&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addelement.html">AddElement()</a>, <a href="deleteelement.html">DeleteElement()</a>, <a href="clearlist.html">ClearList()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=freelist.html>FreeList()</a> - <a href=index.html>List Index</a> - <a href=lastelement.html>LastElement()</a> -><br><br>
+
+</body></html>

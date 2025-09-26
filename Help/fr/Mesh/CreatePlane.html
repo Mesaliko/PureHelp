@@ -1,0 +1,124 @@
+<html><head><title>CreatePlane</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePlane()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreatePlane</b></font>(#Mesh, TailleParcelleX, TailleParcelleZ, NbParcelleX, NbParcelleZ, NbRepetitionTextureX, NbRepetitionTextureZ)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un mesh plan. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+mesh. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>TailleParcelleX</i></td>
+<td> 
+Taille en 'X' d'une Parcelle du plan, dans 
+l'unité monde. La parcelle est le 
+composant de base d'un plan. Un plan 
+peut être composé de nombreuses parcelles 
+pour le rendre plus grand et permettre 
+une déformation. 
+
+</td></tr>
+<tr><td><i>TailleParcelleZ</i></td>
+<td> 
+Taille en 'Z' d'une parcelle du plan, dans 
+l'unité monde. La parcelle est le 
+composant de base d'un plan. Un plan 
+peut être composé de nombreuses parcelles 
+pour le rendre plus grand et permettre 
+une déformation. 
+
+</td></tr>
+<tr><td><i>NbParcelleX</i></td>
+<td> 
+Nombre de parcelles utilisées dans l'axe X du plan. 
+
+</td></tr>
+<tr><td><i>NbParcelleZ</i></td>
+<td> 
+Nombre de parcelles utilisées dans l'axe 
+Z du plan. 
+
+</td></tr>
+<tr><td><i>NbRepetitionTextureX</i></td>
+<td> 
+Nombre de fois que la texture sera 
+répétée sur l'axe X. Pour appliquer la 
+texture entière sur tout l'axe X, il 
+suffit d'utiliser 1. 
+
+</td></tr>
+<tr><td><i>NbRepetitionTextureZ</i></td>
+<td> 
+Nombre de fois que la texture sera 
+répétée sur l'axe Z. Pour appliquer la 
+texture entière sur tout l'axe Z, il 
+suffit d'utiliser 1. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon.<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le 
+paramètre #Mesh alors la valeur de 
+retour est le numéro d'identification, 
+généré automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le nombre de vertice totale est limité par le produit &quot;NbParcelleX&quot; x &quot;NbParcelleZ&quot; qui ne doit pas dépasser 65100. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  InitEngine3D</font>() 
+<font color="#006666">  InitSprite</font>() 
+  
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 640, 480, &quot;Exemple de plan en 3D&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, 640, 480, 0, 0, 0)
+  
+  <font color="#006666">; Lumière</font>
+<font color="#006666">  CreateLight</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> RGB</font>(25, 25, 180), -5, 10, 5, <font color="#924B72">#PB_Light_Point</font>)
+  
+  <font color="#006666">; Camera</font>
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">  MoveCamera</font>(0, 2, 1, 3, <font color="#924B72">#PB_Absolute</font> | <font color="#924B72">#PB_Local</font>)
+<font color="#006666">  CameraLookAt</font>(0, 0, 0, 0)
+  
+  <font color="#006666">; Créer le plan et l'attache à la scène</font>
+<font color="#006666">  CreatePlane</font>(0, 2, 2, 1, 1, 0, 0)
+<font color="#006666">  CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0), <font color="#924B72">#PB_Material_None</font>)
+  
+  <b><font color="#006666">Repeat</font></b>
+<font color="#006666">    RenderWorld</font>()
+<font color="#006666">    FlipBuffers</font>()
+  <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>(1) = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freemesh.html">FreeMesh()</a>, <a href="createsphere.html">CreateSphere()</a>, 
+<a href="createmesh.html">CreateMesh()</a>, <a href="createcube.html">CreateCube()</a>, 
+<a href="createplane.html">CreatePlane()</a>, <a href="createline3d.html">CreateLine3D()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createmesh.html>CreateMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=createsphere.html>CreateSphere()</a> -><br><br>
+
+</body></html>

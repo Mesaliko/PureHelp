@@ -1,0 +1,72 @@
+<html><head><title>SelectElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SelectElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Result = <font color="#006666"><b>SelectElement</b></font>(List(), Position)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the current list element to the element at the specified position. 
+This is very useful if you want to jump to a specific position in the list without manually iterating through the list using a loop. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+The position to move to in the list, considering that the first item in the list 
+is at position 0, the next is at 1 and so on. You must make sure that you do not specify a position 
+that is outside of the number of elements in the list! 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the data address of the selected element if successful or zero 
+if the position is out of range. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+As lists don't use an index internally, this function will jump compulsory to every element 
+in the list until the target position is reached which will take time if the list is large. 
+If a faster method is needed, <a href="changecurrentelement.html">ChangeCurrentElement()</a> should be used. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">mylist</font>.l()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 23
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 56
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 12
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 73
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 0)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;At position 0, the value is &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 2)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;At position 2, the value is &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 1)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;At position 1, the value is &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 3)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;At position 3, the value is &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="changecurrentelement.html">ChangeCurrentElement()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=resetlist.html>ResetList()</a> - <a href=index.html>List Index</a> - <a href=splitlist.html>SplitList()</a> -><br><br>
+
+</body></html>

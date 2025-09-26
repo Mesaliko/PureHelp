@@ -1,0 +1,68 @@
+<html><head><title>ExtractXMLMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractXMLMap()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ExtractXMLMap</b></font>(Node, Map() [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extract elements from the given XML node into the specified Map(). 
+The map will be cleared before extracting the elements. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Node</i></td>
+<td width="90%"> 
+The XML node containing the map data. 
+
+</td></tr>
+<tr><td><i>Map()</i></td>
+<td> 
+The map to fill with the XML elements. Any previous content of the map will be lost. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If this parameter is set to <font color="#924B72">#PB_XML_NoCase</font> then the comparison of XML node and attribute 
+names is performed case insensitive. The default is to be case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The extraction is performed recursively if the map has a structure type. 
+The XML nodes must have the form described in the <a href="insertxmlmap.html">InsertXMLMap()</a> function. Nodes 
+with different names are ignored by the extraction. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Xml$ = &quot;&lt;map&gt;&lt;element key=&quot; +<font color="#006666"> Chr</font>(34) + &quot;theKey&quot; +<font color="#006666"> Chr</font>(34) + &quot;&gt;the value&lt;/element&gt;&lt;/map&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(0, Xml$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(0) = <font color="#924B72">#PB_XML_Success</font>
+    <b><font color="#006666">NewMap</font></b> <font color="#006666">Test</font>.s()
+<font color="#006666">    ExtractXMLMap</font>(<font color="#006666">MainXMLNode</font>(0),<font color="#006666"> Test</font>())
+    
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">Test</font>()
+      <b><font color="#006666">Debug</font></b> <font color="#006666">MapKey</font>(<font color="#006666">Test</font>()) + &quot; -&gt; &quot; +<font color="#006666"> Test</font>()
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">XMLError</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="insertxmlmap.html">InsertXMLMap()</a>, <a href="extractxmlarray.html">ExtractXMLArray()</a>, <a href="extractxmllist.html">ExtractXMLList()</a>, <a href="extractxmlstructure.html">ExtractXMLStructure()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=extractxmllist.html>ExtractXMLList()</a> - <a href=index.html>XML Index</a> - <a href=extractxmlstructure.html>ExtractXMLStructure()</a> -><br><br>
+
+</body></html>

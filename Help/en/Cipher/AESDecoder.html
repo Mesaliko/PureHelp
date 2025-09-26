@@ -1,0 +1,81 @@
+<html><head><title>AESDecoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AESDecoder()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>AESDecoder</b></font>(*Input, *Output, Size, *Key, Bits, *InitializationVector [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Decodes the specified input buffer using the AES algorithm into the output buffer. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Input</i></td>
+<td width="90%"> 
+The input buffer with the encoded data. 
+
+</td></tr>
+<tr><td><i>*Output</i></td>
+<td> 
+The output buffer which will receive the plain data. It has to be different than the 
+input buffer. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The amount of bytes to decode. It has to be at least 16 bytes. To decode something 
+smaller, padding has to be added before the encoding. 
+
+</td></tr>
+<tr><td><i>*Key</i></td>
+<td> 
+A buffer containing the key for decoding. 
+Its size depends of the 'Bits' parameter: 16 bytes for 128-bit encryption, 24 bytes for 192 bit 
+and 32 bytes for 256-bit. <a href="derivecipherkey.html">DeriveCipherKey()</a> can be used to create this key from a password. 
+
+</td></tr>
+<tr><td><i>Bits</i></td>
+<td> 
+The size of the key used by the ciphering. Valid values are 128, 192 and 256. 
+
+</td></tr>
+<tr><td><i>*InitializationVector</i></td>
+<td> 
+The InitializationVector is a random data block, used to initialize the ciphering 
+to avoid breach in decoding (only needed when using the <font color="#924B72">#PB_Cipher_CBC</font> mode). 
+Its size is always 16 bytes long. The contents of this data block must match the one which was used 
+when <a href="aesencoder.html">encoding</a> the data. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+This can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CBC</font>: Default mode of encoding (Cipher Block Chaining). Needs an '*InitializationVector'.
+                  Recommended as more secure than ECB mode.
+  <font color="#924B72">#PB_Cipher_ECB</font>: Alternative mode (Electronic CodeBook). It doesn't uses random value nor chaining 
+                  (each block is ciphered independently) making it very weak compared to CBC, and shouldn't be used for
+                  serious ciphering.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the decoding was successful, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+For more information about AES and source examples, see <a href="aesencoder.html">AESEncoder()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="aesencoder.html">AESEncoder()</a>, <a href="startaescipher.html">StartAESCipher()</a>, <a href="derivecipherkey.html">DeriveCipherKey()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Cipher Index</a> - <a href=aesencoder.html>AESEncoder()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,64 @@
+<html><head><title>ResizeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResizeImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ResizeImage</b></font>(#Image, Breite, Höhe [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Verändert die Größe des Bildes auf die angegebene Abmessungen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Das in der Größe zu ändernde Bild. 
+
+</td></tr>
+<tr><td><i>Breite, Höhe</i></td>
+<td> 
+Die neuen Abmessungen des Bildes. Sowohl Breite als auch Höhe müssen größer 
+als Null sein. 
+<font color="#924B72">#PB_Ignore</font> kann für Breite oder Höhe angegeben werden, damit dieser Wert nicht geändert wird. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Modus der Größenänderung. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_Smooth</font>: Änderung der Bildgröße mit Kantenglättung (&quot;smoothing&quot;). (Standard)
+  <font color="#924B72">#PB_Image_Raw</font>   : Änderung der Bildgröße ohne jegliche Interpolation.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Operation erfolgreich war, und Null bei einem Fehler. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion verändert das <a href="../reference/handles.html">Handle</a> des benutzten 
+Bildes. Es muss deshalb z.B. einem <a href="../gadget/imagegadget.html">ImageGadget()</a> mittels 
+<a href="../gadget/setgadgetstate.html">SetGadgetState()</a> neu zugewiesen werden. 
+<br>
+<br>
+Diese Funktion arbeitet nicht mit Icon-Bildern (.ico) und mit Multiframe-Bildern. 
+<br>
+<br>
+Das Limit für die Bildgröße, welche verarbeitet werden kann, hängt vom Betriebssystem und 
+dem verfügbaren Speicher ab. Wenn genügend Speicher verfügbar ist, dann können von allen 
+von PureBasic unterstützten Betriebssystemen Bilder bis mindestens 8192x8192 Pixel 
+verarbeitet werden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="imagewidth.html">ImageWidth()</a>, <a href="imageheight.html">ImageHeight()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=removeimageframe.html>RemoveImageFrame()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=saveimage.html>SaveImage()</a> -><br><br>
+
+</body></html>

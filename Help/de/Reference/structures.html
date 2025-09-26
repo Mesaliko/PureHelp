@@ -1,0 +1,367 @@
+<html><head><title>Strukturen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Strukturen</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Structure</font></b> &lt;Name&gt; [<b><font color="#006666">Extends</font></b> &lt;Name&gt;] [Align &lt;numerischer konstanter Ausdruck&gt;]
+  ...
+<b><font color="#006666">EndStructure</font></b> 
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Structure</font></b> ist nützlich, um Benutzertypen zu definieren und um Zugriff auf einige Speicherbereiche 
+des OS zu erhalten. Strukturen können für das schnellere und einfachere Verwalten von großen Datenbeständen 
+benutzt werden. Sie sind sehr nützlich, um mit ihrer Hilfe in einem Objekt alle zusammengehörenden Informationen gruppieren 
+zu können. Auf die Struktur-Felder wird mit dem <b><font color="#006666">\</font></b> Operator zugegriffen. Strukturen können auch verschachtelt werden. 
+Statische Arrays werden innerhalb von Strukturen unterstützt. <br>
+<br>
+Strukturfelder müssen einen expliziten Typ haben - einer der von PureBasic unterstützten <a href="../reference/variables.html">Grundtypen</a>, 
+d.h. Byte (.b), Ascii (.a), Character (.c), Word (.w) , Unicode (.u), Long (.l), 
+Integer (.i), Float (.f ), Quad (.q), Double (.d)), String (.s) und Fixed String (.s{ Länge}). 
+<br>
+Dynamische Objekte wie Arrays, Listen und Maps werden innerhalb von Strukturen ebenfalls unterstützt und werden 
+automatisch initialisiert, wenn das Objekt mit Hilfe der Struktur erstellt wird. Um solche Felder 
+zu deklarieren, verwenden Sie die folgende Schlüsselwörter: <b><font color="#006666">Array</font></b>, <b><font color="#006666">List</font></b> und <b><font color="#006666">Map</font></b>. 
+<br>
+<br>
+
+Im Allgemeinen werden Strukturen in Verbindung mit einer <a href="../reference/variables.html">Variablen</a>, 
+einem <a href="../array/index.html">Array</a>, einer <a href="../list/index.html">List</a> oder einer 
+<a href="../map/index.html">Map</a> verwendet. 
+<br>
+Fortgeschrittene Anwender können eine Speicherstruktur jedoch auch mittels <a href="../memory/allocatestructure.html">AllocateStructure()</a> 
+zuweisen und mittels <a href="../memory/freestructure.html">FreeStructure()</a> freigeben. 
+Es ist auch möglich, eine Struktur im Speicher mit 
+<a href="../reference/compilerfunctions.html">InitializeStructure()</a> zu initialisieren, sie mit 
+<a href="../reference/compilerfunctions.html">CopyStructure()</a> zu kopieren, sie mit 
+<a href="../reference/compilerfunctions.html">ClearStructure()</a> zu löschen und sie mit 
+<a href="../reference/compilerfunctions.html">ResetStructure()</a> neu zu initialisieren. 
+<br>
+<br>
+Es ist möglich, eine komplette Struktur zu kopieren, indem mittels des Gleichheitszeichens (=) eine Zuweisung zwischen 
+zwei Struktur-Elementen des gleichen Typs vorgenommen wird. 
+<br>
+<br>
+
+Der optionale <b><font color="#006666">Extends</font></b> Parameter ermöglicht eine Struktur mit neuen Feldern (aus einer bereits definierten Struktur) 
+zu erweitern. Alle in der erweiterten (nach <b><font color="#006666">Extends</font></b> angegebenen) Struktur gefundenen Felder werden in der neu 
+definierten Struktur verfügbar sein und werden vor den neuen Feldern platziert. Dies ist nützlich, um einfache 
+Vererbung von Strukturen durchzuführen. <br>
+<br>
+
+Nur für fortgeschrittene Anwender: Der optionale <b><font color="#006666">Align</font></b> Parameter ermöglicht es, die Ausrichtung (englisch 
+&quot;Alignment&quot;) zwischen jedem Struktur-Feld einzustellen. Die standardmäßige Ausrichtung (auch Anordnung) ist 1, 
+was keine Ausrichtung bedeutet. Zum Beispiel, wenn die Ausrichtugn auf 4 eingestellt wird, dann wird jedes 
+Feld-Offset auf einer 4-Byte-Grenze liegen. Dies kann helfen, eine bessere Leistung beim Zugriff auf die 
+Felder der Struktur zu erreichen. Aber es kann auch mehr Speicher benötigen, da etwas Platz zwischen den 
+einzelnen Feldern verschwendet wird. Der besondere Wert <font color="#924B72">#PB_Structure_AlignC</font> kann verwendet werden, um die 
+Struktur wie in der Sprache C auszurichten, nützlich beim <a href="../reference/import_endimport.html">Importieren</a> von 
+C-Strukturen für die Verwendung mit API-Funktionen. 
+<br>
+<br>
+
+<a href="../reference/compilerfunctions.html">SizeOf</a> kann bei Strukturen benutzt werden, um die Größe der Struktur zu ermitteln. 
+<a href="../reference/compilerfunctions.html">OffsetOf</a> kann verwendet werden, um den Adress-Offset des angegebenen Felds zu ermitteln. <br>
+<br>
+
+Bitte beachten Sie, dass sich in Strukturen ein <b>statisches Array[]</b> nicht so verhält wie das normale BASIC 
+Array (definiert mittels <a href="../reference/dim.html">Dim</a>), um konform zum C/C++ Strukturen Format zu bleiben (was direkte API Strukturen 
+Portierung ermöglicht). Dies bedeutet, dass a<b>[</b>2<b>]</b> ein Array von 0 bis 1 definiert, wogegen Dim a<b>(</b>2<b>)</b> ein 
+Array von 0 bis 2 anlegt. Funktionen der <a href="../array/index.html">Array</a>-Bibliothek arbeiten ebenfalls nicht mit statischen Arrays. 
+<br>
+<br>
+
+Bei der Verwendung von <a href="../reference/memory.html">Zeigern</a> in Strukturen muss der '*' weggelassen werden, einmal mehr zur 
+Erleichterung der API-Code Portierung. Dies kann als eine Kuriosität angesehen werden (und um ehrlich zu sein, ist sie das auch), 
+aber es ist so seit dem Beginn von PureBasic und viele, viele Quellcodes bauen darauf, weshalb dies auch nicht geändert wird. 
+<br>
+<br>
+
+Bei der Verwendung vieler Strukturfelder können Sie den Umfang einzugebenden Codes vereinfachen und seine Lesbarkeit 
+erhöhen, wenn Sie die <a href="../reference/with_endwith.html">With</a> : <a href="../reference/with_endwith.html">EndWith</a> Schlüsselwörter benutzen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    Name.s
+    ForName.s 
+    Age.w 
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">MyFriends</font>.Person(100)
+  
+  <font color="#006666">; Hier wird die Position '0' des Arrays MyFriend()</font>
+  <font color="#006666">; eine Person und deren Informationen enthalten.</font>
+  
+<font color="#006666">  MyFriends</font>(0)\Name = &quot;Andersson&quot;
+<font color="#006666">  MyFriends</font>(0)\Forname = &quot;Richard&quot; 
+<font color="#006666">  MyFriends</font>(0)\Age = 32
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Eine komplexere Struktur (verschachtelt und statisches Array)</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Window
+    *NextWindow.Window  <font color="#006666">; verweist auf ein anderes Window Objekt</font>
+    x.w 
+    y.w
+    Name.s[10]  <font color="#006666">; 10 Namen verfügbar (von 0 bis 9)</font>
+  <b><font color="#006666">EndStructure</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Erweiterte ("extended") Struktur</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MyPoint
+    x.l 
+    y.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> MyColoredPoint <b><font color="#006666">Extends</font></b> MyPoint
+    color.l 
+  <b><font color="#006666">EndStructure</font></b>
+
+  ColoredPoint.MyColoredPoint\x = 10
+  ColoredPoint.MyColoredPoint\y = 20
+  ColoredPoint.MyColoredPoint\color =<font color="#006666"> RGB</font>(255, 0, 0)
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Kopieren von Strukturen</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MyPoint
+    x.l 
+    y.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  LeftPoint.MyPoint\x = 10
+  LeftPoint\y = 20
+  
+  RightPoint.MyPoint = LeftPoint
+  
+  <b><font color="#006666">Debug</font></b> RightPoint\x
+  <b><font color="#006666">Debug</font></b> RightPoint\y
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Dynamisches Objekt</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    Name$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Friends$</font>()
+  <b><font color="#006666">EndStructure</font></b>
+
+  John.Person
+  John\Name$ = &quot;John&quot;
+  John\Age   = 23
+  
+  <font color="#006666">; Jetzt fügen wir einige Freunde zu John hinzu</font>
+  <font color="#006666">;</font>
+<font color="#006666">  AddElement</font>(John\<font color="#006666">Friends$</font>())
+  John\<font color="#006666">Friends$</font>() = &quot;Jim&quot;
+
+<font color="#006666">  AddElement</font>(John\<font color="#006666">Friends$</font>())
+  John\<font color="#006666">Friends$</font>() = &quot;Monica&quot;
+  
+  <b><font color="#006666">ForEach</font></b> John\<font color="#006666">Friends$</font>()
+    <b><font color="#006666">Debug</font></b> John\<font color="#006666">Friends$</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Statische, dynamische Arrays und Übergabe einer Struktur an eine Prozedur</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Whatever
+    a.l
+    b.l[2]          <font color="#006666">; Statisches Array (Standard C) mit 2 Werten b[0] und b[1], nicht in der Größe veränderbar</font>
+    <b><font color="#006666">Array</font></b> <font color="#006666">c</font>.l(3,3)  <font color="#006666">; Dynamisches Array mit 16 Werten c(0,0) bis c(3,3), in der Größe veränderbar mittels ReDim()</font>
+  <b><font color="#006666">EndStructure</font></b>
+
+  MyVar.Whatever
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">MyProcedure</font>(*blahblah.Whatever)
+    *blahblah\a = 5
+    *blahblah\b[0] = 1
+    *blahblah\b[1] = 2
+    *blahblah\<font color="#006666">c</font>(3,3) = 33
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MyProcedure</font>(@MyVar)
+  <b><font color="#006666">Debug</font></b> MyVar\a
+  <b><font color="#006666">Debug</font></b> MyVar\b[0]
+  <b><font color="#006666">Debug</font></b> MyVar\b[1]
+  <b><font color="#006666">Debug</font></b> MyVar\<font color="#006666">c</font>(3,3)
+  
+  <font color="#006666">;Debug MyVar\c(0,10) ; 'Index außerhalb der erlaubten Grenzen' Fehler</font>
+  <b><font color="#006666">ReDim</font></b> MyVar\<font color="#006666">c</font>(3,10)  <font color="#006666">; Beachte: nur die letzte Dimension kann in der Größe verändert werden!</font>
+  <b><font color="#006666">Debug</font></b>  MyVar\<font color="#006666">c</font>(0,10) <font color="#006666">; Cool, das Array ist jetzt größer!</font>
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Verschachtelte Struktur(en)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> pointF 
+    x.f 
+    y.f 
+  <b><font color="#006666">EndStructure</font></b> 
+   
+  <b><font color="#006666">Structure</font></b> Field 
+    Field1.q 
+    Field2.s{6}
+    Field3.s
+    <b><font color="#006666">Array</font></b> <font color="#006666">Tab</font>.pointF(3)  
+  <b><font color="#006666">EndStructure</font></b> 
+ 
+  <b><font color="#006666">Define</font></b> MyVar.Field 
+ 
+  MyVar\<font color="#006666">Tab</font>(3)\x = 34.67
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Ausrichtung (Alignment)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Type <b><font color="#006666">Align</font></b> 4
+    Byte.b
+    Word.w
+    Long.l
+    Float.f
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Byte)   <font color="#006666">; wird 0 ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Word)   <font color="#006666">; wird 4 ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Long)   <font color="#006666">; wird 8 ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Float)  <font color="#006666">; wird 12 ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Zeiger (Pointer)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    *Next.Person  <font color="#006666">; hier ist '*' obligatorisch, um einen Zeiger zu deklarieren</font>
+    Name$
+    Age.b
+  <b><font color="#006666">EndStructure</font></b>
+
+  Timo.Person\Name$ = &quot;Timo&quot;
+  Timo\Age = 25
+  
+  Fred.Person\Name$ = &quot;Fred&quot;
+  Fred\Age = 25
+  
+  Timo\Next = @Fred  <font color="#006666">; bei Verwendung des Zeigers wird das '*' weggelassen</font>
+  
+  <b><font color="#006666">Debug</font></b> Timo\Next\Name$  <font color="#006666">; wird 'Fred' ausgeben</font>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">StructureUnion</font></b>
+  Feld1.Typ
+  Feld2.Typ
+  ...
+<b><font color="#006666">EndStructureUnion</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">StructureUnion</font></b> sind nur nützlich für fortgeschrittene Programmierer, welche etwas Speicher 
+sparen wollen, indem sie einige Felder innerhalb derselben Struktur teilen. Sie funktionieren wie 
+das 'Union' Schlüsselwort in C/C++. 
+<br>
+<br>
+Hinweis: Jedes Feld in der <b><font color="#006666">StructureUnion</font></b> Deklaration kann einen unterschiedlichen 
+<a href="../reference/variables.html">Typ</a> haben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Type
+    Name$
+    <b><font color="#006666">StructureUnion</font></b>
+      Long.l      <font color="#006666">; Jedes Feld (Long, Float und Byte) befindet sich</font>
+      Float.f     <font color="#006666">; an derselben Adresse im Speicher.</font>
+      Byte.b      <font color="#006666">;</font>
+    <b><font color="#006666">EndStructureUnion</font></b>
+  <b><font color="#006666">EndStructure</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> RGB-Beispiel</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> StrColor
+    Red.a
+    Green.a
+    Blue.a
+    Alpha.a
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> StrColorU
+    <b><font color="#006666">StructureUnion</font></b>
+      Component.StrColor
+      Color.l
+      Byte.a[4]
+    <b><font color="#006666">EndStructureUnion</font></b>
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Define</font></b> Color1.StrColorU
+
+  Color1\Color =<font color="#006666"> RGBA</font>($10,$20,$30,$FF)
+  <b><font color="#006666">Debug</font></b> &quot;hex = &quot; +<font color="#006666"> Hex</font>(Color1\Color, <font color="#924B72">#PB_Long</font>)  <font color="#006666">; hex = FF302010 (Little-Endian CPU)</font>
+  <b><font color="#006666">Debug</font></b> &quot;r = &quot; +<font color="#006666"> Hex</font>(Color1\Component\Red)      <font color="#006666">; r = 10</font>
+  <b><font color="#006666">Debug</font></b> &quot;g = &quot; +<font color="#006666"> Hex</font>(Color1\Component\Green)    <font color="#006666">; g = 20</font>
+  <b><font color="#006666">Debug</font></b> &quot;b = &quot; +<font color="#006666"> Hex</font>(Color1\Component\Blue)     <font color="#006666">; b = 30</font>
+  <b><font color="#006666">Debug</font></b> &quot;a = &quot; +<font color="#006666"> Hex</font>(Color1\Component\Alpha)    <font color="#006666">; a = FF</font>
+
+  <b><font color="#006666">Debug</font></b> &quot;by0 = &quot; +<font color="#006666"> Hex</font>(Color1\Byte[0])          <font color="#006666">; by0 = 10</font>
+  <b><font color="#006666">Debug</font></b> &quot;by1 = &quot; +<font color="#006666"> Hex</font>(Color1\Byte[1])          <font color="#006666">; by1 = 20</font>
+  <b><font color="#006666">Debug</font></b> &quot;by2 = &quot; +<font color="#006666"> Hex</font>(Color1\Byte[2])          <font color="#006666">; by2 = 30</font>
+  <b><font color="#006666">Debug</font></b> &quot;by3 = &quot; +<font color="#006666"> Hex</font>(Color1\Byte[3])          <font color="#006666">; by3 = FF</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Erweitertes Beispiel (Datums-Verwaltung)</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> date <font color="#006666">; jj.mm.yyyy</font>
+    day.s{2}
+    dot.s{1}
+    month.s{2}
+    dot.s{1}
+    year.s{4}
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Structure</font></b> dateU
+    <b><font color="#006666">StructureUnion</font></b>
+      s.s{10}
+      d.date
+    <b><font color="#006666">EndStructureUnion</font></b>
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">d1</font>.dateU(365)
+ 
+  <font color="#006666">; Ein Array </font>
+<font color="#006666">  d1</font>(0)\s = &quot;05.04.2028&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">d1</font>(0)\d\day
+  <b><font color="#006666">Debug</font></b> <font color="#006666">d1</font>(0)\d\month
+  <b><font color="#006666">Debug</font></b> <font color="#006666">d1</font>(0)\d\year
+
+  <font color="#006666">; Eine Variable</font>
+  d2.date2\s = &quot;15.11.2030&quot;
+  
+  <b><font color="#006666">Debug</font></b> d2\d\day
+  <b><font color="#006666">Debug</font></b> d2\d\month
+  <b><font color="#006666">Debug</font></b> d2\d\year
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

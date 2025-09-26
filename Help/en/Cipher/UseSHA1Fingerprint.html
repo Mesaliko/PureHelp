@@ -1,0 +1,53 @@
+<html><head><title>UseSHA1Fingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseSHA1Fingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>UseSHA1Fingerprint</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Register the SHA1 fingerprint plugin for future use. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+SHA1 can be used to calculate a checksum to verify that a 'message' has not been altered. Unlike 
+<a href="usecrc32fingerprint.html">CRC32</a> it is nearly impossible to modify the original message and still 
+produce the same SHA1 fingerprint. 
+<br>
+<br>
+Here is a quick explanation taken from the RFC 3174 on SHA1: 
+<br>
+<br>
+'The SHA-1 is called secure because it is computationally infeasible 
+to find a message which corresponds to a given message digest, or to 
+find two different messages which produce the same message digest. 
+Any change to a message in transit will, with very high probability, 
+result in a different message digest, and the signature will fail to 
+verify.' 
+<br>
+<br>
+More information can be found in the RFC 3174: 
+<a href="http://www.ietf.org/rfc/rfc3174.txt">http://www.ietf.org/rfc/rfc3174.txt</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseSHA1Fingerprint</font>()
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;yourpassword&quot;, <font color="#924B72">#PB_Cipher_SHA1</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="usemd5fingerprint.html">UseMD5Fingerprint()</a>(), <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a>(), <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a>(), <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a>() 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=usemd5fingerprint.html>UseMD5Fingerprint()</a> - <a href=index.html>Cipher Index</a> - <a href=usesha2fingerprint.html>UseSHA2Fingerprint()</a> -><br><br>
+
+</body></html>

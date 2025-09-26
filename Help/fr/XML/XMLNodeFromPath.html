@@ -1,0 +1,102 @@
+<html><head><title>XMLNodeFromPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeFromPath()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>XMLNodeFromPath</b></font>(NoeudParent, Chemin$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le noeud contenu dans un 
+noeud parent, dans un 'Chemin$'. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NoeudParent</i></td>
+<td width="90%"> 
+Le noeud parent à utiliser. 
+
+</td></tr>
+<tr><td><i>Chemin$</i></td>
+<td> 
+Contient la liste des noeuds séparée 
+par '/' indiquant le chemin à suivre 
+pour aller du noeud parent au noeud 
+cible. <br>
+Par exemple &quot;voitures/cabriolet&quot; 
+représente le premier noeud avec le 
+nom &quot;cabriolet&quot; dans le noeud nommé 
+&quot;voitures&quot; du 'NoeudParent'. 
+<br>
+<br>
+Le nom d'un noeud peut avoir un index 
+(commençant à 1) pour spécifier lequel 
+des noeuds fils portant le même nom 
+doit être sélectionné. 
+&quot;voitures/cabriolet[3]&quot; 
+représente le 3ème &quot;cabriolet&quot; dans 
+&quot;voitures&quot;. 
+<br>
+<br>
+Autres règles: <br>
+- Si un chemin commence avec '/', il est 
+relatif à la racine de l'arbre XML. 
+Le paramètre 'NoeudParent' est ignoré. 
+<br>
+- Un motif &quot;*&quot; est utilisable à la 
+place d'un nom de noeud pour indiquer 
+que n'importe quel noeud est valide. 
+<br>
+- Un noeud de commentaire porte le 
+nom &quot;#comment&quot; <br>
+- Un noeud CData porte le nom &quot;#cdata&quot; 
+<br>
+- Un noeud de DTD porte le nom &quot;#dtd&quot; 
+<br>
+- Un noeud traitement d'instruction 
+porte le nom &quot;#instruction&quot; 
+
+<br>
+Quelques exemples de chemins: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;/mainnode/#comment[4]&quot; - le 4ème commentaire dans le noeud &quot;mainnode&quot; du noeud racine.
+  &quot;*[10]&quot;                 - le 10ème noeud (de n'importe quel type) du 'NoeudParent'
+  &quot;*/*/*&quot;                 - le premier noeud 3 niveau en dessous du 'NoeudParent' en ne tenant pas compte de leurs types
+  &quot;node[3]/*[3]/#cdata&quot;   - la première section CData dans le 3ème noeud de n'importe quel type dans le 3ème noeud &quot;node&quot; du 'NoeudParent'
+</font></pre>
+
+<b>Note: </b> Cette commande n'est pas 
+mise en œuvre de la spécification XPath. 
+La syntaxe utilisée et comprise par cette 
+commande est seulement un petit sous 
+ensemble de XPath. Cela signifie un 
+chemin de retour de <a href="xmlnodepath.html">XMLNodePath()</a> est 
+une requête XPath valide, mais cette 
+commande ne comprend que la syntaxe 
+décrite ici, pas n'importe quelle 
+requête XPath. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le noeud cible, ou zéro si 
+le chemin ne représente pas un noeud 
+valide. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="xmlnodepath.html">XMLNodePath()</a> peut être utilisé pour 
+obtenir un tel chemin pour un noeud 
+donné. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="xmlnodepath.html">XMLNodePath()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=xmlnodefromid.html>XMLNodeFromID()</a> - <a href=index.html>XML Index</a> - <a href=xmlnodepath.html>XMLNodePath()</a> -><br><br>
+
+</body></html>

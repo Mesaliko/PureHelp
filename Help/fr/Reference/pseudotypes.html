@@ -1,0 +1,66 @@
+<html><head><title>Pseudotypes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Pseudotypes</font></b></p>
+
+<b>Description</b><br><blockquote>
+
+
+Pour les programmeurs chevronnés. Les pseudotypes sont destinés à faciliter la programmation quand 
+l'utilisation de bibliothèques externes nécessitant des types non supportés par PureBasic sont 
+requises. Plusieurs types prédéfinis sont disponibles et permettent une conversion à la volée 
+des types PureBasic vers ces types. Etant donné que ce ne sont pas des types normaux, leur notation 
+est volontairement différente: un préfixe 'p-' (pour 'pseudo') fait partie du nom du type. 
+Les pseudotypes disponibles sont: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  p-ascii: se comporte comme un type 'string', mais la chaîne de caractères sera toujours convertie en
+           ascii lors de l'appel de la fonction, même si le programme est compilé en mode <a href="../reference/unicode.html">unicode</a>. 
+           C'est très utile pour appeler les fonctions d'une bibliothèque qui ne supporte pas
+           l'unicode, dans un programme unicode.
+           
+  p-utf8: se comporte comme un type 'string', mais la chaîne de caractères sera toujours convertie en
+          utf-8 lors de l'appel de la fonction. C'est très utile pour appeler les fonctions d'une bibliothèque qui ne supporte que
+          l'utf-8 comme format de chaîne de caractères.
+
+  p-bstr: se comporte comme un type 'string', mais la chaîne de caractères sera toujours convertie en
+          bstr lors de l'appel de la fonction. C'est très utile pour appeler les fonctions d'une bibliothèque qui ont besoin
+          des chaînes de caractères bstr, comme les composants COM.
+          
+  p-unicode: se comporte comme un type 'string', mais la chaîne de caractères sera toujours convertie en
+             unicode lors de l'appel de la fonction, même si le programme est compilé en mode ascii. 
+             C'est très utile pour appeler les fonctions d'une bibliothèque qui ne supporte que
+             l'unicode, dans un programme ascii.
+             
+  p-variant: se comporte comme un type numérique, en ajustant l'appel de la fonction pour utiliser correctement
+             un paramètre de type 'VARIANT'. C'est très utile pour appeler les fonctions d'une bibliothèque qui ont besoin
+             des paramètres de type 'VARIANT', comme les composants COM.
+</font></pre>
+
+Les pseudotypes peuvent être utilisés uniquement avec les <a href="../reference/prototypes.html">prototypes</a>, les <a href="../reference/interfaces.html">interfaces</a> 
+et les fonctions <a href="../reference/import_endimport.html">importées</a>. Ils ne font la conversion que si c'est 
+nécessaire. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  
+  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Nous spécifions le pseudotype 'p-ascii'pour les 2 paramètres de type string</font>
+    <font color="#006666">; (texte à afficher et titre) car l'api MessageBoxA est une fonction ascii. Le compilateur</font>
+    <font color="#006666">; convertira automatiquement les chaînes ascii en ascii pour les besoins de la fonction     </font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxA</font>(Window.l, Corps.p-ascii, Titre.p-ascii, Options.i = 0)
+                                                  
+  <b><font color="#006666">EndImport</font></b>
+  
+  <font color="#006666">; L'exemple suivant fonctionnera correctement même si les chaînes internes PureBasic sont en unicode</font>
+  <font color="#006666">; car le compilateur se chargera automatiquement de la conversion ASCII.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  MessageBoxA</font>(0,  &quot;Le monde&quot;, &quot;Bonjour&quot;)
+    
+</font></pre>
+
+
+
+</blockquote>
+</font></body></html>

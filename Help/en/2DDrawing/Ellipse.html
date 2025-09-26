@@ -1,0 +1,71 @@
+<html><head><title>Ellipse</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Ellipse()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>Ellipse</b></font>(x, y, RadiusX, RadiusY [, Color]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Draw an ellipse in the current drawing output. 
+The filling mode is determined by <a href="drawingmode.html">DrawingMode()</a>. 
+The current output is set with <a href="startdrawing.html">StartDrawing()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+The position of the center pixel of the ellipse. 
+
+</td></tr>
+<tr><td><i>RadiusX, RadiusY</i></td>
+<td> 
+The radius of the ellipse in the x and y direction. The center pixel is not 
+included in these values. 
+
+</td></tr>
+<tr><td><i>Color (optional)</i></td>
+<td> 
+The color to be used for the ellipse. If this parameter is not specified, the default color 
+set with <a href="frontcolor.html">FrontColor()</a> will be used. 
+This color can be in <a href="../2ddrawing/rgb.html">RGB</a> or <a href="../2ddrawing/rgba.html">RGBA</a> format. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;2DDrawing Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> radius=50 <b><font color="#006666">To</font></b> 10 <b><font color="#006666">Step</font></b> -10
+<font color="#006666">        Ellipse</font>(100, 100, radius*2, radius,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+      <b><font color="#006666">Next</font></b> radius
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/ellipse.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="box.html">Box()</a>, <a href="roundbox.html">RoundBox()</a>, <a href="line.html">Line()</a>, <a href="circle.html">Circle()</a> 
+<a href="frontcolor.html">FrontColor()</a>, <a href="rgb.html">RGB()</a>, <a href="rgba.html">RGBA()</a>, <a href="drawingmode.html">DrawingMode()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawingmode.html>DrawingMode()</a> - <a href=index.html>2DDrawing Index</a> - <a href=ellipticalgradient.html>EllipticalGradient()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,77 @@
+<html><head><title>ChangeGamma</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ChangeGamma()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ChangeGamma</b></font>(IntensiteRouge, IntensiteVert, IntensiteBleu)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Change la composante Gamma de l'écran en 
+cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>IntensiteRouge, IntensiteVert, IntensiteBleu</i></td>
+<td width="90%"> 
+Les nouvelles intensités. 
+<br>
+<br>
+Les valeurs valides sont comprises 
+entre 0 et 255. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+ATTENTION : Cela ne fonctionne qu'en mode 
+plein écran (pas en mode fenêtré). 
+<br>
+<br>
+L'intensité des canaux Rouge, Vert et 
+Bleu peut être modifiée individuellement. 
+<br>
+<br>
+Cette fonction peut être utilisée pour 
+faire des fondus enchaînés (fade in/fade 
+out) en mode plein écran, des splashs de 
+couleurs, etc. S'il ne fait rien, le 
+matériel ne supporte pas cette fonction 
+(Pas d'émulation prévue, en raison du 
+nombre élevé d'opérations nécessaires à 
+effectuer). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">;Initialisation du système d'affichage.</font>
+<font color="#006666">  InitSprite</font>()
+
+  <font color="#006666">; Ouverture d'un écran 800*600 32 bits, noir par défaut</font>
+<font color="#006666">  OpenScreen</font>(800, 600, 32, &quot;Sprite&quot;)
+
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 255
+  <font color="#006666">;Ecran jaune</font>
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(255,255,i))
+  <font color="#006666">;Changement de la composante bleue et affichage du résultat dans le buffer</font>
+<font color="#006666">  ChangeGamma</font>(255, 255, i)
+  <font color="#006666">;Inversion des buffers = affichage sur l'écran</font>
+<font color="#006666">  FlipBuffers</font>()  
+  <b><font color="#006666">Next</font></b> i
+
+ <font color="#006666">;Attendre 1 seconde</font>
+<font color="#006666">  Delay</font>(1000)
+
+ <font color="#006666">;Fermer l'écran</font>
+<font color="#006666">  CloseScreen</font>() 
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows (DirectX)</Blockquote></p><center><a href=index.html>Screen Index</a> - <a href=clearscreen.html>ClearScreen()</a> -><br><br>
+
+</body></html>

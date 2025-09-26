@@ -1,0 +1,62 @@
+<html><head><title>AddMailRecipient</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMailRecipient()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddMailRecipient</b></font>(#Mail, Adresse$, Flags)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt einen Empfänger (englisch &quot;recipient&quot;) zur angegebenen Email hinzu. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+Die zu verwendende Email. 
+
+</td></tr>
+<tr><td><i>Adresse$</i></td>
+<td> 
+Die Adresse des Empfängers. Die Adresse muss in einem der folgenden Formate vorliegen: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;joe.doe@domain.com&quot;
+  &quot;&lt;joe.doe@domain.com&gt;&quot;
+  &quot;Joe Doe &lt;joe.doe@domain.com&gt;&quot;
+</font></pre>
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+Die Kategorien, zu welcher der Empfänger hinzugefügt werden soll. Dies kann eine 
+Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mail_To</font> : Haupt-Empfänger (ggf. mehrere) der Email
+  <font color="#924B72">#PB_Mail_Cc</font> : Empfänger (ggf. mehrere), welche eine Kopie der Email erhalten (und jeder dies sehen kann)
+  <font color="#924B72">#PB_Mail_Bcc</font>: Empfänger (ggf. mehrere), welche eine Kopie der Email erhalten (aber niemand dies sieht)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, &quot;andre@purebasic.com&quot;, <font color="#924B72">#PB_Mail_To</font>) <font color="#006666">; Andre ist der Hauptempfänger</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;fred@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Cc</font>)  <font color="#006666">; Fred erhält eine Kopie</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;timo@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Bcc</font>) <font color="#006666">; Timo erhält auch eine Kopie, aber Andre und Fred wissen dies nicht</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removemailrecipient.html">RemoveMailRecipient()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addmailattachmentdata.html>AddMailAttachmentData()</a> - <a href=index.html>Mail Inhaltsverzeichnis</a> - <a href=createmail.html>CreateMail()</a> -><br><br>
+
+</body></html>

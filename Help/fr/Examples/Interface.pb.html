@@ -1,0 +1,159 @@
+<html><head><title>Interface.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Interface
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+<font color="#006666">;- =================================
+</font><font color="#006666">;- Example 1
+</font><font color="#006666">;- =================================
+</font><b><font color="#006666">Debug</font></b> &quot;***************************&quot;
+<b><font color="#006666">Debug</font></b> &quot;*        Example 1        *&quot;
+<b><font color="#006666">Debug</font></b> &quot;***************************&quot;
+
+<b><font color="#006666">Structure</font></b> Foo
+  *vt                         <font color="#006666">;pointer to virtual table as first entry
+</font>  intFoo.i
+<b><font color="#006666">EndStructure</font></b>
+
+<font color="#006666">;public menthods
+</font><b><font color="#006666">Procedure</font></b> <font color="#006666">Foo_SetFoo</font>(*this.foo,value.i)  <font color="#006666">;first parameter is the *this pointer
+</font>  *this\intFoo = value
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Foo_GetFoo</font>(*this.foo)
+  <b><font color="#006666">ProcedureReturn</font></b> *this\intFoo
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">;destructor
+</font><b><font color="#006666">Procedure</font></b> <font color="#006666">Foo_Free</font>(*this.foo)
+<font color="#006666">  FreeMemory</font>(*this)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Interface</font></b> IFoo    <font color="#006666">;create interface hides the *this pointer
+</font><font color="#006666">  Get</font>()
+<font color="#006666">  Set</font>(value.i)
+<font color="#006666">  Free</font>()
+<b><font color="#006666">EndInterface</font></b>
+
+<b><font color="#006666">DataSection</font></b>
+  vtFoo:    <font color="#006666">;create virtual table
+</font>  <b><font color="#006666">Data</font></b>.i @Foo_GetFoo()
+  <b><font color="#006666">Data</font></b>.i @Foo_SetFoo()
+  <b><font color="#006666">Data</font></b>.i @Foo_Free()
+<b><font color="#006666">EndDataSection</font></b>
+
+<font color="#006666">;contructor
+</font><b><font color="#006666">Procedure</font></b> <font color="#006666">New_Foo</font>()
+  <b><font color="#006666">Protected</font></b> *this.foo
+  *this =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(foo))
+  <b><font color="#006666">If</font></b> *this
+    *this\vt = ?vtFoo
+    <b><font color="#006666">ProcedureReturn</font></b> *this
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">;user declares inteface
+</font>
+<b><font color="#006666">Global</font></b> *myfoo.ifoo =<font color="#006666"> New_Foo</font>()
+
+<b><font color="#006666">If</font></b> *myfoo
+  *myfoo\<font color="#006666">Set</font>(123)
+  <b><font color="#006666">Debug</font></b> *myfoo\<font color="#006666">Get</font>()
+  *myfoo\<font color="#006666">Free</font>()
+<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+
+
+<font color="#006666">;- =================================
+</font><font color="#006666">;- Example 2
+</font><font color="#006666">;- =================================
+</font><b><font color="#006666">Debug</font></b> &quot;***************************&quot;
+<b><font color="#006666">Debug</font></b> &quot;*        Example 2        *&quot;
+<b><font color="#006666">Debug</font></b> &quot;***************************&quot;
+
+<b><font color="#006666">Interface</font></b> NewRectangle
+<font color="#006666">  Perimeter</font>.i()
+<font color="#006666">  Surface</font>.i()
+<font color="#006666">  Length</font>.i(Valeur)
+<font color="#006666">  Width</font>.i(Valeur)
+<font color="#006666">  Destroy</font>.i()
+<b><font color="#006666">EndInterface</font></b>
+
+<b><font color="#006666">Structure</font></b> Rectangle
+  *DSVT <font color="#006666">;Data Section Virtual Table
+</font>  
+  Length.i
+  Width.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.i <font color="#006666">RectangleInit</font>(Length=0, Width=0)
+  <b><font color="#006666">Protected</font></b> *Object.Rectangle
+  
+  *Object =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(Rectangle))
+  
+  <b><font color="#006666">If</font></b> *Object
+    *Object\DSVT = ?Class
+    
+    *Object\Length = Length
+    *Object\Width = Width
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">ProcedureReturn</font></b> *object
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Perimeter</font>(*this.Rectangle)
+  <b><font color="#006666">ProcedureReturn</font></b> (*this\Length + *this\Width) * 2
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Surface</font>(*this.Rectangle)
+  <b><font color="#006666">ProcedureReturn</font></b> *this\Length * *this\Width
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Length</font>(*this.Rectangle, Valeur)
+  *this\Length = Valeur
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Width</font>(*this.Rectangle, Valeur)
+  *this\Width = Valeur
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Destroy</font>(*this.Rectangle)
+<font color="#006666">  FreeMemory</font>(*this)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">DataSection</font></b>
+  Class:
+  <b><font color="#006666">Data</font></b>.i @Perimeter()
+  <b><font color="#006666">Data</font></b>.i @Surface()
+  <b><font color="#006666">Data</font></b>.i @Length()
+  <b><font color="#006666">Data</font></b>.i @Width()
+  <b><font color="#006666">Data</font></b>.i @Destroy()
+<b><font color="#006666">EndDataSection</font></b>
+
+<font color="#006666">; How to use it
+</font>MyField.NewRectangle =<font color="#006666"> RectangleInit</font>(20,10)
+
+<b><font color="#006666">Debug</font></b> &quot;Perimeter is  &quot; + MyField\<font color="#006666">Perimeter</font>()
+<b><font color="#006666">Debug</font></b> &quot;Surface is  &quot;  + MyField\<font color="#006666">Surface</font>()
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<font color="#006666">;Let's modify some values
+</font>MyField\<font color="#006666">Length</font>(40)
+MyField\<font color="#006666">Width</font>(20)
+<b><font color="#006666">Debug</font></b> &quot;Perimeter is  &quot; + MyField\<font color="#006666">Perimeter</font>()
+<b><font color="#006666">Debug</font></b> &quot;Surface is  &quot;  + MyField\<font color="#006666">Surface</font>()
+
+MyField\<font color="#006666">Destroy</font>()
+<b><font color="#006666">Debug</font></b> &quot;&quot;</font></pre>
+</body></html>

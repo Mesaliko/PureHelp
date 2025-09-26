@@ -1,0 +1,79 @@
+<html><head><title>UserGuide - Loops</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Loops</font></b></p>
+
+Data, Events or many other things can also be processed using loops, which are always 
+checked for a specific condition. Loops can be: <a href="../reference/repeat_until.html">Repeat : Until</a>, 
+<a href="../reference/repeat_until.html">Repeat : Forever</a>, <a href="../reference/while_wend.html">While : Wend</a>, 
+<a href="../reference/for_next.html">For : Next</a>, <a href="../reference/foreach_next.html">ForEach : Next</a>. 
+<br>
+<br>
+In this loop the counter A is increased by two each time, this loop will always perform 
+the same number of iterations. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i A
+  <b><font color="#006666">For</font></b> A = 0 <b><font color="#006666">To</font></b> 10 <b><font color="#006666">Step</font></b> 2
+  �� <b><font color="#006666">Debug</font></b> A
+  <b><font color="#006666">Next</font></b> A
+</font></pre>
+
+This loop will increment the variable B by a <a href="../math/random.html">random</a> amount between 0 and 20 each time, 
+until B exceeds 100. The number of iterations actually performed in the loop will vary 
+depending on the random numbers. The check is performed at the start of the loop - so 
+if the condition is already true, zero iterations may be performed. Take the ; away 
+from the second line to see this happen. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i B
+  <font color="#006666">; B = 100</font>
+  <b><font color="#006666">While</font></b> B &lt; 100
+��   B +<font color="#006666"> Random</font>(20)
+��   <b><font color="#006666">Debug</font></b> B
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+This loop is very similar to the last except that the check is performed at the end 
+of the loop. So one iteration, at least, will be performed. Again remove the ; from 
+the second line to demonstrate. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i C
+  <font color="#006666">; C = 100</font>
+  <b><font color="#006666">Repeat</font></b>
+��   C +<font color="#006666"> Random</font>(20)
+��   <b><font color="#006666">Debug</font></b> C
+  <b><font color="#006666">Until</font></b> C &gt; 99
+</font></pre>
+
+
+This loop is infinite. It won't stop until you stop it (use the red X button on the 
+IDE toolbar). 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i D
+  <b><font color="#006666">Repeat</font></b>
+��   <b><font color="#006666">Debug</font></b> D
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+
+There is a special loop for working with <a href="../reference/newlist.html">lists</a> and 
+<a href="../reference/newmap.html">maps</a>, it will iterate every member of the list (or map) in turn. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Fruit</font>.s()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Banana&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Apple&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Pear&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Orange&quot;
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Fruit</font>()
+��   <b><font color="#006666">Debug</font></b> <font color="#006666">Fruit</font>()
+  <b><font color="#006666">Next</font></b> <font color="#006666">Fruit</font>()
+</font></pre>
+
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_decisions.html">< Previous: Decisions & Conditions</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_string.html">Next: String Manipulation ></a> 
+</blockquote>
+</font></body></html>

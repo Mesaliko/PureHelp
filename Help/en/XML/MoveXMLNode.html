@@ -1,0 +1,60 @@
+<html><head><title>MoveXMLNode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MoveXMLNode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>MoveXMLNode</b></font>(Node, ParentNode [, PreviousNode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Moves the given XML node and all its contained text and children to a new location. 
+This function can even be used to move nodes into a different XML tree. 
+For copying a complete node to a new location <a href="copyxmlnode.html">CopyXMLNode()</a> can be used. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Node</i></td>
+<td width="90%"> 
+The node to move. 
+
+</td></tr>
+<tr><td><i>ParentNode</i></td>
+<td> 
+The node into which to insert the node. To insert the node 
+at the root of the tree, <a href="rootxmlnode.html">RootXMLNode()</a> can be used here. 
+
+</td></tr>
+<tr><td><i>PreviousNode (optional)</i></td>
+<td> 
+A childnode of 'ParentNode' after which the node should 
+be inserted. If this value is 0 or not specified, the node is inserted as the first child of 
+its parent. If this value is -1, the node is inserted as the last child of its parent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the move was successful or zero if the node could not be moved. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The following rules must be followed for a successful move: <br>
+- The <a href="rootxmlnode.html">root node</a> of a tree cannot be moved <br>
+- ParentNode may not be of type <font color="#924B72">#PB_XML_Comment</font> or <font color="#924B72">#PB_XML_CData</font> <br>
+- PreviousNode must be a direct child of ParentNode (if it is specified) <br>
+- Node and PreviousNode cannot be equal <br>
+- ParentNode cannot be equal to, or a child of Node (a node cannot be moved into itself) <br>
+- If the XML tree already has a <a href="mainxmlnode.html">main node</a>, only nodes other than <font color="#924B72">#PB_XML_Normal</font> 
+and <font color="#924B72">#PB_XML_CData</font> can be inserted at the root level 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="deletexmlnode.html">DeleteXMLNode()</a>, <a href="copyxmlnode.html">CopyXMLNode()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=mainxmlnode.html>MainXMLNode()</a> - <a href=index.html>XML Index</a> - <a href=nextxmlattribute.html>NextXMLAttribute()</a> -><br><br>
+
+</body></html>

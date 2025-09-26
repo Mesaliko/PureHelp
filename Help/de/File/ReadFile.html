@@ -1,0 +1,80 @@
+<html><head><title>ReadFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReadFile</b></font>(#Datei, Dateiname$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet eine existierende Datei ausschließlich für Lese-Operationen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datei</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren der Datei. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Dateiname und der Pfad zur Datei. Wenn der Dateiname keinen vollständigen 
+Dateipfad enthält, wird dieser relativ zum <a href="../filesystem/getcurrentdirectory.html">aktuellen Verzeichnis</a> 
+interpretiert. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Kann eine Kombination (mit Hilfe des '| Operanden) der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_File_SharedRead</font> : wenn die Datei bereits von einem anderen Prozess oder Thread für eine Lese-Operation 
+                        geöffnet wurde, wird dieses Flag für den Zugriff darauf benötigt (nur auf Windows).
+  <font color="#924B72">#PB_File_SharedWrite</font>: wenn die Datei bereits von einem anderen Prozess oder Thread für eine Schreib-Operation
+                        geöffnet wurde, wird dieses Flag für den Zugriff darauf benötigt (nur auf Windows).
+  <font color="#924B72">#PB_File_NoBuffering</font>: das PureBasic-interne Datei-Puffersystem wird für diese Datei deaktiviert.
+                        <a href="filebufferssize.html">FileBuffersSize()</a> kann bei dieser Datei nicht verwendet werden.
+</font></pre>
+kombiniert mit einem der folgenden Werte (die folgenden Flags beeinflussen das Verhalten von 
+<a href="readstring.html">ReadString()</a> und <a href="readcharacter.html">ReadCharacter()</a>): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : alle Lese/Schreib-String-Operationen werden ASCII verwenden, wenn nicht anders angegeben.
+  <font color="#924B72">#PB_UTF8</font>   : alle Lese/Schreib-String-Operationen werden UTF-8 verwenden, wenn nicht anders angegeben (Standard).
+  <font color="#924B72">#PB_Unicode</font>: alle Lese/Schreib-String-Operationen werden Unicode verwenden, wenn nicht anders angegeben.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Datei erfolgreich geöffnet wurde, und Null bei einem Fehler. 
+Wenn <font color="#924B72">#PB_Any</font> als #Datei Parameter verwendet wurde, dann wird bei Erfolg die neu 
+generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um eine Datei zum Lesen und Schreiben zu öffnen, verwenden Sie die <a href="openfile.html">OpenFile()</a> 
+Funktion. Zum Erstellen einer neuen und leeren Datei verwenden Sie die Funktion <a href="createfile.html">CreateFile()</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, &quot;Text.txt&quot;)       <font color="#006666">; wenn die Datei geöffnet werden konnte, setzen wir fort...</font>
+    Format =<font color="#006666"> ReadStringFormat</font>(0)
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(0) = 0               <font color="#006666">; sich wiederholende Schleife solange das Ende der Datei (&quot;end of file&quot;) noch nicht erreicht wurde</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ReadString</font>(0, Format)  <font color="#006666">; Zeile für Zeile im Debugger-Fenster anzeigen</font>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    CloseFile</font>(0)                   <font color="#006666">; schließen der zuvor geöffneten Datei</font>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Konnte Datei nicht öffnen!&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="openfile.html">OpenFile()</a>, <a href="createfile.html">CreateFile()</a>, <a href="closefile.html">CloseFile()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=readdouble.html>ReadDouble()</a> - <a href=index.html>File Inhaltsverzeichnis</a> - <a href=readfloat.html>ReadFloat()</a> -><br><br>
+
+</body></html>

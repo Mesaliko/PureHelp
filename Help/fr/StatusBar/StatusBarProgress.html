@@ -1,0 +1,105 @@
+<html><head><title>StatusBarProgress</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StatusBarProgress()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>StatusBarProgress</b></font>(#BarreEtat, Champ, Valeur [, Apparence [, Min, Max]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Affiche une barre de progression dans un 
+champ. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BarreEtat</i></td>
+<td width="90%"> 
+La barre d'état à utiliser. 
+
+</td></tr>
+<tr><td><i>Champ</i></td>
+<td> 
+Le champ à utiliser. 
+<br>
+Le premier champ commence à zéro. 
+
+</td></tr>
+<tr><td><i>Valeur</i></td>
+<td> 
+La progression à afficher, entre un 
+minimum et un maximum. 
+<br>
+<br>
+La mise à jour de la barre de progression 
+se fait en appellant cette fonction de 
+nouveau avec une nouvelle valeur de 
+progression. 
+
+</td></tr>
+<tr><td><i>Apparence (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs 
+suivantes (combinaison avec l'opérateur '|' 
+(OR)): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_StatusBar_Raised</font>    : Bordure en relief élevé (sauf OS X et Windows avec thème graphique)
+  <font color="#924B72">#PB_StatusBar_BorderLess</font>: Sans bordure
+</font></pre>
+
+</td></tr>
+<tr><td><i>Min, Max (optionnel)</i></td>
+<td> 
+Les bornes minimum et maximum autorisées. 
+<br>
+<br>
+S'ils sont omis, ou si <font color="#924B72">#PB_Ignore</font> est 
+spécifié, alors les valeurs précédentes 
+seront utilisées. 
+<br>
+<br>
+Les valeurs par défaut de 'Min' et 'Max' 
+pour les champs nouvellement créés sont 
+respectivement 0 et 100. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 360, 50, &quot;Barre d'état avec une barre de progression&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      AddStatusBarField</font>(170)
+<font color="#006666">      AddStatusBarField</font>(150)
+    <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">    StatusBarText</font>(0, 0, &quot;Progression en cours...&quot;)
+<font color="#006666">    StatusBarProgress</font>(0, 1, 0)
+<font color="#006666">    Delay</font>(500)    
+<font color="#006666">    StatusBarProgress</font>(0, 1, 25)
+<font color="#006666">    Delay</font>(500)
+<font color="#006666">    StatusBarProgress</font>(0, 1, 50)
+<font color="#006666">    Delay</font>(500)
+<font color="#006666">    StatusBarProgress</font>(0, 1, 75)
+<font color="#006666">    Delay</font>(500)
+<font color="#006666">    StatusBarProgress</font>(0, 1, 100)
+<font color="#006666">    StatusBarText</font>(0, 0, &quot;Terminé !&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="statusbartext.html">StatusBarText()</a>, <a href="statusbarimage.html">StatusBarImage()</a>, 
+<a href="createstatusbar.html">CreateStatusBar()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=statusbarimage.html>StatusBarImage()</a> - <a href=index.html>StatusBar Index</a> - <a href=statusbartext.html>StatusBarText()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,74 @@
+<html><head><title>CreatePack</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePack()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreatePack</b></font>(#Pack, Filename$ [, Plugin [, Level]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create a new empty pack file. If the file already exists, it will be replaced with a new empty file. 
+Before creating a pack file, at least one packer has to be registered with one of the following 
+command: <a href="usezippacker.html">UseZipPacker()</a>, <a href="usebrieflzpacker.html">UseBriefLZPacker()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+A number to identify the new pack file. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used as 
+a parameter to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The filename for the new pack file. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+The plugin to use, if more than one packer plugin has been registered. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: use the BriefLZ packer to create the pack file. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> has to be called to register the plugin.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : use the Zip packer to create the pack file. <a href="usezippacker.html">UseZipPacker()</a> has to be called to register the plugin.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : use the Lzma packer to create the pack file (also known as 7z archive). <a href="uselzmapacker.html">UseLzmaPacker()</a> has to be called to register the plugin.
+  <font color="#924B72">#PB_PackerPlugin_Tar</font>    : use the Tar packer to create the pack file. <a href="usetarpacker.html">UseTarPacker()</a> has to be called to register the plugin.
+                             It can be combined with <font color="#924B72">#PB_Packer_Gzip</font> or <font color="#924B72">#PB_Packer_Bzip2</font> to create compressed tar archive.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Level (optional)</i></td>
+<td> 
+The compression level to use. It is an integer value ranging from 0 (lower compression ratio, faster compression) to 9 (higher compression ratio, 
+slower compression). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the pack file has been successfully created, zero otherwise. If <font color="#924B72">#PB_Any</font> 
+was used as the #Pack parameter then the generated pack number is returned. 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseZipPacker</font>()
+
+  <font color="#006666">; Create the packed file</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreatePack</font>(0, &quot;mycompressedfiles.zip&quot;) 
+  
+    <font color="#006666">; add your files </font>
+<font color="#006666">    AddPackFile</font>(0, &quot;Image1.bmp&quot;, &quot;Image1.bmp&quot;)  
+<font color="#006666">    AddPackFile</font>(0, &quot;Image2.bmp&quot;, &quot;Image2.bmp&quot;) 
+<font color="#006666">    AddPackFile</font>(0, &quot;mywave1.wav&quot;, &quot;mywave1.wav&quot;) 
+<font color="#006666">    AddPackFile</font>(0, &quot;mywave2.wav&quot;, &quot;mywave2.wav&quot;) 
+<font color="#006666">    ClosePack</font>(0) 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="closepack.html">ClosePack()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=compressmemory.html>CompressMemory()</a> - <a href=index.html>Packer Index</a> - <a href=examinepack.html>ExaminePack()</a> -><br><br>
+
+</body></html>

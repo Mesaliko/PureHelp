@@ -1,0 +1,70 @@
+<html><head><title>GenericJoint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GenericJoint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GenericJoint</b></font>(#Joint, EntityID, TransformX, TransformY, TransformZ, EntityID2, TransformX2, TransformY2, TransformZ2)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new joint, based on one or two points. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Joint</i></td>
+<td width="90%"> 
+The number to identify the new joint. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>EntityID</i></td>
+<td> 
+The entity id associated to the joint. To get a valid entity id, use <a href="../entity/entityid.html">EntityID()</a>. 
+
+</td></tr>
+<tr><td><i>TransformX, TransformY, TransformZ</i></td>
+<td> 
+The transformation to apply for the first entity. 
+
+</td></tr>
+<tr><td><i>EntityID2 (optional)</i></td>
+<td> 
+The second entity associated to the joint. If this parameter isn't specified, a single 
+joint is created between the pivot point and the entity. If this parameter is specified, 
+the first entity is anchored to the second entity. To get a valid entity id, use <a href="../entity/entityid.html">EntityID()</a>. 
+
+</td></tr>
+<tr><td><i>TransformX2, TransformY2, TransformZ2 (optional)</i></td>
+<td> 
+The transformation to apply for the second entity. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns zero if the joint can't be created. If <a href="../reference/purebasic_objects.html">#PB_Any</a> is used 
+as '#Joint' parameter, the new joint number will be returned as 'Result'. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="getjointattribute.html">GetJointAttribute()</a> and <a href="setjointattribute.html">SetJointAttribute()</a> can be used with the following attribute to change the joint behavior: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Joint_EnableSpring</font>: sets to <font color="#924B72">#True</font> to enable spring, <font color="#924B72">#False</font> to disable it (default)
+  <font color="#924B72">#PB_Joint_Stiffness</font>   : sets the stiffness. Values should be between 1 and 10000
+  <font color="#924B72">#PB_Joint_Damping</font>     : sets the damping. Values should be between 0 and 1 (0 means a very strong damping).
+  <font color="#924B72">#PB_Joint_Position</font>    : sets the position on the axis
+  <font color="#924B72">#PB_Joint_NoLimit</font>     : free axis position
+  <font color="#924B72">#PB_Joint_LowerLimit</font>  : lower limit
+  <font color="#924B72">#PB_Joint_UpperLimit</font>  : upper limit
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freejoint.html">FreeJoint()</a>, <a href="getjointattribute.html">GetJointAttribute()</a>, <a href="setjointattribute.html">SetJointAttribute()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=freejoint.html>FreeJoint()</a> - <a href=index.html>Joint Index</a> - <a href=getjointattribute.html>GetJointAttribute()</a> -><br><br>
+
+</body></html>

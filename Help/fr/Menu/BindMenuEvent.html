@@ -1,0 +1,100 @@
+<html><head><title>BindMenuEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BindMenuEvent()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>BindMenuEvent</b></font>(#Menu, Element, @Callback())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un événement du menu grâce à une 
+procédure dite de 'callback'. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+Le menu à utiliser. 
+
+</td></tr>
+<tr><td><i>Element</i></td>
+<td> 
+L'élément de menu. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+La procédure à appeler lorsque 
+l'événement se produit. Elle doit être 
+déclarée comme ceci: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">EventHandler</font>()
+    <font color="#006666">; Du code ici...</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+Les fonction de PureBasic comme 
+<a href="../window/eventgadget.html">EventGadget()</a>, <a href="../window/eventwindow.html">EventWindow()</a>, 
+<a href="../window/eventmenu.html">EventMenu()</a>, <a href="../window/eventtype.html">EventType()</a> et <a href="../window/eventdata.html">EventData()</a> 
+sont disponibles pour obtenir plus 
+d'informations sur l'événement. 
+<br>
+<br>
+Note: <a href="../window/windowevent.html">WindowEvent()</a> et <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> ne 
+devraient jamais être appelées à l'intérieur 
+du Callback(), car ça peut verrouiller  un 
+programme ou occasionner un comportement erroné. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est un moyen supplémentaire pour 
+gérer les événements dans PureBasic, 
+qui fonctionne sans problème avec les 
+habituelles commandes <a href="../window/windowevent.html">WindowEvent()</a> et 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a>. <br>
+Cet évènement peut être supprimé avec 
+<a href="unbindmenuevent.html">UnbindMenuEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">TestHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Evènement : Menu -Test-&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">QuitHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Evènement : Menu -Quitter-&quot;
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 200, 50, &quot;Test Clic&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+  
+<font color="#006666">  CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;Fichier&quot;)
+<font color="#006666">      MenuItem</font>(0, &quot;Test&quot;)
+<font color="#006666">      MenuItem</font>(1, &quot;Quitter&quot;)
+  
+<font color="#006666">  BindMenuEvent</font>(0, 0, @TestHandler())
+<font color="#006666">  BindMenuEvent</font>(0, 1, @QuitHandler())
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a>, 
+<a href="bindmenuevent.html">BindMenuEvent()</a>, <a href="../window/unbindevent.html">UnbindEvent()</a>, 
+<a href="../window/windowevent.html">WindowEvent()</a>, <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Menu Index</a> - <a href=closesubmenu.html>CloseSubMenu()</a> -><br><br>
+
+</body></html>

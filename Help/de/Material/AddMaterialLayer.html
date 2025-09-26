@@ -1,0 +1,71 @@
+<html><head><title>AddMaterialLayer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMaterialLayer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddMaterialLayer</b></font>(#Material, TexturID [, Modus [, TexturKoordinatenIndex]])</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Fügt dem Material einen neuen Layer (Schicht) hinzu und legt die angegebene 
+Textur darin ab. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+Das zu verwendende Material. 
+
+</td></tr>
+<tr><td><i>TextureID</i></td>
+<td> 
+Die hinzuzufügende Textur. Eine gültige 'TexturID' kann einfach mittels dem 
+<a href="../texture/textureid.html">TextureID()</a> Befehl ermittelt werden. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_Add</font>        : Führt eine Pixel 'Add' (Hinzufügen) Operation über dem vorherigen
+                            Layer aus (schwarze Farbe ist wie transparent).
+  <font color="#924B72">#PB_Material_AddSigned</font>  : Führt eine Pixel-signierte 'Add' (Hinzufügen) Operation über dem
+                            vorherigen Layer aus (schwarze Farbe ist wie transparent).
+  <font color="#924B72">#PB_Material_Substract</font>  : Führt eine Pixel 'Substract' (Substraktion) Operation über dem
+                            vorherigen Layer aus (schwarze Farbe ist wie transparent).
+  <font color="#924B72">#PB_Material_Replace</font>    : Führt eine Pixel 'Replace' (Ersetzen) Operation über dem
+                            vorherigen Layer aus.
+  <font color="#924B72">#PB_Material_AlphaBlend</font> : Benutzt den Alpha-Kanal Layer der Textur (sollte im TGA- oder
+                            PNG-Format vorliegen) und mischt ihn mit dem vorherigen Layer.
+  <font color="#924B72">#PB_Material_Modulate</font>   : Führt eine Pixel 'Multiply' (Multiplikation) Operation über dem
+                            vorherigen Layer aus.
+  <font color="#924B72">#PB_Material_ModulateX2</font> : Führt eine Pixel 'Multiply' (Multiplikation) Operation über dem
+                            vorherigen Layer aus und hellt diesen anschließend auf (x2)
+  <font color="#924B72">#PB_Material_ModulateX4</font> : Führt eine Pixel 'Multiply' (Multiplikation) Operation über dem
+                            vorherigen Layer aus und hellt diesen anschließend auf (x4)
+  <font color="#924B72">#PB_Material_BlendDiffuseAlpha</font>: Benutzt den Alpha-Kanal Layer der Textur und mischt diesen
+                                  mit dem vorherigen Layer mit Diffusion.
+  <font color="#924B72">#PB_Material_BlendCurrentAlpha</font>: Benutzt den Alpha-Kanal Layer der aktuellen Stufe und mischt
+                                  diesen mit dem vorherigen Layer.
+</font></pre>
+
+</td></tr>
+<tr><td><i>TexturKoordinatenIndex (optional)</i></td>
+<td> 
+Der Textur-Koordinaten-Index (Standardwert ist 0). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removemateriallayer.html">RemoveMaterialLayer()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Material Inhaltsverzeichnis</a> - <a href=copymaterial.html>CopyMaterial()</a> -><br><br>
+
+</body></html>

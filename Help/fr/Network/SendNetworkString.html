@@ -1,0 +1,81 @@
+<html><head><title>SendNetworkString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SendNetworkString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SendNetworkString</b></font>(Connexion, Texte$ [, Format])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Envoie une chaîne de caractères au 
+client spécifié. Cette fonction peut 
+être utilisée par une application 
+Serveur ou Client. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connexion</i></td>
+<td width="90%"> 
+La connexion. 
+<br>
+<br>
+Du côté serveur, 'Connexion' est le 
+client qui a reçu les données.<br>
+Du côté client, 'Connexion' est 
+renvoyé par <a href="opennetworkconnection.html">OpenNetworkConnection()</a>. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+La chaîne de caractères à envoyer. 
+
+</td></tr>
+<tr><td><i>Format (optionnel)</i></td>
+<td> 
+Le format de chaîne à utiliser lors de 
+l'envoi. <br>
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Envoie les chaînes au format ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Envoie les chaînes au format UTF8 (Par défaut)
+  <font color="#924B72">#PB_Unicode</font>: Envoie les chaînes au format unicode
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre d'octets qui a été 
+envoyé. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+SendNetworkString() fournit une solution 
+rapide pour envoyer rapidement des chaînes 
+de caractères. <br>
+La chaîne sera envoyée en tant que donnée 
+brute (sans le caractère NULL de 
+terminaison), aussi peut-elle être reçue 
+en utilisant <a href="receivenetworkdata.html">ReceiveNetworkData()</a>, après 
+que <a href="networkserverevent.html">NetworkServerEvent()</a> / 
+<a href="networkclientevent.html">NetworkClientEvent()</a> ait renvoyé 
+<font color="#924B72">#PB_NetworkEvent_Data</font>). <br>
+En mode <a href="../reference/unicode.html">unicode</a> 
+la chaîne est envoyée en UTF-8, qui est 
+indépendant du processeur (contrairement 
+à UTF-16). 
+<br>
+<br>
+Il n'existe pas de fonction 
+ReceiveNetworkString(). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="sendnetworkdata.html">SendNetworkData()</a>, <a href="receivenetworkdata.html">ReceiveNetworkData()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=sendnetworkdata.html>SendNetworkData()</a> - <a href=index.html>Network Index</a> - <a href=serverid.html>ServerID()</a> -><br><br>
+
+</body></html>

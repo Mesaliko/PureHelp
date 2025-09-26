@@ -1,0 +1,67 @@
+<html><head><title>EncodeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EncodeImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Buffer = <font color="#006666"><b>EncodeImage</b></font>(#Image [, ImagePlugin [, Flags [, Depth]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Encode the specified image into a memory buffer. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The image to encode. 
+
+</td></tr>
+<tr><td><i>ImagePlugin (optional)</i></td>
+<td> 
+The format to encode the image in. This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ImagePlugin_BMP</font>      : encode the image in BMP (default)
+  <font color="#924B72">#PB_ImagePlugin_JPEG</font>     : encode the image in JPEG (<a href="../imageplugin/usejpegimageencoder.html">UseJPEGImageEncoder()</a> has to be used)
+  <font color="#924B72">#PB_ImagePlugin_JPEG2000</font> : encode the image in JPEG2000 (<a href="../imageplugin/usejpeg2000imageencoder.html">UseJPEG2000ImageEncoder()</a> has to be used)
+  <font color="#924B72">#PB_ImagePlugin_PNG</font>      : encode the image in PNG (<a href="../imageplugin/usepngimageencoder.html">UsePNGImageEncoder()</a> has to be used)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Parameters for the image plug-in. For now, only the quality setting is supported: 
+a number from 0 (worse quality) to 10 (maximum quality). Only the JPEG and JPEG 2000 plugins currently support it (default 
+quality is set to '7' if no flags are specified). 
+<br>
+<br>
+When an image is encoded using palletized depth (1, 4 or 8), the following 
+flag is available for combination: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_FloydSteinberg</font>: Apply a Floyd-Steinberg dithering.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Depth (optional)</i></td>
+<td> 
+The depth in which to save the image. Valid values are 1, 4, 8, 24 and 32. 
+The default value is the original image depth. 
+For now, only PNG encoder support palletized image format (1, 4 or 8-bit). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns a <a href="../reference/memory.html">pointer</a> to a newly allocated memory buffer containing the encoded image, or zero if the encoding has failed. 
+<a href="../memory/memorysize.html">MemorySize()</a> can be used to get the size of the encoded image. <a href="../memory/freememory.html">FreeMemory()</a> has to be used to free the buffer 
+after use. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createimage.html>CreateImage()</a> - <a href=index.html>Image Index</a> - <a href=freeimage.html>FreeImage()</a> -><br><br>
+
+</body></html>

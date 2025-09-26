@@ -1,0 +1,232 @@
+<html><head><title>AddKeyboardShortcut</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddKeyboardShortcut()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>AddKeyboardShortcut</b></font>(#Fenetre, Raccourci, Evenement)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ajoute ou remplace un raccourci clavier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>Raccourci</i></td>
+<td> 
+Le raccourci clavier peut prendre 
+l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shortcut_Back</font>      (Retour Arrière) 
+  <font color="#924B72">#PB_Shortcut_Tab</font>       (Tabulation)
+  <font color="#924B72">#PB_Shortcut_Clear</font>
+  <font color="#924B72">#PB_Shortcut_Return</font>    (Entrée)
+  <font color="#924B72">#PB_Shortcut_Menu</font>      (Alt)
+  <font color="#924B72">#PB_Shortcut_Pause</font>      
+  <font color="#924B72">#PB_Shortcut_Print</font>      
+  <font color="#924B72">#PB_Shortcut_Capital</font>   (Verrouillage Majuscule)
+  <font color="#924B72">#PB_Shortcut_Escape</font>    (Echap)
+  <font color="#924B72">#PB_Shortcut_Space</font>     (Espace)
+  <font color="#924B72">#PB_Shortcut_PageUp</font>    (Page précédente)
+  <font color="#924B72">#PB_Shortcut_PageDown</font>  (Page Suivante)
+  <font color="#924B72">#PB_Shortcut_End</font>       (Fin)
+  <font color="#924B72">#PB_Shortcut_Home</font>      (Début)
+  <font color="#924B72">#PB_Shortcut_Left</font>      (Flèche à gauche)
+  <font color="#924B72">#PB_Shortcut_Up</font>        (Flèche en haut)
+  <font color="#924B72">#PB_Shortcut_Right</font>     (Flèche à droite)
+  <font color="#924B72">#PB_Shortcut_Down</font>      (Flèche en bas)
+  <font color="#924B72">#PB_Shortcut_Select</font>
+  <font color="#924B72">#PB_Shortcut_Execute</font>
+  <font color="#924B72">#PB_Shortcut_Snapshot</font>  (Impr écran)
+  <font color="#924B72">#PB_Shortcut_Insert</font>
+  <font color="#924B72">#PB_Shortcut_Delete</font>    (Suppr)
+  <font color="#924B72">#PB_Shortcut_Help</font>
+  <font color="#924B72">#PB_Shortcut_0</font>
+  <font color="#924B72">#PB_Shortcut_1</font>
+  <font color="#924B72">#PB_Shortcut_2</font>
+  <font color="#924B72">#PB_Shortcut_3</font>
+  <font color="#924B72">#PB_Shortcut_4</font>
+  <font color="#924B72">#PB_Shortcut_5</font>
+  <font color="#924B72">#PB_Shortcut_6</font>
+  <font color="#924B72">#PB_Shortcut_7</font>
+  <font color="#924B72">#PB_Shortcut_8</font>
+  <font color="#924B72">#PB_Shortcut_9</font>
+  <font color="#924B72">#PB_Shortcut_A</font>
+  <font color="#924B72">#PB_Shortcut_B</font>
+  <font color="#924B72">#PB_Shortcut_C</font>
+  <font color="#924B72">#PB_Shortcut_D</font>
+  <font color="#924B72">#PB_Shortcut_E</font>
+  <font color="#924B72">#PB_Shortcut_F</font>
+  <font color="#924B72">#PB_Shortcut_G</font>
+  <font color="#924B72">#PB_Shortcut_H</font>
+  <font color="#924B72">#PB_Shortcut_I</font>
+  <font color="#924B72">#PB_Shortcut_J</font>
+  <font color="#924B72">#PB_Shortcut_K</font>
+  <font color="#924B72">#PB_Shortcut_L</font>
+  <font color="#924B72">#PB_Shortcut_M</font>
+  <font color="#924B72">#PB_Shortcut_N</font>
+  <font color="#924B72">#PB_Shortcut_O</font>
+  <font color="#924B72">#PB_Shortcut_P</font>
+  <font color="#924B72">#PB_Shortcut_Q</font>
+  <font color="#924B72">#PB_Shortcut_R</font>
+  <font color="#924B72">#PB_Shortcut_S</font>
+  <font color="#924B72">#PB_Shortcut_T</font>
+  <font color="#924B72">#PB_Shortcut_U</font>
+  <font color="#924B72">#PB_Shortcut_V</font>
+  <font color="#924B72">#PB_Shortcut_W</font>
+  <font color="#924B72">#PB_Shortcut_X</font>
+  <font color="#924B72">#PB_Shortcut_Y</font>
+  <font color="#924B72">#PB_Shortcut_Z</font>
+  <font color="#924B72">#PB_Shortcut_LeftWindows</font>  (Touche fenêtre main gauche)
+  <font color="#924B72">#PB_Shortcut_RightWindows</font> (Touche fenêtre main droite)
+  <font color="#924B72">#PB_Shortcut_Apps</font>
+  <font color="#924B72">#PB_Shortcut_Pad0</font>
+  <font color="#924B72">#PB_Shortcut_Pad1</font>
+  <font color="#924B72">#PB_Shortcut_Pad2</font>
+  <font color="#924B72">#PB_Shortcut_Pad3</font>
+  <font color="#924B72">#PB_Shortcut_Pad4</font>
+  <font color="#924B72">#PB_Shortcut_Pad5</font>
+  <font color="#924B72">#PB_Shortcut_Pad6</font>
+  <font color="#924B72">#PB_Shortcut_Pad7</font>
+  <font color="#924B72">#PB_Shortcut_Pad8</font>
+  <font color="#924B72">#PB_Shortcut_Pad9</font>
+  <font color="#924B72">#PB_Shortcut_Multiply</font>    (*)
+  <font color="#924B72">#PB_Shortcut_Add</font>         (+)
+  <font color="#924B72">#PB_Shortcut_Separator</font>
+  <font color="#924B72">#PB_Shortcut_Subtract</font>    (-)
+  <font color="#924B72">#PB_Shortcut_Decimal</font>     (.)
+  <font color="#924B72">#PB_Shortcut_Divide</font>      (/)
+  <font color="#924B72">#PB_Shortcut_F1</font>
+  <font color="#924B72">#PB_Shortcut_F2</font>
+  <font color="#924B72">#PB_Shortcut_F3</font>
+  <font color="#924B72">#PB_Shortcut_F4</font>
+  <font color="#924B72">#PB_Shortcut_F5</font>
+  <font color="#924B72">#PB_Shortcut_F6</font>
+  <font color="#924B72">#PB_Shortcut_F7</font>
+  <font color="#924B72">#PB_Shortcut_F8</font>
+  <font color="#924B72">#PB_Shortcut_F9</font>
+  <font color="#924B72">#PB_Shortcut_F10</font>
+  <font color="#924B72">#PB_Shortcut_F11</font>
+  <font color="#924B72">#PB_Shortcut_F12</font>
+  <font color="#924B72">#PB_Shortcut_F13</font>
+  <font color="#924B72">#PB_Shortcut_F14</font>
+  <font color="#924B72">#PB_Shortcut_F15</font>
+  <font color="#924B72">#PB_Shortcut_F16</font>
+  <font color="#924B72">#PB_Shortcut_F17</font>
+  <font color="#924B72">#PB_Shortcut_F18</font>
+  <font color="#924B72">#PB_Shortcut_F19</font>
+  <font color="#924B72">#PB_Shortcut_F20</font>
+  <font color="#924B72">#PB_Shortcut_F21</font>
+  <font color="#924B72">#PB_Shortcut_F22</font>
+  <font color="#924B72">#PB_Shortcut_F23</font>
+  <font color="#924B72">#PB_Shortcut_F24</font>
+  <font color="#924B72">#PB_Shortcut_Numlock</font>
+  <font color="#924B72">#PB_Shortcut_Scroll</font>      (Arrêt défil)
+</font></pre>
+
+Les touches de raccourci ci-dessus 
+peuvent être combinées avec les 
+valeurs ci-dessous si nécessaire: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shortcut_Shift</font>  : 'Shift' ou 'Majuscule'
+  <font color="#924B72">#PB_Shortcut_Control</font>: 'Control' ou 'CTRL'
+  <font color="#924B72">#PB_Shortcut_Alt</font>    : 'Alt' 
+  <font color="#924B72">#PB_Shortcut_Command</font>: 'Apple' ou 'Pomme' (MacOS X)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Evenement</i></td>
+<td> 
+Un nombre unique défini par l'utilisateur 
+qui permet d'identifier le raccourci 
+clavier.<br>
+Ce nombre doit être compris entre 0 et 
+64000 et il correspond à l'évènement de 
+type <a href="../menu/index.html">menu</a> qui lui 
+est associé. <br>
+Par défaut, une fenêtre a déjà 2 
+raccourcis clavier pour permettre 
+les déplacements entre les 
+<a href="../gadget/index.html">gadgets</a> avec la 
+touche 'Tab' (Tabulation) et 'Shift+Tab' 
+(Majuscule + Tabulation): 
+<font color="#924B72">#PB_Shorcut_Tab</font> et 
+<font color="#924B72">#PB_Shortcut_Tab</font>|<font color="#924B72">#PB_Shortcut_Shift</font> 
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un raccourci génère un évènement de type <a href="../menu/index.html">menu</a> (comme le ferait un élément de menu) car 
+la plupart du temps les raccourcis sont utilisés en conjonction avec les menus. <br>
+La constante <font color="#924B72">#PB_Shortcut_Command</font> est seulement utile sous MacOS X et permet d'utiliser la touche 'Apple' (droite ou 
+gauche). Cette constante est aussi supportée sur les autres OS (pour faciliter la portabilité) et elle aura 
+alors un rôle identique à <font color="#924B72">#PB_Shortcut_Control</font>. 
+<br>
+<br>
+Un raccourci clavier peut être enlevé avec <a href="removekeyboardshortcut.html">RemoveKeyboardShortcut()</a>. 
+<br>
+<br>
+Les fenêtres filles du gadget MDI ne sont pas supportées. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  AddKeyboardShortcut</font>(0, <font color="#924B72">#PB_Shortcut_Control</font> | <font color="#924B72">#PB_ShortCut_F</font>, 15) <font color="#006666">; Crée un raccourci clavier CTRL+F sur la fenêtre 0</font>
+                                                                    <font color="#006666">; qui générera un évènement de valeur 15.</font>
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Exemple étendu avec des raccourcis clavier avec ou sans menu</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Window</font> = 0
+  <b><font color="#006666">Enumeration</font></b> Menu
+    <font color="#924B72">#Menu</font>
+    <font color="#924B72">#PopupMenu</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  <b><font color="#006666">Enumeration</font></b> Menu_elements
+    <font color="#924B72">#mOuvrir</font>
+    <font color="#924B72">#mCopier</font>
+    <font color="#924B72">#mFactice</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(<font color="#924B72">#Window</font>, 200, 200, 600, 100, &quot;Appuyer sur Ctrl+D  |  Ctrl+O  |  Ctrl+Maj+C&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(<font color="#924B72">#Menu</font>,<font color="#006666"> WindowID</font>(<font color="#924B72">#Window</font>))  <font color="#006666">; Créer un menu standard avec un titre et un élément de menu</font>
+<font color="#006666">      MenuTitle</font>(&quot;Fichier&quot;)
+<font color="#006666">      MenuItem</font>(<font color="#924B72">#mOuvrir</font>, &quot;Ouvrir&quot; + <font color="#924B72">#TAB$</font> + &quot;Ctrl+O&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">CreatePopupMenu</font>(<font color="#924B72">#PopupMenu</font>)  <font color="#006666">; Créer un menu contextuel supplémentaire</font>
+<font color="#006666">      MenuItem</font>(<font color="#924B72">#mCopier</font>, &quot;Copier&quot; + <font color="#924B72">#TAB$</font> + &quot;Ctrl+Shift+C&quot;)
+    <b><font color="#006666">EndIf</font></b>
+<font color="#006666">    AddKeyboardShortcut</font>(<font color="#924B72">#Window</font>, <font color="#924B72">#PB_Shortcut_Control</font> | <font color="#924B72">#PB_Shortcut_D</font>, <font color="#924B72">#mFactice</font>)  <font color="#006666">; Raccourci clavier autonome (sans élément de menu)</font>
+<font color="#006666">    AddKeyboardShortcut</font>(<font color="#924B72">#Window</font>, <font color="#924B72">#PB_Shortcut_Control</font> | <font color="#924B72">#PB_Shortcut_O</font>, <font color="#924B72">#mOuvrir</font>)   <font color="#006666">; Raccourci pour l'élément de menu</font>
+<font color="#006666">    AddKeyboardShortcut</font>(<font color="#924B72">#Window</font>, <font color="#924B72">#PB_Shortcut_Control</font> | <font color="#924B72">#PB_Shortcut_Shift</font> | <font color="#924B72">#PB_Shortcut_C</font>, <font color="#924B72">#mCopier</font>)  <font color="#006666">; Raccourci pour l'élément de menu contextuel</font>
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>()
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_RightClick</font>  <font color="#006666">; Afficher le menu contextuel avec le clic droit de la souris</font>
+<font color="#006666">          DisplayPopupMenu</font>(<font color="#924B72">#PopupMenu</font>,<font color="#006666"> WindowID</font>(<font color="#924B72">#Window</font>))
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#mFactice</font> : <b><font color="#006666">Debug</font></b> &quot;Autonome&quot;
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#mOuvrir</font> : <b><font color="#006666">Debug</font></b> &quot;Ouvrir&quot;
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#mCopier</font> : <b><font color="#006666">Debug</font></b> &quot;Copier&quot;
+          <b><font color="#006666">EndSelect</font></b>
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+          <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="removekeyboardshortcut.html">RemoveKeyboardShortcut()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Window Index</a> - <a href=addwindowtimer.html>AddWindowTimer()</a> -><br><br>
+
+</body></html>

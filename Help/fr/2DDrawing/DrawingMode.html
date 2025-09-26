@@ -1,0 +1,180 @@
+<html><head><title>DrawingMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingMode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>DrawingMode</b></font>(Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change le mode d'affichage pour les 
+textes et les dessins. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mode</i></td>
+<td width="90%"> 
+Peut être une combinaison des valeurs 
+suivantes: 
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_Default</font> 
+<blockquote>
+
+C'est le mode de dessin par défaut quand <a href="startdrawing.html">StartDrawing()</a> est appelé.<br>
+Le texte est affiché avec un fond solide et les formes géométriques sont pleines.<br>
+Si la surface de dessin gère un canal alpha, les opérations de dessin n'affecteront 
+que les composantes couleurs et laisseront le canal alpha inchangé. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Default.png"></p>
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_Transparent</font> 
+<blockquote>
+
+Si ce mode est activé alors le fond du texte affiché avec <a href="drawtext.html">DrawText()</a> sera transparent. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Transparent.png"></p>
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_NativeText</font> 
+<blockquote>
+
+Avec ce mode, les commandes <a href="drawtext.html">DrawText()</a> et <a href="drawrotatedtext.html">DrawRotatedText()</a> utiliseront la sortie texte native pour avoir un rendu de texte de type gadget. 
+Tous les effets spéciaux comme XOR, AlphaBlend, CustomFilters, etc. ne sont pas disponibles avec ce mode. 
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_XOr</font> 
+<blockquote>
+
+Active le mode XOR. Toutes les couleurs des graphiques seront inversées par rapport à la couleur du fond. La 
+couleur courante n'a plus d'importance et n'est pas prise en compte. Ce mode ne peut pas 
+être combiné avec les mode alpha ci-dessous. 
+<br>
+<br>
+<b>Note:</b> Ce mode ne fonctionne pas avec la sortie <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_XOr.png"></p>
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_Outlined</font> 
+<blockquote>
+
+Si ce mode est activé, seuls les contours des figures géométriques seront dessinés (les figures ne seront 
+pas pleines). Ceci s'applique aux commandes telles que <a href="circle.html">Circle()</a>(), <a href="box.html">Box()</a>, etc. 
+<br>
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Outlined.png"></p>
+<br>
+</blockquote>
+
+<b>Note:</b> Les modes suivants ne fonctionnent qu'avec <a href="../image/imageoutput.html">ImageOutput()</a>, <a href="../gadget/canvasoutput.html">CanvasOutput()</a> et 
+<a href="../sprite/spriteoutput.html">SpriteOutput()</a>. Ils sont ignorés pour toutes les autres sorties: 
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_AlphaBlend</font> 
+<blockquote>
+
+Les opérations de dessin seront fusionnées avec le fond en utilisant le canal alpha pour gérer la transparence de chaque pixel. 
+<a href="rgba.html">RGBA()</a> peut être utilisé pour définir une couleur qui intègre un degré de transparence pour les 
+commandes comme <a href="frontcolor.html">FrontColor()</a>, <a href="box.html">Box()</a>, <a href="drawtext.html">DrawText()</a> etc. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_AlphaBlend.png"></p>
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_AlphaClip</font> 
+<blockquote>
+
+Les opérations de dessin seront fusionnées avec le fond en utilisant le canal alpha pour gérer la transparence de chaque pixel, comme 
+avec le mode <font color="#924B72">#PB_2DDrawing_AlphaBlend</font> mode, mais avec la différence que le fond agit comme un masque. 
+Cela signifie que les zones du fond qui étaient transparentes avant la fusion le resteront après. Si la surface de dessin ne gère 
+pas de canal alpha, alors ce mode agit exactement comme <font color="#924B72">#PB_2DDrawing_AlphaBlend</font>. 
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_AlphaChannel</font> 
+<blockquote>
+
+Les opérations de dessin ne modifieront que les valeurs du canal alpha de la surface de dessin. Toutes les informations 
+concernant les couleurs seront ignorées. Par exemple, dessiner un <a href="circle.html">cercle</a> avec une couleur 
+<a href="../2ddrawing/rgba.html">RGBA</a>(0, 0, 0, 0) fera un 'trou' en forme de cercle dans la surface, car cette zone sera 
+alors complètement transparente. Si la surface de dessin n'a pas de canal alpha, comme le CanvasGadget, alors les opérations de dessin 
+n'auront aucun effet dans ce mode. 
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_AllChannels</font> 
+<blockquote>
+
+Les opérations de dessin modifieront les composantes couleurs ainsi que les valeurs du canal alpha de la surface de dessin. 
+Il n'y a plus de mélange lors des opérations de dessin. Ce mode est équivalent à l'enchainement des 
+modes <font color="#924B72">#PB_2DDrawing_Default</font> et de <font color="#924B72">#PB_2DDrawing_AlphaChannel</font>. 
+Si la surface de dessin n'a pas de canal alpha, comme le CanvasGadget, alors ce mode est identique à <font color="#924B72">#PB_2DDrawing_Default</font>. 
+</blockquote>
+
+<br>
+<p><img src="../HelpPictures/AlphaBlending.png"></p>
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_Gradient</font> 
+<blockquote>
+
+Ce mode permet de dessiner un dégradé à la place d'une couleur solide. La forme du dégradé peut être modifiée à l'aide des 
+commandes telles que <a href="lineargradient.html">LinearGradient()</a>, <a href="circulargradient.html">CircularGradient()</a> etc. Les couleurs qui composeront le dégradé peuvent 
+être définies avec <a href="gradientcolor.html">GradientColor()</a>. Les paramètres de couleur spécifiés pour chaque opération de dessin 
+seront ignorés dans ce mode. Il est possible de combiner ce mode avec les modes alpha ci-dessus pour avoir des dégradés semi-transparents. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Gradient.png"></p>
+</blockquote>
+
+<br>
+<br>
+<font color="#924B72">#PB_2DDrawing_CustomFilter</font> 
+<blockquote>
+
+Dans ce mode, la couleur de chaque pixel pourra être définie par la procédure spécifiée par <a href="customfiltercallback.html">CustomFilterCallback()</a>. 
+Cela permet d'implémenter des rendus complètement libres tout en utilisant des formes géométriques pour le dessin. 
+<br>
+<p><img src="../HelpPictures/customfilter.png"></p>
+</blockquote>
+
+<br>
+<br>
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour utiliser plusieurs modes en même 
+temps, il suffit d'utiliser l'opérateur 
+'|' (OR). Exemple pour des dessins 
+détourés en mode 'xor': 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font> | <font color="#924B72">#PB_2DDrawing_XOr</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="frontcolor.html">FrontColor()</a>, <a href="backcolor.html">BackColor()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=drawingfont.html>DrawingFont()</a> - <a href=index.html>2DDrawing Index</a> - <a href=ellipse.html>Ellipse()</a> -><br><br>
+
+</body></html>

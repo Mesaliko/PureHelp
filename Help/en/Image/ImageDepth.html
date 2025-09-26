@@ -1,0 +1,56 @@
+<html><head><title>ImageDepth</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageDepth()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ImageDepth</b></font>(#Image [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the depth of the #Image, as it is stored internally by PureBasic. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The image to use. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The kind of depth to return. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_InternalDepth</font>: Returns the depth of the decoded image (default). Valid return values are:
+                                    - 24 (24-bit, 16 millions colors)
+                                    - 32 (32-bit, 16 millions colors + 8-bit alpha channel)
+  <font color="#924B72">#PB_Image_OriginalDepth</font>: Returns the original depth, as it was before the decoding. Valid return values are:
+                                    - 1 (1-bit, 2 colors, monochrome image)
+                                    - 4 (4-bit, 16 colors)
+                                    - 8 (8-bit, 256 colors)
+                                    - 16 (16-bit, 65536 colors)
+                                    - 24 (24-bit, 16 millions colors)
+                                    - 32 (32-bit, 16 millions colors + 8-bit alpha channel)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the possible depth values described above. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+When loading an image, PureBasic converts it either in 24-bit or in 32-bit, depending 
+if the source image has an alpha channel or not. Every image which has a 
+depth less than 24-bit will be internally converted to 24-bit. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="imagewidth.html">ImageWidth()</a>, <a href="imageheight.html">ImageHeight()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=grabimage.html>GrabImage()</a> - <a href=index.html>Image Index</a> - <a href=imageformat.html>ImageFormat()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html><head><title>ToolBarButtonText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ToolBarButtonText()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ToolBarButtonText</b></font>(#ToolBar, Button, Text$) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the text for the specified #ToolBar button. The toolbar had to be created with 
+the <font color="#924B72">#PB_ToolBar_Text</font> flag. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#ToolBar</i></td>
+<td width="90%"> 
+The toolbar to use. 
+
+</td></tr>
+<tr><td><i>Button</i></td>
+<td> 
+The toolbar button to change the text. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The new text to display. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 80, &quot;ToolBar&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateToolBar</font>(0,<font color="#006666"> WindowID</font>(0), <font color="#924B72">#PB_ToolBar_Large</font> | <font color="#924B72">#PB_ToolBar_Text</font>)
+<font color="#006666">      UsePNGImageDecoder</font>()
+      Path$ = <font color="#924B72">#PB_Compiler_Home</font>  + &quot;Examples&quot; + <font color="#924B72">#PS$</font> + &quot;Sources&quot; + <font color="#924B72">#PS$</font> + &quot;Data&quot; + <font color="#924B72">#PS$</font> + &quot;ToolBar&quot; + <font color="#924B72">#PS$</font> + &quot;&quot;
+<font color="#006666">      ToolBarImageButton</font>(0,<font color="#006666"> LoadImage</font>(0, Path$ + &quot;New.png&quot;), <font color="#924B72">#PB_ToolBar_Normal</font>, &quot;New&quot;)
+<font color="#006666">      ToolBarImageButton</font>(1,<font color="#006666"> LoadImage</font>(1, Path$ + &quot;Open.png&quot;), <font color="#924B72">#PB_ToolBar_Normal</font>, &quot;Open&quot;)
+<font color="#006666">      ToolBarImageButton</font>(2,<font color="#006666"> LoadImage</font>(2, Path$ + &quot;Save.png&quot;), <font color="#924B72">#PB_ToolBar_Normal</font>, &quot;Save&quot;)
+<font color="#006666">      ToolBarButtonText</font>(0, 0, &quot;Old !&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="toolbarimagebutton.html">ToolBarImageButton()</a>, <a href="toolbarseparator.html">ToolBarSeparator()</a>, <a href="createtoolbar.html">CreateToolBar()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=settoolbarbuttonstate.html>SetToolBarButtonState()</a> - <a href=index.html>ToolBar Index</a> - <a href=toolbarheight.html>ToolBarHeight()</a> -><br><br>
+
+</body></html>

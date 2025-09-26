@@ -1,0 +1,115 @@
+<html><head><title>ReleaseMouse</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReleaseMouse()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ReleaseMouse</b></font>(Etat)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Capture ou libère la souris pour rendre son 
+usage possible dans le système d'exploitation. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Etat</i></td>
+<td width="90%"> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>  : La souris est libérée de l'écran
+  <font color="#924B72">#False</font> : La souris est capturée dans l'écran.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+On utilise typiquement cette fonction après 
+avoir vérifié le résultat de la 
+commande <a href="../screen/isscreenactive.html">IsScreenActive()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <font color="#006666">; Quelques variables</font>
+  MargeG = 20 
+  MargeH = 20 
+  LargeurEcran = 440 
+  HauteurEcran = 440 
+
+  <font color="#006666">; Initialisation du monde 2D</font>
+<font color="#006666">  InitSprite</font>()
+<font color="#006666">  InitMouse</font>() 
+  
+  <font color="#006666">; Ouverture de la fenêtre et de l'écran</font>
+<font color="#006666">  OpenWindow</font>(0,0,0,650,480,&quot;Capture/Libération de la souris&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>|<font color="#924B72">#PB_Window_SystemMenu</font>) 
+<font color="#006666">  ButtonGadget</font>(1,500,440,120,24,&quot;Cliquez !&quot;) 
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0),20,20,LargeurEcran,HauteurEcran,0,0,0) 
+
+  <font color="#006666">; Gestion de la fenêtre et de l'écran</font>
+  <b><font color="#006666">Repeat</font></b>
+    
+    <b><font color="#006666">Repeat</font></b> <font color="#006666">; Gestion de la fenêtre</font>
+      Event  =<font color="#006666"> WindowEvent</font>()  
+      <b><font color="#006666">Select</font></b> Event 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font> 
+          <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 1     <font color="#006666">; Si Clic sur le Bouton &quot;Cliquez !&quot;</font>
+<font color="#006666">            MessageRequester</font>(&quot;Attention&quot;,&quot;Bouton cliqué !&quot;) 
+          <b><font color="#006666">EndIf</font></b> 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font> <font color="#006666">; Si fermeture de la fenêtre</font>
+          <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndSelect</font></b>
+      
+      <font color="#006666">; Affichage de la position de la souris dans la fenêtre</font>
+<font color="#006666">      SetWindowTitle</font>(0, &quot;Capture/Libération de la souris X= &quot; +<font color="#006666"> Str</font>(mx) + &quot; Y= &quot;+<font color="#006666"> Str</font>(my))
+    <b><font color="#006666">Until</font></b> Event =  0 
+    
+    <font color="#006666">; Gestion de la capture de la souris dans l'écran noir</font>
+      <b><font color="#006666">If</font></b> inScreen = <font color="#924B72">#True</font>       <font color="#006666">; Si la souris est dans l'écran noir...</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">MouseX</font>() &gt; LargeurEcran-2 <b><font color="#006666">Or</font></b> <font color="#006666">MouseY</font>() &gt; HauteurEcran-2 <b><font color="#006666">Or</font></b> <font color="#006666">MouseX</font>() &lt; 1 <b><font color="#006666">Or</font></b> <font color="#006666">MouseY</font>() &lt;1 
+<font color="#006666">              ReleaseMouse</font>(<font color="#924B72">#True</font>)   <font color="#006666">; ...et si elle s'approche des bords de l'écran alors on libère la souris</font>
+              inScreen = <font color="#924B72">#False</font> 
+          <b><font color="#006666">EndIf</font></b>  
+      <b><font color="#006666">Else</font></b>                      
+        mx =<font color="#006666"> WindowMouseX</font>(0)      <font color="#006666">; Sinon, si la souris entre dans l'écran noir...</font>
+        my =<font color="#006666"> WindowMouseY</font>(0)
+        <b><font color="#006666">If</font></b> mx &lt; LargeurEcran + MargeG <b><font color="#006666">And</font></b> mx &gt; MargeG <b><font color="#006666">And</font></b> my &gt; MargeH <b><font color="#006666">And</font></b> my &lt; MargeH + HauteurEcran                         
+<font color="#006666">          ReleaseMouse</font>(<font color="#924B72">#False</font>)    <font color="#006666">; ... alors on capture la souris </font>
+<font color="#006666">            MouseLocate</font>(mx-MargeG,my-MargeH) 
+            inScreen = <font color="#924B72">#True</font> 
+        <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">EndIf</font></b> 
+    
+    <font color="#006666">; Affichage de l'écran noir</font>
+<font color="#006666">    ClearScreen</font>(0) 
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ScreenOutput</font>()) 
+<font color="#006666">        DrawText</font>(150,200,&quot;Souris relachée&quot;) 
+<font color="#006666">        DrawText</font>(180,230,&quot;X= &quot;)
+<font color="#006666">        DrawText</font>(180,260,&quot;Y= &quot;)
+<font color="#006666">    StopDrawing</font>()  
+    <b><font color="#006666">If</font></b> inScreen  <font color="#006666">; Si la souris est dans l'écran noir... </font>
+<font color="#006666">        ExamineMouse</font>() 
+<font color="#006666">        StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">        FrontColor</font>(<font color="#006666">RGB</font>(255,255,0))
+<font color="#006666">        DrawText</font>(150,200,&quot;Souris capturée&quot; ) 
+<font color="#006666">        DrawText</font>(180,230,&quot;X= &quot;+<font color="#006666"> Str</font>(<font color="#006666">MouseX</font>())) 
+<font color="#006666">        DrawText</font>(180,260,&quot;Y= &quot;+<font color="#006666"> Str</font>(<font color="#006666">MouseY</font>()))
+<font color="#006666">        DrawText</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(), &quot;[&quot;+<font color="#006666">Chr</font>(164)+&quot;]&quot;)
+<font color="#006666">        StopDrawing</font>() 
+    <b><font color="#006666">EndIf</font></b> 
+<font color="#006666">    FlipBuffers</font>() 
+ <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinemouse.html">ExamineMouse()</a>, <a href="../screen/isscreenactive.html">IsScreenActive()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=mousey.html>MouseY()</a> - <a href=index.html>Mouse Index</a><br><br></blockquote>
+</font></body></html>

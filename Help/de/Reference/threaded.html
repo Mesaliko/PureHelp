@@ -1,0 +1,70 @@
+<html><head><title>Threaded</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Threaded</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Threaded</font></b>[.&lt;Typ&gt;] &lt;Variable[.&lt;Typ&gt;]&gt; [= &lt;konstanter Ausdruck&gt;] [, ...]
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Threaded</font></b> ermöglicht das Erstellen von <a href="../thread/index.html">Thread-basierten</a> beständigen 
+<a href="../reference/variables.html">Variablen</a>, <a href="../reference/dim.html">Arrays</a> (außer multi-dimensionaler 
+Arrays), <a href="../reference/newlist.html">Listen</a> oder  <a href="../reference/newmap.html">Maps</a>. 
+<br>
+<br>
+Das bedeutet, dass jeder <a href="../thread/index.html">Thread</a> seine eigene Version des Objekts haben wird. 
+Dies ist nur nützlich beim Schreiben von &quot;multithreaded&quot; Programmen (mit mehreren Prozessen). 
+Wenn nach <b><font color="#006666">Threaded</font></b> ein Typ angegeben wird, dann wird der Standard-Typ für diese Deklaration geändert. 
+<br>
+<br>
+Jeder Variable kann direkt ein Standard-Wert zugewiesen werden, aber dies muss ein konstanter Wert sein. 
+Die Thread-Initialisierung erfolgt beim ersten Start des Threads. 
+Das bedeutet, dass bei gleichzeitiger Deklaration und Zuweisung einer Thread-Variable die Variable für alle Threads zugewiesen wird. Siehe Beispiel 2. 
+Beim Deklarieren eines &quot;Threaded&quot; Arrays, muss der Dimensions-Parameter ebenfalls ein konstanter Wert sein. 
+<br>
+<br>
+Ein &quot;Threaded&quot; Objekt kann nicht in einer Prozedur deklariert werden, sein Geltungsbereich ist immer global. 
+
+
+</blockquote><p><b>Beispiel:</b> 1 Mit Variablen</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Threaded</font></b> Counter
+  
+  Counter = 128
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(Parameter)
+    
+    <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird null anzeigen, da dieser Thread diese Variable bisher nicht verwendet hat</font>
+    Counter = 256
+    <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird 256 anzeigen</font>
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  Thread =<font color="#006666"> CreateThread</font>(@Thread(), 0)
+<font color="#006666">  WaitThread</font>(Thread) <font color="#006666">; Warte auf das Beenden des Threads</font>
+  
+  <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird 128 anzeigen, auch wenn 'Counter' innerhalb des Threads verändert wurde</font>
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> 2 Alle Threads</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Threaded</font></b> Counter = 128 <font color="#006666">; Definiert für alle Threads</font>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(Parameter)
+    
+    <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird 128 anzeigen, da beim Programmstart auch ein Thread gestartet wurde</font>
+    Counter = 256
+    <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird 256 anzeigen</font>
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  Thread =<font color="#006666"> CreateThread</font>(@Thread(), 0)
+<font color="#006666">  WaitThread</font>(Thread) <font color="#006666">; Warte auf das Beenden des Threads</font>
+  
+  <b><font color="#006666">Debug</font></b> Counter <font color="#006666">; Wird 128 anzeigen, auch wenn 'Counter' innerhalb des Threads verändert wurde</font>
+</font></pre>
+</blockquote>
+</font></body></html>

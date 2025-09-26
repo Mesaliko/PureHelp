@@ -1,0 +1,80 @@
+<html><head><title>Compositors.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Compositor
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> =0.5
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;Compositor - [F1]Radial Blur - [F2] Bloom - [F3] Glass - [F4] Embossed - [F5] Sharpen Edges - [F6] Posterize - [F7] Laplace - [F8] Tiling     - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Compositors&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">CreateTorus</font>(0,10,0.8,64,64)
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 100
+<font color="#006666">  CreateMaterial</font>(i,(0),<font color="#006666">Random</font>($ffffff))
+<font color="#006666">  MaterialShininess</font>(i,64,$ffffff)
+<font color="#006666">  CreateEntity</font>(i,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(i),<font color="#006666">Random</font>(100)-50,<font color="#006666">Random</font>(100)-50,<font color="#006666">Random</font>(100)-50):<font color="#006666">RotateEntity</font>(i,<font color="#006666">Random</font>(360),<font color="#006666">Random</font>(360),<font color="#006666">Random</font>(360))
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0,100,0,0)
+<font color="#006666">CameraLookAt</font>(0, 0, 0, 0)
+
+<font color="#006666">CreateLight</font>(0,$ffffff,20000,10000,10000)
+
+<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Radial Blur&quot;)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>  
+<font color="#006666">  ExamineMouse</font>()
+<font color="#006666">  ExamineKeyboard</font>()    
+  MouseX = -<font color="#006666">MouseDeltaX</font>() * 0.05
+  MouseY = -<font color="#006666">MouseDeltaY</font>() * 0.05
+  
+  KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+  Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)-<font color="#006666">MouseWheel</font>()*10)*<font color="#924B72">#CameraSpeed</font> 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F1</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Radial Blur&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F2</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Bloom&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F3</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Glass&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F4</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Embossed&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F5</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Sharpen Edges&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F6</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Posterize&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F7</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Laplace&quot;):<b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F8</font>):<font color="#006666">CreateCompositorEffect</font>(0,0,&quot;Tiling&quot;):<b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 100
+<font color="#006666">    RotateEntity</font>(i,0.1,0.2,0.3,<font color="#924B72">#PB_Relative</font>)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

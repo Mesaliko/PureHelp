@@ -1,0 +1,128 @@
+<html><head><title>Einsteiger-Kapitel - Lesen und Schreiben von Dateien</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Lesen und Schreiben von Dateien</font></b></p>
+
+Dieses Beispiel wird 100 zufällige Datensätze schreiben, wobei jeder ein <a href="../reference/variables.html">Byte</a>, 
+eine <a href="../reference/variables.html">Fließkomma-Zahl</a>, ein <a href="../reference/variables.html">Long-Integer</a> 
+und einen <a href="../reference/variables.html">String</a> enthält. Danach liest es alle Datensätze wieder 
+ein und zeigt sie im <a href="../reference/ide_debugger.html">Debug-Fenster</a> an. 
+<br>
+<br>
+Es demonstriert die <a href="../filesystem/gettemporarydirectory.html">GetTemporaryDirectory()</a>, <a href="../file/createfile.html">CreateFile()</a>, <a href="../file/openfile.html">OpenFile()</a>, <a href="../file/eof.html">Eof()</a> und auch eine 
+Reihe der Befehle zum <a href="../file/index.html">Lesen und Schreiben</a> von Daten. 
+<br>
+<br>
+Es funktioniert soweit recht gut, hat aber einen Nachteil. Da der String-Wert eine variable 
+Länge hat, können Sie nicht zufällig auf die Datensätze zugreifen - denn man kann nicht 
+vorhersagen, wo jeder neue Datensatz in der Datei beginnt. Sie müssen alle wieder in der 
+gleichen Reihenfolge eingelesen werden, wie sie geschrieben wurden. Das ist kein Problem 
+mit der kleinen Anzahl an Datensätzen, welche hier erzeugt werden, dies kann aber mit einer 
+größeren Datei problematisch werden. PureBasic bietet einen Weg, um auch mit dieser Situation 
+umzugehen - aber ein Beispiel wäre zu komplex für dieses Thema. Sehen Sie in das 
+<a href="../database/index.html">Datenbank</a>-Kapitel dieser Hilfe-Datei, um zu sehen, wie es gemacht 
+werden kann. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnableExplicit</font></b>
+  <font color="#006666">; Definieren der Konstanten:</font>
+  <font color="#924B72">#MAXBYTE</font> = 255
+  <font color="#924B72">#MAXLONG</font> = 2147483647
+  
+  <font color="#006666">; Definieren einiger Variablen.</font>
+  <b><font color="#006666">Define</font></b>.f Float
+  <b><font color="#006666">Define</font></b>.i Count, File
+  <b><font color="#006666">Define</font></b>.s Folder, FileName, String
+  
+  <font color="#006666">; Erstellen eines temporären Dateinamens.</font>
+  Folder =<font color="#006666"> GetTemporaryDirectory</font>()
+  FileName = Folder + &quot;test.data&quot;
+  
+  <font color="#006666">; Erstellen der temporären Datei.</font>
+  <font color="#006666">; Wenn #PB_Any verwendet wird, gibt CreateFile die Dateinummer zurück.</font>
+  <font color="#006666">; Dies ist nützlich, wenn Sie mehr als eine Datei gleichzeitig geöffnet haben.</font>
+  File =<font color="#006666"> CreateFile</font>(<font color="#924B72">#PB_Any</font>, FileName)
+  
+  <b><font color="#006666">If</font></b> File
+    <font color="#006666">; Wenn dies erfolgreich war - schreibe 100 zufällige Datensätze.</font>
+    <b><font color="#006666">For</font></b> Count = 1 <b><font color="#006666">To</font></b> 100
+      
+      <font color="#006666">; Schreibe ein zufällges Byte (0 - 255).</font>
+<font color="#006666">      WriteByte</font>(File,<font color="#006666"> Random</font>(<font color="#924B72">#MAXBYTE</font>))
+      
+      <font color="#006666">; Erstellen und Schreiben einer zufälligen Fließkommazahl (Float).</font>
+      <font color="#006666">; Diese Berechnung erfolgt, damit die Zahl (wahrscheinlich) eine Fließkomma-Komponente hat.</font>
+      Float =<font color="#006666"> Random</font>(<font color="#924B72">#MAXLONG</font>) / ((<font color="#006666">Random</font>(7) + 2) * 5000)
+<font color="#006666">      WriteFloat</font>(File, Float)
+      
+      <font color="#006666">; Schreibe einen zufälligen Long-Wert.</font>
+<font color="#006666">      WriteLong</font>(File,<font color="#006666"> Random</font>(<font color="#924B72">#MAXLONG</font>))
+      
+      <font color="#006666">; Erstellt und schreibt einen zufälligen String im Unicode-Format.</font>
+      <font color="#006666">; Beachten Sie die Verwendung von WriteStringN, um den String mit einem &quot;End of line&quot; (Ende der Zeile) Zeichen zu begrenzen.</font>
+      String = &quot;String &quot; +<font color="#006666"> StrU</font>(<font color="#006666">Random</font>(<font color="#924B72">#MAXLONG</font>))
+<font color="#006666">      WriteStringN</font>(File, String, <font color="#924B72">#PB_Unicode</font>)
+      
+    <b><font color="#006666">Next</font></b> Count
+    
+    <font color="#006666">; Schließen der Datei.</font>
+<font color="#006666">    CloseFile</font>(File)
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; Wenn dies nicht erfolgreich war.</font>
+    <b><font color="#006666">Debug</font></b> &quot;Could not create the file: &quot; + FileName 
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Öffnen der Datei - diesmal zum Lesen.</font>
+  File =<font color="#006666"> ReadFile</font>(<font color="#924B72">#PB_Any</font>, FileName)
+  
+  <b><font color="#006666">If</font></b> File
+    <font color="#006666">; Wenn dies erfolgreich war - lesen und darstellen der Datensätze aus der Datei.</font>
+    
+    <font color="#006666">; Den Zähler zurücksetzen.</font>
+    Count = 1
+    
+    <font color="#006666">; Schleife bis das Ende der Datei ('end of file') erreicht wird.</font>
+    <font color="#006666">; Dies wird alle Datensätze einlesen - unabhängig davon, wie viele es sind.</font>
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(File) = 0
+      
+      <font color="#006666">; Ausgeben einer Kopfzeile.</font>
+      <b><font color="#006666">Debug</font></b> &quot;------------------------------------------------------------------------------------------------&quot;
+      
+      <b><font color="#006666">Debug</font></b> &quot;[&quot; +<font color="#006666"> StrU</font>(Count) + &quot;]&quot;
+      Count + 1
+      <font color="#006666">; Lesen und ausgeben eines Byte-Wertes.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrU</font>(<font color="#006666">ReadByte</font>(File), <font color="#924B72">#PB_Byte</font>)
+      
+      <font color="#006666">; Lesen eines Fließkomma-Wertes.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrF</font>(<font color="#006666">ReadFloat</font>(File))
+      
+      <font color="#006666">; Lesen eines Long-Wertes.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrU</font>(<font color="#006666">ReadLong</font>(File), <font color="#924B72">#PB_Long</font>)
+      
+      <font color="#006666">; Lesen eines String-Wertes.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ReadString</font>(File, <font color="#924B72">#PB_Unicode</font>)
+      
+    <b><font color="#006666">Wend</font></b>
+    
+    <font color="#006666">; Ausgeben einer Abschlusszeile.</font>
+    <b><font color="#006666">Debug</font></b> &quot;------------------------------------------------------------------------------------------------&quot;
+    
+    <font color="#006666">; Schließen der Datei.</font>
+<font color="#006666">    CloseFile</font>(File)
+    
+    <font color="#006666">; Aufräumen.</font>
+<font color="#006666">    DeleteFile</font>(FileName)
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; Wenn dies nicht erfolgreich war.</font>
+    <b><font color="#006666">Debug</font></b> &quot;Could not open the file: &quot; + FileName
+    
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_directives.html">< Vorheriges: Compiler-Direktiven</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_memory.html">Nächstes: Speicher-Zugriff ></a> 
+</blockquote>
+</font></body></html>

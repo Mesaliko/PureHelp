@@ -1,0 +1,62 @@
+<html><head><title>CameraReflection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CameraReflection()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CameraReflection</b></font>(#Camera, #CameraPrincipale, EntiteID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Définit une caméra comme une caméra-miroir. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Camera</i></td>
+<td width="90%"> 
+La caméra à utiliser comme caméra-miroir. 
+
+</td></tr>
+<tr><td><i>#CameraPrincipale</i></td>
+<td> 
+La caméra à utiliser comme source d'image à refléter. 
+
+</td></tr>
+<tr><td><i>EntiteID</i></td>
+<td> 
+L'<a href="../entity/entityid.html">EntityID()</a> à utiliser comme source d'image à refléter. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Ce sont à la fois #CameraPrincipale et EntiteID qui seront utilisés comme sources 
+de l'image à refléter en image miroir. 
+<br>
+<br>
+Une texture RTT doit être créée à partir de #Camera à l’aide de <a href="../texture/createrendertexture.html">CreateRenderTexture()</a>. 
+<br>
+La matière (matériau) qui utilisera cette texture RTT doit être définie avec <a href="../material/setmaterialattribute.html">SetMaterialAttribute()</a> 
+de cette manière: SetMaterialAttribute(Matiere, <font color="#924B72">#PB_Material_ProjectiveTexturing</font>, #Camera). 
+<br>
+<br>
+Cette commande doit être utilisée dans la boucle de rendu. 
+<br>
+<br>
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/Reflection.pb.html">Reflection.pb</a>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../material/setmaterialattribute.html">SetMaterialAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=camerarange.html>CameraRange()</a> - <a href=index.html>Camera Index</a> - <a href=camerarendermode.html>CameraRenderMode()</a> -><br><br>
+
+</body></html>

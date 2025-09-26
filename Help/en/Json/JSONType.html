@@ -1,0 +1,108 @@
+<html><head><title>JSONType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">JSONType()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>JSONType</b></font>(JSONValue)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the type of the given JSON value. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValue</i></td>
+<td width="90%"> 
+The JSON value. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+It can be one of the following: 
+<br>
+<br>
+
+<font color="#924B72">#PB_JSON_Null</font> 
+<blockquote>
+
+The value represents the JSON literal null. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_String</font> 
+<blockquote>
+
+The value contains a string. <a href="getjsonstring.html">GetJSONString()</a> can be used to read the string. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Number</font> 
+<blockquote>
+
+The value contains a number. <a href="getjsondouble.html">GetJSONDouble()</a>, <a href="getjsonfloat.html">GetJSONFloat()</a>, <a href="getjsoninteger.html">GetJSONInteger()</a> or 
+<a href="getjsonquad.html">GetJSONQuad()</a> can be used to read the number. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Boolean</font> 
+<blockquote>
+
+The value contains a boolean. <a href="getjsonboolean.html">GetJSONBoolean()</a> can be used to read the value. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Array</font> 
+<blockquote>
+
+The value contains an array of JSON elements. <a href="jsonarraysize.html">JSONArraySize()</a> returns the size 
+of the array. <a href="getjsonelement.html">GetJSONElement()</a> can be used to get a specific array element. 
+<a href="addjsonelement.html">AddJSONElement()</a>, <a href="removejsonelement.html">RemoveJSONElement()</a>, <a href="resizejsonelements.html">ResizeJSONElements()</a> or 
+<a href="clearjsonelements.html">ClearJSONElements()</a> can be used to modify the array. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Object</font> 
+<blockquote>
+
+The value contains an object (a set of key/value pairs). <a href="jsonobjectsize.html">JSONObjectSize()</a> returns the 
+number of members in the object. <a href="getjsonmember.html">GetJSONMember()</a> returns a specific member value. 
+<a href="examinejsonmembers.html">ExamineJSONMembers()</a> can be used to examine the member values. 
+<a href="addjsonmember.html">AddJSONMember()</a>, <a href="removejsonmember.html">RemoveJSONMember()</a> or <a href="clearjsonmembers.html">ClearJSONMembers()</a> can be used to modify the object. 
+</blockquote>
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; A procedure that accepts any JSON value and returns a string</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">GetAnyValue</font>(Value)
+    <b><font color="#006666">Select</font></b> <font color="#006666">JSONType</font>(Value)
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Null</font>:    <b><font color="#006666">ProcedureReturn</font></b> &quot;null&quot;
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_String</font>:  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">GetJSONString</font>(Value)
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Number</font>:  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">StrD</font>(<font color="#006666">GetJSONDouble</font>(Value))    
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Boolean</font>: <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Str</font>(<font color="#006666">GetJSONBoolean</font>(Value))
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Array</font>:   <b><font color="#006666">ProcedureReturn</font></b> &quot;array&quot;
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Object</font>:  <b><font color="#006666">ProcedureReturn</font></b> &quot;object&quot;
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  ParseJSON</font>(0, &quot;[1, 2, true, null, &quot; +<font color="#006666"> Chr</font>(34) + &quot;hello&quot; +<font color="#006666"> Chr</font>(34) + &quot;]&quot;)
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> <font color="#006666">JSONArraySize</font>(<font color="#006666">JSONValue</font>(0)) - 1
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetAnyValue</font>(<font color="#006666">GetJSONElement</font>(<font color="#006666">JSONValue</font>(0), i))
+  <b><font color="#006666">Next</font></b> i
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="jsonvalue.html">JSONValue()</a>, <a href="setjsonarray.html">SetJSONArray()</a>, <a href="setjsonboolean.html">SetJSONBoolean()</a>, <a href="setjsondouble.html">SetJSONDouble()</a>, 
+<a href="setjsonfloat.html">SetJSONFloat()</a>, <a href="setjsoninteger.html">SetJSONInteger()</a>, <a href="setjsonnull.html">SetJSONNull()</a>, 
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="setjsonstring.html">SetJSONString()</a>, <a href="setjsonquad.html">SetJSONQuad()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=jsonobjectsize.html>JSONObjectSize()</a> - <a href=index.html>Json Index</a> - <a href=jsonvalue.html>JSONValue()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,112 @@
+<html><head><title>SetWindowCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetWindowCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetWindowCallback</b></font>(@ProcedureName() [, #Window [, Modus]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Nur für erfahrene Programmierer. Diese Funktion wird nur auf Microsoft Windows 
+unterstützt. 
+<br>
+<br>
+Normale Ereignisse (Events) sollten mit den regulären Befehlen <a href="waitwindowevent.html">WaitWindowEvent()</a> 
+oder <a href="windowevent.html">WindowEvent()</a> verarbeitet werden. 
+<br>
+<br>
+Dieser Befehl assoziiert einen Callback (&quot;Rückruf&quot;), um die Ereignisse aller offenen Fenster zu verarbeiten. 
+Alle Ereignisse werden durch diesen Callback abgefangen und können hier verarbeitet werden. 
+Um einen Callback nur für ein bestimmtes Fenster festzulegen, kann mit dem optionalen Parameter 
+die PB Fensternummer '#Window' übergeben werden. 
+<br>
+<br>
+Zum Entfernen/Deaktivieren eines gesetzten Callbacks rufen Sie einfach SetWindowCallback(0 [, #Window]) auf. 
+<br>
+<br>
+<b>Warnung:</b> Dieser Weg ist &quot;low-level&quot;. Falsche Handhabung der Nachrichten (&quot;Messages&quot;) im Callback 
+kann die PB-interne Nachrichten-Verarbeitung stören. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@ProcedureName()</i></td>
+<td width="90%"> 
+Die zu verwendende Callback-<a href="../reference/procedures.html">Prozedur</a>. 
+Wenn ein vorheriger Callback festgelegt war, wird dieser ersetzt. Der Callback muss 4 Parameter haben. 
+Wenn das Ereignis nicht verarbeitet wird, muss das Ergebnis auf <font color="#924B72">#PB_ProcessPureBasicEvents</font> gesetzt werden, 
+damit das Ereignis ordnungsgemäß von PureBasic verarbeitet wird. Hier ist ein Beispielcode zur korrekten 
+Verwendung eines Callbacks: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">MyWindowCallback</font>(WindowID, Message, WParam, LParam)
+    Result = <font color="#924B72">#PB_ProcessPureBasicEvents</font>
+    <font color="#006666">;</font>
+    <font color="#006666">; Ihr Programmcode hier</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">ProcedureReturn</font></b> Result
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</td></tr>
+<tr><td><i>#Window (optional)</i></td>
+<td> 
+Ein bestimmtes Fenster, dem der Callback zugewiesen werden soll. Sofern dieser Parameter 
+weggelassen wird, wird der Callback für jedes Fenster aufgerufen. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Callback-Modus, kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_ProcessChildEvents</font>: die Ereignisse von untergeordneten Gadgets ('child gadget events', mostly #WM_NOTIFY)
+                                 werden an das Hauptfenster gesendet. Funktioniert nicht für alle Gadgets (Standard).
+  <font color="#924B72">#PB_Window_NoChildEvents</font>     : Ereignisse von untergeordneten Gadgets ('child gadget events' werden nicht an das
+                                 Hauptfenster gesendet (WinAPI Standard-Verhalten).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+Hier sehen Sie ein lauffähiges Beispiel, welches einige Fenster-Parameter überprüft 
+(unter Verwendung von <a href="http://msdn.microsoft.com/library">Windows API</a> Konstanten): 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WinCallback</font>(hWnd, uMsg, wParam, lParam) 
+    <font color="#006666">; Windows füllt die Parameter automatisch, welche wir im Callback verwenden...</font>
+    
+    <b><font color="#006666">If</font></b> uMsg = <font color="#924B72">#WM_SIZE</font> 
+      <b><font color="#006666">Select</font></b> wParam 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_MINIMIZED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Fenster wurde minimiert&quot;
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_RESTORED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Fenster wurde wiederhergestellt&quot;
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_MAXIMIZED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Fenster wurde maximiert&quot;
+      <b><font color="#006666">EndSelect</font></b> 
+    <b><font color="#006666">EndIf</font></b> 
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_ProcessPureBasicEvents</font> 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 100, &quot;Messages&quot;, <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_MaximizeGadget</font>) 
+
+<font color="#006666">    SetWindowCallback</font>(@WinCallback(), 0) <font color="#006666">; Callback zuweisen</font>
+    
+    <b><font color="#006666">Repeat</font></b> 
+      <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>() 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font> 
+          <b><font color="#006666">End</font></b> 
+      <b><font color="#006666">EndSelect</font></b> 
+    <b><font color="#006666">ForEver</font></b> 
+    
+  <b><font color="#006666">EndIf</font></b> 
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=setactivewindow.html>SetActiveWindow()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=setwindowcolor.html>SetWindowColor()</a> -><br><br>
+
+</body></html>

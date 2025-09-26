@@ -1,0 +1,116 @@
+<html><head><title>AddWindowTimer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddWindowTimer()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>AddWindowTimer</b></font>(#Fenetre, Minuteur, Temps)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un nouveau minuteur à une fenêtre. 
+<br>
+<br>
+Un minuteur a pour fonction de générer 
+un évènement de type <font color="#924B72">#PB_Event_Timer</font> 
+tous les 'Temps' millisecondes. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>Minuteur</i></td>
+<td> 
+Le numéro d'identification du minuteur. 
+<br>
+<br>
+Ce numéro sera renvoyé par <a href="eventtimer.html">EventTimer()</a> 
+lors d'un évènement de type 
+<font color="#924B72">#PB_Event_Timer</font>. 
+
+</td></tr>
+<tr><td><i>Temps</i></td>
+<td> 
+Temps écoulé, en millisecondes, entre 
+deux évènements <font color="#924B72">#PB_Event_Timer</font> events. <br>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un minuteur est toujours lié à une 
+fenêtre et sera supprimé avec la 
+fermeture de la fenêtre. 
+<br>
+<br>
+Plusieurs minuteurs peuvent fonctionner 
+en même temps dans une fenêtre. 
+<br>
+De plus, des minuteurs actifs sur 
+différentes fenêtres peuvent avoir le 
+même numéro. 
+<br>
+<br>
+Les évènements 'minuteur' ne seront 
+générés que si aucun autre évènement 
+ne doit être traité (les minuteurs 
+ont une priorité basse). Cela implique 
+qu'ils sont relativement peu précis, et 
+que la durée entre deux évènements du 
+même minuteur peut varier. Ils n'ont 
+pas pour vocation à être utilisés pour 
+de la précision, mais plutôt pour 
+effectuer des tâches périodiques comme 
+par exemple la mise à jour d'un gadget. 
+<br>
+<br>
+Pour retirer un minuteur, il faut 
+utiliser <a href="removewindowtimer.html">RemoveWindowTimer()</a>. 
+<br>
+<br>
+Pour modifier la durée de la minuterie, il 
+faut d'abord <a href="removewindowtimer.html">supprimer</a> 
+le minuteur, puis ajouter ce même minuteur 
+avec une autre valeur de temps: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">    RemoveWindowTimer</font>(<font color="#924B72">#Fenetre</font>, Timer0)
+<font color="#006666">    AddWindowTimer</font>(<font color="#924B72">#Fenetre</font>, Timer0, NouvelleValeur)
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 100, &quot;Exemple Minuteur&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ProgressBarGadget</font>(0, 10, 10, 380, 20, 0, 100)
+    
+    <font color="#006666">; Ajout du minuteur n°123 dans la fenêtre 0 qui se déclenchera toutes les 250 ms</font>
+<font color="#006666">    AddWindowTimer</font>(0, 123, 250)
+    
+    Value = 0
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Timer</font> <b><font color="#006666">And</font></b> <font color="#006666">EventTimer</font>() = 123
+        Value = (Value + 5) % 100
+<font color="#006666">        SetGadgetState</font>(0, Value)
+      <b><font color="#006666">EndIf</font></b>    
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="removewindowtimer.html">RemoveWindowTimer()</a>, <a href="eventtimer.html">EventTimer()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addkeyboardshortcut.html>AddKeyboardShortcut()</a> - <a href=index.html>Window Index</a> - <a href=bindevent.html>BindEvent()</a> -><br><br>
+
+</body></html>

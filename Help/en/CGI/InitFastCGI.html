@@ -1,0 +1,82 @@
+<html><head><title>InitFastCGI</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InitFastCGI()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>InitFastCGI</b></font>(LocalPort [, BoundIP$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initializes FastCGI support. Once called, all the CGI commands switch automatically to FastCGI support. 
+This library support threaded FastCGI processing, when enabling the 'thread-mode' in PureBasic. 
+FastCGI support is only supported through a local socket. <a href="initcgi.html">InitCGI()</a> needs to be called before 
+using this command. <br>
+<br>
+Unlike a regular CGI program which is launched at every request, the FastCGI program stays in memory 
+once launched and can handle any number of requests. It can be very useful if the CGI 
+initialization is time consumming (for example connecting a database), so it's only performed 
+once at start. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>LocalPort</i></td>
+<td width="90%"> 
+The local port to bind the FastCGI application. The web-server needs to be configured to use this port. 
+
+</td></tr>
+<tr><td><i>BoundIP$ (optional)</i></td>
+<td> 
+The IP address to bind the FastCGI application. For now, only &quot;localhost&quot; or &quot;127.0.0.1&quot; is accepted. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns non-zero if the FastCGI environment has been correctly initialized. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Using FastCGI can be much easier for development than standard CGI, as the program can stay in memory and be 
+debugged as usual PureBasic application. <br>
+<br>
+To configure FastCGI support on Apache, you need to activate the 'mod_proxy' and 'mod_proxy_fcgi' modules, and then add 
+a 'ProxyPass' declaration in the configuration: 
+<pre><font face="Courier New, Courier, mono" size="2">  ProxyPass /myfastcgiapp/ fcgi://localhost:5600/
+</font></pre>
+Here, the url '/myfastcgiapp' will redirect to the FastCGI program bound on the port 5600. It's also possible to 
+run the FastCGI program on distant server. 
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitFastCGI</font>(5600) <font color="#006666">; Create the FastCGI program on port 5600</font>
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">While</font></b> <font color="#006666">WaitFastCGIRequest</font>()
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">ReadCGI</font>()
+<font color="#006666">      WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Write the headers to inform the browser of the content format</font>
+  
+<font color="#006666">      WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - FastCGI&lt;/title&gt;&lt;body&gt;&quot; +
+                     &quot;Hello from PureBasic FastCGI !&lt;br&gt;&quot; +
+                     &quot;Actual time: &lt;b&gt;&quot;+<font color="#006666">FormatDate</font>(&quot;%hh:%ii&quot;,<font color="#006666"> Date</font>()) + &quot;&lt;/b&gt;&quot; +
+                     &quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="initcgi.html">InitCGI()</a>, <a href="waitfastcgirequest.html">WaitFastCGIRequest()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=initcgi.html>InitCGI()</a> - <a href=index.html>CGI Index</a> - <a href=readcgi.html>ReadCGI()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,72 @@
+<html><head><title>SetMaterialAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetMaterialAttribute()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetMaterialAttribute</b></font>(#Material, Attribute, Value [, Layer])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sets the specified attribute value to the given material. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+The material to use. 
+
+</td></tr>
+<tr><td><i>Attribute</i></td>
+<td> 
+The attribute to set. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_DepthCheck</font> : Enables or disables the depth check for the material.
+                            Value can be <font color="#924B72">#True</font> (depth check enabled) or <font color="#924B72">#False</font> (depth check disabled).
+  <font color="#924B72">#PB_Material_DepthWrite</font> : Enables or disables the depth write for the material.
+                            Value can be <font color="#924B72">#True</font> (depth write enabled) or <font color="#924B72">#False</font> (depth write disabled).
+  <font color="#924B72">#PB_Material_AlphaReject</font>: Enables alpha reject on the texture (useful for semi transparent textures like
+                            trees, window, etc).
+  <font color="#924B72">#PB_Material_TAM</font>        : Changes the 'Texture Addressing Mode' (TAM). It can be one of the following values:
+                            <font color="#924B72">#PB_Material_WrapTAM</font>  : wrap mode
+                            <font color="#924B72">#PB_Material_MirrorTAM</font>: mirror mode
+                            <font color="#924B72">#PB_Material_ClampTAM</font> : clamp mode
+                            <font color="#924B72">#PB_Material_BorderTAM</font>: border mode
+  <font color="#924B72">#PB_Material_EnvironmentMap</font>: Enables environment map. It can be one of the following values:
+                            <font color="#924B72">#PB_Material_NoMap</font>        : disable environment map
+                            <font color="#924B72">#PB_Material_PlanarMap</font>    : planar environment map
+                            <font color="#924B72">#PB_Material_CurvedMap</font>    : curved environment map
+                            <font color="#924B72">#PB_Material_ReflectionMap</font>: reflection environment map
+                            <font color="#924B72">#PB_Material_NormalMap</font>    : normal environment map
+ <font color="#924B72">#PB_Material_ProjectiveTexturing</font>: Enable projective texturing for this material. The value is a #Camera number to use.
+ <font color="#924B72">#PB_Material_PointSprite</font> : Enables or disables point sprite for the material.
+                            If greater than zero, the value is the point size / 1000. If zero, point size is disabled.
+ <font color="#924B72">#PB_Material_DepthBias</font>   : Enables or disables the depth bias for the material.
+                            If greater than zero, the value is the depth bias / 1000. If zero, depth bias is disabled.
+
+</font></pre>
+</td></tr>
+<tr><td><i>Value</i></td>
+<td> 
+Value of the attribute to set. 
+
+</td></tr>
+<tr><td><i>Layer (optional)</i></td>
+<td> 
+The layer to use. The first layer is zero (if this parameter is omitted, the layer zero is used). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getmaterialattribute.html">GetMaterialAttribute()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=scrollmaterial.html>ScrollMaterial()</a> - <a href=index.html>Material Index</a> - <a href=setmaterialcolor.html>SetMaterialColor()</a> -><br><br>
+
+</body></html>

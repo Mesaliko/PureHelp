@@ -1,0 +1,37 @@
+<html><head><title>Résidents</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Résidents</font></b></p>
+
+<b>Description</b><br><blockquote>
+
+Les résidents sont des fichiers pré-compilés qui sont chargés lors du démarrage du 
+compilateur. Ils se trouvent dans le dossier des 'residents' dans le chemin 
+d'installation de PureBasic. Un fichier résident doit avoir l'extension '.res' et peut 
+contenir les éléments suivants:  <a href="../reference/structures.html">Structures</a>, 
+<a href="../reference/interfaces.html">interfaces</a>, <a href="../reference/prototypes.html">prototypes</a>, <a href="../reference/macros.html">macros</a> et 
+<a href="../reference/general_rules.html">constantes</a>. Il ne peut pas contenir un code dynamique 
+ni des <a href="../reference/procedures.html">procédures</a>. 
+<br>
+<br>
+Lorsqu'un résident est chargé, tout son contenu est disponible pour le programme en cours 
+de compilation. C'est pourquoi toutes les constantes intégrées comme <font color="#924B72">#PB_Event_CloseWindow</font> 
+sont disponibles, elles sont dans le fichier 'PureBasic.res.<br>
+Toutes les structures et les constantes de l'API sont également dans un fichier résident. 
+L'utilisation des résidents est un bon moyen pour stocker les macros, les structures et 
+les constantes  communes afin qu'elles soient disponibles pour tous les programmes.<br>
+Lors de la distribution d'une bibliothèque utilisateur, c'est aussi une bonne solution 
+pour fournir les constantes et les structures nécessaires. 
+<br>
+<br>
+Pour créer un nouveau résident, le <a href="../reference/cli_compiler.html">compilateur en ligne de commande</a> 
+doit être utilisé, car il n'y a pas d'option pour le faire à partir de l'IDE. 
+Il est souvent nécessaire d'utiliser /IGNORERESIDENT et /CREATERESIDENT en même temps afin 
+d'éviter des erreurs, car la version précédente du résident est chargée avant la 
+création de la nouvelle. 
+<br>
+<br>
+Les résidents aident grandement à avoir une compilation et un démarrage du compilateur 
+plus rapide, car toutes les informations sont stockées au format binaire. C'est beaucoup 
+plus rapide que l'analyse d'un fichier d'inclusion à chaque compilation. 
+</blockquote>
+</font></body></html>

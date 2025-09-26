@@ -1,0 +1,65 @@
+<html><head><title>CatchPack</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchPack()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchPack</b></font>(#Archive, *AdresseMemoire, Taille [, Plugin])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre un fichier archive depuis la mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Archive</i></td>
+<td width="90%"> 
+Le numéro d'identification de l'archive à ouvrir. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé comme paramètre pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>*AdresseMemoire</i></td>
+<td> 
+L'adresse mémoire où se trouve le fichier archive. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille du fichier archive en octets. 
+
+</td></tr>
+<tr><td><i>Plugin (optionnel)</i></td>
+<td> 
+Le plugin à utiliser, si plusieurs plugins packer ont été enregistrés. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_PackerPlugin_BriefLZ</font> : Utilise le packer BriefLZ pour ouvrir l'archive. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> doit être appelé avant.
+   <font color="#924B72">#PB_PackerPlugin_Zip</font>     : Utilise le packer Zip pour ouvrir l'archive. <a href="usezippacker.html">UseZipPacker()</a> doit être appelé avant.
+   <font color="#924B72">#PB_PackerPlugin_Lzma</font>    : Utilise le packer Lzma pour ouvrir l'archive. <a href="uselzmapacker.html">UseLzmaPacker()</a> doit être appelé avant.
+   <font color="#924B72">#PB_PackerPlugin_Tar</font>     : Utilise le packer Tar pour ouvrir l'archive. <a href="usetarpacker.html">UseTarPacker()</a> doit être appelé avant.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le fichier archive a été ouvert avec succès, zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été utilisé comme paramètre #Archive, un numéro généré est renvoyé. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Avant d'ouvrir un fichier archive, au moins un packer doit être enregistré avec l'une des 
+commandes suivantes : <a href="usezippacker.html">UseZipPacker()</a>, <a href="uselzmapacker.html">UseLzmaPacker()</a>, <a href="usetarpacker.html">UseTarPacker()</a>, <a href="usebrieflzpacker.html">UseBriefLZPacker()</a>.<br>
+Une fois ouvert, le contenu de l'archive peut être répertorié avec <a href="examinepack.html">ExaminePack()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closepack.html">ClosePack()</a>, <a href="examinepack.html">ExaminePack()</a>, <a href="openpack.html">OpenPack()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addpackmemory.html>AddPackMemory()</a> - <a href=index.html>Packer Index</a> - <a href=closepack.html>ClosePack()</a> -><br><br>
+
+</body></html>

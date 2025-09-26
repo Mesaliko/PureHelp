@@ -1,0 +1,149 @@
+<html><head><title>ScrollBarGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScrollBarGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ScrollBarGadget</b></font>(#Gadget, x, y, Breite, Höhe, Minimum, Maximum, SeitenLänge [, Flags]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein ScrollBar-Gadget (auch Scroll- oder Schiebebalken) innerhalb der aktuellen Gadgetliste. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+Die Minimum- und Maximum-Werte, welche der Schiebebalken annehmen kann. 
+Diese Werte müssen zwischen 0 und 10.000 liegen, um Einschränkungen auf manchen 
+Betriebssystemen zu vermeiden. 
+
+</td></tr>
+<tr><td><i>SeitenLänge</i></td>
+<td> 
+Der Bereich, welcher Bestandteil der aktuell angezeigten &quot;Seite&quot; ist. 
+<br>
+<br>
+Zum Beispiel: Sie haben ein Bild mit einer Breite von 100 Pixel 
+und Sie sehen nur 25 Pixel. Was Sie sehen, wird eine 'Seite' genannt - in diesem 
+Beispiel ist die Seitenlänge 25, der Minimum-Wert beträgt 0 und der Maximum-Wert 100. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags zum Verändern des Gadget-Verhaltens. 
+Dies kann die folgende Konstante sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar_Vertical</font> : Der Schiebebalken ist vertikal (anstelle von horizontal, was der Standard ist).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, oder Null bei einem Fehler. Wenn 
+<font color="#924B72">#PB_Any</font> als #Gadget Parameter verwendet wurde, dann beinhaltet der Rückgabewert 
+bei Erfolg die automatisch generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Befehle können zum Verwalten dieses Gadgets verwendet werden: 
+<br>
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Gibt die aktuelle Position des Schiebebalkens zurück (der Wert liegt innerhalb der 'Minimum' und 'Maximum - Seitenlänge + 1' Spanne). 
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: Ändert die aktuelle Schiebebalken-Position. 
+<br>
+- <a href="getgadgetattribute.html">GetGadgetAttribute()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar_Minimum</font>   : gibt die minimale Schiebebalken-Position zurück.
+  <font color="#924B72">#PB_ScrollBar_Maximum</font>   : gibt die maximale Schiebebalken-Position zurück.
+  <font color="#924B72">#PB_ScrollBar_PageLength</font>: gibt den Wert der Seitenlänge zurück.
+</font></pre>
+
+- <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar_Minimum</font>   : ändert die minimale Schiebebalken-Position.
+  <font color="#924B72">#PB_ScrollBar_Maximum</font>   : ändert die maximale Schiebebalken-Position.
+  <font color="#924B72">#PB_ScrollBar_PageLength</font>: ändert den Wert der Seitenlänge.
+</font></pre>
+
+Ein Ereignis wird ausgelöst, wenn es verwendet wird. Siehe Beispiele unten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 305, 140, &quot;ScrollBarGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget       </font>(2,  10, 25, 250,  20, &quot;ScrollBar Standard  (start=50, page=30/100)&quot;,<font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ScrollBarGadget  </font>(0,  10, 42, 250,  20, 0, 100, 30)
+<font color="#006666">    SetGadgetState   </font>(0,  50)   <font color="#006666">; wir setzen den ersten Schiebebalken (ID = 0) auf 50 von 100</font>
+<font color="#006666">    TextGadget       </font>(3,  10,115, 250,  20, &quot;ScrollBar Vertical  (start=100, page=50/300)&quot;,<font color="#924B72">#PB_Text_Right</font>)
+<font color="#006666">    ScrollBarGadget  </font>(1, 270, 10,  25, 120 ,0, 300, 50, <font color="#924B72">#PB_ScrollBar_Vertical</font>)
+<font color="#006666">    SetGadgetState   </font>(1, 100)   <font color="#006666">; wir setzen den zweiten Schiebebalken (ID = 1) auf 100 von 300</font>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/scrollbargadget.png"></p>
+
+</blockquote><p><b>Beispiel:</b> ScrollBar-Ereignisse</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">BindHScrollDatas</font>()
+<font color="#006666">    SetWindowTitle</font>(0, &quot;ScrollBarGadget (&quot; +<font color="#006666"> GetGadgetState</font>(0) + &quot;)&quot; )
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">BindVScrollDatas</font>()
+<font color="#006666">    SetWindowTitle</font>(0, &quot;ScrollBarGadget (&quot; +<font color="#006666"> GetGadgetState</font>(1) + &quot;)&quot; )
+  <b><font color="#006666">EndProcedure</font></b>
+
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 400, &quot;ScrollBarGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    TextGadget       </font>(2,  10, 25, 350,  30, &quot;ScrollBar Standard  (Start = 50, Seite = 30/100)&quot;)
+<font color="#006666">    ScrollBarGadget  </font>(0,  10, 50, 350,  20, 0, 100, 30)
+<font color="#006666">    SetGadgetState   </font>(0,  50)   <font color="#006666">; setze den ersten Scrollbalken (ID = 0) auf 50 von 100</font>
+<font color="#006666">    TextGadget       </font>(3,  10, 120, 350,  30, &quot;ScrollBar vertical  (Start = 100, Seite = 50/300)&quot;)
+<font color="#006666">    ScrollBarGadget  </font>(1, 175, 160,  25, 120 ,0, 300, 50, <font color="#924B72">#PB_ScrollBar_Vertical</font>)
+<font color="#006666">    SetGadgetState   </font>(1, 100)   <font color="#006666">; setze den zweiten Scrollbalken (ID = 1) auf 100 von 300</font>
+  
+<font color="#006666">    BindGadgetEvent</font>(0, @<font color="#006666"> BindHScrollDatas</font>())
+<font color="#006666">    BindGadgetEvent</font>(1, @<font color="#006666"> BindVScrollDatas</font>())
+  
+    <b><font color="#006666">Repeat</font></b> 
+      <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>() 
+        <b><font color="#006666">Case</font></b>  <font color="#924B72">#PB_Event_CloseWindow</font> 
+          <b><font color="#006666">End</font></b> 
+        <b><font color="#006666">Case</font></b>  <font color="#924B72">#PB_Event_Gadget</font> 
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+            <b><font color="#006666">Case</font></b> 0
+<font color="#006666">              MessageRequester</font>(&quot;Info&quot;,&quot;Der Scrollbalken 0 wurde verwendet ! (&quot; +<font color="#006666"> GetGadgetState</font>(0) +
+                                      &quot;)&quot; ,<font color="#924B72">#PB_MessageRequester_Ok</font>)
+            <b><font color="#006666">Case</font></b> 1
+<font color="#006666">              MessageRequester</font>(&quot;Info&quot;,&quot;Der Scrollbalken 1 wurde verwendet ! (&quot; +<font color="#006666"> GetGadgetState</font>(1) +
+                                    &quot;)&quot; ,<font color="#924B72">#PB_MessageRequester_Ok</font>) 
+            
+          <b><font color="#006666">EndSelect</font></b> 
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b> 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, <a href="scrollareagadget.html">ScrollAreaGadget()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=scrollareagadget.html>ScrollAreaGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=setactivegadget.html>SetActiveGadget()</a> -><br><br>
+
+</body></html>

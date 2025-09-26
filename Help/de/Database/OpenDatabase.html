@@ -1,0 +1,68 @@
+<html><head><title>OpenDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenDatabase()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenDatabase</b></font>(#Datenbank, DatenbankName$, Benutzer$, Passwort$ [, Plugin])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet eine neue Datenbank-Verbindung. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datenbank</i></td>
+<td width="90%"> 
+Die Nummer, mit der auf die neue Datenbank verwiesen wird. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Nummer 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>DatenbankName$</i></td>
+<td> 
+Der Name der zu öffnenden Datenbank. 
+
+</td></tr>
+<tr><td><i>Benutzer$</i></td>
+<td> 
+Der Benutzername für die Verbindung. 
+
+</td></tr>
+<tr><td><i>Password$</i></td>
+<td> 
+Das Passwort für die Verbindung. Dies kann ein leerer String sein, wenn kein Passwort benötigt wird. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+Gibt das zu verwendende Datenbank-Plugin an. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Database_ODBC</font>      : Die Datenbank wird die ODBC-Umgebung nutzen (<a href="useodbcdatabase.html">UseODBCDatabase()</a> muss aufgerufen werden).
+  <font color="#924B72">#PB_Database_SQLite</font>    : Die Datenbank wird die SQLite-Umgebung nutzen (<a href="usesqlitedatabase.html">UseSQLiteDatabase()</a> muss aufgerufen werden).
+  <font color="#924B72">#PB_Database_PostgreSQL</font>: Die Datenbank wird die PostgreSQL-Umgebung nutzen (<a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a> muss aufgerufen werden).
+  <font color="#924B72">#PB_Database_MySQL</font>     : Die Datenbank wird die MySQL-Umgebung nutzen (<a href="usemysqldatabase.html">UseMySQLDatabase()</a> muss aufgerufen werden).
+</font></pre>
+Wenn 'Plugin' nicht angegeben wird, dann wird das erste registrierte Datenbank-Plugin verwendet. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Datenbank-Verbindung erfolgreich aufgebaut 
+werden konnte, und Null wenn nicht. Fehler-Informationen können mit dem <a href="databaseerror.html">DatabaseError()</a> 
+Befehl ermittelt werden. 
+<br>
+Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> als #Datenbank Parameter verwendet wird, 
+dann wird die Nummer der neuen Datenbank zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="opendatabaserequester.html">OpenDatabaseRequester()</a>, <a href="closedatabase.html">CloseDatabase()</a>, 
+<a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a>, <a href="usemysqldatabase.html">UseMySQLDatabase()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextdatabaserow.html>NextDatabaseRow()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=opendatabaserequester.html>OpenDatabaseRequester()</a> -><br><br>
+
+</body></html>

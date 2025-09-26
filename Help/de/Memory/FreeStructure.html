@@ -1,0 +1,50 @@
+<html><head><title>FreeStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FreeStructure()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FreeStructure</b></font>(*Eintrag)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den zuvor mittels <a href="allocatestructure.html">AllocateStructure()</a> reservierten dynamischen Struktur-Eintrag frei. 
+Es ist nicht notwendig, <a href="../reference/compilerfunctions.html">ClearStructure()</a> vor dem 
+Freigeben der Struktur aufzurufen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Eintrag</i></td>
+<td width="90%"> 
+Die Adresse des freizugebenden dynamischen Struktur-Eintrags. Dies muss ein von 
+<a href="allocatestructure.html">AllocateStructure()</a> zurückgegebener Wert sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn das Programm bei diesem Befehl abstürzt, auch wenn die Eingabe korrekt 
+erscheint, ist dies üblicherweise das Ergebnis eines Speicherfehlers zu einem früheren 
+Zeitpunkt im Programm, bei dem in einen Bereich außerhalb des reservierten Speicherbereichs 
+geschrieben wurde. 
+Ein solcher Fehler kann mit Hilfe des <a href="../reference/ide_debugtools.html">Purifier</a> Debugger-Tools 
+bis auf die eigentliche Ursache eingegrenzt werden. 
+<br>
+<br>
+Alle verbliebenen reservierten dynamischen Struktur-Einträge werden automatisch 
+freigegeben, wenn das Programm endet. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="allocatestructure.html">AllocateStructure()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=freememory.html>FreeMemory()</a> - <a href=index.html>Memory Inhaltsverzeichnis</a> - <a href=memorysize.html>MemorySize()</a> -><br><br>
+
+</body></html>

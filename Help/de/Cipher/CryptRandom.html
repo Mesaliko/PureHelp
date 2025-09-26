@@ -1,0 +1,52 @@
+<html><head><title>CryptRandom</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CryptRandom()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CryptRandom</b></font>(Maximum)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt eine Zufallszahl (Ganzzahl) zurück, welche zwischen (und einschließlich) 0 und dem 'Maximum'-Wert 
+des kryptographisch sicheren Zufallszahlengenerators liegt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Maximum</i></td>
+<td width="90%"> 
+Der Maximal-Wert, welcher von der Funktion zurückgegeben werden soll. 
+'Maximum' darf nicht den positiven <a href="../reference/variables.html">Long</a>-Wert übersteigen: 2147483647. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die generierte Zufallszahl zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Generator muss zuerst mit dem <a href="opencryptrandom.html">OpenCryptRandom()</a> Befehl geöffnet worden sein. 
+<br>
+<br>
+<b>Wichtig: </b> Die Verwendung eines 'Maximum'-Werts, der nicht eins weniger als die Potenz von zwei 
+beträgt, macht bestimmte Zahlen wahrscheinlicher als andere, was für einen statistischen 
+Angriff verwendet werden kann. Dies ist das Ergebnis der Division der generierten Zufallszahl, 
+damit diese in den angegebenen Bereich passt. 
+<br>
+<br>
+Um größere Mengen an Zufallsdaten zu generieren, verwenden Sie die <a href="cryptrandomdata.html">CryptRandomData()</a> Funktion. 
+Um Zufallszahlen vom schnelleren, aber nicht kryptographisch sicheren, Zufallszahlengenerator zu generieren, 
+verwenden Sie die <a href="../math/random.html">Random()</a> Funktion. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="opencryptrandom.html">OpenCryptRandom()</a>, <a href="cryptrandomdata.html">CryptRandomData()</a>, <a href="closecryptrandom.html">CloseCryptRandom()</a>, 
+<a href="../math/random.html">Random()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createpasswordhash.html>CreatePasswordHash()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=cryptrandomdata.html>CryptRandomData()</a> -><br><br>
+
+</body></html>

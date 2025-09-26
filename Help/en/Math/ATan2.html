@@ -1,0 +1,56 @@
+<html><head><title>ATan2</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ATan2()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.f(.d) = <font color="#006666"><b>ATan2</b></font>(x.f(.d), y.f(.d))</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Calculates the angle in radian between the x axis and a line drawn in the direction specified by 'x' 
+and 'y'. It can be used to calculate angles between lines in 2D or to transform rectangular coordinates 
+into polar coordinates. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.f, y.f or x.d, y.d</i></td>
+<td width="90%"> 
+The direction of the line to calculate the angle from. Zero values are allowed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the resulting angle in radian. The result can be transformed into degrees 
+using the <a href="degree.html">Degree()</a> function. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function calculates the value <a href="atan.html">ATan(y/x)</a> and examines the sign of x and y to place 
+the angle in the correct quadrant. It also handles the cases where y is zero to avoid division by zero 
+errors. 
+<br>
+<br>
+The result is always between <font color="#924B72">-#PI</font> and <font color="#924B72">+#PI</font>. Negative angles indicate that the 
+line is below the x axis, positive values indicate that line is above the x axis. If 'x' and 'y' are zero 
+then the function returns 0.0. 
+<br>
+<br>
+This function handles and returns <a href="../reference/variables.html">float or double</a> values. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(10, 10) <font color="#006666">; will display #PI/4 (45 degrees in radian)</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="atan.html">ATan()</a>, <a href="degree.html">Degree()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=atan.html>ATan()</a> - <a href=index.html>Math Index</a> - <a href=atanh.html>ATanH()</a> -><br><br>
+
+</body></html>

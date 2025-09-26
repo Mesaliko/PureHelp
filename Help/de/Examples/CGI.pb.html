@@ -1,0 +1,64 @@
+<html><head><title>CGI.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CGI example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; To test it, you will need to compile it as an standalone executable and put it in the /cgi-bin/ folder of your
+</font><font color="#006666">; webserver.
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+  <b><font color="#006666">End</font></b>
+<b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Write the headers to inform the browser of the content format
+</font>
+<font color="#006666">WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic CGI&lt;/title&gt;&lt;body&gt;&quot;)
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">WriteCGIConstant</font>(Constant$)
+<font color="#006666">  WriteCGIString</font>(Constant$ + &quot;: &quot; +<font color="#006666"> CGIVariable</font>(Constant$)+&quot;&lt;br&gt;&quot;)
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_AuthType</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ContentLength</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_DocumentRoot</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_GatewayInterface</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_PathInfo</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_PathTranslated</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_QueryString</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteAddr</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteHost</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteIdent</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemotePort</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteUser</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RequestURI</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RequestMethod</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ScriptName</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ScriptFilename</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerAdmin</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerName</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerPort</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerProtocol</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerSignature</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerSoftware</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAccept</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAcceptEncoding</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAcceptLanguage</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpCookie</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpForwarded</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpHost</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpPragma</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpReferer</font>)
+<font color="#006666">WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpUserAgent</font>)
+
+<font color="#006666">WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+</body></html>

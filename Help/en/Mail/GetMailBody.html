@@ -1,0 +1,42 @@
+<html><head><title>GetMailBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMailBody()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>GetMailBody</b></font>(#Mail)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Return the specified mail body, previously set with <a href="setmailbody.html">SetMailBody()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+The mail to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the body as a string. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    SetMailBody</font>(0, &quot;This is the body&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetMailBody</font>(0) <font color="#006666">; Will print &quot;This is the body&quot;</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=getmailattribute.html>GetMailAttribute()</a> - <a href=index.html>Mail Index</a> - <a href=ismail.html>IsMail()</a> -><br><br>
+
+</body></html>

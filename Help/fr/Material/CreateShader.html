@@ -1,0 +1,59 @@
+<html><head><title>CreateShader</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateShader()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateShader</b></font>(ShaderID, ProgrammeVertex$, ProgrammeFragment$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau shader en utilisant les programmes de vertex et de fragments spécifiés. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ShaderID</i></td>
+<td width="90%"> 
+Un nombre entre 0 et 65536 identifie le nouveau shader. 
+
+</td></tr>
+<tr><td><i>ProgrammeVertex$</i></td>
+<td> 
+Le programme GLSL à utiliser pour les sommets (vertices). 
+
+</td></tr>
+<tr><td><i>ProgrammeFragment$</i></td>
+<td> 
+Le programme GLSL à utiliser pour les fragments. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le shader a été créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les shaders ont généralement besoin de recevoir des paramètres pour fonctionner et deux fonctions permettent de passer ces paramètres : 
+<a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a> (paramètre automatique) et <a href="materialshaderparameter.html">MaterialShaderParameter()</a> (paramètre shader).<br>
+PureBasic permet également de définir ces paramètres directement dans les programmes de shaders en ajoutant à la fin de la ligne de 
+déclaration 'uniform' : &quot;//&quot; suivi soit de :<br>
+- le numéro du paramètre auto précédé d'un &quot;+&quot; (cf. les constantes 'ParameterType' de la fonction <a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a>).<br>
+- une ou plusieurs valeurs (séparées par un espace) correspondant au paramètre du shader (<a href="materialshaderparameter.html">MaterialShaderParameter()</a>).<br>
+<br>
+Exemple :<br>
+uniform vec4 camera_pos;//+76 &lt;- paramètre automatique <font color="#924B72">#PB_Shader_CameraPosition</font><br>
+uniform vec4 fog_params ;//+31 &lt;- paramètre automatique <font color="#924B72">#PB_Shader_FogParams</font><br>
+uniform vec3 speed;//0.5 1 0 &lt;- paramètre de shader 'speed'<br>
+uniform sampler2D diffuseMap;//1 &lt;- shader paramètre texture number<br>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createshadermaterial.html">CreateShaderMaterial()</a>, <a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a>, <a href="materialshaderparameter.html">MaterialShaderParameter()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=creatematerial.html>CreateMaterial()</a> - <a href=index.html>Material Index</a> - <a href=createshadermaterial.html>CreateShaderMaterial()</a> -><br><br>
+
+</body></html>

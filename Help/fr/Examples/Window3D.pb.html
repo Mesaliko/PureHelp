@@ -1,0 +1,75 @@
+<html><head><title>Window3D.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Window 3D
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#MainWindow</font> = 0
+<font color="#924B72">#CloseButton</font> = 0
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Window 3D - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/GUI&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+
+<font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)  <font color="#006666">; Front camera
+</font><font color="#006666">MoveCamera</font>(0,0,100,100, <font color="#924B72">#PB_Absolute</font>)
+
+
+<font color="#006666">OpenWindow3D</font>(<font color="#924B72">#MainWindow</font>, 100, 100, 500, 200, &quot;Hello in 3D !&quot;)
+
+<font color="#006666">ButtonGadget3D</font>(<font color="#924B72">#CloseButton</font>, 150, 40, 200, 50, &quot;Quit&quot;)
+
+<font color="#006666">ShowGUI</font>(128, 1) <font color="#006666">; Display the GUI, semi-transparent and display the mouse cursor
+</font>
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>() <b><font color="#006666">And</font></b> <font color="#006666">ExamineMouse</font>()
+    Input$ =<font color="#006666"> KeyboardInkey</font>()
+    
+<font color="#006666">    InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>), Input$, 0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Handle the GUI 3D events, it's similar to regular GUI events
+</font>  <font color="#006666">;
+</font>  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WindowEvent3D</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event3D_CloseWindow</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventWindow3D</font>() = <font color="#924B72">#MainWindow</font>
+<font color="#006666">          CloseWindow3D</font>(<font color="#924B72">#MainWindow</font>)
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event3D_Gadget</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventGadget3D</font>() = <font color="#924B72">#CloseButton</font>
+          Quit = 1
+        <b><font color="#006666">EndIf</font></b>
+        
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">Until</font></b> Event = 0
+  
+<font color="#006666">  RenderWorld</font>()
+  
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+</font></pre>
+</body></html>

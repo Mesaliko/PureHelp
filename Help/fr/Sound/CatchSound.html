@@ -1,0 +1,91 @@
+<html><head><title>CatchSound</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchSound()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchSound</b></font>(#Son, *Memoire [, Taille [, Options]])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Charge un Son qui se trouve déjà en mémoire. 
+<br>
+<br>
+Les formats reconnus sont le WAV au format 
+PCM (le format ADPCM n'est pas supporté) 
+ou n'importe quel format supporté par la 
+<a href="../soundplugin/index.html">bibliothèque SoundPlugin</a>. 
+<br>
+<a href="../soundplugin/useflacsounddecoder.html">UseFLACSoundDecoder()</a> <br>
+<a href="../soundplugin/useoggsounddecoder.html">UseOGGSoundDecoder()</a> 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Son</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau Son. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+L'adresse de la mémoire où se trouve le Son. 
+
+</td></tr>
+<tr><td><i>Taille (optionnel)</i></td>
+<td> 
+La taille en octets de la zone mémoire appelée tampon 
+ou buffer qui contient le Son. 
+<br>
+<br>
+Attention, ce paramètre est facultatif avec les 
+fichiers WAV, mais il est obligatoire pour les 
+autres formats sonores. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sound_Streaming</font>: Active le support du streaming
+                       Seulement pour les formats <a href="../soundplugin/useflacsounddecoder.html">FLAC</a> et 
+                       <a href="../soundplugin/useoggsounddecoder.html">OGG</a>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CatchSound</font>(0, ?Music)
+  <b><font color="#006666">End</font></b>
+
+  <b><font color="#006666">DataSection</font></b>
+    Music: 
+    <b><font color="#006666">IncludeBinary</font></b> &quot;Sound.wav&quot;
+</font></pre>
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le &quot;?&quot; est un pointeur sur une étiquette 
+(label). 
+Plus d'informations sur les pointeurs et les 
+accès mémoire peuvent être trouvées dans le 
+chapitre <a href="../reference/memory.html">ici</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loadsound.html">LoadSound()</a>, <a href="freesound.html">FreeSound()</a>, <a href="playsound.html">PlaySound()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Sound Index</a> - <a href=freesound.html>FreeSound()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,245 @@
+<html><head><title>General Syntax Rules</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">General Syntax Rules</font></b></p>
+
+
+PureBasic has established rules which never change. These are: 
+
+<p><b>Comments</b></p><blockquote>
+
+<!-- There is a bug somewhere, and i had to do this work around. Mesa -->
+<blockquote>
+  Comments are marked by the semicolon character <b><font color="#006666">';'</font></b>.
+  All text entered after the semicolon, and up to the end of the line, is ignored by the compiler.
+</blockquote>
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> a = 10 <font color="#006666">; This is a comment to indicate something.</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Keywords</b></p><blockquote>
+
+
+All <b>keywords</b> are used for general things inside PureBasic, like creating arrays (Dim) or lists (NewList), 
+or controlling the program flow (If : Else : EndIf). They are not followed by the brackets '()', which are 
+typically used for PureBasic <b>functions</b>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">    <b><font color="#006666">If</font></b> a = 1      <font color="#006666">; If, Else and EndIf are keywords; while 'a = 1'</font>
+      ...         <font color="#006666">; is a variable used inside an expression.</font>
+    <b><font color="#006666">Else</font></b>
+      ...
+    <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<b>Keywords</b> are regularly described in the chapters on the left side of 
+the index page in the reference manual. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Functions</b></p><blockquote>
+
+
+Every <b>function</b> must be followed by an opening round bracket '(' character, otherwise it will not be considered a function (this applies also to functions without parameters). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">    EventWindow</font>() <font color="#006666">; it is a function.</font>
+    EventWindow   <font color="#006666">; it is a variable.</font>
+</font></pre>
+
+<b>Functions</b> are regularly included in the PureBasic &quot;Command libraries&quot;, described on the right side of 
+the index page in the reference manual. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Constants</b></p><blockquote>
+
+
+All constants are preceded by the hash <b><font color="#006666">#</font></b> character. 
+They can only be declared once in the source and always keep their predefined values. 
+(The compiler replaces all constant names with their corresponding values when compiling the executable.) 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Hello</font> = 10 <font color="#006666">; it is a constant.</font>
+  Hello  = 10 <font color="#006666">; it is a variable.</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Literal strings</b></p><blockquote>
+
+
+Literal strings are declared using the &quot; character. 
+Escape sequences are supported by prepending the ~ character to the literal string. 
+The supported escape sequences are: 
+<pre><font face="Courier New, Courier, mono" size="2">  \a: alarm           <b><font color="#006666">Chr</font></b>(7)
+  \b: backspace       <b><font color="#006666">Chr</font></b>(8)
+  \f: formfeed        <b><font color="#006666">Chr</font></b>(12)
+  \n: newline         <b><font color="#006666">Chr</font></b>(10)
+  \r: carriage return <b><font color="#006666">Chr</font></b>(13)
+  \t: horizontal tab  <b><font color="#006666">Chr</font></b>(9)
+  \v: vertical tab    <b><font color="#006666">Chr</font></b>(11)
+  \&quot;: double quote    <b><font color="#006666">Chr</font></b>(34)
+  \\: backslash       <b><font color="#006666">Chr</font></b>(92)
+</font></pre>
+There are two special constants for strings: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Empty</font>$: represents an empty string (exactly the same as &quot;&quot;)
+  <font color="#924B72">#Null</font>$ : represents an null string. This can be used for API
+           functions requiring a null pointer to a string, or to really free a string.
+</font></pre>
+Warning: On Windows, \t does not work with the graphical functions of the 2DDrawing and VectorDrawing libraries. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  a$ =  &quot;Hello world&quot;  <font color="#006666">; standard string</font>
+  b$ = ~&quot;Escape\nMe !&quot; <font color="#006666">; string with escape sequences</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Labels</b></p><blockquote>
+
+
+All labels must be followed by a colon <b><font color="#006666">:</font></b> character. 
+Label names may not contain any operators (+,-,...) or special characters (ß,ä,ö,ü,...). 
+Labels defined inside a <a href="../reference/procedures.html">procedure</a> will be available only in that procedure. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  I_am_a_label:
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Modules</b></p><blockquote>
+
+
+<a href="../reference/module.html">Modules</a> use a :: (double colon) when referencing a module name. 
+Be careful not to confuse these with the single colon used by labels. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> CarModule::NbCars
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Expressions</b></p><blockquote>
+
+
+An expression is something which can be evaluated. 
+An expression can mix any variables, constants, or functions, of the same type. 
+When using numbers in an expression, you can prefix them with the <b><font color="#006666">$</font></b> symbol 
+to indicate a hexadecimal number, or with the <b><font color="#006666">%</font></b> symbol to indicate a binary number. 
+Without either of those, the number will be treated as decimal. 
+Strings must be enclosed within straight double quotes. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = a + 1 + (12 * 3)
+
+  a = a +<font color="#006666"> WindowHeight</font>(<font color="#924B72">#Window</font>) + b/2 + <font color="#924B72">#MyConstant</font>
+
+  <b><font color="#006666">If</font></b> a &lt;&gt; 12 + 2
+    b + 2 &gt;= c + 3
+  <b><font color="#006666">EndIf</font></b>
+
+  a$ = b$ + &quot;this is a string value&quot; + c$
+
+  Foo = Foo + $69 / %1001  <font color="#006666">; Hexadecimal and binary number usage</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Concatenation of commands</b></p><blockquote>
+
+
+Any number of commands can be added to the same line by using the <b><font color="#006666">:</font></b> option. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> IsCrazy = 0 :<font color="#006666"> MessageRequester</font>(&quot;Info&quot;, &quot;Not Crazy&quot;) : <b><font color="#006666">Else</font></b> :<font color="#006666"> MessageRequester</font>(&quot;Info&quot;, &quot;Crazy&quot;) : <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Line continuation</b></p><blockquote>
+
+
+Long expressions can be split across several lines. 
+A split line has to end with one of the following operators: plus (+), comma (,), or (|), And, Or, Xor. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  Text$ = &quot;Very very very very long text&quot; + <font color="#924B72">#LF$</font> +
+          &quot;another long text&quot; + <font color="#924B72">#LF$</font> +
+          &quot; and the end of the long text&quot;
+
+<font color="#006666">  MessageRequester</font>(&quot;Hello this is a very long title&quot;,
+                   &quot;And a very long message, so we can use the multiline&quot; + <font color="#924B72">#LF$</font> + Text$,
+                   <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Typical words in this manual</b></p><blockquote>
+
+
+Words used in this manual: 
+
+<blockquote>
+
+&lt;variable&gt; : a basic variable. <br>
+&lt;expression&gt; : an expression as explained above. <br>
+&lt;constant&gt; : a numeric constant. <br>
+&lt;label&gt; : a program label. <br>
+&lt;type&gt; : any type, (standard or structured). <br>
+</blockquote>
+
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Others</b></p><blockquote>
+
+
+- In this guide, all topics are listed in alphabetical order to decrease any search time. 
+<br>
+<br>
+- <b>Return values</b> of commands are always <a href="../reference/variables.html">Integer</a> if no other type 
+is specified in the Syntax line of the command description. 
+<br>
+- In the PureBasic documentation, the terms &quot;commands&quot; and &quot;functions&quot; are used interchangeably, regardless of whether the function returns a value or not. 
+To learn whether value is returned by a specific command or function, consult the description provided in the command's documentation. 
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

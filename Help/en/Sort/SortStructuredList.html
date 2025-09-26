@@ -1,0 +1,114 @@
+<html><head><title>SortStructuredList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SortStructuredList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SortStructuredList</b></font>(ListName(), Options, OffsetOf(Structure\Field), TypeOf(Structure\Field) [, Start, End])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Sorts the specified structured <a href="../list/index.html">list</a>, according to the given options. 
+The list must have an associated <a href="../reference/structures.html">structure</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ListName()</i></td>
+<td width="90%"> 
+The list to sort. 
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sort_Ascending</font> : Sort the list in ascending order (lower values first)
+  <font color="#924B72">#PB_Sort_Descending</font>: Sort the list in descending order (higher values first)
+  <font color="#924B72">#PB_Sort_NoCase</font>    : Sort the string list without case sensitivity (a=A, b=B etc..)
+</font></pre>
+
+</td></tr>
+<tr><td><i>OffsetOf(Structure\Field)</i></td>
+<td> 
+Offset of the field in the structure. 
+<a href="../reference/compilerfunctions.html">OffsetOf()</a> may be used to retrieve the field offset in the structure associated to the list. 
+
+</td></tr>
+<tr><td><i>TypeOf(Structure\Field)</i></td>
+<td> 
+The field type of the field in the structure. It has to match the real structure field type. 
+<a href="../reference/compilerfunctions.html">TypeOf()</a> may be used to automatically retrieve the field type. 
+Available types are: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>     : The structure field to sort is a byte (.b)
+  <font color="#924B72">#PB_Word</font>     : The structure field to sort is a word (.w)
+  <font color="#924B72">#PB_Long</font>     : The structure field to sort is a long (.l)
+  <font color="#924B72">#PB_String</font>   : The structure field to sort is a string (.s or $, fixed strings are not supported)
+  <font color="#924B72">#PB_Float</font>    : The structure field to sort is a float (.f)
+  <font color="#924B72">#PB_Double</font>   : The structure field to sort is a double (.d)
+  <font color="#924B72">#PB_Quad</font>     : The structure field to sort is a quad (.q)
+  <font color="#924B72">#PB_Character</font>: The structure field to sort is a character (.c)
+  <font color="#924B72">#PB_Integer</font>  : The structure field to sort is an integer (.i)
+  <font color="#924B72">#PB_Ascii</font>    : The structure field to sort is an ascii character (.a)
+  <font color="#924B72">#PB_Unicode</font>  : The structure field to sort is a unicode character (.u)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Start, End (optional)</i></td>
+<td> 
+The index of the first and last element in the list that should be sorted. If these parameters 
+are not specified, then the whole list is sorted. 
+<br>
+The first list element is at position 0, the next at 1 and so on. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="../reference/variables.html">Fixed strings</a> are not supported by the sort routine. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Structure</font></b> Animal
+    Name$
+    Speed.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Animals</font>.Animal()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Tiger&quot;
+<font color="#006666">  Animals</font>()\Speed = 10
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Jaguar&quot;
+<font color="#006666">  Animals</font>()\Speed = 40
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Zebra&quot;
+<font color="#006666">  Animals</font>()\Speed = 30
+
+<font color="#006666">  SortStructuredList</font>(<font color="#006666">Animals</font>(), 0,<font color="#006666"> OffsetOf</font>(Animal\Name$),<font color="#006666"> TypeOf</font>(Animal\Name$))
+
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Animals</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animals</font>()\Name$+&quot; - Speed: &quot;+<font color="#006666">Str</font>(<font color="#006666">Animals</font>()\Speed)
+  <b><font color="#006666">Next</font></b>
+
+<font color="#006666">  SortStructuredList</font>(<font color="#006666">Animals</font>(), 0,<font color="#006666"> OffsetOf</font>(Animal\Speed),<font color="#006666"> TypeOf</font>(Animal\Speed))
+
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Animals</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animals</font>()\Name$+&quot; - Speed: &quot;+<font color="#006666">Str</font>(<font color="#006666">Animals</font>()\Speed)
+  <b><font color="#006666">Next</font></b>
+
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="sortlist.html">SortList()</a>, <a href="customsortlist.html">CustomSortList()</a>, <a href="randomizelist.html">RandomizeList()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=sortstructuredarray.html>SortStructuredArray()</a> - <a href=index.html>Sort Index</a><br><br>
+
+</body></html>

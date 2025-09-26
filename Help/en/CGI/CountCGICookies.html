@@ -1,0 +1,44 @@
+<html><head><title>CountCGICookies</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CountCGICookies()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CountCGICookies</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the number of available cookies. The cookies are small persistent files stored in the web browser to 
+allow to remember a context and ease future navigation when loading the same page later on. Please note than European legislation 
+now impose to inform users that cookies are not being used to gather information unnecessarily. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of available cookies. The name and value of cookies can be get with 
+<a href="cgicookiename.html">CGICookieName()</a> and <a href="cgicookievalue.html">CGICookieValue()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;) <font color="#006666">; Write the headers to inform the browser of the content format</font>
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderSetCookie</font>  , &quot;mycookie=hello&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Write one cookie named 'mycookie'</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - cookies&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;NbCookies: &quot; +<font color="#006666"> CountCGICookies</font>() + &quot;&lt;br&gt;&lt;br&gt;&quot;)
+
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="cgicookiename.html">CGICookieName()</a>, <a href="cgicookievalue.html">CGICookieValue()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=cgivariable.html>CGIVariable()</a> - <a href=index.html>CGI Index</a> - <a href=countcgiparameters.html>CountCGIParameters()</a> -><br><br>
+
+</body></html>

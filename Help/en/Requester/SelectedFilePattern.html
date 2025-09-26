@@ -1,0 +1,43 @@
+<html><head><title>SelectedFilePattern</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SelectedFilePattern()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SelectedFilePattern</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the selected pattern index chosen with <a href="openfilerequester.html">OpenFileRequester()</a> or <a href="savefilerequester.html">SaveFileRequester()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The selected pattern index chosen with <a href="openfilerequester.html">OpenFileRequester()</a> or <a href="savefilerequester.html">SaveFileRequester()</a>. 
+The first pattern is at position 0. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  StandardFile$ = &quot;C:\autoexec.bat&quot;        <font color="#006666">; initial path + file</font>
+  Pattern$ = &quot;Text (*.txt)|*.txt;*.bat|&quot;   <font color="#006666">; set first pattern  (index = 0)</font>
+  Pattern$ + &quot;PureBasic (*.pb)|*.pb|&quot;      <font color="#006666">; set second pattern (index = 1)</font>
+  Pattern$ + &quot;Bmp (*.bmp)|*.bmp|&quot;          <font color="#006666">; set third pattern  (index = 2)</font>
+  Pattern$ + &quot;Jpeg (*.jpg)|*.jpg|&quot;         <font color="#006666">; set fourth pattern (index = 3)</font>
+  Pattern$ + &quot;All files (*.*)|*.*&quot;         <font color="#006666">; set fifth pattern  (index = 4)</font>
+  Pattern = 1    <font color="#006666">; use the second of the five possible patterns as standard</font>
+
+  <font color="#006666">; Now we open a filerequester, you can change the pattern and will get the index after closing</font>
+  File$ =<font color="#006666"> OpenFileRequester</font>(&quot;Please choose file to load&quot;, StandardFile$, Pattern$, Pattern)
+  Index =<font color="#006666"> SelectedFilePattern</font>()
+  <b><font color="#006666">If</font></b> Index &gt; -1
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Following pattern index was selected: &quot;+<font color="#006666">Str</font>(Index), 0)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;The requester was canceled.&quot;, 0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=savefilerequester.html>SaveFileRequester()</a> - <a href=index.html>Requester Index</a> - <a href=selectedfontcolor.html>SelectedFontColor()</a> -><br><br>
+
+</body></html>

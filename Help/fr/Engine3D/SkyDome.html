@@ -1,0 +1,98 @@
+<html><head><title>SkyDome</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SkyDome()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SkyDome</b></font>(TextureID, CouleurCiel , CouleurAurore, [NbCoucheNuage, Hauteur.f, VitesseX.f, VitesseZ.f])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un ciel artificiel nuageux et animé en forme de dôme. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>TextureID</i></td>
+<td width="90%"> 
+L'identifiant de la texture 'nuage' à utiliser. 
+<br>
+<br>
+<a href="../texture/textureid.html">TextureID()</a> peut être utilisé pour obtenir une valeur valide. 
+
+</td></tr>
+<tr><td><i>CouleurCiel</i></td>
+<td> 
+La couleur  du ciel au format <a href="../2ddrawing/rgba.html">RGBA()</a>. 
+
+</td></tr>
+<tr><td><i>CouleurAurore</i></td>
+<td> 
+La couleur du levé de soleil au format <a href="../2ddrawing/rgba.html">RGBA()</a>. 
+
+</td></tr>
+<tr><td><i>NbCoucheNuage (optionnel)</i></td>
+<td> 
+Le nombre de couche de nuage, en commançant par 1. 
+
+</td></tr>
+<tr><td><i>Hauteur.f (optionnel)</i></td>
+<td> 
+La hauteur des nuages en unité monde (World). 
+
+</td></tr>
+<tr><td><i>VitesseX.f, VitesseZ.f (optionnel)</i></td>
+<td> 
+La vitesse de déplacement des nuages. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#EndDistance</font> = 1024*4
+
+<font color="#006666">  InitEngine3D</font>() :<font color="#006666"> InitSprite</font>() :<font color="#006666"> InitKeyboard</font>()
+
+<font color="#006666">  ExamineDesktops</font>() : dx =<font color="#006666"> DesktopWidth</font>(0)*0.9 : dy =<font color="#006666"> DesktopHeight</font>(0)*0.9
+<font color="#006666">  OpenWindow</font>(0, 0, 0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666"> DesktopUnscaledY</font>(dy), &quot;SkyDome - Press ESC to quit&quot;, <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">  Parse3DScripts</font>()
+
+  <font color="#006666">; Camera</font>
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">  MoveCamera</font>(0,0,5,0) 
+<font color="#006666">  CameraLookAt</font>(0,2,5,10)
+
+  <font color="#006666">; Sky</font>
+  TextureSky =<font color="#006666"> LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;sky.png&quot;)
+<font color="#006666">  SkyDome</font>(<font color="#006666">TextureID</font>(TextureSky), $cc6600, $0088ff, 3, 400, -0.5, 0)
+
+  <font color="#006666">; Sun</font>
+<font color="#006666">  CreateLight</font>(0, $ff88ff, 20000, 40000, 20000)
+<font color="#006666">  AmbientColor</font>($010101)
+<font color="#006666">  Fog</font>($554488,1, 0, <font color="#924B72">#EndDistance</font>)
+
+  <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>() : <b><font color="#006666">Wend</font></b>
+<font color="#006666">    ExamineKeyboard</font>()
+    
+<font color="#006666">    RenderWorld</font>()
+<font color="#006666">    FlipBuffers</font>()    
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="skybox.html">SkyBox()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=skybox.html>SkyBox()</a> - <a href=index.html>Engine3D Index</a> - <a href=worldcollisionappliedimpulse.html>WorldCollisionAppliedImpulse()</a> -><br><br>
+
+</body></html>

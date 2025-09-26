@@ -1,0 +1,53 @@
+<html><head><title>DrawingBufferPitch</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingBufferPitch()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DrawingBufferPitch</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la longueur réelle d'une ligne 
+du buffer courant, en octets. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la longueur en octets d'une ligne 
+de la surface de dessin, y compris toutes 
+les données annexes de chaque pixel. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="drawingbuffer.html">DrawingBuffer()</a> doit être appelé avant 
+d'utiliser cette fonction. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;Buffer Image&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200, 32) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawText</font>(60,80,&quot;PUREBASIC&quot;,<font color="#006666"> RGB</font>(255, 255, 0))
+      <b><font color="#006666">Debug</font></b> &quot;Adresse mémoire : &quot; +<font color="#006666"> Str</font>(<font color="#006666">DrawingBuffer</font>())
+      <b><font color="#006666">Debug</font></b> &quot;Longueur réelle d'une ligne en octet : &quot; +<font color="#006666"> Str</font>(<font color="#006666">DrawingBufferPitch</font>())    
+      <b><font color="#006666">Debug</font></b> &quot;Format de pixel : &quot; +<font color="#006666"> Str</font>(<font color="#006666">DrawingBufferPixelFormat</font>())
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="drawingbuffer.html">DrawingBuffer()</a>, <a href="drawingbufferpixelformat.html">DrawingBufferPixelFormat()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=drawingbuffer.html>DrawingBuffer()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawingbufferpixelformat.html>DrawingBufferPixelFormat()</a> -><br><br>
+
+
+</body></html>

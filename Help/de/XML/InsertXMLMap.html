@@ -1,0 +1,82 @@
+<html><head><title>InsertXMLMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertXMLMap()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>InsertXMLMap</b></font>(ElternKnoten, Map() [, VorherigerKnoten])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt die angegebene Map() als einen neuen XML-Knoten in den angegebenen Elternknoten ein. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ElternKnoten</i></td>
+<td width="90%"> 
+Der Knoten, in welchen der neue Knoten eingefügt werden soll. Um den neuen Knoten an 
+der Wurzel des XML-Baums einzufügen, kann hier <a href="rootxmlnode.html">RootXMLNode()</a> verwendet werden. 
+
+</td></tr>
+<tr><td><i>Map()</i></td>
+<td> 
+Die in die XML-Struktur einzufügende <a href="../map/index.html">Map</a>. 
+
+</td></tr>
+<tr><td><i>VorherigerKnoten (optional)</i></td>
+<td> 
+Ein Unterknoten (&quot;child&quot;) des 'ElternKnoten', nach dem der neue Knoten eingefügt werden soll. 
+Ist dieser Wert gleich 0 oder nicht angegeben, dann wird der neue Knoten als erster 
+Unterknoten seines Elternknotens eingefügt. Ist dieser Wert gleich -1, dann wird der 
+neue Knoten als letzter Unterknoten seines Elternknotens eingefügt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der neue XML-Knoten, wenn er erfolgreich erstellt wurde - oder Null, wenn an dieser 
+Stelle kein Knoten eingefügt werden konnte. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die bei <a href="createxmlnode.html">CreateXMLNode()</a> angegebenen Regeln, wo ein neuer Knoten eingefügt werden kann, 
+gelten auch für diese Funktion. 
+<br>
+<br>
+Der eingefügte Knoten wird &quot;map&quot; benannt und seine beinhalteten Element-Knoten 
+werden als &quot;element&quot; bezeichnet. Jeder Element-Knoten wird ein als &quot;key&quot; bezeichnetes 
+Attribut haben, welches den Map-Schlüssel (Key) des Elements beinhaltet. 
+Siehe unten für ein Beispiel der erstellten XML-Struktur. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieses Beispiel erzeugt folgende XML-Struktur:</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; &lt;map&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;DE&quot;&gt;Germany&lt;/element&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;US&quot;&gt;United States&lt;/element&gt;</font>
+  <font color="#006666">;   &lt;element key=&quot;FR&quot;&gt;France&lt;/element&gt;</font>
+  <font color="#006666">; &lt;/map&gt;</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">Countries</font>.s()
+<font color="#006666">  Countries</font>(&quot;DE&quot;) = &quot;Germany&quot;
+<font color="#006666">  Countries</font>(&quot;FR&quot;) = &quot;France&quot;  
+<font color="#006666">  Countries</font>(&quot;US&quot;) = &quot;United States&quot;
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateXML</font>(0)
+<font color="#006666">    InsertXMLMap</font>(<font color="#006666">RootXMLNode</font>(0),<font color="#006666"> Countries</font>())
+<font color="#006666">    FormatXML</font>(0, <font color="#924B72">#PB_XML_ReFormat</font>)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeXML</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="extractxmlmap.html">ExtractXMLMap()</a>, <a href="insertxmlarray.html">InsertXMLArray()</a>, <a href="insertxmllist.html">InsertXMLList()</a>, <a href="insertxmlstructure.html">InsertXMLStructure()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=insertxmllist.html>InsertXMLList()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=insertxmlstructure.html>InsertXMLStructure()</a> -><br><br>
+
+</body></html>

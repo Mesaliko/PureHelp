@@ -1,0 +1,112 @@
+<html><head><title>Debugger-Schlüsselwörter in PureBasic</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Debugger-Schlüsselwörter in PureBasic</font></b></p>
+
+<p><b>Überblick</b></p><blockquote>
+
+
+Eine vollständige Beschreibung aller Funktionen des mächtigen Debuggers 
+finden Sie in den gesonderten Kapiteln <a href="../reference/ide_debugger.html">Benutzen des Debuggers</a> 
+bzw. <a href="../reference/ide_debugtools.html">Benutzen der Debugger-Werkzeuge</a>. 
+<br>
+<br>
+Es folgt eine Liste mit speziellen Debugger-Schlüsselwörtern, um den Debugger von Ihrem 
+Quellcode aus zu kontrollieren. Es gibt auch eine <a href="../debugger/index.html">Debugger Bibliothek</a>, 
+die weitere Funktionen zur Verfügung stellt, um das Verhalten des Debuggers zu ändern. 
+<br>
+Verschiedene auch für das Debuggen nützliche Compiler-Konstanten finden Sie im Kapitel 
+<a href="../reference/compilerdirectives.html">Compiler-Direktiven</a>. 
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">  
+  <b><font color="#006666">CallDebugger</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Dies ruft den &quot;Debugger&quot; auf und hält sofort die Programmausführung an. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Debug</font></b> &lt;Ausdruck&gt; [, DebugLevel]
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Zeigt das <a href="../reference/ide_debugtools.html">Debugger-Ausgabefenster</a> und darin das Ergebnis. Der Ausdruck kann jeder gültige PureBasic 
+Ausdruck sein, von numerisch bis zu einem String. Ein wichtiger Punkt ist, dass der Debug Befehl 
+und sein zugehöriger Ausdruck total ignoriert (nicht kompiliert) werden, wenn der Debugger 
+deaktiviert ist. <br>
+<br>
+Hinweis: Dies gilt auch, wenn Sie hinter Debug vollständige Befehlszeilen (z.B. Debug LoadImage(1,&quot;test.bmp&quot;)) 
+angeben. Diese werden bei ausgeschaltetem Debugger nicht mit kompiliert! <br>
+<br>
+Dies bedeutet, dass dieser Befehl benutzt werden kann, um einfach den Programmablauf zu verfolgen 
+(&quot;tracen&quot;), ohne beim Erstellen des endgültigen Executable die Debug-Befehle auskommentieren zu müssen. <br>
+<br>
+Der 'DebugLevel' ist die Prioritätsstufe der Debug-Mitteilung. Alle normalen Debug-Mitteilungen 
+(ohne angegebenen DebugLevel) werden automatisch angezeigt. Wenn ein Level angegeben wurde, dann wird 
+die Mitteilung nur angezeigt, wenn der aktuelle DebugLevel (definiert mit dem nachfolgenden 'DebugLevel' Befehl) 
+gleich oder höher als dieser Wert ist. Dies ermöglicht einen hierarchischen Debug-Modus, indem mehr und mehr 
+präzisere Informationen in Abhängigkeit vom benutzten DebugLevel angezeigt werden. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">DebugLevel</font></b> &lt;numerischer Wert&gt;
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Legt den aktuellen DebugLevel für die <b><font color="#006666">Debug</font></b> Mitteilung fest. 
+<br>
+<br>
+Hinweis: Der DebugLevel wird zum Zeitpunkt des Kompilierens festgelegt. Dies bedeutet, dass 
+Sie den <b><font color="#006666">DebugLevel</font></b> Befehl vor jedem anderen Debug-Befehl einfügen müssen, um sicher 
+zu gehen, dass dieser sich auf alle Debug-Befehle auswirkt. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">DisableDebugger</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Dies deaktiviert die Debugger-Prüfroutinen für nach diesem Befehl folgenden Quellcode. 
+Dadurch wird der Debugger nicht vollständig ausgeschaltet. Daher sollten Performance-Prüfungen nicht 
+mittels dem <b><font color="#006666">DisableDebugger</font></b> Befehl durchgeführt werden, sondern durch Deaktivieren des Debuggers 
+vor dem Kompilieren des Programms. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">EnableDebugger</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Dies schaltet die Debugger-Prüfroutinen bei nach diesem Befehl folgenden Quellcode ein 
+(wenn der Debugger vorher mittels <b><font color="#006666">DisableDebugger</font></b> ausgeschalten wurde). 
+<br>
+<br>
+Hinweis: <b><font color="#006666">EnableDebugger</font></b> hat keinen Effekt, wenn der Debugger in der IDE komplett 
+ausgeschalten ist (siehe <a href="../reference/ide_debugger.html">Compiler-Einstellungen</a>). 
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,75 @@
+<html><head><title>CompareArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareArray()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CompareArray</b></font>(Array1(), Array2() [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Vergleicht alle Elemente der beiden Arrays auf Gleichheit. Vergleicht rekursiv auch Inhalte 
+<a href="../reference/structures.html">strukturierter</a> Arrays mit dynamischen Elementen (wie eingebetteter 
+Arrays, Listen oder Maps). 
+<br>
+Die beiden Arrays gelten als gleich, wenn sie den gleichen Typ und die gleichen Dimensionen haben und 
+wenn jedes Elemente-Paar gleich ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Array1(), Array2()</i></td>
+<td width="90%"> 
+Die zu vergleichenden Arrays. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : Beim String-Vergleich wird die Groß-/Kleinschreibung beachtet (a=a). (Standard)
+  <font color="#924B72">#PB_String_NoCase</font>        : Beim String-Vergleich wird die Groß-/Kleinschreibung nicht beachtet (a=A).
+  <font color="#924B72">#PB_Memory_FollowPointers</font>: Wenn ein Strukturelement ein Zeiger (Pointer) ist, der nicht 0 ist, wird das Ziel des
+                             Zeigers rekursiv verglichen.
+                             Standardmäßig wird nur der Zeigerwert selbst verglichen.
+                             Siehe die Anmerkungen unten für weitere Details.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn beide Arrays gleich sind, oder Null, wenn sie sich unterscheiden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Option <font color="#924B72">#PB_Memory_FollowPointers</font> ist für fortgeschrittene Benutzer gedacht und erfordert besondere Sorgfalt, 
+um Abstürze zu vermeiden. Wenn diese Option verwendet wird, müssen alle Zeigerwerte auf einen gültigen und 
+initialisierten Speicher zeigen oder den Wert 0 haben. Es ist auch nicht erlaubt, Schleifen in den pointierten 
+Elementen (englisch &quot;pointed elements&quot; - eine Kette von Zeigern, die auf sich selbst verweist) zu haben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">A</font>(4)
+<font color="#006666">  A</font>(0) = 10
+<font color="#006666">  A</font>(1) = 20
+<font color="#006666">  A</font>(2) = 30
+<font color="#006666">  A</font>(3) = 40
+
+  <b><font color="#006666">Dim</font></b> <font color="#006666">B</font>(4)
+<font color="#006666">  B</font>(0) = 10
+<font color="#006666">  B</font>(1) = 20
+<font color="#006666">  B</font>(2) = 50 <font color="#006666">; Nicht gleich zu A(2)</font>
+<font color="#006666">  B</font>(3) = 40
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareArray</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>()) <font color="#006666">; Nicht gleich</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../list/comparelist.html">CompareList()</a>, <a href="../map/comparemap.html">CompareMap()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=arraysize.html>ArraySize()</a> - <a href=index.html>Array Inhaltsverzeichnis</a> - <a href=copyarray.html>CopyArray()</a> -><br><br>
+
+</body></html>

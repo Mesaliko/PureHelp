@@ -1,0 +1,103 @@
+<html><head><title>CreateSemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateSemaphore()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Semaphore = <font color="#006666"><b>CreateSemaphore</b></font>([InitialCount])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new semaphore object. 
+<br>
+<br>
+A semaphore is a thread synchronization object that keeps an internal count. It has two kinds of operations: 
+<a href="signalsemaphore.html">signal</a> and <a href="waitsemaphore.html">wait</a>. A wait operation decreases the count 
+of the semaphore by one. If the count would drop below 0, the wait operation will block until a signal call is made. 
+A signal operation increases the count one, releasing a blocking thread if there is one. A semaphore allows 
+to enforce minimum or maximum counts across threads for example to prevent a queue from running out or getting 
+too many items. 
+<br>
+<br>
+Unlike a <a href="createmutex.html">mutex</a>, a semaphore object is not &quot;owned&quot; by a particular thread, which means that 
+signal/wait calls do not need to be done from the same thread as it is the case with <a href="lockmutex.html">LockMutex()</a> and 
+<a href="unlockmutex.html">UnlockMutex()</a>. In fact a common use for a semaphore objects is for one thread to do the 
+<a href="signalsemaphore.html">SignalSemaphore()</a> calls and for another one to do all <a href="waitsemaphore.html">WaitSemaphore()</a> calls to implement 
+a producer/consumer pattern. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>InitialCount (optional)</i></td>
+<td width="90%"> 
+It has be a positive value that specifies the initial count of the semaphore. 
+If it is not specified, the initial count is zero. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The new semaphore, or zero if the semaphore creation has failed. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+This example shows a &quot;producer&quot; thread populating a queue with elements and the main thread reading them. 
+The semaphore is used to make sure the queue never runs out of elements. Note that this could also be 
+achieved with only a mutex and waiting/polling for queue elements with a <a href="../system/delay.html">Delay()</a> in between, 
+but the semaphore commands do a more efficient wait (returning immediately at the <a href="signalsemaphore.html">SignalSemaphore()</a> call 
+and not just on the next time a polling loop would check the queue). 
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Global</font></b> Semaphore =<font color="#006666"> CreateSemaphore</font>()
+<b><font color="#006666">Global</font></b> Mutex     =<font color="#006666"> CreateMutex</font>()
+<b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">Queue</font>()
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Producer</font>(Total)
+
+  <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> Total
+<font color="#006666">    Delay</font>(<font color="#006666">Random</font>(750) + 250)
+    
+    <font color="#006666">; The queue access still needs a normal mutex lock to be thread-safe</font>
+<font color="#006666">    LockMutex</font>(Mutex)
+<font color="#006666">      LastElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      AddElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      Queue</font>() = i
+<font color="#006666">    UnlockMutex</font>(Mutex)    
+
+    <font color="#006666">; Signal that there is a new queue element</font>
+<font color="#006666">    SignalSemaphore</font>(Semaphore)
+  <b><font color="#006666">Next</font></b> i
+    
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#006666">CreateThread</font>(@Producer(), 30)
+
+  <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30  
+    <font color="#006666">; wait for one element to be available</font>
+<font color="#006666">    WaitSemaphore</font>(Semaphore)
+    
+    <font color="#006666">; display the queue state</font>
+<font color="#006666">    LockMutex</font>(Mutex)
+      Queue$ = &quot;Queue:&quot;
+      <b><font color="#006666">ForEach</font></b> <font color="#006666">Queue</font>()
+        Queue$ + &quot; &quot; +<font color="#006666"> Str</font>(<font color="#006666">Queue</font>())
+      <b><font color="#006666">Next</font></b> <font color="#006666">Queue</font>()
+      <b><font color="#006666">Debug</font></b> Queue$
+    
+      <font color="#006666">; remove head element from the queue</font>
+<font color="#006666">      FirstElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      DeleteElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">    UnlockMutex</font>(Mutex)
+    
+  <b><font color="#006666">Next</font></b> i
+
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freesemaphore.html">FreeSemaphore()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createmutex.html>CreateMutex()</a> - <a href=index.html>Thread Index</a> - <a href=createthread.html>CreateThread()</a> -><br><br>
+
+</body></html>

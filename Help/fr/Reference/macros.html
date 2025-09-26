@@ -1,0 +1,187 @@
+<html><head><title>Les macros</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les macros</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Macro"><u>Macro/EndMacro</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#UndefineMacro"><u>UndefineMacro</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#MacroExpandedCount"><u>MacroExpandedCount</u></a></td>
+  </tr>
+  </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Macro"></a>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Macro</font></b> &lt;nom&gt; [(Parametre [, ...])]
+  ...
+<b><font color="#006666">EndMacro</font></b> 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Le système de macro est une fonctionnalité très puissante, principalement utile pour les programmeurs 
+chevronnés. Une macro est un bout de code quelconque (un mot clef, une ligne, plusieurs lignes) qui peut 
+être inséré à n'importe quel endroit dans le code source en indiquant le nom de la macro. En ce sens, 
+une macro est différente d'une <a href="../reference/procedures.html">procedure</a>, car les procédures ne dupliquent 
+pas leur code à chaque appel. 
+<br>
+<br>
+La déclaration Macro : EndMacro doit être effectuée avant le premier appel à la macro. 
+Comme les macros seront complètement remplacées par le code correspondant au moment de la compilation, 
+elles ne sont pas locales à une procédure. 
+<br>
+<br>
+Une macro ne peut pas avoir un type de retour, ou des paramètres typés, car cela n'a pas de sens. Quand une 
+macro a des paramètres, ils sont remplacés dans le code de la macro par l'expression littérale qui a été 
+passée lors de l'appel. Aucune évaluation n'est faite à ce stade, ce qui est très important à comprendre: 
+l'évaluation de la ligne ne commence uniquement lorsque toutes les macros trouvées sur cette ligne ont été 
+traitées. 
+<br>
+<br>
+Les macros sont divisées en deux catégories: les simples (sans paramètres) et les complexes 
+(avec paramètres, obligation d'utiliser les parenthèses pour les appeler). Quand aucun paramètre 
+n'est spécifié, il est possible de remplacer n'importe quel mot avec un autre mot (ou une autre 
+expression). Les macros ne peuvent pas être appelées de manière récursive. 
+<br>
+<br>
+La déclaration de macro ne peut pas être imbriquée (il n'est pas possible de définir une macro dans une autre). 
+
+</blockquote><p><b>Exemple:</b> Macro simple</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Macro</font></b> MonNot
+    <b><font color="#006666">Not</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+  a = 0
+  <b><font color="#006666">If</font></b> MonNot a   <font color="#006666">; Ici la ligne sera remplacée par : 'If Not a'</font>
+    <b><font color="#006666">Debug</font></b> &quot;Ok&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+En utilisant les paramètres, il est possible de créer des macros très flexibles. Le caractère 
+de concaténation '#' est disponible pour créer des nouveaux mots ou labels en combinant le code 
+de la macro et l'expression passée en paramètre (les espaces ne sont pas acceptées entre chaque 
+mots devant être concaténés). Il est aussi possible de définir des valeurs par défaut pour chaque 
+paramètre, pour qu'ils puissent être omis lors de l'appel de la macro. 
+
+</blockquote><p><b>Exemple:</b> Macro avec paramètres</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">BoiteDeMessageEnMajuscule</font>(Titre, Corps)
+<font color="#006666">    MessageRequester</font>(Titre,<font color="#006666"> UCase</font>(Corps), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+  Texte$ = &quot;le Monde&quot;
+<font color="#006666">  BoiteDeMessageEnMajuscule</font>(&quot;Salut&quot;, &quot;-&quot;+Texte$+&quot;-&quot;) <font color="#006666">; Ici la ligne sera remplacée comme ça :</font>
+                                                     <font color="#006666">; MessageRequester(&quot;Salut&quot;, UCase(&quot;-&quot;+Texte$+&quot;-&quot;), 0)</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Macro avec paramètre par défaut</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">BoiteDeMessageEnMajuscule</font>(Titre, Corps = &quot;Ah, aucun corps spécifié&quot;)
+<font color="#006666">    MessageRequester</font>(Titre,<font color="#006666"> UCase</font>(Corps), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  BoiteDeMessageEnMajuscule</font>(&quot;Salut&quot;) <font color="#006666">; Ici la ligne sera remplacée comme ça :</font>
+                                     <font color="#006666">; MessageRequester(&quot;Salut&quot;, UCase(&quot;Ah, aucun corps spécifié&quot;), 0)</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Macro et concaténation</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">XCase</font>(Type, Texte) <font color="#006666">; renvoie le texte dans la casse du type spécifié</font>
+    Type<font color="#924B72">#Case</font>(Texte)        <font color="#006666">; Type U =&gt; MAJUSCULES</font>
+  <b><font color="#006666">EndMacro</font></b>                 <font color="#006666">; Type L =&gt; minuscules</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(U, &quot;Salut&quot;) <font color="#006666">; macro remplacée par UCase(&quot;Salut&quot;)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(L, &quot;Salut&quot;) <font color="#006666">; macro remplacée par LCase(&quot;Salut&quot;)</font>
+  
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Macro complexe sur plusieurs lignes</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Guillemet
+    &quot;
+  <b><font color="#006666">EndMacro</font></b>
+
+  <b><font color="#006666">Macro</font></b> <font color="#006666">Assertion</font>(Expression)
+    <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Debugger</font>  <font color="#006666">; active uniquement l'assertion lorsque le débogueur est actif</font>
+      <b><font color="#006666">If</font></b> Expression
+        <b><font color="#006666">Debug</font></b> &quot;Assertion (Ligne &quot; + <font color="#924B72">#PB_Compiler_Line</font> + &quot;) : &quot; + Guillemet<font color="#924B72">#Expression</font><font color="#924B72">#Guillemet</font>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">CompilerEndIf</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  Assertion</font>(10 &lt;&gt; 10) <font color="#006666">; N'affichera rien</font>
+<font color="#006666">  Assertion</font>(10 &lt;&gt; 15) <font color="#006666">; Devrait afficher l'assertion </font>
+  
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="UndefineMacro"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">UndefineMacro</font></b> &lt;nom&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">UndefineMacro</font></b> permet d'annuler une macro définie précédemment, 
+et de la redéfinir d'une manière différente. <br>
+Une fois que la macro a été annulée, elle n'est plus disponible. 
+
+</blockquote><p><b>Exemple:</b> annulation de macro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> &quot;1&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Appel de la macro</font>
+  
+  <b><font color="#006666">UndefineMacro</font></b> Test <font color="#006666">; Annule la définition du macro, elle n'existe plus.</font>
+  
+  <b><font color="#006666">Macro</font></b> Test <font color="#006666">; Maintenant, nous pouvons redéfinir la macro.</font>
+    <b><font color="#006666">Debug</font></b> &quot;2&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Appel de la macro</font>
+  
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="MacroExpandedCount"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">MacroExpandedCount</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">MacroExpandedCount</font></b> permet d'obtenir le nombre de fois que la macro 
+a été utilisée/appel. 
+Il peut être utile de générer des identifiants uniques dans la même macro 
+pour chaque utilisation (comme un label, le nom de la procédure, etc.) 
+
+</blockquote><p><b>Exemple:</b> Comptage</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">MacroExpandedCount</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Appel de la macro</font>
+  Test <font color="#006666">; Appel de la macro</font>
+  Test <font color="#006666">; Appel de la macro</font>
+  
+</font></pre>
+
+</blockquote>
+</font></body></html>

@@ -1,0 +1,62 @@
+<html><head><title>ReadProgramData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReadProgramData</b></font>(Programm, *Puffer, Größe)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest Daten von der angegebenen Programmausgabe (stdout) und speichert diese in den 
+angegebenen Puffer. 
+<br>
+Dieser Befehl wartet, bis Daten vom Programm einzulesen sind. Um diesen Wartevorgang 
+zu vermeiden, kann zuerst <a href="availableprogramoutput.html">AvailableProgramOutput()</a> verwendet werden, um zu überprüfen, 
+ob etwas zum Einlesen vorhanden ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programm</i></td>
+<td width="90%"> 
+Das zu verwendende Programm. Dieses muss zuvor mittels <a href="runprogram.html">RunProgram()</a> und dem 
+<font color="#924B72">#PB_Program_Read</font> Flag gestartet worden sein. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Der Speicherpuffer, in den die Daten eingelesen werden sollen. Ein Speicherpuffer 
+kann zum Beispiel mit <a href="../memory/allocatememory.html">AllocateMemory()</a> erstellt werden. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die zu lesende Größe, in Bytes. Der Puffer sollte groß genug sein, um mit dieser 
+Größe umgehen zu können. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die Anzahl an gerade gelesenen Bytes. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion liest bis zu 'Größe' an Bytes - aber auch weniger, wenn nicht soviel verfügbar ist 
+(sie gibt jedoch nicht Null Bytes zurück, da immer auf einige zu lesende Daten gewartet wird). 
+Überprüfen Sie den Rückgabewert, um den Umfang der gelesenen Daten zu wissen. 
+<br>
+<br>
+Allerdings bleibt die Funktion unbegrenzt gesperrt, wenn das Programm einen Eingriff des Nutzers 
+anfordert. Geben Sie z.B. eine Ja/Nein-Auswahl an das Programm zurück, um fortzufahren. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="readprogramstring.html">ReadProgramString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=programrunning.html>ProgramRunning()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=readprogramerror.html>ReadProgramError()</a> -><br><br>
+
+</body></html>

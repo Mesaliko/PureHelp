@@ -1,0 +1,58 @@
+<html><head><title>SetDatabaseDouble</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDatabaseDouble()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDatabaseDouble</b></font>(#Database, StatementIndex, Value.d)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Set a double value as a bind variable for the next call to <a href="databasequery.html">DatabaseQuery()</a> or <a href="databaseupdate.html">DatabaseUpdate()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Database</i></td>
+<td width="90%"> 
+The database to use. 
+
+</td></tr>
+<tr><td><i>StatementIndex</i></td>
+<td> 
+The index of the bind variable within the statement. The first variable has index 0. 
+
+</td></tr>
+<tr><td><i>Value.d</i></td>
+<td> 
+The value to use for the bind variable. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Bind variables make constructing statements with variable data easier, because there is no 
+need to add the data into the string. The statement string can contain the placeholders and 
+the data is bound before executing the statement. This method also avoids vulnerabilities 
+due to possible SQL injection which can be done if data (such as strings) is directly 
+inserted in the statement text. Since the statement only contains the placeholder, there 
+is no danger. 
+<br>
+<br>
+See <a href="databasequery.html">DatabaseQuery()</a> and <a href="databaseupdate.html">DatabaseUpdate()</a> for examples how to specify bind variables in an 
+SQL statement. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setdatabasestring.html">SetDatabaseString()</a>, <a href="setdatabaselong.html">SetDatabaseLong()</a>, <a href="setdatabasequad.html">SetDatabaseQuad()</a>, <a href="setdatabasefloat.html">SetDatabaseFloat()</a> 
+<a href="setdatabaseblob.html">SetDatabaseBlob()</a>, <a href="setdatabasenull.html">SetDatabaseNull()</a>, <a href="databasequery.html">DatabaseQuery()</a>, <a href="databaseupdate.html">DatabaseUpdate()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setdatabaseblob.html>SetDatabaseBlob()</a> - <a href=index.html>Database Index</a> - <a href=setdatabasefloat.html>SetDatabaseFloat()</a> -><br><br>
+
+</body></html>

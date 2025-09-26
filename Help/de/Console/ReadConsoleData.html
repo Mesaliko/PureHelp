@@ -1,0 +1,84 @@
+<html><head><title>ReadConsoleData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadConsoleData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReadConsoleData</b></font>(*Puffer, Größe)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest &quot;Roh-Eingaben&quot; aus der Konsole. Dieser Befehl wird nur im nicht-grafischen Modus unterstützt. 
+Er kann zum Einlesen von nicht zeilenbasierten Daten verwendet werden, oder zum Einlesen von 
+text-ähnlichen Dateien, welche über eine Pipe an das Programm umgeleitet wurden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Puffer</i></td>
+<td width="90%"> 
+Der Speicherpuffer, in welchen die Daten gelesen werden sollen. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Der maximalen Umfang (in Bytes) an zu lesenden Daten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Anzahl an Bytes zurück, welche gerade von der Eingabe eingelesen wurden. 
+Wenn Null zurückgegeben wird, bedeutet dies, dass keine weiteren Eingaben zu lesen 
+sind (ein 'EOF' - Ende der Datei wurde empfangen). 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl wartet, bis es einige zu lesende Eingaben gab. Er kehrt nur ohne gelesene Daten 
+zurück, wenn ein Fehler oder eine EOF (&quot;End of file&quot; - Ende der Datei) Bedingung auftrat. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dies liest ein übergebenes Bild von der Konsole und stellt dieses in einem Fenster dar.</font>
+  <font color="#006666">; Kompilieren Sie diesen Code in ein Executable und starten dieses wie folgt &quot;myexe &lt; image.bmp&quot;</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; (setzen Sie &quot;Executable-Format&quot; auf &quot;Console&quot; in the Compiler-Optionen!)</font>
+  <font color="#006666">; (funktioniert nur mit Bitmaps und Icons, außer Sie nutzen einen Image Decoder)</font>
+  <font color="#006666">;</font>
+<font color="#006666">  OpenConsole</font>()
+  TotalSize = 0
+  BufferFree = 10000
+  *Buffer =<font color="#006666"> AllocateMemory</font>(BufferFree)
+  
+  <b><font color="#006666">Repeat</font></b>
+    ReadSize =<font color="#006666"> ReadConsoleData</font>(*Buffer+TotalSize, BufferFree) <font color="#006666">; liest einen Block an Daten</font>
+    TotalSize + ReadSize
+    BufferFree - ReadSize
+    <b><font color="#006666">If</font></b> BufferFree &lt; 100  <font color="#006666">; verändert die Buffergröße, wenn diese nicht groß genug ist</font>
+      BufferFree = 10000
+      *Buffer =<font color="#006666"> ReAllocateMemory</font>(*Buffer, TotalSize+10000)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> ReadSize = 0 <font color="#006666">; sobald 0 zurückgegeben wird, gibt es nichts weiter zum einlesen</font>
+  
+  <b><font color="#006666">If</font></b> TotalSize &gt; 0 <font color="#006666">; das Bild darstellen, wenn vorher erfolgreich</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, *Buffer, TotalSize)
+      <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0), &quot;Image&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">        ImageGadget</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> ImageID</font>(0))
+        <b><font color="#006666">Repeat</font></b>
+        <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Fehler&quot;, &quot;Kein gültiges Bild.&quot;)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="writeconsoledata.html">WriteConsoleData()</a>, <a href="../memory/allocatememory.html">AllocateMemory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=rawkey.html>RawKey()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=writeconsoledata.html>WriteConsoleData()</a> -><br><br>
+
+</body></html>

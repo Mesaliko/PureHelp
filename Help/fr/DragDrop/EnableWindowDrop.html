@@ -1,0 +1,101 @@
+<html><head><title>EnableWindowDrop</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableWindowDrop()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>EnableWindowDrop</b></font>(#Fenetre, Format, Actions [, TypeInterne])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Permet à une <a href="../window/index.html">fenêtre</a> 
+d'être la cible d'un 'Drag &amp; Drop' d'un format 
+spécifique. Quand l'utilisateur voudra déposer 
+une donnée de ce format sur la fenêtre, le 
+curseur sera modifié en conséquence, indiquant 
+que l'action est possible. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+Le numéro de la fenêtre qui supportera le 
+'Drag &amp; Drop'. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+Indique quel type de donnée pourra être 
+déposé sur la fenêtre. 
+<br>
+<br>
+Il peut prendre une des valeurs suivantes ou 
+un identifiant de format système (voir 
+<a href="dragosformats.html">DragOSFormats()</a> pour plus d'informations). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drop_Text</font>   : Accepte du texte sur cette fenêtre
+  <font color="#924B72">#PB_Drop_Image</font>  : Accepte des images sur cette fenêtre
+  <font color="#924B72">#PB_Drop_Files</font>  : Accepte des noms de fichiers sur cette fenêtre
+  <font color="#924B72">#PB_Drop_Private</font>: Accepte un 'Drag &amp; Drop' interne
+</font></pre>
+
+</td></tr>
+<tr><td><i>Actions</i></td>
+<td> 
+L'utilisateur peut décider de l'action à 
+prendre en utilisant les touches Ctrl ou 
+Shift. Les actions disponibles dépendent 
+aussi du composant sur lequel le texte va 
+être déposé. 
+<br>
+<br>
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: Le format de données ne sera pas accepté par cette fenêtre
+  <font color="#924B72">#PB_Drag_Copy</font>: La donnée peut être copiée
+  <font color="#924B72">#PB_Drag_Move</font>: La donnée peut être déplacée
+  <font color="#924B72">#PB_Drag_Link</font>: La donnée peut être liée
+</font></pre>
+
+</td></tr>
+<tr><td><i>TypeInterne (optionnel)</i></td>
+<td> 
+Uniquement nécessaire quand <font color="#924B72">#PB_Drop_Private</font> 
+est utilisé comme format. <br>
+Il indique le type du 'Drag &amp; Drop' interne à 
+accepter. <br>
+Voir <a href="dragprivate.html">DragPrivate()</a> pour plus d'informations. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Plusieurs types de formats peuvent être 
+acceptés par une même fenêtre. Si la source 
+des données transférées a spécifié plusieurs 
+formats qui sont pris en compte par la 
+fenêtre, celui qui aura été activé en dernier 
+sera accepté. Donc le format le plus 
+approprié devra être activé en dernier. 
+<br>
+<br>
+Quand une donnée sera déposée sur la fenêtre, 
+le programme recevra un évènement 
+<font color="#924B72">#PB_Event_WindowDrop</font>. 
+<a href="../window/eventwindow.html">EventWindow()</a> indiquera la fenêtre concernée 
+et les commandes 'Event' de cette bibliothèque 
+permettront de récupérer la donnée déposée. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="enablegadgetdrop.html">EnableGadgetDrop()</a>, <a href="eventdroptype.html">EventDropType()</a>, 
+<a href="eventdropaction.html">EventDropAction()</a>, <a href="setdropcallback.html">SetDropCallback()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=enablegadgetdrop.html>EnableGadgetDrop()</a> - <a href=index.html>DragDrop Index</a> - <a href=eventdropaction.html>EventDropAction()</a> -><br><br>
+
+</body></html>

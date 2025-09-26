@@ -1,0 +1,368 @@
+<html><head><title>Structures</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Structures</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Structure"><u>Structure</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#StructureUnion"><u>StructureUnion</u></a></td>
+  </tr>
+  </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Structure"></a>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Structure</font></b> &lt;nom&gt; [<b><font color="#006666">Extends</font></b> &lt;name&gt;] [Align &lt;expression numérique constante&gt;]
+  ...
+<b><font color="#006666">EndStructure</font></b> 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Structure</font></b> est utile pour définir un type utilisateur et accéder à des zones mémoires 
+du système d'exploitation par exemple. Les structures peuvent être utilisées pour rendre l'accès 
+à des grands fichiers plus facilement. Cela peut être plus efficace dans la mesure où vous pouvez 
+regrouper dans un même objet des informations communes. On accède aux structures avec le caractère <b><font color="#006666"></font></b>\ . 
+Les structures peuvent s'imbriquer. Les tableaux statiques sont acceptés dans une structure. 
+<br>
+<br>
+Les champs de structure doivent avoir un type explicite parmi tous les <a href="../reference/variables.html">Types basiques</a> 
+gérés par PureBasic, à savoir Byte (.b), Ascii (.a), Caractère (.c) , Word (.w) , Unicode (.u), 
+Long (.l), Integer (.i), Float (.f ), Quad (.q), Double (.d)), String (.s) et String Fixe (.s{Longueur}). 
+<br>
+Les objets dynamiques tel que les tableaux, listes et maps sont aussi supportés dans les structures et sont 
+automatiquement initialisés quand l'objet utilisant la structure est déclaré. Pour définir un tel champ, 
+utiliser les mot-clés suivant: <b><font color="#006666">Array</font></b>, <b><font color="#006666">List</font></b> et <b><font color="#006666">Map</font></b>. 
+<br>
+<br>
+Généralement, les structures sont utilisées en association avec une variable, un 
+<a href="../array/index.html">tableau</a>, une <a href="../list/index.html">liste</a>, ou une 
+<a href="../map/index.html">map</a>. Toutefois, les utilisateurs avancés pourront allouer une 
+structure en mémoire avec <a href="../memory/allocatestructure.html">AllocateStructure()</a> et la libérer avec <a href="../memory/freestructure.html">FreeStructure()</a>. 
+Il est aussi possible d'initialiser une structure en mémoire avec 
+<a href="../reference/compilerfunctions.html">InitializeStructure()</a>, de la copier avec 
+<a href="../reference/compilerfunctions.html">CopyStructure()</a>, de la vider avec 
+<a href="../reference/compilerfunctions.html">ClearStructure()</a> et de la reinitialiser avec 
+<a href="../reference/compilerfunctions.html">ResetStructure()</a> 
+<br>
+<br>
+Il est possible de copier une structure complète en utilisant l'opérateur égal 
+(&quot;=&quot;) entre deux éléments de même type. 
+<br>
+<br>
+Le paramètre optionnel <b><font color="#006666">Extends</font></b> permet d'étendre une structure existante avec de nouveaux champs. 
+Tous les champs se trouvant dans la structure étendue se retrouveront en tête de la nouvelle structure. 
+C'est très utile pour faire un héritage simple de structures. 
+<br>
+<br>
+Pour les utilisateurs avancés seulement. Le  paramètre <b><font color="#006666">Align</font></b> permet d'ajuster l'alignement entre chaque champ de la structure. L'alignement par défaut 
+est de 1, ce qui signifie pas d'alignement. Par exemple, si l'alignement est fixé à 4, chaque champs sera aligné sur 4 octets. 
+Cela peut aider à améliorer les performances lors de l'accès aux champs de la structure, mais cela peut utiliser plus de mémoire, car un certain espace 
+entre chaque champs sera perdu. La valeur spéciale <font color="#924B72">#PB_Structure_AlignC</font> peut être utilisée pour aligner la structure 
+telle qu'elle se ferait en langage C, utile lors de l'importation structures C utilisées avec des fonctions API. 
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="../reference/compilerfunctions.html">SizeOf</a> permet de connaître la taille en octets d'une structure. 
+  - <a href="../reference/compilerfunctions.html">OffsetOf</a> donne la position (offset) en mémoire d'un champ d'une structure. 
+  </font></pre>
+<br>
+<b>Note</b> : 
+Un <b>Tableau statique</b> dans une structure ne se comporte pas de la même façon qu'un tableau défini avec la commande  <a href="../reference/dim.html">Dim</a>. 
+Ceci pour être conforme au format de structures en C/C++ (pour permettre un portage direct des structures de l'API). 
+Ce qui signifie que a<b>[</b>2<b>]</b> assignera un tableau de 0 à 1 (deux éléments) alors que Dim a<b>(</b>2<b>)</b> assignera un tableau de 0 à 2 (trois éléments). 
+Et Les fonctions de la bibliothèque <a href="../array/index.html">Array</a> ne peuvent pas être utilisées avec ce type de tableaux. 
+<br>
+<br>
+Lorsque vous utilisez des pointeurs dans les structures, L'étoile '*' doit être 
+omise lors de l'utilisation du champ, une fois de plus pour faciliter 
+le portage de code API. Cela peut être considéré comme une bizarrerie (et pour être honnête, ça l'est) 
+mais c'est comme ça depuis le début de PureBasic et beaucoup, beaucoup de sources sont écrites de cette façon et 
+cela restera inchangé. 
+<br>
+<br>
+Quand beaucoup de champs doivent être remplis en une fois, il est conseillé d'utiliser <a href="../reference/with_endwith.html">With</a> : <a href="../reference/with_endwith.html">EndWith</a> 
+pour réduire la quantité de code à saisir et améliorer sa lisibilité. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom.s
+    Prenom.s 
+    Age.w 
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Dim</font></b> <font color="#006666">MesAmis</font>.Personne(100)
+
+  <font color="#006666">; Ici la position '0' du tableau MesAmis()</font>
+  <font color="#006666">; contiendra une personne et ses informations personnelles</font>
+
+<font color="#006666">  MesAmis</font>(0)\Nom = &quot;Durand&quot;
+<font color="#006666">  MesAmis</font>(0)\Prenom = &quot;Michel&quot; 
+<font color="#006666">  MesAmis</font>(0)\Age = 32
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Structure plus complexe (Tableau statique imbriqué)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Structure</font></b> Fenetre
+    *FenetreSuivante.Fenetre  <font color="#006666">; Pointe vers un autre objet fenêtre</font>
+    x.w 
+    y.w
+    Nom.s[10]  <font color="#006666">; 10 noms possibles</font>
+  <b><font color="#006666">EndStructure</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Structure étendue</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MonPoint
+    x.l 
+    y.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> MonPointEnCouleur <b><font color="#006666">Extends</font></b> MonPoint
+    couleur.l 
+  <b><font color="#006666">EndStructure</font></b>
+
+  ColoredPoint.MonPointEnCouleur\x = 10
+  ColoredPoint.MonPointEnCouleur\y = 20
+  ColoredPoint.MonPointEnCouleur\couleur =<font color="#006666"> RGB</font>(255, 0, 0)
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Copie de structure</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MonPoint
+    x.l 
+    y.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  PointGauche.MonPoint\x = 10
+  PointGauche\y = 20
+  
+  PointDroit.MonPoint = PointGauche
+  
+  <b><font color="#006666">Debug</font></b> PointDroit\x
+  <b><font color="#006666">Debug</font></b> PointDroit\y
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Objet Dynamique</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Amis$</font>()
+  <b><font color="#006666">EndStructure</font></b>
+
+  Jean.Personne
+  Jean\Nom$ = &quot;Jean&quot;
+  Jean\Age   = 23
+  
+  <font color="#006666">; Ajoutons des amis à Jean</font>
+  <font color="#006666">;</font>
+<font color="#006666">  AddElement</font>(Jean\<font color="#006666">Amis$</font>())
+  Jean\<font color="#006666">Amis$</font>() = &quot;Jim&quot;
+
+<font color="#006666">  AddElement</font>(Jean\<font color="#006666">Amis$</font>())
+  Jean\<font color="#006666">Amis$</font>() = &quot;Monica&quot;
+  
+  <b><font color="#006666">ForEach</font></b> Jean\<font color="#006666">Amis$</font>()
+    <b><font color="#006666">Debug</font></b> Jean\<font color="#006666">Amis$</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Tableau statique, dynamique et Structure en argument de procédure</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Truc
+    a.l
+    b.l[2]          <font color="#006666">; Tableau statique (Standard C) avec 2 valeurs b[0] et b[1], non redimensionnable</font>
+    <b><font color="#006666">Array</font></b> <font color="#006666">c</font>.l(3,3)  <font color="#006666">; Tableau dynamique avec 16 valeurs de c(0,0) à c(3,3), redimensionnable avec ReDim()</font>
+  <b><font color="#006666">EndStructure</font></b>
+
+  MaVar.Truc
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">MaProcedure</font>(*blabla.Truc)
+    *blabla\a = 5
+    *blabla\b[0] = 1
+    *blabla\b[1] = 2
+    *blabla\<font color="#006666">c</font>(3,3) = 33
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MaProcedure</font>(@MaVar)
+  <b><font color="#006666">Debug</font></b> MaVar\a
+  <b><font color="#006666">Debug</font></b> MaVar\b[0]
+  <b><font color="#006666">Debug</font></b> MaVar\b[1]
+  <b><font color="#006666">Debug</font></b> MaVar\<font color="#006666">c</font>(3,3)
+  
+  <font color="#006666">;Debug MaVar\c(0,10) ; Erreur index hors limite</font>
+  <b><font color="#006666">ReDim</font></b> MaVar\<font color="#006666">c</font>(3,10)  <font color="#006666">; Attention, seule la dernière dimension peut être redimensionnée !</font>
+  <b><font color="#006666">Debug</font></b>  MaVar\<font color="#006666">c</font>(0,10)
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Structure de structure(s)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> pointF 
+    x.f 
+    y.f 
+  <b><font color="#006666">EndStructure</font></b> 
+   
+  <b><font color="#006666">Structure</font></b> Champs 
+    Champs1.q 
+    Champs2.s{6}
+    Champs3.s
+    <b><font color="#006666">Array</font></b> <font color="#006666">Tab</font>.pointF(3)  
+  <b><font color="#006666">EndStructure</font></b> 
+ 
+  <b><font color="#006666">Define</font></b> MaVar.Champs 
+ 
+  MaVar\<font color="#006666">Tab</font>(3)\x = 34.67
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Alignement Mémoire</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Type <b><font color="#006666">Align</font></b> 4
+    Byte.b
+    Word.w
+    Long.l
+    Float.f
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Byte)   <font color="#006666">; Affiche 0</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Word)   <font color="#006666">; Affiche 4</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Long)   <font color="#006666">; Affiche 8</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Type\Float)  <font color="#006666">; Affiche 12</font>
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Pointers</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    *Next.Personne <font color="#006666">; Ici, le '*' est obligatoire pour déclarer un pointeur</font>
+    Nom$
+    Age.b
+  <b><font color="#006666">EndStructure</font></b>
+
+  Timo.Personne\Nom$ = &quot;Timo&quot;
+  Timo\Age = 25
+  
+  Fred.Personne\Nom$ = &quot;Fred&quot;
+  Fred\Age = 25
+  
+  Timo\Next = @Fred <font color="#006666">; Lorsque vous utilisez le pointeur, le '*' est omis</font>
+  
+  <b><font color="#006666">Debug</font></b> Timo\Next\Nom$ <font color="#006666">; Affichera 'Fred'</font>
+</font></pre>
+
+<br>
+<br>
+
+<br>
+<br>
+<hr>
+<a name="StructureUnion"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">StructureUnion</font></b>
+  Champs.Type
+  Champs.Type
+  ...
+<b><font color="#006666">EndStructureUnion</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">StructureUnion</font></b> est prévu pour les programmeurs avancés qui souhaitent économiser de la mémoire en 
+partageant certains champs à l'intérieur d'une même structure. Il s'agit d'un équivalent du mot clef 'union' en C/C++. 
+<br>
+<br>
+Note: Chaque champ dans la déclaration <b><font color="#006666">StructureUnion</font></b> peut être d'un <a href="../reference/variables.html">type</a> différent. 
+<br>
+Note: Chaque champ dans la déclaration <b><font color="#006666">StructureUnion</font></b> est placé à la même adresse mémoire. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Type
+    Nom$
+    <b><font color="#006666">StructureUnion</font></b>
+      Long.l      <font color="#006666">; Chaque champ (Long, Float et Byte) est placé à la même adresse mémoire.</font>
+      Float.f     <font color="#006666">; </font>
+      String.b    <font color="#006666">; </font>
+    <b><font color="#006666">EndStructureUnion</font></b>    
+  <b><font color="#006666">EndStructure</font></b> 
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Exemple RVB</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> StrCouleur
+    Rouge.a
+    Vert.a
+    Bleu.a
+    Alpha.a
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> StrCouleurU
+    <b><font color="#006666">StructureUnion</font></b>
+      Composant.StrCouleur
+      Couleur.l
+      Octet.a[4]
+    <b><font color="#006666">EndStructureUnion</font></b>
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Define</font></b> Couleur1.StrCouleurU
+
+  Couleur1\Couleur =<font color="#006666"> RGBA</font>($10, $20, $30, $FF)
+  <b><font color="#006666">Debug</font></b> &quot;hex = &quot; +<font color="#006666"> Hex</font>(Couleur1\Couleur, <font color="#924B72">#PB_Long</font>)    <font color="#006666">;hex = FF302010 (processeurs little-endian)</font>
+  <b><font color="#006666">Debug</font></b> &quot;r = &quot;   +<font color="#006666"> Hex</font>(Couleur1\Composant\Rouge)      <font color="#006666">;r = 10</font>
+  <b><font color="#006666">Debug</font></b> &quot;v = &quot;   +<font color="#006666"> Hex</font>(Couleur1\Composant\Vert)       <font color="#006666">;v = 20</font>
+  <b><font color="#006666">Debug</font></b> &quot;b = &quot;   +<font color="#006666"> Hex</font>(Couleur1\Composant\Bleu)       <font color="#006666">;b = 30</font>
+  <b><font color="#006666">Debug</font></b> &quot;a = &quot;   +<font color="#006666"> Hex</font>(Couleur1\Composant\Alpha)      <font color="#006666">;a = FF</font>
+
+  <b><font color="#006666">Debug</font></b> &quot;Octet0 = &quot; +<font color="#006666"> Hex</font>(Couleur1\Octet[0])          <font color="#006666">;Octet0 = 10</font>
+  <b><font color="#006666">Debug</font></b> &quot;Octet1 = &quot; +<font color="#006666"> Hex</font>(Couleur1\Octet[1])          <font color="#006666">;Octet1 = 20</font>
+  <b><font color="#006666">Debug</font></b> &quot;Octet2 = &quot; +<font color="#006666"> Hex</font>(Couleur1\Octet[2])          <font color="#006666">;Octet2 = 30</font>
+  <b><font color="#006666">Debug</font></b> &quot;Octet3 = &quot; +<font color="#006666"> Hex</font>(Couleur1\Octet[3])          <font color="#006666">;Octet3 = FF</font>
+
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Exemple gestion de dates</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> StrDate <font color="#006666">;jj.mm.aaa</font>
+    jour.s{2}
+    separateur1.s{1}
+    mois.s{2}
+    separateur2.s{1}
+    an.s{4}
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> StrDateU
+    <b><font color="#006666">StructureUnion</font></b>
+      s.s{10}
+      d.StrDate
+    <b><font color="#006666">EndStructureUnion</font></b>
+  <b><font color="#006666">EndStructure</font></b>
+
+  <font color="#006666">;Un tableau</font>
+  <b><font color="#006666">Dim</font></b> <font color="#006666">MaDate</font>.StrDateU(365)
+<font color="#006666">  MaDate</font>(0)\s = &quot;05.04.2028&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MaDate</font>(0)\d\jour    <font color="#006666">; 05</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MaDate</font>(0)\d\mois    <font color="#006666">; 04</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MaDate</font>(0)\d\an      <font color="#006666">; 2028</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MaDate</font>(0)\s         <font color="#006666">; 05.04.2028</font>
+
+  <font color="#006666">;Une variable</font>
+  MaDate2.StrDateU\s = &quot;15.11.2030&quot;
+
+  <b><font color="#006666">Debug</font></b> MaDate2\d\jour      <font color="#006666">; 15</font>
+  <b><font color="#006666">Debug</font></b> MaDate2\d\mois      <font color="#006666">; 11</font>
+  <b><font color="#006666">Debug</font></b> MaDate2\d\an        <font color="#006666">; 2030</font>
+  <b><font color="#006666">Debug</font></b> MaDate2\s           <font color="#006666">; 15.11.2030</font>
+</font></pre>
+</blockquote>
+</font></body></html>

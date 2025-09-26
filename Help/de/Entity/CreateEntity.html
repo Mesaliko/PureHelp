@@ -1,0 +1,85 @@
+<html><head><title>CreateEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateEntity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateEntity</b></font>(#Entity, MeshID, MaterialID, [x, y, z [, PickMaske [, SichtbarkeitsMaske]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein neues Entity-Objekt mittels dem angegebenen Mesh und Material. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren des neuen Entity. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>MeshID</i></td>
+<td> 
+Das für die Erstellung des Entity zu verwendende Mesh. Um eine gültige Mesh-ID 
+zu erhalten, verwenden Sie <a href="../mesh/meshid.html">MeshID()</a>. Dynamische Meshes werden nicht unterstützt 
+(= Meshes, welche mit dem <font color="#924B72">#PB_Mesh_Dynamic</font> Flag erstellt wurden). 
+
+</td></tr>
+<tr><td><i>MaterialID</i></td>
+<td> 
+Das für die Erstellung des Entity zu verwendende Material. Um eine gültige Material-ID 
+zu erhalten, verwenden Sie <a href="../material/materialid.html">MaterialID()</a>. 
+<br>
+<font color="#924B72">#PB_Material_None</font> kann als Parameter-Wert verwendet werden, um das dem Mesh zugewiesene 
+.material Skript zu verwenden. Vor der Verwendung von <font color="#924B72">#PB_Material_None</font> sollte 
+<a href="../engine3d/parse3dscripts.html">Parse3DScripts()</a> aufgerufen werden. 
+
+</td></tr>
+<tr><td><i>x, y, z (optional)</i></td>
+<td> 
+Die Position des neuen Entity in der Welt. 
+
+</td></tr>
+<tr><td><i>PickMaske (optional)</i></td>
+<td> 
+Ein spezieller Wert, der von <a href="../engine3d/raypick.html">RayPick()</a> und <a href="../engine3d/mousepick.html">MousePick()</a> verwendet wird, um auszuwählen, 
+welche Entity-Gruppe behandelt wird. Da es eine Maske ist, sollte jeder Wert eine 
+Potenz von zwei sein. 31 verschiedene Masken sind verfügbar. Um einfach einen Masken-Wert 
+zu erstellen, kann der '&lt;&lt;' Operator verwendet werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1 &lt;&lt; 1  : erster gültiger Masken-Wert
+  - 1 &lt;&lt; 2  : zweiter gültiger Masken-Wert
+  - 1 &lt;&lt; 3  : dritter gültiger Masken-Wert
+  - ...
+  - 1 &lt;&lt; 31 : letzter gültiger Masken-Wert
+</font></pre>
+Um deren Verwendung zu vereinfachen, sollten Konstanten für die Speicherung des Masken-Werts 
+und dessen spätere Verwendung genutzt werden. Beim Aufrufen der &quot;Pick&quot;-Funktionen können 
+Masken mit Hilfe des '|' Operators kombiniert werden, um mehr als einen Typ von Entities 
+auszuwählen. 
+
+</td></tr>
+<tr><td><i>SichtbarkeitsMaske (optional)</i></td>
+<td> 
+Eine Maske, um auszuwählen, auf welcher Kamera das Entity angezeigt werden soll. 
+Wenn diese Maske zu der bei <a href="../camera/createcamera.html">CreateCamera()</a> spezifizierten Maske passt, wird das 
+Entity auf der Kamera dargestellt. Siehe 'PickMaske' zum Erstellen korrekter Masken. 
+Wenn dieser Parameter weggelassen wird, dann wird das Entity auf allen Kameras 
+sichtbar sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn das Entity nicht erstellt werden konnte. Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+als '#Entity' Parameter verwendet wird, dann wird die neue Entity-Nummer zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freeentity.html">FreeEntity()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=copyentity.html>CopyEntity()</a> - <a href=index.html>Entity Inhaltsverzeichnis</a> - <a href=createentitybody.html>CreateEntityBody()</a> -><br><br>
+
+</body></html>

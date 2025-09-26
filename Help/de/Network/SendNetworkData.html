@@ -1,0 +1,55 @@
+<html><head><title>SendNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SendNetworkData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SendNetworkData</b></font>(Verbindung, *SpeicherPuffer, Länge)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Sendet Roh-Daten zum angegebenen Client. Diese Funktion kann sowohl von 
+Client- als auch Server-Applikationen genutzt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Verbindung</i></td>
+<td width="90%"> 
+Die Verbindung, an die Daten gesendet werden sollen. 
+Auf der Server-Seite ist 'Verbindung' der Client, welcher diese Daten empfangen soll 
+(die ClientID kann einfach mittels <a href="eventclient.html">EventClient()</a> ermittelt werden). 
+Auf der Client-Seite wird 'Verbindung' von <a href="opennetworkconnection.html">OpenNetworkConnection()</a> zurückgegeben. 
+
+</td></tr>
+<tr><td><i>*SpeicherPuffer</i></td>
+<td> 
+Die Adresse der zu sendenden Daten. 
+
+</td></tr>
+<tr><td><i>Länge</i></td>
+<td> 
+Die Länge der zu sendenden Daten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Anzahl der tatsächlich gesendeten Bytes zurück. Wenn die zurückgegebene Anzahl 
+an Bytes nicht mit dem Parameter 'Länge' übereinstimmt, dann ist möglicherweise der Empfangspuffer 
+des Anwenders voll. Wenn nichts gesendet werden konnte, dann ist das Ergebnis gleich -1. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Bei UDP-Verbindungen beträgt die maximale 'Länge' 2048. Bei TCP-Verbindungen 
+beträgt die maximale 'Länge' 65536. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="sendnetworkstring.html">SendNetworkString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=receivenetworkdata.html>ReceiveNetworkData()</a> - <a href=index.html>Network Inhaltsverzeichnis</a> - <a href=sendnetworkstring.html>SendNetworkString()</a> -><br><br>
+
+</body></html>

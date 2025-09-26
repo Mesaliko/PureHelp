@@ -1,0 +1,67 @@
+<html><head><title>CreateDataMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateDataMesh()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateDataMesh</b></font>(#Mesh, Array.MeshVertex() [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein neues '#Mesh' vom angegebenen zwei-dimensionalen Array des Typs MeshVertex. 
+Dieser Befehl erlaubt eine schnellere Mesh-Erstellung als mittels <a href="createmesh.html">CreateMesh()</a>, indem ein 
+Array vorbereitet und mit einmal an den Befehl übergeben wird. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren des neuen Mesh. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Array</i></td>
+<td> 
+Ein zwei-dimensionales Array des Typs MeshVertex, das für die Erstellung des neuen 
+Meshs verwendet wird. Die MeshVertex Struktur ist wie folgt definiert: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f
+    NormalY.f
+    NormalZ.f
+    TangentX.f
+    TangentY.f
+    TangentZ.f 
+    u.f
+    v.f
+    Color.l
+  <b><font color="#006666">EndStructure</font></b>   
+</font></pre>
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Die Art und Weise, die Scheitelpunkte (englisch 'vertices') zu verbinden. 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_DiagonalRegular1</font>      : Diagonalen werden auf die gleiche Weise ausgerichtet
+  <font color="#924B72">#PB_Mesh_DiagonalRegular2</font>      : Diagonalen sind anders ausgerichtet
+  <font color="#924B72">#PB_Mesh_DiagonalAlternate</font>     : Diagonalen sind einmal so und einmal anders (alternativ)
+  <font color="#924B72">#PB_Mesh_DiagonalShortestLength</font>: Diagonalen liegen zwischen den beiden nächstgelegenen Scheitelpunkten
+  <font color="#924B72">#PB_Mesh_DiagonalClosestNormal</font> : Diagonalen liegen zwischen den beiden nächsten Normalen (Skalarprodukt).
+                                   Bester Modus, erfordert aber Normalen.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn das #Mesh bereits existierte, dann wird dieses freigegeben und durch ein neues ersetzt. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createcylinder.html>CreateCylinder()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=createicosphere.html>CreateIcoSphere()</a> -><br><br>
+
+</body></html>

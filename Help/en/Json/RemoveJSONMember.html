@@ -1,0 +1,53 @@
+<html><head><title>RemoveJSONMember</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RemoveJSONMember()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>RemoveJSONMember</b></font>(JSONValue, Key$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Remove the memver with the specified key from a JSON value of 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Object</font>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValue</i></td>
+<td width="90%"> 
+The JSON value. The value must be of type <font color="#924B72">#PB_JSON_Object</font>. 
+
+</td></tr>
+<tr><td><i>Key$</i></td>
+<td> 
+The key of the member to remove. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Input$ = &quot;{ &quot; +<font color="#006666"> Chr</font>(34) + &quot;x&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 10, &quot; + 
+<font color="#006666">                  Chr</font>(34) + &quot;y&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 20, &quot; + 
+<font color="#006666">                  Chr</font>(34) + &quot;z&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 30 }&quot;
+  
+<font color="#006666">  ParseJSON</font>(0, Input$)
+<font color="#006666">  RemoveJSONMember</font>(<font color="#006666">JSONValue</font>(0), &quot;x&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0, <font color="#924B72">#PB_JSON_PrettyPrint</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="addjsonmember.html">AddJSONMember()</a>, 
+<a href="clearjsonmembers.html">ClearJSONMembers()</a>, <a href="getjsonmember.html">GetJSONMember()</a>, <a href="examinejsonmembers.html">ExamineJSONMembers()</a>, <a href="jsonobjectsize.html">JSONObjectSize()</a>, 
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=removejsonelement.html>RemoveJSONElement()</a> - <a href=index.html>Json Index</a> - <a href=resizejsonelements.html>ResizeJSONElements()</a> -><br><br>
+
+</body></html>

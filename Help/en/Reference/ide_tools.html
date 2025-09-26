@@ -1,0 +1,272 @@
+<html><head><title>Using the built-in Tools</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Using the built-in Tools</font></b></p>
+
+The PureBasic IDE comes with many building tools, to make programming tasks 
+easier and increase your productivity. Many of them can be configured to be 
+either accessible from the Menu as separate windows, or to be permanently 
+displayed in the Panel on the side of the editing area. 
+
+<br>
+<br>
+
+For information on how to configure these tools and where they are displayed, 
+see <a href="../reference/ide_preferences.html">Configuring the IDE</a>. 
+
+
+<p><b>Tools for the Side Panel Area</b></p><blockquote>
+
+
+<b>Procedure Browser</b> 
+
+<p><img src="images/ide_tools_procedurelist.png"></p>
+
+This tool displays a list of all <a href="../reference/procedures.html">procedures</a> and <a href="../reference/macros.html">macros</a> declared in the current source 
+code. By double-clicking on an entry in that list, the cursor automatically 
+jumps to that procedure. 
+<br>
+<br>
+Macros will be marked in the list by a &quot;+&quot; sign before the name. 
+<br>
+<br>
+You can also place special comment marks in your code, 
+that will be displayed in the list too. They look like this: &quot;;- &lt;description&gt;&quot;. 
+The ; starts a comment, the ‘-‘ that follows it immediately defines such a mark. 
+<br>
+<br>
+The description will be shown in the Procedure list, and clicking on it will jump 
+to the line of this mark. Such a comment mark can be distinguished from a Procedure 
+by the &quot;&gt; &quot; that is displayed before it in the procedure list. 
+<br>
+<br>
+The list of procedures can be sorted, and it can display the procedure/macro arguments in the list. 
+For these options, see <a href="../reference/ide_preferences.html">Configuring the IDE</a>. 
+
+<br>
+<br>
+
+<b>Project Panel</b> 
+
+<p><img src="images/ide_tools_project.png"></p>
+
+This tool displays a tree of all files in the current <a href="../reference/ide_projects.html">project</a>. A double-click on a file 
+opens it in the IDE. This allows fast access to all files in the project. A right-click on a file opens a context menu 
+which provides more options: 
+
+<blockquote>
+
+<p><img src="images/ide_popupmenu_project.png"></p>
+
+<u>Open</u> - Open the file in the IDE. 
+<br>
+<u>Open in FileViewer</u> - Open the file in the FileViewer of the IDE. 
+<br>
+<u>Open in Explorer</u> - Open the file in the operating systems file manager. 
+<br>
+<u>Add File to Project</u> - Add a new file to the project. 
+<br>
+<u>Remove File from Project</u> - Remove the selected file(s) from the project. 
+<br>
+<u>Refresh AutoComplete data</u> - Rescan the file for AutoComplete items. 
+
+</blockquote>
+
+
+<b>Explorer</b> 
+
+<p><img src="images/ide_tools_fileexplorer.png"></p>
+
+The Explorer tool displays an explorer, from which you can select files and open 
+them quickly with a double-click. PureBasic files (*.pb, *.pbi, *.pbp, *.pbf) will 
+be loaded into the edit area and all other recognized files (text &amp; binary) files 
+will be displayed into the internal File Viewer. 
+
+<br>
+<br>
+
+<b>Variable Viewer</b> 
+
+<p><img src="images/ide_tools_variablelist.png"></p>
+
+The variable viewer can display <a href="../reference/variables.html">variables</a>, 
+<a href="../reference/dim.html">Arrays</a>, <a href="../reference/newlist.html">lists</a>, 
+<a href="../reference/general_rules.html">Constants</a>, <a href="../reference/structures.html">Structures</a> 
+and <a href="../reference/interfaces.html">Interfaces</a> defined in your source code, or 
+any currently opened file. You can configure what exactly it should display in 
+the <a href="../reference/ide_preferences.html">preferences</a>. 
+<br>
+Note: The displaying of variables is somewhat limited for now. It can only detect 
+variables explicitly declared with <a href="../reference/define.html">Define</a>, 
+<a href="../reference/global.html">Global</a>, <a href="../reference/shared.html">Shared</a>, 
+<a href="../reference/protected.html">Protected</a> or <a href="../reference/static.html">Static</a>. 
+
+<br>
+<br>
+
+<b>Code Templates</b> 
+
+<p><img src="images/ide_tools_templates.png"></p>
+
+The templates tool allows you to manage a list of small code parts, that you can 
+quickly insert into your source code with a double-click. It allows you to manage the 
+codes in different directories, and put a comment to each code. This tool is perfect to 
+manage small, often used code parts. 
+
+<br>
+<br>
+
+<b>Issue Browser</b> 
+
+<p><img src="images/ide_tools_issues.png"></p>
+
+The issue browser tool collects comments in the source code that fit a defined format 
+and lists them ordered by priority. It can be used to track which areas of the 
+source code still need to be worked on. 
+<br>
+<br>
+Each displayed issue corresponds to one comment in 
+the code. A double-click on the issue shows that code line. Issues can be displayed for 
+the current file, or for multiple files (all open files, or all files that belong to 
+the current <a href="../reference/ide_projects.html">project</a>). 
+The issue list can also be exported in CSV format. 
+<br>
+<br>
+To configure the collected issues, see the &quot;Issues&quot; section in the 
+<a href="../reference/ide_preferences.html">Preferences</a>. 
+
+<br>
+<br>
+
+<b>Color Picker</b> 
+
+<p><img src="images/ide_tools_colorrequester.png"></p>
+The color picker helps you to find the perfect color value for whatever task you need. 
+The following methods of picking a color are available: 
+<br>
+<br>
+RGB: Select a color by choosing red, green and blue intensities. 
+<br>
+HSV: Select a color by choosing hue, saturation and value. 
+<br>
+HSL: Select a color by choosing hue, saturation and lightness. 
+<br>
+Wheel: Select a color using the HSV model in a color wheel. 
+<br>
+Palette: Select a color from a predefined palette. 
+<br>
+Name: Select a color from a palette by name. 
+<br>
+<br>
+The color selection includes an alpha component, if the &quot;Include alpha channel&quot; checkbox is activated. 
+The individual components (red/green/blue intensities or hue/saturation/lightness) as well as 
+the hexadecimal representation of the current color can be seen and modified in the text fields. 
+<br>
+<br>
+The &quot;Insert Color&quot; button inserts the hexadecimal value of the current color in the source code. 
+The &quot;Insert RGB&quot; button inserts the color as a call to the <a href="../2ddrawing/rgb.html">RGB()</a> or 
+<a href="../2ddrawing/rgba.html">RGBA()</a> function into the code. The &quot;Save Color&quot; button saves the current color 
+to the history area at the bottom. Clicking on a color in the history makes it the current color again. 
+
+<br>
+<br>
+
+<b>Character Table</b> 
+
+<p><img src="images/ide_tools_ascii-table.png"></p>
+
+The character table tool displays a table showing the first 256 unicode characters, together with 
+their index in decimal and hex, as well as the corresponding html notation. By double-clicking 
+on any line, this character will be inserted into the source code. With the buttons on the 
+bottom, you can select which column of the table to insert on a double-click. 
+
+
+<br>
+<br>
+
+<b>Help Tool</b> 
+
+<p><img src="images/ide_tools_help.png"></p>
+
+The Help Tool is an alternative viewer for the <a href="../reference/ide_help.html">reference guide</a>. It can 
+be used to view the PureBasic manual side by side with the code. Whether or not the F1 shortcut opens 
+the manual in the tool or as a separate window can be specified in the 
+<a href="../reference/ide_preferences.html">preferences</a>. 
+
+</blockquote>
+<p><b>Other built-in tools</b></p><blockquote>
+
+
+<b>Structure Viewer</b> 
+
+<p><img src="images/ide_tools_structureviewer.png"></p>
+
+The structure viewer allows you to view all the Structures, Interfaces and Constants 
+predefined in PureBasic. Double-clicking on a Structure or Interface shows the 
+declaration. On top of the list you can select a filter to display only entries that 
+start with a given character. 
+<br>
+<br>
+The &quot;Back&quot; button navigates back through the viewed entries. 
+<br>
+&quot;Insert name&quot; inserts just the name of the selected entry. 
+<br>
+&quot;Insert copy&quot; inserts a copy of the declaration of that entry. 
+<br>
+&quot;Insert&quot; lets you enter a variable name and then inserts a definition of that variable 
+and the selected entry and all elements of it. 
+
+<br>
+<br>
+
+
+<b>File Viewer</b> 
+
+<p><img src="images/ide_tools_fileviewer.png"></p>
+
+The internal file viewer allows you do display certain types of files. Text files, 
+images and web pages (windows only). Any unknown file type will be displayed in a 
+hex-viewer. The &quot;Open&quot; button opens a new file, the &quot;X button&quot; closes it and the 
+arrows can be used to navigate through the open files. 
+<br>
+Also any binary file that you attempt to open from the Explorer tool, or by 
+double-clicking on an <a href="../reference/includes.html">IncludeBinary</a> keyword will be 
+displayed in this file viewer. 
+
+
+<br>
+<br>
+
+<b>Compare Files/Folders</b> 
+
+<p><img src="images/ide_tools_diff_options.png"></p>
+
+This tool can compare two (text-) files or two directories and highlight their differences. 
+The &quot;Options&quot; tab can be used to ignore some differences such as spaces or upper/lowercase changes. 
+
+<p><img src="images/ide_tools_diff_files.png"></p>
+
+The files are shown side by side with the differences marked in the following way: 
+Lines shown in red were removed in the file on the right, lines shown in green were added 
+in the file on the right and lines shown in yellow were changed between the two files. 
+
+<p><img src="images/ide_tools_diff_directories.png"></p>
+
+When comparing directories, the content of both directories is examined (with the option to filter 
+the search by file extension and include subdirectories) and the files are marked in a similar way: 
+Files in red do not exist in the second directory, files in green are new in the second directory and 
+files in yellow were modified. A double-click on a modified file shows the modifications made 
+to that file. 
+
+
+</blockquote>
+<p><b>Other entries in the Tools menu</b></p><blockquote>
+
+
+<b>Form Designer</b> 
+
+<p><img src="images/ide_tools_vdesigner.png"></p>
+
+The Form Designer can be used to design the user interface for you 
+application. For more information, see the <a href="../reference/ide_form.html">form designer</a> chapter. 
+</blockquote>
+</font></body></html>

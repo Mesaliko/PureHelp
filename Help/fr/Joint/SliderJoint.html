@@ -1,0 +1,95 @@
+<html><head><title>SliderJoint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SliderJoint()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SliderJoint</b></font>(#Charniere, EntiteID, TransformationX, TransformationY, TransformationZ, EntiteID2, TransformationX2, TransformationY2, TransformationZ2)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle charnière de type 
+glissière ou curseur entre deux entités. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Charniere</i></td>
+<td width="90%"> 
+Le numéro d'identification de la nouvelle 
+charnière. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">PB_Any #</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>EntiteID</i></td>
+<td> 
+La première entité associée à la charnière. 
+<br>
+<br>
+Pour obtenir un identifiant valide, utiliser 
+<a href="../entity/entityid.html">EntityID()</a>. 
+
+</td></tr>
+<tr><td><i>TransformX, TransformY, TransformZ</i></td>
+<td> 
+La valeur de la transformation de la 
+première entité. 
+
+</td></tr>
+<tr><td><i>EntiteID2</i></td>
+<td> 
+La deuxième entité associée à la charnière. 
+<br>
+<br>
+Pour obtenir un identifiant valide, utiliser 
+<a href="../entity/entityid.html">EntityID()</a>. 
+<br>
+<br>
+</td></tr>
+<tr><td><i>TransformX2, TransformY2, TransformZ2</i></td>
+<td> 
+La valeur de la transformation de la seconde 
+entité. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie zéro si la charnière ne peut être créée. 
+<br>
+<br>
+Si <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+est utilisé à la place de '#Charniere', le 
+nouveau numéro sera renvoyé dans 'Resultat'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La glissière peut être utilisée pour déplacer 
+une entité avec contrainte sur une surface 
+plane, etc. 
+<br>
+<br>
+<a href="getjointattribute.html">GetJointAttribute()</a> et <a href="setjointattribute.html">SetJointAttribute()</a> 
+peuvent être utilisés avec les attributs 
+suivants pour modifier le comportement de la charnière: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_SliderJoint_LowerLimit</font> : Limite inférieure de la charnière.
+  <font color="#924B72">#PB_SliderJoint_UpperLimit</font> : Limite supérieure de la charnière.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/SliderJoint.pb.html">SliderJoint.pb</a>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freejoint.html">FreeJoint()</a>, <a href="getjointattribute.html">GetJointAttribute()</a>, 
+<a href="setjointattribute.html">SetJointAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setjointattribute.html>SetJointAttribute()</a> - <a href=index.html>Joint Index</a><br><br>
+
+</body></html>

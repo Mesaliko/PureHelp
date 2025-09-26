@@ -1,0 +1,61 @@
+<html><head><title>WaitThread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WaitThread()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>WaitThread</b></font>(Thread [, Timeout])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Hält die Programmausführung an, bis der angegebene 'Thread' endet oder das optionale 
+'Timeout' (in Millisekunden) erreicht wird. Wurde der Thread bereits abgeschlossen, 
+kehrt diese Funktion umgehend zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Thread</i></td>
+<td width="90%"> 
+Der Thread, auf den gewartet werden soll. Dieser Wert wird von <a href="createthread.html">CreateThread()</a> zurückgegeben. 
+
+</td></tr>
+<tr><td><i>Timeout (optional)</i></td>
+<td> 
+Timeout (&quot;Auszeit&quot;), auf welche gewartet werden soll, in Millisekunden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn der Thread beendet wurde. Oder Null, 
+wenn der Timeout-Wert erreicht wurde. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">PrintStuff</font>(*Interval)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">      PrintN</font>(&quot;.&quot;)
+<font color="#006666">      Delay</font>(*Interval)
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+    thread =<font color="#006666"> CreateThread</font>(@PrintStuff(), 500)
+    <b><font color="#006666">If</font></b> thread
+      <font color="#006666">; Wartet auf das Beenden des Threads, bevor wir fortfahren.</font>
+      <font color="#006666">; Kommentieren Sie den WaitThread Befehl aus und sehen Sie, was passiert</font>
+<font color="#006666">      WaitThread</font>(thread)
+        
+        <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">          PrintN</font>(&quot;A&quot;)
+<font color="#006666">          Delay</font>(1000)
+        <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=waitsemaphore.html>WaitSemaphore()</a> - <a href=index.html>Thread Inhaltsverzeichnis</a><br><br>
+</body></html>

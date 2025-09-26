@@ -1,0 +1,72 @@
+<html><head><title>Break : Continue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Break : Continue</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Break</font></b> [Level]
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Break</font></b> bietet die Möglichkeit, folgende Schleifen während jeder Wiederholung (Iteration) zu verlassen: 
+<a href="../reference/repeat_until.html">Repeat</a>, <a href="../reference/for_next.html">For</a>, <a href="../reference/foreach_next.html">ForEach</a> und <a href="../reference/while_wend.html">While</a>. 
+Der optionale 'Level' Parameter gibt die Anzahl zu verlassender Schleifen an, wenn es sich 
+um mehrere verschachtelte Schleifen handelt. Wenn kein Parameter angegeben wurde, verlässt <b><font color="#006666">Break</font></b> die aktuelle Schleife. 
+
+</blockquote><p><b>Beispiel:</b> Einfache Schleife</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    <b><font color="#006666">If</font></b> k=5
+      <b><font color="#006666">Break</font></b>  <font color="#006666">; Wird direkt die For/Next Schleife verlassen</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Verschachtelte Schleifen</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    Counter = 0
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">If</font></b> k=5
+        <b><font color="#006666">Break</font></b> 2 <font color="#006666">; Wird direkt die Repeat/Until und die For/Next Schleifen verlassen</font>
+      <b><font color="#006666">EndIf</font></b>
+      Counter+1
+    <b><font color="#006666">Until</font></b> Counter &gt; 1
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Continue</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Continue</font></b> bietet die Möglichkeit, bei folgenden Schleifen die aktuelle Wiederholung (Schleifendurchlauf) 
+zu überspringen und direkt zum Ende der Schleife zu springen (ohne den Quellcode dazwischen zu verarbeiten): 
+<a href="../reference/repeat_until.html">Repeat</a>, <a href="../reference/for_next.html">For</a>, <a href="../reference/foreach_next.html">ForEach</a> und <a href="../reference/while_wend.html">While</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    <b><font color="#006666">If</font></b> k=5
+      <b><font color="#006666">Continue</font></b>  <font color="#006666">; Wird das 'Debug 5' überspringen und direkt zum nächstem Schleifendurchlauf übergehen</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,76 @@
+<html><head><title>WindowY</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowY()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>WindowY</b></font>(#Fenetre [, Mode])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la position Y d'une fenêtre dans 
+l'écran. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Le mode de calcul de la position Y 
+de la fenêtre. <br>
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_FrameCoordinate</font>: Position Y de la fenêtre, incluant les bordures (par défaut).
+  <font color="#924B72">#PB_Window_InnerCoordinate</font>: Position Y de la zone intérieure de la fenêtre 
+                              (où gadget peut être ajouté), à l'exclusion des bordures.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la position Y depuis le bord 
+haut de l'écran (en pixels) de la 
+fenêtre. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Exemple...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    
+<font color="#006666">   ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Position Y de la fenêtre&quot;)
+   
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1
+             
+             Y =<font color="#006666"> WindowY</font>(0, <font color="#924B72">#PB_Window_InnerCoordinate</font>)
+             <b><font color="#006666">Debug</font></b> &quot;Position X interne : &quot; +<font color="#006666"> Str</font>(Y)
+             
+             Y=<font color="#006666"> WindowY</font>(0, <font color="#924B72">#PB_Window_FrameCoordinate</font>)
+             <b><font color="#006666">Debug</font></b> &quot;Position X totale : &quot; +<font color="#006666"> Str</font>(Y)
+                                                          
+           <b><font color="#006666">EndSelect</font></b>
+            
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="openwindow.html">OpenWindow()</a>, <a href="windowx.html">WindowX()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=windowx.html>WindowX()</a> - <a href=index.html>Window Index</a><br><br>
+
+</body></html>

@@ -1,0 +1,120 @@
+<html><head><title>DragPrivate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragPrivate()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DragPrivate</b></font>(Type [, Actions])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lance une opération de 'Drag &amp; Drop' limitée 
+à l'appicaton elle-même. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+La valeur qui identifiera la donnée à 
+déposer dans l'application. 
+<br>
+<br>
+N'importe quelle valeur de type Long (.l) 
+est utilisable. 
+<br>
+<br>
+La même valeur devra être spécifiée à 
+<a href="enablegadgetdrop.html">EnableGadgetDrop()</a> ou <a href="enablewindowdrop.html">EnableWindowDrop()</a> 
+pour les 
+<a href="../gadget/index.html">Gadgets</a>/ 
+<a href="../window/index.html">Fenêtres</a> 
+qui accepteront cette donnée. 
+<br>
+<br>
+Cela permet de définir avec exactitude quel 
+Gadget/Fenêtre acceptera tel type de données, 
+et ainsi de réaliser des schémas 'Drag &amp; 
+Drop' complexes. 
+
+</td></tr>
+<tr><td><i>Actions (optionnel)</i></td>
+<td> 
+Si ce paramètre est omis, <font color="#924B72">#PB_Drag_Copy</font> 
+sera utilisé comme valeur par défaut. 
+<br>
+<br>
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: Le texte peut être copié
+  <font color="#924B72">#PB_Drag_Move</font>: Le texte peut être déplacé
+  <font color="#924B72">#PB_Drag_Link</font>: Le texte peut être lié
+</font></pre>
+<blockquote>
+
+L'utilisateur peut décider de l'action à 
+prendre en utilisant les touches Ctrl ou 
+Shift. Les actions disponibles dépendent 
+aussi du composant sur lequel le texte va 
+être déposé. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une des valeurs 'Actions' pour 
+indiquer laquelle a été choisie par 
+l'utilisateur, ou <font color="#924B72">#PB_Drag_None</font> si le 
+'Drag &amp; Drop' a été annulé. 
+<br>
+<br>
+Si l'opération n'a pas été annulée, la 
+<a href="../window/waitwindowevent.html">boucle d'évènement</a> 
+recevra <font color="#924B72">#PB_Event_WindowDrop</font> ou 
+<font color="#924B72">#PB_Event_GadgetDrop</font> de type 
+<font color="#924B72">#PB_Drop_Private</font>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Contrairement aux autres commandes qui 
+démarrent un 'Drag &amp; Drop', la donnée ne 
+pourra être déposée qu'au sein de 
+l'application (les données transférées avec 
+les commandes telles que <a href="dragtext.html">DragText()</a> ou 
+<a href="dragimage.html">DragImage()</a> peuvent aussi être acceptés par 
+les autres applications). 
+Cette commande permet d'ajouter des 
+fonctionnalités de 'Drag &amp; Drop' entre les 
+<a href="../gadget/index.html">Gadgets</a> ou les 
+<a href="../window/index.html">Fenêtres</a> en utilisant 
+des données qui ne seraient pas 
+interprétables par d'autres applications. 
+<br>
+<br>
+Un 'Drag &amp; Drop' peut être démarré n'importe 
+quand, mais il faut que le bouton gauche de 
+la souris soit appuyé sinon l'opération se 
+terminera immédiatement. Le moment le plus 
+approprié pour lancer un 'Drag &amp; Drop' est 
+en réponse à un évènement sur un 
+<a href="../gadget/index.html">Gadget</a> avec un 
+<a href="../window/eventtype.html">EventType()</a> valant <font color="#924B72">#PB_EventType_DragStart</font>. 
+<br>
+<br>
+Si l'opération n'a pas été interrompue, la 
+<a href="../window/waitwindowevent.html">boucle d'événements</a> 
+recevra un événement <font color="#924B72">#PB_Event_WindowDrop</font> ou 
+<font color="#924B72">#PB_Event_GadgetDrop</font> de type 
+<font color="#924B72">#PB_Drop_Private</font>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="dragtext.html">DragText()</a>, <a href="dragimage.html">DragImage()</a>, <a href="dragfiles.html">DragFiles()</a>, 
+<a href="dragosformats.html">DragOSFormats()</a>, <a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows, Linux</Blockquote></p><center><- <a href=dragosformats.html>DragOSFormats()</a> - <a href=index.html>DragDrop Index</a> - <a href=dragtext.html>DragText()</a> -><br><br>
+
+</body></html>

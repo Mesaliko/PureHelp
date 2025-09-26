@@ -1,0 +1,58 @@
+<html><head><title>RegisterFontFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegisterFontFile()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>RegisterFontFile</b></font>(Fichier$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Enregistre un fichier de police en vue d'être utilisé avec la commande <a href="loadfont.html">LoadFont()</a>. <br>
+Toutes les polices contenues dans le fichier seront alors disponibles. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichier$</i></td>
+<td width="90%"> 
+Le fichier contenant les polices.<br>
+Le fichier doit être au format TrueType. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le fichier a été enregistré correctement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le fichier de police est inscrit pour le programme en cours. 
+Cela signifie que la ou les polices ne sont pas accessibles 
+par les autres programmes.<br>
+Le fichier est désinscrit lorsque le programme se termine.<br>
+Aucun changement dans le système d'exploitation n'est fait par cette commande. 
+<br>
+<br>
+Vous ne pouvez pas utiliser de police enregistrée avec la bibliothèque 
+VectorDrawing. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Utilisons une nouvelle police qui a été téléchargée à partir d'Internet dans le répertoire temporaire ...</font>
+  <font color="#006666">; Le nom de la police est &quot;ascii&quot; et le fichier est &quot;ascii.ttf&quot;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">RegisterFontFile</font>(<font color="#006666">GetTemporaryDirectory</font>() + &quot;ascii.ttf&quot;) <font color="#006666">; Nous devons l'enregistrer avant de l'utiliser</font>
+<font color="#006666">    LoadFont</font>(0, &quot;ascii&quot;, 12) <font color="#006666">; Maintenant, nous pouvons charger la police, le système d'exploitation la connait</font>
+<font color="#006666">    SetGadgetFont</font>(0,<font color="#006666"> FontID</font>(0))
+  ...
+</font></pre>
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/FontRegister.pb.html">FontRegister.pb</a>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loadfont.html">LoadFont()</a> 
+</blockquote>
+</font></body></html>

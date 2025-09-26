@@ -1,0 +1,62 @@
+<html><head><title>RaiseError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RaiseError()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>RaiseError</b></font>(CodeErreur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Génère artificiellement une erreur du 
+type spéficié et lance une procédure 
+de gestion d'erreur ou termine le 
+programme si elle n'existe pas. 
+Le 'CodeErreur' pourra être récupéré 
+dans la procédure de gestion d'erreur 
+avec la commande <a href="errorcode.html">ErrorCode()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>CodeErreur</i></td>
+<td width="90%"> 
+Sous Windows, n'importe quel numéro 
+d'erreur peut être utilisé (y compris 
+ceux définis par l'utilisateur), c'est 
+un nombre entre 0 et 268435455 (un 
+sur 27 bits). 
+Sous Linux ou MacOS X, seuls les numéros 
+d'erreur suivants sont acceptés: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OnError_InvalidMemory</font>         : Lecture ou écriture dans une zone protégée.
+  <font color="#924B72">#PB_OnError_Floatingpoint</font>         : Erreur de calcul flottant.
+  <font color="#924B72">#PB_OnError_Breakpoint</font>            : Point d'arrêt débogueur atteint (autres que ceux du PureBasic).
+  <font color="#924B72">#PB_OnError_IllegalInstruction</font>    : Exécution d'une instruction invalide.
+  <font color="#924B72">#PB_OnError_PriviledgedInstruction</font>: Exécution d'une instruction privilégiée (système) non autorisée.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+<font color="#006666">    MessageRequester</font>(&quot;Test OnError&quot;, &quot;L'erreur suivante est arrivée: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;Début Test.&quot;)
+
+<font color="#006666">  OnErrorCall</font>(@ErrorHandler())
+<font color="#006666">  RaiseError</font>(<font color="#924B72">#PB_OnError_InvalidMemory</font>)
+  
+<font color="#006666">  MessageRequester</font>(&quot;Test OnError&quot;, &quot;Ceci ne devrait jamais s'afficher.&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="errorcode.html">ErrorCode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=onerrorgoto.html>OnErrorGoto()</a> - <a href=index.html>OnError Index</a><br><br>
+
+</body></html>

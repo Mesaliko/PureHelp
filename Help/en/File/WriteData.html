@@ -1,0 +1,67 @@
+<html><head><title>WriteData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>WriteData</b></font>(#File, *MemoryBuffer, Length)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Write the content of the specified memory buffer to a file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#File</i></td>
+<td width="90%"> 
+The file to write to. 
+
+</td></tr>
+<tr><td><i>*MemoryBuffer</i></td>
+<td> 
+The memory address of the data to write to the file. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+The number of bytes to write to the file. The maximum length is 2 GB. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of bytes actually written to the file. 
+If there is an error, the return-value is zero. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Because of <a href="filebufferssize.html">file buffering</a>, this function may return successful even if there is not enough 
+space left on the output device for the write operation. 
+The file must be opened using a write-capable function (i.e. not with <a href="readfile.html">ReadFile()</a>). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  *MemoryID =<font color="#006666"> AllocateMemory</font>(1000)       <font color="#006666">; allocating a memory block</font>
+  <b><font color="#006666">If</font></b> *MemoryID
+<font color="#006666">    PokeS</font>(*MemoryID, &quot;Store this string in the memory area&quot;)   <font color="#006666">; we write a string into the memory block</font>
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0,<font color="#006666"> GetHomeDirectory</font>()+&quot;Text.txt&quot;)           <font color="#006666">; we create a new text file...</font>
+<font color="#006666">    WriteData</font>(0, *MemoryID,<font color="#006666"> SizeOf</font>(Character)*<font color="#006666">Len</font>(&quot;Store this string in the memory area&quot;))          <font color="#006666">; write the text from the memory block into the file</font>
+<font color="#006666">    CloseFile</font>(0)                         <font color="#006666">; close the previously opened file and so store the written data</font>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;may not create the file!&quot;
+  <b><font color="#006666">EndIf</font></b>
+
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="readdata.html">ReadData()</a>, <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=writecharacter.html>WriteCharacter()</a> - <a href=index.html>File Index</a> - <a href=writedouble.html>WriteDouble()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,95 @@
+<html><head><title>StartAESCipher</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartAESCipher()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>StartAESCipher</b></font>(#Cipher, *Cle, Bits, *VecteurInitialisation, Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise un flux de chiffrement AES. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Cipher</i></td>
+<td width="90%"> 
+L'identifiant du nouveau chiffrement. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>*Cle</i></td>
+<td> 
+Un tampon contenant la clé de décodage. 
+<pre><font face="Courier New, Courier, mono" size="2">   Sa taille dépend du paramètre 'Bits': 
+     l6 octets pour le cryptage 128 bits. 
+     24 octets pour le cryptage 196 bits.
+     32 octets pour le cryptage 256 bits.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Bits</i></td>
+<td> 
+La taille de la clé utilisée par le chiffrement. <br>
+Les valeurs valides sont 128, 192 et 256.<br>
+<a href="derivecipherkey.html">DeriveCipherKey()</a> peut être utilisé pour créer cette clé à partir d'un mot de passe. 
+
+</td></tr>
+<tr><td><i>*VecteurInitialisation</i></td>
+<td> 
+Est un bloc de données aléatoires, 
+utilisé pour initialiser le chiffrement 
+et pour empêcher toute 
+violation de décodage (uniquement 
+nécessaire si vous utilisez le mode 
+<font color="#924B72">#PB_Cipher_CBC</font>). 
+<pre><font face="Courier New, Courier, mono" size="2">   Sa taille dépend du paramètre 'Bits': 
+     l6 octets pour le cryptage 128 bits. 
+     24 octets pour le cryptage 196 bits.
+     32 octets pour le cryptage 256 bits.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_Decode</font>: Le flux est utilisé pour décoder les données.
+  <font color="#924B72">#PB_Cipher_Encode</font>: Le flux est utilisé pour encoder les données.
+avec
+  <font color="#924B72">#PB_Cipher_CBC</font>: Mode par défaut (Cipher Block Chaining). Besoin de '*VecteurInitialisation'.
+                  Recommandé car plus sûr que le mode ECB.
+  <font color="#924B72">#PB_Cipher_ECB</font>: Mode alternatif(Electronic CodeBook). Pas besoin de '*VecteurInitialisation'
+                   ni de chaînage(chaque bloc est codé indépendamment). Cryptage très faible comparé à CBC
+                   et ne devrait pas être utilisé pour un cryptage sérieux.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre #Cipher alors un numéro généré automatiquement 
+est renvoyé. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les nouveaux tampons à encoder ou à décoder peuvent être ajoutés avec <a href="addcipherbuffer.html">AddCipherBuffer()</a>. 
+<br>
+<br>
+Une fois le codage terminé, <a href="finishcipher.html">FinishCipher()</a> doit être appelé. 
+<br>
+<br>
+Pour plus d'information à propos de AES, voir <a href="aesencoder.html">AESEncoder()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addcipherbuffer.html">AddCipherBuffer()</a>, <a href="finishcipher.html">FinishCipher()</a>, <a href="aesencoder.html">AESEncoder()</a>, <a href="aesdecoder.html">AESDecoder()</a>, <a href="derivecipherkey.html">DeriveCipherKey()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=opencryptrandom.html>OpenCryptRandom()</a> - <a href=index.html>Cipher Index</a> - <a href=startfingerprint.html>StartFingerprint()</a> -><br><br>
+
+</body></html>

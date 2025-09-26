@@ -1,0 +1,79 @@
+<html><head><title>EnableWindowDrop</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableWindowDrop()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>EnableWindowDrop</b></font>(#Window, Format, Actions [, PrivateType])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Enables a <a href="../window/index.html">window</a> to be a target for Drag &amp; Drop operations of a specific format. Only the area not covered 
+by any gadgets will be the target area. When the user drags data of this format over the window, the cursor 
+will indicate that the data can be dropped there. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+The PureBasic window number for the window in question. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+The data format, which can be one of the following values, or an OS specific ID for 
+a custom format (see <a href="dragosformats.html">DragOSFormats()</a> for more information). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drop_Text</font>   : Accept text on this window
+  <font color="#924B72">#PB_Drop_Image</font>  : Accept images on this window
+  <font color="#924B72">#PB_Drop_Files</font>  : Accept filenames on this window
+  <font color="#924B72">#PB_Drop_Private</font>: Accept a &quot;private&quot; Drag &amp; Drop on this window
+</font></pre>
+
+</td></tr>
+<tr><td><i>Actions</i></td>
+<td> 
+A combination of the Drag &amp; Drop actions that should be allowed for the data. 
+The user can decide which of these actions to take by pressing modifier keys like Ctrl or Shift. The actions 
+that can really be taken also depend on the actions allowed by the drag source. 
+Possible actions are: (they can be combined with '|') 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: The data format will not be accepted on the gadget
+  <font color="#924B72">#PB_Drag_Copy</font>: The data can be copied
+  <font color="#924B72">#PB_Drag_Move</font>: The data can be moved
+  <font color="#924B72">#PB_Drag_Link</font>: The data can be linked
+</font></pre>
+
+</td></tr>
+<tr><td><i>PrivateType (optional)</i></td>
+<td> 
+The type of private Drag &amp; Drop to accept if 'Format' is <font color="#924B72">#PB_Drop_Private</font>. 
+See <a href="dragprivate.html">DragPrivate()</a> for more information. 
+This parameter is ignored for other formats. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Multiple formats can be allowed on the same window. If the drag source provides multiple formats 
+that match the list of accepted formats, the one that was added last will be accepted. So the preferred 
+format in which to receive data should be enabled last. 
+<br>
+<br>
+If data was dropped on the window, the program will receive a <font color="#924B72">#PB_Event_WindowDrop</font> event. 
+<a href="../window/eventwindow.html">EventWindow()</a> will indicate the target window and the Event functions of this 
+library can be used to get the dropped data. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="enablegadgetdrop.html">EnableGadgetDrop()</a>, <a href="eventdroptype.html">EventDropType()</a>, <a href="eventdropaction.html">EventDropAction()</a>, 
+<a href="setdropcallback.html">SetDropCallback()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=enablegadgetdrop.html>EnableGadgetDrop()</a> - <a href=index.html>DragDrop Index</a> - <a href=eventdropaction.html>EventDropAction()</a> -><br><br>
+
+</body></html>

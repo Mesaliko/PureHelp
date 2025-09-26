@@ -1,0 +1,119 @@
+<html><head><title>NewMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">NewMap</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">NewMap</font></b> nom.&lt;type&gt;([Slots])      
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">NewMap</font></b> permet de déclarer une nouvelle map, aussi connue sous le nom de table de hachage ou dictionnaire. Elle permet un accès rapide à 
+un élément basé sur une clef. Chaque clef dans la map est unique, ce qui signifie qu'il n'est pas possible d'avoir deux éléments 
+distincts avec la même clef. Il n'y a pas de limite sur le nombre d'élément que peut contenir une map. Une map peut être déclarée avec 
+n'importe quel type <a href="../reference/variables.html">basic</a> ou <a href="../reference/structures.html">structuré</a>. 
+Pour consulter toutes les commandes nécessaires à la manipulation des maps, voir la bibliothèque <a href="../map/index.html">Map</a>. <br>
+<br>
+Quand une nouvelle clef est utilisée, un nouvel élément est automatiquement ajouté à la map même sans affectation. Si un autre élément avec 
+la même clef était déjà présent dans la map, il sera remplacé par le nouveau. Une fois qu'un élément a été créé ou accédé, il devient l' 
+élément courant de la map, et les accès à cet élément peuvent ensuite s'effectuer sans avoir à spécifier de clef. C'est très utile 
+lors de l'utilisation d'une map structurée, car la recherche de l'élément ne sera plus nécéssaire pour accéder aux différents champs. <br>
+<br>
+Les maps sont toujours locales par défaut, donc pour accéder à partir d'une <a href="../reference/procedures.html">procédure</a> à une map définie dans le 
+code source principal du programme, l'utilisation de <a href="../reference/global.html">Global</a> ou <a href="../reference/shared.html">Shared</a> 
+est requise. 
+Il est également possible de passer une map en paramètre d'une <a href="../reference/procedures.html">procédure</a> à l'aide 
+du mot-clef <b><font color="#006666">Map</font></b>. 
+<br>
+<br>
+Utilisez la commande <a href="../reference/others.html">Swap</a> pour permuter rapidement un élément d'une map avec une variable, 
+un élément d'un tableau ou un élément de la map. 
+<br>
+<br>
+Le paramètre optionnel 'Slots' défini le nombre de slots interne qui sera utilisé par la map pour effectuer le stockage des éléments. Plus il y a de slots 
+en interne, plus l'accès à un élément sera rapide, mais plus la consommation mémoire sera importante. C'est un compromis dépendant 
+du nombre d'éléments que la map contiendra au maximum et de la rapidité nécessaire à l'accès d'un élément. La valeur par défaut est 512. Ce paramètre 
+n'a pas d'influence sur le nombre d'éléments que la map peut contenir. 
+
+</blockquote><p><b>Exemple:</b> Map simple</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+  
+<font color="#006666">  Pays</font>(&quot;DE&quot;) = &quot;Allemagne&quot;
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Pays</font>(&quot;UK&quot;) = &quot;United Kingdom&quot;
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Pays</font>(&quot;FR&quot;)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Pays</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Pays</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Map en paramètre d'une procédure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+  
+<font color="#006666">  Pays</font>(&quot;DE&quot;) = &quot;Allemagne&quot;
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Pays</font>(&quot;UK&quot;) = &quot;United Kingdom&quot;
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">DebugMap</font>(<b><font color="#006666">Map</font></b> <font color="#006666">ParameterMap</font>.s())
+
+<font color="#006666">    ParameterMap</font>(&quot;US&quot;) = &quot;United States&quot;
+
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">ParameterMap</font>()
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ParameterMap</font>()
+    <b><font color="#006666">Next</font></b>
+ 
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  DebugMap</font>(<font color="#006666">Pays</font>())
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Map structurée</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Voiture
+    Poids.l
+    Vitesse.l
+    Prix.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">Voitures</font>.Voiture()
+  
+  <font color="#006666">; Ici, nous utilisons l'élément courant après l'insertion du nouvel élément</font>
+  <font color="#006666">;</font>
+<font color="#006666">  Voitures</font>(&quot;Ferrari F40&quot;)\Poids = 1000
+<font color="#006666">  Voitures</font>()\Vitesse = 320
+<font color="#006666">  Voitures</font>()\Prix = 500000
+  
+<font color="#006666">  Voitures</font>(&quot;Lamborghini Gallardo&quot;)\Poids = 1200
+<font color="#006666">  Voitures</font>()\Vitesse = 340
+<font color="#006666">  Voitures</font>()\Prix = 700000
+
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Voitures</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Nom de la Voiture: &quot;+<font color="#006666">MapKey</font>(<font color="#006666">Voitures</font>())
+    <b><font color="#006666">Debug</font></b> &quot;Poids: &quot;+<font color="#006666">Str</font>(<font color="#006666">Voitures</font>()\Poids)
+  <b><font color="#006666">Next</font></b>
+ 
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Élémént de Map créé sans affectation</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">IconeMap</font>()
+
+<font color="#006666">  IconeMap</font>(&quot;1&quot;)=1
+<font color="#006666">  IconeMap</font>(&quot;2&quot;)=2
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FindMapElement</font>(<font color="#006666">IconeMap</font>(),&quot;3&quot;)<font color="#006666">; Affiche 0 car l'élément n'existe pas</font>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">IconeMap</font>(&quot;3&quot;):<b><font color="#006666">EndIf</font></b><font color="#006666">; PureBasic le crée sans affectation parce qu'une nouvelle clé a été détectée</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FindMapElement</font>(<font color="#006666">IconeMap</font>(),&quot;3&quot;)<font color="#006666">; Affiche le pointeur vers ce nouvel élément. </font>
+</font></pre>
+</blockquote>
+</font></body></html>

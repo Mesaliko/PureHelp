@@ -1,0 +1,98 @@
+<html><head><title>UserGuide - Decisions & Conditions</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Decisions & Conditions</font></b></p>
+
+There are different ways of processing data obtained from user input or other way 
+(loading from a file, ...). The common <a href="../reference/variables.html">arithmetic functions</a> 
+(+, -, *, /, ...) can be combined with conditions. You can use the 
+<a href="../reference/if_endif.html">If : Else/ElseIf : EndIf</a> set of keywords or the 
+<a href="../reference/select_endselect.html">Select : Case/Default : EndSelect</a> keywords, just 
+use what is the best for your situation! 
+<br>
+<br>
+This example shows the use of <b><font color="#006666">If : ElseIf : Else : EndIf</font></b> for creating a message, possibly 
+for showing in the status bar of a form (<a href="../gadget/index.html">GUI</a>) or something similar, based upon the number 
+of items and filtered items in an, imaginary, list. Note that unlike some other BASIC 
+languages, PureBasic doesn't use the &quot;Then&quot; keyword and that there is no space in the 
+ElseIf and EndIf keywords. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.l Items = 10, Filter = 6
+  <b><font color="#006666">Define</font></b>.s Message
+  
+  <b><font color="#006666">If</font></b> Items = 0 
+    Message = &quot;List is empty.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items = 1 <b><font color="#006666">And</font></b> Filter = 0
+    Message = &quot;One item. Not shown by filter.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items &gt; 1 <b><font color="#006666">And</font></b> Filter = 0
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; items. All filtered.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items &gt; 1 <b><font color="#006666">And</font></b> Filter = 1
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; items. One shown by filter.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items = Filter
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; items. None filtered.&quot;
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; None of the other conditions were met.</font>
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; items. &quot; +<font color="#006666"> StrU</font>(Filter) +&quot; shown by filter.&quot;
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">Debug</font></b> Message
+</font></pre>
+
+<br>
+This example shows the use of <b><font color="#006666">Select : Case : Default : EndSelect</font></b> to categorize the 
+first 127 <a href="../reference/ascii.html">ASCII</a> characters into groups. The &quot;For : Next&quot; loop counts to 130 to 
+demonstrate the <a href="../reference/select_endselect.html">Default</a> keyword. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.c Char
+  <b><font color="#006666">Define</font></b>.s Message
+  
+  <b><font color="#006666">For</font></b> Char = 0 <b><font color="#006666">To</font></b> 130
+    
+    <b><font color="#006666">Select</font></b> Char
+
+      <b><font color="#006666">Case</font></b> 0 <b><font color="#006666">To</font></b> 8, 10 <b><font color="#006666">To</font></b> 31, 127
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a non-printing control code.&quot;
+        
+      <b><font color="#006666">Case</font></b> 9
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a tab.&quot;
+        
+      <b><font color="#006666">Case</font></b> 32
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a space.&quot;
+        
+      <b><font color="#006666">Case</font></b> 36, 128   
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a currency symbol. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 33 <b><font color="#006666">To</font></b> 35, 37 <b><font color="#006666">To</font></b> 47, 58 <b><font color="#006666">To</font></b> 64, 91 <b><font color="#006666">To</font></b> 96
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a punctuation mark or math symbol. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 48 <b><font color="#006666">To</font></b> 57
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a numeral. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 65 <b><font color="#006666">To</font></b> 90
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is an upper case letter. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 97 <b><font color="#006666">To</font></b> 122
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; is a lower case letter. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Default</font></b>
+        <font color="#006666">; If none of the preceding Case conditions are met.</font>
+        Message = &quot;Sorry, I don't know what &quot; +<font color="#006666"> StrU</font>(Char) + &quot; is!&quot;
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+    <b><font color="#006666">Debug</font></b> Message
+    
+  <b><font color="#006666">Next</font></b> Char
+</font></pre>
+
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_constants.html">< Previous: Constants</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_loops.html">Next: Loops ></a> 
+</blockquote>
+</font></body></html>

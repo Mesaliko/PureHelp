@@ -1,0 +1,81 @@
+<html><head><title>ResizeWindow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResizeWindow()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ResizeWindow</b></font>(#Fenetre, X, Y, Largeur, Hauteur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Déplace et redimensionne une fenêtre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>X, Y</i></td>
+<td> 
+Les nouvelles coordonnées de la fenêtre, 
+en pixels. 
+<br>
+<br>
+Si 'X' ou 'Y' sont définis avec 
+<font color="#924B72">#PB_Ignore</font> alors les valeurs 
+actuelles de 'X' ou 'Y' ne seront 
+pas modifiées. 
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur</i></td>
+<td> 
+Les nouvelles dimensions de la fenêtre. 
+<br>
+<br>
+Si 'Largeur' ou 'Hauteur' sont définies 
+avec <font color="#924B72">#PB_Ignore</font> alors les valeurs 
+actuelles de 'Largeur' ou 'Hauteur' 
+ne seront pas modifiées. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Exemple...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+   
+<font color="#006666">   ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Déplacer et Agrandir la fenêtre&quot;)
+   
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1
+             
+<font color="#006666">             ResizeWindow</font>(0, 100, 100, 350, <font color="#924B72">#PB_Ignore</font>)
+                                           
+           <b><font color="#006666">EndSelect</font></b>
+            
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../gadget/resizegadget.html">ResizeGadget()</a>, <a href="bindevent.html">BindEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removewindowtimer.html>RemoveWindowTimer()</a> - <a href=index.html>Window Index</a> - <a href=setactivewindow.html>SetActiveWindow()</a> -><br><br>
+
+</body></html>

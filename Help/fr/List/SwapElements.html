@@ -1,0 +1,88 @@
+<html><head><title>SwapElements</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SwapElements()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SwapElements</b></font>(Liste(), *PremierElement, *DeuxiemeElement)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Permute la place de 2 éléments de la liste. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+<tr><td><i>*PremierElement</i></td>
+<td> 
+<a href="../reference/memory.html">Adresse</a> du 
+premier élément à échanger. 
+<br>
+<br>
+Vous pouvez récupérer cette adresse en 
+utilisant l'opérateur @ sur le nom de la 
+liste. 
+
+</td></tr>
+<tr><td><i>*DeuxiemeElement</i></td>
+<td> 
+<a href="../reference/memory.html">Adresse</a> du 
+second élément à échanger. 
+<br>
+<br>
+Vous pouvez récupérer cette adresse en 
+utilisant l'opérateur @ sur le nom de la 
+liste. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction procure une façon rapide 
+pour réorganiser ou trier une liste 
+car les éléments ne sont pas déplacés. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Nombres</font>()
+  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">Nombres</font>())
+<font color="#006666">    Nombres</font>() = k
+  <b><font color="#006666">Next</font></b>
+    
+<font color="#006666">  SelectElement</font>(<font color="#006666">Nombres</font>(), 3) <font color="#006666">; Sélectionne le 4ème élément</font>
+  *PremierElement = @Nombres()
+  
+<font color="#006666">  SelectElement</font>(<font color="#006666">Nombres</font>(), 9) <font color="#006666">; Sélectionne le 10ème élément</font>
+  *DeuxiemeElement = @Nombres()
+  
+  <font color="#006666">; Echange le 4ème et le 10ème</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SwapElements</font>(<font color="#006666">Nombres</font>(), *PremierElement, *DeuxiemeElement)
+    
+  <font color="#006666">; Prouvons-le</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="moveelement.html">MoveElement()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=splitlist.html>SplitList()</a> - <a href=index.html>List Index</a><br><br>
+
+</body></html>

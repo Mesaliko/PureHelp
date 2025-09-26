@@ -1,0 +1,66 @@
+<html><head><title>Inkey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Inkey()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+String$ = <font color="#006666"><b>Inkey</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns a character string if a key is pressed during the call of Inkey(). It doesn't 
+interrupt (halt) the program flow. If special keys (non-ASCII) have to be handled, 
+<a href="rawkey.html">RawKey()</a> should be called after Inkey(). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns a string containing the pressed character if it is a non-special key, and 
+an empty string otherwise. 
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    PrintN</font>(&quot;Press Escape to exit&quot;)
+  
+    <b><font color="#006666">Repeat</font></b>
+      KeyPressed$ =<font color="#006666"> Inkey</font>()
+      
+      <b><font color="#006666">If</font></b> KeyPressed$ &lt;&gt; &quot;&quot;
+        
+<font color="#006666">        PrintN</font>(&quot;You pressed: &quot; + KeyPressed$)
+<font color="#006666">        PrintN</font>(&quot;It has a raw code of: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">RawKey</font>()
+      
+<font color="#006666">        PrintN</font>(&quot;You pressed a non ASCII key.&quot;)
+<font color="#006666">        PrintN</font>(&quot;It has a raw code of: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        Delay</font>(20) <font color="#006666">; Don't eat all the CPU time, we're on a multitask OS</font>
+      <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Until</font></b> KeyPressed$ =<font color="#006666"> Chr</font>(27) <font color="#006666">; Wait until escape is pressed</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The ASCII codes and numeric values reported in this description may change depending on 
+the code page you have configured at boot time for keyboard input. However, the concepts 
+should be the same and you can use the above example to figure out the real values for 
+your system. 
+<br>
+<br>
+A table with ASCII codes is available <a href="../reference/ascii.html">here</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="rawkey.html">RawKey()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=enablegraphicalconsole.html>EnableGraphicalConsole()</a> - <a href=index.html>Console Index</a> - <a href=input.html>Input()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,150 @@
+<html><head><title>HTTPRequest</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPRequest()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>HTTPRequest</b></font>(Type, URL$ [, Data$ [, Flags [, Headers()]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Send an HTTP request with optional text data. If binary data needs to be sent, <a href="httprequestmemory.html">HTTPRequestMemory()</a> can be used. 
+This command is designed to handle REST like web APIs easily. <a href="finishhttp.html">FinishHTTP()</a> needs to be always called once the request has been executed. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+The type of the request. Can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Get</font>    : GET request ('Data$' parameter will be ignored)
+  <font color="#924B72">#PB_HTTP_Post</font>   : POST request ('Data$' parameter will be sent if specified)
+  <font color="#924B72">#PB_HTTP_Put</font>    : PUT request ('Data$' parameter will be sent if specified)
+  <font color="#924B72">#PB_HTTP_Patch</font>  : PATCH request ('Data$' parameter will be sent if specified)
+  <font color="#924B72">#PB_HTTP_Delete</font> : DELETE request ('Data$' parameter will be sent if specified)
+</font></pre>
+
+</td></tr>
+<tr><td><i>URL$</i></td>
+<td> 
+The URL to send the request to. 
+
+</td></tr>
+<tr><td><i>Data$ (optional)</i></td>
+<td> 
+The text data to send with the request (will be sent as UTF-8 format). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: starts the download asynchronously.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : don't follow automatic redirections.
+  <font color="#924B72">#PB_HTTP_NoSSLCheck</font>  : don't check if the SSL certificate is valid (can be useful for testing purpose).
+  <font color="#924B72">#PB_HTTP_HeadersOnly</font> : gets headers only.
+  <font color="#924B72">#PB_HTTP_WeakSSL</font>     : to support older servers.
+  <font color="#924B72">#PB_HTTP_Debug</font>       : to print in the console debug information. 
+</font></pre>
+
+</td></tr>
+<tr><td><i>Headers() (optional)</i></td>
+<td> 
+A map of string pair to specify additional headers for the request. Example: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Header$</font>()
+<font color="#006666">  Header$</font>(&quot;Content-Type&quot;) = &quot;text/plain&quot;
+<font color="#006666">  Header$</font>(&quot;User-Agent&quot;) = &quot;Firefox 54.0&quot;
+<font color="#006666">  Header$</font>(&quot;NoParamHeader&quot;) = &quot;&quot;  <font color="#006666">; When putting no string value, it will an empty parameter</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the HTTP request identifier if the call has been successfully initialized, zero otherwise. <a href="httpinfo.html">HTTPInfo()</a> can be 
+used to get some info about the request. If <font color="#924B72">#PB_HTTP_Asynchronous</font> 
+was specified, <a href="httpprogress.html">HTTPProgress()</a> can be used and <a href="aborthttp.html">AbortHTTP()</a> must be used. 
+<a href="httpmemory.html">HTTPMemory()</a> can be used to get the result as a raw buffer (the raw buffer must be freed with <a href="../memory/freememory.html">FreeMemory()</a>). 
+<a href="finishhttp.html">FinishHTTP()</a> has to be always called to finish a successfully initialized HTTP request, even if the call was synchronous. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux, 'libcurl' needs to be installed to have this command working (most of Linux 
+distributions comes with it already installed). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Response: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> with headers</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Header$</font>()
+<font color="#006666">  Header$</font>(&quot;Content-Type&quot;) = &quot;plaintext&quot;
+<font color="#006666">  Header$</font>(&quot;User-Agent&quot;) = &quot;Firefox 54.0&quot;
+  
+  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;, &quot;&quot;, 0,<font color="#006666"> Header$</font>())
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Response: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Asynchronous</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.purebasic.com/download/PureBasic_Demo.zip&quot;, &quot;&quot;, <font color="#924B72">#PB_HTTP_Asynchronous</font>)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Progress =<font color="#006666"> HTTPProgress</font>(HttpRequest)
+      <b><font color="#006666">Select</font></b> Progress
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Success</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download finished&quot;
+          *Buffer =<font color="#006666"> HTTPMemory</font>(HTTPRequest)
+          <b><font color="#006666">If</font></b> *Buffer
+            <b><font color="#006666">Debug</font></b> &quot;Memory buffer size: &quot;+<font color="#006666">MemorySize</font>(*buffer) <font color="#006666">; Here the buffer can be written to disk or used directory</font>
+<font color="#006666">            FreeMemory</font>(*Buffer)
+          <b><font color="#006666">EndIf</font></b>
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Always call FinishHTTP() when request is finished</font>
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Failed</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download failed&quot;
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Always call FinishHTTP() when request failed</font>
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Aborted</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download aborted&quot;
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Always call FinishHTTP() when request is aborted</font>
+          
+        <b><font color="#006666">Default</font></b>
+          <b><font color="#006666">Debug</font></b> &quot;Current download: &quot; + Progress <font color="#006666">; The current download progress, in bytes</font>
+<font color="#006666">          Delay</font>(100)
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=httpproxy.html>HTTPProxy()</a> - <a href=index.html>Http Index</a> - <a href=httprequestmemory.html>HTTPRequestMemory()</a> -><br><br>
+
+</body></html>

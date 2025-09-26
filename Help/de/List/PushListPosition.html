@@ -1,0 +1,84 @@
+<html><head><title>PushListPosition</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PushListPosition()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>PushListPosition</b></font>(Liste())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Merkt sich das aktuelle Element (sofern eines vorhanden) der Liste, wodurch es später 
+mittels <a href="poplistposition.html">PopListPosition()</a> wiederhergestellt werden kann. 
+Die Position wird in einer &quot;Stack-Struktur&quot; (einem &quot;Lifo-Stapel&quot;: &quot;Last In&quot;, &quot;First Out&quot; - 
+in Deutsch &quot;zuletzt rein, zuerst raus&quot;) gespeichert, sodass mehrere Aufrufe dieser 
+Funktion möglich sind. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+Der Variablenname der verknüpften Liste, welche mit dem <a href="../reference/newlist.html">NewList</a> Befehl erstellt 
+wurde. Sie müssen die Klammern nach dem Listennamen immer angeben. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion kann verwendet werden, um sich das aktuelle Element zu merken. Damit kann mit Hilfe 
+von <a href="nextelement.html">NextElement()</a> oder <a href="../reference/foreach_next.html">ForEach</a> ein Listen-Durchlauf gemacht werden, 
+und das aktuelle Element kann nach dem Durchlauf mittels <a href="poplistposition.html">PopListPosition()</a> wieder hergestellt werden. 
+Mehrere Aufrufe dieser Funktion können erfolgen, solange jeder davon später mit einem 
+korrespondierenden <a href="poplistposition.html">PopListPosition()</a> Aufruf ausgeglichen wird. 
+<br>
+<br>
+Hinweis: Es ist nicht erlaubt, mit Hilfe der <a href="deleteelement.html">DeleteElement()</a> oder <a href="clearlist.html">ClearList()</a> Funktionen ein gemerktes 
+aktuelles Element zu löschen. Dies kann in einen Absturz resultieren, wenn <a href="poplistposition.html">PopListPosition()</a> aufgerufen 
+wird, da der Elemente-Speicher nicht länger gültig ist. 
+<br>
+<br>
+Der hier verwendete Stapel ist ein Speicherbereich, keine Liste. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>()
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 1
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 2
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 5
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 3
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 5
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>()):<font color="#006666"> Numbers</font>() = 2
+  
+  <font color="#006666">; Eine einfache doppelte Löschung mit Hilfe eines verschachtelten Durchlaufs</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Numbers</font>()
+    Value =<font color="#006666"> Numbers</font>()
+<font color="#006666">    PushListPosition</font>(<font color="#006666">Numbers</font>())
+    <b><font color="#006666">While</font></b> <font color="#006666">NextElement</font>(<font color="#006666">Numbers</font>())
+      <b><font color="#006666">If</font></b> <font color="#006666">Numbers</font>() = Value 
+<font color="#006666">        DeleteElement</font>(<font color="#006666">Numbers</font>())
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    PopListPosition</font>(<font color="#006666">Numbers</font>())
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Numbers</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Numbers</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="poplistposition.html">PopListPosition()</a>, <a href="selectelement.html">SelectElement()</a>, <a href="changecurrentelement.html">ChangeCurrentElement()</a>, <a href="nextelement.html">NextElement()</a>, <a href="previouselement.html">PreviousElement()</a>, 
+<a href="../reference/foreach_next.html">ForEach</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=previouselement.html>PreviousElement()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=resetlist.html>ResetList()</a> -><br><br>
+
+</body></html>

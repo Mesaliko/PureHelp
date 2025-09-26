@@ -1,0 +1,77 @@
+<html><head><title>Print</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Print()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>Print</b></font>(Text$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Zeigt den angegebenen String 'Text$' in der Konsole an. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+Der anzuzeigende Text. Im <a href="enablegraphicalconsole.html">Grafikmodus</a> 
+darf die Länge des Strings die Breite der Konsole nicht überschreiten, andernfalls wird das Ende des 
+Strings abgeschnitten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Im <a href="enablegraphicalconsole.html">Grafikmodus</a> ist es möglich, die aktuelle Cursor-Position mit dem 
+Befehl <a href="consolelocate.html">ConsoleLocate()</a> zu ändern. Um das Aussehen des Strings bei der Ausgabe 
+zu ändern, sollte der Befehl <a href="consolecolor.html">ConsoleColor()</a> verwendet werden. 
+<br>
+<br>
+Der Cursor wird auf das nächste Zeichen nach dem Ende des ausgegebenen Strings bewegt. 
+Bei der nächsten Anwendung von Print() beginnt die Ausgabe also unmittelbar hinter dem zuletzt 
+ausgegebenen String. Um den Cursor nach der Ausgabe automatisch auf die nächste Zeile springen zu lassen, 
+verwenden Sie den Befehl <a href="printn.html">PrintN()</a>. 
+<br>
+<br>
+Wenn Sie Text über den rechten Rand des Konsolenfensters hinaus ausgeben, wird dieser automatisch umgebrochen 
+und am linken Rand der nächsten Zeile fortgesetzt. Wenn Ihre Textausgabe über den unteren Rand 
+des Konsolenfensters hinausgeht, wird das Konsolenfenster seinen Inhalt automatisch nach oben 
+scrollen. 
+<br>
+<br>
+Um Roh-Daten auf einer nicht-grafischen Konsole (für Pipe-Kommunikation) auszugeben, kann 
+<a href="writeconsoledata.html">WriteConsoleData()</a> verwendet werden. 
+<br>
+<br>
+Hinweis: Im Konsolenfenster werden im ASCII-Modus, ohne weitere Maßnahmen (z.B. Nutzung des WinAPI-Befehls CharToOem_()), 
+deutsche Umlaute oder Sonderzeichen (z.B. ä, ö, ü, ß) nicht korrekt dargestellt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    Print</font>(&quot;Dies ist tatsaechlich ein langer String.&quot;)
+<font color="#006666">    Print</font>(&quot;Sie sehen, dass dieser String an das Ende des vorherigen anschliesst?&quot;)
+<font color="#006666">    Print</font>(&quot;Dies liegt daran, dass der Cursor an das Ende des Strings bewegt wird und nicht auf eine neue Zeile.&quot;)
+<font color="#006666">    Print</font>(&quot;Hoffentlich wird der Text jetzt auch korrekt umgebrochen.&quot;)
+
+<font color="#006666">    PrintN</font>(&quot;&quot;)
+<font color="#006666">    PrintN</font>(&quot;&quot;)
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Return zum Beenden.&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="printn.html">PrintN()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=openconsole.html>OpenConsole()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=printn.html>PrintN()</a> -><br><br>
+
+</body></html>

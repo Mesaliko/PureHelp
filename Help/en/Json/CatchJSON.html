@@ -1,0 +1,70 @@
+<html><head><title>CatchJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchJSON()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CatchJSON</b></font>(#JSON, *Buffer, Size [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Parse JSON data from a memory buffer. The contents of the memory buffer 
+are expected to be encoded in UTF-8 format. The <a href="jsonvalue.html">JSONValue()</a> function can be 
+used to access the contained JSON value(s) after parsing. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+A number to identify the new JSON. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+A readable memory location. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+Length (in bytes) of the memory location. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If set to <font color="#924B72">#PB_JSON_NoCase</font>, the JSON data will be parsed case insensitive. 
+The default is to be case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the JSON data was parsed correctly, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #JSON parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+In case of an error, the <a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a> and <a href="jsonerrorposition.html">JSONErrorPosition()</a> 
+functions can be used to get more information about the error. 
+<br>
+<br>
+To parse JSON data directly from a string, the <a href="parsejson.html">ParseJSON()</a> function can be used instead. 
+<br>
+<br>
+JSON is a case sensitive data format. However, in some situations, such as deserializing 
+structures with <a href="extractjsonstructure.html">ExtractJSONStructure()</a> or similar commands it may be useful to treat 
+JSON objects as case insensitive. The <font color="#924B72">#PB_JSON_NoCase</font> flag causes all 
+member related functions to treat keys in this object as case insensitive. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createjson.html">CreateJSON()</a>, <a href="parsejson.html">ParseJSON()</a>, <a href="loadjson.html">LoadJSON()</a>, <a href="jsonvalue.html">JSONValue()</a>, <a href="freejson.html">FreeJSON()</a>, 
+<a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a>, <a href="jsonerrorposition.html">JSONErrorPosition()</a>, 
+<a href="exportjson.html">ExportJSON()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addjsonmember.html>AddJSONMember()</a> - <a href=index.html>Json Index</a> - <a href=clearjsonelements.html>ClearJSONElements()</a> -><br><br>
+
+</body></html>

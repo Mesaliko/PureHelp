@@ -1,0 +1,65 @@
+<html><head><title>PathBoundsX</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PathBoundsX()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.d = <font color="#006666"><b>PathBoundsX</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the X coordinate (top/left corner) of the bounding box for the current vector 
+drawing path. The result is the lowest X coordinate that stroking/filling the current 
+path would reach. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The X coordinate of the bounding box. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      <font color="#006666">; construct path</font>
+<font color="#006666">      MovePathCursor</font>(150, 125)
+<font color="#006666">      AddPathCurve</font>(0, 270, 0, -150, 350, 180)
+      
+      <font color="#006666">; get path bounds</font>
+      x =<font color="#006666"> PathBoundsX</font>()
+      y =<font color="#006666"> PathBoundsY</font>()
+      w =<font color="#006666"> PathBoundsWidth</font>()
+      h =<font color="#006666"> PathBoundsHeight</font>()
+      
+      <font color="#006666">; stroke the path</font>
+<font color="#006666">      VectorSourceColor</font>($FF0000FF)
+<font color="#006666">      StrokePath</font>(5)
+      
+      <font color="#006666">; draw bounding box</font>
+<font color="#006666">      AddPathBox</font>(x, y, w, h)
+<font color="#006666">      VectorSourceColor</font>($FF000000)
+<font color="#006666">      DashPath</font>(2, 5)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/pathboundsx.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="pathboundsy.html">PathBoundsY()</a>, <a href="pathboundswidth.html">PathBoundsWidth()</a>, <a href="pathboundsheight.html">PathBoundsHeight()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=pathboundswidth.html>PathBoundsWidth()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=pathboundsy.html>PathBoundsY()</a> -><br><br>
+
+</body></html>

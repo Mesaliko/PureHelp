@@ -1,0 +1,63 @@
+<html><head><title>DrawImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawImage</b></font>(ImageID, x, y [, NeueBreite, NeueHöhe])  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Zeichnet ein Bild auf den aktuellen Ausgabekanal. 
+Der Füllmodus wird vom Zeichenmodus <a href="drawingmode.html">DrawingMode()</a> bestimmt. 
+Der aktuelle Ausgabekanal wird mittels <a href="startdrawing.html">StartDrawing()</a> festgelegt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ImageID</i></td>
+<td width="90%"> 
+Die ID des zu zeichnenden Bildes. Dieser Wert kann mittels 
+des <a href="../image/imageid.html">ImageID()</a> - Befehls aus der Image 
+Library ermittelt werden. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+Die Position der linken oberen Ecke des Bildes auf dem Ausgabekanal. 
+
+</td></tr>
+<tr><td><i>NeueBreite, NeueHöhe (optional)</i></td>
+<td> 
+Das Bild wird auf die angegebene Größe angepasst und dann gezeichnet. Werden diese Parameter nicht 
+angegeben, dann wird das Bild in seiner Original-Größe gezeichnet. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das Bild wird &quot;alpha-blended&quot;, d.h. gemischt mit dem Zeichen-Hintergrund, wenn der 
+aktuelle <a href="drawingmode.html">Zeichenmodus</a> einen der &quot;Alpha-Blending&quot; Flags nutzt, 
+andernfalls wird das Bild einfach in die Ausgabe kopiert. Um ein Bild auf jeden Fall 
+mittels Alpha-Blending zu zeichnen, muss der <a href="drawalphaimage.html">DrawAlphaImage()</a> Befehl 
+verwendet werden. 
+<br>
+<br>
+Eine Reihe von Backends (einschließlich <a href="../window/windowoutput.html">WindowOutput()</a> unter Linux) können den 
+Alphakanal beim Zeichnen von Bildern nicht ignorieren. DrawImage() entspricht dort also 
+<a href="drawalphaimage.html">DrawAlphaImage()</a>. Wenn Sie konsistente Ergebnisse wünschen, verwenden Sie einfach 
+<a href="drawalphaimage.html">DrawAlphaImage()</a>, das auf allen Backends dieselbe Ausgabe erzeugen sollte. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="drawalphaimage.html">DrawAlphaImage()</a>, <a href="../image/imageid.html">ImageID()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=drawalphaimage.html>DrawAlphaImage()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=drawrotatedtext.html>DrawRotatedText()</a> -><br><br>
+
+</body></html>

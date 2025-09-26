@@ -1,0 +1,53 @@
+<html><head><title>SetWindowTitle</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetWindowTitle()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetWindowTitle</b></font>(#Window, Title$) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the text which is currently displayed in the window title bar. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+The window to use. 
+
+</td></tr>
+<tr><td><i>Title$</i></td>
+<td> 
+The new title to set. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="getwindowtitle.html">GetWindowTitle()</a> can be used to get the current window title. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(2, 100, 100, 200, 100, &quot;My cool title&quot;)
+<font color="#006666">    SetWindowTitle</font>(2, &quot;Even cooler title !&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getwindowtitle.html">GetWindowTitle()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setwindowstate.html>SetWindowState()</a> - <a href=index.html>Window Index</a> - <a href=smartwindowrefresh.html>SmartWindowRefresh()</a> -><br><br>
+
+</body></html>

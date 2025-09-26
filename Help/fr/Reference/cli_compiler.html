@@ -1,0 +1,342 @@
+<html><head><title>Utiliser le compilateur en ligne de commande</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Utiliser le compilateur en ligne de commande</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+Le compilateur est situé dans le sous-dossier 
+'compilers' du dossier PureBasic. 
+La manière la plus simple d'y accéder est 
+d'ajouter ce répertoire à la variable PATH, 
+ce qui vous donnera un accès permanent à 
+toutes les commandes de ce répertoire. 
+<br>
+<br>
+Il existe deux compilateurs pour PureBasic :  <br>
+- 'pbcompiler' qui génère du code assembleur (x86 et x64). <br>
+- 'pbcompilerc' (ou 'pbcompiler' sur une plate-forme qui ne prend pas en charge le backend d'assemblage) 
+qui génère du code C. 
+<br>
+<br>
+Le compilateur backend C est disponible sur toutes les plateformes prises en charge, tandis que le 
+compilateur backend ASM n'est pris en charge que sur Windows (x86, x64), Linux (x86, x64) et OS X (x64). 
+<br>
+<br>
+Le compilateur backend C ne permet pas d'entrer du code assembleur. 
+<br>
+<br>
+Sous Windows, un fichier &quot;PureBasic-CLI.cmd&quot; est disponible directement dans la 
+racine PureBasic pour ouvrir facilement une invite de ligne de commande afin 
+d'utiliser les outils de ligne de commande PureBasic. 
+
+</blockquote>
+<p><b>Paramètres du compilateur (multi-plateforme)</b></p><blockquote>
+
+
+Note: Tous les noms de commutateurs commençant par '/' ne sont valides que sous Windows (Par exemple :  '/DEBUGGER'). 
+Si vous avez besoin d'écrire une ligne de commande multiplateforme, vous pouvez utiliser le format '-' ou '--' (comme : '-d' ou '--debugger). 
+<br>
+<br>
+-h, --help, /? : affiche une aide simplifiée 
+sur le compilateur. 
+<br>
+<br>
+-d, --debugger, /DEBUGGER : active le débogueur. 
+<br>
+<br>
+-cl, --console, /CONSOLE: fichier de sortie au format <a href="../console/index.html">Console</a>. Le format par défaut sous Windows est Win32. <br>
+<br>
+<br>
+-pf, --purifier, /PURIFIER: active le purifier. 
+Le debugger doit être activé pour faire fonctionner 
+le purifier. 
+<br>
+<br>
+-o, --output, /OUTPUT &quot;Fichier&quot; : crée un 
+fichier exécutable ou une DLL indépendant ayant 
+pour nom 'Fichier' et enregistré dans le chemin 
+désiré. Sur MacOS X, il est possible de créer un 
+ensemble d'applications en ajoutant &quot;.app&quot; dans 
+le nom de l'exécutable. De cette façon, toute la 
+structure de répertoire sera créé automatiquement. 
+<br>
+<br>
+-r, --resident, /RESIDENT &quot;Fichier&quot; : crée un 
+fichier résident ayant pour nom 'Fichier'. 
+<br>
+<br>
+-i, --import, /IMPORT &quot;Fichier&quot;: crée un fichier d'importation 
+au nom de fichier donné. Seulement un seul bloc  Import/EndImport 
+autorisé dans le fichier. Les fonctions importées seront chargées 
+automatiquement pour tous les projets de PureBasic. 
+<br>
+<br>
+-l, --linenumbering, /LINENUMBERING: ajoute des 
+informations concernant les lignes et les fichiers 
+sources à l'exécutable, qui peut le ralentir 
+considérablement. Ce qui permet à la 
+<a href="../onerror/index.html">bibliothèque OnError</a> 
+d'indiquer le fichier et le numéro de ligne en cas 
+d'erreur. 
+<br>
+<br>
+-q, --quiet, /QUIET: désactive toutes les éditions de 
+texte inutiles. Très pratique lorsque vous utilisez 
+un éditeur tiers. 
+-sb, --standby, /STANDBY: charge le compilateur en 
+mémoire, en attente de commandes externes (éditeurs, 
+scripts...). Plus d'informations sur l'utilisation 
+de ce paramètre est disponible dans le fichier 
+'CompilerInterface.txt' du répertoire 'SDK' de 
+PureBasic. 
+<br>
+<br>
+-ir, --ignoreresident, /IGNORERESIDENT &quot;Fichier&quot;: 
+ne charge pas le fichier résident au démarrage du 
+compilateur. C'est utile pour mettre à jour un 
+fichier résident déjà existant. 
+<br>
+<br>
+-co, --constant, /CONSTANT Nom=Valeur: crée la constante 
+spécifiée avec la valeur indiquée. <br>
+Exemple: 'pbcompiler test.pb /CONSTANT MaConstante=10'. 
+La constante <font color="#924B72">#MaConstante</font> sera créée automatiquement 
+avec la valeur 10 avant de commencer la compilation. 
+<br>
+<br>
+-t, --thread, /THREAD: utilise les routines 
+<a href="../thread/index.html">thread-safe</a> pour toutes la 
+gestion des chaînes de caractères et pour toutes les 
+commandes. 
+<br>
+<br>
+-s, --subsystem, /SUBSYSTEM &quot;Nom&quot;: utilise le sous-système spécifié pour remplacer des commandes 
+internes. Le nom du sous-système n'est pas sensible à la casse. 
+Pour plus d'informations, voir <a href="../reference/subsystems.html">sous-systèmes</a>. 
+-k, --check, /CHECK: vérifie la syntaxe uniquement, 
+ne créer pas ni ne lance l'exécutable. 
+<br>
+<br>
+-z, --optimizer, /OPTIMIZER: Active l'optimiseur de code. 
+<br>
+<br>
+-c, --commented, /COMMENTED : Crée un fichier de sortie commenté 'purebasic.asm' ou 'purebasic.c' lors de la création d'un exécutable. 
+Ce fichier peut être réassemblé avec l'option '--reasm' même après des modifications. 
+Cette option est réservée aux programmeurs avancés. <br>
+<br>
+-ra, --reasm, /REASM : Réassemble le fichier 'purebasic.asm' ou 'purebasic.c' et crée un exécutable. Cela permet d'utiliser l'option '--commented', 
+de modifier la sortie générée et de créer à nouveau l'exécutable. <br>
+Cette option est réservée aux programmeurs avancés. <br>
+<br>
+-pp, --preprocess, /PREPROCESS &quot;Fichier&quot;: Prétraite 
+le code source et écrit la sortie dans le &quot;Fichier&quot; 
+spécifié. <br>
+Le fichier traité est un fichier unique avec toutes 
+les macro déployées, les directives de compilation sont 
+prises en compte et le multiligne intégré. Cela permet 
+une analyse plus facile d'un fichier source PureBasic, 
+car tout est déployé et disponible dans un format de 
+fichier plat 'flat'. Les commentaires ne sont pas inclus 
+par défaut, sauf avec l'option  /COMMENTED. Le fichier 
+prétraité peut être recompilé comme n'importe quel 
+autre fichier source PureBasic pour créer l'exécutable 
+final. 
+<br>
+<br>
+-ls, --liststructures, /LISTSTRUCTURES : crée un fichier avec toutes les structures intégrées connues 
+par le compilateur. Le nom du fichier peut être spécifié avec '--output'. 
+<br>
+<br>
+-lf, --listfunction, /LISTFUNCTIONS : crée un fichier avec toutes les commandes purebasic intégrées 
+connues par le compilateur. Le nom du fichier peut être spécifié avec '--output'. 
+<br>
+<br>
+-li, --listinterfaces, /LISTINTERFACES : crée un fichier avec toutes les interfaces intégrées 
+connues par le compilateur. Le nom du fichier peut être spécifié avec '--output'. 
+<br>
+<br>
+-qs, --querystructure, /QUERYSTRUCTURE &quot;nom&quot; : crée un fichier avec la définition de la structure. 
+Le nom du fichier peut être spécifié avec '--output. 
+<br>
+<br>
+-g, --language, /LANGUAGE \&quot;language\&quot;: utilise la langue 
+spécifiée pour les messages d'erreur du compilateur. 
+<br>
+<br>
+-v, --version, /VERSION: Affiche la version du compilateur. 
+<br>
+<br>
+<b>Exemples:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">    CLI&gt; pbcompiler codesource.pb
+  </font></pre>
+
+Le compilateur compile le code 'codesource.pb' et l'exécute. 
+
+<br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">    CLI&gt; pbcompiler codesource.pb /DEBUGGER
+  </font></pre>
+
+Le compilateur compile le code 'codesource.pb' 
+et l'exécute avec le débogueur actif. 
+<br>
+<br>
+
+</blockquote>
+<p><b>Paramètres du compilateur spécifiques à Windows</b></p><blockquote>
+
+
+/ICON &quot;Icone.ico&quot; : ajoute l'icône spécifiée 
+dans l'exécutable. 
+<br>
+<br>
+/DLL: le fichier de sortie est une <a href="../reference/dll.html">DLL</a>. 
+<br>
+<br>
+/XP: ajoute le support des thèmes ('skins') pour Windows. 
+<br>
+<br>
+/MMX, /3DNOW, /SSE or /SSE2: génère un exécutable spécifique 
+à un type de processeur. Si une routine est disponible 
+dans une version optimisée pour le type de processeur 
+choisi, elle sera utilisée. 
+Du coup, l'exécutable ne fonctionnera correctement que 
+sur ce type de processeur. 
+<br>
+<br>
+/DYNAMICCPU: génère un exécutable qui contient toutes 
+les versions des routines spécialement optimisées 
+pour un type de processeur. Quand le programme se lance, 
+il déterminera dynamiquement le type du processeur et 
+choisira les routines les plus adaptées. Cela produit 
+un exécutable plus gros mais plus rapide. 
+<br>
+<br>
+/RESOURCE &quot;Fichier&quot;: ajoute un fichier de resource 
+Windows (.rc) à l'exécutable ou la DLL. Ce fichier ne 
+doit pas être un fichier resource compilé, mais un 
+fichier texte contenant des directives. 
+Il est possible de ne specifier qu'un seul fichier 
+resource, mais il peut en inclure d'autre si 
+besoin est, à l'aide des directives adéquates. 
+<br>
+/LINKER &quot;FichierCommandes&quot;: spécifie un fichier qui 
+contient des commandes à passer directement au linker. 
+Sur Windows, PureBasic utilise le linker de PellesC 
+(polink), plus d'informations à propos des options 
+possible sont disponible dans l'aide de PellesC. 
+<br>
+<br>
+Les deux options de compilation suivantes sont 
+nécessaires pour créer des programmes fonctionnant 
+sur Microsoft Vista ou au-dessus (Windows 7/8/10). 
+Ces deux options sont en rapport avec le 'manifeste' 
+inclus, donc elles sont ignorées avec les versions 
+plus anciennes de Windows. 
+Si aucune de ces deux options ne s ont utilisées, 
+l'exe s'exécutera en tant qu'utilisateur normal, 
+mais avec la virtualisation activée (redirection du 
+registre et des fichiers). Il est recommandé d'utiliser 
+le commutateur /USER pour désactiver la virtualisation 
+pour tous les programmes qui ont les privilèges d'utilisateur 
+standard, car c'est seulement destinés à la compatibilité 
+des programmes plus anciens. Ces options sont également 
+disponibles dans le menu 
+<a href="../reference/ide_compiler.html">Compilateur/Options du compilateur</a> 
+de l'IDE. 
+<br>
+<br>
+/ADMINISTRATOR: oblige le programme à demander des 
+privilèges d'administrateur au démarrage. 
+Le programme ne fonctionnera pas sans ça. Cette 
+option est nécessaire. Note: Vous pouvez également 
+<a href="../reference/ide_debugger.html">déboguer</a> 
+les programmes avec cette option, mais seulement 
+avec la version autonome du débogueur (car il doit 
+fonctionner avec des droits élevés lui aussi). 
+<br>
+<br>
+/USER: le programme sera exécuté avec les droit de 
+l'utilisateur qui l'a lancé. Virtualisation pour 
+l'exe est désactivée. 
+<br>
+<br>
+/DPIAWARE: Activer le support DPI sur l'exécutable. <br>
+<br>
+<br>
+/DLLPROTECTION: Active la protection contre le préchargement des DLL sur l'exécutable. 
+Cela empêche que les DLL système soient d'abord recherchées dans le répertoire du programme plutôt 
+que dans le répertoire System32 du système d'exploitation Windows. 
+<br>
+<br>
+/UCRT : Utilise le CRT universel dynamique lors de la création de l'exécutable ou de 
+la DLL. Il est recommandé lors de la création d'un exécutable ou d'une DLL qui n'a 
+pas besoin de prendre en charge une version Windows antérieure à Windows 10.<br>
+L'exécutable ou la DLL résultante sera plus petite et bénéficiera de correctifs de 
+sécurité automatiques du CRT lorsque Microsoft le mettra à jour. Cette option est 
+toujours activée sur PureBasic pour Windows arm64. 
+<br>
+<br>
+
+<b>Exemples:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">    CLI&gt; pbcompiler &quot;C:\Project\Source\DLLSource.pb&quot; /EXE &quot;C:\Projet\projet.dll&quot; /DLL
+  </font></pre>
+Le compilateur compile le code 'DLLSource.pb' 
+(ici avec le chemin complet) et crée la DLL 
+&quot;projet.dll&quot; à l'emplacement indiqué. 
+<br>
+<br>
+
+</blockquote>
+<p><b>Paramètres du compilateur spécifiques à Linux</b></p><blockquote>
+
+
+-so ou --sharedobject &quot;fichier&quot;:  Créer une 
+bibliothèque dynamique (objet partagé). 
+<br>
+<br>
+-h ou --help: affiche une aide simplifiée 
+sur le compilateur. 
+<br>
+<br>
+-mmx, -3dnow, -sse ou -sse2: génère un exécutable 
+spécifique à un type de processeur. Si une routine 
+est disponible dans une version optimisée pour le 
+type de processeur choisi, elle sera utilisée. 
+Du coup, l'exécutable ne fonctionnera correctement 
+que sur ce type de processeur. 
+<br>
+<br>
+-dc ou --dynamiccpu: génère un exécutable qui contient 
+toutes les versions des routines spécialement optimisées 
+pour un type de processeur. Quand le programme se 
+lance, il déterminera dynamiquement le type du 
+processeur et choisira les routines les plus adaptées. 
+Cela produit un exécutable plus gros mais plus rapide. 
+<br>
+<br>
+
+
+</blockquote>
+<p><b>Paramètres du compilateur spécifiques à OSX</b></p><blockquote>
+
+
+-dl ou --dylib &quot;Fichier&quot;: crée une bibliothèque 
+dynamique (dylib). 
+<br>
+<br>
+-n ou --icon &quot;Icone.icns&quot;: ajoute une icon à 
+l'application. 
+<br>
+<br>
+-f ou --front: met le processus à l'avant plan 
+lors de son lancement. 
+<br>
+<br>
+-ibp ou --ignorebundlepath: ne pas utiliser le 
+chemin du bundle comme répertoire courant. 
+<br>
+<br>
+</blockquote>
+</font></body></html>

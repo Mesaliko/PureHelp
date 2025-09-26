@@ -1,0 +1,489 @@
+<html><head><title>Using the debugger</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Using the debugger</font></b></p>
+
+
+PureBasic provides a powerful debugger that helps you find mistakes and bugs in your 
+source code. It lets you control the program execution, watch your <a href="../reference/variables.html">variables</a>, 
+<a href="../reference/dim.html">arrays</a> or <a href="../reference/newlist.html">lists</a> or display 
+debug output of your programs. It also provides advanced 
+features for <a href="../reference/inlinedasm.html">assembly</a> programmer to examine and modify the CPU registers or view the 
+program stack, or the Memory of your program. It also provides the possibility to debug a program remotely 
+over the network. 
+
+<br>
+<br>
+
+To enable the debugger for your program, you can select &quot;Use Debugger&quot; from the debugger 
+menu, or set it in your programs Compiler options. By using the &quot;Compile with Debugger&quot; 
+command from the Compiler menu, you can enable the debugger for just one compilation. 
+
+<br>
+<br>
+
+You can directly use <a href="../reference/debugger.html">debugger commands</a> in your source, such 
+as <b><font color="#006666">CallDebugger</font></b>, <b><font color="#006666">Debug</font></b>, <b><font color="#006666">DebugLevel</font></b>, <b><font color="#006666">DisableDebugger</font></b> and 
+<b><font color="#006666">EnableDebugger</font></b>. 
+
+<br>
+<br>
+
+
+The PureBasic debugger comes in 3 forms: 
+
+<br>
+<br>
+
+A Debugger integrated directly with the IDE, for an easy to use, quick way to debug 
+your programs directly from the programming environment. This debugger also 
+provides the most features. 
+
+<br>
+<br>
+
+A separate, standalone debugger, that is useful for some special purposes (for example, 
+when the same program must be executed and debugged several times at once) or to be used 
+with third party code Editors. It provides most of the features of the integrated IDE debugger, 
+but because it is separate from the IDE, some of the efficiency of the direct access from the IDE is lost. 
+The standalone debugger can be used to debug programs remotely through a network connection. 
+
+
+<br>
+<br>
+
+A <a href="../console/index.html">console</a> only debugger. This debuggers primary use is for testing non-graphical 
+environment like on Linux systems without an X server, or to remotely develop through ssh. 
+
+<br>
+<br>
+
+The type of debugger that is used can be selected in the <a href="../reference/ide_preferences.html">preferences</a>. 
+
+<br>
+<br>
+
+All this debugging functionality however comes at a price. Running a program in debug mode is 
+significantly slower in its execution that running it without the debugger. This should be no problem 
+however, since this is for testing only anyway. 
+<br>
+If you need to use the debugger, but have some parts in you program that require the full execution 
+speed, you can disable the debugger in just that section with the <b><font color="#006666">DisableDebugger</font></b> / 
+<b><font color="#006666">EnableDebugger</font></b> keywords. 
+
+
+<p><b>The Debugger integrated into the IDE</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_integrated.png"></p>
+
+You can access all the debugger features while the program is running from the debugger menu, or the 
+corresponding toolbar buttons or shortcuts. 
+
+<br>
+<br>
+
+While you are debugging your program, all the source files that belong to that program (also included files) 
+will be locked to read-only until the program has finished. This helps to ensure that the code 
+that is marked as the currently executed one is has not actually been modified already 
+without a recompilation. 
+
+<br>
+<br>
+
+Note that a program can be run only one time at once in IDE debugger mode. If you try to 
+executed it again, you are given the option to execute it with the standalone Debugger. 
+
+
+
+
+<br>
+<br>
+
+<b>Tip:</b> 
+<br>
+The debugger menu is also added to the system-menu of the Main IDE window (the menu you 
+get when clicking the PB icon in the left/top of the window). This allows you to access 
+the debugger menu also from the Taskbar, by right-clicking on the Taskbar-Icon of the IDE. 
+
+
+
+
+</blockquote>
+<p><b>Program Control</b></p><blockquote>
+
+
+
+There are functions for basic control of the running program. You can halt 
+the execution to examine variables and the code position or let the code execute 
+line by line to follow the program flow. While the program is halted, the line that 
+is currently being executed is marked in your source code (with very light-blue 
+background color in the default colors). 
+<br>
+<br>
+The state of the program can be viewed in the IDE status bar, and in the Error log area. 
+
+<br>
+<br>
+
+Menu commands for program control: 
+
+<br>
+<br>
+
+<b>Stop</b> 
+<br>
+Halts the Program and displays the current line. 
+
+<br>
+<br>
+
+<b>Continue</b> 
+<br>
+Continues the program execution until another stop condition is met. 
+
+<br>
+<br>
+
+<b>Kill Program</b> 
+<br>
+This forces the program to end, and closes all associated debugger windows. 
+
+<br>
+<br>
+
+<b>Step</b> 
+<br>
+This executes one line of source code and then stops the execution again. 
+
+<br>
+<br>
+
+<b>Step &lt;n&gt;</b> 
+<br>
+This will execute a number of steps that you can specify and then stop the execution again. 
+
+<br>
+<br>
+
+<b>Step Over</b> 
+<br>
+This will execute the current line in the source and then stop again, just like the normal 'Step'. 
+The difference is that if the current line contains calls to <a href="../reference/procedures.html">procedures</a>, the execution will not 
+stop inside these procedures like it does with the normal 'Step', but it will execute the whole 
+procedure and stop after it returned. This allows to quickly skip procedures in step mode. 
+
+<br>
+<br>
+
+<b>Step Out</b> 
+<br>
+This will execute the remaining code inside the current <a href="../reference/procedures.html">procedure</a> and stop again after the procedure 
+has returned. If the current line is not in any procedure, a normal 'Step' will be done. 
+
+</blockquote>
+<p><b>Line Breakpoints</b></p><blockquote>
+
+
+Breakpoints are another way to control the execution of your program. With the 
+Breakpoint menu command, you mark the currently selected line as a breakpoint 
+(or remove any breakpoint that exists in that line). 
+<br>
+<br>
+When the execution of the code reaches that line, it will stop at this point. 
+Note that if you select a non-executable line (such as an empty line or a Structure definition), 
+it will halt the execution on the next executable line after that. 
+
+<br>
+<br>
+
+After the execution of your program has stopped at a breakpoint, you can use any 
+of the Program control commands to continue/end the execution. 
+
+<br>
+<br>
+
+Breakpoints can be set and removed dynamically, while your program is running, 
+or while you are editing your source code. With the &quot;Clear Breakpoints&quot; command, you 
+can clear all breakpoints in a source file. 
+
+<br>
+<br>
+
+Note: You can also set/remove Breakpoints by holding down the Alt Key and clicking on 
+the border that contains the Breakpoint marks. 
+
+
+</blockquote>
+<p><b>Data Breakpoints</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_databreak.png"></p>
+
+In addition to the line specific breakpoints, the debugger also provides data breakpoints. 
+Data breakpoints halt the program if a given condition is met. This way it is easy to find 
+out when a variable or other value in the program changes and halt the program if that happens. 
+The condition can be any <a href="../reference/general_rules.html">PureBasic expression</a> that can be evaluated to true or false. 
+This can be anything that could be put after an <b><font color="#006666">If</font></b> keyword, including <a href="../reference/variables.html">logical operators</a> 
+such as <b><font color="#006666">And</font></b>, <b><font color="#006666">Or</font></b> or <b><font color="#006666">Not</font></b>. Most functions of the 
+<a href="../math/index.html">Math</a>, <a href="../memory/index.html">Memory</a> and <a href="../string/index.html">String</a> 
+libraries as well as all object validation functions in the form IsXXX() and the XxxID functions 
+for getting the OS identifiers for an object are also available. 
+
+<br>
+<br>
+Example conditions: 
+<pre><font face="Courier New, Courier, mono" size="2">  MyVariable$ &lt;&gt; &quot;Hello&quot; <b><font color="#006666">Or</font></b> Counter &lt; 0  <font color="#006666">; halt if MyVariable$ changes from &quot;Hello&quot; or if the Counter falls below zero</font>
+<font color="#006666">  PeekL</font>(*SomeAddress+500) &lt;&gt; 0           <font color="#006666">; halt if the long value at the given memory location is not equal to zero</font>
+</font></pre>
+
+Data breakpoints can be added using the Data Breakpoint option from the Debugger menu. 
+They can be limited to a specific <a href="../reference/procedures.html">procedure</a> or they can be added for all code. The special 
+&quot;Main&quot; entry of the procedure selection specifies that the data breakpoint should only 
+be checked when the execution is not in any procedure. 
+
+<br>
+<br>
+
+The status column shows the status of all breakpoint conditions on their last evaluation. This 
+can be true, false or an error if the condition is not a valid expression. Once a condition 
+is evaluated to true, the program execution will be halted. This condition is automatically 
+removed from the list as soon as the program continues, so that it does not halt the program 
+again immediately. 
+
+<br>
+<br>
+
+Note: Checking for data breakpoints slows down the program execution because the breakpoint 
+conditions have to be re-evaluated for every executed line of code to check if the condition is met. 
+So data breakpoints should only be added when needed to keep the program execution fast otherwise. 
+Limiting a data breakpoint to a certain procedure also increases the speed because the check then only 
+affects the given procedure and not the entire program. 
+
+
+</blockquote>
+<p><b>Examining variables during runtime</b></p><blockquote>
+
+
+The value of a variable can be very quickly viewed while the program is running by placing the 
+mouse cursor over a variable in the source code and waiting for a brief moment. If the variable is 
+currently in scope and can be displayed, its value will be shown as a tool-tip on the mouse location. 
+
+<p><img src="images/ide_debugger_showstructure.png"></p>
+
+
+More complex <a href="../reference/general_rules.html">expressions</a> (for example <a href="../reference/dim.html">array</a> fields) 
+can be viewed by selecting them with the mouse and placing the mouse cursor over the selection. 
+
+<p><img src="images/ide_debugger_showexpression.png"></p>
+
+
+The <a href="../reference/ide_debugtools.html">debugger tools</a> also offer a number of ways to examine the content 
+of <a href="../reference/variables.html">variables</a>, <a href="../reference/dim.html">arrays</a> or <a href="../list/index.html">lists</a>. 
+
+
+
+</blockquote>
+<p><b>Errors in the Program</b></p><blockquote>
+
+
+If the debugger encounters an error in your program, it will halt the execution, 
+mark the line that contains the error (red background in the default colors) and 
+display the error-message in the error log and the status bar. 
+
+<br>
+<br>
+
+At this point, you can still examine the variables of your program, the callstack 
+or the memory, however other features like the Register display or stack trace are 
+not available after an error. 
+<br>
+<br>
+If the error is determined to be fatal (like an invalid memory access, or division 
+by 0), you are not allowed to continue the execution from this point. If the error 
+was reported by a PureBasic library, you are allowed to try to continue, but in many 
+cases, this may lead to further errors, as simply continuing just ignores the displayed error. 
+
+<br>
+<br>
+
+After an error (even fatal ones), you have to use the &quot;Kill Program&quot; command to end 
+the program and continue editing the source code. The reason why the program is not 
+automatically ended is that this would not allow to use the other debugger features 
+(like variable display) to find the cause of the error. 
+<br>
+<br>
+Note: you can configure the debugger to automatically kill the program on any error. 
+See <a href="../reference/ide_preferences.html">Customizing the IDE</a> for that. 
+
+</blockquote>
+<p><b>Debugger warnings</b></p><blockquote>
+
+
+In some cases the debugger cannot be sure whether a given parameter is actually an error 
+in the program or was specified like that on purpose. In such a case, the debugger issues a warning. 
+By default, a warning will be displayed with file and line number in the error log and the line will 
+be marked (orange in the default colors). This way the warnings do not go unnoticed, but they do 
+not interrupt the program flow. 
+
+
+There is also the option of either ignoring all warnings or treating all warnings like errors 
+(stopping the program). The handling of debugger warnings can be customized globally in the 
+<a href="../reference/ide_preferences.html">Preferences</a> or for the current compiled program in the 
+<a href="../reference/ide_compiler.html">Compiler options</a>. 
+
+</blockquote>
+<p><b>The Error log</b></p><blockquote>
+
+
+The error log is used to keep track of the compiler errors, as well as the messages 
+from the debugging. Messages are always logged for the file they concern, so when an 
+error happens in an <a href="../reference/includes.html">included file</a>, this file will be displayed, 
+and a message logged for it. 
+
+<br>
+<br>
+
+The &quot;Error log&quot; submenu of the Debugger menu provides functions for that: 
+
+<br>
+<br>
+
+<b>Show error log</b> 
+<br>
+Shows / hides the log for the current source. 
+
+<br>
+<br>
+
+<b>Clear log</b> 
+<br>
+Clears the log for this file. 
+
+<br>
+<br>
+
+<b>Copy log</b> 
+<br>
+Copies the contents of the error log to the clipboard. 
+
+<br>
+<br>
+
+<b>Clear Error marks</b> 
+<br>
+After you have killed the program, any error mark in the source file will remain. 
+This is to help you identify the line that caused the problem and solve it. The 
+&quot;Clear error Marks&quot; command can be used to remove these marks. 
+<br>
+<br>
+You can also configure the IDE to automatically clean the error marks when the 
+program ends. See <a href="../reference/ide_preferences.html">Configuring the IDE</a> for that. 
+
+
+
+
+</blockquote>
+<p><b>The Standalone Debugger</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_extern.png"></p>
+
+The standalone debugger is very similar to the one in the IDE, and will be explained here only briefly: 
+<br>
+<br>
+On the Debugger window, you have control buttons to carry out the basic program control, 
+as described above. The &quot;Step&quot; button carries out as many steps as are set in the edit 
+field next to it. Closing the Debugger with &quot;Quit&quot; or the close button will also 
+kill the debugged program. 
+
+<br>
+<br>
+
+The Error log area can be hidden by the up arrow button on the right side in order 
+to make the debugger window smaller. 
+
+<br>
+<br>
+
+The code view is used to display the currently executed code line as well as any errors 
+or breakpoints. Use the combo box above it to select the included file to view. The &quot;Set Breakpoint&quot;, 
+&quot;Remove Breakpoint&quot; and &quot;Clear Breakpoints&quot; can be used to manage breakpoints in the 
+currently displayed source file. The code view also provides the mouse-over feature from the integrated 
+debugger to quickly view the content of a variable. 
+
+<br>
+<br>
+
+The debugger tools can be accessed from the buttons below the code area. Their usage is the same as with the 
+integrated IDE debugger. 
+
+<br>
+<br>
+
+Note: The Standalone Debugger has no configuration of its own. It will use the debugger settings and 
+coloring options from the IDE. So if you use a third-party Editor and the standalone debugger, you 
+should run the IDE at least once to customize the Debugger settings. 
+
+<br>
+<br>
+
+<b>Executing the standalone debugger from the command-line:</b> 
+<br>
+
+To execute a program compiled on the command-line with enabled debugger (-d or /DEBUGGER switch), 
+call the debugger like this: 
+<br>
+<br>
+
+pbdebugger &lt;executable file&gt; &lt;executable command-line&gt; 
+
+<br>
+<br>
+If you execute a debugger-enabled executable from the command-line directly, it will only 
+use the command-line debugger. 
+
+</blockquote>
+<p><b>The command-line debugger:</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_console.png"></p>
+
+The command-line debugger is not a part of the IDE and therefore not explained in detail here. 
+<br>
+<br>
+While the program is running, hit Ctrl+C in the console to open a debugger console prompt. 
+In this prompt type &quot;help&quot; to get an overview of all available commands. 
+Type &quot;help &lt;commandname&gt;&quot; for a more detailed description of the command. 
+
+
+</blockquote>
+<p><b>Debugging threaded programs:</b></p><blockquote>
+
+
+To use the debugger with a program that creates <a href="../thread/index.html">threads</a>, the 'Create thread-safe executable' Option must be set in the 
+<a href="../reference/ide_compiler.html">Compiler options</a>, as otherwise the information displayed by the debugger concerning 
+line numbers, errors, local variables and such could be wrong due to the multiple threads. 
+
+<br>
+<br>
+
+The following features and limitations should be considered when debugging a threaded program: 
+
+<br>
+<br>
+
+While the program is running, the variable viewer, callstack display or assembly debugger will 
+display information on the main thread only. When the program is stopped, they display information 
+on the thread they were stopped in. So to examine local variables or the callstack of a thread, 
+the execution must be halted within that thread (by putting a breakpoint or a <b><font color="#006666">CallDebugger</font></b> statement there). 
+The various 'Step' options always apply to the thread where the execution was last stopped in. 
+<br>
+If an error occurs, the execution is halted within that thread, so any information displayed by the 
+variable viewer or callstack display is of the thread that caused the error. 
+<br>
+The watchlist only watches local variables of the main thread, not those of any additional running threads. 
+<br>
+<br>
+While the execution is stopped within one thread, the execution of all other threads is suspended as well. 
+</blockquote>
+</font></body></html>

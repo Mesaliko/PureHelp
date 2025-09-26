@@ -1,0 +1,89 @@
+<html><head><title>DrawRotatedText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawRotatedText()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>DrawRotatedText</b></font>(X.d, Y.d, Texte$, Angle.f [, Couleur])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Affiche un texte avec un angle donné sur la surface de dessin en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X.d, Y.d</i></td>
+<td width="90%"> 
+L'emplacement du coin en haut et à gauche du texte.<br>
+<br>
+C'est aussi le centre de rotation du texte. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Le texte à dessiner. 
+
+</td></tr>
+<tr><td><i>Angle.f</i></td>
+<td> 
+L'angle de rotation en degrés 
+(sens anti-horaire). 
+
+</td></tr>
+<tr><td><i>Couleur (optionnel)</i></td>
+<td> 
+La couleur du texte. <br>
+<br>
+Si ce paramètre n'est pas spécifié 
+alors la couleur par défaut <a href="frontcolor.html">FrontColor()</a> 
+sera utilisée. 
+<br>
+<br>
+Cette couleur peut être au format <a href="rgb.html">RGB()</a> 
+ou <a href="rgba.html">RGBA()</a>. 
+<br>
+<br>
+Le fond du texte est toujours transparent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour avoir une sortie de texte de type gadget, le mode de dessin <font color="#924B72">#PB_2DDrawing_NativeText</font> 
+peut être utilisé (Voir <a href="drawingmode.html">DrawingMode()</a>). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;DrawRotatedText Exemple&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> Angle = 0 <b><font color="#006666">To</font></b> 360 <b><font color="#006666">Step</font></b> 45
+<font color="#006666">        DrawRotatedText</font>(100, 100, &quot;Hello World!&quot;, Angle,<font color="#006666"> RGB</font>(0, 0, 0))
+      <b><font color="#006666">Next</font></b> Angle
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/rotatedtext.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="drawtext.html">DrawText()</a>, <a href="drawingfont.html">DrawingFont()</a>, <a href="frontcolor.html">FrontColor()</a>, <a href="drawingmode.html">DrawingMode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=drawimage.html>DrawImage()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawtext.html>DrawText()</a> -><br><br>
+
+</body></html>

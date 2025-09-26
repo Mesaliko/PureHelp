@@ -1,0 +1,75 @@
+<html><head><title>For : Next</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">For : Next</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">For</font></b> &lt;Variable&gt; = &lt;Ausdruck1&gt; <b><font color="#006666">To</font></b> &lt;Ausdruck2&gt; [<b><font color="#006666">Step</font></b> &lt;Konstante&gt;]
+  ...
+<b><font color="#006666">Next</font></b> [&lt;Variable&gt;]
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">For : Next</font></b> wird benutzt, um eine Schleife mit den vorgegebenen Parametern zu erstellen. 
+In jeder Schleife wird der Wert der &lt;Variable&gt; um den Faktor 1 erhöht 
+(oder um den &quot;Step Wert&quot;, wenn ein <b><font color="#006666">Step</font></b> Wert angegeben wurde). Wenn die &lt;Variable&gt; über 
+dem Wert von &lt;Ausdruck2&gt; ist, endet die Schleife. <br>
+<br>
+Mit dem <a href="../reference/break_continue.html">Break</a> Befehl kann die <b><font color="#006666">For : Next</font></b> Schleife (vorzeitig) 
+verlassen werden, mit dem <a href="../reference/break_continue.html">Continue</a> Befehl kann das Ende des aktuellen Schleifendurchlaufs übersprungen werden. 
+<br>
+<br>
+Die <b><font color="#006666">For : Next</font></b> Schleife arbeitet ausschließlich mit <a href="../reference/variables.html">Integer-Werten</a>, sowohl bei den 
+Ausdrücken als auch der <b><font color="#006666">Step</font></b> Konstante. Die <b><font color="#006666">Step</font></b> Konstante kann auch negativ sein. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 10 
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+In diesem Beispiel wird die Programmschleife 11 mal (0 bis 10) durchlaufen und dann beendet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 10 <b><font color="#006666">To</font></b> 1 <b><font color="#006666">Step</font></b> -1
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+In diesem Beispiel wird die Programmschleife 10 mal (10 bis 1 rückwärts) durchlaufen und dann beendet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 2
+  b = 3 
+  <b><font color="#006666">For</font></b> k = a+2 <b><font color="#006666">To</font></b> b+7 <b><font color="#006666">Step</font></b> 2
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b> k  
+</font></pre>
+
+Hier führt das Programm 4 Schleifendurchläufe vorm Beenden aus (k wird in jeder Schleife um den 
+Wert 2 erhöht, so ergeben sich folgende Werte von k: 4-6-8-10). Das &quot;k&quot; nach dem &quot;Next&quot; 
+kennzeichnet, dass &quot;Next&quot; die &quot;For k&quot; Schleife beendet. Wird eine andere Variable angegeben, 
+quittiert dies der Compiler mit einer Fehlermeldung. Es kann - je nach Situation - nützlich sein, 
+mehrere &quot;For/Next&quot;-Schleifen zu verschachteln. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> x=0 <b><font color="#006666">To</font></b> 10 
+    <b><font color="#006666">For</font></b> y=0 <b><font color="#006666">To</font></b> 5
+      <b><font color="#006666">Debug</font></b> &quot;x: &quot; + x + &quot; y: &quot; + y
+    <b><font color="#006666">Next</font></b> y
+  <b><font color="#006666">Next</font></b> x
+</font></pre>
+
+<b>Hinweis:</b> Beachten Sie, dass in PureBasic der Wert des &lt;Ausdruck2&gt; ('To' Wert) auch 
+innerhalb der For : Next Schleife geändert werden kann. Dies kann bei falscher Anwendung zu 
+Endlos-Schleifen führen. 
+
+</blockquote>
+</font></body></html>

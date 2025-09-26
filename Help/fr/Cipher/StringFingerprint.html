@@ -1,0 +1,101 @@
+<html><head><title>StringFingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StringFingerprint()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>StringFingerprint</b></font>(Texte$, Plugin [, Bits [, Format [, CleHmac$ [,FormatCleHmac]]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'empreinte d'une chaîne de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Texte$</i></td>
+<td width="90%"> 
+La chaîne de caractères. 
+
+</td></tr>
+<tr><td><i>Plugin</i></td>
+<td> 
+Le plugin à utiliser. Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CRC32</font>: utilise l'algorithme CRC32. <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_MD5</font>  : utilise l'algorithme MD5.   <a href="usemd5fingerprint.html">UseMD5Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA1</font> : utilise l'algorithme SHA1.  <a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA2</font> : utilise l'algorithme SHA2.  <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : utilise l'algorithme SHA3.  <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+</font></pre>
+Le plugin peut être combiné avec l'indicateur <font color="#924B72">#PB_Cipher_HMAC</font> pour calculer un HMAC (code 
+d'authentification de message basé sur le hachage) au lieu d'une empreinte digitale normale. 
+Dans ce cas, le paramètre &quot;CleHmac$&quot; est également nécessaire. 
+
+</td></tr>
+<tr><td><i>Bits (optionnel)</i></td>
+<td> 
+Le nombre de bits à utiliser pour l'empreinte. Supporté seulement avec les plugins suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_SHA2</font> : peut être 224, 256 (par defaut), 384 ou 512.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : peut être 224, 256 (par defaut), 384 or 512.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Format (optionnel)</i></td>
+<td> 
+Le format de la chaîne de caractères à utiliser avant 
+le 'hashage'.<br>
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>    : la chaîne sera 'hashée' au format UTF8 (par défaut).
+  <font color="#924B72">#PB_Ascii</font>   : la chaîne sera 'hashée' au format ASCII.
+  <font color="#924B72">#PB_Unicode</font> : la chaîne sera 'hashée' au format Unicode (UTF16).
+</font></pre>
+
+</td></tr>
+<tr><td><i>CleHmac$ (optionnel)</i></td>
+<td> 
+La clé secrète à utiliser dans le calcul HMAC. 
+<br>
+<br>
+Ce paramètre n'est utilisé que si le <font color="#924B72">#PB_Cipher_HMAC</font> est ajouté au paramètre du plugin. 
+
+</td></tr>
+<tr><td><i>FormatCleHmac (optionnel)</i></td>
+<td> 
+Le format de chaîne à utiliser pour la clé HMAC. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Encoder la clé en ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Encoder la clé en UTF-8 (par défaut).
+  <font color="#924B72">#PB_Unicode</font>: Encoder la clé en Unicode
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'empreinte sous forme d'une chaîne 
+de caractères hexadécimale. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMD5Fingerprint</font>()
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;UnMotdePasse&quot;, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> HMAC</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseSHA2Fingerprint</font>()
+
+  <font color="#006666">; Utilise hmacSha256 avec la clé et le message en ascii.</font>
+  <font color="#006666">; Devrait être 4643978965ffcec6e6d73b36a39ae43ceb15f7ef8131b8307862ebc560e7f988.</font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;le message à hacher ici&quot;, <font color="#924B72">#PB_Cipher_SHA2</font>|<font color="#924B72">#PB_Cipher_HMAC</font>, 256, <font color="#924B72">#PB_Ascii</font>, &quot;la clé secrète partagée ici&quot;, <font color="#924B72">#PB_Ascii</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="filefingerprint.html">FileFingerprint()</a>, <a href="startfingerprint.html">StartFingerprint()</a>, <a href="fingerprint.html">Fingerprint()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=startfingerprint.html>StartFingerprint()</a> - <a href=index.html>Cipher Index</a> - <a href=usecrc32fingerprint.html>UseCRC32Fingerprint()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,116 @@
+<html><head><title>CreateCubicTexture</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateCubicTexture()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateCubicTexture</b></font>(#Texture, #Texture1, #Texture2, #Texture3, #Texture4, #Texture5, #Texture6)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle texture cubique en utilisant les textures spécifiées.<br>
+Les textures cubiques sont utiles pour créer des reflets du monde. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Texture</i></td>
+<td width="90%"> 
+Un numéro pour identifier la nouvelle texture. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé pour générer automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>#Texture1</i></td>
+<td> 
+La texture à utiliser pour la première face de la texture cubique. 
+
+</td></tr>
+<tr><td><i>#Texture2</i></td>
+<td> 
+La texture à utiliser pour la seconde face de la texture cubique. 
+
+</td></tr>
+<tr><td><i>#Texture3</i></td>
+<td> 
+La texture à utiliser pour la troisième face de la texture cubique. 
+
+</td></tr>
+<tr><td><i>#Texture4</i></td>
+<td> 
+La texture à utiliser pour la quatrième face de la texture cubique. 
+
+</td></tr>
+<tr><td><i>#Texture5</i></td>
+<td> 
+La texture à utiliser pour la cinquième face de la texture cubique. 
+
+</td></tr>
+<tr><td><i>#Texture6</i></td>
+<td> 
+La texture à utiliser pour la sixième face de la texture cubique. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la texture cubique a été créée avec succès, zéro sinon. 
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre #Texture, le nombre généré est renvoyé en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<font color="#924B72">#PB_Material_EnvironmentMap</font> doit être spécifié avec <a href="../material/setmaterialattribute.html">SetMaterialAttribute()</a> pour activer la réflexion cubique. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  InitEngine3D</font>() :<font color="#006666"> InitSprite</font>() :<font color="#006666"> InitKeyboard</font>()
+
+<font color="#006666">  OpenWindow</font>(0, 0,0, 800, 600, &quot;Texture cubique et reflets - [Esc] pour quitter&quot;, <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0,<font color="#006666"> WindowWidth</font>(0),<font color="#006666"> WindowHeight</font>(0), 0, 0, 0)
+
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;Examples/3D/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;Examples/3D/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">  Parse3DScripts</font>()
+
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">  MoveCamera</font>(0,0,0,-8)
+<font color="#006666">  CameraLookAt</font>(0,0,0,0)
+
+<font color="#006666">  CreateLight</font>(0,$ffffff, -100, 100, 50)
+<font color="#006666">  AmbientColor</font>($111111*2)
+<font color="#006666">  CameraBackColor</font>(0,$880044)
+
+<font color="#006666">  SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">  LoadTexture</font>(0,&quot;desert07_RT.jpg&quot;)
+<font color="#006666">  LoadTexture</font>(1,&quot;desert07_LF.jpg&quot;)
+<font color="#006666">  LoadTexture</font>(2,&quot;desert07_UP.jpg&quot;)
+<font color="#006666">  LoadTexture</font>(3,&quot;desert07_DN.jpg&quot;)
+<font color="#006666">  LoadTexture</font>(4,&quot;desert07_FR.jpg&quot;)
+<font color="#006666">  LoadTexture</font>(5,&quot;desert07_BK.jpg&quot;)
+<font color="#006666">  CreateCubicTexture</font>(10, 0, 1, 2, 3, 4, 5)
+
+<font color="#006666">  LoadTexture</font>(11, &quot;dirt.jpg&quot;)
+<font color="#006666">  CreateMaterial</font>(0,<font color="#006666"> TextureID</font>(11))
+<font color="#006666">  AddMaterialLayer</font>(0,<font color="#006666"> TextureID</font>(10), <font color="#924B72">#PB_Material_Add</font>)
+<font color="#006666">  SetMaterialAttribute</font>(0, <font color="#924B72">#PB_Material_EnvironmentMap</font>, <font color="#924B72">#PB_Material_ReflectionMap</font>, 1)
+
+<font color="#006666">  CreateTorus</font>(0,2,1,32,32)
+<font color="#006666">  CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+
+  <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">    ExamineKeyboard</font>()
+<font color="#006666">    RotateEntity</font>(0,1,1,1, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">    RenderWorld</font>()
+<font color="#006666">    FlipBuffers</font>()    
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>)
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createcubemaptexture.html>CreateCubeMapTexture()</a> - <a href=index.html>Texture Index</a> - <a href=createrendertexture.html>CreateRenderTexture()</a> -><br><br>
+
+</body></html>

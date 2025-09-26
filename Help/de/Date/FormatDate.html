@@ -1,0 +1,60 @@
+<html><head><title>FormatDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FormatDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>FormatDate</b></font>(Maske$, Datum.q)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt einen formatierten String vom angegebenen Datum zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Maske$</i></td>
+<td width="90%"> 
+Die für das Formatieren des Datums zu verwendende Maske. Die folgenden &quot;Tokens&quot; (reservierten Zeichen) 
+im Masken-String werden entsprechend des angegebenen Datums ersetzt: 
+<pre><font face="Courier New, Courier, mono" size="2">  %yyyy: wird durch den Jahres-Wert ersetzt, auf 4 Stellen.
+  %yy: wird durch den Jahres-Wert ersetzt, auf 2 Stellen.
+  %mm: wird durch den Monats-Wert ersetzt, auf 2 Stellen.
+  %dd: wird durch den Tages-Wert ersetzt, auf 2 Stellen.
+  %hh: wird durch den Stunden-Wert ersetzt, auf 2 Stellen.
+  %ii: wird durch den Minuten-Wert ersetzt, auf 2 Stellen.
+  %ss: wird durch den Sekunden-Wert ersetzt, auf 2 Stellen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Datum.q</i></td>
+<td> 
+Der zu verwendende Datumswert. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den maskierten String zurück, in dem alle Tokens durch ihre jeweiligen Datumswerte ersetzt werden, 
+sofern das Datum gültig war, andernfalls einen leeren String. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;J=%yyyy, M=%mm, T=%dd&quot;,<font color="#006666"> Date</font>()) <font color="#006666">; zeigt das aktuelle Datum in </font>
+                                                    <font color="#006666">; der Form &quot;J=2010, M=04, T=16&quot;</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%dd.%mm.%yyyy&quot;,<font color="#006666"> Date</font>()) <font color="#006666">; zeigt das aktuelle Datum in </font>
+                                            <font color="#006666">; der Form &quot;16.04.2010&quot;</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%hh:%ii:%ss&quot;,<font color="#006666"> Date</font>())  <font color="#006666">; zeigt die aktuelle Zeit mittels dem 00:00:00 Format</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="date.html">Date()</a>, <a href="parsedate.html">ParseDate()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=dayofyear.html>DayOfYear()</a> - <a href=index.html>Date Inhaltsverzeichnis</a> - <a href=hour.html>Hour()</a> -><br><br>
+
+</body></html>

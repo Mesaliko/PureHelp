@@ -1,0 +1,108 @@
+<html><head><title>SetDragCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDragCallback()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetDragCallback</b></font>(@DragCallback())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Installe une fonction callback qui sera 
+appelée automatiquement quand une opération 
+de 'Drag &amp; Drop' sera démarrée depuis cette 
+application. La callback permet de modifier 
+le comportement par défaut fourni par 
+PureBasic, par exemple pour changer le 
+curseur via l'API du système d'exploitation. 
+La fonction callback est dépendante de l'OS. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@DragCallback()</i></td>
+<td width="90%"> 
+L'adresse d'une fonction à appeler lors du 
+début d'une opération de drag &amp; drop. 
+<br>
+La forme et l'objet du rappel dépend de l'OS. 
+<br>
+Elle doit prendre la forme suivante: 
+<br>
+<br>
+
+<b>Windows:</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragCallback</font>(Action.l)
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+La callback est appelée durant toute 
+l'opération de 'Drag &amp; Drop'. Le paramètre 
+'Action' indique quelle action serait prise 
+en compte si l'utilisateur relachait le 
+bouton de la souris à cet instant. Il peut 
+prendre une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: La donnée ne sera pas acceptée
+  <font color="#924B72">#PB_Drag_Copy</font>: La donnée sera copiée
+  <font color="#924B72">#PB_Drag_Move</font>: La donnée sera déplacée
+  <font color="#924B72">#PB_Drag_Link</font>: La donnée sera liée
+</font></pre>
+
+La callback permet de fournir un curseur ou 
+une image différente. Si c'est le cas, il 
+faudra renvoyer <font color="#924B72">#False</font>, sinon le curseur 
+par défaut sera utilisé. 
+</blockquote>
+
+
+<b>Linux:</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragCallback</font>(*Context.GdkDragContext, isStart.l)
+  
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+La callback est appelée seulement au début 
+et à la fin d'une opération de 'Drag &amp; Drop'. 
+Le paramètre '*Context' indique le contexte 
+gdk de cette opération, 'isStart' indique si 
+c'est le début ou la fin de l'opération. 
+La valeur renvoyée par la callback est 
+ignorée. 
+<br>
+<br>
+Des fonctions Gtk comme 
+gtk_drag_set_icon_pixbuf_() peuvent être 
+utilisées dans la callback pour définir une 
+image différente durant l'opération. 
+</blockquote>
+
+
+
+<b>MacOSX:</b> 
+<blockquote>
+
+Non supporté. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setdropcallback.html">SetDropCallback()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextdraggeditem.html>NextDraggedItem()</a> - <a href=index.html>DragDrop Index</a> - <a href=setdropcallback.html>SetDropCallback()</a> -><br><br>
+
+</body></html>

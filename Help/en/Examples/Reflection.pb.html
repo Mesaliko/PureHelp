@@ -1,0 +1,95 @@
+<html><head><title>Reflection.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Reflection
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; Use the keyboard arrows to move/roll the plan
+</font><font color="#006666">; Use F12 to switch between wireframe and textured
+</font><font color="#006666">;
+
+</font><b><font color="#006666">Define</font></b>.f MouseX,Mousey, a, ap, dp, co, si
+
+<b><font color="#006666">Procedure</font></b>.f <font color="#006666">POM</font>(v.f)
+  <b><font color="#006666">ProcedureReturn</font></b> (<font color="#006666">Random</font>(v*1000)-v*500)/500
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">SetupMaterial</font>(n, Filename$, scale.f=1)
+<font color="#006666">  LoadTexture</font>(n, Filename$)
+<font color="#006666">  CreateMaterial</font>(n,<font color="#006666">TextureID</font>(n))
+<font color="#006666">  ScaleMaterial</font>(n,0.5/scale,1/scale)
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Reflection -          [Arrows] mirror moving   [F12] Wireframe    [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0,0,20,-40)
+<font color="#006666">CameraLookAt</font>(0, 0,0,0)
+<font color="#006666">CreateLight</font>(0,$ffffff, 10000, 5000, 2000)
+<font color="#006666">AmbientColor</font>($888888)
+
+<font color="#006666">CreateCamera</font>(1,0,0,100,100)
+<font color="#006666">CreateRenderTexture</font>(0,<font color="#006666">CameraID</font>(1),<font color="#006666">ScreenWidth</font>()/1,<font color="#006666">ScreenHeight</font>()/1)
+<font color="#006666">CreateMaterial</font>(1,<font color="#006666">TextureID</font>(0))
+<font color="#006666">SetMaterialAttribute</font>(1,<font color="#924B72">#PB_Material_ProjectiveTexturing</font>,1)
+<font color="#006666">LoadTexture</font>(1, &quot;MRAMOR6X6.jpg&quot;)
+<font color="#006666">AddMaterialLayer</font>(1,<font color="#006666">TextureID</font>(1),<font color="#924B72">#PB_Material_Modulate</font>)
+<font color="#006666">CreatePlane</font>(1,100,100,1,1,4,4)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666">MeshID</font>(1),<font color="#006666">MaterialID</font>(1))
+
+<font color="#006666">SetupMaterial</font>(2, &quot;RustySteel.jpg&quot;,2)
+<font color="#006666">SetupMaterial</font>(3, &quot;Dirt.jpg&quot;,2)
+<font color="#006666">SetupMaterial</font>(4, &quot;soil_wall.jpg&quot;,2)
+<font color="#006666">SetupMaterial</font>(5, &quot;Wood.jpg&quot;,2)
+
+<font color="#006666">CreateIcoSphere</font>(0,3,3)
+<b><font color="#006666">For</font></b> i=100 <b><font color="#006666">To</font></b> 150
+<font color="#006666">  CreateEntity</font>(i,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(2+<font color="#006666">Random</font>(3)),<font color="#006666">pom</font>(32),<font color="#006666">pom</font>(4),<font color="#006666">pom</font>(32))
+<font color="#006666">  ScaleEntity</font>(i,1,1+<font color="#006666">pom</font>(0.7),1)
+<font color="#006666">  RotateEntity</font>(i,<font color="#006666">pom</font>(180),<font color="#006666">pom</font>(180),<font color="#006666">pom</font>(180))
+<b><font color="#006666">Next</font></b>
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineMouse</font>()
+  MouseX = -<font color="#006666">MouseDeltaX</font>() *  0.05
+  MouseY = -<font color="#006666">MouseDeltaY</font>() *  0.05
+<font color="#006666">  ExamineKeyboard</font>()
+  ap+(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)))*0.01
+  dp-(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>   )))*0.1
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F12</font>) : fdf=1-fdf : <b><font color="#006666">If</font></b> fdf :<font color="#006666"> CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Wireframe</font>) : <b><font color="#006666">Else</font></b> :<font color="#006666"> CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Textured</font>) : <b><font color="#006666">EndIf</font></b> : <b><font color="#006666">EndIf</font></b>
+  a+0.002
+<font color="#006666">  MoveCamera</font>(0,<font color="#006666">Cos</font>(a)*50,10,<font color="#006666">Sin</font>(a)*50,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraLookAt</font>(0,0,0,0)
+  
+  co=<font color="#006666">Cos</font>(ap)
+  si=<font color="#006666">Sin</font>(ap)
+<font color="#006666">  MoveEntity</font>(1,si*dp,-co*dp,0, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  EntityDirection</font>(1, si, co, 0, <font color="#924B72">#PB_World</font>, <font color="#924B72">#PB_Vector_Y</font>)
+  
+<font color="#006666">  CameraReflection</font>(1,0,<font color="#006666">EntityID</font>(1))
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+</font></pre>
+</body></html>

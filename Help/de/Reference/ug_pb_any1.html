@@ -1,0 +1,362 @@
+<html><head><title>Einsteiger-Kapitel - Dynamische Nummerierung von Fenstern und Gadgets mittels #PB_Any</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Dynamische Nummerierung von Fenstern und Gadgets mittels #PB_Any</font></b></p>
+
+Wenn Sie in die Hilfe-Artikel des <a href="../window/openwindow.html">OpenWindow</a> Befehls oder 
+eines der Befehle zur <a href="../gadget/index.html">Gadget</a>-Erstellung (zum Beispiel <a href="../gadget/buttongadget.html">ButtonGadget()</a>) 
+geschaut haben, oder mit dem Form-Designer experimentiert haben, werden Sie Verweise auf 
+eine spezielle Konstante genannt <a href="../reference/purebasic_objects.html">#PB_Any</a> bemerkt haben. 
+In diesem Artikel schauen wir uns diese etwas näher an, um herauszufinden, warum diese 
+so bedeutsam ist. 
+<br>
+<br>
+Bisher haben alle unserer Beispiele ein Gruppen von Konstanten verwendet, eine 
+<a href="../reference/enumerations.html">Enumeration</a> (Aufzählung), um ein einzelnes 
+<a href="../window/index.html">Fenster</a> und jedes <a href="../gadget/index.html">Gadget</a> auf diesem 
+Fenster zu identifizieren. Dies ist gut in einfachen Programmen, welche wir bisher 
+präsentiert haben, aber führt zu einem Problem in komplexeren Programmen - nur eines 
+dieser Fenster kann zur gleichen Zeit existieren. 
+<br>
+<br>
+Was passiert also, wenn ein Programm mehr als ein Exemplar eines Fenster bieten muss? 
+Vielleicht möchten Sie mehrere Dateien gleichzeitig geöffnet haben oder möglicherweise 
+möchten Sie mehrere verschiedene Ansichten der gleichen Datei anbieten. 
+<br>
+<br>
+Dies ist der Punkt, wo die spezielle <font color="#924B72">#PB_Any</font> Konstante zum Einsatz kommt. Wenn diese 
+Konstante als Argument bei den Funktionen zum Einsatz kommt, welche dies unterstützen, 
+dann wird automatisch eine eindeutige Referenznummer generiert und als Ergebnis der 
+Funktion zurückgegeben. 
+<br>
+<br>
+Vorausgesetzt, wir achten auf all diese Referenzen, können wir dies zu unserem Vorteil 
+nutzen. Dessen Organisation ist ein wenig komplizierter als die Beispiele, die wir bisher 
+gesehen haben - aber die erhöhte Flexibilität, die es uns bieten kann, ist diese Mühe 
+absolut wert. 
+<br>
+<br>
+Dieses Beispiel-Programm bietet ein Fenster, auf dem ein regelmäßiges Vieleck (Polygon) 
+in blau auf einem umlaufenden grauen Kreis gezeichnet wird. Eine Combobox ist dazu da, 
+uns eine Auswahl der zu zeichnenden Polygone zu ermöglichen. Ein Menü wird angeboten, 
+um das Erstellen neuer Fenster oder das Schließen des aktuellen Fensters zu ermöglichen. 
+<br>
+<br>
+Es gibt mehrere Dinge, die zu diesem Programm angemerkt werden sollen: 
+<blockquote>
+
+Im Enumerations Abschnitt beachten Sie, dass es nur Aufzählungen für die 
+<a href="../menu/index.html">Menü-Einträge</a> gibt. Diese werden auf allen Fenstern gemeinsam 
+genutzt - obwohl jedes Fenster seine eigene Menüleiste hat. 
+<br>
+<br>
+Im <a href="../reference/structures.html">Structures</a> Abschnitt beachten Sie, dass die POLYGONWINDOW 
+Struktur vier Integer-Werte beinhaltet und somit einen Platz bietet, die Verweise auf 
+die Menüleiste, einen Text, eine Auswahlbox und einen Zeichenbereich zu speichern. 
+<br>
+<br>
+Im Variablen-Abschnitt beachten Sie, dass in Ergänzung zu den üblichen Variablen 
+zum Empfangen von Ereignis-Details eine <a href="../reference/newmap.html">Map</a> namens ActiveWindows 
+mittels der zuvor definierten POLYGONWINDOW Struktur erstellt wird. 
+<br>
+<br>
+Schauen Sie auf die CreatePolygonWindow <a href="../reference/procedures.html">Prozedur</a>. <br>
+Wenn wir das Fenster erstellen, speichern wir das Ergebnis der @openwindowFunktion 
+in einer Variable genannt ThisWindow. Dann konvertieren wir diese in einen String-Wert 
+und verwenden diesen als Schlüssel für einen neuen Map-Eintrag. 
+<br>
+<br>
+Wenn wir dann das <a href="../menu/createmenu.html">Menü</a> und die <a href="../gadget/textgadget.html">Text-</a>, 
+<a href="../gadget/comboboxgadget.html">Combobox-</a> und <a href="../gadget/imagegadget.html">Image-Gadgets</a> 
+auf dem neuen Fenster erstellen, werden die von diesen Funktionen zurückgegebenen 
+Referenzen ebenfalls in der Map gespeichert. 
+<br>
+<br>
+Werfen Sie dann einen Blick auf die ResizePolygonWindow Prozedur. <br>
+Beachten Sie, wie der Wert von EventWindow von der Ereignis-Schleife in diese 
+Prozedur übergeben wird. Dieser Wert wird dann verwendet, um Referenzen auf die 
+untergeordneten Steuerelemente aus der Map zu erhalten, und diese Referenzen 
+werden dann verwendet, um die Gadgets in der <a href="../gadget/resizegadget.html">Größe zu verändern</a>. 
+<br>
+<br>
+Schauen Sie auf die DestroyPolygonWindow Prozedur. <br>
+Hier werden die Referenzen auf die untergeordneten Steuerelemente aus der Map entfernt, 
+wenn ein Fenster geschlossen wird. Wenn die Größe der Map Null erreicht - gibt es 
+keine weiteren offenen Fenster und DestroyPolygonWindow setzt ein Ereignis-Flag, 
+was dem Programm mitteilt, dass es beendet werden kann. 
+<br>
+<br>
+Starten Sie nun das Programm. <br>
+- Verwenden Sie den 'New Window' Menüeintrag, um zwei oder drei neue Polygon-Fenster zu öffnen. <br>
+- Verwenden Sie die Combobox in jedem Fenster, um ein unterschiedliches Aussehen 
+auszuwählen – beachten Sie, dass jedes Fenster unabhängig von allen anderen arbeitet. <br>
+- Verändern Sie einige der Fenster in der Größe – beachten Sie, dass sie alle unabhängig 
+von einander in der Größe verändert werden können und sich auch das Polygon mit dem 
+Fenster in der Größe anpasst. <br>
+</blockquote>
+
+
+Zum Schluss bleibt anzumerken, dass eine <a href="../reference/newmap.html">Map</a> nicht den einzigen Weg 
+darstellt, diesen Effekt zu erreichen. Eine <a href="../reference/newlist.html">verknüpfte Liste</a> oder ein 
+<a href="../reference/dim.html">Array</a> kann für diesen Job ebenfalls verwendet werden, wenn Sie möchten - 
+auch wenn der Code für das Implementieren dieser Alternativen wegen der Unterschiede wie diese 
+arbeiten etwas anders gegenüber dem hier präsentierten aussehen muss. 
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Compiler Direktiven</font>
+  <b><font color="#006666">EnableExplicit</font></b>
+  
+  <font color="#006666">; Konstanten</font>
+  <b><font color="#006666">CompilerIf</font></b> <font color="#006666">Defined</font>(Blue, <font color="#924B72">#PB_Constant</font>) = <font color="#924B72">#False</font>
+    <font color="#924B72">#Blue</font> = 16711680
+    <font color="#924B72">#Gray</font> = 8421504
+    <font color="#924B72">#White</font> = 16777215
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  <font color="#006666">;- Enumerations</font>
+  <font color="#006666">; Die Menü-Befehle werden bei allen Fenstern die gleichen sein.</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#MenuNew</font>
+    <font color="#924B72">#MenuClose</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">;- Structures</font>
+  <font color="#006666">; Diese Struktur wird alle Referenzen auf die einmaligen Elemente eines Fensters beinhalten.</font>
+  <b><font color="#006666">Structure</font></b> POLYGONWINDOW
+    Menu.i
+    LabelSides.i
+    ComboSides.i
+    ImagePlot.i
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <font color="#006666">;- Variablen</font>
+  
+  <font color="#006666">; Diese Map verwendet die zuvor definierte Struktur, um die Referenzen auf alle geöffneten Fenster festzuhalten.</font>
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">ActiveWindows</font>.POLYGONWINDOW()
+  
+  <font color="#006666">; Ereignis-Variablen.</font>
+  <b><font color="#006666">Define</font></b>.i Event, EventWindow, EventGadget, EventType, EventMenu, EventQuit
+  <b><font color="#006666">Define</font></b>.s EventWindowKey
+  
+  <font color="#006666">; Implementierung.</font>
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">CreatePolygonWindow</font>()
+    <font color="#006666">; Erstellt ein neues Fenster und Gadgets, fügt dieses und seine untergeordneten Gadgets zur Tracking-Map hinzu.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b>.i ThisWindow
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    ThisWindow =<font color="#006666"> OpenWindow</font>(<font color="#924B72">#PB_Any</font>, 50, 50, 300, 300, &quot;Polygon&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)  
+    
+<font color="#006666">    WindowBounds</font>(ThisWindow, 250, 250, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+    
+    <b><font color="#006666">If</font></b> ThisWindow
+      <font color="#006666">; Maps erhalten einen String-Wert als Schlüssel, weshalb wir die Integer-Zahl 'ThisWindow' in einen String umwandeln.</font>
+      ThisKey =<font color="#006666"> StrU</font>(ThisWindow)
+      
+      <font color="#006666">; Ein Map-Element hinzufügen, um alle neuen Gadget-Referenzen festzuhalten.</font>
+<font color="#006666">      AddMapElement</font>(<font color="#006666">ActiveWindows</font>(), ThisKey)
+      
+      <font color="#006666">; Erstelle die Menüleiste.</font>
+<font color="#006666">      ActiveWindows</font>(ThisKey)\Menu =<font color="#006666"> CreateMenu</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> WindowID</font>(ThisWindow))
+<font color="#006666">      MenuTitle</font>(&quot;Window&quot;)
+<font color="#006666">      MenuItem</font>(<font color="#924B72">#MenuNew</font>, &quot;New Window&quot;)
+<font color="#006666">      MenuItem</font>(<font color="#924B72">#MenuClose</font>, &quot;Close Window&quot;)
+      
+      <font color="#006666">; Erstelle die untergeordneten Gadgets und speichere ihre Referenzen in der Map.</font>
+      <b><font color="#006666">With</font></b> <font color="#006666">ActiveWindows</font>()
+        <font color="#006666">; Ein Beschriftungstext für die Auswahlbox.</font>
+        \LabelSides =<font color="#006666"> TextGadget</font>(<font color="#924B72">#PB_Any</font>, 5, 5, 150, 20, &quot;Number of Sides:&quot;)
+        
+        <font color="#006666">; Die Auswahlbox.</font>
+        \ComboSides =<font color="#006666"> ComboBoxGadget</font>(<font color="#924B72">#PB_Any</font>, 160, 5, 100, 25)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 0, &quot;Triangle&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 1, &quot;Diamond&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 2, &quot;Pentagon&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 3, &quot;Hexagon&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 4, &quot;Heptagon&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 5, &quot;Octagon&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 6, &quot;Nonagon&quot;)
+<font color="#006666">        AddGadgetItem</font>(\ComboSides, 7, &quot;Decagon&quot;)
+        
+        <font color="#006666">; Dreieck auswählen.</font>
+<font color="#006666">        SetGadgetState</font>(\ComboSides, 0)
+        
+        <font color="#006666">; Das sichtbare Image-Gadget auf dem Fenster.</font>
+        \ImagePlot =<font color="#006666"> ImageGadget</font>(<font color="#924B72">#PB_Any</font>, 5, 35, 290, 240, 0, <font color="#924B72">#PB_Image_Border</font>)
+      <b><font color="#006666">EndWith</font></b>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Gibt die Referenz auf das neue Fenster zurück.</font>
+    <b><font color="#006666">ProcedureReturn</font></b> ThisWindow
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">DestroyPolygonWindow</font>(Window.i)
+    <font color="#006666">; Entfernt das Fenster 'Window' aus der 'ActiveWindows' Map, schließt das Fenster und setzt das Quit Flag, wenn nötig.</font>
+    <b><font color="#006666">Shared</font></b> EventQuit,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Konvertiert den Integer-Wert 'Window' in einen String.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Löscht den Map-Eintrag.</font>
+<font color="#006666">    DeleteMapElement</font>(<font color="#006666">ActiveWindows</font>(), ThisKey)
+    
+    <font color="#006666">; Schließt das Fenster.</font>
+<font color="#006666">    CloseWindow</font>(Window)
+    
+    <font color="#006666">; Überprüft, ob es noch offene Fenster gibt.</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">MapSize</font>(<font color="#006666">ActiveWindows</font>()) = 0
+      EventQuit = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">ResizePolygonWindow</font>(Window.i)
+    <font color="#006666">; Verändert die untergeordneten Gadgets auf dem Fenster in ihrer Größe.</font>
+    <font color="#006666">; In der Praxis muss bei diesem Beispiel nur das ImageGadget in der Größe verändert werden.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b>.i ThisImage
+    <b><font color="#006666">Protected</font></b>.i X, Y, W, H
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Ermittelt Referenzen auf die betroffenen Gadgets aus der Map.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    ThisImage =<font color="#006666"> ActiveWindows</font>(ThisKey)\ImagePlot
+    
+    <font color="#006666">; Verändert die Gadgets in der Größe.</font>
+    W =<font color="#006666"> WindowWidth</font>(Window) - 15
+    H =<font color="#006666"> WindowHeight</font>(Window) - 70
+<font color="#006666">    ResizeGadget</font>(ThisImage, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, H)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PlotPolygon</font>(Window.i)
+    <font color="#006666">; Zeichnet das Polygon-Bild und überträgt es auf das Image-Gadget.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b>.f Radius, OriginX, OriginY, StartX, StartY, EndX, EndY
+    <b><font color="#006666">Protected</font></b>.i Sides, Vertex, Width, Height, ThisCombo, ThisImage, ThisPlot
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Überprüft, ob das Ereignis für das richtige Fenster ist.</font>
+    <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">IsWindow</font>(Window) : <b><font color="#006666">ProcedureReturn</font></b> : <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Ermittelt Referenzen auf die betroffenen Gadgets aus der Map.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    ThisCombo =<font color="#006666"> ActiveWindows</font>(ThisKey)\ComboSides
+    ThisImage =<font color="#006666"> ActiveWindows</font>(ThisKey)\ImagePlot
+    
+    <font color="#006666">; Berechnet Abmessungen und Herkunft.</font>
+    Sides =<font color="#006666"> GetGadgetState</font>(ThisCombo) + 3
+    Width =<font color="#006666"> GadgetWidth</font>(ThisImage) - 4
+    Height =<font color="#006666"> GadgetHeight</font>(ThisImage) - 4
+    OriginX = Width/2
+    OriginY = Height/2
+    <b><font color="#006666">If</font></b> Width &lt; Height
+      Radius = OriginX - 50
+    <b><font color="#006666">Else</font></b>
+      Radius = OriginY - 50
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Erstellt ein neues Bild.</font>
+    ThisPlot =<font color="#006666"> CreateImage</font>(<font color="#924B72">#PB_Any</font>, Width, Height)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(ThisPlot))
+    
+    <font color="#006666">; Zeichnet einen weißen Hintergrund.</font>
+<font color="#006666">    Box</font>(0, 0, Width, Height, <font color="#924B72">#White</font>)
+    
+    <font color="#006666">; Zeichnet einen grauen umlaufenden Kreis.</font>
+<font color="#006666">    Circle</font>(OriginX, OriginY, Radius, <font color="#924B72">#Gray</font>)
+    
+    <font color="#006666">; Zeichnet das Polygon.</font>
+    <b><font color="#006666">For</font></b> Vertex = 0 <b><font color="#006666">To</font></b> Sides
+      
+      <font color="#006666">; Berechnet den Startpunkt.</font>
+      StartX =  OriginX + (Radius *<font color="#006666"> Cos</font>(2 * <font color="#924B72">#PI</font> * Vertex/Sides))
+      StartY = OriginY + (Radius *<font color="#006666"> Sin</font>(2 * <font color="#924B72">#PI</font> * Vertex/Sides)) 
+      
+      <font color="#006666">; und den Endpunkt.</font>
+      EndX = OriginX + (Radius *<font color="#006666"> Cos</font>(2 * <font color="#924B72">#PI</font> * (Vertex + 1)/Sides))
+      EndY = OriginY + (Radius *<font color="#006666"> Sin</font>(2 * <font color="#924B72">#PI</font> * (Vertex + 1)/Sides))
+      
+      <font color="#006666">; Zeichnet die Seite in blau.</font>
+<font color="#006666">      LineXY</font>(StartX, StartY, EndX, EndY, <font color="#924B72">#Blue</font>)
+      
+    <b><font color="#006666">Next</font></b> Vertex
+    
+    <font color="#006666">; Füllt das Polygon in blau.</font>
+<font color="#006666">    FillArea</font>(OriginX, OriginY, <font color="#924B72">#Blue</font>, <font color="#924B72">#Blue</font>)
+    
+<font color="#006666">    StopDrawing</font>()
+    
+    <font color="#006666">; Übertragt den Bild-Inhalt in das sichtbare Gadget.</font>
+<font color="#006666">    SetGadgetState</font>(ThisImage,<font color="#006666"> ImageID</font>(ThisPlot))
+    
+    <font color="#006666">; Löscht das temporäre Bild.</font>
+<font color="#006666">    FreeImage</font>(ThisPlot)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Hauptteil</font>
+  
+  <font color="#006666">; Erstellt das erste Fenster.</font>
+  EventWindow =<font color="#006666"> CreatePolygonWindow</font>()
+<font color="#006666">  ResizePolygonWindow</font>(EventWindow)
+<font color="#006666">  PlotPolygon</font>(EventWindow)
+  
+  <font color="#006666">;- Ereignis-Schleife</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    EventWindow =<font color="#006666"> EventWindow</font>()
+    EventWindowKey =<font color="#006666"> StrU</font>(EventWindow)
+    EventGadget =<font color="#006666"> EventGadget</font>()
+    EventType =<font color="#006666"> EventType</font>()
+    EventMenu =<font color="#006666"> EventMenu</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <font color="#006666">; Ein Gadget-Ereignis ist aufgetreten.</font>
+        <b><font color="#006666">If</font></b> EventGadget =<font color="#006666"> ActiveWindows</font>(EventWindowKey)\LabelSides
+          <font color="#006666">; Tue nichts.</font>
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget =<font color="#006666"> ActiveWindows</font>(EventWindowKey)\ComboSides
+          <font color="#006666">; Wenn sich die Auswahlbox verändert hat, das Bild neu zeichnen.</font>
+<font color="#006666">          PlotPolygon</font>(EventWindow)
+          
+          <font color="#006666">; Aktualisiert den Fenstertitel, um das neue Aussehen wiederzuspiegeln.</font>
+<font color="#006666">          SetWindowTitle</font>(EventWindow,<font color="#006666"> GetGadgetText</font>(<font color="#006666">ActiveWindows</font>(EventWindowKey)\ComboSides))
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget =<font color="#006666"> ActiveWindows</font>(EventWindowKey)\ImagePlot
+          <font color="#006666">; Tue nichts.</font>
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+        <font color="#006666">; Ein Menü-Ereignis ist aufgetreten.</font>
+        <b><font color="#006666">If</font></b> EventMenu = <font color="#924B72">#MenuNew</font>
+          EventWindow =<font color="#006666"> CreatePolygonWindow</font>()
+<font color="#006666">          ResizePolygonWindow</font>(EventWindow)
+<font color="#006666">          PlotPolygon</font>(EventWindow)
+          
+        <b><font color="#006666">ElseIf</font></b> EventMenu = <font color="#924B72">#MenuClose</font>
+<font color="#006666">          DestroyPolygonWindow</font>(EventWindow)
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Repaint</font>
+        <font color="#006666">; Ein Fenster-Inhalt wurde für ungültig erklärt.</font>
+<font color="#006666">        PlotPolygon</font>(EventWindow)
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_SizeWindow</font>
+        <font color="#006666">; Ein Fenster wurde in der Größe verändert.</font>
+<font color="#006666">        ResizePolygonWindow</font>(EventWindow)
+<font color="#006666">        PlotPolygon</font>(EventWindow)
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <font color="#006666">; Ein Fenster wurde geschlossen.</font>
+<font color="#006666">        DestroyPolygonWindow</font>(EventWindow)
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> EventQuit = <font color="#924B72">#True</font>
+</font></pre>
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_memory.html">< Vorheriges: Speicher-Zugriff</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_pb_any2.html">Nächstes: Verwalten mehrerer Fenster ></a> 
+</blockquote>
+</font></body></html>

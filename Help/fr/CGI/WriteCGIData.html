@@ -1,0 +1,68 @@
+<html><head><title>WriteCGIData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteCGIData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>WriteCGIData</b></font>(*Memoire, Taille)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Écrit les données binaires sur la sortie CGI. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+Le tampon en mémoire à écrire. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille (en octets) à écrire. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les 
+données ont été écrites avec succès 
+sur la sortie CGI. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lors de l'envoi des données binaires, 
+l'en-tête &quot;Content-Type&quot; doit être 
+défini en &quot;application/octet-stream '. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;application/octet-stream&quot;)
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentDisposition</font>, &quot;attachment; filename=image.png&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>)
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/data/world.png&quot;)
+    Taille =<font color="#006666"> Lof</font>(0)
+    *Memoire =<font color="#006666"> AllocateMemory</font>(Taille)
+<font color="#006666">    ReadData</font>(0, *Memoire, Taille) <font color="#006666">; Lire l'intégralité du dossier dans le nouveau tampon mémoire</font>
+    
+<font color="#006666">    WriteCGIData</font>(*Memoire, Taille) <font color="#006666">; Écrivez le tampon entier sur la sortie CGI</font>
+    
+<font color="#006666">    CloseFile</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="initcgi.html">InitCGI()</a>, <a href="writecgiheader.html">WriteCGIHeader()</a>, 
+<a href="writecgifile.html">WriteCGIFile()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=waitfastcgirequest.html>WaitFastCGIRequest()</a> - <a href=index.html>CGI Index</a> - <a href=writecgifile.html>WriteCGIFile()</a> -><br><br>
+
+</body></html>

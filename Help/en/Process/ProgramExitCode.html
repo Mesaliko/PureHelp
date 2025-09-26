@@ -1,0 +1,45 @@
+<html><head><title>ProgramExitCode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramExitCode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ProgramExitCode</b></font>(Program)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the exitcode that was returned when the given program ended. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to use. It must have been started before with <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The exitcode that was returned when the specified program ended. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function should only be used after the given program has ended. 
+Use <a href="programrunning.html">ProgramRunning()</a> or <a href="waitprogram.html">WaitProgram()</a> to make sure of that. 
+<br>
+<br>
+The exitcode allows for a single value to be returned from the program, back to the program that 
+executed it. This is usually used to indicate either the error or the success of the program. 
+Please note, that due to OS limitation on OS X and Linux the supported exitcode are in the range of 0 - 255. 
+<br>
+<br>
+To return an exitcode from a PB program, use the optional value with the <b><font color="#006666">End</font></b> statement: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">End</font></b> 1   <font color="#006666">; returns the exitcode 1</font>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextenvironmentvariable.html>NextEnvironmentVariable()</a> - <a href=index.html>Process Index</a> - <a href=programfilename.html>ProgramFilename()</a> -><br><br>
+
+</body></html>

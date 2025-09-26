@@ -1,0 +1,83 @@
+<html><head><title>HyperLinkGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HyperLinkGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>HyperLinkGadget</b></font>(#Gadget, x, y, Width, Height, Text$, Color [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates an HyperLink gadget in the current GadgetList. 
+A hyperlink gadget is a text area which reacts to the mouse pointer by changing its color 
+and the cursor shape. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The text to display on the link. 
+
+</td></tr>
+<tr><td><i>Color</i></td>
+<td> 
+The color for the text when the mouse is over the gadget. The text color for the non-highlighted state 
+can be changed with <a href="setgadgetcolor.html">SetGadgetColor()</a>. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Hyperlink_Underline</font>: Draw a line under the text without the need to use an underlined font.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with the 
+<font color="#924B72">#PB_Gadget_FrontColor</font> and <font color="#924B72">#PB_Gadget_BackColor</font> types to change the color of the 
+text and background (if the window's background have changed). 
+<br>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;HyperlinkGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    HyperLinkGadget</font>(0, 10, 10, 250,20,&quot;Red HyperLink&quot;,<font color="#006666"> RGB</font>(255,0,0))
+<font color="#006666">    HyperLinkGadget</font>(1, 10, 30, 250,40,&quot;Arial Underlined Green HyperLink&quot;,<font color="#006666"> RGB</font>(0,255,0), <font color="#924B72">#PB_HyperLink_Underline</font>)
+<font color="#006666">    SetGadgetFont</font>(1,<font color="#006666"> LoadFont</font>(0, &quot;Arial&quot;, 12))
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/hyperlinkgadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=hidegadget.html>HideGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=ipaddressgadget.html>IPAddressGadget()</a> -><br><br>
+
+</body></html>

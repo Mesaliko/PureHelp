@@ -1,0 +1,121 @@
+<html><head><title>CustomGradient</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CustomGradient()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CustomGradient</b></font>(@GradientCallback())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un dégradé avec une forme personnalisée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@GradientCallback()</i></td>
+<td width="90%"> 
+L'adresse de la procédure de callback. 
+<br>
+<br>
+La procédure doit avoir la forme suivante: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.f <font color="#006666">GradientCallback</font>(X, Y)
+    <font color="#006666">;</font>
+    <font color="#006666">; Renvoie une valeur entre 0.0 et 1.0 pour définir le dégradé à la position x,y</font>
+    <font color="#006666">; </font>
+    <b><font color="#006666">ProcedureReturn</font></b> 1.0
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+La procédure sera appelée pour chaque 
+pixel affiché par l'opération de dessin. 
+<br>
+La procédure doit renvoyer une valeur 
+comprise entre 0.0 and 1.0 (pas une 
+valeur de couleur) pour définir la valeur 
+du dégradé à une position donnée. 
+<br>
+<br>
+Les coordonnées X et Y sont toujours 
+orientées par rapport au coin supérieur 
+gauche de la surface de dessin.<br>
+Les coordonnées ne sont pas affectées 
+par les appels à <a href="setorigin.html">SetOrigin()</a> ou à 
+<a href="clipoutput.html">ClipOutput()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Par défaut, la valeur 0.0 représente la 
+<a href="backcolor.html">couleur d'arrière plan</a> 
+et la valeur 1.0 représente la 
+<a href="frontcolor.html">couleur d'avant plan</a>. 
+<br>
+<br>
+Des couleurs additionnelles peuvent être 
+ajoutées au dégradé avec <a href="gradientcolor.html">GradientColor()</a>. 
+<br>
+<br>
+Cette procédure sera appelée de nombreuse 
+fois (pour chaque pixel à appeler), donc 
+elle devra être la plus courte et la 
+plus optimisée possible, sinon l'impact 
+sur les performances de dessin sera 
+conséquent. 
+<br>
+<br>
+<b>Note:</b> Cette commande a un effet 
+uniquement sur des surfaces de type 
+<a href="../image/imageoutput.html">ImageOutput()</a> et <a href="../gadget/canvasoutput.html">CanvasOutput()</a>. 
+Le dégradé est dessiné uniquement si le 
+mode <font color="#924B72">#PB_2DDrawing_Gradient</font> est activé 
+avec <a href="drawingmode.html">DrawingMode()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.f <font color="#006666">GradientCallback</font>(X, Y)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Sin</font>(x * 0.1) *<font color="#006666"> Sin</font>(y * 0.1) <font color="#006666">; Valeur comprise entre 0 et 1</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;CustomGradient&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 400, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 400, 200, $FFFFFF)
+      
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Gradient</font>)      
+<font color="#006666">      BackColor</font>($00FFFF)
+<font color="#006666">      FrontColor</font>($FF0000)
+      
+<font color="#006666">      CustomGradient</font>(@GradientCallback())
+<font color="#006666">      Circle</font>(100, 100, 100)   
+<font color="#006666">      Circle</font>(300, 100, 100)
+      
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 400, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/customgradient.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="gradientcolor.html">GradientColor()</a>, <a href="resetgradientcolors.html">ResetGradientColors()</a>, 
+<a href="lineargradient.html">LinearGradient()</a>, <a href="circulargradient.html">CircularGradient()</a>, 
+<a href="ellipticalgradient.html">EllipticalGradient()</a>, <a href="boxedgradient.html">BoxedGradient()</a>, 
+<a href="conicalgradient.html">ConicalGradient()</a>, <a href="drawingmode.html">DrawingMode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=customfiltercallback.html>CustomFilterCallback()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawalphaimage.html>DrawAlphaImage()</a> -><br><br>
+
+</body></html>

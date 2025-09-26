@@ -1,0 +1,71 @@
+<html><head><title>GetGadgetState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetGadgetState()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetGadgetState</b></font>(#Gadget)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'état actuel d'un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'état du gadget. <br>
+Voir ci-dessous en fonction du type 
+gadget. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il s'agit d'une fonction universelle 
+qui fonctionne avec presque tous les 
+gadgets: 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="buttongadget.html">ButtonGadget()</a>     : renvoie l'état d'un bouton à bascule (<font color="#924B72">#PB_Button_Toggle</font>): 1 = pressé, 0 = normal. 
+  - <a href="buttonimagegadget.html">ButtonImageGadget()</a>: renvoie l'état d'un bouton à bascule (<font color="#924B72">#PB_Button_Toggle</font>): 1 = pressé, 0 = normal. 
+  - <a href="calendargadget.html">CalendarGadget()</a>   : renvoie la date actuellement sélectionnée.
+  - <a href="checkboxgadget.html">CheckBoxGadget()</a>   : renvoie une des valeurs suivantes:
+    <font color="#924B72">#PB_CheckBox_Checked</font>  : La case est cochée.
+    <font color="#924B72">#PB_CheckBox_Unchecked</font>: La case est décochée.
+    <font color="#924B72">#PB_CheckBox_Inbetween</font>: L'état de la case à cocher est indéterminé (Seulement pour les cases à cocher de type <font color="#924B72">#PB_CheckBox_ThreeState</font>).
+
+  - <a href="comboboxgadget.html">ComboBoxGadget()</a>    : Renvoie le numéro de l'élément sélectionné ou -1 si pas de sélection. 
+  - <a href="dategadget.html">DateGadget()</a>        : Renvoie la date ou l'heure actuellement sélectionnée. Si <font color="#924B72">#PB_Date_CheckBox</font> 
+                          est utilisé et que la case à cocher est décochée, 0 sera renvoyé. 
+  - <a href="explorerlistgadget.html">ExplorerListGadget()</a>: Renvoie le numéro de l'élément sélectionné ou -1 si pas de sélection. 
+  - <a href="explorertreegadget.html">ExplorerTreeGadget()</a>: Renvoie le type de l'élément sélectionné (<font color="#924B72">#PB_Explorer_File</font> ou <font color="#924B72">#PB_Explorer_Directory</font>). 
+  - <a href="imagegadget.html">ImageGadget()</a>       : Renvoie l'ImageID de l'image actuellement affichée. 
+  - <a href="ipaddressgadget.html">IPAddressGadget()</a>   : Renvoie l'adresse IP courante. 
+  - <a href="listicongadget.html">ListIconGadget()</a>    : Renvoie le numéro du premier élément sélectionné ou -1 s'il n'y a pas d'élément sélectionné. 
+  - <a href="listviewgadget.html">ListViewGadget()</a>    : Renvoie le numéro de l'élément sélectionné ou -1 s'il n'y a pas d'élément sélectionné. 
+  - <a href="mdigadget.html">MDIGadget()</a>         : Renvoie le numéro de la fenêtre fille active, ou -1 si aucune n'est active. 
+  - <a href="optiongadget.html">OptionGadget()</a>      : Renvoie 1 s'il est activé, 0 sinon. 
+  - <a href="panelgadget.html">PanelGadget()</a>       : Renvoie le numéro d'onglet sélectionné ou -1 si pas de sélection. 
+  - <a href="progressbargadget.html">ProgressBarGadget()</a> : Renvoie la valeur actuelle de la barre de progression. 
+  - <a href="scrollbargadget.html">ScrollBarGadget()</a>   : Renvoie la position actuelle de l'ascenseur. 
+  - <a href="shortcutgadget.html">ShortcutGadget()</a>    : Renvoie le raccourci clavier sélectionné. 
+  - <a href="spingadget.html">SpinGadget()</a>        : Renvoie la valeur actuelle du SpinGadget. 
+  - <a href="splittergadget.html">SplitterGadget()</a>    : Renvoie la position actuelle de la barre de séparation, en pixels. 
+  - <a href="trackbargadget.html">TrackBarGadget()</a>    : Renvoie la position actuelle de la TrackBar (valeur comprise entre la valeur minimale et maximale). 
+  - <a href="treegadget.html">TreeGadget()</a>        : Renvoie le numéro de l'élément sélectionné ou  -1 si pas de sélection.
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, 
+<a href="setgadgetitemstate.html">SetGadgetItemState()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getgadgetitemtext.html>GetGadgetItemText()</a> - <a href=index.html>Gadget Index</a> - <a href=getgadgettext.html>GetGadgetText()</a> -><br><br>
+
+</body></html>

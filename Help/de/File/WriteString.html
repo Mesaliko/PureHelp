@@ -1,0 +1,70 @@
+<html><head><title>WriteString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>WriteString</b></font>(#Datei, Text$ [, Format])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Schreibt einen String in eine Datei. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datei</i></td>
+<td width="90%"> 
+Die Datei, in welche geschrieben werden soll. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der zu schreibende String. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+Das Format, in welchem der String geschrieben werden soll. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Schreibt den String im ASCII-Format
+  <font color="#924B72">#PB_UTF8</font>   : Schreibt den String im UTF8-Format
+  <font color="#924B72">#PB_Unicode</font>: Schreibt den String im UTF16-Format
+</font></pre>
+Wenn dieses Flag nicht gesetzt wird, dann hängt das Format für das Schreiben des Strings von der 
+entsprechenden Einstellung des zuvor verwendeten <a href="createfile.html">CreateFile()</a> bzw. <a href="openfile.html">OpenFile()</a> Befehls ab. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Operation erfolgreich war, und Null bei einem Fehler. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wegen des <a href="filebufferssize.html">Zwischenspeicherns</a> (Cachen) kann diese Funktion auch dann 
+eine Erfolgsmeldung zurückgeben, wenn auf dem Ausgabegerät nicht genug Platz für die Schreib-Operation 
+übrig ist. 
+<br>
+Die Datei muss mit Schreib-Unterstützung geöffnet worden sein (d.h. nicht mit <a href="readfile.html">ReadFile()</a>). 
+Das abschließende &quot;Null&quot; Stringzeichen wird nicht in die Datei geschrieben. 
+<br>
+<br>
+Um ein BOM (&quot;Byte Order Mark&quot; oder auch &quot;Kennzeichen der Byte-Reihenfolge) einzufügen, 
+mit dessen Hilfe später das String-Kodierungs-Format der Datei identifiziert werden kann, 
+verwenden Sie die Funktion <a href="writestringformat.html">WriteStringFormat()</a> 
+<br>
+Um einen String einschließlich eines Zeilenvorschubs (&quot;Newline&quot;) zu schreiben, verwenden Sie 
+die Funktion FastLink &quot;WriteStringN()&quot;. 
+<br>
+<br>
+Für ein Beispiel siehe den <a href="createfile.html">CreateFile()</a> Befehl. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="readstring.html">ReadString()</a>, <a href="writestringn.html">WriteStringN()</a>, <a href="writestringformat.html">WriteStringFormat()</a>, <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=writequad.html>WriteQuad()</a> - <a href=index.html>File Inhaltsverzeichnis</a> - <a href=writestringformat.html>WriteStringFormat()</a> -><br><br>
+
+</body></html>

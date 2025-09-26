@@ -1,0 +1,175 @@
+<html><head><title>CheckObjectVisibility2.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CheckObjectVisibility
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, Speed = 1.0
+<b><font color="#006666">Define</font></b>.i RobotMove
+
+<font color="#924B72">#CameraSpeed</font> = 2
+
+<font color="#006666">InitEngine3D</font>(<font color="#924B72">#PB_Engine3D_DebugLog</font>)
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; CheckObjectVisibility -  [PageUp]   [PageDown]  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;,     <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;        , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;          , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;         , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/fonts&quot;           , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+
+<font color="#006666">;- Material
+</font><font color="#006666">;
+</font><font color="#006666">GetScriptMaterial</font>(1, &quot;Color/Red&quot;)
+<font color="#006666">GetScriptMaterial</font>(2, &quot;Color/Green&quot;)
+<font color="#006666">GetScriptMaterial</font>(3, &quot;Color/Blue&quot;)
+<font color="#006666">GetScriptMaterial</font>(4, &quot;Color/Yellow&quot;)
+<font color="#006666">CreateMaterial</font>(5,<font color="#006666"> LoadTexture</font>(5, &quot;r2skin.jpg&quot;))
+
+<font color="#006666">;- Ground
+</font><font color="#006666">;
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 700, 700, 70, 70, 15, 15)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0))
+<font color="#006666">EntityRenderMode</font>(0, 0)
+
+<font color="#006666">;- Mesh
+</font><font color="#006666">;
+</font><font color="#006666">LoadMesh</font>(1, &quot;robot.mesh&quot;)
+<font color="#006666">CreateSphere</font>(2, 10)
+<font color="#006666">LoadMesh</font>(3, &quot;PureBasic.mesh&quot;)
+
+<font color="#006666">;- Entity
+</font><font color="#006666">;
+</font><font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(5))
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(3),<font color="#006666"> MaterialID</font>(1), -200, 12,  100)
+<font color="#006666">CreateEntity</font>(3,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(2),  200, 10, -100)
+<font color="#006666">CreateEntity</font>(4,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(3),  200, 10,  100)
+<font color="#006666">CreateEntity</font>(5,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(4), -200, 10, -100)
+
+<font color="#006666">ScaleEntity</font>(3, 2, 2, 2)
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 120, 400, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1) + 40,<font color="#006666"> EntityZ</font>(1))
+
+<font color="#006666">CreateCamera</font>(1, 0, 0, 100, 100)
+<font color="#006666">CameraFOV</font>(1, 60)
+
+<font color="#006666">;- TextureRTT
+</font><font color="#006666">;
+</font><font color="#006666">CreateRenderTexture</font>(10,<font color="#006666"> CameraID</font>(1), 800, 600, <font color="#924B72">#PB_Texture_AutomaticUpdate</font>)
+<font color="#006666">CreateMaterial</font>(10,<font color="#006666"> TextureID</font>(10))
+<font color="#006666">SetMaterialColor</font>(10, <font color="#924B72">#PB_Material_SelfIlluminationColor</font>,<font color="#006666"> RGB</font>(255, 255, 255))
+
+<font color="#006666">;- Billboard group
+</font><font color="#006666">;
+</font><font color="#006666">CreateBillboardGroup</font>(0,<font color="#006666"> MaterialID</font>(10), 68, 48)
+<font color="#006666">AddBillboard</font>(0, 0, 0, 0)
+
+<font color="#006666">;- Attach objects
+</font><font color="#006666">;
+</font><font color="#006666">AttachEntityObject</font>(1, &quot;Joint1&quot;,<font color="#006666"> CameraID</font>(1), 0, 0, 0, -20, -90, 0)
+<font color="#006666">AttachEntityObject</font>(1, &quot;Joint1&quot;,<font color="#006666"> BillboardGroupID</font>(0), 0, 60, 0, 0, 0, 0)
+
+<font color="#006666">;-Light
+</font><font color="#006666">;
+</font><font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), -40, 100, 80)
+<font color="#006666">AmbientColor</font>($888888)
+
+<font color="#006666">;- Skybox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Additive</font>)
+
+<font color="#006666">;- Text3D
+</font><font color="#006666">CreateText3D</font>(0, &quot;&quot;)
+<font color="#006666">Text3DColor</font>(0,<font color="#006666"> RGBA</font>(0, 255, 255, 255))
+<font color="#006666">Text3DAlignment</font>(0, <font color="#924B72">#PB_Text3D_HorizontallyCentered</font> | <font color="#924B72">#PB_Text3D_VerticallyCentered</font>)
+
+<font color="#006666">AttachEntityObject</font>(1, &quot;Joint1&quot;,<font color="#006666"> Text3DID</font>(0))
+<font color="#006666">MoveText3D</font>(0, 0, 30, 0)
+<font color="#006666">ScaleText3D</font>(0, 6, 6, 0)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>  
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  RobotMove = <font color="#924B72">#False</font>
+  
+  RobotdX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+  Robotdz = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>
+  
+  <b><font color="#006666">If</font></b> Robotdx <b><font color="#006666">Or</font></b> Robotdz:RobotMove=<font color="#924B72">#True</font>:<b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MoveEntity</font>(1,Robotdx*Speed,0,Robotdz*speed)
+<font color="#006666">  EntityDirection</font>(1,Robotdx,0,Robotdz,<font color="#924B72">#PB_Parent</font>,<font color="#924B72">#PB_Vector_X</font>)
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageUp</font>) <b><font color="#006666">And</font></b> Speed &lt; 2.0
+    Speed + 0.05
+  <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageDown</font>) <b><font color="#006666">And</font></b> Speed &gt; 0.1
+    Speed - 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> RobotMove
+    <b><font color="#006666">If</font></b> <font color="#006666">EntityAnimationStatus</font>(1, &quot;Walk&quot;) = <font color="#924B72">#PB_EntityAnimation_Stopped</font> <font color="#006666">; Loop
+</font><font color="#006666">      StartEntityAnimation</font>(1, &quot;Walk&quot;, <font color="#924B72">#PB_EntityAnimation_Manual</font>)     <font color="#006666">; Start the animation from the beginning
+</font>    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    StopEntityAnimation</font>(1, &quot;Walk&quot;)
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  AddEntityAnimationTime</font>(1, &quot;Walk&quot;, TimeSinceLastFrame * Speed*1.5)
+  
+<font color="#006666">  RotateEntity</font>(2, 0, 1, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  CameraLookAt</font>(0,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1) + 40,<font color="#006666"> EntityZ</font>(1))
+  
+  <font color="#006666">;Check Objects
+</font>  Object$ = &quot;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CheckObjectVisibility</font>(1,<font color="#006666"> EntityID</font>(2))
+    Object$ + &quot;PureBasic ! &quot;
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">CheckObjectVisibility</font>(1,<font color="#006666"> EntityID</font>(3))
+    Object$ + &quot;Green Sphere ! &quot;
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">CheckObjectVisibility</font>(1,<font color="#006666"> EntityID</font>(4))
+    Object$ + &quot;Blue Sphere ! &quot;
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">CheckObjectVisibility</font>(1,<font color="#006666"> EntityID</font>(5))
+    Object$ + &quot;Yellow Sphere ! &quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> Object$ = &quot;&quot;
+    Object$ = &quot;nothing !&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  Text3DCaption</font>(0, &quot;I can see &quot; + Object$)
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>()
+  
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

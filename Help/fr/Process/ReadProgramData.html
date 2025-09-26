@@ -1,0 +1,71 @@
+<html><head><title>ReadProgramData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ReadProgramData</b></font>(Programme, *Memoire, Taille)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit les données provenant de la sortie 
+standard (stdout) d'un programme. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programme</i></td>
+<td width="90%"> 
+Le programme à utiliser. 
+<br>
+<br>
+Le programme doit avoir été lancé 
+avec <a href="runprogram.html">RunProgram()</a> en spécifiant 
+l'option <font color="#924B72">#PB_Program_Read</font>. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+La mémoire tampon dans laquelle seront stockées 
+les données lues.<br>
+Un tampon de mémoire peut être créé avec 
+<a href="../memory/allocatememory.html">AllocateMemory()</a>. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille des données à lire, en octets.<br>
+Le tampon devra être suffisamment grand pour 
+gérer cette taille. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nombre d'octets effectivement lus. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La commande lit un nombre d'octets jusqu'à la valeur 'Taille', ou moins 
+s'il n'y a pas assez de données  à lire. Par contre, cette commande 
+attendra jusqu'à ce qu'il y ait au  moins un octet avant de quitter, 
+donc la valeur 0 pour 'Resultat'  n'est pas possible. 
+<br>
+<br>
+<b>Note:</b> cette commande bloque jusqu'à  ce qu'il y ait des données à lire. 
+Pour éviter ce blocage, la commande  <a href="availableprogramoutput.html">AvailableProgramOutput()</a> peut être 
+utilisée pour vérifier si il y a bien des  données en attente. 
+<br>
+Cependant la fonction reste bloquée indéfiniment si le programme réclame l'intervention 
+de l'utilisateur. Comme par exemple, renvoyer un choix oui/non au programme pour qu'il 
+se poursuive. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="readprogramstring.html">ReadProgramString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=programrunning.html>ProgramRunning()</a> - <a href=index.html>Process Index</a> - <a href=readprogramerror.html>ReadProgramError()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,58 @@
+<html><head><title>Add3DArchive</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Add3DArchive()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>Add3DArchive</b></font>(Pfad$, Typ)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt der aktuellen 3D Pfad-Liste einen neuen absoluten oder relativen Datei-'Pfad$' hinzu. 
+<br>
+<br>
+Alle 3D-Befehle, welche auf das Laden von Daten angewiesen sind (z.B. <a href="../texture/index.html">Texturen</a>, 
+<a href="../mesh/index.html">Mesh's</a>, <a href="skybox.html">Sky</a>, <a href="renderworld.html">World</a>, ...), 
+werden diesen Pfad benutzen. Es muss nach <a href="../screen/openscreen.html">OpenScreen()</a> oder <a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a> angegeben werden. 
+<br>
+<br>
+Sie wundern sich, warum es einen speziellen Weg zur Handhabung der 
+Dateien für die 3D-Befehle gibt? Dies liegt daran, dass dieser den Datei-Zugriff flexibler 
+macht und Sie auf die Daten mittels des Standard-Dateisystems oder direkt über die Archiv-Datei (wie .zip) 
+zugreifen können. Dies ist ein sehr cooles Feature, da Sie all Ihre Daten in eine große Datei 
+packen können, und dann auf deren Inhalte so zugreifen können als würden diese sich in einem Standard-Verzeichnis befinden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Pfad$</i></td>
+<td width="90%"> 
+Der Dateipfad, welcher zur 3D-Pfad-Liste hinzugefügt werden soll. Dies kann ein tatsächlicher Pfad 
+im Dateisystem oder ein ZIP-Archiv sein. 
+
+</td></tr>
+<tr><td><i>Typ</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_3DArchive_FileSystem</font>  : Standard-Verzeichnis
+  <font color="#924B72">#PB_3DArchive_Zip</font>         : Gepackte Zip-Datei
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  Add3DArchive</font>(&quot;MyData.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>) <font color="#006666">; Fügt die .zip Datei als ein Verzeichnis der Pfad-Liste hinzu</font>
+<font color="#006666">  LoadTexture</font>(0, &quot;MyTexture.jpg&quot;)               <font color="#006666">; Lädt MyTexture.jpg aus der Zip-Datei</font>
+<font color="#006666">  LoadTexture</font>(1, &quot;World/Grass.jpg&quot;)             <font color="#006666">; Lädt Grass.jpg aus dem &quot;World\&quot;-Verzeichnis der Zip-Datei</font>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=ambientcolor.html>AmbientColor()</a> -><br><br>
+
+</body></html>

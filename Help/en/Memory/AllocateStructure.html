@@ -1,0 +1,70 @@
+<html><head><title>AllocateStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AllocateStructure()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Item.StructureName = <font color="#006666"><b>AllocateStructure</b></font>(StructureName)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Allocates a new dynamic structure item. This dynamic structure item is properly initialized 
+and ready to use, without the need to call <a href="../reference/compilerfunctions.html">InitializeStructure()</a>. 
+To access the structure data, a <a href="../reference/memory.html">pointer</a> associated with the specified 'StructureName' has to be used. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>StructureName</i></td>
+<td width="90%"> 
+The name of the structure used to create the new dynamic item. The structure has to be already 
+created. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The address of the new dynamic structure item, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command is for advanced users and shouldn't be needed for most programs. It's often a better choice 
+to use a structured <a href="../array/index.html">array</a>, <a href="../list/index.html">list</a> or <a href="../map/index.html">map</a> to store dynamic structured items. 
+<br>
+<br>
+<a href="freestructure.html">FreeStructure()</a> can be used to free the dynamic structure item. 
+All dynamic structures are automatically freed when the programs ends. 
+<br>
+<br>
+If the program crashes at this command, it is usually a result of a memory corruption at 
+an earlier time in the program by writing at an area outside of the allocated memory area. 
+Such an error can be narrowed down to the real cause using the 
+<a href="../reference/ide_debugtools.html">purifier</a> debugger tool. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> People
+    Name$
+    <b><font color="#006666">List</font></b> <font color="#006666">Friends$</font>()
+  <b><font color="#006666">EndStructure</font></b>
+
+  *DynamicPeople.People =<font color="#006666"> AllocateStructure</font>(People)
+  *DynamicPeople\Name$ = &quot;Fred&quot;
+<font color="#006666">  AddElement</font>(*DynamicPeople\<font color="#006666">Friends$</font>())
+  *DynamicPeople\<font color="#006666">Friends$</font>() = &quot;Stef&quot;
+
+  <b><font color="#006666">Debug</font></b> *DynamicPeople\Name$
+  <b><font color="#006666">Debug</font></b> *DynamicPeople\<font color="#006666">Friends$</font>()
+
+<font color="#006666">  FreeStructure</font>(*DynamicPeople)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freestructure.html">FreeStructure()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=allocatememory.html>AllocateMemory()</a> - <a href=index.html>Memory Index</a> - <a href=comparememory.html>CompareMemory()</a> -><br><br>
+
+</body></html>

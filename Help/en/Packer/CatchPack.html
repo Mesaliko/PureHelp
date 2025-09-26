@@ -1,0 +1,58 @@
+<html><head><title>CatchPack</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchPack()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CatchPack</b></font>(#Pack, *MemoryAddress, Size [, Plugin])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Open a previously existing pack file from memory. Before opening a pack file, at least one packer has to be registered 
+with one of the following command: <a href="usezippacker.html">UseZipPacker()</a>, <a href="uselzmapacker.html">UseLzmaPacker()</a>, <a href="usetarpacker.html">UseTarPacker()</a>, <a href="usebrieflzpacker.html">UseBriefLZPacker()</a>. 
+Once opened, the pack content can be listed with <a href="examinepack.html">ExaminePack()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+A number to identify pack file to open. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used as 
+a parameter to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>*MemoryAddress</i></td>
+<td> 
+The memory address where the pack file is located. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size of the pack file in bytes. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+The plugin to use, if more than one packer plugin has been registered. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: use the BriefLZ packer to open the pack file. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> has to be called to have any effect.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : use the Zip packer to open the pack file. <a href="usezippacker.html">UseZipPacker()</a> has to be called to have any effect.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : use the Lzma packer to open the pack file. <a href="uselzmapacker.html">UseLzmaPacker()</a> has to be called to have any effect.
+  <font color="#924B72">#PB_PackerPlugin_Tar</font>    : use the Tar packer to open the pack file. <a href="usetarpacker.html">UseTarPacker()</a> has to be called to have any effect.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the pack file has been successfully opened, zero otherwise. If <font color="#924B72">#PB_Any</font> 
+was used as the #Pack parameter then the generated pack number is returned. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="closepack.html">ClosePack()</a>, <a href="examinepack.html">ExaminePack()</a>, <a href="openpack.html">OpenPack()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addpackmemory.html>AddPackMemory()</a> - <a href=index.html>Packer Index</a> - <a href=closepack.html>ClosePack()</a> -><br><br>
+
+</body></html>

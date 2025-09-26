@@ -1,0 +1,106 @@
+<html><head><title>CatchImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CatchImage</b></font>(#Image, Speicheradresse [, Größe])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Lädt das angegebene Bild von der angegebenen Speicheradresse. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Die Nummer, mit welcher das geladene Bild identifiziert wird. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann angegeben werden, um diese Nummer 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>*Speicheradresse</i></td>
+<td> 
+Die Speicheradresse, von der das Bild geladen werden soll. 
+
+</td></tr>
+<tr><td><i>Größe (optional)</i></td>
+<td> 
+Die Größe des Bildes in Bytes. Die Größe ist optional, da der &quot;Loader&quot; aus dem Bild 
+bestimmen kann, wann er mit einlesen aufhören muss. Es ist jedoch ratsam, eine Größe beim 
+Laden von unbekannten Bildern anzugeben, da der &quot;Loader&quot; dann auch beschädigte Bilder korrekt 
+verarbeiten kann (ohne Angabe der Bildgröße kann ein korruptes Bild zum Absturz des Programms 
+führen). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Bild erfolgreich geladen wurde, und Null 
+wenn das Bild nicht geladen werden konnte. 
+Wenn <font color="#924B72">#PB_Any</font> als #Image Parameter angegeben wurde, dann wird bei Erfolg die 
+automatisch generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das Limit für die Bildgröße, welche verarbeitet werden kann, hängt vom Betriebssystem und 
+dem verfügbaren Speicher ab. Wenn genügend Speicher verfügbar ist, dann können von allen 
+von PureBasic unterstützten Betriebssystemen Bilder bis mindestens 8192x8192 Pixel 
+verarbeitet werden. 
+<br>
+<br>
+Wenn ein Bild geladen wird, dann wird es entweder in 24 Bit konvertiert (wenn die Bildtiefe 
+kleiner oder gleich 24 Bit ist), oder in 32 Bit (wenn das Bild einen Alpha-Kanal hat). 
+Ein geladenes Bild kann mit Hilfe des <a href="freeimage.html">FreeImage()</a> Befehls freigegeben werden. 
+<br>
+<br>
+Dieser Befehl ist nützlich in Verbindung mit dem <a href="../reference/includes.html">'IncludeBinary'</a> PureBasic 
+Schlüsselwort. Damit können Bilder mit in das Executable gepackt werden. Nichtsdestotrotz, 
+benutzen Sie diese Option mit Bedacht, da hiermit mehr Speicher benötigt wird, als wenn 
+die Bilddatei in einer externen Datei gespeichert wird (die Datei befindet sich im Speicher 
+des Executable und auch geladen im physikalischen Speicher). 
+<br>
+<br>
+Das Bild kann im BMP-, Icon- (.ico, nur auf Windows) oder jedem anderen Format vorliegen, welches 
+durch die <a href="../imageplugin/index.html">ImagePlugin</a> Bibliothek unterstützt wird. 
+Transparenz bei BMP-Bildern wird nicht unterstützt. 
+<br>
+<br>
+Die folgenden Befehle können verwendet werden, um zusätzliche Bildformate zu aktivieren: 
+<br>
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+<a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 148, 148, &quot;ImageGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, ?Geebee)
+<font color="#006666">      ImageGadget</font>(0, 10, 10, 0, 0,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">DataSection</font></b>
+    GeeBee:
+    <b><font color="#006666">IncludeBinary</font></b> <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/Geebee2.bmp&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+Hinweis: Das &quot;?&quot; ist ein Zeiger auf eine Sprungmarke. Weitere Informationen über Zeiger und 
+Speicherzugriff finden Sie im zugehörigen Kapitel <a href="../reference/memory.html">hier</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="loadimage.html">LoadImage()</a>, <a href="freeimage.html">FreeImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin Bibliothek</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addimageframe.html>AddImageFrame()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=copyimage.html>CopyImage()</a> -><br><br>
+
+</body></html>

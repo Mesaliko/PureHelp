@@ -1,0 +1,92 @@
+<html><head><title>AddPackFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddPackFile()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddPackFile</b></font>(#Archive, Fichier$, FichierCompresser$)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ajoute et compresse un fichier dans une archive préalablement créée avec <a href="createpack.html">CreatePack()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Archive</i></td>
+<td width="90%"> 
+L'archive à utiliser. 
+
+</td></tr>
+<tr><td><i>Fichier$</i></td>
+<td> 
+Le fichier à ajouter à l'archive. 
+
+</td></tr>
+<tr><td><i>FichierCompresser$</i></td>
+<td> 
+Le nom de fichier à utiliser dans l'archive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le fichier a été ajouté avec succès à l'archive. 
+<br>
+Si le fichier ne peut pas être compressé, il sera stocké tel quel dans l'archive. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'ajout d'un grand fichier peut prendre un temps assez long. 
+
+</blockquote><p><b>Exemple:</b> Utilisation d'une arborescence de fichiers</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">  UseZipPacker</font>()
+
+  Path$ =  <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/&quot;  <font color="#006666">; Chemin d'accès aux fichiers sources des exemples PureBasic</font>
+  PackFile$ =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;MyCompressedFiles.zip&quot;  <font color="#006666">; Chemin d'accès au futur fichier compréssé (zip)</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">CreatePack</font>(0, PackFile$)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;Data/world.png&quot;, &quot;Data/world.png&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;Data/test.pref&quot;, &quot;Data/test.pref&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;Data/CdPlayer.ico&quot;, &quot;Data/CdPlayer.ico&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;2DDrawing.pb&quot;, &quot;2DDrawing.pb&quot;)
+<font color="#006666">    ClosePack</font>(0)
+    <b><font color="#006666">Debug</font></b> &quot;Fichier compressé créé avec succès : &quot; + PackFile$
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Erreur lors de la création du fichier compressé !&quot;
+  <b><font color="#006666">EndIf</font></b>
+
+  Path$ =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;test_a_supprimer/&quot;  <font color="#006666">; Chemin d'accès au répertoire dans lequel les fichiers compressés doivent être extraits</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenPack</font>(0, PackFile$)
+    <b><font color="#006666">If</font></b> (<font color="#006666">CreateDirectory</font>(Path$) <b><font color="#006666">And</font></b> <font color="#006666">CreateDirectory</font>(Path$ + &quot;Data/&quot;)) <b><font color="#006666">Or</font></b> <font color="#006666">FileSize</font>(Path$ + &quot;Data/&quot;) = -2
+      <b><font color="#006666">If</font></b> <font color="#006666">ExaminePack</font>(0)
+         <b><font color="#006666">Debug</font></b> &quot;Fichier compressé créé avec succès : &quot; + PackFile$
+        <b><font color="#006666">While</font></b> <font color="#006666">NextPackEntry</font>(0)
+          <b><font color="#006666">Debug</font></b> &quot; - nom : &quot; +<font color="#006666"> PackEntryName</font>(0) + &quot;, taille : &quot; +<font color="#006666"> PackEntrySize</font>(0)
+          <b><font color="#006666">If</font></b> <font color="#006666">UncompressPackFile</font>(0, Path$ +<font color="#006666"> PackEntryName</font>(0),<font color="#006666"> PackEntryName</font>(0)) = -1
+            <b><font color="#006666">Debug</font></b> &quot;Erreur : échec de décompression du fichier compressé : &quot; +<font color="#006666"> PackEntryName</font>(0)
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">Wend</font></b>
+      <b><font color="#006666">Else</font></b>
+        <b><font color="#006666">Debug</font></b> &quot;Erreur lors de l'examen du fichier compressé !&quot;
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      ClosePack</font>(0)
+    
+<font color="#006666">      RunProgram</font>(PackFile$) <font color="#006666">; Ouverture du répertoire contenant les fichiers décompressés</font>
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Erreur lors de la création du dossier de décompression de l'archive !&quot;  
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Erreur lors de l'ouverture du fichier compressé !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createpack.html">CreatePack()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addpackdirectory.html>AddPackDirectory()</a> - <a href=index.html>Packer Index</a> - <a href=addpackmemory.html>AddPackMemory()</a> -><br><br>
+
+</body></html>

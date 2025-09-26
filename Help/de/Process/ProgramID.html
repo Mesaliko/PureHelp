@@ -1,0 +1,48 @@
+<html><head><title>ProgramID</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramID()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ProgramID</b></font>(Programm)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den eindeutigen Systembezeichner (&quot;system identifier&quot;) des angegebenen Programms 
+zurück. Dabei handelt es sich um die sogenannte &quot;Prozess-ID&quot; oder &quot;PID&quot;. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programm</i></td>
+<td width="90%"> 
+Das zu verwendende Programm. Dieses muss zuvor mittels <a href="runprogram.html">RunProgram()</a> gestartet worden sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der eindeutige Systembezeichner (Identifier) für das angegebene Programm. 
+
+<br>
+<br>
+Wenn der Identifier nicht zurückgegeben werden kann, wird -1 zurückgegeben. 
+<br>
+Dies passiert, wenn <a href="runprogram.html">RunProgram()</a> zum Öffnen einer Datei in einem anderen 
+Programm verwendet wird, wie z.B. RunProgram(&quot;Source.pb&quot;). 
+<br>
+<br>
+Hinweis: der hier zurückgegebene Wert ist kein Handle (wie bei den meisten anderen ...ID() Befehlen). 
+Es ist stattdessen die Prozess-ID, welche auch im TaskManager zu sehen ist. Um ein Prozess-Handle 
+zu erhalten, verwenden Sie die OpenProcess_() API. 
+<br>
+<br>
+Hinweis: Der zurückgegebene Wert kann falsch sein, wenn der Prozess durch einen Wrapper 
+gestartet wurde, wie dies bei Windows 10 der Fall ist und bei UWP (Universal Windows Platform) 
+Programmen, die durch ApplicationFrameHost.exe (AFH) gestartet wurden. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=programfilename.html>ProgramFilename()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=programparameter.html>ProgramParameter()</a> -><br><br>
+
+</body></html>

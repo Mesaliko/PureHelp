@@ -1,0 +1,185 @@
+<html><head><title>Macros</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Macros</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Macro</font></b> &lt;Name&gt; [(Parameter [, ...])]
+  ...
+<b><font color="#006666">EndMacro</font></b> 
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Makros (englisch &quot;Macros&quot;) sind ein sehr mächtiges Feature, hauptsächlich nützlich für fortgeschrittene 
+Programmierer. Ein Makro ist ein Platzhalter für etwas Code (ein Schlüsselwort, eine Zeile oder 
+auch viele Zeilen), welcher (beim Kompilieren) direkt an der Stelle, wo das Makro aufgerufen wird, 
+in den Programmcode eingefügt wird. 
+<br>
+<br>
+In dieser Beziehung unterscheidet es sich von <a href="../reference/procedures.html">Prozeduren</a>, da 
+Prozeduren beim Aufrufen nicht den Code duplizieren. 
+<br>
+<br>
+Die <b><font color="#006666">Macro</font></b> : <b><font color="#006666">EndMacro</font></b> Deklaration muss vor dem ersten Aufruf des Makros erfolgen. 
+Da Makros zur Kompilier-Zeit komplett durch ihren zugehörigen Code ersetzt werden, sind sie nicht 
+lokal zu einer Prozedur, etc. 
+<br>
+<br>
+Ein Makro kann weder einen Rückgabewert noch typenbasierte Parameter haben. Wenn ein Makro 
+einige Parameter hat, werden diese im Makro exakt durch den wörtlichen Ausdruck ersetzt, der 
+beim Aufruf des Makros an dieses übergeben wurde. Zu diesem Zeitpunkt wird keine Auswertung 
+vorgenommen, was sehr wichtig zum Verstehen ist: Die Auswertung einer Code-Zeile wird begonnen, 
+sobald alle auf dieser Zeile gefundenen Makros erweitert (d.h. durch ihren Inhalt ersetzt) wurden. 
+<br>
+<br>
+Makros werden in zwei Kategorien eingeteilt: Einfache (ohne Parameter) und 
+komplexe (mit Parameter, benötigen Klammern beim Aufruf). Bei der Verwendung ohne Parameter 
+ist es möglich, jedes Wort mit einem anderen Wort (oder jeden Ausdrucks) zu ersetzen. 
+Makros können nicht rekursiv verwendet werden. 
+Makro-Deklarationen können nicht verschachtelt werden (es ist nicht möglich, ein Makro innerhalb 
+eines anderen zu definieren). 
+
+</blockquote><p><b>Beispiel:</b> Einfaches Makro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> MyNot
+    <b><font color="#006666">Not</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+  a = 0
+  <b><font color="#006666">If</font></b> MyNot a   <font color="#006666">; Hier wird die Zeile erweitert auf: 'If Not a'</font>
+    <b><font color="#006666">Debug</font></b> &quot;Ok&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+</font></pre>
+
+Mit der Verwendung von Parametern ist es möglich, sehr flexible Makros zu erschaffen. 
+Das spezielle Verknüpfungszeichen '#' kann benutzt werden, um neue Labels oder Keywords 
+(Schlüsselwörter) durch Mischen von Makro-Code und Parameter-Ausdrücken zu erschaffen 
+(Leerzeichen zwischen jedem Wort werden durch das Verknüpfungszeichen nicht akzeptiert). 
+Es ist auch möglich, Standardwerte für Parameter zu definieren, sodass sie beim Aufruf 
+des Makros weggelassen werden können. 
+
+</blockquote><p><b>Beispiel:</b> Makro mit Parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">UMsgBox</font>(Title, Body)
+<font color="#006666">    MessageRequester</font>(Title,<font color="#006666"> UCase</font>(Body), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+  Text$ = &quot;World&quot;
+<font color="#006666">  UMsgBox</font>(&quot;Hello&quot;, &quot;-&quot;+Text$+&quot;-&quot;) <font color="#006666">; Hier wird die Zeile wie folgt erweitert:</font>
+                                  <font color="#006666">; 'MessageRequester(&quot;Hello&quot;, UCase(&quot;-&quot;+Text$+&quot;-&quot;), 0)'</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Makro mit Standard-Parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">UMsgBox</font>(Title, Body = &quot;Ha, no body specified&quot;)
+<font color="#006666">    MessageRequester</font>(Title,<font color="#006666"> UCase</font>(Body), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  UMsgBox</font>(&quot;Hello&quot;) <font color="#006666">; Hier wird die Zeile wie folgt erweitert:</font>
+                   <font color="#006666">; 'MessageRequester(&quot;Hello&quot;, UCase(&quot;Ha, no body specified&quot;), 0)'</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Makro mit Parameter-Verknüpfung</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">XCase</font>(Type, Text)
+    Type<font color="#924B72">#Case</font>(Text)
+  <b><font color="#006666">EndMacro</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(U, &quot;Hello&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(L, &quot;Hello&quot;)
+  
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Fortgeschrittenes mehrzeiliges Makro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> DoubleQuote
+    &quot;
+  <b><font color="#006666">EndMacro</font></b>
+
+  <b><font color="#006666">Macro</font></b> <font color="#006666">Assert</font>(Expression)
+    <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Debugger</font>  <font color="#006666">; 'Assert' (Erklärung) nur im Debug-Modus aktivieren</font>
+      <b><font color="#006666">If</font></b> Expression
+        <b><font color="#006666">Debug</font></b> &quot;Assert (Line &quot; + <font color="#924B72">#PB_Compiler_Line</font> + &quot;): &quot; + DoubleQuote<font color="#924B72">#Expression</font><font color="#924B72">#DoubleQuote</font>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">CompilerEndIf</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  Assert</font>(10 &lt;&gt; 10) <font color="#006666">; Wird nichts anzeigen</font>
+<font color="#006666">  Assert</font>(10 &lt;&gt; 15) <font color="#006666">; Sollte die Erklärung anzeigen</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">UndefineMacro</font></b> &lt;Name&gt;
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">UndefineMacro</font></b> ermöglicht das Löschen (englisch &quot;Undefine&quot;) eines zuvor definierten Makros, und 
+das neue Definieren in einer anderen Art und Weise. Sobald ein Makro gelöscht (&quot;undefined&quot;) wurde, steht 
+es nicht mehr für die weitere Verwendung zur Verfügung. 
+
+</blockquote><p><b>Beispiel:</b> Löschen eines Makros</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> &quot;1&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Aufrufen des Makros</font>
+  
+  <b><font color="#006666">UndefineMacro</font></b> Test <font color="#006666">; Löschen des Makros, es existiert jetzt nicht mehr</font>
+  
+  <b><font color="#006666">Macro</font></b> Test <font color="#006666">; Jetzt können wir das Makro erneut definieren</font>
+    <b><font color="#006666">Debug</font></b> &quot;2&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Aufrufen des Makros</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">MacroExpandedCount</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Mittels <b><font color="#006666">MacroExpandedCount</font></b> kann die Anzahl der &quot;Erweiterungen&quot; (englisch &quot;expanded count&quot;, d.h. die Anzahl 
+wie oft ein Makro erweitert/aufgerufen wurde) ermittelt werden. Dies kann nützlich sein, um bei jeder 
+Erweiterung/jedem Aufruf einen eindeutigen Bezeichner im gleichen Makro zu generieren (wie Sprungmarken, 
+Prozedur-Namen, etc.). 
+
+</blockquote><p><b>Beispiel:</b> Anzahl der Makro-Aufrufe</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">MacroExpandedCount</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Aufrufen des Makros</font>
+  Test <font color="#006666">; Aufrufen des Makros</font>
+  Test <font color="#006666">; Aufrufen des Makros</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

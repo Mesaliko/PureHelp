@@ -1,0 +1,99 @@
+<html><head><title>ThreadPriority</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ThreadPriority()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OldPriority = <font color="#006666"><b>ThreadPriority</b></font>(Thread, Priority)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the priority of the specified thread and returns the old priority. 
+<br>
+<br>
+The priority value can go from 1 to 32. 1 is the lowest priority available, 16 is the normal priority 
+and 32 is the time critical priority (highest, please don't use it unless you know what you're 
+doing). 
+<br>
+<br>
+If the priority is 0, then the priority isn't changed (useful to only retrieve the thread 
+priority without change it). All threads are created with a normal priority. 
+<br>
+<br>
+Typically you would give a thread which is always running (for example, an image processing thread) 
+a priority which is not greater than any other thread in your system. The reason for this is that if 
+it is always running, and it has a high priority, then no other thread will get a chance to run. 
+If a thread needs to be highly responsive but spends most of its time waiting for some event 
+you might consider giving it a higher than normal priority. 
+<br>
+<br>
+
+Windows schedules threads (chooses which one to run for a short length of time) using a 
+preemptive priority based scheduling strategy, with round robin scheduling within 
+the same priority level. This means that if it is time for execution of a different thread 
+(known as a context switch) then the thread with the highest priority that is available to run will be the next one to 
+be executed. If there is more than one thread with the highest priority, and they are available to 
+run, then each thread will be cycled through on successive context switches. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Thread</i></td>
+<td width="90%"> 
+The thread to change the priority of. This value is returned by <a href="createthread.html">CreateThread()</a>. 
+
+</td></tr>
+<tr><td><i>Priority</i></td>
+<td> 
+The new priority to assign to the thread. The priority can be zero (meaning not to change 
+the priority) or range from 1 (lowest priority) to 32 (highest priority). 16 is normal priority. 
+Windows doesn't support 32 different level of priority, here is the corresponding table: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1: lowest
+  - between 2 and 15: below normal 
+  - 16:  normal
+  - between 17 and 30: above normal
+  - 31: highest
+  - 32: time critical
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The priority of the thread before this function was called. This can be 
+useful if you only want to boost the priority of the thread for a short time and then return 
+it to its previous level. The returned value is not necessary the same than the one set with ThreadPriority(), as 
+it depends of the granularity of the priority tuning offered by the system. <br>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Procedure which always runs (note, no Delay function as</font>
+  <font color="#006666">; this would cause the thread to stop running while it was</font>
+  <font color="#006666">; being delayed</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PrintStuff</font>(*Interval)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1000000000
+      <font color="#006666">; Nasty busy wait</font>
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+    thread =<font color="#006666"> CreateThread</font>(@PrintStuff(), 500)
+    <b><font color="#006666">If</font></b> thread
+      <font color="#006666">; Increase the priority above the main thread</font>
+      <font color="#006666">; You should notice a delay before the print function</font>
+      <font color="#006666">; is executed. Now change the 17 to 15 (lower than normal priority)</font>
+      <font color="#006666">; and see that the print executes immediately</font>
+<font color="#006666">      ThreadPriority</font>(thread, 17)
+<font color="#006666">      PrintN</font>(&quot;Waits for higher priority thread to finish&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    PrintN</font>(&quot;Press return to exit&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=threadid.html>ThreadID()</a> - <a href=index.html>Thread Index</a> - <a href=trylockmutex.html>TryLockMutex()</a> -><br><br>
+
+</body></html>

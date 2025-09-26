@@ -1,0 +1,88 @@
+<html><head><title>CreateXMLNode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateXMLNode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateXMLNode</b></font>(NoeudParent, Nom$ [, NoeudPrecedent [, Type]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau noeud et l'insert 
+sous un noeud parent. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NoeudParent</i></td>
+<td width="90%"> 
+Le noeud sous lequel le nouveau noeud doit 
+être inséré. Pour insérer le noeud à la 
+racine de l'arbre XML, utiliser 
+<a href="rootxmlnode.html">RootXMLNode()</a>. 
+
+</td></tr>
+<tr><td><i>Nom$</i></td>
+<td> 
+Le nom du noeud, c'est une chaîne de 
+caractères. <br>
+Peut être une chaine vide si le nom 
+du noeud n'est pas requis par le parse. 
+
+</td></tr>
+<tr><td><i>NoeudPrecedent (optionnel)</i></td>
+<td> 
+Représente le noeud fils de 'NoeudParent' 
+après lequel le nouveau noeud devra être 
+inséré. Si sa valeur est omise ou égale 
+à 0, le nouveau noeud est inséré en tant 
+que premier fils du noeud parent. Si sa 
+valeur est -1, alors le nouveau noeud 
+est inséré comme dernier fils du noeud 
+parent. 
+
+</td></tr>
+<tr><td><i>Type (optionnel)</i></td>
+<td> 
+Spécifie le <a href="xmlnodetype.html">type</a> 
+pour ce nouveau noeud. Le type par défaut 
+est <font color="#924B72">#PB_XML_Normal</font>. 
+Note: le type du noeud ne peut plus être 
+modifié une fois qu'il a été créé. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le noeud nouvellement créé ou 
+zéro s'il n'a pas pu être inséré à cet 
+endroit. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les règles suivantes doivent être respectées 
+pour que l'insertion se passe correctement: 
+<br>
+- 'NoeudParent' ne peut pas être de type 
+<font color="#924B72">#PB_XML_Comment</font> ou <font color="#924B72">#PB_XML_CData</font> 
+<br>
+- 'NoeudPrecedent' doit être un fils 
+direct du 'NoeudParent' (s'il est 
+spécifié) <br>
+- Un noeud de type <font color="#924B72">#PB_XML_Root</font> ne peut 
+pas être créé manuellement <br>
+- Si l'arbre XML a déjà un 
+<a href="mainxmlnode.html">noeud principal</a>, 
+seuls les noeuds de type autres que 
+<font color="#924B72">#PB_XML_Normal</font> et <font color="#924B72">#PB_XML_CData</font> peuvent 
+être insérés à la racine 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="deletexmlnode.html">DeleteXMLNode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createxml.html>CreateXML()</a> - <a href=index.html>XML Index</a> - <a href=deletexmlnode.html>DeleteXMLNode()</a> -><br><br>
+
+</body></html>

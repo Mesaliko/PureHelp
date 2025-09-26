@@ -1,0 +1,81 @@
+<html><head><title>AddJSONMember</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddJSONMember()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddJSONMember</b></font>(JSONValeur, Cle$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un nouveau membre (couple nom/valeur) 
+à un objet JSON de 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Object</font>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON à ajouter. 
+<br>
+<br>
+Doit être du type <font color="#924B72">#PB_JSON_Object</font>. 
+
+</td></tr>
+<tr><td><i>Cle$</i></td>
+<td> 
+La clé du nouveau membre. 
+<br>
+<br>
+Si un membre avec la même clé existe dans 
+l'objet, il sera remplacé. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'adresse du membre ajouté. 
+<br>
+La valeur nouvellement ajoutée est 
+initialement de type <font color="#924B72">#PB_JSON_Null</font>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si un membre avec la clé spécifiée 
+existe déjà, il sera remplacé. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+    Objet =<font color="#006666"> SetJSONObject</font>(<font color="#006666">JSONValue</font>(0))
+    
+    AdressePrenom =<font color="#006666"> AddJSONMember</font>(Objet, &quot;Prénom&quot;)
+<font color="#006666">    SetJSONString</font>(AdressePrenom, &quot;Jean&quot;)
+    
+    AdresseNom =<font color="#006666"> AddJSONMember</font>(Objet, &quot;Nom&quot;)
+<font color="#006666">    SetJSONString</font>(AdresseNom, &quot;Dupond&quot;)    
+    
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+   <font color="#006666">; Résultat : {&quot;Nom&quot;: &quot;Dupond&quot;, &quot;Prénom&quot;: &quot;Jean&quot;}</font>
+   <font color="#006666">; Remarque : Un objet JSON, est un ensemble de couples nom/valeur non ordonnés. </font>
+   <font color="#006666">;            Un objet commence par { (accolade gauche) et se termine par } (accolade droite). </font>
+   <font color="#006666">;            Chaque nom est suivi de : (deux-points) et les couples nom/valeur sont séparés par une , (virgule).</font>
+  
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="removejsonmember.html">RemoveJSONMember()</a>, 
+<a href="clearjsonmembers.html">ClearJSONMembers()</a>, <a href="getjsonmember.html">GetJSONMember()</a>, 
+<a href="examinejsonmembers.html">ExamineJSONMembers()</a>, <a href="jsonobjectsize.html">JSONObjectSize()</a>, 
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addjsonelement.html>AddJSONElement()</a> - <a href=index.html>Json Index</a> - <a href=catchjson.html>CatchJSON()</a> -><br><br>
+
+</body></html>

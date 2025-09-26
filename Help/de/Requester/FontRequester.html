@@ -1,0 +1,98 @@
+<html><head><title>FontRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FontRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>FontRequester</b></font>(FontName$, FontGröße, Flags [, Farbe [, Stil]] [, ParentID]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet den Standard-Requester zum Auswählen eines Zeichensatzes. 
+<br>
+<br>
+Die Befehle <a href="selectedfontcolor.html">SelectedFontColor()</a>, <a href="selectedfontname.html">SelectedFontName()</a>, <a href="selectedfontsize.html">SelectedFontSize()</a> 
+und <a href="selectedfontstyle.html">SelectedFontStyle()</a> können nach einem erfolgreichen Aufruf benutzt werden, 
+um die benötigten Informationen über den ausgewählten Zeichensatz zu erhalten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>FontName$</i></td>
+<td width="90%"> 
+Der zu verwendende Standard-Fontname, wenn der Requester geöffnet wird. 
+
+</td></tr>
+<tr><td><i>FontGröße</i></td>
+<td> 
+Die zu verwendend Standard-Fontgröße, wenn der Requester geöffnet wird. 
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+Dies kann kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FontRequester_Effects</font> : Aktiviert die &quot;Effekte&quot; des Requesters, einschließlich Farbauswahl (nur auf Windows).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Farbe (optional)</i></td>
+<td> 
+Legt die Standardfarbe fest, wenn der Requester geöffnet wird. 
+Einen gültigen Farbwert erhalten Sie mit dem Befehl <a href="../2ddrawing/rgb.html">RGB()</a>. 
+
+</td></tr>
+<tr><td><i>Stil (optional)</i></td>
+<td> 
+Legt den Standardstil fest, wenn der Requester geöffnet wird. 
+Siehe <a href="selectedfontstyle.html">SelectedFontStyle()</a> für die verfügbaren Stile. 
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+Die Kennung des übergeordneten Fensters. Eine gültige Fensterkennung kann mit 
+<a href="../window/windowid.html">WindowID()</a> abgerufen werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn ein Zeichensatz ausgewählt wurde, und Null wenn der 
+Nutzer den Requester abgebrochen hat. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  FontName$ = &quot;Arial&quot;   <font color="#006666">; Anfangs-Zeichensatz festlegen  (Kann auch ein leer sein)</font>
+  FontSize  = 14        <font color="#006666">; Anfangs-Größe festlegen  (kann auch Null sein)</font>
+  Result =<font color="#006666"> FontRequester</font>(FontName$, FontSize, <font color="#924B72">#PB_FontRequester_Effects</font>)
+  <b><font color="#006666">If</font></b> Result
+    Message$ = &quot;Sie haben folgenden Zeichensatz ausgewählt:&quot;  + <font color="#924B72">#LF$</font> 
+    Message$ + &quot;Name:  &quot; +<font color="#006666"> SelectedFontName</font>()       + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Größe: &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontSize</font>())  + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Farbe: &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontColor</font>()) + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Bold</font>
+      Message$ + &quot;Fett&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_StrikeOut</font>
+      Message$ + &quot;Durchgestrichen&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Underline</font>
+      Message$ + &quot;Unterstrichen&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b> 
+    Message$ = &quot;Der Requester wurde abgebrochen.&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;FontRequester&quot;, Message$, <font color="#924B72">#PB_MessageRequester_Ok</font>) 
+</font></pre>
+<br>
+<p><img src="../HelpPictures/fontrequester.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="selectedfontcolor.html">SelectedFontColor()</a>, <a href="selectedfontname.html">SelectedFontName()</a>, <a href="selectedfontsize.html">SelectedFontSize()</a>, <a href="selectedfontstyle.html">SelectedFontStyle()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=colorrequester.html>ColorRequester()</a> - <a href=index.html>Requester Inhaltsverzeichnis</a> - <a href=inputrequester.html>InputRequester()</a> -><br><br>
+
+</body></html>

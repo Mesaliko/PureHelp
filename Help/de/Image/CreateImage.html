@@ -1,0 +1,85 @@
+<html><head><title>CreateImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateImage</b></font>(#Image, Breite, Höhe [, Tiefe [, HintergrundFarbe]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein leeres Bild (englisch &quot;Image&quot;, standardmäßig mit schwarzem Hintergrund), 
+welches zum darauf Zeichnen benutzt werden kann. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Bild zu identifizieren. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann angegeben werden, um diese Nummer 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Breite, Höhe</i></td>
+<td> 
+Die Abmessungen des neuen Bildes. Sowohl Breite als auch Höhe müssen größer 
+als Null sein. 
+
+</td></tr>
+<tr><td><i>Tiefe (optional)</i></td>
+<td> 
+Die Farbtiefe des neuen Bildes. 
+Gültige Werte können sein: 24 und 32. Der Standard ist 24-Bit, wenn keine Tiefe 
+angegeben wird. 
+
+</td></tr>
+<tr><td><i>HintergrundFarbe (optional)</i></td>
+<td> 
+Die beim Erstellen des Bildes verwendete Hintergrund-<a href="../2ddrawing/rgb.html">RGB()</a>-Farbe. Diese Farbe kann auf 
+<font color="#924B72">#PB_Image_Transparent</font> gesetzt werden, um ein Bild zu erstellen, bei dem der Alpha-Kanal 
+auf völlige Transparenz gesetzt ist. Dies hat nur einen Effekt bei 32-Bit Bildern. 
+Die Standard-Hintergrundfarbe ist schwarz, wenn dieser Parameter nicht angegeben wird. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Bild erfolgreich erstellt wurde, und Null 
+wenn das Bild nicht erstellt werden konnte. 
+Wenn <font color="#924B72">#PB_Any</font> als #Image Parameter angegeben wurde, dann wird bei Erfolg die 
+automatisch generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das Limit für die Bildgröße, welche verarbeitet werden kann, hängt vom Betriebssystem und 
+dem verfügbaren Speicher ab. Wenn genügend Speicher verfügbar ist, dann können von allen 
+von PureBasic unterstützten Betriebssystemen Bilder bis mindestens 8192x8192 Pixel 
+verarbeitet werden. 
+<br>
+<br>
+Sie können verschiedene andere Funktionen benutzen, um auf das erstellte Bild zuzugreifen: 
+<br>
+- <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> mit <a href="imageoutput.html">ImageOutput()</a> zum Zeichnen auf das erstellte Bild 
+<br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> mit <a href="imagevectoroutput.html">ImageVectorOutput()</a> zum Zeichnen auf dem erstellten Bild mittels Vektorzeichnen 
+<br>
+- <a href="copyimage.html">CopyImage()</a> zum Erstellen eines weiteren Bildes vom aktuellen Bild 
+<br>
+- <a href="grabimage.html">GrabImage()</a> zum Erstellen eines weiteren Bildes aus einem angegebenen Bildausschnitt des aktuellen Bildes 
+<br>
+- <a href="../2ddrawing/drawimage.html">DrawImage()</a> mit <a href="imageid.html">ImageID()</a> zum Zeichnen des Bildes auf dem aktuellen Ausgabekanal 
+<br>
+- <a href="../gadget/imagegadget.html">ImageGadget()</a> zum Anzeigen des Bildes auf einem Programmfenster 
+<br>
+- <a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> zum Erstellen eines Bild-Schalters auf einem Programmfenster 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="freeimage.html">FreeImage()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=copyimage.html>CopyImage()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=encodeimage.html>EncodeImage()</a> -><br><br>
+
+</body></html>

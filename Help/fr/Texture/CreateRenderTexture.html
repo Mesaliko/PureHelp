@@ -1,0 +1,89 @@
+<html><head><title>CreateRenderTexture</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateRenderTexture()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateRenderTexture</b></font>(#Texture, CameraID, Largeur, Hauteur [, Options [, NomTextureRendu$]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une texture de rendu. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Texture</i></td>
+<td width="90%"> 
+Le numéro de la nouvelle texture. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>CameraID</i></td>
+<td> 
+Le numéro de la caméra à associer à la texture. 
+<br>
+<br>
+Cet ID peut être obtenu par <a href="../camera/cameraid.html">CameraID()</a>. 
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur</i></td>
+<td> 
+Les dimensions de la nouvelle texture, en pixels. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Texture_AutomaticUpdate</font>: La texture est mise à jour automatiquement à chaque <a href="../engine3d/renderworld.html">RenderWorld()</a> (par défaut).
+  <font color="#924B72">#PB_Texture_ManualUpdate</font>   : La texture n'est pas mise à jour automatiquement, <a href="updaterendertexture.html">UpdateRenderTexture()</a> doit 
+                               être appelé manuellement.
+  <font color="#924B72">#PB_Texture_CameraViewPort</font> : La fenêtre caméra ne sera pas supprimée, utile pour toujours être en mesure 
+                               de faire une capture de la caméra.
+</font></pre>
+
+</td></tr>
+<tr><td><i>NomTextureRendu$ (optionnel)</i></td>
+<td> 
+Le nom de la nouvelle texture dans le système OGRE. 
+<br>
+<br>
+Cela permet d'utiliser ce nom dans le script pour assigner un shader à cette texture. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La caméra associée à la texture rendra son point de vue directement sur la texture, 
+sans être affichée à l'écran. Cela peut être très utile pour des objets qui affichent 
+une partie de la scène comme un écran de télévision, un miroir, etc. 
+<br>
+<br>
+La mise à jour automatique ne se produit qu'à l'appel de <a href="../engine3d/renderworld.html">RenderWorld()</a>. 
+De plus, si une autre texture porte le même nom, la création échoue. 
+<br>
+<br>
+Note: <a href="textureoutput.html">TextureOutput()</a> n'est pas supporté sur les textures rendues. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="updaterendertexture.html">UpdateRenderTexture()</a>, <a href="saverendertexture.html">SaveRenderTexture()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createcubictexture.html>CreateCubicTexture()</a> - <a href=index.html>Texture Index</a> - <a href=createtexture.html>CreateTexture()</a> -><br><br>
+
+</body></html>

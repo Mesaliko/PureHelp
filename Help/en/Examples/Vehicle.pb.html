@@ -1,0 +1,323 @@
+<html><head><title>Vehicle.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CreateVehicle
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+<font color="#924B72">#CameraSpeed</font> = 2
+
+<b><font color="#006666">Global</font></b>.f KeyX, KeyY, MouseX, MouseY, ElapsedTime
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">VECTOR3</font>(V, a, b, c)
+  V\x = a
+  V\y = b
+  V\z = c
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Vehicle
+  Chassis.i
+  Wheels.i[4]
+  EngineBrake.f
+  EngineForce.f
+  Steering.f
+  
+  SteeringLeft.i
+  SteeringRight.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Global</font></b> Recul = <font color="#924B72">#False</font>
+
+<b><font color="#006666">Global</font></b> MaxEngineForce.f = 2000.0
+<b><font color="#006666">Global</font></b> MaxEngineBrake.f = 150.0
+
+<b><font color="#006666">Global</font></b> SteeringIncrement.f = 0.5
+<b><font color="#006666">Global</font></b> SteeringClamp.f = 27
+
+<b><font color="#006666">Global</font></b> WheelRadius.f = 0.5<font color="#006666">;
+</font><b><font color="#006666">Global</font></b> WheelWidth.f = 0.4 <font color="#006666">;
+
+</font><b><font color="#006666">Global</font></b> SuspensionStiffness.f = 20.0
+<b><font color="#006666">Global</font></b> SuspensionDamping.f = 3.3
+<b><font color="#006666">Global</font></b> SuspensionCompression.f = 4.4
+<b><font color="#006666">Global</font></b> MaxSuspensionTravelCm.f = 500.0<font color="#006666">;
+</font><b><font color="#006666">Global</font></b> FrictionSlip.f = 20
+
+<b><font color="#006666">Global</font></b> RollInfluence.f = 0.3
+<b><font color="#006666">Global</font></b> SuspensionRestLength.f = 0.6<font color="#006666">;
+
+</font><b><font color="#006666">Global</font></b> Vehicle.s_Vehicle
+
+<font color="#924B72">#CUBE_HALF_EXTENTS</font> = 1
+
+<b><font color="#006666">Declare</font></b> <font color="#006666">BuildVehicle</font>(*Vehicle.s_Vehicle)
+<b><font color="#006666">Declare</font></b> <font color="#006666">HandleVehicle</font>()
+<b><font color="#006666">Declare</font></b> <font color="#006666">ControlVehicle</font>(elapsedTime.f)
+<b><font color="#006666">Declare</font></b>.f  <font color="#006666">Interpolation</font>(x1.f, x2.f, percent.f)
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; CreateVehicle - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot; , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, -1,<font color="#006666"> RGB</font>(105, 105, 105))
+
+<font color="#006666">;- Material
+</font><font color="#006666">;
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Wood.jpg&quot;))
+<font color="#006666">GetScriptMaterial</font>(1, &quot;SphereMap/SphereMappedRustySteel&quot;)
+<font color="#006666">CreateMaterial</font>(2,<font color="#006666"> LoadTexture</font>(2, &quot;Dirt.jpg&quot;))
+<font color="#006666">ScaleMaterial</font>(2,0.05,0.05)
+<font color="#006666">GetScriptMaterial</font>(3, &quot;Scene/GroundBlend&quot;)
+
+<font color="#006666">;-Ground
+</font><font color="#006666">;
+</font><font color="#006666">CreatePlane</font>(0, 500, 500, 5, 5, 5, 5)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(2))
+<font color="#006666">EntityRenderMode</font>(0, 0)
+<font color="#006666">CreateEntityBody</font>(0, <font color="#924B72">#PB_Entity_PlaneBody</font>, 0, 0, 1)
+
+<font color="#006666">;-Walls
+</font><font color="#006666">;
+</font><font color="#006666">CreateCube</font>(1, 1)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666">MeshID</font>(1),<font color="#006666">MaterialID</font>(2),0,1, 250)
+<font color="#006666">ScaleEntity</font>(1,500,2,0.5)
+<font color="#006666">CreateEntityBody</font>(1, <font color="#924B72">#PB_Entity_PlaneBody</font>, 0, 0, 1, <font color="#924B72">#PB_Vector_NegativeZ</font>, -1,-1,-1)
+
+<font color="#006666">CreateEntity</font>(2,<font color="#006666">MeshID</font>(1),<font color="#006666">MaterialID</font>(2),0,1, -250)
+<font color="#006666">ScaleEntity</font>(2,500,2,0.5)
+<font color="#006666">CreateEntityBody</font>(2, <font color="#924B72">#PB_Entity_PlaneBody</font>, 0, 0, 1, <font color="#924B72">#PB_Vector_Z</font>, -1,-1,-1)
+
+<font color="#006666">CreateEntity</font>(3,<font color="#006666">MeshID</font>(1),<font color="#006666">MaterialID</font>(2),250,1, 0)
+<font color="#006666">ScaleEntity</font>(3,0.5,2,500)
+<font color="#006666">CreateEntityBody</font>(3, <font color="#924B72">#PB_Entity_PlaneBody</font>, 0, 0, 1, <font color="#924B72">#PB_Vector_NegativeX</font>, -1,-1,-1)
+
+<font color="#006666">CreateEntity</font>(4,<font color="#006666">MeshID</font>(1),<font color="#006666">MaterialID</font>(2),-250,1, 0)
+<font color="#006666">ScaleEntity</font>(4,0.5,2,500)
+<font color="#006666">CreateEntityBody</font>(4, <font color="#924B72">#PB_Entity_PlaneBody</font>, 0, 0, 1, <font color="#924B72">#PB_Vector_X</font>, -1,-1,-1)
+
+
+CylinderMEsh =<font color="#006666"> CreateCylinder</font>(<font color="#924B72">#PB_Any</font>, 0.5, 2)
+
+<b><font color="#006666">For</font></b> i=-250 <b><font color="#006666">To</font></b> 250 <b><font color="#006666">Step</font></b> 30
+  Cylinder =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666">MeshID</font>(CylinderMEsh),<font color="#006666">MaterialID</font>(1), 0, 1, i)
+<font color="#006666">  CreateEntityBody</font>(Cylinder, <font color="#924B72">#PB_Entity_CylinderBody</font>, 0, 0, 1)
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font><font color="#006666">CreateLight</font>(0 ,<font color="#006666">RGB</font>(190, 190, 190), 400, 120, 100,<font color="#924B72">#PB_Light_Directional</font>)
+<font color="#006666">SetLightColor</font>(0, <font color="#924B72">#PB_Light_SpecularColor</font>,<font color="#006666"> RGB</font>(255*0.4, 255*0.4,255*0.4))
+<font color="#006666">LightDirection</font>(0 ,0.55, -0.3, -0.75)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(255*0.2, 255*0.2,255*0.2))
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0,  800, 400, 80, <font color="#924B72">#PB_Absolute</font>)
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">;-
+</font><font color="#006666">BuildVehicle</font>(@Vehicle)
+
+<font color="#006666">;-Main
+</font><font color="#006666">;
+</font><b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineMouse</font>()
+<font color="#006666">  ExamineKeyboard</font>()
+  
+<font color="#006666">  HandleVehicle</font>()
+  
+<font color="#006666">  ControlVehicle</font>(ElapsedTime/20)
+  
+<font color="#006666">  CameraFollow</font>(0,<font color="#006666"> EntityID</font>(Vehicle\Chassis),180, 3.5, 10, 0.1, 0.1)
+  
+  ElapsedTime =<font color="#006666"> RenderWorld</font>()
+  
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Clamp</font>(*var.float, min.f, max.f)
+  <b><font color="#006666">If</font></b> *var\f &lt; min
+    *var\f = min
+  <b><font color="#006666">ElseIf</font></b> *var\f &gt; max
+    *var\f = max
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">BuildVehicle</font>(*Vehicle.s_Vehicle)
+  <b><font color="#006666">Protected</font></b>.VECTOR3 connectionPointCS0<font color="#006666">; wheelDirectionCS0,wheelAxleCS,
+</font>  
+  <b><font color="#006666">With</font></b> *Vehicle
+    
+    \SteeringLeft = <font color="#924B72">#False</font>
+    \SteeringRight = <font color="#924B72">#False</font>
+    
+    \EngineForce = 0
+    \Steering = 0
+    
+    
+    <font color="#006666">;- &gt;&gt;&gt; create vehicle  &lt;&lt;&lt;&lt;&lt;
+</font>    
+    connectionHeight.f = 0.6
+    
+    ChassisMesh =<font color="#006666"> CreateCube</font>(<font color="#924B72">#PB_Any</font>, 2)
+    
+    ChassisEntity =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(chassisMesh),<font color="#006666"> MaterialID</font>(3), 0, 1, 0)
+<font color="#006666">    ScaleEntity</font>(ChassisEntity, 0.8, 0.7, 2)
+    \Chassis =<font color="#006666"> CreateVehicle</font>(<font color="#924B72">#PB_Any</font>)
+<font color="#006666">    AddSubEntity</font>(\Chassis, ChassisEntity, <font color="#924B72">#PB_Entity_BoxBody</font>)
+    
+<font color="#006666">    EntityRenderMode</font>(\Chassis, <font color="#924B72">#PB_Entity_CastShadow</font>)
+<font color="#006666">    CreateVehicleBody</font>(\Chassis, 700, 0.3, 0.8,suspensionStiffness, suspensionCompression, suspensionDamping, maxSuspensionTravelCm, frictionSlip)
+    
+<font color="#006666">    MoveEntity</font>(\Chassis, 0, 3, 0,<font color="#924B72">#PB_Absolute</font>)
+    
+<font color="#006666">    SetEntityAttribute</font>(\Chassis, <font color="#924B72">#PB_Entity_LinearDamping</font>, 0.2)
+<font color="#006666">    SetEntityAttribute</font>(\Chassis, <font color="#924B72">#PB_Entity_AngularDamping</font>, 0.2)
+    
+    Wheel =<font color="#006666"> CreateSphere</font>(<font color="#924B72">#PB_Any</font>, WheelRadius)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 3
+      \Wheels[i] =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(Wheel), <font color="#924B72">#PB_Material_None</font>)
+<font color="#006666">      ScaleEntity</font>(\Wheels[i], WheelWidth,1,1)
+    <b><font color="#006666">Next</font></b>
+    
+    <font color="#006666">;-WheelSteerable and WheelsEngine
+</font><font color="#006666">    VECTOR3</font>(connectionPointCS0, <font color="#924B72">#CUBE_HALF_EXTENTS</font>-(0.2*WheelWidth), connectionHeight,2*<font color="#924B72">#CUBE_HALF_EXTENTS</font>-WheelRadius)
+<font color="#006666">    AddVehicleWheel</font>(\Chassis, \Wheels[0],
+                    connectionPointCS0\x, connectionPointCS0\y,connectionPointCS0\z,
+                    -1, 0,0, SuspensionRestLength, WheelRadius, <font color="#924B72">#True</font>, RollInfluence)
+    
+    
+<font color="#006666">    VECTOR3</font>(connectionPointCS0, -<font color="#924B72">#CUBE_HALF_EXTENTS</font>+(0.2*WheelWidth), connectionHeight, 2*<font color="#924B72">#CUBE_HALF_EXTENTS</font>-WheelRadius)
+<font color="#006666">    AddVehicleWheel</font>(\Chassis, \Wheels[1],
+                    connectionPointCS0\x, connectionPointCS0\y,connectionPointCS0\z,
+                    -1, 0,0, SuspensionRestLength, WheelRadius, <font color="#924B72">#True</font>, RollInfluence)
+    
+    
+<font color="#006666">    VECTOR3</font>(connectionPointCS0, -<font color="#924B72">#CUBE_HALF_EXTENTS</font>+(0.2*WheelWidth), connectionHeight, -2*<font color="#924B72">#CUBE_HALF_EXTENTS</font>+WheelRadius)<font color="#006666">;
+</font><font color="#006666">    AddVehicleWheel</font>(\Chassis, \Wheels[2],
+                    connectionPointCS0\x, connectionPointCS0\y,connectionPointCS0\z,
+                    -1, 0,0, SuspensionRestLength, WheelRadius, <font color="#924B72">#False</font>, RollInfluence)
+    
+    
+<font color="#006666">    VECTOR3</font>(connectionPointCS0, <font color="#924B72">#CUBE_HALF_EXTENTS</font>-(0.2*WheelWidth), connectionHeight, -2*<font color="#924B72">#CUBE_HALF_EXTENTS</font>+WheelRadius)<font color="#006666">;
+</font><font color="#006666">    AddVehicleWheel</font>(\Chassis, \Wheels[3],
+                    connectionPointCS0\x, connectionPointCS0\y,connectionPointCS0\z,
+                    -1, 0,0, SuspensionRestLength, WheelRadius, <font color="#924B72">#False</font>, RollInfluence)
+    
+    
+  <b><font color="#006666">EndWith</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">HandleVehicle</font>()
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+    Vehicle\SteeringLeft = <font color="#924B72">#True</font>
+    Vehicle\SteeringRight = <font color="#924B72">#False</font>
+    
+  <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+    Vehicle\SteeringRight = <font color="#924B72">#True</font>
+    Vehicle\SteeringLeft = <font color="#924B72">#False</font>
+  <b><font color="#006666">Else</font></b>
+    Vehicle\SteeringRight = <font color="#924B72">#False</font>
+    Vehicle\SteeringLeft = <font color="#924B72">#False</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">GetEntityAttribute</font>(Vehicle\Chassis, <font color="#924B72">#PB_Entity_LinearVelocity</font>)&lt; 0.4
+      Recul = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> Recul
+      Vehicle\EngineForce = -MaxEngineForce
+      Vehicle\EngineBrake = 0
+    <b><font color="#006666">Else</font></b>
+      Vehicle\EngineForce = 0
+      Vehicle\EngineBrake = MaxEngineBrake
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+    Vehicle\EngineForce = MaxEngineForce
+    Vehicle\EngineBrake = 0
+  <b><font color="#006666">Else</font></b>
+    Vehicle\EngineBrake = MaxEngineForce/ 100
+    Vehicle\EngineForce = 0
+    Recul = <font color="#924B72">#False</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ControlVehicle</font>(elapsedTime.f)
+  
+  <font color="#006666">; apply engine Force on relevant wheels
+</font>  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1
+<font color="#006666">    ApplyVehicleBrake</font>(Vehicle\Chassis, i, Vehicle\EngineBrake)
+<font color="#006666">    ApplyVehicleForce</font>(Vehicle\Chassis, i, Vehicle\EngineForce)
+  <b><font color="#006666">Next</font></b>
+  
+  
+  <b><font color="#006666">If</font></b> (Vehicle\SteeringLeft)
+    
+    Vehicle\Steering + SteeringIncrement*elapsedTime
+    <b><font color="#006666">If</font></b> (Vehicle\Steering &gt; SteeringClamp)
+      Vehicle\Steering = SteeringClamp
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">ElseIf</font></b> (Vehicle\SteeringRight)
+    
+    Vehicle\Steering - SteeringIncrement*elapsedTime
+    <b><font color="#006666">If</font></b> (Vehicle\Steering &lt; -SteeringClamp)
+      Vehicle\Steering = -SteeringClamp
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Else</font></b>
+    Vehicle\Steering =<font color="#006666"> Interpolation</font>(Vehicle\Steering, 0, 0.05)
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; apply Steering on relevant wheels
+</font>  
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1
+<font color="#006666">    ApplyVehicleSteering</font>(Vehicle\Chassis, i, Vehicle\Steering)
+  <b><font color="#006666">Next</font></b>
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.f <font color="#006666">Interpolation</font>(x1.f, x2.f, percent.f)
+  <b><font color="#006666">If</font></b> percent&lt;0
+    percent=0
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> percent&gt;1
+    percent=1
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">ProcedureReturn</font></b> x1 + percent * (x2 - x1)
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+
+</font></pre>
+</body></html>

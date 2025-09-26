@@ -1,0 +1,53 @@
+<html><head><title>ScaleEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScaleEntity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ScaleEntity</b></font>(#Entity, x, y, z [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Scales the entity according to the specified x,y,z values. When using <font color="#924B72">#PB_Relative</font> mode, 
+this is a factor based scale which means the entity size will be multiplied with the 
+given value to obtain the new size. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The entity to use. 
+
+</td></tr>
+<tr><td><i>x, y, z</i></td>
+<td> 
+The scaling to apply. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The scale mode. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Relative</font>: relative scale, based on the previous size (default). Using 1.0 for scale value will let this value unchanged.
+  <font color="#924B72">#PB_Absolute</font>: absolute scale, in world unit.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ScaleEntity</font>(0, 2, 2, 2) <font color="#006666">; Double the current size of the entity</font>
+<font color="#006666">  ScaleEntity</font>(0, 1, 1, 1) <font color="#006666">; Don't change the size of the entity (multiply by 1 don't change anything</font>
+<font color="#006666">  ScaleEntity</font>(0, 3, 1, 1) <font color="#006666">; Make the width of the entity 3 times larger</font>
+<font color="#006666">  ScaleEntity</font>(0, 1, 1, 1, <font color="#924B72">#PB_Absolute</font>) <font color="#006666">; Reset the entity size to 1,1,1.</font>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=rotateentitybone.html>RotateEntityBone()</a> - <a href=index.html>Entity Index</a> - <a href=scaleentitybone.html>ScaleEntityBone()</a> -><br><br>
+
+</body></html>

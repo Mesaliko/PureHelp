@@ -1,0 +1,166 @@
+<html><head><title>TerrainShadow.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Terrain : Shadow
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#CameraSpeed</font> = 2
+<font color="#924B72">#TerrainMiniX</font> = 0
+<font color="#924B72">#TerrainMiniY</font> = 0
+<font color="#924B72">#TerrainMaxiX</font> = 0
+<font color="#924B72">#TerrainMaxiY</font> = 0
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Clamp</font>(*var.float, min.f, max.f)
+  <b><font color="#006666">If</font></b> *var\f &lt; min
+    *var\f = min
+  <b><font color="#006666">ElseIf</font></b> *var\f &gt; max
+    *var\f = max
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">InitEngine3D</font>()
+  
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Terrain : Shadow - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/&quot;       , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/nvidia&quot; , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;         , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Terrain&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, <font color="#924B72">#PB_Default</font>,<font color="#006666"> RGB</font>(105, 105, 105))
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font>light =<font color="#006666"> CreateLight</font>(<font color="#924B72">#PB_Any</font> ,<font color="#006666">RGB</font>(255, 255, 255), 4000, 1200, 1000,<font color="#924B72">#PB_Light_Directional</font>)
+<font color="#006666">SetLightColor</font>(light, <font color="#924B72">#PB_Light_SpecularColor</font>,<font color="#006666"> RGB</font>(255*0.4, 255*0.4,255*0.4))
+<font color="#006666">LightDirection</font>(light ,0.55, -0.3, -0.75)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(255*0.2, 255*0.2,255*0.2))
+    
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0,  800, 400, 80, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(5, 5, 10))
+
+
+<font color="#006666">;----------------------------------
+</font><font color="#006666">; terrain definition
+</font><font color="#006666">SetupTerrains</font>(<font color="#006666">LightID</font>(Light), 3000, <font color="#924B72">#PB_Terrain_NormalMapping</font>)
+<font color="#006666">; initialize terrain
+</font><font color="#006666">CreateTerrain</font>(0, 513, 12000, 600, 3, &quot;TerrainShadow&quot;, &quot;dat&quot;)
+<font color="#006666">; set all texture will be use when terrrain will be constructed
+</font><font color="#006666">AddTerrainTexture</font>(0,  0, 100, &quot;dirt_grayrocky_diffusespecular.jpg&quot;,  &quot;dirt_grayrocky_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  1,  30, &quot;grass_green-01_diffusespecular.jpg&quot;, &quot;grass_green-01_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  2, 200, &quot;growth_weirdfungus-03_diffusespecular.jpg&quot;, &quot;growth_weirdfungus-03_normalheight.jpg&quot;)
+
+<font color="#006666">; construct terrains
+</font><b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+  <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+<font color="#006666">    DefineTerrainTile</font>(0, tx, ty, &quot;terrain513.png&quot;, ty % 2, tx % 2)
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+<font color="#006666">BuildTerrain</font>(0)
+
+<font color="#006666">;InitBlendMaps
+</font>minHeight1.f = 70
+fadeDist1.f = 40
+minHeight2.f = 70
+fadeDist2.f = 15
+<b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+  <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+    Size =<font color="#006666"> TerrainTileLayerMapSize</font>(0, tx, ty)
+    <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> Size-1
+      <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> Size-1
+        Height.f =<font color="#006666"> TerrainTileHeightAtPosition</font>(0, tx, ty, 1, x, y)
+        
+        val.f = (Height - minHeight1) / fadeDist1
+<font color="#006666">        Clamp</font>(@val, 0, 1)
+<font color="#006666">        SetTerrainTileLayerBlend</font>(0, tx, ty, 1, x, y, val)
+        
+        val.f = (Height - minHeight2) / fadeDist2
+<font color="#006666">        Clamp</font>(@val, 0, 1)
+<font color="#006666">        SetTerrainTileLayerBlend</font>(0, tx, ty, 2, x, y, val)
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+<font color="#006666">    UpdateTerrainTileLayerBlend</font>(0, tx, ty, 1)
+<font color="#006666">    UpdateTerrainTileLayerBlend</font>(0, tx, ty, 2)
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+<font color="#006666">UpdateTerrain</font>(0)
+
+
+<font color="#006666">; enable shadow terrain
+</font><font color="#006666">TerrainRenderMode</font>(0, <font color="#924B72">#PB_Terrain_CastShadows</font>)
+    
+<font color="#006666">; create sphere for test
+</font><font color="#006666">CreateSphere</font>(1, 20.0, 50, 50)
+<b><font color="#006666">Global</font></b> ball =<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(1), <font color="#924B72">#Null</font>)
+<font color="#006666">MoveEntity</font>(ball, 300,60,0, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">EntityRenderMode</font>(ball, <font color="#924B72">#PB_Entity_CastShadow</font>)
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+      KeyX = -<font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+      KeyX = <font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">Else</font></b>
+      KeyX = 0
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+      KeyY = -<font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+      KeyY = <font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">Else</font></b>
+      KeyY = 0
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    
+<font color="#006666">    InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>))
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>)
+<font color="#006666">      TerrainMousePick</font>(0,<font color="#006666">  CameraID</font>(0),<font color="#006666"> MouseX</font>(),<font color="#006666">  MouseY</font>())
+<font color="#006666">      MoveEntity</font>(ball,<font color="#006666"> PickX</font>(),<font color="#006666"> PickY</font>()+20,<font color="#006666"> PickZ</font>(), <font color="#924B72">#PB_Absolute</font>)
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndIf</font></b>
+  <font color="#006666">;CameraLocate(0, CameraX(0), PBO_GetTerrainHeight(0, CameraX(0), CameraZ(0)) + 20, CameraZ(0))
+</font><font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+<font color="#006666">  RotateCamera</font>(0,  MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+<b><font color="#006666">End</font></b>
+</font></pre>
+</body></html>

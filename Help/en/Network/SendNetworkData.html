@@ -1,0 +1,53 @@
+<html><head><title>SendNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SendNetworkData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SendNetworkData</b></font>(Connection, *MemoryBuffer, Length)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sends raw data to the specified client. This function can be used by both 
+client and server applications. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connection</i></td>
+<td width="90%"> 
+The connection to send data to. 
+On the server side, 'Connection' is the client which should receive this data. 
+On the client side, 'Connection' is returned by <a href="opennetworkconnection.html">OpenNetworkConnection()</a>. 
+
+</td></tr>
+<tr><td><i>*MemoryBuffer</i></td>
+<td> 
+The address of the data to send. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+The length of the data to send. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of bytes actually sent. If the number of bytes returned is not equal 
+to the 'Length' parameter the receiving buffer of the user is probably full. 
+If nothing could be sent then 'Result' will equal -1. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On UDP connections, the maximum 'Length' is 2048. On TCP connections, the maximum 'Length' is 65536. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="sendnetworkstring.html">SendNetworkString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=receivenetworkdata.html>ReceiveNetworkData()</a> - <a href=index.html>Network Index</a> - <a href=sendnetworkstring.html>SendNetworkString()</a> -><br><br>
+
+</body></html>

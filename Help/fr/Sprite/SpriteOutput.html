@@ -1,0 +1,57 @@
+<html><head><title>SpriteOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpriteOutput()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SpriteOutput</b></font>(#Sprite)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'identifiant d'un Sprite 
+nécessaire à la bibliothèque 
+<a href="../2ddrawing/index.html">2DDrawing</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le sprite sur lequel on dessinera. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'OutputID du Sprite s'il est 
+possible de dessiner dessus, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il faut utiliser un bloc <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> 
+/ <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> pour effectuer les 
+dessins 2D directement sur le Sprite. 
+<br>
+<br>
+La mémoire allouée avec SpriteOutput() 
+est libérée avec <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a>, OutputID 
+ne peut donc pas être réutilisé. 
+<br>
+<br>
+SpriteOutput() doit être appelée dans 
+le même thread où <a href="../screen/openscreen.html">OpenScreen()</a> a été 
+appelé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  ...
+<font color="#006666">  StartDrawing</font>(<font color="#006666">SpriteOutput</font>(<font color="#924B72">#Sprite</font>))
+    <font color="#006666">; Dessin ici ...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=spriteid.html>SpriteID()</a> - <a href=index.html>Sprite Index</a> - <a href=spritepixelcollision.html>SpritePixelCollision()</a> -><br><br>
+
+</body></html>

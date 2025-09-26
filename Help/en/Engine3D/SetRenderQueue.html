@@ -1,0 +1,48 @@
+<html><head><title>SetRenderQueue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetRenderQueue()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetRenderQueue</b></font>(ObjectID, Queue [, Priority])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the render order of the specified object. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ObjectID</i></td>
+<td width="90%"> 
+The object ID to convert the coordinate from. It can be one of the following type: 
+<pre><font face="Courier New, Courier, mono" size="2">  - Entity         : use <a href="../entity/entityid.html">EntityID()</a> to get a valid ID.
+  - Light          : use <a href="../light/lightid.html">LightID()</a> to get a valid ID.
+  - Mesh           : use <a href="../mesh/meshid.html">MeshID()</a> to get a valid ID.
+  - ParticleEmitter: use <a href="../particle/particleemitterid.html">ParticleEmitterID()</a> to get a valid ID.
+  - BillboardGroup : use <a href="../billboard/billboardgroupid.html">BillboardGroupID()</a> to get a valid ID.
+  - Text3D         : use <a href="../text3d/text3did.html">Text3DID()</a> to get a valid ID.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Queue</i></td>
+<td> 
+The queue number to use to render the object. Queue number can be from 0 (background) to 100 (foreground). The default queue is 0, and is render 
+behind all the other render queues. 
+
+</td></tr>
+<tr><td><i>Priority (optional)</i></td>
+<td> 
+The priority to use within the queue. Valid values are from 0 (background) to 10000 (foreground). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setorientation.html>SetOrientation()</a> - <a href=index.html>Engine3D Index</a> - <a href=setworldattribute.html>SetWorldAttribute()</a> -><br><br>
+
+</body></html>

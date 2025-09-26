@@ -1,0 +1,116 @@
+<html><head><title>ListViewGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ListViewGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ListViewGadget</b></font>(#Gadget, x, y, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a ListView gadget in the current GadgetList. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ListView_Multiselect</font>: allows multiple items to be selected
+  <font color="#924B72">#PB_ListView_ClickSelect</font>: allows multiple items to be selected. clicking on one item selects/deselects it (on OS X, same behaviour as <font color="#924B72">#PB_ListView_Multiselect</font>)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+The following functions can be used to act on the list content: 
+<br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: Add an item. A ListViewGadget() is limited to 65536 items. 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: Remove an item. 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: Remove all the items 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: Returns the number of items currently in the #Gadget. 
+<br>
+<br>
+- <a href="getgadgetitemdata.html">GetGadgetItemData()</a>: Get the value that was stored with the gadget item. 
+<br>
+- <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Returns nonzero if the item is selected, zero otherwise. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Get the content of the given item. 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Get the index of the selected item or -1 if there is no selected item. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Get the content of the selected item. 
+<br>
+- <a href="setgadgetitemdata.html">SetGadgetItemData()</a>: store a value with the given item. 
+<br>
+- <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Selects or deselects the given item. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: Set the text of the given item. 
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: Change the selected item. If -1 is specified, all selections will be removed. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Selects the item with the given text (the text must match exactly). 
+
+<br>
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textcolor
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Backgroundcolor
+</font></pre>
+
+The following events are supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font> (also fired when the selection change)
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>
+  <font color="#924B72">#PB_EventType_RightClick</font>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 140, &quot;ListViewGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ListViewGadget</font>(0, 10, 10, 250, 120)
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 12
+<font color="#006666">      AddGadgetItem </font>(0, -1, &quot;Item &quot; +<font color="#006666"> Str</font>(a) + &quot; of the Listview&quot;) <font color="#006666">; define listview content</font>
+    <b><font color="#006666">Next</font></b>
+<font color="#006666">    SetGadgetState</font>(0, 9) <font color="#006666">; set (beginning with 0) the tenth item as the active one</font>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/listviewgadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, <a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="getgadgetitemdata.html">GetGadgetItemData()</a>, <a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="listicongadget.html">ListIconGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=listicongadget.html>ListIconGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=mdigadget.html>MDIGadget()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,67 @@
+<html><head><title>PokeS</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PokeS()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>PokeS</b></font>(*Speicherpuffer, Text$ [, Länge [, Flags]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Schreibt einen String an die angegebene Speicheradresse, gefolgt von einem Null-Zeichen für 
+den Abschluss (&quot;null-terminierter&quot; String). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Speicherpuffer</i></td>
+<td width="90%"> 
+Die Adresse, an die geschrieben werden soll. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der zu schreibende String. 
+
+</td></tr>
+<tr><td><i>Länge (optional)</i></td>
+<td> 
+Die maximale Anzahl an zu schreibenden Zeichen (Character). Wird dieser Parameter 
+nicht angegeben oder -1 verwendet, dann wird die volle Länge geschrieben. 
+Das abschließende Null-Zeichen, was immer geschrieben wird (außer das <font color="#924B72">#PB_String_NoZero</font> 
+Flag ist gesetzt), wird bei dieser Zählung nicht mitgerechnet. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Das beim Schreiben des Strings zu verwendende String-Format. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Schreibt die Strings als ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Schreibt die Strings als UTF8
+  <font color="#924B72">#PB_Unicode</font>: Schreibt die Strings als Unicode (Standard)
+</font></pre>
+Dieser kann mit der folgenden Konstante kombiniert werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_NoZero</font>: Schreibt nicht das abschließende Null-Zeichen.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die Anzahl der in den Speicher geschriebenen Bytes, ohne das abschließende 
+Null-Zeichen. Die Anzahl an geschriebenen Bytes weicht von der String-Länge in Zeichen (Character) 
+ab, wenn das Format <font color="#924B72">#PB_UTF8</font> or <font color="#924B72">#PB_Unicode</font> ist. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Eine Kombination aus PokeS() und <a href="peeks.html">PeekS()</a> kann verwendet werden, um eine Konvertierung 
+zwischen den verschiedenen unterstützten String-Modi (ASCII, UTF8 und Unicode) vorzunehmen. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="peeks.html">PeekS()</a>, <a href="copymemorystring.html">CopyMemoryString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=pokeq.html>PokeQ()</a> - <a href=index.html>Memory Inhaltsverzeichnis</a> - <a href=pokeu.html>PokeU()</a> -><br><br>
+
+</body></html>

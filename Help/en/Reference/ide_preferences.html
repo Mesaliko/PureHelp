@@ -1,0 +1,1237 @@
+<html><head><title>Customizing the IDE</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Customizing the IDE</font></b></p>
+
+The PureBasic IDE provides many options to customize or disable some of its 
+features in order to become the perfect tool for you. 
+<br>
+<br>
+These options are accessible from the Preferences command in the File menu, and the 
+meaning of each setting is described here. 
+
+<br>
+<br>
+
+Any changes made will only take effect once you click the &quot;OK&quot; button or &quot;Apply&quot;. 
+
+<p><b>General</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_general.png"></p>
+
+Options that affect the general behavior of the IDE. 
+
+<br>
+<br>
+
+<b>Run only one Instance</b> 
+<br>
+If set, prevents the IDE from being opened more than once. Clicking on a 
+PB file in the explorer will open it in the already existing IDE instance 
+instead of opening a new one. 
+
+<br>
+<br>
+
+<b>Disable Splash screen</b> 
+<br>
+Disables the splash screen that is displayed on start-up. 
+
+<br>
+<br>
+
+<b>Memorize Window positions</b> 
+<br>
+Remembers the position of all IDE windows when you close them. If you prefer to 
+have all windows open at a specific location and size, enable this option, move 
+all windows to the perfect position, then restart the IDE (to save all options) 
+and then disable this option to always open all windows in the last saved position. 
+
+<br>
+<br>
+
+<b>Show window contents while moving the Splitter</b> 
+<br>
+Enable this only if you have a fast computer. Otherwise moving the Splitter 
+bar to the Error Log or Tools Panel may flicker a lot. 
+
+<br>
+<br>
+
+<b>Auto-Reload last open sources</b> 
+<br>
+On IDE start-up, opens all the sources that were open when the IDE was closed the last time. 
+
+<br>
+<br>
+
+<b>Display full Source Path in Title bar</b> 
+<br>
+If set, the IDE title bar will show the full path to the currently 
+edited file. If not, only the filename is shown. 
+
+<br>
+<br>
+
+<b>Enable Appearance Dark Mode</b> 
+<br>
+Is set, allows the appearance 'Dark Mode'. 
+
+<br>
+<br>
+
+<b>Recent Files list</b> 
+<br>
+This setting specifies how many entries are shown in the &quot;Recent Files&quot; 
+submenu of the File menu. 
+
+<br>
+<br>
+
+<b>Search History size</b> 
+<br>
+This setting specifies how many recent search words are 
+remembered for &quot;Find/Replace&quot; and &quot;Find in Files&quot; 
+
+<br>
+<br>
+
+<b>Check for updates</b> 
+<br>
+Specifies how often the IDE should check on the purebasic.com server for the 
+availability of new updates. An update check can also be performed manually at any time 
+from the &quot;Help&quot; menu. 
+
+<br>
+<br>
+
+<b>Check for releases</b> 
+<br>
+Specifies which kind of releases should cause a notification if they are available. 
+
+
+</blockquote>
+<p><b>General - Language</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_language.png"></p>
+
+This allows you to change the language of the IDE. The combo box shows the 
+available languages, and you can view some information about the language file 
+(for example who translated it and when it was last updated). 
+
+
+
+
+</blockquote>
+<p><b>General - Shortcuts</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_shortcuts.png"></p>
+
+Here you can fully customize all the shortcut commands of the IDE. Select an entry from 
+the list, select the shortcut field, enter the new key combination and 
+click &quot;Set&quot; to change the entry. 
+
+<br>
+<br>
+
+Note that Tab &amp; Shift+Tab are reserved for block-indentation and un-indentation and 
+cannot be changed. Furthermore some key combination might have a special meaning for 
+the OS and should therefore not be used. 
+
+</blockquote>
+<p><b>General - Themes</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_themes.png"></p>
+
+This section shows the available icon themes for the IDE and allows to select 
+the theme to use. The IDE comes with two themes by default. 
+<br>
+<br>
+More themes can be easily added by creating a zip-file containing the images 
+(in png format) and a &quot;Theme.prefs&quot; file to describe the theme. The zip-file 
+has to be copied to the &quot;Themes&quot; folder in the PureBasic installation directory 
+to be recognized by the IDE. The &quot;SilkTheme.zip&quot; file can be used as an example 
+to create a new theme. 
+
+<br>
+<br>
+
+<b>Display Icons in the Menu</b> 
+<br>
+Allows to hide/show the images in the IDE menus. 
+
+<br>
+<br>
+
+<b>Show main Toolbar</b> 
+<br>
+Allows to hide/show the main toolbar in order to gain space for the editing area. 
+
+
+
+</blockquote>
+<p><b>General - Toolbar</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_toolbar.png"></p>
+
+This allows to fully customize the main Toolbar. By selecting an entry and 
+using the Buttons in the &quot;Position&quot; section, you can change the order. The 
+&quot;Item Settings&quot; section can be used to modify the entry or add a new one. 
+New ones are always added at the end of the list. 
+
+<br>
+<br>
+
+Types of items: 
+<br>
+<b>Separator</b> : a vertical separator line. 
+<br>
+<b>Space</b> : an empty space, the size of one toolbar icon. 
+<br>
+<b>Standard Icon</b> : allows you to select a OS standard icon from the combo box on the right. 
+<br>
+<b>IDE Icon</b> : allows you to select one of the IDE's own icons in the combo box on the right. 
+<br>
+<b>Icon File</b> : allows you to specify your own icon file to use in the edit box on the right 
+(PNG files are supported on all platforms, Windows additionally supports icon files). 
+
+<br>
+<br>
+If you do not select a separator or space, you can specify an action to carry out when the button is pressed: 
+<br>
+
+<b>Menu Item</b> : carries out the menu command specified in the combo box on the right. 
+<br>
+<b>Run tool</b> : executes the external tool specified in the combo box on the right. 
+
+<br>
+<br>
+
+The &quot;Default Sets&quot; section contains two standard toolbar 
+sets which you can select, and later modify. 
+
+
+
+</blockquote>
+<p><b>Editor</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_editor.png"></p>
+
+Settings that affect the management of the source codes. 
+
+<br>
+<br>
+
+<b>Monitor open files for changes on disk</b> 
+<br>
+Monitors all open files for changes that are made to the files on disk while they are edited in the IDE. 
+If modifications are made by other programs, a warning is displayed with the choice to reload the file from disk. 
+
+<br>
+<br>
+
+<b>Auto-save before compiling</b> 
+<br>
+Saves the current source code before each compile/run or executable creation. Note that 
+any open <a href="../reference/includes.html">include files</a> are not automatically saved. 
+
+<br>
+<br>
+
+<b>Save all sources with Auto-save</b> 
+<br>
+Saves all sources instead of just the current one with one of the Auto-save options. 
+
+<br>
+<br>
+
+<b>Memorize cursor position</b> 
+<br>
+Saves the current cursor position, as well as the state of 
+all folding marks with the compiler options for the source file. 
+
+<br>
+<br>
+
+<b>Memorize Marker positions</b> 
+<br>
+Saves all the Markers with the options for the source file. 
+
+
+<br>
+<br>
+
+<b>Always hide the error log</b> 
+<br>
+The error log can be shown/hidden on a per-source basis. This option provides a global 
+setting to ignore the per-source setting and never display the error log. It also removes 
+the corresponding menu entries from the IDE menu. 
+
+<br>
+<br>
+
+<b>Save settings to</b> 
+<br>
+This option allows to specify where the compiler options of a 
+source file are saved: 
+
+<br>
+<br>
+
+<blockquote>
+
+
+<u>The end of the Source file</u> 
+<br>
+Saves the settings as a special comment block at the end of each source file. 
+
+<br>
+<br>
+
+<u>The file &lt;filename&gt;.pb.cfg</u> 
+<br>
+Creates a .pb.cfg file for each saved source code that contains this information. 
+
+<br>
+<br>
+
+<u>A common file project.cfg for every directory</u> 
+<br>
+Creates a file called project.cfg in each directory where PB files are 
+saved. This one file will contain the options for all files in that directory. 
+
+<br>
+<br>
+
+<u>Don't save anything</u> 
+<br>
+No options are saved. When reopening a source file, the 
+defaults will always be used. 
+
+</blockquote>
+
+
+<br>
+<br>
+
+
+<b>Tab Length</b> 
+<br>
+Allows to specify how many spaces are inserted each time you press the Tab key. 
+
+<br>
+<br>
+
+<b>Use real Tab (Ascii 9)</b> 
+<br>
+If set, the tab key inserts a real tab character instead of spaces. 
+If not set, there are spaces inserted when Tab is pressed. 
+<br>
+<br>
+Note that if real tab is used, the &quot;Tab Length&quot; option specifies 
+the size of one displayed tab character. 
+
+<br>
+<br>
+
+<b>Source Directory</b> 
+<br>
+Specifies the default directory used in the Open and Save dialogs 
+if no other files are currently open (if another file is open, its 
+path will be used as default). 
+<br>
+<br>
+Set this to the path were you usually save the source codes. 
+
+<br>
+<br>
+
+<b>Code file extensions</b> 
+<br>
+The IDE detects code files by their extension (pb, pbi or pbf by default). Non-code files 
+are edited in a &quot;plain text&quot; mode in which code-related features are disabled. 
+This setting causes the IDE to recognize further file extensions as code files. 
+The field can contain a comma-separated list (i.e. &quot;pbx, xyz&quot;) of extensions to recognize. 
+
+<br>
+<br>
+
+</blockquote>
+<p><b>Editor - Editing</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_editorfont.png"></p>
+
+Use &quot;Select Font&quot; to change the font used to display the source code. 
+To ensure a good view of the source code, it should be a fixed-size font, 
+and possibly even one where bold characters have the same size as non-bold ones. 
+
+<br>
+<br>
+
+
+
+<b>Enable bolding of keywords</b> 
+<br>
+If your font does not display bold characters in the same size 
+as non-bold ones, you should disable this option. If disabled, 
+the keywords will not be shown as bold. 
+
+<br>
+<br>
+
+<b>Enable case correction</b> 
+<br>
+If enabled, the case of PureBasic keywords, PureBasic Functions 
+as well as predefined constants will automatically be corrected 
+while you type. 
+
+<br>
+<br>
+
+<b>Enable marking of matching Braces</b> 
+<br>
+If enabled, the brace matching the one under the cursor will be highlighted. 
+
+<br>
+<br>
+
+<b>Enable marking of matching Keywords</b> 
+<br>
+If enabled, the keyword(s) matching the one under the cursor will be underlined. 
+
+<br>
+<br>
+
+<b>Display line numbers</b> 
+<br>
+Shows or hides the line number column on the left. 
+
+
+</blockquote>
+<p><b>Editor - Coloring</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_editorcolors.png"></p>
+
+Here you can change the color settings for the syntax coloring, as well as 
+the debugger marks. Default color schemes can be selected from the box on the 
+bottom, and also modified after they have been set. 
+Individual color settings can be disabled by use of the checkboxes. 
+
+
+<br>
+<br>
+
+Note: The 'Accessibility' color scheme has (apart from high-contrast colors) a special setting 
+to always use the system color for the selection in the code editor. This helps screen-reader 
+applications to better detect the selected text. 
+
+
+<br>
+<br>
+More color schemes can be added by creating scheme definition files 
+with the name format &quot;SchemeName.prefs&quot;. The files have to 
+be copied to the &quot;ColorSchemes&quot; folder in the PureBasic installation directory 
+to be recognized by the IDE. The default scheme files can be used as examples 
+to create a new scheme, or you can export your colors from the 
+Import/Export section of the Preferences window (select &quot;Include Color settings&quot;). 
+
+</blockquote>
+<p><b>Editor - Coloring - Custom Keywords</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_ownkeywords.png"></p>
+
+In this section, a list of custom keywords can be defined. These keywords can have a special color 
+assigned to them in the coloring options and the IDE will apply case-correction to them if this feature is enabled. 
+This allows for applying a special color to special keywords by preprocessor tools or macro sets, 
+or to simply have some PB keywords colored differently. 
+
+<br>
+<br>
+
+Note that these keywords take precedence above all other coloring in the IDE, so this allows to 
+change the color or case correction even for PureBasic keywords. 
+
+<br>
+<br>
+
+The keywords can be either entered directly in the preferences or specified in a text file with 
+one keyword per line (or both). 
+
+
+</blockquote>
+<p><b>Editor - Folding</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_editorfolding.png"></p>
+
+Here you can set the keywords in the source code that start/end a foldable 
+section of code. You can add any number of words that will mark such a sections. 
+You can also choose to completely disable the folding feature. 
+<br>
+<br>
+Words that are found inside comments are ignored, unless the defined keyword includes 
+the comment symbol at the start (like the default &quot;;{&quot; keyword). 
+<br>
+<br>
+A keyword may not include spaces. 
+
+
+</blockquote>
+<p><b>Editor - Indentation</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_indent.png"></p>
+
+Here you can specify how the editor handles code indentation when the return key is pressed. 
+<br>
+<br>
+
+
+<b>No indentation</b> 
+<br>
+Pressing return always places the cursor at the beginning of the next line. 
+
+<br>
+<br>
+
+<b>Block mode</b> 
+<br>
+The newly created line gets the same indentation as the one before it. 
+
+<br>
+<br>
+
+<b>Keyword sensitive</b> 
+<br>
+Pressing the return key corrects the indentation of both the old line and the new line depending 
+on the <a href="../reference/general_rules.html">keywords</a> on these lines. The rules for this are specified in the keyword list below. These 
+rules also apply when the &quot;Reformat indentation&quot; item in the <a href="../reference/ide_editing.html">edit menu</a> is used. 
+
+<br>
+<br>
+
+<b>Show indentation guides</b> 
+<br>
+Causes vertical lines to be shown to visualize the indentation on each line. This makes it easier 
+to see which source lines are on the same level of indentation. 
+
+<br>
+<br>
+
+
+<b>Show whitespace characters</b> 
+<br>
+Causes whitespace characters to be visible as little dots (spaces) or arrows (tab characters). 
+
+<br>
+<br>
+
+The keyword list contains the keywords that have an effect on the indentation. The &quot;Before&quot; setting specifies 
+the change in indentation on the line that contains the keyword itself while the &quot;After&quot; setting specifies the 
+change that applies to the line after it. 
+
+
+</blockquote>
+<p><b>Editor - Auto complete</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_autocomplete.png"></p>
+
+
+<b>Display the full Auto complete list</b> 
+<br>
+Always displays all keywords in the list, but selects the closest match. 
+
+<br>
+<br>
+
+<b>Display all words that start with the first character</b> 
+<br>
+Displays only those words that start with the same character as you typed. 
+The closest mach is selected. 
+
+<br>
+<br>
+
+<b>Display only words that start with the typed word</b> 
+<br>
+Does not display any words that do not start with what you typed. 
+If no words match, the list is not displayed at all. 
+
+<br>
+<br>
+
+<b>Box width / Box height</b> 
+<br>
+Here you can define the size of the auto complete list (in pixel). 
+Note that these are maximum values. The displayed box may become smaller if there are only a few items to display. 
+
+<br>
+<br>
+
+<b>Add opening Brackets to Functions/Arrays/Lists</b> 
+<br>
+Will automatically add a &quot;(&quot; after any function/Array/List inserted by auto 
+complete. Functions with no parameters or lists get a &quot;()&quot; added. 
+
+<br>
+<br>
+
+<b>Add a Space after PB Keywords followed by an expression</b> 
+<br>
+When inserting PB keywords that cannot appear alone, a space 
+is automatically added after them. 
+
+<br>
+<br>
+
+<b>Add matching ‘End' keyword if insert shortcut is pressed twice</b> 
+<br>
+When the selected keyword has a complementary end keyword, for example &quot;EndSelect&quot; to &quot;Select&quot; or &quot;EndIf&quot; to &quot;If&quot;, 
+the insert shortcut (default Tab) can be repeated a second time to automatically add this text too. 
+The end keyword will be inserted after the cursor, so you can continue typing after the first keyword that was inserted. 
+
+<br>
+<br>
+
+<b>Automatically popup AutoComplete for Structure items</b> 
+<br>
+Displays the list automatically whenever a structured variable or interface is entered 
+and the &quot;\&quot; character is typed after it to show the list of possible structure 
+fields. If disabled, the list can still be displayed by pressing the keyboard 
+shortcut to open the AutoComplete window (usually Ctrl+Space, this can be modified 
+in the Shortcuts section of the Preferences). 
+
+<br>
+<br>
+
+<b>Automatically popup AutoComplete outside of Structures</b> 
+<br>
+Displays the list automatically when the current word is not a structure after 
+a certain amount of characters has been typed, and a possible match in the list 
+is found. If disabled, the list can still be displayed by pressing the assigned 
+keyboard shortcut. 
+
+<br>
+<br>
+
+<b>Characters needed before opening the list</b> 
+<br>
+Here you can specify how many characters the word must have minimum 
+before the list is automatically displayed. 
+
+
+</blockquote>
+<p><b>Editor - Auto complete - Displayed items</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_autocompletelist.png"></p>
+
+This shows a list of possible items that can be included with the possible matches in the AutoComplete list. 
+
+<br>
+<br>
+
+<b>Source code Items</b> 
+<br>
+Items defined in the active source code, or other open sources (see below). 
+
+<br>
+<br>
+
+<b>Predefined Items</b> 
+<br>
+Items that are predefined by PureBasic, such as the PureBasic keywords, functions or predefined constants. 
+
+<br>
+<br>
+
+<b>Add Items from: the current source only</b> 
+<br>
+Source code items are only added from the active source code. 
+
+<br>
+<br>
+
+<b>Add Items from: the current project (if any)</b> 
+<br>
+Source code items are added from the current project if there is one. The other source codes in the 
+project do not have to be currently open in the IDE for this. 
+
+<br>
+<br>
+
+<b>Add Items from: the current project or all files (if none)</b> 
+<br>
+Source code items are added from the current project. If the current source code does not 
+belong to the open project then the items from all open source codes will be added. 
+
+<br>
+<br>
+
+<b>Add Items from: all open files</b> 
+<br>
+Source code items are added from all currently open source codes. 
+
+</blockquote>
+<p><b>Editor - Issues</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_issues.png"></p>
+
+Allows to configure the collection of 'issue' markers from comments in the source code. 
+Issue markers can be displayed in the <a href="../reference/ide_tools.html">Issues</a> or ProcedureBrowser 
+tool, and they can be marked within the source code with a separate background color. 
+
+<br>
+<br>
+
+A definition for an issue consists of the following: 
+
+<blockquote>
+
+
+<u>Issue name</u> 
+<br>
+A name for the type of issue. 
+
+<br>
+<br>
+
+<u>Regular expression</u> 
+<br>
+A regular expression defining the pattern for the issue. This regular expression 
+is applied to all comments in the source code. Each match of the expression is 
+considered to match the issue type. <br>
+Two optional named groups (named &quot;display&quot; and &quot;mark&quot;) can be included in the regex to control which part of the match 
+is highlighted and which part is displayed in the tool. <br>
+<br>
+
+Example: The default TODO pattern, but only display the part after the TODO in the tool <br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">    \bTODO\b(?&lt;display&gt;.*)
+  </font></pre>
+
+Example: Match everything in {}, but only highlight the inner part (display the full match in the tool) <br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">    {(?&lt;mark&gt;.*)}
+  </font></pre>
+
+Both named groups can also be used in a single regex for full control. If no groups with these names exist in the regex, the full match will be used. 
+
+<br>
+<br>
+
+<u>Priority</u> 
+<br>
+Each issue type is assigned a priority. The priority can be used to order and filter 
+the displayed issues in the issue tool. 
+
+<br>
+<br>
+
+<u>Color</u> 
+<br>
+The color used to mark the issue in the source code (if enabled). The color will be used 
+to mark the background of either only the issue text itself, or the entire code line depending 
+on the coloring option. 
+
+<br>
+<br>
+
+<u>Show in issue tool</u> 
+<br>
+If enabled, any found issues of this type are listed in the issues tool. This option 
+can be disabled to cause an issue to only be marked in the source code with a special 
+background color if desired. 
+
+<br>
+<br>
+
+<u>Show in procedure browser</u> 
+<br>
+If enabled, any found issues are shown as an entry in the procedure browser tool. 
+
+</blockquote>
+
+
+</blockquote>
+<p><b>Editor - Session history</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_sessionhistory.png"></p>
+
+Allows to configure how the session history is recording changes. 
+
+<br>
+<br>
+
+<b>Enable recording of history</b> 
+<br>
+Enable or disable the history session recording. When enabled, all the changes made to a file will be recorded 
+in the background in a database. A session is created when the IDE launch, and is closed when the IDE quits. 
+This is useful to rollback to a previous version of a file, or to find back a deleted 
+or corrupted file. It's like a very powerful source backup tool, limited in time (by default one month 
+of recording). It's not aimed to replace a real source versioning system like SVN or GIT. It's complementary 
+to have finer change trace. The source code will be stored without encryption, so if you are working on 
+sensitive source code, be sure to have this database file in a secure location, or disable this feature. 
+It's possible to define the session history database location using an <a href="../reference/ide_commandline.html">IDE command-line</a> switch. 
+<br>
+<br>
+
+<b>Record change every X minutes</b> 
+<br>
+Change the interval between each silent recording (when editing). A file will be automatically recorded when 
+saving or closing it. 
+
+<br>
+<br>
+
+<b>Record only changes to files smaller than X kilobytes</b> 
+<br>
+Change the maximum size (in kilobytes) of the files being recorded. This allow to exclude very big files which 
+could make the database grow a lot. 
+
+<br>
+<br>
+
+<b>Keep all history</b> 
+<br>
+Keep all the history, the database is never purged. It will always grows, so it should be watched. 
+
+<br>
+<br>
+
+<b>Keep maximum X sessions</b> 
+<br>
+After reaching the maximum number of sessions, the oldest session will be removed from the database. 
+
+<br>
+<br>
+
+<b>Keep sessions for X days</b> 
+<br>
+After reaching the maximum number of days, the session will be removed from the database. 
+
+</blockquote>
+<p><b>Compiler</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_compiler.png"></p>
+
+This page allows to select additional compilers which should be available for compilation 
+in the <a href="../reference/ide_compiler.html">Compiler Options</a>. This allows switching between different 
+compilers of the same version (like the x86 and x64 compilers) or even switching between different 
+versions easily. 
+<br>
+<br>
+Any PureBasic compiler starting from Version 4.10 can be added here. The target processor of the 
+selected compilers does not have to match that of the default compiler, as long as the target 
+operating system is the same. The list displays the compiler version and path of the selected 
+compilers. 
+<br>
+<br>
+The information used by the IDE (for code highlighting, auto complete, structure viewer) always 
+comes from the default compiler. The additional compilers are only used for compilation. 
+
+
+</blockquote>
+<p><b>Compiler - Defaults</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_editorstandards.png"></p>
+
+This page allows setting the default compiler options that will be 
+used when you create a new source code with the IDE. 
+<br>
+<br>
+For an explanation of the meaning of each field, see the <a href="../reference/ide_compiler.html">Compiler Options</a>. 
+
+
+</blockquote>
+<p><b>Debugger</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_debugger.png"></p>
+
+Settings for the internal Debugger, or the Standalone Debugger. 
+The command-line debugger is configured from the command-line only. 
+
+<br>
+<br>
+
+<b>Debugger Type</b> 
+<br>
+Select the type of debugger you want to use when compiling from the IDE here. 
+
+<br>
+<br>
+
+<b>Choose Warning level</b> 
+<br>
+Select the action that should be taken if the debugger issues a warning. 
+The available options are: 
+<br>
+<u>Ignore Warnings:</u> Warnings will be ignored without displaying anything. 
+<br>
+<u>Display Warnings:</u> Warnings will be displayed in the error log and the source 
+code line will be marked, but the program continues to run. 
+<br>
+<u>Treat Warnings as Errors:</u> A warning will be treated like an error. 
+<br>
+See <a href="../reference/ide_debugger.html">Using the debugger</a> for more information on debugger warnings and errors. 
+
+<br>
+<br>
+
+<b>Memorize debugger window positions</b> 
+<br>
+The same as the &quot;Memorize Window positions&quot; for in the General 
+section, but for all Debugger windows. 
+
+<br>
+<br>
+
+<b>Keep all debugger windows on top</b> 
+<br>
+All debugger windows will be kept on top of all other windows, 
+even from other applications. 
+
+<br>
+<br>
+
+<b>Bring Debugger windows to front when one is focused</b> 
+<br>
+With this option set, focusing one window that belongs to the 
+debugger of a file, all windows that belong to the same debugging 
+session will be brought to the top. 
+
+<br>
+<br>
+
+<b>Display Timestamp in error log</b> 
+<br>
+Includes the time of the event in the error log. 
+
+<br>
+<br>
+
+<b>Stop execution at program start</b> 
+<br>
+Each program will be started in an already halted mode, giving 
+you the opportunity to start moving step-by-step, right from 
+the start of the program. 
+
+<br>
+<br>
+
+<b>Stop execution before program end</b> 
+<br>
+Stops the program execution right before the executable would 
+unload. This gives you a last chance to use the debugging tools 
+to examine Variables or Memory before the program ends. 
+
+<br>
+<br>
+
+<b>Kill Program after an Error</b> 
+<br>
+If a program encounters an error, it will be directly ended and all 
+debugger windows closed. This gives the opportunity to directly modify 
+the code again without an explicit &quot;Kill Program&quot;, but there is no chance 
+to examine the program after an error. 
+
+<br>
+<br>
+
+<b>Keep Error marks after program end</b> 
+<br>
+Does not remove the lines marked with errors when the program ends. This gives 
+the opportunity to still see where an error occurred while editing the code again. 
+<br>
+<br>
+The marks can be manually removed with the &quot;Clear error marks&quot; command in the &quot;Error log&quot; 
+submenu of the debugger menu. 
+
+<br>
+<br>
+
+<b>Clear error log on each run</b> 
+<br>
+Clears the log window when you execute a program. This ensures that the log does not 
+grow too big (this option is also available with the command-line debugger selected). 
+
+<br>
+<br>
+
+<b>Timeout for Debugger startup</b> 
+<br>
+Specifies the time in milliseconds how long the debugger will wait for a program to 
+start up before giving up. This timeout prevents the debugger from locking up 
+indefinitely if the executable cannot start for some reason. 
+
+</blockquote>
+<p><b>Debugger - Individual Settings</b></p><blockquote>
+
+
+This allows setting options for the individual debugger tools. The &quot;Display Hex values&quot; 
+options switch between displaying <a href="../reference/variables.html">Byte, Long and Word</a> as 
+decimal or hexadecimal values. 
+
+<p><img src="images/ide_prefs_debugsettings.png"></p>
+
+<b>Debug Output – Add Timestamp</b> 
+<br>
+Adds a timestamp to the output displayed from the Debug command. 
+
+<br>
+<br>
+
+<b>Debug Output - Display debug output in the error log</b> 
+<br>
+With this option enabled, a <a href="../reference/debugger.html">Debug</a> command in the code will not 
+open the <a href="../reference/ide_debugtools.html">Debug Output window</a>, but instead show the output in the <a href="../reference/ide_start.html">error log</a>. 
+
+<br>
+<br>
+
+<b>Debug Output – Use custom font</b> 
+<br>
+A custom font can be selected here for the <a href="../reference/ide_debugtools.html">debug output window</a>. This allows to specify a 
+smaller font for much output or a proportional one if this is desired. 
+
+<br>
+<br>
+
+
+<b>Profiler - Start Profiler on program startup</b> 
+<br>
+Determines whether the profiler tool should start recording data when the program starts. 
+
+<br>
+<br>
+
+
+<b>ASM Debugger – Update Stack trace automatically</b> 
+<br>
+Updates the stack trace automatically on each step/stop you do. If disabled, 
+a manual update button will be displayed in the ASM window. 
+
+<br>
+<br>
+
+<b>Memory Viewer – Array view in one column only</b> 
+<br>
+If the memory area is displayed in array view, this option selects whether 
+it should be multi-column (with 16 bytes displayed in each column) or with 
+only one column. 
+
+
+
+</blockquote>
+<p><b>Debugger - Default Windows</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_debugwindows.png"></p>
+
+The debugger tools you select on this page will automatically 
+be opened each time you run a program with enabled debugger. 
+
+</blockquote>
+<p><b>Form</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_form.png"></p>
+
+Allows to customize the integrated form designer behavior. 
+
+<br>
+<br>
+
+<b>New gadgets use #PB_Any by default</b> 
+<br>
+If enabled, new gadget creation will use #PB_Any instead of static enumeration numbering. 
+
+<br>
+<br>
+
+<b>New gadgets use a variable as caption</b> 
+<br>
+If enabled, new gadget will use a variable instead of static text as caption. It can be useful 
+to easily localize the form. 
+
+<br>
+<br>
+
+<b>Grid visible</b> 
+<br>
+If enabled, the grid will be visible on the form designer, to ease gadget alignment. 
+
+<br>
+<br>
+
+<b>Generate event procedure</b> 
+<br>
+If enabled, an event procedure will be automatically generated (and updated). 
+
+<br>
+<br>
+
+<b>Generate event loop</b> 
+<br>
+If enabled, a basic event loop will be generated for the form. 
+
+<br>
+<br>
+
+<b>Grid size</b> 
+<br>
+Space between two grid points, in pixels. 
+
+<br>
+<br>
+
+<b>OS skin</b> 
+<br>
+Skin to use for the form designer. 
+
+</blockquote>
+<p><b>Tools Panel</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_toolspanel.png"></p>
+
+This allows configuring the internal tools that can be displayed in the side panel. 
+Each tool that is in the &quot;Displayed Tools&quot; list is displayed in the Panel on the 
+side of the edit area. Each tool that is not listed there is accessible from the 
+Tools menu as a separate window. 
+<br>
+Put only those tools in the side panel that you use very frequently, and put the 
+most frequently used first, as it will be the active one once you open the IDE. 
+
+<br>
+<br>
+
+By selecting a tool in either of the lists, you get more configuration options 
+for that tool (if there are any) in the &quot;Configuration&quot; section below. 
+
+<br>
+<br>
+Here is an explanation of those tools that have special options: 
+
+<br>
+<br>
+
+<b>Explorer</b> 
+<br>
+You can select between a Tree or List display of the file-system. 
+You can also set whether the last displayed directory should be remembered, 
+or if the Source Path should be the default directory when the IDE is started. 
+
+<br>
+<br>
+
+<b>Procedure Browser</b> 
+<br>
+&quot;Sort Procedures by Name&quot; : sorts the list alphabetically (by default they are listed as they appear in the code). 
+<br>
+&quot;Group Markers&quot; : groups the &quot;;-&quot; markers together. 
+<br>
+&quot;Display Procedure Arguments&quot; : Displays the full declaration of each procedure in the list. 
+
+<br>
+<br>
+
+<b>Variable Viewer</b> 
+<br>
+The &quot;Display Elements from all open sources&quot; option determines whether 
+the list should only include items from this code, or from all open codes. 
+<br>
+<br>
+Furthermore you can select the type of items displayed in the Variable viewer. 
+
+<br>
+<br>
+
+<b>Help Tool</b> 
+<br>
+&quot;Open sidebar help on F1&quot;: specifies whether to open the help tool instead of the separate help viewer when F1 is pressed. 
+
+</blockquote>
+<p><b>Tools panel - Options</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_toolspanel_options.png"></p>
+
+Here you can customize the appearance of the Tools Panel a bit more. You can 
+select the side on which it will be displayed, a Font for its text, as well 
+as a foreground and background color for the displayed tools. 
+The font and color options can be disabled to use the OS defaults instead. 
+
+<br>
+<br>
+
+<b>Do not use colors/fonts for tools in external windows</b> 
+<br>
+If set, the color/font options only apply to the Tools displayed in the Panel, 
+those that you open from the Tools menu will have the default colors. 
+
+<br>
+<br>
+
+<b>Automatically hide the Panel</b> 
+<br>
+To save space, the Panel will be hidden if the mouse is not over it. 
+Moving the mouse to the side of the IDE will show it again. 
+
+<br>
+<br>
+
+<b>Milliseconds delay before hiding the Panel</b> 
+<br>
+Sets a timeout in ms, after which the Panel is hidden if you leave it with the mouse. 
+
+
+</blockquote>
+<p><b>Import/Export</b></p><blockquote>
+
+
+<p><img src="images/ide_prefs_import.png"></p>
+
+This section allows you to export the layout settings of the IDE in a platform independent 
+format, which allows you to import them again into the PureBasic IDE on another Operating System, 
+or to share your options with other PB users. 
+
+<br>
+<br>
+
+To export your settings, select what types of settings you want to include, select a 
+filename and press the &quot;Save&quot; button. 
+
+<br>
+<br>
+
+To import settings, select the filename and press &quot;Open&quot;. You will then see the options that are 
+included in this file as enabled checkboxes. After selecting what you want to import, click the 
+&quot;Import Settings&quot; button. 
+
+<br>
+<br>
+
+For the new settings to take effect, you have to first click the apply button. 
+
+<br>
+<br>
+
+Note: You can import the style files from the jaPBe Editor, but only the color settings will be imported. 
+
+</blockquote>
+</font></body></html>

@@ -1,0 +1,58 @@
+<html><head><title>RemovePreferenceKey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RemovePreferenceKey()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>RemovePreferenceKey</b></font>(Clé$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprime une clé et sa valeur associée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Clé$</i></td>
+<td width="90%"> 
+La clé à supprimer. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">If</font></b> <font color="#006666">CreatePreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;, <font color="#924B72">#PB_Preference_GroupSeparator</font>)
+<font color="#006666">    PreferenceGroup</font>(&quot;Window&quot;)
+<font color="#006666">      WritePreferenceLong </font>(&quot;X&quot;, 100)
+<font color="#006666">      WritePreferenceLong </font>(&quot;Y&quot;, 125)
+<font color="#006666">      WritePreferenceString</font>(&quot;Titre&quot;, &quot;PureNote&quot;)    
+<font color="#006666">    ClosePreferences</font>()   
+<font color="#006666">    RunProgram</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;)
+ <b><font color="#006666">EndIf</font></b>  
+    
+<font color="#006666">  MessageRequester</font>(&quot;Info&quot;, &quot;Ok pour supprimer la clé 'Titre' &quot;)
+    
+  <font color="#006666">; Ouvrir le fichier préférence</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;)
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+       
+  <font color="#006666">; Supprimer la clé 'Titre'  </font>
+<font color="#006666">  RemovePreferenceKey</font>(&quot;Titre&quot;)
+  
+<font color="#006666">  ClosePreferences</font>()      
+<font color="#006666">  RunProgram</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinepreferencekeys.html">ExaminePreferenceKeys()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removepreferencegroup.html>RemovePreferenceGroup()</a> - <a href=index.html>Preference Index</a> - <a href=writepreferencedouble.html>WritePreferenceDouble()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,93 @@
+<html><head><title>FormatXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FormatXML()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FormatXML</b></font>(#XML, Options [, Indentation])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Nettoie ou reformate un arbre XML pour le 
+rendre plus lisible lors d'un 
+<a href="exportxml.html">export</a> ou d'un 
+<a href="savexml.html">enregistrement</a>, ou plus 
+compact si la taille est primordiale (avant un transfert réseau par exemple). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+L'arbre XML à formater. 
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+Peut être une combinaison des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_WindowsNewline</font>: Change tous les retours chariot en CRLF
+  <font color="#924B72">#PB_XML_LinuxNewline</font>  : Change tous les retours chariot en LF
+  <font color="#924B72">#PB_XML_MacNewline</font>    : Change tous les retours chariot en CR
+
+  <font color="#924B72">#PB_XML_CutNewline</font>    : Enlève tous les retours chariot
+  <font color="#924B72">#PB_XML_ReduceNewline</font> : Enlève toutes les lignes vides
+
+  <font color="#924B72">#PB_XML_CutSpace</font>      : Enlève tous les espaces
+  <font color="#924B72">#PB_XML_ReduceSpace</font>   : Enlève tous les espaces en double
+ 
+  <font color="#924B72">#PB_XML_ReFormat</font>      : Reformate complètement l'arbre XML
+  <font color="#924B72">#PB_XML_ReIndent</font>      : Change l'indentation des lignes
+</font></pre>
+Pour <font color="#924B72">#PB_XML_ReFormat</font> et 
+<font color="#924B72">#PB_XML_ReIndent</font>, le paramètre 
+'Indentation' définit le nombre 
+d'espaces à rajouter par niveau 
+d'indentation. 
+<br>
+<br>
+Note: Il n'y a pas de reformatage dans 
+les sections CData et 'Processing 
+Instructions' mis à part les retours 
+chariots, car les espaces contenus dans 
+ces sections peuvent être importants. 
+<br>
+<br>
+Note: Depuis MacOSX, le retour chariot 
+'CR' est devenu de moins en moins commun 
+au profit du retour de ligne 'LF' utilisé 
+sur tous les systèmes unix. L'option 
+<font color="#924B72">#PB_XML_MacNewline</font> est fournie pour des 
+raisons de compatibilité, mais il est 
+conseillé d'utiliser 
+<font color="#924B72">#PB_XML_LinuxNewline</font> sur MacOS X. 
+
+</td></tr>
+<tr><td><i>Indentation (optionnel)</i></td>
+<td> 
+L'Indentation à appliquer (en caractères) 
+avec <font color="#924B72">#PB_XML_ReFormat</font> ou <font color="#924B72">#PB_XML_ReIndent</font> 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le formatage de l'arbre XML est stocké 
+dans les champs 'text' et 'offset' de 
+chaque noeud (voir <a href="getxmlnodetext.html">GetXMLNodeText()</a> et 
+<a href="getxmlnodeoffset.html">GetXMLNodeOffset()</a> pour plus 
+d'informations). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="exportxml.html">ExportXML()</a>, <a href="savexml.html">SaveXML()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=extractxmlstructure.html>ExtractXMLStructure()</a> - <a href=index.html>XML Index</a> - <a href=freexml.html>FreeXML()</a> -><br><br>
+
+</body></html>

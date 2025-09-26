@@ -1,0 +1,563 @@
+<html><head><title>SystemFolders.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - All system folders in Windows (Windows only)
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+  <b><font color="#006666">CompilerError</font></b> &quot;This example is Windows only&quot;
+<b><font color="#006666">CompilerEndIf</font></b>
+
+<b><font color="#006666">Import</font></b> &quot;Shell32.lib&quot;
+<font color="#006666">  SHGetKnownFolderPath</font>(*rfid.Guid, dwFlags, hToken, ppszPath)
+<b><font color="#006666">EndImport</font></b>
+
+<font color="#006666">; Global LibShell32 = OpenLibrary(#PB_Any, &quot;Shell32.dll&quot;)
+</font><font color="#006666">; Prototype SHGetKnownFolderPath(*rfid.Guid, dwFlags, hToken, ppszPath)
+</font><font color="#006666">; Global SHGetKnownFolderPath.SHGetKnownFolderPath = GetFunction(LibShell32, &quot;SHGetKnownFolderPath&quot;)
+</font>
+<font color="#924B72">#KF_FLAG_DEFAULT</font> = $00000000
+<font color="#924B72">#KF_FLAG_FORCE_APP_DATA_REDIRECTION</font> = $00080000
+<font color="#924B72">#KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET</font> = $00040000
+<font color="#924B72">#KF_FLAG_FORCE_PACKAGE_REDIRECTION</font> = $00020000
+<font color="#924B72">#KF_FLAG_NO_PACKAGE_REDIRECTION</font> = $00010000
+<font color="#924B72">#KF_FLAG_FORCE_APPCONTAINER_REDIRECTION</font> = $00020000
+<font color="#924B72">#KF_FLAG_NO_APPCONTAINER_REDIRECTION</font> = $00010000
+<font color="#924B72">#KF_FLAG_CREATE</font> = $00008000
+<font color="#924B72">#KF_FLAG_DONT_VERIFY</font> = $00004000
+<font color="#924B72">#KF_FLAG_DONT_UNEXPAND</font> = $00002000
+<font color="#924B72">#KF_FLAG_NO_ALIAS</font> = $00001000
+<font color="#924B72">#KF_FLAG_INIT</font> = $00000800
+<font color="#924B72">#KF_FLAG_DEFAULT_PATH</font> = $00000400
+<font color="#924B72">#KF_FLAG_NOT_PARENT_RELATIVE</font> = $00000200
+<font color="#924B72">#KF_FLAG_SIMPLE_IDLIST</font> = $00000100
+<font color="#924B72">#KF_FLAG_ALIAS_ONLY</font> = $80000000
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">DEFINE_KNOWN_FOLDER</font>(ID, l1, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8)
+  <b><font color="#006666">Global</font></b> ID.Guid  
+  ID\Data1 = l1: ID\Data2 = w1: ID\Data3 = w2
+  ID\Data4[0] = b1: ID\Data4[1] = b2: ID\Data4[2] = b3: ID\Data4[3] = b4: ID\Data4[4] = b5: ID\Data4[5] = b6: ID\Data4[6] = b7: ID\Data4[7] = b8 
+  <font color="#006666">;   DataSection: ID: Data.l l1: Data.w w1, w2: Data.b b1, b2, b3, b4, b5, b6, b7, b8: EndDataSection
+</font><b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">; {D20BEEC4-5CA8-4905-AE3B-BF251EA09B53}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_NetworkFolder,             $D20BEEC4, $5CA8, $4905, $AE, $3B, $BF, $25, $1E, $A0, $9B, $53)
+<font color="#006666">; {0AC0837C-BBF8-452A-850D-79D08E667CA7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ComputerFolder,            $0AC0837C, $BBF8, $452A, $85, $0D, $79, $D0, $8E, $66, $7C, $A7)
+<font color="#006666">; {4D9F7874-4E0C-4904-967B-40B0D20C3E4B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_InternetFolder,            $4D9F7874, $4E0C, $4904, $96, $7B, $40, $B0, $D2, $0C, $3E, $4B)
+<font color="#006666">; {82A74AEB-AEB4-465C-A014-D097EE346D63}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ControlPanelFolder,        $82A74AEB, $AEB4, $465C, $A0, $14, $D0, $97, $EE, $34, $6D, $63)
+<font color="#006666">; {76FC4E2D-D6AD-4519-A663-37BD56068185}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PrintersFolder,            $76FC4E2D, $D6AD, $4519, $A6, $63, $37, $BD, $56, $06, $81, $85)
+<font color="#006666">; {43668BF8-C14E-49B2-97C9-747784D784B7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SyncManagerFolder,         $43668BF8, $C14E, $49B2, $97, $C9, $74, $77, $84, $D7, $84, $B7)
+<font color="#006666">; {0F214138-B1D3-4a90-BBA9-27CBC0C5389A}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SyncSetupFolder,           $f214138, $b1d3, $4a90, $bb, $a9, $27, $cb, $c0, $c5, $38, $9a)
+<font color="#006666">; {4bfefb45-347d-4006-a5be-ac0cb0567192}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ConflictFolder,            $4bfefb45, $347d, $4006, $a5, $be, $ac, $0c, $b0, $56, $71, $92)
+<font color="#006666">; {289a9a43-be44-4057-a41b-587a76d7e7f9}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SyncResultsFolder,         $289a9a43, $be44, $4057, $a4, $1b, $58, $7a, $76, $d7, $e7, $f9)
+<font color="#006666">; {B7534046-3ECB-4C18-BE4E-64CD4CB7D6AC}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RecycleBinFolder,          $B7534046, $3ECB, $4C18, $BE, $4E, $64, $CD, $4C, $B7, $D6, $AC)
+<font color="#006666">; {6F0CD92B-2E97-45D1-88FF-B0D186B8DEDD}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ConnectionsFolder,         $6F0CD92B, $2E97, $45D1, $88, $FF, $B0, $D1, $86, $B8, $DE, $DD)
+<font color="#006666">; {FD228CB7-AE11-4AE3-864C-16F3910AB8FE}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Fonts,                     $FD228CB7, $AE11, $4AE3, $86, $4C, $16, $F3, $91, $0A, $B8, $FE)
+<font color="#006666">; {B4BFCC3A-DB2C-424C-B029-7FE99A87C641}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Desktop,                   $B4BFCC3A, $DB2C, $424C, $B0, $29, $7F, $E9, $9A, $87, $C6, $41)
+<font color="#006666">; {B97D20BB-F46A-4C97-BA10-5E3608430854}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Startup,                   $B97D20BB, $F46A, $4C97, $BA, $10, $5E, $36, $08, $43, $08, $54)
+<font color="#006666">; {A77F5D77-2E2B-44C3-A6A2-ABA601054A51}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Programs,                  $A77F5D77, $2E2B, $44C3, $A6, $A2, $AB, $A6, $01, $05, $4A, $51)
+<font color="#006666">; {625B53C3-AB48-4EC1-BA1F-A1EF4146FC19}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_StartMenu,                 $625B53C3, $AB48, $4EC1, $BA, $1F, $A1, $EF, $41, $46, $FC, $19)
+<font color="#006666">; {AE50C081-EBD2-438A-8655-8A092E34987A}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Recent,                    $AE50C081, $EBD2, $438A, $86, $55, $8A, $09, $2E, $34, $98, $7A)
+<font color="#006666">; {8983036C-27C0-404B-8F08-102D10DCFD74}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SendTo,                    $8983036C, $27C0, $404B, $8F, $08, $10, $2D, $10, $DC, $FD, $74)
+<font color="#006666">; {FDD39AD0-238F-46AF-ADB4-6C85480369C7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Documents,                 $FDD39AD0, $238F, $46AF, $AD, $B4, $6C, $85, $48, $03, $69, $C7)
+<font color="#006666">; {1777F761-68AD-4D8A-87BD-30B759FA33DD}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Favorites,                 $1777F761, $68AD, $4D8A, $87, $BD, $30, $B7, $59, $FA, $33, $DD)
+<font color="#006666">; {C5ABBF53-E17F-4121-8900-86626FC2C973}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_NetHood,                   $C5ABBF53, $E17F, $4121, $89, $00, $86, $62, $6F, $C2, $C9, $73)
+<font color="#006666">; {9274BD8D-CFD1-41C3-B35E-B13F55A758F4}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PrintHood,                 $9274BD8D, $CFD1, $41C3, $B3, $5E, $B1, $3F, $55, $A7, $58, $F4)
+<font color="#006666">; {A63293E8-664E-48DB-A079-DF759E0509F7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Templates,                 $A63293E8, $664E, $48DB, $A0, $79, $DF, $75, $9E, $05, $09, $F7)
+<font color="#006666">; {82A5EA35-D9CD-47C5-9629-E15D2F714E6E}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonStartup,             $82A5EA35, $D9CD, $47C5, $96, $29, $E1, $5D, $2F, $71, $4E, $6E)
+<font color="#006666">; {0139D44E-6AFE-49F2-8690-3DAFCAE6FFB8}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonPrograms,            $0139D44E, $6AFE, $49F2, $86, $90, $3D, $AF, $CA, $E6, $FF, $B8)
+<font color="#006666">; {A4115719-D62E-491D-AA7C-E74B8BE3B067}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonStartMenu,           $A4115719, $D62E, $491D, $AA, $7C, $E7, $4B, $8B, $E3, $B0, $67)
+<font color="#006666">; {C4AA340D-F20F-4863-AFEF-F87EF2E6BA25}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicDesktop,             $C4AA340D, $F20F, $4863, $AF, $EF, $F8, $7E, $F2, $E6, $BA, $25)
+<font color="#006666">; {62AB5D82-FDC1-4DC3-A9DD-070D1D495D97}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramData,               $62AB5D82, $FDC1, $4DC3, $A9, $DD, $07, $0D, $1D, $49, $5D, $97)
+<font color="#006666">; {B94237E7-57AC-4347-9151-B08C6C32D1F7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonTemplates,           $B94237E7, $57AC, $4347, $91, $51, $B0, $8C, $6C, $32, $D1, $F7)
+<font color="#006666">; {ED4824AF-DCE4-45A8-81E2-FC7965083634}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicDocuments,           $ED4824AF, $DCE4, $45A8, $81, $E2, $FC, $79, $65, $08, $36, $34)
+<font color="#006666">; {3EB685DB-65F9-4CF6-A03A-E3EF65729F3D}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RoamingAppData,            $3EB685DB, $65F9, $4CF6, $A0, $3A, $E3, $EF, $65, $72, $9F, $3D)
+<font color="#006666">; {F1B32785-6FBA-4FCF-9D55-7B8E7F157091}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalAppData,              $F1B32785, $6FBA, $4FCF, $9D, $55, $7B, $8E, $7F, $15, $70, $91)
+<font color="#006666">; {A520A1A4-1780-4FF6-BD18-167343C5AF16}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalAppDataLow,           $A520A1A4, $1780, $4FF6, $BD, $18, $16, $73, $43, $C5, $AF, $16)
+<font color="#006666">; {352481E8-33BE-4251-BA85-6007CAEDCF9D}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_InternetCache,             $352481E8, $33BE, $4251, $BA, $85, $60, $07, $CA, $ED, $CF, $9D)
+<font color="#006666">; {2B0F765D-C0E9-4171-908E-08A611B84FF6}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Cookies,                   $2B0F765D, $C0E9, $4171, $90, $8E, $08, $A6, $11, $B8, $4F, $F6)
+<font color="#006666">; {D9DC8A3B-B784-432E-A781-5A1130A75963}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_History,                   $D9DC8A3B, $B784, $432E, $A7, $81, $5A, $11, $30, $A7, $59, $63)
+<font color="#006666">; {1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_System,                    $1AC14E77, $02E7, $4E5D, $B7, $44, $2E, $B1, $AE, $51, $98, $B7)
+<font color="#006666">; {D65231B0-B2F1-4857-A4CE-A8E7C6EA7D27}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SystemX86,                 $D65231B0, $B2F1, $4857, $A4, $CE, $A8, $E7, $C6, $EA, $7D, $27)
+<font color="#006666">; {F38BF404-1D43-42F2-9305-67DE0B28FC23}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Windows,                   $F38BF404, $1D43, $42F2, $93, $05, $67, $DE, $0B, $28, $FC, $23)
+<font color="#006666">; {5E6C858F-0E22-4760-9AFE-EA3317B67173}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Profile,                   $5E6C858F, $0E22, $4760, $9A, $FE, $EA, $33, $17, $B6, $71, $73)
+<font color="#006666">; {33E28130-4E1E-4676-835A-98395C3BC3BB}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Pictures,                  $33E28130, $4E1E, $4676, $83, $5A, $98, $39, $5C, $3B, $C3, $BB)
+<font color="#006666">; {7C5A40EF-A0FB-4BFC-874A-C0F2E0B9FA8E}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFilesX86,           $7C5A40EF, $A0FB, $4BFC, $87, $4A, $C0, $F2, $E0, $B9, $FA, $8E)
+<font color="#006666">; {DE974D24-D9C6-4D3E-BF91-F4455120B917}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFilesCommonX86,     $DE974D24, $D9C6, $4D3E, $BF, $91, $F4, $45, $51, $20, $B9, $17)
+<font color="#006666">; {6D809377-6AF0-444b-8957-A3773F02200E}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFilesX64,           $6d809377, $6af0, $444b, $89, $57, $a3, $77, $3f, $02, $20, $0e )
+<font color="#006666">; {6365D5A7-0F0D-45e5-87F6-0DA56B6A4F7D}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFilesCommonX64,     $6365d5a7, $f0d, $45e5, $87, $f6, $d, $a5, $6b, $6a, $4f, $7d )
+<font color="#006666">; {905e63b6-c1bf-494e-b29c-65b732d3d21a}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFiles,              $905e63b6, $c1bf, $494e, $b2, $9c, $65, $b7, $32, $d3, $d2, $1a)
+<font color="#006666">; {F7F1ED05-9F6D-47A2-AAAE-29D317C6F066}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ProgramFilesCommon,        $F7F1ED05, $9F6D, $47A2, $AA, $AE, $29, $D3, $17, $C6, $F0, $66)
+<font color="#006666">; {5cd7aee2-2219-4a67-b85d-6c9ce15660cb}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UserProgramFiles,          $5cd7aee2, $2219, $4a67, $b8, $5d, $6c, $9c, $e1, $56, $60, $cb)
+<font color="#006666">; {bcbd3057-ca5c-4622-b42d-bc56db0ae516}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UserProgramFilesCommon,    $bcbd3057, $ca5c, $4622, $b4, $2d, $bc, $56, $db, $0a, $e5, $16)
+<font color="#006666">; {724EF170-A42D-4FEF-9F26-B60E846FBA4F}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AdminTools,                $724EF170, $A42D, $4FEF, $9F, $26, $B6, $0E, $84, $6F, $BA, $4F)
+<font color="#006666">; {D0384E7D-BAC3-4797-8F14-CBA229B392B5}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonAdminTools,          $D0384E7D, $BAC3, $4797, $8F, $14, $CB, $A2, $29, $B3, $92, $B5)
+<font color="#006666">; {4BD8D571-6D19-48D3-BE97-422220080E43}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Music,                     $4BD8D571, $6D19, $48D3, $BE, $97, $42, $22, $20, $08, $0E, $43)
+<font color="#006666">; {18989B1D-99B5-455B-841C-AB7C74E4DDFC}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Videos,                    $18989B1D, $99B5, $455B, $84, $1C, $AB, $7C, $74, $E4, $DD, $FC)
+<font color="#006666">; {C870044B-F49E-4126-A9C3-B52A1FF411E8}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Ringtones,                 $C870044B, $F49E, $4126, $A9, $C3, $B5, $2A, $1F, $F4, $11, $E8)
+<font color="#006666">; {B6EBFB86-6907-413C-9AF7-4FC2ABF07CC5}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicPictures,            $B6EBFB86, $6907, $413C, $9A, $F7, $4F, $C2, $AB, $F0, $7C, $C5)
+<font color="#006666">; {3214FAB5-9757-4298-BB61-92A9DEAA44FF}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicMusic,               $3214FAB5, $9757, $4298, $BB, $61, $92, $A9, $DE, $AA, $44, $FF)
+<font color="#006666">; {2400183A-6185-49FB-A2D8-4A392A602BA3}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicVideos,              $2400183A, $6185, $49FB, $A2, $D8, $4A, $39, $2A, $60, $2B, $A3)
+<font color="#006666">; {E555AB60-153B-4D17-9F04-A5FE99FC15EC}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicRingtones,           $E555AB60, $153B, $4D17, $9F, $04, $A5, $FE, $99, $FC, $15, $EC)
+<font color="#006666">; {8AD10C31-2ADB-4296-A8F7-E4701232C972}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ResourceDir,               $8AD10C31, $2ADB, $4296, $A8, $F7, $E4, $70, $12, $32, $C9, $72)
+<font color="#006666">; {2A00375E-224C-49DE-B8D1-440DF7EF3DDC}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalizedResourcesDir,     $2A00375E, $224C, $49DE, $B8, $D1, $44, $0D, $F7, $EF, $3D, $DC)
+<font color="#006666">; {C1BAE2D0-10DF-4334-BEDD-7AA20B227A9D}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonOEMLinks,            $C1BAE2D0, $10DF, $4334, $BE, $DD, $7A, $A2, $0B, $22, $7A, $9D)
+<font color="#006666">; {9E52AB10-F80D-49DF-ACB8-4330F5687855}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CDBurning,                 $9E52AB10, $F80D, $49DF, $AC, $B8, $43, $30, $F5, $68, $78, $55)
+<font color="#006666">; {0762D272-C50A-4BB0-A382-697DCD729B80}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UserProfiles,              $0762D272, $C50A, $4BB0, $A3, $82, $69, $7D, $CD, $72, $9B, $80)
+<font color="#006666">; {DE92C1C7-837F-4F69-A3BB-86E631204A23}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Playlists,                 $DE92C1C7, $837F, $4F69, $A3, $BB, $86, $E6, $31, $20, $4A, $23)
+<font color="#006666">; {15CA69B3-30EE-49C1-ACE1-6B5EC372AFB5}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SamplePlaylists,           $15CA69B3, $30EE, $49C1, $AC, $E1, $6B, $5E, $C3, $72, $AF, $B5)
+<font color="#006666">; {B250C668-F57D-4EE1-A63C-290EE7D1AA1F}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SampleMusic,               $B250C668, $F57D, $4EE1, $A6, $3C, $29, $0E, $E7, $D1, $AA, $1F)
+<font color="#006666">; {C4900540-2379-4C75-844B-64E6FAF8716B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SamplePictures,            $C4900540, $2379, $4C75, $84, $4B, $64, $E6, $FA, $F8, $71, $6B)
+<font color="#006666">; {859EAD94-2E85-48AD-A71A-0969CB56A6CD}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SampleVideos,              $859EAD94, $2E85, $48AD, $A7, $1A, $09, $69, $CB, $56, $A6, $CD)
+<font color="#006666">; {69D2CF90-FC33-4FB7-9A0C-EBB0F0FCB43C}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PhotoAlbums,               $69D2CF90, $FC33, $4FB7, $9A, $0C, $EB, $B0, $F0, $FC, $B4, $3C)
+<font color="#006666">; {DFDF76A2-C82A-4D63-906A-5644AC457385}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Public,                    $DFDF76A2, $C82A, $4D63, $90, $6A, $56, $44, $AC, $45, $73, $85)
+<font color="#006666">; {df7266ac-9274-4867-8d55-3bd661de872d}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ChangeRemovePrograms,      $df7266ac, $9274, $4867, $8d, $55, $3b, $d6, $61, $de, $87, $2d)
+<font color="#006666">; {a305ce99-f527-492b-8b1a-7e76fa98d6e4}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppUpdates,                $a305ce99, $f527, $492b, $8b, $1a, $7e, $76, $fa, $98, $d6, $e4)
+<font color="#006666">; {de61d971-5ebc-4f02-a3a9-6c82895e5c04}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AddNewPrograms,            $de61d971, $5ebc, $4f02, $a3, $a9, $6c, $82, $89, $5e, $5c, $04)
+<font color="#006666">; {374DE290-123F-4565-9164-39C4925E467B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Downloads,                 $374de290, $123f, $4565, $91, $64, $39, $c4, $92, $5e, $46, $7b)
+<font color="#006666">; {3D644C9B-1FB8-4f30-9B45-F670235F79C0}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicDownloads,           $3d644c9b, $1fb8, $4f30, $9b, $45, $f6, $70, $23, $5f, $79, $c0)
+<font color="#006666">; {7d1d3a04-debb-4115-95cf-2f29da2920da}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SavedSearches,             $7d1d3a04, $debb, $4115, $95, $cf, $2f, $29, $da, $29, $20, $da)
+<font color="#006666">; {52a4f021-7b75-48a9-9f6b-4b87a210bc8f}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_QuickLaunch,               $52a4f021, $7b75, $48a9, $9f, $6b, $4b, $87, $a2, $10, $bc, $8f)
+<font color="#006666">; {56784854-C6CB-462b-8169-88E350ACB882}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Contacts,                  $56784854, $c6cb, $462b, $81, $69, $88, $e3, $50, $ac, $b8, $82)
+<font color="#006666">; {A75D362E-50FC-4fb7-AC2C-A8BEAA314493}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SidebarParts,              $a75d362e, $50fc, $4fb7, $ac, $2c, $a8, $be, $aa, $31, $44, $93)
+<font color="#006666">; {7B396E54-9EC5-4300-BE0A-2482EBAE1A26}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SidebarDefaultParts,       $7b396e54, $9ec5, $4300, $be, $a, $24, $82, $eb, $ae, $1a, $26)
+<font color="#006666">; {DEBF2536-E1A8-4c59-B6A2-414586476AEA}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicGameTasks,           $debf2536, $e1a8, $4c59, $b6, $a2, $41, $45, $86, $47, $6a, $ea)
+<font color="#006666">; {054FAE61-4DD8-4787-80B6-090220C4B700}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_GameTasks,                 $54fae61, $4dd8, $4787, $80, $b6, $9, $2, $20, $c4, $b7, $0)
+<font color="#006666">; {4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SavedGames,                $4c5c32ff, $bb9d, $43b0, $b5, $b4, $2d, $72, $e5, $4e, $aa, $a4)
+<font color="#006666">; {CAC52C1A-B53D-4edc-92D7-6B2E8AC19434} - deprecated
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Games,                     $cac52c1a, $b53d, $4edc, $92, $d7, $6b, $2e, $8a, $c1, $94, $34)
+<font color="#006666">; {98ec0e18-2098-4d44-8644-66979315a281}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SEARCH_MAPI,               $98ec0e18, $2098, $4d44, $86, $44, $66, $97, $93, $15, $a2, $81)
+<font color="#006666">; {ee32e446-31ca-4aba-814f-a5ebd2fd6d5e}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SEARCH_CSC,                $ee32e446, $31ca, $4aba, $81, $4f, $a5, $eb, $d2, $fd, $6d, $5e)
+<font color="#006666">; {bfb9d5e0-c6a9-404c-b2b2-ae6db6af4968}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Links,                     $bfb9d5e0, $c6a9, $404c, $b2, $b2, $ae, $6d, $b6, $af, $49, $68)
+<font color="#006666">; {f3ce0f7c-4901-4acc-8648-d5d44b04ef8f}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UsersFiles,                $f3ce0f7c, $4901, $4acc, $86, $48, $d5, $d4, $4b, $04, $ef, $8f)
+<font color="#006666">; {A302545D-DEFF-464b-ABE8-61C8648D939B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UsersLibraries,            $a302545d, $deff, $464b, $ab, $e8, $61, $c8, $64, $8d, $93, $9b)
+<font color="#006666">; {190337d1-b8ca-4121-a639-6d472d16972a}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SearchHome,                $190337d1, $b8ca, $4121, $a6, $39, $6d, $47, $2d, $16, $97, $2a)
+<font color="#006666">; {2C36C0AA-5812-4b87-BFD0-4CD0DFB19B39}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_OriginalImages,            $2C36C0AA, $5812, $4b87, $bf, $d0, $4c, $d0, $df, $b1, $9b, $39)
+<font color="#006666">; {7b0db17d-9cd2-4a93-9733-46cc89022e7c}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_DocumentsLibrary,          $7b0db17d, $9cd2, $4a93, $97, $33, $46, $cc, $89, $02, $2e, $7c)
+<font color="#006666">; {2112AB0A-C86A-4ffe-A368-0DE96E47012E}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_MusicLibrary,              $2112ab0a, $c86a, $4ffe, $a3, $68, $d, $e9, $6e, $47, $1, $2e)
+<font color="#006666">; {A990AE9F-A03B-4e80-94BC-9912D7504104}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PicturesLibrary,           $a990ae9f, $a03b, $4e80, $94, $bc, $99, $12, $d7, $50, $41, $4)
+<font color="#006666">; {491E922F-5643-4af4-A7EB-4E7A138D8174}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_VideosLibrary,             $491e922f, $5643, $4af4, $a7, $eb, $4e, $7a, $13, $8d, $81, $74)
+<font color="#006666">; {1A6FDBA2-F42D-4358-A798-B74D745926C5}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RecordedTVLibrary,         $1a6fdba2, $f42d, $4358, $a7, $98, $b7, $4d, $74, $59, $26, $c5)
+<font color="#006666">; {52528A6B-B9E3-4add-B60D-588C2DBA842D}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_HomeGroup,                 $52528a6b, $b9e3, $4add, $b6, $d, $58, $8c, $2d, $ba, $84, $2d)
+<font color="#006666">; {9B74B6A3-0DFD-4f11-9E78-5F7800F2E772}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_HomeGroupCurrentUser,      $9b74b6a3, $dfd, $4f11, $9e, $78, $5f, $78, $0, $f2, $e7, $72)
+<font color="#006666">; {5CE4A5E9-E4EB-479D-B89F-130C02886155}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_DeviceMetadataStore,       $5ce4a5e9, $e4eb, $479d, $b8, $9f, $13, $0c, $02, $88, $61, $55)
+<font color="#006666">; {1B3EA5DC-B587-4786-B4EF-BD1DC332AEAE}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Libraries,                 $1b3ea5dc, $b587, $4786, $b4, $ef, $bd, $1d, $c3, $32, $ae, $ae)
+<font color="#006666">; {48daf80b-e6cf-4f4e-b800-0e69d84ee384}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicLibraries,           $48daf80b, $e6cf, $4f4e, $b8, $00, $0e, $69, $d8, $4e, $e3, $84)
+<font color="#006666">; {9e3995ab-1f9c-4f13-b827-48b24b6c7174}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_UserPinned,                $9e3995ab, $1f9c, $4f13, $b8, $27, $48, $b2, $4b, $6c, $71, $74)
+<font color="#006666">; {bcb5256f-79f6-4cee-b725-dc34e402fd46}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ImplicitAppShortcuts,      $bcb5256f, $79f6, $4cee, $b7, $25, $dc, $34, $e4, $2, $fd, $46)
+<font color="#006666">; {008ca0b1-55b4-4c56-b8a8-4de4b299d3be}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AccountPictures,           $008ca0b1, $55b4, $4c56, $b8, $a8, $4d, $e4, $b2, $99, $d3, $be)
+<font color="#006666">; {0482af6c-08f1-4c34-8c90-e17ec98b1e17}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_PublicUserTiles,           $0482af6c, $08f1, $4c34, $8c, $90, $e1, $7e, $c9, $8b, $1e, $17)
+<font color="#006666">; {1e87508d-89c2-42f0-8a7e-645a0f50ca58}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppsFolder,                $1e87508d, $89c2, $42f0, $8a, $7e, $64, $5a, $0f, $50, $ca, $58)
+<font color="#006666">; {F26305EF-6948-40B9-B255-81453D09C785}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_StartMenuAllPrograms,      $f26305ef, $6948, $40b9, $b2, $55, $81, $45, $3d, $9, $c7, $85)
+<font color="#006666">; {A440879F-87A0-4F7D-B700-0207B966194A}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CommonStartMenuPlaces,     $a440879f, $87a0, $4f7d, $b7, $0, $2, $7, $b9, $66, $19, $4a)
+<font color="#006666">; {A3918781-E5F2-4890-B3D9-A7E54332328C}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_ApplicationShortcuts,      $a3918781, $e5f2, $4890, $b3, $d9, $a7, $e5, $43, $32, $32, $8c)
+<font color="#006666">; {00BCFC5A-ED94-4e48-96A1-3F6217F21990}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RoamingTiles,              $bcfc5a, $ed94, $4e48, $96, $a1, $3f, $62, $17, $f2, $19, $90)
+<font color="#006666">; {AAA8D5A5-F1D6-4259-BAA8-78E7EF60835E}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RoamedTileImages,          $aaa8d5a5, $f1d6, $4259, $ba, $a8, $78, $e7, $ef, $60, $83, $5e)
+<font color="#006666">; {b7bede81-df94-4682-a7d8-57a52620b86f}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Screenshots,               $b7bede81, $df94, $4682, $a7, $d8, $57, $a5, $26, $20, $b8, $6f)
+<font color="#006666">; {AB5FB87B-7CE2-4F83-915D-550846C9537B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CameraRoll,                $ab5fb87b, $7ce2, $4f83, $91, $5d, $55, $8, $46, $c9, $53, $7b)
+<font color="#006666">; {A52BBA46-E9E1-435f-B3D9-28DAA648C0F6} - deprecated
+</font><font color="#006666">; Same GUID as FOLDERID_OneDrive
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SkyDrive,                  $a52bba46, $e9e1, $435f, $b3, $d9, $28, $da, $a6, $48, $c0, $f6)
+<font color="#006666">; {A52BBA46-E9E1-435f-B3D9-28DAA648C0F6}
+</font><font color="#006666">; Same GUID as FOLDERID_SkyDrive
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_OneDrive,                  $a52bba46, $e9e1, $435f, $b3, $d9, $28, $da, $a6, $48, $c0, $f6)
+<font color="#006666">; {24D89E24-2F19-4534-9DDE-6A6671FBB8FE}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SkyDriveDocuments,         $24d89e24, $2f19, $4534, $9d, $de, $6a, $66, $71, $fb, $b8, $fe)
+<font color="#006666">; {339719B5-8C47-4894-94C2-D8F77ADD44A6}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SkyDrivePictures,          $339719b5, $8c47, $4894, $94, $c2, $d8, $f7, $7a, $dd, $44, $a6)
+<font color="#006666">; {C3F2459E-80D6-45DC-BFEF-1F769F2BE730}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SkyDriveMusic,             $c3f2459e, $80d6, $45dc, $bf, $ef, $1f, $76, $9f, $2b, $e7, $30)
+<font color="#006666">; {767E6811-49CB-4273-87C2-20F355E1085B}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SkyDriveCameraRoll,        $767e6811, $49cb, $4273, $87, $c2, $20, $f3, $55, $e1, $08, $5b)
+<font color="#006666">; {0D4C3DB6-03A3-462F-A0E6-08924C41B5D4}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SearchHistory,             $0d4c3db6, $03a3, $462f, $a0, $e6, $08, $92, $4c, $41, $b5, $d4)
+<font color="#006666">; {7E636BFE-DFA9-4D5E-B456-D7B39851D8A9}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SearchTemplates,           $7e636bfe, $dfa9, $4d5e, $b4, $56, $d7, $b3, $98, $51, $d8, $a9)
+<font color="#006666">; {2B20DF75-1EDA-4039-8097-38798227D5B7}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CameraRollLibrary,         $2b20df75, $1eda, $4039, $80, $97, $38, $79, $82, $27, $d5, $b7)
+<font color="#006666">; {3B193882-D3AD-4eab-965A-69829D1FB59F}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SavedPictures,             $3b193882, $d3ad, $4eab, $96, $5a, $69, $82, $9d, $1f, $b5, $9f)
+<font color="#006666">; {E25B5812-BE88-4bd9-94B0-29233477B6C3}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_SavedPicturesLibrary,      $e25b5812, $be88, $4bd9, $94, $b0, $29, $23, $34, $77, $b6, $c3)
+<font color="#006666">; {12D4C69E-24AD-4923-BE19-31321C43A767}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RetailDemo,                $12d4c69e, $24ad, $4923, $be, $19, $31, $32, $1c, $43, $a7, $67)
+<font color="#006666">; {1C2AC1DC-4358-4B6C-9733-AF21156576F0}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Device,                    $1C2AC1DC, $4358, $4B6C, $97, $33, $AF, $21, $15, $65, $76, $F0)
+<font color="#006666">; {DBE8E08E-3053-4BBC-B183-2A7B2B191E59}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_DevelopmentFiles,          $dbe8e08e, $3053, $4bbc, $b1, $83, $2a, $7b, $2b, $19, $1e, $59)
+<font color="#006666">; {31C0DD25-9439-4F12-BF41-7FF4EDA38722}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_Objects3D,                 $31c0dd25, $9439, $4f12, $bf, $41, $7f, $f4, $ed, $a3, $87, $22)
+<font color="#006666">; {EDC0FE71-98D8-4F4A-B920-C8DC133CB165}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppCaptures,               $edc0fe71, $98d8, $4f4a, $b9, $20, $c8, $dc, $13, $3c, $b1, $65)
+<font color="#006666">; {f42ee2d3-909f-4907-8871-4c22fc0bf756}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalDocuments,            $f42ee2d3, $909f, $4907, $88, $71, $4c, $22, $fc, $0b, $f7, $56)
+<font color="#006666">; {0ddd015d-b06c-45d5-8c4c-f59713854639 }
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalPictures,             $0ddd015d, $b06c, $45d5, $8c, $4c, $f5, $97, $13, $85, $46, $39)
+<font color="#006666">; {35286a68-3c57-41a1-bbb1-0eae73d76c95}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalVideos,               $35286a68, $3c57, $41a1, $bb, $b1, $0e, $ae, $73, $d7, $6c, $95)
+<font color="#006666">; {a0c69a99-21c8-4671-8703-7934162fcf1d}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalMusic,                $a0c69a99, $21c8, $4671, $87, $03, $79, $34, $16, $2f, $cf, $1d)
+<font color="#006666">; {7d83ee9b-2244-4e70-b1f5-5393042af1e4}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_LocalDownloads,            $7d83ee9b, $2244, $4e70, $b1, $f5, $53, $93, $04, $2a, $f1, $e4)
+<font color="#006666">; {2f8b40c2-83ed-48ee-b383-a1f157ec6f9a}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_RecordedCalls,             $2f8b40c2, $83ed, $48ee, $b3, $83, $a1, $f1, $57, $ec, $6f, $9a)
+<font color="#006666">; {7ad67899-66af-43ba-9156-6aad42e6c596}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AllAppMods,                $7ad67899, $66af, $43ba, $91, $56, $6a, $ad, $42, $e6, $c5, $96)
+<font color="#006666">; {3db40b20-2a30-4dbe-917e-771dd21dd099}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_CurrentAppMods,            $3db40b20, $2a30, $4dbe, $91, $7e, $77, $1d, $d2, $1d, $d0, $99)
+<font color="#006666">; {B2C5E279-7ADD-439F-B28C-C41FE1BBF672}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppDataDesktop,               $b2c5e279, $7add, $439f, $b2, $8c, $c4, $1f, $e1, $bb, $f6, $72)
+<font color="#006666">; {7BE16610-1F7F-44AC-BFF0-83E15F2FFCA1}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppDataDocuments,             $7be16610, $1f7f, $44ac, $bf, $f0, $83, $e1, $5f, $2f, $fc, $a1)
+<font color="#006666">; {7CFBEFBC-DE1F-45AA-B843-A542AC536CC9}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppDataFavorites,             $7cfbefbc, $de1f, $45aa, $b8, $43, $a5, $42, $ac, $53, $6c, $c9)
+<font color="#006666">; {559D40A3-A036-40FA-AF61-84CB430A4D34}
+</font><font color="#006666">DEFINE_KNOWN_FOLDER</font>(FOLDERID_AppDataProgramData,           $559d40a3, $a036, $40fa, $af, $61, $84, $cb, $43, $a, $4d, $34)
+
+<b><font color="#006666">Procedure</font></b>.s <font color="#006666">KnownFolderPath</font>(*id.Guid, Flags = <font color="#924B72">#KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET</font>)
+  <b><font color="#006666">Protected</font></b> *p, path.s
+<font color="#006666">  SHGetKnownFolderPath</font>(*id, Flags, 0, @*p)
+  <b><font color="#006666">If</font></b> *p
+    path =<font color="#006666"> PeekS</font>(*p)
+<font color="#006666">    CoTaskMemFree_</font>(*p)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">ProcedureReturn</font></b> path
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.s <font color="#006666">KnownFolderPathS</font>(Guid.s, Flags = <font color="#924B72">#KF_FLAG_RETURN_FILTER_REDIRECTION_TARGET</font>)
+  <b><font color="#006666">Protected</font></b> g.Guid, *p, path.s
+  <b><font color="#006666">If</font></b> <font color="#006666">IIDFromString_</font>(Guid, g) = <font color="#924B72">#S_OK</font>
+<font color="#006666">    SHGetKnownFolderPath</font>(@g, Flags, 0, @*p)
+    <b><font color="#006666">If</font></b> *p
+      path =<font color="#006666"> PeekS</font>(*p)
+<font color="#006666">      CoTaskMemFree_</font>(*p)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">ProcedureReturn</font></b> path
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AccountPictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AccountPictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AddNewPrograms: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AddNewPrograms)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AdminTools: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AdminTools)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AllAppMods: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AllAppMods)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppCaptures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppCaptures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppDataDesktop: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppDataDesktop)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppDataDocuments: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppDataDocuments)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppDataFavorites: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppDataFavorites)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppDataProgramData: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppDataProgramData)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ApplicationShortcuts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ApplicationShortcuts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppsFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppsFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_AppUpdates: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_AppUpdates)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CameraRoll: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CameraRoll)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CameraRollLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CameraRollLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CDBurning: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CDBurning)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ChangeRemovePrograms: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ChangeRemovePrograms)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonAdminTools: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonAdminTools)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonOEMLinks: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonOEMLinks)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonPrograms: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonPrograms)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonStartMenu: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonStartMenu)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonStartMenuPlaces: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonStartMenuPlaces)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonStartup: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonStartup)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CommonTemplates: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CommonTemplates)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ComputerFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ComputerFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ConflictFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ConflictFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ConnectionsFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ConnectionsFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Contacts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Contacts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ControlPanelFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ControlPanelFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Cookies: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Cookies)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_CurrentAppMods: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_CurrentAppMods)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Desktop: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Desktop)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_DevelopmentFiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_DevelopmentFiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Device: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Device)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_DeviceMetadataStore: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_DeviceMetadataStore)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Documents: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Documents)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_DocumentsLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_DocumentsLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Downloads: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Downloads)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Favorites: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Favorites)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Fonts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Fonts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Games: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Games)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_GameTasks: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_GameTasks)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_History: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_History)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_HomeGroup: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_HomeGroup)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_HomeGroupCurrentUser: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_HomeGroupCurrentUser)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ImplicitAppShortcuts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ImplicitAppShortcuts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_InternetCache: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_InternetCache)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_InternetFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_InternetFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Libraries: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Libraries)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Links: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Links)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalAppData: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalAppData)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalAppDataLow: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalAppDataLow)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalDocuments: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalDocuments)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalDownloads: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalDownloads)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalizedResourcesDir: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalizedResourcesDir)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalMusic: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalMusic)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalPictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalPictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_LocalVideos: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_LocalVideos)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Music: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Music)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_MusicLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_MusicLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_NetHood: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_NetHood)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_NetworkFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_NetworkFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Objects3D: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Objects3D)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_OneDrive: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_OneDrive)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_OriginalImages: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_OriginalImages)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PhotoAlbums: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PhotoAlbums)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Pictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Pictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PicturesLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PicturesLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Playlists: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Playlists)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PrintersFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PrintersFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PrintHood: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PrintHood)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Profile: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Profile)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramData: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramData)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFilesCommon: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFilesCommon)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFilesCommonX64: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFilesCommonX64)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFilesCommonX86: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFilesCommonX86)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFilesX64: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFilesX64)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ProgramFilesX86: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ProgramFilesX86)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Programs: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Programs)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Public: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Public)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicDesktop: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicDesktop)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicDocuments: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicDocuments)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicDownloads: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicDownloads)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicGameTasks: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicGameTasks)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicLibraries: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicLibraries)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicMusic: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicMusic)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicPictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicPictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicRingtones: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicRingtones)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicUserTiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicUserTiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_PublicVideos: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_PublicVideos)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_QuickLaunch: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_QuickLaunch)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Recent: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Recent)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RecordedCalls: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RecordedCalls)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RecordedTVLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RecordedTVLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RecycleBinFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RecycleBinFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_ResourceDir: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_ResourceDir)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RetailDemo: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RetailDemo)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Ringtones: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Ringtones)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RoamedTileImages: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RoamedTileImages)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RoamingAppData: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RoamingAppData)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_RoamingTiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_RoamingTiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SampleMusic: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SampleMusic)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SamplePictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SamplePictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SamplePlaylists: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SamplePlaylists)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SampleVideos: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SampleVideos)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SavedGames: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SavedGames)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SavedPictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SavedPictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SavedPicturesLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SavedPicturesLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SavedSearches: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SavedSearches)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Screenshots: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Screenshots)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SEARCH_CSC: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SEARCH_CSC)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SEARCH_MAPI: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SEARCH_MAPI)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SearchHistory: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SearchHistory)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SearchHome: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SearchHome)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SearchTemplates: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SearchTemplates)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SendTo: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SendTo)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SidebarDefaultParts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SidebarDefaultParts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SidebarParts: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SidebarParts)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SkyDrive: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SkyDrive)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SkyDriveCameraRoll: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SkyDriveCameraRoll)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SkyDriveDocuments: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SkyDriveDocuments)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SkyDriveMusic: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SkyDriveMusic)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SkyDrivePictures: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SkyDrivePictures)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_StartMenu: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_StartMenu)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_StartMenuAllPrograms: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_StartMenuAllPrograms)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Startup: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Startup)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SyncManagerFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SyncManagerFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SyncResultsFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SyncResultsFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SyncSetupFolder: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SyncSetupFolder)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_System: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_System)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_SystemX86: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_SystemX86)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Templates: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Templates)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UserPinned: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UserPinned)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UserProfiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UserProfiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UserProgramFiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UserProgramFiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UserProgramFilesCommon: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UserProgramFilesCommon)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UsersFiles: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UsersFiles)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_UsersLibraries: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_UsersLibraries)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Videos: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Videos)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_VideosLibrary: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_VideosLibrary)
+<b><font color="#006666">Debug</font></b> &quot;FOLDERID_Windows: &quot; +<font color="#006666"> KnownFolderPath</font>(FOLDERID_Windows)
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;BEWARE about FOLDERID_ProgramFiles, FOLDERID_ProgramFilesX86, FOLDERID_ProgramFilesX64&quot;
+<b><font color="#006666">Debug</font></b> &quot;---------------------------------------------------------------------------------------&quot;
+<b><font color="#006666">Debug</font></b> &quot;OS     App    KNOWNFOLDERID Default Path CSIDL Equivalent&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFiles %SystemDrive%\Program Files CSIDL_PROGRAM_FILES&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFilesX86 %SystemDrive%\Program Files CSIDL_PROGRAM_FILESX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFilesX64 (not supported under 32-bit operating systems) Not applicable Not applicable&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFiles %SystemDrive%\Program Files CSIDL_PROGRAM_FILES&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFilesX86 %SystemDrive%\Program Files (x86) CSIDL_PROGRAM_FILESX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFilesX64 %SystemDrive%\Program Files None&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFiles %SystemDrive%\Program Files (x86) CSIDL_PROGRAM_FILES&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFilesX86 %SystemDrive%\Program Files (x86) CSIDL_PROGRAM_FILESX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFilesX64 (not supported for 32-bit applications) Not applicable Not applicable&quot;
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;BEWARE about FOLDERID_ProgramFilesCommon&quot;
+<b><font color="#006666">Debug</font></b> &quot;-----------------------------------------&quot;
+<b><font color="#006666">Debug</font></b> &quot;OS     App    KNOWNFOLDERID Default Path CSIDL Equivalent&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFilesCommon %ProgramFiles%\Common Files CSIDL_PROGRAM_FILES_COMMON&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFilesCommonX86 %ProgramFiles%\Common Files CSIDL_PROGRAM_FILES_COMMONX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_ProgramFilesCommonX64 (undefined) Not applicable Not applicable&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFilesCommon %ProgramFiles%\Common Files CSIDL_PROGRAM_FILES_COMMON&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFilesCommonX86 %ProgramFiles(x86)%\Common Files CSIDL_PROGRAM_FILES_COMMONX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_ProgramFilesCommonX64 %ProgramFiles%\Common Files None&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFilesCommon %ProgramFiles(x86)%\Common Files CSIDL_PROGRAM_FILES_COMMON&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFilesCommonX86 %ProgramFiles(x86)%\Common Files CSIDL_PROGRAM_FILES_COMMONX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_ProgramFilesCommonX64 %ProgramFiles%\Common Files None&quot;
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;BEWARE about FOLDERID_System&quot;
+<b><font color="#006666">Debug</font></b> &quot;----------------------------&quot;
+<b><font color="#006666">Debug</font></b> &quot;OS     App    KNOWNFOLDERID Default Path CSIDL Equivalent&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_System %windir%\system32 CSIDL_SYSTEM&quot;
+<b><font color="#006666">Debug</font></b> &quot;32 bit 32 bit FOLDERID_SystemX86 %windir%\system32 CSIDL_SYSTEMX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_System %windir%\system32 CSIDL_SYSTEM&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 64 bit FOLDERID_SystemX86 %windir%\syswow64 CSIDL_SYSTEMX86&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_System %windir%\system32 CSIDL_SYSTEM&quot;
+<b><font color="#006666">Debug</font></b> &quot;64 bit 32 bit FOLDERID_SystemX86 %windir%\syswow64 CSIDL_SYSTEMX86&quot;
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;Path Vista and later&quot;
+<b><font color="#006666">Debug</font></b> &quot;----------------------------&quot;
+<b><font color="#006666">Debug</font></b> &quot;Environment String Example Path&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ALLUSERSPROFILE% C:\ProgramData&quot;
+<b><font color="#006666">Debug</font></b> &quot;%APPDATA% C:\Users\username\AppData\Roaming&quot;
+<b><font color="#006666">Debug</font></b> &quot;%LOCALAPPDATA% C:\Users\username\AppData\Local&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ProgramData% C:\ProgramData&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ProgramFiles% C:\Program Files&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ProgramFiles(x86)% C:\Program Files (x86)&quot;
+<b><font color="#006666">Debug</font></b> &quot;%PUBLIC% C:\Users\Public&quot;
+<b><font color="#006666">Debug</font></b> &quot;%SystemDrive% C:&quot;
+<b><font color="#006666">Debug</font></b> &quot;%USERPROFILE% C:\Users\username&quot;
+<b><font color="#006666">Debug</font></b> &quot;%windir% C:\Windows&quot;
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;Path Windows XP and earlier&quot;
+<b><font color="#006666">Debug</font></b> &quot;----------------------------&quot;
+<b><font color="#006666">Debug</font></b> &quot;Environment String Example Path&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ALLUSERSPROFILE% C:\Documents and Settings\All Users&quot;
+<b><font color="#006666">Debug</font></b> &quot;%APPDATA% C:\Documents and Settings\username\Application Data&quot;
+<b><font color="#006666">Debug</font></b> &quot;%ProgramFiles% C:\Program Files&quot;
+<b><font color="#006666">Debug</font></b> &quot;%SystemDrive% C:&quot;
+<b><font color="#006666">Debug</font></b> &quot;%USERPROFILE% C:\Documents and Settings\username&quot;
+<b><font color="#006666">Debug</font></b> &quot;%windir% C:\Windows&quot;
+</font></pre>
+</body></html>

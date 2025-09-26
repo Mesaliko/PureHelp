@@ -1,0 +1,46 @@
+<html><head><title>ElapsedMilliseconds</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ElapsedMilliseconds()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.q = <font color="#006666"><b>ElapsedMilliseconds</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die Anzahl an Millisekunden zurück, welche seit einer bestimmten Zeit 
+in der Vergangenheit abgelaufen sind. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die abgelaufene Zeit in Millisekunden zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der zurückgegebene absolute Wert ist 
+nutzlos, da er abhängig vom Betriebssystem variiert. Stattdessen sollte diese 
+Funktion verwendet werden, um Zeitunterschiede zwischen mehreren ElapsedMilliseconds() 
+Aufrufen zu berechnen. 
+<br>
+<br>
+Diese Funktion ist relativ genau: es kann eine leichte Differenz auftreten, je nachdem 
+auf welchem Betriebssystem sie ausgeführt wird, da manche Systeme eine niedrigere 
+Timer-Auflösung als andere haben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  StartTime.q =<font color="#006666"> ElapsedMilliseconds</font>()     <font color="#006666">; ermittelt den aktuellen Wert</font>
+<font color="#006666">  Delay</font>(1000)                             <font color="#006666">; wartet 1000 Millisekunden</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ElapsedMilliseconds</font>() - StartTime <font color="#006666">; der angezeigte Wert sollte ca. 1000 Millisekunden betragen</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="delay.html">Delay()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=doubleclicktime.html>DoubleClickTime()</a> - <a href=index.html>System Inhaltsverzeichnis</a> - <a href=memorystatus.html>MemoryStatus()</a> -><br><br>
+
+</body></html>

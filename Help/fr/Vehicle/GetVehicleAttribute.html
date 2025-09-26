@@ -1,0 +1,69 @@
+<html><head><title>GetVehicleAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetVehicleAttribute()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.f = <font color="#006666"><b>GetVehicleAttribute</b></font>(#Entity, Attribut, Roue)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Obtenir l'attribut spécifié d'une entité véhicule. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+L'entité véhicule à utiliser. 
+
+</td></tr>
+<tr><td><i>Attribut</i></td>
+<td> 
+L'attribut à obtenir. Les attributs suivants sont disponibles: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Vehicle_Friction</font>                : La valeur de frottement de la roue (voir <a href="createvehiclebody.html">CreateVehicleBody()</a> pour plus d'info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionForce</font>      : La valeur de la force maximale de la suspension de roue (voir <a href="createvehiclebody.html">CreateVehicleBody()</a> pour plus d'info).
+  <font color="#924B72">#PB_Vehicle_SuspensionStiffness</font>     : La valeur de rigidité de la suspension (voir <a href="createvehiclebody.html">CreateVehicleBody()</a> pour plus d'info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionCompression</font>: La valeur de compression maximale de la suspension de roue (voir <a href="createvehiclebody.html">CreateVehicleBody()</a> pour plus d'info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionLength</font>     : La longueur maximale de la suspension (mètres).
+  <font color="#924B72">#PB_Vehicle_WheelDampingCompression</font> : La valeur de compression d'amortissement de la roue.
+  <font color="#924B72">#PB_Vehicle_WheelDampingRelaxation</font>  : La valeur de détente d'amortissement de la roue.
+  <font color="#924B72">#PB_Vehicle_RollInfluence</font>           : La valeur de l'influence du roulis de la roue (voir <a href="addvehiclewheel.html">AddVehicleWheel()</a> pour plus d'info).
+  <font color="#924B72">#PB_Vehicle_IsInContact</font>             : Renvoie <font color="#924B72">#True</font> si le véhicule est en contact avec un autre objet, <font color="#924B72">#False</font> sinon.
+  <font color="#924B72">#PB_Vehicle_CurrentSpeed</font>            : La vitesse actuelle du véhicule en km/heure.
+  <font color="#924B72">#PB_Vehicle_ContactPointX</font>           : La coordonnée X du point de contact.
+  <font color="#924B72">#PB_Vehicle_ContactPointY</font>           : La coordonnée Y du point de contact.
+  <font color="#924B72">#PB_Vehicle_ContactPointZ</font>           : La coordonnée Z du point de contact.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalX</font>     : La valeur normale X du point de contact.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalY</font>     : La valeur normale Y du point de contact.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalZ</font>     : La valeur normale Z du point de contact.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorX</font>          : La valeur X du vecteur du point de contact.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorY</font>          : La valeur Y du vecteur du point de contact.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorZ</font>          : La valeur Z du vecteur du point de contact.
+
+</font></pre>
+
+</td></tr>
+<tr><td><i>Roue</i></td>
+<td> 
+L'indice de la roue, à partir de 0. 
+<br>
+<br>
+Si non spécifié, ou mis à <font color="#924B72">#PB_All</font>, la nouvelle valeur de l'attribut est appliquée 
+à toutes les roues. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de l'attribut spécifié ou 0 si le véhicule ne supporte pas l'attribut. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setvehicleattribute.html">SetVehicleAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createvehiclebody.html>CreateVehicleBody()</a> - <a href=index.html>Vehicle Index</a> - <a href=setvehicleattribute.html>SetVehicleAttribute()</a> -><br><br>
+
+</body></html>

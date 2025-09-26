@@ -1,0 +1,67 @@
+<html><head><title>OnError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - OnError</font></b></p>
+
+<p><b>Einleitung</b></p><blockquote>
+
+Diese Bibliothek bietet eine Möglichkeit, um Programmfehler (Programmabstürze) aufzuspüren, ähnlich 
+wie mit dem <a href="../reference/ide_debugger.html">PureBasic Debugger</a>, aber ohne die Nachteile einer größeren 
+Dateigröße und geringerer Ausführungsgeschwindigkeit wie bei Nutzung des Debuggers. 
+Auf diesem Weg kann die finale Version eines Programms, welche an den Endanwender geliefert wird, 
+immer noch Fehler abfangen und dem Anwender einige Informationen über den Fehler zur Verfügung stellen, 
+welche er dann an den Entwickler zurückmelden kann. 
+<br>
+<br>
+Der <a href="../reference/ide_debugger.html">PureBasic Debugger</a> ist immer noch das bessere Werkzeug, um Fehler 
+(englisch &quot;Bugs&quot;) während der Entwicklungsphase zu finden. Grund dafür ist, dass der Debugger viel 
+mehr detaillierte Informationen über den Status des Programms (wie z.B. die aktuellen Werte von 
+<a href="../reference/variables.html">Variablen</a>) liefert und eine ganze Reihe an interaktiven Features zum 
+schnellen Auffinden von Bugs bietet. 
+<br>
+<br>
+<b>Hinweis:</b> Wenn sowohl diese Bibliothek als auch der <a href="../reference/ide_debugger.html">PureBasic Debugger</a> 
+verwendet werden, werden nicht alle Fehler von der OnError Bibliothek abgefangen, da einige Überprüfungen 
+durch den Debugger bereits vorgenommen und gemeldet werden, noch bevor der entsprechende Programmcode mit 
+dem Fehler ausgeführt wird. Um OnError in der IDE zu testen, stellen Sie bitte sicher, dass Debugger 
+ausgeschalten ist (<b><font color="#006666">DisableDebugger</font></b> ist nicht genug). 
+<br>
+<br>
+Diese Bibliothek kann mit Hilfe der Befehle <a href="errorfile.html">ErrorFile()</a> und <a href="errorline.html">ErrorLine()</a> 
+Informationen über die Quellcode-Datei und die Zeile, bei der der Fehler auftrat, liefern. 
+Allerdings nur, wenn dieses Feature während des Kompilierens aktiviert wurde (es verursacht eine 
+sehr geringe Verlangsamung der Ausführungsgeschwindigkeit, um die Zeilennummern zu beobachten). 
+Zur Aktivierung dieses Features setzen Sie das Häkchen bei &quot;OnError-Unterstützung einschalten&quot; in den 
+<a href="../reference/ide_compiler.html">Compiler-Optionen</a> oder geben beim Kompilieren über die 
+<a href="../reference/cli_compiler.html">Kommandozeile</a> den /LINENUMBERING (Windows) bzw. --linenumbering 
+(Linux, Mac OSX) Kommandozeilen-Switch an. 
+<br>
+<br>
+Unter Linux sollte bei der Behandlung schwerwiegender Fehler (im &quot;Error-Handler&quot;) die Benutzeroberfläche (UI) 
+nicht verwendet und das Programm so schnell wie möglich beendet werden, da es sich in einem instabilen Zustand 
+befindet. 
+
+</blockquote><p><b>Befehlsübersicht</b><blockquote>
+<a href="erroraddress.html">ErrorAddress</a><br>
+<a href="errorcode.html">ErrorCode</a><br>
+<a href="errorfile.html">ErrorFile</a><br>
+<a href="errorline.html">ErrorLine</a><br>
+<a href="errormessage.html">ErrorMessage</a><br>
+<a href="errorregister.html">ErrorRegister</a><br>
+<a href="errortargetaddress.html">ErrorTargetAddress</a><br>
+<a href="examineassembly.html">ExamineAssembly</a><br>
+<a href="instructionaddress.html">InstructionAddress</a><br>
+<a href="instructionstring.html">InstructionString</a><br>
+<a href="nextinstruction.html">NextInstruction</a><br>
+<a href="onerrorcall.html">OnErrorCall</a><br>
+<a href="onerrordefault.html">OnErrorDefault</a><br>
+<a href="onerrorexit.html">OnErrorExit</a><br>
+<a href="onerrorgoto.html">OnErrorGoto</a><br>
+<a href="raiseerror.html">RaiseError</a><br>
+</blockquote></p>
+
+<p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/OnError.pb.html">OnError.pb</a>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=../reference/reference.html>Referenz-Handbuch - Inhaltsverzeichnis</a></center><br><br>
+
+</body></html>

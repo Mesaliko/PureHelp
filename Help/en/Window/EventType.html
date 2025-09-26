@@ -1,0 +1,86 @@
+<html><head><title>EventType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EventType()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+EventType = <font color="#006666"><b>EventType</b></font>() </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+After a <a href="windowevent.html">WindowEvent()</a> or <a href="waitwindowevent.html">WaitWindowEvent()</a> function, use this function to determine of which 
+type the event is. The following gadgets support EventType(): 
+<br>
+<br>
+- <a href="../gadget/canvasgadget.html">CanvasGadget()</a> - The CanvasGadget has a special set of event types. <br>
+- <a href="../gadget/comboboxgadget.html">ComboBoxGadget()</a> <br>
+- <a href="../gadget/dategadget.html">DateGadget()</a> <br>
+- <a href="../gadget/editorgadget.html">EditorGadget()</a> <br>
+- <a href="../gadget/explorerlistgadget.html">ExplorerListGadget()</a> <br>
+- <a href="../gadget/explorertreegadget.html">ExplorerTreeGadget()</a> <br>
+- <a href="../gadget/imagegadget.html">ImageGadget()</a> <br>
+- <a href="../gadget/listviewgadget.html">ListViewGadget()</a> <br>
+- <a href="../gadget/listicongadget.html">ListIconGadget()</a> <br>
+- <a href="../gadget/mdigadget.html">MDIGadget()</a> <br>
+- <a href="../gadget/openglgadget.html">OpenGLGadget()</a> <br>
+- <a href="../gadget/spingadget.html">SpinGadget()</a> <br>
+- <a href="../gadget/stringgadget.html">StringGadget()</a> <br>
+- <a href="../gadget/treegadget.html">TreeGadget()</a> <br>
+- <a href="../gadget/webgadget.html">WebGadget()</a> - The WebGadget has a special set of event types. <br>
+<br>
+(See the gadget definition to see which events are supported.) 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The following values are possible, if an event of the type <font color="#924B72">#PB_Event_Gadget</font> (library 
+<a href="../gadget/index.html">Gadget</a>) or <font color="#924B72">#PB_Event_SysTray</font> (library <a href="../systray/index.html">Systray</a>) occurs: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font>       : Left mouse button click
+  <font color="#924B72">#PB_EventType_RightClick</font>      : right mouse button click
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font> : Left mouse button double click
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>: Right mouse button double click
+  <font color="#924B72">#PB_EventType_Focus</font>           : Get the focus.
+  <font color="#924B72">#PB_EventType_LostFocus</font>       : Lose the focus.
+  <font color="#924B72">#PB_EventType_Change</font>          : Content change.
+  <font color="#924B72">#PB_EventType_DragStart</font>       : The user tries to start a <a href="../dragdrop/index.html">Drag & Drop</a> operation.
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 230, 120, &quot;Eventtypes example...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">     ListIconGadget</font>(1, 10, 10, 150, 100, &quot;ListIcon&quot;, 140, <font color="#924B72">#PB_ListIcon_GridLines</font>) 
+     <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 4 
+<font color="#006666">       AddGadgetItem</font>(1, -1, &quot;Line &quot;+<font color="#006666">Str</font>(a)) 
+     <b><font color="#006666">Next</font></b>
+  
+     <b><font color="#006666">Repeat</font></b>
+       Event =<font color="#006666"> WaitWindowEvent</font>()
+       
+       <b><font color="#006666">Select</font></b> Event
+       
+         <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+           <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+             <b><font color="#006666">Case</font></b> 1 
+               <b><font color="#006666">Select</font></b> <font color="#006666">EventType</font>()
+                 <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_LeftClick</font>        : <b><font color="#006666">Debug</font></b> &quot;Click with left mouse button&quot;
+                 <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_RightClick</font>       : <b><font color="#006666">Debug</font></b> &quot;Click with right mouse button&quot;
+                 <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_LeftDoubleClick</font>  : <b><font color="#006666">Debug</font></b> &quot;Double-click with left mouse button&quot;
+                 <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_RightDoubleClick</font> : <b><font color="#006666">Debug</font></b> &quot;Double-click with right mouse button&quot;
+               <b><font color="#006666">EndSelect</font></b>
+           <b><font color="#006666">EndSelect</font></b>
+       
+       <b><font color="#006666">EndSelect</font></b>
+     <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="waitwindowevent.html">WaitWindowEvent()</a>, <a href="windowevent.html">WindowEvent()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=eventtimer.html>EventTimer()</a> - <a href=index.html>Window Index</a> - <a href=eventwindow.html>EventWindow()</a> -><br><br>
+
+</body></html>

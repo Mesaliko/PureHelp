@@ -1,0 +1,119 @@
+<html><head><title>CreateCamera</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateCamera()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateCamera</b></font>(#Kamera, x, y, Breite, Höhe [, SichtbarkeitsMaske [, Lod]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue Kamera in der aktuellen Welt, an der Position 'x, y' mit den angegebenen 
+Dimensionen. Beachten Sie, dass diese angegebene Position und Größe die Position und Größe der 
+Anzeige (&quot;Display&quot;) auf Ihrem Bildschirm sind, nicht die Position und Größe der Kamera in 
+der Welt. 
+<br>
+<br>
+Im Gegensatz zu anderen grafikrelevanten Befehlen werden diese Koordinaten und Dimensionen 
+in Prozent (von 0 bis 100) angegeben (für eine genauere Platzierung können Fließkommazahlen 
+verwendet werden). Dies erscheint Ihnen vielleicht merkwürdig, aber 3D-Applikationen sollten unabhängig 
+von der Bildschirmauflösung arbeiten und die Prozent-Methode ist eine gute Möglichkeit, dies 
+zu erreichen. 
+<br>
+<br>
+Wenn eine Kamera mit einer Höhe von 50% erstellt wird, dann wird sie immer 50% der Höhe des 
+Bildschirms füllen, unabhängig davon, ob Sie einen Bildschirm mit 640*480 oder 1600*1200 
+verwenden. Wenn eine Kamera mit dem gleichen numerischen Bezeichner bereits erstellt wurde, 
+dann wird die vorherige Kamera automatisch freigegeben und durch die neue ersetzt. 
+<br>
+<br>
+Kameras können überlappt werden. Dies bedeutet: Es ist möglich eine Kamera anzuzeigen, 
+die den gesamten Bildschirm füllt und darin eine weitere kleinere Kamera, die einen anderen 
+Platz in der Welt anzeigt. Um dies zu erreichen, ist die Reihenfolge der Erstellung sehr 
+wichtig: Die Kamera, welche obenauf angezeigt werden soll, sollte als letzte erstellt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Kamera</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren der neuen Kamera. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+Die Position (in Prozentwerten) des linken Randes der Kamera-Anzeige auf dem Bildschirm. 
+0% bedeutet am linken Rand des Bildschirms, 100% bedeutet am rechten Rand des Bildschirms. 
+
+</td></tr>
+<tr><td><i>Breite, Höhe</i></td>
+<td> 
+Die Größe (in Prozentwerten) des Bildschirms, den die Anzeige dieser Kamera nutzen soll. 
+Siehe das Bild unten für einen besseren Überblick. 
+
+</td></tr>
+<tr><td><i>SichtbarkeitsMaske (optional)</i></td>
+<td> 
+Eine Maske um auszuwählen, welche <a href="../entity/index.html">Entities</a> und 
+<a href="../billboard/index.html">Billboards</a> auf dieser Kamera angezeigt werden sollen. 
+Die Kamera definiert ihre eigene Maske, und wenn das Entity oder Billboard mit der 
+Maske übereinstimmt, dann werden sie angezeigt. Standardmäßig haben die Entities und 
+Billboards keine Maske, was bedeutet, dass sie immer auf allen Kameras angezeigt werden. 
+
+</td></tr>
+<tr><td><i>Lod (optional)</i></td>
+<td> 
+Ein Lod-Bias (Level of Details) zur Anwendung auf die <a href="../entity/index.html">Entities</a>, die ihn 
+unterstützen. Wenn Lod-Bias &lt;1 ist, wird ein detaillierteres Objekt angezeigt. Wenn Lod-Bias &gt;1 
+ist, wird ein weniger detailliertes Objekt angezeigt. Die Objektdistanz wird durch den Lod-Bias 
+geteilt (d.h. ein Lod-Bias von 0,5 verdoppelt die Distanz). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt Null zurück, wenn die Kamera nicht erstellt werden konnte. Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+als Parameter '#Kamera' verwendet wird, dann wird die Nummer der neuen Kamera als 'Ergebnis' zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+
+</blockquote><p><b>Beispiel:</b> Position und Dimension bei der Kamera-Erstellung:</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Erstellt eine Kamera, welche den gesamten Bildschirm ausfüllt</font>
+  
+<font color="#006666">  CreateCamera</font>(0, 0,  0, 100, 50) <font color="#006666">; Erstellt einen horizontalen Splitscreen Effekt, für einen</font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) <font color="#006666">; 2 Spieler-Modus auf dem gleichen Bildschirm</font>
+
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Erstellt eine &quot;Fullscreen&quot;-Kamera</font>
+<font color="#006666">  CreateCamera</font>(1, 25, 0, 50, 10)  <font color="#006666">; und einen Rückspiegel-Effekt.</font>
+                                  <font color="#006666">; Beachte: der Rückspiegel wird zuletzt erstellt und wird so</font>
+                                  <font color="#006666">; auf der &quot;Fullscreen&quot;-Kamera angezeigt</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Zwei Kameras teilen den Bildschirm in zwei Hälften:</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; obere Kamera</font>
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 50)  
+<font color="#006666">  MoveCamera</font>(0, 0, 50, 150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(0,<font color="#006666"> RGB</font>(215, 225, 255))
+  
+  <font color="#006666">; untere Kamera</font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) 
+<font color="#006666">  MoveCamera</font>(1, 0, 50, -150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(1,<font color="#006666"> RGB</font>(255, 225, 215))
+<font color="#006666">  RotateCamera</font>(1, 180, 0, 0)
+</font></pre>
+<p><img src="../HelpPictures/createcamera.png"></p>
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freecamera.html">FreeCamera()</a>, <a href="resizecamera.html">ResizeCamera()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=checkobjectvisibility.html>CheckObjectVisibility()</a> - <a href=index.html>Camera Inhaltsverzeichnis</a> - <a href=freecamera.html>FreeCamera()</a> -><br><br>
+
+</body></html>

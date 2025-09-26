@@ -1,0 +1,64 @@
+<html><head><title>SetFileAttributes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetFileAttributes()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SetFileAttributes</b></font>(Filename$, Attributes)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Set the attributes of the given Filename$. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Filename$</i></td>
+<td width="90%"> 
+The name of the file to modify. This can also specify the name of a directory. 
+
+</td></tr>
+<tr><td><i>Attributes</i></td>
+<td> 
+The new attributes. 
+<br>
+<br>
+On Windows, 'Attributes' is a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Hidden</font>    : File is hidden
+  <font color="#924B72">#PB_FileSystem_Archive</font>   : File has been changed and not archived since the last time
+  <font color="#924B72">#PB_FileSystem_Normal</font>    : Normal attributes
+  <font color="#924B72">#PB_FileSystem_ReadOnly</font>  : File is in read-only mode
+  <font color="#924B72">#PB_FileSystem_System</font>    : File is a system file
+</font></pre>
+
+On Linux and MacOSX, the following values can be used: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_ReadUser</font>  : Access flags for the owning user
+  <font color="#924B72">#PB_FileSystem_WriteUser</font>
+  <font color="#924B72">#PB_FileSystem_ExecUser</font>
+  <font color="#924B72">#PB_FileSystem_ReadGroup</font> : Access flags for the owning user's group
+  <font color="#924B72">#PB_FileSystem_WriteGroup</font>
+  <font color="#924B72">#PB_FileSystem_ExecGroup</font>
+  <font color="#924B72">#PB_FileSystem_ReadAll</font>   : Access flags for all other users
+  <font color="#924B72">#PB_FileSystem_WriteAll</font>
+  <font color="#924B72">#PB_FileSystem_ExecAll</font>
+</font></pre>
+
+To combine several attributes, just use the '|' (binary OR) operand: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  SetFileAttributes</font>(&quot;C:\Text.txt&quot;, <font color="#924B72">#PB_FileSystem_Hidden</font> | <font color="#924B72">#PB_FileSystem_ReadOnly</font>)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation was successful and zero otherwise. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getfileattributes.html">GetFileAttributes()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setcurrentdirectory.html>SetCurrentDirectory()</a> - <a href=index.html>FileSystem Index</a> - <a href=setfiledate.html>SetFileDate()</a> -><br><br>
+
+</body></html>

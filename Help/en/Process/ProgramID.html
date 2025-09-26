@@ -1,0 +1,47 @@
+<html><head><title>ProgramID</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramID()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ProgramID</b></font>(Program)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the unique system identifier for the given program. This is the so called &quot;Process ID&quot; or &quot;PID&quot;. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to use. It must have been started before with <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The unique system identifier for the given program. 
+
+<br>
+<br>
+If the identifier cannot be returned, -1 will be returned. 
+<br>
+This will happen if <a href="runprogram.html">RunProgram()</a> is used to open a file in another program, like 
+RunProgram(&quot;Source.pb&quot;). 
+<br>
+<br>
+Note: the value returned here is not a handle (unlike with most other ...ID() functions). Rather, it is 
+the Process ID which may be viewed within the Taskmanager. To get a process handle, use the OpenProcess_() API. 
+<br>
+<br>
+Note: The returned value may be false if the process is launched by a wrapper as is the 
+case with Windows 10 and UWP (Universal Windows Platform) applications launched by 
+ApplicationFrameHost.exe (AFH). 
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=programfilename.html>ProgramFilename()</a> - <a href=index.html>Process Index</a> - <a href=programparameter.html>ProgramParameter()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,85 @@
+<html><head><title>ChangeCurrentElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ChangeCurrentElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ChangeCurrentElement</b></font>(Liste(), *NeuesElement)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert das aktuelle Element der angegebenen Liste auf das angegebene neue Element '*NeuesElement'. 
+Diese Funktion ist sehr nützlich, wenn Sie sich ein Element &quot;merken&quot; wollen und es nach 
+der Verarbeitung anderer Prozesse wiederherstellen wollen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+Der Variablenname der verknüpften Liste, welche mit dem <a href="../reference/newlist.html">NewList</a> Befehl erstellt 
+wurde. Sie müssen die Klammern nach dem Listennamen immer angeben. 
+
+</td></tr>
+<tr><td><i>*NeuesElement</i></td>
+<td> 
+Das neue Element, was als aktuelles Element der Liste gesetzt werden soll. 
+Das neue Element muss ein <a href="../reference/memory.html">Zeiger</a> (Pointer) auf ein anderes in der Liste 
+existierendes Element sein. 
+Sie sollten dessen Adresse durch Verwendung des @ Operators auf den Listennamen und nicht durch 
+irgendeine andere Methode ermitteln. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel:</b> Vereinfacht</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Old_Element = @mylist()   <font color="#006666">; Ermittelt die Adresse des aktuellen Elements</font>
+  
+<font color="#006666">  ResetList</font>(<font color="#006666">mylist</font>())        <font color="#006666">; Durchführen einer Suchschleife nach allen</font>
+  <b><font color="#006666">While</font></b> <font color="#006666">NextElement</font>(<font color="#006666">mylist</font>())   <font color="#006666">; Elementen mit Name &quot;John&quot; und Änderung dieser in &quot;J&quot; </font>
+    <b><font color="#006666">If</font></b> <font color="#006666">mylist</font>()\name = &quot;John&quot;
+<font color="#006666">      mylist</font>()\name = &quot;J&quot;     
+    <b><font color="#006666">EndIf</font></b> 
+  <b><font color="#006666">Wend</font></b>     
+  
+<font color="#006666">  ChangeCurrentElement</font>(<font color="#006666">mylist</font>(), *Old_Element) <font color="#006666">; Wiederherstellen des letzten aktuellen Elements (von vor der Suche)</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Komplett</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">myList</font>()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">myList</font>())
+<font color="#006666">  myList</font>() = 100
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">myList</font>())
+<font color="#006666">  myList</font>() = 200
+  *element = @myList()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">myList</font>())
+<font color="#006666">  myList</font>() = 300
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">myList</font>()                             <font color="#006666">; Zeigt 300 an (letztes Element)</font>
+<font color="#006666">  ChangeCurrentElement</font>(<font color="#006666">myList</font>(), *element)   <font color="#006666">; Wiederherstellen der Listen-Position</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">myList</font>()                             <font color="#006666">; Zeigt 200 an</font>
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">myList</font>()
+    <b><font color="#006666">If</font></b> @myList() = *element
+      <b><font color="#006666">Debug</font></b> &quot;element: &quot; +<font color="#006666"> myList</font>()           <font color="#006666">; Zeigt &quot;element: 200&quot; an</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="selectelement.html">SelectElement()</a>, <a href="pushlistposition.html">PushListPosition()</a>, <a href="poplistposition.html">PopListPosition()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addelement.html>AddElement()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=clearlist.html>ClearList()</a> -><br><br>
+
+</body></html>

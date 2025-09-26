@@ -1,0 +1,90 @@
+<html><head><title>WorldShadows.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - ShadowColor
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#924B72">#CameraSpeed</font> = 0.2
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; ShadowColor - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Additive</font>)
+<font color="#006666">;WorldShadows(#PB_Shadow_TextureAdditive, 1, $444444,2048)
+
+</font><font color="#006666">; Camera
+</font>Camera =<font color="#006666"> CreateCamera</font>(<font color="#924B72">#PB_Any</font>, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(Camera, -10, 5, -20, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(camera,0,0,0)
+
+<font color="#006666">; Light
+</font><font color="#006666">CreateLight</font>(<font color="#924B72">#PB_Any</font>, $ffffff, 40, 20, 20)
+
+<font color="#006666">;Materials
+</font>WoodMaterial =<font color="#006666"> CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> TextureID</font>(<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>, &quot;Wood.jpg&quot;)))
+DirtMaterial =<font color="#006666"> CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> TextureID</font>(<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>, &quot;Dirt.jpg&quot;)))
+
+<font color="#006666">; Ground
+</font>MeshPlane =<font color="#006666"> CreatePlane</font>(<font color="#924B72">#PB_Any</font>, 100, 100, 10, 10, 15, 15)
+Ground =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshPlane),<font color="#006666"> MaterialID</font>(DirtMaterial))
+<font color="#006666">;EntityRenderMode(Ground, 0) &lt;- for shadow texture : remove cast shadow to enabled receive shadow !?
+
+</font><font color="#006666">; Meshes
+</font>MeshCube =<font color="#006666"> CreateCube</font>(<font color="#924B72">#PB_Any</font>, 4)
+MeshSphere =<font color="#006666"> CreateSphere</font>(<font color="#924B72">#PB_Any</font>, 2)
+MeshLogo =<font color="#006666"> LoadMesh</font>(<font color="#924B72">#PB_Any</font>, &quot;PureBasic.mesh&quot;)
+
+<font color="#006666">; Entities
+</font>cube=<font color="#006666">   CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshCube),<font color="#006666"> MaterialID</font>(WoodMaterial), 5, 2, -5)
+sphere=<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshSphere),<font color="#006666"> MaterialID</font>(WoodMaterial),  0, 2,  0)
+Logo =<font color="#006666">  CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshLogo),<font color="#006666"> MaterialID</font>(WoodMaterial),  -5, 3,  5):<font color="#006666">ScaleEntity</font>(Logo, 0.2, 0.2, 0.2)
+
+<font color="#006666">;SkyBox
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">AmbientColor</font>($555555)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * 0.05
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)-<font color="#006666">MouseWheel</font>()*10)*<font color="#924B72">#CameraSpeed</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MoveCamera  </font>(Camera, KeyX, 0, KeyY)
+<font color="#006666">  RotateCamera</font>(Camera, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  RotateEntity</font>(Logo, 0, 1, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+</font></pre>
+</body></html>

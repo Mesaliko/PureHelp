@@ -1,0 +1,66 @@
+<html><head><title>StartDrawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartDrawing()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>StartDrawing</b></font>(OutputID) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die aktuelle Ausgabe auf den angegebenen Ausgabekanal. Nachdem dieser 
+festgelegt wurde, werden alle Zeichenoperationen darauf ausgegeben. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>OutputID</i></td>
+<td width="90%"> 
+Der Ausgabekanal, auf welchem gezeichnet werden soll. Dieser kann 
+mit den folgenden Funktionen ermittelt werden: 
+<br>
+<br>
+<a href="../window/windowoutput.html">WindowOutput()</a>: Grafiken werden direkt auf dem Fenster gerendert 
+<br>
+<a href="../screen/screenoutput.html">ScreenOutput()</a>: Grafiken werden direkt auf dem Bildschirm gerendert (für Spiele) 
+<br>
+<a href="../sprite/spriteoutput.html">SpriteOutput()</a>: Grafiken werden direkt auf dem Sprite gerendert (für Spiele) 
+<br>
+<a href="../image/imageoutput.html">ImageOutput()</a>: Grafiken werden direkt in die Bilddaten gerendert (siehe <a href="../image/createimage.html">CreateImage()</a>) 
+<br>
+<a href="../printer/printeroutput.html">PrinterOutput()</a>: Grafiken werden direkt auf die Druckerausgabe gerendert 
+<br>
+<a href="../gadget/canvasoutput.html">CanvasOutput()</a>: Grafiken werden direkt auf das <a href="../gadget/canvasgadget.html">CanvasGadget()</a> gerendert 
+<br>
+<a href="../texture/textureoutput.html">TextureOutput()</a>: Grafiken werden direkt auf eine Textur gerendert (für 3D-Spiele) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Zeichnen möglich ist - oder Null, wenn die 
+Operation fehlschlug. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Hintergrundfarbe wird standardmäßig auf schwarz (d.h. RGB(0, 0, 0)) und die Vordergrundfarbe 
+auf weiß (d.h. RGB(255, 255, 255)) gesetzt. 
+<br>
+<br>
+Sobald alle Zeichenoperationen abgeschlossen wurden, muss <a href="stopdrawing.html">StopDrawing()</a> 
+aufgerufen werden. 
+<br>
+<br>
+Wenn &quot;Erstelle threadsicheres Executable&quot; in den <a href="../reference/ide_compiler.html">Compiler-Optionen</a> 
+aktiviert ist, dann hat jeder Thread seine eigene aktuelle Zeichenausgabe. Dies bedeutet, dass 
+zwei Threads zur gleichen Zeit auf verschiedene Ausgaben zeichnen können. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="stopdrawing.html">StopDrawing()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setorigin.html>SetOrigin()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=stopdrawing.html>StopDrawing()</a> -><br><br>
+
+</body></html>

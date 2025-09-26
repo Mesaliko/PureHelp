@@ -1,0 +1,138 @@
+<html><head><title>Enumérations</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Enumérations</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Enumeration</font></b> [nom] [&lt;constante&gt; [<b><font color="#006666">Step</font></b> &lt;constante&gt;]] 
+  <font color="#924B72">#Constante1</font>
+  <font color="#924B72">#Constante2</font> [= &lt;constante&gt;]
+  <font color="#924B72">#Constante3</font>
+  ...
+<b><font color="#006666">EndEnumeration</font></b>
+
+
+
+<b><font color="#006666">EnumerationBinary</font></b> [nom] [&lt;constante&gt;] 
+  <font color="#924B72">#Constante1</font>
+  <font color="#924B72">#Constante2</font> [= &lt;constante&gt;]
+  <font color="#924B72">#Constante3</font>
+  ...
+<b><font color="#006666">EndEnumeration</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Les énumérations sont très pratiques pour 
+déclarer rapidement une série de constantes 
+sans s'occuper de leur valeur numérique. 
+La première constante de l'énumération 
+prendra la valeur 0, la constante suivante 
+prendra la valeur 1 etc. Il est possible de 
+changer la valeur de départ de l'énumération 
+et d'ajuster la valeur utilisée pour 
+l'incrémentation de chaque constante. 
+Si nécessaire, il est possible d'affecter 
+directement une valeur numérique à une constante 
+(grâce à l'opérateur '=') et les constantes 
+suivantes utiliseront cette nouvelle valeur comme 
+valeur de base. Comme les énumerations n'acceptent 
+que les nombres entiers, les nombres flottants 
+seront arroundis à l'entier le plus proche. 
+<br>
+<br>
+Un 'nom' peut être configuré pour identifier 
+une énumération et permettre de l'interrompre 
+puis de la poursuivre plus tard. 
+C'est utile pour regrouper des objets dans une 
+même énumération tout en les déclarant dans 
+différents endroits du code. 
+<br>
+<br>
+Pour les utilisateurs avancés seulement : 
+La constante réservée <font color="#924B72">#PB_Compiler_EnumerationValue</font> 
+stocke la prochaine valeur qui sera utilisée par 
+l'énumération. Cela peut être utile pour connaître 
+la valeur de la dernière énumération ou pour chaîner 
+plusieurs énumérations. 
+<br>
+<br>
+<b><font color="#006666">EnumerationBinary</font></b> peut être utilisé pour 
+créer des énumérations appropriées pour les options 
+(flags). 
+La première valeur de l'élément est 1. 
+
+</blockquote><p><b>Exemple:</b> Enumération simple</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; égale à 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; égale à 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; égale à 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Enumération avec un pas déterminé</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b> 20 <b><font color="#006666">Step</font></b> 3
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; égale à 20</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; égale à 23</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; égale à 26</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Enumération avec un changement dynamique</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font>      <font color="#006666">; égale à 0</font>
+    <font color="#924B72">#GadgetText</font> = 15 <font color="#006666">; égale à 15</font>
+    <font color="#924B72">#GadgetOK</font>        <font color="#006666">; égale à 16</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Enumérations nommées</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b> Gadget
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; égale à 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; égale à 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; égale à 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Enumeration</font></b> Window
+    <font color="#924B72">#FirstWindow</font>  <font color="#006666">; égale à 0</font>
+    <font color="#924B72">#SecondWindow</font> <font color="#006666">; égale à 1</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+
+  <b><font color="#006666">Enumeration</font></b> Gadget
+    <font color="#924B72">#GadgetCancel</font> <font color="#006666">; égale à 3</font>
+    <font color="#924B72">#GadgetImage</font>  <font color="#006666">; égale à 4</font>
+    <font color="#924B72">#GadgetSound</font>  <font color="#006666">; égale à 5</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Obtenir la prochaine valeur d'énumération</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; égale à 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; égale à 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; égale à 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Debug</font></b> &quot;La prochaine valeur d'énumération est : &quot; + <font color="#924B72">#PB_Compiler_EnumerationValue</font> <font color="#006666">; affiche 3</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Enumération binaire</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnumerationBinary</font></b>
+    <font color="#924B72">#Flags1</font> <font color="#006666">; égale à 1</font>
+    <font color="#924B72">#Flags2</font> <font color="#006666">; égale à 2</font>
+    <font color="#924B72">#Flags3</font> <font color="#006666">; égale à 4</font>
+    <font color="#924B72">#Flags4</font> <font color="#006666">; égale à 8</font>
+    <font color="#924B72">#Flags5</font> <font color="#006666">; égale à 16</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+</blockquote>
+</font></body></html>

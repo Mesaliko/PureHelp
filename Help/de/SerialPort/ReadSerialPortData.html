@@ -1,0 +1,48 @@
+<html><head><title>ReadSerialPortData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadSerialPortData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReadSerialPortData</b></font>(#SerialPort, *Puffer, Länge)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest eine beliebige Menge an Daten vom #SerialPort. Wenn der Eingabepuffer leer war, 
+wird diese Funktion das Programm blockieren, bis Daten verfügbar sind. 
+Um zu überprüfen, ob Daten verfügbar sind, verwenden Sie <a href="availableserialportinput.html">AvailableSerialPortInput()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#SerialPort</i></td>
+<td width="90%"> 
+Der zu verwendende SerialPort. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Die für das Einlesen der Daten zu verwendende Speicheradresse. 
+
+</td></tr>
+<tr><td><i>Länge</i></td>
+<td> 
+Die Länge der vom SerialPort zu lesenden Daten, in Bytes. Der angegebene Puffer 
+sollte groß genug sein, um diese verarbeiten zu können. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die Anzahl Bytes, welche aktuell gelesen wurden. Dies können weniger als die 
+angeforderte Länge sein. Wenn ein Lesefehler auftrat, wird Null zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="availableserialportinput.html">AvailableSerialPortInput()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=openserialport.html>OpenSerialPort()</a> - <a href=index.html>SerialPort Inhaltsverzeichnis</a> - <a href=serialporterror.html>SerialPortError()</a> -><br><br>
+
+</body></html>

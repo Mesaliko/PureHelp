@@ -1,0 +1,120 @@
+<html><head><title>PanelGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PanelGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>PanelGadget</b></font>(#Gadget, x, y, Breite, Höhe)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein Panel-Gadget (auch: Schaltfläche, Schalttafel, Register, Karteikarte) innerhalb der aktuellen Gadgetliste. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, oder Null bei einem Fehler. Wenn 
+<font color="#924B72">#PB_Any</font> als #Gadget Parameter verwendet wurde, dann beinhaltet der Rückgabewert 
+bei Erfolg die automatisch generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Befehle können benutzt werden, um auf den Inhalt des PanelGadgets zuzugreifen: 
+<br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: fügt eine Schaltfläche hinzu. 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: entfernt eine Schaltfläche. 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: ermittelt die Anzahl der Schaltflächen. 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: entfernt alle Schaltflächen. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: ermittelt den Text der angegebenen Schaltfläche. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: ändert den Text der angegebenen Schaltfläche. 
+<br>
+- <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>: Ändert das aktuelle Bild des angegebenen Eintrags.  (nicht unterstützt auf OS X) 
+<br>
+- <a href="getgadgetitemdata.html">GetGadgetItemData()</a>: ermittelt den Wert, der mit dem angegebenen Eintrag gespeichert wurde. 
+<br>
+- <a href="setgadgetitemdata.html">SetGadgetItemData()</a>: speichert einen Wert mit dem angegebenen Eintrag. 
+<br>
+- <a href="gadgetitemid.html">GadgetItemID()</a>: gibt das Betriebssystem-Handle des angegebenen Eintrags zurück (nur auf Windows, nützlich für API-Funktionen). 
+<br>
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: ändert den aktiven Panel (Schalttafel). 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a> ermittelt den Index des aktuellen Panels. 
+<br>
+- <a href="getgadgetattribute.html">GetGadgetAttribute()</a>: mit einem der folgenden Attribute: (es muss mindestens ein Eintrag vorhanden sein, damit dies funktioniert) 
+<br>
+(nicht unterstützt auf Linux GTK) 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Panel_ItemWidth</font> : Gibt die Breite des inneren Bereichs zurück, worin die Gadgets angezeigt werden.
+  <font color="#924B72">#PB_Panel_ItemHeight</font>: Gibt die Höhe des inneren Bereichs zurück, worin die Gadgets angezeigt werden.
+  <font color="#924B72">#PB_Panel_TabHeight</font> : Gibt die Höhe der &quot;Reiter&quot; (englisch &quot;Panel-Tabs&quot;) am oberen Rand des Gadgets zurück.
+</font></pre>
+
+Die folgenden Ereignisse werden mittels <a href="../window/eventtype.html">EventType()</a> unterstützt: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>: Das aktuell angezeigte Panel hat sich geändert.
+  <font color="#924B72">#PB_EventType_Resize</font>: Das Gadget wurde in der Größe verändert.
+</font></pre>
+
+Sobald ein Panel erstellt wurde, ist seine Liste mit Schaltflächen (Registern...) leer. 
+<br>
+Sie müssen erst <a href="addgadgetitem.html">AddGadgetItem()</a> aufrufen, um eine Schalttafel hinzufügen, bevor Sie 
+andere Gadgets innerhalb des Panel-Gadgets erstellen können. Die nächsten Gadgets werden dann 
+automatisch auf dem neuen Eintrag (Register) des Panel-Gadgets erstellt. 
+Dies ist sehr bequem. Wenn das Panel-Gadget mit allen benötigten Gadgets gefüllt wurde, 
+muss <a href="closegadgetlist.html">CloseGadgetList()</a> aufgerufen werden, um zur vorhergehenden Gadgetliste 
+zurückzukehren. Dies bedeutet, dass ein Panel-Gadget auch auf einem anderen 
+Panel-Gadget erstellt werden kann... 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Zeigt die Verwendung mehrerer Panels...</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 322, 220, &quot;PanelGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    PanelGadget     </font>(0, 8, 8, 306, 203)
+<font color="#006666">      AddGadgetItem </font>(0, -1, &quot;Panel 1&quot;)
+<font color="#006666">        PanelGadget </font>(1, 5, 5, 290, 166)
+<font color="#006666">          AddGadgetItem</font>(1, -1, &quot;Sub-Panel 1&quot;)
+<font color="#006666">          AddGadgetItem</font>(1, -1, &quot;Sub-Panel 2&quot;)
+<font color="#006666">          AddGadgetItem</font>(1, -1, &quot;Sub-Panel 3&quot;)
+<font color="#006666">        CloseGadgetList</font>()
+<font color="#006666">      AddGadgetItem </font>(0, -1,&quot;Panel 2&quot;)
+<font color="#006666">        ButtonGadget</font>(2, 10, 15, 80, 24,&quot;Button 1&quot;)
+<font color="#006666">        ButtonGadget</font>(3, 95, 15, 80, 24,&quot;Button 2&quot;)
+<font color="#006666">    CloseGadgetList</font>()
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/panelgadget.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="closegadgetlist.html">CloseGadgetList()</a>, <a href="opengadgetlist.html">OpenGadgetList()</a>, <a href="setgadgetitemimage.html">SetGadgetItemImage()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=optiongadget.html>OptionGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=progressbargadget.html>ProgressBarGadget()</a> -><br><br>
+
+</body></html>

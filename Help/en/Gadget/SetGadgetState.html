@@ -1,0 +1,96 @@
+<html><head><title>SetGadgetState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetState()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetGadgetState</b></font>(#Gadget, State)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the current state of the specified gadget. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to use. 
+
+</td></tr>
+<tr><td><i>State</i></td>
+<td> 
+The new state for the gadget. See below for the meaning of this value depending on the gadget type. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This is a universal function which works for almost all gadgets: 
+<br>
+<br>
+- <a href="buttonimagegadget.html">ButtonImageGadget()</a>: change the current state of a #PB_Button_Toggle gadget (1 = toggled, 0 = normal). 
+<br>
+- <a href="buttongadget.html">ButtonGadget()</a>: change the current state of a #PB_Button_Toggle gadget (1 = toggled, 0 = normal). 
+<br>
+- <a href="calendargadget.html">CalendarGadget()</a>: set the currently selected date. 
+<br>
+- <a href="checkboxgadget.html">CheckBoxGadget()</a>: Change the state of the checkbox. The following values are possible: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_CheckBox_Checked</font>  : Set the check mark.
+  <font color="#924B72">#PB_CheckBox_Unchecked</font>: Remove the check mark.
+  <font color="#924B72">#PB_CheckBox_Inbetween</font>: Set the &quot;in between&quot; state. (Only for <font color="#924B72">#PB_CheckBox_ThreeState</font> checkboxes)
+</font></pre>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a>: change the currently selected item. 
+<br>
+- <a href="dategadget.html">DateGadget()</a>: set the currently displayed date/time. If <font color="#924B72">#PB_Date_CheckBox</font> was used, set 'State' to 0 to uncheck the checkbox. 
+<br>
+- <a href="imagegadget.html">ImageGadget()</a>: change the current image of the gadget. 
+<br>
+- <a href="ipaddressgadget.html">IPAddressGadget()</a>: change the current IP address. 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a>: change the currently selected item. If -1 is specified, all items will be deselected. 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a>: change the currently selected item. . If -1 is specified, it will remove the selection. 
+<br>
+- <a href="mdigadget.html">MDIGadget()</a>: Change the currently focused childwindow (by giving the related #Window number), or use one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MDI_Cascade</font>         : Cascade the child windows
+  <font color="#924B72">#PB_MDI_TileVertically</font>  : Tile the childwindows vertically
+  <font color="#924B72">#PB_MDI_TileHorizontally</font>: Tile the childwindows horizontally
+  <font color="#924B72">#PB_MDI_Next</font>            : Give focus to the next childwindow
+  <font color="#924B72">#PB_MDI_Previous</font>        : Give focus to the previous childwindow
+  <font color="#924B72">#PB_MDI_Arrange</font>         : Arrange the iconic (minimized) windows
+</font></pre>
+- <a href="optiongadget.html">OptionGadget()</a>: 1 to activate it, 0 otherwise. 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a>: change the current panel. 
+<br>
+- <a href="progressbargadget.html">ProgressBarGadget()</a>: change progress bar value. A value of <font color="#924B72">#PB_ProgressBar_Unknown</font> can be used 
+to indicate that the progress is unknown. 
+<br>
+- <a href="scrollbargadget.html">ScrollBarGadget()</a>: change the current slider position. 
+<br>
+- <a href="shortcutgadget.html">ShortcutGadget()</a>: Change the current shortcut. 
+<br>
+- <a href="spingadget.html">SpinGadget()</a>: change the current value. 
+<br>
+- <a href="splittergadget.html">SplitterGadget()</a>: change the current splitter position, in pixels. 
+<br>
+- <a href="trackbargadget.html">TrackBarGadget()</a>: change the current cursor position. 
+<br>
+- <a href="treegadget.html">TreeGadget()</a>: change the currently selected item, -1 selects no item. 
+<br>
+- <a href="webgadget.html">WebGadget()</a>: perform some action on the gadget. See WebGadget for further descriptions. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setgadgetitemtext.html>SetGadgetItemText()</a> - <a href=index.html>Gadget Index</a> - <a href=setgadgettext.html>SetGadgetText()</a> -><br><br>
+
+</body></html>

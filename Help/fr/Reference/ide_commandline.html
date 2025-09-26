@@ -1,0 +1,75 @@
+<html><head><title>Commutateurs de la ligne de commande</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Commutateurs de la ligne de commande</font></b></p>
+
+L'IDE de PureBasic permet de modifier les chemins et les fichiers 
+utilisés lors de son lancement. Cela permet de créer plusieurs raccourcis 
+qui vont lancer l'IDE avec une configuration particulière pour chaque 
+utilisateur, ou pour chaque projet. 
+
+<br>
+<br>
+
+Il existe également des options pour la compilation des projets 
+PureBasic directement en ligne de commande. 
+Construire un projet à partir de la ligne de commande comporte 
+les mêmes actions, comme le choix de la 'Cible' ou &quot;Créer toutes 
+les cibles&quot; du menu <a href="../reference/ide_compiler.html">Compilateur</a>. 
+
+<br>
+<br>
+
+
+Options générales: 
+<pre><font face="Courier New, Courier, mono" size="2">  /VERSION                 affiche la version de l'IDE
+  /HELP ou /?              affiche une description des arguments de la ligne de commande
+</font></pre>
+
+<pre><font face="Courier New, Courier, mono" size="2">  /P &lt;fichier Préférences&gt;             charge (et enregistre) la configuration à partir du fichier spécifié.
+  /T &lt;fichier Modèle&gt;                  charge (et enregistre) les modèles de code à partir du fichier spécifié.
+  /A &lt;fichier outils&gt;                  charge (et enregistre) la configuration des outils externes à partir du fichier spécifié.
+  /S &lt;Chemin Source&gt;                   change l'option &quot;Répertoire principal&quot; des préférences.
+  /E &lt;Chemin Explorateur&gt;              démarre l'outil 'Explorateur' avec le chemin spécifié.
+  /L &lt;Numéro ligne&gt;                    déplace le curseur à la ligne indiquée (seulement dans le dernier fichier chargé).
+  /H &lt;Base de données de l'Historique&gt; le fichier à utiliser pour la base de données de l'historique de la session.
+  /NOEXT                               désactive l'association automatique des fichiers '.pb' dans la base de registre.
+  /LOCAL                               place tous les fichiers préférences dans le répertoire de PureBasic au lieu du répertoire personnel de l'utilisateur. 
+  /PORTABLE                            combinaison de /LOCAL et de /NOEXT 
+</font></pre>
+
+Options pour compiler les projets: 
+<pre><font face="Courier New, Courier, mono" size="2">  /BUILD &lt;file&gt;            spécifie le fichier de projet à construire
+  /TARGET &lt;target&gt;         spécifie la cible à construire (la valeur par défaut est de construire toutes les cibles)
+  /QUIET                   cache tous les messages lors de la construction sauf les erreurs
+  /READONLY                ne met pas à jour le fichier de projet après la compilation (ni nouvelle date d'accès et ni nouveaux compteurs de construction )
+</font></pre>
+
+Par défaut, les fichiers paramètres utilisés 
+avec /P /T et /A se trouvent dans le répertoire 
+%APPDATA%\PureBasic\. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  Le paramètre /NOEXT est particulièrement utile lorque plusieurs versions de PureBasic 
+  cohabitent sur un même système (pour tester les versions bêta par exemple). Ainsi les 
+  fichiers .pb seront toujours associés à la même version de PureBasic.
+<br>
+<br>
+  Le paramètre /PORTABLE peut être utilisé afin de garder l'ensemble de la configuration 
+  dans le répertoire local pour copier facilement PureBasic sur différents ordinateurs 
+  (ou le faire fonctionner depuis une clé USB par exemple).
+</font></pre>
+
+Exemple: 
+<pre><font face="Courier New, Courier, mono" size="2">  PureBasic.exe Example.pb /PORTABLE
+</font></pre>
+
+
+
+Il est aussi possible d'ouvrir des fichiers en ligne de commande, 
+par exemple la commande: PureBasic.exe Exemple.pb, ouvrira le 
+fichier Exemple.pb dans l'éditeur de PureBasic. 
+Il est même possible de spécifier un masque en entrée, par exemple 
+&quot;*.pb&quot; chargera tous les fichiers sources du répertoire. 
+
+
+
+</font></body></html>

@@ -1,0 +1,48 @@
+<html><head><title>SysTray.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - SysTray example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; Note: on some Linux distributions (like Ubuntu), the systray icons can be hidden by default. For more information
+</font><font color="#006666">; see this link: http://ubuntugenius.wordpress.com/2011/06/25/ubuntu-11-04-fix-show-all-iconsindicators-in-unity-panels-notification-area/
+</font><font color="#006666">;
+</font>
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 150, 300, 100, &quot;PureBasic - SysTray Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+    <font color="#006666">; .ico format is available only on Windows
+</font>    IconName$ = <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/CdPlayer.ico&quot;
+  <b><font color="#006666">CompilerElse</font></b>
+<font color="#006666">    UsePNGImageDecoder</font>()
+    IconName$ = <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/world.png&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+<font color="#006666">  AddSysTrayIcon</font>(1,<font color="#006666"> WindowID</font>(0),<font color="#006666"> LoadImage</font>(0, IconName$))
+<font color="#006666">  AddSysTrayIcon</font>(2,<font color="#006666"> WindowID</font>(0),<font color="#006666"> LoadImage</font>(1, IconName$))
+<font color="#006666">  SysTrayIconToolTip</font>(1, &quot;Icon 1&quot;)
+<font color="#006666">  SysTrayIconToolTip</font>(2, &quot;Icon 2&quot;)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_SysTray</font>
+      <b><font color="#006666">If</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_LeftDoubleClick</font>
+<font color="#006666">        MessageRequester</font>(&quot;SysTray&quot;, &quot;Left DoubleClick on SysTrayIcon &quot;+<font color="#006666">Str</font>(<font color="#006666">EventGadget</font>()),0)
+        
+<font color="#006666">        ChangeSysTrayIcon </font>(<font color="#006666">EventGadget</font>(),<font color="#006666"> LoadImage</font>(0, IconName$))
+<font color="#006666">        SysTrayIconToolTip</font>(<font color="#006666">EventGadget</font>(), &quot;Changed !&quot;)
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

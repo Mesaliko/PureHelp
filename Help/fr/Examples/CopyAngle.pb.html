@@ -1,0 +1,66 @@
+<html><head><title>CopyAngle.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CopyAngle
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#CameraSpeed</font> = 1
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, RollZ
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; CopyAngle - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+
+<font color="#006666">LoadMesh</font>(0, &quot;robot.mesh&quot;)
+
+<font color="#006666">CreateMaterial</font>(1,<font color="#006666"> LoadTexture</font>(1, &quot;clouds.jpg&quot;))
+<font color="#006666">CreateMaterial</font>(2,<font color="#006666"> LoadTexture</font>(2, &quot;r2skin.jpg&quot;))
+
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(1), -30, 0, 0)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(2),  30, 0, 0)
+
+<font color="#006666">SkyBox</font>(&quot;stevecube.jpg&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 40, 150, <font color="#924B72">#PB_Absolute</font>)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()    
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>    
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  RotateEntity</font>(1, 0.7, 1, 0.5, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  RotateEntity</font>(2,<font color="#006666"> EntityPitch</font>(1,<font color="#924B72">#PB_Engine3D_Adjusted</font>),<font color="#006666"> EntityYaw</font>(1,<font color="#924B72">#PB_Engine3D_Adjusted</font>),<font color="#006666"> EntityRoll</font>(1,<font color="#924B72">#PB_Engine3D_Adjusted</font>))
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+</font></pre>
+</body></html>

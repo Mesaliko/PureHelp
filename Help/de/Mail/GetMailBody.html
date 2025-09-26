@@ -1,0 +1,43 @@
+<html><head><title>GetMailBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMailBody()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>GetMailBody</b></font>(#Mail)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den angegebenen Email-Inhalt (auch &quot;Email-Körper&quot;) zurück, welcher zuvor mit 
+<a href="setmailbody.html">SetMailBody()</a> festgelegt wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+Die zu verwendende Email. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Inhalt (Körper) als einen String zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    SetMailBody</font>(0, &quot;Dies ist der Hauptteil&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetMailBody</font>(0) <font color="#006666">; wird &quot;Dies ist der Hauptteil&quot; ausgeben</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getmailattribute.html>GetMailAttribute()</a> - <a href=index.html>Mail Inhaltsverzeichnis</a> - <a href=ismail.html>IsMail()</a> -><br><br>
+
+</body></html>

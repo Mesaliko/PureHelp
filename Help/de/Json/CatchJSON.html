@@ -1,0 +1,76 @@
+<html><head><title>CatchJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchJSON()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CatchJSON</b></font>(#JSON, *Puffer, Länge [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Analysiert (&quot;parst&quot;) JSON-Daten von einem Speicherpuffer. Vom Inhalt des Speicherpuffers 
+wird erwartet, dass er im UTF-8 Format kodiert ist. Die <a href="jsonvalue.html">JSONValue()</a> Funktion kann verwendet 
+werden, um nach dem Parsen auf den/die beinhalteten JSON-Wert(e) zuzugreifen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+Eine Nummer um das neue JSON-Objekt zu identifizieren. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Zahl automatisch 
+zu generieren. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Ein lesbarer <a href="../memory/index.html">Speicherplatz</a>. 
+
+</td></tr>
+<tr><td><i>Länge</i></td>
+<td> 
+Länge (in Bytes) des Speicherplatzes. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Wenn dieser auf <font color="#924B72">#PB_JSON_NoCase</font> gesetzt wird, dann werden die JSON-Daten ohne Beachtung 
+von Groß- und Kleinschreibung analysiert. Standardmäßig wird die Groß- und Kleinschreibung 
+beachtet. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn die JSON-Daten korrekt analysiert (&quot;geparst&quot;) wurden, 
+andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> als #JSON Parameter verwendet wurde, dann wird im 
+Erfolgsfall die generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Im Fall eines Fehlers können die <a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a> und <a href="jsonerrorposition.html">JSONErrorPosition()</a> 
+Funktionen verwendet werden, um weitere Informationen über den Fehler zu ermitteln. 
+<br>
+<br>
+Um JSON-Daten aus einem String zu parsen, kann stattdessen die <a href="parsejson.html">ParseJSON()</a> Funktion 
+verwendet werden. 
+<br>
+<br>
+JSON ist ein Datenformat, dass die Groß- und Kleinschreibung berücksichtigt. In manchen 
+Situationen jedoch, wie z.B. beim Deserialisieren von Strukturen mittels <a href="extractjsonstructure.html">ExtractJSONStructure()</a> 
+oder ähnlichen Befehlen, kann es nützlich sein, JSON-Objekte ohne Beachtung der Groß- und 
+Kleinschreibung zu nutzen. Das <font color="#924B72">#PB_JSON_NoCase</font> Flag zwingt alle Mitglieder-relevanten 
+Funktionen, die Schlüssel in diesem Objekt ohne Berücksichtigung von Groß- und Kleinschreibung 
+zu behandeln. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createjson.html">CreateJSON()</a>, <a href="parsejson.html">ParseJSON()</a>, <a href="loadjson.html">LoadJSON()</a>, <a href="jsonvalue.html">JSONValue()</a>, <a href="freejson.html">FreeJSON()</a>, 
+<a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a>, <a href="jsonerrorposition.html">JSONErrorPosition()</a>, 
+<a href="exportjson.html">ExportJSON()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addjsonmember.html>AddJSONMember()</a> - <a href=index.html>Json Inhaltsverzeichnis</a> - <a href=clearjsonelements.html>ClearJSONElements()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,77 @@
+<html><head><title>OpenSubMenu</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenSubMenu()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OpenSubMenu</b></font>(Text$ [, ImageID]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein leeres Unter-Menü im aktuellen Menü. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+Der Text für das Unter-Menü. 
+<br>
+<br>
+<b>Windows:</b> 
+<br>
+Im Parameter Text$ können Sie das spezielle '&amp;' Zeichen benutzen, um einen bestimmten 
+Buchstaben zu unterstreichen: 
+<br>
+&quot;&amp;Datei&quot; ergibt in Wirklichkeit: <u>D</u>atei 
+
+</td></tr>
+<tr><td><i>ImageID (optional)</i></td>
+<td> 
+Ein optionales Bild (Image), welches nahe des Unter-Menüs angezeigt werden soll. 
+Dieser Parameter hat nur einen Effekt, wenn das aktuelle Menü mittels <a href="createimagemenu.html">CreateImageMenu()</a> 
+oder <a href="createpopupimagemenu.html">CreatePopupImageMenu()</a> erstellt worden ist. 
+Dieser Wert kann mit der <a href="../image/imageid.html">ImageID()</a> Funktion ermittelt werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es ist nicht möglich, ein OpenSubMenu einfach umzubenennen - außer auf Windows, welches eine Menü-Nummer zurückgibt.<br>
+Beispiel: <br>
+SubMenu = OpenSubMenu (&quot;New&quot;)<br>
+SetMenuItemText (0, SubMenu, &quot;Open&quot;)<br>
+Auf Linux und macOS müssen Sie mit mehreren Menüs &quot;jonglieren&quot; oder es &quot;zerstören&quot; und neu erstellen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 220, 100, &quot;SubMenu Example&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      MenuTitle</font>(&quot;Project&quot;) 
+<font color="#006666">        MenuItem</font>(1, &quot;Open&quot;)  
+<font color="#006666">        MenuItem</font>(2, &quot;Close&quot;)
+<font color="#006666">        MenuBar</font>()
+<font color="#006666">        OpenSubMenu</font>(&quot;Recent files&quot;)       <font color="#006666">; beginne Erstellung des Unter-Menüs</font>
+<font color="#006666">          MenuItem</font>( 3, &quot;C:\Autoexec.bat&quot;)
+<font color="#006666">          MenuItem</font>( 4, &quot;D:\Test.txt&quot;)
+<font color="#006666">        CloseSubMenu</font>()                    <font color="#006666">; beende Unter-Menü</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/opensubmenu.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closesubmenu.html">CloseSubMenu()</a>, <a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="menubar.html">MenuBar()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=menutitle.html>MenuTitle()</a> - <a href=index.html>Menu Inhaltsverzeichnis</a> - <a href=setmenuitemstate.html>SetMenuItemState()</a> -><br><br>
+
+</body></html>

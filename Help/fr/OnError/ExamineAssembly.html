@@ -1,0 +1,78 @@
+<html><head><title>ExamineAssembly</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExamineAssembly()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ExamineAssembly</b></font>(*MemoireDébut [, *MemoireFin])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Désassemblage des instructions à partir d'une 
+adresse mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*MemoireDébut</i></td>
+<td width="90%"> 
+L'adresse en mémoire de la première 
+instruction à désassembler. 
+<br>
+<br>
+Le désassemblage se déroulera jusqu'à 
+ce que <a href="nextinstruction.html">NextInstruction()</a> ne soit plus 
+appelé ou si *MemoireFin est spécifié. 
+
+</td></tr>
+<tr><td><i>*MemoireFin (optionnel)</i></td>
+<td> 
+L'adresse en mémoire de la dernière 
+instruction à désassembler et 
+<a href="nextinstruction.html">NextInstruction()</a> reverra zéro. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le 
+désassemblage est possible, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<b>Important:</b> 
+Les commandes de désassemblage utilisent la bibliothèque 
+<a href="http://udis86.sourceforge.net/">Udis86 disassembler</a> 
+pour décoder les instructions. Elle est disponible 
+sous license BSD qui peut être consultée 
+<a href="../mainguide/license_udis86.html">ici</a>. 
+Si <a href="examineassembly.html">ExamineAssembly()</a> et ses autres commandes 
+relatives sont utilisées dans un programme, 
+le texte de licence ci-dessus devra être 
+inclus avec le logiciel. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DisableDebugger</font></b> <font color="#006666">; Désactive le Debugger</font>
+  
+  Code_Start:
+    <font color="#006666">; Placer le code à désassembler ici</font>
+    a = (<font color="#006666">Random</font>(100) * 5) + 2000
+  Code_End:
+  
+  Texte$ = &quot;Code désassemblé: &quot; +<font color="#006666"> Chr</font>(13)  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineAssembly</font>(?Code_Start, ?Code_End)
+    <b><font color="#006666">While</font></b> <font color="#006666">NextInstruction</font>()
+      Texte$ +<font color="#006666"> RSet</font>(<font color="#006666">Hex</font>(<font color="#006666">InstructionAddress</font>()),<font color="#006666"> SizeOf</font>(Integer)*2, &quot;0&quot;)
+      Texte$ + &quot; &quot; +<font color="#006666"> InstructionString</font>() +<font color="#006666"> Chr</font>(13)
+    <b><font color="#006666">Wend</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;Resultat&quot;, Texte$)
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=errortargetaddress.html>ErrorTargetAddress()</a> - <a href=index.html>OnError Index</a> - <a href=instructionaddress.html>InstructionAddress()</a> -><br><br>
+
+</body></html>

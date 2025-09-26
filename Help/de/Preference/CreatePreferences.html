@@ -1,0 +1,82 @@
+<html><head><title>CreatePreferences</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePreferences()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreatePreferences</b></font>(Dateiname$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue leere Preference-Datei. Existiert diese Datei bereits, so wird diese 
+gelöscht. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateiname$</i></td>
+<td width="90%"> 
+Der Dateiname der neuen Preference-Datei. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Preference_NoSpace</font>: es werden keine Leerzeichen rings um das Gleichheitszeichen (=) - zwischen
+                          Schlüssel und Wert - eingefügt,
+                          Dies kann nützlich beim Umgang mit externen Voreinstellungs-Dateien
+                          sein, welche kein Leerzeichen rings um das Leerzeichen akzeptieren.
+  <font color="#924B72">#PB_Preference_GroupSeparator</font>: fügt eine leere Zeile zwischen den Gruppen ein, um die
+                                 Lesbarkeit der Datei zu erhöhen.
+  <font color="#924B72">#PB_Preference_NoBOM</font>         : Beim Schreiben der Datei wird kein UTF-8-BOM hinzugefügt. Die Datei
+                                 wird trotzdem mit der UTF-8-Kodierung geschrieben.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn die Datei erfolgreich erstellt wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Sobald die Datei erfolgreich erstellt wurde, können Befehle zum Schreiben von Daten 
+wie <a href="writepreferencestring.html">WritePreferenceString()</a> genutzt werden. Wenn Werte in die Preference-Datei geschrieben 
+wurden, ist es möglich, diese mit Funktionen wie <a href="readpreferencestring.html">ReadPreferenceString()</a> wieder einzulesen. 
+<br>
+<br>
+Zum Entfernen eines Schlüssels oder einer Gruppe gibt es die Befehle 
+<a href="removepreferencekey.html">RemovePreferenceKey()</a> und <a href="removepreferencegroup.html">RemovePreferenceGroup()</a>. 
+Zum Erstellen oder Ändern einer Gruppe verwenden Sie <a href="preferencegroup.html">PreferenceGroup()</a>. 
+<br>
+<br>
+Sobald alle Schreib-Operationen erfolgt sind, muss <a href="closepreferences.html">ClosePreferences()</a> aufgerufen werden, 
+um die Einstellungen tatsächlich auf Disk zu speichern. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Erstellt eine Preference-Datei namens Setup.ini</font>
+<font color="#006666">  CreatePreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Setup.ini&quot;)
+  
+  <font color="#006666">; Erstellt eine Gruppe namens &quot;Window&quot;</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+<font color="#006666">    WritePreferenceLong</font>(&quot;X&quot;, 10)      <font color="#006666">; X = 10</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;Y&quot;, 10)      <font color="#006666">; Y = 10</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;W&quot;, 800)     <font color="#006666">; W = 800</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;H&quot;, 600)     <font color="#006666">; H = 600</font>
+<font color="#006666">    WritePreferenceFloat</font>(&quot;%&quot;, 20)     <font color="#006666">; % = 20.000000</font>
+<font color="#006666">    WritePreferenceString</font>(&quot;Title&quot;, &quot;PureNote&quot;) <font color="#006666">; Title = &quot;PureNote&quot;</font>
+  
+  <font color="#006666">; Schließt die Preference-Datei</font>
+<font color="#006666">  ClosePreferences</font>()
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closepreferences.html">ClosePreferences()</a>, <a href="../process/programparameter.html">ProgramParameter()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=closepreferences.html>ClosePreferences()</a> - <a href=index.html>Preference Inhaltsverzeichnis</a> - <a href=examinepreferencegroups.html>ExaminePreferenceGroups()</a> -><br><br>
+
+</body></html>

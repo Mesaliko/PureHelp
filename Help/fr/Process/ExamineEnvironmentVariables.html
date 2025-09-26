@@ -1,0 +1,51 @@
+<html><head><title>ExamineEnvironmentVariables</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExamineEnvironmentVariables()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ExamineEnvironmentVariables</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise l'énumération des variables 
+d'environnement disponibles. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les commandes <a href="nextenvironmentvariable.html">NextEnvironmentVariable()</a>, 
+<a href="environmentvariablename.html">EnvironmentVariableName()</a> 
+et <a href="environmentvariablevalue.html">EnvironmentVariableValue()</a> sont 
+disponibles pour récupérer les informations 
+concernant chaque variable d'environnement. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; énumère toutes les variables d'environnement disponibles pour le programme</font>
+  <font color="#006666">;</font>
+<font color="#006666">  OpenConsole</font>()
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineEnvironmentVariables</font>()
+    <b><font color="#006666">While</font></b> <font color="#006666">NextEnvironmentVariable</font>()
+<font color="#006666">      PrintN</font>(<font color="#006666">EnvironmentVariableName</font>() + &quot; = &quot; +<font color="#006666"> EnvironmentVariableValue</font>())
+    <b><font color="#006666">Wend</font></b>
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  PrintN</font>(&quot;&quot;)
+<font color="#006666">  PrintN</font>(&quot;Appuyez sur [Entree] pour quitter.&quot;)
+<font color="#006666">  Input</font>()
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="nextenvironmentvariable.html">NextEnvironmentVariable()</a>, <a href="environmentvariablename.html">EnvironmentVariableName()</a>, <a href="environmentvariablevalue.html">EnvironmentVariableValue()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=environmentvariablevalue.html>EnvironmentVariableValue()</a> - <a href=index.html>Process Index</a> - <a href=getenvironmentvariable.html>GetEnvironmentVariable()</a> -><br><br>
+
+</body></html>

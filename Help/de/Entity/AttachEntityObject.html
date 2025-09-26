@@ -1,0 +1,74 @@
+<html><head><title>AttachEntityObject</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AttachEntityObject()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AttachEntityObject</b></font>(#Entity, Bone$, ObjektID [, x, y, z, Nick, Roll, Gier])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt ein existierendes Objekt zu einem #Entity-Knochen (englisch &quot;bone&quot;) hinzu. 
+Ein Objekt kann vom Entity-Knochen mittels <a href="detachentityobject.html">DetachEntityObject()</a> entfernt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Das zu verwendende Entity. 
+
+</td></tr>
+<tr><td><i>Bone$</i></td>
+<td> 
+Der Knochen-Name (&quot;bone&quot;) im OGRE-Mesh, oder wie bei <a href="../skeleton/createbone.html">CreateBone()</a> angegeben. Bleibt der Knochen-Name leer, 
+dann wird das Objekt nicht zu einem Knochen sondern direkt zum Entity-Objekt hinzugefügt. 
+
+</td></tr>
+<tr><td><i>ObjektID</i></td>
+<td> 
+Das hinzuzufügende Objekt. Dies kann eines der folgenden Typen sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  - Entity : verwenden Sie <a href="entityid.html">EntityID()</a> als 'ObjektID'.
+  - Camera : verwenden Sie <a href="../camera/cameraid.html">CameraID()</a> als 'ObjektID'.
+  - Light  : verwenden Sie <a href="../light/lightid.html">LightID()</a> als 'ObjektID'.
+  - BillboardGroup : verwenden Sie <a href="../billboard/billboardgroupid.html">BillboardGroupID()</a> als 'ObjektID'.
+  - ParticleEmitter: verwenden Sie <a href="../particle/particleemitterid.html">ParticleEmitterID()</a> als 'ObjektID'.
+  - Node   : verwenden Sie <a href="../node/nodeid.html">NodeID()</a> als 'ObjektID'.
+  - Text3D : verwenden Sie <a href="../text3d/text3did.html">Text3DID()</a> als 'ObjektID'.
+</font></pre>
+
+</td></tr>
+<tr><td><i>x, y, z (optional)</i></td>
+<td> 
+Die relative Offset-Position des hinzugefügten Objekts. 
+
+</td></tr>
+<tr><td><i>Pitch (optional)</i></td>
+<td> 
+Der auf das hinzugefügte Objekt anzuwendende 'Nick'-Wert (englisch &quot;Pitch&quot;). 
+
+</td></tr>
+<tr><td><i>Roll (optional)</i></td>
+<td> 
+Der auf das hinzugefügte Objekt anzuwendende 'Roll'-Wert. 
+
+</td></tr>
+<tr><td><i>Yaw (optional)</i></td>
+<td> 
+Der auf das hinzugefügte Objekt anzuwendende 'Gier'-Wert (englisch &quot;Yaw&quot;). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="detachentityobject.html">DetachEntityObject()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=applyentitytorqueimpulse.html>ApplyEntityTorqueImpulse()</a> - <a href=index.html>Entity Inhaltsverzeichnis</a> - <a href=copyentity.html>CopyEntity()</a> -><br><br>
+
+</body></html>

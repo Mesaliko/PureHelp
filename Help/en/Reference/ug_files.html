@@ -1,0 +1,126 @@
+<html><head><title>UserGuide - Reading and writing files</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Reading and writing files</font></b></p>
+
+This example will write 100 random records each containing a <a href="../reference/variables.html">byte</a>, 
+a <a href="../reference/variables.html">floating-point number</a>, a <a href="../reference/variables.html">long integer</a> 
+and a <a href="../reference/variables.html">string</a>. It then reads all the records back and displays them 
+in the <a href="../reference/ide_debugger.html">debug window</a>. 
+<br>
+<br>
+It demonstrates the <a href="../filesystem/gettemporarydirectory.html">GetTemporaryDirectory()</a>, <a href="../file/createfile.html">CreateFile()</a>, <a href="../file/openfile.html">OpenFile()</a>, <a href="../file/eof.html">Eof()</a> and a number of 
+<a href="../file/index.html">Read and Write</a> data instructions too. 
+<br>
+<br>
+It works fine as far as it goes, but has a drawback. As the string value has a variable length - 
+you can't randomly access the records because you can't predict where each new record will 
+start in the file. They must be all be read back in the same sequence as they were written. 
+This isn't a problem with the small number of records created here but this could be an 
+inconvenience with a larger file. PureBasic offers a way to handle this situation too - but 
+an example would be too complex for this topic. See the <a href="../database/index.html">Database</a> 
+sections of the help-file or reference manual to see how it could be done. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnableExplicit</font></b>
+  <font color="#006666">; Define the constants:</font>
+  <font color="#924B72">#MAXBYTE</font> = 255
+  <font color="#924B72">#MAXLONG</font> = 2147483647
+  
+  <font color="#006666">; Define some variables.</font>
+  <b><font color="#006666">Define</font></b>.f Float
+  <b><font color="#006666">Define</font></b>.i Count, File
+  <b><font color="#006666">Define</font></b>.s Folder, FileName, String
+  
+  <font color="#006666">; Create a temporary file name.</font>
+  Folder =<font color="#006666"> GetTemporaryDirectory</font>()
+  FileName = Folder + &quot;test.data&quot;
+  
+  <font color="#006666">; Create the temporary file.</font>
+  <font color="#006666">; If #PB_Any is used, CreateFile returns the file's number.  </font>
+  <font color="#006666">; Useful if you may have more than one file open simultaneously.</font>
+  File =<font color="#006666"> CreateFile</font>(<font color="#924B72">#PB_Any</font>, FileName)
+  
+  <b><font color="#006666">If</font></b> File
+    <font color="#006666">; If this was successful - write 100 random records.</font>
+    <b><font color="#006666">For</font></b> Count = 1 <b><font color="#006666">To</font></b> 100
+      
+      <font color="#006666">; Write a random byte (0 - 255).</font>
+<font color="#006666">      WriteByte</font>(File,<font color="#006666"> Random</font>(<font color="#924B72">#MAXBYTE</font>))
+      
+      <font color="#006666">; Create and write a random float.</font>
+      <font color="#006666">; This calculation is there to make the number have a floating-point component (probably).</font>
+      Float =<font color="#006666"> Random</font>(<font color="#924B72">#MAXLONG</font>) / ((<font color="#006666">Random</font>(7) + 2) * 5000)
+<font color="#006666">      WriteFloat</font>(File, Float)
+      
+      <font color="#006666">; Write a random long.</font>
+<font color="#006666">      WriteLong</font>(File,<font color="#006666"> Random</font>(<font color="#924B72">#MAXLONG</font>))
+      
+      <font color="#006666">; Create and write a random string in Unicode format.</font>
+      <font color="#006666">; Note the use of WriteStringN to delimit the string with an end of line marker.</font>
+      String = &quot;String &quot; +<font color="#006666"> StrU</font>(<font color="#006666">Random</font>(<font color="#924B72">#MAXLONG</font>))
+<font color="#006666">      WriteStringN</font>(File, String, <font color="#924B72">#PB_Unicode</font>)
+      
+    <b><font color="#006666">Next</font></b> Count
+    
+    <font color="#006666">; Close the file.</font>
+<font color="#006666">    CloseFile</font>(File)
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; If this was unsuccessful.</font>
+    <b><font color="#006666">Debug</font></b> &quot;Could not create the file: &quot; + FileName 
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Open the file for reading this time.</font>
+  File =<font color="#006666"> ReadFile</font>(<font color="#924B72">#PB_Any</font>, FileName)
+  
+  <b><font color="#006666">If</font></b> File
+    <font color="#006666">; If this was successful - read and display records from the file.</font>
+    
+    <font color="#006666">; Reset the counter.</font>
+    Count = 1
+    
+    <font color="#006666">; Loop until the 'end of file' is reached.</font>
+    <font color="#006666">; This will read all of the records regardless of how many there are.</font>
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(File) = 0
+      
+      <font color="#006666">; Print a header line.</font>
+      <b><font color="#006666">Debug</font></b> &quot;------------------------------------------------------------------------------------------------&quot;
+      
+      <b><font color="#006666">Debug</font></b> &quot;[&quot; +<font color="#006666"> StrU</font>(Count) + &quot;]&quot;
+      Count + 1
+      <font color="#006666">; Read a byte value and print it.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrU</font>(<font color="#006666">ReadByte</font>(File), <font color="#924B72">#PB_Byte</font>)
+      
+      <font color="#006666">; Read a float value.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrF</font>(<font color="#006666">ReadFloat</font>(File))
+      
+      <font color="#006666">; Read a long value.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">StrU</font>(<font color="#006666">ReadLong</font>(File), <font color="#924B72">#PB_Long</font>)
+      
+      <font color="#006666">; Read a string value.</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ReadString</font>(File, <font color="#924B72">#PB_Unicode</font>)
+      
+    <b><font color="#006666">Wend</font></b>
+    
+    <font color="#006666">; Print the trailing line.</font>
+    <b><font color="#006666">Debug</font></b> &quot;------------------------------------------------------------------------------------------------&quot;
+    
+    <font color="#006666">; Close the file.</font>
+<font color="#006666">    CloseFile</font>(File)
+    
+    <font color="#006666">; Tidy up.</font>
+<font color="#006666">    DeleteFile</font>(FileName)
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; If this was unsuccessful.</font>
+    <b><font color="#006666">Debug</font></b> &quot;Could not open the file: &quot; + FileName
+    
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_directives.html">< Previous: Compiler directives</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_memory.html">Next: Memory access ></a> 
+</blockquote>
+</font></body></html>

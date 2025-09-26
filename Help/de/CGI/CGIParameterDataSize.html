@@ -1,0 +1,71 @@
+<html><head><title>CGIParameterDataSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CGIParameterDataSize()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CGIParameterDataSize</b></font>(Name$ [, Index])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die Größe der angegebenen Parameter-Daten zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Name$</i></td>
+<td width="90%"> 
+Der Name des Parameters, von dem die Daten ermittelt werden sollen. Der Parameter-Name 
+beachtet die Groß-/Kleinschreibung (&quot;case-sensitive&quot;). 
+<a href="cgiparametername.html">CGIParameterName()</a> kann verwendet werden, um den Namen des angegebenen Parameters 
+zu ermitteln. Um die Anzahl der verfügbaren Parameter zu ermitteln, verwenden Sie 
+<a href="countcgiparameters.html">CountCGIParameters()</a>. 
+
+</td></tr>
+<tr><td><i>Index (optional)</i></td>
+<td> 
+Der Index des Parameters, von dem die Daten ermittelt werden sollen. Der erste Index-Wert 
+beginnt bei 0. Wenn angegeben, dann wird der Wert des 'Name$' Parameters ignoriert 
+(außer wenn auf <font color="#924B72">#PB_Ignore</font> gesetzt). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Datengröße (in Bytes) des angegebenen Parameters zurück. 
+<a href="cgiparameterdata.html">CGIParameterData()</a> kann verwendet werden, um die Adresse des Speicherpuffers vom Parameter 
+zu ermitteln. Der Parameter-Typ muss <font color="#924B72">#PB_CGI_File</font> lauten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Schreibt die Header, um den Browser über das Inhaltsformat zu informieren</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - parameters&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;NbParameters: &quot; +<font color="#006666"> CountCGIParameters</font>() + &quot;&lt;br&gt;&lt;br&gt;&quot;)
+  
+  <font color="#006666">; Auflisten aller Parameter und Anzeigen ihres Namens</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> <font color="#006666">CountCGIParameters</font>()-1
+    <b><font color="#006666">If</font></b> <font color="#006666">CGIParameterType</font>(&quot;&quot;, k) = <font color="#924B72">#PB_CGI_File</font>
+<font color="#006666">      WriteCGIString</font>(&quot;[File] &quot;+<font color="#006666">CGIParameterName</font>(k)+&quot; (filename: '&quot;+<font color="#006666">CGIParameterValue</font>(&quot;&quot;, k) +
+                                                   &quot;' - size: &quot; +<font color="#006666"> CGIParameterDataSize</font>(&quot;&quot;, k) + 
+                                                   &quot; bytes - *buffer: &quot; +<font color="#006666"> CGIParameterData</font>(&quot;&quot;, k) + &quot;)&lt;br&gt;&quot;)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="cgiparametername.html">CGIParameterName()</a>, <a href="cgiparametervalue.html">CGIParameterValue()</a>, <a href="cgiparametertype.html">CGIParameterType()</a>, <a href="cgiparameterdata.html">CGIParameterData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=cgiparameterdata.html>CGIParameterData()</a> - <a href=index.html>CGI Inhaltsverzeichnis</a> - <a href=cgiparametername.html>CGIParameterName()</a> -><br><br>
+
+</body></html>

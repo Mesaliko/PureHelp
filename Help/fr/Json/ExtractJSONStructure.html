@@ -1,0 +1,122 @@
+<html><head><title>ExtractJSONStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractJSONStructure()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ExtractJSONStructure</b></font>(JSONValeur, *Memoire, Structure [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait les membres de la valeur JSON de 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Object</font> 
+dans de la structure spécifiée, en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+<br>
+<br>
+La valeur doit être de type <font color="#924B72">#PB_JSON_Object</font>. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+L'adresse de la mémoire de la structure à remplir. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le type de la structure à remplir. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Avec <font color="#924B72">#PB_JSON_NoClear</font>, la structure ne sera pas effacée avant l'extraction des données 
+JSON: Si les données JSON ne spécifient pas de champ de structure, la valeur du champ 
+actuel sera conservée.<br>
+Sans <font color="#924B72">#PB_JSON_NoClear</font>, la structure entière sera effacée avant l'extraction des données 
+à partir de JSON. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La structure sera vidée de tout contenu 
+précédent avant d'extraire les valeurs de 
+JSON à moins que <font color="#924B72">#PB_JSON_NoClear</font> soit défini. 
+<br>
+<br>
+L'extraction est réalisée de manière 
+récursive si la structure contient d'autres 
+structures, des tableaux, des listes ou des 
+maps.<br>
+Si la valeur JSON contient des membres qui 
+n'ont pas le bon type pour correspondre à 
+un membre de la structure, ils seront 
+ignorés et l'élément de structure 
+correspondante est laissé vide. 
+<br>
+<br>
+Tous les caractères '*' ou '$' sont 
+supprimés des noms des membres de la 
+structure avant de les comparer aux 
+membres de l'objet JSON. Ainsi, une clé 
+de membre ne doit pas inclure ces 
+caractères. 
+<br>
+<br>
+La comparaison des clés de membre avec les 
+noms des membres de la structure est 
+réalisée de façon sensible à la casse. Si 
+les données #JSON ont été créées ou 
+parcourues avec l'option <font color="#924B72">#PB_JSON_NoCase</font>, 
+la comparaison est effectuée suivant la 
+casse. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Livres</font>.s()
+  <b><font color="#006666">EndStructure</font></b>
+
+  Donnees$ = &quot;{&quot; +<font color="#006666"> Chr</font>(34) + &quot;Nom&quot; +<font color="#006666"> Chr</font>(34) + &quot;: &quot; +<font color="#006666"> Chr</font>(34) + &quot;Jean Dupond&quot; +<font color="#006666"> Chr</font>(34) + &quot;, &quot; + 
+<font color="#006666">                   Chr</font>(34) + &quot;Age&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 42, &quot; + 
+<font color="#006666">                   Chr</font>(34) + &quot;Livres&quot; +<font color="#006666"> Chr</font>(34) + &quot;: [&quot; +
+<font color="#006666">                   Chr</font>(34) + &quot;Investir pour les nuls&quot; +<font color="#006666"> Chr</font>(34) + &quot;, &quot; + 
+<font color="#006666">                   Chr</font>(34) + &quot;Dépenser pour les nuls ;)&quot; +<font color="#006666"> Chr</font>(34) + &quot;] }&quot;
+                           
+<font color="#006666">  ParseJSON</font>(0, Donnees$)
+<font color="#006666">  ExtractJSONStructure</font>(<font color="#006666">JSONValue</font>(0), @P.Personne, Personne)
+  
+  <b><font color="#006666">Debug</font></b> P\Nom$
+  <b><font color="#006666">Debug</font></b> P\Age
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ListSize</font>(P\<font color="#006666">Livres</font>())
+  
+  <font color="#006666">; Résultat : Jean Dupond</font>
+  <font color="#006666">;            42</font>
+  <font color="#006666">;            2</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="extractjsonarray.html">ExtractJSONArray()</a>, <a href="extractjsonlist.html">ExtractJSONList()</a>, 
+<a href="extractjsonmap.html">ExtractJSONMap()</a>, 
+<a href="insertjsonarray.html">InsertJSONArray()</a>, <a href="insertjsonlist.html">InsertJSONList()</a>, 
+<a href="insertjsonmap.html">InsertJSONMap()</a>, <a href="insertjsonstructure.html">InsertJSONStructure()</a>, 
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=extractjsonmap.html>ExtractJSONMap()</a> - <a href=index.html>Json Index</a> - <a href=freejson.html>FreeJSON()</a> -><br><br>
+
+</body></html>

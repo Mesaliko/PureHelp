@@ -1,0 +1,103 @@
+<html><head><title>TrackBarGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TrackBarGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>TrackBarGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Minimum, Maximum [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget Curseur dans la GadgetList 
+en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+La plage 'Minimum-Maximum' doit être 
+comprise entre 0 et 10 000. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_TrackBar_Ticks</font>   : Affiche un trait de marquage à chaque valeur.
+  <font color="#924B72">#PB_TrackBar_Vertical</font>: Le gadget est vertical.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les commandes suivantes peuvent être utilisées pour contrôler le gadget:
+  - <a href="getgadgetstate.html">GetGadgetState()</a>: Renvoie la position actuelle du curseur (Valeur comprise entre 'Minimum' et 'Maximum')
+  - <a href="setgadgetstate.html">SetGadgetState()</a>: Change la position actuelle du curseur.
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec l'un des attributs suivants:
+    <font color="#924B72">#PB_TrackBar_Minimum</font>: Renvoie la valeur minimale.
+    <font color="#924B72">#PB_TrackBar_Maximum</font>: Renvoie la valeur maximale. 
+
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a> avec un des attributs suivants:
+    <font color="#924B72">#PB_TrackBar_Minimum</font>: Change la valeur minimale.
+    <font color="#924B72">#PB_TrackBar_Maximum</font>: Change la valeur maximale. 
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 320, 200, &quot;TrackBarGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget    </font>(3, 10,  20, 250, 20,&quot;Barre à curseur standard&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    TrackBarGadget</font>(0, 10,  40, 250, 20, 0, 10000)
+<font color="#006666">    SetGadgetState</font>(0, 5000)
+<font color="#006666">    TextGadget    </font>(4, 10, 100, 250, 20, &quot;Barre à curseur avec traits de marquage&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    TrackBarGadget</font>(1, 10, 120, 250, 20, 0, 30, <font color="#924B72">#PB_TrackBar_Ticks</font>)
+<font color="#006666">    SetGadgetState</font>(1, 3000)
+<font color="#006666">    TextGadget    </font>(5,  90, 180, 200, 20, &quot;Barre à curseur verticale&quot;, <font color="#924B72">#PB_Text_Right</font>)
+<font color="#006666">    TrackBarGadget</font>(2, 270, 10, 20, 170, 0, 10000, <font color="#924B72">#PB_TrackBar_Vertical</font>)
+<font color="#006666">    SetGadgetState</font>(2, 8000)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/trackbargadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=textgadget.html>TextGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=treegadget.html>TreeGadget()</a> -><br><br>
+
+</body></html>

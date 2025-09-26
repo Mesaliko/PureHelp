@@ -1,0 +1,83 @@
+<html><head><title>CreateLight</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateLight()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateLight</b></font>(#Lumiere, Couleur [, X.f, Y.f, Z.f [, Options]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle lumière. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Lumiere</i></td>
+<td width="90%"> 
+La lumière à utiliser. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>Couleur</i></td>
+<td> 
+Couleur de la nouvelle lumière. 
+<br>
+<br>
+<a href="../2ddrawing/rgb.html">RGB()</a> peut être utilisée pour obtenir 
+facilement la couleur désirée. 
+
+</td></tr>
+<tr><td><i>X.f, Y.f, Z.f (optionnel)</i></td>
+<td> 
+Position de la nouvelle lumière. 
+<br>
+<br>
+La nouvelle lumière est créée par défaut 
+à la position 0.0,0.0,0.0. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Light_Point</font>         : Créer un point de lumière (Par défaut) (la lumière est émise dans toutes les directions).
+  <font color="#924B72">#PB_Light_Directional</font>   : Crée une lumière directionnelle.
+  <font color="#924B72">#PB_Light_Spot</font>          : Crée une lumière de type spot. 
+                            <a href="spotlightrange.html">SpotLightRange()</a> peut être utilisé pour modifier le comportement de la lumière.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si la lumière était déjà créée alors elle 
+est automatiquement supprimée et remplacée 
+par la nouvelle. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si <a href="../engine3d/worldshadows.html">WorldShadows()</a> est requis, il doit être appelé avant de créer des lumières. 
+
+</blockquote><p><b>Exemple:</b> :</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateLight</font>(0,<font color="#006666"> RGB</font>(255,0,0)) <font color="#006666">; Crée une lumière rouge</font>
+  
+<font color="#006666">  CreateLight</font>(1,<font color="#006666"> RGB</font>(0,255,0),  0, 100.7, 50) <font color="#006666">; Crée une lumière verte à la position (0, 100.7, 50)</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freelight.html">FreeLight()</a>, <a href="hidelight.html">HideLight()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copylight.html>CopyLight()</a> - <a href=index.html>Light Index</a> - <a href=disablelightshadow.html>DisableLightShadow()</a> -><br><br>
+
+</body></html>

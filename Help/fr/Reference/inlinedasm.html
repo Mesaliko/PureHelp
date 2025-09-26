@@ -1,0 +1,261 @@
+<html><head><title>L'assembleur en ligne x86</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">L'assembleur en ligne x86</font></b></p>
+
+L'utilisation de code assembleur en ligne (in line) ne se fait pas de la même façon avec le backend ASM et le backend C. 
+Avec le compilateur utilisant le backend ASM, PureBasic permet d'inclure toute commande 
+assembleur x86 (y compris les instructions MMX et FPU) directement dans le code source 
+comme dans un vrai source assembleur (pour les processeurs X86 et X64 seulement). 
+Vous pouvez également utiliser directement les <a href="../reference/variables.html">variables</a> ou 
+<a href="../reference/memory.html">pointeurs</a> avec les instructions assembleur et pouvez intégrer 
+plusieurs commandes assembleur sur une même ligne. 
+<br>
+<br>
+Sous Windows et Linux, PureBasic utilise <b>fasm</b> ( 
+<a href="http://flatassembler.net/">http://flatassembler.net</a>), 
+alors pour plus d'information à propos de la syntaxe, lire le guide fasm. <br>
+Sous OS X, PureBasic utilise <b>yasm</b> ( 
+<a href="http://yasm.tortall.net/">http://yasm.tortall.net/</a>), 
+alors pour plus d'information à propos de la syntaxe, lire le guide yasm. 
+<br>
+<br>
+Pour utiliser l'assembleur en ligne, utiliser 
+les directives du compilateur 
+<a href="../reference/compilerdirectives.html">EnableASM</a> 
+ou <a href="../reference/compilerdirectives.html">DisableASM</a>. 
+<br>
+<br>
+Il est possible d'activer la coloration syntaxique 
+ASM dans l'IDE avec &quot;Activer la coloration des 
+mots clés assembleur&quot; 
+<a href="../reference/ide_compiler.html">compiler option</a>. 
+<br>
+
+<p><b>Règles</b></p><blockquote>
+
+
+Vous devez respecter plusieurs règles précises 
+pour inclure de l'assembleur dans du code PureBasic: 
+<br>
+<br>
+- Les <a href="../reference/variables.html">variables</a> et les <a href="../reference/memory.html">pointeurs</a> 
+doivent être déclarés <b>préalablement</b> à leur utilisation dans un contexte assembleur. <br>
+- Concernant les étiquettes (labels): Les labels référencés en assembleur sont toujours en 
+minuscule. Par exemple, le label 'ETIquette:' sera transformé en 'l_etiquette' dans le code 
+assembleur.<br>
+Lorsque vous faites référence à un <a href="../reference/general_rules.html">label purebasic</a> dans 
+le corps du programme (en dehors des procedures et des modules) avec des fonctions 
+assembleurs, vous devez précéder son nom par un L minuscule et d'un caractère de 
+soulignement comme ceci <b>'l_'</b>. <br>
+Si le label est défini dans une <a href="../reference/procedures.html">procédure</a>, alors son 
+préfixe est <b>'ll_nomprocedure_'</b>, en minuscules (ll comme local label) mais il n'est 
+accessible qu'à l'intérieur de la procédure.<br>
+Pour accéder à un label dans un <a href="../reference/module.html">module</a> avec des fonctions 
+assembleurs, vous devez ajouter devant le label le préfixe <b>'nomdumodule.l_nomprocedure_'</b> écrit 
+tout en minuscule.<br>
+Et enfin un label défini dans une procédure elle-même dans un module s'écrira <b>'nomdumodule.ll_nomprocedure_'</b> 
+- Pour info, les listes commencent par 't_nomlist', les map par 'm_nommap' et les tableaux 
+par 'a_nomtableau' est toujours en minuscule. 
+
+<p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DeclareModule</font></b> MonModule
+    LabelDeclareModule: <font color="#006666">;Son nom assembleur est monmodule.l_labeldeclaremodule:</font>
+    <b><font color="#006666">Declare</font></b> <font color="#006666">Init</font>()
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <b><font color="#006666">Module</font></b> MonModule
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>() 
+      LabelModuleProcedure: <font color="#006666">; Son nom assembleur est monmodule.ll_init_labelmoduleprocedure: </font>
+      <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;  
+    <b><font color="#006666">EndProcedure</font></b>
+  
+    LabelModule1: <font color="#006666">;Son nom assembleur est monmodule.l_labelmodule1:</font>
+  <b><font color="#006666">EndModule</font></b>
+
+   <b><font color="#006666">Procedure</font></b> <font color="#006666">Test </font>(*Pointer, Variable)
+    TokiSTART:  <font color="#006666">;Son nom assembleur est ll_test_tokistart:</font>
+  
+    ! MOV dword [p.p_Pointer], 20
+    ! MOV dword [p.v_Variable], 30
+    <b><font color="#006666">Debug</font></b> *Pointer  <font color="#006666">;Son nom assembleur est p.p_Pointer</font>
+    <b><font color="#006666">Debug</font></b> Variable  <font color="#006666">;Son nom assembleur est p.v_Variable</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  VAR=1                       <font color="#006666">;Son nom assembleur est v_VAR</font>
+  *Pointt=<font color="#006666">AllocateMemory</font>(10)  <font color="#006666">;Son nom assembleur est p_Pointt</font>
+  
+  MonModule::<font color="#006666">Init</font>()
+<font color="#006666">  Test</font>(0,0) 
+  
+  Label1: <font color="#006666">;Son nom assembleur est l_label1:  </font>
+  !jmp l_labelend ; Une instruction en assembler doit suivre les règles ci-dessus. Ici c'est l_nomelabel
+  <font color="#006666">;...</font>
+  LabelEnd: <font color="#006666">;Son nom assembleur est l_labelend:</font>
+</font></pre>
+
+- Les erreurs dans une section asm ne sont pas reportées par PureBasic mais par Fasm. Vérifiez 
+votre code si une telle erreur survient. <br>
+- Avec l'assembleur en ligne activé, vous ne pouvez pas utiliser les mots clés ASM pour les 
+étiquettes (label). <br>
+- <b>Sur les processeurs x86, les registres volatiles sont: eax, ecx, edx, xmm0, xmm1, xmm2 et xmm3.</b> 
+Tous les autres doivent être préservés. <br>
+- <b>Sur les processeurs x64, les registres volatiles sont: rax, rcx, rdx, r8, r9, xmm0, xmm1, xmm2 et xmm3.</b> 
+Tous les autres doivent être préservés. 
+<br>
+- Windows: un fichier aide-ASM peut être téléchargé 
+<a href="http://www.purebasic.com/download/AsmHelp.zip"></a>
+ici. Si vous déplacez le fichier 'ASM.HLP' dans le dossier 'Help/' de PureBasic, vous aurez accès à 
+l'aide sur les mots clés assembleur en appuyant sur F1. 
+(Note: Ne fonctionne que si l'option 'assembleur en ligne' est activé). 
+<br>
+<br>
+Quand on utilise l'assembleur dans une 
+<a href="../reference/procedures.html">procédure</a>, 
+il est utile de connaître les points suivants: 
+<br>
+<br>
+- Pour renvoyer directement la valeur du 
+registre 'eax' (ou 'rax' sur x64) comme valeur 
+de retour, il suffit d'utiliser 
+<b><font color="#006666">ProcedureReturn</font></b>, sans paramètre. 
+Le contenu du registre 'eax' (ou 'rax' sur x64) 
+restera inchangé et sera utilisé comme valeur 
+de retour. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.l <font color="#006666">MonTest</font>()
+    !MOV eax, 45
+    <b><font color="#006666">ProcedureReturn</font></b>  <font color="#006666">; La valeur de retour sera 45</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MonTest</font>() 
+</font></pre>
+
+- Les variables locales en PureBasic sont directement 
+indexées par rapport au registre de la <b>pile</b> (ESP) 
+ce qui implique qu'un changement de la valeur de 
+ce registre par une instruction assembleur (tel 
+que PUSH, POP etc..) implique que la référence vers la variable 
+ne sera plus correcte. 
+<br>
+<br>
+- Il est possible de passer directement une ligne 
+complète à l'assembleur sans aucune modification 
+en utilisant le caractère <b>'!'</b> en début de ligne. 
+Ceci permet d'avoir un accès total aux fonctionnalités 
+de l'assembleur. Pour faciliter l'accès aux variables 
+locales, une notation a été mise en place: 
+<b>'p.v_NomVariable'</b> pour une variable standard et 
+<b>'p.p_NomPointeur'</b> pour un pointeur. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Test</font>(*Pointer, Variable)
+    ! MOV dword [p.p_Pointer], 20
+    ! MOV dword [p.v_Variable], 30
+    <b><font color="#006666">Debug</font></b> *Pointer
+    <b><font color="#006666">Debug</font></b> Variable
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  Test</font>(0, 0)
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/AsmInline.pb.html">AsmInline.pb</a>
+
+Particularités de l'assembleur en ligne avec le compilateur utilisant le backend C. 
+
+Il faut utiliser la syntaxe de gcc, voir <a href="https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html">ici</a>. 
+
+</blockquote><p><b>Exemple:</b> Pi</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">pi   <b><font color="#006666">Procedure</font></b>.d <font color="#006666">get_pi</font>()
+  
+  <b><font color="#006666">Define</font></b>.d pi
+  
+  !asm (
+  !    &quot;fldpi\n&quot;
+  !    &quot;fstpl   %[v_pi]\n&quot;
+  !    :[v_pi]&quot;=m&quot;(v_pi)::
+  !);
+  
+    <b><font color="#006666">ProcedureReturn</font></b> pi
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Define</font></b>.d n
+  n=<font color="#006666">get_pi</font>()
+  <b><font color="#006666">Debug</font></b> n
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> bswap</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">bswap</font>(v.l) 
+  <b><font color="#006666">Protected</font></b> ret.l 
+  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Backend</font> = <font color="#924B72">#PB_Backend_C</font> 
+    !&quot;.intel_syntax noprefix&quot;;
+    !&quot;mov eax, v_v&quot;;
+    !&quot;bswap eax&quot;; 
+    !&quot;mov v_ret, eax&quot;;
+  <b><font color="#006666">CompilerElse</font></b> 
+    !mov eax, [p.v_v]
+    !bswap eax 
+    !mov [p.v_ret],eax 
+  <b><font color="#006666">CompilerEndIf</font></b> 
+    <b><font color="#006666">ProcedureReturn</font></b> ret 
+  <b><font color="#006666">EndProcedure</font></b> 
+
+  x.i = $FF000000 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Hex</font>(x),8,&quot;0&quot;)
+  x =<font color="#006666"> bswap</font>(x) 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Hex</font>(x),8,&quot;0&quot;)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Fibonacci</p><blockquote>
+
+Procedure.q fib(ub.l, *f) 
+If (ub&lt;3) 
+ProcedureReturn 1 
+EndIf 
+;  !set_dpfpu(); 
+!asm ( 
+!    &quot;mov %[p_f], %%rax;&quot; 
+!    &quot;fldz;&quot; 
+!    &quot;fistl (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;fld1;&quot; 
+!    &quot;fistl (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;mov %[v_ub], %%ecx;&quot; 
+!    &quot;sub $2, %%ecx;&quot; 
+!    &quot;fib2:&quot; 
+!    &quot;fxch %%st(1);&quot; 
+!    &quot;fadd %%st(1),%%st(0);&quot; 
+!    &quot;fld %%st(0);&quot; 
+!    &quot;fistpq (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;dec %%ecx;&quot; 
+!    &quot;jg fib2;&quot; 
+!    &quot;fstp %%st(0);&quot; 
+!    &quot;fstp %%st(0);&quot; 
+!     :[p_f]&quot;=m&quot;(p_f) 
+!     :[v_ub]&quot;m&quot;(v_ub) 
+!     :&quot;rax&quot;,&quot;ecx&quot; 
+!); 
+ProcedureReturn 
+EndProcedure 
+
+Dim fibonacci.q(20) 
+n=20 
+fib(n+1, @fibonacci(0)) 
+For i.l=0 To n 
+Debug fibonacci(i) 
+Next 
+<pre><font face="Courier New, Courier, mono" size="2">
+</font></pre>
+
+<br><a href="../Examples/AsmInlineBackendC.pb.html">AsmInlineBackendC.pb</a>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,155 @@
+<html><head><title>CGIVariable</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CGIVariable()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>CGIVariable</b></font>(Name$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt den Inhalt der angegebenen CGI-Umgebungsvariable. Wenn das CGI geladen ist, werden viele 
+Informationen mittels Umgebungsvariablen (englisch &quot;environment variables&quot;) vom Web-Server zur 
+CGI-Applikation gesandt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Name$</i></td>
+<td width="90%"> 
+Der Name der zu ermittelnden Variablen. <br>
+Dies kann ein benutzerdefinierter Wert oder eine der folgenden vordefinierten Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_CGI_AuthType</font>          : die durch den Web-Browser verwendete Authentifizierungsmethode, 
+                              sofern eine solche verwendet wurde. 
+                              Diese wird nicht gesetzt, außer das Skript ist geschützt.
+       
+  <font color="#924B72">#PB_CGI_ContentLength</font>     : verwendet für Skripte, welche Formulardaten mit der POST-Methode empfangen.
+                              Diese Variable teilt die Byte-Länge des CGI Eingabe-Datenstrom mit. 
+                              Dies ist erforderlich, um die Daten aus der Standard-Eingabe 
+                              mit der POST-Methode zu lesen.
+        
+  <font color="#924B72">#PB_CGI_HeaderContentType</font> : teilt den Media-Typ der vom Anwender empfangenen Daten mit. Dies
+                              wird für Skripte verwendet, welche mit der POST-Methode aufgerufen werden.
+  <font color="#924B72">#PB_CGI_DocumentRoot</font>      : das Stammverzeichnis &quot;root path&quot; (Pfad zur 'home' HTML Seite für den Server).
+  <font color="#924B72">#PB_CGI_GatewayInterface</font>  : die zum Austausch der Daten zwischen Client und Server verwendete 
+                              Version der &quot;Common Gateway Interface (CGI)&quot; Spezifikation. 
+                              Dies ist in der Regel CGI/1.1 für den aktuellen Revisionsstand.
+  <font color="#924B72">#PB_CGI_PathInfo</font>          : zusätzliche Pfadinformationen am Ende der URL, die auf das 
+                              Server-seitige Skript-Programm zugegriffen hat.
+  <font color="#924B72">#PB_CGI_PathTranslated</font>    : eine übersetzte Version der PATH_INFO Variable, übersetzt vom 
+                              Webserver von virtuellen zu physischen Pfadinformationen.
+  <font color="#924B72">#PB_CGI_QueryString</font>       : dieser String enthält jegliche Informationen am Ende des Server-seitigen
+                              Skript-Pfades, die einem Fragezeichen folgen. Wird verwendet, um Daten
+                              zurückzugeben, wenn die GET-Methode von einem Formular verwendet wurde.
+                              Es gibt Längenbeschränkungen bezüglich des QUERY_STRING.
+       
+  <font color="#924B72">#PB_CGI_RemoteAddr</font>        : die IP-Adresse des Client-Computers.
+  <font color="#924B72">#PB_CGI_RemoteHost</font>        : der vollqualifizierte Domänenname des Client-Rechners, von dem die 
+                              HTTP-Anforderung kommt. Es kann sein, dass es nicht möglich ist, 
+                              diesen Namen zu bestimmen, da viele Client-Computer-Namen nicht
+                               im DNS-System aufgezeichnet werden.
+  <font color="#924B72">#PB_CGI_RemoteIdent</font>       : die Fähigkeit zur Verwendung dieser Variable ist auf Server begrenzt,
+                              die RFC 931 unterstützen. Diese Variable kann den Benutzernamen des 
+                              Client-Rechners enthalten - aber sie ist (wenn verfügbar) nur für Zwecke 
+                              der Protokollierung gedacht.
+  <font color="#924B72">#PB_CGI_RemotePort</font>        : die einen Port anfordernden Clients.
+  <font color="#924B72">#PB_CGI_RemoteUser</font>        : wenn das CGI-Skript geschützt war und der Anwender eingeloggt sein muss, 
+                              um auf das Skript zuzugreifen, wird dieser Wert den Login-Namen 
+                              des Anwenders beinhalten.
+  <font color="#924B72">#PB_CGI_RequestURI</font>        : der Pfad der vom Client angeforderten Datei.
+  <font color="#924B72">#PB_CGI_REquestMethod</font>     : beschreibt die durch den Browser verwendete Anfragemethode (Request), 
+                              welche in der Regel GET, POST oder HEAD ist.
+       
+  <font color="#924B72">#PB_CGI_ScriptName</font>        : der virtuelle Pfad des gerade ausgeführten CGI-Skriptes.
+  <font color="#924B72">#PB_CGI_ScriptFilename</font>    : der lokale Dateiname des geraden ausgeführten Skriptes.
+  <font color="#924B72">#PB_CGI_ServerAdmin</font>       : die Email-Adresse des Server-Administrators.
+  <font color="#924B72">#PB_CGI_ServerName</font>        : der Server-Hostname, die IP-Adresse oder der DNS-Aliasname - angezeigt 
+                              als selbst-referenzierende URL. Dies beinhaltet nicht die Protokoll-Kennung, 
+                              wie bspw.&quot;HTTP:&quot;, den Computernamen oder die Portnummer.
+  <font color="#924B72">#PB_CGI_ServerPort</font>        : die Portnummer, auf die HTTP-Anfragen und -Antworten gesendet werden.
+  <font color="#924B72">#PB_CGI_ServerProtocol</font>    : dieser Wert lautet in der Regel HTTP, welches das zwischen Client- 
+                              und Server-Computern verwendete Protokoll beschreibt.
+  <font color="#924B72">#PB_CGI_ServerSignature</font>   : Server-Informationen, die den Namen und die Version des Web-Servers 
+                              und den bedienten Port beinhalten.
+  <font color="#924B72">#PB_CGI_ServerSoftware</font>    : der Name und die Version des Web-Servers.
+       
+  <font color="#924B72">#PB_CGI_HttpAccept</font>        : die Mediendatentypen , die der Client-Browser akzeptieren kann. 
+                              Diese Datentypen werden durch Komma getrennt.
+  <font color="#924B72">#PB_CGI_HttpAcceptEncoding</font>: der Codierungs-Typ, welchen der Client-Browser akzeptiert.
+  <font color="#924B72">#PB_CGI_HttpAcceptLanguage</font>: die Sprache, welche der Client-Browser akzeptiert.
+  <font color="#924B72">#PB_CGI_HttpCookie</font>        : als Umgebungsvariable verwendet, welche die vom Browser mit 
+                              der Server-Domäne verknüpften Cookies beinhaltet.
+  <font color="#924B72">#PB_CGI_HttpForwarded</font>     : die weitergeleitete Seiten-URL.
+  <font color="#924B72">#PB_CGI_HttpHost</font>          : Hostname, von dem aus die HTTP-Anforderungen kommen.
+  <font color="#924B72">#PB_CGI_HttpPragma</font>        : HTTP Pragmas
+  <font color="#924B72">#PB_CGI_HttpReferer</font>       : die Seitenadresse, von der die HTTP-Anforderung stammt.
+  <font color="#924B72">#PB_CGI_HttpUserAgent</font>     : der Name des Client-Webbrowsers, der für die Anfrage (Request) verwendet wird.
+</font></pre>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Wert der angegebenen CGI-Umgebungsvariable zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Schreibt die Header, um den Browser über das Inhaltsformat zu informieren</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - variables&lt;/title&gt;&lt;body&gt;&quot;)  
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WriteCGIConstant</font>(Constant$)
+<font color="#006666">    WriteCGIString</font>(Constant$ + &quot;: &quot; +<font color="#006666"> CGIVariable</font>(Constant$)+&quot;&lt;br&gt;&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_AuthType</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ContentLength</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_DocumentRoot</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_GatewayInterface</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_PathInfo</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_PathTranslated</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_QueryString</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteAddr</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteHost</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteIdent</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemotePort</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RemoteUser</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RequestURI</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_RequestMethod</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ScriptName</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ScriptFilename</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerAdmin</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerName</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerPort</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerProtocol</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerSignature</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_ServerSoftware</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAccept</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAcceptEncoding</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpAcceptLanguage</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpCookie</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpForwarded</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpHost</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpPragma</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpReferer</font>)
+<font color="#006666">  WriteCGIConstant</font>(<font color="#924B72">#PB_CGI_HttpUserAgent</font>)
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="readcgi.html">ReadCGI()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=cgiparametervalue.html>CGIParameterValue()</a> - <a href=index.html>CGI Inhaltsverzeichnis</a> - <a href=countcgicookies.html>CountCGICookies()</a> -><br><br>
+
+
+</body></html>

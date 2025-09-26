@@ -1,0 +1,114 @@
+<html><head><title>Enumerations</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Enumerations</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Enumeration</font></b> [name] [&lt;constant&gt; [<b><font color="#006666">Step</font></b> &lt;constant&gt;]] 
+  <font color="#924B72">#Constant1</font>
+  <font color="#924B72">#Constant2</font> [= &lt;constant&gt;]
+  <font color="#924B72">#Constant3</font>
+  ...
+<b><font color="#006666">EndEnumeration</font></b>
+
+
+
+<b><font color="#006666">EnumerationBinary</font></b> [name] [&lt;constant&gt;] 
+  <font color="#924B72">#Constant1</font>
+  <font color="#924B72">#Constant2</font> [= &lt;constant&gt;]
+  <font color="#924B72">#Constant3</font>
+  ...
+<b><font color="#006666">EndEnumeration</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Enumerations</font></b> are very handy to declare a sequence of constants quickly without using fixed numbers. 
+The first constant found in the enumeration will get the number 0 and the next one will be 1 etc. 
+It's possible to change the first constant number and adjust the step for each new constant found 
+in the enumeration. If needed, the current constant number can be altered by affecting with '=' 
+the new number to the specified constant. As <b><font color="#006666">Enumeration</font></b>s only accept integer numbers, floats will be rounded to the nearest integer. <br>
+<br>
+A name can be set to identify an enumeration and allow to continue it later. It is useful to group objects altogether while 
+declaring them in different code place. <br>
+<br>
+For advanced user only: the reserved constant <font color="#924B72">#PB_Compiler_EnumerationValue</font> store the next value which will be used 
+in the enumeration. It can be useful to get the last enumeration value or to chain two enumerations. <br>
+<br>
+<b><font color="#006666">EnumerationBinary</font></b> can be used to create enumerations suitable for flags. The first item value is 1. 
+
+
+</blockquote><p><b>Example:</b> Simple enumeration</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; will be 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; will be 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; will be 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Enumeration with step</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b> 20 <b><font color="#006666">Step</font></b> 3
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; will be 20</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; will be 23</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; will be 26</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Enumeration with dynamic change</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font>      <font color="#006666">; will be 0</font>
+    <font color="#924B72">#GadgetText</font> = 15 <font color="#006666">; will be 15</font>
+    <font color="#924B72">#GadgetOK</font>        <font color="#006666">; will be 16</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Named enumeration</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b> Gadget
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; will be 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; will be 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; will be 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Enumeration</font></b> Window
+    <font color="#924B72">#FirstWindow</font>  <font color="#006666">; will be 0</font>
+    <font color="#924B72">#SecondWindow</font> <font color="#006666">; will be 1</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+
+  <b><font color="#006666">Enumeration</font></b> Gadget
+    <font color="#924B72">#GadgetCancel</font> <font color="#006666">; will be 3</font>
+    <font color="#924B72">#GadgetImage</font>  <font color="#006666">; will be 4</font>
+    <font color="#924B72">#GadgetSound</font>  <font color="#006666">; will be 5</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Getting next enumeration value</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetInfo</font> <font color="#006666">; will be 0</font>
+    <font color="#924B72">#GadgetText</font> <font color="#006666">; will be 1</font>
+    <font color="#924B72">#GadgetOK</font>   <font color="#006666">; will be 2</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Debug</font></b> &quot;Next enumeration value: &quot; + <font color="#924B72">#PB_Compiler_EnumerationValue</font> <font color="#006666">; will print 3</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Binary enumeration</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnumerationBinary</font></b>
+    <font color="#924B72">#Flags1</font> <font color="#006666">; will be 1</font>
+    <font color="#924B72">#Flags2</font> <font color="#006666">; will be 2</font>
+    <font color="#924B72">#Flags3</font> <font color="#006666">; will be 4</font>
+    <font color="#924B72">#Flags4</font> <font color="#006666">; will be 8</font>
+    <font color="#924B72">#Flags5</font> <font color="#006666">; will be 16</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+</font></pre>
+</blockquote>
+</font></body></html>

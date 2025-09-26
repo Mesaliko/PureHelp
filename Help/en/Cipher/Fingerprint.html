@@ -1,0 +1,88 @@
+<html><head><title>Fingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Fingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>Fingerprint</b></font>(*Buffer, Size, Plugin [, Bits [, HmacKey$ [, HmacKeyFormat]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns a fingerprint for the given buffer. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Buffer</i></td>
+<td width="90%"> 
+The buffer containing the data. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size of the given buffer. 
+
+</td></tr>
+<tr><td><i>Plugin</i></td>
+<td> 
+The plugin to use. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CRC32</font>: uses CRC32 algorithm. <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_MD5</font>  : uses MD5 algorithm. <a href="usemd5fingerprint.html">UseMD5Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA1</font> : uses SHA1 algorithm. <a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA2</font> : uses SHA2 algorithm. <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a> needs to be called before to register this plugin.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : uses SHA3 algorithm. <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a> needs to be called before to register this plugin.
+</font></pre>
+The plugin to use can be combined with the <font color="#924B72">#PB_Cipher_HMAC</font> flag to compute a HMAC (hash based message authentication code) instead 
+of a regular fingerprint. In this case the &quot;HmacKey$&quot; parameter is needed as well. 
+See <a href="stringfingerprint.html">StringFingerprint()</a> for example usage of the HMAC flag. 
+
+</td></tr>
+<tr><td><i>Bits (optional)</i></td>
+<td> 
+The bits number to use for the fingerprint. It is only supported for the following plugin: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_SHA2</font> : can be 224, 256 (default), 384 or 512.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : can be 224, 256 (default), 384 or 512.
+</font></pre>
+
+</td></tr>
+<tr><td><i>HmacKey$ (optional)</i></td>
+<td> 
+The secret key to use in the HMAC computation. This parameter is only used if the <font color="#924B72">#PB_Cipher_HMAC</font> is added to the plugin parameter. 
+
+</td></tr>
+<tr><td><i>HmacKeyFormat (optional)</i></td>
+<td> 
+The string format to use for the HMAC key. This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : encode the key in ASCII
+  <font color="#924B72">#PB_UTF8</font>   : encode the key on UTF-8 (default).
+  <font color="#924B72">#PB_Unicode</font>: encode the key in Unicode
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the fingerprint as an hexadecimal string. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMD5Fingerprint</font>()
+
+  *Buffer =<font color="#006666"> AllocateMemory</font>(500)    
+  <b><font color="#006666">If</font></b> *Buffer
+<font color="#006666">    PokeS</font>(*Buffer, &quot;The quick brown fox jumps over the lazy dog.&quot;, -1, <font color="#924B72">#PB_Ascii</font>)
+    MD5$ =<font color="#006666"> Fingerprint</font>(*Buffer,<font color="#006666"> MemoryStringLength</font>(*Buffer, <font color="#924B72">#PB_Ascii</font>), <font color="#924B72">#PB_Cipher_MD5</font>)
+    <b><font color="#006666">Debug</font></b> &quot;MD5 Fingerprint = &quot; + MD5$
+<font color="#006666">    FreeMemory</font>(*Buffer)  <font color="#006666">; would also be done automatically at the end of the program</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="filefingerprint.html">FileFingerprint()</a>, <a href="startfingerprint.html">StartFingerprint()</a>, <a href="stringfingerprint.html">StringFingerprint()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=filefingerprint.html>FileFingerprint()</a> - <a href=index.html>Cipher Index</a> - <a href=finishcipher.html>FinishCipher()</a> -><br><br>
+
+</body></html>

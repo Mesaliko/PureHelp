@@ -1,0 +1,58 @@
+<html><head><title>Round</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Round()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.f(.d) = <font color="#006666"><b>Round</b></font>(Number.f(.d), Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Round the specified float number according to the given mode. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Number.f or Number.d</i></td>
+<td width="90%"> 
+The number to round. 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+The rounding mode. This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Round_Down</font>   : rounds down the number
+  <font color="#924B72">#PB_Round_Up</font>     : rounds up the number
+  <font color="#924B72">#PB_Round_Nearest</font>: rounds to the nearest integer number (0.5 and up will round up)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To turn a floating-point number into an integer without rounding, use <a href="int.html">Int()</a> or <a href="intq.html">IntQ()</a>. 
+This function handles and returns <a href="../reference/variables.html">float or double</a> values. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Down</font>)    <font color="#006666">; Will print '11.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-3.6, <font color="#924B72">#PB_Round_Down</font>)    <font color="#006666">; Will print '-4.0'</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Up</font>)      <font color="#006666">; Will print '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-1.6, <font color="#924B72">#PB_Round_Up</font>)      <font color="#006666">; Will print '-1.0'</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Will print '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.4, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Will print '11.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.5, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Will print '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-7.5, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Will print '-8.0'</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="int.html">Int()</a>, <a href="intq.html">IntQ()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=randomseed.html>RandomSeed()</a> - <a href=index.html>Math Index</a> - <a href=sign.html>Sign()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,94 @@
+<html><head><title>PushMapPosition</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PushMapPosition()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>PushMapPosition</b></font>(Map())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Mémorise l'élément courant (s'il existe). 
+<br>
+Il pourra être restauré à l'aide de 
+<a href="popmapposition.html">PopMapPosition()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+La map à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La position est sauvegardée dans une 
+structure de pile, donc plusieurs appels à 
+cette fonction sont possibles. 
+<br>
+<br>
+Cette fonction peut être utilisée pour 
+sauvegarder l'élément courant, donc une 
+itération peut être utilisée sur la map 
+en utilisant <a href="nextmapelement.html">NextMapElement()</a> ou 
+<a href="../reference/foreach_next.html">foreach</a> et 
+l'élément courant peut être restauré après 
+l'itération en utilisant <a href="popmapposition.html">PopMapPosition()</a>. 
+Plusieurs appels peuvent être faits à cette 
+fonction, aussi longtemps que chacun est 
+équilibré avec un appel <a href="popmapposition.html">PopMapPosition()</a> 
+correspondant. 
+<br>
+<br>
+Note: Il n'est pas permis de supprimer un 
+élément qui a été mémorisé, en utilisant 
+<a href="deletemapelement.html">DeleteMapElement()</a> ou <a href="clearmap.html">ClearMap()</a>. 
+Cela peut entraîner un plantage lors de 
+l'appel de <a href="popmapposition.html">PopMapPosition()</a> parce que la 
+mémoire n'est plus valide. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Nombres</font>()
+<font color="#006666">  Nombres</font>(&quot;A&quot;) = 1
+<font color="#006666">  Nombres</font>(&quot;B&quot;) = 2
+<font color="#006666">  Nombres</font>(&quot;C&quot;) = 5
+<font color="#006666">  Nombres</font>(&quot;D&quot;) = 3
+<font color="#006666">  Nombres</font>(&quot;E&quot;) = 2
+<font color="#006666">  Nombres</font>(&quot;F&quot;) = 5
+  
+  <font color="#006666">; Une simple élimination de doublon</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    Value =<font color="#006666"> Nombres</font>()
+<font color="#006666">    PushMapPosition</font>(<font color="#006666">Nombres</font>())
+    <b><font color="#006666">While</font></b> <font color="#006666">NextMapElement</font>(<font color="#006666">Nombres</font>())
+      <b><font color="#006666">If</font></b> <font color="#006666">Nombres</font>() = Value 
+<font color="#006666">        DeleteMapElement</font>(<font color="#006666">Nombres</font>())
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    PopMapPosition</font>(<font color="#006666">Nombres</font>())
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="popmapposition.html">PopMapPosition()</a>, <a href="findmapelement.html">FindMapElement()</a>, 
+<a href="nextmapelement.html">NextMapElement()</a>, <a href="resetmap.html">ResetMap()</a>, 
+<a href="../reference/foreach_next.html">ForEach</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=popmapposition.html>PopMapPosition()</a> - <a href=index.html>Map Index</a> - <a href=resetmap.html>ResetMap()</a> -><br><br>
+
+</body></html>

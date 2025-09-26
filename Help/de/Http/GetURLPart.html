@@ -1,0 +1,75 @@
+<html><head><title>GetURLPart</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetURLPart()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>GetURLPart</b></font>(URL$, Parameter$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt einen bestimmten Teil der angegebenen URL. Dies kann ein benannter Parameter im 
+URL-String oder einem anderen Teil der URL sein. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+Die URL, von welcher ein Teil ermittelt werden soll. 
+Eine URL$ kann Parameter enthalten, welche nützlich sind, wenn eine Skriptsprache (wie PHP) 
+auf dem Web-Server verwendet wird. 
+Der Syntax ist folgender: http://www.purebasic.com/index.php3?test=1. 
+Hier trägt der Parameter die Bezeichnung &quot;test&quot; und sein zugewiesener Wert lautet &quot;1&quot;. 
+
+</td></tr>
+<tr><td><i>Parameter$</i></td>
+<td> 
+Der Parameter, welcher vom URL$ zurückgegeben werden soll. 
+Die Parameter sind nicht &quot;case-sensitive&quot; (d.h. beachten nicht die Groß-/Kleinschreibung). 
+Dieser Parameter kann auch eine der folgenden Konstanten verwenden, um auf einen bestimmten Teil 
+der URL zuzugreifen: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_URL_Protocol</font>: gibt das Protokoll aus der URL$ zurück
+  <font color="#924B72">#PB_URL_Site</font>: gibt die Seite aus der URL$ zurück
+  <font color="#924B72">#PB_URL_Port</font>: gibt den Port aus der URL$ zurück (wenn spezifiziert)
+  <font color="#924B72">#PB_URL_Parameters</font>: gibt alle Parameter aus der URL$ zurück
+  <font color="#924B72">#PB_URL_Path</font>: gibt den Pfad aus der URL$ zurück
+  <font color="#924B72">#PB_URL_User</font>: gibt den Usernamen aus der URL$ zurück (wenn spezifiziert)
+  <font color="#924B72">#PB_URL_Password</font>: gibt das Passwort aus der URL$ zurück (wenn spezifiziert)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Wert des angegebenen Parameters oder einen anderen Teil der URL zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl kann sehr nützlich sein, um z.B. beim Schreiben eines CGI Programms 
+eine URL zu analysieren (&quot;zu parsen&quot;). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  URL$ = &quot;http://user:pass@www.purebasic.com:80/index.php3?test=1&amp;ok=2&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Protocol</font>) <font color="#006666">; Wird &quot;http&quot; ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Site</font>)     <font color="#006666">; Wird &quot;www.purebasic.com&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Port</font>)     <font color="#006666">; Wird &quot;80&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Parameters</font>) <font color="#006666">; Wird &quot;test=1&amp;ok=2&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Path</font>)     <font color="#006666">; Wird &quot;index.php3&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_User</font>)     <font color="#006666">; Wird &quot;user&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Password</font>) <font color="#006666">; Wird &quot;pass&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;test&quot;)           <font color="#006666">; Wird &quot;1&quot; ausgeben </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;ok&quot;)             <font color="#006666">; Wird &quot;2&quot; ausgeben </font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="seturlpart.html">SetURLPart()</a>, <a href="urldecoder.html">URLDecoder()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=finishhttp.html>FinishHTTP()</a> - <a href=index.html>Http Inhaltsverzeichnis</a> - <a href=httpinfo.html>HTTPInfo()</a> -><br><br>
+
+</body></html>

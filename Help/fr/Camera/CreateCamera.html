@@ -1,0 +1,135 @@
+<html><head><title>CreateCamera</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateCamera()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateCamera</b></font>(#Camera, X, Y, Largeur, Hauteur [, MasqueVisibilite] [, NiveauDetails]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle caméra dans le monde 
+courant. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Camera</i></td>
+<td width="90%"> 
+Numéro de la nouvelle caméra. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour autogénérer ce 
+numéro. 
+
+</td></tr>
+<tr><td><i>X, Y</i></td>
+<td> 
+La position (en pourcentage) du bord gauche de l'affichage 
+de la camera. 
+<br>
+Voir l'image ci-dessous. 
+<pre><font face="Courier New, Courier, mono" size="2">  0%  : Affichage sur le bord gauche (haut) de l'écran
+  100%: Affichage sur le bord droit (bas) de l'écran
+</font></pre>
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur</i></td>
+<td> 
+Les dimensions (en pourcentage) de l'affichage 
+de la camera. 
+<br>
+Voir l'image ci-dessous. 
+
+</td></tr>
+<tr><td><i>MasqueVisibilite (optionnel)</i></td>
+<td> 
+Un masque pour sélectionner les 
+<a href="../entity/index.html">entités</a> et les 
+<a href="../billboard/index.html">billboards</a> à 
+afficher par la caméra. 
+<br>
+<br>
+La caméra définit son propre masque, et 
+si l'entité ou le billboard masqué 
+correspond, alors il sera affiché. 
+<br>
+<br>
+Par défaut, les entités et les billboards 
+n'ont pas de masque, ce qui signifie 
+qu'ils seront toujours affichés par 
+toutes les caméras. 
+
+</td></tr>
+<tr><td><i>NiveauDetails (optionnel)</i></td>
+<td> 
+Le niveau de détails (Lod Bias = Level Of Details) à appliquer aux entités qui le supportent. <br>
+S'il est inférieur à 1, un objet plus détaillé sera affiché, s'il est supérieur à 1, une entité 
+moins détaillée sera affichée.<br>
+La distance de l'entité est divisée par le niveau de détail, par exemple un niveau de détail de 0.5 
+double la distance. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro si la caméra n'a pas pu 
+être crée. 
+<br>
+<br>
+Si <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+est utilisé à la place du paramètre 
+'#Camera' alors le nouveau numéro de la 
+caméra sera renvoyé dans 'Resultat'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le fait de poser la position et les 
+dimensions d'une caméra (ce qu'elle 
+affiche en fait) en pourcentage permet de 
+s'abstraire des dimensions de l'écran 
+de l'utilisateur. 
+Ainsi une caméra affichera la même chose 
+sur un écran 800x600 que sur un écran 
+1024x768, etc. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Crée une caméra qui prend tout l'écran</font>
+  
+<font color="#006666">  CreateCamera</font>(0, 0,  0, 100, 50) <font color="#006666">; Crée une caméra qui ne prend que 50% de la hauteur (effet Split-Screen pour 2 joueurs)</font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) <font color="#006666">; Crée la deuxieme caméra de 50% de hauteur mais dans la partie basse de l'écran</font>
+
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Crée une caméra qui prend tout l'écran</font>
+<font color="#006666">  CreateCamera</font>(1, 25, 0, 50, 10)  <font color="#006666">; Avec un effet rétroviseur (miroir).</font>
+                                  <font color="#006666">; Notez que le rétroviseur est le dernier, de sorte qu'il est affiché en haut de la caméra plein écran</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; 2 caméras qui séparent l'écran en deux parties égales :</font>
+  
+  <font color="#006666">; Caméra au dessus</font>
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 50)  
+<font color="#006666">  MoveCamera</font>(0, 0, 50, 150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(0,<font color="#006666"> RGB</font>(215, 225, 255))
+  
+  <font color="#006666">; Caméra en dessous  </font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) 
+<font color="#006666">  MoveCamera</font>(1, 0, 50, -150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(1,<font color="#006666"> RGB</font>(255, 225, 215))
+<font color="#006666">  RotateCamera</font>(1, 180, 0, 0)
+</font></pre>
+<p><img src="../HelpPictures/createcamera.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freecamera.html">FreeCamera()</a>, <a href="resizecamera.html">ResizeCamera()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=checkobjectvisibility.html>CheckObjectVisibility()</a> - <a href=index.html>Camera Index</a> - <a href=freecamera.html>FreeCamera()</a> -><br><br>
+
+</body></html>

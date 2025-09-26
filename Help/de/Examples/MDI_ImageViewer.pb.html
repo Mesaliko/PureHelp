@@ -1,0 +1,258 @@
+<html><head><title>MDI_ImageViewer.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - MDI example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; As MDIGadget is a Windows only gadget, it won't run on Linux or OS X
+</font><font color="#006666">;
+</font><b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+  <b><font color="#006666">CompilerError</font></b> &quot;MDIGadget() is only supported on Windows&quot;
+<b><font color="#006666">CompilerEndIf</font></b>
+
+
+<b><font color="#006666">Structure</font></b> MDIWindow
+  <font color="#006666">; info about the loaded image
+</font>  Image.i
+  ImageWidth.l
+  ImageHeight.l
+  ImageGifAnimated.l
+  
+  <font color="#006666">; Our MDI Window
+</font>  Window.i
+  
+  <font color="#006666">; gadget numbers
+</font>  ScrollAreaGadget.i
+  ImageGadget.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">MDIWindow</font>.MDIWindow()
+
+<font color="#924B72">#WINDOW</font> = 0
+<font color="#924B72">#TOOLBAR</font> = 0
+<font color="#924B72">#MENU</font> = 0
+
+<font color="#006666">;#MDI_Base = 1
+</font><font color="#924B72">#GADGET_MDI</font> = 0
+
+<b><font color="#006666">Enumeration</font></b>
+  <font color="#924B72">#MENU_Open</font>
+  <font color="#924B72">#MENU_Close</font>
+  <font color="#924B72">#MENU_CloseAll</font>
+  <font color="#924B72">#MENU_Quit</font>
+  
+  <font color="#924B72">#MENU_TileVertically</font>
+  <font color="#924B72">#MENU_TileHorizontally</font>
+  <font color="#924B72">#MENU_Cascade</font>
+  <font color="#924B72">#MENU_Arrange</font>
+  <font color="#924B72">#MENU_Previous</font>
+  <font color="#924B72">#MENU_Next</font>
+  
+  <font color="#924B72">#MENU_FirstMDI</font>
+<b><font color="#006666">EndEnumeration</font></b>
+
+<font color="#006666">UseGIFImageDecoder</font>()
+<font color="#006666">UseJPEGImageDecoder</font>()
+<font color="#006666">UsePNGImageDecoder</font>()
+<font color="#006666">UseTGAImageDecoder</font>()
+<font color="#006666">UseTIFFImageDecoder</font>()
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">SelectMDIWindow</font>(Window)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">MDIWindow</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">MDIWindow</font>()\Window = Window
+      <b><font color="#006666">ProcedureReturn</font></b> 1
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Next</font></b>
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<font color="#924B72">#WindowFlags</font> = <font color="#924B72">#PB_Window_ScreenCentered</font>|<font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_MinimizeGadget</font>|<font color="#924B72">#PB_Window_MaximizeGadget</font>|<font color="#924B72">#PB_Window_SizeGadget</font>
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(<font color="#924B72">#WINDOW</font>, 0, 0, 800, 600, &quot;MDI ImageViewer&quot;, <font color="#924B72">#WindowFlags</font>)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(<font color="#924B72">#MENU</font>,<font color="#006666"> WindowID</font>(<font color="#924B72">#WINDOW</font>))
+<font color="#006666">    MenuTitle</font>(&quot;File&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_Open</font>, &quot;Open&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_Close</font>, &quot;Close&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_CloseAll</font>, &quot;Close All&quot;)
+<font color="#006666">    MenuBar</font>()
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_QUit</font>, &quot;Quit&quot;)
+<font color="#006666">    MenuTitle</font>(&quot;Windows&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_TileVertically</font>, &quot;Tile vertically&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_TileHorizontally</font>, &quot;Tile horizontally&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_Cascade</font>, &quot;Cascade&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_Previous</font>, &quot;Previous&quot;)
+<font color="#006666">    MenuItem</font>(<font color="#924B72">#MENU_Next</font>, &quot;Next&quot;)
+    
+    <font color="#006666">; MDI subwindows will get added here
+</font>  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateToolBar</font>(<font color="#924B72">#TOOLBAR</font>,<font color="#006666"> WindowID</font>(<font color="#924B72">#WINDOW</font>))
+<font color="#006666">    ToolBarImageButton</font>(<font color="#924B72">#MENU_Open</font>,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Open.png&quot;))
+<font color="#006666">    ToolBarImageButton</font>(<font color="#924B72">#MENU_Close</font>,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Delete.png&quot;))
+<font color="#006666">    ToolBarSeparator</font>()
+<font color="#006666">    ToolBarImageButton</font>(<font color="#924B72">#MENU_Previous</font>,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Undo.png&quot;))
+<font color="#006666">    ToolBarImageButton</font>(<font color="#924B72">#MENU_Next</font>,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Redo.png&quot;))
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MDIGadget</font>(<font color="#924B72">#GADGET_MDI</font>, 0, 0, 0, 0, 1, <font color="#924B72">#MENU_FirstMDI</font>, <font color="#924B72">#PB_MDI_AutoSize</font>)
+  
+  
+  Quit = 0
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    Window =<font color="#006666"> EventWindow</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        
+        
+        <b><font color="#006666">If</font></b> Window = <font color="#924B72">#WINDOW</font> <font color="#006666">; Out main window is closed, just quit
+</font>          Quit = 1
+          
+        <b><font color="#006666">Else</font></b> <font color="#006666">; It's one of our MDI children
+</font>          
+          <b><font color="#006666">If</font></b> <font color="#006666">SelectMDIWindow</font>(Window) <font color="#006666">; Check if it's one of our MDI window
+</font><font color="#006666">            RemoveWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666">MDIWindow</font>()\Window)
+<font color="#006666">            CloseWindow</font>(Window)
+<font color="#006666">            FreeImage</font>(<font color="#006666">MDIWindow</font>()\Image)
+<font color="#006666">            DeleteElement</font>(<font color="#006666">MDIWindow</font>())
+          <b><font color="#006666">EndIf</font></b>
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_ActivateWindow</font>
+        
+        Window =<font color="#006666"> EventWindow</font>()
+        
+        <b><font color="#006666">If</font></b> <font color="#006666">SelectMDIWindow</font>(Window) <font color="#006666">; Check if it's one of our MDI window
+</font>          <b><font color="#006666">If</font></b> <font color="#006666">MDIWindow</font>()\ImageGifAnimated = <font color="#924B72">#True</font>
+            
+            IsGif=<font color="#924B72">#True</font>
+          <b><font color="#006666">Else</font></b>
+            IsGif=<font color="#924B72">#False</font>
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Timer</font> <font color="#006666">; Let's animate a Gif
+</font>        IsGif=<font color="#924B72">#True</font>
+        <b><font color="#006666">If</font></b> IsGif=<font color="#924B72">#True</font> <b><font color="#006666">And</font></b> <font color="#006666">EventTimer</font>() =<font color="#006666"> MDIWindow</font>()\Window<font color="#006666">; And ImageFrameCount(MDIWindow()\Image) &lt;&gt; 1
+</font>          
+          
+<font color="#006666">          SetImageFrame</font>(<font color="#006666">MDIWindow</font>()\Image, Frame)
+<font color="#006666">          RemoveWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666"> MDIWindow</font>()\Window)
+<font color="#006666">          AddWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666"> MDIWindow</font>()\Window,<font color="#006666"> GetImageFrameDelay</font>(<font color="#006666">MDIWindow</font>()\Image))
+          
+          Frame+1
+          <b><font color="#006666">If</font></b> Frame &gt;=<font color="#006666"> ImageFrameCount</font>(<font color="#006666">MDIWindow</font>()\Image) : Frame = 0 : <b><font color="#006666">EndIf</font></b>
+<font color="#006666">          SetGadgetState</font>(<font color="#006666">MDIWindow</font>()\ImageGadget,<font color="#006666"> ImageID</font>(<font color="#006666">MDIWindow</font>()\Image))
+        <b><font color="#006666">EndIf</font></b>
+        
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Open</font>
+            FileName$ =<font color="#006666"> OpenFileRequester</font>(&quot;Open Image&quot;, DefautFile$, &quot;Image Files (*.bmp,*.jpg,*.tiff,*.png,*.tga,*.gif)|*.bmp;*.jpg;*.tiff;*.png;*.tga;*.gif|All Files (*.*)|*.*&quot;, 0, <font color="#924B72">#PB_Requester_MultiSelection</font>)
+            <b><font color="#006666">While</font></b> FileName$
+              DefaultFile$ = FileName$
+              
+              Image =<font color="#006666"> LoadImage</font>(<font color="#924B72">#PB_Any</font>, FileName$)
+              <b><font color="#006666">If</font></b> Image
+                
+<font color="#006666">                LastElement</font>(<font color="#006666">MDIWindow</font>())
+<font color="#006666">                AddElement</font>(<font color="#006666">MDIWindow</font>())
+                
+                Item =<font color="#006666"> ListIndex</font>(<font color="#006666">MDIWindow</font>())
+                
+<font color="#006666">                MDIWindow</font>()\Image       = Image
+<font color="#006666">                MDIWIndow</font>()\ImageWidth  =<font color="#006666"> ImageWidth</font>(Image)
+<font color="#006666">                MDIWindow</font>()\ImageHeight =<font color="#006666"> ImageHeight</font>(Image)
+                
+                
+                
+<font color="#006666">                MDIWindow</font>()\Window =<font color="#006666"> AddGadgetItem</font>(<font color="#924B72">#GADGET_MDI</font>, -1, FileName$)
+                
+                Width  =<font color="#006666"> WindowWidth </font>(<font color="#006666">MDIWindow</font>()\Window)
+                Height =<font color="#006666"> WindowHeight</font>(<font color="#006666">MDIWindow</font>()\Window)
+                
+<font color="#006666">                MDIWindow</font>()\ScrollAreaGadget =<font color="#006666"> ScrollAreaGadget</font>(<font color="#924B72">#PB_Any</font>, 0, 0, Width, Height,<font color="#006666"> MDIWindow</font>()\ImageWidth,<font color="#006666"> MDIWindow</font>()\ImageHeight, 10)
+<font color="#006666">                MDIWindow</font>()\ImageGadget =<font color="#006666"> ImageGadget</font>(<font color="#924B72">#PB_Any</font>, 0, 0,<font color="#006666"> MDIWindow</font>()\ImageWidth,<font color="#006666"> MDIWindow</font>()\ImageHeight,<font color="#006666"> ImageID</font>(Image))
+                <b><font color="#006666">If</font></b> <font color="#006666">UCase</font>(<font color="#006666">GetExtensionPart</font>(Filename$)) = &quot;GIF&quot;  <b><font color="#006666">And</font></b> <font color="#006666">ImageFrameCount</font>(<font color="#006666">MDIWindow</font>()\Image) &lt;&gt; 1
+<font color="#006666">                  MDIWindow</font>()\ImageGifAnimated = <font color="#924B72">#True</font>
+<font color="#006666">                  AddWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666"> MDIWindow</font>()\Window, 1)
+                <b><font color="#006666">EndIf</font></b>
+<font color="#006666">                CloseGadgetList</font>()
+                
+              <b><font color="#006666">Else</font></b>
+<font color="#006666">                MessageRequester</font>(&quot;Image Viewer&quot;,&quot;Could not load image: &quot;+FileName$)
+              <b><font color="#006666">EndIf</font></b>
+              
+              FileName$ =<font color="#006666"> NextSelectedFileName</font>()
+            <b><font color="#006666">Wend</font></b>
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Close</font>
+            Window =<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>)
+            <b><font color="#006666">If</font></b> Window &lt;&gt; -1
+<font color="#006666">              SelectMDIWindow</font>(Window)
+<font color="#006666">              RemoveWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666"> MDIWindow</font>()\Window)
+<font color="#006666">              CloseWindow</font>(Window)
+<font color="#006666">              FreeImage</font>(<font color="#006666">MDIWindow</font>()\Image)
+<font color="#006666">              DeleteElement</font>(<font color="#006666">MDIWindow</font>())
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_CloseAll</font>
+            
+            <b><font color="#006666">ForEach</font></b> <font color="#006666">MDIWindow</font>()
+<font color="#006666">              RemoveWindowTimer</font>(<font color="#006666">MDIWindow</font>()\Window,<font color="#006666"> MDIWindow</font>()\Window)
+<font color="#006666">              CloseWindow</font>(<font color="#006666">MDIWindow</font>()\Window)
+<font color="#006666">              FreeImage</font>(<font color="#006666">MDIWindow</font>()\Image)
+            <b><font color="#006666">Next</font></b>
+<font color="#006666">            ClearList</font>(<font color="#006666">MDIWindow</font>())
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Quit</font>
+            Quit = 1
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_TileVertically</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_TileVertically</font>)
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_TileHorizontally</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_TileHorizontally</font>)
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Cascade</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_Cascade</font>)
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Arrange</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_Arrange</font>)
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Previous</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_Previous</font>)
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Next</font>
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_MDI</font>, <font color="#924B72">#PB_MDI_Next</font>)
+            
+        <b><font color="#006666">EndSelect</font></b>
+        
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_SizeWindow</font>
+        
+        Window =<font color="#006666"> EventWindow</font>()
+        
+        <b><font color="#006666">If</font></b> <font color="#006666">SelectMDIWindow</font>(Window)
+<font color="#006666">          ResizeGadget</font>(<font color="#006666">MDIWindow</font>()\ScrollAreaGadget, 0, 0,<font color="#006666"> WindowWidth</font>(Window),<font color="#006666"> WindowHeight</font>(Window))
+        <b><font color="#006666">EndIf</font></b>
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Quit = 1
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

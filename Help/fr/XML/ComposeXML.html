@@ -1,0 +1,73 @@
+<html><head><title>ComposeXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ComposeXML()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>ComposeXML</b></font>(#XML [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le code XML dans une chaîne de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+L'arbre XML à exporter. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes 
+(avec l'opérateur '|'): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_StringFormat</font> : Inclut un BOM (byte order mark). Voir <a href="../file/writestringformat.html">WriteStringFormat()</a>.
+  <font color="#924B72">#PB_XML_NoDeclaration</font>: Ne pas inclure la déclaration XML.
+</font></pre>
+Note: Selon la spécification XML, la déclaration 
+XML ne peut être omise si le document est encodé 
+en UTF-8 ou UTF-16 ou si les informations de 
+codage sont prévues à l'extérieur grâce à un 
+protocole de transfert par exemple. Même alors, 
+il est conseillé de conserver la déclaration 
+dans le document. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le balisage XML dans une chaîne de 
+caractères. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le XML sera renvoyé dans le format des chaînes 
+de l'exécutable (ASCII ou Unicode) 
+indépendamment du réglage renvoyé par 
+<a href="getxmlencoding.html">GetXMLEncoding()</a>. 
+La fonction <a href="exportxml.html">ExportXML()</a> peut être utilisée pour 
+créer des balises dans un codage différent. 
+<br>
+<br>
+Le balisage XML créé n'est pas reformaté. 
+Il est renvoyé comme il a été initialement 
+analysé/créé. Les sauts de ligne/espaces 
+entre les balises sont stockés dans le 'texte' 
+de chaque noeud XML. Voir <a href="getxmlnodetext.html">GetXMLNodeText()</a> 
+pour plus d'informations. 
+Pour reformater le balisage XML avant 
+d'enregistrer, le 'texte' de chaque noeud XML 
+peut être modifié ou <a href="formatxml.html">FormatXML()</a> peut être 
+utilisé pour appliquer certaines options de 
+reformatage de l'arbre. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="formatxml.html">FormatXML()</a>, <a href="exportxml.html">ExportXML()</a>, <a href="savexml.html">SaveXML()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=childxmlnode.html>ChildXMLNode()</a> - <a href=index.html>XML Index</a> - <a href=copyxmlnode.html>CopyXMLNode()</a> -><br><br>
+
+</body></html>

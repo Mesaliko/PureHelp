@@ -1,0 +1,69 @@
+<html><head><title>StatusBarImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StatusBarImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>StatusBarImage</b></font>(#StatusBar, Field, ImageID [, Appearance])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sets the specified Field to display an image. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#StatusBar</i></td>
+<td width="90%"> 
+The status bar to use. 
+
+</td></tr>
+<tr><td><i>Field</i></td>
+<td> 
+The field index to set the image. The first field index starts from zero. 
+
+</td></tr>
+<tr><td><i>ImageID</i></td>
+<td> 
+The image to set to the specified statusbar field. It can be easily obtained by using <a href="../image/imageid.html">ImageID()</a>. 
+
+</td></tr>
+<tr><td><i>Appearance (optional)</i></td>
+<td> 
+It can be used to alter the look of the field with the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_StatusBar_Raised</font>    : raised borders (has no effect on OS X and Windows with theme enabled)
+  <font color="#924B72">#PB_StatusBar_BorderLess</font>: without border 
+  <font color="#924B72">#PB_StatusBar_Center</font>    : center the icon in the field
+  <font color="#924B72">#PB_StatusBar_Right</font>     : align the icon to the right of the field
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 340, 50, &quot;StatusBarImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      AddStatusBarField</font>(120)
+<font color="#006666">      AddStatusBarField</font>(170)
+    <b><font color="#006666">EndIf</font></b>
+
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadImage</font>(0, &quot;cube16.ico&quot;)     <font color="#006666">; change path/filename to your own image (or icon)</font>
+<font color="#006666">      StatusBarImage</font>(0, 0,<font color="#006666"> ImageID</font>(0))
+<font color="#006666">      StatusBarImage</font>(0, 1,<font color="#006666"> ImageID</font>(0), <font color="#924B72">#PB_StatusBar_Right</font>) 
+    <b><font color="#006666">EndIf</font></b>  
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b> 
+</font></pre>
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=statusbarid.html>StatusBarID()</a> - <a href=index.html>StatusBar Index</a> - <a href=statusbarprogress.html>StatusBarProgress()</a> -><br><br>
+
+</body></html>

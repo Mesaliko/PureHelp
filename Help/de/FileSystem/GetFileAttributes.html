@@ -1,0 +1,86 @@
+<html><head><title>GetFileAttributes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetFileAttributes()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Attribute = <font color="#006666"><b>GetFileAttributes</b></font>(Dateiname$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die Datei-Attribute der angegebenen Datei zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateiname$</i></td>
+<td width="90%"> 
+Die Datei, von der die Attribute gelesen werden sollen. 
+Dies kann auch der Name eines Verzeichnisses sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Attribute der Datei zurück. Wenn die Datei nicht existiert oder die Attribute 
+nicht gelesen werden können, ist das Ergebnis der Wert -1. 
+<br>
+<br>
+Auf Windows sind die Attribute eine Kombination der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Hidden</font>     : Datei ist versteckt
+  <font color="#924B72">#PB_FileSystem_Archive</font>    : Datei wurde geändert und nicht archiviert seit dem letzten Mal
+  <font color="#924B72">#PB_FileSystem_Compressed</font> : Datei ist komprimiert
+  <font color="#924B72">#PB_FileSystem_Normal</font>     : Normale Attribute
+  <font color="#924B72">#PB_FileSystem_ReadOnly</font>   : Datei ist im &quot;ReadOnly&quot; Modus (schreibgeschützt)
+  <font color="#924B72">#PB_FileSystem_System</font>     : Datei ist eine Systemdatei
+</font></pre>
+
+Auf Linux oder MacOSX sind die Attribute eine Kombination der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Link</font>       : Die Datei ist ein symbolischer Link 
+  <font color="#924B72">#PB_FileSystem_ReadUser</font>   : Zugriffs-Flags für den &quot;besitzenden&quot; (englisch: owning) Anwender
+  <font color="#924B72">#PB_FileSystem_WriteUser</font>
+  <font color="#924B72">#PB_FileSystem_ExecUser</font>
+  <font color="#924B72">#PB_FileSystem_ReadGroup</font>  : Zugriffs-Flags für die &quot;besitzende&quot; (englisch: owning) Anwendergruppe
+  <font color="#924B72">#PB_FileSystem_WriteGroup</font>
+  <font color="#924B72">#PB_FileSystem_ExecGroup</font>
+  <font color="#924B72">#PB_FileSystem_ReadAll</font>    : Zugriffs-Flags für alle anderen Anwender
+  <font color="#924B72">#PB_FileSystem_WriteAll</font>
+  <font color="#924B72">#PB_FileSystem_ExecAll</font>
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um zu testen, ob ein Attribut tatsächlich gesetzt ist, benutzen Sie einfach '&amp;' (binäres 'AND', zu deutsch: und) 
+und die Attribut-Konstanten: 
+<pre><font face="Courier New, Courier, mono" size="2">  FileAttributes =<font color="#006666"> GetFileAttributes</font>(&quot;C:\Text.txt&quot;)
+  <b><font color="#006666">If</font></b> FileAttributes &amp; <font color="#924B72">#PB_FileSystem_Hidden</font>
+    <b><font color="#006666">Debug</font></b> &quot;Diese Datei ist versteckt!&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Value =<font color="#006666"> GetFileAttributes</font>(&quot;c:\autoexec.bat&quot;) 
+  
+  <b><font color="#006666">If</font></b> Value = -1 
+    <b><font color="#006666">Debug</font></b> &quot;Fehler beim Lesen der Datei-Attribute!&quot;
+  <b><font color="#006666">Else</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_Hidden</font>     : txt$ + &quot;H&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_Archive</font>    : txt$ + &quot;A&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_Compressed</font> : txt$ + &quot;C&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_Normal</font>     : txt$ + &quot;N&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_ReadOnly</font>   : txt$ + &quot;R&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">If</font></b> Value &amp; <font color="#924B72">#PB_FileSystem_System</font>     : txt$ + &quot;S&quot; : <b><font color="#006666">Else</font></b> : txt$+&quot;-&quot; : <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">Debug</font></b> txt$ 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setfileattributes.html">SetFileAttributes()</a>, <a href="directoryentryattributes.html">DirectoryEntryAttributes()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getextensionpart.html>GetExtensionPart()</a> - <a href=index.html>FileSystem Inhaltsverzeichnis</a> - <a href=getfiledate.html>GetFileDate()</a> -><br><br>
+
+</body></html>

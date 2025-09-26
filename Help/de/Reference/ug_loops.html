@@ -1,0 +1,79 @@
+<html><head><title>Einsteiger-Kapitel - Schleifen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Schleifen</font></b></p>
+
+Daten, Ereignisse oder viele andere Dinge können auch durch die Verwendung von Schleifen 
+verarbeitet werden, welche immer auf das Zutreffen einer bestimmten Bedingungen geprüft 
+werden. Schleifen können sein: <a href="../reference/repeat_until.html">Repeat : Until</a>, 
+<a href="../reference/repeat_until.html">Repeat : Forever</a>, <a href="../reference/while_wend.html">While : Wend</a>, 
+<a href="../reference/for_next.html">For : Next</a>, <a href="../reference/foreach_next.html">ForEach : Next</a>. 
+<br>
+<br>
+In dieser Schleife wird der Zähler A jedes Mal um zwei erhöht, diese Schleife durchläuft 
+immer die gleiche Anzahl an Wiederholungen (Iterationen). 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i A
+  <b><font color="#006666">For</font></b> A = 0 <b><font color="#006666">To</font></b> 10 <b><font color="#006666">Step</font></b> 2
+  �� <b><font color="#006666">Debug</font></b> A
+  <b><font color="#006666">Next</font></b> A
+</font></pre>
+
+Diese Schleife wird die Variable B jedes Mal um einen <a href="../math/random.html">Zufallswert</a> 
+zwischen 0 und 20 erhöhen, bis B die 100 überschreitet. Die Anzahl der tatsächlich 
+durchgeführten Wiederholungen der Schleife variiert in Abhängigkeit von den Zufallszahlen. 
+Die Prüfung wird am Anfang der Schleife durchgeführt - wenn daher die Bedingung bereits 
+wahr ist, können null Durchläufe ausgeführt werden. Entfernen Sie das &quot;;&quot; von der zweiten 
+Zeile, um dies zu sehen. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i B
+  <font color="#006666">; B = 100</font>
+  <b><font color="#006666">While</font></b> B &lt; 100
+��   B +<font color="#006666"> Random</font>(20)
+��   <b><font color="#006666">Debug</font></b> B
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+Diese Schleife ist sehr ähnlich zur letzten, außer dass die Überprüfung am Ende der 
+Schleife ausgeführt wird. Daher wird mindestens ein Durchlauf ausgeführt. Entfernen 
+Sie auch hier das &quot;;&quot; von der zweiten Zeile, um dies zu demonstrieren. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i C
+  <font color="#006666">; C = 100</font>
+  <b><font color="#006666">Repeat</font></b>
+��   C +<font color="#006666"> Random</font>(20)
+��   <b><font color="#006666">Debug</font></b> C
+  <b><font color="#006666">Until</font></b> C &gt; 99
+</font></pre>
+
+Diese Schleife ist unendlich. Sie wird nicht anhalten, bis Sie sie stoppen (mittels 
+des roten X-Knopfes in der IDE-Werkzeugleiste). 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.i D
+  <b><font color="#006666">Repeat</font></b>
+��   <b><font color="#006666">Debug</font></b> D
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+Es gibt eine spezielle Schleife für das Arbeiten mit <a href="../reference/newlist.html">verkettete Listen</a> 
+und <a href="../reference/newmap.html">Maps</a>, sie wird jeden Eintrag der Liste (oder der Map) durchlaufen. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Fruit</font>.s()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Banana&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Apple&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Pear&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Fruit</font>())
+<font color="#006666">  Fruit</font>() = &quot;Orange&quot;
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Fruit</font>()
+��   <b><font color="#006666">Debug</font></b> <font color="#006666">Fruit</font>()
+  <b><font color="#006666">Next</font></b> <font color="#006666">Fruit</font>()
+</font></pre>
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_decisions.html">< Vorheriges: Entscheidungen & Bedingungen</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_string.html">Nächstes: String-Manipulation ></a> 
+</blockquote>
+</font></body></html>

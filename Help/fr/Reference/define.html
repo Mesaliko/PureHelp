@@ -1,0 +1,61 @@
+<html><head><title>Define</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Define</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Define</font></b>.&lt;type&gt; [&lt;variable&gt; [= &lt;expression&gt;], &lt;variable&gt; [= &lt;expression&gt;], ...]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Permet d'assigner le même type de données à une série de <a href="../reference/variables.html">variables</a>. 
+<br>
+Sans ce mot clé, les variables sont crées avec le type par défaut de PureBasic 
+qui est le type entier INTEGER. Pour rappel le type INTEGER vaut:<br>
+4 octets (avec un compilateur 32 bits) allant de -2147483648 à +2147483647<br>
+8 octets (avec un compilateur 64 bits) allant de -9223372036854775808 à +9223372036854775807 
+<br>
+<br>
+<b><font color="#006666">Define</font></b> est d'une grande souplesse car il permet aussi d'assigner un type différent 
+à une variable en particulier, à l'intérieur d'une série. 
+<br>
+<br>
+<b><font color="#006666">Define</font></b> peut également être utilisé avec les <a href="../reference/dim.html">tableaux</a>, 
+les <a href="../reference/newlist.html">listes</a> et les <a href="../reference/newmap.html">maps</a>. 
+
+</blockquote><p><b>Exemple:</b> Affectation en série</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Define</font></b>.b a, b = 10, c = b*2, d <font color="#006666">; Ces 4 variables sont de type octets (byte .b)</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Mélange d'affectations en série et individuelles</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Define</font></b>.q a, b.w, c, d, st.s = &quot;ok&quot;  <font color="#006666">; a, c, et d sont des Quad (.q), b est un Word (.w) et st est une String (.s)</font>
+
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(a)  <font color="#006666">; Affichera 8</font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(b)  <font color="#006666">; Affichera 2</font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(c)  <font color="#006666">; Affichera 8 </font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(d)  <font color="#006666">; Affichera 8</font>
+   <b><font color="#006666">Debug</font></b> st         <font color="#006666">; Affichera ok  </font>
+</font></pre>
+
+<p>&nbsp;</p>
+<hr>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Define</font></b> &lt;variable&gt;.&lt;type&gt; [= &lt;expression&gt;] [, &lt;variable&gt;.&lt;type&gt; [= &lt;expression&gt;], ...] 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Autre possibilité pour la déclaration des variables avec <b><font color="#006666">Define</font></b>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> MonChar.c <font color="#006666">; Caractère</font>
+  <b><font color="#006666">Define</font></b> MonLong.l <font color="#006666">; Double Mots</font>
+  <b><font color="#006666">Define</font></b> MonWord.w <font color="#006666">; Mot</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MonChar)   <font color="#006666">; Affichera 2 (à cause du mode unicode)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MonLong)   <font color="#006666">; Affichera 4 </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MonWord)   <font color="#006666">; Affichera 2 </font>
+</font></pre>
+</blockquote>
+</font></body></html>

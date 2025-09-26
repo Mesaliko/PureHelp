@@ -1,0 +1,58 @@
+<html><head><title>CloseNetworkConnection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseNetworkConnection()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CloseNetworkConnection</b></font>(Connexion)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ferme une connexion. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connexion</i></td>
+<td width="90%"> 
+La connexion à fermer. 
+<br>
+<br>
+Ceci est le résultat soit d'un appel à 
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a> ou à <a href="eventclient.html">EventClient()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si cette commande est utilisée en mode 
+client, le serveur recevra un événement 
+<font color="#924B72">#PB_NetworkEvent_Disconnect</font>&quot; (utilisateur 
+déconnecté). <br>
+Si cette commande est utilisée en mode 
+serveur, la connexion sera fermée sans 
+aucune notification pour le client. 
+Quand un serveur reçoit un événement 
+<font color="#924B72">#PB_NetworkEvent_Disconnect</font>, la connexion 
+client associée est automatiquement fermée. 
+CloseNetworkConnection() ne doit pas être 
+appelé dans ce cas. 
+<br>
+<br>
+Toutes les connexions restant ouvertes 
+sont automatiquement fermées quand le 
+programme se termine. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a>, <a href="eventclient.html">EventClient()</a>, 
+<a href="closenetworkserver.html">CloseNetworkServer()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Network Index</a> - <a href=closenetworkserver.html>CloseNetworkServer()</a> -><br><br>
+
+</body></html>

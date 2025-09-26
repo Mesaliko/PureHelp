@@ -1,0 +1,76 @@
+<html><head><title>CallCFunctionFast</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallCFunctionFast()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CallCFunctionFast</b></font>(*FunktionsZeiger [,Parameter1 [, Parameter2...]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ruft eine Funktion direkt auf, durch Verwendung ihrer Adresse. 
+Von der Funktion wird erwartet, dass sie die cdecl Aufruf-Konvention (die von der Sprache C 
+verwendete Konvention) verwendet. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*FunktionsZeiger</i></td>
+<td width="90%"> 
+Die Adresse der aufzurufenden Funktion. 
+<br>
+<br>
+Dieser Zeiger (Pointer) kann durch Verwendung der <a href="getfunction.html">GetFunction()</a>, <a href="getfunctionentry.html">GetFunctionEntry()</a> oder 
+<a href="libraryfunctionaddress.html">LibraryFunctionAddress()</a> Befehle ermittelt werden. Die Verwendung dieser Funktion ist 
+der schnellste Weg, um Library-Funktionen aufzurufen, insbesondere wenn die Ergebnisse der GetFunction() 
+bzw. LibraryFunctionAddress() Aufrufe gespeichert wurden. Dies kommt daher, dass dieser Befehl 
+nicht nach dem Namen der Library-Funktion suchen muss. 
+
+</td></tr>
+<tr><td><i>Parameter1, Parameter2, ...</i></td>
+<td> 
+Die Parameter für die aufzurufende Funktion. Die Anzahl der Parameter muss zu den Parametern 
+der aufgerufenen Funktion passen. Die maximale Zahl an unterstützten Parametern liegt bei 20. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Rückgabewert der aufgerufenen Funktion zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wird die Funktion als 'cdecl' beschrieben, dann muss dieser Befehl verwendet werden. 
+Die meisten der unter dem Microsoft Windows OS benutzten DLL's verwenden jedoch nicht 
+diese Form, weshalb <a href="callfunctionfast.html">CallFunctionFast()</a> für die meisten Fälle ausreichend sein sollte. 
+<br>
+Um eine Funktion aufzurufen, welche die 'stdcall' Aufruf-Konvention verwendet, muss die 
+<a href="callfunctionfast.html">CallFunctionFast()</a> Funktion verwendet werden. 
+
+<br>
+<br>
+Hinweis: Diese Funktion ist nicht sehr flexibel und kann nicht mit String/Fließkomma/Double/Quad-Parametern oder 
+String/Fließkomma/Double/Quad-Rückgabewerten umgehen. 
+Die Verwendung von <a href="../reference/prototypes.html">Prototypen</a> ist stattdessen sehr zu empfehlen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">ProcedureC</font></b> <font color="#006666">Function1</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Function1 anhand ihres Namens aufrufen&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">NewMap</font></b> *FuncPtr()
+  *FuncPtr(&quot;Function1&quot;) = @Function1()
+
+<font color="#006666">  CallCFunctionFast</font>(*FuncPtr(&quot;Function1&quot;))
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getfunction.html">GetFunction()</a>, <a href="callfunctionfast.html">CallFunctionFast()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=callcfunction.html>CallCFunction()</a> - <a href=index.html>Library Inhaltsverzeichnis</a> - <a href=callfunction.html>CallFunction()</a> -><br><br>
+
+</body></html>

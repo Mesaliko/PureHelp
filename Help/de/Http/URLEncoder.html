@@ -1,0 +1,83 @@
+<html><head><title>URLEncoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">URLEncoder()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>URLEncoder</b></font>(URL$ [, Format])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt eine ins HTTP-Format kodierte (verschlüsselte) URL$ zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+Die zu verschlüsselnde URL. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+Das Format des Strings, bevor dieser kodiert wird. Dies kann einer der folgenden 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>  (Standard)
+  <font color="#924B72">#PB_Ascii</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die kodierte URL zurück. 
+Um eine verschlüsselte URL zurück in das unverschlüsselte Format zu konvertieren, 
+verwenden Sie <a href="urldecoder.html">URLDecoder()</a>. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Eine URL$ darf bestimmte Zeichen (wie Tab, Leerzeichen, Buchstaben mit Akzent, etc.) 
+nicht enthalten. Daher müssen diese Zeichen verschlüsselt werden, was grundsätzlich 
+mit Hilfe von &quot;%&quot; als Escape-Zeichen erfolgt. 
+<br>
+<br>
+Da diese Funktion den RFC 3986 Standard verwendet, werden manche Zeichen nicht kodiert, 
+wie z.B. (keine erschöpfende Liste): 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;-&quot; | &quot;_&quot; | &quot;.&quot; | &quot;!&quot; | &quot;~&quot; | &quot;*&quot; | &quot;'&quot; | &quot;(&quot; | &quot;)&quot; | 
+  &quot;;&quot; | &quot;/&quot; | &quot;?&quot; | &quot;:&quot; | &quot;@&quot; | &quot;&amp;&quot; | &quot;=&quot; | &quot;+&quot; | &quot;$&quot; |
+  &quot;,&quot; | &quot;&quot;&quot; | &quot;#&quot; | &quot;%&quot; | 
+</font></pre>
+Wenn Sie diese doch kodieren müssen, dann müssen Sie die folgende Tabelle verwenden: 
+https://www.w3schools.com/tags/ref_urlencode.asp 
+<br>
+<br>
+Zum Beispiel in UTF8:<br>
+<pre><font face="Courier New, Courier, mono" size="2">   &quot;-&quot; -&gt; %2D | &quot;_&quot; -&gt; %5F | &quot;.&quot; -&gt; %2E | &quot;!&quot; -&gt; %21 | &quot;~&quot; -&gt; %7E | 
+   
+   &quot;*&quot; -&gt; %2A | &quot;'&quot; -&gt; %27 | &quot;(&quot; -&gt; %28 | &quot;)&quot; -&gt; %29 | &quot;;&quot; -&gt; %3B | 
+   
+   &quot;/&quot; -&gt; %2F | &quot;?&quot; -&gt; %3F | &quot;:&quot; -&gt; %3A | &quot;@&quot; -&gt; %40 | &quot;&amp;&quot; -&gt; %26 | 
+   
+   &quot;=&quot; -&gt; %3D | &quot;+&quot; -&gt; %2B | &quot;$&quot; -&gt; %24 | &quot;,&quot; -&gt; %2C | &quot;&quot;&quot; -&gt; %22 | 
+   
+   &quot;#&quot; -&gt; %23 | &quot;%&quot; -&gt; %25 |  
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">URLEncoder</font>(&quot;http://www.purebasic.com/test with space.php3&quot;)
+  <font color="#006666">; Wird &quot;http://www.purebasic.com/test%20with%20space.php3&quot; ausgeben</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">URLEncoder</font>(&quot;http://www.ok.com value=zzz ?yyy/&quot;)
+  <font color="#006666">; Wird &quot;http://www.ok.com%20value=zzz%20?yyy/&quot; ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="urldecoder.html">URLDecoder()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=urldecoder.html>URLDecoder()</a> - <a href=index.html>Http Inhaltsverzeichnis</a><br><br>
+
+</body></html>

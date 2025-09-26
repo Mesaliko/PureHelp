@@ -1,0 +1,111 @@
+<html><head><title>SaveFileRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SaveFileRequester()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>SaveFileRequester</b></font>(Titre$, FichierParDefaut$, Filtre$, FiltrePosition [, ParentID])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une boîte de dialogue standard pour 
+enregistrer un fichier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titre$</i></td>
+<td width="90%"> 
+Texte de titre de la boîte de dialogue, il 
+remplace le titre par défaut. 
+
+</td></tr>
+<tr><td><i>FichierParDefaut$</i></td>
+<td> 
+Permet d'initialiser la boîte de dialogue 
+avec un répertoire et un fichier par défaut. 
+
+</td></tr>
+<tr><td><i>Filtre$</i></td>
+<td> 
+Permet de n'afficher que les fichiers dont 
+le nom et/ou l'extension de fin correspond 
+au filtre. 
+<br>
+<br>
+Il doit avoir la forme des exemples suivants : 
+'*.txt' pour des fichiers texte, '*.mus;*.mod' 
+pour des fichiers musique ayant l'extension 
+'.mus' ou '.mod'. Chaque filtre est en fait 
+une paire composée du label qui sera visible 
+dans le requester et du filtre proprement dit. 
+Le séparateur est le caractère '|' (Pipe). 
+<br>
+<br>
+Note: Les paramètres 'Filtre$' et 'FiltrePosition' 
+n'ont aucun effet sur Mac OSX 
+(tous les fichiers seront toujours affichés). 
+
+</td></tr>
+<tr><td><i>FiltrePosition</i></td>
+<td> 
+Nombre qui précise le filtre utilisé par défaut. 
+<br>
+<br>
+Valeur entre  0 et le nombre total de filtres moins 1. 
+<br>
+<br>
+Une fois la boîte fermée, <a href="selectedfilepattern.html">SelectedFilePattern()</a> permet 
+de récupérer la position du filtre choisi. 
+<br>
+<br>
+Note: Les paramètres 'Filtre$' et 'FiltrePosition' 
+n'ont aucun effet sur Mac OSX 
+(tous les fichiers seront toujours affichés). 
+
+</td></tr>
+<tr><td><i>ParentID (optionnel)</i></td>
+<td> 
+L'identifiant de la fenêtre parent. 
+<br>
+<br>
+Un identifiant de fenêtre valide peut être récupéré avec <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nom du fichier entré ou une chaîne de 
+caractères vide si l'utilisateur a annulé la boîte. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le 'NomFichier$' renvoyé peut être découpé 
+facilement en chemin, nom ou extension à 
+l'aide des commandes suivantes: <a href="../filesystem/getfilepart.html">GetFilePart()</a>, 
+<a href="../filesystem/getpathpart.html">GetPathPart()</a> et <a href="../filesystem/getextensionpart.html">GetExtensionPart()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  FichierParDefaut$ = &quot;C:\autoexec.bat&quot;   <font color="#006666">; Répertoire et fichier par défaut qui seront affichés</font>
+  <font color="#006666">;  Avec la chaîne suivante nous allons définir les filtres (&quot;|&quot; comme séparateur) pour l'affichage de fichier :</font>
+  <font color="#006666">;  1er  : &quot;Texte (*.txt)&quot; comme nom, &quot;.txt&quot; et &quot;.bat&quot; comme extension autorisée</font>
+  <font color="#006666">;  2ème : &quot;PureBasic (*.pb)&quot; comme nom, &quot;.pb&quot; comme extension autorisée</font>
+  <font color="#006666">;  3ème : &quot;Tous les fichiers (*.*)&quot; comme nom, &quot;*.*&quot; comme extension autorisée, valide pour tous les fichiers</font>
+  Filtre$ = &quot;Texte (*.txt)|*.txt;*.bat|PureBasic (*.pb)|*.pb|Tous les fichiers (*.*)|*.*&quot;
+  Filtre = 0    <font color="#006666">; utiliser  par défaut le premier des trois filtres possibles</font>
+  Fichier$ =<font color="#006666"> SaveFileRequester</font>(&quot;Choisissez un fichier à sauvegarder&quot;, FichierParDefaut$, Filtre$, Filtre)
+  <b><font color="#006666">If</font></b> Fichier$
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Vous avez choisi ce fichier :&quot;+<font color="#006666">Chr</font>(10)+Fichier$, 0)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;La sélection a été annulée.&quot;, 0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/savefilerequester.png"></p>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=pathrequester.html>PathRequester()</a> - <a href=index.html>Requester Index</a> - <a href=selectedfilepattern.html>SelectedFilePattern()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html><head><title>ClearList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ClearList</b></font>(List()) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Clears all the elements in this list and releases their memory. After this call 
+the list is still usable, but the list is empty (i.e. there are no elements in it). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+PureBasic will only free the memory for the elements. If you have been using the 
+list for something such as storing handles of objects that you create 
+directly with the OS, there is no way PureBasic (or any other language) can know 
+what they are. Therefore, in cases such as that, you should go through the 
+elements in the list and free the objects yourself. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>.w()
+
+  <font color="#006666">; A small loop to add many items to the list</font>
+  <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 100
+<font color="#006666">    AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">    Numbers</font>() = i
+  <b><font color="#006666">Next</font></b>
+
+  <font color="#006666">; Proof that items have been added to the list</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;There are &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">Numbers</font>()))+&quot; elements in the list&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+ 
+  <font color="#006666">; Clear the list and show that the list really is empty</font>
+<font color="#006666">  ClearList</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;There are &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">Numbers</font>()))+&quot; elements in the list&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="deleteelement.html">DeleteElement()</a>, <a href="freelist.html">FreeList()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=changecurrentelement.html>ChangeCurrentElement()</a> - <a href=index.html>List Index</a> - <a href=comparelist.html>CompareList()</a> -><br><br>
+
+</body></html>

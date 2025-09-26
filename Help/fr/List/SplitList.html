@@ -1,0 +1,99 @@
+<html><head><title>SplitList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SplitList()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SplitList</b></font>(ListeSource(), ListeDestination() [, GarderElementCourant])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Découpe une liste en deux. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ListeSource()</i></td>
+<td width="90%"> 
+La liste à partir de laquelle les éléments 
+seront déplacés. L'élément courant de la 
+liste précise le point de division de la 
+liste. S'il n'y a pas d'élément courant, 
+alors tous les éléments restent dans 
+ListeSource(). 
+
+</td></tr>
+<tr><td><i>ListeDestination()</i></td>
+<td> 
+La liste vers laquelle les éléments seront 
+déplacés. Tous les éléments existants dans 
+cette liste sont supprimés avant l'ajout 
+des nouveaux éléments. 
+
+</td></tr>
+<tr><td><i>GarderElementCourant (optionnel)</i></td>
+<td> 
+Indique si l'élément courant de 
+ListeSource() reste dans ListeSource() ou 
+s'il est déplacé vers ListeDestination(). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>  : L'élément courant reste dans ListeSource(). 
+  <font color="#924B72">#False</font> : L'élément courant est déplacé vers ListeDestination() (par défaut).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette opération est rapide car les données 
+elles-même ne sont pas déplacées. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si 'GarderElementCourant' est fixé à <font color="#924B72">#True</font> 
+alors le nouvel élément courant dans 
+ListeSource() sera l'élément précédent de 
+la liste. S'il n'y a pas d'élément précédent 
+alors la liste n'aura plus d'élément courant. 
+La ListeDestination() n'aura aucun élément 
+courant. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">NewList</font></b> <font color="#006666">B</font>()
+  
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">A</font>())
+<font color="#006666">    A</font>() = i
+  <b><font color="#006666">Next</font></b> i
+  
+  <font color="#006666">; Coupe en deux la liste A() à l'élément 5 et déplace les éléments restants dans la liste B()</font>
+<font color="#006666">  SelectElement</font>(<font color="#006666">A</font>(), 5)
+<font color="#006666">  SplitList</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>())
+  
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- A() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">A</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- B() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">B</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">B</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="mergelists.html">MergeLists()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=selectelement.html>SelectElement()</a> - <a href=index.html>List Index</a> - <a href=swapelements.html>SwapElements()</a> -><br><br>
+
+</blockquote>
+</font></body></html>

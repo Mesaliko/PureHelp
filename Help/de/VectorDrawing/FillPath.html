@@ -1,0 +1,77 @@
+<html><head><title>FillPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FillPath()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FillPath</b></font>([Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Füllt alle geschlossenen Figuren im aktuellen Vektorzeichnen-Pfad mit der Farbe 
+der Zeichenquelle aus. 
+<br>
+<br>
+Standardmäßig wird der Pfad nach dem Aufruf dieser Funktion zurückgesetzt. 
+Dies kann durch entsprechende Flags verhindert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Flags (optional)</i></td>
+<td width="90%"> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Path_Default</font>     : Kein spezielles Verhalten  (Standardwert)
+  <font color="#924B72">#PB_Path_Preserve</font>    : Den Pfad nach dieser Funktion nicht zurücksetzen
+  <font color="#924B72">#PB_Path_Winding</font>     : Füllt den gesamten Pfad einschließlich sich überlappender Figuren (kein ungerade/gerade Modus).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn der Pfad sich überlappende Figuren enthält, dann wird er in einem ungerade / 
+gerade Modus gefüllt, außer es wurde <font color="#924B72">#PB_Path_Winding</font> angegeben. Von einer ungeraden Anzahl Grenzen eingeschlossene Bereiche 
+werden gefüllt, während in einer geraden Anzahl Grenzen eingeschlossene Bereiche 
+nicht gefüllt werden. Das heißt, alles innerhalb der Außengrenze wird gefüllt, 
+während eingeschlossene Figuren nicht ausgefüllt werden. Wenn die eingeschlossene 
+Figur ebenfalls eine eingeschlossene Figur enthält, wird diese dritte Figur ebenfalls 
+gefüllt, usw. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+<font color="#006666">      AddPathBox</font>(50, 50, 200, 50)
+<font color="#006666">      AddPathBox</font>(150, 75, 200, 50)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+<font color="#006666">      FillPath</font>()
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/fillpath.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="strokepath.html">StrokePath()</a>, <a href="dotpath.html">DotPath()</a>, <a href="dashpath.html">DashPath()</a>, <a href="customdashpath.html">CustomDashPath()</a>, <a href="resetpath.html">ResetPath()</a>, <a href="clippath.html">ClipPath()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=endvectorlayer.html>EndVectorLayer()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=fillvectoroutput.html>FillVectorOutput()</a> -><br><br>
+
+</body></html>

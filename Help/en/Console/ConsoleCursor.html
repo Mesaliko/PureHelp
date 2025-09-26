@@ -1,0 +1,65 @@
+<html><head><title>ConsoleCursor</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConsoleCursor()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ConsoleCursor</b></font>(Height)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the display of the cursor, which is the indicator used to show where the next displayed character 
+will be drawn. This function allows you to change the height of the cursor. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Height</i></td>
+<td width="90%"> 
+The new height of the cursor indicator. This value can be zero (for an invisible cursor) or range 
+from 1 to 10 for the height of the cursor. Currently, 3 values are available: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  1 : Underline cursor (default)
+  5 : Mid-height cursor
+  10: Full-height cursor
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+By default the cursor is a flashing underline in consoles under the Windows OS. Note that you 
+might need to make the console window full-screen to see the true effect of this function. 
+<br>
+<br>
+The console has to be in graphical mode, see <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    EnableGraphicalConsole</font>(1)
+
+    <b><font color="#006666">For</font></b> CursorHeight = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">      ConsoleCursor</font>(CursorHeight)
+<font color="#006666">      PrintN</font>(&quot;Press return to increase cursor size&quot;)
+<font color="#006666">      Input</font>()
+    <b><font color="#006666">Next</font></b>
+    
+<font color="#006666">    PrintN</font>(&quot;Press return to exit&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=consolecolor.html>ConsoleColor()</a> - <a href=index.html>Console Index</a> - <a href=consoleerror.html>ConsoleError()</a> -><br><br>
+
+</body></html>

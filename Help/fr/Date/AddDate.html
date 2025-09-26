@@ -1,0 +1,71 @@
+<html><head><title>AddDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddDate()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.q = <font color="#006666"><b>AddDate</b></font>(Date.q, Plage, Valeur)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ajouter une quantité de temps à une date. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Date.q</i></td>
+<td width="90%"> 
+La date à utiliser. 
+
+</td></tr>
+<tr><td><i>Plage</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Year</font>   : Ajoute 'Valeur' années à la date
+  <font color="#924B72">#PB_Date_Month</font>  : Ajoute 'Valeur' mois à la date
+  <font color="#924B72">#PB_Date_Week</font>   : Ajoute 'Valeur' semaines à la date
+  <font color="#924B72">#PB_Date_Day</font>    : Ajoute 'Valeur' jours à la date
+  <font color="#924B72">#PB_Date_Hour</font>   : Ajoute 'Valeur' heures à la date
+  <font color="#924B72">#PB_Date_Minute</font> : Ajoute 'valeur' minutes à la date
+  <font color="#924B72">#PB_Date_Second</font> : Ajoute 'valeur' secondes à la date
+</font></pre>
+
+<blockquote>
+
+Note: l'utilisation de <font color="#924B72">#PB_Date_Month</font> peut entrainer un arrondi automatique 
+du jour si nécessaire: Par exemple, ajouter un mois au '31 mars 2008' 
+renverra '30 avril 2008', car il n'y a pas 31 jours en avril. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Valeur </i></td>
+<td>
+La quantité à ajouter à la date. 
+<br>
+Une valeur négative est autorisée et permet de soustraire deux dates. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la nouvelle date. 
+<br>
+Si les paramètres donnés ne sont pas valides ou en dehors de la plage de dates supportée, 
+-1 sera renvoyé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> AddDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_Year</font>, 2))  <font color="#006666">; Renvoie la date courante augmentée de 2 ans</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> AddDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_Year</font>, -2)) <font color="#006666">; Renvoie la date courante diminuée de 2 ans</font>
+
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="date.html">Date()</a>, <a href="formatdate.html">FormatDate()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Date Index</a> - <a href=convertdate.html>ConvertDate()</a> -><br><br>
+
+</body></html>

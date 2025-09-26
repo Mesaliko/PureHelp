@@ -1,0 +1,60 @@
+<html><head><title>StrD</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StrD()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>StrD</b></font>(Wert.d [, Stellen])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Konvertiert eine Fließkomma-Zahl doppelter Genauigkeit (Double) in einen String. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Wert.d</i></td>
+<td width="90%"> 
+Der zu konvertierende Wert. 
+
+</td></tr>
+<tr><td><i>Stellen (optional)</i></td>
+<td> 
+Die maximale Zahl an Dezimalstellen ('Stellen') der konvertierten Zahl. 
+Wird diese nicht angegeben, wird die Zahl auf 10 Nachkommastellen gesetzt und die 
+abschließenden Nullen entfernt. 
+<br>
+Die Zahl wird auf die nächste Dezimalstelle gerundet (vergleiche mit <a href="../math/round.html">Round()</a>), wenn 'Stellen' kleiner 
+als die existierenden Dezimalstellen von 'Wert.d' sind. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein String, der den konvertierten Wert beinhaltet. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Ganzzahlen (mit Vorzeichen) werden mit dem Befehl <a href="str.html">Str()</a> und vorzeichenlose Zahlen 
+mit dem Befehl <a href="stru.html">StrU()</a> konvertiert. Es ist möglich, diesen Befehl beim Verketten 
+von String und Double Fließkomma-Zahlen wegzulassen, es wird dann das Standardverhalten 
+von <a href="strd.html">StrD()</a> verwendet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Value.d = 10.54
+  <b><font color="#006666">Debug</font></b> &quot;Ergebnis: &quot; +<font color="#006666"> StrF</font>(value)     <font color="#006666">; wir verwenden nicht den 2. Parameter, bekommen eine Fließkommazahl gerundet auf 10 Nachkommastellen</font>
+  <b><font color="#006666">Debug</font></b> &quot;Ergebnis: &quot; + value           <font color="#006666">; analog der vorherigen Zeile</font>
+  <b><font color="#006666">Debug</font></b> &quot;Ergebnis: &quot; +<font color="#006666"> StrD</font>(Value, 2)  <font color="#006666">; wir möchten ein Ergebnis mit zwei Dezimalstellen, es ist kein Runden nötig, da nur zwei vorhanden sind</font>
+  <b><font color="#006666">Debug</font></b> &quot;Ergebnis: &quot; +<font color="#006666"> StrD</font>(Value, 0)  <font color="#006666">; wir möchten ein Ergebnis ohne Dezimalstellen, daher wird der Wert gerundet</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="strf.html">StrF()</a>, <a href="str.html">Str()</a>, <a href="stru.html">StrU()</a>, <a href="formatnumber.html">FormatNumber()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=str.html>Str()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=strf.html>StrF()</a> -><br><br>
+
+</body></html>

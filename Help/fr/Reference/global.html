@@ -1,0 +1,124 @@
+<html><head><title>Global</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Global</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Global</font></b>[.&lt;type&gt;] &lt;variable[.&lt;type&gt;]&gt; [= &lt;expression&gt;] [, ...]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Une variable déclarée <b><font color="#006666">Global</font></b> n'importe où dans le code est visible et utilisable 
+n'importe où dans le code à l'exception du cas suivant: Les  <a href="../reference/module.html">modules</a> 
+n'ont pas accès aux variables déclarées globales en dehors de ce module.  <br>
+
+<b><font color="#006666">Global</font></b> peut aussi être utilisé avec les <a href="../reference/dim.html">tableaux</a>, 
+les <a href="../reference/newlist.html">listes</a> et les <a href="../reference/newmap.html">maps</a>. <br>
+<br>
+Les instructions <a href="../reference/protected.html">Protected</a> et <a href="../reference/static.html">Static</a> 
+permettent de déclarer une variable locale dans une procédure qui a le même nom qu'une 
+variable globale, sans risque de conflit. 
+
+
+</blockquote><p><b>Exemple:</b> Avec des variables</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> a.l, b.b, c, d = 20
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Debug</font></b> a  <font color="#006666">; Affiche 10 car la variable 'a' est globale</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  a = 10
+<font color="#006666">  Change</font>()
+</font></pre>
+
+<br>
+</blockquote><p><b>Exemple:</b> Avec un tableau</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">Tableau</font>(2)
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Tableau</font>(0)  <font color="#006666">; Affiche 10 car le tableau 'Tableau()' est global</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  Tableau</font>(0) = 10
+<font color="#006666">  Change</font>()
+</font></pre>
+
+<br>
+</blockquote><p><b>Exemple:</b> Complexe avec un module: Tous les cas de figure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> Var_GlobaleHorsModule = 12
+  <b><font color="#006666">Debug</font></b>  Var_GlobaleHorsModule <font color="#006666">; Affiche 12</font>
+
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+    <b><font color="#006666">Global</font></b> Var_GlobaleModule = 308
+    <font color="#924B72">#FerrariName$</font> = &quot;458 Italia&quot;
+    <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font> <font color="#006666">; Affiche &quot;458 Italia&quot;</font>
+  
+    <font color="#006666">; Debug Var_GlobaleHorsModule ; Affiche une erreur car le compilateur veut créer une var globale qui exste déjà</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobaleModule       <font color="#006666">; Affiche 308</font>
+  
+    <b><font color="#006666">Declare</font></b> <font color="#006666">CreateFerrari</font>() 
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+
+  <font color="#006666">; Tous les éléments de cette section seront privés. Tous les noms peuvent être utilisés sans conflit</font>
+  <font color="#006666">; --------------------------------------------------------------------------------------------------</font>
+  <b><font color="#006666">Module</font></b> Ferrari
+    <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule  <font color="#006666">; Affiche 0  &lt;== Regarder !</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobaleModule      <font color="#006666">; Affiche 308</font>
+  
+    <b><font color="#006666">Global</font></b> Initialized = 205
+    <b><font color="#006666">Debug</font></b> Initialized <font color="#006666">; Affiche 205</font>
+  
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()
+      <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule <font color="#006666">; Affiche 0</font>
+      <b><font color="#006666">Debug</font></b> Var_GlobaleModule     <font color="#006666">; Affiche 308</font>
+      <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;  
+    <b><font color="#006666">EndProcedure</font></b>  
+  
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">CreateFerrari</font>()    <font color="#006666">; Procédure publique (car déclarée dans la section 'DeclareModule')</font>
+<font color="#006666">      Init</font>()
+      <b><font color="#006666">Debug</font></b> &quot;CreateFerrari()&quot;
+      <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule <font color="#006666">; Affiche 0</font>
+      <b><font color="#006666">Debug</font></b> Var_GlobaleModule     <font color="#006666">; Affiche 308</font>
+    <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">EndModule</font></b>
+
+
+  <font color="#006666">; Code principal</font>
+  <font color="#006666">; -------------------------------------------------------------------------------------------------- </font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()               <font color="#006666">; Procédure d'initialisation principale, n'entre pas en conflit avec la procédure </font>
+                                 <font color="#006666">; Init() du Module Ferrari</font>
+  
+    <b><font color="#006666">Debug</font></b> &quot;Procédure init() du code principal.&quot;
+    <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule <font color="#006666">; Affiche 12</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobaleModule     <font color="#006666">; Affiche 0</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  Init</font>()
+
+  Ferrari::<font color="#006666">CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> Ferrari::<font color="#924B72">#FerrariName$</font> <font color="#006666">; Affiche 458 Italia</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule  <font color="#006666">; Affiche 12</font>
+  <font color="#006666">; Debug Var_GlobaleModule    ; Affiche une erreur car le compilateur veut créer une var globale qui exste déjà</font>
+
+
+  <b><font color="#006666">UseModule</font></b> Ferrari           <font color="#006666">; Maintenant, importer tous les éléments publics directement dans le programme principal</font>
+
+<font color="#006666">  CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font>         <font color="#006666">; Affiche 458 Italia</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule <font color="#006666">; Affiche 12</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobaleModule     <font color="#006666">; Affiche 308  &lt;== Regarder !</font>
+
+  <b><font color="#006666">UnuseModule</font></b> Ferrari
+  <font color="#006666">; Debug #FerrariName$       ; Affiche une erreur, introuvable</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobaleHorsModule <font color="#006666">; Affiche 12</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobaleModule     <font color="#006666">; Affiche 0  &lt;== Regarder !</font>
+</font></pre>
+</blockquote>
+</font></body></html>

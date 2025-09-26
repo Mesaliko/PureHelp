@@ -1,0 +1,77 @@
+<html><head><title>Point</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Point()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>Point</b></font>(X, Y)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la couleur d'un point de la 
+surface de dessin en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X, Y</i></td>
+<td width="90%"> 
+Position du pixel. 
+<br>
+<br>
+Les coordonnées X, Y doivent être 
+obligatoirement à l'intérieur de la 
+surface de dessin, car il n'y a pas de 
+contrôle pour des raisons de rapidité. 
+<br>
+<a href="outputwidth.html">OutputWidth()</a> et <a href="outputheight.html">OutputHeight()</a> peuvent 
+être utilisés pour cela.<br>
+Cette commande n'est pas affectée par le 
+clipping (écrêtage) imposé par 
+<a href="clipoutput.html">ClipOutput()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la couleur du pixel. 
+<br>
+<br>
+Cette couleur contiendra une valeur 
+alpha uniquement si la zone de dessin 
+est en 32 bits et que le <a href="drawingmode.html">DrawingMode()</a> 
+est configuré sur un des modes alpha 
+(transparence). Sinon la valeur alpha 
+de la couleur sera égale à zéro. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande ne fonctionne pas avec 
+<a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;Point&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 0, 0))
+      <b><font color="#006666">Debug</font></b> <font color="#006666">Point</font>(100, 100)
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="plot.html">Plot()</a>, <a href="red.html">Red()</a>, <a href="green.html">Green()</a>, 
+<a href="blue.html">Blue()</a>, <a href="alpha.html">Alpha()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=plot.html>Plot()</a> - <a href=index.html>2DDrawing Index</a> - <a href=rgb.html>RGB()</a> -><br><br>
+
+</body></html>

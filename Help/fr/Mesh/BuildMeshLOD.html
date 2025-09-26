@@ -1,0 +1,66 @@
+<html><head><title>BuildMeshLOD</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BuildMeshLOD()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>BuildMeshLOD</b></font>(#Mesh [, NbLOD, Distance.f, ValeurReduction.f])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Construit automatiquement un ou plusieurs niveaux de détail (LOD) pour le mesh. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mesh</i></td>
+<td width="90%"> 
+Le mesh à utiliser. 
+
+</td></tr>
+<tr><td><i>NbLOD (optionnel)</i></td>
+<td> 
+Nombre de LOD nécessaires pour ce mesh.<br>
+Si ce paramètre n'est pas utilisé, les LOD seront calculés automatiquement. 
+
+</td></tr>
+<tr><td><i>Distance (optionnel)</i></td>
+<td> 
+Distance minimale par rapport à la caméra où le premier mesh LOD sera utilisé 
+à la place de #Mesh.<br>
+Pour les meshs LOD suivants, la distance sera calculée à l'aide de la formule suivante: 
+'Distance / SqrF (1-ValeurReduction)'. 
+
+</td></tr>
+<tr><td><i>ValeurReduction.f (optionnel)</i></td>
+<td> 
+La réduction à appliquer, entre 0 (pas de réduction) et 1 (réduction de 100%). 
+<br>
+<br>
+Exemple: CreateMeshLodLevels(<font color="#924B72">#Mesh</font>, 3, 100, 0.75) <br>
+- La première réduction du mesh d'origine commence à partir de 100 unités de la caméra, nombre de sommets divisé par 2 (réduction de 75%).<br>
+- La deuxième réduction du mesh d’origine commence à partir de 200 unités de la caméra, nombre de sommets divisé par 16.<br>
+- La troisième réduction du mesh d’origine commence à partir de 400 unités de la caméra, nombre de sommets divisé par 64. 
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le #Mesh sera automatiquement remplacé par un maillage moins complexe lorsqu'il sera 
+affiché au-dessus de la distance spécifiée par rapport à la caméra. 
+<br>
+<br>
+Si des meshs LOD plus précis sont requis, vous pouvez utiliser <a href="addmeshmanuallod.html">AddMeshManualLOD()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createmesh.html">CreateMesh()</a>, <a href="addmeshmanuallod.html">AddMeshManualLOD()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addsubmesh.html>AddSubMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=buildmeshshadowvolume.html>BuildMeshShadowVolume()</a> -><br><br>
+
+</body></html>

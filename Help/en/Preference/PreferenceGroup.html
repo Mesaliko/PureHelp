@@ -1,0 +1,56 @@
+<html><head><title>PreferenceGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PreferenceGroup()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>PreferenceGroup</b></font>(Name$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new group (in the form: [Name$]) or changes the current group in the preference file. 
+All following read or write operations will be restricted to this group. 
+To move outside of any groups, an empty 'Name$' can be used. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Name$</i></td>
+<td width="90%"> 
+The new group name. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the group was already created, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If the group does not exist yet, it will not be created immediately. It will instead be created once 
+the first key is written to it. This allows to use the PreferenceGroup() function to test if a group exists 
+without creating many empty groups. The group search is case-insensitive. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Open a preference file</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Select a group</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+  
+  <font color="#006666">; Examine keys in the group 'Window'</font>
+<font color="#006666">  ExaminePreferenceKeys</font>()
+  <b><font color="#006666">While</font></b>  <font color="#006666">NextPreferenceKey</font>() <font color="#006666">; While a key exists</font>
+<font color="#006666">    MessageRequester</font>(&quot;Keys from the 'Window' group&quot;,<font color="#006666"> PreferenceKeyName</font>() + &quot; = &quot; +<font color="#006666"> PreferenceKeyValue</font>())  <font color="#006666">; Display the key with its data</font>
+  <b><font color="#006666">Wend</font></b>
+  
+  <font color="#006666">; Close the preference file</font>
+<font color="#006666">  ClosePreferences</font>()  
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=preferencecomment.html>PreferenceComment()</a> - <a href=index.html>Preference Index</a> - <a href=preferencegroupname.html>PreferenceGroupName()</a> -><br><br>
+
+</body></html>

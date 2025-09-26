@@ -1,0 +1,63 @@
+<html><head><title>NextElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">NextElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>NextElement</b></font>(Liste())  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+L'élément suivant devient l'élément 
+courant. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'adresse de l'élément suivant 
+en cas de succès ou zéro s'il n'y a pas 
+d'élément suivant. 
+<br>
+La valeur renvoyée par cette commande est 
+un <a href="../reference/memory.html">pointeur</a> 
+vers les données de l'élément suivant s'il existe. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Passe au premier élément si <a href="resetlist.html">ResetList()</a> a été utilisé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">scores</font>.w()
+
+  <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">scores</font>())
+<font color="#006666">    scores</font>() = 100 - i
+  <b><font color="#006666">Next</font></b>
+
+<font color="#006666">  ResetList</font>(<font color="#006666">scores</font>())
+  <b><font color="#006666">While</font></b> <font color="#006666">NextElement</font>(<font color="#006666">scores</font>())
+    <font color="#006666">; Ceci est correct car le premier appel à NextElement() va déplacer l'élément courant vers le premier élément de la liste</font>
+<font color="#006666">    MessageRequester</font>(&quot;Score&quot;,<font color="#006666"> Str</font>(<font color="#006666">scores</font>()), <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="resetlist.html">ResetList()</a>, <a href="previouselement.html">PreviousElement()</a>, 
+<a href="firstelement.html">FirstElement()</a>, <a href="lastelement.html">LastElement()</a>, 
+<a href="selectelement.html">SelectElement()</a>, <a href="listindex.html">ListIndex()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=moveelement.html>MoveElement()</a> - <a href=index.html>List Index</a> - <a href=poplistposition.html>PopListPosition()</a> -><br><br>
+
+</body></html>

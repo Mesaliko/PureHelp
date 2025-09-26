@@ -1,0 +1,80 @@
+<html><head><title>CreateNetworkServer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateNetworkServer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateNetworkServer</b></font>(#Server, Port [, Flags [, BoundIP$]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create a new network server on the local computer using the specified port. To support TLS encryption, <a href="usenetworktls.html">UseNetworkTLS()</a> needs to be 
+called before this command and a TLS flag needs to be specified. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Server</i></td>
+<td width="90%"> 
+A number to identify the new server. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Port</i></td>
+<td> 
+The port to use for the server. 
+Port values can range from 6000 to 7000 (this is a recommended area space, 
+but it can go from 0 to 65000 in reality). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_TCP</font>: the server will use the <a href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP network protocol</a> (default)
+  <font color="#924B72">#PB_Network_UDP</font>: the server will use the <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP network protocol</a>
+</font></pre>
+combined with one of the following values (using the '|' operand): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_IPv4</font>: create a server using IPv4 (default)
+  <font color="#924B72">#PB_Network_IPv6</font>: create a server using IPv6
+</font></pre>
+combined with one of the following values (using the '|' operand): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_NoTLS</font>  : no encryption will be used for this server (default)
+  <font color="#924B72">#PB_Network_TLSv1</font>  : all non-deprecated TLS protocols will be supported (currently v1.2 and v1.3)
+  <font color="#924B72">#PB_Network_TLSv1_0</font>: TLS v1.0 protocol will be supported (warning, this protocol is deprecated for security reasons)
+  <font color="#924B72">#PB_Network_TLSv1_1</font>: TLS v1.1 protocol will be supported (warning, this protocol is deprecated for security reasons)
+  <font color="#924B72">#PB_Network_TLSv1_2</font>: TLS v1.2 protocol will be supported
+  <font color="#924B72">#PB_Network_TLSv1_3</font>: TLS v1.3 protocol will be supported
+</font></pre>
+
+</td></tr>
+<tr><td><i>BoundIP$ (optional)</i></td>
+<td> 
+The local IP address to bind the server. By default, the server is created on all available local interfaces, and accept 
+connections from them. It can be useful to restrict the server to only one interface (for example &quot;127.0.0.1&quot;) 
+to avoid connection attempt from other interfaces. On Windows, binding only to the localhost avoid to trigger the 
+built-in firewall. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the server was created successfully and zero if creation 
+failed, for example, due to the port being already in use. 
+If #PB_Any was used as the #Server parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Any number of servers can run simultaneously on the same computer, the only restriction 
+being that two servers can not run using the same port and the same protocol (<font color="#924B72">#PB_Network_TCP</font> and <font color="#924B72">#PB_Network_UDP</font>). 
+It's possible to create two servers using the same port, one using IPv4 and the other using IPv6. 
+<a href="networkserverevent.html">NetworkServerEvent()</a> can be used to monitor server for events. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a>, <a href="closenetworkserver.html">CloseNetworkServer()</a>, <a href="networkserverevent.html">NetworkServerEvent()</a>, <a href="usenetworktls.html">UseNetworkTLS()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=connectionid.html>ConnectionID()</a> - <a href=index.html>Network Index</a> - <a href=eventclient.html>EventClient()</a> -><br><br>
+
+</body></html>

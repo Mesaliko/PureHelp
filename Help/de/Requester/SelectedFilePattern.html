@@ -1,0 +1,46 @@
+<html><head><title>SelectedFilePattern</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SelectedFilePattern()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Index = <font color="#006666"><b>SelectedFilePattern</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den mittels <a href="openfilerequester.html">OpenFileRequester()</a> oder <a href="savefilerequester.html">SaveFileRequester()</a> ausgewählten 
+Pattern-Index (Dateien-Filter) zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der mittels <a href="openfilerequester.html">OpenFileRequester()</a> oder <a href="savefilerequester.html">SaveFileRequester()</a> ausgewählte 
+Pattern-Index (Dateien-Filter). 
+Das erste Pattern befindet sich an Position 0. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  StandardFile$ = &quot;C:\autoexec.bat&quot;        <font color="#006666">; anfänglicher Pfad + Dateiname</font>
+  Pattern$ = &quot;Text (*.txt)|*.txt;*.bat|&quot;   <font color="#006666">; ersten Pattern festlegen  (Index = 0)</font>
+  Pattern$ + &quot;PureBasic (*.pb)|*.pb|&quot;      <font color="#006666">; zweiten Pattern festlegen (Index = 1)</font>
+  Pattern$ + &quot;Bmp (*.bmp)|*.bmp|&quot;          <font color="#006666">; dritten Pattern festlegen (Index = 2)</font>
+  Pattern$ + &quot;Jpeg (*.jpg)|*.jpg|&quot;         <font color="#006666">; vierten Pattern festlegen (Index = 3)</font>
+  Pattern$ + &quot;All files (*.*)|*.*&quot;         <font color="#006666">; fünften Pattern festlegen (Index = 4)</font>
+  Pattern = 1    <font color="#006666">; wir verwenden den zweiten von fünf möglichen Pattern als Standard</font>
+
+  <font color="#006666">; Jetzt öffnen wir den Dateirequester, Sie können den Dateityp (Pattern) ändern</font>
+  <font color="#006666">; und erhalten nach dem Schließen des Requesters den Index zurück.</font>
+  File$ =<font color="#006666"> OpenFileRequester</font>(&quot;Bitte Datei zum Laden auswählen&quot;, StandardFile$, Pattern$, Pattern)
+  Index =<font color="#006666"> SelectedFilePattern</font>()
+  <b><font color="#006666">If</font></b> Index &gt; -1
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Folgender Pattern-Index wurde ausgewählt: &quot;+<font color="#006666">Str</font>(Index), 0)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Der Requester wurde abgebrochen.&quot;, 0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=savefilerequester.html>SaveFileRequester()</a> - <a href=index.html>Requester Inhaltsverzeichnis</a> - <a href=selectedfontcolor.html>SelectedFontColor()</a> -><br><br>
+
+</body></html>

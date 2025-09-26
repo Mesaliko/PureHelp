@@ -1,0 +1,80 @@
+<html><head><title>AddWindowTimer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddWindowTimer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddWindowTimer</b></font>(#Window, Timer, Timeout)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Adds a new timer to the specified window. This will cause <font color="#924B72">#PB_Event_Timer</font> events 
+to be received periodically in the <a href="windowevent.html">WindowEvent()</a> or <a href="waitwindowevent.html">WaitWindowEvent()</a> 
+functions. The <a href="removewindowtimer.html">RemoveWindowTimer()</a> function can be used to remove the timer again. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+The window to use. A timer is always attached to a window and will be removed if that window is closed. 
+
+</td></tr>
+<tr><td><i>Timer</i></td>
+<td> 
+An user-defined number that identifies this timer. Timers on separate windows may 
+have overlapping numbers. This value will later be returned from <a href="eventtimer.html">EventTimer()</a> when a 
+<font color="#924B72">#PB_Event_Timer</font> is received. It can also be used to remove the timer again with 
+the <a href="removewindowtimer.html">RemoveWindowTimer()</a> function. 
+
+</td></tr>
+<tr><td><i>Timeout</i></td>
+<td> 
+Specifies the amount of time (in milliseconds) between each <font color="#924B72">#PB_Event_Timer</font> events. 
+The timer events will only be generated when there are no other events to be processed (timers are 
+low-priority events). This means that the time that elapses between two timer events may be larger than 
+the specified Timeout value. Timers are therefore not suited for precise timing but are rather intended 
+to perform periodic tasks such as updating a gadget content or similar. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 100, &quot;Timer Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ProgressBarGadget</font>(0, 10, 10, 380, 20, 0, 100)
+<font color="#006666">    AddWindowTimer</font>(0, 123, 250)
+    
+    Value = 0
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Timer</font> <b><font color="#006666">And</font></b> <font color="#006666">EventTimer</font>() = 123
+        Value = (Value + 5) % 100
+<font color="#006666">        SetGadgetState</font>(0, Value)
+      <b><font color="#006666">EndIf</font></b>    
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To change the timer duration you have to <a href="removewindowtimer.html">remove</a> the timer first, then 
+add the same timer with a new 'Timeout' value again: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">    RemoveWindowTimer</font>(<font color="#924B72">#Window</font>, Timer)
+<font color="#006666">    AddWindowTimer</font>(<font color="#924B72">#Window</font>, Timer, Timeout)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="removewindowtimer.html">RemoveWindowTimer()</a>, <a href="eventtimer.html">EventTimer()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addkeyboardshortcut.html>AddKeyboardShortcut()</a> - <a href=index.html>Window Index</a> - <a href=bindevent.html>BindEvent()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,123 @@
+<html><head><title>ImageGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ImageGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, ImageID [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget Image dans la GadgetList 
+en cours. 
+<br>
+<br>
+Un gadget Image permet de positionner une 
+image dans une fenêtre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+<br>
+<br>
+Le gadget ajuste sa largeur et sa hauteur 
+pour s'adapter à l'image affichée. 
+<br>
+<br>
+La largeur et la hauteur spécifiées ne 
+sont utilisés que si aucune image ne 
+s'affiche. 
+
+</td></tr>
+<tr><td><i>ImageID</i></td>
+<td> 
+L'image à afficher. Utiliser la fonction 
+<a href="../image/imageid.html">ImageID()</a> pour obtenir l'ID d'une image. 
+<br>
+<br>
+Si ce paramètre est 0, aucune image ne 
+sera affichée. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_Border</font> : Affiche un cadre autour de l'image.
+  <font color="#924B72">#PB_Image_Raised</font> : Affiche une bordure surélevée autour de l'image.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  - <a href="setgadgetstate.html">SetGadgetState()</a>: Permet de changer dynamiquement l'image contenue dans le gadget. 
+    Un ImageID valide peut être obtenu via <a href="../image/imageid.html">ImageID()</a>. Si 'ImageID' est 0, alors l'image est retirée du gadget.
+
+  Les évènements suivants sont supportés par <a href="../window/eventtype.html">EventType()</a>:
+    <font color="#924B72">#PB_EventType_Change</font>          : L'élément courant a changé
+    <font color="#924B72">#PB_EventType_LeftClick</font>       : L'utilisateur a cliqué sur un élément avec le bouton gauche de la souris.
+    <font color="#924B72">#PB_EventType_RightClick</font>      : L'utilisateur a cliqué sur un élément avec le bouton droit de la souris.
+    <font color="#924B72">#PB_EventType_LeftDoubleClick</font> : L'utilisateur a double-cliqué sur un élément avec le bouton gauche de la souris.
+    <font color="#924B72">#PB_EventType_RightDoubleClick</font>: L'utilisateur a double-cliqué sur un élément avec le bouton droit de la souris.
+    <font color="#924B72">#PB_EventType_DragStart</font>       : L'utilisateur a essayé de lancer une opération 'Glisser &amp; Déposer'.
+                                    <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> peut être utilisé pour obtenir les informations sur les éléments déplacés.
+
+  Après un évènement <font color="#924B72">#PB_EventType_DragStart</font> , la bibliothèque <a href="../dragdrop/index.html">Drag & Drop</a> peut être 
+  utilisée pour commencer une opération 'Glisser &amp; Déposer'. Sous MacOS X, l'événement 
+  <font color="#924B72">#PB_EventType_DragStart</font> doit être géré à l'aide de <a href="../window/bindevent.html">BindEvent()</a> ou de <a href="bindgadgetevent.html">BindGadgetEvent()</a>.
+
+  Si vous avez besoin de plus de types d'évènements ou de l'affichage avec double-tampon pour une mise à jour 
+  régulière de l'image alors jetez un oeil au canvas gadget <a href="canvasgadget.html">CanvasGadget()</a>.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 245, 105, &quot;ImageGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadImage</font>(0,  <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/Map.bmp&quot;)
+<font color="#006666">      ImageGadget</font>(0,  10, 10, 100, 83,<font color="#006666"> ImageID</font>(0))                       <font color="#006666">; imagegadget standard</font>
+<font color="#006666">      ImageGadget</font>(1, 130, 10, 100, 83,<font color="#006666"> ImageID</font>(0), <font color="#924B72">#PB_Image_Border</font>)     <font color="#006666">; imagegadget avec cadre</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/imagegadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="buttonimagegadget.html">ButtonImageGadget()</a>, <a href="../image/imageid.html">ImageID()</a>, 
+<a href="canvasgadget.html">CanvasGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=ipaddressgadget.html>IPAddressGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=isgadget.html>IsGadget()</a> -><br><br>
+
+</body></html>

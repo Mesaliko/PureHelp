@@ -1,0 +1,80 @@
+<html><head><title>ExtractXMLList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractXMLList()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ExtractXMLList</b></font>(Noeud, Liste() [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait les éléments d'un noeud dans une 
+<a href="../list/index.html">liste</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Noeud</i></td>
+<td width="90%"> 
+Le noeud XML contenant les données à 
+extraire. 
+
+</td></tr>
+<tr><td><i>List()</i></td>
+<td> 
+La liste à remplir avec les éléments XML. 
+<br>
+La liste sera effacée avant d'extraire 
+les éléments. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Si ce paramètre est réglé sur 
+<font color="#924B72">#PB_XML_NoCase</font> alors la comparaison des 
+noms de noeuds et d'attribut XML 
+est insensible à la casse.<br>
+La valeur par défaut est d'être sensible 
+à la casse. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'extraction est réalisée de manière 
+récursive si la liste est structurée. 
+Les noeuds XML doivent avoir la forme 
+décrite dans la fonction <a href="insertxmllist.html">InsertXMLList()</a>. 
+Les noeuds avec des noms différents sont 
+ignorés par l'extraction. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Xml$ = &quot;&lt;list&gt;&lt;element&gt;1&lt;/element&gt;&lt;element&gt;10&lt;/element&gt;&lt;ELEMENT&gt;100&lt;/ELEMENT&gt;&lt;/list&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(0, Xml$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(0) = <font color="#924B72">#PB_XML_Success</font>
+    <b><font color="#006666">NewList</font></b> <font color="#006666">Values</font>()
+<font color="#006666">    ExtractXMLList</font>(<font color="#006666">MainXMLNode</font>(0),<font color="#006666"> Values</font>(), <font color="#924B72">#PB_XML_NoCase</font>)
+    
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">Values</font>()
+      <b><font color="#006666">Debug</font></b> <font color="#006666">Values</font>()
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">XMLError</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="insertxmllist.html">InsertXMLList()</a>, <a href="extractxmlarray.html">ExtractXMLArray()</a>, 
+<a href="extractxmlmap.html">ExtractXMLMap()</a>, <a href="extractxmlstructure.html">ExtractXMLStructure()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=extractxmlarray.html>ExtractXMLArray()</a> - <a href=index.html>XML Index</a> - <a href=extractxmlmap.html>ExtractXMLMap()</a> -><br><br>
+
+</body></html>

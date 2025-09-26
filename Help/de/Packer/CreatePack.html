@@ -1,0 +1,77 @@
+<html><head><title>CreatePack</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePack()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreatePack</b></font>(#Pack, DateiName$ [, Plugin [, Level]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue leere Paket-Datei. Wenn die Datei bereits existiert, dann wird sie durch eine 
+neue leere Datei ersetzt. Bevor eine Paket erstellt wird, muss zumindest ein Packer mit einem der 
+folgenden Befehle registriert werden: <a href="usezippacker.html">UseZipPacker()</a>, <a href="usebrieflzpacker.html">UseBriefLZPacker()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren der neuen Paket-Datei. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann als Parameter verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>DateiName$</i></td>
+<td> 
+Der Dateiname für die neue Paket-Datei. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+Das zu verwendende Plugin, wenn mehr als ein Packer-Plugin registriert wurde. Dies kann einer der 
+folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: verwendet den BriefLZ Packer, um die Paket-Datei zu erstellen. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> muss verwendet werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : verwendet den Zip Packer, um die Paket-Datei zu erstellen. <a href="usezippacker.html">UseZipPacker()</a> muss verwendet werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : verwendet den Lzma Packer, um die Paket-Datei (auch bekannt als 7z Archiv). <a href="uselzmapacker.html">UseLzmaPacker()</a> muss verwendet werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_PackerPlugin_Tar</font>    : verwendet den Tar Packer, um die Paket-Datei zu erstellen. <a href="usetarpacker.html">UseTarPacker()</a> muss verwendet werden, um dieses Plugin zu registrieren.
+                            Es kann mit <font color="#924B72">#PB_Packer_Gzip</font> oder <font color="#924B72">#PB_Packer_Bzip2</font> kombiniert werden, um ein komprimiertes Tar Archiv zu erstellen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Level (optional)</i></td>
+<td> 
+Der zu verwendende Komprimierungsgrad. Dies ist ein ganzzahliger Wert, der von 0 (niedrigeres 
+Kompressionsverhältnis, schnellere Kompression) bis 9 (höheres Kompressionsverhältnis, 
+langsameres Komprimieren) reicht. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Paket-Datei erfolgreich erstellt wurde, andernfalls 
+Null. Wenn <font color="#924B72">#PB_Any</font> als #Pack Parameter verwendet wurde, dann wird die generierte Paket-Nummer 
+zurückgegeben. 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseZipPacker</font>()
+
+  <font color="#006666">; Erstellt die gepackte Datei</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreatePack</font>(0, &quot;mycompressedfiles.zip&quot;) 
+  
+    <font color="#006666">; fügt Dateien hinzu</font>
+<font color="#006666">    AddPackFile</font>(0, &quot;Image1.bmp&quot;, &quot;Image1.bmp&quot;)  
+<font color="#006666">    AddPackFile</font>(0, &quot;Image2.bmp&quot;, &quot;Image2.bmp&quot;) 
+<font color="#006666">    AddPackFile</font>(0, &quot;mywave1.wav&quot;, &quot;mywave1.wav&quot;) 
+<font color="#006666">    AddPackFile</font>(0, &quot;mywave2.wav&quot;, &quot;mywave2.wav&quot;) 
+<font color="#006666">    ClosePack</font>(0) 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closepack.html">ClosePack()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=compressmemory.html>CompressMemory()</a> - <a href=index.html>Packer Inhaltsverzeichnis</a> - <a href=examinepack.html>ExaminePack()</a> -><br><br>
+
+</body></html>

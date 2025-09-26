@@ -1,0 +1,90 @@
+<html><head><title>AddStaticGeometryEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddStaticGeometryEntity()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>AddStaticGeometryEntity</b></font>(#Statique, EntitéID, X, Y, Z [, EchelleX, EchelleY, EchelleZ [, RotationX, RotationY, RotationZ [, RotationW, Mode]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute une entité à une forme géométrique 
+statique. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Statique</i></td>
+<td width="90%"> 
+La forme à utiliser. 
+
+</td></tr>
+<tr><td><i>EntitéID</i></td>
+<td> 
+Le numéro d'identification 
+<a href="../entity/entityid.html">EntitéID</a> de 
+l'entité à ajouter à la forme géométrique 
+statique. 
+
+</td></tr>
+<tr><td><i>X, Y, Z</i></td>
+<td> 
+La position de l'entité dans la forme 
+géométrique statique. 
+
+</td></tr>
+<tr><td><i>EchelleX, EchelleY, EchelleZ (optionnel)</i></td>
+<td> 
+Le facteur d'échelle à appliquer à l'entité. 
+
+</td></tr>
+<tr><td><i>RotationX, RotationY, RotationZ (optionnel)</i></td>
+<td> 
+La rotation à appliquer à l'entité. 
+
+</td></tr>
+<tr><td><i>RotationW (optionnel)</i></td>
+<td> 
+La rotation à appliquer à l'entité. (Seulement utilisé avec <font color="#924B72">#PB_Orientation_Quaternion</font> et <font color="#924B72">#PB_Orientation_Direction</font>). 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Le mode de rotation. Peut avoir l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Orientation_PitchYawRoll</font>: 'X' (tangage), 'Y' (lacet), 'Z' (roulis), appliqués dans cet ordre (par défaut).
+  <font color="#924B72">#PB_Orientation_Quaternion</font>  : 'X', 'Y', 'Z', 'W' pour les valeurs du quaternion
+  <font color="#924B72">#PB_Orientation_Direction</font>   : 'X', 'Y', 'Z' pour le vecteur de direction et 'W' pour la rotation (roulis).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'entité d'origine n'est pas modifiée par 
+cette fonction et peut être libérée après 
+l'ajout. 
+<br>
+<br>
+La même entité peut être ajoutée plusieurs fois. 
+<br>
+<br>
+Attention: Une fois que toutes les entités ont 
+été ajoutées, la commande <a href="buildstaticgeometry.html">BuildStaticGeometry()</a> 
+doit être appelée pour générer la forme 
+géométrique statique. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createstaticgeometry.html">CreateStaticGeometry()</a>, 
+<a href="buildstaticgeometry.html">BuildStaticGeometry()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>StaticGeometry Index</a> - <a href=buildstaticgeometry.html>BuildStaticGeometry()</a> -><br><br>
+
+
+</body></html>

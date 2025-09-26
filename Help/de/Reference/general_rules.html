@@ -1,0 +1,251 @@
+<html><head><title>Allgemeine Syntax-Regeln</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Allgemeine Syntax-Regeln</font></b></p>
+
+PureBasic hat ein paar Syntax-Regeln eingeführt, welche sich niemals ändern werden. Dies sind: 
+
+<p><b>Kommentare</b></p><blockquote>
+
+<!-- There is a bug somewhere, and i had to do this work around. Mesa -->
+<blockquote>
+  Kommentare werden gekennzeichnet durch ein Semikolon <b><font color="#006666">;</font></b>.
+  Alle nach dem Semikolon eingegebenen Texte, bis zum Ende der gleichen Zeile, werden vom Compiler ignoriert.
+</blockquote>
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> a = 10 <font color="#006666">; Dies ist ein Kommentar zur näheren Erläuterung.</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Schlüsselwörter</b></p><blockquote>
+
+
+Alle <b>Schlüsselwörter</b> (englisch: &quot;Keywords&quot;) werden für grundlegende Dinge innerhalb von PureBasic 
+verwendet, wie das Erstellen von Arrays (Dim) oder Listen (NewList), oder die Kontrolle des Programmablaufs 
+(If : Else : EndIf). Sie werden nicht von Klammern '()' gefolgt, welche typischerweise für PureBasic 
+<b>Funktionen</b> genutzt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">    <b><font color="#006666">If</font></b> a = 1      <font color="#006666">; If, Else und EndIf sind Schlüsselwörter; während 'a = 1' eine</font>
+      ...         <font color="#006666">; Variable ist, die innerhalb eines Ausdrucks verwendet wird.</font>
+    <b><font color="#006666">Else</font></b>
+      ...
+    <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<b>Schlüsselwörter</b> werden regelmäßig in den Kapiteln auf der linken Seite der 
+Index-Seite im Referenz-Handbuch beschrieben. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Funktionen</b></p><blockquote>
+
+
+Jeder <b>Funktion</b> muss ein öffnendes rundes Klammerzeichen '(' folgen, oder sie wird nicht als Funktion erkannt 
+(das gilt auch für Funktionen ohne Parameter). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">    EventWindow</font>() <font color="#006666">; ist eine Funktion.</font>
+    EventWindow   <font color="#006666">; ist eine Variable.</font>
+</font></pre>
+
+<b>Funktionen</b> sind regelmäßig Bestandteil der PureBasic &quot;Befehls-Bibliotheken&quot;, welche auf der rechten 
+Seite der Index-Seite im Referenz-Handbuch beschrieben werden. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Konstanten</b></p><blockquote>
+
+
+Allen Konstanten geht das Hash-Zeichen <b><font color="#006666">#</font></b> voraus. 
+Sie können nur einmal im Code deklariert werden und behalten immer ihre vordefinierten Werte. 
+(Der Compiler ersetzt beim Kompilieren des Executable alle Konstanten-Namen durch ihre entsprechenden Werte.) 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">    <font color="#924B72">#Hello</font> = 10 ist eine Konstante.
+    Hello = 10 ist eine Variable.
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Literale Strings (Zeichenketten)</b></p><blockquote>
+
+
+Literale Strings werden mit dem Zeichen &quot; deklariert. 
+Escape-Sequenzen werden unterstützt, indem der Literalzeichenfolge das Zeichen ~ vorangestellt wird. 
+Die unterstützten Escape-Sequenzen sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  \a: alarm           <b><font color="#006666">Chr</font></b>(7)      (Alarm)
+  \b: backspace       <b><font color="#006666">Chr</font></b>(8)      (Rücktaste)
+  \f: formfeed        <b><font color="#006666">Chr</font></b>(12)     (Seitenvorschub)
+  \n: newline         <b><font color="#006666">Chr</font></b>(10)     (Zeilenumbruch)
+  \r: carriage return <b><font color="#006666">Chr</font></b>(13)     (Wagenrücklauf)
+  \t: horizontal tab  <b><font color="#006666">Chr</font></b>(9)      (Horizontaler Tab)
+  \v: vertical tab    <b><font color="#006666">Chr</font></b>(11)     (Vertikaler Tab)
+  \&quot;: double quote    <b><font color="#006666">Chr</font></b>(34)     (Doppelte Anführungszeichen)
+  \\: backslash       <b><font color="#006666">Chr</font></b>(92)     (Rückstrich)
+</font></pre>
+Es gibt zwei spezielle Konstanten für Strings: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Empty</font>$: repräsentiert einen leeren String (exakt das gleiche wie &quot;&quot;)
+  <font color="#924B72">#Null</font>$ : repräsentiert einen Null-String. Dieser kann für API-Funktionen verwendet werden, welche
+           einen Null-Zeiger auf einen String benötigen, oder um einen String wirklich freizugeben.
+</font></pre>
+Achtung: Auf Windows funktioniert \t nicht mit den grafischen Funktionen der <a href="../2ddrawing/index.html">2DDrawing</a>- und 
+<a href="../vectordrawing/index.html">VectorDrawing</a>-Bibliotheken. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  a$ =  &quot;Hello world&quot;  <font color="#006666">; Standard-String</font>
+  b$ = ~&quot;Escape\nMe !&quot; <font color="#006666">; String mit Escape-Sequenzen</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Sprungmarken</b></p><blockquote>
+
+
+Allen Sprungmarken (Labels) muss ein Doppelpunkt <b><font color="#006666">:</font></b> folgen. Die Namen von Sprungmarken dürfen 
+keine Operatoren (+,-,...) oder Sonderzeichen (ß,ä,ö,ü,...) enthalten. Innerhalb einer 
+<a href="../reference/procedures.html">procedure</a> definierte Sprungmarken sind nur in dieser Prozedur verfügbar. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">    Ich_bin_eine_Sprungmarke:
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Module</b></p><blockquote>
+
+
+<a href="../reference/module.html">Module</a> verwenden einen :: (doppelten Doppelpunkt), wenn auf einen Modulnamen verwiesen wird. 
+Achten Sie darauf, diese nicht mit dem einfachen Doppelpunkt zu verwechseln, der von Sprungmarken verwendet wird. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> CarModule::NbCars
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Ausdrücke</b></p><blockquote>
+
+
+Ein Ausdruck ist etwas, das ausgewertet werden kann. 
+Ein Ausdruck kann beliebige Variablen, Konstanten oder Funktionen desselben Typs mischen. 
+Wenn Sie Zahlen in einem Ausdruck verwenden, können Sie ihnen das <b><font color="#006666">$</font></b> Symbol voranstellen, 
+um eine Hexadezimalzahl anzugeben, oder mit dem <b><font color="#006666">%</font></b> Symbol, um eine Binärzahl anzugeben. 
+Ohne eines der beiden Zeichen wird die Zahl als Dezimalzahl behandelt. 
+Strings müssen in gerade doppelte Anführungszeichen eingeschlossen werden. 
+
+</blockquote><p><b>Beispiel:</b> gültige Ausdrücke:</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = a + 1 + (12 * 3)
+
+  a = a +<font color="#006666"> WindowHeight</font>(<font color="#924B72">#Window</font>) + b/2 + <font color="#924B72">#MyConstant</font>
+
+  <b><font color="#006666">If</font></b> a &lt;&gt; 12 + 2
+    b + 2 &gt;= c + 3
+  <b><font color="#006666">EndIf</font></b>
+
+  a$ = b$ + &quot;dies ist ein String Wert&quot; + c$
+
+  Foo = Foo + $69 / %1001  <font color="#006666">; Nutzung hexadezimaler und binärer Zahlen</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Verketten von Befehlen</b></p><blockquote>
+
+
+Eine beliebige Anzahl an Befehlen kann auf derselben Zeile mittels der : Option aneinandergereiht werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> IsCrazy = 0 :<font color="#006666"> MessageRequester</font>(&quot;Info&quot;, &quot;Not Crazy&quot;) : <b><font color="#006666">Else</font></b> :<font color="#006666"> MessageRequester</font>(&quot;Info&quot;, &quot;Crazy&quot;) : <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Zeilenfortsetzung</b></p><blockquote>
+
+
+Lange Ausdrücke können auf mehrere Zeilen aufgeteilt werden. 
+Eine aufgesplittete Zeile muss mit einem der folgenden Operatoren enden: Plus (+), Komma (,), 
+oder (|), And, Or, Xor. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  Text$ = &quot;Very very very very long text&quot; + <font color="#924B72">#LF$</font> +
+          &quot;another long text&quot; + <font color="#924B72">#LF$</font> +
+          &quot; and the end of the long text&quot;
+
+<font color="#006666">  MessageRequester</font>(&quot;Hello this is a very long title&quot;,
+                   &quot;And a very long message, so we can use the multiline&quot; + <font color="#924B72">#LF$</font> + Text$,
+                   <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Typische Begriffe in der Anleitung</b></p><blockquote>
+
+
+Begriffe, die in dieser Anleitung benutzt werden: 
+
+<blockquote>
+
+&lt;variable&gt; : eine Basic <a href="../reference/variables.html">Variable</a>. <br>
+&lt;expression&gt; : ein Ausdruck, wie oben beschrieben. <br>
+&lt;constant&gt; : eine numerische Konstante. <br>
+&lt;label&gt; : ein Programmlabel (Sprungmarke). <br>
+&lt;type&gt; : jeder Typ, (Standard oder in einer Struktur). <br>
+</blockquote>
+
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Sonstiges</b></p><blockquote>
+
+
+- In dieser Anleitung sind alle Themen in alphabetischer Reihenfolge aufgeführt, um mögliche Suchzeiten zu verkürzen. 
+<br>
+<br>
+- <b>Rückgabewerte</b> von Befehlen sind immer vom Typ <a href="../reference/variables.html">Integer</a>, wenn kein anderer Typ 
+auf der Syntax-Zeile der jeweiligen Befehlsbeschreibung angegeben ist. 
+<br>
+- In der PureBasic-Dokumentation werden die Begriffe &quot;Befehle&quot; und &quot;Funktionen&quot; synonym verwendet, 
+unabhängig davon, ob die Funktion einen Wert zurückgibt oder nicht. 
+Um zu erfahren, welcher Wert von einem bestimmten Befehl oder einer bestimmten Funktion zurückgegeben wird, 
+schauen Sie in die Beschreibung in der Befehls-Dokumentation. 
+
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,136 @@
+<html><head><title>EnableGadgetDrop</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableGadgetDrop()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>EnableGadgetDrop</b></font>(#Gadget, Format, Actions [, TypeInterne])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Permet à un <a href="../gadget/index.html">gadget</a> 
+d'être la cible d'un 'Drag &amp; Drop' d'un 
+format spécifique. Quand l'utilisateur voudra 
+déposer une donnée de ce format sur le gadget, 
+le curseur sera modifié en conséquence, 
+indiquant que l'action est possible. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro du gadget qui supportera le 'Drag 
+&amp; Drop'. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+Indique quel type de donnée pourra être 
+déposé sur le gadget. 
+<br>
+<br>
+Il peut prendre une des valeurs suivantes 
+ou un identifiant de format système (voir 
+<a href="dragosformats.html">DragOSFormats()</a> pour plus d'informations). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drop_Text</font>   : Accepte du texte sur ce gadget
+  <font color="#924B72">#PB_Drop_Image</font>  : Accepte des images sur ce gadget
+  <font color="#924B72">#PB_Drop_Files</font>  : Accepte des noms de fichiers sur ce gadget
+  <font color="#924B72">#PB_Drop_Private</font>: Accepte un 'Drag &amp; Drop' interne
+</font></pre>
+
+</td></tr>
+<tr><td><i>Actions</i></td>
+<td> 
+L'utilisateur peut décider de l'action à 
+prendre en utilisant les touches Ctrl ou 
+Shift. Les actions disponibles dépendent 
+aussi du composant sur lequel le texte va 
+être déposé. 
+<br>
+<br>
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: Le format de données ne sera pas accepté par ce gadget
+  <font color="#924B72">#PB_Drag_Copy</font>: La donnée peut être copiée
+  <font color="#924B72">#PB_Drag_Move</font>: La donnée peut être déplacée
+  <font color="#924B72">#PB_Drag_Link</font>: La donnée peut être liée
+</font></pre>
+
+</td></tr>
+<tr><td><i>TypeInterne (optionnel)</i></td>
+<td> 
+Uniquement nécessaire quand <font color="#924B72">#PB_Drop_Private</font> 
+est utilisé comme format.<br>
+Il indique le type du 'Drag &amp; Drop' interne 
+à accepter. <br>
+Voir <a href="dragprivate.html">DragPrivate()</a> pour plus d'informations. 
+<br>
+Ce paramètre est ignoré pour les autres 
+formats. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Plusieurs types de formats peuvent être 
+acceptés par un même gadget. Si la source des 
+données transférées a spécifié plusieurs 
+formats qui sont pris en compte par le gadget, 
+celui qui aura été activé en dernier sera 
+accepté. Donc le format le plus approprié 
+devra être activé en dernier. 
+<br>
+<br>
+Quand une donnée sera déposée sur le gadget, 
+le programme recevra un évènement 
+<font color="#924B72">#PB_Event_GadgetDrop</font>. 
+<a href="../window/eventgadget.html">EventGadget()</a> indiquera le gadget concerné 
+et les commandes 'Event' de cette 
+bibliothèque permettront de récupérer la 
+donnée déposée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Faites un cliquer-glisser d'un fichier vers l'un des gadgets qui affichera alors le chemin du fichier</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 500, 200, &quot;Drop File Here&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+  
+<font color="#006666">    StringGadget</font>(0, 10, 10, 500 - 20, 30, &quot;&quot;)
+<font color="#006666">    EditorGadget</font>(1, 10, 50, 500 - 20, 140)
+    
+<font color="#006666">    EnableGadgetDrop</font>(0, <font color="#924B72">#PB_Drop_Files</font>, <font color="#924B72">#PB_Drag_Copy</font>)
+<font color="#006666">    EnableGadgetDrop</font>(1, <font color="#924B72">#PB_Drop_Files</font>, <font color="#924B72">#PB_Drag_Copy</font>)
+  
+    <b><font color="#006666">Repeat</font></b>
+        <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>()
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_GadgetDrop</font>
+                <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+                    <b><font color="#006666">Case</font></b> 0 <font color="#006666">; gadgets ayant reçu l'évènement glisser-déposer de fichier/dossier</font>
+                        <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">FindString</font>(<font color="#006666">EventDropFiles</font>(),<font color="#006666"> Chr</font>(10))
+<font color="#006666">                            SetGadgetText</font>(0,<font color="#006666"> EventDropFiles</font>())
+                        <b><font color="#006666">EndIf</font></b>
+                    <b><font color="#006666">Case</font></b> 1
+<font color="#006666">                        SetGadgetText</font>(1,<font color="#006666"> EventDropFiles</font>())
+                <b><font color="#006666">EndSelect</font></b>
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+<font color="#006666">                CloseWindow</font>(0)
+                <b><font color="#006666">End</font></b>
+        <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="enablewindowdrop.html">EnableWindowDrop()</a>, <a href="eventdroptype.html">EventDropType()</a>, 
+<a href="eventdropaction.html">EventDropAction()</a>, <a href="setdropcallback.html">SetDropCallback()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=draggeditemindex.html>DraggedItemIndex()</a> - <a href=index.html>DragDrop Index</a> - <a href=enablewindowdrop.html>EnableWindowDrop()</a> -><br><br>
+
+</body></html>

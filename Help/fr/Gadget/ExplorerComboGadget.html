@@ -1,0 +1,99 @@
+<html><head><title>ExplorerComboGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExplorerComboGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ExplorerComboGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Repertoire$, [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une combobox qui affiche un 
+répertoire ainsi que tous ses répertoires 
+parents permettant à l'utilisateur d'en 
+choisir un. 
+<br>
+<br>
+Utilisée dans <a href="../requester/openfilerequester.html">OpenFileRequester()</a> par 
+exemple. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Repertoire$</i></td>
+<td> 
+Le répertoire initial affiché (doit être 
+défini comme un chemin d'accès complet), 
+une chaîne vide spécifie le dossier racine. 
+<br>
+<br>
+Si l'option <font color="#924B72">#PB_Explorer_DrivesOnly</font> est 
+posée alors Repertoire$ ne peut être 
+qu'une lettre de lecteur (&quot;A:&quot;, &quot;C:&quot; etc.). 
+Tout caractère qui suit  la lettre du 
+lecteur sera ignoré. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_DrivesOnly</font>   : Le Gadget n'affichera que les disques pour en sélectionner un.
+  <font color="#924B72">#PB_Explorer_Editable</font>     : Le Gadget sera éditable, avec un mode d'auto-complétion automatique.
+  <font color="#924B72">#PB_Explorer_NoMyDocuments</font>: Le répertoire 'MesDocuments' ne sera pas affiché séparément.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le numéro d'identification du gadget, généré automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les commandes suivantes peuvent être utilisées pour agir sur le gadget: 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="getgadgettext.html">GetGadgetText()</a>: Renvoie le répertoire actuellement affiché.
+  - <a href="setgadgettext.html">SetGadgetText()</a>: Change le répertoire actuellement affiché.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 45, &quot;ExplorerComboGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ExplorerComboGadget</font>(0, 10, 10, 380, 25,<font color="#006666"> GetHomeDirectory</font>(), <font color="#924B72">#PB_Explorer_Editable</font>)
+    <b><font color="#006666">Repeat</font></b> 
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/explorercombogadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="explorerlistgadget.html">ExplorerListGadget()</a>, 
+<a href="explorertreegadget.html">ExplorerTreeGadget()</a>, 
+<a href="comboboxgadget.html">ComboBoxGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=editorgadget.html>EditorGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=explorerlistgadget.html>ExplorerListGadget()</a> -><br><br>
+
+</body></html>

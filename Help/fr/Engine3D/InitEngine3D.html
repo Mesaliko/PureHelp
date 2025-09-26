@@ -1,0 +1,81 @@
+<html><head><title>InitEngine3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InitEngine3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>InitEngine3D</b></font>([Options [, Bibliotheque$]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise l'environnement nécessaire au 
+fonctionnement du moteur 3D. 
+<br>
+<br>
+Vous devez placer cette fonction au début 
+de votre code source si vous souhaitez 
+utiliser les fonctions 3D. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Options (optionnel)</i></td>
+<td width="90%"> 
+Peut être une combinaison des constantes 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Engine3D_NoLog</font>      : Pas de log sauvegardé sur disque ni affiché dans une console (par défaut).
+  <font color="#924B72">#PB_Engine3D_DebugLog</font>   : Un fichier journal de débogage nommé 'Ogre.log' sera créé dans le répertoire courant.
+                            pour aider au déboguage. Un grand nombre d'actions sont consignées dans ce fichier,
+                            mais il ne devrait pas affecter les performances de sorte qu'il peut même être activé
+                            dans un exécutable distribuable...
+  <font color="#924B72">#PB_Engine3D_DebugOutput</font>: Les actions sont affichées sur la console. Activez au préalable l'option Console du compilateur 
+                            dans menu Compilateur \ Options du compilateur... \ Options de compilation \ Format de l'exécutable
+
+ </font></pre>
+
+</td></tr>
+<tr><td><i>Bibliotheque$ (optionnel)</i></td>
+<td> 
+Le nom d'un fichier Engine3D à charger. 
+<br>
+<br>
+S'il se trouve dans autre endroit que le 
+dossier courant, il pourra être spécifié 
+ici. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la 
+bibliothèque a été chargée avec succès, 
+zéro sinon.<br>
+Si l'initialisation a échoué, le programme 
+ne devrait pas continuer ou alors tous les 
+appels aux fonctions 3D devraient être 
+désactivés. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction tente de charger la 
+bibliothèque de moteur 3d (nommé 
+'Engine3D.dll' sous Windows, 'engine3d.so' 
+sur Linux et 'engine3d.dylib' sur Mac OS X, 
+depuis le dossier PureBasic/compilateurs/). 
+Si elle échoue, c'est probablement parce 
+que la bibliothèque est introuvable. Sous 
+Windows, une version récente du pilote graphique OpenGL doit être installée. 
+<br>
+<br>
+Après l'appel de cette fonction, vous ne pourrez pas utiliser la fonction <a href="../screen/screenoutput.html">ScreenOutput()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../screen/openscreen.html">OpenScreen()</a>, <a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a>, 
+<a href="add3darchive.html">Add3DArchive()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getz.html>GetZ()</a> - <a href=index.html>Engine3D Index</a> - <a href=loadworld.html>LoadWorld()</a> -><br><br>
+
+</body></html>

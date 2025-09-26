@@ -1,0 +1,97 @@
+<html><head><title>PanelGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PanelGadget3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>PanelGadget3D</b></font>(#Gadget3D, X, Y, Largeur, Hauteur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget boîte à onglets 3D. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Le numéro d'identification du gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le gadget a 
+été créé avec succès, zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Gadget3D alors le numéro généré 
+automatiquement  est renvoyé dans 'Resultat' 
+en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lorsqu'une boîte à onglets est créée, sa 
+liste d'éléments est vide. 
+<br>
+<br>
+Vous pouvez ajouter une 'mini aide' à ce 
+gadget en utilisant <a href="gadgettooltip3d.html">GadgetToolTip3D()</a>. 
+<br>
+<br>
+Les fonctions suivantes peuvent être 
+appelées pour agir sur la liste : 
+<br>
+<br>
+- <a href="addgadgetitem3d.html">AddGadgetItem3D()</a>: Ajoute un élément 
+<br>
+- <a href="removegadgetitem3d.html">RemoveGadgetItem3D()</a>: Supprime un élément 
+<br>
+- <a href="countgadgetitems3d.html">CountGadgetItems3D()</a>: Renvoie le nombre 
+d'éléments.<br>
+- <a href="cleargadgetitems3d.html">ClearGadgetItems3D()</a>: Supprime tous les 
+éléments <br>
+- <a href="getgadgetitemtext3d.html">GetGadgetItemText3D()</a>: Renvoie le texte de 
+l'élément spécifié. <br>
+- <a href="setgadgetitemtext3d.html">SetGadgetItemText3D()</a>: Change le texte de 
+l'élément spécifié. <br>
+<br>
+- <a href="setgadgetstate3d.html">SetGadgetState3D()</a>: Change l'onglet affiché. 
+<br>
+- <a href="getgadgetstate3d.html">GetGadgetState3D()</a>: Renvoie le numéro de 
+l'onglet actuellement affiché.<br>
+- <a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a> avec un des attributs 
+suivants (il doit y avoir au moins un élément 
+dans le PanelGadget3D()): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Panel3D_ItemWidth</font> : Renvoie la largeur de la zone utilisable d'un onglet.
+  <font color="#924B72">#PB_Panel3D_ItemHeight</font>: Renvoie la hauteur de la zone utilisable d'un onglet.
+  <font color="#924B72">#PB_Panel3D_TabHeight</font> : Renvoie la hauteur d'un bouton de changement d'onglet.
+</font></pre>
+
+Avant de pouvoir ajouter des gadgets, il est 
+nécessaire d'appeler la commande 
+<a href="addgadgetitem3d.html">AddGadgetItem3D()</a> pour ajouter au moins un 
+onglet. Les prochains gadgets créés le seront 
+automatiquement sur le dernier onglet. 
+Lorsque tous les gadgets de la boîte à 
+onglets ont été placés, <a href="closegadgetlist3d.html">CloseGadgetList3D()</a> 
+doit être appelé pour revenir à la GadgetList 
+précédente. Il est ainsi parfaitement 
+possible de créer une boîte à onglets dans 
+une autre boîte à onglets... 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=optiongadget3d.html>OptionGadget3D()</a> - <a href=index.html>Gadget3D Index</a> - <a href=progressbargadget3d.html>ProgressBarGadget3D()</a> -><br><br>
+
+</body></html>

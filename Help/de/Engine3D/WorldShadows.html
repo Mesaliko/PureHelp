@@ -1,0 +1,69 @@
+<html><head><title>WorldShadows</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WorldShadows()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>WorldShadows</b></font>(Typ [, Distanz.f [, Farbe [, TexturGröße]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Legt fest, wie die Schatten in der Welt dargestellt (&quot;gerendert&quot;) werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Typ</i></td>
+<td width="90%"> 
+Typ kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shadow_None</font>      : Es werden keine Schatten in dieser Welt dargestellt. Dies kann eine Menge
+                         an CPU-Power einsparen, wenn Schatten nicht benötigt werden. (Standard)
+  <font color="#924B72">#PB_Shadow_Modulative</font>: Schatten werden für die <a href="../entity/index.html">Entities</a> dargestellt, für welche der
+                         Schattenwurf mittels <a href="../entity/entityrendermode.html">EntityRenderMode()</a> und <font color="#924B72">#PB_Entity_CastShadow</font>
+                         eingestellt wurde. Dieser Schattenmodus ist der schnellste verfügbare, er
+                         sieht jedoch nicht besonders gut aus, da die Schatten nicht durchscheinend sind.
+  <font color="#924B72">#PB_Shadow_Additive</font>  : Schatten werden für die <a href="../entity/index.html">Entities</a> dargestellt, für welche der
+                         Schattenwurf mittels <a href="../entity/entityrendermode.html">EntityRenderMode()</a> und <font color="#924B72">#PB_Entity_CastShadow</font>
+                         eingestellt wurde. Dieser Schattenmodus ist langsamer als der modulative Modus,
+                         aber er sieht wesentlich besser aus, da die Schatten durchscheinend sind.
+                         Auch wenn sich mehrere Schatten überlappen, werden die Schatten addiert,
+                         was zu einem dunkleren Resultat führt.
+  <font color="#924B72">#PB_Shadow_TextureAdditive</font>: Schatten werden für die <a href="../entity/index.html">Entities</a> dargestellt, für welche der Schattenwurf 
+                         mittels <a href="../entity/entityrendermode.html">EntityRenderMode()</a> und <font color="#924B72">#PB_Entity_CastShadow</font> eingestellt wurde. 
+                         Dieser Modus liegt im Hinblick auf Geschwindigkeit und Qualität zwischen 
+                         dem modulativen und additiven Schatten, und arbeitet auch mit Wasser.
+  <font color="#924B72">#PB_Shadow_TextureModulative</font>: Schatten werden für die <a href="../entity/index.html">Entities</a> dargestellt, für welche der Schattenwurf 
+                         mittels <a href="../entity/entityrendermode.html">EntityRenderMode()</a> und <font color="#924B72">#PB_Entity_CastShadow</font> eingestellt wurde. 
+                         Dieser Schattenmodus ist schneller als <font color="#924B72">#PB_Shadow_TextureAdditive</font>, er sieht 
+                         jedoch nicht besonders gut aus, da die Schatten nicht durchscheinend sind.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Distanz (optional)</i></td>
+<td> 
+Maximale Distanz von der Kamera, in Welt-Einheiten, über die hinaus die Schatten nicht mehr 
+berechnet werden. 
+
+</td></tr>
+<tr><td><i>Farbe (optional)</i></td>
+<td> 
+Farbe der Schatten. <a href="../2ddrawing/rgb.html">RGB()</a> kann verwendet werden, um einen gültigen Farb-Wert zu erhalten. 
+
+</td></tr>
+<tr><td><i>TexturGröße (optional)</i></td>
+<td> 
+Pixel-Größe der Textur, welche zum Rendern des Schattens verwendet wird. Je größer sie ist, 
+desto besser wird der Schatten aussehen, aber desto langsamer wird es auch. Der Standardwert 
+ist 512, und dieser Wert sollte nicht größer als 4096 sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=worldgravity.html>WorldGravity()</a> - <a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=yaw.html>Yaw()</a> -><br><br>
+
+</body></html>

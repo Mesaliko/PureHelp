@@ -1,0 +1,71 @@
+<html><head><title>FindString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FindString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Position = <font color="#006666"><b>FindString</b></font>(String$, StringToFind$ [, StartPosition [, Mode]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Find the 'StringToFind$' within the given 'String$'. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+The string to use. 
+
+</td></tr>
+<tr><td><i>StringToFind$</i></td>
+<td> 
+The string to find. 
+
+</td></tr>
+<tr><td><i>StartPosition (optional)</i></td>
+<td> 
+The start position to begin the search. The first valid character index is 1. 
+If this parameter isn't specified, the whole string is searched. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font>: case sensitive search (a=a) (default).
+  <font color="#924B72">#PB_String_NoCase</font>       : case insensitive search (A=a).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the position (in character) of the string to find, or zero is the string isn't found. The first character index is 1. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">FindString</font>(&quot;PureBasic&quot;, &quot;Bas&quot;) <font color="#006666">; will display 5</font>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  String$ = &quot;This is a simple line....&quot;
+  
+  <b><font color="#006666">Repeat</font></b>
+  Last = Position
+  Position =<font color="#006666"> FindString</font>(String$ , &quot;i&quot;, Position + 1)
+  <b><font color="#006666">If</font></b> Position &gt; 0
+    <b><font color="#006666">Debug</font></b> &quot;'i' found at position: &quot; + Position
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> <b><font color="#006666">Not</font></b> Position
+  
+  <b><font color="#006666">Debug</font></b> &quot;Last position 'i' was found: &quot; + Last
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="replacestring.html">ReplaceString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=escapestring.html>EscapeString()</a> - <a href=index.html>String Index</a> - <a href=formatnumber.html>FormatNumber()</a> -><br><br>
+
+</body></html>

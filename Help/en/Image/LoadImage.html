@@ -1,0 +1,89 @@
+<html><head><title>LoadImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>LoadImage</b></font>(#Image, Filename$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Load the specified image from a file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+A number to identify the loaded image. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be specified to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The name of the file to load. If the filename does not include a full path, it 
+is interpreted relative to the <a href="../filesystem/getcurrentdirectory.html">current directory</a>. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+This parameter currently has no meaning. If it is specified, 0 should be used for future compatibility. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the image was loaded successfully and zero if the image could not be loaded. 
+If <font color="#924B72">#PB_Any</font> was specified as the #Image parameter then the auto-generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The limit for the image size that can be handled depends on the operating system and the available amount of memory. 
+If enough memory is available, then images up to at least 8192x8192 pixels are can be handled by all operating systems supported by PureBasic. 
+<br>
+<br>
+When an image is loaded, it is converted either in 24-bit (if the image depth 
+is less or equal to 24-bit) or in 32-bit (if the image has an alpha channel). 
+A loaded image can be freed by using the <a href="freeimage.html">FreeImage()</a> function. 
+<br>
+<br>
+The image can be in BMP, icon (.ico, only on Windows) or any other format supported by the ImagePlugin library. 
+Alpha channel is supported for 32-bit BMP images. 
+The following functions can be used to enable automatically more image formats: 
+<br>
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+<a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+<br>
+You can use the several other functions for acting with the loaded image: 
+<br>
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> with <a href="imageoutput.html">ImageOutput()</a> to draw on the loaded image 
+<br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> with <a href="imagevectoroutput.html">ImageVectorOutput()</a> to draw on the created image using vector drawing 
+<br>
+<a href="copyimage.html">CopyImage()</a> to create another image from the actual one 
+<br>
+<a href="grabimage.html">GrabImage()</a> to create another image from a given area of the actual one 
+<br>
+<a href="../2ddrawing/drawimage.html">DrawImage()</a> with <a href="imageid.html">ImageID()</a> to draw the image on actual output channel. 
+<br>
+<a href="../2ddrawing/drawalphaimage.html">DrawAlphaImage()</a> with <a href="imageid.html">ImageID()</a> to draw the image (with alpha channel) on actual output channel. 
+<br>
+<a href="../gadget/imagegadget.html">ImageGadget()</a> for displaying image on an application window 
+<br>
+<a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> for creating an image button on an application window 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="copyimage.html">CopyImage()</a>, <a href="grabimage.html">GrabImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=isimage.html>IsImage()</a> - <a href=index.html>Image Index</a> - <a href=removeimageframe.html>RemoveImageFrame()</a> -><br><br>
+
+</body></html>

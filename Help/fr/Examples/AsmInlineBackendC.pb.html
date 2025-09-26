@@ -1,0 +1,212 @@
+<html><head><title>AsmInlineBackendC.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Inline assembly with C backend
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) 2025 - Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; Windows x64 c backend only
+</font>
+<b><font color="#006666">Procedure</font></b> <font color="#006666">JIT</font>(asm.s)    
+  <b><font color="#006666">Protected</font></b> oldProtection<font color="#006666">;
+</font>  <b><font color="#006666">Protected</font></b> fn,*asm 
+  <b><font color="#006666">Protected</font></b> fasmpath.s = <font color="#924B72">#PB_Compiler_Home</font> + &quot;Compilers&quot; + <font color="#924B72">#PS$</font> + &quot;FAsm.exe&quot; 
+  Inputfile.s =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;PBJit.txt&quot;  
+  outputfile.s =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;PBJit.bin&quot;  
+  fn =<font color="#006666"> CreateFile</font>(-1,outputfile) 
+<font color="#006666">  CloseFile</font>(fn) 
+  fn =<font color="#006666"> CreateFile</font>(-1,Inputfile) 
+  <b><font color="#006666">If</font></b> fn 
+    *asm=<font color="#006666"> UTF8</font>(asm) 
+<font color="#006666">    WriteData</font>(fn,*asm,<font color="#006666">MemorySize</font>(*asm)) 
+<font color="#006666">    CloseFile</font>(fn) 
+<font color="#006666">    OpenConsole</font>()  
+    fasm =<font color="#006666">  RunProgram</font>(fasmpath,Inputfile,&quot;&quot;, <font color="#924B72">#PB_Program_Open</font> | <font color="#924B72">#PB_Program_Read</font>)
+    <b><font color="#006666">If</font></b> fasm 
+      <b><font color="#006666">While</font></b> <font color="#006666">ProgramRunning</font>(fasm)
+        <b><font color="#006666">If</font></b> <font color="#006666">AvailableProgramOutput</font>(fasm) 
+<font color="#006666">          PrintN</font>(<font color="#006666">ReadProgramString</font>(fasm))
+        <b><font color="#006666">EndIf</font></b> 
+      <b><font color="#006666">Wend</font></b>    
+    <b><font color="#006666">EndIf</font></b>    
+<font color="#006666">    FreeMemory</font>(*asm) 
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">FileSize</font>(outputfile) 
+      fn =<font color="#006666"> OpenFile</font>(-1,outputfile)    
+      len =<font color="#006666"> Lof</font>(fn) 
+      *asm =<font color="#006666"> AllocateMemory</font>(Len)
+<font color="#006666">      ReadData</font>(fn,*asm,len)
+<font color="#006666">      CloseFile</font>(fn) 
+      
+      <b><font color="#006666">Protected</font></b> *buffer =<font color="#006666"> VirtualAlloc_</font>(<font color="#924B72">#Null</font>, len, <font color="#924B72">#MEM_COMMIT</font>, <font color="#924B72">#PAGE_READWRITE</font>)<font color="#006666">;
+</font><font color="#006666">      CopyMemory</font>(*asm,*buffer,len)
+<font color="#006666">      FreeMemory</font>(*asm) <font color="#006666">;
+</font><font color="#006666">      VirtualProtect_</font>(*buffer, len, <font color="#924B72">#PAGE_EXECUTE_READ</font>, @oldProtection)          <font color="#006666">;
+</font>      <b><font color="#006666">ProcedureReturn</font></b> *buffer 
+      
+    <b><font color="#006666">EndIf</font></b> 
+  <b><font color="#006666">EndIf</font></b>   
+  
+<b><font color="#006666">EndProcedure</font></b> 
+
+<b><font color="#006666">Prototype</font></b> <font color="#006666">FastHash64</font>(*Buffer, Len, Seed.q=0)
+<b><font color="#006666">Global</font></b> *FastHash64.FastHash64
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">JiTFastHash64</font>()
+  
+  <font color="#006666">; FastHash64 algorithm by Zilong Tan ported by wilbert
+</font>  <b><font color="#006666">Protected</font></b> asm.s 
+  asm + &quot;use64 &quot; + <font color="#924B72">#LF$</font>
+  asm + &quot;MOV    qword [rsp+8],rcx&quot;+ <font color="#924B72">#LF$</font>
+  asm + &quot;MOV    qword [rsp+16],rdx&quot;+ <font color="#924B72">#LF$</font>
+  asm + &quot;MOV    qword [rsp+24],r8&quot;+ <font color="#924B72">#LF$</font>
+  asm + &quot;PS20=48&quot;+ <font color="#924B72">#LF$</font>
+  asm + &quot;SUB    rsp,40&quot;+ <font color="#924B72">#LF$</font>
+  
+  asm + &quot;p.v_Seed equ rsp+PS20+16&quot; + <font color="#924B72">#LF$</font>
+  asm + &quot;p.v_Len equ rsp+PS20+8&quot;+ <font color="#924B72">#LF$</font>
+  asm + &quot;p.p_Buffer equ rsp+PS20+0&quot;+ <font color="#924B72">#LF$</font>
+  
+  asm + &quot;mov r10, 0x2127599bf4325c37&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r11, 0x880355f21e6d1965&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov rdx, [p.p_Buffer]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov rcx, [p.v_Len]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov rax, rcx&quot; + <font color="#924B72">#LF$</font>       <font color="#006666">; h = seed ^ (len * m);
+</font>  asm + &quot;imul rax, r11&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor rax, [p.v_Seed]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;sub rcx, 8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jc .l1&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; 8 byte loop  
+</font>  asm + &quot;.l0: &quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r8, [rdx]&quot; + <font color="#924B72">#LF$</font>         <font color="#006666">; v = *pos++;
+</font>  asm + &quot;add rdx, 8&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; -- mix(v) start --
+</font>  asm + &quot;mov r9, r8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 23&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;imul r8, r10&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r9, r8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 47&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; -- mix end --
+</font>  asm + &quot;xor rax, r8&quot; + <font color="#924B72">#LF$</font>           <font color="#006666">; h ^= mix(v);
+</font>  asm + &quot;imul rax, r11&quot; + <font color="#924B72">#LF$</font>         <font color="#006666">; h *= m;
+</font>  asm + &quot;sub rcx, 8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jnc .l0&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; remaining bytes
+</font>  asm + &quot;.l1: &quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;add rcx, 8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jz .l5&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;test rcx, 4&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jz .l2&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; get 4 bytes
+</font>  asm + &quot;mov r8d, [rdx]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;add rdx, 4&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;ror r8, 32&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;.l2: &quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;test rcx, 2&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jz .l3&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; get 2 bytes
+</font>  asm + &quot;movzx r9d, word [rdx]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;add rdx, 2&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;ror r8, 16&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;.l3: &quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;test rcx, 1&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;jz .l4&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; get 1 byte
+</font>  asm + &quot;movzx r9d, byte [rdx]&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;ror r8, 8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;.l4: &quot;<font color="#006666">;  + #LF$ 
+</font>  asm + &quot;and rcx, 7&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shl rcx, 3&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;rol r8, cl&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; -- mix(v) start --
+</font>  asm + &quot;mov r9, r8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 23&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;imul r8, r10&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r9, r8&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 47&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor r8, r9&quot; + <font color="#924B72">#LF$</font> 
+  <font color="#006666">; -- mix end --
+</font>  asm + &quot;xor rax, r8&quot; + <font color="#924B72">#LF$</font>           <font color="#006666">; h ^= mix(v);
+</font>  asm + &quot;imul rax, r11&quot; + <font color="#924B72">#LF$</font>         <font color="#006666">; h *= m;
+</font>                                       <font color="#006666">; -- mix(h) start --
+</font>  asm + &quot;.l5: &quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r9, rax&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 23&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor rax, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;imul rax, r10&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;mov r9, rax&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;shr r9, 47&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;xor rax, r9&quot; + <font color="#924B72">#LF$</font> 
+  asm + &quot;add rsp,40&quot;+ <font color="#924B72">#LF$</font> 
+  asm + &quot;ret&quot; + <font color="#924B72">#LF$</font>  
+  
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">JIT</font>(asm)   
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.q <font color="#006666">FastHash64C</font>(*buf,len,Seed.q=0)
+  <b><font color="#006666">Protected</font></b> result.q  
+  <font color="#006666">;FastHash64 algorithm by Zilong Tan
+</font>  !typedef unsigned long long uint64_t; 
+  
+  !#define mix(h) ({				      	  \
+  !			(h) ^= (h) &gt;&gt; 23;		          \
+  !			(h) *= 0x2127599bf4325c37ULL;	\
+  !			(h) ^= (h) &gt;&gt; 47; })
+  !
+  
+  !	const uint64_t m = 0x880355f21e6d1965ULL;
+  !	const uint64_t *pos = (const uint64_t *)p_buf;
+  !	const uint64_t *end = pos + (v_len / 8);
+  !	const unsigned char *pos2;
+  !	uint64_t h = v_seed ^ (v_len * m);
+  !	uint64_t v;
+  ! uint64_t result; 
+  
+  !	while (pos != end) {
+  !		v  = *pos++;
+  !		h ^= mix(v);
+  !		h *= m;
+  !	}
+  
+  !	pos2 = (const unsigned char*)pos;
+  !	v = 0;
+  
+  !	switch (v_len &amp; 7) {
+  !	case 7: v ^= (uint64_t)pos2[6] &lt;&lt; 48;
+  !	case 6: v ^= (uint64_t)pos2[5] &lt;&lt; 40;
+  !	case 5: v ^= (uint64_t)pos2[4] &lt;&lt; 32;
+  !	case 4: v ^= (uint64_t)pos2[3] &lt;&lt; 24;
+  !	case 3: v ^= (uint64_t)pos2[2] &lt;&lt; 16;
+  !	case 2: v ^= (uint64_t)pos2[1] &lt;&lt; 8;
+  !	case 1: v ^= (uint64_t)pos2[0];
+  !		h ^= mix(v);
+  !		h *= m;
+  !	}
+  !
+  !	v_result = mix(h);
+  
+  <b><font color="#006666">ProcedureReturn</font></b> result 
+<b><font color="#006666">EndProcedure</font></b>  
+
+<b><font color="#006666">Global</font></b> str.s = &quot;Hello JIT (Just In Time) function&quot; 
+
+*FastHash64 =<font color="#006666"> JiTFastHash64</font>()
+<b><font color="#006666">If</font></b> *FastHash64 
+  <b><font color="#006666">Debug</font></b> *FastHash64(@str,<font color="#006666">StringByteLength</font>(str)) 
+<b><font color="#006666">EndIf</font></b> 
+
+<b><font color="#006666">Debug</font></b> <font color="#006666">FastHash64C</font>(@str,<font color="#006666">StringByteLength</font>(str)) 
+
+</font></pre>
+</body></html>

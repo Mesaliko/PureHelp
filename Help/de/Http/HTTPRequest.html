@@ -1,0 +1,156 @@
+<html><head><title>HTTPRequest</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPRequest()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>HTTPRequest</b></font>(Typ, URL$ [, Daten$ [, Flags [, Header()]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Sendet eine HTTP-Anfrage (&quot;HTTP request&quot;) mit optionalen Text-Daten. Falls Binär-Daten gesendet werden 
+müssen, kann <a href="httprequestmemory.html">HTTPRequestMemory()</a> verwendet werden. 
+Dieser Befehl kann die REST Web-API problemlos verarbeiten. <a href="finishhttp.html">FinishHTTP()</a> muss immer aufgerufen werden, 
+nachdem die Anforderung ausgeführt wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Typ</i></td>
+<td width="90%"> 
+Der Typ der Anfrage. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Get</font>    : GET Request ('Daten$' Parameter wird ignoriert)
+  <font color="#924B72">#PB_HTTP_Post</font>   : POST Request ('Daten$' Parameter wird gesendet, sofern angegeben)
+  <font color="#924B72">#PB_HTTP_Put</font>    : PUT Request ('Daten$' Parameter wird gesendet, sofern angegeben)
+  <font color="#924B72">#PB_HTTP_Patch</font>  : PATCH Request ('Daten$' Parameter wird gesendet, sofern angegeben)
+  <font color="#924B72">#PB_HTTP_Delete</font> : DELETE Request ('Daten$' Parameter wird gesendet, sofern angegeben)
+</font></pre>
+
+</td></tr>
+<tr><td><i>URL$</i></td>
+<td> 
+Die URL, an die die Anfrage gesendet werden soll. 
+
+</td></tr>
+<tr><td><i>Daten$ (optional)</i></td>
+<td> 
+Die mit der Anfrage zu sendenden Text-Daten (werden im UTF-8 Format gesendet). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font> : startet den Download asynchron.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>   : folgt keinen automatischen Weiterleitungen.
+  <font color="#924B72">#PB_HTTP_NoSSLCheck</font>   : prüft nicht, ob das SSL-Zertifikat gültig ist (kann zu Testzwecken nützlich sein).
+  <font color="#924B72">#PB_HTTP_HeadersOnly</font>  : ermittelt nur die Header (Kopfzeilen).
+  <font color="#924B72">#PB_HTTP_WeakSSL</font>      : zum Unterstützen älterer Server.
+  <font color="#924B72">#PB_HTTP_Debug</font>        : zum Ausgeben von Debug-Informationen in der Konsole.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Header() (optional)</i></td>
+<td> 
+Eine Map aus Stringpaaren, um zusätzliche Header für die Anforderung anzugeben. Beispiel: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Header$</font>()
+<font color="#006666">  Header$</font>(&quot;Content-Type&quot;) = &quot;text/plain&quot;
+<font color="#006666">  Header$</font>(&quot;User-Agent&quot;) = &quot;Firefox 54.0&quot;
+<font color="#006666">  Header$</font>(&quot;NoParamHeader&quot;) = &quot;&quot;  <font color="#006666">; Ohne Angabe eines String-Wertes, wird dies ein leerer Parameter sein.</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die HTTP-Request-Kennung zurück, wenn der Aufruf erfolgreich initialisiert wurde, andernfalls Null. 
+<a href="httpinfo.html">HTTPInfo()</a> kann verwendet werden, um Informationen zur Anfrage zu erhalten. Wenn <font color="#924B72">#PB_HTTP_Asynchronous</font> 
+angegeben wurde, kann <a href="httpprogress.html">HTTPProgress()</a> verwendet werden und <a href="aborthttp.html">AbortHTTP()</a> muss verwendet werden. 
+<br>
+<a href="httpmemory.html">HTTPMemory()</a> kann verwendet werden, um das Ergebnis als Rohpuffer (&quot;raw&quot;) abzurufen (der Rohpuffer muss 
+mit <a href="../memory/freememory.html">FreeMemory()</a> freigegeben werden). 
+<br>
+<a href="finishhttp.html">FinishHTTP()</a> muss immer aufgerufen werden, um eine erfolgreich initialisierte HTTP-Anforderung zu beenden, 
+auch wenn der Aufruf synchron erfolgte. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Auf Linux muss 'libcurl' installiert sein, damit dieser Befehl funktioniert (die meisten Linux-Distributionen 
+haben es bereits vorinstalliert). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Response: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> mit Header</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Header$</font>()
+<font color="#006666">  Header$</font>(&quot;Content-Type&quot;) = &quot;plaintext&quot;
+<font color="#006666">  Header$</font>(&quot;User-Agent&quot;) = &quot;Firefox 54.0&quot;
+  
+  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;, &quot;&quot;, 0,<font color="#006666"> Header$</font>())
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Response: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Asynchron</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.purebasic.com/download/PureBasic_Demo.zip&quot;, &quot;&quot;, <font color="#924B72">#PB_HTTP_Asynchronous</font>)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Progress =<font color="#006666"> HTTPProgress</font>(HttpRequest)
+      <b><font color="#006666">Select</font></b> Progress
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Success</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download finished&quot;
+          *Buffer =<font color="#006666"> HTTPMemory</font>(HTTPRequest)
+          <b><font color="#006666">If</font></b> *Buffer
+            <b><font color="#006666">Debug</font></b> &quot;Memory buffer size: &quot;+<font color="#006666">MemorySize</font>(*buffer) <font color="#006666">; Hier kann der Puffer auf die Festplatte oder in das verwendete Verzeichnis geschrieben werden</font>
+<font color="#006666">            FreeMemory</font>(*Buffer)
+          <b><font color="#006666">EndIf</font></b>
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Rufen Sie immer FinishHTTP() auf, wenn die Anfrage abgeschlossen ist</font>
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Failed</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download failed&quot;
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Rufen Sie immer FinishHTTP() auf, wenn die Anfrage fehlschlägt</font>
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_HTTP_Aborted</font>
+          <b><font color="#006666">Debug</font></b> &quot;Download aborted&quot;
+<font color="#006666">          FinishHTTP</font>(HTTPRequest) <font color="#006666">; Rufen Sie immer FinishHTTP() auf, wenn die Anfrage abgebrochen wird</font>
+          
+        <b><font color="#006666">Default</font></b>
+          <b><font color="#006666">Debug</font></b> &quot;Current download: &quot; + Progress <font color="#006666">; Der aktuelle Download-Fortschritt in Bytes</font>
+<font color="#006666">          Delay</font>(100)
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=httpproxy.html>HTTPProxy()</a> - <a href=index.html>Http Inhaltsverzeichnis</a> - <a href=httprequestmemory.html>HTTPRequestMemory()</a> -><br><br>
+
+</body></html>

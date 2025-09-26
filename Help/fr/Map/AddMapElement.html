@@ -1,0 +1,78 @@
+<html><head><title>AddMapElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMapElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddMapElement</b></font>(Map(), Cle$ [, Options])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ajoute un nouvel élément vide. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+La map à utiliser. 
+
+</td></tr>
+<tr><td><i>Cle$</i></td>
+<td> 
+La clé du nouvel élément. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Map_ElementCheck</font>  : Vérifie si un élément existe déjà avec la même clé et le remplace (défaut).
+  <font color="#924B72">#PB_Map_NoElementCheck</font>: Pas de vérification, donc si un élément existe déjà avec la même clé, il sera perdu et inaccessible. 
+                          Sa mémoire ne sera libérée que si <a href="clearmap.html">ClearMap()</a> est utilisé. Ce mode est plus rapide mais plus dangereux. 
+                          A utiliser avec précaution.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon.<br>
+La valeur renvoyée est un 
+<a href="../reference/memory.html">pointeur</a> 
+vers le nouvel élément. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Ce nouvel élément devient l'élément courant. 
+<br>
+<br>
+Cette fonction n'est pas obligatoire pour 
+gérer les maps, car les éléments sont 
+ajoutés automatiquement quand une valeur 
+est affectée à une nouvelle clé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+  
+  <font color="#006666">; Manière normale d'ajouter un élément</font>
+<font color="#006666">  Pays</font>(&quot;US&quot;) = &quot;United State&quot;
+  
+  <font color="#006666">; Et maintenant en utilisant 'AddMapElement()'</font>
+<font color="#006666">  AddMapElement</font>(<font color="#006666">Pays</font>(), &quot;FR&quot;)
+<font color="#006666">  Pays</font>() = &quot;France&quot;
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Pays</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Pays</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="deletemapelement.html">DeleteMapElement()</a>, <a href="clearmap.html">ClearMap()</a>, <a href="mapsize.html">MapSize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Map Index</a> - <a href=clearmap.html>ClearMap()</a> -><br><br>
+
+</body></html>

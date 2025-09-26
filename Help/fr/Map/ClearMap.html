@@ -1,0 +1,66 @@
+<html><head><title>ClearMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearMap()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ClearMap</b></font>(Map()) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Efface tous les éléments et libère la 
+mémoire associée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+La map à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Après cette opération, la map est toujours 
+utilisable, mais elle 
+ne contient plus d'éléments. 
+<br>
+<br>
+PureBasic libèrera seulement la mémoire 
+occupée par les éléments. 
+Si la map a été utilisée pour stocker des 
+objets dynamiques, il n'est pas possible 
+de le détecter (en PureBasic ou dans 
+un autre langage). Dans ce cas, il convient 
+de libérer tous ces objets avant la 
+destruction de la liste. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Pays</font>(&quot;US&quot;) = &quot;United States&quot;
+
+  <font color="#006666">; La preuve que des éléments ont été ajoutés à la map</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Il y a &quot;+<font color="#006666">Str</font>(<font color="#006666">MapSize</font>(<font color="#006666">Pays</font>()))+&quot; éléments dans la map&quot;)
+ 
+  <font color="#006666">; Efface les éléments de la map</font>
+<font color="#006666">  ClearMap</font>(<font color="#006666">Pays</font>())
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Il y a &quot;+<font color="#006666">Str</font>(<font color="#006666">MapSize</font>(<font color="#006666">Pays</font>()))+&quot; éléments dans la map&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addmapelement.html">AddMapElement()</a>, <a href="deletemapelement.html">DeleteMapElement()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addmapelement.html>AddMapElement()</a> - <a href=index.html>Map Index</a> - <a href=comparemap.html>CompareMap()</a> -><br><br>
+
+</body></html>

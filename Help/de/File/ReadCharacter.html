@@ -1,0 +1,51 @@
+<html><head><title>ReadCharacter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadCharacter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Zahl.c = <font color="#006666"><b>ReadCharacter</b></font>(#Datei [, Format])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest ein Zeichen aus einer Datei, beginnend an der aktuellen Dateiposition. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datei</i></td>
+<td width="90%"> 
+Die Datei, aus der gelesen werden soll. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+Das Format des zu lesenden Zeichens (englisch &quot;Character&quot;). 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : 1 Byte Zeichen.
+  <font color="#924B72">#PB_Unicode</font>: 2 Bytes Zeichen (Standard im <a href="../reference/unicode.html">Unicode</a>-Modus).
+  <font color="#924B72">#PB_UTF8</font>   : Multi-Bytes Zeichen (von 1 bis zu 4 Bytes).
+</font></pre>
+Wenn dieses Flag nicht gesetzt wird, dann hängt das Format für das Lesen des Zeichens von der 
+entsprechenden Einstellung des zuvor verwendeten <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> bzw. <a href="readfile.html">ReadFile()</a> Befehls ab. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt das gelesene Zeichen zurück, oder Null bei einem Fehler. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Für ein Beispiel, wie aus einer Datei gelesen wird, siehe den <a href="readfile.html">ReadFile()</a> Befehl - mit 
+ReadCharacter() wird einfach ein Zeichen (Character) anstelle einer kompletten Zeile (String) gelesen. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="writecharacter.html">WriteCharacter()</a>, <a href="readasciicharacter.html">ReadAsciiCharacter()</a>, <a href="readunicodecharacter.html">ReadUnicodeCharacter()</a>, <a href="openfile.html">OpenFile()</a>, <a href="readfile.html">ReadFile()</a>, <a href="loc.html">Loc()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=readbyte.html>ReadByte()</a> - <a href=index.html>File Inhaltsverzeichnis</a> - <a href=readdata.html>ReadData()</a> -><br><br>
+
+</body></html>

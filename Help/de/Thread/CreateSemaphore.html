@@ -1,0 +1,109 @@
+<html><head><title>CreateSemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateSemaphore()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Semaphore = <font color="#006666"><b>CreateSemaphore</b></font>([Anfangszähler])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein neues Semaphore-Objekt. 
+<br>
+<br>
+Ein Semaphore ist ein Thread-Synchronisations-Objekt, welches einen internen Zähler einschließt. 
+Es hat zwei Arten von Operationen: <a href="signalsemaphore.html">Signal</a> und <a href="waitsemaphore.html">Warten</a>. 
+Eine Warte-Operation vermindert den Zähler des Semaphore um eins. Wenn der Zähler unter 0 fallen 
+würde, dann blockiert die Warte-Operation bis ein Signal-Aufruf erfolgt. Eine Signal-Operation 
+erhöht den Zähler um eins, und gibt (wenn vorhanden) einen blockierten Thread wieder frei. 
+Ein Semaphore ermöglicht das Erzwingen von minimalen und maximalen Zählern gegenüber Threads, zum 
+Beispiel um zu vermeiden, dass einem Queue (Warteschlange) die Elemente ausgehen oder er zu viele 
+Elemente erhält. 
+<br>
+<br>
+Anders als ein <a href="createmutex.html">Mutex</a> ist ein Semaphore-Objekt nicht &quot;im Besitz&quot; eines 
+bestimmten Threads, was bedeutet dass Signal/Warte-Aufrufe nicht vom gleichen Thread erfolgen 
+müssen, wie dies mit <a href="lockmutex.html">LockMutex()</a> und <a href="unlockmutex.html">UnlockMutex()</a> der Fall ist. 
+Tatsächlich ist die gebräuchliche Nutzungsweise eines Semaphore-Objekts, durch einen Thread die 
+<a href="signalsemaphore.html">SignalSemaphore()</a> Aufrufe durchzuführen und durch einen weiteren Thread alle 
+<a href="waitsemaphore.html">WaitSemaphore()</a> Aufrufe durchzuführen, um eine Hersteller/Konsument-Struktur 
+(englisch: &quot;producer/consumer pattern&quot;) zu schaffen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Anfangszähler (optional)</i></td>
+<td width="90%"> 
+Dies muss ein positiver Wert sein, welcher den anfänglichen Zähler des Semaphore 
+definiert. Wenn dieser nicht angegeben wird, lautet der anfängliche Zähler gleich 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Das neue Semaphore-Objekt - oder Null, wenn die Semaphore-Erstellung fehlgeschlagen ist. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+Dieses Beispiel zeigt einen &quot;Hersteller&quot;-Thread, welcher ein Queue mit Elementen bevölkert, und 
+den Haupt-Thread, der sie liest. Das Semaphore wird verwendet, um sicher zu gehen, dass dem Queue 
+nie die Elemente ausgehen. Beachten Sie, dass dies auch erreicht werden kann, mit nur einem 
+Mutex und Warten/Abfragen von Queue-Elementen mit einem <a href="../system/delay.html">Delay()</a> zwischendrin, 
+aber die Semaphore-Befehle führen ein effizienteres Warten aus (kehren umgehend nach einem 
+<a href="signalsemaphore.html">SignalSemaphore()</a> Aufruf zurück, und nicht nur wenn das nächste Mal eine Abfrage-Schleife 
+den Queue überprüft). 
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Global</font></b> Semaphore =<font color="#006666"> CreateSemaphore</font>()
+<b><font color="#006666">Global</font></b> Mutex     =<font color="#006666"> CreateMutex</font>()
+<b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">Queue</font>()
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Producer</font>(Total)
+
+  <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> Total
+<font color="#006666">    Delay</font>(<font color="#006666">Random</font>(750) + 250)
+    
+    <font color="#006666">; Der Queue-Zugriff benötigt weiterhin einen normalen &quot;Mutex Lock&quot;, um Thread-sicher zu sein</font>
+<font color="#006666">    LockMutex</font>(Mutex)
+<font color="#006666">      LastElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      AddElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      Queue</font>() = i
+<font color="#006666">    UnlockMutex</font>(Mutex)    
+
+    <font color="#006666">; Signalisiere, dass es ein neues Queue-Element gibt</font>
+<font color="#006666">    SignalSemaphore</font>(Semaphore)
+  <b><font color="#006666">Next</font></b> i
+    
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#006666">CreateThread</font>(@Producer(), 30)
+
+  <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30  
+    <font color="#006666">; Warte auf ein verfügbares Element</font>
+<font color="#006666">    WaitSemaphore</font>(Semaphore)
+    
+    <font color="#006666">; Queue-Status anzeigen</font>
+<font color="#006666">    LockMutex</font>(Mutex)
+      Queue$ = &quot;Queue:&quot;
+      <b><font color="#006666">ForEach</font></b> <font color="#006666">Queue</font>()
+        Queue$ + &quot; &quot; +<font color="#006666"> Str</font>(<font color="#006666">Queue</font>())
+      <b><font color="#006666">Next</font></b> <font color="#006666">Queue</font>()
+      <b><font color="#006666">Debug</font></b> Queue$
+    
+      <font color="#006666">; Kopf-Element vom Queue entfernen</font>
+<font color="#006666">      FirstElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      DeleteElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">    UnlockMutex</font>(Mutex)
+    
+  <b><font color="#006666">Next</font></b> i
+
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freesemaphore.html">FreeSemaphore()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createmutex.html>CreateMutex()</a> - <a href=index.html>Thread Inhaltsverzeichnis</a> - <a href=createthread.html>CreateThread()</a> -><br><br>
+
+</body></html>

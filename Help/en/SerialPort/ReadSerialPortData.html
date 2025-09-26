@@ -1,0 +1,46 @@
+<html><head><title>ReadSerialPortData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadSerialPortData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReadSerialPortData</b></font>(#SerialPort, *Buffer, Length)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Reads an arbitrary amount of data from the #SerialPort. If the input buffer was empty, this function will block 
+until data is available. To check if data is available, use <a href="availableserialportinput.html">AvailableSerialPortInput()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#SerialPort</i></td>
+<td width="90%"> 
+The serial port to use. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+The memory address to use to put the read data. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+The length to read from the serial port, in bytes. The specified buffer should be large enough to handle it. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The number of bytes which are actually read. It can be less than the requested length. 
+If a read error has occurred, it will return zero. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="availableserialportinput.html">AvailableSerialPortInput()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=openserialport.html>OpenSerialPort()</a> - <a href=index.html>SerialPort Index</a> - <a href=serialporterror.html>SerialPortError()</a> -><br><br>
+
+</body></html>

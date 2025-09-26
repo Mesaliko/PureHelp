@@ -1,0 +1,72 @@
+<html><head><title>InputEvent3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputEvent3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>InputEvent3D</b></font>(MouseX, MouseY, LeftMouseButton [, Text$, SpecialKey])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Send an event to the 3D GUI system. It is required to have <a href="windowevent3d.html">WindowEvent3D()</a> working. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>MouseX, MouseY</i></td>
+<td width="90%"> 
+The new mouse coordinate to use. 
+
+</td></tr>
+<tr><td><i>LeftMouseButton</i></td>
+<td> 
+Left mouse button state. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  0: left mouse button is released.
+  1: left mouse button is pushed.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Text$ (optional)</i></td>
+<td> 
+The text to use as input. 
+
+</td></tr>
+<tr><td><i>SpecialKey (optional)</i></td>
+<td> 
+The special key to use as key press. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Key_Back</font>
+  <font color="#924B72">#PB_Key_Delete</font>
+  <font color="#924B72">#PB_Key_Return</font>
+  <font color="#924B72">#PB_Key_Up</font>
+  <font color="#924B72">#PB_Key_Down</font>
+  <font color="#924B72">#PB_Key_Left</font>
+  <font color="#924B72">#PB_Key_Right</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;</font>
+  <font color="#006666">; Typical code to use to send to the 3D GUI system with actual mouse and keyboard events</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>() <b><font color="#006666">And</font></b> <font color="#006666">ExamineMouse</font>()
+    Input$ =<font color="#006666"> KeyboardInkey</font>()
+    
+<font color="#006666">    InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>), Input$, 0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="windowevent3d.html">WindowEvent3D()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=hidewindow3d.html>HideWindow3D()</a> - <a href=index.html>Window3D Index</a> - <a href=iswindow3d.html>IsWindow3D()</a> -><br><br>
+
+</body></html>

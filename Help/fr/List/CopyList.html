@@ -1,0 +1,67 @@
+<html><head><title>CopyList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CopyList()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CopyList</b></font>(ListeSource(), ListeDestination())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Copie tous les éléments d'une liste 
+dans une autre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ListeSource()</i></td>
+<td width="90%"> 
+La liste à copier. 
+
+</td></tr>
+<tr><td><i>ListeDestination()</i></td>
+<td> 
+La copie de la liste. 
+<br>
+<br>
+Tous les éléments présents avant la copie 
+seront effacés. 
+<br>
+Si les deux listes ne sont pas du même 
+type (natif ou structuré) la copie ne 
+se fera pas. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la copie 
+a réussi, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Amis$</font>()
+  <b><font color="#006666">NewList</font></b> <font color="#006666">AmisCopie$</font>()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Amis$</font>())
+<font color="#006666">  Amis$</font>() = &quot;Jean&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Amis$</font>())
+<font color="#006666">  Amis$</font>() = &quot;Elise&quot;
+
+<font color="#006666">  CopyList</font>(<font color="#006666">Amis$</font>(),<font color="#006666"> AmisCopie$</font>())
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">AmisCopie$</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">AmisCopie$</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../array/copyarray.html">CopyArray()</a>, <a href="../map/copymap.html">CopyMap()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=comparelist.html>CompareList()</a> - <a href=index.html>List Index</a> - <a href=countlist.html>CountList()</a> -><br><br>
+
+</body></html>

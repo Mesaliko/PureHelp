@@ -1,0 +1,89 @@
+<html><head><title>CreateBillboardGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateBillboardGroup()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateBillboardGroup</b></font>(#BillboardGruppe, MaterialID, StandardBillboardBreite, StandardBillboardHöhe [, x, y, z [, SichtbarkeitsMaske [, Typ]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue leere Billboard-Gruppe. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BillboardGruppe</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren der neuen Billboard-Gruppe. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>MaterialID</i></td>
+<td> 
+Das Material, welches für alle mittels der <a href="addbillboard.html">AddBillboard()</a> Funktion zu dieser Gruppe 
+hinzugefügten Billboards verwendet werden soll. Um eine gültige Material-ID zu 
+erhalten, verwenden Sie <a href="../material/materialid.html">MaterialID()</a>. 
+
+</td></tr>
+<tr><td><i>StandardBillboardBreite</i></td>
+<td> 
+Die Standardbreite (in Welt-Einheiten) der zu dieser Gruppe hinzugefügten Billboards. 
+Auch wenn die Größe jedes Billboards separat mit dem <a href="resizebillboard.html">ResizeBillboard()</a> Befehl festgelegt 
+werden kann: Es ist wichtig zu beachten, dass es sich negativ auf die Leistung niederschlägt, 
+wenn nicht alle Billboards die gleiche Größe verwenden. 
+
+</td></tr>
+<tr><td><i>StandardBillboardHöhe</i></td>
+<td> 
+Die Standardhöhe (in Welt-Einheiten) der zu dieser Gruppe hinzugefügten Billboards. 
+Auch wenn die Größe jedes Billboards separat mit dem <a href="resizebillboard.html">ResizeBillboard()</a> Befehl festgelegt 
+werden kann: es ist wichtig zu beachten, dass es sich negativ auf die Leistung niederschlägt, 
+wenn nicht alle Billboards die gleiche Größe verwenden. 
+
+</td></tr>
+<tr><td><i>x, y, Z (optional)</i></td>
+<td> 
+Die absolute Position der neuen Billboard-Gruppe in der Welt. 
+
+</td></tr>
+<tr><td><i>SichtbarkeitsMaske (optional)</i></td>
+<td> 
+Eine Maske zum Auswählen, auf welcher <a href="../camera/index.html">Kamera</a> die Billboard-Gruppe dargestellt werden soll. 
+Wenn diese Maske mit der bei <a href="../camera/createcamera.html">CreateCamera()</a> angegebenen Maske zusammenpasst, dann wird die Billboard-Gruppe 
+auf der Kamera angezeigt. Siehe <a href="../entity/createentity.html">CreateEntity()</a> zum Aufbau korrekter Masken. 
+Wenn dieser Parameter weggelassen wird, dann wird die Billboard-Gruppe auf allen Kameras sichtbar sein. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Der Billboard-Typ. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Billboard_Point</font>: Standard-Punkt-Billboard, immer komplett vor der Kamera und immer aufrecht (Standard).
+  <font color="#924B72">#PB_Billboard_Oriented</font>: Billboards sind um einen gemeinsamen Richtungsvektor (als Y-Achse verwendet)
+                          ausgerichtet und drehen sich nur um diese, um für die Kamera sichtbar zu sein.
+  <font color="#924B72">#PB_Billboard_SelfOriented</font>: Billboards sind um ihren eigenen Richtungsvektor (ihre eigene Y-Achse)
+                              ausgerichtet und drehen sich nur um diese, um für die Kamera sichtbar zu sein.
+  <font color="#924B72">#PB_Billboard_Perpendicular</font>: Billboards sind senkrecht zu einem gemeinsamen Richtungsvektor (verwendet
+                               als Z-Achse, der Blickrichtung) und die X- und Y-Achsen werden von einem
+                               gemeinsamen Aufwärts-Vektor (&quot;up vector&quot;) bestimmt.
+  <font color="#924B72">#PB_Billboard_SelfPerpendicular</font>: Billboards sind senkrecht zu ihrem eigenen Richtungsvektor (ihrer eigenen
+                                   Z-Achse, der Blickrichtung) und die X- und Y-Achsen werden von einem
+                                   gemeinsamen Aufwärts-Vektor (&quot;up vector&quot;) bestimmt.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn die Billboard-Gruppe nicht erstellt werden konnte. Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+als Parameter '#BillboardGruppe' verwendet wurde, dann wird die Nummer der neuen Billboard-Gruppe zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freebillboardgroup.html">FreeBillboardGroup()</a>, <a href="addbillboard.html">AddBillboard()</a>, <a href="billboardgroupcommondirection.html">BillboardGroupCommonDirection()</a>, <a href="billboardgroupcommondirection.html">BillboardGroupCommonDirection()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=countbillboards.html>CountBillboards()</a> - <a href=index.html>Billboard Inhaltsverzeichnis</a> - <a href=freebillboardgroup.html>FreeBillboardGroup()</a> -><br><br>
+
+</body></html>

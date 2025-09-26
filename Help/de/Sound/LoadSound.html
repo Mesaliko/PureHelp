@@ -1,0 +1,78 @@
+<html><head><title>LoadSound</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadSound()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>LoadSound</b></font>(#Sound, Dateiname$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Lädt einen WAV-Sound (im PCM-Format, ADPCM wird nicht unterstützt) oder jedes andere 
+von der <a href="../soundplugin/index.html">SoundPlugin Bibliothek</a> unterstützte Format 
+in den Speicher. 
+<br>
+<br>
+Die folgenden Funktionen können verwendet werden, um automatisch mehr Sound-Formate zu aktivieren: 
+<br>
+<br>
+<a href="../soundplugin/useflacsounddecoder.html">UseFLACSoundDecoder()</a> 
+<br>
+<a href="../soundplugin/useoggsounddecoder.html">UseOGGSoundDecoder()</a> 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sound</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen Sounds. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der für das Laden des Sounds zu verwendende Dateiname. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann der folgende Wert sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sound_Streaming</font>: Aktiviert &quot;Streaming Playback&quot; - einem System zum gleichzeitigen 
+           Laden und Abspielen, wodurch nicht erst die gesamte Sound-Datei in den Speicher
+           geladen werden muss (nur unterstützt für <a href="../soundplugin/useflacsounddecoder.html">FLAC</a> und <a href="../soundplugin/useoggsounddecoder.html">OGG</a>)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn der Sound erfolgreich geladen wurde, andernfalls Null. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSound</font>()           <font color="#006666">; Initialisieren des Sound-Systems</font>
+<font color="#006666">    UseOGGSoundDecoder</font>()   <font color="#006666">; Verwenden von Ogg-Dateien</font>
+    
+    <font color="#006666">; Lädt einen Sound aus einer Datei</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadSound</font>(0, <font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/3D/Data/Siren.ogg&quot;)
+<font color="#006666">      PlaySound</font>(0, <font color="#924B72">#PB_Sound_Loop</font>) <font color="#006666">; Abspielen des Sounds in einer Schleife starten</font>
+      
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;OK zum Stoppen.&quot;)
+      
+<font color="#006666">      FreeSound</font>(0) <font color="#006666">; Der Sound wird freigegeben</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Warnung! Die Sound-Umgebung konnte nicht initialisiert werden. Daher können keine Sound-Befehle verwendet werden...&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="catchsound.html">CatchSound()</a>, <a href="freesound.html">FreeSound()</a>, <a href="playsound.html">PlaySound()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=issound.html>IsSound()</a> - <a href=index.html>Sound Inhaltsverzeichnis</a> - <a href=pausesound.html>PauseSound()</a> -><br><br>
+
+</body></html>

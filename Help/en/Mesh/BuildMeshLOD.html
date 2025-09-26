@@ -1,0 +1,58 @@
+<html><head><title>BuildMeshLOD</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BuildMeshLOD()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>BuildMeshLOD</b></font>(#Mesh [, NbLOD, Distance.f, ReductionValue.f])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Build automatically one or several level of detail (LOD) for the mesh. The #Mesh will be replaced automatically 
+with less complex mesh when displayed above the specified distance from the camera. If more precise LOD 
+meshes are required, <a href="addmeshmanuallod.html">AddMeshManualLOD()</a> can be used. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mesh</i></td>
+<td width="90%"> 
+The mesh to use. 
+
+</td></tr>
+<tr><td><i>NbLOD (optional)</i></td>
+<td> 
+Number of needed LOD for this mesh. If this parameter isn't used, then the LODs will be automatically calculated. 
+
+</td></tr>
+<tr><td><i>Distance (optional)</i></td>
+<td> 
+The minimum distance from the camera where the first LOD mesh will be used instead of #Mesh. 
+For the next LOD meshs, the distance will be calculated using this formula: 'Distance / SqrF(1-ReductionValue)'. 
+
+</td></tr>
+<tr><td><i>ReductionValue (optional)</i></td>
+<td> 
+The reduction to apply, between 0 (no reduction) and 1 (100% reduction). <br>
+
+<br>
+Example: CreateMeshLodLevels(<font color="#924B72">#Mesh</font>, 3, 100, 0.75) <br>
+- The first reduction of the original mesh starts from 100 units of the camera, vertices number halved by 4 (75% reduction). 
+- The second reduction of the original mesh starts from 200 units of the camera, vertices number halved by 16. 
+- The third reduction of the original mesh starts from 400 units of the camera, vertices number halved by 64. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createmesh.html">CreateMesh()</a>, <a href="addmeshmanuallod.html">AddMeshManualLOD()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addsubmesh.html>AddSubMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=buildmeshshadowvolume.html>BuildMeshShadowVolume()</a> -><br><br>
+
+</body></html>

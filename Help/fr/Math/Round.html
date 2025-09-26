@@ -1,0 +1,66 @@
+<html><head><title>Round</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Round()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.f(d) = <font color="#006666"><b>Round</b></font>(Nombre.f(d), Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Arrondit un nombre flottant selon le mode choisi. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Nombre.f ou Nombre.d</i></td>
+<td width="90%"> 
+Le nombre à virgule flottante 
+(<a href="../reference/variables.html">float ou double</a>) 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Round_Down</font>   : Le nombre est arrondi par défaut. 
+  <font color="#924B72">#PB_Round_Up</font>     : Le nombre est arrondi par excès.
+  <font color="#924B72">#PB_Round_Nearest</font>: Le nombre est arrondi à l'entier le plus proche (0.5 est arrondi à 1)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nombre arrondi.<br>
+C'est un nombre à virgule flottante 
+(<a href="../reference/variables.html">float ou double</a>) 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour transformer un nombre à virgule flottante 
+en un entier sans arrondi, utiliser <a href="int.html">Int()</a> ou 
+<a href="intq.html">IntQ()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Down</font>)    <font color="#006666">; Affiche '11.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-3.6, <font color="#924B72">#PB_Round_Down</font>)    <font color="#006666">; Affiche '-4.0'</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Up</font>)      <font color="#006666">; Affiche '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-3.6, <font color="#924B72">#PB_Round_Up</font>)      <font color="#006666">; Affiche '-3.0'</font>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.6, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Affiche '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.4, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Affiche '11.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(11.5, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Affiche '12.0'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Round</font>(-3.5, <font color="#924B72">#PB_Round_Nearest</font>) <font color="#006666">; Affiche '-4.0'</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="int.html">Int()</a>, <a href="intq.html">IntQ()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=randomseed.html>RandomSeed()</a> - <a href=index.html>Math Index</a> - <a href=sign.html>Sign()</a> -><br><br>
+
+</body></html>

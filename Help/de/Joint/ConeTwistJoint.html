@@ -1,0 +1,70 @@
+<html><head><title>ConeTwistJoint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConeTwistJoint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ConeTwistJoint</b></font>(#Joint, EntityID, TransformX, TransformY, TransformZ, EntityID2, TransformX2, TransformY2, TransformZ2)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue Kegeldrehungs-Verbindung (englisch &quot;cone twist joint&quot;) zwischen den zwei angegebenen 
+Entities (Objekten). Eine Kegeldrehung kann verwendet werden, um Arme oder Beine an einem Körper 
+zu befestigen, etc. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Joint</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren des neuen Gelenks (Joint). <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>EntityID</i></td>
+<td> 
+Das erste mit dem Gelenk (Joint) verknüpfte Entity. Um eine gültige EntityID zu erhalten, 
+verwenden Sie <a href="../entity/entityid.html">EntityID()</a>. 
+
+</td></tr>
+<tr><td><i>TransformX, TransformY, TransformZ</i></td>
+<td> 
+Die auf das erste Entity (Objekt) anzuwendende Transformation. 
+
+</td></tr>
+<tr><td><i>EntityID2</i></td>
+<td> 
+Das zweite zur Erstellung des Gelenks (Joint) verwendete Entity. Um eine gültige EntityID zu erhalten, 
+verwenden Sie <a href="../entity/entityid.html">EntityID()</a>. 
+
+</td></tr>
+<tr><td><i>TransformX2, TransformY2, TransformZ2</i></td>
+<td> 
+Die auf das zweite Entity (Objekt) anzuwendende Transformation. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn die Verbindung bzw. das Gelenk (Joint) nicht erstellt werden konnte. 
+Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> als Parameter '#Joint' verwendet wird, 
+dann wird die neue Joint-Nummer als 'Ergebnis' zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+<a href="getjointattribute.html">GetJointAttribute()</a> und <a href="setjointattribute.html">SetJointAttribute()</a> können mit den folgenden Attributen verwendet 
+werden, um das Verhalten der Verbindung zu ändern: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ConeTwistJoint_SwingSpan</font>  : Erste Schaukel-Spannweite der Verbindung
+  <font color="#924B72">#PB_ConeTwistJoint_SwingSpan2</font> : Zweite Schaukel-Spannweite der Verbindung
+  <font color="#924B72">#PB_ConeTwistJoint_TwistSpan</font>  : Dreh-Spannweite der Verbindung
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freejoint.html">FreeJoint()</a>, <a href="getjointattribute.html">GetJointAttribute()</a>, <a href="setjointattribute.html">SetJointAttribute()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Joint Inhaltsverzeichnis</a> - <a href=enablehingejointangularmotor.html>EnableHingeJointAngularMotor()</a> -><br><br>
+
+</body></html>

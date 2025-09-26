@@ -1,0 +1,130 @@
+<html><head><title>SpriteCollision</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpriteCollision()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SpriteCollision</b></font>(#Sprite1, X1, Y1, #Sprite2, X2, Y2)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Teste si deux Sprites se chevauchent. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite1</i></td>
+<td width="90%"> 
+Le premier sprite à tester. 
+
+</td></tr>
+<tr><td><i>X1, Y1</i></td>
+<td> 
+Coordonnées du premier sprite, en pixels. 
+
+</td></tr>
+<tr><td><i>#Sprite2</i></td>
+<td> 
+Le second sprite à tester. 
+
+</td></tr>
+<tr><td><i>X2, Y2</i></td>
+<td> 
+Coordonnées du second sprite, en pixels. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les 
+sprites entrent en collision, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction teste une zone rectangulaire, 
+ce qui la rend rapide mais peu précise, 
+mais cependant très utile dans des jeux 
+d'arcade. Fonctionne aussi avec les 
+sprites zoomés. 
+<br>
+<br>
+Utiliser <a href="spritepixelcollision.html">SpritePixelCollision()</a> pour un 
+test de collision précis. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Exemple OpenScreen&quot;)
+
+ <font color="#006666">;Sprite Flèche</font>
+<font color="#006666">CreateSprite</font>(0,20,20,<font color="#924B72">#PB_Sprite_PixelCollision</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">DrawText</font>(0,0,&quot;--&gt;&quot;,<font color="#006666">RGB</font>(255,255,0),<font color="#006666"> RGB</font>(0,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Sprite Cible</font>
+<font color="#006666">CreateSprite</font>(1,100,100,<font color="#924B72">#PB_Sprite_PixelCollision</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(1))
+<font color="#006666">Circle</font>(50,50,49,<font color="#006666">RGB</font>(255,255,0))
+<font color="#006666">Circle</font>(50,50,40,<font color="#006666">RGB</font>(0,255,0))
+<font color="#006666">Circle</font>(50,50,30,<font color="#006666">RGB</font>(0,255,255))
+<font color="#006666">Circle</font>(50,50,20,<font color="#006666">RGB</font>(0,0,255))
+<font color="#006666">Circle</font>(50,50,10,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Sprite Boom</font>
+<font color="#006666">CreateSprite</font>(2,100,100,<font color="#924B72">#PB_Sprite_PixelCollision</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(2))
+<font color="#006666">Circle</font>(50,50,50,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">DrawText</font>(50-<font color="#006666">TextWidth</font>(&quot;BOOM&quot;)/2,50-<font color="#006666">TextHeight</font>(&quot;BOOM&quot;)/2,&quot;BOOM&quot;,<font color="#006666">RGB</font>(255,255,0),<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Coordonnée de départ en x de la flèche</font>
+x=100
+
+ <font color="#006666">;Boucle </font>
+<b><font color="#006666">While</font></b> x &lt; 800  <font color="#006666">; Si la flèche manque la cible alors le programme se terminera quand x = 800</font>
+  
+  <font color="#006666">;La flèche avancera de 2 pixels vers la droite</font>
+  x=x+2
+  
+  <font color="#006666">;Effacer complètement l'écran et afficher un fond noir</font>
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+  
+  <font color="#006666">;Affichage de la flèche</font>
+<font color="#006666">  DisplaySprite</font>(0, x, 250)
+  <font color="#006666">;Affichage de la cible</font>
+<font color="#006666">  DisplaySprite</font>(1, 500, 200)
+  
+  <font color="#006666">;Détection de collision entre la flèche et la cible</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">SpriteCollision</font>(0, x, 250, 1, 500, 200) &lt;&gt; 0
+    <font color="#006666">;S'il y a collision alors on efface l'écran et on affiche BOOM</font>
+<font color="#006666">    ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+<font color="#006666">    DisplaySprite</font>(2, 500, 200)
+    <font color="#006666">;On inverse les buffers pour rendre la scène visible à l'écran.</font>
+<font color="#006666">    FlipBuffers</font>()
+<font color="#006666">    Delay</font>(2000)
+<font color="#006666">    ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+    <b><font color="#006666">End</font></b> <font color="#006666">; et puis on ferme le programme</font>
+  <b><font color="#006666">EndIf</font></b> 
+  
+  
+  <font color="#006666">;Maintenant que tout est calculé et affiché dans le buffer invisible,</font>
+  <font color="#006666">;On inverse les buffers pour rendre la scène visible à l'écran.</font>
+<font color="#006666">  FlipBuffers</font>()
+  
+<font color="#006666">  Delay</font>(10)
+  
+<b><font color="#006666">Wend</font></b>
+
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="spritepixelcollision.html">SpritePixelCollision()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=spriteblendingmode.html>SpriteBlendingMode()</a> - <a href=index.html>Sprite Index</a> - <a href=spritedepth.html>SpriteDepth()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,75 @@
+<html><head><title>InsertJSONArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertJSONArray()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>InsertJSONArray</b></font>(JSONValue, Array())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Insert the specified Array() into the given JSON value. The JSON value will be 
+changed to <a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Array</font>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValue</i></td>
+<td width="90%"> 
+The JSON value. The previous content of the value will be changed to the 
+content of the Array(). 
+
+</td></tr>
+<tr><td><i>Array()</i></td>
+<td> 
+The array to insert into the JSON value. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If the specified Array() has more than one dimension, the JSON value will be filled 
+with a nested array of arrays to represent the multi-dimensional data. See the below 
+example for more details. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">Colors</font>.s(3)
+<font color="#006666">  Colors</font>(0) = &quot;red&quot;
+<font color="#006666">  Colors</font>(1) = &quot;yellow&quot;
+<font color="#006666">  Colors</font>(2) = &quot;green&quot;
+<font color="#006666">  Colors</font>(3) = &quot;blue&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+<font color="#006666">    InsertJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> Colors</font>())
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">matrix</font>(2, 2)
+<font color="#006666">  matrix</font>(0, 0) = 1
+<font color="#006666">  matrix</font>(1, 1) = 1
+<font color="#006666">  matrix</font>(2, 2) = 1
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+<font color="#006666">    InsertJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> matrix</font>())
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="insertjsonlist.html">InsertJSONList()</a>, <a href="insertjsonmap.html">InsertJSONMap()</a>, <a href="insertjsonstructure.html">InsertJSONStructure()</a>, 
+<a href="extractjsonarray.html">ExtractJSONArray()</a>, <a href="extractjsonlist.html">ExtractJSONList()</a>, <a href="extractjsonmap.html">ExtractJSONMap()</a>, <a href="extractjsonstructure.html">ExtractJSONStructure()</a>, 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=getjsonstring.html>GetJSONString()</a> - <a href=index.html>Json Index</a> - <a href=insertjsonlist.html>InsertJSONList()</a> -><br><br>
+
+</body></html>

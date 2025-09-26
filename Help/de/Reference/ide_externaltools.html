@@ -1,0 +1,458 @@
+<html><head><title>Verwenden externer Werkzeuge</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Verwenden externer Werkzeuge</font></b></p>
+
+Die PureBasic IDE ermöglicht es Ihnen, externe Programme so zu konfigurieren, dass 
+diese direkt aus der IDE - über das Menü, Tastenkürzel, die Werkzeugleiste oder 
+spezieller &quot;Auslöser&quot; (englisch &quot;Trigger&quot;) - aufgerufen werden können. 
+Der Nutzen hierfür liegt darin, einen einfachen Zugriff auf andere Programme - die 
+Sie während des Programmierens verwenden - zu gewährleisten. 
+<br>
+<br>
+Sie können auch Ihre eigenen kleinen Werkzeuge (englisch &quot;Tools&quot;) in PureBasic 
+schreiben, die spezielle Aktionen mit dem gerade aufgerufenen Quellcode durchführen, 
+um gewöhnliche Aufgaben zu automatisieren. Weiterhin können Sie externe Dateibetrachter 
+konfigurieren, um den internen <a href="../reference/ide_tools.html">Dateibetrachter</a> der IDE für 
+bestimmte oder alle Dateien zu ersetzen. 
+
+<br>
+<br>
+
+<p><img src="images/ide_exttools_menu.png"></p>
+
+Mit dem Menüpunkt &quot;Werkzeuge konfigurieren&quot; im Werkzeuge-Menü können Sie solche externen 
+Werkzeuge konfigurieren. Die Liste, die Sie im entsprechenden Fenster sehen können, zeigt 
+alle konfigurierten Werkzeuge in der Reihenfolge, wie sie im Werkzeug-Menü erscheinen 
+(außer sie sind versteckt). Sie können hier Werkzeuge hinzufügen und entfernen, oder durch 
+Auswählen eines Eintrags und anschließendem Klicken auf &quot;Nach oben / Nach unten&quot; die 
+Reihenfolge ändern. 
+
+<p><img src="images/ide_exttools_toolswindow.png"></p>
+
+Jedes Werkzeug kann im Fenster &quot;Werkzeuge konfigurieren&quot; durch die Häkchen-Box vor jedem 
+Werkzeug-Eintrag schnell aktiviert oder deaktiviert werden. Eine abgehakte Häkchen-Box 
+bedeutet, dass das Werkzeug aktiviert ist, eine Box ohne Häkchen bedeutet, dass das 
+Werkzeug derzeit deaktiviert ist. 
+
+
+<p><b>Konfigurieren eines Werkzeugs</b></p><blockquote>
+
+
+Die grundlegenden Dinge, die Sie angeben müssen, sind die Kommandozeile des zu startenden 
+Programms und einen Namen dafür für die Werkzeuge-Liste bzw. das Werkzeuge-Menü. Alles 
+andere ist optional. 
+
+<p><img src="images/ide_exttools_toolsedit.png"></p>
+
+<b>Kommandozeile</b> 
+<br>
+Wählen Sie hier das auszuführende Programm aus. 
+
+<br>
+<br>
+
+<b>Argumente</b> 
+<br>
+Geben Sie an das Programm zu übergebende Kommandozeilen-Parameter hier ein. 
+Sie können dabei feste Optionen angeben, aber auch spezielle Platzhalter (&quot;Token&quot;), 
+welche beim Starten des Programms ersetzt werden: 
+
+<br>
+<br>
+%PATH : wird ersetzt durch den Pfad des aktuellen Quellcodes. Bleibt leer, wenn der Quellcode nicht gespeichert wurde. 
+<br>
+%FILE : Dateiname des aktuellen Quellcodes. Bleibt leer, wenn dieser noch nicht gespeichert wurde. Wenn Sie das 
+Werkzeug konfigurieren, um den <a href="../reference/ide_tools.html">Dateibetrachter</a> zu ersetzen, dann repräsentiert 
+dieser Platzhalter die zu öffnende Datei. 
+Sie sollten niemals den Inhalt der %FILE-Datei ändern. Diese Datei enthält den Zustand des Quellcodes, wie er vom 
+Benutzer zuletzt gespeichert wurde. Dies kann sich stark von dem unterscheiden, was derzeit im Editor angezeigt wird. 
+Wenn Sie diese Datei überschreiben, könnte der Benutzer Daten verlieren. 
+<br>
+%TEMPFILE : Wenn diese Option genutzt wird, dann wird der aktuelle Quellcode in eine temporäre Datei gespeichert und 
+deren Dateiname wird hier eingefügt. Sie können die Datei auf Wunsch modifizieren oder löschen. 
+<br>
+%COMPILEFILE : Dieser Platzhalter ist nur gültig für Kompilierungs-Auslöser (Trigger), siehe dazu weiter unten. 
+Dieser wird ersetzt mit der temporären Datei, welche zur Kompilierung an den Compiler geschickt wird. Durch 
+Ändern dieser Datei können Sie auch beeinflussen, was kompiliert wird. 
+<br>
+%EXECUTABLE : Dieser Platzhalter wird durch den Namen des Executable ersetzt, welches zuletzt mit &quot;Executable 
+erstellen&quot; kompiliert wurde. Beim Auftreten des Auslösers &quot;Nach Kompilieren/Starten&quot; wird dieser Platzhalter 
+durch den Namen der vom Compiler erstellten temporären Executable-Datei ersetzt. 
+<br>
+%CURSOR : Wird durch die aktuelle Cursor-Position ersetzt. In der Form ZEILExSPALTE. 
+<br>
+%SELECTION : Wird ersetzt durch die aktuelle Textauswahl in der Form von STARTZEILExSTARTSPALTExENDEZEILExENDESPALTE. 
+Dies kann zusammen mit %TEMPFILE verwendet werden, wenn Sie möchten, dass Ihr Werkzeug einige Aktionen basierend 
+auf dem aktuell ausgewählten Textbereich ausführt. 
+<br>
+%WORD : Enthält das Wort, welches sich gerade unter dem Cursor befindet. 
+<br>
+%PROJECT : Der vollständige Pfad zum Verzeichnis, welches die Projekt-Datei enthält, sofern ein Projekt geöffnet ist. 
+<br>
+%HOME : Der vollständige Pfad zum Purebasic-Verzeichnis. 
+
+<br>
+<br>
+
+Hinweis: Für alle Dateinamen- oder Pfad-Platzhalter ist es generell eine gute Idee, sie in &quot;&quot; zu setzen 
+(z.B. &quot;%TEMPFILE&quot;), um sicherzugehen, dass alle Pfade mit darin enthaltenen Leerzeichen korrekt an das 
+Werkzeug übergeben werden. Diese Platzhalter und eine Beschreibung können Sie auch durch Anklicken des 
+&quot;Info&quot;-Schalters neben dem &quot;Argumente&quot;-Feld ansehen. 
+
+<br>
+<br>
+
+<b>Arbeitsverzeichnis</b> 
+<br>
+Wählen Sie ein Verzeichnis aus, in welchem dieses Werkzeug ausgeführt werden soll. Wenn Sie hier kein 
+Verzeichnis angeben, wird das Werkzeug im Verzeichnis des gerade geöffneten Quellcodes ausgeführt. 
+
+<br>
+<br>
+
+<b>Name</b> 
+<br>
+Geben Sie hier einen Namen für das Werkzeug ein. Dieser wird in der Werkzeuge-Liste und auch im 
+Werkzeuge-Menü angezeigt, sofern das Werkzeug nicht vom Menü versteckt werden soll. 
+
+
+</blockquote>
+<p><b>Ereignis zum Auslösen des Werkzeugs</b></p><blockquote>
+
+
+Hier können Sie auswählen, wann das Werkzeug ausgeführt werden soll. Eine beliebige Anzahl 
+an Werkzeugen kann den gleichen Auslöser haben, sie werden alle ausgeführt, sobald der 
+&quot;Auslöser&quot; auftritt. Die Reihenfolge ihrer Ausführung hängt von der Reihenfolge, in der sie 
+in der Werkzeugeliste erscheinen, ab. 
+
+<p><img src="images/ide_exttools_toolstrigger.png"></p>
+
+<b>Menü oder Tastenkürzel</b> 
+<br>
+Das Werkzeug wird nicht automatisch ausgeführt. Es wird durch ein Tastenkürzel oder über das 
+Menü gestartet. Hinweis: Um ein Werkzeug von der Symbolleiste aus zu starten, müssen Sie einen 
+Schalter dafür in der Symbolleisten-Konfiguration in den Einstellungen hinzufügen (siehe 
+<a href="../reference/ide_preferences.html">Anpassen der IDE</a> für weitere Informationen). 
+<br>
+<br>
+Mit der Einstellung dieses Auslösers wird die &quot;Tastenkürzel&quot;-Option darunter anwählbar. 
+Dort können Sie dann auch ein Tastenkürzel für das Starten dieses Werkzeugs einstellen. 
+
+<br>
+<br>
+
+<b>Editor-Start</b> 
+<br>
+Das Werkzeug wird direkt nach dem vollständigen Start der IDE ausgeführt. 
+
+<br>
+<br>
+
+<b>Editor-Schließen</b> 
+<br>
+Das Werkzeug wird unmittelbar vor dem Schließen der IDE ausgeführt. 
+Beachten Sie, dass zu diesem Zeitpunkt bereits alle zuvor geöffneten Quellcodes 
+geschlossen sind. 
+
+<br>
+<br>
+
+<b>Vor dem Kompilieren/Starten</b> 
+<br>
+Das Werkzeug wird gestartet, unmittelbar bevor der Compiler zum Kompilieren 
+eines Quellcodes aufgerufen wird. Durch Verwendung des %COMPILEFILE Platzhalters 
+können Sie den zu kompilierenden Code erhalten und diesen verändern. Dies macht 
+es möglich, einen kleinen Pre-Prozessor für den Quellcode zu schreiben. Denken 
+Sie bitte daran, dass Sie die Option &quot;Warten bis zum Beenden des Werkzeugs&quot; 
+aktivieren sollten, wenn Sie Ihre Modifizierungen an den Compiler weitergeben 
+möchten. 
+
+<br>
+<br>
+
+<b>Nach dem Kompilieren/Starten</b> 
+<br>
+Das Werkzeug wird gestartet, unmittelbar nachdem die Kompilierung abgeschlossen 
+wurde, jedoch bevor das Executable zum Testen ausgeführt wird. Durch Verwendung 
+des %EXECUTABLE Platzhalters können Sie Zugriff auf die soeben erstellte Datei 
+erhalten. Beachten Sie, dass Sie die Datei verändern, jedoch nicht löschen 
+können, da dies zu einer Fehlermeldung führt, wenn die IDE versucht die Datei 
+auszuführen. 
+
+<br>
+<br>
+
+<b>Kompiliertes Programm starten</b> 
+<br>
+Das Werkzeug wird gestartet, wenn der Anwender den &quot;Starten&quot;-Befehl aus dem Compiler-Menü 
+auswählt. Das Werkzeug wird ausgeführt, bevor das Executable gestartet wird. Der 
+%EXECUTABLE Platzhalter ist hier ebenfalls gültig. 
+
+<br>
+<br>
+
+<b>Vor dem Erstellen des Executable</b> 
+<br>
+Das gleiche wie beim &quot;Vor dem Kompilieren/Starten&quot; Auslöser passiert auch hier, nur 
+dass das auslösende Ereignis auftritt, wenn der Anwender das fertige Executable erstellt. 
+
+<br>
+<br>
+
+<b>Nach dem Erstellen des Executable</b> 
+<br>
+Das Werkzeug wird gestartet, wenn die Kompilierung zur Erstellung des fertigen 
+Executable fertiggestellt ist. Sie können den %EXECUTABLE Platzhalter verwenden, um 
+den Namen der erstellten Datei zu erhalten und damit weitere Aktionen durchzuführen. 
+
+<br>
+<br>
+
+<b>Quellcode geladen</b> 
+<br>
+Das Werkzeug wird ausgeführt, wenn ein Quellcode in die IDE geladen wurde. Die 
+%FILE und %PATH Platzhalter sind hier immer gültig, da die Datei gerade von Disk 
+geladen wurde. 
+
+<br>
+<br>
+
+<b>Quellcode gespeichert</b> 
+<br>
+Das Werkzeug wird ausgeführt, sobald ein Quellcode in der IDE erfolgreich gespeichert wurde. 
+Die %FILE und %PATH Platzhalter sind hier immer gültig, da die Datei gerade auf Disk 
+gespeichert wurde. 
+
+<br>
+<br>
+
+<b>Quellcode geschlossen</b> 
+<br>
+Das Werkzeug wird ausgeführt, sobald ein Quellcode geschlossen werden soll. Zu diesem 
+Zeitpunkt ist die Datei noch vorhanden, sodass Sie immer noch deren Inhalt mit dem 
+%TEMPFILE Platzhalter erhalten können. %FILE wird leer sein, wenn die Datei noch nie 
+gespeichert wurde. 
+
+<br>
+<br>
+
+<b>Dateianzeiger ersetzen - Alle Dateien</b> 
+<br>
+Das Werkzeug ersetzt komplett den internen Dateianzeiger. Wenn in der IDE ein Versuch 
+zum öffnen einer Datei gestartet wird, welche nicht in den Editier-Bereich geladen werden 
+kann, wird die IDE zuerst die Werkzeuge mit einem für den speziellen Dateityp gesetzten 
+Auslöser probieren. Wenn keines gefunden werden kann, wird die zu öffnende Datei an dieses 
+Werkzeug geleitet. Verwenden Sie den %FILE Platzhalter, um den Dateinamen der zu öffnenden 
+Datei zu erhalten. 
+<br>
+<br>
+Hinweis: Nur ein Werkzeug kann diesen Auslöser haben. Jede weiteren Werkzeuge mit diesem 
+Auslöser werden ignoriert. 
+
+<br>
+<br>
+
+<b>Dateianzeiger ersetzen - Unbekannte Dateien</b> 
+<br>
+Dieses Werkzeug ersetzt in erster Linie den Hex-Dateibetrachter, welcher üblicherweise 
+verwendet wird, um unbekannte Dateiformate anzuzeigen. Er wird gestartet, wenn die 
+Dateiendung der IDE unbekannt ist und wenn kein anderes externes Werkzeug zum Anzeigen 
+einer solchen Datei konfiguriert ist. (Wenn ein Werkzeug mit dem &quot;Dateianzeiger ersetzen - Alle 
+Dateien&quot; Auslöser gesetzt ist, dann wird dieses Werkzeug niemals aufgerufen.) 
+<br>
+<br>
+Hinweis: Nur ein Werkzeug kann diesen Auslöser haben. 
+
+<br>
+<br>
+
+<b>Dateianzeiger ersetzen - Spezielle Dateien</b> 
+<br>
+Damit wird ein Werkzeug zum Umgang mit bestimmten Dateiendungen konfiguriert. Es hat 
+eine höhere Priorität als die &quot;Dateianzeiger ersetzen - Alle Dateien&quot; oder 
+&quot;Dateianzeiger ersetzen - Unbekannte Dateien&quot; Auslöser und auch als der interne 
+Dateibetrachter selbst. Geben Sie die Dateiendungen, welche durch das Werkzeug 
+geöffnet werden sollen, in dem Eingabefeld auf der rechten Seite an. Mehrere 
+Endungen können eingegeben werden. 
+<br>
+<br>
+Eine beispielhafte Anwendungsmöglichkeit für diesen Auslöser ist zum Beispiel das 
+Konfigurieren eines Programms wie dem Acrobat Reader zum Umgang mit der &quot;pdf&quot;-Dateiendung. 
+Dies ermöglicht es Ihnen, PDF-Dateien einfach aus dem Dateiexplorer, dem Dateianzeiger 
+oder mittels Doppelklick auf eine <a href="../reference/includes.html">Includebinary</a> Anweisung im 
+Quellcode zu öffnen. 
+
+<br>
+<br>
+
+<b>Datei öffnen – spezielle Dateiendungen</b> 
+<br>
+Dies wird ausgelöst (englisch &quot;triggered&quot;) bei bestimmten Dateiendungen. 
+Dieser Auslöser hat eine höhere Priorität als &quot;Datei öffnen – nicht-PB Binärdateien&quot; 
+und &quot;Datei öffnen – nicht-PB Textdateien&quot;. 
+Geben Sie die Dateiendungen, welche das Tool unterstützen soll, in der Editier-Box 
+rechts an. Mehrere Dateiendungen können angegeben werden. 
+<br>
+<br>
+Hinweis: 
+Die &quot;Datei öffnen&quot; Auslöser werden dann aktiv, wenn man eine Datei über das Datei/Öffnen Menü der IDE öffnet 
+oder eine Datei per Drag&amp;Drop auf die IDE gezogen wird. 
+Diese Auslöser haben eine höhere Priorität für die Datei/Öffnen Tasks. 
+Nur wenn kein aktives Werkzeug vorhanden ist, werden die &quot;Dateianzeiger ersetzen&quot;-Auslöser behandelt. 
+
+<br>
+<br>
+
+<b>Datei öffnen – nicht-PB Binärdateien</b> 
+<br>
+Dieser Auslöser wird getriggert bei Binärdateien, die nicht zu PureBasic gehören 
+(also praktisch alle). 
+<br>
+<br>
+Hinweis: Nur ein Werkzeug kann diesen Auslöser haben. Alle anderen Tools mit diesem Trigger werden ignoriert. 
+
+<br>
+<br>
+
+<b>Datei öffnen – nicht-PB Textdateien</b> 
+<br>
+Dieser wird getriggert bei Textdateien, die nicht zu PureBasic gehören. 
+<br>
+<br>
+Hinweis: Nur ein Werkzeug kann diesen Auslöser haben. 
+
+</blockquote>
+<p><b>Andere Optionen auf der rechten Seite</b></p><blockquote>
+
+
+<b>Warten bis zum Beenden des Werkzeugs</b> 
+<br>
+Die IDE wird für Eingaben gesperrt und unterlässt alle Aktionen bis das Werkzeug fertig 
+mit seiner Arbeit ist. Diese Option ist notwendig, wenn Sie einen Quellcode verändern 
+und danach wieder laden oder ihn an nach einem entsprechenden Auslöser an den Compiler 
+übergeben möchten. 
+
+<br>
+<br>
+
+<b>Versteckt starten</b> 
+<br>
+Startet das Programm im unsichtbaren Modus. Verwenden Sie diese Option nicht für 
+Programme, welche evtl. Anwender-Eingaben erwarten, da es in diesem Fall keine 
+Möglichkeit zum Schließen des Programms gibt. 
+
+<br>
+<br>
+
+<b>Editor verstecken</b> 
+<br>
+Dies ist nur möglich mit der gesetzten Option &quot;Warten bis zum Beenden des Werkzeugs&quot;. 
+Versteckt den Editor, während das Werkzeug läuft. 
+
+<br>
+<br>
+
+<b>Quellcode nach Ende des Werkzeugs neu laden</b> 
+<br>
+Dies ist nur möglich mit der gesetzten Option &quot;Warten bis zum Beenden des Werkzeugs&quot; 
+und wenn entweder der %FILE oder %TEMPFILE Platzhalter in der Argumente-Liste verwendet 
+wird. 
+<br>
+<br>
+Nachdem Ihr Programm beendet wurde, wird die IDE den Quellcode erneut in den Editor 
+laden. Sie können auswählen, ob dieser den alten Code ersetzen oder als ein neuer 
+Code geladen werden soll. 
+
+<br>
+<br>
+
+<b>Werkzeug vom Hauptmenü verstecken</b> 
+<br>
+Versteckt das Werkzeug vom Werkzeuge-Menü. Dies ist nützlich für Werkzeuge, welche 
+nur durch einen speziellen &quot;Auslöser&quot; und nicht vom Menü aus gestartet werden sollen. 
+
+<br>
+<br>
+
+<b>Werkzeug auf einer pro-Quellcode Basis aktivieren</b> 
+<br>
+Werkzeuge mit dieser gesetzten Option werden in der &quot;Werkzeuge ausführen&quot; Liste in den 
+<a href="../reference/ide_compiler.html">Compiler-Optionen</a> aufgelistet, und nur für solche 
+Quellcodes ausgeführt, wo es dort aktiviert ist. 
+Bitte beachten Sie, dass bei Deaktivieren eines Werkzeugs hier im &quot;Werkzeuge konfigurieren&quot; 
+Fenster dieses global deaktiviert wird und damit für keinen Quellcode läuft, auch wenn es 
+dort aktiviert wird. 
+<br>
+<br>
+Diese Option ist nur verfügbar für die folgenden Auslöser-Ereignisse: 
+<br>
+- Vor dem Kompilieren/Starten <br>
+- Nach dem Kompilieren/Starten <br>
+- Kompiliertes Programm starten <br>
+- Vor dem Erstellen des Executable <br>
+- Nach dem Erstellen des Executable <br>
+- Quellcode geladen <br>
+- Quellcode gespeichert <br>
+- Quellcode geschlossen 
+
+<br>
+<br>
+
+<b>Unterstützte Dateierweiterungen</b> 
+<br>
+Nur für den &quot;Dateianzeiger ersetzen - Spezielle Dateien&quot; Auslöser. 
+Geben Sie die Liste der durch dieses Werkzeug unterstützten Endungen hier ein. 
+
+
+
+</blockquote>
+<p><b>Tipps für das Schreiben Ihrer eigenen Quellcode-Prozessoren (Verarbeitungswerkzeuge)</b></p><blockquote>
+
+
+Die IDE bietet zusätzliche Informationen für die Werkzeuge in der Form von Umgebungsvariablen. 
+Diese können innerhalb des Werkzeugs einfach mit den Befehlen der <a href="../process/index.html">Process</a> Bibliothek 
+gelesen werden. 
+
+<br>
+<br>
+
+Dies ist eine Liste der angebotenen Variablen. Bitte beachten Sie, dass die Variablen, welche Informationen 
+über den aktiven Quellcode bieten, nicht für Werkzeuge zum Start oder Ende der IDE verfügbar sind. 
+<pre><font face="Courier New, Courier, mono" size="2">  PB_TOOL_IDE         - Voller Pfad und Dateiname der IDE
+  PB_TOOL_Compiler    - Voller Pfad und Dateiname des Compilers
+  PB_TOOL_Preferences - Voller Pfad und Dateiname der IDE-Einstellungsdatei (.prefs)
+  PB_TOOL_Project     - Voller Pfad und Dateiname des aktuell offenen Projekts (falls es eines gibt)
+  PB_TOOL_Language    - Sprache, welche gegenwärtig in der IDE verwendet wird
+  PB_TOOL_FileList    - Eine Liste aller in der IDE geöffneten Dateien, getrennt durch Chr(10)
+
+  PB_TOOL_Debugger    - Diese Variablen bieten Einstellungen aus dem Fenster <a href="../reference/ide_compiler.html">Compiler Optionen</a>
+  PB_TOOL_InlineASM     des aktuellen Quellcodes. Sie sind auf &quot;1&quot; gesetzt, wenn die Option
+  PB_TOOL_Unicode       eingeschaltet ist, andernfalls auf &quot;0&quot;.
+  PB_TOOL_Thread     
+  PB_TOOL_XPSkin     
+  PB_TOOL_OnError    
+
+  PB_TOOL_SubSystem   - Inhalt des &quot;Subsystem&quot; Felds in den Compiler-Optionen
+  PB_TOOL_Executable  - das gleiche wie das %COMPILEFILE Token für die Kommandozeile
+  PB_TOOL_Cursor      - das gleiche wie das %CURSOR Token für die Kommandozeile
+  PB_TOOL_Selection   - das gleiche wie das %SELECTION Token für die Kommandozeile
+  PB_TOOL_Word        - das gleiche wie das %WORD Token für die Kommandozeile
+
+  PB_TOOL_MainWindow  - OS Handle des IDE-Hauptfensters
+  PB_TOOL_Scintilla   - OS Handle der Scintilla Editor-Komponente des aktuellen Quellcodes
+</font></pre>
+
+<br>
+
+Wenn die %TEMPFILE oder %COMPILEFILE Platzhalter verwendet werden, 
+hängt die IDE die Compiler-Optionen als Kommentar an das Ende der 
+erstellten temporären Datei - auch wenn der Anwender ausgewählt hat, 
+die Optionen beim Speichern eines Quellcodes nicht zu speichern. 
+<br>
+<br>
+Dies gibt Ihrem Werkzeug die Möglichkeit, die Compiler-Einstellungen 
+für diese Datei auszulesen und diese bei den weiteren Aktionen mit 
+zu berücksichtigen. 
+
+</blockquote>
+</font></body></html>

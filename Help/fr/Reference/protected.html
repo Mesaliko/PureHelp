@@ -1,0 +1,49 @@
+<html><head><title>Protected</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Protected</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Protected</font></b>[.&lt;type&gt;] &lt;variable[.&lt;type&gt;]&gt; [= &lt;expression&gt;] [, ...]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Protected</font></b> permet de créer une variable locale dans une procédure. Elle supplante l'éventuelle 
+variable globale du même nom pendant toute la procédure (contrairement à une variable locale classique non protégée). 
+Une valeur par défaut peut être assignée à la variable. 
+<b><font color="#006666">Protected</font></b> peut aussi être utilisé avec les <a href="../reference/dim.html">tableaux</a>, les <a href="../reference/newlist.html">listes</a> et les <a href="../reference/newmap.html">maps</a>. <br>
+<br>
+La valeur de la variable locale sera réinitialisée à chaque appel de la procédure. Pour éviter cela, 
+<a href="../reference/static.html">Static</a> permet de déclarer une variable locale indépendante des variables 
+globales tout en gardant sa valeur au fil des appels de la procédure. 
+
+</blockquote><p><b>Exemple:</b> Avec une variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> a
+  a = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Protected</font></b> a 
+    a = 20
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  <b><font color="#006666">Debug</font></b> a <font color="#006666">; Affichera 10 car la variable a été protégée. </font>
+</font></pre>
+
+<br>
+</blockquote><p><b>Exemple:</b> Avec un tableau</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">Tableau</font>(2)
+<font color="#006666">  Tableau</font>(0) = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Protected</font></b> <b><font color="#006666">Dim</font></b> <font color="#006666">Tableau</font>(2) <font color="#006666">; Ce tableau est protégé, il sera local.</font>
+<font color="#006666">    Tableau</font>(0) = 20 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Tableau</font>(0) <font color="#006666">; Affichera 10 car le tableau a été protégé.</font>
+</font></pre>
+</blockquote>
+</font></body></html>

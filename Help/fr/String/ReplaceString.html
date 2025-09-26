@@ -1,0 +1,98 @@
+<html><head><title>ReplaceString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReplaceString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>ReplaceString</b></font>(Chaine$, ChaineCherchee$, ChaineRemplacee$ [, Mode [, PositionDepart [, NbOccurences]]])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Remplace une sous-chaîne par une 
+autre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne de caractères à utiliser. 
+
+</td></tr>
+<tr><td><i>ChaineCherchee$</i></td>
+<td> 
+La chaîne de caractères à substituée. 
+
+</td></tr>
+<tr><td><i>ChaineRemplacee$ </i></td>
+<td> 
+La chaîne de caractères de remplacement. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : La suppression est sensible à la casse (A&lt;&gt;a). Par défaut.
+  <font color="#924B72">#PB_String_NoCase</font> : Recherche les occurrences sans tenir compte de la casse (A=a). 
+  <font color="#924B72">#PB_String_InPlace</font>: Remplacement direct dans la Chaîne de caractères initiale 'Chaîne$'. Dans ce cas,
+                      'ChaineRemplacee$' doit absolument avoir la même taille que 'ChaineCherchee$'.
+                      C'est une fonctionnalité pour programmeurs expérimentés qui ont besoin d'une fonction
+                      extrêmement rapide pour ce cas particulier. Quand cette option est utilisée, le résultat 
+                      renvoyé par ReplaceString() doit être ignoré (car c'est la chaîne de caractères passée en 
+                      paramètre qui est modifiée).
+</font></pre>
+
+</td></tr>
+<tr><td><i>PositionDepart (optionnel)</i></td>
+<td> 
+Permet de spécifier à partir de quel 
+caractère le remplacement doit être 
+effectué. 
+<br>
+<br>
+Sa valeur minimale est 1. 
+
+</td></tr>
+<tr><td><i>NbOccurences (optionnel)</i></td>
+<td> 
+Le remplacement s'arrêtera une fois 
+'NbOccurences' atteint. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie un chaîne dont toutes les 
+occurrences 'ChaineCherchee$' ont 
+été substituées par 'ChaineRemplacee$'. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">ReplaceString</font>(&quot;deviser de l'Art&quot;, &quot; de&quot;, &quot; sur&quot;) <font color="#006666">; Affichera &quot;deviser sur l'Art&quot;</font>
+
+  test$ = &quot;Salut les gens, Salut les gens&quot;
+  Resultat$ =<font color="#006666"> ReplaceString</font>(test$, &quot;SALUT&quot;, &quot;ho non...&quot;, <font color="#924B72">#PB_String_NoCase</font>, 10) <font color="#006666">; Affichera &quot;Salut les gens, ho non... les gens&quot;</font>
+  <b><font color="#006666">Debug</font></b> Resultat$
+  
+  test$ = &quot;Bundy, Barbie, Buddy&quot;
+<font color="#006666">  ReplaceString</font>(test$, &quot;B&quot;, &quot;Z&quot;, <font color="#924B72">#PB_String_InPlace</font>, 1)  <font color="#006666">; Tous les B seront remplacés par des Z  (Dans ce mode la chaîne de caractères passée en paramètre est modifiée)</font>
+  <b><font color="#006666">Debug</font></b> test$   <font color="#006666">; Affichera &quot;Zundy, Zarbie, Zuddy&quot;.</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="countstring.html">CountString()</a>, 
+<a href="findstring.html">FindString()</a>, 
+<a href="insertstring.html">InsertString()</a>, 
+<a href="removestring.html">RemoveString()</a>, 
+<a href="reversestring.html">ReverseString()</a>, 
+<a href="stringbytelength.html">StringByteLength()</a>, 
+<a href="stringfield.html">StringField()</a>, <a href="../regularexpression/replaceregularexpression.html">ReplaceRegularExpression()</a> 
+
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removestring.html>RemoveString()</a> - <a href=index.html>String Index</a> - <a href=reversestring.html>ReverseString()</a> -><br><br>
+
+</body></html>

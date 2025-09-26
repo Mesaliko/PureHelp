@@ -1,0 +1,107 @@
+<html><head><title>String Guess UTF8.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;
+</font>  <font color="#006666">; ------------------------------------------------------------
+</font>  <font color="#006666">;
+</font>  <font color="#006666">;   PureBasic - UTF8-String example file
+</font>  <font color="#006666">;
+</font>  <font color="#006666">;    (c) 2018 - Fantaisie Software
+</font>  <font color="#006666">;
+</font>  <font color="#006666">; ------------------------------------------------------------
+</font>  <font color="#006666">;
+</font>
+  <font color="#006666">; This example show how to guess if a raw string is an UTF8-String
+</font>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">seems_utf8</font>(*StrMem, iLen.i)
+    <font color="#006666">;Return #True (1) if a string in memory (buffer) is an UTF8-String, #False (0) otherwise
+</font>    
+    <font color="#006666">; Some var needed
+</font>    <b><font color="#006666">Protected</font></b> iCnt.i
+    <b><font color="#006666">Protected</font></b> aCharVal.a
+    <b><font color="#006666">Protected</font></b> iNext.i
+    <b><font color="#006666">Protected</font></b> iCnt2.i
+    <b><font color="#006666">Protected</font></b> iUtf8Detected.i = <font color="#924B72">#False</font>
+    
+    <font color="#006666">; get length, For utf8 this means bytes and not characters
+</font>    <font color="#006666">; we need to check each byte in the string
+</font>    
+    <b><font color="#006666">For</font></b> iCnt=0 <b><font color="#006666">To</font></b> iLen-1
+      
+      <font color="#006666">; get the byte code 0-255 of the i-th byte
+</font>      
+      aCharVal =<font color="#006666"> PeekA</font>(*StrMem+iCnt)
+      
+      <font color="#006666">;       Debug &quot;Cnt &gt;&quot;+iCnt+&quot;&lt; CharVal &gt;&quot;+aCharVal+&quot;&lt; - &gt;&quot;+Right(&quot;00000000&quot;+Bin(aCharVal, #PB_Ascii),8)+&quot;&lt; Char&gt;&quot;+Chr(aCharVal)+&quot;&lt;&quot;
+</font>      
+      <font color="#006666">; # utf8 characters can take 1-6 bytes, how much
+</font>      <font color="#006666">; # exactly is decoded in the first character If
+</font>      <font color="#006666">; # it has a character code &gt;= 128 (highest bit set).
+</font>      <font color="#006666">; # For all &lt;= 127 the ASCII is the same As UTF8.
+</font>      <font color="#006666">; # The number of bytes per character is stored in
+</font>      <font color="#006666">; # the highest bits of the first byte of the UTF8
+</font>      <font color="#006666">; # character. The bit pattern that must be matched
+</font>      <font color="#006666">; # For the different length are shown As comment.
+</font>      <font color="#006666">; #
+</font>      <font color="#006666">; # So $n will hold the number of additonal characters
+</font>      
+      <b><font color="#006666">If</font></b> (aCharVal &lt; $80) : iNext = 0 <font color="#006666">; # 0bbbbbbb
+</font>      <b><font color="#006666">ElseIf</font></b> ((aCharVal &amp; $E0) = $C0) : iNext=1<font color="#006666">; # 110bbbbb
+</font>      <b><font color="#006666">ElseIf</font></b> ((aCharVal &amp; $F0) = $E0) : iNext=2<font color="#006666">; # 1110bbbb
+</font>      <b><font color="#006666">ElseIf</font></b> ((aCharVal &amp; $F8) = $F0) : iNext=3<font color="#006666">; # 11110bbb
+</font>      <b><font color="#006666">ElseIf</font></b> ((aCharVal &amp; $FC) = $F8) : iNext=4<font color="#006666">; # 111110bb
+</font>      <b><font color="#006666">ElseIf</font></b> ((aCharVal &amp; $FE) = $FC) : iNext=5<font color="#006666">; # 1111110b
+</font>      <b><font color="#006666">Else</font></b>
+        <font color="#006666">;          Debug &quot;error &gt;&quot;+iCnt+&quot;&lt; iLen &gt;&quot;+iLen+&quot;&lt; &quot;
+</font>        
+        <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font><font color="#006666">; # Does not match any model
+</font>      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; # the code now checks the following additional bytes
+</font>      <font color="#006666">; # First in the If checks that the byte is really inside the
+</font>      <font color="#006666">; # string And running over the string End.
+</font>      <font color="#006666">; # The second just check that the highest two bits of all
+</font>      <font color="#006666">; # additonal bytes are always 1 And 0 (hexadecimal 0x80)
+</font>      <font color="#006666">; # which is a requirement For all additional UTF-8 bytes
+</font>      <b><font color="#006666">If</font></b> iNext&gt;0
+        <font color="#006666">;          Debug &quot;Next &gt;&quot;+iNext+&quot;&lt;&quot;
+</font>        iUtf8Detected=<font color="#924B72">#True</font>
+        <b><font color="#006666">For</font></b> iCnt2=1 <b><font color="#006666">To</font></b> iNext <font color="#006666">;# n bytes matching 10bbbbbb follow ?
+</font>          <b><font color="#006666">If</font></b> iCnt+iCnt2&gt;iLen <b><font color="#006666">Or</font></b> (<font color="#006666">PeekA</font>(*StrMem+iCnt+iCnt2) &amp; $C0)&lt;&gt;$80
+            <font color="#006666">;                Debug &quot;false iCnt &gt;&quot;+iCnt+&quot;&lt; iCnt2&gt;&quot;+iCnt2+&quot;&lt; iLen &gt;&quot;+iLen+&quot;&lt; iNext &gt;&quot;+iNext+&quot;&lt; CHAR &gt;&quot;+PeekA(*StrMem+iCnt)
+</font>            
+            <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">Next</font></b>
+        iCnt+iCnt2-1
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Next</font></b>
+    
+    <b><font color="#006666">ProcedureReturn</font></b> iUtf8Detected
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  unicode.s=&quot;Hélé&quot; <font color="#006666">; Since PB 5.5, all strings are created in unicode by default
+</font>  
+  *Mem0=<font color="#006666">AllocateMemory</font>(4)
+<font color="#006666">  PokeS</font>(*Mem0,&quot;Hélé&quot;,4, <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; Fills a buffer with an UTF8-String
+</font>  
+  *Mem1 =<font color="#006666"> Ascii</font>(&quot;Hélé&quot;) <font color="#006666">; Fills a buffer with an ASCII-String
+</font>  *Mem2 =<font color="#006666"> UTF8</font>(&quot;Hélé&quot;)  <font color="#006666">; Fills a buffer With an UTF8-String
+</font>  
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(@&quot;Hélé&quot;, 4)  <font color="#006666">; displays #false because it's an unicode-string
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(@unicode, 4) <font color="#006666">; displays #false because it's an unicode-string
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(*Mem0, 4)    <font color="#006666">; displays #true because it's an UTF8-string
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(*Mem1, 4)    <font color="#006666">; displays #false because it's an ASCII-string
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(*Mem2, 4)    <font color="#006666">; displays #true because it's an UTF8-string
+</font>  
+<font color="#006666">  PokeS</font>(*Mem0,&quot;Hele&quot;, 4, <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; Fills a buffer with an UTF8-String
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(*Mem0, 4)       <font color="#006666">; displays #false because the buffer is filled with ascii characters only (0 to $80=127)
+</font>                                     <font color="#006666">; then it's not possible to discriminate an ascii-string of an utf8-string
+</font>  
+<font color="#006666">  PokeS</font>(*Mem0,&quot;Hé Hele&quot;, 7, <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; Fills a buffer with an UTF8-String
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">seems_utf8</font>(*Mem0, 7)          <font color="#006666">; displays #true because because it's an UTF8-string
+</font>    </font></pre>
+</body></html>

@@ -1,0 +1,78 @@
+<html><head><title>UnbindGadgetEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UnbindGadgetEvent()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>UnbindGadgetEvent</b></font>(#Gadget, @Callback() [, TypeEvenement])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Retire un évènement d'un gadget de la 
+liste des évènements de la fenêtre 
+initialement ajouté avec la fonction 
+<a href="bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+La procédure à retirer. 
+
+</td></tr>
+<tr><td><i>TypeEvenement (optionnel)</i></td>
+<td> 
+Le type d'évènement à retirer. 
+<br>
+<br>
+Pour une liste complète des types pris 
+en charge, voir <a href="../window/eventtype.html">EventType()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si l'évènement correspondant n'est pas 
+trouvé, cette commande n'a aucun effet. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ButtonHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Clic sur le ButtonGadget #&quot; +<font color="#006666"> EventGadget</font>()
+ 
+<font color="#006666">    UnbindGadgetEvent</font>(0, @ButtonHandler()) <font color="#006666">; Suppression immédiate</font>
+    <b><font color="#006666">Debug</font></b> &quot;Évènement détaché&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 200, 50, &quot;Test clic&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+  
+<font color="#006666">  ButtonGadget</font>(0, 10, 10, 180, 30, &quot;Cliquez moi !&quot;)
+  
+<font color="#006666">  BindGadgetEvent</font>(0, @ButtonHandler())
+<font color="#006666">  UnbindGadgetEvent</font>(0, @ButtonHandler()) <font color="#006666">;</font>
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../window/bindevent.html">BindEvent()</a>, <a href="bindgadgetevent.html">BindGadgetEvent()</a>, 
+<a href="../menu/bindmenuevent.html">BindMenuEvent()</a>, <a href="../window/windowevent.html">WindowEvent()</a>, 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=treegadget.html>TreeGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=usegadgetlist.html>UseGadgetList()</a> -><br><br></blockquote>
+</font></body></html>

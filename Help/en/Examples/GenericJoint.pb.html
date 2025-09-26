@@ -1,0 +1,171 @@
+<html><head><title>GenericJoint.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - GenericJoint
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+
+<font color="#924B72">#Speed</font> = 50
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, ex,ey
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;GenericJoint - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">CreateSprite</font>(1, 200, 120, <font color="#924B72">#PB_Sprite_AlphaBlending</font>)
+<font color="#006666">LoadFont</font>(1, &quot;Arial&quot;, 16, <font color="#924B72">#PB_Font_Bold</font>)
+
+<font color="#006666">;====================== Materials/textures ========================
+
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0,&quot;Wood.jpg&quot;))
+<font color="#006666">GetScriptMaterial</font>(1, &quot;Examples/SphereMappedRustySteel&quot;)
+<font color="#006666">GetScriptMaterial</font>(2, &quot;Color/Red&quot;)
+<font color="#006666">GetScriptMaterial</font>(3, &quot;Color/Green&quot;)
+<font color="#006666">CreateMaterial</font>(4,<font color="#006666"> LoadTexture</font>(4, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreateMaterial</font>(10,<font color="#006666"> LoadTexture</font>(10, &quot;ground_diffuse.png&quot;)) :<font color="#006666"> ScaleMaterial</font>(10,1/8,1/8)
+<font color="#006666">GetScriptMaterial</font>(11, &quot;Color/Yellow&quot;)
+
+<font color="#006666">;- Aim
+</font><font color="#006666">CreateSprite</font>(0,256,256,<font color="#924B72">#PB_Sprite_AlphaBlending</font> )
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AllChannels</font>)
+<font color="#006666">Box</font>(0, 0, 256, 256, $0)
+<font color="#006666">Circle</font>(128, 128, 102, $ffffffff)
+<font color="#006666">Circle</font>(128, 128, 100, $77aaaaaa)
+<font color="#006666">LineXY</font>(128, 0, 128, 255, $ffffffff)
+<font color="#006666">LineXY</font>(0, 128, 255, 128, $ffffffff)
+<font color="#006666">StopDrawing</font>()
+
+<font color="#006666">;====================== Meshes/Entities/bodies/joints ========================
+
+</font><font color="#006666">; Ground
+</font><font color="#006666">;
+</font><font color="#006666">CreateCube</font>(10, 2)
+<font color="#006666">CreateEntity</font>(10,<font color="#006666"> MeshID</font>(10),<font color="#006666"> MaterialID</font>(10),  0, -4.0, 0) :<font color="#006666"> ScaleEntity</font>(10, 20, 0.2, 20)
+<font color="#006666">CreateEntityBody</font>(10, <font color="#924B72">#PB_Entity_StaticBody</font> , 0,0.5,0.5)
+
+<font color="#006666">; Shoot ball
+</font><font color="#006666">;
+</font><font color="#006666">CreateSphere</font>(11, 1)
+
+<font color="#006666">; plane - elastic y rotation
+</font><font color="#006666">;
+</font><font color="#006666">CreateCube</font>(0, 2)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0),  8,  1.0, 0) :<font color="#006666"> ScaleEntity</font>(0, 4, 1, 0.2)
+<font color="#006666">CreateEntityBody</font>(0, <font color="#924B72">#PB_Entity_BoxBody</font>, 1, 0.5, 0.5)
+
+<font color="#006666">GenericJoint</font>(1,<font color="#006666">EntityID</font>(10),8,2,0,<font color="#006666">EntityID</font>(0), 0, 0, 0)
+<font color="#006666">SetJointAttribute</font>(1, <font color="#924B72">#PB_Joint_EnableSpring</font>, <font color="#924B72">#True</font>, 4)
+<font color="#006666">SetJointAttribute</font>(1, <font color="#924B72">#PB_Joint_Stiffness</font>, 500, 4)
+<font color="#006666">SetJointAttribute</font>(1, <font color="#924B72">#PB_Joint_Damping</font>, 0.01, 4)
+
+<font color="#006666">; Punching ball: elastic x and z rotation
+</font><font color="#006666">;
+</font><font color="#006666">CreateSphere</font>(1, 3)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1), -8,  0.5, 0)
+<font color="#006666">CreateEntityBody</font>(1, <font color="#924B72">#PB_Entity_SphereBody</font>, 0.4, 0.5, 0.5)
+
+<font color="#006666">GenericJoint</font>(0,<font color="#006666">EntityID</font>(10), -6, 0, 0,<font color="#006666">EntityID</font>(1), 0, -6, 0)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_EnableSpring</font>, <font color="#924B72">#True</font>, 3)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_Stiffness</font>, 1000, 3)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_Damping</font>, 0.005, 3)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_EnableSpring</font>, <font color="#924B72">#True</font>, 5)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_Stiffness</font>, 1000, 5)
+<font color="#006666">SetJointAttribute</font>(0, <font color="#924B72">#PB_Joint_Damping</font>, 0.005, 5)
+
+<font color="#006666">; red target - elastic z translation
+</font><font color="#006666">;
+</font><font color="#006666">CreateSphere</font>(2, 2)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(2),  0,  0.0, 0) :<font color="#006666"> ScaleEntity</font>(2, 1, 1, 0.3)
+<font color="#006666">CreateEntityBody</font>(2, <font color="#924B72">#PB_Entity_ConvexHullBody</font>, 1, 0.5, 0.5)
+
+<font color="#006666">GenericJoint</font>(2,<font color="#006666">EntityID</font>(10), 16, 2, 0,<font color="#006666">EntityID</font>(2), 0, -2, 0)
+<font color="#006666">SetJointAttribute</font>(2, <font color="#924B72">#PB_Joint_EnableSpring</font>, <font color="#924B72">#True</font>, 2)
+<font color="#006666">SetJointAttribute</font>(2, <font color="#924B72">#PB_Joint_Stiffness</font>, 5, 2)
+<font color="#006666">SetJointAttribute</font>(2, <font color="#924B72">#PB_Joint_Damping</font>, 0.5, 2)
+
+<font color="#006666">; green target - elastic x translation and z rotation
+</font><font color="#006666">;
+</font><font color="#006666">CreateSphere</font>(3, 2)
+<font color="#006666">CreateEntity</font>(3,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(3),  0,  0.0, -8) :<font color="#006666"> ScaleEntity</font>(3, 0.3, 1, 1)
+<font color="#006666">CreateEntityBody</font>(3, <font color="#924B72">#PB_Entity_ConvexHullBody</font>, 1,0.5,0.5)
+
+<font color="#006666">GenericJoint</font>(3,<font color="#006666">EntityID</font>(10), 0, 4, -8,<font color="#006666"> EntityID</font>(3), 0, 0, 0)
+<font color="#006666">SetJointAttribute</font>(3, <font color="#924B72">#PB_Joint_EnableSpring</font>, <font color="#924B72">#True</font>, 0)
+<font color="#006666">SetJointAttribute</font>(3, <font color="#924B72">#PB_Joint_Stiffness</font>, 1, 0)
+<font color="#006666">SetJointAttribute</font>(3, <font color="#924B72">#PB_Joint_Damping</font>, 0.5, 0)
+<font color="#006666">SetJointAttribute</font>(3, <font color="#924B72">#PB_Joint_NoLimit</font>, 0, 5)
+
+<font color="#006666">; turnstile - free x rotation
+</font><font color="#006666">;
+</font><font color="#006666">CreateCube</font>(4, 4)
+<font color="#006666">CreateEntity</font>(4,<font color="#006666"> MeshID</font>(4),<font color="#006666"> MaterialID</font>(4),  -12,  0.0, 0) :<font color="#006666"> ScaleEntity</font>(4, 1, 1, 0.2)
+<font color="#006666">CreateEntityBody</font>(4, <font color="#924B72">#PB_Entity_BoxBody</font>, 1, 0.5, 0.5)
+
+<font color="#006666">GenericJoint</font>(4,<font color="#006666">EntityID</font>(10), -16, 4, 0,<font color="#006666">EntityID</font>(4), 0, 0, 0)
+<font color="#006666">SetJointAttribute</font>(4, <font color="#924B72">#PB_Joint_NoLimit</font>, 0, 3)
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, -1, 8, 25, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, -1, 0, 0)
+
+<font color="#006666">; Light
+</font><font color="#006666">;
+</font><font color="#006666">CreateLight</font>(0, $ffffff, 500, 1000, 500)
+<font color="#006666">AmbientColor</font>($777777)
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Additive</font>)
+
+<font color="#006666">MouseLocate</font>(dx/2, dy/2)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>      
+<font color="#006666">  ExamineMouse</font>()
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>)
+    <b><font color="#006666">If</font></b> Clic = 0
+      <b><font color="#006666">If</font></b> <font color="#006666">PointPick</font>(0,<font color="#006666"> MouseX</font>(),<font color="#006666"> MouseY</font>())
+        Clic = 1
+        Shoot =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(11),<font color="#006666"> MaterialID</font>(11),<font color="#006666"> CameraX</font>(0),<font color="#006666"> CameraY</font>(0),<font color="#006666"> CameraZ</font>(0))
+<font color="#006666">        CreateEntityBody</font>(Shoot, <font color="#924B72">#PB_Entity_SphereBody</font>, 1,0.5,0.5)
+<font color="#006666">        ApplyEntityImpulse</font>(Shoot,<font color="#006666"> PickX</font>() * <font color="#924B72">#Speed</font>,<font color="#006666"> PickY</font>() * <font color="#924B72">#Speed</font>,<font color="#006666"> PickZ</font>() * <font color="#924B72">#Speed</font>)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    Clic = 0
+  <b><font color="#006666">EndIf</font></b>
+  
+  keyy = -(<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)&lt;&gt;0)-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)&lt;&gt;0))-<font color="#006666">MouseWheel</font>()*5
+  keyx = -(<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)&lt;&gt;0)-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)&lt;&gt;0))
+  
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+<font color="#006666">  CameraLookAt</font>(0, 0, 0, 0)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  DisplayTransparentSprite</font>(0,<font color="#006666">  MouseX</font>()-<font color="#006666">SpriteWidth</font>(0)/2,<font color="#006666">  MouseY</font>()-<font color="#006666">SpriteHeight</font>(0)/2)
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+</font></pre>
+</body></html>

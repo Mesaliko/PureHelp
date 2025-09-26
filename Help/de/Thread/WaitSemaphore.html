@@ -1,0 +1,41 @@
+<html><head><title>WaitSemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WaitSemaphore()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>WaitSemaphore</b></font>(Semaphore)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Vermindert den internen Zähler des Semaphore um eins, und blockiert die weitere Thread-Ausführung, 
+wenn der Zähler unter Null fallen würde. Ein blockierter Thread wird fortgesetzt, sobald ein 
+weiterer Thread <a href="signalsemaphore.html">SignalSemaphore()</a> aufruft. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Semaphore</i></td>
+<td width="90%"> 
+Das Semaphore-Objekt, auf das gewartet werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Semaphore-Zähler ist begrenzt auf einen vorzeichenbehafteten <a href="../reference/variables.html">32 Bit Wert</a>, 
+womit ein Maximum von 2147483647 <a href="signalsemaphore.html">SignalSemaphore()</a> Aufrufen durchgeführt werden kann, ohne dass 
+zwischendurch mit <a href="waitsemaphore.html">WaitSemaphore()</a> Aufrufen ausgeglichen wird. 
+<br>
+<br>
+Siehe <a href="createsemaphore.html">CreateSemaphore()</a> für ein Code-Beispiel. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=unlockmutex.html>UnlockMutex()</a> - <a href=index.html>Thread Inhaltsverzeichnis</a> - <a href=waitthread.html>WaitThread()</a> -><br><br>
+
+</body></html>

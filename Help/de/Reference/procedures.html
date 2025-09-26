@@ -1,0 +1,228 @@
+<html><head><title>Prozeduren</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Prozeduren</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Procedure</font></b>[.&lt;Typ&gt;] Name(&lt;Parameter1[.&lt;Typ&gt;]&gt; [, &lt;Parameter2[.&lt;Typ&gt;] [= StandardWert]&gt;, ...])
+  ...
+  [<b><font color="#006666">ProcedureReturn</font></b> Wert]
+<b><font color="#006666">EndProcedure</font></b> 
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Eine <b><font color="#006666">Procedure</font></b> ist ein Programmteil, welcher unabhängig vom Hauptcode des 
+Programms ist und seine eigenen Parameter und <a href="../reference/variables.html">Variablen</a> haben kann. In PureBasic wird bei 
+Prozeduren die Rekursion voll unterstützt, jede Prozedur kann sich auch selbst aufrufen. 
+Die Variablen innerhalb der Prozedur erhalten bei jedem Aufruf der Prozedur standardmäßig 
+den Wert 0 (null). Um auf Variablen des Hauptprogramms zugreifen zu können, müssen diese mit 
+der Prozedur &quot;geteilt&quot; (shared) werden. Dies ist mit den <a href="../reference/shared.html">Shared</a> oder <a href="../reference/global.html">Global</a> Schlüsselworten 
+möglich (siehe auch die <a href="../reference/protected.html">Protected</a> und <a href="../reference/static.html">Static</a> Schlüsselwörter). 
+<br>
+<br>
+Die letzten Parameter können einen Standardwert (muss ein konstanter Ausdruck sein) haben. Wenn also 
+diese Parameter beim Prozedur-Aufruf weggelassen werden, wird der Standardwert verwendet. 
+<br>
+<br>
+<a href="../reference/dim.html">Arrays</a> können mit Hilfe des Schlüsselworts <b><font color="#006666">Array</font></b> als Parameter übergeben werden, 
+<a href="../reference/newlist.html">verknüpfte Listen</a> mittels des Schlüsselworts <b><font color="#006666">List</font></b> und 
+<a href="../reference/newmap.html">Maps</a> mittels Schlüsselworts <b><font color="#006666">Map</font></b>. 
+<br>
+<br>
+Eine Prozedur kann wenn nötig eine Zahl oder einen String zurückliefern. Sie müssen in diesem 
+Fall nach <b><font color="#006666">Procedure</font></b> den Typ (.Typ) festlegen und das <b><font color="#006666">ProcedureReturn</font></b> Schlüsselwort an einem beliebigen 
+Punkt innerhalb der Prozedur aufrufen. Ein Aufruf von <b><font color="#006666">ProcedureReturn</font></b> verlässt umgehend die Prozedur, 
+auch wenn er innerhalb einer Schleife erfolgt. 
+<br>
+<b><font color="#006666">ProcedureReturn</font></b> kann nicht verwendet werden, um ein <a href="../reference/dim.html">Array</a>, eine <a href="../reference/newlist.html">Linked List</a> 
+oder eine <a href="../reference/newmap.html">Map</a> zurückzuliefern, übergeben Sie zu diesem Zweck das Array, die Linked List bzw. die Map 
+als Parameter an die Prozedur. 
+<br>
+<br>
+Wenn für <b><font color="#006666">ProcedureReturn</font></b> kein (Rückgabe-) Wert angegeben wird, ist der Rückgabewert 
+<br>
+- Null, wenn der Compiler das C-Backend verwendet (auf allen von PureBasic unterstützten Prozessoren), oder 
+<br>
+- der Inhalt des Registers 'eax' auf 32 Bit (X86-Prozessoren) bzw. 'rax' auf 64 Bit (X64-Prozessoren), 
+wenn der Compiler das ASM-Backend verwendet (siehe <a href="../reference/inlinedasm.html">Inline-ASM</a> für weitere Informationen). 
+<br>
+<br>
+Hinweis: Für die Rückgabe von Strings aus DLLs siehe <a href="../reference/dll.html">DLLs</a>. Für fortgeschrittene 
+Programmierer ist <b><font color="#006666">ProcedureC</font></b> verfügbar und wird die Prozedur mittels der 'CDecl' anstelle der 
+'StandardCall' Aufruf-Konvention deklarieren. Weitere Informationen zu Aufrufkonventionen (cdecl, stdcall, fastcall) 
+von Bibliotheken finden Sie <a href="https://de.wikipedia.org/wiki/Aufrufkonvention">hier</a>. 
+<br>
+<br>
+Einzelne Prozeduren können durch die Nutzung von <a href="../thread/index.html">Threads</a> auch asynchron zum eigentlichen 
+Hauptprogramm ausgeführt werden. 
+
+</blockquote><p><b>Beispiel:</b> Prozedur mit einer numerischen Variable als Rückgabewert</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Maximum</font>(nb1, nb2)
+    <b><font color="#006666">If</font></b> nb1 &gt; nb2
+      Result = nb1
+    <b><font color="#006666">Else</font></b>
+      Result = nb2
+    <b><font color="#006666">EndIf</font></b>
+  
+    <b><font color="#006666">ProcedureReturn</font></b> Result
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  Result =<font color="#006666"> Maximum</font>(15, 30)
+  <b><font color="#006666">Debug</font></b> Result
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Prozedur mit einem String als Rückgabewert</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">Attach</font>(string1$,string2$)
+    result$ = string1$+&quot; &quot;+string2$
+    <b><font color="#006666">ProcedureReturn</font></b> result$
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  a$ =<font color="#006666"> Attach</font>(&quot;PureBasic&quot;,&quot;Coder&quot;)
+  <b><font color="#006666">Debug</font></b> a$
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Parameter mit Standardwert</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">a</font>(a, b, c=2)
+    <b><font color="#006666">Debug</font></b> c
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  a</font>(10, 12)      <font color="#006666">; 2 wird als Standardwert für den dritten Parameter genutzt</font>
+<font color="#006666">  a</font>(10, 12, 15) 
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Verknüpfte Listen als Parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Test</font>.Point()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>()\x = 1
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>()\x = 2
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">DebugList</font>(c.l, <b><font color="#006666">List</font></b> <font color="#006666">ParameterList</font>.Point())
+
+<font color="#006666">    AddElement</font>(<font color="#006666">ParameterList</font>())
+<font color="#006666">    ParameterList</font>()\x = 3
+
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">ParameterList</font>()
+<font color="#006666">      MessageRequester</font>(&quot;List&quot;,<font color="#006666"> Str</font>(<font color="#006666">ParameterList</font>()\x))
+    <b><font color="#006666">Next</font></b>
+ 
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  DebugList</font>(10,<font color="#006666"> Test</font>())
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Array als Parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">Table</font>.Point(10, 15)
+
+<font color="#006666">  Table</font>(0,0)\x = 1
+<font color="#006666">  Table</font>(1,0)\x = 2
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">TestIt</font>(c.l, <b><font color="#006666">Array</font></b> <font color="#006666">ParameterTable</font>.Point(2))  <font color="#006666">; Die Tabelle unterstützt 2 Dimensionen</font>
+
+<font color="#006666">    ParameterTable</font>(1, 2)\x = 3
+<font color="#006666">    ParameterTable</font>(2, 2)\x = 4
+ 
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  TestIt</font>(10,<font color="#006666"> Table</font>())
+
+<font color="#006666">  MessageRequester</font>(&quot;Table&quot;,<font color="#006666"> Str</font>(<font color="#006666">Table</font>(1, 2)\x))
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Statische, dynamisches Array und das Übergeben einer Struktur an eine Prozedur</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Whatever
+    a.l
+    b.l[2]          <font color="#006666">; Statisches Array (Standard C) mit 2 Werten b[0] und b[1], nicht in der Größe veränderbar</font>
+    <b><font color="#006666">Array</font></b> <font color="#006666">c</font>.l(3,3)  <font color="#006666">; Dynamisches Array mit 16 Werten c(0,0) bis c(3,3), in der Größe veränderbar mittels ReDim()</font>
+  <b><font color="#006666">EndStructure</font></b>
+
+  MyVar.Whatever
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">MyProcedure</font>(*blahblah.Whatever)
+    *blahblah\a = 5
+    *blahblah\b[0] = 1
+    *blahblah\b[1] = 2
+    *blahblah\<font color="#006666">c</font>(3,3) = 33
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MyProcedure</font>(@MyVar)
+  <b><font color="#006666">Debug</font></b> MyVar\a
+  <b><font color="#006666">Debug</font></b> MyVar\b[0]
+  <b><font color="#006666">Debug</font></b> MyVar\b[1]
+  <b><font color="#006666">Debug</font></b> MyVar\<font color="#006666">c</font>(3,3)
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Aufrufen einer Funktion anhand ihres Namens</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Prototype</font></b> <font color="#006666">Function</font>()
+
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">Function1</font>()
+      <b><font color="#006666">Debug</font></b> &quot;I call Function1 by its name&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">LaunchProcedure</font>(Name.s)
+      <b><font color="#006666">Protected</font></b> ProcedureName.Function =<font color="#006666"> GetRuntimeInteger</font>(Name + &quot;()&quot;)
+<font color="#006666">      ProcedureName</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  LaunchProcedure</font>(&quot;Function1&quot;) <font color="#006666">; Display &quot;I call Function1 by its name&quot;</font>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Declare</font></b>[.&lt;Typ&gt;] Name(&lt;Parameter1[.&lt;Typ&gt;]&gt; [, &lt;Parameter2[.&lt;Typ&gt;] [= StandardWert]&gt;,...])
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Manchmal ist es notwendig, dass eine Prozedur von einer anderen Prozedur aufgerufen wird, 
+bevor sie überhaupt deklariert wurde. Dies ist ärgerlich, da der Compiler dies mit 
+'Prozedur xxxx nicht gefunden' reklamiert. Das Deklarieren mit <b><font color="#006666">Declare</font></b> kann in diesem konkreten 
+Fall helfen, in dem zu Beginn nur der Kopf ('Header') der Prozedur deklariert wird. Nichtsdestotrotz, 
+die Deklarierung des Headers und die tatsächliche Deklarierung der Prozedur müssen identisch sein 
+(einschließlich der Typen-Angabe nach dem Prozedurnamen und optionaler Parameter, wenn vorhanden). 
+<br>
+<br>
+Für fortgeschrittene Programmierer ist <b><font color="#006666">DeclareC</font></b> verfügbar und wird die Prozedur mit 
+der 'CDecl' anstelle der 'StandardCall' Aufruf-Konvention deklarieren. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Declare</font></b> <font color="#006666">Maximum</font>(Wert1, Wert2)
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Operate</font>(Wert)
+<font color="#006666">    Maximum</font>(10, 2)      <font color="#006666">; Zu dieser Zeit ist Maximum() nicht bekannt.</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Maximum</font>(Wert1, Wert2)
+    <b><font color="#006666">ProcedureReturn</font></b> 0
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

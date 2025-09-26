@@ -1,0 +1,58 @@
+<html><head><title>ExportJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExportJSON()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ExportJSON</b></font>(#JSON, *Buffer, Size [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Export the given JSON data to a memory location. The JSON data will be 
+encoded in UTF-8 format. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+The JSON to export. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+A writable memory location. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size of the memory location. If the size is not large enough to hold 
+the entire JSON data, the function will fill the memory location with data, 
+but then return failure. The <a href="exportjsonsize.html">ExportJSONSize()</a> function can be used 
+to determine the needed size. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If set to <font color="#924B72">#PB_JSON_PrettyPrint</font>, the composed string will 
+contain additional newline and whitespace for better readability. The extra 
+whitespace is not significant to the JSON format. The output will have the 
+same meaning to a JSON reader with or without this flag. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of bytes written to the memory location on success. 
+If the function fails, the result is 0. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="exportjsonsize.html">ExportJSONSize()</a>, <a href="composejson.html">ComposeJSON()</a>, <a href="savejson.html">SaveJSON()</a>, <a href="catchjson.html">CatchJSON()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=examinejsonmembers.html>ExamineJSONMembers()</a> - <a href=index.html>Json Index</a> - <a href=exportjsonsize.html>ExportJSONSize()</a> -><br><br>
+
+
+</body></html>

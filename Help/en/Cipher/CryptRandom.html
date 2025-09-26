@@ -1,0 +1,51 @@
+<html><head><title>CryptRandom</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CryptRandom()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CryptRandom</b></font>(Maximum)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns a random number (integer) which lies between (and including) 0 and the Maximum value from the 
+cryptographic safe pseudorandom number generator. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Maximum</i></td>
+<td width="90%"> 
+The maximum value to be returned by the function. 
+'Maximum' may not exceed the positive <a href="../reference/variables.html">long</a> value: 2147483647. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the generated random number. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The generator has to be opened first with the <a href="opencryptrandom.html">OpenCryptRandom()</a> command. 
+<br>
+<br>
+<b>Important: </b> Using a 'Maximum' value which is not one less than a power of two will cause certain 
+numbers to be more likely than others which could be used for a statistical attack. This is the result of 
+dividing the generated random number to fit the specified range. 
+<br>
+<br>
+To generate larger amounts of random data, use the <a href="cryptrandomdata.html">CryptRandomData()</a> function. 
+To generate random numbers from the faster but not cryptographic safe pseudorandom number generator, use the 
+<a href="../math/random.html">Random()</a> function. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="opencryptrandom.html">OpenCryptRandom()</a>, <a href="cryptrandomdata.html">CryptRandomData()</a>, <a href="closecryptrandom.html">CloseCryptRandom()</a>, 
+<a href="../math/random.html">Random()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createpasswordhash.html>CreatePasswordHash()</a> - <a href=index.html>Cipher Index</a> - <a href=cryptrandomdata.html>CryptRandomData()</a> -><br><br>
+
+</body></html>

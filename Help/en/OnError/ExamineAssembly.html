@@ -1,0 +1,67 @@
+<html><head><title>ExamineAssembly</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExamineAssembly()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ExamineAssembly</b></font>(*Address [, *EndAddress])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initializes the disassembling at the given address or address range. 
+
+<br>
+<br>
+<b>Important:</b> The disassembly commands use the <a href="http://udis86.sourceforge.net/">Udis86 disassembler library</a> 
+to decode the instructions. This library is released under the BSD license which can be viewed <a href="../mainguide/license_udis86.html">here</a>. 
+If <a href="examineassembly.html">ExamineAssembly()</a> and the related commands are used in a program that is to be made public, the above linked 
+licence text must be included with the software. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Address</i></td>
+<td width="90%"> 
+The address of the first instruction to disassemble. 
+
+</td></tr>
+<tr><td><i>*EndAddress (optional)</i></td>
+<td> 
+If specified, the disassembling will end (<a href="nextinstruction.html">NextInstruction()</a> will return zero) as soon as *EndAddress is reached. 
+If not specified, the disassembling will run until <a href="nextinstruction.html">NextInstruction()</a> is no longer called. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if disassembling is possible, zero otherwise. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DisableDebugger</font></b> <font color="#006666">; do not disassemble any debugger related instructions</font>
+  
+  Code_Start:
+    <font color="#006666">; Place code to be disassembled here</font>
+    a = (<font color="#006666">Random</font>(100) * 5) + 2000
+  Code_End:
+  
+  Text$ = &quot;Disassembled code: &quot; +<font color="#006666"> Chr</font>(13)  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineAssembly</font>(?Code_Start, ?Code_End)
+    <b><font color="#006666">While</font></b> <font color="#006666">NextInstruction</font>()
+      Text$ +<font color="#006666"> RSet</font>(<font color="#006666">Hex</font>(<font color="#006666">InstructionAddress</font>()),<font color="#006666"> SizeOf</font>(Integer)*2, &quot;0&quot;)
+      Text$ + &quot; &quot; +<font color="#006666"> InstructionString</font>() +<font color="#006666"> Chr</font>(13)
+    <b><font color="#006666">Wend</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;Result&quot;, Text$)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="nextinstruction.html">NextInstruction()</a>, <a href="instructionaddress.html">InstructionAddress()</a>, <a href="instructionstring.html">InstructionString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=errortargetaddress.html>ErrorTargetAddress()</a> - <a href=index.html>OnError Index</a> - <a href=instructionaddress.html>InstructionAddress()</a> -><br><br>
+
+</body></html>

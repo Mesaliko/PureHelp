@@ -1,0 +1,66 @@
+<html><head><title>GetUserDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetUserDirectory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>GetUserDirectory</b></font>(Type)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le chemin du répertoire du type d'annuaire spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Le type de répertoire. Peut s'agir de l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Directory_Desktop</font>    : Répertoire 'Bureau' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_Downloads</font>  : Répertoire 'Téléchargements' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_Documents</font>  : Répertoire 'Documents' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_Pictures</font>   : Répertoire 'Images' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_Musics</font>     : Répertoire 'Musiques' de l'utilisateur connecté  
+  <font color="#924B72">#PB_Directory_Videos</font>     : Répertoire 'Videos' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_Public</font>     : Répertoire 'Documents Publics' de l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_ProgramData</font>: Répertoire des données stokées par les programmes de l'utilisateur connecté
+                             Sous Linux et OSX, c'est le dossier 'home' suivi de '/.' pour pouvoir créer 
+                             un répertoire de configuration caché par l'utilisateur connecté
+  <font color="#924B72">#PB_Directory_AllUserData</font>: Répertoire de données des programmes communs (accessible à tous les utilisateurs)
+  <font color="#924B72">#PB_Directory_Programs</font>   : Répertoire  des fichiers de programme globaux (lecture seule)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le chemin complet du répertoire demandé qui se termine par un séparateur de répertoire 
+<font color="#924B72">#PS</font>, <font color="#924B72">#PS$</font> ('\' pour Windows, '/' pour Linux et MacOSX). 
+<br>
+Renvoie une chaîne vide si le type n'est pas trouvé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Desktop</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Downloads</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Documents</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Pictures</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Videos</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Musics</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Public</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_ProgramData</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_AllUserData</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Programs</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getcurrentdirectory.html">GetCurrentDirectory()</a>, 
+<a href="gethomedirectory.html">GetHomeDirectory()</a>, 
+<a href="gettemporarydirectory.html">GetTemporaryDirectory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=gettemporarydirectory.html>GetTemporaryDirectory()</a> - <a href=index.html>FileSystem Index</a> - <a href=isdirectory.html>IsDirectory()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,130 @@
+<html><head><title>CompilerSystemData.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Some Pb Compiler, FileSystem and system data
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><b><font color="#006666">Debug</font></b> &quot;Compiler:&quot;
+<b><font color="#006666">Debug</font></b> &quot;*********&quot;
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_OS = #PB_OS_Windows&quot;:<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Linux</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_OS = #PB_OS_Linux&quot;:<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_MacOS</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_OS = #PB_OS_MacOS&quot;:<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_Processor</font> = <font color="#924B72">#PB_Processor_x86</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Processor = #PB_Processor_x86&quot;:<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_Processor</font> = <font color="#924B72">#PB_Processor_x64</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Processor = #PB_Processor_x64&quot;:<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_ExecutableFormat</font> = <font color="#924B72">#PB_Compiler_Executable</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_ExecutableFormat = #PB_Compiler_Executable&quot;:<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_ExecutableFormat</font> = <font color="#924B72">#PB_Compiler_Console</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_ExecutableFormat = #PB_Compiler_Console&quot;:<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">If</font></b> <font color="#924B72">#PB_Compiler_ExecutableFormat</font> = <font color="#924B72">#PB_Compiler_DLL</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_ExecutableFormat = #PB_Compiler_DLL&quot;:<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Date: &quot; +<font color="#006666"> FormatDate</font>(&quot;%yyyy,%mm,%dd&quot;,<font color="#924B72">#PB_Compiler_Date</font>)
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_File: &quot;       + <font color="#924B72">#PB_Compiler_File</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_FilePath: &quot;   + <font color="#924B72">#PB_Compiler_FilePath</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Line: &quot;       + <font color="#924B72">#PB_Compiler_Line</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Procedure: &quot;  + <font color="#924B72">#PB_Compiler_Procedure</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Module: &quot;     + <font color="#924B72">#PB_Compiler_Module</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Version: &quot;    + <font color="#924B72">#PB_Compiler_Version</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Home: &quot;       + <font color="#924B72">#PB_Compiler_Home</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Debugger: &quot;   + <font color="#924B72">#PB_Compiler_Debugger</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Thread: &quot;     + <font color="#924B72">#PB_Compiler_Thread</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_Unicode: &quot;    + <font color="#924B72">#PB_Compiler_Unicode</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_LineNumbering: &quot;  + <font color="#924B72">#PB_Compiler_LineNumbering</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_InlineAssembly: &quot; + <font color="#924B72">#PB_Compiler_InlineAssembly</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_EnableExplicit: &quot; + <font color="#924B72">#PB_Compiler_EnableExplicit</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_IsMainFile: &quot;     + <font color="#924B72">#PB_Compiler_IsMainFile</font>
+<b><font color="#006666">Debug</font></b> &quot;#PB_Compiler_IsIncludeFile: &quot;  + <font color="#924B72">#PB_Compiler_IsIncludeFile</font>
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;File Sytem :&quot;
+<b><font color="#006666">Debug</font></b> &quot;************&quot;
+<b><font color="#006666">Debug</font></b> &quot;GetCurrentDirectory(): &quot; +<font color="#006666"> GetCurrentDirectory</font>()
+<b><font color="#006666">Debug</font></b> &quot;GetHomeDirectory(): &quot; +<font color="#006666"> GetHomeDirectory</font>()
+<b><font color="#006666">Debug</font></b> &quot;GetTemporaryDirectory(): &quot; +<font color="#006666"> GetTemporaryDirectory</font>()
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Documents): &quot;   +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Documents</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Downloads): &quot;   +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Downloads</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Documents): &quot;   +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Documents</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Pictures): &quot;    +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Pictures</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Musics): &quot;      +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Musics</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Videos): &quot;      +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Videos</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Public): &quot;      +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Public</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_ProgramData): &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_ProgramData</font>)
+
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_AllUserData): &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_AllUserData</font>)
+<b><font color="#006666">Debug</font></b> &quot;GetUserDirectory(#PB_Directory_Programs): &quot;    +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Programs</font>)
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;Sytem :&quot;
+<b><font color="#006666">Debug</font></b> &quot;*******&quot;
+<b><font color="#006666">Debug</font></b> &quot;CPUName(): &quot; +<font color="#006666">  CPUName</font>()
+<b><font color="#006666">Debug</font></b> &quot;ComputerName(): &quot; +<font color="#006666"> ComputerName</font>()
+<b><font color="#006666">Debug</font></b> &quot;CountCPUs(#PB_System_CPUs): &quot; +<font color="#006666"> CountCPUs</font>(<font color="#924B72">#PB_System_CPUs</font>)
+<b><font color="#006666">Debug</font></b> &quot;CountCPUs(#PB_System_ProcessCPUs): &quot; +<font color="#006666"> CountCPUs</font>(<font color="#924B72">#PB_System_ProcessCPUs</font>)
+<b><font color="#006666">Debug</font></b> &quot;DoubleClickTime(): &quot; +<font color="#006666"> DoubleClickTime</font>()
+<b><font color="#006666">Debug</font></b> &quot;ElapsedMilliseconds(): &quot; +<font color="#006666"> ElapsedMilliseconds</font>()
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_TotalPhysical): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_TotalPhysical</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_FreePhysical): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_FreePhysical</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_PageSize): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_PageSize</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_TotalSwap) (Windows &amp; Linux): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_TotalSwap</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_FreeSwap) (Windows &amp; Linux): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_FreeSwap</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_TotalVirtual) (Windows): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_TotalVirtual</font>)
+<b><font color="#006666">Debug</font></b> &quot;MemoryStatus(#PB_System_FreeVirtual) (Windows): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_FreeVirtual</font>)
+<b><font color="#006666">Debug</font></b> &quot;OSVersion(): &quot;
+<b><font color="#006666">Select</font></b> <font color="#006666">OSVersion</font>()
+    <font color="#006666">;Windows
+</font>  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_NT3_51</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_NT3_51&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_95</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_95&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_NT_4</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_NT_4&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_98</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_98&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_ME</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_ME&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_2000</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_2000&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_XP</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_XP&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2003</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2003&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Vista</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Vista&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2008</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2008&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_7</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_7&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2008_R2</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2008_R2&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_8</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_8&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2012</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2012&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_8_1</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_8_1&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2012_R2</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2012_R2&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_10</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_10&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2016</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2016&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2019</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2019&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2022</font>:<b><font color="#006666">Debug</font></b> &quot; #PB_OS_Windows_Server_2022&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_11</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_11&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Server_2025</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Server_2025&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_Future</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Windows_Future&quot;
+    
+    <font color="#006666">;Linux
+</font>  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Linux_2_2</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Linux_2_2&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Linux_2_4</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Linux_2_4&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Linux_2_6</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Linux_2_6&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Linux_Future</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_Linux_Future&quot;
+    
+    <font color="#006666">;MacOSX
+</font>  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_0</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_0&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_1</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_1&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_2</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_2&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_3</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_3&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_4</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_4&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_5</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_5&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_6</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_6&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_7</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_7&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_8</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_8&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_9</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_9&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_10</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_10&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_10_11</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_10_11&quot;
+  <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_MacOSX_Future</font>:<b><font color="#006666">Debug</font></b> &quot;#PB_OS_MacOSX_Future&quot;
+    
+  <b><font color="#006666">Default</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Unknown&quot;
+<b><font color="#006666">EndSelect</font></b>
+
+<b><font color="#006666">Debug</font></b> &quot;UserName(): &quot; +<font color="#006666"> UserName</font>()
+</font></pre>
+</body></html>

@@ -1,0 +1,48 @@
+<html><head><title>LoadSound3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadSound3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>LoadSound3D</b></font>(#Sound3D, Filename$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Loads a mono WAV or OGG sound file. The sound has to be mono, as stereo sounds don't allow spacial positioning. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sound3D</i></td>
+<td width="90%"> 
+A number to identify the new sound. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The sound filename to load. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sound3D_Streaming</font>: Enable sound streaming playback
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the sound has been successfully loaded, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A sound doesn't hold its position. It can be attached to a <a href="../node/index.html">node</a> object to have its own position. 
+A sound is played relative to the listener location. To change the listener location, use <a href="soundlistenerlocate.html">SoundListenerLocate()</a>. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=issound3d.html>IsSound3D()</a> - <a href=index.html>Sound3D Index</a> - <a href=playsound3d.html>PlaySound3D()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,75 @@
+<html><head><title>CatchXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchXML()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CatchXML</b></font>(#XML, *Address, Size [, Flags [, Encoding]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new XML tree from XML data in the given memory area. The markup can be parsed in blocks 
+by multiple calls to this function to allow parsing XML data while it arrives from the <a href="../network/index.html">network</a> for example. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+A number to identify the new XML. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>*Address</i></td>
+<td> 
+A readable memory location. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+Size (in bytes) of the memory location. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If omitted, the memory location must contain all XML data. To parse XML in multiple blocks, 
+the following flags can be used: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_StreamStart</font>: Start parsing the first block
+  <font color="#924B72">#PB_XML_StreamNext</font> : Continue parsing with a new block
+  <font color="#924B72">#PB_XML_StreamEnd</font>  : End parsing after this block
+</font></pre>
+When calling this function with <font color="#924B72">#PB_XML_StreamStart</font> or <font color="#924B72">#PB_XML_StreamEnd</font>, 
+the 'Size' parameter can be 0 to start/end a parsing operation without actually parsing more data. 
+<br>
+<br>
+Note that when parsing in blocks, all data already parsed is accessible in the XML tree even before 
+a call with <font color="#924B72">#PB_XML_StreamEnd</font> is made. 
+
+</td></tr>
+<tr><td><i>Encoding (optional)</i></td>
+<td> 
+The encoding to use when loading the XML tree (this overwrites the encoding set in the XML declaration). Valid values are: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font> (default)
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font>
+</font></pre>
+This parameter should be used when the document does not have an XML declaration, or the encoding information is 
+provided outside of the XML document, for example through a mime type header in a communication protocol. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+This function only returns zero on memory errors or invalid Flags. 
+To check for parser errors <a href="xmlstatus.html">XMLStatus()</a> should be used. 
+In case of a parsing error, all data parsed before the error is accessible in the XML tree. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freexml.html">FreeXML()</a>, <a href="createxml.html">CreateXML()</a>, <a href="loadxml.html">LoadXML()</a>, <a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>XML Index</a> - <a href=childxmlnode.html>ChildXMLNode()</a> -><br><br>
+
+</body></html>

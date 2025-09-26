@@ -1,0 +1,104 @@
+<html><head><title>CreateEntityBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateEntityBody()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CreateEntityBody</b></font>(#Entity, Type [, Mass [, Restitution, Friction [, Axis [, SizeX, SizeY, SizeZ]]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the type of the body associated with the #Entity. 
+<br>
+<br>
+To have its collisions managed by the physic 
+engine, an entity has to set a body. In fact, only the body is known by the physic engine, which will 
+do all the calculation about the entity, check the mass, friction and if it collides will move back 
+the real entity. 
+<br>
+<br>
+To have any effect, the physic engine needs to be activated with the <a href="../engine3d/enableworldphysics.html">EnableWorldPhysics()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Type defines how the physic engine will handle this entity. It can be one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_None</font>       : No body is associated to the entity (default)
+  <font color="#924B72">#PB_Entity_StaticBody</font> : The body is a static only, which means the mesh can't be animated.
+                          This mode allows very precise collisions, as it's done against triangles
+                          (also known as tri-mesh collision). It's also fast when colliding with
+                          a box or sphere entity body type. It's perfect when using a mesh for
+                          a ground or static world.
+  <font color="#924B72">#PB_Entity_PlaneBody</font>  : A 'virtual' plane is set on the entity (with the same dimensions)
+                          and is used to manage the collision against the other entities.
+  <font color="#924B72">#PB_Entity_ConeBody</font>   : A 'virtual' cone is set around the entity (with the same dimensions)
+                          and is used to manage the collision against the other entities.
+  <font color="#924B72">#PB_Entity_BoxBody</font>    : A 'virtual' box is set around the entity (with the same dimensions)
+                          and is used to manage the collision against the other entities.
+  <font color="#924B72">#PB_Entity_SphereBody</font> : A 'virtual' sphere is set around the entity and is used to manage the collision
+                          against the other entities.
+  <font color="#924B72">#PB_Entity_CylinderBody</font> : A 'virtual' cylinder is set around the entity and is used to manage the collision
+                          against the other entities.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : A 'virtual' capsule is set around the entity and is used to manage the collision
+                          against the other entities.
+  <font color="#924B72">#PB_Entity_ConvexHullBody</font> : A 'virtual' complex form deduced from the real mesh is set around the entity
+                          and is used to manage the collision against the other entities. This mode is
+                          slower than basic collide forms.
+  <font color="#924B72">#PB_Entity_CompoundBody</font>   : A 'virtual' Compound body is set around the entity and is used to manage the collision
+                          against the other entities.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Mass (optional)</i></td>
+<td> 
+Mass of the object. Don't use too big value or it could produce physic incoherencies (1 is the preferred value). 
+
+</td></tr>
+<tr><td><i>Restitution (optional)</i></td>
+<td> 
+Restitution of the object. This value can also be get or set via <a href="getentityattribute.html">GetEntityAttribute()</a> and <a href="setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Friction (optional)</i></td>
+<td> 
+Friction of the object. This value can also be get or set via <a href="getentityattribute.html">GetEntityAttribute()</a> and <a href="setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Axis (optional)</i></td>
+<td> 
+The axis of the body. 
+
+It only applies to the following body type: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_PlaneBody</font>
+  <font color="#924B72">#PB_Entity_CylinderBody</font>
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> 
+</font></pre>
+
+</td></tr>
+<tr><td><i>SizeX, SizeY, SizeZ (optional)</i></td>
+<td> 
+The bounding box size of the body. It only applies to the following body type: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_BoxBody</font>     : SizeX, SizeY and SizeZ are available.
+  <font color="#924B72">#PB_Entity_SphereBody</font>  : SizeX is available.
+  <font color="#924B72">#PB_Entity_ConeBody</font>    : SizeX and SizeY are available.
+  <font color="#924B72">#PB_Entity_CylinderBody</font>: SizeX and SizeY are available.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : SizeX, SizeY and SizeZ are available.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freeentitybody.html">FreeEntityBody()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createentity.html>CreateEntity()</a> - <a href=index.html>Entity Index</a> - <a href=detachentityobject.html>DetachEntityObject()</a> -><br><br>
+
+</body></html>

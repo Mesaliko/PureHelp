@@ -1,0 +1,45 @@
+<html><head><title>CopySprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CopySprite()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CopySprite</b></font>(#Sprite1, #Sprite2 [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Copy the #Sprite1 to #Sprite2. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite1</i></td>
+<td width="90%"> 
+The source sprite to copy. 
+
+</td></tr>
+<tr><td><i>#Sprite2</i></td>
+<td> 
+A number to identify the new copied sprite. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. If #Sprite2 doesn't exists, it is created. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+It can be a combination of the following values (with the '|' operator): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Add special information to handle pixel collision through <a href="spritepixelcollision.html">SpritePixelCollision()</a>.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Sprite is created with per pixel alpha-channel support, needed for <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the sprite has been copied, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Sprite2 parameter then the generated number is returned on success. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=clipsprite.html>ClipSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=createsprite.html>CreateSprite()</a> -><br><br>
+
+</body></html>

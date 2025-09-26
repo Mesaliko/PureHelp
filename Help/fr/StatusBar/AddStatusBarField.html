@@ -1,0 +1,86 @@
+<html><head><title>AddStatusBarField</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddStatusBarField()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>AddStatusBarField</b></font>(Largeur)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Ajoute un champ à la barre d'état. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Largeur</i></td>
+<td width="90%"> 
+La largeur du nouveau champ, en pixels. 
+<br>
+<br>
+Avec <font color="#924B72">#PB_Ignore</font>, le champ sera dimensionné 
+automatiquement afin de remplir l'espace 
+libre de la barre d'état. Plusieurs champs 
+peuvent avoir une largeur valant <font color="#924B72">#PB_Ignore</font>, 
+dans ce cas l'espace libre sera partagé entre 
+ces différents champs. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les nouveaux champs sont ajoutés à la suite 
+(à droite) du dernier champ créé. 
+<br>
+<br>
+Les commandes suivantes permettent d'agir sur 
+le contenu d'un champ de la barre d'état: 
+<br>
+<br>
+- <a href="statusbartext.html">StatusBarText()</a> <br>
+- <a href="statusbarimage.html">StatusBarImage()</a> <br>
+- <a href="statusbarprogress.html">StatusBarProgress()</a> <br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 940, 60, &quot;Barre d'état&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+  
+<font color="#006666">  ButtonGadget</font>(1,10,3,300,25,&quot;Ajouter un champ dans la barre d'état&quot;)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    AddStatusBarField</font>(110)
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  StatusBarText</font>(0, 0, &quot;Champ normal&quot;)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          <b><font color="#006666">Case</font></b> 1 
+<font color="#006666">            AddStatusBarField</font>(110)
+        <b><font color="#006666">EndSelect</font></b>
+        
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="statusbartext.html">StatusBarText()</a>, 
+<a href="statusbarimage.html">StatusBarImage()</a>, 
+<a href="statusbarprogress.html">StatusBarProgress()</a>, 
+<a href="createstatusbar.html">CreateStatusBar()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>StatusBar Index</a> - <a href=createstatusbar.html>CreateStatusBar()</a> -><br><br>
+
+</body></html>

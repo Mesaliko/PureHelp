@@ -1,0 +1,64 @@
+<html><head><title>Shader.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Shader
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+
+</font><font color="#006666">InitEngine3D</font>():<font color="#006666">InitSprite</font>():<font color="#006666">InitKeyboard</font>():<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;CreateShader - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#006666">GetCurrentDirectory</font>(), <font color="#924B72">#PB_3DArchive_FileSystem</font> )
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100):<font color="#006666">MoveCamera</font>(0,0,3,-6):<font color="#006666">CameraLookAt</font>(0,0,0,0)
+<font color="#006666">CreateLight</font>(0,$ffffff, -10000, 10000, 0)
+<font color="#006666">AmbientColor</font>($111111*8)
+<font color="#006666">CameraBackColor</font>(0,$444488)
+
+vert_pg.s=&quot;%%#version 130%%uniform mat4 P25;//+25%uniform vec4 P80;//+80%uniform vec4 P46;//+46 0%uniform vec4 P43;//+43 0%uniform vec4 P32;//+32%%out vec3 oviewdir;%out vec3 olightdir;%out vec3 onormal;%out vec4 ovcolor;%out float olightatt;%out vec2 ouv;%out float ofogf;%%void main()%{%oviewdir=normalize(P80.xyz-gl_Vertex.xyz);%olightdir=normalize(P46.xyz-gl_Vertex.xyz);%gl_Position=P25*gl_Vertex;%onormal=gl_Normal;%float Dist=distance(P46,gl_Vertex);%olightatt=1.0/(P43.y+P43.z*Dist+P43.w*Dist*Dist);%ouv=(gl_TextureMatrix[0]*gl_MultiTexCoord0).xy;%ovcolor=gl_Color;%ofogf=P32.z&gt;0?min(abs(gl_Position.z)*P32.w,1):0;%}%%%%%%%&quot;
+frag_pg.s=&quot;%%#version 130%%uniform vec4 P71;//+71 0%uniform vec4 P72;//+72 0%uniform vec4 P69;//+69 0%uniform float P37;//+37%uniform vec4 P31;//+31%uniform float blend;//0.5%%uniform sampler2D tx1;//0%uniform sampler2D tx2;//1%%in vec3 oviewdir;%in vec3 olightdir;%in vec3 onormal;%in vec4 ovcolor;%in float olightatt;%in vec2 ouv;%in float ofogf;%%void main()%{%vec3 normal=normalize(onormal);%vec3 viewdir=normalize(oviewdir);%vec3 lightdir=normalize(olightdir);%%vec4 tcolor=vec4(mix(texture(tx1,ouv),texture(tx2,ouv),blend))*ovcolor;%%float dif=max(dot(lightdir,normal),0)*olightatt;%float spe=pow(max(dot(normalize(lightdir+viewdir),normal),0),P37);%vec4 color=vec4(tcolor.rgb,1)*(P69+P71*dif)+P72*tcolor.a*spe;%gl_FragColor=mix(color,P31,ofogf);%}%%&quot;
+vert_pg=<font color="#006666">ReplaceString</font>(vert_pg,&quot;%&quot;,<font color="#924B72">#LF$</font>)
+frag_pg=<font color="#006666">ReplaceString</font>(frag_pg,&quot;%&quot;,<font color="#924B72">#LF$</font>)
+<font color="#006666">CreateShader</font>(0,vert_pg,frag_pg)
+<font color="#006666">CreateShaderMaterial</font>(0,0)
+<font color="#006666">LoadTexture</font>(1,&quot;grass.jpg&quot;)
+<font color="#006666">LoadTexture</font>(0,&quot;RustySteel.jpg&quot;)
+<font color="#006666">MaterialShaderTexture</font>(0,<font color="#006666">TextureID</font>(0),<font color="#006666">TextureID</font>(1),0,0)
+<font color="#006666">MaterialShininess</font>(0,64,$ffffff)
+<font color="#006666">ScaleMaterial</font>(0,0.125,0.5)
+<font color="#006666">MaterialFilteringMode</font>(0,<font color="#924B72">#PB_Material_Anisotropic</font>)
+<font color="#006666">CreateTorus</font>(0,2,1,32,32)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0))
+
+<b><font color="#006666">Define</font></b>.f MouseX,Mousey,depx,depz,dist,val,blend
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">  ExamineKeyboard</font>()
+<font color="#006666">  ExamineMouse</font>()
+  depx=(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)))*0.1
+  depz=(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>   )))*0.1+<font color="#006666">MouseWheel</font>()*5
+  MouseX = -<font color="#006666">MouseDeltaX</font>() *  0.05
+  MouseY = -<font color="#006666">MouseDeltaY</font>() *  0.05
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+  dist+(depz-dist)*0.05:<font color="#006666">MoveCamera  </font>(0, depX, 0, -dist)
+<font color="#006666">  RotateEntity</font>(0,0.1,0.1,0.1, <font color="#924B72">#PB_Relative</font>)
+  
+  val+0.02:blend=(<font color="#006666">Sin</font>(val)+1)/2
+<font color="#006666">  MaterialShaderParameter</font>(0,<font color="#924B72">#PB_Shader_Fragment</font>,&quot;blend&quot;,<font color="#924B72">#PB_Shader_Float</font>,blend,0,0,0)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()    
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(3)
+
+</font></pre>
+</body></html>

@@ -1,0 +1,121 @@
+<html><head><title>CreateEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateEntity()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateEntity</b></font>(#Entity, MeshID, MatiereID, [X, Y, Z [, MasqueSelection [, MasqueVisibilite]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle entité utilisant un 
+mesh et une matière. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Numéro de l'entité. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>MeshID</i></td>
+<td> 
+Le mesh à utiliser. 
+<br>
+<br>
+Pour obtenir un identifiant valide, 
+utiliser <a href="../mesh/meshid.html">MeshID()</a>. 
+<br>
+<br>
+Les meshes dynamiques (créés avec l'option 
+<font color="#924B72">#PB_Mesh_Dynamic</font>) ne sont pas autorisés. 
+
+</td></tr>
+<tr><td><i>MatiereID</i></td>
+<td> 
+La matière à utiliser. 
+<br>
+<br>
+Pour obtenir un identifiant valide, 
+utilisez <a href="../material/materialid.html">MaterialID()</a>. 
+
+</td></tr>
+<tr><td><i>X, Y, Z (optionnel)</i></td>
+<td> 
+La position de la nouvelle entité dans 
+le monde. 
+
+</td></tr>
+<tr><td><i>MasqueSelection (optionnel)</i></td>
+<td> 
+Utilisé par  <a href="../engine3d/raypick.html">RayPick()</a> et <a href="../engine3d/mousepick.html">MousePick()</a> 
+pour sélectionner le groupe d'entités 
+qui sera traité. 
+<br>
+<br>
+Comme il s'agit d'un masque, chaque 
+valeur doit être une puissance de deux 
+et 31 masques différents sont disponibles. 
+<br>
+<br>
+Pour créer une valeur de masque facilement, 
+l'opérateur '&lt;&lt;'  peut être utilisé: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1 &lt;&lt; 1  : Première valeur de masque valide
+  - 1 &lt;&lt; 2  : Deuxième valeur de masque valide
+  - 1 &lt;&lt; 3  : Troisième valeur de masque valide
+  - ...
+  - 1 &lt;&lt; 31 : Dernières valeur de masque valide
+</font></pre>
+Pour faciliter l'utilisation, les 
+constantes doivent être utilisées pour 
+stocker la valeur du masque. 
+<br>
+<br>
+Lorsque vous appelez les fonctions de 
+sélection, les masques peuvent être 
+combinés avec l'opérateur '|' 
+pour sélectionner plus d'un type d'entité. 
+
+</td></tr>
+<tr><td><i>MasqueVisibilite (optionnel)</i></td>
+<td> 
+Un masque à choisir sur la caméra qui 
+affiche l'entité. 
+<br>
+<br>
+Si ce masque correspond au masque spécifié par 
+<a href="../camera/createcamera.html">CreateCamera()</a> alors l'entité sera affichée 
+par la caméra. <br>
+Voir l'option 'MasqueSelection' ci-dessus 
+pour construire des masques appropriés. 
+<br>
+<br>
+Si ce paramètre est omis alors l'entité 
+sera visible par toutes les caméras. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si l'entité était déjà créée, elle est 
+automatiquement supprimée et remplacée 
+par la nouvelle. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freeentity.html">FreeEntity()</a>, <a href="hideentity.html">HideEntity()</a>, <a href="isentity.html">IsEntity()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copyentity.html>CopyEntity()</a> - <a href=index.html>Entity Index</a> - <a href=createentitybody.html>CreateEntityBody()</a> -><br><br>
+</body></html>

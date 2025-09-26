@@ -1,0 +1,54 @@
+<html><head><title>UseSHA1Fingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseSHA1Fingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>UseSHA1Fingerprint</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Registriert das SHA1 Fingerprint Plugin für die weitere Nutzung. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+SHA1 kann zur Berechnung einer Prüfsumme verwendet werden, um 
+sicherzugehen, dass eine 'Nachricht' nicht verändert wurde. Anders als bei 
+<a href="usecrc32fingerprint.html">CRC32</a> ist es nahezu unmöglich, die originale Nachricht zu 
+verändern und trotzdem den gleichen SHA1 Fingerabdruck zu erhalten. 
+<br>
+<br>
+Hier eine kurze Erläuterung aus dem RFC 3174 über SHA1: 
+<br>
+<br>
+'Der SHA-1 wird sicher genannt, da es rechnerisch unmöglich ist: eine Nachricht zu 
+finden, die zu einem angegebenen &quot;Message Digest&quot; (Prüfsumme) passt; oder zwei unterschiedliche 
+Nachrichten zu finden, welche den gleichen &quot;Message Digest&quot; produzieren. 
+Jede Änderung einer Nachricht während der Übertragung wird mit sehr hoher Wahrscheinlichkeit 
+in einen unterschiedlichen &quot;Message Digest&quot; resultieren, und die Signatur wird bei 
+der Überprüfung fehlschlagen.' 
+<br>
+<br>
+Weitere Informationen sind im RFC 3174 zu finden: 
+<a href="http://www.ietf.org/rfc/rfc3174.txt">http://www.ietf.org/rfc/rfc3174.txt</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseSHA1Fingerprint</font>()
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;yourpassword&quot;, <font color="#924B72">#PB_Cipher_SHA1</font>)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="usemd5fingerprint.html">UseMD5Fingerprint()</a>(), <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a>(), <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a>(), <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a>() 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=usemd5fingerprint.html>UseMD5Fingerprint()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=usesha2fingerprint.html>UseSHA2Fingerprint()</a> -><br><br>
+
+</body></html>

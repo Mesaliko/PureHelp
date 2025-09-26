@@ -1,0 +1,112 @@
+<html><head><title>EditorGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EditorGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>EditorGadget</b></font>(#Gadget, x, y, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates an Editor gadget in the current GadgetList. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. This can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Editor_ReadOnly</font>     : the user cannot edit the text in the gadget.
+  <font color="#924B72">#PB_Editor_WordWrap</font>     : the lines too long to be displayed will be wrapped still displayed completely
+  <font color="#924B72">#PB_Editor_TabNavigation</font>: when using TAB in the editor gadget it will cycle to the next gadget instead of inserting a TAB character.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+The following events are supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>   : the text has been modified by the user.
+  <font color="#924B72">#PB_EventType_Focus</font>    : the editor has got the focus.
+  <font color="#924B72">#PB_EventType_LostFocus</font>: the editor has lost the focus.
+</font></pre>
+
+The following functions can be used to act on the editor content: 
+<br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: Add a text line. 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: Return the number of lines in the editor gadget. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Get the specified line text. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Get the text content of the editor gadget. Please note, that several 
+lines of text are separated with &quot;Chr(13)+Chr(10)&quot; on Windows and &quot;Chr(10)&quot; on Linux and OS X. 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: Remove a line in the editor. 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: Clear the text content. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: Set the specified line text. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Change the text content of the editor gadget. 
+<br>
+- <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: With the following attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Editor_ReadOnly</font>: set the read-only state (zero means editable, nonzero means read-only).
+  <font color="#924B72">#PB_Editor_WordWrap</font>: set the word-wrap state
+</font></pre>
+- <a href="getgadgetattribute.html">GetGadgetAttribute()</a>: With the following attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Editor_ReadOnly</font>: get the read-only state (zero means editable, nonzero means read-only).
+  <font color="#924B72">#PB_Editor_WordWrap</font>: get the word-wrap state
+</font></pre>
+
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_BackColor</font>      : backgroundcolor (not supported on MacOSX)
+  <font color="#924B72">#PB_Gadget_FrontColor</font>     : textcolor
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 322, 150, &quot;EditorGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    EditorGadget</font>(0, 8, 8, 306, 133)
+    <b><font color="#006666">For</font></b> a = 0 <b><font color="#006666">To</font></b> 5
+<font color="#006666">      AddGadgetItem</font>(0, a, &quot;Line &quot;+<font color="#006666">Str</font>(a))
+    <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/editorgadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="stringgadget.html">StringGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=disablegadget.html>DisableGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=explorercombogadget.html>ExplorerComboGadget()</a> -><br><br>
+
+</body></html>

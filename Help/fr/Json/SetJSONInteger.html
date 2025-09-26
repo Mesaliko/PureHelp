@@ -1,0 +1,59 @@
+<html><head><title>SetJSONInteger</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetJSONInteger()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetJSONInteger</b></font>(JSONValeur, Valeur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change le <a href="jsontype.html">type</a> de la 
+valeur JSON en <font color="#924B72">#PB_JSON_Number</font> et 
+stocke la valeur 'Integer' donnée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+
+</td></tr>
+<tr><td><i>Valeur</i></td>
+<td> 
+La valeur à stocker. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+    ValeurTableau =<font color="#006666"> SetJSONArray</font>(<font color="#006666">JSONValue</font>(0))
+<font color="#006666">    SetJSONInteger</font>(<font color="#006666">AddJSONElement</font>(ValeurTableau), 1)
+<font color="#006666">    SetJSONInteger</font>(<font color="#006666">AddJSONElement</font>(ValeurTableau), 2)
+<font color="#006666">    SetJSONInteger</font>(<font color="#006666">AddJSONElement</font>(ValeurTableau), 3)
+    
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Resultat : [1, 2, 3]</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getjsoninteger.html">GetJSONInteger()</a>, 
+<a href="setjsonarray.html">SetJSONArray()</a>, <a href="setjsonboolean.html">SetJSONBoolean()</a>, 
+<a href="setjsondouble.html">SetJSONDouble()</a>, <a href="setjsonfloat.html">SetJSONFloat()</a>, 
+<a href="setjsonnull.html">SetJSONNull()</a>, <a href="setjsonobject.html">SetJSONObject()</a>, 
+<a href="setjsonstring.html">SetJSONString()</a>, <a href="setjsonquad.html">SetJSONQuad()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setjsonfloat.html>SetJSONFloat()</a> - <a href=index.html>Json Index</a> - <a href=setjsonnull.html>SetJSONNull()</a> -><br><br>
+
+</body></html>

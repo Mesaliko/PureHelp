@@ -1,0 +1,46 @@
+<html><head><title>ExaminePreferenceKeys</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExaminePreferenceKeys()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ExaminePreferenceKeys</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Starts the enumeration of all the keys found in the current group of the preference file. The current group can be selected with 
+<a href="preferencegroup.html">PreferenceGroup()</a> or by examining all groups with <a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a>. 
+<a href="nextpreferencekey.html">NextPreferenceKey()</a> can be used to list all the keys found. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the enumeration has been successfully started, zero otherwise. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Open a preference file</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Select a group</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+  
+  <font color="#006666">; Examine keys in the group 'Window'</font>
+<font color="#006666">  ExaminePreferenceKeys</font>()
+  <b><font color="#006666">While</font></b> <font color="#006666">NextPreferenceKey</font>() <font color="#006666">; While a key exists</font>
+    <b><font color="#006666">Debug</font></b> &quot;Key group 'Window': &quot; +<font color="#006666"> PreferenceKeyName</font>() + &quot; = &quot; +<font color="#006666"> PreferenceKeyValue</font>()  <font color="#006666">; Display the key with its data</font>
+  <b><font color="#006666">Wend</font></b>
+  
+  <font color="#006666">; Close the preference file</font>
+<font color="#006666">  ClosePreferences</font>()  
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a>, <a href="nextpreferencegroup.html">NextPreferenceGroup()</a>, <a href="nextpreferencekey.html">NextPreferenceKey()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=examinepreferencegroups.html>ExaminePreferenceGroups()</a> - <a href=index.html>Preference Index</a> - <a href=flushpreferencebuffers.html>FlushPreferenceBuffers()</a> -><br><br>
+
+</body></html>

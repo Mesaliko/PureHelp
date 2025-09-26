@@ -1,0 +1,65 @@
+<html><head><title>SpritePixelCollision</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpritePixelCollision()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SpritePixelCollision</b></font>(#Sprite1, x1, y1, #Sprite2, x2, y2)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Überprüft, ob sich zwei Sprites überlappen. <font color="#924B72">#PB_Sprite_PixelCollision</font> 
+muss bei der Sprite-Erstellung angegeben werden, damit dieser Befehl funktioniert. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite1</i></td>
+<td width="90%"> 
+Das erste zu überprüfende Sprite. 
+
+</td></tr>
+<tr><td><i>x1, y1</i></td>
+<td> 
+Koordinaten des ersten Sprites, in Pixel. 
+
+</td></tr>
+<tr><td><i>#Sprite2</i></td>
+<td> 
+Das zweite zu überprüfende Sprite. 
+
+</td></tr>
+<tr><td><i>x2, y2</i></td>
+<td> 
+Koordinaten des zweiten Sprites, in Pixel. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn sich die zwei Sprites überlappen, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Routine führt eine exakte Kollisionsüberprüfung anhand transparenter Pixel durch, 
+was ein langsameres aber sehr genaues Ergebnis ergibt. Um die Überprüfung zu optimieren, 
+entfernen Sie so viele transparente Pixel wie möglich, damit die Sprite-Größe auch vollständig 
+durch das Sprite ausgenutzt wird (d.h. verwenden Sie keine breiten transparenten Ränder rings 
+um das Abbild des eigentliches Sprites). Vergrößerte/gezoomte Sprites werden ebenfalls unterstützt. 
+<br>
+<br>
+Für eine schnellere Kollisionsprüfung, die nur auf rechteckigen Rahmen beruht, verwenden 
+Sie <a href="spritecollision.html">SpriteCollision()</a>. 
+<br>
+<br>
+Achtung, dies funktioniert nicht mit Sprites, welche gedreht oder verformt wurden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="spritecollision.html">SpriteCollision()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=spriteoutput.html>SpriteOutput()</a> - <a href=index.html>Sprite Inhaltsverzeichnis</a> - <a href=spritequality.html>SpriteQuality()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,60 @@
+<html><head><title>WaitThread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WaitThread()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>WaitThread</b></font>(Thread [, Timeout])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Stop the program execution until the specified 'Thread' exits, or the optional timeout (in milliseconds) 
+is reached. If the thread is already finished, it returns immediately. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Thread</i></td>
+<td width="90%"> 
+The thread to wait for. This value is returned by <a href="createthread.html">CreateThread()</a>. 
+
+</td></tr>
+<tr><td><i>Timeout (optional)</i></td>
+<td> 
+Timeout to wait, in milliseconds. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the thread has ended, or zero if the timeout was reached. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">PrintStuff</font>(*Interval)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">      PrintN</font>(&quot;.&quot;)
+<font color="#006666">      Delay</font>(*Interval)
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+    thread =<font color="#006666"> CreateThread</font>(@PrintStuff(), 500)
+    <b><font color="#006666">If</font></b> thread
+      <font color="#006666">; Wait for thread to finish before we continue</font>
+      <font color="#006666">; Try commenting the WaitThread function out and seeing what happens</font>
+<font color="#006666">      WaitThread</font>(thread)
+      
+      <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">        PrintN</font>(&quot;A&quot;)
+<font color="#006666">        Delay</font>(1000)
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=waitsemaphore.html>WaitSemaphore()</a> - <a href=index.html>Thread Index</a><br><br>
+
+</body></html>

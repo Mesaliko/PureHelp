@@ -1,0 +1,70 @@
+<html><head><title>URLDecoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">URLDecoder()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>URLDecoder</b></font>(URL$ [, Format])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie une URL décodée qui 
+avait été encodée au format 
+HTTP. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+L'URL à décoder. 
+
+</td></tr>
+<tr><td><i>Format (optionnel)</i></td>
+<td> 
+Le format d'encodage de 
+l'URL. <br>
+Peut être une des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>  (par défaut)
+  <font color="#924B72">#PB_Ascii</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'URL décodée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une URL ne peut pas contenir 
+certains caractères (comme 
+la tabulation, l'espace, les 
+lettres accentuées etc.) donc 
+il est nécessaire de les encoder, 
+principalement en utilisant le 
+caractère d'échappement &quot;%&quot; 
+suivi d'un chiffre. Si l'URL$ 
+n'était pas encodée, cette 
+fonction n'a aucun effet et 
+renverra l'URL originale. 
+<br>
+<br>
+Voir <a href="http://www.w3schools.com/tags/ref_urlencode.asp">ici</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">URLDecoder</font>(&quot;http://www.purebasic.com/test%20with%20space.php&quot;)
+  <font color="#006666">; Affichera &quot;http://www.purebasic.com/test with space.php&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=seturlpart.html>SetURLPart()</a> - <a href=index.html>Http Index</a> - <a href=urlencoder.html>URLEncoder()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,168 @@
+<html><head><title>PureBasic Objekte</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">PureBasic Objekte</font></b></p>
+
+<p><b>Einführung</b></p><blockquote>
+
+
+Der Sinn dieses Kapitels besteht darin, das Verhalten, die Erstellung und die 
+Handhabung von Objekten in PureBasic zu beschreiben. Zur Demonstration 
+verwenden wir das <a href="../image/index.html">Image</a> (Bild) Objekt, aber dieselbe Logik gilt auch für 
+alle anderen PureBasic Objekte. Wenn wir ein Image-Objekt erstellen, können 
+wir dies auf zwei Weisen tun: indexiert und dynamisch. 
+
+</blockquote>
+<p><b>I. Indexierte Nummerierung</b></p><blockquote>
+
+
+Der statische bzw. indexierte Weg ermöglicht Ihnen, auf ein Objekt durch einen 
+vordefinierten numerischen Wert zu verweisen. Die erste verfügbare Index-Zahl 
+ist 0, weitere Indizes werden anschließend fortlaufend (sequentiell) 
+zugeordnet. Dies bedeutet, wenn Sie die Index-Nummer 0 und dann die Nummer 
+1000 verwenden, werden 1001 Indizes reserviert und 999 (von 1 bis 999) bleiben 
+unbenutzt, welches keine effiziente Art und Weise zur Benutzung von 
+indexierten Objekten darstellt. Wenn Sie eine flexiblere Methode brauchen, 
+verwenden Sie die dynamische Art zum Zuordnen von Objekten, wie im Abschnitt 
+II. beschrieben. <br>
+<br>
+Der indexierte Weg bietet mehrere Vorteile an: 
+<blockquote>
+<p><b></b></p><blockquote>
+
+- Einfachere Handhabung, da keine <a href="../reference/variables.html">Variablen</a> oder <a href="../reference/dim.html">Arrays</a> benötigt werden. <br>
+- 'Gruppen' Verarbeitung, ohne die Notwendigkeit eines zwischenzeitlichen Arrays. <br>
+- Benutzung des Objekts in <a href="../reference/procedures.html">Prozeduren</a>, ohne irgendetwas <a href="../reference/global.html">global</a> definierten zu müssen (bei Verwendung einer <a href="../reference/general_rules.html">Konstante</a> oder Zahl). <br>
+- Ein Objekt, das mit einem Index verknüpft ist, wird bei erneuter Nutzung dieses Index automatisch freigegeben. 
+</blockquote>
+</blockquote>
+
+
+Die maximale Index-Zahl wird auf eine obere Grenze (normalerweise von 5000 bis 
+60000) beschränkt und hängt vom Objekttyp ab. <a href="../reference/enumerations.html">Enumerations</a> (Aufzählungen) sind 
+ausdrücklich zu empfehlen, wenn Sie mit fortlaufenden Konstanten zur 
+Identifizierung von Objekten (was ebenso empfehlenswert ist) arbeiten möchten. 
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(0, 640, 480) <font color="#006666">; Erstellt ein Bild, die n°0</font>
+<font color="#006666">  ResizeImage</font>(0, 320, 240) <font color="#006666">; Verändert die Größe des n°0 Bilds und ändert sein @ReferenceLink &quot;handles&quot; &quot;Handle&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(2, 640, 480) <font color="#006666">; Erstellt ein Bild, die n°2</font>
+<font color="#006666">  ResizeImage</font>(2, 320, 240) <font color="#006666">; Verändert die Größe des n°2 Bilds und ändert sein @ReferenceLink &quot;handles&quot; &quot;Handle&quot;</font>
+<font color="#006666">  CreateImage</font>(2, 800, 800) <font color="#006666">; Erstellt ein neues Bild mit dem n°2 Index, das alte wird automatisch freigegeben</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 9
+<font color="#006666">    CreateImage</font>(k, 640, 480) <font color="#006666">; Erstellt 10 verschiedene Bilder, nummeriert von 0 bis 9</font>
+<font color="#006666">    ResizeImage</font>(k, 320, 240) <font color="#006666">; Verändert die Größe der Bilder auf halbe Breite/Höhe und ändert ihre @ReferenceLink &quot;handles&quot; &quot;Handles&quot;</font>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#ImageBackground</font> = 0
+  <font color="#924B72">#ImageButton</font>     = 1
+
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageBackground</font>, 640, 480) <font color="#006666">; Erstellt ein Hintergrund-Bild (n°0)</font>
+<font color="#006666">  ResizeImage</font>(<font color="#924B72">#ImageBackground</font>, 320, 240) <font color="#006666">; Verändert die Größe des Hintergrund-Bilds</font>
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageButton</font>    , 800, 800) <font color="#006666">; Erstellt ein Bild (n°1)</font>
+</font></pre>
+
+</blockquote>
+</blockquote>
+
+
+</blockquote>
+<p><b>II. Dynamische Nummerierung</b></p><blockquote>
+
+
+Manchmal ist die indexierte Nummerierung nicht sehr praktisch, um dynamische 
+Situationen zu handhaben, wo wir mit einer unbekannten Anzahl von Objekten 
+umgehen müssen. PureBasic bietet eine einfache und komplementäre Möglichkeit, 
+Objekte auf eine dynamische Art und Weise zu erstellen. Beide Methoden 
+(indexiert und dynamisch) können gleichzeitig - ohne irgendeinen Konflikt - 
+verwendet werden. Um ein dynamisches Objekt zu erstellen, müssen Sie die 
+<font color="#924B72">#PB_Any</font> Konstante anstelle einer Index-Zahl angeben, und die dynamische Nummer 
+wird als Ergebnis der entsprechenden Funktion zurückgegeben. Dann verwenden 
+Sie einfach diese Nummer mit den anderen Objektfunktionen an der Stelle, wo 
+Sie sonst eine indexierte Zahl verwenden würden (außer zum Erstellen eines neuen Objekts). Diese Art und Weise des 
+Objekt-Handlings kann sehr nützlich sein, wenn es in Verbindung mit einer 
+verknüpften Liste verwendet wird, welche auch einen dynamischen Weg des 
+Speicherns darstellt. 
+
+<blockquote>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  DynamicImage1 =<font color="#006666"> CreateImage</font>(<font color="#924B72">#PB_Any</font>, 640, 480) <font color="#006666">; Erstellen eines dynamisch nummerierten Bildes</font>
+<font color="#006666">  ResizeImage</font>(DynamicImage1, 320, 240) <font color="#006666">; Verändern der Größe von DynamicImage1</font>
+</font></pre>
+
+Ein vollständiges Beispiel für dynamische Objekte und <a href="../list/index.html">verknüpfte Listen</a> finden Sie hier: 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/MDI_ImageViewer.pb.html">MDI_ImageViewer.pb</a>
+
+<br>
+<br>
+Weitere Erläuterungen und ein Beispiel für dynamische Nummerierung mehrerer 
+Fenster und Gadgets finden Sie im entsprechenden Kapitel des 
+<a href="../reference/ug_pb_any1.html">'Einsteiger-Kapitels'</a>. 
+
+</blockquote>
+
+
+</blockquote>
+<p><b>Übersicht über die verschiedenen PureBasic-Objekte</b></p><blockquote>
+
+
+Verschiedene PureBasic-Objekte (Fenster, Gadgets, Sprites, etc.) können den gleichen Bereich 
+an Objekt-Nummern erneut verwenden. Somit können die folgenden Objekte jeweils beginnend 
+bei 0 (oder einem anderen Wert) nummeriert werden und PureBasic unterscheidet sie anhand 
+ihres Typs: 
+<blockquote>
+
+- <a href="../database/index.html">Database</a> <br>
+- <a href="../dialog/index.html">Dialog</a> <br>
+- <a href="../entity/index.html">Entity</a> <br>
+- <a href="../file/index.html">File</a> <br>
+- <a href="../ftp/index.html">FTP</a> <br>
+- <a href="../gadget/index.html">Gadget</a> (einschließlich dem <a href="../scintilla/scintillagadget.html">ScintillaGadget()</a>) <br>
+- <a href="../gadget3d/index.html">Gadget3D</a> 
+- <a href="../image/index.html">Image</a> <br>
+- <a href="../library/index.html">Library</a> <br>
+- <a href="../light/index.html">Light</a> <br>
+- <a href="../mail/index.html">Mail</a> <br>
+- <a href="../material/index.html">Material</a> <br>
+- <a href="../menu/index.html">Menu</a> (nicht <a href="../menu/menuitem.html">MenuItem()</a>, da dies kein Objekt ist) <br>
+- <a href="../mesh/index.html">Mesh</a> <br>
+- <a href="../movie/index.html">Movie</a> <br>
+- <a href="../music/index.html">Music</a> <br>
+- <a href="../network/index.html">Network</a> <br>
+- <a href="../node/index.html">Node</a> <br>
+- <a href="../particle/index.html">Particle</a> <br>
+- <a href="../regularexpression/index.html">RegularExpression</a> <br>
+- <a href="../serialport/index.html">SerialPort</a> <br>
+- <a href="../sound/index.html">Sound</a> <br>
+- <a href="../sound3d/index.html">Sound3D</a> <br>
+- <a href="../sprite/index.html">Sprite</a> <br>
+- <a href="../statusbar/index.html">StatusBar</a> <br>
+- <a href="../texture/index.html">Texture</a> <br>
+- <a href="../toolbar/index.html">ToolBar</a> <br>
+- <a href="../window/index.html">Window</a> <br>
+- <a href="../window3d/index.html">Window3D</a> <br>
+- <a href="../xml/index.html">XML</a> <br>
+</blockquote>
+
+</blockquote>
+</font></body></html>

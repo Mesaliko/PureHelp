@@ -1,0 +1,67 @@
+<html><head><title>XMLNodeFromPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeFromPath()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>XMLNodeFromPath</b></font>(ParentNode, Path$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the XML node inside ParentNode who's relation to ParentNode is described through 'Path$'. 
+<a href="xmlnodepath.html">XMLNodePath()</a> can be used to get such a path to a node. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ParentNode</i></td>
+<td width="90%"> 
+The parent XML node. 
+
+</td></tr>
+<tr><td><i>Path$</i></td>
+<td> 
+Contains a list of node names separated by '/' to indicate the way to follow from the parent 
+to the target node. For example &quot;childtag/subchildtag&quot; specifies the first node with name &quot;subchildtag&quot; 
+inside the first node with name &quot;childtag&quot; inside ParentNode. 
+<br>
+<br>
+A node name can have an index (one based) to specify which of multiple child tags of the same name should be selected. 
+&quot;childtag/subchildtag[3]&quot; specifies the 3rd &quot;subchildtag&quot; inside the first &quot;childtag&quot; of ParentNode. 
+<br>
+<br>
+Other rules: <br>
+- If a path starts with '/' it is relative to the tree's root. No matter which node ParentNode specifies. <br>
+- A Wildcard &quot;*&quot; can be used instead of a tag name to specify that any tag is to be selected. <br>
+- A Comment node has the tagname &quot;#comment&quot; <br>
+- A CData node has the tagname &quot;#cdata&quot; <br>
+- A DTD node has the tagname &quot;#dtd&quot; <br>
+- A Processing Instruction node has the tagname &quot;#instruction&quot; <br>
+
+<br>
+Some examples of valid paths: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;/mainnode/#comment[4]&quot; - the 4th comment inside the &quot;mainnode&quot; node inside the root of the tree
+  &quot;*[10]&quot;                 - the 10th node (of any type) inside ParentNode
+  &quot;*/*/*&quot;                 - the 1st node 3 levels below ParentNode independent of its type
+  &quot;node[3]/*[3]/#cdata&quot;   - the first CData section inside the 3rd node of any kind inside the 3rd &quot;node&quot; node inside ParentNode
+</font></pre>
+
+<b>Note: </b> This command is no implementation of the XPath specification. The syntax used and understood by this command 
+is only a small subset of XPath. This means a path returned from <a href="xmlnodepath.html">XMLNodePath()</a> is a valid XPath query, 
+but this command only understands the syntax described here, not just any XPath query. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The target node or zero if the path did not lead to a valid node. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="xmlnodepath.html">XMLNodePath()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=xmlnodefromid.html>XMLNodeFromID()</a> - <a href=index.html>XML Index</a> - <a href=xmlnodepath.html>XMLNodePath()</a> -><br><br>
+
+</body></html>

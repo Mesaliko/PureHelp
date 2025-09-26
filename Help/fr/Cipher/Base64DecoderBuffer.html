@@ -1,0 +1,143 @@
+<html><head><title>Base64DecoderBuffer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Base64DecoderBuffer()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>Base64DecoderBuffer</b></font>(*TamponSource, LongueurSource, *TamponDestination, LongueurDestination)  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Décode un tampon codé en 
+<a href="base64encoderbuffer.html">Base64</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*TamponSource</i></td>
+<td width="90%"> 
+Le tampon contenant les données codées. 
+
+</td></tr>
+<tr><td><i>LongueurSource</i></td>
+<td> 
+La taille de la mémoire tampon d'entrée. 
+
+</td></tr>
+<tr><td><i>*TamponDestination</i></td>
+<td> 
+Le tampon de sortie où les données 
+seront copiées. 
+
+</td></tr>
+<tr><td><i>LongueurDestination</i></td>
+<td> 
+La taille de la mémoire tampon de sortie. 
+<blockquote>
+
+La mémoire tampon de sortie peut être 
+jusqu'à 25% plus petite que le tampon 
+d'entrée, avec une taille minimale de 
+64 octets.<br>
+Il est recommandé de faire un tampon 
+légèrement plus grand, par exemple 20%, 
+pour éviter les débordements. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la longueur des données 
+décodées en octets. 
+
+</blockquote><p><b>Exemple:</b> Encodage & Décodage d'une variable texte</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Exemple$ = &quot;Voici une phrase !&quot; 
+  Decoded$ =<font color="#006666"> Space</font>(1024) 
+  Encoded$ =<font color="#006666"> Space</font>(1024) 
+    
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Base64EncoderBuffer</font>(@Exemple$,<font color="#006666"> StringByteLength</font>(Exemple$), @Encoded$,<font color="#006666"> StringByteLength</font>(Encoded$))
+  <b><font color="#006666">Debug</font></b> Encoded$ 
+    
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Base64DecoderBuffer</font>(@Encoded$,<font color="#006666"> StringByteLength</font>(Encoded$), @Decoded$,<font color="#006666"> StringByteLength</font>(Decoded$))
+  <b><font color="#006666">Debug</font></b> Decoded$
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Encodage & Décodage d'une DataSection</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    TestDebut:
+    <b><font color="#006666">Data</font></b>.a $00, $01, $02, $03, $04, $05, $06, $07
+    <b><font color="#006666">Data</font></b>.a $08, $09, $0A, $0B, $0C, $0D, $0E, $0F
+    TestFin:
+  <b><font color="#006666">EndDataSection</font></b>
+  
+  Taille = (?TestFin - ?TestDebut) * 1.35
+  <b><font color="#006666">If</font></b> Taille &lt; 64
+  Taille = 64
+  <b><font color="#006666">EndIf</font></b>
+  
+  *EncodeBuffer =<font color="#006666"> AllocateMemory</font>(Taille)
+  Taille =<font color="#006666"> Base64EncoderBuffer</font>(?TestDebut, ?TestFin - ?TestDebut, *EncodeBuffer,<font color="#006666"> MemorySize</font>(*EncodeBuffer))
+  ChaineEncodee$ =<font color="#006666"> PeekS</font>(*EncodeBuffer, Taille, <font color="#924B72">#PB_Ascii</font>)
+  <b><font color="#006666">Debug</font></b> ChaineEncodee$
+  
+  *DecodeBuffer =<font color="#006666"> AllocateMemory</font>(Taille)
+  Taille =<font color="#006666"> PokeS</font>(*EncodeBuffer, ChaineEncodee$,<font color="#006666"> StringByteLength</font>(ChaineEncodee$, <font color="#924B72">#PB_Ascii</font>), <font color="#924B72">#PB_Ascii</font>|<font color="#924B72">#PB_String_NoZero</font>)
+  Taille =<font color="#006666"> Base64DecoderBuffer</font>(*EncodeBuffer, Taille, *DecodeBuffer,<font color="#006666"> MemorySize</font>(*DecodeBuffer))
+<font color="#006666">  ShowMemoryViewer</font>(*DecodeBuffer, Taille)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Problème de décodage d'une variable texte déjà codé en Base64 par un logiciel externe</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Attention, il est délicat d'utiliser une variable pour décoder un texte</font>
+  <font color="#006666">; déjà codé en Base64 par un logiciel externe (messagerie par exemple)</font>
+  
+  Encoded$ = &quot;Vm9pY2kgdW5lIHBocmFzZSAh&quot; <font color="#006666">;&quot;Voici une phrase !&quot;, codée en Base64 utf8</font>
+  Decoded$ =<font color="#006666"> Space</font>(1024) 
+   
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Base64DecoderBuffer</font>(@Encoded$,<font color="#006666"> StringByteLength</font>(Encoded$), @Decoded$, 1024)
+  <b><font color="#006666">Debug</font></b> Decoded$ <font color="#006666">; ==&gt; Affiche n'importe quoi</font>
+  
+  <font color="#006666">; Pour résoudre ce problème, suivre la procédure ci-dessous</font>
+  
+  <font color="#006666">; Différents exemples de textes déjà codés</font>
+  Encode_utf8$      = &quot;Vm9pY2kgdW5lIHBocmFzZSBow6kgIQ0K&quot; <font color="#006666">;Voici une phrase hé !, codée en Base64 utf8</font>
+  Encode_iso8859_1$ = &quot;Vm9pY2kgdW5lIHBocmFzZSBo6SAhDQo=&quot; <font color="#006666">;Voici une phrase hé !, codée en Base64 iso8859_1$</font>
+  Encode_ascii$     = &quot;Vm9pY2kgdW5lIHBocmFzZSBoICENCg==&quot; <font color="#006666">;Voici une phrase hé !, codée en Base64 ascii </font>
+
+  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">Decode64</font>(Texte64.s, Option=<font color="#924B72">#PB_UTF8</font>)
+    <b><font color="#006666">Protected</font></b> *in, *out
+    <b><font color="#006666">Protected</font></b> Resultat.s
+  
+    *in =<font color="#006666"> Ascii</font>(Texte64) <font color="#006666">; Le texte codé en Base64 est supposé être en ascii pour PureBasic</font>
+    <b><font color="#006666">If</font></b> *in &lt;&gt; 0
+      <font color="#006666">; La mémoire tampon de sortie peut être jusqu'à 33% plus petite que le tampon d'entrée</font>
+      *out =<font color="#006666"> AllocateMemory</font>(<font color="#006666">MemoryStringLength</font>(*in,<font color="#924B72">#PB_Ascii</font>) * 0.8) <font color="#006666">; Ici nous prenons une valeur de 20%</font>
+      <b><font color="#006666">If</font></b> *out &lt;&gt; 0
+<font color="#006666">        Base64DecoderBuffer</font>(*in,<font color="#006666"> MemorySize</font>(*in), *out,<font color="#006666"> MemorySize</font>(*out))  <font color="#006666">; Décodage...</font>
+        Resultat =<font color="#006666"> PeekS</font>(*out, -1, Option) <font color="#006666">; Le résultat est transféré dans une variable</font>
+<font color="#006666">        FreeMemory</font>(*out)
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      FreeMemory</font>(*in)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">ProcedureReturn</font></b> Resultat
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Decode64</font>(Encode_utf8$)                 <font color="#006666">; Affiche: Voici une phrase hé !</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Decode64</font>(Encode_iso8859_1$, <font color="#924B72">#PB_Ascii</font>) <font color="#006666">; Affiche: Voici une phrase hé ! (iso8859_1 est aussi appelée Latin-1 ou Europe occidentale et contient tous les caractères ascii)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Decode64</font>(Encode_ascii$, <font color="#924B72">#PB_Ascii</font>)     <font color="#006666">; Affiche: Voici une phrase h ! (problème avec lettres accentuées...)</font>
+                                               <font color="#006666">; car le codage Base64 ascii s'arrête au caractère ascii n°127</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="base64encoderbuffer.html">Base64EncoderBuffer()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=base64decoder.html>Base64Decoder()</a> - <a href=index.html>Cipher Index</a> - <a href=base64encoder.html>Base64Encoder()</a> -><br><br>
+
+</body></html>

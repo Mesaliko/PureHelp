@@ -1,0 +1,76 @@
+<html><head><title>DeleteMapElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeleteMapElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DeleteMapElement</b></font>(Map() [, Cle$])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Efface un élément. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+La map à utiliser. 
+
+</td></tr>
+<tr><td><i>Cle$</i></td>
+<td> 
+La clé de l'élément.<br>
+Si ce paramètre n'est pas spécifié alors 
+c'est l'élément courant qui sera supprimé. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La valeur renvoyée est un 
+<a href="../reference/memory.html">pointeur</a> 
+vers le nouvel élément. <br>
+Si la liste ne comporte aucun élément 
+courant après la suppression, le 
+résultat est zéro. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Après cet appel, le nouvel élément courant est l'élément précédent 
+(celui qui précéde l'élément supprimé), qui est un élément arbitraire, 
+car une map n'est pas triée. Si cet élément n'existe pas (en d'autres termes, 
+vous avez supprimé le premier élément de la map) alors il n'y a plus d'élément 
+en cours, comme après un <a href="resetmap.html">ResetMap()</a>. S'il n'y avait qu'un seul élément dans la 
+carte lorsque vous l'avez supprimé, il ne vous reste plus aucun élément en cours ! 
+<br>
+<br>
+Si le paramètre optionnel &quot;Cle$&quot; est spécifié, il n'y aura pas d'élément courant 
+après cet appel. N'utilisez donc pas ce paramètre si la commande est utilisée dans une 
+boucle <a href="../reference/foreach_next.html">ForEach : Next</a> ! 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+
+<font color="#006666">  Pays</font>(&quot;US&quot;) = &quot;United States&quot;
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Pays</font>(&quot;DE&quot;) = &quot;Allemagne&quot;
+
+  <font color="#006666">; Supprime un pays</font>
+<font color="#006666">  DeleteMapElement</font>(<font color="#006666">Pays</font>(), &quot;FR&quot;)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Pays</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Pays</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addmapelement.html">AddMapElement()</a>, <a href="clearmap.html">ClearMap()</a>, <a href="mapsize.html">MapSize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copymap.html>CopyMap()</a> - <a href=index.html>Map Index</a> - <a href=findmapelement.html>FindMapElement()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,93 @@
+<html><head><title>DrawText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawText()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.d = <font color="#006666"><b>DrawText</b></font>(X.d, Y.d, Texte$ [, CouleurTexte [, CouleurFond]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Affiche un texte sur la surface de dessin en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X.d, Y.d,</i></td>
+<td width="90%"> 
+Position du texte. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Le texte à afficher. 
+
+</td></tr>
+<tr><td><i>CouleurTexte (optionnel)</i></td>
+<td> 
+Couleur du texte. 
+<br>
+<br>
+Si le paramètre  n'est pas précisé, la couleur définie par <a href="frontcolor.html">FrontColor()</a> sera utilisée par défaut. 
+<br>
+<br>
+Les fonctions <a href="rgb.html">RGB()</a> ou <a href="rgba.html">RGBA()</a> peuvent être utilisées pour définir facilement une couleur. 
+
+</td></tr>
+<tr><td><i>CouleurFond (optionnel)</i></td>
+<td> 
+Couleur de fond. 
+<br>
+<br>
+Si le paramètre  n'est pas précisé, la couleur définie par <a href="backcolor.html">BackColor()</a> sera utilisée par défaut. 
+<br>
+<br>
+Les fonctions <a href="rgb.html">RGB()</a> ou <a href="rgba.html">RGBA()</a> peuvent être utilisées pour définir facilement une couleur. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la nouvelle position en X du curseur texte, juste après le dernier caractère affiché. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le <a href="drawingmode.html">DrawingMode()</a> courant utilise l'option <font color="#924B72">#PB_2DDrawing_Transparent</font> alors le fond est transparent.<br>
+Si <a href="drawingmode.html">DrawingMode()</a> est configuré pour avoir un fond opaque et que le mode de dessin courant utilise 
+le canal alpha alors le texte est d'abord mélangé au fond et ensuite appliqué sur la zone de dessin. 
+<br>
+<br>
+Pour avoir une sortie de texte de type gadget, le mode de dessin <font color="#924B72">#PB_2DDrawing_NativeText</font> peut être 
+utilisé (Voir <a href="drawingmode.html">DrawingMode()</a>). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;DrawText Exemple&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30
+<font color="#006666">        DrawText</font>(<font color="#006666">Random</font>(200),<font color="#006666"> Random</font>(200), &quot;Hello World!&quot;,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+      <b><font color="#006666">Next</font></b> i
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/text.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="drawrotatedtext.html">DrawRotatedText()</a>, <a href="drawingfont.html">DrawingFont()</a>, <a href="frontcolor.html">FrontColor()</a>, <a href="backcolor.html">BackColor()</a>, <a href="drawingmode.html">DrawingMode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=drawrotatedtext.html>DrawRotatedText()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawingbuffer.html>DrawingBuffer()</a> -><br><br>
+
+</body></html>

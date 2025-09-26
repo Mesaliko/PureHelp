@@ -1,0 +1,97 @@
+<html><head><title>FlipBuffers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FlipBuffers()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FlipBuffers</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Les deux tampons, celui de l'écran visible 
+(Front) et celui de l'écran invisible 
+(Back) sont interchangés. 
+La zone invisible est désormais visible 
+et vice versa, ce qui permet de faire un 
+effet de &quot;double-buffering&quot; et d'éviter 
+le scintillement (flickering). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La fonction FlipBuffers() doit toujours être appelée en dehors d'un bloc <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a>. 
+<br>
+<br>
+Un écran doit avoir été ouvert avec <a href="openscreen.html">OpenScreen()</a> ou <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+<br>
+La manière dont les tampons sont interchangés (avec ou sans synchronisation) est fixé par <a href="openscreen.html">OpenScreen()</a> ou <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+<br>
+<br>
+FlipBuffers() doit être appelé dans la boucle d'événement en <a href="../screen/openscreen.html">mode plein écran</a> afin de gérer correctement 
+les événements des <a href="../joystick/examinejoystick.html">joysticks</a>, du <a href="../keyboard/examinekeyboard.html">clavier</a> et de la 
+<a href="../mouse/examinemouse.html">souris</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">;Initialisation du système d'affichage.</font>
+<font color="#006666">InitSprite</font>() 
+
+ <font color="#006666">;Ouverture d'un écran 800*600 32 bits, noir par défaut</font>
+<font color="#006666">OpenScreen</font>(800, 600, 32, &quot;Sprite&quot;)
+ <font color="#006666">;Par défaut, les deux buffers sont remplis par un fond noir</font>
+ <font color="#006666">;Appelons-les : Buffer_NonAffiché et Buffer_Affiché</font>
+ <font color="#006666">;Buffer_Affiché = Fond noir / Buffer_NonAffiché = Fond noir</font>
+
+<font color="#006666">Delay</font>(1000) <font color="#006666">; Attendre 1 seconde</font>
+ <font color="#006666">;L'écran est noir pendant 1s</font>
+
+ <font color="#006666">;ATTENTION : Toutes les actions 2D se font sur le Buffer_NonAffiché</font>
+<font color="#006666">ClearScreen</font>(<font color="#006666">RGB</font>(255,0,0))
+ <font color="#006666">;Buffer_Affiché = Fond noir / Buffer_NonAffiché = Fond rouge</font>
+
+<font color="#006666">FlipBuffers</font>() <font color="#006666">; Il faut inverser les buffers pour afficher l'écran rouge</font>
+ <font color="#006666">;Buffer_Affiché = Fond rouge / Buffer_NonAffiché = Fond noir</font>
+
+<font color="#006666">Delay</font>(1000) <font color="#006666">; Attendre 1 seconde</font>
+ <font color="#006666">;L'écran est rouge pendant 1s </font>
+
+<font color="#006666">ClearScreen</font>(<font color="#006666">RGB</font>(0,255,0))
+ <font color="#006666">;Buffer_Affiché = Fond rouge / Buffer_NonAffiché = Fond vert</font>
+
+<font color="#006666">FlipBuffers</font>()<font color="#006666">; Il faut inverser les buffers pour afficher l'écran vert</font>
+ <font color="#006666">;Buffer_Affiché = Fond vert / Buffer_NonAffiché = Fond rouge</font>
+
+<font color="#006666">Delay</font>(1000) <font color="#006666">; Attendre 1 seconde</font>
+ <font color="#006666">;L'écran est vert pendant 1s </font>
+
+<font color="#006666">ClearScreen</font>(<font color="#006666">RGB</font>(0,0,255))
+ <font color="#006666">;Buffer_Affiché = Fond vert / Buffer_NonAffiché = Fond bleu</font>
+
+<font color="#006666">FlipBuffers</font>()<font color="#006666">; Il faut inverser les buffers pour afficher l'écran bleu</font>
+ <font color="#006666">;Buffer_Affiché = Fond bleu / Buffer_NonAffiché = Fond vert</font>
+
+<font color="#006666">Delay</font>(1000) <font color="#006666">; Attendre 1 seconde</font>
+ <font color="#006666">;L'écran est bleu pendant 1s </font>
+
+<font color="#006666">FlipBuffers</font>()<font color="#006666">; l'écran est vert !!!</font>
+ <font color="#006666">;Buffer_Affiché = Fond vert / Buffer_NonAffiché = Fond bleu</font>
+
+<font color="#006666">Delay</font>(1000) <font color="#006666">; Attendre 1 seconde</font>
+ <font color="#006666">;L'écran est vert pendant 1s</font>
+
+<font color="#006666">CloseScreen</font>()  
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="openscreen.html">OpenScreen()</a>, <a href="openwindowedscreen.html">OpenWindowedScreen()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=examinescreenmodes.html>ExamineScreenModes()</a> - <a href=index.html>Screen Index</a> - <a href=isscreenactive.html>IsScreenActive()</a> -><br><br>
+
+</body></html>

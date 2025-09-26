@@ -1,0 +1,255 @@
+<html><head><title>UserGuide - Displaying graphics output & simple drawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Displaying graphics output & simple drawing</font></b></p>
+
+This example show how to create a simple drawing. It uses the <a href="../2ddrawing/index.html">2D drawing commands</a> 
+to draw two sine waves at different frequencies and shows the harmonic produced by combining 
+the two waves. It uses <a href="../reference/procedures.html">procedures</a>, which we will discuss in 
+more detail later on, to break the drawing tasks into three self-contained tasks: 
+<br>
+<br>
+Drawing the axes - demonstrates the <a href="../2ddrawing/line.html">Line()</a> command. <br>
+Drawing the legend - demonstrates the <a href="../2ddrawing/box.html">Box()</a> and <a href="../2ddrawing/drawtext.html">DrawText()</a> commands. <br>
+Drawing the wave forms - demonstrates the <a href="../2ddrawing/linexy.html">LineXY()</a> command and shows how to use color. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Window</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#WinHarmonic</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; Gadgets</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#txtPlot1</font>
+    <font color="#924B72">#cboPlot1</font>
+    <font color="#924B72">#txtPlot2</font>
+    <font color="#924B72">#cboPlot2</font>
+    <font color="#924B72">#imgPlot</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; Image</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#drgPlot</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; Image dimensions are used in several places so define constants.</font>
+  <font color="#924B72">#imgPlotX</font> = 8
+  <font color="#924B72">#imgPlotY</font> = 40
+  <font color="#924B72">#imgPlotW</font> = 745
+  <font color="#924B72">#imgPlotH</font> = 645
+  
+  <font color="#006666">; Event variables</font>
+  <b><font color="#006666">Define</font></b>.l Event, EventWindow, EventGadget, EventType, EventMenu
+  
+  <font color="#006666">; Implementation</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">CreateWindow</font>()
+    <font color="#006666">; Creates the window and gadgets.  </font>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(<font color="#924B72">#WinHarmonic</font>, 30, 30, <font color="#924B72">#imgPlotW</font> + 20, <font color="#924B72">#imgPlotH</font> + 55, &quot;Harmonics&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)
+      
+      <font color="#006666">; This is a non-visual gadget used to draw the image, later its contents will be displayed in #imgPlot.</font>
+<font color="#006666">      CreateImage</font>(<font color="#924B72">#drgPlot</font>, <font color="#924B72">#imgPlotW</font> - 5, <font color="#924B72">#imgPlotH</font> - 5, 24)
+      
+      <font color="#006666">; Label for the Plot 1 combo.</font>
+<font color="#006666">      TextGadget</font>(<font color="#924B72">#txtPlot1</font>, 2, 5, 50, 25, &quot;Plot 1:&quot;)
+      
+      <font color="#006666">; The Plot 1 combo.</font>
+<font color="#006666">      ComboBoxGadget</font>(<font color="#924B72">#cboPlot1</font>, 55, 5, 150, 25)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 0, &quot;Sin(X)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 1, &quot;Sin(X * 2)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 2, &quot;Sin(X * 3)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 3, &quot;Sin(X * 4)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 4, &quot;Sin(X * 5)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot1</font>, 5, &quot;Sin(X * 6)&quot;)
+      
+      <font color="#006666">; Select Sin(X)</font>
+<font color="#006666">      SetGadgetState</font>(<font color="#924B72">#cboPlot1</font>, 0)
+      
+      <font color="#006666">; Label for the Plot 2 combo.</font>
+<font color="#006666">      TextGadget</font>(<font color="#924B72">#txtPlot2</font>, 230, 5, 50, 25, &quot;Plot 2:&quot;)
+      
+      <font color="#006666">; The Plot 2 combo.</font>
+<font color="#006666">      ComboBoxGadget</font>(<font color="#924B72">#cboPlot2</font>, 280, 5, 150, 25)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 0, &quot;Sin(X)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 1, &quot;Sin(X * 2)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 2, &quot;Sin(X * 3)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 3, &quot;Sin(X * 4)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 4, &quot;Sin(X * 5)&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#cboPlot2</font>, 5, &quot;Sin(X * 6)&quot;)
+      
+      <font color="#006666">; Select Sin(X * 2), otherwise the initial display is a bit uninteresting.</font>
+<font color="#006666">      SetGadgetState</font>(<font color="#924B72">#cboPlot2</font>, 1)
+      
+      <font color="#006666">; The visual image gadget on the window.</font>
+<font color="#006666">      ImageGadget</font>(<font color="#924B72">#imgPlot</font>, <font color="#924B72">#imgPlotX</font>, <font color="#924B72">#imgPlotY</font>, <font color="#924B72">#imgPlotW</font>, <font color="#924B72">#imgPlotH</font>, 0, <font color="#924B72">#PB_Image_Border</font>)
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PlotAxes</font>()
+    <font color="#006666">; Draws the axes on the image #drgPlot.</font>
+    
+    <font color="#006666">; Send drawing commands to #drgPlot.</font>
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(<font color="#924B72">#drgPlot</font>))
+    
+      <font color="#006666">; Draw a white background.</font>
+<font color="#006666">      Box</font>(0, 0,<font color="#006666"> ImageWidth</font>(<font color="#924B72">#drgPlot</font>),<font color="#006666"> ImageHeight</font>(<font color="#924B72">#drgPlot</font>),<font color="#006666"> RGB</font>(255, 255, 255))
+      
+      <font color="#006666">; Draw the axes in black.</font>
+<font color="#006666">      Line</font>(1, 1, 1,<font color="#006666"> ImageHeight</font>(<font color="#924B72">#drgPlot</font>) - 2,<font color="#006666"> RGB</font>(0, 0, 0))
+<font color="#006666">      Line</font>(1, (<font color="#006666">ImageHeight</font>(<font color="#924B72">#drgPlot</font>) - 2) /2,<font color="#006666"> ImageWidth</font>(<font color="#924B72">#drgPlot</font>) -2, 1,<font color="#006666"> RGB</font>(0, 0, 0))
+      
+      <font color="#006666">; Finished drawing.</font>
+<font color="#006666">    StopDrawing</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PlotLegend</font>(alngPlot1, alngPlot2)
+    <font color="#006666">; Draws the legend on the image #drgPlot.</font>
+    
+    <b><font color="#006666">Protected</font></b>.s strFunc1, strFunc2, strLabel1, strLabel2, strLabel3
+    
+    <font color="#006666">; Set label text 1.</font>
+    <b><font color="#006666">If</font></b> alngPlot1 = 0 
+      strFunc1 = &quot;Sin(X)&quot;
+    <b><font color="#006666">Else</font></b>
+      strFunc1 = &quot;Sin(X * &quot; +<font color="#006666"> StrU</font>(alngPlot1 + 1) + &quot;)&quot;
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set label text 2.</font>
+    <b><font color="#006666">If</font></b> alngPlot2 = 0 
+      strFunc2 = &quot;Sin(X)&quot;
+    <b><font color="#006666">Else</font></b>
+      strFunc2 = &quot;Sin(X * &quot; +<font color="#006666"> StrU</font>(alngPlot2 + 1) + &quot;)&quot;
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set label text.</font>
+    strLabel1 = &quot;Y = &quot; + strFunc1
+    strLabel2 = &quot;Y = &quot; + strFunc2
+    strLabel3 = &quot;Y = &quot; + strFunc1 + &quot; + &quot; + strFunc2 
+    
+    <font color="#006666">; Draw legend.</font>
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(<font color="#924B72">#drgPlot</font>))
+    
+      <font color="#006666">; Box.</font>
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font>)
+<font color="#006666">      Box</font>(20, 10,<font color="#006666"> TextWidth</font>(strLabel3) + 85, 80,<font color="#006666"> RGB</font>(0, 0, 0))
+      
+      <font color="#006666">; Label 1.</font>
+<font color="#006666">      Line</font>(30, 30, 50, 1,<font color="#006666"> RGB</font>(0, 0, 255))
+<font color="#006666">      DrawText</font>(95, 22, strLabel1,<font color="#006666"> RGB</font>(0, 0, 0),<font color="#006666"> RGB</font>(255, 255, 255))
+      
+      <font color="#006666">; Label 2.</font>
+<font color="#006666">      Line</font>(30, 50, 50, 1,<font color="#006666"> RGB</font>(0, 255, 200))
+<font color="#006666">      DrawText</font>(95, 42, strLabel2,<font color="#006666"> RGB</font>(0, 0, 0),<font color="#006666"> RGB</font>(255, 255, 255))
+      
+      <font color="#006666">; Label 3.</font>
+<font color="#006666">      Line</font>(30, 70, 50, 1,<font color="#006666"> RGB</font>(255, 0, 0))
+<font color="#006666">      DrawText</font>(95, 62, strLabel3,<font color="#006666"> RGB</font>(0, 0, 0),<font color="#006666"> RGB</font>(255, 255, 255))
+    
+<font color="#006666">    StopDrawing</font>()
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PlotFunction</font>(alngPlot1, alngPlot2)
+    <font color="#006666">; Draws the waveforms on the image #drgPlot.</font>
+    
+    <b><font color="#006666">Protected</font></b>.l lngSX, lngEX
+    <b><font color="#006666">Protected</font></b>.f fltRad1, fltRad2, fltSY1, fltEY1, fltSY2, fltEY2, fltSY3, fltEY3
+    
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(<font color="#924B72">#drgPlot</font>))
+    
+      <font color="#006666">; Set initial start points for each wave.</font>
+      lngSX = 1
+      fltSY1 =<font color="#006666"> ImageHeight</font>(<font color="#924B72">#drgPlot</font>) / 2
+      fltSY2 = fltSY1
+      fltSY3 = fltSY1
+      
+      <font color="#006666">; Plot wave forms.</font>
+      <b><font color="#006666">For</font></b> lngEX = 1 <b><font color="#006666">To</font></b> 720
+        <font color="#006666">; Sine function works in radians, so convert from degrees and calculate sine.</font>
+        
+        <font color="#006666">; Function 1</font>
+        <b><font color="#006666">If</font></b> alngPlot1 = 0 
+          fltRad1 =<font color="#006666"> Sin</font>(<font color="#006666">Radian</font>(lngEX))
+        <b><font color="#006666">Else</font></b>
+          <font color="#006666">; If the function should have a multiplier, account for this.</font>
+          fltRad1 =<font color="#006666"> Sin</font>(<font color="#006666">Radian</font>(lngEX) * (alngPlot1 + 1))
+        <b><font color="#006666">EndIf</font></b>
+        
+        <font color="#006666">; Function 2</font>
+        <b><font color="#006666">If</font></b> alngPlot2 = 0 
+          fltRad2 =<font color="#006666"> Sin</font>(<font color="#006666">Radian</font>(lngEX))
+        <b><font color="#006666">Else</font></b>
+          fltRad2 =<font color="#006666"> Sin</font>(<font color="#006666">Radian</font>(lngEX) * (alngPlot2 + 1))
+        <b><font color="#006666">EndIf</font></b>
+        
+        <font color="#006666">; Plot function 1 in blue.</font>
+        <font color="#006666">; Calculate end Y point.</font>
+        fltEY1 = (<font color="#006666">ImageHeight</font>(<font color="#924B72">#drgPlot</font>) / 2) + (fltRad1 * 100)
+        <font color="#006666">; Draw a line from the start point to the end point.</font>
+<font color="#006666">        LineXY</font>(lngSX, fltSY1, lngEX, fltEY1,<font color="#006666"> RGB</font>(0, 0, 255))
+        <font color="#006666">; Update the next start Y point to be the current end Y point.</font>
+        fltSY1 = fltEY1
+        
+        <font color="#006666">; Plot function 2 in green.</font>
+        fltEY2 = (<font color="#006666">ImageHeight</font>(<font color="#924B72">#drgPlot</font>) / 2) + (fltRad2 * 100)
+<font color="#006666">        LineXY</font>(lngSX, fltSY2, lngEX, fltEY2,<font color="#006666"> RGB</font>(0, 255, 200))
+        fltSY2 = fltEY2
+        
+        <font color="#006666">; Plot harmonic in red.</font>
+        fltEY3 = (<font color="#006666">ImageHeight</font>(<font color="#924B72">#drgPlot</font>) / 2) + ((fltRad1 + fltRad2) * 100)
+<font color="#006666">        LineXY</font>(lngSX, fltSY3, lngEX, fltEY3,<font color="#006666"> RGB</font>(255, 0, 0))
+        fltSY3 = fltEY3
+        
+        <font color="#006666">; Update the start X point to be the current end X point.</font>
+        lngSX = lngEX
+      <b><font color="#006666">Next</font></b> lngEX
+      
+<font color="#006666">    StopDrawing</font>()
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Main</font>
+<font color="#006666">  CreateWindow</font>()
+<font color="#006666">  PlotAxes</font>()
+<font color="#006666">  PlotLegend</font>(<font color="#006666">GetGadgetState</font>(<font color="#924B72">#cboPlot1</font>),<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#cboPlot2</font>))
+<font color="#006666">  PlotFunction</font>(<font color="#006666">GetGadgetState</font>(<font color="#924B72">#cboPlot1</font>),<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#cboPlot2</font>))
+  
+  <font color="#006666">; Reload the image gadget now drawing is complete.</font>
+<font color="#006666">  ImageGadget</font>(<font color="#924B72">#imgPlot</font>, <font color="#924B72">#imgPlotX</font>, <font color="#924B72">#imgPlotY</font>, <font color="#924B72">#imgPlotW</font>, <font color="#924B72">#imgPlotH</font>,<font color="#006666"> ImageID</font>(<font color="#924B72">#drgPlot</font>), <font color="#924B72">#PB_Image_Border</font>)
+  
+  <font color="#006666">;- Event loop</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    EventWindow =<font color="#006666"> EventWindow</font>()
+    EventGadget =<font color="#006666"> EventGadget</font>()
+    EventType =<font color="#006666"> EventType</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">If</font></b> EventGadget = <font color="#924B72">#txtPlot1</font> <b><font color="#006666">Or</font></b> EventGadget = <font color="#924B72">#txtPlot2</font>
+          <font color="#006666">; Do nothing.</font>
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#imgPlot</font>
+          <font color="#006666">; Do nothing.</font>
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#cboPlot1</font> <b><font color="#006666">Or</font></b> EventGadget = <font color="#924B72">#cboPlot2</font>
+          <font color="#006666">; If one of the combo boxes changed, redraw the image.</font>
+<font color="#006666">          PlotAxes</font>()
+<font color="#006666">          PlotLegend</font>(<font color="#006666">GetGadgetState</font>(<font color="#924B72">#cboPlot1</font>),<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#cboPlot2</font>))
+<font color="#006666">          PlotFunction</font>(<font color="#006666">GetGadgetState</font>(<font color="#924B72">#cboPlot1</font>),<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#cboPlot2</font>))
+<font color="#006666">          ImageGadget</font>(<font color="#924B72">#imgPlot</font>, <font color="#924B72">#imgPlotX</font>, <font color="#924B72">#imgPlotY</font>, <font color="#924B72">#imgPlotW</font>, <font color="#924B72">#imgPlotH</font>,<font color="#006666"> ImageID</font>(<font color="#924B72">#drgPlot</font>), <font color="#924B72">#PB_Image_Border</font>)
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">If</font></b> EventWindow = <font color="#924B72">#WinHarmonic</font>
+<font color="#006666">          CloseWindow</font>(<font color="#924B72">#WinHarmonic</font>)
+          <b><font color="#006666">Break</font></b>
+        <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_gui.html">< Previous: Building a graphical user interface (GUI)</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_procedures.html">Next: Structuring code in Procedures ></a> 
+</blockquote>
+</font></body></html>

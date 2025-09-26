@@ -1,0 +1,108 @@
+<html><head><title>AddGadgetItem</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddGadgetItem()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>AddGadgetItem</b></font>(#Gadget, Position, Text$ [, ImageID [, Flags]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Add a new item to the specified gadget. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to use. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+The item index where the new item should be inserted. To add 
+the item at the start, use an index of 0. To add this item to the end of the current 
+item list, use a value of -1. Remember that when you add an item that all current 
+items which come after the new one will have their positions increased by 1. 
+<br>
+<br>
+For the <a href="mdigadget.html">MDIGadget()</a> this parameter specifies the #Window number for the new MDI childwindow. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used, in which case the return-value will be the new number assigned by PB. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The text for the new item. 
+<br>
+<br>
+When adding an item to a <a href="listicongadget.html">ListIconGadget()</a>, this parameter can contain the text for multiple columns 
+separated by a <a href="../string/chr.html">Chr(10)</a> character. 
+
+</td></tr>
+<tr><td><i>ImageID (optional)</i></td>
+<td> 
+An optional image to use for the item in gadgets that support it. 
+The used image should be in the standard 16x16 size. Use the <a href="../image/imageid.html">ImageID()</a> command to get the ID 
+for this parameter. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+This parameter has a meaning only for the following gadget types: 
+<br>
+<br>
+<a href="treegadget.html">TreeGadget()</a> 
+<blockquote>
+
+This parameter specifies the new sublevel for the item. 
+If the sublevel is greater than that of the previous item, the new one will become this item's child. If it is lower, it will 
+be added after the parent of the previous item. 
+</blockquote>
+
+
+<a href="mdigadget.html">MDIGadget()</a> 
+<blockquote>
+
+This parameter can be used to specify the flags for the new window (see <a href="../window/openwindow.html">OpenWindow()</a>). The 
+<font color="#924B72">#PB_Window_Borderless</font>, <font color="#924B72">#PB_Window_Screencentered</font> and <font color="#924B72">#PB_Window_WindowCentered</font> flags are 
+not supported for MDI windows. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The return-value is only valid with the <a href="mdigadget.html">MDIGadget()</a>. If <font color="#924B72">#PB_Any</font> was used as the 'Position' parameter when adding an item to the <a href="mdigadget.html">MDIGadget()</a>, 
+the return-value is the number that identifies the new MDI window. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The following gadgets are supported: 
+<br>
+<br>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a> : supports the ImageID if the <font color="#924B72">#PB_ComboBox_Image</font> is set. 
+<br>
+- <a href="editorgadget.html">EditorGadget()</a> 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> : supports the ImageID. 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a> 
+<br>
+- <a href="mdigadget.html">MDIGadget()</a> : ImageID can contain an icon for the childwindow titlebar. Flags can specify the new window flags. 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a> : supports the ImageID. 
+<br>
+- <a href="treegadget.html">TreeGadget()</a> : supports the ImageID. 'Flags' is required and specifies the new sublevel. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="comboboxgadget.html">ComboBoxGadget()</a>, <a href="listicongadget.html">ListIconGadget()</a>, 
+<a href="listviewgadget.html">ListViewGadget()</a>, <a href="mdigadget.html">MDIGadget()</a>, <a href="panelgadget.html">PanelGadget()</a>, <a href="treegadget.html">TreeGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addgadgetcolumn.html>AddGadgetColumn()</a> - <a href=index.html>Gadget Index</a> - <a href=bindgadgetevent.html>BindGadgetEvent()</a> -><br><br>
+
+
+</body></html>

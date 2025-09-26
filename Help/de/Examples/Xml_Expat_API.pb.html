@@ -1,0 +1,79 @@
+<html><head><title>Xml_Expat_API.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Xml
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">EnableExplicit</font></b>
+
+
+<b><font color="#006666">ProcedureC</font></b> <font color="#006666">StartElementHandler</font>(*UserData, *Name, *Args)
+  <b><font color="#006666">Protected</font></b> *Depth.INTEGER = *UserData
+  <b><font color="#006666">Protected</font></b> *Arg.INTEGER = *Args
+  <b><font color="#006666">Protected</font></b> Indent$ =<font color="#006666"> Space</font>(6 * *Depth\i), AttName$, AttValue$
+  
+  <b><font color="#006666">Debug</font></b> Indent$ + &quot;Start: &quot; +<font color="#006666"> PeekS</font>(*Name)
+  
+  <font color="#006666">; Attribute values are an array of pointers with alternating name and value entries
+</font>  <font color="#006666">; Terminated by null pointer
+</font>  <b><font color="#006666">While</font></b> *arg\i &lt;&gt; 0
+    AttName$ =<font color="#006666"> PeekS</font>(*arg\i)
+    *arg +<font color="#006666"> SizeOf</font>(Integer)
+    AttValue$ =<font color="#006666"> PeekS</font>(*arg\i)
+    *arg +<font color="#006666"> SizeOf</font>(Integer)
+    <b><font color="#006666">Debug</font></b> Indent$ + &quot;             &quot; + AttName$ + &quot;=&quot; + AttValue$
+  <b><font color="#006666">Wend</font></b>
+  
+  *Depth\i + 1
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">ProcedureC</font></b> <font color="#006666">EndElementHandler</font>(*UserData, *Name)
+  <b><font color="#006666">Protected</font></b> *Depth.INTEGER = *UserData
+  *Depth\i - 1
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Space</font>(6 * *Depth\i) + &quot;End: &quot; +<font color="#006666"> PeekS</font>(*Name)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ui.xml&quot;)
+  
+  <font color="#006666">; initialize parser
+</font>  <b><font color="#006666">Define</font></b> Parser =<font color="#006666"> pb_XML_ParserCreate_</font>(0)
+  <b><font color="#006666">Define</font></b> Depth  = 0
+<font color="#006666">  pb_XML_SetUserData_</font>(Parser, @Depth)
+<font color="#006666">  pb_XML_SetStartElementHandler_</font>(Parser, @StartElementHandler())
+<font color="#006666">  pb_XML_SetEndElementHandler_</font>(Parser, @EndElementHandler())
+  
+  <font color="#006666">; block size for streaming. this is very small as an example. Use something larger like 1Mb here for real files!
+</font>  <b><font color="#006666">Define</font></b> BufferSize = 20, BytesRead
+  <b><font color="#006666">Define</font></b> *Buffer =<font color="#006666"> AllocateMemory</font>(BufferSize)
+  
+  <b><font color="#006666">While</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">Eof</font>(0)
+    <b><font color="#006666">Define</font></b> BytesRead =<font color="#006666"> ReadData</font>(0, *Buffer, BufferSize)
+    <b><font color="#006666">If</font></b> BytesRead &gt; 0
+      <b><font color="#006666">If</font></b> <font color="#006666">pb_XML_Parse_</font>(Parser, *Buffer, BytesRead, <font color="#924B72">#False</font>) = <font color="#924B72">#XML_STATUS_ERROR</font>
+        <font color="#006666">; parser error (message is in ascii)
+</font>        <b><font color="#006666">Debug</font></b> &quot;Parser Error (Line &quot; +<font color="#006666"> Str</font>(<font color="#006666">pb_XML_GetCurrentLineNumber_</font>(Parser)) + &quot;): &quot; +<font color="#006666"> PeekS</font>(<font color="#006666">pb_XML_ErrorString_</font>(<font color="#006666">pb_XML_GetErrorCode_</font>(Parser)), -1, <font color="#924B72">#PB_Ascii</font>)
+        <b><font color="#006666">Break</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Wend</font></b>
+  
+  <font color="#006666">; important: finish the parsing process
+</font><font color="#006666">  pb_XML_Parse_</font>(Parser, *Buffer, 0, <font color="#924B72">#True</font>)
+<font color="#006666">  pb_XML_ParserFree_</font>(Parser)
+  
+<font color="#006666">  FreeMemory</font>(*Buffer)
+  
+<font color="#006666">  CloseFile</font>(0)
+<b><font color="#006666">Else</font></b>
+  <b><font color="#006666">Debug</font></b> &quot;Cannot open file&quot;
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

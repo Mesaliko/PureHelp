@@ -1,0 +1,43 @@
+<html><head><title>ReadProgramError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramError()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>ReadProgramError</b></font>(Program [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Reads a line from the specified programs error output (stderr). 
+Unlike <a href="readprogramdata.html">ReadProgramData()</a>, this function doesn't halt the program flow if no error output is available. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to use. It must have been started before with <a href="runprogram.html">RunProgram()</a> and the <font color="#924B72">#PB_Program_Error</font> flag. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The string format to use when reading the error output. 
+The default format can be affected with the <font color="#924B72">#PB_Program_Ascii</font>, <font color="#924B72">#PB_Program_Unicode</font> and 
+<font color="#924B72">#PB_Program_UTF8</font> flags for <a href="runprogram.html">RunProgram()</a>. 
+This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Reads the error output as ascii
+  <font color="#924B72">#PB_UTF8</font>   : Reads the error output as UTF8 (default)
+  <font color="#924B72">#PB_Unicode</font>: Reads the error output as <a href="../reference/unicode.html">unicode</a>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The error string, or an empty string if there is no error output. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=readprogramdata.html>ReadProgramData()</a> - <a href=index.html>Process Index</a> - <a href=readprogramstring.html>ReadProgramString()</a> -><br><br>
+
+</body></html>

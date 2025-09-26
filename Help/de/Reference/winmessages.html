@@ -1,0 +1,61 @@
+<html><head><title>Windows Message Handling</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Windows Message Handling</font></b></p>
+
+Die Nachrichten (englisch: &quot;Messages&quot;) für Ihr Programm werden von Windows in eine Warteschlange 
+(Queue) geschickt, die erst abgearbeitet wird, wenn Sie dies wollen. Windows sendet tausende 
+Nachrichten an Ihr Programm, ohne dass Sie dies direkt merken. <br>
+<br>
+Wenn Sie z.B. den Status eines Gadgets ändern (egal ob Sie einen neuen Eintrag hinzufügen oder 
+das Image eines ImageGadget's ändern), wird eine Nachricht an die Warteschlange Ihres Programmes versendet. <br>
+<br>
+In PureBasic gibt es zwei Möglichkeiten, die Windows-Nachrichten zu empfangen und zu verarbeiten: 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> und <a href="../window/windowevent.html">WindowEvent()</a>. 
+Der Unterschied besteht darin, dass WaitWindowEvent() wartet, 
+bis eine Nachricht ankommt und WindowEvent() auch so weiterarbeitet. Bearbeitet werden die Nachrichten 
+in der Warteschlange jedoch erst, nachdem Sie WindowEvent() bzw. WaitWindowEvent() aufgerufen haben. <br>
+<br>
+<b>Besonderheiten von WindowEvent():</b> <br>
+<br>
+Der Befehl WindowEvent() wartet nicht, bis eine Message eintrifft, sondern überprüft nur, ob eine in der 
+Queue ist. Falls ja, wird die Message abgearbeitet und WindowEvent() liefert die Nummer der Message zurück. 
+Wenn keine Message ansteht, so wird NULL (0) zurückgegeben. <br>
+<br>
+Die Zeile 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>() : <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+bewirkt somit, dass WindowEvent() solange aufgerufen wird, bis es 0 zurückgibt, d.h. bis alle Messages 
+aus der Warteschlange abgearbeitet sind. <br>
+<br>
+Es reicht NICHT, wenn man nach einem <a href="../gadget/setgadgetstate.html">SetGadgetState()</a> ein simples 'WindowEvent()' macht, um diese 1 
+Message abzuarbeiten. Erstens könnten noch andere Nachrichten in der Schlange sein, die schon vorher 
+angekommen sind, und zweitens sendet Windows auch noch etliche andere Messages, um die wir uns nicht 
+kümmern müssen... die aber trotzdem in der Queue sind. <br>
+<br>
+Ein einfacher Aufruf von 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  WindowEvent</font>()
+</font></pre>
+
+reicht nicht aus, denn dann läuft der Code unter Umständen auf einer Windows-Version korrekt, auf einer 
+anderen Version aber nicht. Die verschiedenen Windows-Versionen unterscheiden sich intern eben sehr stark, 
+so dass eine Version nur 1 Message schickt, aber eine andere Windows-Version 5 Nachrichten dafür versendet. <br>
+<br>
+Von daher macht man zum Updaten immer: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>() : <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+Alternativ wäre natürlich auch noch 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WindowEvent</font>() = 0
+</font></pre>
+
+möglich, was jedoch eher unüblich ist. <br>
+<br>
+Die geschilderte Methode &quot;While : WindowEvent() : Wend&quot; ist häufig im Zusammenhang mit dem Befehl <a href="../system/delay.html">Delay()</a> 
+nützlich, wobei die Schleife VOR dem Delay() eingefügt wird, um z.B. erst das Update eines ImageGadget's 
+nach dem Austausch eines Bildes mit SetGadgetState() abzuwarten. 
+</font></body></html>

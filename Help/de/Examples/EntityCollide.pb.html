@@ -1,0 +1,133 @@
+<html><head><title>EntityCollide.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - EntityCollide
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> = 0.4
+<font color="#924B72">#Speed</font> = 60
+
+<font color="#924B72">#MainWindow</font> = 0
+<font color="#924B72">#TextGadget</font> = 0
+
+
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, RatioX, RatioY
+<b><font color="#006666">Define</font></b>.i Shoot
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; EntityCollide - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/GUI&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">;- Materials
+</font><font color="#006666">GetScriptMaterial</font>(0, &quot;Color/Blue&quot;)
+<font color="#006666">GetScriptMaterial</font>(1, &quot;Color/Green&quot;)
+<font color="#006666">GetScriptMaterial</font>(2, &quot;Color/Red&quot;)
+<font color="#006666">GetScriptMaterial</font>(3, &quot;Color/Yellow&quot;)
+<font color="#006666">CreateMaterial</font>(4,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+
+<font color="#006666">;- Meshes
+</font><font color="#006666">CreateCube</font>(0, 2)
+<font color="#006666">CreateSphere</font>(1, 1)
+<font color="#006666">CreateCylinder</font>(2, 1, 4)
+
+<font color="#006666">;- Entities
+</font><font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0),  4,  1.0, 0)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1), -4,  0.5, 0)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(2),  0, -1.0, 0)
+<font color="#006666">CreateEntity</font>(4,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(4),  0, -4.0, 0)
+<font color="#006666">ScaleEntity</font>(4, 5, 0.5, 5)
+
+<font color="#006666">;- Body
+</font><font color="#006666">CreateEntityBody</font>(0, <font color="#924B72">#PB_Entity_BoxBody</font>, 1)
+<font color="#006666">CreateEntityBody</font>(1, <font color="#924B72">#PB_Entity_SphereBody</font>, 1)
+<font color="#006666">CreateEntityBody</font>(2, <font color="#924B72">#PB_Entity_CylinderBody</font>, 1)
+<font color="#006666">CreateEntityBody</font>(4, <font color="#924B72">#PB_Entity_BoxBody</font>, 0)
+
+<font color="#006666">;- Camera
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, -1, 8, 25, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, -1, 0, 0)
+
+<font color="#006666">;- Light
+</font><font color="#006666">CreateLight</font>(0, $FFFFFF, 1560, 900, 500)
+<font color="#006666">AmbientColor</font>($330000)
+
+<font color="#006666">;- GUI
+</font>RatioX =<font color="#006666"> CameraViewWidth</font>(0) / 1920
+RatioY =<font color="#006666"> CameraViewHeight</font>(0) / 1080
+<font color="#006666">OpenWindow3D</font>(<font color="#924B72">#MainWindow</font>, 0, 0, 390 * RatioX, 110 * RatioY, &quot;EntityCollide&quot;)
+<font color="#006666">TextGadget3D</font>(<font color="#924B72">#TextGadget</font>, 10 * RatioX, 20 * RatioY, 350 * RatioX, 40 * RatioY, &quot;Clic somewhere&quot;)
+
+<font color="#006666">ShowGUI</font>(128, 1) <font color="#006666">; Display the GUI, semi-transparent and display the mouse cursor
+
+</font><b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event3D =<font color="#006666"> WindowEvent3D</font>()
+  <b><font color="#006666">Until</font></b> Event3D = 0
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    
+<font color="#006666">    InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>))
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>)
+      <b><font color="#006666">If</font></b> Clic = 0
+        <b><font color="#006666">If</font></b> <font color="#006666">PointPick</font>(0,<font color="#006666"> MouseX</font>(),<font color="#006666"> MouseY</font>())
+          Clic = 1
+          Shoot =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(3),<font color="#006666"> CameraX</font>(0),<font color="#006666"> CameraY</font>(0),<font color="#006666"> CameraZ</font>(0))
+<font color="#006666">          ScaleEntity</font>(Shoot, 0.3, 0.3, 0.3)
+<font color="#006666">          CreateEntityBody</font>(Shoot, <font color="#924B72">#PB_Entity_SphereBody</font>, 1)
+<font color="#006666">          ApplyEntityImpulse</font>(Shoot,<font color="#006666"> PickX</font>() * <font color="#924B72">#Speed</font>,<font color="#006666"> PickY</font>() * <font color="#924B72">#Speed</font>,<font color="#006666"> PickZ</font>() * <font color="#924B72">#Speed</font>)
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Else</font></b>
+      Clic = 0
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> Shoot
+    <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 2
+      <b><font color="#006666">If</font></b> <font color="#006666">EntityCollide</font>(Shoot, i)
+<font color="#006666">        FreeEntity</font>(Shoot)
+<font color="#006666">        FreeEntity</font>(i)
+        Shoot = 0
+        <b><font color="#006666">Break</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+<font color="#006666">  CameraLookAt</font>(0, 0, 0, 0)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

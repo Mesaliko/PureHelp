@@ -1,0 +1,103 @@
+<html><head><title>DirectScreenDrawing.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Drawing via Direct Screen Access (DSA)
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;
+</font>
+<font color="#006666">; We disable the debugger to run at full speed !
+</font><b><font color="#006666">DisableDebugger</font></b>
+
+<font color="#924B72">#ScreenWidth</font>  = 800  <font color="#006666">; Feel free to change this to see the pixel filling speed !
+</font><font color="#924B72">#ScreenHeight</font> = 600
+
+<b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() = 0 <b><font color="#006666">Or</font></b> <font color="#006666">InitKeyboard</font>() = 0
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;Can't initialize the GFX system&quot;,0)
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">Structure</font></b> Pixel
+  Pixel.l
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.f <font color="#006666">GSin</font>(angle.f)
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Sin</font>(angle*(2*3.14/360))
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">; Pre-calculated values are faster than realtime calculated ones...
+</font><font color="#006666">; ... so we save them in an array before starting gfx operations
+</font><b><font color="#006666">Dim</font></b> <font color="#006666">CosTable</font>(<font color="#924B72">#ScreenWidth</font>*2)
+<b><font color="#006666">Dim</font></b> <font color="#006666">ColorTable</font>(255)
+
+<b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> <font color="#924B72">#ScreenWidth</font>*2
+<font color="#006666">  CosTable</font>(i) =<font color="#006666"> GSin</font>(360*i/320)* 32 + 32
+<b><font color="#006666">Next</font></b>
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenScreen</font>(<font color="#924B72">#ScreenWidth</font>, <font color="#924B72">#ScreenHeight</font>, 32, &quot;PB Plasma&quot;)
+
+  <b><font color="#006666">Repeat</font></b>
+    Wave+6
+    <b><font color="#006666">If</font></b> Wave &gt; 320 : Wave = 0 : <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+      Buffer      =<font color="#006666"> DrawingBuffer</font>()             <font color="#006666">; Get the start address of the screen buffer
+</font>      Pitch       =<font color="#006666"> DrawingBufferPitch</font>()        <font color="#006666">; Get the length (in byte) took by one horizontal line
+</font>      PixelFormat =<font color="#006666"> DrawingBufferPixelFormat</font>()  <font color="#006666">; Get the pixel format.
+</font>      
+      <font color="#006666">; We don't care about Y for this effect, so remove it from the fags
+</font>      PixelFormat &amp; ~<font color="#924B72">#PB_PixelFormat_ReversedY</font>
+      
+      <b><font color="#006666">If</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font> <b><font color="#006666">Or</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_24Bits_RGB</font>
+        <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 255
+<font color="#006666">          ColorTable</font>(i) = i &lt;&lt; 16 <font color="#006666">; Blue is at the 3th pixel
+</font>        <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">ElseIf</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_32Bits_BGR</font> <b><font color="#006666">Or</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_24Bits_BGR</font>
+        <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 255
+<font color="#006666">          ColorTable</font>(i) = i       <font color="#006666">; Blue is at the 1th pixel
+</font>        <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font> <b><font color="#006666">Or</font></b> PixelFormat = <font color="#924B72">#PB_PixelFormat_32Bits_BGR</font>
+        Offset = 4
+      <b><font color="#006666">Else</font></b> <font color="#006666">; 24-bit
+</font>        Offset = 3
+      <b><font color="#006666">EndIf</font></b>
+    
+      <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> <font color="#924B72">#ScreenHeight</font>-1
+        pos1 =<font color="#006666"> CosTable</font>(y+wave)
+        
+        *Line.Pixel = Buffer+Pitch*y
+        
+        <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> <font color="#924B72">#ScreenWidth</font>-1
+          pos2 = (<font color="#006666">CosTable</font>(x+Wave) +<font color="#006666"> CosTable</font>(x+y) + pos1)
+          
+          *Line\Pixel =<font color="#006666"> ColorTable</font>(pos2) <font color="#006666">; Write the pixel directly to the memory !
+</font>          *Line+Offset
+          
+          <font color="#006666">; You can try with regular plot to see the speed difference
+</font>          <font color="#006666">; Plot(x, y, ColorTable(pos2))
+</font>        <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">Next</font></b>
+      
+<font color="#006666">      StopDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    ExamineKeyboard</font>()
+    
+<font color="#006666">    FlipBuffers</font>()
+     
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+<b><font color="#006666">Else</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;,&quot;Can't open the screen !&quot;,0)
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>
+</font></pre>
+</body></html>

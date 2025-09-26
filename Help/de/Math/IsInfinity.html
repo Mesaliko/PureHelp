@@ -1,0 +1,54 @@
+<html><head><title>IsInfinity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">IsInfinity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.f(.d) = <font color="#006666"><b>IsInfinity</b></font>(Wert.f(.d))</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn der angegebene 'Wert' positive oder negative 
+Unendlichkeit repräsentiert. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Wert.f oder Wert.d</i></td>
+<td width="90%"> 
+Der Wert, welcher auf Unendlichkeit geprüft werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn der Eingabewert positive oder negative 
+Unendlichkeit repräsentiert, und andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das Überprüfen der Unendlichkeits-Werte sollte nicht durch normalen Vergleich erfolgen, da 
+es von der Hardware-Implementation abhängt, ob Unendlichkeit als gleich zu sich selbst oder 
+nicht behandelt wird. Der Wert positiver Unendlichkeit kann mittels der <a href="infinity.html">Infinity()</a> 
+Funktion generiert werden. 
+<br>
+<br>
+Diese Funktion verarbeitet und gibt <a href="../reference/variables.html">Float oder Double</a> Werte zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Ergebnis =<font color="#006666"> IsInfinity</font>(<font color="#006666">Infinity</font>())  <font color="#006666">; unendlich</font>
+  Ergebnis =<font color="#006666"> IsInfinity</font>(<font color="#006666">Log</font>(0))      <font color="#006666">; -unendlich</font>
+  Ergebnis =<font color="#006666"> IsInfinity</font>(1234.5)      <font color="#006666">; ein endliche Zahl</font>
+  Ergebnis =<font color="#006666"> IsInfinity</font>(<font color="#006666">NaN</font>())       <font color="#006666">; NaN ist nicht das gleiche wie Unendlichkeit</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="infinity.html">Infinity()</a>, <a href="isnan.html">IsNaN()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=intq.html>IntQ()</a> - <a href=index.html>Math Inhaltsverzeichnis</a> - <a href=isnan.html>IsNaN()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,44 @@
+<html><head><title>CountCPUs</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CountCPUs()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CountCPUs</b></font>([Type])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le nombre de core de microprocesseurs. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type (optionnel)</i></td>
+<td width="90%"> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_System_CPUs</font>        : Le nombre total de coeurs de processeurs. (Par défaut)
+  <font color="#924B72">#PB_System_ProcessCPUs</font> : Le nombre de coeurs de processeurs disponibles pour le processus en cours. 
+                           Ceci est utile car le système d'exploitation peut obliger un processus à 
+                           n'utiliser qu'un petit nombre de CPU.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre de coeurs. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> &quot;Le nombre total de coeurs installés sur l'ordinateur: &quot; +<font color="#006666"> CountCPUs</font>(<font color="#924B72">#PB_System_CPUs</font>)
+  <b><font color="#006666">Debug</font></b> &quot;Le nombre de coeurs disponibles pour le processus en cours: &quot; +<font color="#006666"> CountCPUs</font>(<font color="#924B72">#PB_System_ProcessCPUs</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="memorystatus.html">MemoryStatus()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=computername.html>ComputerName()</a> - <a href=index.html>System Index</a> - <a href=delay.html>Delay()</a> -><br><br></blockquote>
+</font></body></html>

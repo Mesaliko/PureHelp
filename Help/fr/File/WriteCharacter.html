@@ -1,0 +1,89 @@
+<html><head><title>WriteCharacter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteCharacter()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>WriteCharacter</b></font>(#Fichier,  Caractere.c [, Format])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ecrit un caractère (1 octet  non signé 
+en mode ascii ou 2 octets  non signés 
+en mode unicode). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fichier</i></td>
+<td width="90%"> 
+Le fichier à utiliser. 
+
+</td></tr>
+<tr><td><i>Caractere.c</i></td>
+<td> 
+La valeur du caractère à écrire. 
+
+</td></tr>
+<tr><td><i>Format (optionnel)</i></td>
+<td> 
+Le format du caractère à écrire. Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : 1 octet non signé.
+  <font color="#924B72">#PB_Unicode</font>: 2 octets non signés (par défaut, voir <a href="../reference/unicode.html">unicode</a>).
+  <font color="#924B72">#PB_UTF8</font>   : entre 1 et 4 octets non signés.
+</font></pre>
+Si cet indicateur n'est pas définie, le format de lecture dépend de l'option utilisée avec 
+<a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> ou <a href="readfile.html">ReadFile()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si 
+l'opération a réussi ou zéro si elle a 
+échoué. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Attention la limite est de 2 Go. 
+<br>
+<br>
+En raison de la mise en mémoire 
+<a href="filebufferssize.html">tampon</a>, cette 
+fonction peut retourner une valeur avec 
+succès même s'il n'y a pas assez d'espace 
+disponible sur le périphérique de sortie 
+pour l'opération d'écriture. 
+<br>
+<br>
+Le fichier doit être ouvert en utilisant 
+une fonction d'écriture compatible 
+(c'est à dire pas avec <a href="readfile.html">ReadFile()</a>). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0, &quot;Test.txt&quot;)  <font color="#006666">; Ouvre un fichier existant ou en crée un nouveau s'il n'existait pas</font>
+<font color="#006666">    FileSeek</font>(0,<font color="#006666"> Lof</font>(0))         <font color="#006666">; Place le pointeur à la fin du fichier en utilisant le résultat de Lof() </font>
+<font color="#006666">    WriteCharacter</font>(0,65)
+<font color="#006666">    WriteStringN</font>(0, &quot;... une autre ligne à la fin du fichier.&quot;)
+<font color="#006666">    CloseFile</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, &quot;Test.txt&quot;)  <font color="#006666">; Si le fichier peut être lu , on continue...</font>
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(0) = 0          <font color="#006666">; Boucle tant que la fin du fichier n'est pas atteinte. (Eof = 'End Of File') </font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ReadCharacter</font>(0)      <font color="#006666">; Affiche ligne par ligne le contenu du fichier</font>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    CloseFile</font>(0)              <font color="#006666">; Ferme le fichier précédemment ouvert</font>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;,&quot;Impossible d'ouvrir le fichier!&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="readcharacter.html">ReadCharacter()</a>, <a href="writeasciicharacter.html">WriteAsciiCharacter()</a>, <a href="writeunicodecharacter.html">WriteUnicodeCharacter()</a>, <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=writebyte.html>WriteByte()</a> - <a href=index.html>File Index</a> - <a href=writedata.html>WriteData()</a> -><br><br>
+
+</body></html>

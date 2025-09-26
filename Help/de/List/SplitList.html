@@ -1,0 +1,86 @@
+<html><head><title>SplitList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SplitList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SplitList</b></font>(QuellListe(), ZielListe() [, ErhalteAktuelles])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Verschiebt die Elemente der QuellListe() vom aktuellen Element an vorwärts zur ZielListe(). 
+Dies ist eine schnelle Operation, da die Element-Daten selber nicht verschoben werden, um 
+die Listen zu teilen (englisch &quot;to split&quot;). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>QuellListe()</i></td>
+<td width="90%"> 
+Die Liste, aus der die Elemente abgeteilt (&quot;gesplittet&quot;) werden. Das aktuelle Element 
+dieser Liste gibt an, wo die Liste geteilt werden soll. Gibt es kein aktuelles Element, 
+verbleiben alle Elemente in der QuellListe(). 
+
+</td></tr>
+<tr><td><i>ZielListe()</i></td>
+<td> 
+Die Liste, wohin die Elemente verschoben werden. Alle in dieser Liste existierenden 
+Elemente werden gelöscht, bevor die neuen Elemente hinzugefügt werden. 
+
+</td></tr>
+<tr><td><i>ErhalteAktuelles (optional)</i></td>
+<td> (englisch &quot;KeepCurrent&quot;) 
+Gibt an, ob der aktuelle Eintrag der QuellListe() in der QuellListe() verbleibt, oder 
+in die ZielListe() verschoben wird. Ist dieser Parameter gleich <font color="#924B72">#True</font>, dann 
+verbleibt das aktuelle Element in der QuellListe(). 
+Lautet er <font color="#924B72">#False</font> (Standard), dann wird das aktuelle Element in die 
+ZielListe() verschoben. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn 'ErhalteAktuelles' (&quot;KeepCurrent&quot;) auf <font color="#924B72">#True</font> gesetzt wird, dann wird das 
+vorherige Element das neue aktuelle Element in der QuellListe(). Gibt es kein vorheriges 
+Element, dann wird die Liste nach Abschluss dieser Funktion kein aktuelles Element mehr haben. 
+Die ZielListe() hat kein aktuelles Element. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">NewList</font></b> <font color="#006666">B</font>()
+  
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">A</font>())
+<font color="#006666">    A</font>() = i
+  <b><font color="#006666">Next</font></b> i
+  
+  <font color="#006666">; teilt A() am Element 5 und verschiebt die verbleibenden Elemente nach B()</font>
+<font color="#006666">  SelectElement</font>(<font color="#006666">A</font>(), 5)
+<font color="#006666">  SplitList</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>())
+  
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- A() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">A</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- B() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">B</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">B</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="mergelists.html">MergeLists()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=selectelement.html>SelectElement()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=swapelements.html>SwapElements()</a> -><br><br>
+</blockquote>
+</font></body></html>

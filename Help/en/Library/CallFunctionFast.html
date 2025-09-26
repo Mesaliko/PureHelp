@@ -1,0 +1,57 @@
+<html><head><title>CallFunctionFast</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallFunctionFast()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CallFunctionFast</b></font>(*FunctionPointer [,Parameter1 [, Parameter2...]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Calls a function directly, using its address. The function is expected to use the stdcall 
+calling convention (the standard in most DLLs on Windows). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*FunctionPointer</i></td>
+<td width="90%"> 
+The address of the function to call. 
+<br>
+<br>
+This pointer may be found using the 
+<a href="getfunction.html">GetFunction()</a>, <a href="getfunctionentry.html">GetFunctionEntry()</a> or <a href="libraryfunctionaddress.html">LibraryFunctionAddress()</a> functions. 
+The use of this function is the fastest method with which to call library functions, especially when 
+the results of a call to: GetFunction() or LibraryFunctionAddress() have been stored. This is due to 
+the fact that this function is not required to search for the name of the library function. 
+
+</td></tr>
+<tr><td><i>Parameter1, Parameter2, ...</i></td>
+<td> 
+The parameters for the function. The number of parameters must match the parameters 
+of the called function. The maximum number of supported parameters is 20. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the return-value of the called function. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To call a function that uses the 'cdecl' calling convention, use the <a href="callcfunctionfast.html">CallCFunctionFast()</a> function. 
+<br>
+<br>
+Note: This function is not very flexible and does not handle string/float/double/quad parameters or string/float/double/quad returns. 
+The use of <a href="../reference/prototypes.html">prototypes</a> is now strongly recommended. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="callcfunctionfast.html">CallCFunctionFast()</a>, <a href="getfunction.html">GetFunction()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=callfunction.html>CallFunction()</a> - <a href=index.html>Library Index</a> - <a href=closelibrary.html>CloseLibrary()</a> -><br><br>
+
+</body></html>

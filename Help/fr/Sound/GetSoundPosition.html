@@ -1,0 +1,92 @@
+<html><head><title>GetSoundPosition</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetSoundPosition()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetSoundPosition</b></font>(#Son [, Mode [, Canal]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la position courante. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Son</i></td>
+<td width="90%"> 
+Le son à utiliser. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sound_Frame</font>      : Position en 'frame' (par défaut). 
+  <font color="#924B72">#PB_Sound_Millisecond</font>: Position en millisecondes.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Canal (optionnel)</i></td>
+<td> 
+Le canal à utiliser. 
+<br>
+<br>
+C'est la valeur retournée par <a href="playsound.html">PlaySound()</a> 
+avec l'option <font color="#924B72">#PB_Sound_MultiChannel</font>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la position courante du son ou -1 
+si une erreur s'est produite. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les sons chargés avec l'option 
+<font color="#924B72">#PB_Sound_Streaming</font> ne sont pas pris en 
+charge. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">If</font></b> <font color="#006666">InitSound</font>()           <font color="#006666">; Initialisation des Sons</font>
+<font color="#006666">  UseOGGSoundDecoder</font>()   <font color="#006666">; Utilisation des fichiers ogg</font>
+  
+  <font color="#006666">; Chargement de 2 sons depuis 2 fichiers</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">LoadSound</font>(0, <font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples\3D\Data\Siren.ogg&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadSound</font>(1, <font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples\3D\Data\Roar.ogg&quot;)
+      
+      <font color="#006666">; La sirène joue </font>
+<font color="#006666">      PlaySound</font>(0)
+      
+      <font color="#006666">; Afficher la position pendant que la sirène joue</font>
+      <b><font color="#006666">Repeat</font></b>
+        Pos=<font color="#006666">GetSoundPosition</font>(0, <font color="#924B72">#PB_Sound_Millisecond</font>)
+<font color="#006666">        Delay</font>(100)   <font color="#006666">; Attendre 100 ms</font>
+        <b><font color="#006666">Debug</font></b> Pos    <font color="#006666">; Afficher la position toutes les 100 ms environ</font>
+        <b><font color="#006666">If</font></b> Pos&gt;1000  <font color="#006666">; Arrêter après 1 seconde environ</font>
+          <b><font color="#006666">Break</font></b>
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">ForEver</font></b>
+      
+      <font color="#006666">; Puis les 2 sons sont joués en même temps</font>
+<font color="#006666">      PlaySound</font>(1)
+      
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Ok pour quitter.&quot;) 
+      <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">Else</font></b>
+  <b><font color="#006666">Debug</font></b> &quot;Avertissement! L'environnement sonore n'a pas pu être initialisé. Aucune commande sonore ne peut donc être utilisée...&quot;
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setsoundposition.html">SetSoundPosition()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getsoundfrequency.html>GetSoundFrequency()</a> - <a href=index.html>Sound Index</a> - <a href=initsound.html>InitSound()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,66 @@
+<html><head><title>Pseudotypes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Pseudotypes</font></b></p>
+
+<b>Beschreibung</b><br><blockquote>
+
+
+Für fortgeschrittene Programmierer. Die Pseudotypes (unechte Datentypen) sind eine Möglichkeit 
+zur Vereinfachung des Programmierens im Umgang mit externen Libraries (Befehls-Bibliotheken), welche 
+<a href="../reference/variables.html">Datentypen</a> benötigen, die nicht intern von PureBasic unterstützt 
+werden. 
+<br>
+<br>
+In diesem Fall ist des möglich, das vordefinierte Pseudotype zu verwenden, welches die notwendige 
+Konvertierung &quot;on-the-fly&quot; (während der Verwendung) ohne Zusatzarbeiten erledigt. Da es sich dabei 
+nicht um 'echte' Datentypen handelt, wurde das gewählte Namensschema ausdrücklich anders gewählt: 
+ein 'p-' Präfix (für 'Pseudo') ist Bestandteil des Typennamens. Die verfügbaren Pseudotypes sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  p-ascii: verhält sich wie ein Stringtyp, konvertiert jedoch vor dem Aufrufen der Funktion den
+           String immer nach ASCII, auch wenn das Programm im <a href="../reference/unicode.html">Unicode</a>-Modus kompiliert wurde.
+           Dies ist zum Beispiel sehr nützlich in einem Unicode-Programm beim Zugriff auf eine 
+           Shared-Library, die selbst kein Unicode unterstützt.
+           
+  p-utf8:  verhält sich wie ein Stringtyp, konvertiert jedoch vor dem Aufrufen der Funktion den
+           String immer nach UTF8. Dies ist sehr nützlich beim Zugriff auf eine Shared-Library, die 
+           einen <a href="../reference/unicode.html">Unicode</a>-String als UTF8 anstelle von ASCII- oder Unicode-Strings übergeben braucht.
+
+  p-bstr:  verhält sich wie ein Stringtyp, konvertiert jedoch vor dem Aufrufen der Funktion den
+           String immer nach BSTR. Dies ist sehr nützlich beim Zugriff auf eine Shared-Library, die 
+           BSTR Parameter benötigt (wie COM Komponenten).
+
+  p-unicode: verhält sich wie ein Stringtyp, konvertiert jedoch vor dem Aufrufen der Funktion den
+             String immer nach <a href="../reference/unicode.html">Unicode</a>, auch wenn das Programm im ASCII-Modus kompiliert wurde.
+             Dies ist sehr nützlich zum Beispiel in einem Ascii-Programm beim Zugriff auf eine 
+             Shared-Library, die nur Unicode unterstützt.
+
+  p-variant: verhält sich wie ein numerischer Typ, stellt den Funktionsaufruf jedoch so ein, dass
+             der 'Variant' Parameter korrekt verwendet wird. Dies ist sehr nützlich beim Zugriff
+             auf &quot;Shared Libraries&quot;, welche den 'Variant' Parameter benötigen, wie COM Komponenten.
+</font></pre>
+
+Die Pseudotypes können nur mit den <a href="../reference/prototypes.html">Prototypes</a>, <a href="../reference/interfaces.html">Interfaces</a> 
+und <a href="../reference/import_endimport.html">importierten Funktionen</a> verwendet werden. Die Pseudotypes führen die 
+Konvertierung nur dann aus, wenn es notwendig ist. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Wir verwenden den 'p-ascii' Pseudotype für die String Parameter, da</font>
+    <font color="#006666">; MessageBoxA() eine nur unter ASCII verwendbare Funktion ist. Der Compiler</font>
+    <font color="#006666">; wird - sofern notwendig - die Strings automatisch nach ASCII konvertieren.</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxA</font>(Window.i, Body.p-ascii, Title.p-ascii, Flags.i = 0)
+                                                  
+  <b><font color="#006666">EndImport</font></b>
+  
+  <font color="#006666">; Dies wird korrekt funktionieren, auch wenn die internen PureBasic-Strings</font>
+  <font color="#006666">; in Unicode vorliegen, da der Compiler eigenständig die nötige</font>
+  <font color="#006666">; ASCII-Konvertierung erledigt.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  MessageBoxA</font>(0, &quot;Hello&quot;, &quot;World&quot;)
+    
+</font></pre>
+</blockquote>
+</font></body></html>

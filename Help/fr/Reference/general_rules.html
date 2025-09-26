@@ -1,0 +1,356 @@
+<html><head><title>Règles de syntaxe générales</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Règles de syntaxe générales</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Commentaires"><u>Commentaires</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Mots clé"><u>Mots clé</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Fonctions"><u>Fonctions</u></a></td>
+  </tr>
+  <tr>  
+    <td align="center" vAlign="center" nowrap><a href="#Constantes"><u>Constantes</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Literal"><u>Séquences d'échappement</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Labels"><u>Labels</u></a></td>
+  </tr> 
+    <td align="center" vAlign="center" nowrap><a href="#Modules"><u>Modules</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Expressions"><u>Expressions</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Regroupement des commandes"><u>Regroupement des commandes</u></a></td>
+  </tr>
+  <tr>  
+    <td align="center" vAlign="center" nowrap><a href="#Texte multiligne"><u>Texte multiligne</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Glossaire"><u>Glossaire</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+PureBasic a défini des règles qui ne changent jamais,à savoir: 
+
+<a name="Commentaires"></a>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;> Commentaires</b></p><blockquote>
+
+<!-- Il y a un bug sur @Section et son indentation, et cette astuce pallie à ça. Mesa -->
+<blockquote>
+  Les commentaires sont signalés par <b><font color="#006666">';'</font></b> . 
+  Tout le texte situé après le caractère <b><font color="#006666">';'</font></b> 
+  est ignoré par le compilateur jusqu'à la fin de la ligne.
+  </blockquote>
+
+<blockquote>
+
+<p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> a = 10 <font color="#006666">; Ceci est un commentaire pour indiquer quelque chose.</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Mots clé"></a>
+</blockquote>
+<p><b>> Mots clé (Keywords)</b></p><blockquote>
+
+Tous les <b>mots clés</b> sont utilisés 
+pour des choses générales à l'intérieur 
+de PureBasic, comme la création de tableaux 
+(Dim) ou des listes (NewList), ou le 
+contrôle du déroulement du programme 
+(If : Else : EndIf). Ils ne sont pas 
+suivis par les parenthèses '()', qui 
+sont généralement utilisées par PureBasic 
+pour les <b>fonctions</b>. 
+<blockquote>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">    <b><font color="#006666">If</font></b> a = 1      <font color="#006666">; If, Else et EndIf sont des mots clés; contrairement à 'a'</font>
+      ...         <font color="#006666">; qui est une variable utilisée dans une expression ('a = 1').</font>
+    <b><font color="#006666">Else</font></b>
+      ...
+    <b><font color="#006666">EndIf</font></b>
+</font></pre>
+</blockquote>
+
+
+Les <b>mots clés</b> sont régulièrement 
+décrits dans les chapitres sur le côté 
+gauche de la page d'index du manuel de 
+référence. 
+
+<br>
+<br>
+<hr>
+<a name="Fonctions"></a>
+</blockquote>
+<p><b>> Fonctions</b></p><blockquote>
+
+Toutes les fonctions doivent avoir un 
+nom suivi d'un '(' à défaut de quoi 
+elle ne sera pas considérée comme 
+une fonction. Cela est vrai y compris 
+lorsque la fonction ne prend aucun paramètre. 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  WindowEvent</font>() <font color="#006666">; est une fonction.</font>
+  WindowEvent   <font color="#006666">; est une variable.</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Constantes"></a>
+</blockquote>
+<p><b>> Constantes</b></p><blockquote>
+
+Toutes les constantes ont un nom précédé 
+par un <b><font color="#006666"></font></b>#.<br>
+Elles ne peuvent être déclarées qu'une 
+fois et garde toujours leur valeur prédéfinie. 
+(Le compilateur remplace tous les noms 
+des constantes avec leur valeur 
+correspondante lors de la compilation 
+de l'exécutable.) 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Hello</font> = 10 <font color="#006666">; est une constante.</font>
+  Hello  = 10 <font color="#006666">; est une variable.</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Literal"></a>
+</blockquote>
+<p><b>> Texte littéral</b></p><blockquote>
+
+Les chaînes littérales sont encadrées par 
+le caractère &quot;. Les séquences d'échappement sont 
+prises en charge en utilisant le caractère ~ avant 
+la chaîne littérale.<br>
+Les séquences d'échappement autorisés sont: 
+<pre><font face="Courier New, Courier, mono" size="2">  \a: bip                    <b><font color="#006666">Chr</font></b>(7)
+  \b: retour arrière         <b><font color="#006666">Chr</font></b>(8)
+  \f: saut de page           <b><font color="#006666">Chr</font></b>(12)
+  \n: retour à la ligne      <b><font color="#006666">Chr</font></b>(10)
+  \r: retour chariot         <b><font color="#006666">Chr</font></b>(13)
+  \t: tabulation horizontal  <b><font color="#006666">Chr</font></b>(9)
+  \v: tabulation vertical    <b><font color="#006666">Chr</font></b>(11)
+  \&quot;: double quote           <b><font color="#006666">Chr</font></b>(34)
+  \\: antislash              <b><font color="#006666">Chr</font></b>(92)
+</font></pre>
+Il y a deux constantes spéciales pour les chaînes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Empty$</font>: représente une chaîne vide (exactement la même chose que &quot;&quot;)
+  <font color="#924B72">#Null$</font> : représente une chaîne nulle. Ceci peut être utilisé avec les fonctions 
+           des APIs nécessitant un pointeur NULL en guise de chaîne ou à une chaîne vraiment libre.
+</font></pre>
+
+Attention: Sous Windows, \t ne fonctionne pas avec les fonctions graphiques 
+des bibliothèques 2DDrawing et VectorDrawing. 
+<blockquote>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  a$ =  &quot;Salut le monde&quot;  <font color="#006666">; Texte standard</font>
+  b$ = ~&quot;Echappe\nMoi !&quot;  <font color="#006666">; Texte avec une séquence d'échappement</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Labels"></a>
+</blockquote>
+<p><b>> Labels</b></p><blockquote>
+
+Tous les labels (étiquettes) doivent être 
+suivis par un ':'. Les noms de label ne 
+peuvent pas contenir d'opérateurs (+,-,...) ou 
+de caractères spéciaux (é,à,ß,ä,ö,ü,...). 
+<br>
+Dans une <a href="../reference/procedures.html">procédure</a>, 
+l'étiquette sera disponible uniquement 
+dans cette procédure. 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Je_suis_un_label:
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Modules"></a>
+</blockquote>
+<p><b>> Modules</b></p><blockquote>
+
+Les <a href="../reference/module.html">modules</a> utilisent un double deux-points comme cela <b>'::'</b> 
+ce qui permet au programmeur d'accéder à un élément d'un module depuis l'extérieur 
+de ce module. Le nom du module étant précisé, il est suivi du séparateur '::'. 
+Donc attention à ne pas confondre le '::' avec le simple':' d'une étiquette (label). 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Debug</font></b> Voitures::NbVoitures <font color="#006666">; Affiche le contenu de la variable 'NbVoitures' du module 'Voitures'</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Expressions"></a>
+</blockquote>
+<p><b>> Expressions</b></p><blockquote>
+
+On appelle expression toute séquence de 
+code qui peut être évaluée. Une expression 
+peut regrouper toute variable, constante 
+ou fonction d'un même type. Lorsque vous 
+utilisez des nombres dans une expression, 
+vous pouvez utiliser le symbole $ en tête 
+pour préciser qu'il s'agit d'une valeur 
+hexadécimale ou un % pour signifier une 
+valeur binaire. Sans l'un ou l'autre de 
+ces deux symboles, la valeur sera toujours 
+considérée comme décimale. Les chaînes 
+de caractères doivent être délimitées 
+par des guillemets. 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = a + 1 + (12 * 3) 
+  a = a +<font color="#006666"> WindowHeight</font>() + b/2 + <font color="#924B72">#MaConstante</font>
+  
+  <b><font color="#006666">If</font></b> a &lt;&gt; 12 + 2 
+    b + 2 &gt;= c + 3
+  <b><font color="#006666">EndIf</font></b>
+  
+  a.s = b.s + &quot;ceci est une chaine&quot; + c.s
+  a$ = b$ + &quot;ceci est une autre chaine&quot; + c$
+
+  foo = foo + $69 / %1001 <font color="#006666">; Utilisation de nombres hexadécimal et binaire</font>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Regroupement des commandes"></a>
+</blockquote>
+<p><b>> Regroupement des commandes</b></p><blockquote>
+
+Il est possible de placer un nombre 
+quelconque de commandes sur la même 
+ligne en les séparant par <b><font color="#006666">:</font></b>. 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> Variable=0 : <b><font color="#006666">Debug</font></b> &quot;Ok&quot; : <b><font color="#006666">Else</font></b> : <b><font color="#006666">Debug</font></b> &quot;Erreur&quot; : <b><font color="#006666">EndIf</font></b>
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Texte multiligne"></a>
+</blockquote>
+<p><b>> Texte multiligne</b></p><blockquote>
+
+Si une ligne de code contient une 
+expression de grande taille, elle 
+peut être divisée en plusieurs lignes. 
+Une ligne découpée doit se terminer 
+avec l'un des opérateurs suivants: 
+plus (+), virgule (,), ou (|), And, 
+Or, Xor. 
+<blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte$ = &quot;Très très très très long texte&quot; + <font color="#924B72">#LF$</font> +
+          &quot;un autre long texte&quot; + <font color="#924B72">#LF$</font> +
+          &quot;et la fin du long texte.&quot;
+
+<font color="#006666">  MessageRequester</font>(&quot;Bonjour c'est un titre très long.&quot;,
+                   &quot;Et un très long message, afin que nous puissions utiliser le multiligne&quot; + <font color="#924B72">#LF$</font> + Texte$,
+                   <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+</blockquote>
+
+
+<br>
+<br>
+<hr>
+<a name="Glossaire"></a>
+</blockquote>
+<p><b>> Glossaire</b></p><blockquote>
+
+Les mots suivants utilisés dans ce 
+manuel ont toujours le même sens : 
+<br>
+<br>
+&lt;variable&gt; : une variable basic. <br>
+&lt;expression&gt; : une expression comme commenté ci-dessus. <br>
+&lt;constant&gt; : une constante numérique. <br>
+&lt;label&gt; : un label de programme. <br>
+&lt;type&gt; : tout type, (standard ou structuré). <br>
+
+<br>
+<br>
+<hr>
+</blockquote>
+<p><b>> Autres</b></p><blockquote>
+
+- Dans ce manuel, tous les sujets sont listés 
+en ordre alphabétique pour réduire tout 
+temps de recherche. 
+<br>
+<br>
+- La <b>valeur renvoyée</b> par les 
+commandes est le plus souvent un 
+<a href="../reference/variables.html">Integer</a>. 
+Dans le cas contraire, le type de la 
+valeur est indiqué dans la description 
+(ligne de syntaxe) de la commande. 
+<br>
+<br>
+- Dans la documentation de PureBasic, 
+les termes &quot;commandes&quot; et &quot;fonctions&quot; ont 
+le même sens, independamment du fait 
+que la fonction retourne une valeur ou non. 
+</blockquote>
+</font></body></html>

@@ -1,0 +1,55 @@
+<html><head><title>EscapeString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EscapeString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>EscapeString</b></font>(String$ [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die maskierte (englisch &quot;escaped&quot;) Version des Strings zurück. <a href="unescapestring.html">UnescapeString()</a> 
+kann verwendet werden, um die umgekehrte Operation durchzuführen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+Der zu maskierende String. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der beim Maskieren des Strings zu verwendende Modus. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_EscapeInternal</font>: maskiert den String mittels des PureBasic internen Formats (siehe <a href="../reference/general_rules.html">Allgemeine Regeln</a>
+                             für erlaubte Escape-Sequenzen) (Standard).
+  <font color="#924B72">#PB_String_EscapeXML</font>     : maskiert den String mittels der XML Escape-Zeichen. Dies kann nützlich sein, um einen
+                             beliebigen String in einen XML-Baum einzufügen.
+  <font color="#924B72">#PB_String_EscapeJSON</font>    : maskiert den String mittels der JSON-Escape-Zeichen. Dies kann nützlich sein, um einen
+                             beliebigen String in einen JSON-Wert einzufügen.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein maskierter String.<br>
+Achtung: Auf Windows funktioniert \t nicht mit den grafischen Funktionen der <a href="../2ddrawing/index.html">2DDrawing</a>- und 
+<a href="../vectordrawing/index.html">VectorDrawing</a>-Bibliotheken. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">EscapeString</font>(&quot;Test=&quot;+<font color="#006666">Chr</font>(34)+&quot;Hallo&quot;+<font color="#006666">Chr</font>(34)+&quot;.&quot;) <font color="#006666">; wird &quot;Test=\&quot;Hallo\&quot;.&quot; anzeigen</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">EscapeString</font>(&quot;&lt;item&gt;Hallo&lt;/item&gt;&quot;, <font color="#924B72">#PB_String_EscapeXML</font>) <font color="#006666">; wird &quot;&amp;lt;item&amp;gt;Hallo&amp;lt;/item&amp;gt;&quot; anzeigen</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="unescapestring.html">UnescapeString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=countstring.html>CountString()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=findstring.html>FindString()</a> -><br><br>
+
+</body></html>

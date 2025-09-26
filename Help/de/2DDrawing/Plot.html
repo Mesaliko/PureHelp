@@ -1,0 +1,67 @@
+<html><head><title>Plot</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Plot()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>Plot</b></font>(x, y [, Farbe])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Zeichnet einen einzelnen Punkt (Pixel) an der angegebenen Position auf dem aktuellen Ausgabekanal. 
+Der aktuelle Ausgabekanal wird mittels <a href="startdrawing.html">StartDrawing()</a> festgelegt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+Die Position des zu zeichnenden Punktes. 
+<br>
+<br>
+Aus Geschwindigkeitsgründen findet bei diesen Koordinaten keine Überprüfung der Bereichsgrenzen 
+statt, die angegebenen Koordinaten müssen sich innerhalb des aktuellen Zeichenbereichs befinden. 
+<a href="outputwidth.html">OutputWidth()</a> und <a href="outputheight.html">OutputHeight()</a> können verwendet werden, um dies zu überprüfen. 
+Dieser Befehl ist auch nicht vom Clipping (Beschneidung) mittels <a href="clipoutput.html">ClipOutput()</a> betroffen. 
+
+</td></tr>
+<tr><td><i>Farbe (optional)</i></td>
+<td> 
+Die für den Punkt zu verwendende Farbe. Wenn dieser Parameter nicht angegeben wird, 
+dann wird die mittels <a href="frontcolor.html">FrontColor()</a> festgelegte Standard-Zeichenfarbe verwendet. 
+Diese Farbe kann im <a href="../2ddrawing/rgb.html">RGB</a>- oder <a href="../2ddrawing/rgba.html">RGBA</a>-Format vorliegen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;2DDrawing Beispiel&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+      <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> 199
+        <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> 199
+<font color="#006666">          Plot</font>(x, y,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+        <b><font color="#006666">Next</font></b> y
+      <b><font color="#006666">Next</font></b> x
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="point.html">Point()</a>, <a href="frontcolor.html">FrontColor()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=outputwidth.html>OutputWidth()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=point.html>Point()</a> -><br><br>
+
+</body></html>

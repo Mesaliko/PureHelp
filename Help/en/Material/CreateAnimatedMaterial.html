@@ -1,0 +1,60 @@
+<html><head><title>CreateAnimatedMaterial</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateAnimatedMaterial()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateAnimatedMaterial</b></font>(#Material, TextureArray(), Duration.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new animated material using the specified textures. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+A number to identify the new animated material. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>TextureArray()</i></td>
+<td> 
+An array of TextureID, with all the textures to use for the animation. <a href="../texture/textureid.html">TextureID()</a> can be used 
+to get a valid texture identifier. 
+
+</td></tr>
+<tr><td><i>Duration</i></td>
+<td> 
+The animation duration in seconds. It can be a fractional number, for example: 1.5 which will be one second and half. 
+Once the animation is finished, it will automatically start again. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the animated material was successfully created, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Material parameter, then the generated number is returned on success. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateTexture</font>(0, 256, 256)
+<font color="#006666">  CreateTexture</font>(1, 256, 256)
+<font color="#006666">  CreateTexture</font>(2, 256, 256)
+
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Textures</font>(2)
+<font color="#006666">  Textures</font>(0) =<font color="#006666"> TextureID</font>(0)
+<font color="#006666">  Textures</font>(1) =<font color="#006666"> TextureID</font>(1)
+<font color="#006666">  Textures</font>(2) =<font color="#006666"> TextureID</font>(2)
+
+  <font color="#006666">; Creates an animated material with 3 textures, which will play for 500ms</font>
+  <font color="#006666">;</font>
+<font color="#006666">  CreateAnimatedMaterial</font>(0,<font color="#006666"> Textures</font>(), 0.5)
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=countmateriallayers.html>CountMaterialLayers()</a> - <a href=index.html>Material Index</a> - <a href=creatematerial.html>CreateMaterial()</a> -><br><br>
+
+</body></html>

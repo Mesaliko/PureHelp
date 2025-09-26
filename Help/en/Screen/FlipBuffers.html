@@ -1,0 +1,38 @@
+<html><head><title>FlipBuffers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FlipBuffers()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FlipBuffers</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Flip the back and front buffers of the current screen. The invisible area is now visible and vice versa, 
+which allowss to do a 'double-buffering' effect (flicker free graphical displays). 
+A screen must have been opened with <a href="openscreen.html">OpenScreen()</a> or <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. The way the buffer are flipped 
+(with or without synchronization) is set by <a href="openscreen.html">OpenScreen()</a> or <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+FlipBuffers() has to be called outside a <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : ... : <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> program block. 
+<br>
+<br>
+FlipBuffers() must be called in each event loop on a <a href="../screen/openscreen.html">fullscreen</a> to handle 
+events for <a href="../joystick/examinejoystick.html">joystick</a> / <a href="../keyboard/examinekeyboard.html">keyboard</a>&quot; / 
+<a href="../mouse/examinemouse.html">mouse</a> properly. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="openscreen.html">OpenScreen()</a>, <a href="openwindowedscreen.html">OpenWindowedScreen()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=examinescreenmodes.html>ExamineScreenModes()</a> - <a href=index.html>Screen Index</a> - <a href=isscreenactive.html>IsScreenActive()</a> -><br><br>
+
+</body></html>

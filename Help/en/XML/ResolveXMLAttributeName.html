@@ -1,0 +1,57 @@
+<html><head><title>ResolveXMLAttributeName</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResolveXMLAttributeName()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>ResolveXMLAttributeName</b></font>(Node, Attribute$ [, Separator$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the expanded name of the given node's attribute in a document that uses XML namespaces. 
+The expanded name consists of the namespace uri (if any) and the local attribute name, separated 
+by the separator character given in 'Separator$'. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Node</i></td>
+<td width="90%"> 
+The node to use. 
+
+</td></tr>
+<tr><td><i>Attribute$</i></td>
+<td> 
+The attribute to resolve. 
+
+</td></tr>
+<tr><td><i>Separator$ (optional)</i></td>
+<td> 
+The separator to use when concatenating the namespace and the local attribute name. 
+The default separator character is &quot;/&quot;. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+In a document using namespaces, returns the expanded name of the attribute if it could be correctly 
+resolved or an empty string if a namespace prefix is used that is never declared (which is invalid). 
+<br>
+<br>
+In a document without namespaces, returns the attribute name itself. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<b>Note: </b> Unlike with <a href="resolvexmlnodename.html">node names</a>, the default namespace is not applied 
+to attribute names that do not have a namespace prefix. So attribute names without a namespace prefix 
+simply get their local name returned. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="resolvexmlnodename.html">ResolveXMLNodeName()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=removexmlattribute.html>RemoveXMLAttribute()</a> - <a href=index.html>XML Index</a> - <a href=resolvexmlnodename.html>ResolveXMLNodeName()</a> -><br><br>
+
+</body></html>

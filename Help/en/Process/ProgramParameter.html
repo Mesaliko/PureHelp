@@ -1,0 +1,72 @@
+<html><head><title>ProgramParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramParameter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>ProgramParameter</b></font>([Index])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Gets the next parameter string that was passed to the executable when it was launched. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Index (optional)</i></td>
+<td width="90%"> 
+If specified, the parameter for that index will be returned. The first parameter index starts from 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The next parameter value, or an empty string if no more parameters are found. If index is specified 
+it will return the specified parameter value. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function is especially useful for <a href="../console/index.html">console programs</a>, where the user passes 
+one or more parameter at the program start. 
+<br>
+<br>
+<b>Note:</b> Relying on the return of an empty string to detect the last parameter is not a good practice, 
+since the function also returns an empty string if an empty string was passed in &quot;&quot; on the command-line. 
+The preferred method which should be used to get all parameters, is to get the count with <a href="countprogramparameters.html">CountProgramParameters()</a> 
+and then to call ProgramParameter() as often as needed. 
+<br>
+<br>
+To check the behaviour of this function, or do several tests, please read the 'Executable command-line' paragraph 
+in the page <a href="../reference/ide_compiler.html">IDE Compiler options</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  MyProgram.exe MyText.txt /FAST &quot;Special Mode&quot;
+</font></pre>
+The first time that ProgramParameter() is called, it will return &quot;MyText.txt&quot;, the second time 
+&quot;/FAST&quot; and the third time &quot;Special Mode&quot;. 
+
+</blockquote><p><b>Example:</b> Call the compiled program from command-line with the file to display as parameter</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 520, 510, &quot;Example...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    EditorGadget</font>(0, 5, 5, 510, 500, <font color="#924B72">#PB_Editor_WordWrap</font>)
+    path$ =<font color="#006666"> ProgramParameter</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">FileSize</font>(path$) &gt;= 0
+      <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, path$)
+        Text$ =<font color="#006666"> ReadString</font>(0, <font color="#924B72">#PB_File_IgnoreEOL</font>)
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      SetGadgetText</font>(0, Text$)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../preference/createpreferences.html">CreatePreferences()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=programid.html>ProgramID()</a> - <a href=index.html>Process Index</a> - <a href=programrunning.html>ProgramRunning()</a> -><br><br>
+
+</body></html>

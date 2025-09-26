@@ -1,0 +1,97 @@
+<html><head><title>LoadJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadJSON()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>LoadJSON</b></font>(#JSON, Fichier$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Parcourt (parse) les données JSON à 
+partir d'un fichier. 
+<br>
+<br>
+Le contenu du fichier devrait être encodé 
+au format UTF-8.<br>
+Les fichiers avec un autre codage de 
+caractères ne peuvent pas être lus par 
+cette commande.<br>
+La fonction <a href="jsonvalue.html">JSONValue()</a> peut être 
+utilisée pour accéder à la valeur(s) 
+JSON après le parse. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+Un numéro pour identifier la nouvelle 
+JSON. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>Fichier$</i></td>
+<td> 
+Le nom du fichier au format UTF-8 contenant les données JSON. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+<font color="#924B72">#PB_JSON_NoCase</font> : Insensible à la casse. 
+<br>
+<br>
+La valeur par défaut est d'être 
+sensible à la casse. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les 
+données JSON ont été analysées 
+correctement, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le 
+paramètre #JSON alors le nombre généré 
+est renvoyé en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+En cas d'erreur, les fonctions 
+<a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a> et 
+<a href="jsonerrorposition.html">JSONErrorPosition()</a> peuvent être utilisées 
+pour obtenir plus d'informations sur 
+l'erreur. 
+<br>
+<br>
+JSON est un format de données sensible à 
+la casse. Cependant, dans certaines 
+situations, telles que les structures de 
+désérialisation avec 
+<a href="extractjsonstructure.html">ExtractJSONStructure()</a> ou des commandes 
+similaires, il peut être utile de traiter 
+des objets JSON de façon insensible à la 
+casse. 
+L'option <font color="#924B72">#PB_JSON_NoCase</font> permet de 
+traiter tous les clés des membres de 
+l'objet comme insensible à la casse. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createjson.html">CreateJSON()</a>, <a href="catchjson.html">CatchJSON()</a>, 
+<a href="parsejson.html">ParseJSON()</a>, <a href="jsonvalue.html">JSONValue()</a>, 
+<a href="freejson.html">FreeJSON()</a>, <a href="jsonerrormessage.html">JSONErrorMessage()</a>, 
+<a href="jsonerrorline.html">JSONErrorLine()</a>, <a href="jsonerrorposition.html">JSONErrorPosition()</a>, 
+<a href="savejson.html">SaveJSON()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=jsonvalue.html>JSONValue()</a> - <a href=index.html>Json Index</a> - <a href=nextjsonmember.html>NextJSONMember()</a> -><br><br>
+
+</body></html>

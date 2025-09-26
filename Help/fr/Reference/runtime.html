@@ -1,0 +1,102 @@
+<html><head><title>Runtime</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Runtime</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Runtime</font></b> Variable
+<b><font color="#006666">Runtime</font></b> #Constante
+<b><font color="#006666">Runtime</font></b> declaration Procedure() 
+<b><font color="#006666">Runtime</font></b> declaration Enumeration 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Pour les programmeurs chevronnés. <b><font color="#006666">Runtime</font></b> est utilisé pour créer une liste dite 
+&quot;runtime&quot; (&quot;en cours d'exécution&quot;) pour avoir accès aux objets du programme en cours, comme les 
+variables, les constantes et les procédures. 
+Une fois compilé, un programme n'a plus d'étiquette (labels) ni de variable, 
+ni de constantes ou de noms de procédure car tout est converti en code binaire. 
+<b><font color="#006666">Runtime</font></b> force le compilateur à ajouter une référence supplémentaire à chaque 
+objet qui sera alors disponible à travers la bibliothèque <a href="../runtime/index.html">Runtime</a>. 
+Les objets peuvent être manipulés à l'aide de leur référence qui est une chaîne de caractère, 
+même lorsque le programme est compilé. 
+<br>
+<br>
+Pour illustrer l'utilisation d'un <b><font color="#006666">Runtime</font></b>, jetez un coup d'oeil à la bibliothèque 
+<a href="../dialog/index.html">Dialog</a> qui l'utilise pour accéder aux procédures d'événement associées 
+à un <a href="../gadget/index.html">gadget</a>. Ici, le nom de la procédure à utiliser par le gestionnaire 
+d'événements est spécifié dans le fichier XML (qui est un fichier texte), puis 
+la bibliothèque <a href="../dialog/index.html">Dialog</a> utilise la fonction <a href="../runtime/getruntimeinteger.html">GetRuntimeInteger()</a> pour 
+retrouver l'adresse de la procédure pendant l'exécution du programme. 
+Il n'est pas nécessaire de recompiler le programme pour la changer. 
+<br>
+<br>
+Une autre utilisation serait d'ajouter un petit langage de script en temps réel pour le 
+programme, ce qui permet de modifier facilement les variables exposées, en utilisant les 
+valeurs des constantes à l'exécution. Alors que cela pourrait être fait manuellement par 
+la construction d'une Map d'objets, le mot clé  <b><font color="#006666">Runtime</font></b> permet de le faire d'une 
+manière standard et unifiée. 
+
+</blockquote><p><b>Exemple:</b> Procedure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">OnEvent</font>()
+    <b><font color="#006666">Debug</font></b> &quot;OnEvent&quot;
+  <b><font color="#006666">EndProcedure</font></b> 
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;OnEvent()&quot;) <font color="#006666">; Affichera l'adresse de la procédure</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Enumeration</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#Constante1</font> = 10
+    <font color="#924B72">#Constante2</font>
+    <font color="#924B72">#Constante3</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constante1&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constante2&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constante3&quot;)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> a = 20
+  <b><font color="#006666">Runtime</font></b> a
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;a&quot;)
+<font color="#006666">  SetRuntimeInteger</font>(&quot;a&quot;, 30)
+  
+  <b><font color="#006666">Debug</font></b> a <font color="#006666">; La variable a été modifiée</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Appeler une fonction par son nom</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">Prototype</font></b> <font color="#006666">Fonction</font>()
+
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">Fonction1</font>()
+      <b><font color="#006666">Debug</font></b> &quot;J'appelle la Fonction1 par son nom&quot;<font color="#006666">; </font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">Fonction2</font>()
+      <b><font color="#006666">Debug</font></b> &quot;J'appelle la Fonction2 par son nom&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">LancerProcedure</font>(Nom.s)
+      <b><font color="#006666">Protected</font></b> ProcedureNom.Fonction =<font color="#006666"> GetRuntimeInteger</font>(Nom + &quot;()&quot;)
+<font color="#006666">      ProcedureNom</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  LancerProcedure</font>(&quot;Fonction1&quot;) <font color="#006666">; Affiche &quot;J'appelle la Fonction1 par son nom&quot;</font>
+<font color="#006666">  LancerProcedure</font>(&quot;Fonction2&quot;) <font color="#006666">; Affiche &quot;J'appelle la Fonction2 par son nom&quot;</font>
+  
+</font></pre>
+
+
+
+
+</blockquote>
+</font></body></html>

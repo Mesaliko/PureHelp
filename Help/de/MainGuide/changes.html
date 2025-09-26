@@ -1,0 +1,680 @@
+<html><head><title>Änderungen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Änderungen</font></b></p>
+
+<b>Änderungen an den Libraries von v3.94 zu v4.00</b> 
+
+<p><b>Image</b></p><blockquote>
+
+
+<font color="red">Entfernt</font>: UseImage() - ändern Sie UseImage(#Image) in ImageID(#Image), wo einfach nur die ID benötigt wird. <br>
+<br>
+<font color="green">Hinzugefügt</font>: CreateImage(#Image, Breite, Höhe [, Tiefe]) - neuer Parameter <br>
+<font color="green">Hinzugefügt</font>: LoadImage(#Image, DateiName$ [, Flags]) - neuer Parameter <br>
+<font color="green">Hinzugefügt</font>: CatchImage(#Image, DateiName$ [, Länge [, Flags]]) - neue Parameter <br>
+<br>
+<font color="orange">Geändert</font>: ImageDepth(#Image)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: ImageHeight(#Image)       - neuer Parameter <br>
+<font color="orange">Geändert</font>: ImageWidth(#Image)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: ImageID(#Image)           - neuer Parameter <br>
+<font color="orange">Geändert</font>: ImageOutput(#Image)       - neuer Parameter <br>
+
+
+</blockquote>
+<p><b>String</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: StrD(Nummer [, Dezimalstellen]) <br>
+<font color="green">Hinzugefügt</font>: StrQ() <br>
+<font color="green">Hinzugefügt</font>: HexQ() <br>
+<font color="green">Hinzugefügt</font>: BinQ() <br>
+<font color="green">Hinzugefügt</font>: StrU(): ein #PB_Quad Flag hinzugefügt <br>
+<font color="green">Hinzugefügt</font>: ValD(), ValQ() <br>
+<font color="green">Hinzugefügt</font>: StringByteLength() - zum Berechnen der benötigten Länge eines Strings in den von PureBasic unterstützten verschiedenen Kodierungen 
+
+
+</blockquote>
+<p><b>Math</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: IntQ() 
+
+
+</blockquote>
+<p><b>Thread</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: IsThread(Thread)    - testet, ob ein Thread (noch) existiert. <br>
+<font color="green">Hinzugefügt</font>: CreateMutex()       - erstellt ein Mutex-Objekt <br>
+<font color="green">Hinzugefügt</font>: FreeMutex(Mutex)    - zerstört das Objekt <br>
+<font color="green">Hinzugefügt</font>: LockMutex(Mutex)    - wartet bis ein Mutex verfügbar ist und sperrt diesen dann <br>
+<font color="green">Hinzugefügt</font>: TryLockMutex(Mutex) - sperrt einen Mutex, wenn verfügbar, andernfalls wird umgehend 0 zurückgegeben <br>
+<font color="green">Hinzugefügt</font>: UnlockMutex(Mutex)  - entsperrt den Mutex, damit andere Threads diesen sperren können <br>
+
+
+</blockquote>
+<p><b>Process (Neu)</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: GetEnvironmentVariable(Name$)         - ermittelt den Wert einer Umgebungsvariable <br>
+<font color="green">Hinzugefügt</font>: SetEnvironmentVariable(Name$, Wert$)  - setzt den Wert <br>
+<font color="green">Hinzugefügt</font>: RemoveEnvironmentVariable(Name$)      - löscht eine Umgebungsvariable <br>
+<font color="green">Hinzugefügt</font>: ExamineEnvironmentVariables()         - untersucht die derzeit gesetzten Umgebungsvariablen <br>
+<font color="green">Hinzugefügt</font>: NextEnvironmentVariable()             - ermittelt die nächste Variable <br>
+<font color="green">Hinzugefügt</font>: EnvironmentVariableName()             - ermittelt den Variablennamen <br>
+<font color="green">Hinzugefügt</font>: EnvironmentVariableValue()            - ermittelt den Variablenwert <br>
+<font color="green">Hinzugefügt</font>: ProgramName()               - ermittelt den vollständigen Pfad des Executables <br>
+<font color="green">Hinzugefügt</font>: CountProgramParameters()    - ermittelt die Anzahl der Parameter <br>
+<font color="green">Hinzugefügt</font>: IsProgram(Programm)         - überprüft, ob 'Programm' ein gültiges und mit RunProgram gestartetes Programm ist <br>
+<font color="green">Hinzugefügt</font>: ProgramID(Programm)         - ermittelt die ProcessID des Programms <br>
+<font color="green">Hinzugefügt</font>: ProgramRunning(Programm)    - gibt 1 zurück, wenn das Programm noch läuft <br>
+<font color="green">Hinzugefügt</font>: WaitProgram(Programm [, Timeout])  - wartet auf das Ende des Programms (mit optionalem Timeout). Gibt 1 zurück, wenn das Programm beendet wurde. <br>
+<font color="green">Hinzugefügt</font>: KillProgram(Programm)        - zwingt das Programm zum Beenden <br>
+<font color="green">Hinzugefügt</font>: ProgramExitCode(Programm)    - ermittelt den Exitcode des Programms (nur gültig, nachdem das Programm beendet wurde) <br>
+<font color="green">Hinzugefügt</font>: CloseProgram(Programm)       - schließt die Interaktion mit dem Programm <br>
+<font color="green">Hinzugefügt</font>: AvailableProgramOutput(Programm)         - gibt die Anzahl an Bytes zurück, die bereit sind zum Lesen <br>
+<font color="green">Hinzugefügt</font>: ReadProgramString(Programm)              - liest einen String von der Programmausgabe <br>
+<font color="green">Hinzugefügt</font>: ReadProgramData(Programm, *Buffer, Größe) - liest Daten von der Ausgabe <br>
+<font color="green">Hinzugefügt</font>: ReadProgramError(Programm)               - liest eine Nachricht von STDERR <br>
+<font color="green">Hinzugefügt</font>: WriteProgramString(Programm, String$)    - schreibt in die Programmeingabe (String) <br>
+<font color="green">Hinzugefügt</font>: WriteProgramData(Program, *Buffer, Größe)- schreibt Daten in die Programmeingabe <br>
+<br>
+<font color="orange">Geändert</font>: ProgramParameter([Index])   - ermittelt den nächsten Parameter (oder den am Positions-Index) <br>
+<font color="orange">Geändert</font>: RunProgram() mit neuen Flags: 
+<pre><font face="Courier New, Courier, mono" size="2">  #PB_Program_Open    - öffnet die Programmkommunikation/ermittelt Informationen
+  #PB_Program_Read    - erlaubt das Lesen der Programmausgabe (STDOUT)
+  #PB_Program_Write   - erlaubt das Schreiben in die Programmeingabe (STDIN)
+  #PB_Program_Error   - erlaubt das Abfragen von Nachrichten auf der Standard-Fehlerausgabe (STDERR)
+  #PB_Program_Connect - verbindet die Ausgabe eines anderen Programms mit der Eingabe dieses Programms
+</font></pre>
+
+
+
+</blockquote>
+<p><b>File</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: FileBuffersSize(#Datei, Größe) - ändert die Größe des Puffers für die angegebene Datei <br>
+<font color="green">Hinzugefügt</font>: FileID(#Datei) - gibt die einmalige ID zurück, welche die Datei im Betriebssystem identifiziert <br>
+<font color="green">Hinzugefügt</font>: FlushFileBuffers(#Datei) - stellt sich, dass alle gepufferten Operationen auf Disk geschrieben werden <br>
+<font color="green">Hinzugefügt</font>: ReadChar(#Datei) <br>
+<font color="green">Hinzugefügt</font>: ReadQuad(#Datei) <br>
+<font color="green">Hinzugefügt</font>: ReadDouble(#Datei) <br>
+<font color="green">Hinzugefügt</font>: WriteChar(#Datei, Wert) <br>
+<font color="green">Hinzugefügt</font>: WriteQuad(#Datei, Wert) <br>
+<font color="green">Hinzugefügt</font>: WriteDouble(#Datei, Wert) <br>
+<font color="green">Hinzugefügt</font>: ReadStringFormat(#Datei) <br>
+<font color="green">Hinzugefügt</font>: WriteStringFormat(#Datei, Format) <br>
+
+<br>
+<font color="orange">Geändert</font>: FileSeek(#Datei, NeuePosition)  - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteData(#Datei)               - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadData(#Datei)                - neuer Parameter <br>
+<font color="orange">Geändert</font>: Lof(#Datei)                     - neuer Parameter <br>
+<font color="orange">Geändert</font>: Loc(#Datei)                     - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadByte(#Datei)                - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadWord(#Datei)                - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadLong(#Datei)                - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadFloat(#Datei)               - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadString(#Datei [,Format])    - neuer Parameter <br>
+<font color="orange">Geändert</font>: ReadData(#Datei)                - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteByte(#Datei, Data)         - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteWord(#Datei, Data)         - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteLong(#Datei, Data)         - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteFloat(#Datei, Data)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteString(#Datei, Data [,Format])       - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteStringN(#Datei, Data [,Format])      - neuer Parameter <br>
+<font color="orange">Geändert</font>: WriteData(#Datei, Data, Länge)  - neuer Parameter <br>
+<br>
+<font color="red">Entfernt</font>: UseFile()                - ändern Sie UseFile(#Datei) in FileID(#Datei), wo lediglich die ID benötigt wird. <br>
+
+
+</blockquote>
+<p><b>2DDrawing</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: DrawAlphaImage() <br>
+<font color="green">Hinzugefügt</font>: TextHeight(Text$)     - gibt die für den String benötigte Höhe zurück (unter Berücksichtigung des aktuellen Zeichensatzes/-ausgabe) <br>
+<font color="green">Hinzugefügt</font>: FillArea(x, y, RandFarbe [, Farbe]) - wenn RandFarbe = -1, wird der Bereich mit der gleichen Farbe wie an (x,y) gefüllt <br>
+<br>
+<font color="orange">Geändert</font>: FrontColor(Farbe)     - Rot, Grün und Blau in nur einen Farbwert verbunden (fügen Sie RGB() für eine schnelle Umsetzung von altem Code hinzu). <br>
+<font color="orange">Geändert</font>: BackColor(Farbe)      - Rot, Grün und Blau in nur einen Farbwert verbunden. <br>
+<font color="orange">Geändert</font>: NeuX = DrawText(x, y, Text$ [, ZeichenFarbe [, HintergrundFarbe]]) - x/y Koordinaten und optionale Farbwerte hinzugefügt <br>
+<font color="orange">Geändert</font>: TextLength(Text$) -&gt; TextWidth(Text$) - umbenannt <br>
+<br>
+<font color="red">Entfernt</font>: Locate(x, y)   - nicht länger nützlich. 
+
+
+</blockquote>
+<p><b>Palette</b></p><blockquote>
+
+
+<font color="red">Entfernt</font>: UsePalette() <br>
+<br>
+<font color="orange">Geändert</font>: GetPaletteColor(#Palette, Index)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: SetPaletteColor(#Palette, Index, Farbe) - neuer Parameter 
+
+
+</blockquote>
+<p><b>Module</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: SetModulePosition(#Modul, Position)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: GetModulePosition(#Modul)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: GetModuleRow(#Modul)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: StopModule(#Modul)    - neuer Parameter und -1 = stoppt alle Module 
+
+
+</blockquote>
+<p><b>Database</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: FirstDatabaseRow(#Datenbank)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: PreviousDatabaseRow(#Datenbank) - neuer Parameter <br>
+<font color="orange">Geändert</font>: NextDatabaseRow(#Datenbank)     - neuer Parameter <br>
+<font color="orange">Geändert</font>: GetDatabaseLong(#Datenbank)     - neuer Parameter <br>
+<font color="orange">Geändert</font>: GetDatabaseFloat(#Datenbank)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: GetDatabaseString(#Datenbank)   - neuer Parameter <br>
+<font color="orange">Geändert</font>: DatabaseUpdate(#Datenbank, Anfrage$) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DatabaseQuery(#Datenbank, Anfrage$) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DatabaseColumnType(#Datenbank, Spalte) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DatabaseColumns(#Datenbank) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DatabaseColumnName(#Datenbank, Spalte) - neuer Parameter <br>
+<br>
+<font color="red">Entfernt</font>: UseDatabase() <br>
+
+
+</blockquote>
+<p><b>Movie</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: MovieAudio(#Movie)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieHeight(#Movie)       - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieWidth(#Movie)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieInfo(#Movie)         - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieLength(#Movie)       - neuer Parameter <br>
+<font color="orange">Geändert</font>: RenderMovieFrame(#Movie)  - neuer Parameter <br>
+<font color="orange">Geändert</font>: ResizeMovie(#Movie, x, y, Breite, Höhe) - neuer Parameter <br>
+<font color="orange">Geändert</font>: ResumeMovie(#Movie)       - neuer Parameter <br>
+<font color="orange">Geändert</font>: PauseMovie(#Movie)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: StopMovie(#Movie)         - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieSeek(#Movie, Position) - neuer Parameter <br>
+<font color="orange">Geändert</font>: MovieStatus(#Movie)       - neuer Parameter <br>
+<br>
+<font color="red">Entfernt</font>: UseMovie() 
+
+
+
+</blockquote>
+<p><b>FileSystem</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: FinishDirectory(#Verzeichnis) <br>
+<font color="green">Hinzugefügt</font>: DirectoryEntryType(#Verzeichnis) <br>
+<font color="green">Hinzugefügt</font>: DirectoryEntryDate(#Verzeichnis, DateType) - #PB_Date_Created, #PB_Date_Accessed, #PB_Date_Modified <br>
+<font color="green">Hinzugefügt</font>: GetFileDate(Dateiname$, DatenTyp) <br>
+<font color="green">Hinzugefügt</font>: SetFileDate(Dateiname$, DatenTyp) <br>
+<br>
+<font color="orange">Geändert</font>: NextDirectoryEntry(#Verzeichnis)  - neuer Parameter <br>
+<font color="orange">Geändert</font>: DirectoryEntryName(#Verzeichnis)  - neuer Parameter <br>
+<font color="orange">Geändert</font>: DirectoryEntryAttributes(#Verzeichnis) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DirectoryEntrySize(#Verzeichnis)       - neuer Parameter <br>
+<br>
+<font color="blue">Umbenannt</font>: IsFilename() in CheckFilename()      - Funktionsname geändert <br>
+<br>
+<font color="red">Entfernt</font>: UseDirectory() <br>
+<br>
+Wichtige Hinweise: NextDirectoryEntry() gibt nicht länger den Typ eines Eintrags (Datei/Typ) zurück. Um 
+einheitlich zu anderen Examine...()/Next...() Funktionen in PB zu sein, wird jetzt nur 0 oder 1 zurückgegeben 
+(0 bedeutet keine weiteren Objekte). Verwenden Sie DirectoryEntryType(), um den Typ eines Eintrags herauszufinden, 
+wie Sie dies zuvor mit dem Ergebnis von NextDirectoryEntry() gemacht haben. 
+FinishDirectory() muss nach jedem ExamineDirectory() aufgerufen werden. 
+
+
+</blockquote>
+<p><b>Menu</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: GetMenuItemText(#Menu, EintragID) <br>
+<font color="green">Hinzugefügt</font>: GetMenuTitleText(#Menu, EintragID) <br>
+<font color="green">Hinzugefügt</font>: SetMenuItemText(#Menu, EintragID, Text$) <br>
+<font color="green">Hinzugefügt</font>: SetMenuTitleText(#Menu, EintragID, Text$) <br>
+<br>
+<font color="orange">Geändert</font>: DisableMenuItem(#Menu, EintragID, Status)  - neuer Parameter <br>
+<font color="orange">Geändert</font>: MenuID(#Menu)  - neuer Parameter 
+
+
+</blockquote>
+<p><b>Console</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: EnableGraphicalConsole(Status) <br>
+<font color="green">Hinzugefügt</font>: RawKey() <br>
+<font color="green">Hinzugefügt</font>: Umleitung und Standardausgabe Unterstützung <br>
+<br>
+<font color="orange">Geändert</font>: Inkey()  - gibt jetzt nur 1 Zeichen oder nichts zurück (anstelle von immer 2), verwenden Sie RawKey() für das extra Zeichen <br>
+<br>
+Hinweis: die alte Console Library verwendete einen grafischen Konsolenmodus, womit keine korrekte Ausgabe 
+auf stdout erfolgte (Sie konnten sie nicht über die Befehlszeile aufrufen, wie : myprogram.exe &gt; test.txt). 
+Jetzt haben Sie diese Wahl mit EnableGraphicalConsole(Status), und wenn Sie nicht ausdrücklich den 
+grafischen Modus einstellen, sollte die Ausgabe korrekt an stdout gesendet werden, was Ihnen das Schreiben 
+besserer Konsolen-Werkzeuge ermöglicht. Das gleich gilt für stdin und den Input() Befehl. 
+
+
+</blockquote>
+<p><b>AudioCD</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: alle Funktionsnamen von 'CDAudio' in 'AudioCD' (weniger französisch-englisch...) 
+
+
+</blockquote>
+<p><b>Toolbar</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: ToolBarHeight(#ToolBar) <br>
+<font color="green">Hinzugefügt</font>: ToolBarID(#ToolBar) <br>
+<br>
+<font color="orange">Geändert</font>: ToolBarTooltip(#ToolBar, Schalter, Text$) - neuer Parameter <br>
+<font color="orange">Geändert</font>: DisableToolBarButton(#ToolBar, Schalter, Status) - neuer Parameter 
+
+
+</blockquote>
+<p><b>Statusbar</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: StatusBarHeight(#StatusBar) <br>
+<font color="green">Hinzugefügt</font>: StatusBarID(#StatusBar) 
+
+
+</blockquote>
+<p><b>Font</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: FontID(#Font) - neuer Parameter <br>
+<font color="orange">Geändert</font>: CloseFont() in FreeFont() <br>
+<br>
+<font color="red">Entfernt</font>: UseFont() 
+
+</blockquote>
+<p><b>Preferences</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: Möglichkeit zum Hinzufügen/Ändern/Löschen von Schlüsseln in existierenden Prefs-Dateien. <br>
+<font color="green">Hinzugefügt</font>: RemovePreferenceKey(Name$) <br>
+<font color="green">Hinzugefügt</font>: RemovePreferenceGroup(Name$) <br>
+<font color="green">Hinzugefügt</font>: ExaminePreferenceGroups() - untersuchen aller Gruppennamen in der Datei <br>
+<font color="green">Hinzugefügt</font>: NextPreferenceGroup()     - springt zum nächsten Gruppennamen (die Gruppe wird als die aktuelle gesetzt). <br>
+<font color="green">Hinzugefügt</font>: PreferenceGroupName()     - ermitteln des Gruppennamens. <br>
+<font color="green">Hinzugefügt</font>: ExaminePreferenceKeys()   - untersuchen aller Schlüsselnamen in der aktuellen Gruppe. <br>
+<font color="green">Hinzugefügt</font>: NextPreferenceKey()       - springt zum nächsten Schlüssel. <br>
+<font color="green">Hinzugefügt</font>: PreferenceKeyName()       - ermitteln den Schlüsselnamen. <br>
+<font color="green">Hinzugefügt</font>: ReadPreferenceQuad(Schlüssel$, Standard) <br>
+<font color="green">Hinzugefügt</font>: ReadPreferenceDouble(Schlüssel$, Standard) <br>
+<font color="green">Hinzugefügt</font>: WritePreferenceQuad(Schlüssel$, Wert) <br>
+<font color="green">Hinzugefügt</font>: WritePreferenceDouble(Schlüssel$, Wert) 
+
+
+
+</blockquote>
+<p><b>Sprite</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: SpriteID(#Sprite) <br>
+<font color="green">Hinzugefügt</font>: FlipBuffer() - ein Flag hinzugefügt, um eine CPU-optimierte Synchronisation im Vollbildschirm-Modus zu erhalten. <br>
+<br>
+<font color="blue">Umbenannt</font>: DisplayTranslucideSprite() in DisplayTranslucentSprite() <br>
+<br>
+<font color="orange">Geändert</font>: TransparentSpriteColor(#Sprite, R, G, B) in TransparentSpriteColor(#Sprite, Farbe) <br>
+<font color="orange">Geändert</font>: ClearScreen(R, G, B) in ClearScreen(Farbe) 
+
+
+</blockquote>
+<p><b>Library</b></p><blockquote>
+
+
+<font color="blue">Umbenannt</font>: IsFunction() -&gt; GetFunction() 
+
+
+
+</blockquote>
+<p><b>Network</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: UDP-Unterstützung über die Flags #PB_Network_UDP und #PB_Network_TCP <br>
+<font color="green">Hinzugefügt</font>: GetClientIP() <br>
+<font color="green">Hinzugefügt</font>: GetClientPort() <br>
+<font color="green">Hinzugefügt</font>: EventServerNumber() <br>
+<br>
+<font color="blue">Umbenannt</font>: NetworkClientID() -&gt; EventClient() 
+
+
+</blockquote>
+<p><b>Keyboard</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: #PB_Keyboard_International und #PB_Keyboard_AllowSystemKeys Flags bei KeyboardMode() 
+
+
+</blockquote>
+<p><b>Clipboard</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: GetClipboardData(Typ) in GetClipboardImage(#Image) <br>
+<font color="orange">Geändert</font>: SetClipboardData(Typ, Data) in SetClipboardImage(#Image) 
+
+
+</blockquote>
+<p><b>Memory</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: Unterstützung für Unicode-Konvertierung bei PeekS() und PokeS() zwischen ASCII, UTF8 und UTF16 <br>
+<font color="green">Hinzugefügt</font>: PeekC(), PeekD(), PeekQ() <br>
+<font color="green">Hinzugefügt</font>: PokeC(), PokeD(), PokeQ() <br>
+<font color="green">Hinzugefügt</font>: MemorySize() - gibt die Größe eines Speicherblocks zurück <br>
+<font color="green">Hinzugefügt</font>: MoveMemory() <br>
+<font color="green">Hinzugefügt</font>: CompareMemoryString(*Text1, *Test2 [Modus [, MaxLänge [, Flags]]]) - Neue Flag-Parameter für den Vergleich von UTF16/UTF8/ASCII <br>
+<font color="green">Hinzugefügt</font>: MemoryStringLength() - Neue Flag-Parameter für UTF16/UTF8/ASCII Unterstützung <br>
+<br>
+Hinweis: Die Befehle PeekS, PokeS, CompareMemoryString, MemoryStringLength haben jetzt einen Parameter, welcher das String-Format angibt. 
+Mögliche Optionen sind: #PB_Ascii, #PB_Unicode oder #PB_UTF8. Dies erlaubt das Arbeiten mit Strings im Speicher 
+unabhängig vom aktuellen String-Modus, in dem das Executable kompiliert wurde (Unicode oder nicht). 
+
+
+</blockquote>
+<p><b>Engine3D</b></p><blockquote>
+
+
+<font color="orange">Geändert</font>: CreateMesh(#Mesh, MaximumVertex) - neuer Parameter <br>
+<font color="orange">Geändert</font>: MaterialAmbientColor(#Matrix1, -1) - -1 neuer Parameter <br>
+<br>
+<font color="green">Hinzugefügt</font>: EntityRenderMode() <br>
+<font color="green">Hinzugefügt</font>: WorldShadows(#PB_Shadow_Additive)  <br>
+<font color="green">Hinzugefügt</font>: ParticleEmitterDirection() <br>
+<font color="green">Hinzugefügt</font>: GetEntityMass <br>
+<font color="green">Hinzugefügt</font>: SetEntityMass <br>
+<font color="green">Hinzugefügt</font>: GetEntityFriction <br>
+<font color="green">Hinzugefügt</font>: SetEntityFriction <br>
+<font color="green">Hinzugefügt</font>: EntityPhysicBody <br>
+<font color="green">Hinzugefügt</font>: ExamineWorldCollisions <br>
+<font color="green">Hinzugefügt</font>: NextWorldCollision <br>
+<font color="green">Hinzugefügt</font>: CheckWorldCollisionEntity <br>
+<font color="green">Hinzugefügt</font>: FirstWorldCollisionEntity <br>
+<font color="green">Hinzugefügt</font>: SecondWorldCollisionEntity <br>
+<font color="green">Hinzugefügt</font>: WorldGravity <br>
+<font color="green">Hinzugefügt</font>: EnableWorldCollision <br>
+<font color="green">Hinzugefügt</font>: EnableWorldPhysics <br>
+<font color="green">Hinzugefügt</font>: Parse3DScripts <br>
+<br>
+<font color="red">Entfernt</font>: RotateParticleEmitter() (war bisher nutzlos) <br>
+
+
+</blockquote>
+<p><b>Window</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: GetActiveWindow()       - gibt das Fenster mit dem Fokus zurück <br>
+<font color="green">Hinzugefügt</font>: DisableWindow(#Window, Status) - deaktiviert Anwendereingaben in das Fenster <br>
+<font color="green">Hinzugefügt</font>: GetWindowState(#Window)       - ermittelt den Minimiert/Maximiert Status <br>
+<font color="green">Hinzugefügt</font>: SetWindowState(#Window, Status)- setzt den Minimiert/Maximiert Status <br>
+<font color="green">Hinzugefügt</font>: StickyWindow(#Window, Status)  - setzt das Fenster in den Vordergrund aller anderen, auch wenn es deaktiviert ist <br>
+<font color="green">Hinzugefügt</font>: SetWindowColor(#Window, Farbe)- setzt die Hintergrundfarbe eines Fensters <br>
+<font color="green">Hinzugefügt</font>: GetWindowColor(#Window)       - ermittelt die aktuelle Hintergrundfarbe eines Fensters <br>
+<font color="green">Hinzugefügt</font>: SmartWindowRefresh(#Window, Status) - Aktiviert oder deaktiviert das &quot;SmartRefresh&quot; Feature (intelligentes Auffrischen) <br>
+<br>
+<font color="orange">Geändert</font>: OpenWindow(#Window, x, y, Breite, Höhe, Titel$ [, Flags [, ParentID]]) - Flags sind jetzt am Ende und optional <br>
+<font color="orange">Geändert</font>: WaitWindowEvent([Timeout])                  - optionalen Timeout-Wert hinzugefügt <br>
+<font color="orange">Geändert</font>: ResizeWindow(#Window, x, y, Breite, Höhe)  - '-1' Parameter müssen in #PB_Ignore geändert werden <br>
+<font color="orange">Geändert</font>: SetWindowCallback(@procedure() [, #Window]) - optionalen Window-Parameter hinzugefügt (um einen Callback nur für ein Fenster einzustellen) <br>
+<font color="orange">Geändert</font>: ResizeWindow(#Window, x, y, Breite, Höhe) - jetzt das gleiche wie ResizeGadget() <br>
+<font color="orange">Geändert</font>: WindowID(#Window)       - Parameter ist nicht länger optional <br>
+<font color="orange">Geändert</font>: WindowHeight(#Window)   - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowWidth(#Window)    - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowX(#Window)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowY(#Window)        - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowMouseX(#Window)   - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowMouseY(#Window)   - neuer Parameter <br>
+<font color="orange">Geändert</font>: WindowOutput(#Window)   - neuer Parameter <br>
+<br>
+<font color="blue">Umbenannt</font>: EventWindowID() in EventWindow() <br>
+<font color="blue">Umbenannt</font>: EventGadgetID() in EventGadget() <br>
+<font color="blue">Umbenannt</font>: EventMenuID()   in EventMenu() <br>
+<font color="blue">Umbenannt</font>: ActivateWindow() in SetActiveWindow(#Window) <br>
+<br>
+<font color="red">Entfernt</font>: MoveWindow() <br>
+<font color="red">Entfernt</font>: DetachMenu() <br>
+<font color="red">Entfernt</font>: UseWindow() <br>
+<font color="red">Entfernt</font>: Konstanten zur Kompatibilität mit früheren Versionen entfernt, wie z.B. #PB_EventCloseWindow (benutzen Sie stattdessen das dokumentierte #PB_Event_CloseWindow) <br>
+
+
+</blockquote>
+<p><b>Gadget</b></p><blockquote>
+
+
+<font color="green">Hinzugefügt</font>: GetActiveGadget()      - gibt das gerade aktive Gadget zurück <br>
+<font color="green">Hinzugefügt</font>: GadgetType(#Gadget) - gibt eine Konstante zurück, welche den Typ des Gadgets identifiziert <br>
+<font color="green">Hinzugefügt</font>: SetGadgetData(#Gadget, Wert) - weist einem Gadget einen Wert hinzu (funktioniert mit allen Gadgets) <br>
+<font color="green">Hinzugefügt</font>: GetGadgetData(#Gadget)        - liest den zugewiesenen Wert <br>
+<font color="green">Hinzugefügt</font>: SetGadgetItemData(#Gadget, Eintrag, Wert) - weist einem Gadget-Eintrag einen Wert zu (funktioniert nur bei bestimmten Gadgets) <br>
+<font color="green">Hinzugefügt</font>: GetGadgetItemData(#Gadget, Eintrag) <br>
+<font color="green">Hinzugefügt</font>: SetGadgetColor(#Gadget, Farbtyp, Farbe) <br>
+<font color="green">Hinzugefügt</font>: GetGadgetColor(#Gadget, Farbtyp) <br>
+<font color="green">Hinzugefügt</font>: SetGadgetItemColor(#Gadget, Eintrag, Farbtyp, Farbe [, Spalte]) <br>
+<font color="green">Hinzugefügt</font>: GetGadgetItemColor(#Gadget, Eintrag, Farbtyp [, Spalte]) <br>
+<br>
+<font color="orange">Geändert</font>: ActivateGadget(#Gadget) ist jetzt SetActiveGadget(#Gadget) <br>
+<font color="orange">Geändert</font>: ResizeGadget(#Gadget, x, y, Breite, Höhe), -1 sollte jetzt in #PB_Ignore geändert werden <br>
+<br>
+<font color="red">Entfernt</font>: #PB_String_MultiLine 
+<br>
+<br>
+
+
+</blockquote>
+<p><b>Individuelle Änderungen bei Gadgets:</b></p><blockquote>
+
+
+<b>CalendarGadget()</b> <br>
+- unterstützt SetGadgetColor() mit den folgenden Farbtypen: <br>
+<blockquote>
+
+#PB_Gadget_BackColor       - Hintergrund <br>
+#PB_Gadget_FrontColor      - Text zum Anzeigen der Tage <br>
+#PB_Gadget_TitleBackColor  - Hintergrund des Monats-Titels <br>
+#PB_Gadget_TitleFrontColor - Textfarbe des Monats-Titels <br>
+#PB_Gadget_GreyTextColor   - Farbe für Tage, die nicht im aktuellen Monat liegen <br>
+</blockquote>
+
+<br>
+
+<b>ComboBoxGadget()</b> <br>
+- unterstützt SetGadgetItemData() <br>
+<br>
+
+<b>ContainerGadget()</b> <br>
+- unterstützt SetGadgetColor() für die Hintergrundfarbe <br>
+<br>
+
+<b>DateGadget()</b> <br>
+- unterstützt SetGadgetColor() mit den gleichen Wert wie das CalendarGadget() zum Einfärben des Aufklapp-Kalenders <br>
+- der Eingabebereich kann derzeit nicht eingefärbt werden <br>
+<br>
+
+<b>EditorGadget()</b> <br>
+- unterstützt SetGadgetColor für Vorder- und Hintergrundfarbe <br>
+- neuer Flag: #PB_Editor_ReadOnly  <br>
+- unterstützt SetGadgetrAttribute() mit #PB_Editor_ReadOnly zum Ermitteln/Setzen des &quot;Readonly&quot; Flags <br>
+<br>
+
+<b>ExplorerListGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe &amp; #PB_Gadget_LineColor <br>
+- unterstützt GetGadgetItemAttribute(#Gadget, 0, #PB_Explorer_ColumnWidth, 2) ; gibt die Breite der Spalte 2 zurück <br>
+- unterstützt SetGadgetItemAttribute(#Gadget, 0, #PB_Explorer_ColumnWidth, 100, 2) ; setzt die Breite der Spalte 2 auf 100 <br>
+- unterstützt GetGadgetItemText(#Gadget, -1, 2)             ; gibt die Überschrift der Spalte 2 zurück <br>
+- unterstützt SetGadgetItemText(#Gadget, -1, &quot;New Text&quot;, 2) ; ändert die Überschrift der Spalte 2 <br>
+<br>
+
+<b>ExplorerTreeGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe &amp; #PB_Gadget_LineColor <br>
+<br>
+
+<b>HyperLinkGadget()</b> <br>
+- unterstützt SetGadgetColor() für die Vordergrundfarbe (Hintergrund ist immer transparent) <br>
+- neuer Flag: #PB_Hyperlink_Underline - zeichnet eine Linie unter den Text (ohne eine unterstrichenen Zeichensatz zu benötigen) <br>
+<br>
+
+<b>ListIconGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe und #PB_Gadget_LineColor (für #PB_ListIcon_GridLines) <br>
+- unterstützt SetGadgetItemColor() für Vorder- und Hintergrundfarbe (kann für jede Zelle individuell eingestellt werden) <br>
+- unterstützt SetGadgetItemData() <br>
+- Das Ereignis zum Feststellen einer Änderung der der Checkbox ist jetzt #PB_EventType_Change <br>
+- unterstützt GetGadgetItemAttribute(#Gadget, 0, #PB_ListIcon_ColumnWidth, 2) ; gibt die Breite der Spalte 2 zurück <br>
+- unterstützt SetGadgetItemAttribute(#Gadget, 0, #PB_ListIcon_ColumnWidth, 100, 2) ; setzt die Breite von Spalte 2 auf 100 <br>
+- unterstützt GetGadgetItemText(#Gadget, -1, 2)             ; gibt die Überschrift von Spalte 2 zurück <br>
+- unterstützt SetGadgetItemText(#Gadget, -1, &quot;New Text&quot;, 2) ; ändert die Überschrift von Spalte 2 <br>
+<br>
+
+<b>ListViewGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe (nicht für individuelle Einträge) <br>
+- unterstützt SetGadgetItemData() <br>
+- neue Flags: <br>
+<blockquote>
+
+#PB_ListView_Multiselect - erlaubt Mehrfach-Auswahl <br>
+#PB_ListView_ClickSelect - Mehrfachauswahl + Anklicken eines Eintrags markiert diesen oder entfernt die Markierung <br>
+</blockquote>
+
+<br>
+
+<b>MDIGadget()</b> <br>
+- Die Child-Fenster des MDIGadget sind nicht länger &quot;GadgetItems&quot; (Gadget-Einträge), stattdessen echte PB-Fenster. 
+Dies bedeutet, dass Sie ALLE Befehle der Windows Library mit ihnen benutzen können (mit Ausnahme von StickyWindow()). 
+Dies macht einige der MDIGadget Features überflüssig, daher gibt es einige Änderungen: <br>
+- Das Gadget sendet keinerlei Events mehr: alle Ereignisse zum Schließen, Größenänderung oder Aktivieren werden jetzt als Window-Events empfangen. <br>
+- GetGadgetAttribute(), Get/SetGadgetItemAttribute, Get/SetGadgetItemState(), Get/SetGadgetItemText 
+werden alle nicht länger unterstützt. All dies kann einfach über die Befehle der Windows Library erledigt werden. <br>
+- RemoveGadgetItem() wird nicht länger unterstützt. Verwenden Sie CloseWindow(). <br>
+<br>
+Die mit dem MDIGadget nutzbaren Befehle sind jetzt nur noch diese: (+ die gesamte Windows Library!) <br>
+- ClearGadgetItemList() : schließt alle Child-Fenster <br>
+- CountGadgetItems()    : ermittelt die Anzahl an Child-Fenstern im Gadget <br>
+- GetGadgetState()      : ermittelt die WindowID des gerade im Vordergrund des Gadgets befindlichen Fensters <br>
+- SetGadgetState()      : setzt ein bestimmtes Fenster in den Vordergrund oder ordnet die Child-Fenster an. (Alles wie beim alten MDIGadget.) <br>
+- AddGadgetItem()       : erstellt ein MDI Child - dies funktioniert wie folgt: <br>
+<pre><font face="Courier New, Courier, mono" size="2">   AddGadgetItem(#MDI, #Window, Titel$ [, ImageID [, Flags]])
+     - #Window - Nummer des neuen Fensters (kann #PB_Any sein!)
+     - Titel$  - neuer Fenstertitel
+     - ImageID - Icon für das Fenster (optional)
+     - Flags   - unterstützt die meisten Flags von OpenWindow,
+                 wenn keine angegeben sind, werden die Standard MDI Flags verwendet.
+   Nicht unterstützte Flags: #PB_Window_Borderless, #PB_Window_ScreenCentered, #PB_Window_WindowCentered
+</font></pre>
+Hinweis: Sie müssen jetzt CreateGadgetList() aufrufen, um Einträge zu einem MDI Child-Fenster hinzufügen zu können, einfach wie bei normalen Fenstern. <br>
+<br>
+- SetGadgetColor()     kann mit #PB_Gadget_BackColor verwendet werden, um die MDI Hintergrundfarbe festzulegen <br>
+- SetGadgetAttribute() kann mit #PB_MDI_Image verwendet werden, um ein Hintergrundbild festzulegen, #PB_MDI_TileImage kann den Kachelmodus für das Bild ein- oder ausschalten <br>
+<br>
+<br>
+
+<b>PanelGadget()</b> <br>
+- GetGadgetAttribute() hinzugefügt, mit #PB_Panel_ItemWidth, #PB_Panel_ItemHeight (&quot;Readonly&quot;) 
+(es muss mindestens ein Tab vorhanden sein, damit dies funktioniert) <br>
+<br>
+
+<b>ProgressBarGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe (funktioniert nicht mit XP Skins) <br>
+- unterstützt SetGadgetAttribute() mit #PB_ProgressBar_Minimum, #PB_ProgressBar_Maximum <br>
+<br>
+
+<b>ScrollAreaGadget()</b> <br>
+- unterstützt SetGadgetColor() für die Hintergrundfarbe <br>
+- neuer Flag: #PB_ScrollArea_Center - wenn die innere Größe kleiner als die äußere ist, wird der innere Bereich automatisch zentriert <br>
+- neue Optionen für SetGadgetAttribute(): #PB_ScrollArea_X/#PB_ScrollArea_Y zum Auslesen/Setzen der aktuellen Scroll-Position <br>
+- generiert jetzt ein Ereignis, wenn gescrollt wird <br>
+<br>
+
+<b>ScrollBarGadget()</b> <br>
+- unterstützt SetGadgetAttribute() mit #PB_ScrollBar_Minimum, #PB_ScrollBar_Maximum, #PB_ScrollBar_PageLength <br>
+<br>
+
+<b>SpinGadget()</b> <br>
+- unterstützt SetGadgetColor für Vorder- und Hintergrundfarbe (to color the edit area) <br>
+- unterstützt SetGadgetAttribute() mit #PB_Spin_Minimum, #PB_Spin_Maximum <br>
+- Neue Flags: 
+<blockquote>
+
+#PB_Spin_ReadOnly - Das zugehörige Stringgadget ist nicht editierbar, die Zahl kann nur durch die Pfeile geändert werden <br>
+#PB_Spin_Numeric  - Das SpinGadget wird automatisch den Text mit dem Wert des eingestellten Status aktualisieren, sodass SetGadgetText nicht benötigt wird. <br>
+</blockquote>
+
+- Werte für EventType (Ereignistypen): 
+<blockquote>
+
+1 - der 'Hoch' Schalter wurde gedrückt <br>
+-1 - der 'Runter' Schalter wurde gedrückt <br>
+#PB_EventType_Change - der Text in der Eingabebox wurde geändert <br>
+</blockquote>
+
+<br>
+
+<b>SplitterGadget()</b> <br>
+- neue Flags für Get/SetGadgetAttribute(): #PB_Splitter_FirstGadget, #PB_Splitter_SecondGadget <br>
+Mit GetGadgetAttribute() geben sie die #Gadget Nummer des gespeicherten Gadget zurück. <br>
+Mit SetGadgetAttribute() können Sie ein neues Gadget in den Splitter-Bereich einfügen. <br>
+<br>
+Hinweis: Das alte Gadget wird nicht automatisch freigegeben! (Es wird aus dem Splitter genommen und auf dem gleichen Fenster wie der Splitter platziert.) 
+Wenn Sie daher nicht möchten, dass das alte Gadget verbleibt, entfernen Sie es mit FreeGadget(). 
+Dies ermöglicht das Umschalten von Gadgets in einem Splitter, ohne diese jedes Mal neu erstellen zu müssen. <br>
+<br>
+Hinweis: Sie können ein Gadget nicht gleichzeitig in 2 Splitterbereichen haben. Um dieses daher von einem 
+Splitter in einen anderen zu verschieben, ersetzen Sie es zuerst im ersten Splitter und setzen Sie es 
+dann in den zweiten. <br>
+<br>
+
+<b>StringGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe <br>
+<br>
+
+<b>TextGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe <br>
+<br>
+
+<b>TrackBarGadget()</b> <br>
+- unterstützt SetGadgetAttribute() mit #PB_TrackBar_Minimum, #PB_TrackBar_Maximum <br>
+<br>
+
+<b>TreeGadget()</b> <br>
+- unterstützt SetGadgetColor() für Vorder- und Hintergrundfarbe &amp; #PB_Gadget_LineColor <br>
+- unterstützt SetGadgetItemColor() für Vorder- und Hintergrundfarbe <br>
+- Management der Einträge komplett geändert. Es gibt keinerlei Knoten (&quot;Nodes&quot;) mehr, 
+einfach eine fortlaufende Liste, wo jeder Eintrag einen &quot;Sublevel&quot; hat. Die Sublevel 
+aller Einträge definieren die Baumstruktur wie folgt: 
+<pre><font face="Courier New, Courier, mono" size="2">   + Sublevel 0
+   +-+ Sublevel 1
+   | | Sublevel 1
+   | +-+ Sublevel 2
+   | | Sublevel 1
+   | Sublevel 0
+</font></pre>
+- neuer Parameter für AddGadgetItem: AddGadgetItem(#Gadget, Position, Text$ [, ImageID [, Flags]]) <br>
+Der &quot;Flags&quot; Parameter wird beim TreeGadget immer benötigt und definiert den Sublevel, 
+in welchen dieser Eintrag eingeordnet wird. <br>
+<br>
+Um den oben dargestellten Baum zu erstellen, gehen Sie wie folgt vor: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 0&quot;, 0, 0)
+<font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 1&quot;, 0, 1)
+<font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 1&quot;, 0, 1)
+<font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 2&quot;, 0, 2)
+<font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 1&quot;, 0, 1)
+<font color="#006666">   AddGadgetItem</font>(<font color="#924B72">#TreeGadget</font>, -1, &quot;Sublevel 0&quot;, 0, 0)    
+</font></pre>
+- neues GetGadgetItemAttribute() mit #PB_Tree_SubLevel (&quot;readonly&quot;), um den Sublevel jedes Eintrags zu ermitteln <br>
+- <font color="red">Entfernt</font>: OpenTreeGadgetNode() <br>
+- <font color="red">Entfernt</font>: CloseTreeGadgetNode() <br>
+- <font color="red">Entfernt</font>: TreeGadgetItemNumber()     - kann einfach mittels GadgetItemID() und einem Durchlauf durch die Eintragliste emuliert werden <br>
+- <font color="red">Entfernt</font>: CountTreeGadgetNodeItems() - kann einfach durch Vergleichen des Sublevels der Einträge emuliert werden <br>
+<br>
+
+<a href="../mainguide/history.html">Zurück zur History</a> 
+</blockquote>
+</font></body></html>

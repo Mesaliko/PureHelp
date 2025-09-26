@@ -1,0 +1,125 @@
+<html><head><title>GetClipboardImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetClipboardImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetClipboardImage</b></font>(#Image [, Profondeur])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle image à partir d'une image contenue dans le presse-papier (si elle existe). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Numéro de la nouvelle image. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">PB_Any#</a> peut être utilisé pour générer automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>Profondeur (optionnel)</i></td>
+<td> 
+La profondeur de couleur de l'image. 
+<br>
+<br>
+Les valeurs valides sont 24 bits (par défaut) ou 32 bits. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> est utilisé pour le paramètre '#Image', le numéro de la nouvelle image 
+sera renvoyé dans 'Resultat'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Sous Windows, il se peut que la transparence ne soit pas détectée une fois l'image du presse-papier 
+collée dans un logiciel tiers. (L'enregistrement de cette image au format png conserve la transparence.) 
+Il s'agit d'un problème lié au format BMP et à la façon dont Windows 
+le gère. Il est possible d'avoir une image bitmap 32 bits sans canal alpha. Dans ce cas, toutes les 
+valeurs alpha sont 0 mais l'image est censée être opaque. 
+Étant donné que les images dans GetClipboardImage() peuvent provenir de l'extérieur de PB, nous ne 
+pouvons pas savoir si l'image est censée être entièrement transparente ou entièrement opaque. C'est 
+pourquoi nous n'utilisons le canal alpha que s'il y a au moins un pixel avec une valeur autre que 0. 
+Sinon, nous la traitons comme une image opaque. 
+<br>
+<br>
+L'image ainsi obtenue peut être détruite à l'aide de la commande <a href="../image/freeimage.html">FreeImage()</a>. 
+<br>
+<br>
+Pour plus d'information sur les images, voir la bibliothèque <a href="../image/index.html">Image</a> 
+ou le gadget <a href="../gadget/imagegadget.html">ImageGadget()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0,26,20)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0,0,26,20,<font color="#006666">RGB</font>(255,255,255))
+<font color="#006666">      Circle</font>(13,10,5,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">    StopDrawing</font>()
+<font color="#006666">    SetClipboardImage</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Presse-papier&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+   <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">WindowOutput</font>(0))
+<font color="#006666">     DrawImage</font>(<font color="#006666">GetClipboardImage</font>(0), 10,10) 
+<font color="#006666">     DrawImage</font>(<font color="#006666">GetClipboardImage</font>(0), 100, 30, 65, 50) 
+<font color="#006666">      StopDrawing</font>()
+   <b><font color="#006666">EndIf</font></b>
+
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+ 
+  <font color="#006666">; Vous pouvez aussi ouvrir un logiciel de dessin (par exemple 'Paint') </font>
+  <font color="#006666">; et collez le contenu du presse-papier (Edition puis Coller), </font>
+  <font color="#006666">; et vous verrez le drapeau japonais ;-)</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> avec transparence</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Shift</font>= 10
+  <b><font color="#006666">Global</font></b> ImageSource.s
+
+<font color="#006666">  CreateImage</font>(0,200,200,32,<font color="#924B72">#PB_Image_Transparent</font>)
+<font color="#006666">  StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaChannel</font>) 
+<font color="#006666">  Box</font>(0, 0, 100, 50, $00000000)
+<font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaBlend</font>)
+<font color="#006666">  DrawText</font>(10,50,&quot;PUREBASIC&quot;,<font color="#006666"> RGBA</font>(255, 255, 0, 255),<font color="#006666"> RGBA</font>(0, 0, 0, 0))
+<font color="#006666">  Circle</font>(100,100, 50,<font color="#006666">RGBA</font>(255, 255, 255,128))
+<font color="#006666">  StopDrawing</font>() 
+<font color="#006666">  SetClipboardImage</font>(0)
+<font color="#006666">  GetClipboardImage</font>(1,32)
+
+
+<font color="#006666">  CreateImage</font>(0,200,200,32,<font color="#924B72">#Blue</font>)
+<font color="#006666">  StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaBlend</font>)
+<font color="#006666">  DrawImage</font>(<font color="#006666">ImageID</font>(1),<font color="#924B72">#Shift</font>,-<font color="#924B72">#Shift</font>)
+<font color="#006666">  StopDrawing</font>()
+
+<font color="#006666">  OpenWindow</font>(0,0,0,200,200,<font color="#006666">Str</font>(<font color="#006666">ImageDepth</font>(1)))
+<font color="#006666">    ImageGadget</font>(0,0,0,200,200,<font color="#006666">ImageID</font>(0))
+  <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>() : <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font> : <b><font color="#006666">End</font></b> : <b><font color="#006666">EndSelect</font></b> : <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setclipboardimage.html">SetClipboardImage()</a>, <a href="getclipboardtext.html">GetClipboardText()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=clearclipboard.html>ClearClipboard()</a> - <a href=index.html>Clipboard Index</a> - <a href=getclipboardtext.html>GetClipboardText()</a> -><br><br>
+
+</body></html>

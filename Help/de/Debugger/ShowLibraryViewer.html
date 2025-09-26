@@ -1,0 +1,60 @@
+<html><head><title>ShowLibraryViewer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ShowLibraryViewer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ShowLibraryViewer</b></font>([Bibliothek$ [, #Objekt]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet das <a href="../reference/ide_debugtools.html">Library-Anzeiger</a>-Fenster oder bringt es in den Vordergrund, wenn es bereits offen ist. 
+Wenn 'Bibliothek$' angegeben wird, dann wird der Anzeiger die Objekte dieser Bibliothek (Library) anzeigen. 
+Wenn eine '#Objekt'-Nummer angegeben wird, dann wird der Anzeiger das angegebene Objekt dieser 
+Bibliothek anzeigen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Bibliothek$ (optional)</i></td>
+<td width="90%"> 
+Die Bibliothek, welche im Anzeiger dargestellt werden soll. 
+Wenn dieser Parameter nicht angegeben wird, dann wird der Anzeiger geöffnet, 
+ohne eine bestimmte Bibliothek anzuzeigen. 
+
+</td></tr>
+<tr><td><i>#Objekt (optional)</i></td>
+<td> 
+Das Objekt der Bibliothek, welches im Anzeiger dargestellt werden soll. 
+Wenn dieser Parameter nicht angegeben wird, dann wird kein Objekt angezeigt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">    Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30
+<font color="#006666">      DrawText</font>(<font color="#006666">Random</font>(200),<font color="#006666"> Random</font>(200), &quot;Hello World!&quot;,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+    <b><font color="#006666">Next</font></b> i
+<font color="#006666">    StopDrawing</font>() 
+    
+<font color="#006666">    ShowLibraryViewer</font>(&quot;Image&quot;, 0)  <font color="#006666">; das Bild anzeigen</font>
+    <b><font color="#006666">CallDebugger</font></b>     <font color="#006666">; das Programm anhalten, damit es nicht sofort beendet wird</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../reference/ide_debugtools.html">Eingebaute Debugger-Werkzeuge</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=showdebugoutput.html>ShowDebugOutput()</a> - <a href=index.html>Debugger Inhaltsverzeichnis</a> - <a href=showmemoryviewer.html>ShowMemoryViewer()</a> -><br><br>
+
+</body></html>

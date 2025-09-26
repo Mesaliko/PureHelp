@@ -1,0 +1,145 @@
+<html><head><title>CatchImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchImage</b></font>(#Image, *AdresseMemoire [, Taille])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Charge une image à partir de l'emplacement 
+mémoire spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Le numéro d'identification de l'image. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>*AdresseMemoire</i></td>
+<td> 
+L'adresse mémoire où se trouve l'image à 
+charger. 
+
+</td></tr>
+<tr><td><i>Taille (optionnel)</i></td>
+<td> 
+La taille de l'image en octets. 
+<br>
+<br>
+La taille est facultative car le chargeur 
+(loader) peut déterminer quand arrêter la 
+lecture, à partir de l'image. Il est cependant 
+conseillé de prévoir une taille lors du 
+chargement d'images inconnues, car le chargeur 
+peut ensuite gérer correctement les images 
+corrompues (sans préciser la taille de 
+l'image, une image corrompue peut faire 
+planter le  programme). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'image a été 
+chargée avec succès , zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Image alors le numéro généré automatiquement 
+est renvoyé dans 'Resultat' en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La taille maximale de l'image est fonction du 
+système d'exploitation et de la quantité de 
+mémoire disponible. 
+Si la mémoire disponible est suffisante alors 
+une image de 8192x8192 pixels au moins peut 
+être traitée par tous les systèmes 
+d'exploitation pris en charge par PureBasic. 
+<br>
+<br>
+Quand une image est chargée, elle est 
+convertie soit en 24 bits (si la profondeur de 
+l'image est inférieure ou égale à 24 bits) 
+soit en 32 bits (si l'image a un canal alpha). 
+La transparence des images BMP n'est pas prise en charge. 
+<br>
+<br>
+Quand une image n'est plus utile, elle peut 
+être détruite avec la commande <a href="freeimage.html">FreeImage()</a> 
+pour libérer de la mémoire. 
+<br>
+<br>
+Cette commande est utile pour inclure 
+des images (logo etc..) directement dans 
+l'exécutable avec la commande 
+<a href="../reference/includes.html">IncludeBinary</a>. 
+Néanmoins, n'abusez pas de cette 
+fonctionnalité car une image incluse 
+dans un exécutable consomme automatiquement 
+de la mémoire supplémentaire puisque tout 
+l'exécutable, y compris les images, est 
+chargé en mémoire. 
+<br>
+<br>
+L'image peut être au format BMP, icône (.ico, 
+seulement supporté sous Windows) ou dans un 
+des formats supportés par la bibliothèque 
+ImagePlugin. 
+Sous Windows, si le format de l'image est une 
+icône (.ico), les commandes suivantes ne 
+seront pas disponibles pour la manipuler: 
+<a href="saveimage.html">SaveImage()</a> et <a href="imageoutput.html">ImageOutput()</a>. 
+<br>
+<br>
+Les commandes suivantes peuvent être 
+utilisées pour activer automatiquement le 
+support des formats d'images suivants: 
+<br>
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+<a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 256, 256, &quot;CatchImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, ?Image_Start, ?Image_End - ?Image_Start)
+<font color="#006666">      ImageGadget</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> ImageID</font>(0))
+      <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+
+  <b><font color="#006666">DataSection</font></b>
+    Image_Start:
+      <b><font color="#006666">IncludeBinary</font></b> <font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples\Sources\Data\Background.bmp&quot;
+    Image_End:
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+Notes: Le &quot;?&quot; est un pointeur vers un label. 
+Vous trouverez plus d'informations au sujet 
+des pointeurs et des accès mémoire 
+<a href="../reference/memory.html">ici</a> 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="loadimage.html">LoadImage()</a>, <a href="freeimage.html">FreeImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addimageframe.html>AddImageFrame()</a> - <a href=index.html>Image Index</a> - <a href=copyimage.html>CopyImage()</a> -><br><br>
+
+</body></html>

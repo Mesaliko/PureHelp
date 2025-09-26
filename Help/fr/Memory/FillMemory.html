@@ -1,0 +1,70 @@
+<html><head><title>FillMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FillMemory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FillMemory</b></font>(*Memoire, Taille [, Valeur [, Type]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Remplit une zone mémoire avec une valeur donnée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse de la zone mémoire à remplir. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille en octets de la zone mémoire à 
+remplir. 
+
+</td></tr>
+<tr><td><i>Valeur (optionnel)</i></td>
+<td> 
+La valeur à écrire dans la zone de mémoire. 
+<br>
+<br>
+La valeur par défaut est la valeur <font color="#924B72">#NULL</font> (0). 
+
+</td></tr>
+<tr><td><i>Type (optionnel)</i></td>
+<td> 
+Peut être une des constantes suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>     : Type <a href="../reference/variables.html">byte</a>  (1 octet signé) (défaut).
+  <font color="#924B72">#PB_Ascii</font>    : Type <a href="../reference/variables.html">ascii</a> (1 octet non signé).
+  <font color="#924B72">#PB_Word</font>     : Type <a href="../reference/variables.html">word</a>  (2 octets signés).
+  <font color="#924B72">#PB_Unicode</font>  : Type <a href="../reference/variables.html">word</a>  (2 octets non signés).
+  <font color="#924B72">#PB_Character</font>: Type <a href="../reference/variables.html">caractère</a> (2 octets non signés en <a href="../reference/unicode.html">unicode</a>).
+  <font color="#924B72">#PB_Long</font>     : Type <a href="../reference/variables.html">long</a>      (4 octets).
+  <font color="#924B72">#PB_Integer</font>  : Type <a href="../reference/variables.html">integer</a>   (4 octets dans un exécutable 32 bits, 8 octets dans un exécutable 64 bits).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Tampon =<font color="#006666"> AllocateMemory</font>(500)
+  
+<font color="#006666">  FillMemory</font>(*Tampon, 500) <font color="#006666">; Remplit 500 octets avec des zéros (vide la zone mémoire)</font>
+<font color="#006666">  FillMemory</font>(*Tampon, 500, $FF) <font color="#006666">; Remplit 500 octets avec la valeur $FF</font>
+<font color="#006666">  FillMemory</font>(*Tampon, 500, $BADF00D, <font color="#924B72">#PB_Long</font>) <font color="#006666">; Remplit 500 octets avec la valeur $BADF00D</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="allocatememory.html">AllocateMemory()</a>, <a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copymemorystring.html>CopyMemoryString()</a> - <a href=index.html>Memory Index</a> - <a href=freememory.html>FreeMemory()</a> -><br><br>
+
+</body></html>

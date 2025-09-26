@@ -1,0 +1,76 @@
+<html><head><title>ProgramParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramParameter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Parameter$ = <font color="#006666"><b>ProgramParameter</b></font>([Index])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt den nächsten Parameter-String, der dem Executable beim Start übergeben wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Index (optional)</i></td>
+<td width="90%"> 
+Wenn angegeben, wird der Parameter für diesen Index zurückgegeben. Der erste 
+Parameter-Index beginnt bei 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der nächste Parameter-Wert - oder einen leeren String, wenn keine weiteren Parameter 
+gefunden wurden. Wenn ein 'Index' angegeben wurde, dann wird der angegebene Parameter-Wert 
+zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl ist insbesondere nützlich für <a href="../console/index.html">Konsolen-Programme</a>, 
+wo der Anwender beim Programmstart einen oder mehrere Parameter übergibt. 
+<br>
+<br>
+<b>Hinweis:</b> Sich zur Ermittlung des letzten Parameters auf die Rückgabe eines leeren 
+Strings zu verlassen, ist keine gute Praxis, da der Befehl auch einen leeren String 
+zurückgibt, wenn in &quot;&quot; ein leerer String in der Kommandozeile übergeben wurde. 
+Der bessere Weg zur Ermittlung aller Parameter ist es, die Anzahl mittels 
+<a href="countprogramparameters.html">CountProgramParameters()</a> zu ermitteln und dann 
+ProgramParameter() sooft wie nötig aufzurufen. 
+<br>
+<br>
+Um das Verhalten dieser Funktion zu überprüfen oder mehrere Tests durchzuführen, lesen Sie 
+bitte den Absatz &quot;Executable-Kommandozeile&quot; auf der Seite <a href="../reference/ide_compiler.html">IDE Compiler-Optionen</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  MyProgram.exe MyText.txt /FAST &quot;Special Mode&quot;
+</font></pre>
+Das erste Mal, wenn ProgramParameter() aufgerufen wird, gibt es &quot;MyText.txt&quot; zurück, 
+beim zweiten Mal &quot;/FAST&quot; und beim dritten Mal &quot;Special Mode&quot;. 
+
+</blockquote><p><b>Beispiel:</b> Kompiliertes Programm über die Kommandozeile mit der anzuzeigenden Datei als Parameter aufrufen</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 520, 510, &quot;Example...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    EditorGadget</font>(0, 5, 5, 510, 500, <font color="#924B72">#PB_Editor_WordWrap</font>)
+    path$ =<font color="#006666"> ProgramParameter</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">FileSize</font>(path$) &gt;= 0
+      <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, path$)
+        Text$ =<font color="#006666"> ReadString</font>(0, <font color="#924B72">#PB_File_IgnoreEOL</font>)
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      SetGadgetText</font>(0, Text$)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../preference/createpreferences.html">CreatePreferences()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=programid.html>ProgramID()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=programrunning.html>ProgramRunning()</a> -><br><br>
+
+</body></html>

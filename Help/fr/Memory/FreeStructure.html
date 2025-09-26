@@ -1,0 +1,79 @@
+<html><head><title>FreeStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FreeStructure()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FreeStructure</b></font>(*Structure)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Libère la structure dynamique précédemment 
+allouée avec <a href="allocatestructure.html">AllocateStructure()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Structure</i></td>
+<td width="90%"> 
+L'adresse de la structure dynamique à 
+libérer. 
+<br>
+<br>
+Ce doit être la valeur renvoyée 
+par <a href="allocatestructure.html">AllocateStructure()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il n'est pas nécessaire d'appeler 
+<a href="../reference/compilerfunctions.html">ClearStructure()</a> 
+avant de libérer la structure. 
+<br>
+<br>
+Si le programme se bloque avec cette commande, 
+c'est généralement le résultat d'une corruption 
+de la mémoire plus tôt dans le programme, en 
+écrivant dans une zone à l'extérieur de la 
+zone mémoire allouée. 
+Il est possible de remonter à la cause de cette 
+erreur en utilisant le 
+<a href="../reference/ide_debugtools.html">purificateur</a>. 
+<br>
+<br>
+Toutes les structures dynamiques sont 
+automatiquement libérées à la fermeture 
+du programme. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Peuple
+    Nom$
+    <b><font color="#006666">List</font></b> <font color="#006666">Amis$</font>()
+  <b><font color="#006666">EndStructure</font></b>
+  
+  *DynamicPeuple.Peuple =<font color="#006666"> AllocateStructure</font>(Peuple)
+  *DynamicPeuple\Nom$ = &quot;Fred&quot;
+<font color="#006666">  AddElement</font>(*DynamicPeuple\<font color="#006666">Amis$</font>())
+  *DynamicPeuple\<font color="#006666">Amis$</font>() = &quot;Stef&quot;
+  
+  <b><font color="#006666">Debug</font></b> *DynamicPeuple\Nom$
+  <b><font color="#006666">Debug</font></b> *DynamicPeuple\<font color="#006666">Amis$</font>()
+  
+<font color="#006666">  FreeStructure</font>(*DynamicPeuple)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="allocatestructure.html">AllocateStructure()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=freememory.html>FreeMemory()</a> - <a href=index.html>Memory Index</a> - <a href=memorysize.html>MemorySize()</a> -><br><br>
+
+</body></html>

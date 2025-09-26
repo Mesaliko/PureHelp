@@ -1,0 +1,55 @@
+<html><head><title>PeekI</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PeekI()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.i = <font color="#006666"><b>PeekI</b></font>(*Memoire)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit un entier 'integer' en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire à lire. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de l' 
+<a href="../reference/variables.html">integer</a>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Représente 4 octets signés de -2 147 483 648 à 
++ 2 147 483 647 sur un exécutable 32 bits, 
+8 octets signés de -9 223 372 036 854 775 808 
+à + 9 223 372 036 854 775 807 sur un exécutable 
+64 bits. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MemoireID =<font color="#006666"> AllocateMemory</font>(5000)
+  <b><font color="#006666">If</font></b> *MemoireID
+<font color="#006666">    PokeI</font>(*MemoireID, 123456789.123456789)   <font color="#006666">; Stocke cette valeur dans la zone mémoire&quot;)</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">PeekI</font>(*MemoireID)                  <font color="#006666">; Lit cette valeur depuis la zone mémoire&quot;)</font>
+<font color="#006666">    FreeMemory</font>(*MemoireID)  
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible d'allouer la mémoire demandée !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pokei.html">PokeI()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=peekf.html>PeekF()</a> - <a href=index.html>Memory Index</a> - <a href=peekl.html>PeekL()</a> -><br><br>
+
+</body></html>

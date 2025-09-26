@@ -1,0 +1,60 @@
+<html><head><title>PeekS</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PeekS()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>PeekS</b></font>(*Speicherpuffer [, Länge [, Format]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest einen String von der angegebenen Speicheradresse. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Speicherpuffer</i></td>
+<td width="90%"> 
+Die Adresse, von der gelesen werden soll. 
+
+</td></tr>
+<tr><td><i>Länge (optional)</i></td>
+<td> 
+Die maximale Anzahl an zu lesenden Zeichen (&quot;Character&quot;). Wenn dieser Parameter nicht 
+angegeben wird oder -1 verwendet wird, dann gibt es kein Maximum. 
+Der String wird gelesen, bis ein abschließendes Null-Zeichen auftritt, oder die maximale 
+Länge erreicht wird. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+Das beim Lesen des Strings zu verwendende String-Format. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Liest die Strings als ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Liest die Strings als UTF8
+  <font color="#924B72">#PB_Unicode</font>: Liest die Strings als Unicode (Standard)
+</font></pre>
+kombiniert mit einem der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ByteLength</font>: nur gültig bei Verwendung des <font color="#924B72">#PB_UTF8</font> Flags, die 'Länge' wird Bytes darstellen (nicht 'Character'-Zeichen).
+                  Dies kann nützlich sein, da UTF8 variable Zeichen-Längen ('Character') hat.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den eingelesenen String zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Eine Kombination aus <a href="pokes.html">PokeS()</a> und PeekS() kann verwendet werden, um eine Konvertierung 
+zwischen den verschiedenen unterstützten String-Modi (ASCII, UTF8 und Unicode) vorzunehmen. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="pokes.html">PokeS()</a>, <a href="memorystringlength.html">MemoryStringLength()</a>, <a href="comparememorystring.html">CompareMemoryString()</a>, <a href="copymemorystring.html">CopyMemoryString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=peekq.html>PeekQ()</a> - <a href=index.html>Memory Inhaltsverzeichnis</a> - <a href=peeku.html>PeekU()</a> -><br><br>
+
+</body></html>

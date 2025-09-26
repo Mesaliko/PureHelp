@@ -1,0 +1,51 @@
+<html><head><title>UncompressPackMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UncompressPackMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>UncompressPackMemory</b></font>(#Pack, *Buffer, Size [, PackedFilename$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Uncompress into the memory buffer from the current pack entry being 
+examined with <a href="examinepack.html">ExaminePack()</a> and <a href="nextpackentry.html">NextPackEntry()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+The pack to use. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+The memory buffer to uncompress the pack entry. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size of the memory to uncompress the pack entry. 
+
+</td></tr>
+<tr><td><i>PackedFilename$ (optional)</i></td>
+<td> 
+The packed filename entry to uncompress. If this parameter is not specified, the current entry being 
+examined with <a href="examinepack.html">ExaminePack()</a> and <a href="nextpackentry.html">NextPackEntry()</a> is uncompressed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Return the uncompressed size if the pack entry has been successfully uncompressed into the memory buffer, -1 otherwise. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="openpack.html">OpenPack()</a>, <a href="catchpack.html">CatchPack()</a>, <a href="examinepack.html">ExaminePack()</a>, <a href="nextpackentry.html">NextPackEntry()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=uncompresspackfile.html>UncompressPackFile()</a> - <a href=index.html>Packer Index</a> - <a href=usebrieflzpacker.html>UseBriefLZPacker()</a> -><br><br>
+
+</body></html>

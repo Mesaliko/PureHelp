@@ -1,0 +1,62 @@
+<html><head><title>OnErrorGoto</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorGoto()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>OnErrorGoto</b></font>(?Etiquette)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Si une erreur survient, le programme saute à 
+l'étiquette (label) donnée. 
+Une fois dans le label, des informations à 
+propos de l'erreur pourront être affichées 
+en utilisant les commandes de cette bibliothèque. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>?Etiquette</i></td>
+<td width="90%"> 
+L'adresse de l'étiquette sur laquelle renvoyer 
+le programme après une erreur. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La pile du programme ne sera pas sauvegardée 
+avant le saut vers le label, donc les 
+variables locales ne seront plus accessibles. 
+Il n'est pas recommandé de vouloir continuer 
+l'exécution d'un programme après une erreur, 
+car le contexte ne sera plus correct. La 
+meilleure pratique est de rassembler un 
+maximum d'informations à propos de l'erreur 
+et de quitter le programme. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;Test OnError&quot;, &quot;Début Test.&quot;)
+
+<font color="#006666">  OnErrorGoto</font>(?GestionErreurs)
+<font color="#006666">  Pokes</font>(10, &quot;Salut le Monde.&quot;) <font color="#006666">; Provoque une erreur #PB_OnError_InvalidMemory</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;Test OnError&quot;, &quot;Ceci ne devrait jamais s'afficher.&quot;)
+  <b><font color="#006666">End</font></b>
+  
+  GestionErreurs:
+<font color="#006666">  MessageRequester</font>(&quot;Test OnError&quot;, &quot;L'erreur suivante est arrivée: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">End</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=onerrorexit.html>OnErrorExit()</a> - <a href=index.html>OnError Index</a> - <a href=raiseerror.html>RaiseError()</a> -><br><br>
+
+</body></html>

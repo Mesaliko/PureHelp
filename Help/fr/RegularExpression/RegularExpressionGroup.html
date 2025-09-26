@@ -1,0 +1,80 @@
+<html><head><title>RegularExpressionGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegularExpressionGroup()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>RegularExpressionGroup</b></font>(#ExpressionReguliere, Groupe)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait la chaîne de caractères d'un groupe 
+après un appel à <a href="examineregularexpression.html">ExamineRegularExpression()</a> 
+et à <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#ExpressionReguliere</i></td>
+<td width="90%"> 
+L'identifiant de l'expression régulière. 
+
+</td></tr>
+<tr><td><i>Groupe</i></td>
+<td> 
+L'index du groupe à extraire. <br>
+Le premier groupe a pour index 1. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la chaîne de caractères qui 
+correspond au groupe d'expression regulière. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les Groupes dans une expression régulière 
+sont définis en entourant une 
+sous-expression avec des parenthèses &quot;(&quot; 
+et &quot;)&quot;. <br>
+Les groupes sont numérotés comme ils 
+apparaissent dans l'expression régulière 
+de gauche à droite. 
+Le premier groupe a l'index 1.<br>
+La fonction <a href="countregularexpressiongroups.html">CountRegularExpressionGroups()</a> 
+peut être utilisée pour connaître le nombre 
+de groupes dans une expression régulière. 
+<br>
+<br>
+Une variante est l'utilisation de la fonction 
+<a href="regularexpressionnamedgroup.html">RegularExpressionNamedGroup()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cette expression correspond à une couleur (avec la valeur rouge, vert et bleu)</font>
+  <font color="#006666">; Les couleurs sont regroupées avec des () et la valeur de la couleur est extraite </font>
+  <font color="#006666">; dans le cas d'une correspondance.</font>
+  <font color="#006666">;  </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;color=(red|green|blue)&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineRegularExpression</font>(0, &quot;stype=bold, color=blue, margin=50&quot;)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextRegularExpressionMatch</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;La couleur est &quot; +<font color="#006666"> RegularExpressionGroup</font>(0, 1)
+      <b><font color="#006666">Wend</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examineregularexpression.html">ExamineRegularExpression()</a>, <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>, 
+<a href="regularexpressiongroupposition.html">RegularExpressionGroupPosition()</a>, <a href="regularexpressiongrouplength.html">RegularExpressionGroupLength()</a>, 
+<a href="regularexpressionnamedgroup.html">RegularExpressionNamedGroup()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=regularexpressionerror.html>RegularExpressionError()</a> - <a href=index.html>RegularExpression Index</a> - <a href=regularexpressiongrouplength.html>RegularExpressionGroupLength()</a> -><br><br>
+
+</body></html>

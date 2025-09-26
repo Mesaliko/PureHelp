@@ -1,0 +1,111 @@
+<html><head><title>EventlParam</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EventlParam()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>EventlParam</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le paramètre LPARAM du 
+dernier évènement. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le paramètre LPARAM du 
+dernier évènement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction n'est plus supportée et 
+ne devrait plus être utilisée. 
+Utilisez plutôt la fonction 
+<a href="setwindowcallback.html">SetWindowCallback()</a> afin d'avoir un 
+plein accès aux messages Windows. 
+
+</blockquote><p><b>Exemple:</b> Sans callback</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  OpenWindow</font>(0, 0, 0, 300, 200, &quot;Messages&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_ScreenCentered</font>)
+   
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Debug</font></b> &quot;-&gt; Evènement n°&quot;+<font color="#006666">Str</font>(Event)+&quot; : WParam=&quot;+<font color="#006666">Str</font>(<font color="#006666">EventwParam</font>())+&quot; , LParam=&quot;+<font color="#006666">Str</font>(<font color="#006666">EventlParam</font>())
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">ForEver</font></b> 
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Avec callback</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WinCallback</font>(hWnd, uMsg, wParam, lParam)
+    <b><font color="#006666">Debug</font></b> &quot;Evènement n°&quot;+<font color="#006666">Str</font>(uMsg)+&quot; : WParam=&quot;+<font color="#006666">Str</font>(wParam)+&quot; , LParam=&quot;+<font color="#006666">Str</font>(lParam)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_ProcessPureBasicEvents</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 300, 200, &quot;Messages&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+<font color="#006666">  SetWindowCallback</font>(@WinCallback())
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    <font color="#006666">;Debug &quot;-&gt; Evènement n°&quot;+Str(Event)+&quot; : WParam=&quot;+Str(EventwParam())+&quot; , LParam=&quot;+Str(EventlParam())</font>
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">ForEver</font></b>  
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Appuyer sur une combinaison de plusieurs touches : CTRL, MAJ, Bouton souris, puis cliquez gauche</font>
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 300, 200, &quot;Messages&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+<font color="#006666">  TextGadget</font>(0,4,4,392,92,&quot;Clic&quot;)
+
+  <b><font color="#006666">Repeat</font></b>
+  event =<font color="#006666"> WaitWindowEvent</font>()
+  
+  <b><font color="#006666">Select</font></b> event
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#WM_LBUTTONDOWN</font>
+      x =<font color="#006666"> EventlParam</font>() &amp; $FFFF   <font color="#006666">; Mot de poids faible(16 Bits)</font>
+      y =<font color="#006666"> EventlParam</font>()&gt;&gt;16       <font color="#006666">; Mot de poids fort  (16 Bits)</font>
+      cles =<font color="#006666"> EventwParam</font>()            
+      
+<font color="#006666">      SetGadgetText</font>(0,&quot;X= &quot; +<font color="#006666"> Str</font>(x) + &quot;  Y= &quot; +<font color="#006666"> Str</font>(y) +<font color="#006666"> Chr</font>(13) +<font color="#006666"> Chr</font>(10) + &quot;Clés: &quot; +<font color="#006666"> RSet</font>(<font color="#006666">Bin</font>(cles),32,&quot;0&quot;))
+      
+      combinaison$ = &quot;&quot;
+      <b><font color="#006666">If</font></b> cles &amp; <font color="#924B72">#MK_CONTROL</font>
+        combinaison$ = combinaison$ + &quot; CTRL &quot;
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> cles &amp; <font color="#924B72">#MK_SHIFT</font>
+        combinaison$ = combinaison$ + &quot; MAJ &quot;
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> cles &amp; <font color="#924B72">#MK_MBUTTON</font> 
+        combinaison$ = combinaison$ + &quot; Clic milieu &quot;
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> cles &amp; <font color="#924B72">#MK_RBUTTON</font>
+        combinaison$ = combinaison$ + &quot; Clic droit &quot;
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> cles &amp; <font color="#924B72">#MK_LBUTTON</font>
+        combinaison$ = combinaison$ + &quot; Clic gauche &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">Debug</font></b>  combinaison$
+      
+  <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">Until</font></b> event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="eventwparam.html">EventwParam()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows</Blockquote></p><center><- <a href=eventwindow.html>EventWindow()</a> - <a href=index.html>Window Index</a> - <a href=eventwparam.html>EventwParam()</a> -><br><br></blockquote>
+</font></body></html>

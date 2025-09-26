@@ -1,0 +1,57 @@
+<html><head><title>RayCollide</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RayCollide()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>RayCollide</b></font>(x, y, z, ZielX, ZielY, ZielZ [, KollisionsGruppe, KollisionsMaske]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Wirft einen Strahl (englisch: &quot;casts a ray&quot;) zwischen dem ersten und dem zweiten 
+Punkt, und prüft, ob ein LibraryLink &quot;Entity&quot; &quot;Entity&quot; mit dem Strahl kollidiert. 
+Nur Objekte (entities) mit einem Körper (body) reagieren auf den Strahl. 
+<br>
+<br>
+Diese Funktion basiert auf der Physik-Engine, welche vor Verwendung dieses Befehls mittels 
+<a href="enableworldphysics.html">EnableWorldPhysics()</a> aktiviert werden muss. 
+<br>
+<br>
+Um die Position des Kollisions-Punktes zu ermitteln, verwenden Sie <a href="pickx.html">PickX()</a>, <a href="picky.html">PickY()</a> und <a href="pickz.html">PickZ()</a>. 
+Die Normalen-Werte am Kollisions-Punkt sind verfügbar mittels <a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a> und <a href="normalz.html">NormalZ()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y, z</i></td>
+<td width="90%"> 
+Die Koordinaten des ersten Punkts, in Welt-Einheiten. 
+
+</td></tr>
+<tr><td><i>ZielX, ZielY, ZielZ</i></td>
+<td> 
+Die Koordinaten des zweiten Punkts, in Welt-Einheiten. 
+
+</td></tr>
+<tr><td><i>KollisionsGruppe, KollisionsMaske (optional)</i></td>
+<td> 
+Die zu verwendende Kollisionsgruppe und Kollisionsmaske. Dies kann nützlich sein, um zu filtern, 
+welches Entity mit dem Strahl kollidieren soll. Kollisionsgruppe und -maske können mit 
+<a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a> verändert werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die <a href="../entity/index.html">Entity</a>-Nummer zurück, wenn der Strahl mit einem kollidierte. 
+Oder -1, wenn keine Kollision aufgetreten ist. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a>, <a href="normalz.html">NormalZ()</a>, <a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=raycast.html>RayCast()</a> - <a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=raypick.html>RayPick()</a> -><br><br>
+
+</body></html>

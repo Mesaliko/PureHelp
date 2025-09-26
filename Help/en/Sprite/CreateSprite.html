@@ -1,0 +1,90 @@
+<html><head><title>CreateSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateSprite()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateSprite</b></font>(#Sprite, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates an empty sprite with the specified dimensions. <a href="spriteoutput.html">SpriteOutput()</a> can be used 
+to draw on the sprite. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+A number to identify the new sprite. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The size of the new sprite (in pixels). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values (with the '|' operator): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Add special information to handle pixel collision through <a href="spritepixelcollision.html">SpritePixelCollision()</a>.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Sprite is created with per pixel alpha-channel support, needed for <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>.
+  <font color="#924B72">#PB_Sprite_Transparent</font> : Sprite is created fully transparent (alpha channel value set to 0). If used, <a href="../2ddrawing/drawingmode.html">DrawingMode()</a> should be set to <font color="#924B72">#PB_DrawingMode_AllChannels</font> when using <a href="spriteoutput.html">SpriteOutput()</a>.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the sprite has been created, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Sprite parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+CreateSprite() has to be called in the same thread where <a href="../screen/openscreen.html">OpenScreen()</a> was called. 
+
+</blockquote><p><b>Example:</b> CreateSprite using transparent flag</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  InitSprite</font>()
+   
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 640, 480, &quot;A screen in a window...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, 640, 480, <font color="#924B72">#True</font>, 0, 0)
+    
+<font color="#006666">    CreateSprite</font>(0, 64, 64, <font color="#924B72">#PB_Sprite_AlphaBlending</font> | <font color="#924B72">#PB_Sprite_Transparent</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AllChannels</font>)
+<font color="#006666">      Circle</font>(16, 16, 8,<font color="#006666"> RGBA</font>(255, 0, 0, 255)) <font color="#006666">; Opaque red circle</font>
+<font color="#006666">      Circle</font>(32, 32, 8,<font color="#006666"> RGBA</font>(0, 255, 0, 128)) <font color="#006666">; Semi transparent green circle</font>
+<font color="#006666">      StopDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Repeat</font></b> <font color="#006666">; It's very important to process all the events remaining in the queue at each frame</font>
+        Event =<font color="#006666"> WindowEvent</font>()
+        <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+          <b><font color="#006666">End</font></b>
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">Until</font></b> Event = 0
+      
+<font color="#006666">      ClearScreen</font>(<font color="#006666">RGB</font>(0, 0, 0)) <font color="#006666">; A black background</font>
+      
+<font color="#006666">      DisplayTransparentSprite</font>(0, 300, 200)
+      
+<font color="#006666">      FlipBuffers</font>()
+    <b><font color="#006666">ForEver</font></b>
+        
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Can't open windowed screen!&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="grabsprite.html">GrabSprite()</a>, <a href="spriteoutput.html">SpriteOutput()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copysprite.html>CopySprite()</a> - <a href=index.html>Sprite Index</a> - <a href=displaysprite.html>DisplaySprite()</a> -><br><br>
+
+</body></html>

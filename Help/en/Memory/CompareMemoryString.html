@@ -1,0 +1,64 @@
+<html><head><title>CompareMemoryString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareMemoryString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CompareMemoryString</b></font>(*String1, *String2 [, Mode [, Length [, Flags]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Compare two strings at the specified memory addresses. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*String1, *String2</i></td>
+<td width="90%"> 
+The addresses of the strings to compare. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+Character comparison mode. This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : Case sensitive search (a=a). (default)
+  <font color="#924B72">#PB_String_NoCase</font>        : Case insensitive search using all unicode character set (Ã¤=Ã„).
+  <font color="#924B72">#PB_String_NoCaseAscii</font>   : Case insensitive search using only ascii character set (a=A). 
+                             Much faster than <font color="#924B72">#PB_String_NoCase</font> when full unicode support is not required.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Length (optional)</i></td>
+<td> 
+The number of characters to compare. If this parameter is not specified or has the value -1, 
+the strings are compared until a null-character is reached. If the strings are not null-terminated, 
+this parameter must be specified. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The string format to use when comparing the strings. This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Compares the strings as ascii
+  <font color="#924B72">#PB_UTF8</font>   : Compares the strings as UTF8
+  <font color="#924B72">#PB_Unicode</font>: Compares the strings as unicode (default)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_Equal</font>  : if String1 equals String2
+  <font color="#924B72">#PB_String_Lower</font>  : if String1 is lower than String2
+  <font color="#924B72">#PB_String_Greater</font>: if String1 greater than String2
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="pokes.html">PokeS()</a>, <a href="peeks.html">PeekS()</a>, <a href="memorystringlength.html">MemoryStringLength()</a>, <a href="copymemorystring.html">CopyMemoryString()</a>, <a href="comparememory.html">CompareMemory()</a>, <a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=comparememory.html>CompareMemory()</a> - <a href=index.html>Memory Index</a> - <a href=copymemory.html>CopyMemory()</a> -><br><br>
+
+</body></html>

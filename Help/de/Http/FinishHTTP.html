@@ -1,0 +1,45 @@
+<html><head><title>FinishHTTP</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FinishHTTP()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>FinishHTTP</b></font>(HttpVerbindung)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die mit dem angegebenen asynchronen Download, der entweder mit <a href="receivehttpfile.html">ReceiveHTTPFile()</a> 
+oder <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a> gestartet wurde, verknüpften Ressourcen frei. 
+Dies muss immer nach einem erfolgreichen Aufruf von <a href="receivehttpfile.html">ReceiveHTTPFile()</a> bzw. <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a> aufgerufen werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>HttpVerbindung</i></td>
+<td width="90%"> 
+Die zu beendende Http-Verbindung. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Abhängig davon, mit welchem Receive-Befehl der Download gestartet wurde, gibt FinishHTTP() folgendes zurück: 
+<br>
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>: Anzahl der empfangenen Bytes (Größe der gespeicherten Datei). 
+<br>
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a> mit gesetztem <font color="#924B72">#PB_HTTP_Asynchronous</font> Flag: Adresse des Speicherbereichs, ab dem die empfangenen 
+Daten gespeichert wurden. Mit <a href="../memory/memorysize.html">MemorySize()</a> kann dann der Umfang der empfangenen Daten ermittelt werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Wert <font color="#924B72">#PB_HTTP_Aborted</font> wird von <a href="httpprogress.html">HTTPProgress()</a> zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="httpprogress.html">HTTPProgress()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=aborthttp.html>AbortHTTP()</a> - <a href=index.html>Http Inhaltsverzeichnis</a> - <a href=geturlpart.html>GetURLPart()</a> -><br><br>
+
+</body></html>

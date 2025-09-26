@@ -1,0 +1,70 @@
+<html><head><title>SetFTPDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetFTPDirectory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SetFTPDirectory</b></font>(#Ftp, Verzeichnis$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert das aktuelle #Ftp Verzeichnis, relativ zum aktuellen Verzeichnis. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Ftp</i></td>
+<td width="90%"> 
+Die zu verwendende FTP-Verbindung. 
+
+</td></tr>
+<tr><td><i>Verzeichnis$</i></td>
+<td> 
+Das Verzeichnis, wohin gewechselt werden soll. Der Parameter muss 
+zu einem Verzeichnis innerhalb des aktuellen FTP-Verzeichnisses passen. 
+Verschachtelte Pfade sind nicht erlaubt. Verwenden Sie &quot;..&quot;, um zum 
+übergeordneten Verzeichnis (&quot;parent&quot;) des aktuellen Verzeichnisses zurückzukehren. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Operation erfolgreich war, und Null bei einem Fehler. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um das aktuelle Verzeichnis zu erhalten, verwenden Sie <a href="getftpdirectory.html">GetFTPDirectory()</a>. 
+Pfade/Unterverzeichnisse werden nicht unterstützt, nur direkte Verzeichnis-Wechsel 
+sind erlaubt: um mehrere Ebenen von Verzeichnissen zu wechseln, muss dieser 
+Befehl auch mehrere Male aufgerufen werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenFTP</font>(0, &quot;ftp.free.fr&quot;, &quot;anonymous&quot;, &quot;&quot;)
+    
+    <b><font color="#006666">Debug</font></b> &quot;Erfolgreich verbunden&quot;
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">SetFTPDirectory</font>(0, &quot;pub&quot;)
+      <b><font color="#006666">If</font></b> <font color="#006666">SetFTPDirectory</font>(0, &quot;linux&quot;)
+        <b><font color="#006666">Debug</font></b> &quot;Cool, wird sind zu '/pub/linux' gewechselt&quot;
+        <b><font color="#006666">Debug</font></b> <font color="#006666">GetFTPDirectory</font>(0)
+      <b><font color="#006666">Else</font></b>
+        <b><font color="#006666">Debug</font></b> &quot;Kein Wechsel zu '/pub/linux' möglich&quot;
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Kein Wechsel zu 'pub' möglich&quot;
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Keine Verbindung zu ftp.free.fr möglich&quot;
+  <b><font color="#006666">EndIf</font></b>  
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getftpdirectory.html">GetFTPDirectory()</a>, <a href="examineftpdirectory.html">ExamineFTPDirectory()</a>, <a href="sendftpfile.html">SendFTPFile()</a>, <a href="receiveftpfile.html">ReceiveFTPFile()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=sendftpfile.html>SendFTPFile()</a> - <a href=index.html>Ftp Inhaltsverzeichnis</a><br><br></blockquote>
+</font></body></html>

@@ -1,0 +1,39 @@
+<html><head><title>NextSelectedFileName</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">NextSelectedFileName()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>NextSelectedFileName</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Après un <a href="openfilerequester.html">OpenFileRequester()</a> utilisant 
+la constante <font color="#924B72">#PB_Requester_MultiSelection</font>, 
+cette instruction renvoie le fichier 
+sélectionné suivant, s'il existe. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Une chaîne de caractères contenant le 
+nom du fichier suivant ou une chaîne 
+vide s'il n'y a plus de fichier 
+à lister. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  NomFichier$ =<font color="#006666"> OpenFileRequester</font>(&quot;Choisissez quelques fichiers&quot;,&quot;&quot;,&quot;&quot;,0, <font color="#924B72">#PB_Requester_MultiSelection</font>)
+ 
+  <b><font color="#006666">While</font></b> NomFichier$
+    <b><font color="#006666">Debug</font></b> NomFichier$
+    NomFichier$ =<font color="#006666"> NextSelectedFileName</font>()
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=messagerequester.html>MessageRequester()</a> - <a href=index.html>Requester Index</a> - <a href=openfilerequester.html>OpenFileRequester()</a> -><br><br>
+
+
+</body></html>

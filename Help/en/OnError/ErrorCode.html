@@ -1,0 +1,35 @@
+<html><head><title>ErrorCode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ErrorCode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ErrorCode</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the error code of the currently handled error. This command only returns a meaningful value 
+if there was an error handled by <a href="onerrorcall.html">OnErrorCall()</a> or <a href="onerrorgoto.html">OnErrorGoto()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+One of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OnError_InvalidMemory</font>         : Read or write operation on an invalid location
+  <font color="#924B72">#PB_OnError_Floatingpoint</font>         : Floating-point error
+  <font color="#924B72">#PB_OnError_Breakpoint</font>            : Debugger breakpoint reached (non-PureBasic breakpoints)
+  <font color="#924B72">#PB_OnError_IllegalInstruction</font>    : Attempt to execute an illegal instruction
+  <font color="#924B72">#PB_OnError_PriviledgedInstruction</font>: Attempt to execute a privileged (system-) instruction
+  <font color="#924B72">#PB_OnError_DivideByZero</font>          : Division by zero (Windows only)
+</font></pre>
+Linux and Mac OSX report <font color="#924B72">#PB_OnError_Floatingpoint</font> for division by zero errors. 
+<br>
+<br>
+In addition, every OS may have more possible error values. On Windows, custom errors can be raised with 
+the <a href="raiseerror.html">RaiseError()</a> command. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=erroraddress.html>ErrorAddress()</a> - <a href=index.html>OnError Index</a> - <a href=errorfile.html>ErrorFile()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,51 @@
+<html><head><title>OpenLibrary</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenLibrary()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenLibrary</b></font>(#Library, Dateiname$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet eine &quot;shared&quot; Library (Befehls-Bibliothek), damit auf die darin enthaltenen Funktionen zugegriffen werden kann. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Library</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren dieser Library. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Dateiname der zu ladenden &quot;shared&quot; Library an. 
+Wenn der Dateiname keinen Pfad enthält, dann wird das Betriebssystem in seinen System-Ordnern, 
+im Programm-Verzeichnis und im aktuellen Verzeichnis nach der Library suchen. 
+<br>
+Um auf Linux oder MacOS die Bibliothek aus dem aktuellen Verzeichnis zu laden, muss das 
+Pfadpräfix './' angegeben werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Library erfolgreich geöffnet wurde - und Null, wenn nicht. 
+Wenn <font color="#924B72">#PB_Any</font> als #Library Parameter verwendet wurde, dann wird bei Erfolg 
+die für die Library generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es ist zwingend erforderlich, dass das erstellte PureBasic-Executable und die &quot;shared&quot; Library 
+dieselbe Architektur verwenden (z. B. kann eine x86-DLL nicht von x64-Executables geöffnet werden). 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closelibrary.html">CloseLibrary()</a>, <a href="getfunction.html">GetFunction()</a>, <a href="../reference/prototypes.html">Prototypes</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextlibraryfunction.html>NextLibraryFunction()</a> - <a href=index.html>Library Inhaltsverzeichnis</a><br><br></blockquote>
+</font></body></html>

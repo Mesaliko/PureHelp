@@ -1,0 +1,156 @@
+<html><head><title>PureBasic objects</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">PureBasic objects</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+The purpose of this section is to describe the behavior, creation, and handling of 
+objects in PureBasic. For the demonstration, we will use the <a href="../image/index.html">Image</a> object, but the 
+same logic applies to all other PureBasic objects. When creating an Image object, we 
+can do it in two ways: indexed and dynamic. 
+
+</blockquote>
+<p><b>I. Indexed numbering</b></p><blockquote>
+
+
+The static, indexed way, allows you to reference an object by a predefined 
+numeric value. The first available index number is 0 and subsequent indexes 
+are allocated sequentially. This means that if you use the number 0 and then 
+the number 1000, 1001 indexes will be allocated and 999 (from 1 to 999) will 
+be unused, which is not an efficient way to use indexed objects. If you need a 
+more flexible method, use the dynamic way of allocating objects, as described 
+in section II. The indexed way offers several advantages: 
+<blockquote>
+<p><b></b></p><blockquote>
+
+- Easier handling, since no <a href="../reference/variables.html">variables</a> or <a href="../reference/dim.html">arrays</a> are required. <br>
+- 'Group' processing, without the need to use an intermediate array. <br>
+- Use the object in <a href="../reference/procedures.html">procedures</a> without declaring anything in <a href="../reference/global.html">global</a> (if using a <a href="../reference/general_rules.html">constant</a> or a number). <br>
+- An object that is associated with an index is automatically freed when reusing that index. 
+</blockquote>
+</blockquote>
+
+
+The maximum index number is limited to an upper bound, depending of the object 
+type (usually from 5000 to 60000). <a href="../reference/enumerations.html">Enumerations</a> are strongly recommended if 
+you plan to use sequential constants to identify your objects (which is also 
+recommended). 
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(0, 640, 480) <font color="#006666">; Create an image, the n°0</font>
+<font color="#006666">  ResizeImage</font>(0, 320, 240) <font color="#006666">; Resize the n°0 image and change its @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(2, 640, 480) <font color="#006666">; Create an image, the n°2</font>
+<font color="#006666">  ResizeImage</font>(2, 320, 240) <font color="#006666">; Resize the n°2 image and change its @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+<font color="#006666">  CreateImage</font>(2, 800, 800) <font color="#006666">; Create a new image in the n°2 index, the old one is automatically free'ed</font>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 9
+<font color="#006666">    CreateImage</font>(k, 640, 480) <font color="#006666">; Create 10 different images, numbered from 0 to 9</font>
+<font color="#006666">    ResizeImage</font>(k, 320, 240) <font color="#006666">; Resize images into half width/height  and change its @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#ImageBackground</font> = 0
+  <font color="#924B72">#ImageButton</font>     = 1
+
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageBackground</font>, 640, 480) <font color="#006666">; Create an image (n°0)</font>
+<font color="#006666">  ResizeImage</font>(<font color="#924B72">#ImageBackground</font>, 320, 240) <font color="#006666">; Resize the background image</font>
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageButton</font>    , 800, 800) <font color="#006666">; Create an image (n°1)</font>
+</font></pre>
+
+</blockquote>
+</blockquote>
+
+
+</blockquote>
+<p><b>II. Dynamic numbering</b></p><blockquote>
+
+
+Sometimes, indexed numbering isn't very handy to handle dynamic situations where we need 
+to deal with an unknown number of objects. PureBasic provides an easy and complementary way 
+to create objects in a dynamic manner. Both methods (indexed and dynamic) can be used together 
+at the same time without any conflict. To create a dynamic object, you just have to specify 
+the <font color="#924B72">#PB_Any</font> constant instead of the indexed number, and the dynamic number will be returned as 
+result of the function. Then just use this number with the other object functions in the place 
+where you would use an indexed number (except to create a new object). This way of object handling can be very useful when used 
+in combination with a <a href="../list/index.html">list</a>, which is also a dynamic way of storage. 
+
+<blockquote>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  DynamicImage1 =<font color="#006666"> CreateImage</font>(<font color="#924B72">#PB_Any</font>, 640, 480) <font color="#006666">; Create a dynamic image</font>
+<font color="#006666">  ResizeImage</font>(DynamicImage1, 320, 240) <font color="#006666">; Resize the DynamicImage1</font>
+</font></pre>
+
+A complete example of dynamic objects and <a href="../list/index.html">lists</a> can be found here: 
+
+</blockquote><p><b>Example</b></p><blockquote>
+<a href="../Examples/MDI_ImageViewer.pb.html">MDI_ImageViewer.pb</a>
+
+<br>
+<br>
+Further description and an example of dynamic numbering multiple windows and gadgets 
+can be found in the related <a href="../reference/ug_pb_any1.html">'Beginners chapter'</a>. 
+
+</blockquote>
+
+
+</blockquote>
+<p><b>Overview of the different PureBasic objects</b></p><blockquote>
+
+
+Different PureBasic objects (windows, gadgets, sprites, etc.) can use the same range of object numbers 
+again. So the following objects can be enumerated each one starting at 0 (or other value) and PureBasic 
+differs them by their type: 
+<blockquote>
+
+- <a href="../database/index.html">Database</a> <br>
+- <a href="../dialog/index.html">Dialog</a> <br>
+- <a href="../entity/index.html">Entity</a> <br>
+- <a href="../file/index.html">File</a> <br>
+- <a href="../ftp/index.html">FTP</a> <br>
+- <a href="../gadget/index.html">Gadget</a> (including the <a href="../scintilla/scintillagadget.html">ScintillaGadget()</a>) <br>
+- <a href="../gadget3d/index.html">Gadget3D</a> <br>
+- <a href="../image/index.html">Image</a> <br>
+- <a href="../library/index.html">Library</a> <br>
+- <a href="../light/index.html">Light</a> <br>
+- <a href="../mail/index.html">Mail</a> <br>
+- <a href="../material/index.html">Material</a> <br>
+- <a href="../menu/index.html">Menu</a> (not <a href="../menu/menuitem.html">MenuItem()</a>, as this is no object) <br>
+- <a href="../mesh/index.html">Mesh</a> <br>
+- <a href="../movie/index.html">Movie</a> <br>
+- <a href="../music/index.html">Music</a> <br>
+- <a href="../network/index.html">Network</a> <br>
+- <a href="../node/index.html">Node</a> <br>
+- <a href="../particle/index.html">Particle</a> <br>
+- <a href="../regularexpression/index.html">RegularExpression</a> <br>
+- <a href="../serialport/index.html">SerialPort</a> <br>
+- <a href="../sound/index.html">Sound</a> <br>
+- <a href="../sound3d/index.html">Sound3D</a> <br>
+- <a href="../sprite/index.html">Sprite</a> <br>
+- <a href="../statusbar/index.html">StatusBar</a> <br>
+- <a href="../texture/index.html">Texture</a> <br>
+- <a href="../toolbar/index.html">ToolBar</a> <br>
+- <a href="../window/index.html">Window</a> <br>
+- <a href="../window3d/index.html">Window3D</a> <br>
+- <a href="../xml/index.html">XML</a> <br>
+</blockquote>
+
+</blockquote>
+</font></body></html>

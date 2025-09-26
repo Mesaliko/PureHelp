@@ -1,0 +1,68 @@
+<html><head><title>Bin</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Bin()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>Bin</b></font>(Valeur.q [, Type])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Convertit un nombre entier en un 
+nombre binaire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Valeur.q </i></td>
+<td width="90%"> 
+Un nombre entier de type 'quad' (8 
+octets). 
+
+</td></tr>
+<tr><td><i>Type (optionnel)</i></td>
+<td> 
+Permet de traiter la 'Valeur' comme 
+un type différent: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Quad</font>   : La valeur sera traitée comme un 'quad' (0 à 18446744073709551615) (Par défaut)
+  <font color="#924B72">#PB_Byte</font>   : La valeur sera traitée comme un 'byte' (0 à 255)
+  <font color="#924B72">#PB_Ascii</font>  : La valeur sera traitée comme un 'caractère ascii' (0 à 255)
+  <font color="#924B72">#PB_Word</font>   : La valeur sera traitée comme un 'word' (0 à 65535)
+  <font color="#924B72">#PB_Unicode</font>: La valeur sera traitée comme un 'caractère unicode' (0 à 65535)
+  <font color="#924B72">#PB_Long</font>   : La valeur sera traitée comme un 'long' (0 à 4294967296)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Convertit une valeur numérique de 
+type 'quad' en chaîne en utilisant 
+la représentation binaire. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Bin</font>(32) <font color="#006666">; Affichera &quot;100000&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Bin</font>(1024*1024*1024*1024) <font color="#006666">; Affichera &quot;10000000000000000000000000000000000000000&quot;</font>
+</font></pre>
+
+<br>
+<b>Note:</b> Si des zéros supplémentaires 
+sont nécessaires pour formater 
+correctement le texte, il est possible 
+d'utiliser <a href="rset.html">RSet()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Bin</font>(32), 16, &quot;0&quot;) <font color="#006666">; Affichera &quot;0000000000100000&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="str.html">Str()</a>, <a href="val.html">Val()</a>, <a href="hex.html">Hex()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=ascii.html>Ascii()</a> - <a href=index.html>String Index</a> - <a href=chr.html>Chr()</a> -><br><br>
+
+</body></html>

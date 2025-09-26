@@ -1,0 +1,67 @@
+<html><head><title>SkyBox</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SkyBox()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SkyBox</b></font>(TexturName$ [, FogFarbe, FogIntensität, FogStartDistanz, FogEndDistanz])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Lädt einen sechsseitigen Würfel (&quot;SkyBox&quot;) und erstellt eine künstliche Box, welche weit 
+weg von der Kamera liegt, aber nah zur Welt. Dies ist sehr nützlich, um einfach eine 
+abgeschlossene Welt zu erhalten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>TexturName$</i></td>
+<td width="90%"> 
+Die <a href="../texture/index.html">Texturen</a> müssen im zuvor mit dem <a href="add3darchive.html">Add3DArchive()</a> Befehl deklarierten 
+Pfad liegen. Der &quot;Basis-Name&quot; der einzelnen Texturen, welche nach der 
+folgenden Regel ihre Datei-Namen erhalten sollten: 
+<pre><font face="Courier New, Courier, mono" size="2">  TexturName_BK ; BacK face   (Rückseite)
+  TexturName_FR ; FRont face  (Vorderseite)
+  TexturName_DN ; DowN face   (Unterseite)
+  TexturName_UP ; UP face     (Oberseite)
+  TexturName_LF ; LeFt face   (Linke Seite)
+  TexturName_RT ; RighT face  (Rechte Seite)
+</font></pre>
+
+</td></tr>
+<tr><td><i>FogFarbe (optional)</i></td>
+<td> 
+Die Nebel-Farbe. <a href="../2ddrawing/rgb.html">RGB()</a> kann verwendet werden, um einen gültigen Farbwert zu erhalten. 
+Wenn diese nicht angegeben wird, werden die Nebel-Einstellungen vom <a href="fog.html">Fog()</a> Befehl geerbt. 
+
+</td></tr>
+<tr><td><i>FogIntensität (optional)</i></td>
+<td> 
+Die Nebel-Intensität. Wenn diese auf Null gesetzt wird, dann wird der Nebel-Effekt deaktiviert. 
+
+</td></tr>
+<tr><td><i>FogStartDistanz (optional)</i></td>
+<td> 
+Die Distanz von der Kamera (in Welt-Einheiten), ab der der Nebel starten soll. 
+
+</td></tr>
+<tr><td><i>FogEndDistanz (optional)</i></td>
+<td> 
+Die Distanz von der Kamera, ab der der Nebel völlig undurchsichtig wird. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die &quot;SkyBox&quot; erfolgreich erstellt wurde. 
+Wenn die Texturen nicht geladen werden konnten, dann wird die &quot;SkyBox&quot; mit leeren Texturen erstellt. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="skydome.html">SkyDome()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=showgui.html>ShowGUI()</a> - <a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=skydome.html>SkyDome()</a> -><br><br>
+
+</body></html>

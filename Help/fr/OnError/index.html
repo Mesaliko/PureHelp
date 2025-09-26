@@ -1,0 +1,79 @@
+<html><head><title>OnError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - OnError</font></b></p>
+
+<p><b>Généralités</b></p><blockquote>
+
+Cette bibliothèque permet de détecter les erreurs 
+d'exécution (crashs de programmes) de manière 
+similaire au 
+<a href="../reference/ide_debugger.html">débogueur PureBasic</a>, 
+mais sans le désavantage de la taille plus 
+importante et de la vitesse d'exécution réduite 
+inhérente à l'utilisation du débogueur. Cela permet 
+aux programmes livrés à l'utilisateur final de 
+collecter des informations importantes lors de 
+dysfonctionnements et de les renvoyer au développeur. 
+<br>
+<br>
+Le <a href="../reference/ide_debugger.html">débogueur PureBasic</a> 
+est quand même le meilleur outil pour trouver 
+les bugs lors de la phase de développement, car 
+il fournit des informations bien plus détaillées 
+sur le programme (comme la valeur des 
+<a href="../reference/variables.html">variables</a>) ainsi que 
+des outils visuels pour trouver rapidement l'origine 
+des bugs. 
+<br>
+<br>
+<b>Note:</b> Si cette bibliothèque et le <a href="../reference/ide_debugger.html">débogueur PureBasic</a> 
+sont activés en même temps, toutes les erreurs ne seront pas détectées par la bibliothèque OnError, 
+car des vérifications sont effectuées par le débogueur avant même que le code ne soit exécuté. 
+Pour tester OnError dans l'IDE, assurez-vous de désactiver le débogueur (<b><font color="#006666">DisableDebugger</font></b> n'est pas suffisant). 
+<br>
+<br>
+Cette bibliothèque fournit des informations sur 
+le nom du code source et la ligne à laquelle 
+l'erreur est survenue à l'aide des commandes 
+<a href="errorfile.html">ErrorFile()</a> et <a href="errorline.html">ErrorLine()</a>, seulement si cette 
+fonctionnalité a été activée lors de la compilation 
+du programme (car elle induit une légère pénalité 
+dans la vitesse d'exécution du programme pour 
+retenir le numéro de la ligne en cours d'exécution). 
+Pour l'activer, il faut cocher &quot;Activer le numéro de 
+ligne pour OnError&quot; dans les 
+<a href="../reference/ide_compiler.html">options de compilation</a> 
+ou spécifier /LINENUMBERING (Windows) ou --linenumbering 
+(Linux, MacOS X) en 
+<a href="../reference/cli_compiler.html">ligne de commande</a>. 
+<br>
+<br>
+Sur Linux, dans un gestionnaire d'erreurs fatales, l'interface utilisateur ne doit pas être 
+utilisée et le programme doit se terminer aussi vite que possible car il est dans un état 
+instable. 
+
+</blockquote><p><b>Sommaire des commandes</b><blockquote>
+<a href="erroraddress.html">ErrorAddress</a><br>
+<a href="errorcode.html">ErrorCode</a><br>
+<a href="errorfile.html">ErrorFile</a><br>
+<a href="errorline.html">ErrorLine</a><br>
+<a href="errormessage.html">ErrorMessage</a><br>
+<a href="errorregister.html">ErrorRegister</a><br>
+<a href="errortargetaddress.html">ErrorTargetAddress</a><br>
+<a href="examineassembly.html">ExamineAssembly</a><br>
+<a href="instructionaddress.html">InstructionAddress</a><br>
+<a href="instructionstring.html">InstructionString</a><br>
+<a href="nextinstruction.html">NextInstruction</a><br>
+<a href="onerrorcall.html">OnErrorCall</a><br>
+<a href="onerrordefault.html">OnErrorDefault</a><br>
+<a href="onerrorexit.html">OnErrorExit</a><br>
+<a href="onerrorgoto.html">OnErrorGoto</a><br>
+<a href="raiseerror.html">RaiseError</a><br>
+</blockquote></p>
+
+<p><b>Exemple</b></p><blockquote>
+<a href="../Examples/OnError.pb.html">OnError.pb</a>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=../reference/reference.html>Guide de référence - Index</a></center><br><br>
+
+</body></html>

@@ -1,0 +1,160 @@
+<html><head><title>WebViewGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WebViewGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>WebViewGadget</b></font>(#Gadget, x, y, Width, Height [, Flags])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Creates a new web view gadget in the current GadgetList. If needed a proxy can be set with <a href="webviewproxy.html">WebViewProxy()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be composed (using the '|' operator) of one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_WebView_Debug</font>: Enable the 'inspect' menu item in the context menu to display the web inspector and console.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero on success, zero otherwise. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+After creation, use <a href="bindwebviewcallback.html">BindWebViewCallback()</a> to interact with the JavaScript code of the UI. 
+In addition common gadget commands like <a href="../gadget/resizegadget.html">ResizeGadget()</a> or <a href="../gadget/hidegadget.html">HideGadget()</a> may be used with the control as well. 
+<br>
+<br>
+The following functions can be used to act on a WebViewGadget: 
+<br>
+<br>
+- <a href="../gadget/setgadgettext.html">SetGadgetText()</a>: Change the current URL. It can be a local file URL like 'file://c:/purebasic/svn/webview.html' or a regular HTTP URL. When using 
+a local file URL, it needs to be the full pathname. You can easily construct the local URL by adding 'file://' to the 
+pathname. 
+<br>
+<br>
+- <a href="../gadget/setgadgetitemtext.html">SetGadgetItemText()</a>: With <font color="#924B72">#PB_WebView_HtmlCode</font> as 'Item' html code can be streamed into the gadget. The html is treated 
+as untrusted local content and some permission are not allowed. 
+<br>
+
+</blockquote><p><b>Example:</b> using local HTML and CSS files</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">IncrementJS</font>(JsonParameters$)
+    <b><font color="#006666">Static</font></b> i
+    <b><font color="#006666">Debug</font></b> &quot;IncrementJS &quot;+JsonParameters$
+    i+1
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;{ \&quot;count\&quot;: &quot;+<font color="#006666">Str</font>(i)+ &quot;}&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">ComputeJS</font>(JsonParameters$)
+    <b><font color="#006666">Debug</font></b> &quot;ComputeJS &quot;+JsonParameters$
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;150&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 400, 400, &quot;Hello&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+<font color="#006666">  WebViewGadget</font>(0, 0, 0, 400, 400)
+<font color="#006666">  SetGadgetText</font>(0, &quot;file://&quot; + <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/WebView/webview.html&quot;)
+    
+<font color="#006666">  BindWebViewCallback</font>(0, &quot;increment&quot;, @IncrementJS())
+<font color="#006666">  BindWebViewCallback</font>(0, &quot;compute&quot;, @ComputeJS())
+
+  <b><font color="#006666">Repeat</font></b> 
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> using inline HTML code</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">IncrementJS</font>(JsonParameters$)
+    <b><font color="#006666">Static</font></b> i
+    <b><font color="#006666">Debug</font></b> &quot;IncrementJS &quot;+JsonParameters$
+    i+1
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;{ \&quot;count\&quot;: &quot;+<font color="#006666">Str</font>(i)+ &quot;}&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">ComputeJS</font>(JsonParameters$)
+    <b><font color="#006666">Debug</font></b> &quot;ComputeJS &quot;+JsonParameters$
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;150&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 400, 400, &quot;Hello&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+<font color="#006666">  WebViewGadget</font>(0, 0, 0, 400, 400)
+
+<font color="#006666">  SetGadgetItemText</font>(0, <font color="#924B72">#PB_WebView_HtmlCode</font>, 
+                    ~&quot;&lt;button id=\&quot;increment\&quot;&gt;Tap me&lt;/button&gt;\n&quot;+
+                    ~&quot;&lt;div&gt;You tapped &lt;span id=\&quot;count\&quot;&gt;0&lt;/span&gt; time(s).&lt;/div&gt;\n&quot;+
+                    ~&quot;&lt;button id=\&quot;compute\&quot;&gt;Compute&lt;/button&gt;\n&quot;+
+                    ~&quot;&lt;div&gt;Result of computation: &lt;span id=\&quot;compute-result\&quot;&gt;0&lt;/span&gt;&lt;/div&gt;\n&quot;+
+                    ~&quot;&lt;script&gt;\n&quot;+
+                    ~&quot;  const [incrementElement, countElement, computeElement, &quot;+
+                    ~&quot;computeResultElement] =\n&quot;+
+                    ~&quot;    document.querySelectorAll(\&quot;#increment, #count, #compute, &quot;+
+                    ~&quot;#compute-result\&quot;);\n&quot;+
+                    ~&quot;  document.addEventListener(\&quot;DOMContentLoaded\&quot;, () =&gt; {\n&quot;+
+                    ~&quot;    incrementElement.addEventListener(\&quot;click\&quot;, () =&gt; {\n&quot;+
+                    ~&quot;      window.increment().then(result =&gt; {\n&quot;+
+                    ~&quot;        countElement.textContent = result.count;\n&quot;+
+                    ~&quot;      });\n&quot;+
+                    ~&quot;    });\n&quot;+
+                    ~&quot;    computeElement.addEventListener(\&quot;click\&quot;, () =&gt; {\n&quot;+
+                    ~&quot;      computeElement.disabled = true;\n&quot;+
+                    ~&quot;      window.compute(6, 7).then(result =&gt; {\n&quot;+
+                    ~&quot;        computeResultElement.textContent = result;\n&quot;+
+                    ~&quot;        computeElement.disabled = false;\n&quot;+
+                    ~&quot;      });\n&quot;+
+                    ~&quot;    });\n&quot;+
+                    ~&quot;  });\n&quot;+
+                    ~&quot;&lt;/script&gt;&quot;)
+    
+<font color="#006666">  BindWebViewCallback</font>(0, &quot;increment&quot;, @IncrementJS())
+<font color="#006666">  BindWebViewCallback</font>(0, &quot;compute&quot;, @ComputeJS())
+
+  <b><font color="#006666">Repeat</font></b> 
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> with disabled right-click menu</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Html$ = ~&quot;&lt;html style=\&quot;margin:0px;height:100%;width:100%\&quot;&gt;&quot;+
+          ~&quot;&lt;body oncontextmenu=\&quot;return false;\&quot; style=\&quot;margin:0px;min-height:100%;width:100%\&quot;&gt;&quot;+
+          ~&quot;&lt;button id=\&quot;displayInfo\&quot;&gt;Display Info&lt;/button&gt;&quot;+
+          ~&quot;&lt;/body&gt;&lt;/html&gt;\n&quot;
+  
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 400, 400, &quot;No right click UI&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+<font color="#006666">  WebViewGadget</font>(0, 0, 0, 400, 400)
+<font color="#006666">  SetGadgetItemText</font>(0, <font color="#924B72">#PB_WebView_HtmlCode</font>, Html$)
+
+  <b><font color="#006666">Repeat</font></b> 
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+<a href="webviewexecutescript.html">WebViewExecuteScript()</a>, <a href="bindwebviewcallback.html">BindWebViewCallback()</a>, <a href="webviewproxy.html">WebViewProxy()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=webviewexecutescript.html>WebViewExecuteScript()</a> - <a href=index.html>WebView Index</a> - <a href=webviewproxy.html>WebViewProxy()</a> -><br><br>
+
+</body></html>

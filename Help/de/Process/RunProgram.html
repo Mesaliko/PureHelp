@@ -1,0 +1,143 @@
+<html><head><title>RunProgram</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RunProgram()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>RunProgram</b></font>(DateiName$ [, Parameter$, Arbeitsverzeichnis$ [, Flags [, SenderProgramm]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Startet ein externes Programm. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>DateiName$</i></td>
+<td width="90%"> 
+Der Name des Executables einschließlich dessen Pfad. 
+
+</td></tr>
+<tr><td><i>Parameter$ (optional)</i></td>
+<td> 
+Definiert die Kommandozeilen-Parameter, welche an das Programm übergeben werden. 
+
+</td></tr>
+<tr><td><i>Arbeitsverzeichnis$ (optional)</i></td>
+<td> 
+Gibt das Verzeichnis an, welches dann das aktuelles Verzeichnis für das gestartete 
+Programm sein wird. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination (mittels '|' OR-Operator) der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Program_Wait</font>   : Wartet bis das gestartete Programm beendet wird
+  <font color="#924B72">#PB_Program_Hide</font>   : Startet das Programm im unsichtbaren Modus
+  <font color="#924B72">#PB_Program_Open</font>   : Öffnet ein Programm, um mit diesem zu kommunizieren oder Informationen darüber zu erhalten
+  <font color="#924B72">#PB_Program_Read</font>   : Liest die Konsolenausgabe des Programms (stdout)
+  <font color="#924B72">#PB_Program_Write</font>  : Schreibt in die Eingabe des Programms (stdin)
+  <font color="#924B72">#PB_Program_Error</font>  : Liest die Fehlerausgabe des Programms (stderr)
+  <font color="#924B72">#PB_Program_Connect</font>: Verbindet die Ausgabe eines anderen Programms mit der Eingabe dieses Programms
+  <font color="#924B72">#PB_Program_Ascii</font>  : Standard Lese/Schreib Operationen erfolgen in ASCII.
+  <font color="#924B72">#PB_Program_Unicode</font>: Standard Lese/Schreib Operationen erfolgen in Unicode.
+  <font color="#924B72">#PB_Program_UTF8</font>   : Standard Lese/Schreib Operationen erfolgen in UTF8 (Standard).
+</font></pre>
+
+Ein mittels <font color="#924B72">#PB_Program_Open</font> ausgeführtes Programm muss mit <a href="closeprogram.html">CloseProgram()</a> 
+geschlossen werden. Die 'Read', 'Write', 'Error' und 'Connect' Flags benötigen 
+auch ein gleichzeitig gesetztes <font color="#924B72">#PB_Program_Open</font> Flag. 
+<br>
+<br>
+Beim Verwenden des <font color="#924B72">#PB_Program_Connect</font> Flags muss zuvor ein anderes Programm mit den 
+<font color="#924B72">#PB_Program_Open</font> und <font color="#924B72">#PB_Program_Read</font> Flags gestartet worden sein. 
+Die beim Starten dieses Programms zurückgegebene Nummer muss als 'SenderProgramm' Parameter 
+an RunProgram() übergeben werden. 
+<br>
+<br>
+Die folgenden Befehle können verwendet werden, wenn ein Programm mit dem <font color="#924B72">#PB_Program_Open</font> Flag ausgeführt wurde: 
+<br>
+<br>
+- <a href="isprogram.html">IsProgram()</a>: überprüft, ob eine Nummer ein gültiges - mittels RunProgram() ausgeführtes Programm - darstellt. 
+<br>
+- <a href="programid.html">ProgramID()</a>: gibt die OS Prozess-ID des Programms zurück. 
+<br>
+- <a href="programrunning.html">ProgramRunning()</a>: überprüft, ob ein Programm noch läuft. 
+<br>
+- <a href="waitprogram.html">WaitProgram()</a>: wartet auf das Ende eines Programms. 
+<br>
+- <a href="killprogram.html">KillProgram()</a>: beendet das Programm. 
+<br>
+- <a href="programexitcode.html">ProgramExitCode()</a>: ermittelt den Exitcode des Programms. 
+<br>
+- <a href="closeprogram.html">CloseProgram()</a>: schließt die Verbindung zum Programm. 
+<br>
+<br>
+Die folgenden Befehle können für Programme, welche mit den 'Read', 'Write' und 'Error' Flags ausgeführt wurden, verwendet werden: 
+<br>
+<br>
+- <a href="availableprogramoutput.html">AvailableProgramOutput()</a>: überprüft, ob die Ausgabe eines Programms verfügbar ist. 
+<br>
+- <a href="readprogramstring.html">ReadProgramString()</a>: liest einen String von der Ausgabe des Programms. 
+<br>
+- <a href="readprogramdata.html">ReadProgramData()</a>: liest Daten von der Ausgabe des Programms. 
+<br>
+- <a href="readprogramerror.html">ReadProgramError()</a>: liest einen String von der Fehlerausgabe des Programms. 
+<br>
+- <a href="writeprogramstring.html">WriteProgramString()</a>: schreibt einen String in die Eingabe des Programms. 
+<br>
+- <a href="writeprogramdata.html">WriteProgramData()</a>: schreibt Daten in die Eingabe des Programms. 
+
+</td></tr>
+<tr><td><i>Sender-Programm (optional)</i></td>
+<td> 
+Wird in Verbindung mit dem <font color="#924B72">#PB_Program_Connect</font> Flag benötigt, und muss die Nummer eines 
+zuvor mittels RunProgram() und den <font color="#924B72">#PB_Program_Open</font> und <font color="#924B72">#PB_Program_Read</font> Flags gestarteten 
+anderen Programms beinhalten. Die Ausgabe des &quot;Sender-Programms&quot; wird dann direkt an 
+die Eingabe des nun ausgeführten Programms geschickt. Verschiedene Programme können auf 
+diese Art und Weise verbunden werden, um Daten zwischen verschiedenen Programmen 
+weiterzureichen (der englische Begriff ist 'pipe' - bildlich auch so vorstellbar: 
+&quot;der Datenstrom geht in einer Richtung durch alle Programme&quot;). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn das Programm erfolgreich gestartet wurde, andernfalls Null. 
+<br>
+<br>
+Wenn <font color="#924B72">#PB_Program_Open</font> in den übergebenen Flags enthalten war, ist der 
+Rückgabewert eine Nummer, welche das Programm identifiziert. Diese kann beim Aufruf von 
+Befehlen wie <a href="readprogramstring.html">ReadProgramString()</a> oder <a href="programexitcode.html">ProgramExitCode()</a> verwendet werden, um Informationen 
+über das Programm zu erhalten. Gleiches gilt analog bei anderen der oben genannten Befehle. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Führt den PB Compiler mit der -h Option aus und stellt die Ausgabe dar</font>
+  <font color="#006666">;</font>
+  Compiler =<font color="#006666"> RunProgram</font>(<font color="#924B72">#PB_Compiler_Home</font>+&quot;compilers/pbcompiler&quot;, &quot;-h&quot;, &quot;&quot;, <font color="#924B72">#PB_Program_Open</font> | <font color="#924B72">#PB_Program_Read</font>)
+  Output$ = &quot;&quot;
+  <b><font color="#006666">If</font></b> Compiler
+    <b><font color="#006666">While</font></b> <font color="#006666">ProgramRunning</font>(Compiler)
+      <b><font color="#006666">If</font></b> <font color="#006666">AvailableProgramOutput</font>(Compiler)
+        Output$ +<font color="#006666"> ReadProgramString</font>(Compiler) +<font color="#006666"> Chr</font>(13)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Wend</font></b>
+    Output$ +<font color="#006666"> Chr</font>(13) +<font color="#006666"> Chr</font>(13)
+    Output$ + &quot;Exitcode: &quot; +<font color="#006666"> Str</font>(<font color="#006666">ProgramExitCode</font>(Compiler))
+    
+<font color="#006666">    CloseProgram</font>(Compiler) <font color="#006666">; Schließt die Verbindung zum Programm</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;Output&quot;, Output$)
+</font></pre>
+
+Unter Windows verwendet RunProgram() die Standard-Applikation, welche mit dem Dateityp der angegebenen 
+Datei verknüpft ist. Ein Beispiel: RunProgram(&quot;Test.html&quot;) öffnet den WebBrowser, welcher auf Ihrem 
+System standardmäßig für das Anzeigen von Webseiten verwendet wird. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=removeenvironmentvariable.html>RemoveEnvironmentVariable()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=setenvironmentvariable.html>SetEnvironmentVariable()</a> -><br><br>
+
+</body></html>

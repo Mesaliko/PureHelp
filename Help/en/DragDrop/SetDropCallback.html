@@ -1,0 +1,87 @@
+<html><head><title>SetDropCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDropCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDropCallback</b></font>(@DropCallback())</blockquote>
+
+<b>Description</b><br><blockquote>
+
+A callback function to be called when data is dragged over a gadget or window that allows 
+data to be dropped (see <a href="enablegadgetdrop.html">EnableGadgetDrop()</a> / <a href="enablewindowdrop.html">EnableWindowDrop()</a>). 
+The callback allows to modify the Drag &amp; Drop process provided by PureBasic, for example by providing 
+extra visual notification on the target gadget or window. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@DropCallback()</i></td>
+<td width="90%"> 
+A callback to be called during a drop operation. 
+<br>
+<br>
+The callback is called as the mouse enters, moves and leaves the target gadget or window and allows to 
+provide additional feedback to the user, for example by highlighting the target item or area. 
+Furthermore the callback can deny the currently intended action and this way specify more detailed 
+where within a gadget or window the data can be dropped. 
+The cursor should not be modified here, as the drag source is responsible for this. 
+<br>
+<br>
+The form of the callback is described below: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DropCallback</font>(TargetHandle, State, Format, Action, x, y)
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+The first parameter specifies the <a href="../reference/handles.html">OS specific handle</a> for the target gadget or window. 
+On Windows this is a HWND value, on Linux a GtkWidget pointer and on MacOSX it is a ControlRef or WindowRef value. 
+These are the same values as returned by <a href="../gadget/gadgetid.html">GadgetID()</a> or <a href="../window/windowid.html">WindowID()</a> 
+for the target gadget or window. 
+<br>
+<br>
+'State' specifies the current state of the Drag &amp; Drop operation and is one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Enter</font> : The mouse entered the gadget or window
+  <font color="#924B72">#PB_Drag_Update</font>: The mouse was moved inside the gadget or window, or the intended action changed
+  <font color="#924B72">#PB_Drag_Leave</font> : The mouse left the gadget or window (Format, Action, x, y are 0 here)
+  <font color="#924B72">#PB_Drag_Finish</font>: The Drag &amp; Drop finished
+</font></pre>
+
+'Format' specifies the data format and can be one of the following values, or an OS specific ID for 
+a custom format (see <a href="dragosformats.html">DragOSFormats()</a> for more information). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drop_Text</font>   : Accept text on this gadget or window
+  <font color="#924B72">#PB_Drop_Image</font>  : Accept images on this gadget or window
+  <font color="#924B72">#PB_Drop_Files</font>  : Accept filenames on this gadget or window
+  <font color="#924B72">#PB_Drop_Private</font>: Accept a &quot;private&quot; Drag &amp; Drop on this gadget or window
+</font></pre>
+
+'Action' specifies the action that would be taken if the user released the mouse at this point. 
+It can be one of these values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: The data will not be accepted if dropped here
+  <font color="#924B72">#PB_Drag_Copy</font>: The data will be copied
+  <font color="#924B72">#PB_Drag_Move</font>: The data will be moved
+  <font color="#924B72">#PB_Drag_Link</font>: The data will be linked
+</font></pre>
+
+By returning <font color="#924B72">#True</font>, the callback allows the action to take place at this point. 
+By returning <font color="#924B72">#False</font>, the callback denies the action (the cursor will be 
+changed to a &quot;forbidden&quot; cursor by the drag source, except on Linux GTK). 
+Especially if 'State' is <font color="#924B72">#PB_Drag_Finish</font>, returning <font color="#924B72">#False</font> will cause 
+the whole Drag &amp; Drop operation to fail. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setdragcallback.html>SetDragCallback()</a> - <a href=index.html>DragDrop Index</a><br><br>
+
+</body></html>

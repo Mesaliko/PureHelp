@@ -1,0 +1,132 @@
+<html><head><title>Einsteiger-Kapitel - Anzeigen von Text-Ausgabe (Konsole)</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Anzeigen von Text-Ausgabe (Konsole)</font></b></p>
+
+Im vorangegangenen Thema <a href="../reference/ug_inputoutput.html">Eingabe & Ausgabe</a> haben Sie 
+bereits einen Überblick über die verschiedenen Möglichkeiten gesehen, Text an den 
+Anwender auszugeben. Und im Thema <a href="../reference/ug_data.html">Speichern von Daten im Speicher</a> 
+haben wir begonnen eine kleine Applikation zu erstellen, welche uns die Eigenschaften 
+der Dateien in einem bestimmten Ordner im <a href="../reference/debugger.html">Debug-Fenster</a> anzeigt. 
+<br>
+<br>
+Jetzt werden wir uns dieses Beispiel noch einmal ansehen, um den Abschnitt der 
+Datenausgabe zu verbessern und damit einige Probleme bei der Verwendung des Debug-Fensters 
+zu lösen. Erstens ist dieses Fenster nur in der PureBasic IDE verfügbar - was bedeutet, dass 
+es nur für Programmierer nützlich ist; und zweitens gibt es uns nicht wirklich viel Kontrolle 
+darüber, wie unsere Ausgabe aussieht. 
+<br>
+<br>
+PureBasic bietet ein Textmodus-Fenster bzw. <a href="../console/openconsole.html">Konsolen-Fenster</a>, 
+welches in kompilierten Programmen verwendet werden kann. Lassen Sie uns also unser Beispiel 
+aktualisieren, um diese Ausgabemöglichkeit zu verwenden. 
+<br>
+<br>
+Zuerst benötigen wir einige weitere Variablen, um dies ordentlich umzusetzen. 
+Die Änderung der Variablen-Definitionen sieht wie folgt aus: 
+<pre><font face="Courier New, Courier, mono" size="2">  ...
+  
+  <font color="#006666">; Jetzt definieren wir eine neue Liste an Dateien unter Verwendung der zuvor spezifizierten</font>
+  <font color="#006666">; Struktur, und einige andere Variablen welche wir später verwenden werden.</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Files</font>.FILEITEM()
+  <b><font color="#006666">Define</font></b>.s Access, Attrib, Create, Folder, Modify, Msg, Num, Size
+  <b><font color="#006666">Define</font></b>.l Result
+  
+  ...
+</font></pre>
+
+Als nächstes entfernen wir den Ausgabe-Abschnitt im Code komplett, beginnend bei der 
+Kommentar-Zeile: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Wenn es einige Einträge in der Liste gibt, zeigen wir die Ergebnisse im Debug-Ausgabefenster.</font>
+  ...
+</font></pre>
+
+Und ersetzen diesen mit: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Öffnen eines Textmodus-Fenster zum Anzeigen der Ergebnisse.</font>
+<font color="#006666">  OpenConsole</font>()
+  
+  <font color="#006666">; Anzeigen eines Titels.</font>
+  <font color="#006666">; PrintN zeigt den angegebenen String im Konsolen-Fenster an und bewegt die</font>
+  <font color="#006666">;        Ausgabe-Position an den Anfang der darauffolgenden Zeile.</font>
+  <font color="#006666">; Space(n) gibt n Leerzeichen in einem String zurück.</font>
+<font color="#006666">  PrintN</font>(&quot;File list of &quot; + Folder + &quot;.&quot;)
+<font color="#006666">  PrintN</font>(&quot;-------------------------------------------------------------------------------&quot;)
+  Msg = &quot;Num Name&quot;
+<font color="#006666">  PrintN</font>(Msg)
+  Msg =<font color="#006666"> Space</font>(4) + &quot;Create&quot; +<font color="#006666"> Space</font>(5) + &quot;Access&quot; +<font color="#006666"> Space</font>(5) + &quot;Modify&quot; +<font color="#006666"> Space</font>(5) + &quot;Attrib Size&quot;
+<font color="#006666">  PrintN</font>(Msg)
+  
+  <font color="#006666">; Verkettete Liste durchlaufen, um die Ergebnisse anzuzeigen.</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Files</font>()
+
+    <font color="#006666">; Tabellarisieren der Nummer des Listen-Index</font>
+��������<font color="#006666">; ListIndex() gibt die aktuelle Position in der Liste, beginnend bei Null, zurück.</font>
+��������<font color="#006666">; StrU wandelt eine Zahl ohne Vorzeichen in einen String.</font>
+��������<font color="#006666">; RSet erweitert einen String auf eine angegebene Länge mit der notwendigen Anzahl</font>
+    <font color="#006666">; eines angegebenen Zeichens am Beginn.</font>
+��������<font color="#006666">; Hier haben wir dies verwendet, um (mit zusätzlichen Leerzeichen) sicherzustellen,</font>
+    <font color="#006666">; dass alle Index-Nummern auf 3 Zeichen Länge erweitert sind.</font>
+    Num =<font color="#006666"> RSet</font>(<font color="#006666">StrU</font>(<font color="#006666">ListIndex</font>(<font color="#006666">Files</font>()) + 1), 3, &quot; &quot;)
+    
+    <font color="#006666">; Eintrag-Nummer und Dateiname anzeigen.</font>
+    Msg = Num + &quot; &quot; +<font color="#006666"> Files</font>()\Name
+<font color="#006666">    PrintN</font>(Msg)
+    
+    <font color="#006666">; Diese Zeilen konvertieren die drei Datumswerte in eine gebräuchlichere Ansicht.</font>
+    Create =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateCreated)
+    Access =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateAccessed)
+    Modify =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateModified)
+    
+    <font color="#006666">; Konvertiert die Dateigröße in einen String - genauso wie vorhin den Index-Wert,</font>
+����  <font color="#006666">; lässt aber Platz für die maximale Größe eines Quad-Wertes.</font>
+    Size =<font color="#006666"> RSet</font>(<font color="#006666">StrU</font>(<font color="#006666">Files</font>()\Size), 19)
+    
+    <font color="#006666">; Konvertiert die Attribute vorerst in einen String.</font>
+    Attrib =<font color="#006666"> RSet</font>(<font color="#006666">StrU</font>(<font color="#006666">Files</font>()\Attributes), 6, &quot; &quot;)
+    
+    <font color="#006666">; Zeigt die Datei-Eigenschaften an.</font>
+    Msg =<font color="#006666"> Space</font>(4) + Create + &quot; &quot; + Access + &quot; &quot; + Modify + &quot; &quot; + Attrib + &quot; &quot; + Size
+<font color="#006666">    PrintN</font>(Msg)
+    
+    <font color="#006666">; Anzeigen einer Leerzeile.</font>
+<font color="#006666">    PrintN</font>(&quot;&quot;)
+    
+  <b><font color="#006666">Next</font></b> <font color="#006666">Files</font>()
+  
+  <font color="#006666">; Warten auf die Return-Taste, damit die Ergebnisse angesehen werden können, bevor das Fenster schließt.</font>
+<font color="#006666">  PrintN</font>(&quot;&quot;)
+<font color="#006666">  PrintN</font>(&quot;Press return to exit&quot;)
+<font color="#006666">  Input</font>()
+</font></pre>
+
+Wenn alles gut geht, sollte die Ausgabe in einem Konsolenfenster in etwa so aussehen: 
+<pre><font face="Courier New, Courier, mono" size="2">  File <b><font color="#006666">List</font></b> of C:\Documents <b><font color="#006666">And</font></b> Settings\user\.
+  -------------------------------------------------------------------------------
+  Num Name
+      Create     Access     Modify     Attrib Size
+    1 NTUSER.DAT
+      03/07/2008 04/04/2011 02/04/2011     34            18874368
+  
+    2 kunzip.dll
+      14/07/2008 04/04/2011 14/07/2008     32               18432
+  
+    3 ntuser.dat.LOG
+      03/07/2008 04/04/2011 04/04/2011     34                1024
+  
+    4 ntuser.ini
+      03/07/2008 02/04/2011 02/04/2011      6                 278
+  
+  Press <b><font color="#006666">Return</font></b> <b><font color="#006666">To</font></b> exit
+</font></pre>
+
+Diese Ausgabe ist von einem Windows XP System, spätere Versionen von Windows sowie Linux und 
+Mac OSX werden natürlich andere Datei anzeigen. 
+<br>
+<b>Hinweis für Linux/MacOS:</b> Bitte darauf achten, dass Sie &quot;Konsole&quot; als Executable-Format in den 
+<a href="../reference/ide_compiler.html">Compiler-Optionen</a> auswählen. 
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_inputoutput.html">< Vorheriges: Eingabe & Ausgabe</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_gui.html">Nächstes: Erstellen einer grafischen Benutzeroberfläche (GUI) ></a> 
+</blockquote>
+</font></body></html>

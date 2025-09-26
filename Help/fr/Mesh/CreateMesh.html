@@ -1,0 +1,74 @@
+<html><head><title>CreateMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateMesh()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateMesh</b></font>(#Mesh [, Type [, Mode])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Créé un nouveau mesh complètement vide. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau mesh. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Type (optionnel)</i></td>
+<td> 
+Le type du nouveau mesh. Peut être une des 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_TriangleList</font> : Le mesh est composé d'une liste de triangles (par défaut).
+  <font color="#924B72">#PB_Mesh_TriangleStrip</font>: Le mesh est composé d'une liste de triangles connectés (Les sommets sont partagés).
+  <font color="#924B72">#PB_Mesh_TriangleFan</font>  : Le mesh est composé d'une liste de triangles qui partagent le même sommet central .
+  <font color="#924B72">#PB_Mesh_PointList</font>    : Le mesh est composé d'une liste de points.
+  <font color="#924B72">#PB_Mesh_LineList</font>     : Le mesh est composé d'une liste de lignes.
+  <font color="#924B72">#PB_Mesh_LineStrip</font>    : Le mesh est composé d'une liste de lignes connectées (Les sommets sont partagés).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Le mode du nouveau mesh. Peut être une des 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_Static</font> : Une fois créé, le mesh ne peut plus être modifié avec les fonctions de mise à jour de mesh (par défaut).
+  <font color="#924B72">#PB_Mesh_Dynamic</font>: Une fois créé, le mesh peut être modifié avec les fonctions de mise à jour de mesh.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Mesh, alors la valeur de retour est le 
+numéro d'identification, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Après création, les commandes comme 
+<a href="meshvertexposition.html">MeshVertexPosition()</a> ou <a href="meshface.html">MeshFace()</a> 
+peuvent être utilisés pour le construire. 
+<br>
+<br>
+Si le mesh était déjà créé, il est 
+automatiquement supprimé et remplacé par le 
+nouveau. 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createline3d.html>CreateLine3D()</a> - <a href=index.html>Mesh Index</a> - <a href=createplane.html>CreatePlane()</a> -><br><br>
+
+</body></html>

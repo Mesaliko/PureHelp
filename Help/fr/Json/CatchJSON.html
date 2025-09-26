@@ -1,0 +1,107 @@
+<html><head><title>CatchJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchJSON()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchJSON</b></font>(#JSON, *Memoire, Taille [, Option])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Parcourt (parse) les données JSON d'une 
+mémoire tampon. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+Numéro d'identification du nouveau JSON. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+Un emplacement de mémoire accessible en 
+lecture. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+Longueur (en octets) de l'emplacement en 
+mémoire. 
+
+</td></tr>
+<tr><td><i>Option (optionnel)</i></td>
+<td> 
+<font color="#924B72">#PB_JSON_NoCase</font> : Les données JSON 
+seront parcourues sans tenir compte 
+de la casse. 
+<br>
+<br>
+La valeur par défaut est d'être sensible 
+à la casse. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les 
+données JSON ont été parcourues 
+correctement, zéro sinon.<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé comme paramètre 
+#JSON alors le nombre généré est renvoyé 
+en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le contenu de la mémoire tampon doit être 
+codé au format UTF-8. 
+<br>
+<br>
+La fonction <a href="jsonvalue.html">JSONValue()</a> peut être 
+utilisée pour accéder à la valeur JSON 
+après l'analyse. 
+<br>
+<br>
+En cas d'erreur, les fonctions 
+<a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a> et 
+<a href="jsonerrorposition.html">JSONErrorPosition()</a> peuvent être utilisées 
+pour obtenir plus d'informations sur 
+l'erreur. 
+<br>
+<br>
+Pour parcourir les données JSON directement 
+à partir d'une chaîne, la fonction 
+<a href="parsejson.html">ParseJSON()</a> peut être utilisée à la place. 
+<br>
+<br>
+JSON est un format de données sensible à 
+la casse. Cependant, dans certaines 
+situations, telles que l'utilisation de 
+structures de désérialisation avec 
+<a href="extractjsonstructure.html">ExtractJSONStructure()</a> ou des commandes 
+similaires, il peut être utile de traiter 
+des objets JSON de façon insensible à la 
+casse. 
+L'option <font color="#924B72">#PB_JSON_NoCase</font> permet de 
+traiter les clés de chaque membre de 
+l'objet de façon insensible à la casse. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createjson.html">CreateJSON()</a>, <a href="parsejson.html">ParseJSON()</a>, <a href="loadjson.html">LoadJSON()</a>, 
+<a href="jsonvalue.html">JSONValue()</a>, <a href="freejson.html">FreeJSON()</a>, 
+<a href="jsonerrormessage.html">JSONErrorMessage()</a>, <a href="jsonerrorline.html">JSONErrorLine()</a>, 
+<a href="jsonerrorposition.html">JSONErrorPosition()</a>, 
+<a href="exportjson.html">ExportJSON()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addjsonmember.html>AddJSONMember()</a> - <a href=index.html>Json Index</a> - <a href=clearjsonelements.html>ClearJSONElements()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,42 @@
+<html><head><title>MenuBar</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MenuBar()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MenuBar</b></font>() </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une barre de séparation horizontale dans 
+un menu déroulant. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;Exemple MenuBar&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))  <font color="#006666">; la création du menu commence ici....</font>
+<font color="#006666">      MenuTitle</font>(&quot;Projet&quot;)
+<font color="#006666">        MenuItem</font>(1, &quot;Ouvrir&quot;)
+<font color="#006666">        MenuBar</font>()                 <font color="#006666">; la barre de séparation sera insérée ici</font>
+<font color="#006666">        MenuItem</font>(4, &quot;Fermer&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>()=<font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/menubar.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="opensubmenu.html">OpenSubMenu()</a>, 
+<a href="createmenu.html">CreateMenu()</a>, <a href="createpopupmenu.html">CreatePopupMenu()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=ismenu.html>IsMenu()</a> - <a href=index.html>Menu Index</a> - <a href=menuheight.html>MenuHeight()</a> -><br><br>
+
+</body></html>

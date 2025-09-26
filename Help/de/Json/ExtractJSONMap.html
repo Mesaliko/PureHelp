@@ -1,0 +1,66 @@
+<html><head><title>ExtractJSONMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractJSONMap()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ExtractJSONMap</b></font>(JSONWert, Map())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Extrahiert Elemente vom angegebenen JSON-Wert des <a href="jsontype.html">Typs</a> <font color="#924B72">#PB_JSON_Object</font> 
+in die angegebene Map(). Die Map wird in der Größe auf die Anzahl der im JSON-Wert 
+beinhalteten Elemente angepasst. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONWert</i></td>
+<td width="90%"> 
+Der JSON-Wert. Der Wert muss vom Typ <font color="#924B72">#PB_JSON_Object</font> sein. 
+
+</td></tr>
+<tr><td><i>Map()</i></td>
+<td> 
+Die <a href="../map/index.html">Map</a>, welche mit den JSON-Elementen gefüllt werden soll. 
+Die Map wird in der Größe angepasst, um die gleiche Größe wie der JSON-Wert zu haben. 
+Der gesamte vorherige Inhalt der Map geht verloren. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Extrahierung erfolgt rekursiv, wenn die Map einen Struktur-Typ hat. Wenn der 
+JSON-Wert Elemente enthält, die nicht den richtigen Typ haben, um mit der Map() 
+übereinzustimmen, dann werden sie ignoriert und das zugehörige Map-Element bleibt 
+leer. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Input$ = &quot;{&quot; +<font color="#006666"> Chr</font>(34) + &quot;enabled&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 1, &quot; + 
+<font color="#006666">                 Chr</font>(34) + &quot;displayed&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 1, &quot; + 
+<font color="#006666">                 Chr</font>(34) + &quot;visible&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 0 }&quot;        
+<font color="#006666">  ParseJSON</font>(0, Input$)
+  
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">Options</font>()
+<font color="#006666">  ExtractJSONMap</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> Options</font>())       
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Options</font>(&quot;enabled&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Options</font>(&quot;visible&quot;)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="extractjsonarray.html">ExtractJSONArray()</a>, <a href="extractjsonlist.html">ExtractJSONList()</a>, <a href="extractjsonstructure.html">ExtractJSONStructure()</a>, 
+<a href="insertjsonarray.html">InsertJSONArray()</a>, <a href="insertjsonlist.html">InsertJSONList()</a>, <a href="insertjsonmap.html">InsertJSONMap()</a>, <a href="insertjsonstructure.html">InsertJSONStructure()</a>, 
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=extractjsonlist.html>ExtractJSONList()</a> - <a href=index.html>Json Inhaltsverzeichnis</a> - <a href=extractjsonstructure.html>ExtractJSONStructure()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,82 @@
+<html><head><title>CatchXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchXML()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CatchXML</b></font>(#XML, *Adresse, Größe [, Flags [, Kodierung]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt einen neuen XML-Baum aus den XML-Daten des angegebenen Speicherbereichs. 
+Das &quot;Markup&quot; (Formatierung) kann durch mehrfachen Aufruf dieser Funktion in Blöcken analysiert 
+werden, um das Analysieren (Parsen) von XML-Daten zu erlauben, während diese zum Beispiel vom 
+<a href="../network/index.html">Netzwerk</a> eintreffen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren der neuen XML-Struktur. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese 
+Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>*Adresse</i></td>
+<td> 
+Eine lesbare Speicherposition. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Größe (in Bytes) des Speicherbereichs. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Wird dieser nicht angegeben, dann muss der Speicherblock alle XML-Daten beinhalten. 
+Um XML in mehreren Blöcken zu parsen, können die folgenden Flags verwendet werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_StreamStart</font>: Startet das Parsen mit dem ersten Block
+  <font color="#924B72">#PB_XML_StreamNext</font> : Setzt das Parsen mit einem neuen Block fort
+  <font color="#924B72">#PB_XML_StreamEnd</font>  : Beendet das Parsen nach diesem Block
+</font></pre>
+Wenn diese Funktion mit <font color="#924B72">#PB_XML_StreamStart</font> oder <font color="#924B72">#PB_XML_StreamEnd</font> 
+aufgerufen wird, dann kann der Parameter 'Größe' 0 sein, um die Parser-Operation zu starten/zu beenden, 
+ohne dabei weitere Daten zu analysieren. 
+<br>
+<br>
+Beachten Sie beim Parsen in Blöcken, dass auf alle schon analysierten Daten im XML-Baum bereits 
+vor einem Aufruf mit <font color="#924B72">#PB_XML_StreamEnd</font> zugegriffen werden kann. 
+
+</td></tr>
+<tr><td><i>Kodierung (optional)</i></td>
+<td> 
+Die beim Laden des XML-Baums zu verwendende Kodierung (dies überschreibt das 
+Kodierungs-Set in der XML-Deklaration). Gültige Werte sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font> (Standard)
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font>
+</font></pre>
+Dieser Parameter sollte verwendet werden, wenn das Dokument keine XML-Deklaration hat, oder die Kodierungs-Information 
+außerhalb des XML-Dokuments bereitgestellt wird, zum Beispiel durch einen Mime-Type-Header in einem 
+Kommunikationsprotokoll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Diese Funktion gibt nur Null bei Speicherfehlern oder ungültigen Flags zurück. 
+Um eine Überprüfung auf Parser-Fehler vorzunehmen, sollte <a href="xmlstatus.html">XMLStatus()</a> verwendet werden. 
+Im Falle eines Parser-Fehlers kann auf alle vor dem Fehler analysierten (&quot;geparsten&quot;) Daten im 
+XML-Baum zugegriffen werden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freexml.html">FreeXML()</a>, <a href="createxml.html">CreateXML()</a>, <a href="loadxml.html">LoadXML()</a>, <a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>XML Inhaltsverzeichnis</a> - <a href=childxmlnode.html>ChildXMLNode()</a> -><br><br>
+
+</body></html>

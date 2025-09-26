@@ -1,0 +1,86 @@
+<html><head><title>Alpha</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Alpha()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>Alpha</b></font>(Couleur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la valeur de la composante alpha 
+(transparence) d'une couleur. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Couleur</i></td>
+<td width="90%"> 
+La valeur de la couleur. 
+<br>
+<br>
+Cela ne peut être qu'une valeur RGBA 32 bits. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de la composante alpha. 
+<br>
+Une valeur de 0 signifie une complète 
+transparence et une valeur de 255 signifie 
+opacité totale.<br>
+Le résultat sera compris entre 0 et 255. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="rgba.html">RGBA()</a> permet de combiner les valeurs rouge, 
+verte, bleue et alpha en une couleur 32 bits. 
+<br>
+Ces fonctions sont utiles lors des opérations de 
+<a href="../2ddrawing/index.html">dessin 2D</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;Alpha&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_ScreenCentered</font>)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 800, 600, 32) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0)) <font color="#006666">; création d'une image fond noir par défaut</font>
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaChannel</font>) <font color="#006666">; le Canal alpha (transparence) sera modifié</font>
+<font color="#006666">    Box</font>(0, 0, 200, 200, $00000000)          <font color="#006666">; le noir est complètement transparent</font>
+   
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaBlend</font>)   <font color="#006666">; le dessin sera fusionné avec le fond en utilisant le canal alpha pour gérer la transparence de chaque pixel</font>
+<font color="#006666">    Circle</font>( 75,  75, 50,<font color="#006666"> RGBA</font>(255,   0,   0, 64))  <font color="#006666">; Cercle rouge très transparent</font>
+<font color="#006666">    Circle</font>(125,  75, 50,<font color="#006666"> RGBA</font>(  0, 255,   0, 128)) <font color="#006666">; Cercle vert moyennement transparent</font>
+<font color="#006666">    Circle</font>(100, 125, 50,<font color="#006666"> RGBA</font>(  0,   0, 255, 192)) <font color="#006666">; Cercle bleu peu transparent</font>
+<font color="#006666">    DrawText</font>(20, 180, &quot;Cliquer sur le dessin&quot;)     <font color="#006666">; Texte sans transparence</font>
+<font color="#006666">    StopDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+ 
+<font color="#006666">  ImageGadget</font>(0, 0, 0, 0, 0,<font color="#006666"> ImageID</font>(0))  <font color="#006666">; Affichage du dessin dans un gadget</font>
+  
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>(0) 
+      <b><font color="#006666">If</font></b>  Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_LeftClick</font>  
+        x =<font color="#006666"> WindowMouseX</font>(0)
+        y =<font color="#006666"> WindowMouseY</font>(0)
+        <b><font color="#006666">If</font></b> <font color="#006666">Bool</font>(x&gt;0  <b><font color="#006666">And</font></b> y&gt;0)      
+<font color="#006666">          StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">          DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_AlphaBlend</font>)
+          Couleur =<font color="#006666"> Point</font>(x,y)
+          Transparence =<font color="#006666"> Alpha</font>(Couleur)
+          <b><font color="#006666">Debug</font></b> &quot;La composante Transparence vaut : &quot; +<font color="#006666"> Str</font>(Transparence)
+<font color="#006666">          StopDrawing</font>()
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>   
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="red.html">Red()</a>, <a href="green.html">Green()</a>, <a href="blue.html">Blue()</a>, <a href="rgba.html">RGBA()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>2DDrawing Index</a> - <a href=alphablend.html>AlphaBlend()</a> -><br><br>
+
+</body></html>

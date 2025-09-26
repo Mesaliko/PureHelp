@@ -1,0 +1,103 @@
+<html><head><title>AddSubEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddSubEntity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>AddSubEntity</b></font>(#Entity, #SubEntity, Typ, [OffsetX, OffsetY, OffsetZ [, GrößeX, GrößeY, GrößeZ [, AchseX, AchseY, AchseZ]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt ein &quot;Sub-Entity&quot; zu einem Entity hinzu. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Das zu verwendende Entity. 
+
+</td></tr>
+<tr><td><i>#SubEntity</i></td>
+<td> 
+Das hinzuzufügende Entity. 
+
+</td></tr>
+<tr><td><i>Typ</i></td>
+<td> 
+Typ definiert, wie die Physik-Engine dieses Entity behandeln wird. Dies kann eine 
+der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_StaticBody</font> : Der Körper ist nur statisch, was bedeutet, dass das Mesh nicht animiert werden kann.
+                          Dieser Modus erlaubt sehr präzise Kollisionen, da diese gegen Dreiecke
+                          ausgeführt werden (auch bekannt als &quot;Tri-Mesh Collision&quot;). Er ist auch 
+                          schnell bei Zusammenstößen mit den Entity-Körpertypen Kasten (&quot;Box&quot;) und
+                          Kugel (&quot;Sphere&quot;). Er ist perfekt, wenn das Mesh für die Erde oder eine
+                          statische Welt verwendet wird.
+  <font color="#924B72">#PB_Entity_PlaneBody</font>  : Eine 'virtuelle' Ebene (&quot;plane&quot;) wird rings um das Entity gelegt (mit den gleichen Abmessungen)
+                          und wird für das Managen von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_ConeBody</font>   : Ein 'virtueller' Kegel (&quot;cone&quot;) wird rings um das Entity gelegt (mit den gleichen Abmessungen)
+                          und wird für das Managen von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_BoxBody</font>    : Eine 'virtuelle' Box wird rings um das Entity gelegt (mit den gleichen Abmessungen)
+                          und wird für das Managen von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_SphereBody</font> : Eine 'virtuelle' Kugel wird rings um das Entity gelegt und wird für das Managen
+                          von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_CylinderBody</font> : Ein 'virteller' Zylinder wird rings um das Entity gelegt und wird für das Managen
+                          von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : Eine 'virtelle' Kapsel wird rings um das Entity gelegt und wird für das Managen
+                          von Kollisionen mit anderen 'Entities' verwendet.
+  <font color="#924B72">#PB_Entity_ConvexHullBody</font> : Eine 'virtuelle' komplexe Form - abgeleitet vom tatsächlichen Mesh - wird rings
+                          um das Entity gelegt und wird für das Managen von Kollisionen mit anderen 'Entities' verwendet.           
+                          Dieser Modus ist langsamer als die grundlegenden Kollisionsformen.
+  <font color="#924B72">#PB_Entity_CompoundBody</font>   : Ein 'virtueller' zusammengesetzter Körper (&quot;compound body&quot;) wird rings um das Entity
+                          gelegt. Dies ist die schnellste Möglichkeit für eine beliebige Form. Diese wird durch einen
+              &quot;Haufen&quot; an Ecken (Scheiteln, englisch &quot;vertices&quot;) definiert, jedoch wird die Form aus der
+              kleinsten konvexen Form gebildet, welche die Ecken umschließt.
+</font></pre>
+
+</td></tr>
+<tr><td><i>OffsetX, OffsetY, OffsetZ (optional)</i></td>
+<td> 
+Versatz (Offset) der Übersetzung (&quot;translation&quot;) des Körpers. 
+
+</td></tr>
+<tr><td><i>GrößeX, GrößeY, GrößeZ (optional)</i></td>
+<td> 
+Die Größe vom Begrenzungsrahmen (englisch &quot;bounding box&quot;) des Körpers. Dies gilt nur für 
+die folgenden Körper-Typen: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_BoxBody</font>     : GrößeX, GrößeY und GrößeZ sind verfügbar.
+  <font color="#924B72">#PB_Entity_SphereBody</font>  : GrößeX ist verfügbar.
+  <font color="#924B72">#PB_Entity_ConeBody</font>    : GrößeX und GrößeY sind verfügbar.
+  <font color="#924B72">#PB_Entity_CylinderBody</font>: GrößeX und GrößeY sind verfügbar.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : GrößeX, GrößeY und GrößeZ sind verfügbar.
+</font></pre>
+Wenn GrößeX = -1, dann wird der Begrenzungsrahmen verwendet. 
+
+</td></tr>
+<tr><td><i>AchseX, AchseY, AchseZ (optional)</i></td>
+<td> 
+Die Achsen der Körperorientierung. Dies gilt nur für die folgenden Körper-Typen: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_PlaneBody</font>
+  <font color="#924B72">#PB_Entity_CylinderBody</font>
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> 
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt Null zurück, wenn das Entity nicht erstellt werden konnte. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es ist notwendig, die <a href="createentitybody.html">CreateEntityBody()</a> Funktion mit der 
+#PB_Entity_CompoundBody Option zu verwenden, nachdem alle 'Sub-Entities' hinzugefügt wurden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createentity.html">CreateEntity()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Entity Inhaltsverzeichnis</a> - <a href=applyentityforce.html>ApplyEntityForce()</a> -><br><br>
+
+</body></html>

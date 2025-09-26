@@ -1,0 +1,74 @@
+<html><head><title>CreateShader</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateShader()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateShader</b></font>(ShaderID, VertexProgramm$, FragmenteProgramm$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt einen neuen Shader mit den angegebenen Vertex- und Fragmentprogrammen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ShaderID</i></td>
+<td width="90%"> 
+Eine Zahl zwischen 0 und 65536, um den neuen Shader zu identifizieren. 
+Um einen der vordefinierten Shader auszuwählen, verwenden Sie einen der folgenden 
+Werte als 'ShaderID' (VertexProgramm$ und FragmentProgramm$ Parameter werden ignoriert): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_ColorShader</font>
+  <font color="#924B72">#PB_Material_PerpixelShader</font>
+  <font color="#924B72">#PB_Material_BumpShader</font>
+  <font color="#924B72">#PB_Material_SkyShader</font>
+  <font color="#924B72">#PB_Material_WaterShader</font>
+  <font color="#924B72">#PB_Material_WaterShaderRTT</font>
+  <font color="#924B72">#PB_Material_OceanShader</font>
+  <font color="#924B72">#PB_Material_PointSpriteSphereShader</font>
+</font></pre>
+
+</td></tr>
+<tr><td><i>VertexProgramm$</i></td>
+<td> 
+Das für Vertexe (Scheitelpunkte) zu verwendende GLSL-Programm. 
+
+</td></tr>
+<tr><td><i>FragmenteProgramm$</i></td>
+<td> 
+Das für Fragmente zu verwendende GLSL-Programm. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn der Shader erfolgreich erstellt wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Shader müssen normalerweise Parameter erhalten, um zu funktionieren, und zwei Funktionen 
+ermöglichen die Übergabe dieser Parameter: <a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a> (automatischer 
+Parameter) und <a href="materialshaderparameter.html">MaterialShaderParameter()</a> (Shader-Parameter).<br>
+PureBasic ermöglicht es auch, diese Parameter direkt in den Shader-Programmen einzustellen, 
+indem am Ende der 'uniform' Deklarationszeile folgendes hinzugefügt wird: &quot;//&quot; gefolgt von 
+entweder:<br>
+- die Auto-Parameternummer mit vorangestelltem &quot;+&quot; (vgl. 'ParameterTyp'-Konstanten der Funktion 
+<a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a>). <br>
+- ein oder mehrere Werte (durch Leerzeichen getrennt), entsprechend dem Shader-Parameter 
+(<a href="materialshaderparameter.html">MaterialShaderParameter()</a>). <br>
+<br>
+Beispiel:<br>
+uniform vec4 camera_pos;//+76 &lt;- automatischer Parameter <font color="#924B72">#PB_Shader_CameraPosition</font> <br>
+uniform vec4 fog_params;//+31 &lt;- automatischer Parameter <font color="#924B72">#PB_Shader_FogParams</font> <br>
+uniform vec3 speed;//0.5 1 0 &lt;- Shader-Parameter 'speed' <br>
+uniform sampler2D diffuseMap;//1 &lt;- Shader-Parameter Textur-Nummer <br>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createshadermaterial.html">CreateShaderMaterial()</a>, <a href="materialshaderautoparameter.html">MaterialShaderAutoParameter()</a>, <a href="materialshaderparameter.html">MaterialShaderParameter()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=creatematerial.html>CreateMaterial()</a> - <a href=index.html>Material Inhaltsverzeichnis</a> - <a href=createshadermaterial.html>CreateShaderMaterial()</a> -><br><br>
+
+</body></html>

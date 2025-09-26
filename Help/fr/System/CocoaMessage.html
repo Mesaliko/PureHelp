@@ -1,0 +1,125 @@
+<html><head><title>CocoaMessage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CocoaMessage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CocoaMessage</b></font>(AddresseValeurDeRetour, Objet, Methode$ [, ValeurParametre [, Parametre$, [, ValeurParametre, ...]]])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Pour les utilisateurs avancés. Disponible sur 
+Mac OS X uniquement, elle permet d'envoyer 
+facilement un message Objective-C au framework 
+OS X et d'accéder à toute l'API. Habituellement 
+Objective-C utilise des parenthèses pour avoir 
+une syntaxe claire pour les messages. 
+Comme PureBasic ne supporte pas Objective-C en 
+natif, il doit l'émuler, alors la syntaxe est 
+un peu différente. Une fois apprise, il est 
+facile d'appeler une API. 
+Pour plus d'exemples, n'hésitez pas à lire le 
+thread suivant sur le 
+<a href="http://www.purebasic.fr/english/viewtopic.php?f=19&t=50795">forum</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>AddresseValeurDeRetour</i></td>
+<td width="90%"> 
+Si l'appel de l'API renvoie une structure ou 
+un type différent d'entier 'integer', ce champ 
+est utilisé pour définir le résultat du retour. 
+Une adresse vers la structure ou la variable 
+doit être spécifiée. 
+Si zéro est spécifié, le résultat sera ignoré. 
+
+</td></tr>
+<tr><td><i>Objet</i></td>
+<td> 
+L'objet sur lequel les méthodes Objective-C 
+seront appelées. Il peut être égal à zéro si 
+la méthode est une méthode statique (c'est le 
+cas la plupart du temps lors de la création 
+d'un objet). 
+
+</td></tr>
+<tr><td><i>Methode$</i></td>
+<td> 
+La méthode de l'objet à appeler, suivi d'un 
+';' comme d'habitude. 
+Si la méthode a besoin d'une structure comme 
+paramètre, '@' doit être ajouté après le 
+point-virgule. Si la méthode s'attend à 
+une chaîne comme paramètre, '$' peut être 
+ajouté après le point-virgule, de sorte que 
+la chaîne sera automatiquement convertie dans 
+une NSString temporaire. Ce n'est pas requis, 
+mais il peut être utile et ça facilite le 
+codage. Si la méthode n'est pas prise en 
+charge par l'objet, un message du débogueur 
+sera levé lors de l'exécution. 
+
+</td></tr>
+<tr><td><i>ValeurParametre (optionnel)</i></td>
+<td> 
+La valeur du paramètre associé à la méthode 
+précédente. 
+
+</td></tr>
+<tr><td><i>Parameter$ (optionnel)</i></td>
+<td> 
+Le paramètre de la méthode suivante. 
+PureBasic supporte jusqu'à 7 
+paramètres par méthode. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Valeur de retour de type 'Integer'. Utile 
+pour la création d'identifiant d'objets. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+PureBasic a déjà configuré un pool de mémoire 
+temporaire qui est vidé à chaque fois que 
+<a href="../window/windowevent.html">WindowEvent()</a> ou <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> est appelé. 
+Si vous avez besoin de libérer immédiatement 
+les gros objets, vous devrez créer un pool de 
+mémoire locale pour chacun de vos appels. 
+
+</blockquote><p><b>Exemple:</b> avec une chaîne</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Objective-C: </font>
+  <font color="#006666">;   ColorList = [NSColorList colorListNamed:@&quot;Crayons&quot;];</font>
+  <font color="#006666">;</font>
+  ColorList =<font color="#006666"> CocoaMessage</font>(0, 0, &quot;NSColorList colorListNamed:$&quot;, @&quot;Crayons&quot;) <font color="#006666">; Créera un NSString pour &quot;Crayons&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> avec un type complexe</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Objective-C: </font>
+  <font color="#006666">;   Transform = [NSAffineTransform transform];</font>
+  <font color="#006666">;</font>
+  Transform =<font color="#006666"> CocoaMessage</font>(0, 0, &quot;NSAffineTransform transform&quot;) <font color="#006666">; Obtenir une 'identity transform'</font>
+
+  <font color="#006666">; Objective-C: </font>
+  <font color="#006666">;   [TransForm scaleXBy:sx yBy:sy];</font>
+  <font color="#006666">;</font>
+  sx.CGFloat = 5.5
+  sy.CGFloat = 20
+<font color="#006666">  CocoaMessage</font>(0, TransForm, &quot;scaleXBy:@&quot;, @sx, &quot;yBy:@&quot;, @sy) <font color="#006666">; Agrandit x par 5.5, y par 20. comme sx n'est pas un 'integer', '@' doit être utilisé.</font>
+  
+  <font color="#006666">; Objective-C: </font>
+  <font color="#006666">;   NSAffineTransform TransformStruct = [TransForm transformStruct];</font>
+  <font color="#006666">;</font>
+<font color="#006666">  CocoaMessage</font>(@TransformStruct.NSAffineTransform, TransForm, &quot;transformStruct&quot;) <font color="#006666">; Obtenir une structure transform</font>
+  
+  <b><font color="#006666">Debug</font></b> TransformStruct\m11 <font color="#006666">; debug affiche 5.5</font>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>MacOS X</Blockquote></p><center><- <a href=cpuname.html>CPUName()</a> - <a href=index.html>System Index</a> - <a href=computername.html>ComputerName()</a> -><br><br>
+
+</body></html>

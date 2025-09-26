@@ -1,0 +1,66 @@
+<html><head><title>ForEach : Next</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">ForEach : Next</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">ForEach</font></b> <font color="#006666">Liste</font>() <b>Ou</b> <font color="#006666">Map</font>()
+  ...
+<b><font color="#006666">Next</font></b> [Liste() <b>Ou</b> Map()]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">ForEach</font></b> énumère tous les élèments d'une <a href="../list/index.html">liste</a> ou d'une <a href="../map/index.html">map</a>. 
+Si la <a href="../list/index.html">liste</a> ou la <a href="../map/index.html">map</a> est vide, <b><font color="#006666">ForEach</font></b> : <b><font color="#006666">Next</font></b> quitte immédiatement, sans entrer dans la boucle. 
+<br>
+<br>
+Lors du l'utilisation en conjonction avec une liste: comme la boucle se termine seulement lorsque le dernier élément de la liste est atteint (en terme de position), 
+il est tout à fait possible de <a href="../list/deleteelement.html">supprimer</a> ou d' <a href="../list/addelement.html">ajouter</a> 
+des éléments durant un cycle de boucle. 
+De même il est permis de changer l'élément courant avec <a href="../list/changecurrentelement.html">ChangeCurrentElement()</a>. 
+Après l'un de ces changements, le prochain cycle de boucle continue avec l'élément qui suit l'élément courant. 
+<br>
+<br>
+Lors du l'utilisation en conjonction avec une map, veuillez à ne pas mettre de clé (voir exemple ci-dessous). 
+<br>
+<br>
+Il est possible de quitter une boucle <b><font color="#006666">ForEach</font></b> : <b><font color="#006666">Next</font></b> à tout moment à l'aide de la commande 
+<a href="../reference/break_continue.html">Break</a>. La commande <a href="../reference/break_continue.html">Continue</a> permet de passer 
+directement à l'itération suivante, sans exécuter la fin du code contenu dans la boucle. <br>
+<br>
+
+</blockquote><p><b>Exemple:</b> Liste</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Nombre</font>()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Nombre</font>())
+<font color="#006666">  Nombre</font>() = 10
+    
+<font color="#006666">  AddElement</font>(<font color="#006666">Nombre</font>())
+<font color="#006666">  Nombre</font>() = 20
+    
+<font color="#006666">  AddElement</font>(<font color="#006666">Nombre</font>())
+<font color="#006666">  Nombre</font>() = 30
+    
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombre</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Nombre</font>() <font color="#006666">; Affichera 10, 20 et 30</font>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Map</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Pays</font>.s()
+
+<font color="#006666">  Pays</font>(&quot;US&quot;) = &quot;United States&quot;
+<font color="#006666">  Pays</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Pays</font>(&quot;DE&quot;) = &quot;Allemagne&quot;
+
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Pays</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Pays</font>()
+    <font color="#006666">;Debug Pays(&quot;FR&quot;) ; Non, ne pas mettre de clé car cela peut engendrer une boucle infinie</font>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,84 @@
+<html><head><title>XMLStatus</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLStatus()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>XMLStatus</b></font>(#XML)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the status of the last parsing operation done on this XML tree (using <a href="loadxml.html">LoadXML()</a> 
+or <a href="catchxml.html">CatchXML()</a>). This function should be called after every  <a href="loadxml.html">LoadXML()</a> or 
+<a href="catchxml.html">CatchXML()</a> call to ensure that the parsing succeeded. 
+A string representation of the parsing status (ie a readable error-message) is returned by the 
+<a href="xmlerror.html">XMLError()</a> function. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+The XML to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+A value of zero (<font color="#924B72">#PB_XML_Success</font>) indicates a successful parsing, all other values 
+indicate various error conditions. 
+<br>
+<br>
+The following returnvalues are possible: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_Success</font>             : no error
+  <font color="#924B72">#PB_XML_NoMemory</font>            : out of memory
+  <font color="#924B72">#PB_XML_Syntax</font>              : syntax error
+  <font color="#924B72">#PB_XML_NoElements</font>          : no element found
+  <font color="#924B72">#PB_XML_InvalidToken</font>        : not well-formed (invalid token)
+  <font color="#924B72">#PB_XML_UnclosedToken</font>       : unclosed token
+  <font color="#924B72">#PB_XML_PartialCharacter</font>    : partial character
+  <font color="#924B72">#PB_XML_TagMismatch</font>         : mismatched tag
+  <font color="#924B72">#PB_XML_DublicateAttribute</font>  : duplicate attribute
+  <font color="#924B72">#PB_XML_JunkAfterDocElement</font> : junk after document element
+  <font color="#924B72">#PB_XML_ParamEntityRef</font>      : illegal parameter entity reference
+  <font color="#924B72">#PB_XML_UndefinedEntity</font>     : undefined entity
+  <font color="#924B72">#PB_XML_RecursiveEntityRef</font>  : recursive entity reference
+  <font color="#924B72">#PB_XML_AsyncEntity</font>         : asynchronous entity
+  <font color="#924B72">#PB_XML_BadCharacterRef</font>     : reference to invalid character number
+  <font color="#924B72">#PB_XML_BinaryEntityRef</font>     : reference to binary entity
+  <font color="#924B72">#PB_XML_AttributeExternalEntityRef</font>: reference to external entity in attribute
+  <font color="#924B72">#PB_XML_MisplacedXML</font>        : XML or text declaration not at start of entity
+  <font color="#924B72">#PB_XML_UnknownEncoding</font>     : unknown encoding
+  <font color="#924B72">#PB_XML_IncorrectEncoding</font>   : encoding specified in XML declaration is incorrect
+  <font color="#924B72">#PB_XML_UnclosedCDataSection</font>: unclosed CDATA section
+  <font color="#924B72">#PB_XML_ExternalEntityHandling</font>: error in processing external entity reference
+  <font color="#924B72">#PB_XML_NotStandalone</font>       : document is not standalone
+  <font color="#924B72">#PB_XML_UnexpectedState</font>     : unexpected parser state
+  <font color="#924B72">#PB_XML_EntityDeclaredInPE</font>  : entity declared in parameter entity
+  <font color="#924B72">#PB_XML_FeatureRequiresDTD</font>  : requested feature requires XML_DTD support in Expat
+  <font color="#924B72">#PB_XML_CantChangeFeatures</font>  : cannot change setting once parsing has begun
+  <font color="#924B72">#PB_XML_UnboundPrefix</font>       : unbound prefix
+  <font color="#924B72">#PB_XML_UndeclaringPrefix</font>   : must not undeclare prefix
+  <font color="#924B72">#PB_XML_IncompletePE</font>        : incomplete markup in parameter entity
+  <font color="#924B72">#PB_XML_XMLDeclaration</font>      : XML declaration not well-formed
+  <font color="#924B72">#PB_XML_TextDeclaration</font>     : text declaration not well-formed
+  <font color="#924B72">#PB_XML_PublicID</font>            : illegal character(s) in public id
+  <font color="#924B72">#PB_XML_Suspended</font>           : parser suspended
+  <font color="#924B72">#PB_XML_NotSuspended</font>        : parser not suspended
+  <font color="#924B72">#PB_XML_Aborted</font>             : parsing aborted
+  <font color="#924B72">#PB_XML_Finished</font>            : parsing finished
+  <font color="#924B72">#PB_XML_SuspendedPE</font>         : cannot suspend in external parameter entity
+  <font color="#924B72">#PB_XML_ReservedPrefixXML</font>   : reserved prefix (xml) must not be undeclared or bound to another namespace name
+  <font color="#924B72">#PB_XML_ReservedPrefixXMLNS</font> : reserved prefix (xmlns) must not be declared or undeclared
+  <font color="#924B72">#PB_XML_ReservedNamespaceURI</font>: prefix must not be bound to one of the reserved namespace names
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=xmlnodetype.html>XMLNodeType()</a> - <a href=index.html>XML Index</a><br><br>
+
+</body></html>

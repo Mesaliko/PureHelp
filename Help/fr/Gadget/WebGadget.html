@@ -1,0 +1,205 @@
+<html><head><title>WebGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WebGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>WebGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, URL$ [, Options]))</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un Navigateur Internet (WebGadget) dans la GadgetList en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau gadget. 
+
+</td></tr>
+<tr><td><i>URL$</i></td>
+<td> 
+L'URL à charger. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être la constante suivante : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Web_Edge</font>: Utilise le moteur WebView2 pour afficher la page Web (Windows uniquement). 
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre #Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré automatiquement. 
+<br>
+<br>
+Cette fonction échoue si les composants requis pour le WebGadget ne peuvent pas être chargés. 
+Voir ci-dessous les exigences pour le WebGadget sur chaque OS. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les composants suivants sont requis pour utiliser le WebGadget sur chaque OS. 
+Ces composants sont nécessaires pour utiliser le WebGadget, pas seulement pour 
+la compilation du programme. 
+<br>
+<br>
+<b>Windows</b> 
+<blockquote>
+
+Le WebGadget utilise l'objet ActiveX d'Internet Explorer 11 de Windows.<br>
+Si l'indicateur <font color="#924B72">#PB_Web_Edge</font> est utilisé, il utilise à la place le composant Edge moderne WebView2.<br>
+WebView2 est le composant basé sur Edge permettant d'afficher une page Web moderne dans une 
+application Windows. Il est intégré à Windows 10 et Windows 11. 
+Pour les anciennes versions de Windows, il doit être installé (si ce n'est déjà fait) : 
+<a href="https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution">guide de distribution</a>. 
+</blockquote>
+
+
+<b>Linux</b> 
+<blockquote>
+
+Le WebGadget utilise la bibliothèque 
+WebKitGtk sur Linux. Le paquet est nommé 
+&quot;libwebkit&quot;. 
+Certaines distributions peuvent comprendre 
+une ancienne version de ce paquet qui est 
+nommé «WebKitGtk». 
+Si votre distribution ne contient pas ce 
+paquet alors les sources peuvent être 
+téléchargées sur Internet 
+<a href="https://webkitgtk.org/">WebKitGtk home page</a>. 
+</blockquote>
+
+
+<b>OS X</b> 
+<blockquote>
+
+Le WebGadget utilise le composant WebKit 
+de OS X. Ce composant est fourni avec 
+le système d'exploitation. 
+Il n'y a pas d'autres exigences. 
+</blockquote>
+
+Les fonctions suivantes peuvent être 
+utilisées avec WebGadget: 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="setgadgettext.html">SetGadgetText()</a>: Change l'URL.
+  - <a href="getgadgettext.html">GetGadgetText()</a>: Renvoie l'URL actuelle.
+  - <a href="setgadgetstate.html">SetGadgetState()</a>: Effectue une action sur le gadget. 'Etat' peut prendre une des valeurs suivantes:
+    <font color="#924B72">#PB_Web_Back</font>   : Retour en arrière dans la navigation.
+    <font color="#924B72">#PB_Web_Forward</font>: Avance d'un pas dans la navigation.
+    <font color="#924B72">#PB_Web_Stop</font>   : Arrête le chargement de la page.
+    <font color="#924B72">#PB_Web_Refresh</font>: Recharge la page actuelle.
+
+
+  - <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: avec <font color="#924B72">#PB_Web_HtmlCode</font> comme 'Element' le code html peut être inséré dans le Gadget. (Windows seulement)
+
+  - <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Les constantes suivantes peuvent être utilisées pour obtenir une information: (Windows seulement)
+    <font color="#924B72">#PB_Web_HtmlCode</font>      : Renvoie le code html du gadget.
+    <font color="#924B72">#PB_Web_PageTitle</font>     : Renvoie le titre de la page affichée.
+    <font color="#924B72">#PB_Web_StatusMessage</font> : Renvoie le message actuel de la barre d'état.
+    <font color="#924B72">#PB_Web_SelectedText</font>  : Renvoie le texte sélectionné à l'intérieur du gadget.
+
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: Définit les attributs suivants:
+    <font color="#924B72">#PB_Web_ScrollX</font>            : Fixe la position de la barre de défilement horizontale. (Windows seulement)
+    <font color="#924B72">#PB_Web_ScrollY</font>            : Fixe la position de la barre de défilement verticale. (Windows seulement)
+    <font color="#924B72">#PB_Web_BlockPopups</font>        : Bloque les fenêtres popup (Valeur=1 pour bloquer et 0 pour débloquer). <font color="#924B72">#PB_EventType_PopupWindow</font> est renvoyé si cet attribut est validé. (Windows seulement) 
+    <font color="#924B72">#PB_Web_BlockPopupMenu</font>     : Bloque le menu popup standard. <font color="#924B72">#PB_EventType_PopupMenu</font> est renvoyé si cet attribut est validé. (Windows seulement)
+</font></pre>
+
+La callback de la navigation doit avoir le format suivant :  (Windows seulement) 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">NavigationCallback</font>(Gadget, Url$)
+    <font color="#006666">;</font>
+    <font color="#006666">; Renvoie #True pour autoriser cette </font>
+    <font color="#006666">;navigation ou #False pour la refuser.</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a>: Pour obtenir les attributs suivants :
+    <font color="#924B72">#PB_Web_ScrollX</font>           : Renvoie la position de la barre de défilement horizontale.
+    <font color="#924B72">#PB_Web_ScrollY</font>           : Renvoie la position de la barre de défilement verticale.
+    <font color="#924B72">#PB_Web_Busy</font>              : Renvoie une valeur différente de zéro si le gadget est occupé à charger une page.
+    <font color="#924B72">#PB_Web_Progress</font>          : Renvoie la progression actuelle (parfois estimée) après un évènement <font color="#924B72">#PB_EventType_DownloadProgress</font>.
+    <font color="#924B72">#PB_Web_ProgressMax</font>       : Renvoie la progression actuelle maximum (parfois estimée) après un évènement <font color="#924B72">#PB_EventType_DownloadProgress</font> .
+    <font color="#924B72">#PB_Web_BlockPopups</font>       : Renvoie la valeur actuelle de l'attribut de blocage des fenêtres popup.
+    <font color="#924B72">#PB_Web_BlockPopupMenu</font>    : Renvoie la valeur actuelle de l'attribut de blocage du menu popup.
+    <font color="#924B72">#PB_Web_NavigationCallback</font>: Renvoie la valeur actuelle de la callback (si elle existe).
+</font></pre>
+
+Les évènements suivants sont supportés 
+par <a href="../window/eventtype.html">EventType()</a> pour ce gadget: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_TitleChange</font>      : Le titre de la page a changé (Windows seulement).
+  <font color="#924B72">#PB_EventType_StatusChange</font>     : Le message de la barre d'état a changé (Windows seulement).
+  <font color="#924B72">#PB_EventType_DownloadStart</font>    : Le téléchargement d'une page a commencé (Windows, OS X).
+  <font color="#924B72">#PB_EventType_DownloadProgress</font> : L'information de progression du téléchargement est disponible avec <a href="getgadgetattribute.html">GetGadgetAttribute()</a>  (Windows seulement).
+  <font color="#924B72">#PB_EventType_DownloadEnd</font>      : Le téléchargement d'une page s'est terminé (fini ou annulé) (Windows, OS X).
+  <font color="#924B72">#PB_EventType_PopupWindow</font>      : Une fenêtre popup vient d'être bloquée (Windows seulement).
+  <font color="#924B72">#PB_EventType_PopupMenu</font>        : Le menu popup vient d'être bloqué (utile pour afficher un menu personnalisé) (Windows seulement).
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0,0,0,600,300,&quot;WebGadget&quot;,<font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    WebGadget</font>(0,10,10,580,280,&quot;https://www.purebasic.com&quot;)
+    <font color="#006666">; Note: si vous désirez utiliser un fichier local, changez le dernier paramètre en &quot;file://&quot; + chemin + nomdufichier</font>
+    <b><font color="#006666">Repeat</font></b> 
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/webgadget.png"></p>
+
+<br>
+<br>
+Example 2:  (Windows seulement) Utilisation de la procedure NavigationCallback() 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cet exemple affiche le site Web PureBasic.com. La procédure callback interdit la</font>
+  <font color="#006666">; navigation vers les 'News' du site (#False retourné), mais l'autorise </font>
+  <font color="#006666">; pour tous les autres sites (#True retourné).</font>
+    
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">NavigationCallback</font>(Gadget, Url$) 
+    <b><font color="#006666">If</font></b> Url$= &quot;https://www.purebasic.com/news.php&quot; 
+<font color="#006666">      MessageRequester</font>(&quot;&quot;, &quot;Pas de News aujourd'hui !&quot;) 
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font> 
+    <b><font color="#006666">Else</font></b> 
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font> 
+    <b><font color="#006666">EndIf</font></b> 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 600, 300, &quot;WebGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    WebGadget</font>(0, 10, 10, 580, 280, &quot;https://www.purebasic.com&quot;) 
+<font color="#006666">    SetGadgetAttribute</font>(0, <font color="#924B72">#PB_Web_NavigationCallback</font>, @NavigationCallback())
+    <b><font color="#006666">Repeat</font></b> 
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, 
+<a href="setgadgetattribute.html">SetGadgetAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=usegadgetlist.html>UseGadgetList()</a> - <a href=index.html>Gadget Index</a><br><br>
+
+</body></html>

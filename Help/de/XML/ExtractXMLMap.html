@@ -1,0 +1,70 @@
+<html><head><title>ExtractXMLMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractXMLMap()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ExtractXMLMap</b></font>(Knoten, Map() [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Extrahiert Elemente vom angegebenen XML-Knoten in die angegebene Map(). 
+Die Map wird geleert, bevor die Elemente extrahiert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Knoten</i></td>
+<td width="90%"> 
+Der XML-Knoten, welcher die Map-Daten enthält. 
+
+</td></tr>
+<tr><td><i>Map()</i></td>
+<td> 
+Die <a href="../map/index.html">Map</a>, welche mit den XML-Elementen gefüllt werden soll. 
+Der gesamte vorherige Inhalt der Map geht verloren. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Wird dieser Parameter auf <font color="#924B72">#PB_XML_NoCase</font> gesetzt, dann erfolgt der Vergleich von 
+XML-Knoten und Attribut-Namen ohne Beachtung der Groß- und Kleinschreibung. 
+Der Standard ist, die Groß- und Kleinschreibung zu beachten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Extrahierung erfolgt rekursiv, wenn die Map einen Struktur-Typ hat. 
+Die XML-Knoten müssen die in der <a href="insertxmlmap.html">InsertXMLMap()</a> Funktion beschriebene Form haben. 
+Knoten mit abweichenden Namen werden bei der Extrahierung ignoriert. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Xml$ = &quot;&lt;map&gt;&lt;element key=&quot; +<font color="#006666"> Chr</font>(34) + &quot;theKey&quot; +<font color="#006666"> Chr</font>(34) + &quot;&gt;the value&lt;/element&gt;&lt;/map&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(0, Xml$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(0) = <font color="#924B72">#PB_XML_Success</font>
+    <b><font color="#006666">NewMap</font></b> <font color="#006666">Test</font>.s()
+<font color="#006666">    ExtractXMLMap</font>(<font color="#006666">MainXMLNode</font>(0),<font color="#006666"> Test</font>())
+    
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">Test</font>()
+      <b><font color="#006666">Debug</font></b> <font color="#006666">MapKey</font>(<font color="#006666">Test</font>()) + &quot; -&gt; &quot; +<font color="#006666"> Test</font>()
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">XMLError</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="insertxmlmap.html">InsertXMLMap()</a>, <a href="extractxmlarray.html">ExtractXMLArray()</a>, <a href="extractxmllist.html">ExtractXMLList()</a>, <a href="extractxmlstructure.html">ExtractXMLStructure()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=extractxmllist.html>ExtractXMLList()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=extractxmlstructure.html>ExtractXMLStructure()</a> -><br><br>
+
+</body></html>

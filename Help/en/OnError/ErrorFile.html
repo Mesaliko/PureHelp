@@ -1,0 +1,30 @@
+<html><head><title>ErrorFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ErrorFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>ErrorFile</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the filename of the source code or <a href="../reference/includes.html">includefile</a> where the current error occurred. 
+This command only returns a meaningful value if there was an error handled by <a href="onerrorcall.html">OnErrorCall()</a> or <a href="onerrorgoto.html">OnErrorGoto()</a>. 
+<br>
+<br>
+The tracking of line numbers needs to be enabled on compilation for this command to return the actual file name. 
+To enable this feature, enable the &quot;Enable OnError lines support&quot; checkbox in the <a href="../reference/ide_compiler.html">compiler options</a> 
+or specify the /LINENUMBERING (Windows) or --linenumbering (Linux, Mac OSX) command-line switch when compiling 
+from the <a href="../reference/cli_compiler.html">command-line</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The filename of the error, or &quot;OnError line support disabled&quot; if the OnError lines support is disabled. 
+(A simple way to check if the OnError lines support is enabled is to check if the result of <a href="errorline.html">ErrorLine()</a> is not -1.) 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=errorcode.html>ErrorCode()</a> - <a href=index.html>OnError Index</a> - <a href=errorline.html>ErrorLine()</a> -><br><br>
+
+</body></html>

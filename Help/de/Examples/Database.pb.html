@@ -1,0 +1,54 @@
+<html><head><title>Database.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Database example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">UseSQLiteDatabase</font>()
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CheckDatabaseUpdate</font>(Database, Query$)
+   Result =<font color="#006666"> DatabaseUpdate</font>(Database, Query$)
+   <b><font color="#006666">If</font></b> Result = 0
+      <b><font color="#006666">Debug</font></b> <font color="#006666">DatabaseError</font>()
+   <b><font color="#006666">EndIf</font></b>
+   
+   <b><font color="#006666">ProcedureReturn</font></b> Result
+<b><font color="#006666">EndProcedure</font></b>
+
+DatabaseFile$ =<font color="#006666"> GetTemporaryDirectory</font>()+&quot;Database.sqlite&quot;
+
+<b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0, DatabaseFile$)
+<font color="#006666">   CloseFile</font>(0)
+   
+   <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, DatabaseFile$, &quot;&quot;, &quot;&quot;)
+   
+<font color="#006666">      CheckDatabaseUpdate</font>(0, &quot;CREATE TABLE food (name CHAR(50), weight INT)&quot;)
+
+<font color="#006666">      CheckDatabaseUpdate</font>(0, &quot;INSERT INTO food (name, weight) VALUES ('apple', '10')&quot;)
+<font color="#006666">      CheckDatabaseUpdate</font>(0, &quot;INSERT INTO food (name, weight) VALUES ('pear', '5')&quot;)
+<font color="#006666">      CheckDatabaseUpdate</font>(0, &quot;INSERT INTO food (name, weight) VALUES ('banana', '20')&quot;)
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(0, &quot;SELECT * FROM food WHERE weight &gt; 7&quot;)
+      
+         <b><font color="#006666">While</font></b> <font color="#006666">NextDatabaseRow</font>(0)
+            <b><font color="#006666">Debug</font></b> <font color="#006666">GetDatabaseString</font>(0, 0)
+         <b><font color="#006666">Wend</font></b>
+      
+<font color="#006666">         FinishDatabaseQuery</font>(0)
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      CloseDatabase</font>(0)
+   <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Can't open database !&quot;
+   <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">Else</font></b>
+   <b><font color="#006666">Debug</font></b> &quot;Can't create the database file !&quot;
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

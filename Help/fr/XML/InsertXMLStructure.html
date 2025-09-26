@@ -1,0 +1,115 @@
+<html><head><title>InsertXMLStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertXMLStructure()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>InsertXMLStructure</b></font>(NoeudParent, *Memoire, Structure [, NoeudPrecedent])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Insère une structure dans un noeud. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NoeudParent</i></td>
+<td width="90%"> 
+Le noeud dans lequel insérer le nouveau 
+noeud. 
+<br>
+<br>
+Pour insérer le nouveau noeud à la racine 
+de l'arbre, utiliser <a href="rootxmlnode.html">RootXMLNode()</a>. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+L'adresse de la structure à insérer. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le type de la structure à insérer. 
+
+</td></tr>
+<tr><td><i>NoeudPrecedent (optionnel)</i></td>
+<td> 
+Un noeud enfant du noeud parent après qui 
+le nouveau noeud doit être inséré. 
+<br>
+Si cette valeur est 0 ou non spécifiée, le 
+nouveau noeud est inséré comme premier 
+enfant de son parent. <br>
+Si cette valeur est -1, le noeud est 
+inséré comme dernier enfant de son parent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nouveau noeud XML s'il a été créé avec 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les règles spécifiées dans <a href="createxmlnode.html">CreateXMLNode()</a> 
+pour le cas où un nouveau noeud est inséré 
+s'appliquent également à cette fonction. 
+<br>
+<br>
+Le noeud inséré est nommé comme la 
+structure. 
+Chaque élément de la structure est ajouté 
+sous forme d'un sous-noeud à l'intérieur 
+du noeud de la structure. Chaque caractère 
+'*' ou '$' est retiré du nom de l'élément 
+de la structure. 
+Si l'élément de la structure contient un 
+tableau, une liste, une map ou une 
+structure, plusieurs noeuds sont ajoutés 
+de manière récursive. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cet exemple produit l'arbre XML suivant:</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; &lt;Personne&gt;</font>
+  <font color="#006666">;  &lt;Nom&gt;John Smith&lt;/Nom&gt;</font>
+  <font color="#006666">;  &lt;Age&gt;42&lt;/Age&gt;</font>
+  <font color="#006666">;  &lt;Livres&gt;</font>
+  <font color="#006666">;   &lt;element&gt;Investir pour les Nuls&lt;/element&gt;</font>
+  <font color="#006666">;   &lt;element&gt;Programmer pour les Nuls&lt;/element&gt;</font>
+  <font color="#006666">;  &lt;/Livres&gt;</font>
+  <font color="#006666">; &lt;/Personne&gt; </font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Livres</font>.s()
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Define</font></b> P.Personne
+  
+  P\Nom$ = &quot;John Smith&quot;
+  P\Age   = 42
+<font color="#006666">  AddElement</font>(P\<font color="#006666">Livres</font>()): P\<font color="#006666">Livres</font>() = &quot;Investir pour les Nuls&quot;
+<font color="#006666">  AddElement</font>(P\<font color="#006666">Livres</font>()): P\<font color="#006666">Livres</font>() = &quot;Programmer pour les Nuls&quot;
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateXML</font>(0)
+<font color="#006666">    InsertXMLStructure</font>(<font color="#006666">RootXMLNode</font>(0), @P, Personne)
+<font color="#006666">    FormatXML</font>(0, <font color="#924B72">#PB_XML_ReFormat</font>)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeXML</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="extractxmlstructure.html">ExtractXMLStructure()</a>, <a href="insertxmlarray.html">InsertXMLArray()</a>, 
+<a href="insertxmllist.html">InsertXMLList()</a>, <a href="insertxmlmap.html">InsertXMLMap()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=insertxmlmap.html>InsertXMLMap()</a> - <a href=index.html>XML Index</a> - <a href=isxml.html>IsXML()</a> -><br><br>
+
+</body></html>

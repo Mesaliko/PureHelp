@@ -1,0 +1,114 @@
+<html><head><title>Interfaces</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Interfaces</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Interface</font></b> &lt;nom&gt; [<b><font color="#006666">Extends</font></b> &lt;nom&gt;]
+  &lt;Methode[.&lt;type&gt;]()&gt;
+...
+<b><font color="#006666">EndInterface</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Les Interfaces sont utilisées pour accéder facilement aux modules 'Orientés Objets' tels que les 
+bibliothèques COM (Component Object Model) ou DirectX. Ce type de bibliothèques sont de plus en 
+plus courantes sous Windows et les interfaces permettent une exploitation de ces fonctions sans 
+impacts de performances. Les interfaces jettent aussi les bases pour une 'Programmation Orientée 
+Object' (OOP en anglais) avec PureBasic mais de solides connaissances sont nécessaires pour en tirer parti 
+(les interfaces n'ont pas été conçues pour ajouter une couche objet à PureBasic mais plutôt pour 
+accéder facilement à des objets dejà conçus). La plupart des interfaces utilisées sous Windows sont 
+déjà incluses dans les fichiers résidents 'Interfaces.res' et 'InterfaceDX.res', ce qui rend leur 
+utilisation immédiate. 
+<br>
+<br>
+Le paramètre optionnel <b><font color="#006666">Extends</font></b> permet d'étendre une interface sans avoir à dupliquer ses 
+fonctions (ces 'fonctions' sont aussi communément appelées 'méthodes' dans les autres langages objet 
+tels que C++ ou Java). Toutes les fonctions contenues dans l'interface étendue seront disponibles 
+dans la nouvelle interface. C'est utile pour un héritage simple d'objets. 
+<br>
+<br>
+<a href="../reference/dim.html">les tableaux (Arrays)</a> peuvent être passés en paramètres à l'aide du mot clé <b><font color="#006666">Array</font></b>, 
+<a href="../reference/newlist.html">Les listes</a> en utilisant le mot clé <b><font color="#006666">List</font></b> et 
+<a href="../reference/newmap.html">les maps</a> en utilisant le mot clé <b><font color="#006666">Map</font></b>. 
+<br>
+<br>
+Un type de retour peut être défini dans la déclaration de l'interface en ajoutant le type après la méthode. 
+<br>
+<br>
+La commande <a href="../reference/compilerfunctions.html">SizeOf</a> peut être utilisée avec les interfaces pour déterminer la taille d'une interface 
+et la commande <a href="../reference/compilerfunctions.html">OffsetOf</a> peut être utilisée pour déterminer l'index d'une fonction dans une interface. 
+<br>
+<br>
+Les <a href="../reference/pseudotypes.html">pseudotypes</a> peuvent être utilisés pour les paramètres des fonctions 
+de l'interface, mais pas pour le type de retour. 
+<br>
+<br>
+Note: Les concepts objets sont principalement appropriés pour les développeurs expérimentés et il n'est pas 
+nécessaire de les maîtriser ou même les comprendre pour réaliser des applications ou jeux professionnels. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/Interface.pb.html">Interface.pb</a>
+
+</blockquote><p><b>Exemple:</b> Appel à une fonction objet</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Nous allons considérer que vous voulez accéder à un objet externe (à l'intérieur d'une DLL par exemple).</font>
+  <font color="#006666">; Premièrement, déclarez son interface.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Interface</font></b> MonObjet
+<font color="#006666">    Deplacer</font>(x,y)
+<font color="#006666">    DeplacerF</font>(x.f,y.f)
+<font color="#006666">    Detruire</font>()
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <font color="#006666">; Si 'CreationObjet()' est la fonction qui crée l'objet, à partir de la DLL,</font>
+  <font color="#006666">; dont l'interface vient d'être définie...</font>
+  <font color="#006666">; Alors créons le premier objet.</font>
+  <font color="#006666">;</font>
+  Objet1.MonObjet =<font color="#006666"> CreationObjet</font>()
+  
+  <font color="#006666">; Et le deuxième.</font>
+  <font color="#006666">;</font>
+  Objet2.MonObjet =<font color="#006666"> CreationObjet</font>()
+  
+  <font color="#006666">; Ensuite, les fonctions qui viennent d'être définies, peuvent être utilisées, </font>
+  <font color="#006666">; afin d'agir sur l'objet désiré.</font>
+  
+  Objet1\<font color="#006666">Deplacer</font>(10, 20)
+  Objet1\<font color="#006666">Detruire</font>()
+  
+  Objet2\<font color="#006666">DeplacerF</font>(10.5, 20.1)
+  Objet2\<font color="#006666">Detruire</font>()
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Utilisation de 'Extends'</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Définition d'une interface générique 'Cube'</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Interface</font></b> Cube
+<font color="#006666">    EnvoyerPosition</font>()
+<font color="#006666">    DefinirPosition</font>(x)
+<font color="#006666">    EnvoyerLargeur</font>()
+<font color="#006666">    DefinirLargeur</font>(Largeur)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <b><font color="#006666">Interface</font></b> CubeColorer <b><font color="#006666">Extends</font></b> Cube
+<font color="#006666">    EnvoyerCouleur</font>()
+<font color="#006666">    DefinirCouleur</font>(Couleur)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <b><font color="#006666">Interface</font></b> CubeTexturer <b><font color="#006666">Extends</font></b> Cube
+<font color="#006666">    EnvoyerTexture</font>()
+<font color="#006666">    DefinirTexture</font>(TextureID)
+  <b><font color="#006666">EndInterface</font></b>
+  
+  <font color="#006666">; Nous avons maintenant 3 interfaces pour chaque objet:</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; - 'Cube' a les fonctions Envoyer/DefinirPosition() et Envoyer/DefinirLargeur()</font>
+  <font color="#006666">; - 'CubeColorer' a les fonctions Envoyer/DefinirPosition(), Envoyer/DefinirLargeur() et Envoyer/DefinirCouleur() </font>
+  <font color="#006666">; - 'CubeTexturer' a les fonctions Envoyer/DefinirPosition(),Envoyer/DefinirLargeur() et Envoyer/DefinirTexture()</font>
+  <font color="#006666">;</font>
+</font></pre>
+</blockquote>
+</font></body></html>

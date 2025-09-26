@@ -1,0 +1,99 @@
+<html><head><title>GetMeshData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMeshData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetMeshData</b></font>(#Mesh, SousMesh, TableauData(), Options, PremierIndex, DernierIndex)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Obtenir les données internes du mesh, 
+comme les sommets, les faces, etc. 
+<br>
+(Les meshes dynamiques, créés avec l'option <font color="#924B72">#PB_Mesh_Dynamic</font>, ne sont pas supportés). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le mesh à utiliser. 
+
+</td></tr>
+<tr><td><i>SousMesh</i></td>
+<td> 
+Le SousMesh à utiliser. 
+L'indice du premier SousMesh commence à 0 
+(mesh principal). 
+
+</td></tr>
+<tr><td><i>TableauData()</i></td>
+<td> 
+Le tableau pour recevoir les données. 
+Il doit être un tableau de type 
+&quot;MeshVertex&quot; ou &quot;MeshFace&quot; en 
+fonction des paramètres 'Options'. 
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+Indique le type de données qui doivent être 
+récupérées. Peut être l'une des valeurs suivantes: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_Vertex</font>: TableauData() est un tableau de type &quot;MeshVertex&quot;.
+  <font color="#924B72">#PB_Mesh_Face</font>  : TableauData() est un tableau de type &quot;MeshFace&quot;.
+</font></pre>
+En combinaison avec: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_UVCoordinate</font> : Obtenir les informations de coordonnées UV (seulement pour l'option <font color="#924B72">#PB_Mesh_Vertex</font>)
+  <font color="#924B72">#PB_Mesh_Normal</font>       : Obtenir les informations de la 'normale' (seulement pour l'option <font color="#924B72">#PB_Mesh_Vertex</font>)
+  <font color="#924B72">#PB_Mesh_Color</font>        : Obtenir les informations de couleurs (seulement pour l'option <font color="#924B72">#PB_Mesh_Vertex</font>)
+  <font color="#924B72">#PB_Mesh_Tangent</font>      : Obtenir les informations de tangente (seulement pour l'option <font color="#924B72">#PB_Mesh_Vertex</font>)
+</font></pre>
+
+Les structures &quot;MeshVertex&quot; et 
+&quot;MeshFace&quot; sont définis comme suit: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f ; qu'avec l'option <font color="#924B72">#PB_Mesh_Normal</font>
+    NormalY.f ;
+    NormalZ.f ;
+    TangentX.f
+    TangentY.f
+    TangentZ.f
+    u.f       ; qu'avec l'option <font color="#924B72">#PB_Mesh_UVCoordinate</font> 
+    v.f       ;
+    Color.l   ; qu'avec l'option <font color="#924B72">#PB_Mesh_Color</font>
+  <b><font color="#006666">EndStructure</font></b>    
+  
+  <b><font color="#006666">Structure</font></b> MeshFace
+    Index.l
+  <b><font color="#006666">EndStructure</font></b>   
+</font></pre>
+
+</td></tr>
+<tr><td><i>PremierIndex, DernierIndex</i></td>
+<td> 
+Premier et dernier index pour obtenir les 
+données. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+En cas de succès, TableauData() a été 
+redimensionnée et contient les informations 
+du mesh. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+<a href="setmeshdata.html">SetMeshData()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=freemesh.html>FreeMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=ismesh.html>IsMesh()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,89 @@
+<html><head><title>Static</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Static</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Static</font></b>[.&lt;type&gt;] &lt;variable[.&lt;type&gt;]&gt; [= &lt;constant expression&gt;] [, ...]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Static</font></b> allows to create a local persistent <a href="../reference/variables.html">variable</a> in a <a href="../reference/procedures.html">Procedure</a> even 
+if the same variable has been declared as <a href="../reference/global.html">Global</a> in the main program. 
+If a type is specified after <b><font color="#006666">Static</font></b>, the default type is changed for this declaration. 
+<b><font color="#006666">Static</font></b> can also be used with <a href="../reference/dim.html">arrays</a>, <a href="../reference/newlist.html">lists</a> and <a href="../reference/newmap.html">maps</a>. 
+When declaring a static array, the dimension parameter has to be a constant value. <br>
+<br>
+The value of the variable isn't reinitialized at each procedure call, means you can use local 
+variables parallel to global variables (with the same name), and both will keep their values. 
+Each variable can have a default value directly assigned to it, but it has to be a constant value.<br>
+<br>
+Beside <b><font color="#006666">Static</font></b> you can use the keyword <a href="../reference/protected.html">Protected</a>, to separate global from local variables, 
+but with <a href="../reference/protected.html">Protected</a> the local variables will not keep their values. 
+
+</blockquote><p><b>Example:</b> With variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> a
+  a = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Static</font></b> a
+    a+1
+    <b><font color="#006666">Debug</font></b> &quot;In Procedure: &quot;+<font color="#006666">Str</font>(a) <font color="#006666">; Will print 1, 2, 3 as the variable increments at each procedure call.</font>
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+<font color="#006666">  Change</font>()
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> a <font color="#006666">; Will print 10, as the static variable doesn't affect global one.</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> With array</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>(2)
+  <b><font color="#006666">Array</font></b>(0) = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Static</font></b> <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>(2)
+    <b><font color="#006666">Array</font></b>(0)+1
+    <b><font color="#006666">Debug</font></b> &quot;In Procedure: &quot;+<font color="#006666">Str</font>(<b><font color="#006666">Array</font></b>(0)) <font color="#006666">; Will print 1, 2, 3 as the value of the array field increments at each procedure call.</font>
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+<font color="#006666">  Change</font>()
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(0) <font color="#006666">; Will print 10, as the static array doesn't affect global one.</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> With multiple procedure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Foo</font>()
+    <b><font color="#006666">Static</font></b> x = 100  <font color="#006666">; the declaration and the assignment is done only once at program start.</font>
+  
+    <b><font color="#006666">Debug</font></b> x
+    x + 1
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  Foo</font>() <font color="#006666">; Display 100</font>
+<font color="#006666">  Foo</font>() <font color="#006666">; Display 101</font>
+<font color="#006666">  Foo</font>() <font color="#006666">; Display 102</font>
+
+  <b><font color="#006666">Debug</font></b> &quot;---&quot;
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Bar</font>()
+    <b><font color="#006666">Static</font></b> x  <font color="#006666">; the declaration is done only once at program start.  </font>
+    x = 100   <font color="#006666">; the assignment is done on every Procedure call.</font>
+  
+    <b><font color="#006666">Debug</font></b> x
+    x + 1
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  Bar</font>() <font color="#006666">; Display 100</font>
+<font color="#006666">  Bar</font>() <font color="#006666">; Display 100</font>
+<font color="#006666">  Bar</font>() <font color="#006666">; Display 100</font>
+
+</font></pre>
+</blockquote>
+</font></body></html>

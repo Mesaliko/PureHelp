@@ -1,0 +1,115 @@
+<html><head><title>HTTPRequestMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPRequestMemory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>HTTPRequestMemory</b></font>(Type, URL$ [, *Data, TailleData [, Options [, EnTetes()]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Envoie une requête HTTP avec des données binaires optionnelles. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Le type de la requête. Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Get</font>   : GET request (le paramètre '*Data' sera ignoré)
+  <font color="#924B72">#PB_HTTP_Post</font>  : POST request (le paramètre '*Data' sera envoyé si spécifié)
+  <font color="#924B72">#PB_HTTP_Put</font>   : PUT request (le paramètre '*Data' sera envoyé si spécifié)
+  <font color="#924B72">#PB_HTTP_Patch</font> : PATCH request (le paramètre '*Data' sera envoyé si spécifié)
+  <font color="#924B72">#PB_HTTP_Delete</font>: DELETE request (le paramètre '*Data' sera envoyé si spécifié)
+</font></pre>
+
+</td></tr>
+<tr><td><i>URL$</i></td>
+<td> 
+L'URL à interroger. 
+
+</td></tr>
+<tr><td><i>*Data (optionnel)</i></td>
+<td> 
+Adresse mémoire du tampon (buffer) contenant les données à envoyer. 
+
+</td></tr>
+<tr><td><i>TailleData (optionnel)</i></td>
+<td> 
+Taille en octets du tampon. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Ce peut être une combinaison des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: Téléchargement de manière asynchrone.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : Ne pas suivre les redirections automatiques.
+  <font color="#924B72">#PB_Http_NoSSLCheck</font>  : Ne pas vérifier si le certificat SSL est valide (peut être utile à des fins de test).
+  <font color="#924B72">#PB_HTTP_HeadersOnly</font> : Ne télécharge que les en-têtes.
+  <font color="#924B72">#PB_HTTP_WeakSSL</font>     : Support des vieux serveurs.
+  <font color="#924B72">#PB_HTTP_Debug</font>       : Affiche les informations de débogage.
+
+</font></pre>
+
+</td></tr>
+<tr><td><i>EnTetes() (optionnel)</i></td>
+<td> 
+Une map d'en-têtes supplémentaires, sous forme de chaînes de caractères. <br>
+Exemple: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Header$</font>()
+<font color="#006666">  Header$</font>(&quot;Content-Type&quot;) = &quot;octectstream&quot;
+<font color="#006666">  Header$</font>(&quot;User-Agent&quot;) = &quot;Firefox 54.0&quot;
+<font color="#006666">  Header$</font>(&quot;NoParamHeader&quot;) = &quot;&quot;  
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'identifiant de la requête HTTP si l'appel a été initialisé avec succès, 
+zéro sinon . 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Sous Linux, vous devez installer 'libcurl' pour que cette commande fonctionne 
+(la plupart des distributions Linux l'ont déjà). 
+<br>
+<br>
+Si des données binaires doivent être envoyées, vous pouvez utiliser <a href="httprequestmemory.html">HTTPRequestMemory()</a>(). 
+<br>
+<br>
+Cette commande est conçue pour gérer  facilement REST comme une API Web. 
+<br>
+<br>
+<a href="httpinfo.html">HTTPInfo()</a> peut être utilisé pour obtenir des informations sur la requête.<br>
+Si <font color="#924B72">#PB_HTTP_Asynchronous</font> a été spécifié, <a href="httpprogress.html">HTTPProgress()</a> et <a href="aborthttp.html">AbortHTTP()</a> peuvent être 
+utilisés.<br>
+<a href="httpmemory.html">HTTPMemory()</a> peut être utilisé pour obtenir le résultat sous forme de tampon brut 
+(le tampon brut doit être libéré avec <a href="../memory/freememory.html">FreeMemory()</a>). 
+<br>
+<br>
+<a href="finishhttp.html">FinishHTTP()</a> doit toujours être appelé pour terminer une demande HTTP initialisée 
+avec succès, même si l'appel était synchrone.<br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequestMemory</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;Status: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Réponse: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;La requête a échoué&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="httprequest.html">HTTPRequest()</a>, <a href="urlencoder.html">URLEncoder()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=httprequest.html>HTTPRequest()</a> - <a href=index.html>Http Index</a> - <a href=httptimeout.html>HTTPTimeout()</a> -><br><br>
+
+</body></html>

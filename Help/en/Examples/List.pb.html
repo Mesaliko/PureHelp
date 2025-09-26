@@ -1,0 +1,119 @@
+<html><head><title>List.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Linked list example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">Structure</font></b> BasicStructure
+    Field1.i
+    Field2.w
+    Field3.l
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Structure</font></b> ComplexStructure
+    Field1.i
+    *Basic.BasicStructure              <font color="#006666">; Pointer to a BasicStructure object
+</font>    Basic2.BasicStructure              <font color="#006666">; Creation of the BasicStructure object inside this structure
+</font>    *Next.ComplexStructure             <font color="#006666">; Pointer to another ComplexStructure object
+</font><b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">NewList</font></b> <font color="#006666">TestList</font>.BasicStructure()
+<b><font color="#006666">NewList</font></b> <font color="#006666">TestComplexList</font>.ComplexStructure()
+
+<font color="#006666">;
+</font><font color="#006666">;-------- BasicStructure Add Elements --------
+</font><font color="#006666">;
+</font>
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestList</font>()\Field2 = 1
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestList</font>()\Field2 = 2
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestList</font>()\Field2 = 3
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestList</font>()\Field2 = 4
+
+<b><font color="#006666">Debug</font></b> &quot;=============================================&quot;
+<b><font color="#006666">Debug</font></b> &quot; Simple Structure&quot;
+<b><font color="#006666">Debug</font></b> &quot;.................&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">Debug</font></b> &quot;Number of elements in the list: &quot; +<font color="#006666"> ListSize</font>(<font color="#006666">TestList</font>())
+
+<font color="#006666">; First way to list all the elements
+</font><font color="#006666">;
+</font><font color="#006666">ResetList</font>(<font color="#006666">TestList</font>())               <font color="#006666">; Reset the list index before the first element.
+</font>
+<b><font color="#006666">While</font></b> <font color="#006666">NextElement</font>(<font color="#006666">TestList</font>())       <font color="#006666">; Process all the elements...
+</font>    <b><font color="#006666">Debug</font></b> &quot;ResetList() - 'Field2' value: &quot; +<font color="#006666"> TestList</font>()\Field2
+<b><font color="#006666">Wend</font></b>
+
+<font color="#006666">; Second way, with the help of ForEach
+</font><font color="#006666">;
+</font><b><font color="#006666">ForEach</font></b> <font color="#006666">TestList</font>()       <font color="#006666">; Process all the elements...
+</font>    <b><font color="#006666">Debug</font></b> &quot;ForEach() - 'Field2' value: &quot; +<font color="#006666"> TestList</font>()\Field2
+<b><font color="#006666">Next</font></b>
+
+
+<font color="#006666">SelectElement</font>(<font color="#006666">TestList</font>(), 2)  <font color="#006666">; Go directly to the 3rd element
+</font><b><font color="#006666">Debug</font></b> &quot;3rd Element - 'Field2' value: &quot; +<font color="#006666"> TestList</font>()\Field2
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<font color="#006666">; 
+</font><font color="#006666">;
+</font><font color="#006666">;-------- ComplexStructure Add Elements --------
+</font><font color="#006666">;
+</font><font color="#006666">AddElement</font>(<font color="#006666">TestComplexList</font>())
+<font color="#006666">TestComplexList</font>()\Field1 = 11
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestComplexList</font>()\Basic =<font color="#006666"> AllocateStructure</font>(BasicStructure)
+<font color="#006666">TestComplexList</font>()\Basic\Field1 = 111 <font color="#006666">; It's a pointer but we don't use the * (it's a PureBasic oddity)
+</font><font color="#006666">TestComplexList</font>()\Basic\Field2 = 222
+<font color="#006666">TestComplexList</font>()\Basic\Field3 = 333
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestComplexList</font>()\Basic2\Field1 = 1111
+<font color="#006666">TestComplexList</font>()\Basic2\Field2 = 2222
+<font color="#006666">TestComplexList</font>()\Basic2\Field3 = 3333
+
+<font color="#006666">AddElement</font>(<font color="#006666">TestList</font>())
+<font color="#006666">TestComplexList</font>()\Next =<font color="#006666"> AllocateStructure</font>(ComplexStructure)
+<font color="#006666">TestComplexList</font>()\Next\Field1 = 7
+<font color="#006666">TestComplexList</font>()\Next\Basic =<font color="#006666"> AllocateStructure</font>(BasicStructure)
+<font color="#006666">TestComplexList</font>()\Next\Basic\Field1 = 77
+<font color="#006666">TestComplexList</font>()\Next\Basic\Field2 = 88
+<font color="#006666">TestComplexList</font>()\Next\Basic\Field3 = 99
+<font color="#006666">TestComplexList</font>()\Next\Basic2\Field1 = 777
+<font color="#006666">TestComplexList</font>()\Next\Basic2\Field2 = 888
+<font color="#006666">TestComplexList</font>()\Next\Basic2\Field3 = 999
+<font color="#006666">TestComplexList</font>()\Next\Next =<font color="#006666"> AllocateStructure</font>(ComplexStructure)
+<font color="#006666">TestComplexList</font>()\Next\Next\Field1 = 9999
+
+<font color="#006666">; Debug several fields
+</font><b><font color="#006666">Debug</font></b> &quot;=============================================&quot;
+<b><font color="#006666">Debug</font></b> &quot; Complex Structure&quot;
+<b><font color="#006666">Debug</font></b> &quot;..................&quot;
+<b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Field1 = &quot; +<font color="#006666"> TestComplexList</font>()\Field1 <font color="#006666">;= 11
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Basic\Field2 = &quot; +<font color="#006666"> TestComplexList</font>()\Basic\Field2 + &quot; (Beware, it's a pointer but we don't use the '*'&quot;<font color="#006666">;= 222
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Basic2\Field3 = &quot; +<font color="#006666"> TestComplexList</font>()\Basic2\Field3<font color="#006666">;= 3333
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Next\Field1 = &quot; +<font color="#006666"> TestComplexList</font>()\Next\Field1 + &quot; (idem)&quot;     <font color="#006666">;= 7
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Next\Basic\Field1 = &quot; +<font color="#006666"> TestComplexList</font>()\Next\Basic\Field1 + &quot; (idem)&quot; <font color="#006666">;= 77
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Next\Basic2\Field1 = &quot; +<font color="#006666"> TestComplexList</font>()\Next\Basic2\Field1 + &quot; (idem)&quot;<font color="#006666">;= 777
+</font><b><font color="#006666">Debug</font></b> &quot;TestComplexList()\Next\Next\Field1 = &quot; +<font color="#006666"> TestComplexList</font>()\Next\Next\Field1 + &quot; (idem)&quot;  <font color="#006666">;= 9999
+</font>
+
+<b><font color="#006666">End</font></b>
+
+</font></pre>
+</body></html>

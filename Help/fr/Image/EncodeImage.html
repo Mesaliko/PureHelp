@@ -1,0 +1,110 @@
+<html><head><title>EncodeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EncodeImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>EncodeImage</b></font>(#Image [, ImagePlugin [, Options [, Profondeur]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Encode une image dans une mémoire tampon. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à encoder. 
+
+</td></tr>
+<tr><td><i>ImagePlugin (optionnel)</i></td>
+<td> 
+Le format de l'image à encoder. 
+Il peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ImagePlugin_BMP</font>      : Encoder l'image en BMP (Par défaut)
+  <font color="#924B72">#PB_ImagePlugin_JPEG</font>     : Encoder l'image en JPEG (<a href="../imageplugin/usejpegimageencoder.html">UseJPEGImageEncoder()</a> doit être utilisé)
+  <font color="#924B72">#PB_ImagePlugin_JPEG2000</font> : Encoder l'image en JPEG2000 (<a href="../imageplugin/usejpeg2000imageencoder.html">UseJPEG2000ImageEncoder()</a> doit être utilisé)
+  <font color="#924B72">#PB_ImagePlugin_PNG</font>      : Encoder l'image en PNG (<a href="../imageplugin/usepngimageencoder.html">UsePNGImageEncoder()</a> doit être utilisé)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Qualité de l'image pour <font color="#924B72">#PB_ImagePlugin_JPEG</font> 
+et <font color="#924B72">#PB_ImagePlugin_JPEG2000</font>:<br>
+De 0 = Qualité médiocre à 10 = Qualité maximale. 
+<br>
+Qualité par défaut = 7, si aucune option 
+n'est spécifiée. 
+<br>
+<br>
+Quand une image est codée en utilisant une 
+palette (1, 4 ou 8), la constante suivante 
+peut faire partie de la combinaison: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_FloydSteinberg</font>: Applique un filtre Floyd-Steinberg.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Profondeur (optionnel)</i></td>
+<td> 
+La profondeur dans lequel vous souhaitez 
+enregistrer l'image. 
+<br>
+<br>
+Les valeurs valides sont 1, 4, 8, 24 et 32. 
+<br>
+La valeur par défaut est la profondeur de 
+l'image originale.<br>
+Pour l'instant, seul l'encodeur PNG supporte 
+le format d'image palettisée (1, 4 ou 8 bits). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie un <a href="../reference/memory.html">pointeur</a> 
+vers une mémoire tampon nouvellement allouée 
+contenant l'image encodée, ou zéro si 
+l'encodeur a échoué. 
+<br>
+<br>
+<a href="../memory/memorysize.html">MemorySize()</a> peut être utilisé pour obtenir 
+la taille de l'image encodée. <br>
+<a href="../memory/freememory.html">FreeMemory()</a> doit être utilisé pour libérer 
+la mémoire tampon après utilisation. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UsePNGImageEncoder</font>()
+<font color="#006666">  UsePNGImageDecoder</font>()
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 426, 128, &quot;EncodeImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ImageGadget</font>(0, 0, 0, 128, 128,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples\Sources\Data\GeeBee2.bmp&quot;))
+<font color="#006666">    ButtonGadget</font>(1, 138, 50, 150, 30, &quot;Encodage PNG 2 bits -&gt;&quot;)
+<font color="#006666">    ImageGadget</font>(2, 298, 0, 128, 128, 0)
+    
+    *ptr=<font color="#006666">EncodeImage</font>(0 ,<font color="#924B72">#PB_ImagePlugin_PNG</font>, <font color="#924B72">#PB_Image_FloydSteinberg</font>, 2) <font color="#006666">; Encodage 2 bits</font>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()          
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          <b><font color="#006666">Case</font></b> 1 
+<font color="#006666">            CatchImage</font>(2, *ptr)          <font color="#006666">; L'image est en mémoire</font>
+<font color="#006666">            SetGadgetState</font>(2,<font color="#006666">ImageID</font>(2)) <font color="#006666">; Affichage</font>
+        <b><font color="#006666">EndSelect</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+   <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createimage.html>CreateImage()</a> - <a href=index.html>Image Index</a> - <a href=freeimage.html>FreeImage()</a> -><br><br>
+
+</body></html>

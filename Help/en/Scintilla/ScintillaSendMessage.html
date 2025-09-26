@@ -1,0 +1,73 @@
+<html><head><title>ScintillaSendMessage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScintillaSendMessage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ScintillaSendMessage</b></font>(#Gadget, Message [, Param [, LParam]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sends a message to the scintilla control to perform a specific task. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The scintilla gadget to use. 
+
+</td></tr>
+<tr><td><i>Message</i></td>
+<td> 
+The message to send. More information about the possible messages may be found on the 
+<a href="http://www.scintilla.org/">Scintilla Homepage</a>. 
+The <font color="#924B72">#SCI_</font>[...] constants representing the possible values are already defined 
+in PureBasic. 
+
+</td></tr>
+<tr><td><i>Param (optional)</i></td>
+<td> 
+The first custom parameter for the specified message. Default value if not specified is zero. 
+
+</td></tr>
+<tr><td><i>LParam (optional)</i></td>
+<td> 
+The second custom parameter for the specified message. Default value if not specified is zero. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The result of the message sent. 
+
+</blockquote><p><b>Example:</b> Text with red highlighting</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#num_indicator</font> = 0
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 330, 90, &quot;ScintillaGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+  
+<font color="#006666">    ScintillaGadget</font>(0, 5, 5, 320, 80, 0)
+    *Text =<font color="#006666"> UTF8</font>(&quot;This is a simple ScintillaGadget with text...&quot; + <font color="#924B72">#LF$</font> + &quot;More text&quot; + <font color="#924B72">#LF$</font> + &quot;Even more text!&quot;)
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_SETTEXT</font>, 0, *Text)
+<font color="#006666">    FreeMemory</font>(*Text) <font color="#006666">; The buffer made by UTF8() has to be freed, to avoid memory leak</font>
+    
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_INDICSETSTYLE</font>, <font color="#924B72">#num_indicator</font>, <font color="#924B72">#INDIC_STRAIGHTBOX</font>) <font color="#006666">; first indicator with style 8 (0-19)</font>
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_INDICSETFORE</font>, <font color="#924B72">#num_indicator</font>, <font color="#924B72">#Red</font>)                <font color="#006666">; first indicator with red color</font>
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_SETINDICATORCURRENT</font>, <font color="#924B72">#num_indicator</font>, <font color="#924B72">#INDIC_STRAIGHTBOX</font>) <font color="#006666">; set the indicator as the current one</font>
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_INDICSETUNDER</font>, <font color="#924B72">#num_indicator</font>, 1)   <font color="#006666">; set indicator under the text, i.e. doesn't obscure it</font>
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_INDICSETALPHA</font>, <font color="#924B72">#num_indicator</font>, 127) <font color="#006666">; set transparency</font>
+    nLine = 1 <font color="#006666">; line number starts from 0</font>
+    start =<font color="#006666"> ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_POSITIONFROMLINE</font>, nLine)
+    length =<font color="#006666"> ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_GETLINEENDPOSITION</font>, nLine) - start
+<font color="#006666">    ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_INDICATORFILLRANGE</font>, start, length) <font color="#006666">; start and length</font>
+    
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=scintillagadget.html>ScintillaGadget()</a> - <a href=index.html>Scintilla Index</a><br><br>
+</blockquote>
+</font></body></html>

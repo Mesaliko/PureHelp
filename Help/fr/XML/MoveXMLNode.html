@@ -1,0 +1,88 @@
+<html><head><title>MoveXMLNode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MoveXMLNode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>MoveXMLNode</b></font>(Noeud, NoeudParent [, NoeudPrecedent])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Déplace un noeud et tout son contenu (texte 
+et noeuds fils) à un nouvel emplacement. 
+<br>
+<br>
+Cette fonction peut déplacer des noeuds de 
+documents XML différents.<br>
+Pour copier un noeud à un nouvel 
+emplacement, utiliser <a href="copyxmlnode.html">CopyXMLNode()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Noeud</i></td>
+<td width="90%"> 
+Le noeud à déplacer. 
+
+</td></tr>
+<tr><td><i>NoeudParent</i></td>
+<td> 
+Le noeud sous lequel le noeud déplacé 
+sera inséré. Pour insérer le noeud 
+à la racine de l'arbre XML, utiliser 
+<a href="rootxmlnode.html">RootXMLNode()</a>. 
+
+</td></tr>
+<tr><td><i>NoeudPrecedent (optionnel)</i></td>
+<td> 
+Le noeud fils de 'NoeudParent' après 
+lequel le nouveau noeud devra être 
+inséré. Si sa valeur est omise ou 
+égale à 0, le nouveau noeud est inséré 
+en tant que premier fils du noeud 
+parent. Si sa valeur est -1 alors 
+le nouveau noeud est inséré comme 
+dernier fils du noeud parent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le 
+déplacement est un succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les règles suivantes doivent être respectées 
+pour que le déplacement se déroule 
+correctement: 
+<br>
+- Le <a href="rootxmlnode.html">noeud racine</a> ne 
+peut pas être déplacé <br>
+- 'NoeudParent' ne peut pas être de type 
+<font color="#924B72">#PB_XML_Comment</font> ou <font color="#924B72">#PB_XML_CData</font> 
+<br>
+- 'NoeudPrecedent' doit être un fils 
+direct du 'NoeudParent' (s'il est spécifié) 
+<br>
+- 'Noeud' et 'NoeudPrecedent' ne peuvent 
+pas être identiques <br>
+- 'NoeudParent' ne peut pas être égal à 
+'Noeud' ou à un de ses fils (un noeud ne 
+peut pas être déplacé dans lui-même) 
+<br>
+- Si l'arbre XML a déjà un 
+<a href="mainxmlnode.html">noeud principal</a>, 
+seuls les noeuds de type autres que 
+<font color="#924B72">#PB_XML_Normal</font> et <font color="#924B72">#PB_XML_CData</font> peuvent 
+être insérés à la racine. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="deletexmlnode.html">DeleteXMLNode()</a>, <a href="copyxmlnode.html">CopyXMLNode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=mainxmlnode.html>MainXMLNode()</a> - <a href=index.html>XML Index</a> - <a href=nextxmlattribute.html>NextXMLAttribute()</a> -><br><br>
+
+</body></html>

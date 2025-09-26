@@ -1,0 +1,38 @@
+<html><head><title>Residents</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Residents</font></b></p>
+
+<b>Beschreibung</b><br><blockquote>
+
+Residents sind vorkompilierte Dateien, die geladen werden, wenn der Compiler gestartet wird. Sie sind im 
+Ordner 'residents' des PureBasic-Installationspfads zu finden. Eine Resident-Datei muss die Endung 
+'.res' haben und kann die folgenden Elemente enthalten: <a href="../reference/structures.html">Strukturen</a>, 
+<a href="../reference/interfaces.html">interfaces</a>, <a href="../reference/prototypes.html">Prototypes</a>, 
+<a href="../reference/macros.html">Makros</a> und <a href="../reference/general_rules.html">Konstanten</a>. 
+Sie kann keinen dynamischen Code oder <a href="../reference/procedures.html">Prozeduren</a> enthalten. 
+<br>
+<br>
+Wenn ein Resident geladen wird, dann ist sein gesamter Inhalt für das zu kompilierende Programm verfügbar. 
+Das ist der Grund, warum alle eingebauten Konstanten wie <font color="#924B72">#PB_Event_CloseWindow</font> verfügbar sind, sie befinden 
+sich in der 'PureBasic.res' Datei. Alle API-Strukturen und Konstanten befinden sich auch in einer 
+Resident-Datei. 
+<br>
+<br>
+Die Verwendung von Residents ist ein sinnvoller Weg, um gemeinsam genutzte Makros, Strukturen und Konstanten 
+zu speichern, so dass sie für alle Programme verfügbar sind. Beim Weitergeben einer Anwender-Bibliothek ist 
+dies auch eine gute Lösung, die benötigten Konstanten und Strukturen anzubieten, wie dies PureBasic tut. 
+<br>
+<br>
+Um eine neue Resident-Datei zu erstellen, muss der <a href="../reference/cli_compiler.html">Kommandozeilen-Compiler</a> 
+verwendet werden, da keine Möglichkeit gibt, dies aus der IDE heraus zu tun. 
+<br>
+Es ist oftmals erforderlich, /IGNORERESIDENT und /CREATERESIDENT zur gleichen Zeit zu verwenden, um 
+Dopplungs-Fehler zu vermeiden, da die vorherige Version des Residents geladen wird, bevor die neue 
+erstellt wird. 
+<br>
+<br>
+Residents helfen sehr dabei, eine schnellere Kompilierung und einen schnelleren Compiler-Start zu erhalten, da alle 
+Informationen im binären Format gespeichert werden. Dies ist viel schneller zu laden, als bei jedem 
+Kompilieren eine Include-Datei zu parsen. 
+</blockquote>
+</font></body></html>

@@ -1,0 +1,48 @@
+<html><head><title>SelectedFilePattern</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SelectedFilePattern()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SelectedFilePattern</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'index du filtre sélectionné lors 
+de l'utilisation de la commande 
+<a href="openfilerequester.html">OpenFileRequester()</a> ou <a href="savefilerequester.html">SaveFileRequester()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'index du filtre sélectionné 
+lors de l'utilisation de la commande 
+<a href="openfilerequester.html">OpenFileRequester()</a> ou <a href="savefilerequester.html">SaveFileRequester()</a>. 
+<br>
+L'index du premier filtre est 0. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  FichierParDefaut$ = &quot;C:\autoexec.bat&quot;    <font color="#006666">; Répertoire et fichier par défaut</font>
+  Filtre$ = &quot;Texte (*.txt)|*.txt;*.bat|&quot;   <font color="#006666">; Premier filtre   (index = 0)</font>
+  Filtre$ + &quot;PureBasic (*.pb)|*.pb|&quot;       <font color="#006666">; Deuxième filtre  (index = 1)</font>
+  Filtre$ + &quot;Bmp (*.bmp)|*.bmp|&quot;           <font color="#006666">; Troisième filtre (index = 2)</font>
+  Filtre$ + &quot;Jpeg (*.jpg)|*.jpg|&quot;          <font color="#006666">; Quatrième filtre (index = 3)</font>
+  Filtre$ + &quot;Tous les fichiers (*.*)|*.*&quot;  <font color="#006666">; Cinquième filtre (index = 4)</font>
+  Filtre = 1  <font color="#006666">; Le deuxième filtre sera utilisé par défaut.</font>
+
+  <font color="#006666">; Ouvre une boîte de dialogue pour choisir un fichier, vous pouvez changer de filtre et obtenir son index après validation</font>
+  Fichier$ =<font color="#006666"> OpenFileRequester</font>(&quot;Choisissez un fichier&quot;, FichierParDefaut$, Filtre$, Filtre)
+  Index =<font color="#006666"> SelectedFilePattern</font>()
+  <b><font color="#006666">If</font></b> Index &gt; -1
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;L'index du filtre sélectionné est le suivant : &quot;+<font color="#006666">Str</font>(Index), 0)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;La sélection a été annulée.&quot;, 0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=savefilerequester.html>SaveFileRequester()</a> - <a href=index.html>Requester Index</a> - <a href=selectedfontcolor.html>SelectedFontColor()</a> -><br><br>
+
+</body></html>

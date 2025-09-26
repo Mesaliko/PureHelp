@@ -1,0 +1,81 @@
+<html><head><title>UseMySQLDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseMySQLDatabase()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>UseMySQLDatabase</b></font>([NomBibliotheque$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise l’environnement de base de données MySQL et MariaDB pour une utilisation ultérieure. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NomBibliotheque$ (optionnel)</i></td>
+<td width="90%"> 
+Nom de fichier (et chemin si nécessaire) de la bibliothèque dynamique à utiliser. 
+Comme la plupart des distributions Linux sont livrées avec le paquet libmysql.so, 
+il peut être configuré avec un nom de fichier correct, de sorte que libmaria.so 
+ne doit pas nécessairement être associé à l'exécutable. Si ce paramètre n'est pas 
+spécifié, 'libmariadb.dll' (Windows), 'libmariadb.so' (Linux) ou 'libmariadb.dylib' 
+(OSX) seront utilisés. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie <font color="#924B72">#True</font> si l'environnement MySQL est initialisé avec succès, <font color="#924B72">#False</font> sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+MySQL et MariaDB (un fork open source de MySQL) (fork: Logiciel issu d’une scission 
+d’un projet initial unique, et qui partage avec lui une part de son code source) 
+sont de puissants gestionnaires de bases de données basés sur serveur qui prennent 
+en charge des bases de données très volumineuses et des accès simultanés élevés. 
+PureBasic utilise la bibliothèque opensource MariaDB pour connecter des bases de 
+données MySQL et MariaDB sans aucun problème, ce qui peut être utilisé dans des 
+applications commerciales sans licence supplémentaire. Lorsque vous envoyez votre 
+programme PureBasic, vous devrez ajouter 'libmariadb.dll' (Windows), 'libmariadb.so' 
+(Linux) ou 'libmariadb.dylib' (OSX) trouvé dans le répertoire 'PureBasic/Compilers' 
+de votre installation ou de votre paquet Purebasic. 
+<br>
+<br>
+Il n'y a pas de pilote supplémentaire à installer, tout est prêt pour connecter un 
+serveur MySQL ou MariaDB. Pour plus d'informations à propos de MariaDB: 
+<a href="https://mariadb.org/">https://mariadb.org/</a>. 
+<br>
+<br>
+Une base de données MySQL ou MariaDB doit être connectée à l'aide de <a href="opendatabase.html">OpenDatabase()</a> 
+avant d'utiliser toutes fonctions de base de données. 
+<br>
+Les paramètres spécifiques à MySQL doivent être passés dans le paramètre 'NomBaseDeDonnes$' 
+de <a href="opendatabase.html">OpenDatabase()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  - host: Nom de l'hôte ou adresse IP à laquelle se connecter.
+  - port: Numéro de port auquel se connecter sur le serveur hôte.
+  - dbname: Nom de la base de données. Le nom peut être entouré de guillemets simples (quotes) s'il contient des espaces : dbname='films et musiques'.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMySQLDatabase</font>()
+
+  <font color="#006666">; Vous devez avoir un serveur fonctionnant sur localhost</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, &quot;host=localhost port=3306 dbname='test'&quot;, &quot;utilisateur&quot;, &quot;motdepasse&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Connecté à MySQL&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;La connexion a échoué: &quot;+<font color="#006666">DatabaseError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, <a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setdatabasestring.html>SetDatabaseString()</a> - <a href=index.html>Database Index</a> - <a href=useodbcdatabase.html>UseODBCDatabase()</a> -><br><br>
+
+</body></html>

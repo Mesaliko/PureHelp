@@ -1,0 +1,103 @@
+<html><head><title>PostEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PostEvent()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>PostEvent</b></font>(Event [, Window, Object [, Type [, Data]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Posts an event at the end of the internal event queue and continues program execution without waiting for message processing. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Event</i></td>
+<td width="90%"> 
+The event to post. For a list of PureBasic event, see <a href="windowevent.html">WindowEvent()</a>. When using custom event, 
+the first value must be at least <font color="#924B72">#PB_Event_FirstCustomValue</font>, to not clash with internal events. 
+
+</td></tr>
+<tr><td><i>Window (optional)</i></td>
+<td> 
+The window number associated with the event. When using 
+a custom event, it can be any integer number. This value can be retrieved with <a href="eventwindow.html">EventWindow()</a>. 
+
+</td></tr>
+<tr><td><i>Object (optional)</i></td>
+<td> 
+The object number associated with the event. It can be for example a <a href="../gadget/index.html">gadget</a> 
+or <a href="../menu/index.html">menu</a> number. When using 
+a custom event, it can be any positive integer number (zero included). This value can be retrieved with <a href="eventgadget.html">EventGadget()</a>. 
+
+</td></tr>
+<tr><td><i>Type (optional)</i></td>
+<td> 
+The type associated with the event. When using custom event, the first value must be at 
+least <font color="#924B72">#PB_EventType_FirstCustomValue</font>, to not clash with internal values. 
+This value can be retrieved with <a href="eventtype.html">EventType()</a>. 
+
+</td></tr>
+<tr><td><i>Data (optional)</i></td>
+<td> 
+A data associated with the event. It is only valid when using a custom event and can be any integer number. 
+This value can be retrieved with <a href="eventdata.html">EventData()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns a non-zero value if the event was sent without error, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command can be very useful to communicate between <a href="../thread/index.html">threads</a> and the main event loop. For example, a thread can send 
+a custom event when it has finished its processing (with an associated data), so the main loop will get it and further 
+processing can be done. 
+<br>
+<br>
+All PureBasic generated events are always handled before systems events (so as you add a new event without processing others it always comes first). 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; All our custom events</font>
+  <b><font color="#006666">Enumeration</font></b> <font color="#924B72">#PB_Event_FirstCustomValue</font>
+    <font color="#924B72">#EventBeginProcessing</font>
+    <font color="#924B72">#EventProcessingFinished</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(Value)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EventBeginProcessing</font>)
+    
+<font color="#006666">    Delay</font>(3000)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EventProcessingFinished</font>)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 200, 200, 100, 100, &quot;PostEvent&quot;)
+  
+<font color="#006666">  CreateThread</font>(@Thread(), 0)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EventBeginProcessing</font>
+        <b><font color="#006666">Debug</font></b> &quot;Thread begin processing &quot;
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EventProcessingFinished</font>
+        <b><font color="#006666">Debug</font></b> &quot;Thread processing finished&quot;
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="windowevent.html">WindowEvent()</a>, <a href="eventwindow.html">EventWindow()</a>, <a href="eventgadget.html">EventGadget()</a>, <a href="eventtype.html">EventType()</a>, <a href="eventdata.html">EventData()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=openwindow.html>OpenWindow()</a> - <a href=index.html>Window Index</a> - <a href=removekeyboardshortcut.html>RemoveKeyboardShortcut()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,38 @@
+<html><head><title>EventDropBuffer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EventDropBuffer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Result = <font color="#006666"><b>EventDropBuffer</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+After a <font color="#924B72">#PB_Event_GadgetDrop</font> or <font color="#924B72">#PB_Event_WindowDrop</font> is received by 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> or <a href="../window/windowevent.html">WindowEvent()</a> with an 
+OS specific format, this function can be used to access the data. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the memory address where the dropped data is located.  The <a href="eventdropsize.html">EventDropSize()</a> command 
+returns the size of this buffer. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The returned memory buffer is internal to the library and should not be freed. It is also only valid 
+until the next call to <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> or <a href="../window/windowevent.html">WindowEvent()</a>, 
+so the data should be copied if it is required for longer than that. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="eventdropsize.html">EventDropSize()</a>, 
+<a href="enablegadgetdrop.html">EnableGadgetDrop()</a>, <a href="enablewindowdrop.html">EnableWindowDrop()</a>, 
+<a href="eventdroptype.html">EventDropType()</a>,  <a href="eventdropaction.html">EventDropAction()</a>, 
+<a href="eventdropx.html">EventDropX()</a>, <a href="eventdropy.html">EventDropY()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=eventdropaction.html>EventDropAction()</a> - <a href=index.html>DragDrop Index</a> - <a href=eventdropfiles.html>EventDropFiles()</a> -><br><br>
+
+</body></html>

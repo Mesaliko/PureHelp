@@ -1,0 +1,91 @@
+<html><head><title>OpenDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenDatabase()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenDatabase</b></font>(#BaseDeDonnees, NomBaseDeDonnes$, Utilisateur$, MotdePasse$ [, Plugin]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvrir une base de données. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BaseDeDonnees</i></td>
+<td width="90%"> 
+La base de données à utiliser. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utiliser pour autogénérer ce 
+numéro. 
+
+</td></tr>
+<tr><td><i>NomBaseDeDonnes$</i></td>
+<td> 
+Le nom de la base de données à ouvrir. 
+
+</td></tr>
+<tr><td><i>Utilisateur$</i></td>
+<td> 
+Le nom d'utilisateur de connexion. 
+
+</td></tr>
+<tr><td><i>MotdePasse$</i></td>
+<td> 
+Le mot de passe de connexion. 
+<br>
+<br>
+Le mot de passe peut être une chaîne vide 
+si aucun mot de passe n'est requis. 
+
+</td></tr>
+<tr><td><i>Plugin (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Database_ODBC</font>      : La base de données utilisera ODBC (<a href="useodbcdatabase.html">UseODBCDatabase()</a> doit avoir été appelé).
+  <font color="#924B72">#PB_Database_SQLite</font>    : La base de données utilisera SQLite (<a href="usesqlitedatabase.html">UseSQLiteDatabase()</a> doit avoir été appelé).
+  <font color="#924B72">#PB_Database_PostgreSQL</font>: La base de données utilisera PostgreSQL (<a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a> doit avoir été appelé).
+  <font color="#924B72">#PB_Database_MySQL</font>     : La base de données utilisera MySQL (<a href="usemysqldatabase.html">UseMySQLDatabase()</a> doit avoir été appelé).
+</font></pre>
+Si 'Plugin' n'est pas spécifié, le premier plugin enregistré sera utilisé. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+connexion, zéro sinon. 
+Dans ce cas, la base n'a pas pu être 
+trouvée ou le compte utilisateur n'est pas 
+valable et la description exacte de 
+l'erreur peut être récupérée grâce à 
+<a href="databaseerror.html">DatabaseError()</a>. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#BaseDeDonnees,le nombre généré est renvoyé. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour déclarer une base de données ODBC, 
+lire le document d'aide de Windows. 
+<br>
+<br>
+Si une autre base de données a déjà été 
+ouverte sous le même numéro, la base 
+précédement gérée par ce numéro est 
+automatiquement fermée. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opendatabaserequester.html">OpenDatabaseRequester()</a>, <a href="closedatabase.html">CloseDatabase()</a>, 
+<a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, 
+<a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a>, <a href="usemysqldatabase.html">UseMySQLDatabase()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextdatabaserow.html>NextDatabaseRow()</a> - <a href=index.html>Database Index</a> - <a href=opendatabaserequester.html>OpenDatabaseRequester()</a> -><br><br>
+
+</body></html>

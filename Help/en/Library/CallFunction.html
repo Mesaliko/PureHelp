@@ -1,0 +1,57 @@
+<html><head><title>CallFunction</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallFunction()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CallFunction</b></font>(#Library, FunctionName$ [,Parameter1 [, Parameter2...]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Calls a function in the specified library, by using its name. The specified library must have previously 
+been opened with the <a href="openlibrary.html">OpenLibrary()</a> function. The function is expected to use the stdcall 
+calling convention (the standard in most DLLs on Windows). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Library</i></td>
+<td width="90%"> 
+The library from which the function will be called. 
+
+</td></tr>
+<tr><td><i>FunctionName$</i></td>
+<td> 
+The name of the function to call. The function name is case sensitive. 
+
+</td></tr>
+<tr><td><i>Parameter1, Parameter2, ...</i></td>
+<td> 
+The parameters for the function. The number of parameters must match the parameters 
+of the called function. The maximum number of supported parameters is 20. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the return-value of the called function or zero if the library does not contain 
+a function with the given name. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To call a function that uses the 'cdecl' calling convention, use the <a href="callcfunction.html">CallCFunction()</a> function. 
+<br>
+<br>
+Note: This function is not very flexible and does not handle string/float/double/quad parameters or string/float/double/quad returns. 
+The use of <a href="../reference/prototypes.html">prototypes</a> is now strongly recommended. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="callcfunction.html">CallCFunction()</a>, <a href="getfunction.html">GetFunction()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=callcfunctionfast.html>CallCFunctionFast()</a> - <a href=index.html>Library Index</a> - <a href=callfunctionfast.html>CallFunctionFast()</a> -><br><br>
+
+</body></html>

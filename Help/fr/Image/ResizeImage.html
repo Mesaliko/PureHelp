@@ -1,0 +1,97 @@
+<html><head><title>ResizeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResizeImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ResizeImage</b></font>(#Image, Largeur, Hauteur [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Redimensionne une image. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à redimensionner. 
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur</i></td>
+<td> 
+Les nouvelles dimensions de l'image. 
+<br>
+<br>
+À la fois la largeur et la hauteur doivent 
+être supérieures à zéro.<br>
+<font color="#924B72">#PB_Ignore</font> peut être spécifié pour la largeur 
+ou la hauteur, ainsi la valeur ne sera pas 
+modifiée. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut prendre une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_Smooth</font>: Redimensionne l'image avec interpolation (mode par défaut).
+  <font color="#924B72">#PB_Image_Raw</font>   : Redimensionne l'image sans interpolation (peut donner des résultats peu satisfaisants).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'opération a 
+réussi et zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction modifie le 
+<a href="../reference/handles.html">handle</a> de l'image 
+utilisée. Par conséquent, il doit être 
+ré-affecté par exemple à un <a href="../gadget/imagegadget.html">ImageGadget()</a> 
+avec <a href="../gadget/setgadgetstate.html">SetGadgetState()</a>. 
+<br>
+<br>
+Cette fonction ne fonctionne pas avec des 
+icônes (.ico) ni avec les images multi-frame. 
+<br>
+<br>
+La limite de la taille de l'image qui peut 
+être traitée est fonction du système 
+d'exploitation et de la quantité de mémoire 
+disponible. Si la mémoire disponible est 
+suffisante alors une image de 8192x8192 peut 
+être traitée par tous les systèmes 
+d'exploitation pris en charge par PureBasic. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 426, 128, &quot;ResizeImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ImageGadget</font>(0, 0, 0, 128, 128,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples\Sources\Data\GeeBee2.bmp&quot;))
+<font color="#006666">    ButtonGadget</font>(1, 138, 50, 150, 30, &quot;Réduire l'image -&gt;&quot;)
+<font color="#006666">    ImageGadget</font>(2, 298, 0, 128, 128, 0)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()          
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          <b><font color="#006666">Case</font></b> 1 
+<font color="#006666">            CopyImage</font>(0,1)
+<font color="#006666">            ResizeImage</font>(1, 64, 64)<font color="#006666">; Coupe l'image</font>
+<font color="#006666">            SetGadgetState</font>(2,<font color="#006666"> ImageID</font>(1)) <font color="#006666">; Affichage         </font>
+        <b><font color="#006666">EndSelect</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="imagewidth.html">ImageWidth()</a>, <a href="imageheight.html">ImageHeight()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removeimageframe.html>RemoveImageFrame()</a> - <a href=index.html>Image Index</a> - <a href=saveimage.html>SaveImage()</a> -><br><br>
+
+</body></html>

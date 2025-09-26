@@ -1,0 +1,74 @@
+<html><head><title>Inkey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Inkey()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>Inkey</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie un caractère si une 
+touche du clavier est appuyée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une chaîne contenant le 
+caractère correspondant à la touche 
+enfoncée ou une chaîne vide si la 
+touche ne correspond à aucun 
+caractère (touche de fonction). 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+- Cette commande ne bloque pas 
+l'exécution du programme. 
+<br>
+<br>
+- Si des touches spéciales (non-ascii) 
+doivent être gérées, <a href="rawkey.html">RawKey()</a> peut 
+être appelé après Inkey(). 
+<br>
+<br>
+- Les codes ASCII et les valeurs 
+numériques présentées ici peuvent 
+changer en fonction de la page de 
+code clavier chargée pendant le boot. 
+<br>
+<br>
+- Un tableau contenant les valeurs 
+ascii est disponible 
+<a href="../reference/ascii.html">ici</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    PrintN</font>(&quot;Appuyez sur [Echap] pour quitter&quot;)
+  
+    <b><font color="#006666">Repeat</font></b>
+      KeyPressed$ =<font color="#006666"> Inkey</font>()
+      
+      <b><font color="#006666">If</font></b> KeyPressed$ &lt;&gt; &quot;&quot;
+<font color="#006666">        PrintN</font>(&quot;Vous avez appuye sur : &quot; + KeyPressed$)
+<font color="#006666">        PrintN</font>(&quot;Son identifiant numerique est : &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">RawKey</font>()
+<font color="#006666">        PrintN</font>(&quot;Vous avez appuye sur une touche qui n'est pas alpha-numerique.&quot;)
+<font color="#006666">        PrintN</font>(&quot;Son identifiant numerique est : &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        Delay</font>(20) <font color="#006666">; Evite de monopoliser tout le temps processeur. Utile pour un OS multi-tâches.</font>
+      <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Until</font></b> KeyPressed$ =<font color="#006666"> Chr</font>(27) <font color="#006666">; Attends jusqu'à ce que la touche [Echap] soit appuyée</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="rawkey.html">RawKey()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=enablegraphicalconsole.html>EnableGraphicalConsole()</a> - <a href=index.html>Console Index</a> - <a href=input.html>Input()</a> -><br><br>
+
+</body></html>

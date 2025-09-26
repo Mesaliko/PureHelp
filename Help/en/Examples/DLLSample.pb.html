@@ -1,0 +1,78 @@
+<html><head><title>DLLSample.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - DLL example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; This example is a skeleton to build easely a DLL using PureBasic
+</font><font color="#006666">; The dll is created in the 'Compilers' directory, under the
+</font><font color="#006666">; 'purebasic.dll' name. An associated '.lib' is generated to use
+</font><font color="#006666">; with VisualC++.
+</font><font color="#006666">;
+</font><font color="#006666">;
+</font><font color="#006666">; Rules to follow:
+</font><font color="#006666">;   - Never write code outside a procedure, except for variables
+</font><font color="#006666">;   or structure declaration.
+</font><font color="#006666">;
+</font><font color="#006666">;   - DirectX Init routines must not be initialized in the the
+</font><font color="#006666">;   AttachProcess() procedure
+</font><font color="#006666">;
+</font><font color="#006666">;   - There is 4 procedures automatically called: AttachProcess(),
+</font><font color="#006666">;   DetachProcess(), AttachThread() and DetachThread(). If you don't
+</font><font color="#006666">;   need them, just remove them.
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#TESTDLL</font> = 0
+
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#TESTDLL</font> = 0
+
+  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+
+    <font color="#006666">; These 4 procedures are Windows specific
+</font>    <font color="#006666">;
+</font>
+    <font color="#006666">; This procedure is called once, when the program loads the library
+</font>    <font color="#006666">; for the first time. All init stuffs can be done here (but not DirectX init)
+</font>    <font color="#006666">;
+</font>    <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">AttachProcess</font>(Instance)
+    <b><font color="#006666">EndProcedure</font></b>
+  
+  
+    <font color="#006666">; Called when the program release (free) the DLL
+</font>    <font color="#006666">;
+</font>    <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">DetachProcess</font>(Instance)
+    <b><font color="#006666">EndProcedure</font></b>
+  
+  
+    <font color="#006666">; Both are called when a thread in a program call or release (free) the DLL
+</font>    <font color="#006666">;
+</font>    <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">AttachThread</font>(Instance)
+    <b><font color="#006666">EndProcedure</font></b>
+  
+    <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">DetachThread</font>(Instance)
+    <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">CompilerEndIf</font></b>
+
+  <font color="#006666">; Real code start here..
+</font>  <font color="#006666">;
+</font>  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">EasyRequester</font>(Message$)
+
+<font color="#006666">    MessageRequester</font>(&quot;EasyRequester !&quot;, Message$)
+
+  <b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">CompilerElse</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;PureBasic.dll&quot;) <b><font color="#006666">Or</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;PureBasic.so&quot;)
+<font color="#006666">    CallFunction</font>(0, &quot;EasyRequester&quot;, @&quot;Test&quot;)
+  <b><font color="#006666">EndIf</font></b>
+    
+<b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+</body></html>

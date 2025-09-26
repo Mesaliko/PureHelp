@@ -1,0 +1,71 @@
+<html><head><title>StringGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StringGadget3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>StringGadget3D</b></font>(#Gadget3D, x, y, Breite, Hoehe, Inhalt$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein String-Gadget innerhalb der aktuellen Gadget-Liste. 
+<br>
+<br>
+Dieses Gadget akzeptiert nur eine Zeile an Text. Um mehrzeilige Eingaben zu erhalten, 
+verwenden Sie das <a href="editorgadget3d.html">EditorGadget3D()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen 3D-Gadgets. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Zahl 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>Inhalt$</i></td>
+<td> 
+Der anfängliche Text-Inhalt. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination (verknüpft mit dem '|' OR-Operator) der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String3D_Numeric</font>    : Nur (positive) Ganzzahlen werden akzeptiert.
+  <font color="#924B72">#PB_String3D_Password</font>   : Passwort-Modus, es werden nur '*' anstelle normaler Zeichen angezeigt.
+  <font color="#924B72">#PB_String3D_ReadOnly</font>   : 'Read only' Modus. Es kann kein Text eingegeben werden.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall einen Wert ungleich Null zurück, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Gadget3D Parameter verwendet wurde, dann enthält bei Erfolg der Rückgabewert 
+die automatisch generierte Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Inhalt kann später mit <a href="setgadgettext3d.html">SetGadgetText3D()</a> verändert und mit <a href="getgadgettext3d.html">GetGadgetText3D()</a> 
+ermittelt werden. 
+<br>
+<br>
+Die Abfrage der folgenden Ereignisse wird mittels <a href="../window3d/eventtype3d.html">EventType3D()</a> unterstützt: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType3D_Change</font>    : Der Text wurde durch den Anwender geändert.
+  <font color="#924B72">#PB_EventType3D_Focus</font>     : Das StringGadget erhielt den Fokus.
+  <font color="#924B72">#PB_EventType3D_LostFocus</font> : Das StringGadget verlor den Fokus.
+</font></pre>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip3d.html">GadgetToolTip3D()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=spingadget3d.html>SpinGadget3D()</a> - <a href=index.html>Gadget3D Inhaltsverzeichnis</a> - <a href=textgadget3d.html>TextGadget3D()</a> -><br><br>
+
+</body></html>

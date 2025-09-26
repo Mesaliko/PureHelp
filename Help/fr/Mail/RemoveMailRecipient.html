@@ -1,0 +1,75 @@
+<html><head><title>RemoveMailRecipient</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RemoveMailRecipient()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>RemoveMailRecipient</b></font>(#Courrier, [, Addresse$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprimer un destinataire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Courrier</i></td>
+<td width="90%"> 
+Le courrier à utiliser. 
+
+</td></tr>
+<tr><td><i>Addresse$ (optionnel)</i></td>
+<td> 
+L'adresse du destinataire à supprimer. 
+<br>
+<br>
+L'adresse doit être dans un format 
+correct ou le mail ne sera pas envoyé 
+et doit correspondre à une adresse 
+à partir d'un appel à <a href="addmailrecipient.html">AddMailRecipient()</a>. 
+<br>
+<br>
+S'il n'est pas spécifié, tous les 
+destinataires sont retirés de l'e-mail. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+La ou les catégories du ou des destinataires. 
+Peut être une combinaison des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mail_To</font> : Destinataire(s) principal(aux).
+  <font color="#924B72">#PB_Mail_Cc</font> : Destinataire(s) en copie conforme (Copie Carbone: Tous les destinataires sont visibles).
+  <font color="#924B72">#PB_Mail_Bcc</font>: Destinataire(s) en copie invisible ('Blind carbon copy': Seul le destinataire est visible).
+</font></pre>
+S'il n'est pas spécifié, toutes les 
+catégories sont retirées pour l'adresse 
+indiquée. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@votreadresse.com&quot;, &quot;Salut&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, &quot;andre@purebasic.com&quot;, <font color="#924B72">#PB_Mail_To</font>) <font color="#006666">; Andre est le destinataire principal</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;fred@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Cc</font>)  <font color="#006666">; Fred reçoit une copie du mail</font>
+<font color="#006666">    AddMailRecipient</font>(0, &quot;timo@purebasic.com&quot;, <font color="#924B72">#PB_Mail_Bcc</font>) <font color="#006666">; Timo reçoit une copie du mail aussi mais Andre et Fred ne le savent pas</font>
+    
+    <font color="#006666">; Assurez-vous que Fred soit retiré de toutes les destinations :-)</font>
+<font color="#006666">    RemoveMailRecipient</font>(0, &quot;fred@purebasic.com&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addmailrecipient.html">AddMailRecipient()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=mailprogress.html>MailProgress()</a> - <a href=index.html>Mail Index</a> - <a href=sendmail.html>SendMail()</a> -><br><br>
+
+</body></html>

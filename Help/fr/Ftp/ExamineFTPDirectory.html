@@ -1,0 +1,93 @@
+<html><head><title>ExamineFTPDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExamineFTPDirectory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ExamineFTPDirectory</b></font>(#FTP)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Examine le contenu du répertoire FTP 
+courant. 
+<br>
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#FTP</i></td>
+<td width="90%"> 
+La connexion FTP à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si 
+l'opération a réussi, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour le moment, seuls les serveurs de type 
+unix sont supportés. Le protocole FTP ne 
+spécifie pas formellement comment la 
+liste des fichiers doit être retournée, 
+donc chaque serveur peut potentiellement 
+la renvoyer sous une forme spécifique. 
+Heureusement, la plupart des serveurs 
+FTP dans le monde fonctionnent sous 
+unix/linux, et utilisent la même 
+convention pour lister un répertoire. 
+Ceci dit, il n'est pas garanti que cette 
+commande fonctionne avec tous les serveurs. 
+Elle sera mise à jour au fur et à mesure 
+des besoins pour supporter un plus grand 
+nombre de serveurs. 
+Si le serveur n'est pas correctement 
+supporté, il est possible d'utiliser 
+<a href="ftpdirectoryentryraw.html">FTPDirectoryEntryRaw()</a> pour récupérer 
+l'information brute de chaque élément. 
+<br>
+<br>
+La liste créée peut être ensuite parcourue 
+avec les fonctions <a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a>, 
+<a href="ftpdirectoryentryname.html">FTPDirectoryEntryName()</a>, 
+<a href="ftpdirectoryentrytype.html">FTPDirectoryEntryType()</a>, 
+<a href="ftpdirectoryentryattributes.html">FTPDirectoryEntryAttributes()</a>, 
+<a href="ftpdirectoryentrydate.html">FTPDirectoryEntryDate()</a> et 
+<a href="ftpdirectoryentrysize.html">FTPDirectoryEntrySize()</a>. 
+<br>
+<br>
+Pour changer le répertoire courant, 
+utilisez <a href="setftpdirectory.html">SetFTPDirectory()</a>. 
+<br>
+<br>
+Une fois que l'examen du répertoire 
+est terminé, il faut appeler 
+<a href="finishftpdirectory.html">FinishFTPDirectory()</a> pour libérer 
+les ressources associées. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenFTP</font>(0, &quot;ftp.free.fr&quot;, &quot;anonymous&quot;, &quot;&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineFTPDirectory</font>(0)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextFTPDirectoryEntry</font>(0)
+        <b><font color="#006666">Debug</font></b> <font color="#006666">FTPDirectoryEntryName</font>(0)
+      <b><font color="#006666">Wend</font></b>
+<font color="#006666">      FinishFTPDirectory</font>(0)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Connexion avec ftp.free.fr impossible&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a>, 
+<a href="finishftpdirectory.html">FinishFTPDirectory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=deleteftpfile.html>DeleteFTPFile()</a> - <a href=index.html>Ftp Index</a> - <a href=ftpdirectoryentryattributes.html>FTPDirectoryEntryAttributes()</a> -><br><br>
+
+</body></html>

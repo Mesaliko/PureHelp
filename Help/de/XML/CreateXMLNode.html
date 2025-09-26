@@ -1,0 +1,65 @@
+<html><head><title>CreateXMLNode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateXMLNode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateXMLNode</b></font>(ElternKnoten, Name$ [, VorherigerKnoten [, Typ]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt einen neuen XML-Knoten und fügt diesen in den angegebenen Elternknoten ein. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ElternKnoten</i></td>
+<td width="90%"> 
+(englisch &quot;ParentNode&quot;). Der Knoten, in welchen der neue Knoten eingefügt werden soll. 
+Um den neuen Knoten als Wurzel des Baums einzufügen, kann hier <a href="rootxmlnode.html">RootXMLNode()</a> verwendet 
+werden. 
+
+</td></tr>
+<tr><td><i>Name$</i></td>
+<td> 
+Der Knoten Name$. Dies kann ein leerer String sein, wenn der Knotenname nicht benötigt wird. 
+
+</td></tr>
+<tr><td><i>VorherigerKnoten (optional)</i></td>
+<td> 
+(englisch &quot;PreviousNode&quot;). Ein untergeordneter Knoten (englisch &quot;childnode&quot;) 
+von 'ElternKnoten', nach welchem der neue Knoten eingefügt werden soll. Wenn dieser Wert 0 ist oder der 
+Parameter nicht angegeben wird, dann wird der neue Knoten als erstes &quot;Kind&quot; (child) seiner &quot;Eltern&quot; eingefügt. 
+Wenn der Wert gleich -1 ist, dann wird der neue Knoten als letztes &quot;Kind&quot; (child) seiner &quot;Eltern&quot; eingefügt. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Der <a href="xmlnodetype.html">Typ</a> des neuen Knotens. Der Standard ist <font color="#924B72">#PB_XML_Normal</font>. 
+Beachten Sie, dass der Knoten-Typ nicht mehr geändert werden kann, nachdem der Knoten erstellt wurde. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den <a href="../reference/memory.html">Zeiger</a> auf den neuen XML-Knoten zurück, wenn dieser erfolgreich 
+erstellt wurde - oder Null, wenn an dieser Stelle kein Knoten eingefügt werden konnte. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die folgenden Regeln müssen für ein erfolgreiches Einfügen eingehalten werden: <br>
+- 'ElternKnoten' darf nicht vom Typ <font color="#924B72">#PB_XML_Comment</font> oder <font color="#924B72">#PB_XML_CData</font> sein <br>
+- VorherigerKnoten' muss ein direktes &quot;Kind&quot; (child) von 'ElternKnoten' sein (wenn dieser spezifiziert wurde) <br>
+- Ein Knoten vom Typ <font color="#924B72">#PB_XML_Root</font> kann nicht manuell erstellt werden <br>
+- Wenn der XML-Baum bereits einen <a href="mainxmlnode.html">Hauptknoten</a> hat, können auf der Wurzel-Ebene 
+nur andere Knoten als <font color="#924B72">#PB_XML_Normal</font> und <font color="#924B72">#PB_XML_CData</font> eingefügt werden 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="deletexmlnode.html">DeleteXMLNode()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createxml.html>CreateXML()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=deletexmlnode.html>DeleteXMLNode()</a> -><br><br>
+
+</body></html>

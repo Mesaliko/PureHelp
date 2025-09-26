@@ -1,0 +1,67 @@
+<html><head><title>InputRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>InputRequester</b></font>(Title$, Message$, DefaultText$ [, Flags [, ParendID]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens a blocking input requester to enter some text. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Title$</i></td>
+<td width="90%"> 
+Title of the requester. 
+
+</td></tr>
+<tr><td><i>Message$</i></td>
+<td> 
+Message displayed before the input field. 
+
+</td></tr>
+<tr><td><i>DefaultText$</i></td>
+<td> 
+Default text in the input field. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Can be the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_InputRequester_Password</font>: set the field type as 'password'. The displayed text will be hidden.
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+The parent window identifier. A valid window identifier can be retrieved with <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the text in the input field, or an empty string if the requester has been closed without hitting the &quot;OK&quot; button. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Input$ =<font color="#006666"> InputRequester</font>(&quot;Title&quot;, &quot;Please make your input:&quot;, &quot;I'm the default input.&quot;)
+
+  <b><font color="#006666">If</font></b> Input$ &gt; &quot;&quot;
+    a$ = &quot;You entered in the requester:&quot; +<font color="#006666"> Chr</font>(10)  <font color="#006666">; Chr(10) only needed</font>
+    a$ + Input$                                                  <font color="#006666">; for line-feed</font>
+  <b><font color="#006666">Else</font></b>  
+    a$ = &quot;The requester was canceled or there was nothing entered.&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, 0)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/inputrequester.png"></p>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=fontrequester.html>FontRequester()</a> - <a href=index.html>Requester Index</a> - <a href=messagerequester.html>MessageRequester()</a> -><br><br>
+
+</body></html>

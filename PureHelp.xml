@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<dialogs><!--Created by Dialog Design0R V1.86 => get it from: https://hex0rs.coderbu.de/en/sdm_downloads/dialogdesign0r/-->
+  <window flags="#PB_Window_SystemMenu | #PB_Window_MinimizeGadget | #PB_Window_MaximizeGadget | #PB_Window_SizeGadget | #PB_Window_Invisible | #PB_Window_NoActivate" text="Pure Help" width="800" height="600" margin="0" name="window_purehelp">
+    <vbox expand="item:2" spacing="0">
+      <hbox expand="item:8" spacing="0">
+        <container flags="#PB_Container_Single" margin="0" id="#container_Maskpanel">
+          <vbox expand="item:1">
+            <buttonimage width="100" flags="#PB_Button_Toggle" id="#Maskpanel" onevent="OnClick_Maskpanel()"/>
+            <text text="Hide" flags="#PB_Text_Center" id="#text_Maskpanel"/>
+          </vbox> 
+        </container>
+        <container margin="0" flags="#PB_Container_Single" id="#container_Previous">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Previous" onevent="OnClick_Previous()"/>
+            <text text="Previous" flags="#PB_Text_Center" id="#text_previous"/>
+          </vbox> 
+        </container>
+        <container flags="#PB_Container_Single" margin="0" id="#container_Next">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Next" onevent="OnClick_Next()"/>
+            <text text="Next" flags="#PB_Text_Center" id="#text_Next"/>
+          </vbox> 
+        </container>
+        <container flags="#PB_Container_Single" margin="0" id="#container_Home">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Home" onevent="OnClick_Home()"/>
+            <text text="Home" flags="#PB_Text_Center" id="#text_Home"/>
+          </vbox> 
+        </container>
+        <container flags="#PB_Container_Single" margin="0" id="#container_Print">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Print" onevent="OnClick_Print()"/>
+            <text text="Print" flags="#PB_Text_Center" id="#text_Print"/>
+          </vbox> 
+        </container>
+        <container margin="0" flags="#PB_Container_Single" id="#container_Search">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Search" onevent="OnClick_Search()"/>
+            <text text="Search" flags="#PB_Text_Center" id="#text_Searches"/>
+          </vbox> 
+        </container>
+        <container flags="#PB_Container_Single" margin="0" id="#container_Options">
+          <vbox expand="item:1">
+            <buttonimage width="100" id="#Options" onevent="OnClick_Options()"/>
+            <text text="Options" flags="#PB_Text_Center" id="#text_Options"/>
+          </vbox> 
+        </container>
+        <container flags="#PB_Container_Single" margin="0" id="#container_Zoom">
+          <vbox expand="item:1">
+            <trackbar width="100" min="10" max="500" value="100" id="#Zoom" onevent="OnChange_Zoom()"/>
+            <text text="Zoom = 100 %" flags="#PB_Text_Center" id="#text_Zoom"/> 
+          </vbox> 
+        </container> 
+      </hbox>
+      <splitter flags="#PB_Splitter_Vertical | #PB_Splitter_Separator" firstmin="0" secondmin="100" id="#splitter">
+        <container flags="#PB_Container_BorderLess" margin="0" id="#container_left">
+          <panel margin="0" id="#panel">
+            <tab text="Summary" id="#tab_summary">
+              <multibox>
+                <tree id="#tree_summary" onrightclick="OnRClick_tree_summary()" onevent="OnEvent_tree_summary()" onleftclick="OnClick_tree_summary()" onchange="OnChange_tree_summary()" onleftdoubleclick="OnLDClick_tree_summary()"/>
+                <tree invisible="yes" id="#tree_summarynoicons" onrightclick="OnRClick_tree_summary()" onevent="OnEvent_tree_summary()" onchange="OnChange_tree_summary()" onleftclick="OnClick_tree_summary()" onleftdoubleclick="OnLDClick_tree_summary()"/>
+              </multibox> 
+            </tab>
+            <tab text="Index" id="#tab_index">
+              <vbox expand="item:3">
+                <text text="Search the keyword:" id="#text_index"/>
+                <string id="#string_index" onchange="OnChange_string_index()"/>
+                <listview id="#listview_index" onleftclick="OnClick_listview_index()" onleftdoubleclick="OnLDClick_listview_index()"/>
+                <hbox expand="item:1">
+                  <empty/>
+                  <button text="Display" height="30" id="#button_index" onevent="OnClick_button_index()"/>
+                </hbox> 
+              </vbox> 
+            </tab>
+            <tab text="Search" id="#tab_search">
+              <vbox expand="item:5">
+                <text text="Search the keyword:" id="#text_search"/>
+                <string id="#string_Search" onchange="OnChange_string_search()"/>
+                <hbox expand="item:1">
+                  <empty/>
+                  <button text="list of sections" height="30" id="#button_searchlist" onevent="OnClick_button_searchlist()"/>
+                </hbox>
+                <text text="Select the section:" id="#text_selectsection"/>
+                <listview id="#listview_search" onleftclick="OnClick_listview_search()" onleftdoubleclick="OnLDClick_listview_search()"/>
+                <hbox expand="item:1">
+                  <progressbar id="#progressbar"/>
+                  <button text="Display" height="30" id="#button_search" onevent="OnClick_button_search()"/>
+                </hbox> 
+              </vbox> 
+            </tab>
+            <tab text="Favorite" id="#tab_favorite">
+              <vbox expand="item:2">
+                <text text="Sections:" id="#text_favorite"/>
+                <listview id="#listview_favorite" onleftclick="OnClick_listview_favorite()" onleftdoubleclick="OnLDClick_listview_favorite()"/>
+                <hbox expand="item:1">
+                  <empty/>
+                  <button text="Delete" height="30" id="#button_favoritedel" onevent="OnClick_button_favoritedel()"/>
+                  <button text="Display" height="30" id="#button_favorite" onevent="OnClick_button_favorite()"/> 
+                </hbox>
+                <text text="Current section:" id="#text_sectioncurrent"/>
+                <string id="#string_favoritesectioncurrent" onchange="OnChange_favoritesectioncurrent()"/>
+                <hbox expand="item:1">
+                  <empty/>
+                  <button text="Add" height="30" id="#button_favoriteadd" onevent="OnClick_button_favoriteadd()"/>
+                </hbox> 
+              </vbox> 
+            </tab> 
+          </panel> 
+        </container>
+        <container flags="#PB_Container_BorderLess" margin="0" id="#container_right">
+          <multibox>
+            <web invisible="yes" id="#web"/>
+            <web flags="#PB_Web_Edge" id="#web_edge"/>
+            <webview invisible="yes" id="#webview"/> 
+          </multibox> 
+        </container> 
+      </splitter> 
+    </vbox> 
+  </window>
+</dialogs><!--DDesign0R Definition: PureBasic|1|1|1|_______|Mesa3|1-->

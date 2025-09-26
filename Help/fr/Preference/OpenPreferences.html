@@ -1,0 +1,101 @@
+<html><head><title>OpenPreferences</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenPreferences()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenPreferences</b></font>(Fichier$ [, Options [, Encodage]])])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre un fichier de préférences. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichier$</i></td>
+<td width="90%"> 
+Le nom du fichier de préférences à ouvrir. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Preference_NoSpace</font>       : Pas d'espaces autour du signe égal.
+                                 Utile quand il s'agit d'un fichier de préférences externes qui 
+                                 n'accepte pas les espaces autour de signe égal.
+  <font color="#924B72">#PB_Preference_GroupSeparator</font>: Ajoute une ligne vide entre les groupes pour faciliter la lisibilité.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Encodage (optionnel)</i></td>
+<td> 
+Permet de forcer l'utilisation d'un encodage de chaîne particulier lors de la lecture du 
+fichier de préférences. Si une nomenclature UTF-8 (BOM) est trouvée au début du fichier, ce paramètre 
+est ignoré et UTF-8 sera utilisé. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_UTF8</font>  : Le fichier sera lu en UTF-8, même s'il n'a pas de nomenclature (BOM).
+   <font color="#924B72">#PB_Ascii</font> : Le fichier sera lu en Ascii, sauf s'il existe une nomenclature UTF-8 (BOM). 
+                Si les préférences sont réécrites dans un fichier, elles utiliseront UTF-8.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le fichier ne peut pas être ouvert, le programmeur peut malgré tout utiliser la commande de 
+lecture, celle-ci renvoyant alors la valeur spécifiée par défaut. 
+Ceci est très pratique pour initialiser en une fois les variables du programme. 
+Les fonctions comme <a href="readpreferencestring.html">ReadPreferenceString()</a> peuvent être utilisées pour lire les valeurs 
+de préférences stockées dans le fichier. 
+<br>
+<br>
+Pour effacer une clé ou un groupe, utiliser <a href="removepreferencekey.html">RemovePreferenceKey()</a> ou <a href="removepreferencegroup.html">RemovePreferenceGroup()</a>. 
+<br>
+<a href="preferencegroup.html">PreferenceGroup()</a> permet de créer ou de changer le groupe courant. 
+<br>
+<br>
+Il est possible de modifier les valeurs existantes avec <a href="writepreferencestring.html">WritePreferenceString()</a> ou une commande ad hoc. 
+<br>
+<br>
+Une fois les opérations sur le fichier terminées, il faut utiliser <a href="closepreferences.html">ClosePreferences()</a> pour mettre à 
+jour, écrire et fermer le fichier préférences sur le disque. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Ouvrir un fichier préférence</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/Sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Examen des Groupes</font>
+<font color="#006666">  ExaminePreferenceGroups</font>()
+  <font color="#006666">; Pour chaque groupe</font>
+  <b><font color="#006666">While</font></b> <font color="#006666">NextPreferenceGroup</font>()
+    texte$ = texte$ +<font color="#006666"> PreferenceGroupName</font>() + <font color="#924B72">#LF$</font> <font color="#006666">; On récupère son nom</font>
+  <font color="#006666">; Examen des Clés pour le groupe en cours  </font>
+<font color="#006666">    ExaminePreferenceKeys</font>()
+  <font color="#006666">; Pour chaque clé  </font>
+  <b><font color="#006666">While</font></b>  <font color="#006666">NextPreferenceKey</font>()                          
+    texte$ = texte$ +<font color="#006666"> PreferenceKeyName</font>() + &quot; = &quot; +<font color="#006666"> PreferenceKeyValue</font>() + <font color="#924B72">#LF$</font> <font color="#006666">; On récupère son nom et sa valeur</font>
+  <b><font color="#006666">Wend</font></b>
+  texte$ = texte$ +  <font color="#924B72">#LF$</font>
+  <b><font color="#006666">Wend</font></b>
+
+ <font color="#006666">; Afficher tous les groupes et toutes les clés avec leur valeur</font>
+<font color="#006666">  MessageRequester</font>(&quot;test.pref&quot;,texte$)
+
+  <font color="#006666">; Fermer le fichier préférence</font>
+<font color="#006666">  ClosePreferences</font>()    
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closepreferences.html">ClosePreferences()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextpreferencekey.html>NextPreferenceKey()</a> - <a href=index.html>Preference Index</a> - <a href=preferencecomment.html>PreferenceComment()</a> -><br><br>
+
+</body></html>

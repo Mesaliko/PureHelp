@@ -1,0 +1,55 @@
+<html><head><title>GetOriginX</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetOriginX()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetOriginX</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la coordonnée X de l'origine 
+du dessin qui a été définie à l'aide 
+de <a href="setorigin.html">SetOrigin()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la coordonnée X de l'origine 
+du dessin. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;GetOriginX&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200, 24, $FFFFFF) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+        
+      <font color="#006666">; Dessine la même figure à différents endroits en déplaçant l'origine dessin</font>
+      <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> 120 <b><font color="#006666">Step</font></b> 40
+        <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> 120 <b><font color="#006666">Step</font></b> 60
+<font color="#006666">          SetOrigin</font>(X, Y)
+          <b><font color="#006666">Debug</font></b> <font color="#006666">GetOriginX</font>()
+          <b><font color="#006666">Debug</font></b> <font color="#006666">GetOriginY</font>()          
+<font color="#006666">          Box</font>(0, 0, 30, 30, $FF0000)
+<font color="#006666">          Circle</font>(15, 15, 10, $00FF00)
+        <b><font color="#006666">Next</font></b> y
+      <b><font color="#006666">Next</font></b> x 
+  
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))      
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getoriginy.html">GetOriginY()</a>, <a href="setorigin.html">SetOrigin()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=frontcolor.html>FrontColor()</a> - <a href=index.html>2DDrawing Index</a> - <a href=getoriginy.html>GetOriginY()</a> -><br><br>
+
+</body></html>

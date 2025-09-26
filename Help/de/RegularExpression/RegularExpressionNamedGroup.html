@@ -1,0 +1,70 @@
+<html><head><title>RegularExpressionNamedGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegularExpressionNamedGroup()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>RegularExpressionNamedGroup</b></font>(#RegularExpression, GruppenName$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Extrahiert den mit einer benannten Gruppe innerhalb des regulären Ausdrucks 
+übereinstimmenden String, nach einem Aufruf von <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#RegularExpression</i></td>
+<td width="90%"> 
+Der zu verwendende reguläre Ausdruck. <a href="examineregularexpression.html">ExamineRegularExpression()</a> und 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a> müssen auf diesen regulären Ausdruck aufgerufen worden 
+sein. 
+
+</td></tr>
+<tr><td><i>GruppenName$</i></td>
+<td> 
+Der Name der zu extrahierenden Gruppe. Der Gruppenname beachtet die Groß- und 
+Kleinschreibung. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den mit einer Gruppe des regulären Ausdrucks übereinstimmenden String zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Gruppen in einem regulären Ausdruck werden definiert, indem ein Unter-Ausdruck 
+(&quot;sub-expression&quot;) von Klammern &quot;(&quot; und &quot;)&quot; umschlossen wird. Auf Gruppen kann 
+sowohl mittels Index-basierender Funktionen wie <a href="regularexpressiongroup.html">RegularExpressionGroup()</a> 
+zugegriffen werden, als auch durch Zuweisung eines Namens mittels des 
+&quot;(?&lt;name&gt;)&quot; Syntax wie im Beispiel unten zu sehen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieser Ausdruck stimmt mit einem Farbeinstellungs-String (mit den Werten Rot,</font>
+  <font color="#006666">; Grün oder Blau) überein. Die Farben sind gruppiert mit (), was den Namen</font>
+  <font color="#006666">; &quot;col&quot; zugewiesen bekommen hat. Dieser Farbname wird dann extrahiert.</font>
+  <font color="#006666">;  </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;color=(?&lt;col&gt;red|green|blue)&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineRegularExpression</font>(0, &quot;stype=bold, color=blue, margin=50&quot;)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextRegularExpressionMatch</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;The color is &quot; +<font color="#006666"> RegularExpressionNamedGroup</font>(0, &quot;col&quot;)
+      <b><font color="#006666">Wend</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="examineregularexpression.html">ExamineRegularExpression()</a>, <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>, 
+<a href="regularexpressionnamedgroupposition.html">RegularExpressionNamedGroupPosition()</a>, <a href="regularexpressionnamedgrouplength.html">RegularExpressionNamedGroupLength()</a>, 
+<a href="regularexpressiongroup.html">RegularExpressionGroup()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=regularexpressionmatchstring.html>RegularExpressionMatchString()</a> - <a href=index.html>RegularExpression Inhaltsverzeichnis</a> - <a href=regularexpressionnamedgrouplength.html>RegularExpressionNamedGroupLength()</a> -><br><br>
+
+</body></html>

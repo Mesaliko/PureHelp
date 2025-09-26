@@ -1,0 +1,53 @@
+<html><head><title>LoadMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadMesh()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>LoadMesh</b></font>(#Mesh, Filename$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Loads a new mesh. Before loading a mesh, an archive must be specified with <a href="../engine3d/add3darchive.html">Add3DArchive()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+A number to identify the new mesh. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The filename of the mesh. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the mesh was successfully loaded, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Mesh parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Mesh is required to be in the OGRE .mesh format. A command-line tool based on <a href="http://assimp.sourceforge.net/main_features_formats.html">assimp</a> is available to convert 
+many 3d formats into the OGRE mesh, including materials and animations. It can be downloaded 
+here: <a href="http://www.purebasic.com/download/OgreAssimpConverter.zip">OgreAssimpConverter.zip</a> (Windows only). Some problems 
+have been reported with shadow and converted meshes, if that happen use OgreMeshUpdater.exe on the newly converted mesh and it should fix 
+it. <br>
+<br>
+It is also possible to use existing exporter for Milkshape, Lightwave, Blender or 3DS Max. More 
+information may be found on the <a href="http://www.ogre3d.org/">OGRE website</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freemesh.html">FreeMesh()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=ismesh.html>IsMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=meshdirectadd.html>MeshDirectAdd()</a> -><br><br>
+
+</body></html>

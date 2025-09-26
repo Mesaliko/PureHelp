@@ -1,0 +1,27 @@
+<html><head><title>Migration from PureBasic 5.40 to 5.50</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Migration from PureBasic 5.40 to 5.50</font></b></p>
+
+<p><b>Particule library</b></p><blockquote>
+
+
+<br>
+ParticleVelocity(): code changed to support current velocity. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Old</font>
+<font color="#006666">  ParticleVelocity</font>(<font color="#924B72">#ParticleEmitter</font>, Minimum, Maximum)
+
+  <font color="#006666">; New</font>
+<font color="#006666">  ParticleVelocity</font>(<font color="#924B72">#ParticleEmitter</font>, Mode, Value)
+</font></pre>
+
+<br>
+</blockquote>
+<p><b>Others</b></p><blockquote>
+
+
+<br>
+PureBasic internal manipulation of strings is now unicode only.<br>
+ASCII mode is no longer supported internally. The function *Result = Ascii(String$) 
+allows the manipulation of ASCII strings by the user. 
+</blockquote>
+</font></body></html>

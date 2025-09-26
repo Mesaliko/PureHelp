@@ -1,0 +1,74 @@
+<html><head><title>EventData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EventData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>EventData</b></font>() </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la valeur associée à l'évènement 
+en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la donnée associée à l'évènement 
+en cours. <br>
+Si l'évènement courant n'est pas un 
+évènement personnalisé envoyé par 
+<a href="postevent.html">PostEvent()</a>, alors cette valeur est 
+indéfinie. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'évènement doit être un évènement 
+personnalisé envoyé avec <a href="postevent.html">PostEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b> <font color="#924B72">#PB_Event_FirstCustomValue</font>
+    <font color="#924B72">#EvenementDebutAction</font>
+    <font color="#924B72">#EvenementFinAction</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(Valeur)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EvenementDebutAction</font>, 0, 1, <font color="#924B72">#PB_EventType_FirstCustomValue</font>, 10)
+    
+<font color="#006666">    Delay</font>(3000)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EvenementFinAction</font>, 0, 1, <font color="#924B72">#PB_EventType_FirstCustomValue</font>, 100)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 200, 200, 100, 100, &quot;PostEvent&quot;)
+  
+<font color="#006666">  CreateThread</font>(@Thread(), 0)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EvenementDebutAction</font>
+        <b><font color="#006666">Debug</font></b> &quot;Le Thread commence une action... &quot;
+        <b><font color="#006666">Debug</font></b> <font color="#006666">EventData</font>()
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EvenementFinAction</font>
+        <b><font color="#006666">Debug</font></b> &quot;Le Thread a terminé une action&quot;
+        <b><font color="#006666">Debug</font></b> <font color="#006666">EventData</font>()
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="postevent.html">PostEvent()</a>, <a href="windowevent.html">WindowEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=event.html>Event()</a> - <a href=index.html>Window Index</a> - <a href=eventgadget.html>EventGadget()</a> -><br><br>
+
+</body></html>

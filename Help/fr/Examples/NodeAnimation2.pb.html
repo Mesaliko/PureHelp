@@ -1,0 +1,200 @@
+<html><head><title>NodeAnimation2.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - NodeAnimation
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; Try to play with 'Weight' (and look at cylinder with red ribbon)
+</font><font color="#924B72">#Weight</font> = 1 <font color="#006666">; try different values btw 0 to 1
+</font>
+<b><font color="#006666">Declare</font></b> <font color="#006666">AddPath0</font>(No)
+<b><font color="#006666">Declare</font></b> <font color="#006666">AddPath1</font>(No)
+<b><font color="#006666">Declare</font></b> <font color="#006666">AddPath2</font>(No, Weight.f)
+<b><font color="#006666">Declare</font></b> <font color="#006666">AddPath3</font>(No, Weight.f)
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; NodeAnimation - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;            , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;        , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;          , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;         , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Additive</font>)
+
+<font color="#006666">;- Ground
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 1200, 1200, 1, 1, 5, 5)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0), 500, 0, -500)
+
+<font color="#006666">;- Cube
+</font><font color="#006666">CreateCube</font>(1, 100)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">;- Sphere
+</font><font color="#006666">CreateSphere</font>(2, 50, 50, 50)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(2), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">;- Cylinder
+</font><font color="#006666">CreateCylinder</font>(3, 5, 50)
+<font color="#006666">CreateEntity</font>(3,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">;- Cylinder - check point
+</font><font color="#006666">CreateCylinder</font>(3, 15, 150)
+<font color="#006666">CreateEntity</font>(4,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 50,  50,   50)
+<font color="#006666">CreateEntity</font>(5,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 50,  50, -950)
+<font color="#006666">CreateEntity</font>(6,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 950, 50, -950)
+<font color="#006666">CreateEntity</font>(7,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 950, 50,   50)
+<font color="#006666">CreateEntity</font>(8,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 450, 50, -450)
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 500, 1500, 1450, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraFOV</font>(0, 25)
+<font color="#006666">CameraBackColor</font>(0,$846748)
+<font color="#006666">CameraLookAt</font>(0, 500, 0, -500)
+
+<font color="#006666">;- Node
+</font><font color="#006666">;
+</font><font color="#006666">CreateNode</font>(0)
+<font color="#006666">AttachNodeObject</font>(0,<font color="#006666"> EntityID</font>(1))
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font><font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(25, 25, 25))
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(215, 190, 40), -750, 750, -750)
+
+<font color="#006666">;create 3 ribbon trails, just For fun
+</font><font color="#006666">;
+</font><font color="#006666">GetScriptMaterial</font>(1, &quot;Examples/LightRibbonTrail&quot;)
+<font color="#006666">CreateRibbonEffect</font>(0,<font color="#006666"> MaterialID</font>(1), 1, 80, 1800)
+<font color="#006666">RibbonEffectColor</font>(0, 0,<font color="#006666"> RGBA</font>(255*0.8, 255*0.8, 0, 255),<font color="#006666"> RGBA</font>(1, 255, 255, 5))
+<font color="#006666">RibbonEffectWidth</font>(0, 0, 8, 3)
+<font color="#006666">AttachRibbonEffect</font>(0,<font color="#006666"> EntityParentNode</font>(3))
+
+<font color="#006666">CreateRibbonEffect</font>(1,<font color="#006666"> MaterialID</font>(1), 1, 80, 1800)
+<font color="#006666">RibbonEffectColor</font>(1, 0,<font color="#006666"> RGBA</font>(0, 255*0.8, 255*0.8, 255),<font color="#006666"> RGBA</font>(0, 255, 0, 5))<font color="#006666">;RGBA(255, 255, 1, 5))
+</font><font color="#006666">RibbonEffectWidth</font>(1, 0, 8, 3)
+<font color="#006666">AttachRibbonEffect</font>(1,<font color="#006666"> EntityParentNode</font>(2))
+
+<font color="#006666">CreateRibbonEffect</font>(2,<font color="#006666"> MaterialID</font>(1), 1, 80, 1800)
+<font color="#006666">RibbonEffectColor</font>(2, 0,<font color="#006666"> RGBA</font>(0, 255, 0, 255),<font color="#006666"> RGBA</font>(1, 1, 1, 5))
+<font color="#006666">RibbonEffectWidth</font>(2, 0, 8, 3)
+<font color="#006666">AttachRibbonEffect</font>(2,<font color="#006666"> EntityParentNode</font>(1))
+
+<font color="#006666">;- NodeAnimation
+</font><font color="#006666">;
+</font><font color="#006666">AddPath0</font>(0)
+<font color="#006666">AddPath1</font>(1)
+
+<font color="#006666">;Test Weight
+</font><font color="#006666">;
+</font><font color="#006666">AddPath2</font>(2, <font color="#924B72">#Weight</font>)
+<font color="#006666">AddPath3</font>(3, 1.0 - <font color="#924B72">#Weight</font>)
+
+<b><font color="#006666">Repeat</font></b>
+  
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineKeyboard</font>()
+  
+<font color="#006666">  AddNodeAnimationTime</font>(0, TimeSinceLastFrame * 2)
+<font color="#006666">  AddNodeAnimationTime</font>(1, TimeSinceLastFrame * 2)
+<font color="#006666">  AddNodeAnimationTime</font>(2, TimeSinceLastFrame * 2)
+<font color="#006666">  AddNodeAnimationTime</font>(3, TimeSinceLastFrame * 2)
+  
+<font color="#006666">  EntityLookAt</font>(1, 450,<font color="#006666"> EntityY</font>(1), -450)
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">AddPath0</font>(NodeAnimation)
+  Duration = 15000
+  Time = Duration / 5 <font color="#006666">; 5 keyFrame
+</font><font color="#006666">  CreateNodeAnimation</font>(NodeAnimation,<font color="#006666"> NodeID</font>(0), Duration, <font color="#924B72">#PB_NodeAnimation_Spline</font>, <font color="#924B72">#PB_NodeAnimation_LinearRotation</font>)
+  
+  <font color="#006666">;Animation Cube
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 0.00,  50,  50,   50)<font color="#006666">; key 0
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 1.25, 950,  50,   50)<font color="#006666">; key 1
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 2.50, 950,  50, -950)<font color="#006666">; key 2
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 3.75,  50,  50, -950)<font color="#006666">; key 3
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 5.00,  50,  50,   50)<font color="#006666">; key 4
+</font>  
+<font color="#006666">  StartNodeAnimation</font>(NodeAnimation)
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">AddPath1</font>(NodeAnimation)
+  Duration = 15000
+  Time = Duration / 5 <font color="#006666">; 5 keyFrame
+</font><font color="#006666">  CreateNodeAnimation</font>(NodeAnimation,<font color="#006666"> EntityParentNode</font>(2), Duration, <font color="#924B72">#PB_NodeAnimation_Spline</font>, <font color="#924B72">#PB_NodeAnimation_LinearRotation</font>)
+  
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 0.0,  50, 280,   50)<font color="#006666">; key 0
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 1.0,  50,  50, -950)<font color="#006666">; key 1
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 2.0, 950, 280, -950)<font color="#006666">; key 2
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 4.0, 950,  50,   50)<font color="#006666">; key 3
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 4.5, 450,  50, -450)<font color="#006666">; key 4
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 5.0,  50, 280,   50)<font color="#006666">; key 5
+</font>  
+<font color="#006666">  StartNodeAnimation</font>(NodeAnimation)
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">AddPath2</font>(NodeAnimation, Weight.f)
+  Duration = 35000
+  Time = Duration / 8
+<font color="#006666">  CreateNodeAnimation</font>(NodeAnimation,<font color="#006666"> EntityParentNode</font>(3), Duration, <font color="#924B72">#PB_NodeAnimation_Spline</font>, <font color="#924B72">#PB_NodeAnimation_LinearRotation</font>)
+  
+  <font color="#006666">;Animation Cylinder
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 0.00,<font color="#006666"> EntityX</font>(4),<font color="#006666"> EntityY</font>(4)      ,<font color="#006666"> EntityZ</font>(4))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 1.00,<font color="#006666"> EntityX</font>(8),<font color="#006666"> EntityY</font>(8) + 200,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 2.00,<font color="#006666"> EntityX</font>(5),<font color="#006666"> EntityY</font>(5)      ,<font color="#006666"> EntityZ</font>(5))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 3.00,<font color="#006666"> EntityX</font>(8),<font color="#006666"> EntityY</font>(8) + 200,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 4.00,<font color="#006666"> EntityX</font>(6),<font color="#006666"> EntityY</font>(6)      ,<font color="#006666"> EntityZ</font>(6))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 5.00,<font color="#006666"> EntityX</font>(8),<font color="#006666"> EntityY</font>(8) + 200,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 6.00,<font color="#006666"> EntityX</font>(7),<font color="#006666"> EntityY</font>(7)      ,<font color="#006666"> EntityZ</font>(7))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 7.00,<font color="#006666"> EntityX</font>(8),<font color="#006666"> EntityY</font>(8) + 200,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 8.00,<font color="#006666"> EntityX</font>(4),<font color="#006666"> EntityY</font>(4)      ,<font color="#006666"> EntityZ</font>(4))
+  
+<font color="#006666">  StartNodeAnimation</font>(NodeAnimation)
+<font color="#006666">  SetNodeAnimationWeight</font>(NodeAnimation, Weight)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">AddPath3</font>(NodeAnimation, Weight.f)
+  Duration = 15000
+  Time = Duration / 5 <font color="#006666">; 5 keyFrame
+</font><font color="#006666">  CreateNodeAnimation</font>(NodeAnimation,<font color="#006666"> EntityParentNode</font>(3), Duration, <font color="#924B72">#PB_NodeAnimation_Spline</font>, <font color="#924B72">#PB_NodeAnimation_SphericalRotation</font>)
+  
+  <font color="#006666">;Animation Cylinder
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 0.0,  50,  50,   50)<font color="#006666">; key 0
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 1.0,  50,  50, -950)<font color="#006666">; key 1
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 2.0, 950, 250, -950)<font color="#006666">; key 2
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 4.0, 950,  50,   50)<font color="#006666">; key 3
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 4.5, 450,  50, -450)<font color="#006666">; key 4
+</font><font color="#006666">  CreateNodeAnimationKeyFrame</font>(NodeAnimation, Time * 5.0,  50,  50,   50)<font color="#006666">; key 5
+</font>  
+<font color="#006666">  StartNodeAnimation</font>(NodeAnimation)
+<font color="#006666">  SetNodeAnimationWeight</font>(NodeAnimation, Weight)
+<b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+</body></html>

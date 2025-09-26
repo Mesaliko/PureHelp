@@ -1,0 +1,122 @@
+<html><head><title>OSVersion</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OSVersion()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>OSVersion</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the version of the operating system on which the program has been launched. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the following values, depending on the OS on which the command run: 
+<br>
+<br>
+
+<b>Windows</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OS_Windows_NT3_51</font>
+  <font color="#924B72">#PB_OS_Windows_95</font>
+  <font color="#924B72">#PB_OS_Windows_NT_4</font>
+  <font color="#924B72">#PB_OS_Windows_98</font>
+  <font color="#924B72">#PB_OS_Windows_ME</font>
+  <font color="#924B72">#PB_OS_Windows_2000</font>
+  <font color="#924B72">#PB_OS_Windows_XP</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2003</font>
+  <font color="#924B72">#PB_OS_Windows_Vista</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2008</font>
+  <font color="#924B72">#PB_OS_Windows_7</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2008_R2</font>
+  <font color="#924B72">#PB_OS_Windows_8</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2012</font>
+  <font color="#924B72">#PB_OS_Windows_8_1</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2012_R2</font>
+  <font color="#924B72">#PB_OS_Windows_10</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2016</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2019</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2022</font>
+  <font color="#924B72">#PB_OS_Windows_11</font>
+  <font color="#924B72">#PB_OS_Windows_Server_2025</font>
+  <font color="#924B72">#PB_OS_Windows_Future</font>  ; New Windows version (not existing when the program was written)
+</font></pre>
+</blockquote>
+
+
+<b>Linux</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OS_Linux_2_2</font>
+  <font color="#924B72">#PB_OS_Linux_2_4</font>
+  <font color="#924B72">#PB_OS_Linux_2_6</font>
+  <font color="#924B72">#PB_OS_Linux_Future</font>  ; New Linux version (not existing when the program was written)
+</font></pre>
+</blockquote>
+
+
+<b>Mac OSX</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OS_MacOSX_10_0</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_1</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_2</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_3</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_4</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_5</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_6</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_7</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_8</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_9</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_10</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_11</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_12</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_13</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_14</font>
+  <font color="#924B72">#PB_OS_MacOSX_10_15</font>
+  <font color="#924B72">#PB_OS_MacOSX_11</font>
+  <font color="#924B72">#PB_OS_MacOSX_12</font>
+  <font color="#924B72">#PB_OS_MacOSX_13</font>
+  <font color="#924B72">#PB_OS_MacOSX_14</font>
+  <font color="#924B72">#PB_OS_MacOSX_15</font>
+  <font color="#924B72">#PB_OS_MacOSX_Future</font>  ; New MacOS X version (not existing when the program was written)
+</font></pre>
+</blockquote>
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Select</font></b> <font color="#006666">OSVersion</font>()
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_98</font>
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Windows 98&quot;)
+
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_2000</font>
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Windows 2000&quot;)
+
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_OS_Windows_XP</font>
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Windows XP&quot;)
+
+    <b><font color="#006666">Default</font></b>
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Unsupported Windows version&quot;)
+  <b><font color="#006666">EndSelect</font></b>
+</font></pre>
+
+Note: the value of these constants are established before the release date of each version, 
+therefore tests such as the one which follows, may be used, in order to catch all versions 
+which are older or newer than a given one: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OSVersion</font>() &lt; <font color="#924B72">#PB_OS_Windows_2000</font>
+    <font color="#006666">;</font>
+    <font color="#006666">; All versions older than Windows 2000</font>
+    <font color="#006666">;</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=memorystatus.html>MemoryStatus()</a> - <a href=index.html>System Index</a> - <a href=username.html>UserName()</a> -><br><br>
+
+</body></html>

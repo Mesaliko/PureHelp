@@ -1,0 +1,55 @@
+<html><head><title>OnErrorGoto</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorGoto()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorGoto</b></font>(?LabelAddress)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the action taken when an error occurs to jump to the specified label address and continue 
+program execution there. After the jump to the label, the functions of this library can be used 
+to get further information about the error. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>?LabelAddress</i></td>
+<td width="90%"> 
+The address of a label in the program to jump to. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The program stack will not be adjusted before jumping to the label, so local variables 
+should not be accessed as they may not be reachable anymore. It is also not safe to continue normal 
+program execution after an error as things like the return address of a procedure may be wrong 
+if the stack is no longer correct. The best practice is just to gather and display information 
+about the error and then exit the program. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;Test start&quot;)
+
+<font color="#006666">  OnErrorGoto</font>(?ErrorHandler)
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; Cause a #PB_OnError_InvalidMemory error</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;This should never be displayed&quot;)
+  <b><font color="#006666">End</font></b>
+  
+  ErrorHandler:
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;The following error happened: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">End</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=onerrorexit.html>OnErrorExit()</a> - <a href=index.html>OnError Index</a> - <a href=raiseerror.html>RaiseError()</a> -><br><br>
+
+</body></html>

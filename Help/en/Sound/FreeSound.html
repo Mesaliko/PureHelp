@@ -1,0 +1,55 @@
+<html><head><title>FreeSound</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FreeSound()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FreeSound</b></font>(#Sound)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Stops and removes a sound previously loaded with <a href="loadsound.html">LoadSound()</a> or <a href="catchsound.html">CatchSound()</a> from memory. Once a sound has been 
+freed, it can't be played anymore. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sound</i></td>
+<td width="90%"> 
+The sound to free. If <font color="#924B72">#PB_All</font> is specified, all the remaining sounds are freed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+All remaining sounds are automatically freed when the program ends. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSound</font>()           <font color="#006666">; Initialize Sound system</font>
+<font color="#006666">    UseOGGSoundDecoder</font>()   <font color="#006666">; Use ogg files</font>
+    
+    <font color="#006666">; Loads a sound from a file</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadSound</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;Examples/3D/Data/Siren.ogg&quot;)
+      <font color="#006666">; The sound is playing </font>
+<font color="#006666">      PlaySound</font>(0, <font color="#924B72">#PB_Sound_Loop</font>)
+      
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;Ok to stop.&quot;)
+      
+<font color="#006666">      FreeSound</font>(0) <font color="#006666">; The sound is freed</font>
+      <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Warning! The sound environment couldn't be initialized. So no sound commands can be used...&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=catchsound.html>CatchSound()</a> - <a href=index.html>Sound Index</a> - <a href=getsoundfrequency.html>GetSoundFrequency()</a> -><br><br>
+
+</body></html>

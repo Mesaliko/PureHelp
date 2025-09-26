@@ -1,0 +1,96 @@
+<html><head><title>SignalSemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SignalSemaphore()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SignalSemaphore</b></font>(Semaphore)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Augmente la valeur du compteur interne 
+du sémaphore de un, ce qui a pour 
+effet de débloquer le thread en 
+attente sur ce sémaphore (si il y 
+en a un). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Semaphore</i></td>
+<td width="90%"> 
+Le sémaphore à signaler. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le compteur maximal d'un sémaphore est 
+limité à une 
+<a href="../reference/variables.html">valeur 32 bits</a> 
+signée, donc un maximum de 2147483647 
+appels à <a href="signalsemaphore.html">SignalSemaphore()</a> peuvent être 
+effectués sans être contre-balancés 
+par des appels à <a href="waitsemaphore.html">WaitSemaphore()</a>. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Assurez vous que l'option &quot;Activer la gestion des threads&quot; est sélectionnée</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Global</font></b> Semaphore =<font color="#006666"> CreateSemaphore</font>()
+  <b><font color="#006666">Global</font></b> Mutex     =<font color="#006666"> CreateMutex</font>()
+  <b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">Queue</font>()
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Producer</font>(Total)
+
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> Total
+<font color="#006666">      Delay</font>(<font color="#006666">Random</font>(750) + 250)
+    
+      <font color="#006666">; L'accès à la liste nécessite tout de même un mutex pour être threadsafe</font>
+<font color="#006666">      LockMutex</font>(Mutex)
+<font color="#006666">        LastElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        AddElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        Queue</font>() = i
+<font color="#006666">      UnlockMutex</font>(Mutex)    
+
+      <font color="#006666">; Envoie un signal pour indiquer qu'un nouvel élément est disponible</font>
+<font color="#006666">      SignalSemaphore</font>(Semaphore)
+    <b><font color="#006666">Next</font></b> i
+    
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateThread</font>(@Producer(), 30)
+
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30  
+      <font color="#006666">; Attente d'un nouvel élément</font>
+<font color="#006666">      WaitSemaphore</font>(Semaphore)
+    
+      <font color="#006666">; Affiche l'état de la liste</font>
+<font color="#006666">      LockMutex</font>(Mutex)
+        Queue$ = &quot;Queue:&quot;
+        <b><font color="#006666">ForEach</font></b> <font color="#006666">Queue</font>()
+          Queue$ + &quot; &quot; +<font color="#006666"> Str</font>(<font color="#006666">Queue</font>())
+        <b><font color="#006666">Next</font></b> <font color="#006666">Queue</font>()
+        <b><font color="#006666">Debug</font></b> Queue$
+    
+        <font color="#006666">; Efface le premier élément de la liste</font>
+<font color="#006666">        FirstElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">        DeleteElement</font>(<font color="#006666">Queue</font>())
+<font color="#006666">      UnlockMutex</font>(Mutex)
+    
+    <b><font color="#006666">Next</font></b> i
+
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="waitsemaphore.html">WaitSemaphore()</a>, <a href="trysemaphore.html">TrySemaphore()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=resumethread.html>ResumeThread()</a> - <a href=index.html>Thread Index</a> - <a href=threadid.html>ThreadID()</a> -><br><br>
+
+</body></html>

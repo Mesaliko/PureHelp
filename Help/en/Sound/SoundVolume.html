@@ -1,0 +1,68 @@
+<html><head><title>SoundVolume</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SoundVolume()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SoundVolume</b></font>(#Sound, Volume.f [, Channel])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the sound volume, in real-time. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sound</i></td>
+<td width="90%"> 
+The sound to use. If <font color="#924B72">#PB_All</font> is specified, all the sounds (and all channels) are affected. 
+
+</td></tr>
+<tr><td><i>Volume.f</i></td>
+<td> 
+The new volume for the sound. Valid values are from 0 (no volume) to 100 (full volume). 
+
+</td></tr>
+<tr><td><i>Channel (optional)</i></td>
+<td> 
+The channel to use. It's the value returned by <a href="playsound.html">PlaySound()</a> when using the 
+<font color="#924B72">#PB_Sound_MultiChannel</font> flag. If <font color="#924B72">#PB_All</font> is specified, all the channels of the sound are affected. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSound</font>()           <font color="#006666">; Initialize Sound system</font>
+<font color="#006666">    UseOGGSoundDecoder</font>()   <font color="#006666">; Use ogg files</font>
+    
+    <font color="#006666">; Loads a sound from a file</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadSound</font>(0, <font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/3D/Data/Siren.ogg&quot;)
+      <font color="#006666">; The sound is playing</font>
+<font color="#006666">      PlaySound</font>(0, <font color="#924B72">#PB_Sound_Loop</font>, 20)
+      
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;The sound volume is at 20%&quot;)
+      
+<font color="#006666">      SoundVolume</font>(0, 80)
+<font color="#006666">      MessageRequester</font>(&quot;Info&quot;, &quot;The sound volume is at 80%&quot;)
+      
+<font color="#006666">      FreeSound</font>(0) <font color="#006666">; The sound is freed</font>
+      <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Warning! The sound environment couldn't be initialized. So no sound commands can be used...&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="loadsound.html">LoadSound()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=soundstatus.html>SoundStatus()</a> - <a href=index.html>Sound Index</a> - <a href=stopsound.html>StopSound()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,53 @@
+<html><head><title>RegularExpressionNamedGroupPosition</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegularExpressionNamedGroupPosition()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RegularExpressionNamedGroupPosition</b></font>(#RegularExpression, GroupName$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the position (within the current matching string) of the specified named 
+group after a call to <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#RegularExpression</i></td>
+<td width="90%"> 
+The regular expression to use. <a href="examineregularexpression.html">ExamineRegularExpression()</a> and 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a> must have been called on this regular expression. 
+
+</td></tr>
+<tr><td><i>GroupName$</i></td>
+<td> 
+The name of the group to extract. The group name is case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the character position of the group within the matching string 
+(not within the original input string!). 
+The first character of the match has position 1. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Groups in a regular expression are defined by surrounding a sub-expression 
+with braces &quot;(&quot; and &quot;)&quot;. Groups can either accessed by index using functions 
+like <a href="regularexpressiongroupposition.html">RegularExpressionGroupPosition()</a> or they can be assigned a name using the 
+&quot;(?&lt;name&gt;)&quot; syntax as shown in the example for the <a href="regularexpressionnamedgroup.html">RegularExpressionNamedGroup()</a> 
+function. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examineregularexpression.html">ExamineRegularExpression()</a>, <a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>, 
+<a href="regularexpressionnamedgroup.html">RegularExpressionNamedGroup()</a>, <a href="regularexpressionnamedgrouplength.html">RegularExpressionNamedGroupLength()</a>, 
+<a href="regularexpressiongroupposition.html">RegularExpressionGroupPosition()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=regularexpressionnamedgrouplength.html>RegularExpressionNamedGroupLength()</a> - <a href=index.html>RegularExpression Index</a> - <a href=replaceregularexpression.html>ReplaceRegularExpression()</a> -><br><br>
+
+</body></html>

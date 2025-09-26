@@ -1,0 +1,60 @@
+<html><head><title>GrabSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GrabSprite()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>GrabSprite</b></font>(#Sprite, x, y, Breite, Höhe [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fotografiert (&quot;grab&quot;) den Bildschirminhalt im Bereich von (x, y, Breite, Höhe) und 
+erstellt daraus ein neues Sprite. In der Kombination von Grabsprite und 
+<a href="savesprite.html">SaveSprite()</a> ist es somit z.B. möglich, einen Screenshot 
+eines Spiels zu erstellen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen fotografierten Sprites. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+Die Position auf dem Bildschirm, an der das Fotografieren beginnt (in Pixel). 
+
+</td></tr>
+<tr><td><i>Breite, Höhe</i></td>
+<td> 
+Die Größe der Fotografie (in Pixel). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte (verknüpft mit dem '|' Operator) sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Fügt spezielle Informationen zum Handling der Pixel-Kollision mittels <a href="spritepixelcollision.html">SpritePixelCollision()</a> hinzu.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Das Sprite wird mit per Pixel Alpha-Kanal Unterstützung erstellt, benötigt
+                             für <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>. Die mit <a href="transparentspritecolor.html">TransparentSpriteColor()</a> eingestellte transparente Standardfarbe
+                             wird automatisch angewendet.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn das Sprite fotografiert wurde, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Sprite Parameter verwendet wurde, dann wird im Erfolgsfall die generierte Nummer 
+zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+GrabSprite() sollte immer außerhalb eines <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> Blocks aufgerufen werden. <br>
+Die transparente Sprite-Farbe wird automatisch angewendet, wenn das AlphaBlending-Flag verwendet wird. 
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=freesprite.html>FreeSprite()</a> - <a href=index.html>Sprite Inhaltsverzeichnis</a> - <a href=initsprite.html>InitSprite()</a> -><br><br>
+
+</body></html>

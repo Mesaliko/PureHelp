@@ -1,0 +1,68 @@
+<html><head><title>Kommandozeilen-Optionen der IDE</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Kommandozeilen-Optionen der IDE</font></b></p>
+
+Die PureBasic IDE ermöglicht Ihnen über die Kommandozeile die verwendeten 
+Pfade und Dateien zu ändern. Damit sind Sie in der Lage, verschiedene 
+Verknüpfungen zu erstellen, welche die IDE mit verschiedenen Konfigurationen 
+für verschiedene Anwender oder für verschiedene Projekte starten. 
+
+<br>
+<br>
+
+Es gibt auch Optionen für das Kompilieren von PureBasic-Projekten direkt aus der Kommandozeile. 
+Das Erstellen eines Projekts über die Kommandozeile beinhaltet die gleichen Aktionen wie bei der 
+Auswahl von &quot;Ziel erstellen&quot; bzw. &quot;Alle Ziele erstellen&quot; im <a href="../reference/ide_compiler.html">Compiler-Menü</a>. 
+
+<br>
+<br>
+
+
+Allgemeine Optionen: 
+<pre><font face="Courier New, Courier, mono" size="2">  /VERSION                 zeigt die IDE-Version an und beendet sich
+  /HELP oder /?            zeigt eine Beschreibung der Kommandozeilen-Argumente an
+</font></pre>
+
+Optionen für das Starten der IDE: 
+<pre><font face="Courier New, Courier, mono" size="2">  /P &lt;Preferences Datei&gt;   lädt/speichert alle Einstellungen aus der bzw. in die angegebene Datei.
+  /T &lt;Templates Datei&gt;     lädt/speichert alle Code-Bausteine aus der bzw. in die angegebene Datei.
+  /A &lt;Tools Datei&gt;         lädt/speichert die Einstellungen der externen Werkzeuge aus dieser bzw. in dieser Datei.
+  /S &lt;Source Pfad&gt;         überschreibt den in den Voreinstellungen eingestellten &quot;Quellcode-Pfad&quot;.
+  /E &lt;Explorer Pfad&gt;       startet das Explorer-Werkzeug mit dem angegebenen Pfad.
+  /L &lt;Zeilennummer&gt;        setzt den Cursor auf die angegebene Zeilennummer in der zuletzt geöffneten Datei.
+  /H &lt;Geschichtsdatenbank&gt; gibt die Datei an, welche für die Sitzungsgeschichte-Datenbank verwendet werden soll.
+  /NOEXT                   schaltet das Registrieren der .pb Endung in der Windows Registry aus.
+  /LOCAL                   speichert alle Einstellungen in das PureBasic Verzeichnis.
+  /PORTABLE                das gleiche wie /LOCAL und /NOEXT zusammen.
+</font></pre>
+
+Optionen für das Erstellen von Projekten: 
+<pre><font face="Courier New, Courier, mono" size="2">  /BUILD &lt;Datei&gt;           gibt die zu erstellende Projekt-Datei an
+  /TARGET &lt;Ziel&gt;           gibt das zu erstellende Ziel an (der Standard ist das Erstellen aller Ziele)
+  /QUIET                   versteckt alle Erstellungs-Nachrichten außer Fehlermeldungen
+  /READONLY                aktualisiert nicht die Projekt-Datei nach dem Kompilieren (mit neuer Zugriffszeit und Erstellungszähler)
+</font></pre>
+
+Die Standarddateien für /P /T und /A werden auf Ihrem System im %APPDATA%\PureBasic\ Verzeichnis gespeichert. 
+
+<br>
+<br>
+Der /NOEXT Befehl ist nützlich, wenn Sie <a href="../reference/several_pb.html">mehrere PB-Versionen gleichzeitig</a> im Einsatz haben (z.B. zum Testen 
+von Beta-Versionen), aber die .pb Endung nur mit einer von ihnen verknüpft haben möchten. 
+Der /PORTABLE Befehl kann verwendet werden, um alle Konfigurationen innerhalb des lokalen Verzeichnisses zu behalten, damit 
+PureBasic einfach auf verschiedene Computer kopiert werden kann (oder es zum Beispiel von USB-Sticks gestartet werden kann). 
+
+<br>
+<br>
+Beispiel: 
+<pre><font face="Courier New, Courier, mono" size="2">  PureBasic.exe Beispiel.pb /PORTABLE
+</font></pre>
+
+
+<br>
+<br>
+
+Sie können auch Dateinamen von zu ladenden Quellcode-Dateien auf der Kommandozeile angeben. 
+Sie können sogar Platzhalter für sie verwenden (z.B. können Sie mit &quot;*.pb&quot; ein gesamtes Verzeichnis 
+laden). 
+</font></body></html>

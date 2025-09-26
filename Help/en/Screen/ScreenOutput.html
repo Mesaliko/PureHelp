@@ -1,0 +1,38 @@
+<html><head><title>ScreenOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScreenOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>ScreenOutput</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the OutputID of the currently used screen to perform 2D rendering operations on it. It will use 
+the PureBasic <a href="../2ddrawing/index.html">2DDrawing library</a> and can only be used within a <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> / 
+<a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> block. The memory allocated in ScreenOutput() is released on StopDrawing(). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The OutputID of the currently used screen to perform 2D rendering operations on it. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux and OS X, ScreenOutput() copies the whole screen buffer back to main memory to do 2D drawing operations 
+(OpenGL doesn't allow direct buffer access). Therefore drawing on a screen is very slow and should be avoided. 
+ScreenOutput() has to be called in the same thread where <a href="openscreen.html">OpenScreen()</a> was called.<br>
+The use of <a href="../engine3d/initengine3d.html">InitEngine3D()</a> is forbidden, <a href="screenoutput.html">ScreenOutput()</a> returns 0. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+    <font color="#006666">; do some drawing stuff here...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=screenmodewidth.html>ScreenModeWidth()</a> - <a href=index.html>Screen Index</a> - <a href=screenwidth.html>ScreenWidth()</a> -><br><br>
+
+</body></html>

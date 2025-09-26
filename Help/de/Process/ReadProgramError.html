@@ -1,0 +1,45 @@
+<html><head><title>ReadProgramError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramError()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>ReadProgramError</b></font>(Programm [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest eine Zeile von der Fehlerausgabe (stderr) des angegebenen Programms. 
+Anders als <a href="readprogramdata.html">ReadProgramData()</a> hält diese Funktion nicht den Programmablauf an, 
+wenn keine Fehlerausgabe verfügbar ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programm</i></td>
+<td width="90%"> 
+Das zu verwendende Programm. Dieses muss zuvor mittels <a href="runprogram.html">RunProgram()</a> und dem 
+<font color="#924B72">#PB_Program_Error</font> Flag gestartet worden sein. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Das zu verwendende String-Format, wenn die Fehlerausgabe gelesen wird. 
+Das Standard-Format kann bestimmt werden mit den <font color="#924B72">#PB_Program_Ascii</font>, <font color="#924B72">#PB_Program_Unicode</font> 
+und <font color="#924B72">#PB_Program_UTF8</font> Flags für <a href="runprogram.html">RunProgram()</a>. 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Liest die Fehlerausgabe als ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Liest die Fehlerausgabe als UTF8 (Standard)
+  <font color="#924B72">#PB_Unicode</font>: Liest die Fehlerausgabe als <a href="../reference/unicode.html">Unicode</a>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der Fehlerstring - oder ein leerer String, wenn es keine Fehlerausgabe gibt. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=readprogramdata.html>ReadProgramData()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=readprogramstring.html>ReadProgramString()</a> -><br><br>
+
+</body></html>

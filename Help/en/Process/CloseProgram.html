@@ -1,0 +1,47 @@
+<html><head><title>CloseProgram</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseProgram()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CloseProgram</b></font>(Program)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Closes the connection with the given program (which was started with <a href="runprogram.html">RunProgram()</a>) 
+and frees all related data. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to close. It must have been started before with <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This does not terminate the program, it only closes the connection with it. To terminate the program, 
+call <a href="killprogram.html">KillProgram()</a> first. Also if the program terminated normally, this function must still be 
+called to properly release all data. 
+<br>
+<br>
+If the program was started with the <font color="#924B72">#PB_Program_Write</font> flag, CloseProgram() will cause the program 
+to receive an EOF (end of file) on its standard input. This condition can also be produced without directly 
+closing the connection to the program by calling <a href="writeprogramdata.html">WriteProgramData()</a> with the special 
+<font color="#924B72">#PB_Program_Eof</font> value. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="killprogram.html">KillProgram()</a>, <a href="runprogram.html">RunProgram()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=availableprogramoutput.html>AvailableProgramOutput()</a> - <a href=index.html>Process Index</a> - <a href=countprogramparameters.html>CountProgramParameters()</a> -><br><br>
+
+</body></html>

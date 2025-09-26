@@ -1,0 +1,80 @@
+<html><head><title>StartAESCipher</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartAESCipher()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>StartAESCipher</b></font>(#Cipher, *Key, Bits, *InitializationVector, Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initializes a new AES cipher stream where data can be added using <a href="addcipherbuffer.html">AddCipherBuffer()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Cipher</i></td>
+<td width="90%"> 
+The number which identifies this new cipher. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>*Key</i></td>
+<td> 
+A buffer containing the key for decoding. 
+Its size depends of the 'Bits' parameter: 16 bytes for 128-bit encryption, 24 bytes for 196-bit 
+and 32 bytes for 256-bit. <a href="derivecipherkey.html">DeriveCipherKey()</a> can be used to create this key from a password. 
+
+</td></tr>
+<tr><td><i>Bits</i></td>
+<td> 
+The size of the key used by the ciphering. Valid values are 128, 192 and 256. 
+
+</td></tr>
+<tr><td><i>*InitializationVector</i></td>
+<td> 
+The InitializationVector is a random data block, used to initialize the ciphering 
+to avoid breach in decoding (only needed when using the <font color="#924B72">#PB_Cipher_CBC</font> mode). 
+Its size depends of the 'Bits' parameter: 16 bytes for 128-bit encryption, 24 bytes for 196-bit 
+and 32 bytes for 256-bit. 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+This parameter can be a combination of one the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_Decode</font>: The stream is used to decode data.
+  <font color="#924B72">#PB_Cipher_Encode</font>: The stream is used to encode data.
+
+with
+
+  <font color="#924B72">#PB_Cipher_CBC</font>: Default mode of encoding (Cipher Block Chaining). Needs an '*InitializationVector'.
+                  Recommended as more secure than ECB mode.
+  <font color="#924B72">#PB_Cipher_ECB</font>: Alternative mode (Electronic CodeBook). It doesn't uses random value nor chaining 
+                  (each block is ciphered independently) making it very weak compared to CBC, and shouldn't be used for
+                  serious ciphering.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+If <font color="#924B72">#PB_Any</font> was used as the #Cipher parameter then the auto-generated #Cipher number is returned. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+New buffers to be encoded or decoded can be added with <a href="addcipherbuffer.html">AddCipherBuffer()</a>. 
+Once a cipher is finished, <a href="finishcipher.html">FinishCipher()</a> has to be called. 
+<br>
+<br>
+For more information about AES, see <a href="aesencoder.html">AESEncoder()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addcipherbuffer.html">AddCipherBuffer()</a>, <a href="finishcipher.html">FinishCipher()</a>, <a href="aesencoder.html">AESEncoder()</a>, <a href="aesdecoder.html">AESDecoder()</a>, <a href="derivecipherkey.html">DeriveCipherKey()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=opencryptrandom.html>OpenCryptRandom()</a> - <a href=index.html>Cipher Index</a> - <a href=startfingerprint.html>StartFingerprint()</a> -><br><br>
+
+
+</body></html>

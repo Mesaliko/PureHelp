@@ -1,0 +1,64 @@
+<html><head><title>FTPDirectoryEntryAttributes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FTPDirectoryEntryAttributes()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Attributes = <font color="#006666"><b>FTPDirectoryEntryAttributes</b></font>(#Ftp)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the attributes of the current entry in the FTP enumeration being listed with the <a href="examineftpdirectory.html">ExamineFTPDirectory()</a> and 
+<a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a> functions. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Ftp</i></td>
+<td width="90%"> 
+The connection to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FTP_ReadUser</font>  : Access flags for the owning user
+  <font color="#924B72">#PB_FTP_WriteUser</font>
+  <font color="#924B72">#PB_FTP_ExecuteUser</font>
+  <font color="#924B72">#PB_FTP_ReadGroup</font> : Access flags for the owning user's group
+  <font color="#924B72">#PB_FTP_WriteGroup</font>
+  <font color="#924B72">#PB_FTP_ExecuteGroup</font>
+  <font color="#924B72">#PB_FTP_ReadAll</font>   : Access flags for all other users
+  <font color="#924B72">#PB_FTP_WriteAll</font>
+  <font color="#924B72">#PB_FTP_ExecuteAll</font>
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+To check if one attribute is actually set, just use the '&amp;' (binary AND) and the attribute constant value: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  [...]
+  
+  FileAttributes =<font color="#006666"> FTPDirectoryEntryAttributes</font>(<font color="#924B72">#Ftp</font>)
+  <b><font color="#006666">If</font></b> FileAttributes &amp; <font color="#924B72">#PB_FTP_ReadUser</font>
+    <b><font color="#006666">Debug</font></b> &quot;This file has the ReadUser flag&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examineftpdirectory.html">ExamineFTPDirectory()</a>, 
+<a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a>, 
+<a href="ftpdirectoryentrytype.html">FTPDirectoryEntryType()</a>, 
+<a href="ftpdirectoryentryname.html">FTPDirectoryEntryName()</a>, 
+<a href="ftpdirectoryentrydate.html">FTPDirectoryEntryDate()</a>, 
+<a href="ftpdirectoryentrysize.html">FTPDirectoryEntrySize()</a>, 
+<a href="ftpdirectoryentryraw.html">FTPDirectoryEntryRaw()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=examineftpdirectory.html>ExamineFTPDirectory()</a> - <a href=index.html>Ftp Index</a> - <a href=ftpdirectoryentrydate.html>FTPDirectoryEntryDate()</a> -><br><br>
+
+
+</body></html>

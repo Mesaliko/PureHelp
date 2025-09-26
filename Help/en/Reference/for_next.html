@@ -1,0 +1,71 @@
+<html><head><title>For : Next</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">For : Next</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">For</font></b> &lt;variable&gt; = &lt;expression1&gt; <b><font color="#006666">To</font></b> &lt;expression2&gt; [<b><font color="#006666">Step</font></b> &lt;constant&gt;]
+  ...
+<b><font color="#006666">Next</font></b> [&lt;variable&gt;]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">For</font></b> : <b><font color="#006666">Next</font></b> is used to create a loop within a program with the given parameters. 
+At each loop the &lt;variable&gt; value is increased by a 1, (or of the &quot;Step value&quot; if a <b><font color="#006666">Step</font></b> value 
+is specified) and when the &lt;variable&gt; value is above the &lt;expression2&gt; value, the loop stop. 
+<br>
+<br>
+With the <a href="../reference/break_continue.html">Break</a> command its possible to exit the <b><font color="#006666">For</font></b> : <b><font color="#006666">Next</font></b> loop at any moment, 
+with the <a href="../reference/break_continue.html">Continue</a> command the end of the current iteration can be skipped. 
+<br>
+<br>
+The <b><font color="#006666">For : Next</font></b> loop works only with integer values, at the expressions as well 
+at the <b><font color="#006666">Step</font></b> constant. The <b><font color="#006666">Step</font></b> constant can also be negative. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 10 
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+In this example, the program will loop 11, time (0 to 10), then quit. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 10 <b><font color="#006666">To</font></b> 1 <b><font color="#006666">Step</font></b> -1
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+In this example, the program will loop 10 times (10 to 1 backwards), then quit. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 2
+  b = 3 
+  <b><font color="#006666">For</font></b> k = a+2 <b><font color="#006666">To</font></b> b+7 <b><font color="#006666">Step</font></b> 2
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b> k  
+</font></pre>
+
+Here, the program will loop 4 times before quitting, (k is increased by a value of 2 at each loop, 
+so the k value is: 4-6-8-10). The &quot;k&quot; after the &quot;Next&quot; indicates that &quot;Next&quot; is ending the &quot;For k&quot; loop. 
+If another variable, is used the compiler will generate an error. It can be useful to nest several &quot;For/Next&quot; loops. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> x=0 <b><font color="#006666">To</font></b> 10 
+    <b><font color="#006666">For</font></b> y=0 <b><font color="#006666">To</font></b> 5
+      <b><font color="#006666">Debug</font></b> &quot;x: &quot; + x + &quot; y: &quot; + y
+    <b><font color="#006666">Next</font></b> y
+  <b><font color="#006666">Next</font></b> x
+</font></pre>
+
+<b>Note:</b> Be aware, that in PureBasic the value of &lt;expression2&gt; ('To' value) can also be changed inside 
+the For : Next loop. This can lead to endless loops when wrongly used. 
+</blockquote>
+</font></body></html>

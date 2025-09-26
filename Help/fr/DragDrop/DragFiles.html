@@ -1,0 +1,133 @@
+<html><head><title>DragFiles</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragFiles()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DragFiles</b></font>(Fichiers$ [, Actions])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lance une opération de 'Drag &amp; Drop' en 
+utilisant une liste de fichiers. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichiers$</i></td>
+<td width="90%"> 
+La liste des noms de fichiers ou de 
+répertoires à transférer. 
+<br>
+<br>
+Les noms doivent être séparés par le 
+caractère <a href="../string/chr.html">Chr(10)</a> 
+(fin de ligne). 
+<br>
+<br>
+Chaque nom de fichier doit contenir son 
+chemin absolu, car l'application qui recevra 
+ces données ne sera pas capable de résoudre 
+les chemins relatifs. 
+<br>
+<br>
+Ces noms de fichiers doivent se référer à 
+des fichiers existants, accessibles par 
+l'application cible. 
+
+</td></tr>
+<tr><td><i>Actions (optionnel)</i></td>
+<td> 
+Si ce paramètre est omis, <font color="#924B72">#PB_Drag_Copy</font> 
+sera utilisé comme valeur par défaut. 
+<br>
+<br>
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: Les fichiers peuvent être copiés
+  <font color="#924B72">#PB_Drag_Move</font>: Les fichiers peuvent être déplacés
+  <font color="#924B72">#PB_Drag_Link</font>: Les fichiers peuvent être liés
+</font></pre>
+<blockquote>
+
+L'utilisateur peut décider de l'action à 
+prendre en utilisant les touches Ctrl ou 
+Shift. Les actions disponibles dépendent 
+aussi du composant sur lequel le texte va 
+être déposé. 
+(Sous MacOSX, les actions ne sont traitées 
+que comme une suggestion. La cible de dépôt 
+peut encore choisir une autre action.) 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une des valeurs 'Actions' pour 
+indiquer laquelle a été choisie par 
+l'utilisateur, ou <font color="#924B72">#PB_Drag_None</font> si le 
+'Drag &amp; Drop' a été annulé. 
+<br>
+<br>
+<b>Note:</b> contrairement aux autres 
+fonctions de 'Drag &amp; Drop', aucune action 
+n'est à prendre lorsque <font color="#924B72">#PB_Drag_Move</font> est 
+renvoyé. Comme les données déposées ne sont 
+que le nom du fichier et pas le fichier 
+lui-même, toutes actions entreprises sur le 
+fichier seront faites par l'application 
+cible. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un 'Drag &amp; Drop' peut être 
+démarré n'importe quand, mais il faut que le 
+bouton gauche de la souris soit appuyé sinon 
+l'opération se terminera immédiatement. Le 
+moment le plus approprié pour lancer un 
+'Drag &amp; Drop' est en réponse à un évènement 
+sur un <a href="../gadget/index.html">Gadget</a> avec 
+un <a href="../window/eventtype.html">EventType()</a> valant <font color="#924B72">#PB_EventType_DragStart</font>. 
+<br>
+<br>
+Sous MacOS X, l'évènement <font color="#924B72">#PB_EventType_DragStart</font> doit être géré à l'aide de <a href="../window/bindevent.html">BindEvent()</a> 
+ou de <a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragStartHandler</font>()
+<font color="#006666">    ExamineDraggedItems</font>()
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDraggedItem</font>()
+      Fichiers$ +<font color="#006666"> GetGadgetText</font>(0) +<font color="#006666"> GetGadgetItemText</font>(0,<font color="#006666"> DraggedItemIndex</font>()) +<font color="#006666"> Chr</font>(10)
+    <b><font color="#006666">Wend</font></b>
+    
+    <b><font color="#006666">Debug</font></b> &quot;Fichiers en cours de déplacement : &quot; + Fichiers$
+    
+<font color="#006666">    DragFiles</font>(Fichiers$)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <font color="#006666">; Sélectionnez dess fichiers ou des dossiers et faites-les glisser vers une autre application.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 400, 400, &quot;Cliquer-glisser&quot;)
+<font color="#006666">    ExplorerListGadget</font>(0, 10, 10, 380, 380,<font color="#006666"> GetHomeDirectory</font>(), <font color="#924B72">#PB_Explorer_MultiSelect</font>)
+    
+    <font color="#006666">; BindGadgetEvent() est requis pour gérer l'événement de démarrage par glisser-déposer</font>
+<font color="#006666">    BindGadgetEvent</font>(0, @DragStartHandler(), <font color="#924B72">#PB_EventType_DragStart</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()  
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="dragtext.html">DragText()</a>, <a href="dragimage.html">DragImage()</a>, <a href="dragprivate.html">DragPrivate()</a>, <a href="dragosformats.html">DragOSFormats()</a>, 
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows, Linux</Blockquote></p><center><a href=index.html>DragDrop Index</a> - <a href=dragimage.html>DragImage()</a> -><br><br>
+
+</body></html>

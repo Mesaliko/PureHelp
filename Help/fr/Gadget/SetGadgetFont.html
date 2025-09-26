@@ -1,0 +1,75 @@
+<html><head><title>SetGadgetFont</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetFont()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetGadgetFont</b></font>(#Gadget, PoliceID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la police d'un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+<br>
+<br>
+Si la valeur de #Gadget est <font color="#924B72">#PB_Default</font>, 
+alors la police par défaut utilisée par 
+les nouveaux gadgets est changée par la 
+nouvelle valeur. 
+
+</td></tr>
+<tr><td><i>PoliceID</i></td>
+<td> 
+Le numéro d'identification de la police à 
+utiliser. 
+<br>
+<br>
+Si la valeur de 'PoliceID' est <font color="#924B72">#PB_Default</font>, 
+alors la police par défaut du système 
+d'exploitation sera utilisée. 
+<br>
+<br>
+'PoliceID' peut être facilement obtenu par 
+la fonction <a href="../font/fontid.html">FontID()</a> de la bibliothèque 
+Font. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 222, 130, &quot;SetGadgetFont&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadFont</font>(0, &quot;Arial&quot;, 16)
+<font color="#006666">      SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>,<font color="#006666"> FontID</font>(0))   <font color="#006666">; la police par défaut est remplacée par celle chargée (Arial 16)</font>
+    <b><font color="#006666">EndIf</font></b>
+<font color="#006666">    ButtonGadget</font>(0, 10, 10, 200, 30, &quot;Bouton - Arial 16&quot;)
+<font color="#006666">    SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>, <font color="#924B72">#PB_Default</font>)  <font color="#006666">; remet la police par défaut originale (standard)</font>
+<font color="#006666">    ButtonGadget</font>(1, 10, 50, 200, 30, &quot;Bouton - standard&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadFont</font>(1,&quot;Courier&quot;,10, <font color="#924B72">#PB_Font_Bold</font> | <font color="#924B72">#PB_Font_Underline</font>)
+<font color="#006666">      SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>,<font color="#006666"> FontID</font>(1))   <font color="#006666">; la police par défaut est remplacée par celle chargée (Courier 10)</font>
+    <b><font color="#006666">EndIf</font></b>
+<font color="#006666">    TextGadget</font>(2, 10, 90, 200, 40, &quot;Texte en Courier 10 Gras + souligné&quot;, <font color="#924B72">#PB_Text_Center</font>)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/setgadgetfont.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetfont.html">GetGadgetFont()</a>, <a href="../font/fontid.html">FontID()</a>, <a href="../font/loadfont.html">LoadFont()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setgadgetdata.html>SetGadgetData()</a> - <a href=index.html>Gadget Index</a> - <a href=setgadgetitemattribute.html>SetGadgetItemAttribute()</a> -><br><br>
+
+</body></html>

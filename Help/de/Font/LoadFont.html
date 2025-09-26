@@ -1,0 +1,90 @@
+<html><head><title>LoadFont</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadFont()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>LoadFont</b></font>(#Font, Name$, Höhe [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Versucht den angegebenen Zeichensatz zu öffnen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Font</i></td>
+<td width="90%"> 
+Die Nummer, durch welche der neue Zeichensatz identifiziert wird. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Nummer 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Name$</i></td>
+<td> 
+Der Name des zu ladenden Zeichensatzes. 
+
+</td></tr>
+<tr><td><i>Höhe</i></td>
+<td> 
+Die vertikale Größe des Zeichensatzes in Punkten. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Optionale Varianten des zu ladenden Zeichensatzes. 
+Dies kann eine Kombination der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Font_Bold</font>       : Fettschrift
+  <font color="#924B72">#PB_Font_Italic</font>     : Kursiv (Schrägschrift)
+  <font color="#924B72">#PB_Font_Underline</font>  : Unterstrichen (nur auf Windows)
+  <font color="#924B72">#PB_Font_StrikeOut</font>  : Durchgestrichen (nur auf Windows)
+  <font color="#924B72">#PB_Font_HighQuality</font>: Zeichensatz mit höchster Qualität laden (langsamer) (nur auf Windows)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn der Zeichensatz erfolgreich geladen wurde, 
+und Null wenn nicht. Wenn <font color="#924B72">#PB_Any</font> als #Font Parameter verwendet wurde, 
+dann wird bei Erfolg die generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn vorher ein anderer Zeichensatz mit derselben #Font-Nummer geladen wurde, wird der ältere 
+Zeichensatz beim Laden des neuen automatisch freigegeben. 
+<br>
+<br>
+Auf Windows und OS X wird der systemseitige Font-Mapper (die Schriftart-Zuordnung) immer versuchen, 
+eine Schriftart zu finden. Wenn ein nicht existierender Zeichensatz-Name wie 
+z.B. &quot;Tim Now Ronin&quot; verwendet wird, dann versucht der Font-Mapper den am besten 
+passenden zu finden. Dies wird anhand solcher Kriterien wie Zeichensatz-Name, 
+Zeichensatz-Höhe, Stil usw. erfolgen. Daher kann also nicht davon ausgegangen 
+werden, dass kein Zeichensatz geladen wird, nur wegen inkorrektem Namen, Größe, etc. 
+<br>
+<br>
+Auf Windows und macOS können Sie die Größe und den Stil der Systemschriftart der Anwendung ändern, 
+ohne ihren Namen anzugeben, und zwar wie folgt: LoadFont(1, &quot;&quot;, 24) 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;Loading font...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadFont</font>(1, &quot;Arial&quot;, 24)
+<font color="#006666">      SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>,<font color="#006666"> FontID</font>(1))
+<font color="#006666">      TextGadget</font>(0, 10, 10, 250, 40, &quot;Arial 24&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<br>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="fontid.html">FontID()</a>, <a href="freefont.html">FreeFont()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=isfont.html>IsFont()</a> - <a href=index.html>Font Inhaltsverzeichnis</a> - <a href=registerfontfile.html>RegisterFontFile()</a> -><br><br>
+
+</body></html>

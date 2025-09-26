@@ -1,0 +1,217 @@
+<html><head><title>OpenScreen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenScreen()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenScreen</b></font>(Largeur, Hauteur, Profondeur, Titre$ [, FlipMode [, TauxDeRafraichissement])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre un nouvel écran. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Largeur, Hauteur</i></td>
+<td width="90%"> 
+La résolution de l'écran, en pixels. 
+<br>
+<br>
+Attention, la résolution voulue doit 
+pouvoir être supportée par le matériel. 
+<br>
+La fonction <a href="examinescreenmodes.html">ExamineScreenModes()</a> permet 
+d'obtenir la liste des résolutions 
+supportées par le matériel. 
+
+</td></tr>
+<tr><td><i>Profondeur</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  16: 65536 couleurs, palette fixe
+  24: 16777216 couleurs, palette fixe
+  32: 16777216 couleurs, plus rapide que le mode 24-bit, la transparence (alphablending) est autorisée.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Titre$</i></td>
+<td> 
+Le titre de l'application.<br>
+Sous Windows seulement. Le paramètre 
+'Titre$' sera affiché dans la barre des 
+tâches lors d'un retour vers le bureau. 
+Il est conseillé de choisir un nom 
+approprié à l'application. 
+
+</td></tr>
+<tr><td><i>FlipMode (optionnel)</i></td>
+<td> 
+Définit le mode de synchronisation utilisé 
+avant l'échange des buffers.<br>
+(Vertical blank synchronization = Synchro 
+verticale)').<br>
+<br>
+Peut prendre l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Screen_NoSynchronization</font>   : Désactive la synchronisation 
+   <font color="#924B72">#PB_Screen_WaitSynchronization</font> : Active la synchronisation (mode par défaut)
+   <font color="#924B72">#PB_Screen_SmartSynchronization</font>: Active la synchronisation en essayant de préserver le temps processeur,lorsque le jeu 
+                                    est en mode plein écran.
+</font></pre>
+Attendre la synchronisation permet d'avoir 
+des inversions de buffers parfaites, sans 
+'tearing' (ancienne et nouvelle image à 
+moitié visible) ou autres effets parasites 
+car l'inversion est effectuée lorsque que 
+le faisceau lumineux est en dehors de la 
+partie visible de l'écran. De plus, 
+l'inversion se fait à un rythme régulier, 
+en relation avec sa fréquence de 
+rafraîchissement: par exemple, pour un 
+écran en 60 Hz, l'inversion pourra se 
+faire au maximum 60 fois par seconde 
+(donc on aura un rythme régulier de 60 
+images/secondes). 
+
+</td></tr>
+<tr><td><i>TauxDeRafraichissement (optionnel)</i></td>
+<td> 
+Définit le taux de rafraîchissement (en Hz). 
+<br>
+Si l'écran ne supporte pas ce taux de 
+rafraîchissement, alors <a href="openscreen.html">OpenScreen()</a> 
+échouera. 
+<br>
+<br>
+La fonction <a href="examinescreenmodes.html">ExamineScreenModes()</a> permet 
+d'obtenir la liste des taux de 
+rafraîchissement supportés par le 
+matériel. 
+<br>
+<br>
+Note: Sous Windows, le taux de 
+rafraîchissement peut être bloqué par le 
+système ou par les pilotes vidéo. Le 
+résultat de cette fonction n'est donc 
+pas forcément fiable. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'écran 
+a été créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'écran est créé avec deux buffers vidéo, 
+ce qui permet l'affichage successif des 
+deux buffers avec la fonction 
+<a href="flipbuffers.html">FlipBuffers()</a>, particulièrement utile 
+pour les jeux. 
+<br>
+<br>
+Pour ouvrir un écran à l'intérieur d'une 
+fenêtre, il convient d'utiliser la 
+commande <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+<br>
+<br>
+Il n'est pas possible d'utiliser la 
+bibliothèque 
+<a href="../requester/index.html">Requester</a> 
+dans un écran. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">;ATTENTION le retour vers le bureau (ALT+TAB) n'est pas géré dans cet exemple.</font>
+
+ <font color="#006666">;Initialisation des sprites, du clavier et de la souris </font>
+<b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() = 0 <b><font color="#006666">Or</font></b> <font color="#006666">InitKeyboard</font>() = 0 <b><font color="#006666">Or</font></b> <font color="#006666">InitMouse</font>() = 0
+<font color="#006666">  MessageRequester</font>(&quot;Erreur&quot;, &quot;Impossible d'initialiser l'écran.&quot;)
+  <b><font color="#006666">End</font></b>
+<b><font color="#006666">EndIf</font></b>
+
+ <font color="#006666">;Ouverture de l'écran</font>
+<b><font color="#006666">If</font></b> <font color="#006666">OpenScreen</font>(800,600,32,&quot;Exemple OpenScreen&quot;) = 0
+<font color="#006666">  MessageRequester</font>(&quot;Erreur&quot;, &quot;Impossible d'ouvrir l'écran.&quot;)
+  <b><font color="#006666">End</font></b>
+<b><font color="#006666">EndIf</font></b>
+
+ <font color="#006666">;Curseur de la souris</font>
+<font color="#006666">CreateSprite</font>(0,20,20,<font color="#924B72">#PB_Sprite_PixelCollision</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">Box</font>(0, 0, 20, 20,<font color="#006666"> RGB</font>(255, 255, 255))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Afficheur &quot;Survoler pour quitter&quot;</font>
+<font color="#006666">CreateSprite</font>(1,200,100,<font color="#924B72">#PB_Sprite_PixelCollision</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(1))
+<font color="#006666">Box</font>(0, 0, 200, 100,<font color="#006666"> RGB</font>(255, 255, 0))
+<font color="#006666">DrawText</font>(10,25,&quot;Survoler pour quitter&quot;,<font color="#006666">RGB</font>(255,255,255),<font color="#006666"> RGB</font>(255,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Boucle principale</font>
+<b><font color="#006666">Repeat</font></b>
+  
+  <font color="#006666">;Effacer complètement l'écran et afficher un fond gris</font>
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(128,128,128))
+  
+  <font color="#006666">;On lit les évènements clavier et souris</font>
+<font color="#006666">  ExamineMouse</font>()
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  <font color="#006666">;Position de la souris</font>
+  x =<font color="#006666"> MouseX</font>()
+  y =<font color="#006666"> MouseY</font>()
+  
+  <font color="#006666">;Affichage du curseur de la souris en temps réel</font>
+<font color="#006666">  DisplaySprite</font>(0, X, Y)
+  <font color="#006666">;Affichage de l'afficheur &quot;Survoler pour quitter&quot;</font>
+<font color="#006666">  DisplaySprite</font>(1, 500, 50)
+  
+  <font color="#006666">;Détection de collision entre le curseur de la souris et l'afficheur</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">SpriteCollision</font>(0, X, Y, 1, 500, 50) &lt;&gt; 0
+    <b><font color="#006666">End</font></b> <font color="#006666">; Si collision alors on ferme le programme</font>
+  <b><font color="#006666">EndIf</font></b> 
+  
+  <font color="#006666">;Affichage du texte</font>
+<font color="#006666">  StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">  DrawText</font>(0, 75, &quot;Appuyez sur ESC pour quitter&quot;,<font color="#006666">RGB</font>(0,0,0),<font color="#006666"> RGB</font>(255,255,255))
+<font color="#006666">  DrawText</font>(0, 550, &quot;Appuyez sur les touches fléchées du clavier tout en bougeant la souris&quot;,<font color="#006666">RGB</font>(255,0,0),<font color="#006666"> RGB</font>(0,255,0))
+<font color="#006666">  StopDrawing</font>()
+  
+  <font color="#006666">;Gestion des 4 touches fléchées du clavier</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+<font color="#006666">    RotateSprite</font>(0,45,<font color="#924B72">#PB_Relative</font>)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+<font color="#006666">    RotateSprite</font>(0,1,<font color="#924B72">#PB_Relative</font>)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+<font color="#006666">    ZoomSprite</font>(0,100,100)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+<font color="#006666">    ZoomSprite</font>(0,20,20)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">;Maintenant que tout est calculé et affiché dans le buffer invisible,</font>
+  <font color="#006666">;on inverse les buffers pour rendre la scène visible à l'écran.</font>
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <font color="#006666">;On quitte l'application en  appuyant sur la touche Echap (ESC)</font>
+
+ <font color="#006666">; Idée   : Remplacer la ligne de code : If OpenScreen(800,600,32,&quot;Exemple OpenScreen&quot;) = 0</font>
+ <font color="#006666">; par    : If OpenScreen(800,600,32,&quot;Exemple OpenScreen&quot;, #PB_Screen_NoSynchronization) = 0</font>
+ <font color="#006666">; ou par : If OpenScreen(800,600,32,&quot;Exemple OpenScreen&quot;, #PB_Screen_SmartSynchronization) = 0</font>
+ <font color="#006666">; et observez la qualité de l'image (bouger la souris)</font>
+
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="openwindowedscreen.html">OpenWindowedScreen()</a>, <a href="flipbuffers.html">FlipBuffers()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextscreenmode.html>NextScreenMode()</a> - <a href=index.html>Screen Index</a> - <a href=openwindowedscreen.html>OpenWindowedScreen()</a> -><br><br>
+</body></html>

@@ -1,0 +1,71 @@
+<html><head><title>RandomData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RandomData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>RandomData</b></font>(*Buffer, Length)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Fills the specified memory buffer with random data. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Buffer</i></td>
+<td width="90%"> 
+The memory address of the buffer to fill. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+The size of the buffer to fill. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command uses the same random seed as the 
+<a href="random.html">Random()</a> command. <a href="randomseed.html">RandomSeed()</a> may be used to change the random number seed. 
+<br>
+<br>
+<b>Note:</b> This command uses a pseudorandom number generator which is very fast and produces 
+randomly looking output but it is not strong enough for cryptographic purposes. 
+The slower <a href="../cipher/cryptrandomdata.html">CryptRandomData()</a> command can be used if more secure 
+random number generation is required. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Create an image with random content</font>
+  <font color="#006666">;</font>
+<font color="#006666">  CreateImage</font>(0, 200, 200)
+  <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+    *Buffer =<font color="#006666"> DrawingBuffer</font>()
+    Pitch   =<font color="#006666"> DrawingBufferPitch</font>()
+
+<font color="#006666">    RandomData</font>(*Buffer, Pitch*200)
+
+<font color="#006666">    StopDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 200, 200, &quot;Random Image&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+
+  <b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="randomseed.html">RandomSeed()</a>, <a href="random.html">Random()</a>, <a href="../cipher/cryptrandomdata.html">CryptRandomData()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=random.html>Random()</a> - <a href=index.html>Math Index</a> - <a href=randomseed.html>RandomSeed()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,109 @@
+<html><head><title>BindWebViewCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BindWebViewCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>BindWebViewCallback</b></font>(#Gadget, JavaScriptFunktion$, @Callback())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Bindet einen PureBasic-Callback an eine neue JavaScript-Funktion. Die JavaScript-Funktion wird automatisch 
+in der Webansicht erstellt und ist im JavaScript-Code verfügbar. 
+<br>
+Wenn die JavaScript-Funktion im Webview-Gadget aufgerufen wird, wird der PureBasic 'Callback' aufgerufen. 
+Der JavaScript-Code wird angehalten, bis der PureBasic-Callback seine Ausführung abgeschlossen hat. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das Webview-Gadget, an das das Ereignis gebunden werden soll. 
+
+</td></tr>
+<tr><td><i>JavaScriptFunktion$</i></td>
+<td> 
+Der Name (unter Beachtung der Groß- und Kleinschreibung) der zu erstellenden JavaScript-Funktion, an 
+welche der Callback gebunden werden soll. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+Die beim Aufruf der JavaScript-Funktion aufzurufende Callback-Prozedur. Diese muss wie folgt deklariert werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">JavaScriptCallback</font>(JsonParameters$)
+    <font color="#006666">; </font>
+    <font color="#006666">; 'JsonParameters$' enthält alle Parameter, die beim Aufruf der JavaScript-Funktion im JSON-Format angegeben wurden.</font>
+    <font color="#006666">;</font>
+    
+    <font color="#006666">; Code</font>
+    
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(JsonResult$)
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+Die Callback-Prozedur kann ein Ergebnis zurückgeben, das von der JavaScript-Funktion verwendet werden kann. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn Ihre JavaScript-Callback-Funktion ein <a href="../string/utf8.html">UTF8()</a> generiertes Ergebnis anstelle von 0 zurückgibt, wird PureBasic 
+den zur Rückgabe verwendeten Speicher automatisch freigeben, wenn er nicht mehr benötigt wird. 
+
+</blockquote><p><b>Beispiel:</b> mit einer 2-Parameter-Javascript-Funktion</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Eine einfache Schaltfläche, deren Beschriftung sich je nach Ergebnis des PureBasic-Rückrufs ändert</font>
+  <font color="#006666">;</font>
+  Html$ =  ~&quot;&lt;button id=\&quot;displayInfo\&quot;&gt;Display Info&lt;/button&gt;\n&quot;+
+           ~&quot;&lt;script&gt;\n&quot;+
+           ~&quot;  const displayInfoElement=document.getElementById(\&quot;displayInfo\&quot;);\n&quot;+
+           ~&quot;  document.addEventListener(\&quot;DOMContentLoaded\&quot;, () =&gt; {\n&quot;+
+           ~&quot;    displayInfoElement.addEventListener(\&quot;click\&quot;, () =&gt; {\n&quot;+
+           ~&quot;      window.displayInfo(1000, 2000).then(result =&gt; {\n&quot;+
+           ~&quot;        displayInfoElement.textContent = result.sum;\n&quot;+
+           ~&quot;      });\n&quot;+
+           ~&quot;    });\n&quot;+
+           ~&quot;  });\n&quot;+
+           ~&quot;&lt;/script&gt;&quot;<font color="#006666">;</font>
+    
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">IncrementJS</font>(JsonParameters$)
+    
+    <b><font color="#006666">Dim</font></b> <font color="#006666">Parameters</font>(0)
+    
+<font color="#006666">    ParseJSON</font>(0, JsonParameters$)
+<font color="#006666">    ExtractJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> Parameters</font>())
+    
+    <b><font color="#006666">Debug</font></b> &quot;Nb Parameters: &quot; +<font color="#006666"> ArraySize</font>(<font color="#006666">Parameters</font>())
+    
+    <b><font color="#006666">Debug</font></b> &quot;Parameter 1: &quot; +<font color="#006666"> Parameters</font>(0)
+    <b><font color="#006666">Debug</font></b> &quot;Parameter 2: &quot; +<font color="#006666"> Parameters</font>(1)
+    
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;{ \&quot;sum\&quot;: &quot;+<font color="#006666">Str</font>(<font color="#006666">Parameters</font>(0) +<font color="#006666"> Parameters</font>(1))+ &quot;}&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 400, 400, &quot;Hello&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+<font color="#006666">  WebViewGadget</font>(0, 0, 0, 400, 400)
+<font color="#006666">  SetGadgetItemText</font>(0, <font color="#924B72">#PB_WebView_HtmlCode</font>, Html$)
+    
+<font color="#006666">  BindWebViewCallback</font>(0, &quot;displayInfo&quot;, @IncrementJS())
+
+  <b><font color="#006666">Repeat</font></b> 
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="webviewgadget.html">WebViewGadget()</a>, <a href="unbindwebviewcallback.html">UnbindWebViewCallback()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>WebView Inhaltsverzeichnis</a> - <a href=unbindwebviewcallback.html>UnbindWebViewCallback()</a> -><br><br>
+
+</body></html>

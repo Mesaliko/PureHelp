@@ -1,0 +1,628 @@
+<html><head><title>Compiling your programs</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Compiling your programs</font></b></p>
+
+Compiling is simple. Just select &quot;Compile/Run&quot; (F5 by default) and your program will be 
+compiled and executed for a testing run. 
+<br>
+<br>
+To customize the compiling process, you can open the &quot;Compiler options&quot; dialog. The 
+settings made there are associated with the current source file or the current project, 
+and also remembered when they are closed. The place where this information is saved can be configured. 
+By default, it is saved at the end of the source code as a comment (invisible in the IDE). 
+<br>
+<br>
+In case of an error that prevents the compiler from completing the compilation, it aborts 
+and displays an error-message. This message is also logged in the error log, and the line 
+that caused the error is marked. 
+<br>
+<br>
+A number of functions from older versions of PureBasic that have been removed from the package 
+still exist for a while as a compatibility wrapper to allow older codes to be tested/ported more 
+easily. If such a function is used in the code, the compiler will issue a warning. 
+A window will be opened displaying all warnings issued during compilation. Double-clicking 
+on a warning will display the file/line that caused the warning. 
+Note that such compatibility wrappers will not remain indefinitely but will be removed in a future update, 
+so it is recommended to fix issues that cause a compiler warning instead of relying on such deprecated functions. 
+
+<p><b>The compiler menu</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_compile.png"></p>
+
+<b>Compile/Run</b> 
+<br>
+This compiles the current source code with the compiler options set for it and 
+executes it. The executable file is stored in a temporary location, but it will be executed with 
+the current path set to the directory of the source code; so loading a file from the same directory 
+as the source code will work. 
+<br>
+<br>
+The source code need not be saved for this (but any <a href="../reference/includes.html">included files</a> must be saved). 
+<br>
+<br>
+The &quot;Compile/Run&quot; option respects the debugger setting (on or off) from the compiler 
+options or debugger menu (they are the same). 
+
+<br>
+<br>
+
+<b>Run</b> 
+<br>
+This executes the last compiled source code once again. Whether or not the debugger is enabled 
+depends on the setting of the last compilation. 
+
+<br>
+<br>
+
+<b>Compile with Debugger</b> 
+<br>
+This is the same as &quot;Compile/Run&quot; except that it ignores the debugger setting and enabled the 
+debugger for this compilation. This is useful when you usually have the debugger off, but want 
+to have it on for just this one compilation. 
+
+<br>
+<br>
+
+<b>Compile without Debugger</b> 
+<br>
+Same as &quot;Compile with Debugger&quot; except that it forces the debugger to be off for this compilation. 
+
+<br>
+<br>
+
+<b>Restart Compiler</b> (not present on all OS) 
+<br>
+This causes the compiler to restart. It also causes the compiler to reload all the libraries and 
+resident files, and with that, the list of known PureBasic functions, Structures, Interfaces and 
+Constants is updated too. 
+This function is useful when you have added a new User Library to the PB directory, but 
+do not want to restart the whole IDE. It is especially useful for library developers to test their library. 
+
+<br>
+<br>
+
+<b>Compiler Options</b> 
+<br>
+This opens the compiler options dialog, that lets you set the options for the compilation 
+of this source file. 
+
+<br>
+<br>
+
+<b>Create executable</b> 
+<br>
+This opens a save dialog, asking for the executable name to create. If the executable format is set 
+to DLL, it will create a DLL on Windows, shared object on Linux and dylib on OS X. When creating 
+an executable on OS X, appending '.app' at the executable name will create a bundled executable 
+with the necessary directory structure, including the icon. If no '.app' is set, then it will 
+create a regular console-like executable. 
+
+<br>
+<br>
+
+<b>Set default Target</b> 
+<br>
+When a project is open, this submenu shows all compile targets and allows to quickly 
+switch the current default target. The default target is the one which is compiled/executed 
+with the &quot;Compile/Run&quot; menu entry. 
+
+<br>
+<br>
+
+<b>Build Target</b> 
+<br>
+When a project is open, this submenu shows all compile targets and allows to directly compile 
+one of them. 
+
+<br>
+<br>
+
+<b>Build all Targets</b> 
+<br>
+When a project is open, this menu entry compiles all targets that have this option enabled in the 
+compiler options. A window is opened to show the build progress. 
+
+
+</blockquote>
+<p><b>Compiler options for non-project files</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_options.png"></p>
+
+<b>Main source file</b> 
+<br>
+By enabling this option, you can define another file that will be the one sent to 
+the compiler instead of this one. The use of this is that when you are editing a 
+file that does not run by itself, but is <a href="../reference/includes.html">included</a> into another 
+file, you can tell the compiler to use that other file to start the compilation. 
+<br>
+<br>
+Note: When using this option, you MUST save your source before compiling, as 
+only files that are written to disk will be used in this case. 
+Most of the compiler settings will be taken from the main source file, so when setting 
+this, they are disabled. Only some settings like the debugger setting will be used 
+from the current source. 
+
+<br>
+<br>
+
+<b>Use Compiler</b> 
+<br>
+This option allows the selection of a different compiler to use instead of the compiler of the current PureBasic version. 
+This makes it easy to compile different versions of the same program (x86 and x64) without having to start up 
+the IDE for the other compiler just for the compilation. 
+Additional compilers for this option have to be configured in the <a href="../reference/ide_preferences.html">preferences</a>. 
+<br>
+<br>
+If the compiler version matches that of the default compiler but the target processor is different then the built-in 
+debugger of the IDE can still be used to debug the compiled executable. 
+This means that an executable compiled with the x86 compiler can be debugged using the x64 IDE and vice versa. 
+If the version does not match then the standalone debugger that comes with the selected compiler will 
+be used for debugging to avoid version conflicts. 
+
+<br>
+<br>
+
+<b>Use Icon</b> (Windows and MacOS X only) 
+<br>
+Here you can set an icon that will be displayed when viewing the created executable in 
+the explorer. It is also displayed in the title bar of your programs windows and the Taskbar. 
+<br>
+<br>
+Windows: The icon must be in ICO format (Windows Icon). 
+<br>
+<br>
+
+MacOS X: The icon must be in ICNS format (Macintosh Icon). To create such an icon, you should create 
+PNG files in the dimensions 128x128, 48x48, 32x32 and 16x16 of your image and then use the tool &quot;Icon Composer&quot; 
+that comes with the OSX developer tools to create the ICNS file. 
+It should be located in /Developer/Applications/Utilities/. To be displayed once the application 
+has just been created, the Finder may need to be restarted. 
+
+<br>
+<br>
+
+<b>Optimize generated code</b> 
+<br>
+This enables the C code optimizer. It simply sets gcc's optimization flags on -O2 when enabled, on -O0 otherwise. 
+<a href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">See here.</a> 
+<br>
+<br>
+
+<b>Enable inline ASM syntax coloring</b> 
+<br>
+This enables the inline ASM syntax coloring. See the <a href="../reference/inlinedasm.html">Inline x86 ASM</a> section of the help-file 
+for more information on this option. 
+
+<br>
+<br>
+
+<b>Create thread-safe executable</b> 
+<br>
+This tells the compiler to use a special version of certain commands to make them safe to be used in threads. 
+See the <a href="../thread/index.html">Thread library</a> for more information. 
+<br>
+<br>
+This also enables the <a href="../reference/ide_debugger.html">Debugger</a> to display correct information if threads are used. 
+Without this option, the debugger might output wrong line numbers when threads are involved for example. 
+
+<br>
+<br>
+
+<b>Enable modern theme support</b> (Windows only) 
+<br>
+Adds support for skinned windows on Windows Vista, Windows 7 or Windows 8. 
+
+<br>
+<br>
+
+<b>Request Administrator mode for Windows Vista and above</b> (Windows only) 
+<br>
+The created executable will always be started with administrator rights on Windows Vista  and above 
+(it will not launch if the administrator password is not entered). This option should be set 
+for programs that need to access restricted folders or restricted areas of the registry to get 
+full access. 
+<br>
+If this option is turned on, the <a href="../reference/ide_debugger.html">standalone debugger</a> will automatically 
+selected when debugging, so the program can be tested in administrator mode. 
+<br>
+<br>
+Note: This option has no effect when the program is run on other versions of Windows. 
+
+<br>
+<br>
+
+<b>Request User mode for Windows Vista and above</b> (Windows only) 
+<br>
+This option disables the &quot;Virtualization&quot; feature for this executable on Windows Vista and above. Virtualization 
+caused file and registry access to be redirected to a special user folder if the user does not have 
+the needed rights to do the operation (this is done for compatibility with older programs). 
+<br>
+Note that this redirection is done without notifying the user; this can lead to some confusion if he tries to find 
+saved files on the file-system. Because of this, it is recommended to disable this feature 
+if the program complies with the Windows Vista file/registry access rules. 
+<br>
+<br>
+Note: This option has no effect when the program is run on other versions of Windows. 
+It cannot be combined with the &quot;Administrator mode&quot; option above. 
+
+<br>
+<br>
+
+<b>Enable DPI Aware Executable</b> (Windows only) 
+<br>
+This option enable DPI awareness when creating an executable. That means than GUI created in PureBasic 
+will scale automatically if the DPI of the screen is above 100%. Most of the process is seamless, but some 
+case needs to be worked out, like pixel based gadgets (ImageGadget, CanvasGadget etc.). 
+
+<br>
+<br>
+
+<b>Enable DLL Protection</b> (Windows only) 
+<br>
+Enable DLL preloading protection to the executable. It prevents that system DLLs are first searched for in the program directory 
+instead of in the System32 directory of the Windows operating system. 
+
+<br>
+<br>
+
+<b>Enable OnError lines support</b> (Windows only) 
+<br>
+Includes line numbers information with the executable for the <a href="../onerror/index.html">OnError-Library</a>. 
+
+<br>
+<br>
+
+<b>Library Subsystem</b> 
+<br>
+Here you can select different subsystems for compilation. More than one subsystem 
+can be specified, separated with a comma. For more information, see <a href="../reference/subsystems.html">subsystems</a>. 
+
+<br>
+<br>
+
+<b>Executable format</b> 
+<br>
+
+
+This allows you to specify the created executable format: 
+<br>
+<u>Windows</u> : a normal windows executable. 
+<br>
+<u>Console</u> : an executable with a default console. This one still can create windows and such, 
+but it always has a console open. When executed from a command prompt, this executable type uses the 
+command terminal as its console and writes there, whereas the &quot;Windows&quot; executable would create a 
+separate Console window when using <a href="../console/openconsole.html">OpenConsole()</a>. 
+This setting must be used to create a <a href="../console/index.html">Console</a> application that can have 
+its input/output redirected with pipes. 
+<br>
+<u>Shared DLL</u> : create a windows DLL. See <a href="../reference/dll.html">Building a DLL</a> for more info. 
+<br>
+Note: When you do &quot;Compile/Run&quot; with a DLL source code, it is executed as a normal executable. A dll 
+is only created when you use &quot;create executable&quot;. 
+
+
+
+<br>
+<br>
+
+<b>Cpu Optimisation</b> (next to Executable format) 
+<br>
+This setting allows to include Cpu optimised PB functions in your executable: 
+<br>
+<u>All CPU</u> : The generic functions are included that run on all CPUs. 
+<br>
+<u>Dynamic CPU</u> : The generic functions as well as any available CPU specific function 
+are included. The function to execute is decided at runtime. This creates a bigger executable, but 
+it will run as fast as possible on all CPUs. 
+<br>
+<u>All other options</u> : Include only the functions for a specific CPU. The executable will 
+not run on any Cpu that does not support this feature. 
+<br>
+<br>
+Note: No PB functions actually support this feature for now (it is ignored for them). 
+However, some User Libraries include such optimisations. 
+
+<br>
+<br>
+
+<b>Linker options file</b> 
+<br>
+A textfile can be specified here with further command-line options that should be passed to the linker 
+when creating the executable. The file should contain one option per line. 
+
+
+</blockquote>
+<p><b>Compile/Run</b></p><blockquote>
+
+
+This section contains options that affect how the executable is run from the IDE for testing. 
+Except for the tools option, they have no effect when the &quot;Create executable&quot; menu is used. 
+
+<p><img src="images/ide_compiler_compile.png"></p>
+
+<b>Enable Debugger</b> 
+<br>
+This sets the debugger state (on/off) for this source code, or if the main file option 
+is used, for that file too. This can also be set from the debugger menu. 
+
+<br>
+<br>
+
+<b>Enable Purifier</b> 
+<br>
+This enables purifier support for the debugger. The purifier can detect a certain type of 
+programming errors such as writing past the end of an allocated memory buffer. 
+See <a href="../reference/ide_debugtools.html">Included debugging tools</a> for more details. 
+
+<br>
+<br>
+
+<b>Use selected Debugger</b> 
+<br>
+This allows to choose a different <a href="../reference/ide_debugger.html">debugger type</a> for this file only. 
+If this option is disabled, the default debugger is used; this can be specified in the 
+<a href="../reference/ide_preferences.html">preferences</a>. 
+
+<br>
+<br>
+
+<b>Use Warning mode</b> 
+<br>
+This allows to choose a different <a href="../reference/ide_debugger.html">warning mode</a> for this file only. 
+If this option is disabled, the default setting is used which can be specified in the 
+<a href="../reference/ide_preferences.html">preferences</a>. The available options are: 
+<br>
+<u>Ignore Warnings:</u> Warnings will be ignored without displaying anything. 
+<br>
+<u>Display Warnings:</u> Warnings will be displayed in the error log and the source 
+code line will be marked, but the program continues to run. 
+<br>
+<u>Treat Warnings as Errors:</u> A warning will be treated like an error. 
+
+<br>
+<br>
+
+<b>Executable command-line</b> 
+<br>
+The string given here will be passed as the command-line to the program when running it from the IDE. 
+The content of this string can be got with <a href="../process/programparameter.html">ProgramParameter()</a>. 
+
+<br>
+<br>
+
+<b>Current directory</b> 
+<br>
+The directory specified here will be set as the current directory for the program when running it from the IDE. 
+
+<br>
+<br>
+
+<b>Create temporary executable in the source directory</b> 
+<br>
+With this option turned on, the temporary executable file for running the program from the IDE will be 
+placed inside the source directory. This can be useful if the program depends on files inside the source 
+directory for testing. With this option turned off, the executable is created in the systems temporary directory. 
+
+<br>
+<br>
+
+<b>Execute tools</b> 
+<br>
+Here <a href="../reference/ide_externaltools.html">external tools</a> can be enabled on a per-source basis. 
+The &quot;Global settings&quot; column shows if the tool is enabled or disabled in the 
+<a href="../reference/ide_externaltools.html">tools configuration</a>. A tool will only be executed for the source 
+if it is both enabled globally and for this source. 
+
+<br>
+<br>
+Note: For a tool to be listed here, it must have the &quot;Enable Tool on a per-source basis&quot; option 
+checked in the <a href="../reference/ide_externaltools.html">tools configuration</a> and be executed by a trigger 
+that is associated with a source file (i.e. not executed by menu or by editor startup for example). 
+
+
+</blockquote>
+<p><b>Constants</b></p><blockquote>
+
+
+In this section, a set of special editor constants as well as custom constants can be defined 
+which will be predefined when compiling this source. 
+
+<p><img src="images/ide_compiler_constants.png"></p>
+
+<b>#PB_Editor_CompileCount</b> 
+<br>
+If enabled, this constant holds the number of times that the code was compiled (both with &quot;Compile/Run&quot; and 
+&quot;Create Executable&quot;) from the IDE. The counter can be manually edited in the input field. 
+
+<br>
+<br>
+
+<b>#PB_Editor_BuildCount</b> 
+<br>
+If enabled, this constant holds the number of times that the code was compiled with &quot;Create Executable&quot; only. 
+The counter can be manually edited in the input field. 
+
+<br>
+<br>
+
+<b>#PB_Editor_CreateExecutable</b> 
+<br>
+If enabled, this constant holds a value of 1 if the code is compiled with the &quot;Create Executable&quot; menu or 
+0 if &quot;Compile/Run&quot; was used. 
+
+<br>
+<br>
+
+<b>Custom constants</b> 
+<br>
+Here, custom constants can be defined and then easily switched on/off through checkboxes. 
+Constant definitions should be added as they would be written within the source code. 
+This provides a way to enable/disable certain features in a program by defining a constant here and then 
+checking in the source for it to enable/disable the features with 
+<a href="../reference/compilerdirectives.html">CompilerIf/CompilerEndIf</a>. 
+<br>
+<br>
+Inside the definition of these constants, environment variables can be used by specifying them 
+in a &quot;bash&quot; like style with a &quot;$&quot; in front. The environment variable will be replaced in the constant 
+definition before compiling the source. This allows to pass certain options of the system that the 
+code is compiled on to the program in the form of constants. 
+<br>
+<br>
+Example: #Creator=$USERNAME 
+<br>
+Here, the $USERNAME will be replaced by the username of the logged in user on Windows systems. If 
+an environment variable does not exist, it will be replaced by an empty string. 
+
+<br>
+<br>
+Note: To test within the source code if a constant is defined or not, the <font color="#006666">Defined</font>() 
+<a href="../reference/compilerfunctions.html">compiler function</a> can be used. 
+
+
+
+
+</blockquote>
+<p><b>Version Information</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_version.png"></p>
+
+This is a Windows only feature. By enabling this, a resource is included in the executable with information about your program. 
+It can be viewed by right-clicking on the executable in the windows explorer and selecting &quot;Properties&quot;. 
+Also it can be read by other programs such as setup tools. 
+<br>
+<br>
+Fields marked with a * are required if you want to include the version info (if not all required fields 
+are set, the information may not display correctly on some versions of Windows). 
+<br>
+<br>
+The first two fields MUST be composed of 4 numbers separated by commas. All other fields may be any 
+string. In the 3 empty boxes, you can define your own fields to include in the Version info block. 
+<br>
+<br>
+In all the string fields, you may include special tokens that are replaced when compiling: 
+<br>
+%OS : replaced with the version of Windows used to compile the program 
+<br>
+%SOURCE : replaced with the filename (no path) of the source file. 
+<br>
+%EXECUTABLE : replaced with the name of the created executable (this only works when &quot;create executable&quot; is used, not with &quot;Compile/Run&quot;. 
+<br>
+%COMPILECOUNT : replaced with the value of the <font color="#924B72">#PB_Editor_CompileCount</font> constant. 
+<br>
+%BUILDCOUNT : replaced with the value of the <font color="#924B72">#PB_Editor_BuildCount</font> constant. 
+<br>
+<br>
+Furthermore, you can use any token listed with the <a href="../date/formatdate.html">FormatDate()</a> command. These tokens 
+will be replaced with their respective meaning in <a href="../date/formatdate.html">FormatDate()</a> used with the date of  the 
+compilation (i.e. %yy gives the year of the compilation) 
+
+<br>
+<br>
+Meaning of the lower 3 fields: 
+<br>
+<br>
+
+<b>File OS</b> 
+<br>
+Specifies the OS that this Program is compiled for (Using VOS_DOS or VOS_WINDOWS16 makes little sense. 
+They are only included for the sake of completeness). 
+
+<br>
+<br>
+
+<b>File Type</b> 
+<br>
+Type of the executable (Here VFT_UNKNOWN, VFT_APP or VFT_DLL are the only ones that really make sense for PureBasic programs). 
+
+<br>
+<br>
+
+<b>Language</b> 
+<br>
+Specifies the language in which this version info is written. 
+<br>
+<br>
+The fields values can be accessed when compiling the program from the IDE using the following constants (same order): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Editor_FileVersionNumeric</font>
+  <font color="#924B72">#PB_Editor_ProductVersionNumeric</font>
+  <font color="#924B72">#PB_Editor_CompanyName</font>
+  <font color="#924B72">#PB_Editor_ProductName</font>
+  <font color="#924B72">#PB_Editor_ProductVersion</font>
+  <font color="#924B72">#PB_Editor_FileVersion</font>
+  <font color="#924B72">#PB_Editor_FileDescription</font>
+  <font color="#924B72">#PB_Editor_InternalName</font>
+  <font color="#924B72">#PB_Editor_OriginalFilename</font>
+  <font color="#924B72">#PB_Editor_LegalCopyright</font>
+  <font color="#924B72">#PB_Editor_LegalTrademarks</font>
+  <font color="#924B72">#PB_Editor_PrivateBuild</font>
+  <font color="#924B72">#PB_Editor_SpecialBuild</font>
+  <font color="#924B72">#PB_Editor_Email</font>
+  <font color="#924B72">#PB_Editor_Website</font>
+</font></pre>
+
+
+</blockquote>
+<p><b>Resources</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_ressources.png"></p>
+
+This is a Windows only feature. Here you can include as many Resource scripts (*.rc files) as you want. They will be compiled 
+and included with the executable. You can use any resource editor (for example the <a href="http://www.christian-heffner.de/index.php?page=start&lang=en">PellesC</a> IDE) 
+to create such scripts. 
+
+<br>
+<br>
+
+Note: Since Resources are a specific to the Windows platform only, PB does not include a 
+Library to manage them and they are not further documented here. See documentation on the 
+<a href="https://learn.microsoft.com/en-us/windows/win32/apiindex/windows-api-list">Windows API</a> and resources for more information. 
+
+
+
+
+</blockquote>
+<p><b>Compiler options for projects</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_targets.png"></p>
+
+The compiler options for projects allow the definition of multiple compile targets. Each target is 
+basically a set of compiler options with a designated source file and output executable. The left 
+side of the compiler options window is extended with the list of the defined compile targets. The toolbar 
+on top of it allows to create, delete, copy, edit or move targets in the list. 
+<br>
+<br>
+The default target is the one which will be compiled when the &quot;Compile/Run&quot; menu entry is selected. 
+It can be quickly switched with the &quot;Set as default target&quot; checkbox or from the compiler menu. 
+The &quot;Enable in 'Build all Targets'&quot; option specifies whether or not the selected target will be built 
+when the 'Build all Targets' menu entry is used. 
+<br>
+<br>
+The right side of the compiler options is almost the same as in the non-project mode and reflects 
+the settings for the compile target that is currently selected on the left. 
+The only difference are the &quot;Input source file&quot; and &quot;Output executable&quot; fields on the first tab. 
+These fields have to be specified for all compile targets. Other than that, the compiler 
+options are identical to the options described above. 
+<br>
+<br>
+In project mode, the information about the compile target is stored in the project file and not in the 
+individual source files. Information that belongs to the file (such as the folding state) are still saved 
+for the individual source files in the location specified by the <a href="../reference/ide_preferences.html">Preferences</a>. 
+
+
+</blockquote>
+<p><b>The Build progress window</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_build.png"></p>
+
+When the 'Build all Targets' menu entry is selected on an open project, all targets that have the corresponding 
+option set in the compiler options will be compiled in the order they are defined in the compiler options. The progress 
+window shows the current compile progress as well as the status of each target. When the process is finished, the 
+build log can be copied to the clipboard or saved to disk. 
+</blockquote>
+</font></body></html>

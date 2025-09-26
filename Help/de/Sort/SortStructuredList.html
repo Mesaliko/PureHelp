@@ -1,0 +1,116 @@
+<html><head><title>SortStructuredList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SortStructuredList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SortStructuredList</b></font>(ListenName(), Optionen, OffsetOf(Struktur\Feld), TypeOf(Struktur\Feld) [, Start, Ende])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Sortiert die angegebene <a href="../list/index.html">Liste</a> entsprechend den übergebenen 
+Optionen. Die Liste muss eine zugehörige <a href="../reference/structures.html">Struktur</a> besitzen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ListenName()</i></td>
+<td width="90%"> 
+Die zu sortierende Liste. 
+
+</td></tr>
+<tr><td><i>Optionen</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sort_Ascending</font>  : Sortiert die Liste in aufsteigender Richtung (kleine Zahlen zuerst)
+  <font color="#924B72">#PB_Sort_Descending</font> : Sortiert die Liste in absteigender Richtung (große Zahlen zuerst)
+  <font color="#924B72">#PB_Sort_NoCase</font>     : Sortiert eine Liste mit Strings ohne Berücksichtigung der Groß-/Kleinschreibung (a=A, b=B etc..)
+</font></pre>
+
+</td></tr>
+<tr><td><i>OffsetOf(Struktur\Feld)</i></td>
+<td> 
+Offset des Feldes in der Struktur. <a href="../reference/compilerfunctions.html">OffsetOf()</a> kann 
+verwendet werden, um die Position eines Feldes in der dem Array zugewiesenen Struktur 
+zu ermitteln, nach dem sortiert werden soll. 
+
+</td></tr>
+<tr><td><i>TypeOf(Struktur\Feld)</i></td>
+<td> 
+Der Feld-Typ des Feldes in der Struktur. Dieser muss mit dem tatsächlichen Struktur-Feld-Typ übereinstimmen. 
+<a href="../reference/compilerfunctions.html">TypeOf()</a> kann verwendet werden, um automatisch den Feld-Typ zu ermitteln. 
+Verfügbare Typen sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>     : Das Strukturfeld, nach dem sortiert werden soll, ist ein Byte (.b)
+  <font color="#924B72">#PB_Word</font>     : Das Strukturfeld, nach dem sortiert werden soll, ist ein Word (.w)
+  <font color="#924B72">#PB_Long</font>     : Das Strukturfeld, nach dem sortiert werden soll, ist ein Long (.l)
+  <font color="#924B72">#PB_String</font>   : Das Strukturfeld, nach dem sortiert werden soll, ist ein String (.s oder $), <a href="../reference/variables.html">Fixed Strings</a> werden nicht unterstützt.
+  <font color="#924B72">#PB_Float</font>    : Das Strukturfeld, nach dem sortiert werden soll, ist ein Float (.f)
+  <font color="#924B72">#PB_Double</font>   : Das Strukturfeld, nach dem sortiert werden soll, ist ein Double (.d)
+  <font color="#924B72">#PB_Quad</font>     : Das Strukturfeld, nach dem sortiert werden soll, ist ein Quad (.q)
+  <font color="#924B72">#PB_Character</font>: Das Strukturfeld, nach dem sortiert werden soll, ist ein Character (.c)  
+  <font color="#924B72">#PB_Integer</font>  : Das Strukturfeld, nach dem sortiert werden soll, ist ein Integer (.i)
+  <font color="#924B72">#PB_Ascii</font>    : Das Strukturfeld, nach dem sortiert werden soll, ist ein Ascii-Zeichen (.a)
+  <font color="#924B72">#PB_Unicode</font>  : Das Strukturfeld, nach dem sortiert werden soll, ist ein Unicode-Zeichen (.u)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Start, Ende (optional)</i></td>
+<td> 
+Der Index des ersten und letzten Elements in der Liste, welche sortiert werden sollen. 
+Wenn diese Parameter nicht angegeben werden, dann wird die ganze Liste sortiert. 
+<br>
+Das erste Listenelement befindet sich an Position 0, das nächste an 1, usw. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+<a href="../reference/variables.html">Fixed strings</a> (Strings mit fester Größe) werden nicht von der Sortierfunktion unterstützt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Animal
+    Name$
+    Speed.l
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Animals</font>.Animal()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Tiger&quot;
+<font color="#006666">  Animals</font>()\Speed = 10
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Jaguar&quot;
+<font color="#006666">  Animals</font>()\Speed = 40
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Animals</font>())
+<font color="#006666">  Animals</font>()\Name$ = &quot;Zebra&quot;
+<font color="#006666">  Animals</font>()\Speed = 30
+  
+  <font color="#006666">; Sortiert die Liste nach dem Feld 'Name$', welches ein String ist</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SortStructuredList</font>(<font color="#006666">Animals</font>(), <font color="#924B72">#PB_Sort_Ascending</font>,<font color="#006666"> OffsetOf</font>(Animal\Name$),<font color="#006666"> TypeOf</font>(Animal\Name$))
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Animals</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animals</font>()\Name$+&quot; - Speed: &quot;+<font color="#006666">Str</font>(<font color="#006666">Animals</font>()\Speed)
+  <b><font color="#006666">Next</font></b>
+  
+  <font color="#006666">; Sortiert die Liste nach dem Feld 'Speed', welches ein Long ist</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SortStructuredList</font>(<font color="#006666">Animals</font>(), <font color="#924B72">#PB_Sort_Ascending</font>,<font color="#006666"> OffsetOf</font>(Animal\Speed),<font color="#006666"> TypeOf</font>(Animal\Speed))
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Animals</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animals</font>()\Name$+&quot; - Speed: &quot;+<font color="#006666">Str</font>(<font color="#006666">Animals</font>()\Speed)
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="sortlist.html">SortList()</a>, <a href="customsortlist.html">CustomSortList()</a>, <a href="randomizelist.html">RandomizeList()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=sortstructuredarray.html>SortStructuredArray()</a> - <a href=index.html>Sort Inhaltsverzeichnis</a><br><br>
+
+</body></html>

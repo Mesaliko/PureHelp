@@ -1,0 +1,51 @@
+<html><head><title>LockMutex</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LockMutex()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>LockMutex</b></font>(Mutex)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Waits until the mutex object is available (not locked by another thread) and then locks the object 
+so no other thread can get a lock on the object. 
+<br>
+<br>
+After this function returns, it is assured that this thread is the only one with a locked state on the mutex. 
+The thread can now freely access the shared resource that is protected by this mutex, as it is the only one 
+with exclusive access to the mutex. 
+<br>
+<br>
+If another thread calls LockMutex() while this one has the lock, it will wait inside the LockMutex() function until 
+this thread calls <a href="unlockmutex.html">UnlockMutex()</a> to release its lock on the mutex. 
+<br>
+<br>
+<b>Note:</b> Since the LockMutex() function waits until the mutex is available, it can easily lead to lockup 
+situations if a <a href="unlockmutex.html">UnlockMutex()</a> call is forgotten. 
+<br>
+<br>
+See <a href="createmutex.html">CreateMutex()</a> for a code example. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mutex</i></td>
+<td width="90%"> 
+The mutex to lock. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="unlockmutex.html">UnlockMutex()</a>, <a href="createmutex.html">CreateMutex()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=killthread.html>KillThread()</a> - <a href=index.html>Thread Index</a> - <a href=pausethread.html>PauseThread()</a> -><br><br>
+
+</body></html>

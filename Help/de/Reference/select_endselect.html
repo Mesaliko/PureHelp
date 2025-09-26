@@ -1,0 +1,67 @@
+<html><head><title>Select : EndSelect</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Select : EndSelect</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Select</font></b> &lt;Ausdruck1&gt;
+  <b><font color="#006666">Case</font></b> &lt;Ausdruck&gt; [, &lt;Ausdruck&gt; [&lt;numerischer Ausdruck&gt; To &lt;numerischer Ausdruck&gt;]]
+     ...
+  [<b><font color="#006666">Case</font></b> &lt;Ausdruck&gt;]
+     ...
+  [<b><font color="#006666">Default</font></b>] 
+     ...
+<b><font color="#006666">EndSelect</font></b> 
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+<b><font color="#006666">Select</font></b> bietet die Möglichkeit, eine schnelle Auswahl zu treffen. Das Programm führt den &lt;Ausdruck1&gt; aus und behält 
+dessen Ergebnis im Speicher. Es vergleicht dann diesen Wert mit allen Werten aus den <b><font color="#006666">Case</font></b> &lt;Ausdrücken&gt; - 
+und wenn der Wert eines angegebenen <b><font color="#006666">Case</font></b> &lt;Ausdrucks&gt; 'wahr' ergibt, führt es den zugehörigen Programmcode aus und 
+verlässt die <b><font color="#006666">Select</font></b> Struktur. <b><font color="#006666">Case</font></b> unterstützt mehrfache Werte und Werte-Bereiche durch die Verwendung 
+des optionalen <b><font color="#006666">To</font></b> Schlüsselworts (nur für numerische Werte). Bei Verwendung des <b><font color="#006666">To</font></b> Schlüsselworts muss 
+es ein aufsteigender Bereich sein (von kleiner zu größer). Wenn keiner der <b><font color="#006666">Case</font></b> Werte 'wahr' ist, dann wird 
+der <b><font color="#006666">Default</font></b> Code (sofern definiert) ausgeführt. 
+<br>
+<br>
+Hinweis: <b><font color="#006666">Select</font></b> akzeptiert auch <a href="../reference/variables.html">Fließkommazahlen</a> (Floats) als &lt;Ausdruck1&gt;, 
+rundet diese jedoch auf die nächstgelegene Ganzzahl (Integer) ab (Vergleiche werden nur mit Ganzzahlen durchgeführt). 
+
+
+</blockquote><p><b>Beispiel:</b> Einfaches Beispiel</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  Value = 2
+  
+  <b><font color="#006666">Select</font></b> Value
+    <b><font color="#006666">Case</font></b> 1
+      <b><font color="#006666">Debug</font></b> &quot;Value = 1&quot;
+      
+    <b><font color="#006666">Case</font></b> 2 
+      <b><font color="#006666">Debug</font></b> &quot;Value = 2&quot;
+      
+    <b><font color="#006666">Case</font></b> 20 
+      <b><font color="#006666">Debug</font></b> &quot;Value = 20&quot;
+      
+    <b><font color="#006666">Default</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;I don't know&quot;
+  <b><font color="#006666">EndSelect</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Mehrfachauswahl und Bereich Beispiel</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  Value = 2
+  
+  <b><font color="#006666">Select</font></b> Value
+    <b><font color="#006666">Case</font></b> 1, 2, 3
+      <b><font color="#006666">Debug</font></b> &quot;Value ist 1, 2 oder 3&quot;
+      
+    <b><font color="#006666">Case</font></b> 10 <b><font color="#006666">To</font></b> 20, 30, 40 <b><font color="#006666">To</font></b> 50
+      <b><font color="#006666">Debug</font></b> &quot;Value liegt zwischen 10 und 20, ist gleich 30 oder zwischen 40 und 50&quot;
+      
+    <b><font color="#006666">Default</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Ich weiß nicht&quot;
+      
+  <b><font color="#006666">EndSelect</font></b>
+</font></pre>
+</blockquote>
+</font></body></html>

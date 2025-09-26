@@ -1,0 +1,53 @@
+<html><head><title>SetActiveWindow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetActiveWindow()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetActiveWindow</b></font>(#Fenetre)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Active une fenêtre et lui donne le focus. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à activer. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Activer une fenêtre c'est aussi lui 
+donner le focus à l'intérieur du 
+programme mais cela ne veut pas dire 
+que le programme s'affichera en 
+avant-plan. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 400, 200, 220, 200, &quot;Exemple1&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+<font color="#006666">   OpenWindow</font>(1, 500, 200, 220, 200, &quot;Exemple2&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+   
+<font color="#006666">   SetActiveWindow</font>(0)
+
+   <b><font color="#006666">Repeat</font></b>:<b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getactivewindow.html">GetActiveWindow()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=resizewindow.html>ResizeWindow()</a> - <a href=index.html>Window Index</a> - <a href=setwindowcallback.html>SetWindowCallback()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,92 @@
+<html><head><title>MessageRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MessageRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>MessageRequester</b></font>(Title$, Text$ [, Flags [, ParentID]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens a blocking requester to display some information. The program execution 
+is totally stopped until the user close the requester. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Title$</i></td>
+<td width="90%"> 
+The title of the requester window. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The text displayed in the requester window. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Ok</font>          : to have the 'ok' only button (default)
+  <font color="#924B72">#PB_MessageRequester_YesNo</font>       : to have 'yes' or 'no' buttons
+  <font color="#924B72">#PB_MessageRequester_YesNoCancel</font> : to have 'yes', 'no' and 'cancel' buttons
+</font></pre>
+Combined with one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Info</font>   : displays an info icon
+  <font color="#924B72">#PB_MessageRequester_Warning</font>: displays a warning icon
+  <font color="#924B72">#PB_MessageRequester_Error</font>  : displays an error icon
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+The parent window identifier. A valid window identifier can be retrieved with <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+It can be one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Yes</font>    : the 'yes' button was pressed
+  <font color="#924B72">#PB_MessageRequester_No</font>     : the 'no' button was pressed
+  <font color="#924B72">#PB_MessageRequester_Cancel</font> : the 'Cancel' button was pressed
+</font></pre>
+
+</blockquote><p><b>Example:</b> Simple MessageRequester  (usually for information purposes only)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Just a short information text.&quot;, <font color="#924B72">#PB_MessageRequester_Ok</font> | <font color="#924B72">#PB_MessageRequester_Info</font>)
+</font></pre>
+
+</blockquote><p><b>Example:</b> MessageRequester with Yes / No buttons  (usually to question)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Result =<font color="#006666"> MessageRequester</font>(&quot;Title&quot;, &quot;Please make your input:&quot;, <font color="#924B72">#PB_MessageRequester_YesNo</font>)
+  a$ = &quot;Result of the requester was: &quot;
+  <b><font color="#006666">If</font></b> Result = <font color="#924B72">#PB_MessageRequester_Yes</font>    <font color="#006666">; pressed Yes button</font>
+    a$ + &quot;Yes&quot;
+  <b><font color="#006666">Else</font></b>                                    <font color="#006666">; pressed No button</font>
+    a$ + &quot;No&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+</blockquote><p><b>Example:</b> MessageRequester with Yes / No / Cancel buttons  (usually to question)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Result =<font color="#006666"> MessageRequester</font>(&quot;Title&quot;, &quot;Please make your input:&quot;, <font color="#924B72">#PB_MessageRequester_YesNoCancel</font>) 
+  a$ = &quot;Result of the previously requester was: &quot;
+  <b><font color="#006666">If</font></b> Result = <font color="#924B72">#PB_MessageRequester_Yes</font>       <font color="#006666">; pressed Yes button</font>
+    a$ + &quot;Yes&quot;
+  <b><font color="#006666">ElseIf</font></b> Result = <font color="#924B72">#PB_MessageRequester_No</font>    <font color="#006666">; pressed No button</font>
+    a$ + &quot;No&quot;
+  <b><font color="#006666">Else</font></b>                                       <font color="#006666">; pressed Cancel button or Esc</font>
+    a$ + &quot;Cancel&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/messagerequester.png"></p>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=inputrequester.html>InputRequester()</a> - <a href=index.html>Requester Index</a> - <a href=nextselectedfilename.html>NextSelectedFilename()</a> -><br><br>
+
+</body></html>

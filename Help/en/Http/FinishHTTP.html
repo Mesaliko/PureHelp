@@ -1,0 +1,44 @@
+<html><head><title>FinishHTTP</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FinishHTTP()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>FinishHTTP</b></font>(HttpConnection)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Free the resources associated to the specified asynchronous download, started either with <a href="receivehttpfile.html">ReceiveHTTPFile()</a> or 
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>. It must be always called after a successful call of <a href="receivehttpfile.html">ReceiveHTTPFile()</a> or <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>HttpConnection</i></td>
+<td width="90%"> 
+The HTTP connection to finish. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Depending on which Receive command was used to start the download, FinishHTTP() returns one of the following results: 
+<br>
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>: Amount of received bytes (size of the stored file). 
+<br>
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a> with the <font color="#924B72">#PB_HTTP_Asynchronous</font> flag set: Address of the memory area where the received 
+data was stored. With <a href="../memory/memorysize.html">MemorySize()</a> the amount of received data can be determined then. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The value <font color="#924B72">#PB_HTTP_Aborted</font> will be returned by <a href="httpprogress.html">HTTPProgress()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="httpprogress.html">HTTPProgress()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=aborthttp.html>AbortHTTP()</a> - <a href=index.html>Http Index</a> - <a href=geturlpart.html>GetURLPart()</a> -><br><br>
+
+</body></html>

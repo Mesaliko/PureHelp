@@ -1,0 +1,238 @@
+<html><head><title>Einsteiger-Kapitel - Compiler-Direktiven (für unterschiedliches Verhalten auf verschiedenen OS)</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Compiler-Direktiven (für unterschiedliches Verhalten auf verschiedenen OS)</font></b></p>
+
+Dies wird unser letzter Blick auf das Datei-Eigenschaften Programm. Es gibt eine 
+zu überwindende Einschränkung, welche wir zuvor diskutiert haben und es bis jetzt 
+gelassen haben, weil es ein Sonderfall ist. 
+<br>
+<br>
+Bisher war die angezeigte Attribut-Spalte einfach ein <a href="../reference/variables.html">Integer</a>. 
+Dies liegt daran, dass die Rückgabewerte von <a href="../filesystem/getfileattributes.html">GetFileAttributes()</a> und <a href="../filesystem/directoryentryattributes.html">DirectoryEntryAttributes()</a> 
+auf Windows-Systemen eine andere Bedeutung haben, verglichen mit Mac- und Linux-Systemen. 
+<br>
+<br>
+Wir können diesen Unterschied zur Laufzeit nicht erlauben, wir können jedoch 
+<a href="../reference/compilerdirectives.html">Compiler-Direktiven</a> verwenden, damit sich das 
+Programm auf den drei verschiedenen Betriebssystemen unterschiedlich verhält. 
+<br>
+<br>
+
+Fügen Sie diese neue Prozedur-Deklarierung zu diesem Abschnitt hinzu. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Declare</font></b>.s <font color="#006666">AttributeString</font>(Attributes.l)
+</font></pre>
+
+Fügen Sie diese neue Prozedur zum Abschnitt der Implementierung hinzu. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">AttributeString</font>(Attributes.l)
+    <font color="#006666">; Konvertiert einen Integer Attribut-Wert in eine String-Beschreibung.</font>
+    <font color="#006666">; Unterstützt Linux, Mac und Windows Systemattribute.</font>
+    
+    <b><font color="#006666">Protected</font></b>.s Result
+    
+    Result = &quot;&quot;
+    
+    <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+    
+      �� �� <font color="#006666">; Dies sind die Attribute für das Windows-System.</font>
+          <font color="#006666">; Ein &quot;logisches Und&quot; der Attribute mit jeder Konstante filtert dieses Bit</font>
+          <font color="#006666">; aus und kann dann zum Vergleich herangezogen werden.</font>
+      
+      �� �� <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_Archive</font>
+        �� �� �� Result + &quot;A&quot;
+      �� �� <b><font color="#006666">Else</font></b>
+        �� �� �� Result + &quot; &quot;
+      �� �� <b><font color="#006666">EndIf</font></b>
+      �� �� 
+      �� �� <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_Compressed</font>
+        �� �� �� Result + &quot;C&quot;
+      �� �� <b><font color="#006666">Else</font></b>
+        �� �� �� Result + &quot; &quot;
+      �� �� <b><font color="#006666">EndIf</font></b>
+      �� �� 
+      �� �� <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_Hidden</font>
+        �� �� �� Result + &quot;H&quot;
+      �� �� <b><font color="#006666">Else</font></b>
+        �� �� �� Result + &quot; &quot;
+      �� �� <b><font color="#006666">EndIf</font></b>
+      �� �� 
+      �� �� <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ReadOnly</font>
+        �� �� �� Result + &quot;R&quot;
+      �� �� <b><font color="#006666">Else</font></b>
+        �� �� �� Result + &quot; &quot;
+      �� �� <b><font color="#006666">EndIf</font></b>
+      �� �� 
+      �� �� <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_System</font>
+        �� �� �� Result + &quot;S&quot;
+      �� �� <b><font color="#006666">Else</font></b>
+        �� �� �� Result + &quot; &quot;
+      �� �� <b><font color="#006666">EndIf</font></b>
+      �� �� 
+    <b><font color="#006666">CompilerElse</font></b>
+      
+      <font color="#006666">; Dies sind die Attribute für die Mac- und Linux-Systeme.</font>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_Link</font>
+        Result + &quot;L &quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot;  &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Anwender-Attribute.</font>
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ReadUser</font>
+        Result + &quot;R&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_WriteUser</font>
+        Result + &quot;W&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ExecUser</font>
+        Result + &quot;X &quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot;  &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Group attributes.</font>
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ReadGroup</font>
+        Result + &quot;R&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_WriteGroup</font>
+        Result + &quot;W&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ExecGroup</font>
+        Result + &quot;X &quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot;  &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; All attributes.</font>
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ReadAll</font>
+        Result + &quot;R&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_WriteAll</font>
+        Result + &quot;W&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> Attributes &amp; <font color="#924B72">#PB_FileSystem_ExecAll</font>
+        Result + &quot;X&quot;
+      <b><font color="#006666">Else</font></b>
+        Result + &quot; &quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">CompilerEndIf</font></b>
+    
+    <font color="#006666">; Rückgabe des Ergebnisses.</font>
+    <b><font color="#006666">ProcedureReturn</font></b> Result
+    
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Und schließlich ersetzen Sie diese zwei Zeilen in der ListLoad Prozedur 
+<pre><font face="Courier New, Courier, mono" size="2">      <font color="#006666">; Konvertiert die Attribute vorerst in einen String.</font>
+      Attrib =<font color="#006666"> StrU</font>(<font color="#006666">Files</font>()\Attributes)
+</font></pre>
+
+mit diesen 
+<pre><font face="Courier New, Courier, mono" size="2">      <font color="#006666">; Aufrufen von AttributeString zum Konvertieren der Attribute in eine String-Darstellung.</font>
+      Attrib =<font color="#006666"> AttributeString</font>(<font color="#006666">Files</font>()\Attributes)
+</font></pre>
+
+Wenn jetzt das Programm ausgeführt wird, dann wird eine String-Darstellung anstelle 
+der Integer-Werte angezeigt. Auf einem Windows-System wird dies in etwa so aussehen 
+(vorausgesetz alle Attribute sind gesetzt): 
+<pre><font face="Courier New, Courier, mono" size="2">  ACHRS
+</font></pre>
+
+und auf den anderen zwei Systemen: 
+<pre><font face="Courier New, Courier, mono" size="2">  L RWX RWX RWX
+</font></pre>
+
+Die <a href="../reference/compilerdirectives.html">CompilerIf</a> Anweisung funktioniert sehr ähnlich 
+wie die <a href="../reference/if_endif.html">If</a> Anweisung - allerdings führt der Compiler den 
+Vergleich bereits zum Zeitpunkt des Kompilierens durch, anders als das Executable zur 
+Laufzeit. Dies bedeutet, dass wir unterschiedlichen Code einbinden können, um die 
+Datei-Attribute auf den verschiedenen Betriebssystemen zu behandeln. 
+<br>
+<br>
+Die Zeilen zwischen: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+</font></pre>
+
+und 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerElse</font></b>
+</font></pre>
+
+werden auf den Windows-Systemen kompiliert. Die Konstante <font color="#924B72">#PB_Compiler_OS</font> wird automatisch 
+von PureBasic definiert, um diese Art der Programmlogik zu erlauben. 
+<br>
+<br>
+Der andere Abschnitt wird auf den Mac- und Linux-Systemen verwendet - welche auf die 
+gleiche Art und Weise arbeiten. Wenn diese Betriebssysteme ebenfalls noch verschiedene 
+Attribut-Werte hätten, dann könnten wir <a href="../reference/compilerdirectives.html">CompilerSelect</a> 
+und <a href="../reference/compilerdirectives.html">CompilerCase</a> verwenden, um eine Drei-Wege-Entscheidung 
+durchzuführen. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerSelect</font></b> <font color="#924B72">#PB_Compiler_OS</font>
+      
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_OS_Linux</font>
+      <font color="#006666">; Code für Linux-Systeme.</font>
+      
+
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_OS_MacOS</font>
+      <font color="#006666">; Code für Mac-Systeme.</font>
+      
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_OS_Windows</font>
+      <font color="#006666">; Code für Windows-Systeme.</font>
+      
+  <b><font color="#006666">CompilerEndSelect</font></b>
+</font></pre>
+
+Die letzte Compiler-Direktive, welche wir uns hier anschauen möchten, ist: 
+<a href="../reference/compilerdirectives.html">EnableExplicit</a>. 
+<br>
+<br>
+Es gibt einen guten Grund für die Verwendung dieser Direktive. Sie verlangt, dass alle 
+<a href="../reference/variables.html">Variablen</a> vor Ihrer Verwendung ausdrücklich in irgendeiner 
+Weise definiert werden müssen (z.B. mittels <a href="../reference/define.html">Define</a>, 
+<a href="../reference/dim.html">Dim</a>, <a href="../reference/global.html">Global</a>, <a href="../reference/protected.html">Protected</a>, 
+<a href="../reference/static.html">Static</a>, etc.). Dies so zu tun, verhindert evtl. logische Fehler 
+durch falsch eingegebene Variablen-Namen, welche &quot;on-the-fly&quot; (während der Laufzeit) definiert 
+werden. Diese Art der subtilen Fehler hat keine Auswirkungen auf das Kompilieren des eines 
+Programms, kann sich aber zur Laufzeit als ein sehr ungünstiger Fehler herausstellen. 
+Die Verwendung dieser Direktive beseitigt diese Art von Problemen, da ein Compiler-Fehler 
+auftreten würde. 
+<br>
+<br>
+Zum Beispiel: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnableExplicit</font></b>
+  
+  <b><font color="#006666">Define</font></b>.l Field, FieldMax
+  
+  <font color="#006666">; ...</font>
+  
+  <b><font color="#006666">If</font></b> Field &lt; FieldMax
+    <font color="#006666">; Wenn EnableExplicit weggelassen wird, dann wird dieser Code-Abschnitt nicht</font>
+    <font color="#006666">; wie gedacht ausgeführt werden, da FieldMax gleich Null sein wird.</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_procedures.html">< Vorheriges: Strukturieren von Programmcode in Prozeduren</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_files.html">Nächstes: Lesen und Schreiben von Dateien ></a> 
+</blockquote>
+</font></body></html>

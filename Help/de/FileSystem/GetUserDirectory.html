@@ -1,0 +1,60 @@
+<html><head><title>GetUserDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetUserDirectory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>GetUserDirectory</b></font>(Typ)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Verzeichnispfad des angegebenen Verzeichnistyps zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Typ</i></td>
+<td width="90%"> 
+Der Typ des Verzeichnisses, von dem der Pfad ermittelt werden soll. 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Directory_Desktop</font>    : Desktop-Verzeichnis des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Downloads</font>  : Download-Verzeichnis des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Documents</font>  : Dokumenten-Verzeichnispfad des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Videos</font>     : Videos-Verzeichnispfad des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Musics</font>     : Musik-Verzeichnispfad des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Pictures</font>   : Bilder-Verzeichnispfad des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_Public</font>     : 'Public'-Verzeichnis des aktuell eingeloggten Anwenders
+  <font color="#924B72">#PB_Directory_ProgramData</font>: Programmdaten-Verzeichnis des aktuell eingeloggten Anwenders. 
+                             Auf Linux und OSX handelt es sich um das 'Home'-Verzeichnis - gefolgt von einem '/.', um die
+                             Möglichkeit zu haben, ein verstecktes Konfigurationsverzeichnis im 'Home User' zu erstellen.
+  <font color="#924B72">#PB_Directory_AllUserData</font>: gemeinsames Programmdatenverzeichnis (für alle Benutzer zugänglich)
+  <font color="#924B72">#PB_Directory_Programs</font>   : globaler Programmdateienpfad (kann nur lesbar sein)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den vollständigen Pfad des angegebenen Verzeichnisses zurück. 
+Dieser wird mit einem Verzeichnis-Trennzeichen <font color="#924B72">#PS</font>, <font color="#924B72">#PS$</font> ('\' auf Windows, ansonsten '/') enden. 
+Wenn der Typ nicht gefunden wird, dann wird ein leerer String zurückgegeben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Einige ausgewählte Verzeichnistypen auflisten:</font>
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Downloads = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Downloads</font>)
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Documents = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Documents</font>)
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Programs  = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Programs</font>)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getcurrentdirectory.html">GetCurrentDirectory()</a>, 
+<a href="gethomedirectory.html">GetHomeDirectory()</a>, 
+<a href="gettemporarydirectory.html">GetTemporaryDirectory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=gettemporarydirectory.html>GetTemporaryDirectory()</a> - <a href=index.html>FileSystem Inhaltsverzeichnis</a> - <a href=isdirectory.html>IsDirectory()</a> -><br><br>
+
+</body></html>

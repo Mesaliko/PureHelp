@@ -1,0 +1,68 @@
+<html><head><title>SpriteDepth</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpriteDepth()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SpriteDepth</b></font>(#Sprite)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la profondeur de couleurs d'un 
+Sprite. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le sprite à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La profondeur de couleurs du sprite, en 
+bits. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Exemple OpenScreen 32 bits&quot;)
+
+ <font color="#006666">;Sprite Cible 32 bits car l'écran est 32 bits.</font>
+<font color="#006666">CreateSprite</font>(0,100,100)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">Circle</font>(50,50,49,<font color="#006666">RGB</font>(255,255,0))
+<font color="#006666">Circle</font>(50,50,40,<font color="#006666">RGB</font>(0,255,0))
+<font color="#006666">Circle</font>(50,50,30,<font color="#006666">RGB</font>(0,255,255))
+<font color="#006666">Circle</font>(50,50,20,<font color="#006666">RGB</font>(0,0,255))
+<font color="#006666">Circle</font>(50,50,10,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Affichage de la cible</font>
+<font color="#006666">DisplaySprite</font>(0, 500, 200)
+
+ <font color="#006666">;Affichage d'un texte sur l'écran (sans sprite).</font>
+<font color="#006666">StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">DrawText</font>(50, 250, &quot;Profondeur de couleurs du sprite : &quot; +<font color="#006666"> SpriteDepth</font>(0) + &quot; bits.&quot;)
+<font color="#006666">StopDrawing</font>()   
+
+ <font color="#006666">;Maintenant que tout est calculé et affiché dans le buffer invisible,</font>
+ <font color="#006666">;On inverse les buffers pour rendre la scène visible à l'écran.</font>
+<font color="#006666">FlipBuffers</font>() 
+
+<font color="#006666">Delay</font>(5000)
+
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="spritewidth.html">SpriteWidth()</a>, <a href="spriteheight.html">SpriteHeight()</a> 
+
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=spritecollision.html>SpriteCollision()</a> - <a href=index.html>Sprite Index</a> - <a href=spriteheight.html>SpriteHeight()</a> -><br><br>
+
+</body></html>

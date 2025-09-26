@@ -1,0 +1,242 @@
+<html><head><title>Benutzung des Kommandozeilen-Compilers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Benutzung des Kommandozeilen-Compilers</font></b></p>
+
+<p><b>Einführung</b></p><blockquote>
+
+
+Der Kommandozeilen-Compiler befindet sich im Unterordner 'compilers' des PureBasic Verzeichnisses. 
+Eine einfachere Möglichkeit ist das Hinzufügen dieses Verzeichnisses zur 'PATH Variable', um von 
+überall Zugriff auf die Befehle in diesem Verzeichnis zu haben. 
+<br>
+<br>
+Es gibt zwei Compiler für PureBasic: <br>
+- 'pbcompiler' welcher Assembler-Code generiert (x86 und x64)<br>
+- 'pbcompilerc' (oder 'pbcompiler' auf Plattformen, welche das Assembler-Backend nicht unterstützen) welcher C-Code generiert 
+<br>
+<br>
+Der C-Backend Compiler ist verfügbar auf allen unterstützten Plattformen, während der ASM-Backend 
+Compiler nur auf Windows (x86, x64), Linux (x86, x64) und OS X (x64) unterstützt wird. 
+<br>
+<br>
+Der C-Backend Compiler erlaubt keine Eingabe von Assembler-Code. 
+<br>
+<br>
+Unter Windows ist eine Datei 'PureBasic-CLI.cmd' direkt im PureBasic-Stammverzeichnis verfügbar, um einfach eine 
+Befehlszeilen-Eingabeaufforderung zu öffnen und die PureBasic-Kommandozeilen-Tools zu verwenden. 
+
+</blockquote>
+<p><b>Crossplattforme Kommandozeilen-Parameter (Switch)</b></p><blockquote>
+
+
+Hinweis: Alle Kommandozeilen-Parameter, die mit '/' beginnen, sind nur auf Windows gültig (d.h. '/DEBUGGER'). 
+Wenn Sie Crossplattform-kompatibel schreiben müssen, können Sie das '-' bzw. '--' Format verwenden (d.h. '-d' bzw. '--debugger). 
+<br>
+<br>
+-h, --help, /? : zeigt einen kurzen Hilfstext über den Compiler an. <br>
+<br>
+-d, --debugger, /DEBUGGER : schaltet die Debugger Unterstützung ein. <br>
+<br>
+-cl, --console, /CONSOLE: erstellt das Executable im <a href="../console/index.html">Konsolen</a>-Format. Das Standard-Format auf Windows ist Win32. <br>
+<br>
+-pf, --purifier, /PURIFIER: schaltet den Purifier ein. Um einen Effekt zu erzielen, muss der Debugger aktiviert werden. <br>
+<br>
+-o, --output, /OUTPUT &quot;Dateiname&quot; : erstellt ein ausführbares Programm ('Standalone Executable') oder eine DLL mit 
+dem angegebenen Dateinamen im gewünschten Dateipfad. Auf MacOS X ist es möglich ein Programmpacket 
+zu erstellen, durch Hinzufügen von '.app' an den Dateinamen des Programms. Hiermit wird automatisch 
+die gesamte Verzeichnisstruktur erzeugt. <br>
+<br>
+-r, --resident, /RESIDENT &quot;Dateiname&quot; : erstellt eine Resident-Datei mit dem angegebenen Dateinamen. <br>
+<br>
+-i, --import, /IMPORT &quot;Dateiname&quot;: erstellt eine Import-Datei für die angegebene Datei. Nur ein Import/EndImport Block ist in 
+der Datei erlaubt. Die importierten Funktionen werden automatisch für jedes PureBasic Projekt geladen. <br>
+<br>
+-l or --linenumbering, /LINENUMBERING: Fügt Zeilen- und Datei-Informationen zum Executable hinzu, was das Kompilieren beträchtlich 
+verlangsamen kann. Dies ermöglicht der <a href="../onerror/index.html">OnError Library</a> die Datei und die Zeilennummer eines Fehlers zu melden. <br>
+<br>
+-q, --quiet, /QUIET: Schaltet alle unnötige Text-Ausgabe ab, sehr nützlich bei Verwendung eines anderen Editors. <br>
+<br>
+-sb, --standby, /STANDBY: Lädt den Compiler in den Speicher und wartet auf externe Befehle (Editor, Skripte...). 
+Weitere Informationen über die Verwendung dieses Flag gibt es in der Datei 'CompilerInterface.txt' im PureBasic 'SDK' Verzeichnis. <br>
+<br>
+-ir, --ignoreresident, /IGNORERESIDENT &quot;Dateiname&quot;: Lädt nicht die angegebene Resident-Datei, wenn der Compiler startet. Dies ist 
+meistens nützlich beim Updaten einer bereits existierenden Resident-Datei, weshalb diese nicht geladen werden soll. 
+<br>
+<br>
+-co, --constant,/CONSTANT Name=Wert: Erstellt die angegebene Konstante mit dem angegebenen Ausdruck. 
+Beispiel: 'pbcompiler test.pb /CONSTANT MyConstant=10'. Die Konstante <font color="#924B72">#MyConstant</font> 
+wird &quot;on-the-fly&quot; mit dem Wert 10 erstellt, bevor das Programm kompiliert wird. 
+<br>
+<br>
+-t, --thread, /THREAD: Verwendet eine <a href="../thread/index.html">threadsichere</a> Laufzeitumgebung für Strings und allgemeine Routinen. 
+<br>
+<br>
+-s, --subsystem, /SUBSYSTEM &quot;Name&quot;: Verwendet das angegebene SubSystem, um ein Set an internen Funktionen zu ersetzen. 
+Beim Namen des Subsystems wird die Groß-/Kleinschreibung nicht beachtet. 
+Für weitere Informationen siehe das Kapitel <a href="../reference/subsystems.html">Subsysteme</a>. 
+<br>
+<br>
+Jeder kann sein eigenes Sub-System hinzufügen, indem die benötigten Verzeichnisse im 'purebasic/subsystems/' 
+Ordner erstellt werden. Standardmäßig kann OSX das &quot;Carbon&quot; Sub-System verwenden (Cocoa ist die Grundeinstellung). 
+<br>
+<br>
+-k, --check,/CHECK: Überprüft nur den Syntax, erstellt oder startet jedoch kein Executable. <br>
+<br>
+-z, --optimizer, /OPTIMIZER: aktiviert den Code-Optimierer. <br>
+<br>
+-c, --commented, /COMMENTED : erstellt eine kommentierte 'purebasic.asm' oder 'purebasic.c' Ausgabedatei beim Erstellen des Executable. 
+Diese Datei kann später mit der '--reasm' Option re-assembliert werden, wenn die notwendigen Modifikationen erfolgt sind. <br>
+Diese Option ist nur für fortgeschrittene Programmierer bestimmt. <br>
+<br>
+-ra, --reasm, /REASM: re-assembliert die 'purebasic.asm' oder 'purebasic.c' Datei in ein Executable. 
+Dies ermöglicht die Verwendung der '--commented' Option, das Modifizieren der generierten Ausgabe und das erneute Erstellen des Executable. <br>
+Diese Option ist nur für fortgeschrittene Programmierer bestimmt. <br>
+<br>
+-pp, --preprocess, /PREPROCESS &quot;Dateiname&quot;: Vorverarbeitet (&quot;preprocess&quot;) den Quellcode und schreibt die 
+Ausgabe in die angegebene Datei &quot;Dateiname&quot;. Die verarbeitete Datei ist eine einzelne 
+Datei mit allen Makros erweitert, Compiler-Direktiven behandelt und Mehrzeiligkeit 
+aufgehoben. Dies ermöglicht eine einfachere Analyse (&quot;parsen&quot;) einer PureBasic 
+Quellcode-Datei, da alles erweitert und in einem &quot;flachen&quot; Dateiformat verfügbar ist. 
+Standardmäßig sind keine Kommentare enthalten, aber das Flag /COMMENTED kann verwendet 
+werden, um den unveränderten Quellcode als Kommentare zu haben und die Verarbeitung 
+der Kommentare zu erlauben. Die vorverarbeitete (&quot;preprocessed&quot;) Datei kann wie jede 
+andere PureBasic Quellcode-Datei erneut kompiliert werden, um das endgültige Executable 
+zu erstellen. 
+<br>
+-ls, --liststructures, /LISTSTRUCTURES: erstellt eine Datei mit allen dem Compiler bekannten integrierten Strukturen. 
+Der Dateiname kann mit '--output' angegeben werden. <br>
+<br>
+-lf, --listfunction, /LISTFUNCTIONS: erstellt eine Datei mit allen dem Compiler bekannten eingebauten PureBasic-Befehlen. 
+Der Dateiname kann mit '--output' angegeben werden. <br>
+<br>
+-li, --listinterfaces, /LISTINTERFACES: erstellt eine Datei mit allen dem Compiler bekannten integrierten Interfaces. 
+Der Dateiname kann mit '--output' angegeben werden. <br>
+<br>
+-qs, --querystructure, /QUERYSTRUCTURE &quot;name&quot;: erstellt eine Datei mit der Struktur-Definition. 
+Der Dateiname kann mit '--output' angegeben werden. <br>
+<br>
+-g, --language, /LANGUAGE \&quot;language\&quot;: verwendet die spezifische Sprache für die Compiler - Fehlermeldungen. <br>
+<br>
+-v, --version, /VERSION: Zeigt die Compiler-Version an. <br>
+<br>
+<b>Beispiel:</b> 
+
+<pre><font face="Courier New, Courier, mono" size="2">  CLI&gt; pbcompiler sourcecode.pb
+</font></pre>
+
+Der Compiler kompiliert den Sourcecode und führt ihn aus. <br>
+<br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  CLI&gt; pbcompiler sourcecode.pb  --debugger
+</font></pre>
+
+Der Compiler kompiliert den Sourcecode und führt ihn mit aktiviertem Debugger aus. 
+
+<br>
+<br>
+
+</blockquote>
+<p><b>Windows spezifische Kommandozeilen-Parameter</b></p><blockquote>
+
+
+<br>
+/ICON &quot;IconName.ico&quot; : fügt das angegebene Icon zum Executable hinzu. <br>
+<br>
+/DLL: die Ausgabedatei wird eine <a href="../reference/dll.html">DLL</a>. <br>
+;<br>
+;/XP: Fügt die Unterstützung für Windows XP-Themen zum Executable hinzu. <br>
+<br>
+/MMX, /3DNOW, /SSE oder /SSE2: Erstellt ein Prozessor-spezifisches Executable. Dies bedeutet, wenn eine 
+prozessorspezifische Routine verfügbar ist, wird diese für das zu erstellende Executable genutzt. Deshalb 
+wird dieses Executable nur auf Computern mit dieser Art CPU korrekt laufen. <br>
+<br>
+/DYNAMICCPU: Erstellt ein Executable, welches alle verfügbaren Prozessor-spezifischen Routinen beinhaltet. 
+Wenn das Programm dann gestartet wird, ermittelt es den Prozessor-Typ und wählt dann die am besten geeigneten 
+Routinen zur Benutzung. Dies resultiert in einem größerem Executable, jedoch auch im schnellstmöglichen Programm. 
+<br>
+<br>
+/RESOURCE &quot;Dateiname&quot;: Fügt eine Windows Ressource-Datei (.rc) zum/zur erstellten Executable oder DLL hinzu. Dies 
+sollte keine kompilierte Ressource-Datei sein, sondern eine Ascii-Datei mit enthaltenen Anweisungen. Es kann 
+nur eine Ressource angegeben werden, falls nötig kann diese Datei jedoch noch andere Ressource-Skripte einbinden. 
+<br>
+<br>
+/LINKER &quot;ResponseDatei&quot;: Gibt eine Datei an, welche direkt an den Linker zu übergebende Befehle enthält. 
+Unter Windows verwendet PureBasic den PellesC Linker (polink), weitere Informationen über die 
+möglichen Optionen finden Sie in der zugehörigen Dokumentation. 
+<br>
+<br>
+Die folgenden zwei Compiler-Optionen werden für das Erstellen von Programmen benötigt, welche auf 
+dem Microsoft Vista OS oder darüber (Windows 7/8/10) laufen sollen. Beides sind Optionen für die eingebundene Manifest-Datei, 
+daher werden sie auf älteren Windows-Versionen ignoriert. 
+Ohne dass eine dieser Optionen gesetzt ist, wird das Executable als &quot;normaler Anwender&quot; gestartet, 
+jedoch mit eingeschalteter Virtualisierung (d.h. Registry- und Datei-Umleitung). 
+Es ist empfehlenswert, die /USER Option zu verwenden, um die Virtualisierung aller Programme zu deaktivieren, 
+welche den Standardbenutzer-Privilegien entsprechen, da dies nur der Kompatibilität älterer Programme dient. 
+Diese Optionen sind auch in den <a href="../reference/ide_compiler.html">IDE Compiler Optionen</a> verfügbar. 
+<br>
+<br>
+/ADMINISTRATOR: Wird das Programm veranlassen, zum Start die Administrator-Privilegien anzufordern. 
+Das Programm wird nicht ohne diese laufen. Diese Option wird benötigt. Hinweis: Sie können mit diesem 
+Flag das Programm auch <a href="../reference/ide_debugger.html">debuggen</a>, jedoch nur mit dem eigenständigen 
+Debugger (da dieser auch im &quot;Elevated&quot; Modus laufen muss). 
+<br>
+<br>
+/USER: Das Programm wird als der Benutzer laufen, welcher es gestartet hat. Virtualisierung für das 
+Executable ist ausgeschalten. 
+<br>
+/DPIAWARE: DPI-Unterstützung für das Executable einschalten. 
+<br>
+<br>
+/DLLPROTECTION: Aktiviert den 'DLL-Preloading'-Schutz für das Executable. Es verhindert, dass System-DLLs 
+zunächst im Programmverzeichnis statt im System32-Verzeichnis des Windows-Betriebssystems gesucht werden. 
+<br>
+<br>
+/UCRT: Verwendet beim Erstellen der ausführbaren Datei oder DLL die dynamische universelle CRT. Dies wird beim Erstellen 
+einer ausführbaren Datei oder DLL empfohlen, die ältere Windows-Versionen vor Windows 10 nicht unterstützen muss. Die 
+resultierende Executable-Datei oder DLL ist kleiner und erhält automatische Sicherheitsfixes vom CRT, wenn Microsoft sie 
+aktualisiert. Diese Option ist unter PureBasic für Windows arm64 immer aktiviert. 
+<br>
+<br>
+<b>Beispiel:</b> 
+
+<pre><font face="Courier New, Courier, mono" size="2">  CLI&gt; pbcompiler &quot;C:\Project\Source\DLLSource.pb&quot; /EXE &quot;C:\Project\project.dll&quot; /DLL
+</font></pre>
+
+Der Compiler kompiliert den Sourcecode (hier mit vollständigem Pfad) und erstellt die DLL &quot;project.dll&quot; im angegebenen Verzeichnis. 
+<br>
+<br>
+
+</blockquote>
+<p><b>Linux spezifische Kommandozeilen-Parameter</b></p><blockquote>
+
+
+-so oder --sharedobject &quot;Dateiname&quot;: Erstellt eine dynamische Library (&quot;shared object&quot;). <br>
+<br>
+-mmx, -3dnow, -sse oder -sse2: erstellt ein Prozessor-spezifisches Executable. Dies bedeutet, wenn eine 
+prozessorspezifische Routine verfügbar ist, wird diese für das zu erstellende Executable genutzt. Deshalb 
+wird dieses Executable nur auf Computern mit dieser Art CPU korrekt laufen. <br>
+<br>
+-dc oder --dynamiccpu: erstellt ein Executable, welches alle verfügbaren Prozessor-spezifischen Routinen beinhaltet. 
+Wenn das Programm dann gestartet wird, ermittelt es den Prozessor-Typ und wählt dann die am besten geeigneten 
+Routinen zur Benutzung. Dies resultiert in einem größerem Executable, jedoch auch im schnellstmöglichen Programm. 
+
+<br>
+<br>
+
+</blockquote>
+<p><b>OS X  spezifische Kommandozeilen-Parameter</b></p><blockquote>
+
+
+-n oder --icon &quot;IconName.icns&quot; : fügt das angegebene Icon zum Executable hinzu. <br>
+<br>
+-dl oder --dylib &quot;Dateiname&quot;: Erstellt eine dynamische Library (&quot;dylib object&quot;). <br>
+<br>
+-f oder --front: bringt den gestarteten Prozess nach vorn. <br>
+<br>
+-ibp oder --ignorebundlepath: verwendet nicht den &quot;Bundle Path&quot; als aktuelles Verzeichnis. 
+
+<br>
+<br>
+
+</blockquote>
+</font></body></html>

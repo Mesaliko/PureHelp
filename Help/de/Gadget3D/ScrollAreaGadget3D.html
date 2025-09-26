@@ -1,0 +1,80 @@
+<html><head><title>ScrollAreaGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScrollAreaGadget3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ScrollAreaGadget3D</b></font>(#Gadget3D, x, y, Breite, Höhe, ScrollBereichBreite, ScrollBereichHöhe, ScrollSchritt)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein ScrollArea-Gadget (scrollbarer Bereich) innerhalb der aktuellen Gadgetliste. 
+<br>
+<br>
+Es ist sehr nützlich, wenn ein Gadget zu groß ist, um in die Fenster-Dimensionen zu passen. 
+In diesem Fall kann es in den ScrollArea-Bereich gelegt werden. Das gesamte Scrolling wird automatisch 
+vom Gadget verwaltet. Dies ist ein Container-Gadget und dafür gedacht, ein oder mehrere 
+Gadgets innerhalb seines Scroll-Bereiches zu haben. Sobald dieses Gadget erstellt wurde, 
+werden alle nachfolgenden Gadgets innerhalb des ScrollArea-Bereiches erstellt. Sobald alle 
+benötigten Gadgets erstellt wurden, muss <a href="closegadgetlist3d.html">CloseGadgetList3D()</a> aufgerufen werden, um 
+zur vorherigen Gadgetliste zurückzukehren. <a href="opengadgetlist3d.html">OpenGadgetList3D()</a> kann später verwendet 
+werden, um weitere Gadgets während des Programmablaufs (&quot;on-the-fly&quot;) zum Scroll-Bereich 
+hinzuzufügen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen 3D-Gadgets. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Zahl 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>ScrollBereichBreite, ScrollBereichHöhe</i></td>
+<td> 
+Die Abmessungen des im Gadget enthaltenen scrollbaren Bereichs. 
+Diese können auch kleiner als die äußeren Abmessungen sein, in diesem Fall wird das 
+Scrolling deaktiviert. 
+
+</td></tr>
+<tr><td><i>ScrollSchritt (optional)</i></td>
+<td> 
+Die Anzahl an Pixel, um die beim Drücken der Schieberegler-Pfeile gescrollt wird. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall einen Wert ungleich Null zurück, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Gadget3D Parameter verwendet wurde, dann enthält bei Erfolg der Rückgabewert 
+die automatisch generierte Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die folgenden Funktionen können verwendet werden, um auf das ScrollAreaGadget zuzugreifen: 
+<br>
+<br>
+<a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a>: mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollArea3D_InnerWidth</font>  : gibt die Breite (in Pixel) des enthaltenen scrollbaren Bereichs zurück.
+  <font color="#924B72">#PB_ScrollArea3D_InnerHeight</font> : gibt die Höhe (in Pixel) des enthaltenen scrollbaren Bereichs zurück.
+  <font color="#924B72">#PB_ScrollArea3D_X</font>           : gibt die aktuelle horizontale Scroll-Position (in Pixel) zurück.
+  <font color="#924B72">#PB_ScrollArea3D_Y</font>           : gibt die aktuelle vertikale Scroll-Position (in Pixel) zurück.
+</font></pre>
+<a href="setgadgetattribute3d.html">SetGadgetAttribute3D()</a>: mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollArea3D_InnerWidth</font>  : ändert die Breite (in Pixel) des enthaltenen scrollbaren Bereichs.
+  <font color="#924B72">#PB_ScrollArea3D_InnerHeight</font> : ändert die Höhe (in Pixel) des enthaltenen scrollbaren Bereichs.
+  <font color="#924B72">#PB_ScrollArea3D_X</font>           : ändert die aktuelle horizontale Scroll-Position (in Pixel).
+  <font color="#924B72">#PB_ScrollArea3D_Y</font>           : ändert die aktuelle vertikale Scroll-Position (in Pixel).
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=resizegadget3d.html>ResizeGadget3D()</a> - <a href=index.html>Gadget3D Inhaltsverzeichnis</a> - <a href=scrollbargadget3d.html>ScrollBarGadget3D()</a> -><br><br>
+
+</body></html>

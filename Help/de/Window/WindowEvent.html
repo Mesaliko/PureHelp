@@ -1,0 +1,229 @@
+<html><head><title>WindowEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowEvent()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ereignis = <font color="#006666"><b>WindowEvent</b></font>()  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Überprüft, ob in irgendeinem der geöffneten Fenster ein Ereignis stattfand. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Das nächste Ereignis aus dem &quot;Ereignis-Queue&quot; (Warteschlange mit Ereignissen) 
+bzw. Null, wenn es keine weiteren Ereignisse gibt. 
+Anders als <a href="waitwindowevent.html">WaitWindowEvent()</a> wartet die Funktion nicht auf das nächste 
+Ereignis - sie kehrt immer sofort zurück. 
+<a href="event.html">Event()</a> kann verwendet werden, um diesen Wert &quot;wiederherzustellen&quot;. 
+<br>
+<br>
+Dies macht sie nützlich für Ereignis-Warteschlangen von Fenstern, wo - ohne dass ein Ereignis auftritt 
+(z.B. bei <a href="../network/index.html">Network</a> Transaktionen) - andere Prozesse ausgeführt werden müssen 
+und daher <a href="waitwindowevent.html">WaitWindowEvent()</a> nicht verwendet werden kann. 
+<br>
+<br>
+Sie muss mit Vorsicht benutzt werden, da sie bei fortlaufender Verwendung - anders 
+als <a href="waitwindowevent.html">WaitWindowEvent()</a> - anderen Programmen während des 
+Wartens auf ein Ereignis keine Rechenzeit zur Verfügung stellt und damit alle 
+CPU-Power verbraucht. In diesem Fall sollte innerhalb der Warteschlange entweder 
+<a href="../system/delay.html">Delay()</a> oder <a href="waitwindowevent.html">WaitWindowEvent()</a> 
+mit einem niedrigen Timeout-Wert verwendet werden. 
+<br>
+<br>
+Um die Fenster-Nummer, in dem das Ereignis stattfand, bestimmen zu können, müssen 
+Sie die <a href="eventwindow.html">EventWindow()</a> Funktion benutzen. 
+<br>
+<br>
+Mögliche Ereignisse sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Event_Menu</font>            : ein <a href="../menu/index.html">Menü</a> wurde ausgewählt
+  <font color="#924B72">#PB_Event_Gadget</font>          : ein <a href="../gadget/index.html">Gadget</a> wurde gedrückt
+  <font color="#924B72">#PB_Event_SysTray</font>         : ein Icon im <a href="../systray/index.html">Systray</a> wurde angeklickt
+  <font color="#924B72">#PB_Event_Timer</font>           : ein <a href="addwindowtimer.html">Timer</a> hat seine Zeitbeschränkung (Timeout) erreicht
+  <font color="#924B72">#PB_Event_CloseWindow</font>     : das Schließgadget vom Fenster wurde gedrückt
+  <font color="#924B72">#PB_Event_Repaint</font>         : der Fensterinhalt wurde zerstört und muss neu gezeichnet werden (nützlich
+                              für <a href="../2ddrawing/index.html">2D Grafik-Operationen</a>) 
+  <font color="#924B72">#PB_Event_SizeWindow</font>      : das Fenster wurde in der Größe verändert
+  <font color="#924B72">#PB_Event_MoveWindow</font>      : das Fenster wurde verschoben
+  <font color="#924B72">#PB_Event_MinimizeWindow</font>  : das Fenster wurde minimiert
+  <font color="#924B72">#PB_Event_MaximizeWindow</font>  : das Fenster wurde maximiert
+  <font color="#924B72">#PB_Event_RestoreWindow</font>   : das Fenster wurde auf die normale Größe zurückgesetzt (sowohl von der
+                              minimalen als auch maximalen Größe)
+  <font color="#924B72">#PB_Event_ActivateWindow</font>  : das Fenster wurde aktiviert (hat den Fokus erhalten)
+  <font color="#924B72">#PB_Event_DeactivateWindow</font>: das Fenster wurde deaktiviert (hat den Fokus verloren)
+  <font color="#924B72">#PB_Event_WindowDrop</font>      : eine <a href="../dragdrop/index.html">Drag & Drop</a> Operation wurde auf einem Fenster abgeschlossen
+  <font color="#924B72">#PB_Event_GadgetDrop</font>      : eine <a href="../dragdrop/index.html">Drag & Drop</a> Operation wurde auf einem <a href="../gadget/index.html">Gadget</a> abgeschlossen
+  <font color="#924B72">#PB_Event_RightClick</font>      : ein rechter Mausklick hat auf dem Fenster stattgefunden. Dies kann nützlich
+                              sein, um ein <a href="../menu/createpopupmenu.html">Popup-Menü</a> anzuzeigen.
+  <font color="#924B72">#PB_Event_LeftClick</font>       : ein linker Mausklick hat auf dem Fenster stattgefunden
+  <font color="#924B72">#PB_Event_LeftDoubleClick</font> : ein linker Maus-Doppelklick hat auf dem Fenster stattgefunden
+</font></pre>
+Ein einfaches Beispiel zum Event-Handling finden Sie in der <a href="waitwindowevent.html">WaitWindowEvent()</a> Beschreibung. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Nach einem <font color="#924B72">#PB_Event_WindowDrop</font> oder <font color="#924B72">#PB_Event_GadgetDrop</font> Ereignis können 
+die Ereignis-Funktionen der <a href="../dragdrop/index.html">Drag & Drop Library</a> verwendet werden, um die abgelegten 
+(&quot;dropped&quot;) Daten zu untersuchen und zu lesen. 
+<br>
+<br>
+<b>Wichtig:</b> Eine Fenster-Ereignis-Warteschlange sollte nicht in einem <a href="../thread/index.html">Thread</a> 
+verarbeitet werden, da es auf OS X und Linux einige Einschränkungen gibt. Ein Debugger-Fehler 
+wird ausgelöst. 
+<br>
+<br>
+Der beste Weg zum Handhaben einer WindowEvent()-Warteschlange sieht wie folgt aus: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Repeat</font></b> 
+    Event =<font color="#006666"> WindowEvent</font>() 
+
+    <b><font color="#006666">If</font></b> Event    <font color="#006666">; ein Ereignis befindet sich in der &quot;Queue&quot; (Warteschlange), also arbeiten wir es ab</font>
+      .... 
+    <b><font color="#006666">Else</font></b>  
+<font color="#006666">      Delay</font>(1)  <font color="#006666">; kein Ereignis aufgetreten, lassen wir also anderen Programmen auch etwas CPU-Zeit zukommen! </font>
+    <b><font color="#006666">EndIf</font></b> 
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+<b>Wichtig:</b> Das 'Delay' sollte nicht nach jedem Ereignis eingefügt werden, denn wenn viele 
+Ereignisse (wie Refresh, Gagdget Updates, etc.) auftreten, wird die Anwendung 
+zwischen jedem Ereignis warten. Deshalb muss das Delay dann 
+eingefügt werden, wenn keine Ereignisse empfangen werden. Andere (empfohlene) 
+Möglichkeiten bestehen darin, <a href="waitwindowevent.html">WaitWindowEvent()</a> mit einem niedrigen Timeout-Wert 
+zu verwenden oder einen Timer mittels  <a href="addwindowtimer.html">AddWindowTimer()</a>() zu definieren. 
+<br>
+<br>
+<b>Wichtig:</b> Wenn Sie irgendwo ein <a href="../screen/flipbuffers.html">FlipBuffers()</a> in Ihrem Code verwenden, dann ist das 
+'Delay(1)' nicht notwendig. 
+
+</blockquote><p><b>Beispiel:</b> Nr. 1 mit Gadget</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 600, 100, &quot;Position of the mouse on the window: &quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget</font>(0, 10, 6, 200, 20, &quot;&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event &lt;&gt; 0  <font color="#006666">; Alle Ereignisse werden behandelt, so dass wir die Koordinaten der Maus anzeigen können</font>
+<font color="#006666">        SetWindowTitle</font>(0, &quot;Position of the mouse on the window: &quot; +<font color="#006666"> Str</font>(<font color="#006666">WindowMouseX</font>(0)) + &quot;,&quot; +<font color="#006666"> Str</font>(<font color="#006666">WindowMouseX</font>(0))) 
+      <b><font color="#006666">Else</font></b>
+      
+<font color="#006666">      Delay</font>(1)  <font color="#006666">; Ohne ein FlipBuffers(), Delay() gibt die CPU für das Multitasking frei</font>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Nr. 2 mit Gadget</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 30, &quot;Position of the mouse on the desktop&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget</font>(0, 10, 6, 200, 20, &quot;&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = 0  <font color="#006666">; Keine Ereignisse in der Warteschlange mehr, damit können wir die Koordinaten der Maus anzeigen</font>
+<font color="#006666">        SetGadgetText</font>(0, &quot;Coordinates: &quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopMouseX</font>())+&quot;,&quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopMouseY</font>()))
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      Delay</font>(20)  <font color="#006666">; Ohne ein FlipBuffers(), Delay() gibt die CPU für das Multitasking frei</font>
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Ohne Gadgets (allgemeiner Fall)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;Einige Variablen</font>
+  BallX = 400
+  BallY = 200
+  BallSpeedY.f = 5
+  Gravitation.f = 2
+
+  <font color="#006666">;Initialisierung</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>()
+<font color="#006666">    InitKeyboard</font>()
+<font color="#006666">    InitMouse</font>()
+  <b><font color="#006666">EndIf</font></b>
+
+  <font color="#006666">;Fenster</font>
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 800, 600, &quot;WindowEvent&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>|<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, 800, 600)
+<font color="#006666">  SetFrameRate</font>(30)
+
+  <font color="#006666">;Hintergrund</font>
+  Ground =<font color="#006666"> CreateSprite</font>(<font color="#924B72">#PB_Any</font>, 800, 30)
+<font color="#006666">  StartDrawing</font>(<font color="#006666">SpriteOutput</font>(Ground))
+<font color="#006666">  Box</font>(0,0,800,30,<font color="#006666">RGB</font>(128, 0, 0))
+<font color="#006666">  StopDrawing</font>()
+
+  <font color="#006666">;Ball</font>
+  Ball =<font color="#006666"> CreateSprite</font>(<font color="#924B72">#PB_Any</font>, 16, 16)
+<font color="#006666">  StartDrawing</font>(<font color="#006666">SpriteOutput</font>(Ball))
+<font color="#006666">  Box</font>(0,0,16,16,<font color="#006666">RGB</font>(135, 206, 235))
+<font color="#006666">  Circle</font>(8,8,8,<font color="#006666">RGB</font>(255, 255, 0))
+<font color="#006666">  StopDrawing</font>()
+
+  <font color="#006666">;Erstelle eines Sprites</font>
+  Image =<font color="#006666"> CreateImage</font>(<font color="#924B72">#PB_Any</font>, 8, 8, 24,<font color="#006666"> RGB</font>(255, 255, 255))
+  *Buffer=<font color="#006666">EncodeImage</font>(Image ,<font color="#924B72">#PB_ImagePlugin_BMP</font>)
+  Gauge =<font color="#006666"> CatchSprite</font>(<font color="#924B72">#PB_Any</font>, *Buffer)
+
+  
+  <font color="#006666">;Hauptschleife</font>
+  <b><font color="#006666">Repeat</font></b> 
+  
+    <b><font color="#006666">Repeat</font></b>
+    <font color="#006666">;Fenster-Ereignisse</font>
+    <font color="#006666">;====================================</font>
+    <font color="#006666">;Versuche alle Möglichkeiten, aber nur eine zu einem Zeitpunkt</font>
+    Event =<font color="#006666"> WindowEvent</font>()    <font color="#006666">; Animation</font>
+    <font color="#006666">;Event = WaitWindowEvent()  ; Animation wird blockiert</font>
+    <font color="#006666">;Event = WaitWindowEvent(100) ; Animation - aber jedes Mal, wenn ein Ereignis wie z.B. eine Mausbewegung eintritt,</font>
+                                  <font color="#006666">; wird die Animation für 100 ms angehalten</font>
+
+    <b><font color="#006666">Select</font></b> Event   
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndSelect</font></b> 
+    <b><font color="#006666">Until</font></b> Event=0
+    
+<font color="#006666">    FlipBuffers</font>() <font color="#006666">; ==&gt; Mit WindowEvent(): FlipBuffers() gibt die CPU für das Multitasking frei,</font>
+                  <font color="#006666">;     sodass Delay(1) nicht erforderlich ist.</font>
+<font color="#006666">    ClearScreen</font>(<font color="#006666">RGB</font>(135, 206, 235))
+    
+<font color="#006666">    ExamineKeyboard</font>() <font color="#006666">;Keyboard</font>
+     
+<font color="#006666">    DisplaySprite</font>(Gauge, 50, 570-BallY) <font color="#006666">;Anzeige des Sprites</font>
+<font color="#006666">    ZoomSprite</font>(Gauge,  20, 570)
+     
+<font color="#006666">    DisplaySprite</font>(Ground, 0, 570) <font color="#006666">;Anzeige des Hintergrunds</font>
+    
+<font color="#006666">    DisplaySprite</font>(Ball, BallX, BallY) <font color="#006666">;Anzeigen des Balls</font>
+    
+    <font color="#006666">;Ball-Bewegung</font>
+    BallSpeedY = BallSpeedY + Gravitation 
+    BallY = BallY + BallSpeedY
+    
+    <font color="#006666">;Management der Kollision der Kugel mit dem Boden</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">SpriteCollision</font>(Ball, BallX, BallY+16, Ground, 0, 570)
+    BallY= 554
+    BallSpeedY = -BallSpeedY
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="waitwindowevent.html">WaitWindowEvent()</a>, <a href="event.html">Event()</a>, <a href="eventwindow.html">EventWindow()</a>, 
+<a href="eventgadget.html">EventGadget()</a>, <a href="eventmenu.html">EventMenu()</a>, 
+<a href="eventtimer.html">EventTimer()</a>, <a href="eventdata.html">EventData()</a>, 
+<a href="eventtype.html">EventType()</a>, <a href="postevent.html">PostEvent()</a>, 
+<a href="bindevent.html">BindEvent()</a>, <a href="unbindevent.html">UnbindEvent()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=windowbounds.html>WindowBounds()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=windowheight.html>WindowHeight()</a> -><br><br>
+
+</body></html>

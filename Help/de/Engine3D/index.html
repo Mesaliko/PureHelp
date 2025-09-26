@@ -1,0 +1,139 @@
+<html><head><title>Engine3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - Engine3D</font></b></p>
+
+<p><b>Einleitung</b></p><blockquote>
+
+PureBasic bietet einfachen Zugriff auf eine sehr mächtige OpenSource 3D-Engine 
+genannt OGRE. Diese Entscheidung wurde getroffen, weil wir das Rad nicht noch einmal 
+erfinden wollten. Als wir die Code-Qualität von OGRE sahen, waren wir der Meinung, 
+dass diese Engine einen beträchtlichen Beitrag zur PureBasic 3D Bibliothek leisten würde. 
+<br>
+<br>
+OGRE befindet sich in ständiger 
+Weiterentwicklung und wird sicherlich bald eine sehr fortschrittliche 
+Engine. Ihre Community wächst mehr und mehr und viele Werkzeuge (Blender, 
+Lightwave und 3DS Max Exporter, Terrain Manager etc.) sind verfügbar, um das Beste 
+aus dieser Engine herauszuholen. Weitere Informationen über OGRE sind auf der 
+<a href="http://www.ogre3d.org">OGRE Webseite</a> verfügbar. 
+Die OGRE-Lizenzdatei kann <a href="../reference/license_engine3d.html">hier</a> eingesehen werden 
+(lesen Sie mehr in den <a href="http://www.ogre3d.org/licensing/licensing-faq">Licensing FAQ</a>). 
+<br>
+<br>
+Hinweis: Wenn Sie in Ihren Projekten die 3D-Engine von PureBasic verwenden 
+und Ihr erstelltes Executable weitergeben möchten, müssen Sie die Engine3D.dll 
+aus dem PureBasic/Compilers Verzeichnis in das Hauptverzeichnis Ihres Projekts kopieren. 
+<br>
+
+<p><b>Räumliche Konventionen</b></p><blockquote>
+
+OGRE verwendet die folgenden räumlichen Konventionen: <br>
+Der räumliche Bezug von OGRE ist direkt und die Regel der &quot;drei Finger der rechten Hand&quot; 
+erlaubt es uns, einfach die Position der Achsen X, Y und Z in der 3D-Welt zu finden. 
+<p><img src="../HelpPictures/ogre_axes.png"></p>
+<u>Achtung, die Z-Achse ist Ihnen zugewandt.</u> 
+<br>
+<br>
+<b>Definition von: Roll, Pitch und Yaw:</b> <br>
+- &quot;Pitch&quot; (auch Nick-Wert oder Neigung) ist eine Drehung um die Achse x. <br>
+- &quot;Yaw&quot; (auch Gier-Wert oder Gierung) ist eine Drehung um die y-Achse. <br>
+- &quot;Roll&quot; (auch Roll-Wert) ist eine Drehung um die z-Achse. 
+<br>
+<br>
+<b>Positive Richtung:</b> <br>
+Die positive Richtung für eine Drehung um die Achse. <br>
+Daumen in der Richtung der Achse wie angedeutet, ergibt die Richtung der Finger die positive 
+Drehrichtung. <br>
+(Verwenden Sie Ihre rechte Hand). 
+<p><img src="../HelpPictures/ogre_directrotation.png"></p>
+<br>
+<br>
+
+</blockquote>
+<p><b>Wichtiger Hinweis:</b></p><blockquote>
+
+In allen bei PureBasic mitgelieferten 3D-Bibliotheken sind alle Variablen und Rückgabewerte 
+vom Typ 'Float' (Fließkommazahl), außer bei IDs und Indexes, auch wenn dies nicht durch ein 
+'.f' angegeben wird. 
+<br>
+<br>
+
+</blockquote><p><b>Befehlsübersicht</b><blockquote>
+<a href="add3darchive.html">Add3DArchive</a><br>
+<a href="ambientcolor.html">AmbientColor</a><br>
+<a href="antialiasingmode.html">AntialiasingMode</a><br>
+<a href="bodypick.html">BodyPick</a><br>
+<a href="checkobjectvisibility.html">CheckObjectVisibility</a><br>
+<a href="convertlocaltoworldposition.html">ConvertLocalToWorldPosition</a><br>
+<a href="convertworldtolocalposition.html">ConvertWorldToLocalPosition</a><br>
+<a href="createwater.html">CreateWater</a><br>
+<a href="enableworldcollisions.html">EnableWorldCollisions</a><br>
+<a href="enableworldphysics.html">EnableWorldPhysics</a><br>
+<a href="engine3dstatus.html">Engine3DStatus</a><br>
+<a href="examineworldcollisions.html">ExamineWorldCollisions</a><br>
+<a href="fetchorientation.html">FetchOrientation</a><br>
+<a href="firstworldcollisionentity.html">FirstWorldCollisionEntity</a><br>
+<a href="fog.html">Fog</a><br>
+<a href="getw.html">GetW</a><br>
+<a href="getworldattribute.html">GetWorldAttribute</a><br>
+<a href="getx.html">GetX</a><br>
+<a href="gety.html">GetY</a><br>
+<a href="getz.html">GetZ</a><br>
+<a href="initengine3d.html">InitEngine3D</a><br>
+<a href="inputevent3d.html">InputEvent3D</a><br>
+<a href="loadworld.html">LoadWorld</a><br>
+<a href="mousepick.html">MousePick</a><br>
+<a href="mouseraycast.html">MouseRayCast</a><br>
+<a href="nextworldcollision.html">NextWorldCollision</a><br>
+<a href="normalx.html">NormalX</a><br>
+<a href="normaly.html">NormalY</a><br>
+<a href="normalz.html">NormalZ</a><br>
+<a href="parse3dscripts.html">Parse3DScripts</a><br>
+<a href="pickx.html">PickX</a><br>
+<a href="picky.html">PickY</a><br>
+<a href="pickz.html">PickZ</a><br>
+<a href="pitch.html">Pitch</a><br>
+<a href="pointpick.html">PointPick</a><br>
+<a href="raycast.html">RayCast</a><br>
+<a href="raycollide.html">RayCollide</a><br>
+<a href="raypick.html">RayPick</a><br>
+<a href="renderworld.html">RenderWorld</a><br>
+<a href="roll.html">Roll</a><br>
+<a href="secondworldcollisionentity.html">SecondWorldCollisionEntity</a><br>
+<a href="setguitheme3d.html">SetGUITheme3D</a><br>
+<a href="setorientation.html">SetOrientation</a><br>
+<a href="setrenderqueue.html">SetRenderQueue</a><br>
+<a href="setworldattribute.html">SetWorldAttribute</a><br>
+<a href="showgui.html">ShowGUI</a><br>
+<a href="skybox.html">SkyBox</a><br>
+<a href="skydome.html">SkyDome</a><br>
+<a href="worldcollisionappliedimpulse.html">WorldCollisionAppliedImpulse</a><br>
+<a href="worldcollisioncontact.html">WorldCollisionContact</a><br>
+<a href="worldcollisionnormal.html">WorldCollisionNormal</a><br>
+<a href="worlddebug.html">WorldDebug</a><br>
+<a href="worldgravity.html">WorldGravity</a><br>
+<a href="worldshadows.html">WorldShadows</a><br>
+<a href="yaw.html">Yaw</a><br>
+</blockquote></p>
+
+<p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/ConvertLocalToWorldPosition.pb.html">ConvertLocalToWorldPosition.pb</a>
+<br><a href="../Examples/ConvertWorldToLocalPosition.pb.html">ConvertWorldToLocalPosition.pb</a>
+<br><a href="../Examples/MousePick.pb.html">MousePick.pb</a>
+<br><a href="../Examples/MouseRayCast.pb.html">MouseRayCast.pb</a>
+<br><a href="../Examples/PointPick.pb.html">PointPick.pb</a>
+<br><a href="../Examples/PointPick_2D3D.pb.html">PointPick_2D3D.pb</a>
+<br><a href="../Examples/RayPick.pb.html">RayPick.pb</a>
+<br><a href="../Examples/SetOrientation.pb.html">SetOrientation.pb</a>
+<br><a href="../Examples/SkyBox.pb.html">SkyBox.pb</a>
+<br><a href="../Examples/Water.pb.html">Water.pb</a>
+<br><a href="../Examples/WorldDebug.pb.html">WorldDebug.pb</a>
+<br><a href="../Examples/WorldShadows.pb.html">WorldShadows.pb</a>
+<br>
+<br>
+<br><a href="../Examples/Bridge.pb.html">Bridge.pb</a>
+<br><a href="../Examples/Pendulum.pb.html">Pendulum.pb</a>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=../reference/reference.html>Referenz-Handbuch - Inhaltsverzeichnis</a></center><br><br>
+
+</body></html>

@@ -1,0 +1,50 @@
+<html><head><title>Image.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Image example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 100, 500, 300, &quot;PureBasic - Image&quot;)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 255, 255)
+
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+    
+    <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 255
+<font color="#006666">      FrontColor</font>(<font color="#006666">RGB</font>(k,0, k))  <font color="#006666">; a rainbow, from black to pink
+</font><font color="#006666">      Line</font>(0, k, 255, 1)
+    <b><font color="#006666">Next</font></b>
+
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">    FrontColor</font>(<font color="#006666">RGB</font>(255,255,255)) <font color="#006666">; print the text to white !
+</font><font color="#006666">    DrawText</font>(40, 50, &quot;An image easily created !&quot;)
+
+<font color="#006666">    StopDrawing</font>() <font color="#006666">; This is absolutely needed when the drawing operations are finished !!! Never forget it !
+</font>    
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  CopyImage</font>(0, 1)
+<font color="#006666">  ResizeImage</font>(1, 100, 100)
+  
+<font color="#006666">  GrabImage</font>(0, 2, 100, 60, 150, 40)
+  
+<font color="#006666">  ImageGadget</font>(0,  20,  10, 255, 255,<font color="#006666"> ImageID</font>(0))
+<font color="#006666">  ImageGadget</font>(1, 320,  80, 100, 100,<font color="#006666"> ImageID</font>(1))
+<font color="#006666">  ImageGadget</font>(2, 320, 200, 150,  40,<font color="#006666"> ImageID</font>(2))
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>  <font color="#006666">; If the user has pressed on the close button
+</font>  
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>   <font color="#006666">; All the opened windows are closed automatically by PureBasic
+</font></font></pre>
+</body></html>

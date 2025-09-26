@@ -1,0 +1,64 @@
+<html><head><title>ExtractRegularExpression</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractRegularExpression()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ExtractRegularExpression</b></font>(#RegularExpression, String$, Array$())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Extrahiert Strings abhängig vom regulären Ausdruck #RegularExpression in ein <a href="../reference/dim.html">Array</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#RegularExpression</i></td>
+<td width="90%"> 
+Der zu verwendende reguläre Ausdruck. 
+
+</td></tr>
+<tr><td><i>String$</i></td>
+<td> 
+Der String, auf den der reguläre Ausdruck angewendet werden soll. 
+
+</td></tr>
+<tr><td><i>Array$()</i></td>
+<td> 
+Die extrahierten Strings werden in diesem Array gespeichert. Die Größe des Arrays 
+wird automatisch an die Anzahl der Elemente im 'String$', welche mit dem Ausdruck 
+zusammenpassen (englisch &quot;matching&quot;), angepasst. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Anzahl der Elemente zurück, welche auf den regulären Ausdruck im String 
+passen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieser Ausdruck passt auf jedes Wort mit 3 Buchstaben, welches mit einem</font>
+  <font color="#006666">; Kleinbuchstaben beginnt, gefolgt vom Zeichen 'b' und welches mit einem</font>
+  <font color="#006666">; Großbuchstaben endet. Beispiel: abC</font>
+  <font color="#006666">;    </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;[a-z]b[A-Z]&quot;)
+    <b><font color="#006666">Dim</font></b> <font color="#006666">Result$</font>(0)
+    NbFound =<font color="#006666"> ExtractRegularExpression</font>(0, &quot;abC ABc zbA abc&quot;,<font color="#006666"> Result$</font>())
+    <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> NbFound-1
+      <b><font color="#006666">Debug</font></b> <font color="#006666">Result$</font>(k)
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createregularexpression.html">CreateRegularExpression()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=examineregularexpression.html>ExamineRegularExpression()</a> - <a href=index.html>RegularExpression Inhaltsverzeichnis</a> - <a href=freeregularexpression.html>FreeRegularExpression()</a> -><br><br>
+
+</body></html>

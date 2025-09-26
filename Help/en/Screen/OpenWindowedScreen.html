@@ -1,0 +1,180 @@
+<html><head><title>OpenWindowedScreen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenWindowedScreen()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>OpenWindowedScreen</b></font>(WindowID, x, y, Width, Height [, AutoStretch, RightOffset, BottomOffset [, FlipMode]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Open a new screen area according to given parameters on the given Window, which must be 
+opened before using <a href="../window/openwindow.html">OpenWindow()</a>. <a href="../sprite/initsprite.html">InitSprite()</a> has to be called successfully before using this command. 
+The &quot;windowed screen&quot; is able to use the hardware acceleration the same way than 
+full-size <a href="openscreen.html">OpenScreen()</a> function. As a window is opened, the window events have to be processed with <a href="../window/windowevent.html">WindowEvent()</a> 
+to have the correct behaviour. All the events needs to be processed before flipping the buffers (see the examples 
+below). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>WindowID</i></td>
+<td width="90%"> 
+The window to use to create the screen. <a href="../window/windowid.html">WindowID()</a> can be used to get a valid window identifier. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+The screen position in the specified window, in pixels. 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The screen resolution, in pixels. 
+
+</td></tr>
+<tr><td><i>AutoStretch (optional)</i></td>
+<td> 
+If set to <font color="#924B72">#True</font>, then the screen area will automatically resize (and its contents will be zoomed 
+to new screen size) when the window size changes. 
+
+</td></tr>
+<tr><td><i>RightOffset, BottomOffset (optional)</i></td>
+<td> 
+Define the margin on the right and bottom of the window, in pixels (for <a href="../statusbar/createstatusbar.html">statusbar</a> for example). 
+
+</td></tr>
+<tr><td><i>FlipMode (optional)</i></td>
+<td> 
+Sets the screen synchronization methods used when flipping buffers (also known as 'Vertical blank synchronization'). 
+It can have one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Screen_NoSynchronization</font>   : disable synchronization 
+   <font color="#924B72">#PB_Screen_WaitSynchronization</font> : enable synchronization (default value)
+   <font color="#924B72">#PB_Screen_SmartSynchronization</font>: enable synchronization, with a CPU saver routine when the program doesn't consume
+       all the CPU time (full screen mode only)
+</font></pre>
+Waiting for the screen synchronization allows the flip to be perfect (no 'tearing' 
+or other visible artifacts) because the flip is performed when the screen has been fully drawn (and when the 
+screen spot is outside of visible screen area). This also link the flip frequency to the actual screen refresh, ie: for 60Hz screen it 
+could have at most 60 flip per seconds, etc. 
+<br>
+<br>
+The opened screen is created with 2 video buffers to allow you to do double buffering, especially useful for games. 
+The buffers can be manipulated with the <a href="flipbuffers.html">FlipBuffers()</a> function. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the screen has been successfully opened, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Only one windowed screen can be opened at one time. The screen dimension can't be greater than the window size or artefacts can occurs. 
+
+</blockquote><p><b>Example:</b> Fixed screen size with gadgets</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() = 0
+<font color="#006666">    MessageRequester</font>(&quot;Error&quot;, &quot;Can't open screen &amp; sprite environment!&quot;, 0)
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 160, &quot;A screen in a window...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0, 170, 135, 45, 20, &quot;Quit&quot;)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, 160, 160)
+<font color="#006666">      CreateSprite</font>(0, 20, 20)
+      <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">        Box</font>(0, 0, 20, 20,<font color="#006666"> RGB</font>(255, 0, 155))
+<font color="#006666">        Box</font>(5, 5, 10, 10,<font color="#006666"> RGB</font>(155, 0, 255))
+<font color="#006666">        StopDrawing</font>()
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Else</font></b>
+<font color="#006666">      MessageRequester</font>(&quot;Error&quot;, &quot;Can't open windowed screen!&quot;, 0)
+      <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  direction = 2
+  <b><font color="#006666">Repeat</font></b>
+    <font color="#006666">; It's very important to process all the events remaining in the queue at each frame</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WindowEvent</font>()
+      
+      <b><font color="#006666">Select</font></b> Event 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+          <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 0
+            <b><font color="#006666">End</font></b>
+          <b><font color="#006666">EndIf</font></b>
+        
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+          <b><font color="#006666">End</font></b> 
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">Until</font></b> Event = 0
+  
+<font color="#006666">    FlipBuffers</font>() 
+<font color="#006666">    ClearScreen</font>(<font color="#006666">RGB</font>(0, 0, 0))
+<font color="#006666">    DisplaySprite</font>(0, x, x)
+    x + direction
+    <b><font color="#006666">If</font></b> x &gt; 140 : direction = -2 : <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> x &lt; 0   : direction =  2 : <b><font color="#006666">EndIf</font></b>
+<font color="#006666">    Delay</font>(1)
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+<p><img src="../HelpPictures/openwindowedscreen.png"></p>
+
+</blockquote><p><b>Example:</b> Screen with enabled auto-stretch and bottom-offset feature</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() = 0
+<font color="#006666">    MessageRequester</font>(&quot;Error&quot;, &quot;Can't open screen &amp; sprite environment!&quot;, 0)
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 420, 200, &quot;A screen in a window...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      AddStatusBarField</font>(420)
+      
+<font color="#006666">    StatusBarText</font>(0, 0, &quot;Automatically zoomed screen area when changing window size...&quot;)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, 420, 200, <font color="#924B72">#True</font>, 0, 20)
+  
+<font color="#006666">      CreateSprite</font>(0, 50, 50) <font color="#006666">; Create an empty sprite, will be whole black</font>
+        
+      <b><font color="#006666">Repeat</font></b>
+        <font color="#006666">; It's very important to process all the events remaining in the queue at each frame</font>
+        <font color="#006666">;</font>
+        <b><font color="#006666">Repeat</font></b>
+          Event =<font color="#006666"> WaitWindowEvent</font>(10)
+          
+          <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+            <b><font color="#006666">End</font></b>
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">Until</font></b> Event = 0
+        
+<font color="#006666">        FlipBuffers</font>()
+<font color="#006666">        ClearScreen</font>(<font color="#006666">RGB</font>(0, 0, 200)) <font color="#006666">; A blue background</font>
+        
+<font color="#006666">        DisplaySprite</font>(0, 10, 10)  <font color="#006666">; Display our black box at the left-top corner</font>
+<font color="#006666">        DisplaySprite</font>(0, 260, 10) <font color="#006666">; Display our black box at the right-top corner</font>
+      <b><font color="#006666">ForEver</font></b>
+      
+    <b><font color="#006666">Else</font></b>
+<font color="#006666">      MessageRequester</font>(&quot;Error&quot;, &quot;Can't open windowed screen!&quot;, 0)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/openwindowedscreen2.png"></p>
+<br>
+For a more detailed example look at </blockquote><p><b>Example</b></p><blockquote>
+<a href="../Examples/WindowedScreen.pb.html">WindowedScreen.pb</a>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="openscreen.html">OpenScreen()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=openscreen.html>OpenScreen()</a> - <a href=index.html>Screen Index</a> - <a href=screendepth.html>ScreenDepth()</a> -><br><br>
+
+</body></html>

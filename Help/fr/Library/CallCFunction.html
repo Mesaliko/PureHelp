@@ -1,0 +1,83 @@
+<html><head><title>CallCFunction</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallCFunction()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CallCFunction</b></font>(#Bibliotheque, NomFonction$ [,Parametre1 [, Parametre2...]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Appelle une fonction d'une bibliothèque 
+à la manière du language C pour les 
+paramètres. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Bibliotheque</i></td>
+<td width="90%"> 
+La bibliothèque à utiliser. 
+
+</td></tr>
+<tr><td><i>NomFonction$</i></td>
+<td> 
+Le nom de la fonction à appeler (sensible 
+à la casse). 
+
+</td></tr>
+<tr><td><i>Parametre1, Parametre2... (optionnel)</i></td>
+<td> 
+Les paramètres de la fonction. 
+<br>
+<br>
+Le nombre de paramètres doivent correspondre 
+aux paramètres de la fonction appelée. 
+<br>
+<br>
+Le nombre maximum de paramètres pris 
+en charge est de 20. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de retour de la fonction 
+appelée ou zéro si la bibliothèque ne 
+contient pas la fonction demandée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Attention, cette fonction n'est utile que 
+si la commande appelée a été déclarée avec 
+la convention 'CDECL' ce qui n'est pas le 
+standard sous Windows. La plupart des DLL 
+sous Windows nécessite l'utilisation de 
+<a href="callfunction.html">CallFunction()</a>. Par contre sous linux, 
+toutes les fonctions des bibliothèques 
+partagées sont en 'CDECL'. 
+<br>
+<br>
+Pour appeler une fonction qui utilise la 
+convention d'appel 'stdcall', utilisez 
+la fonction <a href="callfunction.html">CallFunction()</a>. 
+<br>
+<br>
+Cette fonction n'est pas très flexible car 
+elle n'accepte pas les paramètres de type 
+double et quad, et ne peut pas renvoyer 
+des valeurs de type double, quad ou float. 
+Il est vivement conseillé d'utiliser les 
+<a href="../reference/prototypes.html">prototypes</a> 
+à la place. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="callfunction.html">CallFunction()</a>, <a href="getfunction.html">GetFunction()</a>, 
+<a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Library Index</a> - <a href=callcfunctionfast.html>CallCFunctionFast()</a> -><br><br>
+
+</body></html>

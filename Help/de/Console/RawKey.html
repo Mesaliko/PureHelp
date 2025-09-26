@@ -1,0 +1,62 @@
+<html><head><title>RawKey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RawKey()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>RawKey</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Roh-Code (&quot;Raw key&quot;) des letzten Aufrufs von <a href="inkey.html">Inkey()</a> zurück. 
+Dies ist nützlich für erweiterte (nicht-ASCII) Tasten (zum Beispiel Funktionstasten, 
+Cursortasten, etc.). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Roh-Code der letzten gedrückten Taste zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es sind nicht nur die alpha-numerischen Tasten, welche einen ASCII-Wert haben. Die 
+Escape-Taste (27), die Return-Taste (13), die Tabulator-Taste (9) und die 
+Backspace-Taste (8) sind nur vier Beispiele. 
+<br>
+Eine Tabelle mit ASCII-Codes finden Sie <a href="../reference/ascii.html">hier</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Escape zum Beenden&quot;)
+  
+    <b><font color="#006666">Repeat</font></b>
+      KeyPressed$ =<font color="#006666"> Inkey</font>()
+      
+      <b><font color="#006666">If</font></b> KeyPressed$ &lt;&gt; &quot;&quot;
+        
+<font color="#006666">        PrintN</font>(&quot;Sie drueckten die Taste: &quot; + KeyPressed$)
+<font color="#006666">        PrintN</font>(&quot;Diese hat einen Roh-Code von: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">RawKey</font>()
+      
+<font color="#006666">        PrintN</font>(&quot;Sie haben eine nicht-ASCII Taste gedrueckt.&quot;)
+<font color="#006666">        PrintN</font>(&quot;Diese hat einen Roh-Code von: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        Delay</font>(20) <font color="#006666">; Wir verwenden nicht die gesamte CPU-Zeit, da wir uns auf einem Multitaskting-OS befinden</font>
+      <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Until</font></b> KeyPressed$ =<font color="#006666"> Chr</font>(27) <font color="#006666">; Warten, bis Escape gedrückt wird</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="inkey.html">Inkey()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=printn.html>PrintN()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=readconsoledata.html>ReadConsoleData()</a> -><br><br>
+
+</body></html>

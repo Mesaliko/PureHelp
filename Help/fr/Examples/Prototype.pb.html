@@ -1,0 +1,80 @@
+<html><head><title>Prototype.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Prototype example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">;
+</font><font color="#006666">; Use prototype with structure
+</font><font color="#006666">; =============================
+</font><font color="#006666">;
+</font>
+
+<b><font color="#006666">Prototype</font></b>.d <font color="#006666">Object_add</font>(a.d,b.d)
+
+<b><font color="#006666">Structure</font></b> Object
+  ADD.Object_add
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.d <font color="#006666">Object_add</font>(a.d,b.d)
+  <b><font color="#006666">ProcedureReturn</font></b> a + b
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.i <font color="#006666">new</font>()
+  *o.Object =<font color="#006666"> AllocateStructure</font>(Object)
+  *o\ADD = @Object_add()
+  <b><font color="#006666">ProcedureReturn</font></b> *o
+<b><font color="#006666">EndProcedure</font></b>
+
+*test.Object =<font color="#006666"> new</font>()
+
+<b><font color="#006666">Debug</font></b> &quot; Use prototype with structure&quot;
+<b><font color="#006666">Debug</font></b> &quot; =======================&quot;
+<b><font color="#006666">Debug</font></b> *test\<font color="#006666">add</font>(53,47) <font color="#006666">; Display 100.0
+</font><b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<font color="#006666">;
+</font><font color="#006666">; Use prototype to pass Procedure pointer as parameter
+</font><font color="#006666">; =====================================================
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">Prototype</font></b>.s <font color="#006666">ProtoTest</font>()
+
+<b><font color="#006666">Procedure</font></b>.s <font color="#006666">Test1</font>()
+  <b><font color="#006666">ProcedureReturn</font></b> &quot;Hello from test #1&quot;
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.s <font color="#006666">Test2</font>()
+  <b><font color="#006666">ProcedureReturn</font></b> &quot;Hello from test #2&quot;
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Run</font>(MyTest.ProtoTest)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MyTest</font>()
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Debug</font></b> &quot; Use prototype to pass Procedure pointer as parameter&quot;
+<b><font color="#006666">Debug</font></b> &quot; ===============================================&quot;
+<font color="#006666">Run</font>(@Test1())
+<font color="#006666">Run</font>(@Test2())
+
+
+<font color="#006666">;old fashon
+</font><b><font color="#006666">Procedure</font></b>.s <font color="#006666">test</font>()
+  <b><font color="#006666">ProcedureReturn</font></b> &quot;test&quot;
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">runold</font>(ptr) <font color="#006666">; Assume ptr is the procedure pointer
+</font>  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(<font color="#006666">CallFunctionFast</font>(ptr))
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">runold</font>(@test())</font></pre>
+</body></html>

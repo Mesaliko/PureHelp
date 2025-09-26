@@ -1,0 +1,114 @@
+<html><head><title>CreateBillboardGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateBillboardGroup()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateBillboardGroup</b></font>(#BillboardGroup, MatiereID, LargeurBillboard, HauteurBillboard [, X, Y, Z [, MasqueVisibilité [, Type]]]</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Créé un nouveau groupe de billboards vide. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BillboardGroup</i></td>
+<td width="90%"> 
+Le numéro du nouveau BillboardGroup. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>MatiereID</i></td>
+<td> 
+La matière spécifiée sera affectée au groupe 
+et par conséquent utilisée par tous les 
+billboards du groupe.<br>
+<br>
+La valeur 'MatiereID' peut être facilement 
+récupérée à l'aide de la commande 
+<a href="../material/materialid.html">MaterialID()</a>. 
+<br>
+<br>
+
+</td></tr>
+<tr><td><i>LargeurBillboard, HauteurBillboard</i></td>
+<td> 
+Les dimensions par défaut (en unité monde) 
+des futurs billboards. 
+<br>
+<br>
+Bien que la taille de chaque futur billboard 
+pourra être definie indépendamment à l'aide 
+de la commande <a href="resizebillboard.html">ResizeBillboard()</a>, il est 
+important de garder à l'esprit que des 
+problèmes de performances peuvent très 
+rapidement apparaître si tous les billboards 
+d'un même groupe n'ont pas la même taille. 
+
+</td></tr>
+<tr><td><i>X, Y, Z  (optionnel)</i></td>
+<td> 
+La position absolue du nouveau groupe de 
+billboards dans le monde 3D. 
+
+</td></tr>
+<tr><td><i>MasqueVisibilité (optionnel)</i></td>
+<td> 
+Un masque pour choisir sur quelle caméra le 
+groupe de billboards doit être affiché. 
+<br>
+<br>
+Si ce masque correspond au masque spécifié 
+dans <a href="../camera/createcamera.html">CreateCamera()</a> alors l'entité sera 
+visible par la caméra. <br>
+<br>
+Voir <a href="../entity/createentity.html">CreateEntity()</a> pour construire des 
+masques appropriés. <br>
+<br>
+Si ce paramètre est omis ou <font color="#924B72">#PB_All</font> alors 
+le groupe de billboards sera visible par 
+toutes les caméras. 
+
+</td></tr>
+<tr><td><i>Type (optionnel)</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Billboard_Point</font>: Billboards de points standards, toujours de face et plein cadre et toujours debout (par défaut). 
+  <font color="#924B72">#PB_Billboard_Oriented</font>: Billboards orientés autour d'un vecteur de direction partagé (utilisé comme axe Y) et ne tournent autour de cet axe que pour faire face à la caméra. 
+  <font color="#924B72">#PB_Billboard_SelfOriented</font>: Billboards orientés autour de leur propre vecteur de direction (de leur propre axe Y) et ne tournent autour de cet axe que pour faire face à la caméra.
+  <font color="#924B72">#PB_Billboard_Perpendicular</font>: Billboards perpendiculaires à un vecteur de direction partagé (utilisé comme axe Z, face à l'écran) et les axes X, Y sont déterminés par un vecteur up commun. 
+  <font color="#924B72">#PB_Billboard_SelfPerpendicular</font>: Billboards perpendiculaires à leur propre vecteur de direction (de leur propre axe Z, face à l'écran) et les axes X, Y sont déterminés par par un vecteur up commun.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le #BillboardGroup est déjà utilisé 
+alors il sera automatiquement détruit 
+(ainsi que tous ses billboards) et remplacé 
+par le nouveau. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freebillboardgroup.html">FreeBillboardGroup()</a>, <a href="hidebillboardgroup.html">HideBillboardGroup()</a>, 
+<a href="isbillboardgroup.html">IsBillboardGroup()</a>, <a href="billboardgroupid.html">BillboardGroupID()</a>, 
+<a href="addbillboard.html">AddBillboard()</a>, 
+<a href="billboardgroupcommondirection.html">BillboardGroupCommonDirection()</a>, 
+<a href="billboardgroupcommondirection.html">BillboardGroupCommonDirection()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=countbillboards.html>CountBillboards()</a> - <a href=index.html>Billboard Index</a> - <a href=freebillboardgroup.html>FreeBillboardGroup()</a> -><br><br>
+
+</body></html>

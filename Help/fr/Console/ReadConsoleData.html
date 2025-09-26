@@ -1,0 +1,108 @@
+<html><head><title>ReadConsoleData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadConsoleData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ReadConsoleData</b></font>(*Memoire, Taille)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit l'entrée de la console de 
+manière binaire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+La mémoire tampon dans laquelle 
+les données seront stockées.<br>
+Mémoire auparavant allouée avec 
+<a href="../memory/allocatememory.html">AllocateMemory</a>. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+La quantité maximale de données 
+à lire (en octets). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre d'octets lu 
+à partir de l'entrée. 
+<br>
+<br>
+Si la valeur zéro est renvoyée 
+alors il n'y a plus de données 
+à lire (un indicateur de fin de 
+fichier a été reçu). 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande fonctionne uniquement 
+si le console n'est pas en 
+<a href="enablegraphicalconsole.html">mode graphique</a>. 
+Elle est utile pour lire des données 
+qui ne sont pas basées sur des 
+lignes de texte (à l'inverse de 
+la commande <a href="input.html">Input()</a>) ou des données 
+qui on été redirigées vers le 
+programme à travers un 'pipe'. 
+<br>
+<br>
+Cette commande est bloquante, ce 
+qui signifie que si aucune donnée 
+n'est disponible en entrée, 
+alors le programme attendra l'arrivée 
+d'une donnée indéfiniment sauf si une 
+erreur survient ou un EOF (End Of File). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Ce programme lit une image passée en paramètre depuis une console et l'affiche dans une fenêtre.</font>
+  <font color="#006666">; Il faut le compiler et créer un exécutable, ensuite le lancer de cette façon &quot;MonExecutable &lt; image.bmp&quot;</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; (Dans les options du compilateur sélectionnez &quot;Console&quot; pour le &quot;format de l'exécutable&quot; !)</font>
+  <font color="#006666">; (Fonctionne seulement avec des BMP ou des icônes à moins d'utiliser un décodeur d'images (voir ImagePlugin))</font>
+  <font color="#006666">;</font>
+<font color="#006666">  OpenConsole</font>()
+  TotalSize = 0
+  BufferFree = 10000
+  *Buffer =<font color="#006666"> AllocateMemory</font>(BufferFree)
+  
+  <b><font color="#006666">Repeat</font></b>
+    ReadSize =<font color="#006666"> ReadConsoleData</font>(*Buffer+TotalSize, BufferFree) <font color="#006666">; Lit un bloc de données</font>
+    TotalSize + ReadSize
+    BufferFree - ReadSize
+    <b><font color="#006666">If</font></b> BufferFree &lt; 100  <font color="#006666">; Redimensionne le buffer s'il n'est pas assez grand</font>
+      BufferFree = 10000
+      *Buffer =<font color="#006666"> ReAllocateMemory</font>(*Buffer, TotalSize+10000)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> ReadSize = 0 <font color="#006666">; Une fois que 0 est retourné, il n'y a plus rien à lire</font>
+  
+  <b><font color="#006666">If</font></b> TotalSize &gt; 0 <font color="#006666">; affiche l'image si tout se passe bien </font>
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, *Buffer, TotalSize)
+      <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0), &quot;Image&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">        ImageGadget</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> ImageID</font>(0))
+        <b><font color="#006666">Repeat</font></b>
+        <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Erreur&quot;, &quot;Ce n'est pas une image valide.&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="writeconsoledata.html">WriteConsoleData()</a>, <a href="../memory/allocatememory.html">AllocateMemory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=rawkey.html>RawKey()</a> - <a href=index.html>Console Index</a> - <a href=writeconsoledata.html>WriteConsoleData()</a> -><br><br>
+
+
+</body></html>

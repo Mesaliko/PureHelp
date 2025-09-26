@@ -1,0 +1,71 @@
+<html><head><title>UnbindMenuEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UnbindMenuEvent()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>UnbindMenuEvent</b></font>(#Menu, MenuItem, @Callback())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Unbind a menu event from a callback. If no matching event callback is found, this 
+command has no effect. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+The menu to unbind the event. 
+
+</td></tr>
+<tr><td><i>MenuItem</i></td>
+<td> 
+The menu item within the menu to unbind the event. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+The callback procedure to unbind. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">TestHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Test menu event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">QuitHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Quit menu event&quot;
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 200, 50, &quot;Click test&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+
+<font color="#006666">  CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;File&quot;)
+<font color="#006666">      MenuItem</font>(0, &quot;Test&quot;)
+<font color="#006666">      MenuItem</font>(1, &quot;Quit&quot;)
+
+<font color="#006666">  BindMenuEvent</font>(0, 0, @TestHandler())
+<font color="#006666">  BindMenuEvent</font>(0, 1, @QuitHandler())
+
+<font color="#006666">  UnbindMenuEvent</font>(0, 1, @QuitHandler()) <font color="#006666">; Unbind the quit event</font>
+
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+<a href="../window/bindevent.html">BindEvent()</a>, <a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a>, <a href="bindmenuevent.html">BindMenuEvent()</a>, <a href="../window/windowevent.html">WindowEvent()</a>, <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setmenutitletext.html>SetMenuTitleText()</a> - <a href=index.html>Menu Index</a><br><br></blockquote>
+</font></body></html>

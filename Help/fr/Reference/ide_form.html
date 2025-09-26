@@ -1,0 +1,128 @@
+<html><head><title>Le Concepteur de fenêtre (Form)</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Le Concepteur de fenêtre (Form)</font></b></p>
+
+L'IDE du PureBasic a un concepteur de fenêtre (formulaire) très puissant et intégré à l'éditeur, 
+qui permet de créer et d'organiser des gadgets sur une fenêtre. Il supporte presque tous les 
+<a href="../gadget/index.html">gadgets</a>, les <a href="../menu/index.html">menus</a> et même les 
+<a href="../statusbar/index.html">barres d'état</a>. Un fichier de formulaire est un fichier PureBasic, 
+de sorte qu'il peut être facilement modifié sans même ouvrir le concepteur de formulaire. 
+L'analyseur de code n'est pas le même que celui utilisé par le compilateur, donc il ne 
+prend pas en charge toutes les fonctions PureBasic, alors quand on fait des modifications 
+manuelles dans un fichier formulaire, elles doivent rester basique. 
+
+<p><b>Menu "Form":</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_form.png"></p>
+
+<b>Nouveau Form</b> 
+<br>
+Crée un nouveau formulaire vide. Noter que l'onglet &quot;Form&quot; appelé panneau de conception 
+muni de ses gadgets standards apparait automatiquement. 
+<br>
+<br>
+
+<b>Changer vue Code/Design</b> 
+<br>
+Change la vue du formulaire. Cela permet de passer du mode de conception au mode écriture de code. 
+Un formulaire est construit à partir du code, donc si une modification est apportée 
+directement en mode code, il sera traduit visuellement. 
+<br>
+<br>
+
+<b>Duplicer l'objet</b> 
+<br>
+Duplique l'objet sélectionné. 
+<br>
+<br>
+
+<b>Manager d'image</b> 
+<br>
+<p><img src="images/ide_form_imagemanager.png"></p>
+<br>
+<br>
+Affiche toutes les images actuellement utilisées par le formulaire. 
+L'image et son chemin peuvent être changés facilement ici. 
+
+</blockquote>
+<p><b>Panneau de conception</b></p><blockquote>
+
+
+<p><img src="images/ide_form_designpanel.png"></p>
+
+Ce panneau liste tous les gadgets disponibles. Sélectionnez-en un, et de dessinez-le 
+directement sur le formulaire. Lorsqu'un gadget est sélectionné sur le formulaire, 
+ses propriétés sont afficher sur le panneau et peuvent être modifiées. 
+
+</blockquote>
+<p><b>Utilisation du concepteur de formulaire dans un projet</b></p><blockquote>
+
+
+Le concepteur du formulaire a été créé pour permettre la création et la maintenance aisée de 
+formulaires de façon modulaires. Chaque formulaire doit avoir son propre fichier. Il ne peut pas 
+y avoir deux formulaires dans un même fichier (en d'autres termes, il ne faut jamais avoir 
+deux <a href="../window/openwindow.html">OpenWindow()</a> dans le même fichier). Une procédure d'événement peut être attribué à 
+tous les gadgets, et sera traitée automatiquement dans la boucle d'événements. Les 
+procédures d'événements doivent être définies quelque part dans le code source. <br>
+Chaque fichier de formulaire devrait être nommé avec l'extension '.pbf', pour 
+être correctement ouvert par l'IDE. Les fichiers de formulaire ('.pbf') peuvent 
+également être ajoutés dans un <a href="../reference/ide_projects.html">projet</a>. 
+<br>
+<br>
+Par exemple, pour construire un programme qui gèrent deux fenêtres, il va falloir créer 
+deux fichiers de formulaire et un fichier principal. La structure du projet pourrait 
+ressembler à ça : 
+<pre><font face="Courier New, Courier, mono" size="2">  Main.pb        ; Le fichier principal qui inclut les liens vers les deux fichiers de formulaire,
+                 ; ainsi que le code des événements
+  MainWindow.pbf ; La fenêtre principale
+  DateWindow.pbf ; Une autre fenêtre
+</font></pre>
+Si nous supposons que MainWindow.pbf dispose de deux boutons ('OK' et 'Annuler') et 
+que DateWindow.pbf contient un gadget cadendrier, voici à quoi le fichier principal devrait 
+ressembler (le fichier principal n'est pas géré par le concepteur de formulaire, 
+il doit être écrit manuellement): 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">XIncludeFile</font></b> &quot;MainWindow.pbf&quot; <font color="#006666">; Inclusion de la première fenêtre</font>
+  <b><font color="#006666">XIncludeFile</font></b> &quot;DateWindow.pbf&quot; <font color="#006666">; Inclusion de la seconde fenêtre</font>
+  
+<font color="#006666">  OpenMainWindow</font>() <font color="#006666">; Création de la première fenêtre. Ce nom de procédure est toujours 'Open' suivi du nom de la fenêtre</font>
+<font color="#006666">  OpenDateWindow</font>() <font color="#006666">; Création de la seconde fenêtre</font>
+  
+  <font color="#006666">; Les procédures d'événements, tels que spécifiées dans la propriété 'procédure événement' de chaque gadget</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">OkButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;Evénement Bouton OK&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">CancelButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;Evénement Bouton Annuler&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">TrainCalendarEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;Evénement Calendrier&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; La boucle principale, comme d'habitude, le seul changement est l'appel de la procédure </font>
+  <font color="#006666">; événementielle automtiquement générée pour chaque fenêtre.</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> <font color="#006666">EventWindow</font>()
+      <b><font color="#006666">Case</font></b> MainWindow
+<font color="#006666">        MainWindow_Events</font>(Event) <font color="#006666">; Le nom de la procédure est toujours le nom de la fenêtre suivi de '_Events'</font>
+        
+      <b><font color="#006666">Case</font></b> DateWindow
+<font color="#006666">        DateWindow_Events</font>(Event)
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> <font color="#006666">; Ferme toutes les fenêtres en quittant l'une d'elle</font>
+</font></pre>
+
+Comme on le voit, il est facile d'intégrer des formulaire dans un programme. 
+De plus, il est également possible de continuer à créer une fenêtre manuellement aussi. 
+Pour avoir tout le contrôle sur le code généré, il suffit de passer en mode code. 
+<br>
+<br>
+</blockquote>
+</font></body></html>

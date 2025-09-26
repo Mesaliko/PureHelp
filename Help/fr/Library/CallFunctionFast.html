@@ -1,0 +1,87 @@
+<html><head><title>CallFunctionFast</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallFunctionFast()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CallFunctionFast</b></font>(*PointeurFonction [,Parametre1 [, Parametre2...]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Appelle une fonction directement, 
+en utilisant son adresse.<br>
+La fonction doit utiliser l'appel 
+stdcall (la plupart des DLL de Windows). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*PointeurFonction</i></td>
+<td width="90%"> 
+L'adresse de la fonction à appeler. 
+<br>
+<br>
+Son pointeur est obtenu par <a href="getfunction.html">GetFunction()</a> , 
+<a href="getfunctionentry.html">GetFunctionEntry()</a> ou par 
+<a href="libraryfunctionaddress.html">LibraryFunctionAddress()</a>. 
+<blockquote>
+
+L'utilisation de cette fonction est la méthode 
+la plus rapide pour appeler des fonctions d'une 
+bibliothèque, en particulier lorsque les 
+résultats ont été obtenus avec GetFunction() ou 
+LibraryFunctionAddress(). 
+Cela est dû au fait que cette fonction n'est pas 
+tenue de rechercher le nom de la fonction de 
+bibliothèque. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Parametre1, Parametre2... (optionnel)</i></td>
+<td> 
+Les paramètres de la fonction. 
+<br>
+<br>
+Le nombre maximum de paramètres est 20. 
+<blockquote>
+
+Le nombre de paramètres doit correspondre exactement 
+aux besoins 
+de la fonction. Par exemple, si une fonction 
+nécessite 2 paramètres, alors 2 paramètres 
+doivent être passés même si les valeurs 
+de ces 2 paramètres sont nulles. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de retour de la fonction appelée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour appeler une fonction qui utilise la convention 
+d'appel 'cdecl', utiliser la fonction 
+<a href="callcfunctionfast.html">CallCFunctionFast()</a>. 
+<br>
+<br>
+Note: Cette fonction n'est pas très flexible car 
+elle n'accepte pas les paramètres de type string, 
+float, double et quad, et ne peut pas renvoyer des 
+valeurs de type string, float, double ou quad. 
+Il est vivement conseillé d'utiliser les 
+<a href="../reference/prototypes.html">prototypes</a> à la place. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="callcfunctionfast.html">CallCFunctionFast()</a>, <a href="getfunction.html">GetFunction()</a>, 
+<a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=callfunction.html>CallFunction()</a> - <a href=index.html>Library Index</a> - <a href=closelibrary.html>CloseLibrary()</a> -><br><br>
+
+</body></html>

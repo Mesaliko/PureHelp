@@ -1,0 +1,66 @@
+<html><head><title>FontID</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FontID()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+FontID = <font color="#006666"><b>FontID</b></font>(#Font)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den eindeutigen System-Identifier (Bezeichner) des Zeichensatzes zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Font</i></td>
+<td width="90%"> 
+Der zu verwendende Zeichensatz. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die eindeutige System-ID des Zeichensatzes zurück. 
+Dieses Ergebnis wird manchmal auch als 'Handle' bezeichnet. Schauen Sie in das Extra-Kapitel 
+<a href="../reference/handles.html">'Handles und Nummern'</a> für weitere Informationen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+Ein Beispiel für die Verwendung von FontID() in Kombination mit <a href="../gadget/setgadgetfont.html">SetGadgetFont()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 222, 130, &quot;FontID()&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0, 10, 10, 200, 30, &quot;Anklicken zum Ändern des Fonts...&quot;)
+    Font1 =<font color="#006666"> LoadFont</font>(<font color="#924B72">#PB_Any</font>, &quot;Arial&quot;  ,  8, <font color="#924B72">#PB_Font_Bold</font>)
+    Font2 =<font color="#006666"> LoadFont</font>(<font color="#924B72">#PB_Any</font>, &quot;Verdana&quot;, 12, <font color="#924B72">#PB_Font_StrikeOut</font>)
+    UsedFont = 1
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+      <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 0
+        <b><font color="#006666">If</font></b> UsedFont = 1
+<font color="#006666">          SetGadgetFont</font>(0,<font color="#006666"> FontID</font>(Font2))
+          UsedFont = 2
+        <b><font color="#006666">Else</font></b>
+<font color="#006666">          SetGadgetFont</font>(0,<font color="#006666"> FontID</font>(Font1))
+          UsedFont = 1
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="loadfont.html">LoadFont()</a>, 
+<a href="../gadget/setgadgetfont.html">SetGadgetFont()</a>, 
+<a href="../2ddrawing/drawingfont.html">DrawingFont()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Font Inhaltsverzeichnis</a> - <a href=freefont.html>FreeFont()</a> -><br><br>
+
+</body></html>

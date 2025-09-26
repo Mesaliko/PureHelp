@@ -1,0 +1,82 @@
+<html><head><title>AddMailAttachmentData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMailAttachmentData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>AddMailAttachmentData</b></font>(#Mail, Description$, *Buffer, BufferLength [, MimeType$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Add memory data as an attachment to the mail. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+The mail to use. 
+
+</td></tr>
+<tr><td><i>Description$</i></td>
+<td> 
+The information string displayed for the attachment in the mail. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+The <a href="../memory/index.html">memory area</a> of the data that should be added as the attachment. 
+Once the attachment has been added, the memory area may be changed or freed, since 
+its entire contents are copied into the mail. 
+
+</td></tr>
+<tr><td><i>BufferLength</i></td>
+<td> 
+The size of the attachment in bytes. 
+
+</td></tr>
+<tr><td><i>MimeType$ (optional)</i></td>
+<td> 
+The type of the attached file. 
+If this parameter is omitted, then the file extension will be used to determine that files mime type. 
+See the <a href="addmailattachment.html">AddMailAttachment()</a> command for a list of available mime types. If the extension of the file does not match any of 
+the available mime types, then the &quot;application/octet-stream&quot; mime type will be used. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the attachment was added successfully and zero if not. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Any number of attachments may be added to the mail, but the size limit available for a single 
+attachment is currently set at 100MB. Most servers and clients do not have the capacity to handle 
+attachments of that size, therefore it is advised that each attachment be kept to a reasonable size 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">AddMailAttachmentData</font>(0, &quot;Attachment 1&quot;, ?Hello, 5)
+      <b><font color="#006666">Debug</font></b> &quot;Attachment correctly added&quot;
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Attachment failed&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+
+
+  <b><font color="#006666">DataSection</font></b>
+    Hello:
+      <b><font color="#006666">Data</font></b>.b <font color="#924B72">'H'</font>, <font color="#924B72">'e'</font>, <font color="#924B72">'l'</font>, <font color="#924B72">'l'</font>, <font color="#924B72">'o'</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addmailattachment.html">AddMailAttachment()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addmailattachment.html>AddMailAttachment()</a> - <a href=index.html>Mail Index</a> - <a href=addmailrecipient.html>AddMailRecipient()</a> -><br><br>
+
+</body></html>

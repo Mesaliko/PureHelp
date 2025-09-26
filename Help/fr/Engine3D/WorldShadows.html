@@ -1,0 +1,86 @@
+<html><head><title>WorldShadows</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WorldShadows()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>WorldShadows</b></font>(Type [, Distance.f [, Couleur [, TailleTexture]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change le type d'ombre qui sera 
+appliqué dans le monde 3D. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Peut prendre l'une des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shadow_None</font>      : Aucune ombre ne sera affichée. Cela peut permettre d'économiser beaucoup
+                         de temps processeur si les ombres ne sont pas nécessaires (mode par defaut).
+  <font color="#924B72">#PB_Shadow_Modulative</font>: Les ombres seront affichées pour les <a href="../entity/index.html">entity</a> qui ont le
+                         mode 'ombre' activé avec <a href="../entity/entityrendermode.html">EntityRenderMode()</a> et <font color="#924B72">#PB_Entity_CastShadow</font>.
+                         Ce mode est le plus rapide pour afficher des ombres, mais il n'est pas très 
+                         réaliste car les ombres ainsi projetées ne sont pas translucides.
+  <font color="#924B72">#PB_Shadow_Additive</font>  : Les ombres seront affichées pour les <a href="../entity/index.html">entity</a> qui ont le
+                         mode 'ombre' activé avec <a href="../entity/entityrendermode.html">EntityRenderMode()</a> et <font color="#924B72">#PB_Entity_CastShadow</font>.
+                         Ce mode est le plus lent mais aussi le plus réaliste, étant donné que les ombres 
+                         sont transparentes et s'ajoutent si plusieurs ombres se chevauchent.
+  <font color="#924B72">#PB_Shadow_TextureAdditive</font>  : Les ombres seront affichées pour les <a href="../entity/index.html">entity</a> qui ont le
+                         mode 'ombre' activé avec <a href="../entity/entityrendermode.html">EntityRenderMode()</a> et <font color="#924B72">#PB_Entity_CastShadow</font>. Ce mode
+                         est moyen en terme de rapidité et de qualité, mais fonctionnera même avec un 
+                         <a href="createwater.html">plan d'eau</a>.
+  <font color="#924B72">#PB_Shadow_TextureModulative</font>: Les ombres seront affichées pour les <a href="../entity/index.html">entity</a> qui ont le
+                         mode 'ombre' activé avec <a href="../entity/entityrendermode.html">EntityRenderMode()</a> et <font color="#924B72">#PB_Entity_CastShadow</font>. 
+                         Ce mode d'ombre est plus rapide que <font color="#924B72">#PB_Shadow_TextureAdditive</font> mais pas très beau car 
+                         les ombres ne sont pas translucides.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Distance.f (optionnel)</i></td>
+<td> 
+Distance maximale de la caméra au 
+delà de laquelle les ombres ne seront 
+plus calculées ni affichées. 
+
+</td></tr>
+<tr><td><i>Couleur (optionnel)</i></td>
+<td> 
+Couleur de l'ombre. 
+<br>
+<br>
+<a href="../2ddrawing/rgb.html">RGB()</a> peut être utilisé pour obtenir 
+une valeur de couleur valide. 
+
+</td></tr>
+<tr><td><i>TailleTexture (optionnel)</i></td>
+<td> 
+Taille en pixel de la texture utilisée 
+pour rendre l'ombre. 
+<br>
+<br>
+Plus elle est grande et plus l'ombre 
+sera réaliste, mais plus ce sera lent. 
+<br>
+<br>
+La valeur par défaut est 512 et cette 
+valeur ne doit pas être supérieure à 
+4096. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="enableworldphysics.html">EnableWorldPhysics()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=worldgravity.html>WorldGravity()</a> - <a href=index.html>Engine3D Index</a> - <a href=yaw.html>Yaw()</a> -><br><br>
+
+</body></html>

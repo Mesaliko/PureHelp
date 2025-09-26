@@ -1,0 +1,91 @@
+<html><head><title>FontRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FontRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>FontRequester</b></font>(FontName$, FontSize, Flags [, Color [, Style [, ParentID]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens the standard requester to choose a font. The functions <a href="selectedfontcolor.html">SelectedFontColor()</a>, <a href="selectedfontname.html">SelectedFontName()</a>, <a href="selectedfontsize.html">SelectedFontSize()</a> 
+and <a href="selectedfontstyle.html">SelectedFontStyle()</a> can be used after a successful 
+call to get the needed information about the selected font. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>FontName$</i></td>
+<td width="90%"> 
+The default font name to use when the requester is opened. 
+
+</td></tr>
+<tr><td><i>FontSize</i></td>
+<td> 
+The default font size to use when the requester is opened. 
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FontRequester_Effects</font> : Enable the requesters effects, including color chooser (Windows only).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Color (optional)</i></td>
+<td> 
+Sets the default color when the requester is opened. A valid color value you can get with the function <a href="../2ddrawing/rgb.html">RGB()</a>. 
+
+</td></tr>
+<tr><td><i>Style (optional)</i></td>
+<td> 
+Sets the default style when the requester is opened. See <a href="selectedfontstyle.html">SelectedFontStyle()</a> for available styles. 
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+The parent window identifier. A valid window identifier can be retrieved with <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if a font has been chosen, zero if the user canceled the requester. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  FontName$ = &quot;Arial&quot;   <font color="#006666">; set initial font  (could also be blank)</font>
+  FontSize  = 14        <font color="#006666">; set initial size  (could also be null)</font>
+  Result =<font color="#006666"> FontRequester</font>(FontName$, FontSize, <font color="#924B72">#PB_FontRequester_Effects</font>)
+  <b><font color="#006666">If</font></b> Result
+    Message$ = &quot;You have selected following font:&quot;  + <font color="#924B72">#LF$</font> 
+    Message$ + &quot;Name:  &quot; +<font color="#006666"> SelectedFontName</font>()       + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Size:  &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontSize</font>())  + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Color: &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontColor</font>()) + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Bold</font>
+      Message$ + &quot;Bold&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_StrikeOut</font>
+      Message$ + &quot;StrikeOut&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Underline</font>
+      Message$ + &quot;Underline&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b> 
+    Message$ = &quot;The requester was canceled.&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;FontRequester&quot;, Message$, <font color="#924B72">#PB_MessageRequester_Ok</font>) 
+</font></pre>
+<br>
+<p><img src="../HelpPictures/fontrequester.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="selectedfontcolor.html">SelectedFontColor()</a>, <a href="selectedfontname.html">SelectedFontName()</a>, <a href="selectedfontsize.html">SelectedFontSize()</a>, <a href="selectedfontstyle.html">SelectedFontStyle()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=colorrequester.html>ColorRequester()</a> - <a href=index.html>Requester Index</a> - <a href=inputrequester.html>InputRequester()</a> -><br><br>
+
+</body></html>

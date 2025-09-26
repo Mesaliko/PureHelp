@@ -1,0 +1,116 @@
+<html><head><title>Créer une PureLibrary</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Créer une PureLibrary</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+PureBasic permet de créer facilement des bibliothèques personnalisées pour étendre 
+le jeu de commandes de base de PureBasic avec plus de commandes personnelles. 
+La bibliothèque générée sera située dans le dossier 
+PureBasic/PureLibraries/UserLibraries/, assurez-vous donc d'avoir les droits d'accès 
+appropriés lorsque vous essayez d'en générer une. 
+<br>
+<br>
+Pour l'instant, la création de purelibrary n'est disponible qu'en ligne de commande, 
+en utilisant le compilateur backend C avec l'option '--purelibrary'. Il est également 
+possible d'utiliser le formidable outil de création de bibliothèque de l'IDE par 
+'Pf Shadoko' trouvé sur 
+<a href="https://www.purebasic.fr/english/viewtopic.php?t=85882">ici</a> qui 
+propose également quelques fonctionnalités supplémentaires. 
+<br>
+<br>
+Comme une PureLibary ajoute une nouvelle commande au jeu de commandes standard, le 
+nouveau nom de commande doit être différent des commandes internes. Une PureLibrary 
+doit toujours être compilée avec le compilateur PureBasic sur lequel elle sera 
+utilisée. Si une PureLibrary n'est pas fournie avec son code source associé, 
+elle risque fort de se casser dans une future version de PureBasic. 
+<br>
+<br>
+Une PureLibrary peut également être créée à l'aide de C/C++ ou d'ASM, veuillez 
+consulter le dossier PureLibrary/SDK/. 
+<br>
+
+</blockquote>
+<p><b>Fonctions d'exportation</b></p><blockquote>
+
+
+Aucun code ne doit être écrit en dehors des procédures, à l'exception de la 
+déclaration d'objet. 
+<br>
+<br>
+Pour exporter une fonction lors de la création d'une PureLibrary, elle doit être 
+déclarée comme <b><font color="#006666">ProcedureDLL</font></b>. Si des paramètres facultatifs sont nécessaires, 
+une autre fonction portant le même nom mais avec un numéro incrémenté peut être 
+utilisée. 
+Un commentaire &quot;Aide Rapide (QuickHelp)&quot; peut également être ajouté pour que l'aide 
+rapide soit affichée dans l'IDE lors de l'utilisation de la commande. 
+<br>
+<br>
+
+<b>Exemple:</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;  QuickHelp  MyMax(Min [, Max [, Options, Mode]]) - Une fonction min/max standard</font>
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax3</font>(a, b, c, d)
+    <font color="#006666">; Votre code ici</font>
+    <b><font color="#006666">ProcedureReturn</font></b> a
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax2</font>(a, b)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">MyMax3</font>(a, b, 0, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax</font>(a)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">MyMax2</font>(a, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+</font></pre>
+
+</blockquote>
+<p><b>Fonctions automatiques</b></p><blockquote>
+
+
+Il existe deux fonctions spéciales pour l'initialisation automatique et la libération 
+de la bibliothèque : InitPureLibrary() et FreePureLibrary(). Contrairement aux autres 
+fonctions de la bibliothèque, celles-ci ne sont pas déclarées avec 
+<b><font color="#006666">ProcedureDLL</font></b> mais avec <b><font color="#006666">Procedure</font></b>. Ces deux fonctions sont 
+automatiquement appelées au lancement du programme et lorsque le programme est terminé. 
+<br>
+<br>
+
+<b>Exemple :</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">InitPureLibrary</font>()
+  <font color="#006666">; Votre routine d'initialisation ici</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FreePureLibrary</font>()
+  <font color="#006666">; Votre routine de libération des ressources ici</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</blockquote>
+<p><b>Désactivation d'une PureLibrary</b></p><blockquote>
+
+
+Lors du codage de la PureLibrary, il peut être utile d'ignorer la bibliothèque 
+actuelle avec <b><font color="#006666">DisablePureLibrary</font></b> afin que le nom de la fonction puisse 
+être réutilisé. 
+<br>
+<br>
+<b>Exemple :</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DisablePureLibrary</font></b> MaLibSuperCool
+
+  <font color="#006666">; Toutes les fonctions trouvées dans &quot;MaLibSuperCool&quot; seront ignorées, afin que </font>
+  <font color="#006666">; leur nom puisse être réutilisé avec ProcedureDLL</font>
+</font></pre>
+
+</blockquote>
+<p><b>Suppression d'une PureLibrary</b></p><blockquote>
+
+
+Pour supprimer une PureLibrary personnalisée, supprimez simplement le fichier 
+correspondant dans le dossier PureBasic/PureLibraries/UserLibraries/. 
+</blockquote>
+</font></body></html>

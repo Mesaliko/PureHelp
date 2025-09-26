@@ -1,0 +1,78 @@
+<html><head><title>Print</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Print()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>Print</b></font>(Texte$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Affiche un texte sur la console 
+sans retour de ligne à la fin. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Texte$</i></td>
+<td width="90%"> 
+Le texte à afficher. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si la console est en 
+<a href="enablegraphicalconsole.html">mode graphique</a>, 
+la longueur de Texte$ ne peut 
+pas dépasser la largeur de la console, 
+sinon le texte sera tronqué. 
+<br>
+<br>
+Pour modifier la position du curseur, 
+utilisez la commande <a href="consolelocate.html">ConsoleLocate()</a>. 
+<br>
+<br>
+Pour changer la couleur du texte affiché, 
+utilisez la commande <a href="consolecolor.html">ConsoleColor()</a>. 
+<br>
+<br>
+Une fois le 'Texte$' affiché, le curseur 
+est automatiquement déplacé après le dernier 
+caractère. Si le texte dépasse la largeur 
+de la console, il est automatiquement 
+coupé et affiché sur la ligne suivante. 
+Si la console est remplie, le texte est 
+automatiquement déplacé vers le haut. 
+<br>
+<br>
+Pour afficher des données binaires en 
+mode non-graphique (par exemple lors 
+d'une redirection), la commande 
+<a href="writeconsoledata.html">WriteConsoleData()</a> peut être utilisée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    Print</font>(&quot;C'est une longue chaîne de caracteres. &quot;)
+<font color="#006666">    Print</font>(&quot;Celle-ci se place immediatement apres la première... &quot;)
+<font color="#006666">    Print</font>(&quot;C'est parce que le curseur se place en fin de chaîne, sans retour a la ligne. &quot;)
+
+<font color="#006666">    PrintN</font>(&quot;Appuyez sur [Entree] pour quitter&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="printn.html">PrintN()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=openconsole.html>OpenConsole()</a> - <a href=index.html>Console Index</a> - <a href=printn.html>PrintN()</a> -><br><br>
+
+</body></html>

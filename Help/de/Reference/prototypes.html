@@ -1,0 +1,82 @@
+<html><head><title>Prototypes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Prototypes</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Prototype</font></b>.&lt;Typ&gt; Name(&lt;Parameter&gt;, [, &lt;Parameter&gt; [= StandardWert]...])
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+Für fortgeschrittene Programmierer. <b><font color="#006666">Prototype</font></b> ermöglicht das Deklarieren eines Typs, 
+welcher eine Funktion abbildet (englisch &quot;mapped&quot;). Dies ist nützlich bei der Verwendung mit 
+einer Variable, um einen Funktionszeiger zu erstellen (der Variablen-Wert wird die Adresse 
+der aufzurufenden Funktion sein, und kann auf Wunsch verändert werden). 
+<br>
+<br>
+Dieses Feature kann die <a href="../library/openlibrary.html">OpenLibrary()</a> und 
+<a href="../library/callfunction.html">CallFunction()</a> Sequenz ersetzen, da sie einige Vorteile hat: 
+Es erfolgt eine Typen-Überprüfung, die Anzahl an Parametern wird geprüft. 
+<br>
+<br>
+Anders als CallFunction() können Prototypes problemlos mit Doubles, Fließkomma und 
+Quad <a href="../reference/variables.html">Variablen</a> umgehen. Um einfach den <a href="../reference/memory.html">Zeiger</a> 
+einer Library-Funktion zu erhalten, verwenden Sie <a href="../library/getfunction.html">GetFunction()</a>. 
+<br>
+<br>
+Die letzten Parameter können einen Standard-Wert (muss ein konstanter Ausdruck sein) haben. 
+Wenn also diese Parameter beim Funktionsaufruf weggelassen werden, wird der Standardwert verwendet. 
+<br>
+<br>
+Standardmäßig wird die Funktionen die Standardaufruf Konvention (stdcall) verwenden. Wenn der 
+Funktionszeiger ein C üblicher ist, dann sollte stattdessen die <b><font color="#006666">PrototypeC</font></b> Variante 
+verwendet werden. Weitere Informationen zu Aufrufkonventionen (cdecl, stdcall, fastcall) 
+von Bibliotheken finden Sie <a href="https://de.wikipedia.org/wiki/Aufrufkonvention">hier</a>. 
+<br>
+<br>
+Die <a href="../reference/pseudotypes.html">Pseudotypes</a> können für die Parameter verwendet werden, jedoch 
+nicht für den Rückgabewert. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;This sample only works on Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+
+  <b><font color="#006666">Prototype</font></b>.i <font color="#006666">ProtoMessageBox</font>(Window.i, Body$, Title$, Flags.i = 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;User32.dll&quot;)
+   
+    <font color="#006666">; 'MsgBox' ist eine Variable mit einem 'ProtoMessageBox' Typ</font>
+    <font color="#006666">;</font>
+    MsgBox.ProtoMessageBox =<font color="#006666"> GetFunction</font>(0, &quot;MessageBoxW&quot;)
+    
+<font color="#006666">    MsgBox</font>(0, &quot;Hello&quot;, &quot;World&quot;) <font color="#006666">; wir geben keine Flags an</font>
+  <b><font color="#006666">EndIf</font></b>    
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Mit Pseudotypes</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;This sample only works on Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+
+  <font color="#006666">; Wir verwenden den 'p-ascii' Pseudotype für die String-Parameter, da</font>
+  <font color="#006666">; MessageBoxA() eine reine ASCII-Funktion ist. Der Compiler wird -</font>
+  <font color="#006666">; sofern notwendig - die Strings automatisch nach Unicode konvertieren.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Prototype</font></b>.i <font color="#006666">ProtoMessageBoxA</font>(Window.i, Body.p-ascii, Title.p-ascii, Flags.i = 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;User32.dll&quot;)
+   
+    <font color="#006666">; 'MsgBox' ist eine Variable mit einem 'ProtoMessageBoxA' Typ</font>
+    <font color="#006666">;</font>
+    MsgBox.ProtoMessageBoxA =<font color="#006666"> GetFunction</font>(0, &quot;MessageBoxA&quot;)
+    
+<font color="#006666">    MsgBox</font>(0, &quot;Hello&quot;, &quot;World&quot;) <font color="#006666">; wir geben keine Flags an</font>
+  <b><font color="#006666">EndIf</font></b>    
+</font></pre>
+</blockquote>
+</font></body></html>

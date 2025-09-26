@@ -1,0 +1,353 @@
+<html><head><title>Managing projects</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Managing projects</font></b></p>
+
+The IDE comes with features to easily handle larger projects. These features are 
+completely optional. Programs can be created and compiled without making use of the 
+project management. However, once a program consists of a number of source code 
+and maybe other related files, it can be simpler to handle them all in one project. 
+
+
+<p><b>Project management overview</b></p><blockquote>
+
+
+A project allows the management of multiple source codes and other related files in one place 
+with quick access to the files through the <a href="../reference/ide_tools.html">project tool</a>. 
+Source files included in a project can be scanned for AutoComplete even if they are not currently 
+open in the IDE. This way functions, constants, variables etc. from the entire project can be 
+used with AutoComplete. The project can also remember the source files that are open when the project 
+is closed and reopen them the next time to continue working exactly where you left off. 
+<br>
+<br>
+Furthermore, a project keeps all the compiler settings in one place (the project file) and 
+even allows to manage multiple &quot;compile targets&quot; per project. A compile target is just a set 
+of compiler options. This way multiple versions of the same program, or multiple smaller programs 
+in one project can be easily compiled at once. 
+<br>
+<br>
+To compile a project from a script or makefile, the IDE provides command-line options to compile 
+a project without opening a user interface. See the section on <a href="../reference/ide_commandline.html">command-line options</a> 
+for more details. 
+<br>
+<br>
+All filenames and paths in a project are stored relative to the project file which allows a project 
+to be easily moved to another location as long as the relative directory structure remains intact. 
+
+
+</blockquote>
+<p><b>The Project menu</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_project.png"></p>
+
+<b>New Project</b> 
+<br>
+Creates a new project. If there is a project open at the time it will be closed. The project options 
+window will be opened where the project filename has to be specified and the project can be configured. 
+
+<br>
+<br>
+
+<b>Open Project</b> 
+<br>
+Opens an existing project. If there is a project open at the time it will be closed. 
+Previously open source codes of the project will be opened as well, depending on the project configuration. 
+
+<br>
+<br>
+
+<b>Recent Projects</b> 
+<br>
+This submenu shows a list of recently opened project files. Selecting one of the entries opens this project. 
+
+<br>
+<br>
+
+<b>Close Project</b> 
+<br>
+Closes the currently open project. The settings will be saved and the currently open source files of the 
+project will be closed, depending on the project configuration. 
+
+<br>
+<br>
+
+<b>Project Options</b> 
+<br>
+Opens the project options window. See below for more information. 
+
+<br>
+<br>
+
+<b>Add File to Project</b> 
+<br>
+Adds the currently active source code to the current project. Files belonging to the project are marked with 
+a &quot;&gt;&quot; in the file panel. 
+
+<br>
+<br>
+
+<b>Remove File from Project</b> 
+<br>
+Removes the currently active source from the current project. 
+
+<br>
+<br>
+
+<b>Open Project folder</b> 
+<br>
+Opens the folder that contains the project file in whatever file manager is available on the system. 
+
+
+</blockquote>
+<p><b>The project options window</b></p><blockquote>
+
+
+The project options window is the central configuration for the project. The general project settings 
+as well as the settings for the individual files in the project can me made here. 
+
+<p><img src="images/ide_project_options.png"></p>
+
+The following settings can be made on the &quot;Project Options&quot; tab: 
+<br>
+<br>
+
+<b>Project File</b> 
+<br>
+Shows the filename of the project file. This can only be changed during project creation. 
+
+<br>
+<br>
+
+<b>Project Name</b> 
+<br>
+The name of the project. This name is displayed in the IDE title bar and in the &quot;Recent Projects&quot; menu. 
+
+<br>
+<br>
+
+<b>Comments</b> 
+<br>
+This field allows to add some comments to the project. They will be displayed in the project info tab. 
+
+<br>
+<br>
+
+<b>Set as default project</b> 
+<br>
+The default project will be loaded on every start of the IDE. Only one project can be the default 
+project at a time. If there is no default project, the IDE will load the project that was open 
+when the IDE was closed last time if there was one. 
+
+<br>
+<br>
+
+<b>Close all sources when closing the project</b> 
+<br>
+If enabled, all sources that belong to the project will be closed automatically when the project is closed. 
+
+<br>
+<br>
+
+When opening the project... 
+<blockquote>
+
+
+<b>load all sources that where open last time</b> 
+<br>
+When the project is opened, all the sources that were open when the project was closed will be opened again. 
+
+<br>
+<br>
+
+<b>load all sources of the project</b> 
+<br>
+When the project is opened, all (source-)files of the project will be opened. 
+
+<br>
+<br>
+
+<b>load only sources marked in 'Project Files'</b> 
+<br>
+When the project is opened, only the files that are marked in the 'Project Files' tab will be opened. This way you 
+can start a session always with this set of files open. 
+
+<br>
+<br>
+
+<b>load only the main file of the default target</b> 
+<br>
+When the project is opened, the main file of the default target will be opened too. 
+
+<br>
+<br>
+
+<b>load no files</b> 
+<br>
+No source files are opened when the project is opened. 
+
+</blockquote>
+
+
+The &quot;Project Files&quot; tabs shows the list of files in the project on the right and allows changing their settings. 
+The explorer on the left is for the selection of new files to be added. 
+
+<p><img src="images/ide_project_files.png"></p>
+
+The buttons on the top have the following function: 
+
+<blockquote>
+
+<b>Add</b> 
+<br>
+Add the selected file(s) in the explorer to the project. 
+
+<br>
+<br>
+
+<b>Remove</b> 
+<br>
+Remove the selected files in the file list from the project. 
+
+<br>
+<br>
+
+<b>New</b> 
+<br>
+Shows a file requester to select a filename for a new source file to create. The new file will 
+be created, opened in the IDE and also added to the project. 
+
+<br>
+<br>
+
+<b>Open</b> 
+<br>
+Shows a file requester to select an existing file to open. The file will be opened in the IDE and added to the project. 
+
+<br>
+<br>
+
+<b>View</b> 
+<br>
+Opens the selected file(s) in the file list in the IDE or if they are binary files in the FileViewer. 
+
+</blockquote>
+
+
+
+The checkboxes on the bottom specify the options for the files in the project. They can be applied to a single file 
+or to multiple files at once by selecting the files and changing the state of the checkboxes. The settings have the 
+following meaning: 
+
+<blockquote>
+
+
+<b>Load file when opening the project</b> 
+<br>
+Files with this option will be loaded when the project is open and the &quot;load only sources marked in 'Project Files'&quot; 
+option is specified on the &quot;Project Options&quot; tab. 
+
+<br>
+<br>
+
+<b>Display a warning if file changed</b> 
+<br>
+When the project is closed, the IDE will calculate a checksum of all files that have this option set and display 
+a warning if the file has been modified when the project is opened the next time. This allows to be notified when 
+a file that is shared between multiple projects has been edited while working on another project. 
+This option should be disabled for large data files to speed up project loading and saving, or for files which 
+are changed frequently to avoid getting a warning every time the project is opened. 
+
+<br>
+<br>
+
+<b>Scan file for AutoComplete</b> 
+<br>
+Files with this option will be scanned for AutoComplete data even when they are not currently loaded in the IDE. 
+This option is on by default for all non-binary files. It should be turned off for all files that do not contain 
+source code as well as for any files where you do not want the items to turn up in the AutoComplete list. 
+
+<br>
+<br>
+
+<b>Show file in Project panel</b> 
+<br>
+Files with this option will be displayed in the project side-panel. If the project has many files it may make sense 
+to hide some of them from the panel to have a better overview and faster access to the important files in the project. 
+
+</blockquote>
+
+
+</blockquote>
+<p><b>The project overview</b></p><blockquote>
+
+
+When a project is open, the first tab of the file panel shows an overview of the project and its files. 
+
+<p><img src="images/ide_project_info.png"></p>
+
+<b>Project Info</b> 
+<br>
+This section shows some general info about the project, such as the project filename, its comments 
+or when and where the project was last opened. 
+
+<br>
+<br>
+
+<b>Project Files</b> 
+<br>
+This section shows all files in the project and their settings from the Project Options window. 
+Double-clicking on one of the files opens the file in the IDE. Right-clicking displays a context menu 
+with further options: 
+
+<blockquote>
+
+<p><img src="images/ide_popupmenu_project.png"></p>
+
+<u>Open</u> - Open the file in the IDE. 
+<br>
+<u>Open in FileViewer</u> - Open the file in the FileViewer of the IDE. 
+<br>
+<u>Open in Explorer</u> - Open the file in the operating systems file manager. 
+<br>
+<u>Add File to Project</u> - Add a new file to the project. 
+<br>
+<u>Remove File from Project</u> - Remove the selected file(s) from the project. 
+<br>
+<u>Refresh AutoComplete data</u> - Rescan the file for AutoComplete items. 
+
+</blockquote>
+
+
+
+<b>Project Targets</b> 
+<br>
+This section shows all compile targets in the project and some of their settings. 
+Double-clicking on one of the targets opens this target in the <a href="../reference/ide_compiler.html">compiler options</a>. 
+Right-clicking on one of the targets displays a context menu with further options: 
+
+<blockquote>
+
+
+<u>Edit target</u> - Open the target in the compiler options. 
+<br>
+<u>Set as default target</u> - Set this target as the default target. 
+<br>
+<u>Enable in 'Build all Targets'</u> - Include this target in the 'Build all Targets' compiler menu option. 
+
+</blockquote>
+
+
+
+</blockquote>
+<p><b>The project panel</b></p><blockquote>
+
+
+There is a sidepanel tool which allows quick access to the files belonging to the project. For more information 
+see the <a href="../reference/ide_tools.html">built-in tools</a> section. 
+
+
+
+
+
+</blockquote>
+</font></body></html>

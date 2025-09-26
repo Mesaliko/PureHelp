@@ -1,0 +1,103 @@
+<html><head><title>XMLNodeType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeType()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>XMLNodeType</b></font>(*Knoten)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Typ des angegebenen XML-Knotens zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Knoten</i></td>
+<td width="90%"> 
+Der zu verwendende XML-Knoten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Dies kann einer der folgenden sein: 
+<br>
+<br>
+
+<font color="#924B72">#PB_XML_Root</font> 
+<blockquote>
+
+Dies ist der Wurzelknoten des Baums. Er repräsentiert das Dokument selbst. Dieser Knoten 
+kann nicht manuell erstellt oder gelöscht werden. Innerhalb des Wurzelknotens kann es nur 
+einen Knoten vom Typ <font color="#924B72">#PB_XML_Normal</font> und auch keinen blanken Text geben. 
+(Dies ist notwendig, um ein ordentlich formatiertes XML-Dokument zu haben.) 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Normal</font> 
+<blockquote>
+
+Dies ist ein normaler Knoten im Baum. Er kann eine Liste von Attributen haben und Text und/oder untergeordnete Knoten 
+(&quot;Kinder&quot;, englisch &quot;children&quot;) beinhalten. 
+<br>
+<b>Beispiel: </b>&lt;node attribute=&quot;hello&quot;&gt; beinhalteter Text &lt;/node&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Comment</font> 
+<blockquote>
+
+Dieser Knoten repräsentiert einen Kommentar. Er kann keine untergeordneten Knoten oder Attribute haben. 
+Sein Text repräsentiert den Inhalt des Kommentars. 
+<br>
+<b>Beispiel: </b>&lt;!--  Kommentar Text  --&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_CData</font> 
+<blockquote>
+
+Dies ist eine CData Sektion. Eine CData Sektion beinhaltet nur Text. Deren Inhalt wird nicht vom Parser 
+interpretiert, daher kann er zum Beispiel 'unescaped' &quot;&lt;&quot; and &quot;&gt;&quot; Zeichen enthalten. CData Sektionen 
+können verwendet werden, um andere Markups oder Code innerhalb eines Dokuments einzubinden, ohne alle 
+Zeichen - welche als XML interpretiert werden könnten - erst zu escapen. 
+<br>
+<b>Beispiel: </b>&lt;![CDATA[  cdata Inhalt  ]]&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_DTD</font> 
+<blockquote>
+
+Dies ist eine Document Type Declaration (DTD). Diese Bibliothek verwendet keinen gültigkeitsüberprüfenden 
+Parser, daher werden diese Deklarationen derzeit beim Parsen eines Dokuments ignoriert. Um diese korrekt 
+wieder speichern zu können, befinden sie sich innerhalb eines DTD-Knotens. 
+Der Text-Inhalt des Knotens ist der gesamte DTD Tag. Er kann gelesen und verändert werden durch Befehle 
+wie <a href="setxmlnodetext.html">SetXMLNodeText()</a> und wird beim Exportieren/Speichern ohne Modifizierung 
+zurück in das Dokument geschrieben. Der <a href="setxmlstandalone.html">SetXMLStandalone()</a> Befehl kann beim 
+Arbeiten mit DTDs auch nützlich sein. 
+<br>
+<b>Beispiel: </b>&lt;!DOCTYPE name SYSTEM &quot;external dtd uri&quot;&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Instruction</font> 
+<blockquote>
+
+Dieser Knoten repräsentiert eine Verarbeitungsanweisung (englisch &quot;Processing Instruction&quot;). Verarbeitungsanweisungen 
+beinhalten Informationen, welche dafür gedacht sind, von der Ziel-Applikation interpretiert/ausgeführt zu werden. 
+Sie haben einen <a href="getxmlnodename.html">Namen</a>, um den Inhalt der Anweisung zu spezifieren, und die 
+Anweisungsdaten, auf welche mittels <a href="getxmlnodetext.html">GetXMLNodeText()</a> zugegriffen werden kann. 
+<br>
+<b>Beispiel: </b>&lt;?php if (...) ... ?&gt; 
+<br>
+(Hier ist &quot;php&quot; der Knotenname, und der Rest bis zum &quot;?&gt;&quot; ist der Knotentext.) 
+</blockquote>
+
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=xmlnodepath.html>XMLNodePath()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=xmlstatus.html>XMLStatus()</a> -><br><br>
+
+</body></html>

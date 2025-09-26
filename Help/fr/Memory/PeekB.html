@@ -1,0 +1,54 @@
+<html><head><title>PeekB</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PeekB()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.b = <font color="#006666"><b>PeekB</b></font>(*Memoire)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit un octet (byte) en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire à lire. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de l' 
+<a href="../reference/variables.html">octet</a>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Reprsente 1 octet signé de -128 à +127. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MemoireID =<font color="#006666"> AllocateMemory</font>(5000)
+  <b><font color="#006666">If</font></b> *MemoireID
+<font color="#006666">    PokeB</font>(*MemoireID, 65)     <font color="#006666">; Stocke cette valeur dans la zone mémoire&quot;)</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">PeekB</font>(*MemoireID)   <font color="#006666">; Lit cette valeur depuis la zone mémoire&quot;)</font>
+<font color="#006666">    PokeB</font>(*MemoireID+1, -65)   
+    <b><font color="#006666">Debug</font></b> <font color="#006666">PeekB</font>(*MemoireID + 1)
+    <b><font color="#006666">Debug</font></b> ~65+1                <font color="#006666">; Complément à 2</font>
+<font color="#006666">    FreeMemory</font>(*MemoireID)  
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible d'allouer la mémoire demandée !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pokeb.html">PokeB()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=peeka.html>PeekA()</a> - <a href=index.html>Memory Index</a> - <a href=peekc.html>PeekC()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,83 @@
+<html><head><title>PeekS</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PeekS()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>PeekS</b></font>(*Memoire [, Longueur [, Format]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit une chaîne de caractères en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire à lire. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur de la 
+<a href="../reference/variables.html">chaîne de caractères</a>. 
+
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Longueur (optionnel)</i></td>
+<td width="90%"> 
+Le nombre maximum de caractères à lire. 
+<br>
+Si ce paramètre n'est pas spécifié ou s'il 
+est égal à -1, il n'y a pas de maximum. 
+<br>
+La chaîne est lue jusqu'a ce que le caractère 
+<font color="#924B72">#NULL</font> soit rencontré ou si la longueur 
+maximale est atteinte. 
+
+</td></tr>
+<tr><td><i>Format (optionnel)</i></td>
+<td> 
+Le format à utiliser.<br>
+Peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Format ASCII 
+  <font color="#924B72">#PB_UTF8</font>   : Format UTF-8 
+  <font color="#924B72">#PB_Unicode</font>: Format Unicode (par défaut)
+</font></pre>
+Combiné avec l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ByteLength</font>: Seulement avec l'option <font color="#924B72">#PB_UTF8</font>, le résultat représentera des octets (pas des caractères).
+                  Cela peut être utile car UTF8 a des caractères de longueur variable.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la chaîne lue. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MemoireID =<font color="#006666"> AllocateMemory</font>(5000)
+  <b><font color="#006666">If</font></b> *MemoireID
+<font color="#006666">    PokeS</font>(*MemoireID, &quot;PureBasic hé&quot;)   <font color="#006666">; Stocke cette valeur dans la zone mémoire&quot;)</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MemoireID)             <font color="#006666">; Lit cette valeur depuis la zone mémoire&quot;)</font>
+<font color="#006666">    FreeMemory</font>(*MemoireID)  
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible d'allouer la mémoire demandée !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pokes.html">PokeS()</a>, <a href="memorystringlength.html">MemoryStringLength()</a>, 
+<a href="comparememorystring.html">CompareMemoryString()</a>, <a href="copymemorystring.html">CopyMemoryString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=peekq.html>PeekQ()</a> - <a href=index.html>Memory Index</a> - <a href=peeku.html>PeekU()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,83 @@
+<html><head><title>OpenNetworkConnection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenNetworkConnection()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Connection = <font color="#006666"><b>OpenNetworkConnection</b></font>(ServerName$, Port [, Flags [, TimeOut [, LocalIP$ [, LocalPort]]]]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens a network connection to the specified server. To support TLS encryption, <a href="usenetworktls.html">UseNetworkTLS()</a> needs to be 
+called before this command and a TLS flag needs to be specified. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ServerName$</i></td>
+<td width="90%"> 
+The server to connect to. This can be an 
+IP address or a full name (ie: &quot;127.0.0.1&quot; or &quot;ftp.home.net&quot;). 
+
+</td></tr>
+<tr><td><i>Port</i></td>
+<td> 
+The port on the server to connect to. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_TCP</font>: The connection will use the <a href="http://en.wikipedia.org/wiki/Transmission_Control_Protocol">TCP network protocol</a> (default)
+  <font color="#924B72">#PB_Network_UDP</font>: The connection will use the <a href="http://en.wikipedia.org/wiki/User_Datagram_Protocol">UDP network protocol</a>. The connection will not be
+                   explicitly created, as UDP is a connectionless protocol, but it will add an 
+                   entry in the PureBasic management stack and allow to send data via UDP using 
+                   the regular <a href="sendnetworkdata.html">SendNetworkData()</a> (and related) functions.
+</font></pre>
+combined with one of the following values (using the '|' operand): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_IPv4</font>: open the connection using IPv4 (default)
+  <font color="#924B72">#PB_Network_IPv6</font>: open the connection using IPv6
+</font></pre>
+combined with one of the following values (using the '|' operand): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_NoTLS</font>  : no encryption will be supported for this connection (default)
+  <font color="#924B72">#PB_Network_TLSv1</font>  : all non-deprecated TLS protocols will be supported (currently v1.2 and v1.3)
+  <font color="#924B72">#PB_Network_TLSv1_0</font>: TLS v1.0 protocol will be supported (warning, this protocol is deprecated for security reasons)
+  <font color="#924B72">#PB_Network_TLSv1_1</font>: TLS v1.1 protocol will be supported (warning, this protocol is deprecated for security reasons)
+  <font color="#924B72">#PB_Network_TLSv1_2</font>: TLS v1.2 protocol will be supported
+  <font color="#924B72">#PB_Network_TLSv1_3</font>: TLS v1.3 protocol will be supported
+</font></pre>
+
+</td></tr>
+<tr><td><i>TimeOut (optional)</i></td>
+<td> 
+The maximum time (in milliseconds) before aborting the connection attempt. Usually, it shouldn't be 
+set to a too low value (less than 5000 milliseconds), as initializing a connection over the net 
+can take some time. 
+
+</td></tr>
+<tr><td><i>LocalIP$ (optional)</i></td>
+<td> 
+The local IP address to bind the connection to. 
+
+</td></tr>
+<tr><td><i>LocalPort (optional)</i></td>
+<td> 
+The local port to bind the connection to. By default a random local port is automatically chosen for the new connection, 
+but it can be overridden with this parameter. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the connection identifier for the opened connection if the connection was established correctly. 
+If there was an error the result is zero. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="networkclientevent.html">NetworkClientEvent()</a>, <a href="sendnetworkdata.html">SendNetworkData()</a>, <a href="receivenetworkdata.html">ReceiveNetworkData()</a>, <a href="closenetworkconnection.html">CloseNetworkConnection()</a>, <a href="usenetworktls.html">UseNetworkTLS()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextipaddress.html>NextIPAddress()</a> - <a href=index.html>Network Index</a> - <a href=receivenetworkdata.html>ReceiveNetworkData()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,48 @@
+<html><head><title>ConvertDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConvertDate()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.q = <font color="#006666"><b>ConvertDate</b></font>(Date.q, Format)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Convertit une date entre l'heure locale et l'heure UTC (Temps universel coordonné). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Date.q</i></td>
+<td width="90%"> 
+La date à convertir. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+Le format de date. Il peut s'agir de l'une des constantes suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_LocalTime</font>: Convertit une date UTC en date d’heure locale.
+  <font color="#924B72">#PB_Date_UTC</font>      : Convertit une date d’heure locale en date UTC.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la date convertie, ou -1 si la conversion a échoué. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;Temps Local : %hh:%ii:%ss&quot;,<font color="#006666"> ConvertDate</font>(<font color="#006666">DateUTC</font>(), <font color="#924B72">#PB_Date_LocalTime</font>))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;Temps UTC   : %hh:%ii:%ss&quot;,<font color="#006666"> ConvertDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_UTC</font>))
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="formatdate.html">FormatDate()</a>, <a href="date.html">Date()</a>, <a href="dateutc.html">DateUTC()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=adddate.html>AddDate()</a> - <a href=index.html>Date Index</a> - <a href=date.html>Date()</a> -><br><br>
+
+</body></html>

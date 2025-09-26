@@ -1,0 +1,88 @@
+<html><head><title>DrawVectorImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawVectorImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawVectorImage</b></font>(ImageID [, Alpha [, Width.d, Height.d]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Draw the specified image directly to the vector drawing output. 
+<br>
+<br>
+The image will be drawn at the location of the <a href="movepathcursor.html">path cursor</a>. 
+The cursor will be moved to the location of the bottom/right corner of the image 
+after the image is drawn. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ImageID (optional)</i></td>
+<td width="90%"> 
+Specifies the image to draw. Use the <a href="../image/imageid.html">ImageID()</a> function to 
+get this value from an image. 
+
+</td></tr>
+<tr><td><i>Alpha (optional)</i></td>
+<td> 
+Specifies an optional alpha transparency to apply to the image. 
+This transparency is applied in addition to any transparent pixels already 
+present in the image. 
+The default is value is 255 (no additional transparency). 
+
+</td></tr>
+<tr><td><i>Width.d, Height.d (optional)</i></td>
+<td> 
+Specifies an optional with and height for the image. If no width and height 
+are specified, then the dimensions of the source image (in pixels) are converted 
+into the unit of the vector drawing output and used (i.e. the image has its original 
+size). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+    
+<font color="#006666">    LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/PureBasicLogo.bmp&quot;)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+<font color="#006666">      MovePathCursor</font>(50, 50)
+<font color="#006666">      DrawVectorImage</font>(<font color="#006666">ImageID</font>(0), 127)
+      
+<font color="#006666">      MovePathCursor</font>(75, 75)
+<font color="#006666">      DrawVectorImage</font>(<font color="#006666">ImageID</font>(0), 127,<font color="#006666"> ImageWidth</font>(0) / 2,<font color="#006666"> ImageHeight</font>(0))
+
+<font color="#006666">      MovePathCursor</font>(120, 0)
+<font color="#006666">      RotateCoordinates</font>(120, 0, 35)
+<font color="#006666">      DrawVectorImage</font>(<font color="#006666">ImageID</font>(0), 127)
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/drawvectorimage.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="movepathcursor.html">MovePathCursor()</a>, <a href="pathcursorx.html">PathCursorX()</a>, <a href="pathcursory.html">PathCursorY()</a>, <a href="vectorsourceimage.html">VectorSourceImage()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=dotpath.html>DotPath()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=drawvectorparagraph.html>DrawVectorParagraph()</a> -><br><br>
+
+
+</body></html>

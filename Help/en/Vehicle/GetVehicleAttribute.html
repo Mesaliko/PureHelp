@@ -1,0 +1,64 @@
+<html><head><title>GetVehicleAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetVehicleAttribute()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.f = <font color="#006666"><b>GetVehicleAttribute</b></font>(#Entity, Attribute, Wheel)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Get the specified attribute of the given vehicle entity. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The vehicle entity to use. 
+
+</td></tr>
+<tr><td><i>Attribute</i></td>
+<td> 
+The attribute to get. The following attributes are available: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Vehicle_Friction</font>: get the wheel friction value (see <a href="createvehiclebody.html">CreateVehicleBody()</a> for more info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionForce</font>: get the wheel maximum suspension force value (see <a href="createvehiclebody.html">CreateVehicleBody()</a> for more info).
+  <font color="#924B72">#PB_Vehicle_SuspensionStiffness</font>: get the stiffness value for the suspension (see <a href="createvehiclebody.html">CreateVehicleBody()</a> for more info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionCompression</font>: get the wheel maximum suspension compression value (see <a href="createvehiclebody.html">CreateVehicleBody()</a> for more info).
+  <font color="#924B72">#PB_Vehicle_MaxSuspensionLength</font>: get the maximum length of the suspension (meters).
+  <font color="#924B72">#PB_Vehicle_WheelDampingCompression</font>: get the wheel damping compression value.
+  <font color="#924B72">#PB_Vehicle_WheelDampingRelaxation</font>: get the wheel damping relaxation value.
+  <font color="#924B72">#PB_Vehicle_RollInfluence</font>: get the wheel roll influence value (see <a href="addvehiclewheel.html">AddVehicleWheel()</a> for more info).
+  <font color="#924B72">#PB_Vehicle_IsInContact</font>: return <font color="#924B72">#True</font> if the vehicle is in contact with another object, <font color="#924B72">#False</font> otherwise.
+  <font color="#924B72">#PB_Vehicle_CurrentSpeed</font> : get the current vehicle speed in Km/Hour.
+  <font color="#924B72">#PB_Vehicle_ContactPointX</font>: get the X contact point coordinate.
+  <font color="#924B72">#PB_Vehicle_ContactPointY</font>: get the Y contact point coordinate.
+  <font color="#924B72">#PB_Vehicle_ContactPointZ</font>: get the Z contact point coordinate.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalX</font>: get the X normal value of the contact point.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalY</font>: get the Y normal value of the contact point.
+  <font color="#924B72">#PB_Vehicle_ContactPointNormalZ</font>: get the Z normal value of the contact point.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorX</font>: get the X forward vector value of the contact point.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorY</font>: get the Y forward vector value of the contact point.
+  <font color="#924B72">#PB_Vehicle_ForwardVectorZ</font>: get the Z forward vector value of the contact point.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Wheel</i></td>
+<td> 
+The wheel index, starting from 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the value of the specified attribute or 0 if the vehicle does not support the attribute. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setvehicleattribute.html">SetVehicleAttribute()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createvehiclebody.html>CreateVehicleBody()</a> - <a href=index.html>Vehicle Index</a> - <a href=setvehicleattribute.html>SetVehicleAttribute()</a> -><br><br>
+
+</body></html>

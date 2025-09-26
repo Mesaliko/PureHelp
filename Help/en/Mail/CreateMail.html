@@ -1,0 +1,80 @@
+<html><head><title>CreateMail</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateMail()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateMail</b></font>(#Mail, From$, Subject$ [, Encoding])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create a new, empty mail. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+A number to identify the new mail. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used 
+to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>From$</i></td>
+<td> 
+The sender address for the mail. The address have to be one of the following format: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;joe.doe@domain.com&quot;
+  &quot;&lt;joe.doe@domain.com&gt;&quot;
+  &quot;Joe Doe &lt;joe.doe@domain.com&gt;&quot;
+</font></pre>
+
+</td></tr>
+<tr><td><i>Subject$</i></td>
+<td> 
+The subject line for the mail. 
+
+</td></tr>
+<tr><td><i>Encoding (optional)</i></td>
+<td> 
+The encoding for the mail. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font> : The mail body will be in ascii 
+  <font color="#924B72">#PB_UTF8</font>  : The mail body will be in <a href="../reference/unicode.html">UTF-8</a> (default)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the mail was created successfully and zero if not. 
+If <font color="#924B72">#PB_Any</font> was used as the #Mail parameter, then the auto-generated number is returned in case of success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, <a href="setmailattribute.html">SetMailAttribute()</a>, <a href="addmailattachment.html">AddMailAttachment()</a> and 
+<a href="addmailattachmentdata.html">AddMailAttachmentData()</a> can be used to change the content of the  #Mail. 
+<br>
+<br>
+Note: According to the <a href="http://www.ietf.org/rfc/rfc2822.txt">RFC 2822</a> standard 
+a line break in an e-mail need to be done always using the CRLF chars. <br>
+<br>
+On Linux, 'libcurl' needs to be installed to have the mail commands working (most of Linux 
+distributions comes with it already installed). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    SetMailBody</font>(0, &quot;This is a body !&quot; + <font color="#924B72">#CRLF$</font> + &quot;Second line&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Mail created&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Can't create the mail&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, <a href="setmailattribute.html">SetMailAttribute()</a>, <a href="addmailattachment.html">AddMailAttachment()</a>, <a href="addmailattachmentdata.html">AddMailAttachmentData()</a>, <a href="sendmail.html">SendMail()</a>, <a href="freemail.html">FreeMail()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addmailrecipient.html>AddMailRecipient()</a> - <a href=index.html>Mail Index</a> - <a href=freemail.html>FreeMail()</a> -><br><br>
+
+</body></html>

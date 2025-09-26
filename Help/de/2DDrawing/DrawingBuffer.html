@@ -1,0 +1,53 @@
+<html><head><title>DrawingBuffer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingBuffer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Puffer = <font color="#006666"><b>DrawingBuffer</b></font>()  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Zeichenpuffer (&quot;DrawingBuffer&quot;) für direkte 
+Pixel-Manipulation zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Zeiger (&quot;Pointer&quot;) der Pixel-Daten zurück, wenn direkter Zugriff möglich ist, 
+oder Null, wenn auf die Pixel-Daten nicht direkt zugegriffen werden kann. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion muss erneut aufgerufen werden, wenn andere Befehle dieser Befehls-Bibliothek 
+seit der letzten Pixel-Manipulation verwendet wurden. Sobald <a href="stopdrawing.html">StopDrawing()</a> aufgerufen wurde, 
+wird der Puffer ungültig und kann nicht mehr verwendet werden. 
+<br>
+<br>
+Dieser Befehl ist nur für fortgeschrittene Programmierer. Um weitere Informationen über den 
+Zeichenbuffer zu erhalten, stehen Ihnen die folgenden Befehle zur Verfügung: 
+<a href="drawingbufferpixelformat.html">DrawingBufferPixelFormat()</a> und <a href="drawingbufferpitch.html">DrawingBufferPitch()</a>. 
+<br>
+<br>
+Die zurückgegebene Adresse kann sich direkt im Videospeicher befinden, wenn die Ausgabe 
+auf <a href="../screen/screenoutput.html">ScreenOutput()</a> oder <a href="../sprite/spriteoutput.html">SpriteOutput()</a> 
+erfolgt, und erlaubt sehr schnelle Pixel-Manipulation. 
+Mit <a href="../image/imageoutput.html">ImageOutput()</a> ermöglicht dieser Befehl direkten Zugriff auf die 
+Pixel des Ziel-Bildes. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+Für ein Beispiel, wie der Zeichenbuffer zum Erstellen schöner Grafikeffekte genutzt werden kann, 
+werfen Sie einen Blick auf das: 
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/DirectScreenDrawing.pb.html">DirectScreenDrawing.pb</a>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="drawingbufferpixelformat.html">DrawingBufferPixelFormat()</a>, <a href="drawingbufferpitch.html">DrawingBufferPitch()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=drawtext.html>DrawText()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=drawingbufferpitch.html>DrawingBufferPitch()</a> -><br><br>
+
+</body></html>

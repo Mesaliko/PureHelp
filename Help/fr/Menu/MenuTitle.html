@@ -1,0 +1,60 @@
+<html><head><title>MenuTitle</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MenuTitle()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MenuTitle</b></font>(Titre$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau titre de menu. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titre$</i></td>
+<td width="90%"> 
+Le texte du nouveau titre de menu. 
+<br>
+<br>
+Sous Windows, vous pouvez utiliser le caractère &amp; pour 
+souligner une lettre si le thème graphique le permet, ainsi : 
+<br>
+<br>
+&quot;&amp;Fichier&quot; affichera une ligne de menu 
+<u>F</u>ichier . 
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="menutitle.html">MenuTitle()</a> ne peut pas être utilisés dans les <a href="createpopupmenu.html">menus popup</a>, 
+car ils sont dépourvus d'en-têtes de menus. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;Note : Sous Windows Vista et suivant, pour que le trait souligné apparaisse en permanence, </font>
+  <font color="#006666">;décochez l'option : 'Masquer les lettres soulignées pour la navigation au clavier jusqu'à ce que j'appuie sur la touche Alt'</font>
+  <font color="#006666">;dans les propriétés du bureau puis affichage / Apparence / Effets.</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;Exemple MenuTitle&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      MenuTitle</font>(&quot;Projet&quot;)     <font color="#006666">; Titre normal</font>
+<font color="#006666">        MenuItem</font>(1, &quot;Ouvrir&quot;)  
+<font color="#006666">        MenuItem</font>(2, &quot;Fermer&quot;)
+<font color="#006666">      MenuTitle</font>(&quot;&amp;Edition&quot;)       <font color="#006666">; Titre avec une lettre soulignée. Le trait souligné n'apparaîtra que</font>
+                                  <font color="#006666">; si le menu est appelé avec F10 ou ALT.</font>
+<font color="#006666">        MenuItem</font>(3, &quot;Défaire&quot;)
+<font color="#006666">        MenuItem</font>(4, &quot;Refaire&quot;)
+<font color="#006666">      MenuTitle</font>(&quot;About&quot;)       <font color="#006666">; Titre seul</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>()=<font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/menutitle.png"></p>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=menuitem.html>MenuItem()</a> - <a href=index.html>Menu Index</a> - <a href=opensubmenu.html>OpenSubMenu()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,72 @@
+<html><head><title>EntityCustomParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EntityCustomParameter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>EntityCustomParameter</b></font>(#Entity, SubEntity, ParameterIndex, Value1.f, Value2.f, Value3.f, Value4.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Set a custom parameter value to the #Entity material shader script. To have any effect, the material 
+associated to the entity should have a shader script (either GLSL or HLSL). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The entity to use. 
+
+</td></tr>
+<tr><td><i>SubEntity</i></td>
+<td> 
+The sub-entity to use. First sub-entity index starts at 0 (representing the main entity). 
+
+</td></tr>
+<tr><td><i>ParameterIndex</i></td>
+<td> 
+The parameter index in the shader script. 
+
+</td></tr>
+<tr><td><i>Value1</i></td>
+<td> 
+The first parameter value. 
+
+</td></tr>
+<tr><td><i>Value2</i></td>
+<td> 
+The second parameter value (if the parameter only accept one value, this value will be ignored). 
+
+</td></tr>
+<tr><td><i>Value3</i></td>
+<td> 
+The third parameter value (if the parameter only accept two values, this value will be ignored). 
+
+</td></tr>
+<tr><td><i>Value4</i></td>
+<td> 
+The fourth parameter value (if the parameter only accept three values, this value will be ignored). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To set parameters in a material, you need to define them in the material script as param_named_auto 'VariableName' custom 'ParameterIndex', for example: 
+<pre><font face="Courier New, Courier, mono" size="2">  param_named_auto foo custom 1
+  param_named_auto bar custom 2
+</font></pre>
+The definition and size of the parameter is defined in the shaders script, for example: 
+<pre><font face="Courier New, Courier, mono" size="2">  uniform float foo;
+  uniform vec3 bar;
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=entitycollide.html>EntityCollide()</a> - <a href=index.html>Entity Index</a> - <a href=entitydirection.html>EntityDirection()</a> -><br><br>
+
+</body></html>

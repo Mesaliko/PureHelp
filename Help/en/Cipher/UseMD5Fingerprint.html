@@ -1,0 +1,50 @@
+<html><head><title>UseMD5Fingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseMD5Fingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>UseMD5Fingerprint</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Register the MD5 fingerprint plugin for future use. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Here is a quick explanation taken from the RFC 1321 on MD5: 
+<br>
+<br>
+'The algorithm takes as input a message of arbitrary length and produces 
+as output a 128-bit &quot;fingerprint&quot; or &quot;message digest&quot; of the input. 
+It is conjectured that it is computationally infeasible to produce 
+two messages having the same message digest, or to produce any 
+message having a given pre-specified target message digest. The MD5 
+algorithm is intended for digital signature applications.' 
+<br>
+<br>
+MD5 hashes are often used for password encryption, but it should be 
+avoided as it has been found to be vulnerable to severals attacks. 
+More information about MD5 can be found in the RFC 1321: 
+<a href="http://www.ietf.org/rfc/rfc1321.txt">http://www.ietf.org/rfc/rfc1321.txt</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMD5Fingerprint</font>()
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;yourpassword&quot;, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a>(), <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a>(), <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a>(), <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a>() 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=usecrc32fingerprint.html>UseCRC32Fingerprint()</a> - <a href=index.html>Cipher Index</a> - <a href=usesha1fingerprint.html>UseSHA1Fingerprint()</a> -><br><br>
+
+</body></html>

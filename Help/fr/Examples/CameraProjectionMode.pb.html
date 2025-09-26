@@ -1,0 +1,76 @@
+<html><head><title>CameraProjectionMode.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CameraProjectionMode Camera Orthographic
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; CameraProjectionMode Camera Orthographic - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+
+<font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;White.jpg&quot;))
+<font color="#006666">DisableMaterialLighting</font>(0, <font color="#924B72">#True</font>)
+
+<font color="#006666">;- Mesh
+</font><font color="#006666">CreateMesh</font>(0, <font color="#924B72">#PB_Mesh_LineStrip</font>, <font color="#924B72">#PB_Mesh_Static</font>)
+<b><font color="#006666">Define</font></b>.f x, y, z, t
+
+k=6<font color="#006666">;20
+</font><b><font color="#006666">While</font></b> t &lt;= 2*<font color="#924B72">#PI</font>
+  x.f =<font color="#006666"> Cos</font>(t) -<font color="#006666"> Cos</font>(k* t)/2 +<font color="#006666"> Sin</font>(14* t)/3
+  y.f =<font color="#006666"> Cos</font>(14* t)/3 +<font color="#006666"> Sin</font>(t)-<font color="#006666"> Sin</font>(k* t)/2
+  z.f = 0
+  
+<font color="#006666">  MeshVertexPosition</font>(x, y, z)
+<font color="#006666">  MeshVertexColor</font>(<font color="#006666">RGB</font>(255,0,0))
+  
+  t + 0.001
+  
+<b><font color="#006666">Wend</font></b>
+
+<font color="#006666">FinishMesh</font>(<font color="#924B72">#False</font>)
+
+<font color="#006666">SetMeshMaterial</font>(0,<font color="#006666"> MaterialID</font>(0))
+Plane =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>)
+<font color="#006666">AttachNodeObject</font>(Plane,<font color="#006666"> MeshID</font>(0))
+
+<font color="#006666">;-Camera
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 0, 1, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0,0,0,0)
+
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(50, 250, 50))
+Width.f = 2*<font color="#924B72">#PI</font> <font color="#006666">; width of the plotting x range
+</font>Height.f = (600/800)*Width <font color="#006666">; 800 is the windowed Screen width
+</font><font color="#006666">CameraProjectionMode</font>(0, <font color="#924B72">#PB_Camera_Orthographic</font>, Width, Height)
+
+<font color="#006666">;glLineWidth_(2) thick lines only for opengl subsystem
+</font><b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  RotateNode</font>(Plane, 0, 0, 0.5, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  ExamineKeyboard</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> quit = 1
+
+</font></pre>
+</body></html>

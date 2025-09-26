@@ -1,0 +1,71 @@
+<html><head><title>EscapeString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EscapeString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>EscapeString</b></font>(Chaine$ [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Transforme une chaîne standard en chaîne 
+avec des séquences d'échappement. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+La chaîne à transformer. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_EscapeInternal</font>: échappe une chaîne en utilisant le format de PureBasic (Par défaut). 
+                            (voir <a href="../reference/general_rules.html">Règles générales</a>)                          
+  <font color="#924B72">#PB_String_EscapeXML</font>     : échappe une chaîne en utilisant le format XML. Utile pour insérer une chaîne dans un arbre XML.
+  <font color="#924B72">#PB_String_EscapeJSON</font>    : échappe une chaîne en utilisant le format JSON. Utile pour insérer une chaîne dans une valeur JSON.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la version échappée de la chaîne. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La fonction <a href="unescapestring.html">UnescapeString()</a> peut être 
+utilisée pour faire l'opération inverse. 
+<br>
+<br>
+Rappel du format PureBasic: 
+<pre><font face="Courier New, Courier, mono" size="2">  \a: bip                     <b><font color="#006666">Chr</font></b>(7)
+  \b: retour arrière          <b><font color="#006666">Chr</font></b>(8)
+  \f: saut de page            <b><font color="#006666">Chr</font></b>(12)
+  \n: retour à la ligne       <b><font color="#006666">Chr</font></b>(10)
+  \r: retour chariot          <b><font color="#006666">Chr</font></b>(13)
+  \t: tabulation horizontale  <b><font color="#006666">Chr</font></b>(9)
+  \v: tabulation verticale    <b><font color="#006666">Chr</font></b>(11)
+  \&quot;: double quote            <b><font color="#006666">Chr</font></b>(34)
+  \\: antislash               <b><font color="#006666">Chr</font></b>(92)
+</font></pre>
+
+Attention: Sous Windows, \t ne fonctionne pas avec les fonctions graphiques 
+des bibliothèques 2DDrawing et VectorDrawing. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">EscapeString</font>(&quot;Test=&quot;+<font color="#006666">Chr</font>(34)+&quot;Hello&quot;+<font color="#006666">Chr</font>(34)+&quot;.&quot;) <font color="#006666">; Affiche &quot;Test=\&quot;Hello\&quot;.&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">EscapeString</font>(&quot;&lt;item&gt;Hello&lt;/item&gt;&quot;, <font color="#924B72">#PB_String_EscapeXML</font>) <font color="#006666">; Affiche &quot;&amp;lt;item&amp;gt;Hello&amp;lt;/item&amp;gt;&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="unescapestring.html">UnescapeString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=countstring.html>CountString()</a> - <a href=index.html>String Index</a> - <a href=findstring.html>FindString()</a> -><br><br>
+
+</body></html>

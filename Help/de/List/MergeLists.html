@@ -1,0 +1,77 @@
+<html><head><title>MergeLists</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MergeLists()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>MergeLists</b></font>(QuellListe(), ZielListe() [, Lokation])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Verschiebt alle Elemente von der QuellListe() zur ZielListe(). Dies ist eine schnelle Operation, 
+da die Element-Daten selber nicht verschoben werden, um die zwei Listen zusammenzuführen (englisch 
+&quot;to merge&quot;). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>QuellListe()</i></td>
+<td width="90%"> 
+Die Liste, aus der die Elemente genommen werden. Diese Liste wird leer sein, nachdem 
+diese Funktion abgeschlossen ist. 
+
+</td></tr>
+<tr><td><i>ZielListe()</i></td>
+<td> 
+Die Liste, wohin die Elemente verschoben werden. Diese Liste wird die Elemente beider 
+Listen beinhalten, nachdem diese Funktion abgeschlossen ist. 
+
+</td></tr>
+<tr><td><i>Lokation (optional)</i></td>
+<td> 
+Position, wo die Elemente in der ZielListe() eingefügt werden. Dies kann einer der folgenden 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_List_Last</font>  : Hängt die Elemente am Ende der ZielListe() an  (Standard)
+  <font color="#924B72">#PB_List_First</font> : Fügt die Elemente am Anfang der ZielListe() ein
+  <font color="#924B72">#PB_List_Before</font>: Fügt die Elemente vor dem aktuellen Element der ZielListe() ein
+  <font color="#924B72">#PB_List_After</font> : Fügt die Elemente nach dem aktuellen Element der ZielListe() ein
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">A</font>.s()
+<font color="#006666">  AddElement</font>(<font color="#006666">A</font>()):<font color="#006666"> A</font>() = &quot;a0&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">A</font>()):<font color="#006666"> A</font>() = &quot;a1&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">A</font>()):<font color="#006666"> A</font>() = &quot;a2&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">A</font>()):<font color="#006666"> A</font>() = &quot;a3&quot;
+  
+  <b><font color="#006666">NewList</font></b> <font color="#006666">B</font>.s()
+<font color="#006666">  AddElement</font>(<font color="#006666">B</font>()):<font color="#006666"> B</font>() = &quot;b0&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">B</font>()):<font color="#006666"> B</font>() = &quot;b1&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">B</font>()):<font color="#006666"> B</font>() = &quot;b2&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">B</font>()):<font color="#006666"> B</font>() = &quot;b3&quot;
+    
+  <font color="#006666">; Fügt die Elemente von A() vor dem &quot;b1&quot; Element in B() ein</font>
+<font color="#006666">  SelectElement</font>(<font color="#006666">B</font>(), 1)
+<font color="#006666">  MergeLists</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>(), <font color="#924B72">#PB_List_Before</font>)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">B</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">B</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="splitlist.html">SplitList()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=listsize.html>ListSize()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=moveelement.html>MoveElement()</a> -><br><br>
+
+</body></html>

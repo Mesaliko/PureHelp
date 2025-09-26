@@ -1,0 +1,529 @@
+<html><head><title>Verwenden des Debuggers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Verwenden des Debuggers</font></b></p>
+
+PureBasic bietet einen leistungsstarken Debugger, welcher Ihnen beim Finden von Fehlern 
+und Bugs in Ihrem Quellcode hilft. Er ermöglicht Ihnen die Kontrolle der Programmausführung, 
+Überwachen Ihrer <a href="../reference/variables.html">Variablen</a>, <a href="../reference/dim.html">Arrays</a>, 
+<a href="../reference/newlist.html">Listen</a> bzw. <a href="../reference/newmap.html">Maps</a> oder das Darstellen 
+der Debug-Ausgabe Ihres Programms. 
+
+Er bietet auch fortgeschrittene Funktionen für <a href="../reference/inlinedasm.html">Assembler</a>-Programmierer 
+zum Untersuchen und Verändern von CPU-Registern sowie Anzeigen des Programmstacks oder des Speichers 
+Ihres Programms. Er bietet auch die Möglichkeit zum Debuggen eines Programms über ein Netzwerk 
+(&quot;remotely&quot; - aus der Ferne). 
+
+<br>
+<br>
+
+Um den Debugger für Ihr Programm zu aktivieren, können Sie &quot;Debugger verwenden&quot; aus dem 
+Debugger-Menü verwenden oder diese Einstellungen in den Compiler-Optionen Ihres Programms 
+vornehmen. Durch Verwendung von &quot;Mit Debugger kompilieren&quot; aus dem Compiler-Menü können Sie 
+den Debugger nur für diese eine Kompilierung aktivieren. 
+
+<br>
+<br>
+
+Sie können direkt in Ihrem Quellcode auch <a href="../reference/debugger.html">Debugger-Befehle</a> wie 
+<b><font color="#006666">CallDebugger</font></b>, <b><font color="#006666">Debug</font></b>, <b><font color="#006666">DebugLevel</font></b>, <b><font color="#006666">DisableDebugger</font></b> und 
+<b><font color="#006666">EnableDebugger</font></b> verwenden. 
+
+<br>
+<br>
+
+
+<b>Der PureBasic Debugger ist in drei verschiedenen Formen verfügbar:</b> 
+
+<br>
+<br>
+
+Ein Debugger direkt in die IDE integriert, um auf einfache und schnelle Art und Weise 
+Ihre Programme direkt aus der Programmierumgebung heraus zu debuggen. Dieser Debugger 
+bietet auch die meisten Funktionen. 
+
+<br>
+<br>
+
+Ein separater, eigenständiger Debugger, welcher nützlich für einige spezielle Anwendungszwecke 
+(zum Beispiel, wenn das gleiche Programm mehrfach zur gleichen Zeit ausgeführt und debuggt 
+werden muss) oder die Verwendung mit Code-Editoren von Drittanbietern ist. Er bietet die 
+meisten Funktionen des integrierten IDE-Debuggers - da er jedoch unabhängig von der IDE ist, 
+geht einiges der Effizienz des direkten Zugriffs aus der IDE verloren. Der eigenständige 
+Debugger kann verwendet werden, um Programme aus der Ferne (&quot;remote&quot;) über eine Netzwerk-Verbindung 
+zu debuggen. 
+
+<br>
+<br>
+
+Ein Debugger nur für die <a href="../console/index.html">Konsole</a>. Die Hauptanwendung dieses Debuggers 
+liegt im Testen auf nicht-grafischen Umgebungen wie Linux-Systemen ohne X-Server oder für das 
+Entwickeln &quot;aus der Ferne&quot; mittels ssh. 
+
+<br>
+<br>
+
+Der Typ des zu verwendenden Debuggers kann in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+festgelegt werden. 
+
+<br>
+<br>
+
+Alle diese Funktionalität des Debuggens hat ihren Preis. Der Programmablauf eines im Debug-Modus 
+gestarteten Programms ist deutlich langsamer als ohne Debugger. Dies sollte trotzdem 
+kein Problem darstellen, da dies nur zum Testen genutzt wird. 
+<br>
+<br>
+Wenn Sie den Debugger verwenden wollen, jedoch einige Teile in Ihrem Programm haben, welche die 
+volle Ausführungsgeschwindigkeit benötigen, können Sie durch Verwendung der <b><font color="#006666">DisableDebugger</font></b> 
+/ <b><font color="#006666">EnableDebugger</font></b> Schlüsselwörter genau für diesen Programmteil den Debugger ausschalten. 
+
+
+<p><b>Der in die IDE integrierte Debugger</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_integrated.png"></p>
+
+Sie können während des Programmablaufs über das Debugger-Menü oder die zugehörigen Schalter der 
+Werkzeugleiste bzw. Tastenkürzel auf alle Debugger-Features zugreifen. 
+
+<br>
+<br>
+
+Während Sie Ihr Programm debuggen, werden bis zum Programmende alle zum Programm gehörenden 
+Quellcode-Dateien (auch Include-Dateien) auf 'nur Lesen' (Read-Only) gesetzt. 
+Dies hilft sicherzustellen, dass der aktuell als ausgeführt markierte Code nicht ohne 
+erneute Kompilierung verändert wurde. 
+
+<br>
+<br>
+
+Beachten Sie, dass ein Programm nur einmalig laufen kann, wenn Sie sich im IDE-Debugger-Modus 
+befinden. Wenn Sie das Programm ein weiteres Mal ausführen, wird Ihnen die Option angeboten, dieses 
+mit dem eigenständigen Debugger starten. 
+
+
+
+
+<br>
+<br>
+
+<b>Tipp:</b> 
+<br>
+Das Debugger-Menü wird auch zum Systemmenü (das Menü, welches Sie beim Klicken auf das PB-Icon 
+in der linken oberen Ecke des Fensters erhalten) des Hauptfensters der IDE hinzugefügt. 
+Dies ermöglicht Ihnen auch den Zugriff auf das Debugger-Menü über die Startleiste (Taskbar), 
+indem Sie mit der rechten Maustaste auf das Icon der IDE in der Startleiste klicken. 
+
+
+
+
+</blockquote>
+<p><b>Programmkontrolle</b></p><blockquote>
+
+
+Es gibt Funktionen für die grundlegende Kontrolle des laufenden Programms. 
+Sie können die Ausführung anhalten, um Variablen oder die Code-Position zu untersuchen 
+oder den Quellcode Zeile für Zeile auszuführen, um dem Programmablauf zu folgen. 
+Während das Programm angehalten wird, wird die gerade ausgeführte Zeile in Ihrem 
+Quellcode markiert (mit hellblauer Hintergrundfarbe in den Standard-Farben). 
+<br>
+<br>
+Der Status des Programms kann in der IDE-Statusleiste oder im Bereich des Fehlerberichts 
+eingesehen werden. 
+
+<br>
+<br>
+
+Befehle im Debugger-Menü für den Programmablauf: 
+
+<br>
+<br>
+
+<b>Stop</b> 
+<br>
+Hält das Programm an und zeigt die aktuelle Zeile an. 
+
+<br>
+<br>
+
+<b>Fortsetzen</b> 
+<br>
+Setzt die Programmausführung fort, bis eine erneute Stop-Bedingung eintritt. 
+
+<br>
+<br>
+
+<b>Programm beenden</b> 
+<br>
+Dies veranlasst das Beenden des Programms und schließt alle zugehörigen Debugger-Fenster. 
+
+<br>
+<br>
+
+<b>Schritt</b> 
+<br>
+Dies führt eine Zeile an Quellcode aus und hält dann die Programmausführung wieder an. 
+
+<br>
+<br>
+
+<b>Schritt &lt;n&gt;</b> 
+<br>
+Dies wird eine Anzahl an Schritten, welche Sie angeben können, ausführen und dann 
+die Ausführung wieder anhalten. 
+
+
+<br>
+<br>
+
+<b>Schritt über</b> 
+<br>
+Dies führt die aktuelle Zeile im Quellcode aus und hält dann erneut an, einfach wie der normale 'Schritt'. 
+Der Unterschied besteht darin, dass wenn die aktuelle Zeile Aufrufe zu <a href="../reference/procedures.html">Prozeduren</a> 
+enthält, die Ausführung nicht innerhalb dieser Prozeduren anhält - wie es dies beim normalen 'Schritt' macht, 
+sondern die ganze Prozedur ausgeführt wird und nach der Rückkehr aus dieser angehalten wird. 
+Dies ermöglicht das schnelle Überspringen von Prozeduren im &quot;Schritt&quot;-Modus. 
+
+<br>
+<br>
+
+<b>Schritt aus</b> 
+<br>
+Dies führt den verbleibenden Code innerhalb der aktuellen <a href="../reference/procedures.html">Prozedur</a> aus und 
+hält nach Rückkehr aus dieser erneut an. Wenn sich die aktuelle Zeile nicht innerhalb einer Prozedur 
+befindet, wird ein normaler 'Schritt' ausgeführt. 
+
+
+</blockquote>
+<p><b>Zeilen-Haltepunkte</b></p><blockquote>
+
+
+Haltepunkte sind ein weiterer Weg, um die Ausführung Ihres Programms zu kontrollieren. 
+Mit der Menü-Option &quot;Haltepunkt&quot; markieren Sie die aktuell ausgewählte Zeile als 
+Haltepunkt (oder entfernen jeden Haltepunkt, der in dieser Zeile bereits existiert). 
+<br>
+<br>
+Wenn die Ausführung des Quellcodes diese Zeile erreicht, wird sie an diesem Punkt 
+anhalten. Beachten Sie, dass wenn Sie eine nicht-ausführbare Zeile (wie eine Leerzeile 
+oder eine Struktur-Definition) auswählen, die Programmausführung auf der nächsten 
+ausführbaren Zeile danach angehalten wird. 
+
+<br>
+<br>
+
+Nachdem die Ausführung Ihres Programms am Haltepunkt gestoppt wurde, können Sie 
+jeden Menü-Befehl zur Programmkontrolle verwenden, um die Ausführung fortzusetzen 
+oder zu beenden. 
+
+<br>
+<br>
+
+Haltepunkte können dynamisch gesetzt und entfernt werden, während Ihr Programm läuft 
+oder während Sie Ihren Quellcode bearbeiten. Mit dem Menü-Befehl &quot;Haltepunkte löschen&quot; 
+können Sie alle Haltepunkte in einer Quellcode-Datei entfernen. 
+
+<br>
+<br>
+Hinweis: Sie können auch Haltepunkte setzen/entfernen, indem Sie die Alt-Taste gedrückt 
+halten und auf den Rand, welcher die Haltepunkt-Markierungen enthält, klicken. 
+
+
+</blockquote>
+<p><b>Daten-Haltepunkte</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_databreak.png"></p>
+
+Zusätzlich zu den Zeilen-spezifischen Haltepunkten bietet der Debugger auch Daten-Haltepunkte (englisch &quot;data breakpoints&quot;). 
+Daten-Haltepunkte halten das Programm an, wenn eine bestimmte Bedingung erfüllt ist. Auf 
+diesem Weg ist es einfach herauszufinden, wenn sich eine Variable oder anderer Wert im Programm 
+verändert und das Programm anzuhalten, wenn dies passiert. Die Bedingung kann jeder 
+<a href="../reference/general_rules.html">PureBasic-Ausdruck</a> sein, der zu wahr oder falsch ausgewertet 
+werden kann. Dies kann alles sein, was auf ein <b><font color="#006666">If</font></b> Schlüsselwort folgen kann, 
+einschließlich <a href="../reference/variables.html">logische Operatoren</a> wie <b><font color="#006666">And</font></b>, <b><font color="#006666">Or</font></b> oder <b><font color="#006666">Not</font></b>. 
+Die meisten Funktionen der <a href="../math/index.html">Math</a>, <a href="../memory/index.html">Memory</a> und <a href="../string/index.html">String</a> 
+Bibliotheken wie auch alle Funktionen zur Gültigkeitsüberprüfung von Objekten in der Form IsXXX() 
+und die XxxID-Funktionen zur Ermittlung des OS-Bezeichners für ein Objekt sind ebenfalls verfügbar. 
+
+<br>
+<br>
+Beispiel-Bedingungen: 
+<pre><font face="Courier New, Courier, mono" size="2">  MyVariable$ &lt;&gt; &quot;Hello&quot; <b><font color="#006666">Or</font></b> Counter &lt; 0  <font color="#006666">; hält an, wenn MyVariable$ von &quot;Hello&quot; wechselt oder der Counter (Zähler) unter null fällt</font>
+<font color="#006666">  PeekL</font>(*SomeAddress+500) &lt;&gt; 0           <font color="#006666">; hält an, wenn der Long-Wert an der angegebenen Speicherstelle nicht gleich null ist</font>
+</font></pre>
+
+Daten-Haltepunkte können mit der 'Daten-Haltepunkt' Option im Debugger-Menü hinzugefügt werden. 
+Sie können auf eine bestimmte <a href="../reference/procedures.html">Prozedur</a> beschränkt werden, oder sie 
+können für den gesamten Code hinzufügt werden. Der spezielle Eintrag &quot;Hauptcode&quot; der Prozedur-Auswahl 
+gibt an, dass der Daten-Haltepunkt nur überprüft werden soll, wenn sich die Programmausführung nicht 
+in einer Prozedur befindet. 
+
+<br>
+<br>
+
+Die Spalte &quot;Status&quot; zeigt den Status aller Haltepunkt-Bedingungen bei ihrer letzten Auswertung. 
+Dies kann wahr, falsch oder ein Fehler (wenn die Bedingung kein gültiger Ausdruck ist) sein. 
+Sobald eine Bedingung als wahr ausgewertet wird, wird die Programmausführung angehalten. Diese 
+Bedingung wird automatisch aus der Liste entfernt, sobald das Programm fortgesetzt wird, sodass 
+sie nicht das Programm unmittelbar erneut anhält. 
+
+<br>
+<br>
+
+Hinweis: Das Überprüfen von Daten-Haltepunkten verlangsamt die Programmausführung, da die 
+Haltepunkt-Bedingungen für jede ausgeführte Zeile an Code erneut überprüft werden müssen, 
+um zu überprüfen, ob eine Bedingung erfüllt ist. Daher sollten Daten-Haltepunkte nur 
+wenn nötig hinzugefügt werden, um andernfalls die Programmausführung schnell zu erhalten. 
+Die Beschränkung eines Daten-Haltepunkts auf eine bestimmte Prozedur erhöht auch die 
+Geschwindigkeit, da die Überprüfung dann nur die angegebene Prozedur betrifft und nicht 
+das gesamte Programm. 
+
+
+</blockquote>
+<p><b>Untersuchen von Variablen während der Laufzeit</b></p><blockquote>
+
+
+Der Wert einer Variablen kann sehr schnell angesehen werden, während das Programm läuft, 
+indem der Mauspfeil über eine Variable im Quellcode bewegt und einen kleinen Moment 
+gewartet wird. Wenn die Variable aktuell im Sichtbereich ist und angezeigt werden kann, 
+dann wird ihr Wert als Tooltip an der Mausposition angezeigt. 
+
+<p><img src="images/ide_debugger_showstructure.png"></p>
+
+
+Komplexere <a href="../reference/general_rules.html">Ausdrücke</a> (zum Beispiel <a href="../reference/dim.html">Array</a>-Felder) 
+können angesehen werden, indem sie im Quellcode mit der Maus ausgewählt werden und der Mauspfeil 
+über diese Auswahl bewegt wird. 
+
+<p><img src="images/ide_debugger_showexpression.png"></p>
+
+
+Die <a href="../reference/ide_debugtools.html">Debugger Werkzeuge</a> bieten auch eine Anzahl an Möglichkeiten, 
+um den Inhalt von <a href="../reference/variables.html">Variablen</a>, <a href="../reference/dim.html">Arrays</a>, 
+<a href="../list/index.html">Listen</a> oder <a href="../map/index.html">Maps</a> zu untersuchen. 
+
+
+
+
+</blockquote>
+<p><b>Fehler im Programm</b></p><blockquote>
+
+
+Wenn der Debugger auf einen Fehler in Ihrem Programm stößt, wird er die Ausführung anhalten, 
+die Zeile mit dem aufgetretenen Fehler markieren (roter Hintergrund in den Standardfarben) 
+und die Fehlernachricht im Fehlerbericht und in der Statusleiste anzeigen. 
+
+<br>
+<br>
+
+Zu diesem Zeitpunkt können Sie immer noch die Variablen Ihres Programms untersuchen, genauso 
+die Aufrufverfolgung oder den Speicher. Jedoch andere Features wie die Register-Anzeige 
+oder Stackverfolgung sind nach einem Fehler nicht mehr verfügbar. 
+<br>
+<br>
+Wird der Fehler als schwerwiegend eingeschätzt (wie ein ungültiger Speicherzugriff oder 
+Division durch 0), ist es Ihnen nicht erlaubt, die Ausführung ab diesem Punkt fortzusetzen. 
+Wenn der Fehler von einer PureBasic Library gemeldet wurde, ist Ihnen ein Fortsetzen des 
+Programmablaufs möglich. Dies kann jedoch zu weiteren Fehlern führen, da Fortsetzen des 
+Programms in diesem Fall den angezeigten Fehler einfach ignoriert. 
+
+<br>
+<br>
+Nach einem Fehler (auch einem schwerwiegenden), müssen Sie den Menü-Befehl &quot;Programm beenden&quot; 
+verwenden, um das Programm zu beenden und mit dem Editieren des Quellcodes fortzufahren. Der 
+Grund, warum das Programm nicht automatisch beendet wird, liegt darin, dass Ihnen sonst 
+die Verwendung der anderen Debugger-Features (wie Anzeigen von Variablen) zum Aufspüren 
+des Fehlers nicht möglich wäre. 
+<br>
+<br>
+Hinweis: Sie können den Debugger so konfigurieren, dass das Programm automatisch bei jedem 
+Fehler beendet wird. Siehe hierfür in <a href="../reference/ide_preferences.html">Anpassen der IDE</a>. 
+
+
+</blockquote>
+<p><b>Debugger-Warnungen</b></p><blockquote>
+
+
+Unter bestimmten Umständen kann sich der Debugger nicht sicher sein, ob es sich bei einem angegebenen 
+Parameter um einen Fehler im Programm handelt oder ob er absichtlich so angegeben wurde. In einem 
+solchen Fall gibt der Debugger eine Warnung aus. Standardmäßig wird eine Warnung zusammen mit der 
+Datei und der Zeilennummer im Fehlerbericht angezeigt, und die Zeile wird markiert (orange in 
+den Standard-Farben). Auf diesem Weg bleiben die Warnungen nicht unbeachtet, aber sie unterbrechen 
+nicht den Programmablauf. 
+
+
+Es gibt auch die Option, dass entweder alle Warnungen ignoriert werden oder alle Warnungen wie 
+Fehler behandelt werden (das Programm anhalten). Der Umgang mit Debugger-Warnungen kann global 
+in den <a href="../reference/ide_preferences.html">Einstellungen</a> eingestellt werden, oder für das aktuell 
+kompilierte Programm in den <a href="../reference/ide_compiler.html">Compiler-Optionen</a>. 
+
+
+</blockquote>
+<p><b>Der Fehlerbericht</b></p><blockquote>
+
+
+Der Fehlerbericht (oder auch &quot;Fehlerprotokoll&quot;) wird verwendet, um die Compiler-Fehler 
+aufzuzeichnen, genauso wie die Nachrichten vom Debuggen. Nachrichten werden für die 
+Datei aufgezeichnet, die sie betreffen. Wenn also ein Fehler in einer <a href="../reference/includes.html">Include-Datei</a> 
+auftritt, dann wird diese Datei angezeigt und der Fehler für diese aufgezeichnet. 
+
+<br>
+<br>
+
+Das &quot;Fehlerbericht&quot; Untermenü des Debugger-Menüs bietet Funktionen hierfür: 
+
+<br>
+<br>
+
+<b>Fehlerbericht anzeigen</b> 
+<br>
+Zeigt / versteckt den Bericht für den aktuellen Quellcode. 
+
+<br>
+<br>
+
+<b>Bericht löschen</b> 
+<br>
+Löscht den Bericht für diese Datei. 
+
+<br>
+<br>
+
+<b>Bericht kopieren</b> 
+<br>
+Kopiert den Inhalt des Fehlerberichts in die Zwischenablage. 
+
+<br>
+<br>
+
+<b>Fehlermarkierungen löschen</b> 
+<br>
+Nachdem Sie das Programm beendet haben, bleiben alle Fehlermarkierungen im Quellcode 
+trotzdem erhalten. Dies soll Ihnen helfen, die den Fehler verursachende Zeile zu finden 
+und diesen zu beheben. Der &quot;Fehlermarkierungen löschen&quot; Menü-Befehl kann verwendet werden, 
+um diese Markierungen zu entfernen. 
+<br>
+<br>
+Sie können die IDE auch so konfigurieren, dass die Fehlermarkierungen am Programmende 
+automatisch gelöscht werden. Siehe hierfür in <a href="../reference/ide_preferences.html">Anpassen der IDE</a>. 
+
+
+
+</blockquote>
+<p><b>Der eigenständige Debugger</b></p><blockquote>
+
+
+
+<p><img src="images/ide_debugger_extern.png"></p>
+
+Der eigenständige (auch &quot;standalone&quot;) Debugger ist dem der IDE sehr ähnlich und wird daher 
+hier nur kurz beschrieben: 
+<br>
+<br>
+Auf dem Debugger-Fenster haben Sie Kontrollschalter, um damit die grundlegende 
+Programmkontrolle auszuüben, so wie oben beschrieben. Der &quot;Schritt&quot;-Schalter führt 
+so viele Schritte aus, wie in dem daneben liegenden Eingabefeld angegeben sind. 
+Das Schließen des Debuggers mit &quot;Beenden&quot; oder dem Schließknopf am Fenster wird 
+auch das debuggte Programm beenden. 
+
+<br>
+<br>
+Der Bereich des Fehlerberichts kann versteckt werden, indem Sie auf den Pfeil 
+auf der rechten Seite klicken um das Debuggerfenster kleiner zu machen. 
+
+<br>
+<br>
+
+Die Code-Anzeige wird verwendet, um die aktuell ausgeführte Code-Zeile genauso wie 
+alle Fehler oder Haltepunkte anzuzeigen. Verwenden Sie das oberhalb befindliche Aufklappmenü, 
+um die gewünschte Include-Datei anzuzeigen. Die Schalter &quot;Haltepunkt setzen&quot;, &quot;Haltepunkt 
+entfernen&quot; und &quot;Haltepunkte löschen&quot; können verwendet werden, um die Haltepunkte in der 
+aktuell angezeigte Quellcode-Datei zu verwalten. Die Code-Anzeige bietet auch ein 
+&quot;Mouse over&quot;-Feature (d.h. wenn sich der Mauspfeil über einem Code-Element befindet) 
+durch den integrierten Debugger, um schnell den Inhalt einer Variablen ansehen zu können. 
+
+<br>
+<br>
+
+Auf die Debugger-Werkzeuge kann mittels der Schalter unterhalb der Codeanzeige zugegriffen 
+werden. Ihre Benutzung ist die gleiche wie beim integrierten Debugger. 
+
+<br>
+<br>
+
+Hinweis: Der eigenständige Debugger hat keine eigenen Einstellmöglichkeiten. Er verwendet 
+die Debugger- und Farbeinstellungen der IDE. Wenn Sie also einen Editors eines Drittanbieters 
+und den eigenständigen Debugger verwenden, sollten Sie wenigstens einmal die IDE starten, um 
+die Debugger-Einstellungen vorzunehmen. 
+
+<br>
+<br>
+
+<b>Ausführen des eigenständigen Debuggers von der Kommandozeile:</b> 
+<br>
+
+Um ein über die Kommandozeile kompiliertes Programm mit eingeschaltetem Debugger (-d oder /Debugger 
+Option) auszuführen, rufen Sie den Debugger wie folgt auf: 
+<br>
+<br>
+
+pbdebugger &lt;Executable-Datei&gt; &lt;Executable-Kommandozeile&gt; 
+
+<br>
+<br>
+Wenn Sie ein Executable mit aktiviertem Debugger direkt von der Kommandozeile ausführen, 
+wird nur der Kommandozeilen-Debugger verwendet. 
+
+</blockquote>
+<p><b>Der Kommandozeilen-Debugger:</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_console.png"></p>
+
+Der Kommandozeilen-Debugger ist kein Bestandteil der IDE und daher nicht im Detail 
+hier erklärt. 
+<br>
+<br>
+Während das Programm läuft, drücken Sie Strg+C in der Konsole, um eine Konsolen-Eingabeaufforderung 
+für den Debugger zu öffnen. Dort geben Sie &quot;help&quot; ein, um einen Überblick über alle verfügbaren 
+Befehle zu erhalten. Geben Sie &quot;help &lt;Befehlsname&gt;&quot; ein, um eine detailliertere Beschreibung eines 
+Befehls zu erhalten. 
+
+
+</blockquote>
+<p><b>Debuggen von Programmen mit Threads:</b></p><blockquote>
+
+
+Um den Debugger mit einem Programm zu verwenden, welches <a href="../thread/index.html">Threads</a> erstellt, muss 
+die Option 'Threadsicheres Executable erstellen' in den <a href="../reference/ide_compiler.html">Compiler Optionen</a> 
+gesetzt sein, da andernfalls die vom Debugger angezeigten Informationen betreffs Zeilennummern, Fehlern, 
+lokalen Variablen usw. aufgrund der mehrfachen Threads falsch sein können. 
+
+<br>
+<br>
+
+Die folgenden Features und Einschränkungen sollten beim Debuggen eines Programms mit enthaltenen Threads beachtet werden: 
+
+<br>
+<br>
+
+Während das Programm läuft, werden die Variablenliste, die Aufrufverfolgung oder der Assembler-Debugger 
+Informationen nur über den Haupt-Thread anzeigen. Wenn das Programm angehalten wird, zeigen sie 
+Informationen über den Thread, in dem sie gestoppt wurden. Wenn also lokale Variablen oder der 
+Aufrufstapel eines Threads untersucht werden sollen, muss die Ausführung innerhalb dieses Threads 
+angehalten werden (durch Einfügen eines Haltepunkts oder einer <b><font color="#006666">CallDebugger</font></b> Anweisung darin). 
+Die verschiedenen 'Schritt' Optionen betreffen immer den Thread, worin die Ausführung zuletzt 
+angehalten wurde. 
+<br>
+Wenn ein Fehler auftritt, wird die Ausführung innerhalb dieses Threads angehalten, sodass sich jede 
+von der Variablenliste oder der Aufrufverfolgung angezeigte Information auf den Thread bezieht, 
+welcher den Fehler verursachte. 
+<br>
+Die Beobachtungsliste beobachtet nur lokale Variablen des Haupt-Threads, nicht die von weiteren 
+zusätzlich laufenden Threads. 
+<br>
+<br>
+Während die Ausführung innerhalb eines Threads angehalten ist, wird auch die Ausführung aller 
+anderen Threads unterbrochen. 
+</blockquote>
+</font></body></html>

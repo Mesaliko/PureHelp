@@ -1,0 +1,147 @@
+<html><head><title>Dim</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Dim</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Dim"><u>Dim</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#ReDim"><u>ReDim</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<br>
+<br>
+<hr>
+<a name="Dim"></a>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Dim</font></b> nom.&lt;type&gt;(&lt;expression&gt;, [&lt;expression&gt;], ...)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Dim</font></b> est utilisé pour créer un nouveau tableau. 
+<br>
+<br>
+Un tableau peut être composé d'éléments de <a href="../reference/variables.html">type</a> 
+<a href="../reference/general_rules.html">basique</a> connus sous PureBasic, incluant les 
+<a href="../reference/structures.html">et</a> les types définis par l'utilisateur. <br>
+Attention : Les éléments d'un tableau doivent tous être de même type.<br>
+Une fois le tableau créé, il peut être redimensionné avec <a href="../reference/dim.html">ReDim</a>.<br>
+Pour afficher toutes les commandes utilisées pour gérer les tableaux, reportez-vous à la 
+bibliothèque <a href="../array/index.html">Array</a>. 
+<br>
+<br>
+Les tableaux sont alloués dynamiquement ce qui signifie que leur dimensionnement peut se 
+faire à partir d'une variable ou d'une expression. 
+<br>
+<br>
+Attention, la numérotation des éléments dans PureBasic (comme dans les autres BASIC) 
+commence à 0. Par exemple, le tableau <b><font color="#006666">Dim</font></b>(10) aura 11 éléments allant de 0 à 10. 
+<br>
+Ce comportement est différent pour les tableaux statiques spécifiques aux 
+<a href="../reference/structures.html">structures</a>. Les tableaux statiques utilisent des crochets 
+&quot;[]&quot;, par exemple TabStatic[2] ne comporte que 2 éléments de 0 à 1 et les fonctions 
+de la bibliothèques <a href="../array/index.html">Array</a> ne fonctionnent pas avec eux. 
+<br>
+<br>
+Les tableaux sont toujours locaux par défaut, donc pour accéder à partir d'une procedure à 
+un tableau défini dans le code source principal du programme, l'utilisation de 
+<a href="../reference/global.html">Global</a> ou <a href="../reference/shared.html">Shared</a> est requise. 
+Il est également possible de passer un tableau en paramètre d'une 
+<a href="../reference/procedures.html">procédure</a> à l'aide du mot clef <b><font color="#006666">Array</font></b>. Il sera passé 
+&quot;par référence&quot; (ce qui signifie que le tableau ne sera pas copié, et les fonctions dans 
+la procédure manipulerons le tableau original). 
+<br>
+<br>
+Pour effacer le contenu complet d'un tableau et libérer la mémoire qu'il occupe, 
+utilisez <a href="../array/freearray.html">FreeArray()</a>. 
+<br>
+<br>
+Si <b><font color="#006666">Dim</font></b> est utilisé sur un tableau existant, il réinitialise son contenu à zéro. 
+<br>
+<br>
+Utilisez la commande <a href="../reference/others.html">Swap</a> pour permuter le contenu de tableaux 
+rapidement. 
+<br>
+<br>
+Note: La vérification des accès à un tableau est effectuée uniquement quand le 
+<a href="../reference/debugger.html">débogueur</a> est activé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MonTableau</font>(41)
+<font color="#006666">  MonTableau</font>(0) = 1
+<font color="#006666">  MonTableau</font>(1) = 2 
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Tableau à dimensions multiples</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">TableauMultiple</font>.b(NbColonnes, NbLignes)
+<font color="#006666">  TableauMultiple</font>(10, 20) = 10
+<font color="#006666">  TableauMultiple</font>(20, 30) = 20
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Tableau en paramètre d'une procédure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">fill</font>(<b><font color="#006666">Array</font></b> <font color="#006666">Nombres</font>(1), Longueur)  <font color="#006666">; Le 1 représente le nombre de dimensions du tableau</font>
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> Longueur
+<font color="#006666">      Nombres</font>(i) = i
+    <b><font color="#006666">Next</font></b> i
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Nombres</font>(10)
+<font color="#006666">  fill</font>(<font color="#006666">Nombres</font>(), 10)  <font color="#006666">; Le tableau Nombres() est passé en paramètre</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>(5)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>(10)
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="ReDim"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">ReDim</font></b> nom.&lt;type&gt;(&lt;expression&gt;, [&lt;expression&gt;], ...) 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">ReDim</font></b> permet de redimensionner un tableau déjà déclaré tout en préservant son contenu. La nouvelle 
+taille peut être plus grande ou plus petite, mais le nombre de dimensions ne peut pas être modifié. 
+<br>
+<br>
+Si <b><font color="#006666">ReDim</font></b> est utilisé sur un tableau à plusieurs dimensions, seule la dernière dimension 
+peut être changée. 
+
+</blockquote><p><b>Exemple:</b> Une dimension</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MonTableau</font>.l(1) <font color="#006666">; nous avons 2 éléments</font>
+<font color="#006666">  MonTableau</font>(0) = 1
+<font color="#006666">  MonTableau</font>(1) = 2
+  
+  <b><font color="#006666">ReDim</font></b> <font color="#006666">MonTableau</font>(4) <font color="#006666">; Maintenant nous avons 5 éléments</font>
+<font color="#006666">  MonTableau</font>(2) = 3
+  
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 2
+    <b><font color="#006666">Debug</font></b> <font color="#006666">MonTableau</font>(k)
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Plusieurs dimensions</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MonTableau</font>.l(1,1,1) <font color="#006666">; 3 dimensions et 2 éléments par dimension</font>
+  
+  <b><font color="#006666">ReDim</font></b> <font color="#006666">MonTableau</font>(1,1,4) <font color="#006666">; OUI seule la dernière dimension peut être changée.</font>
+  <font color="#006666">;ReDim MonTableau(4,1,1) ; NON</font>
+  <font color="#006666">;ReDim MonTableau(1,4,1) ; NON</font>
+<font color="#006666">  MonTableau</font>(1,1,4) = 3
+</font></pre>
+</blockquote>
+</font></body></html>

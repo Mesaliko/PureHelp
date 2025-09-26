@@ -1,0 +1,85 @@
+<html><head><title>AddPathCurve</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddPathCurve()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddPathCurve</b></font>(x1.d, y1.d, x2.d, y2.d, x3.d, y3.d [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt eine kubische Bezier-Kurve zum Vektorzeichnen-Pfad hinzu. Die Kurve beginnt bei 
+der aktuellen Pfad-Position und endet bei (x3, y3). Die beiden anderen Punkte bestimmen 
+den Verlauf bzw. die Form der Kurve. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x1.d, y1.d</i></td>
+<td width="90%"> 
+Der erste Kontrollpunkt der Kurve. 
+
+</td></tr>
+<tr><td><i>x2.d, y2.d</i></td>
+<td> 
+Der zweite Kontrollpunkt der Kurve. 
+
+</td></tr>
+<tr><td><i>x3.d, y3.d</i></td>
+<td> 
+Der Endpunkt der Kurve. Dieser Punkt wird zur neuen Pfad-Position. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Path_Default</font> : Die neue Position ist absolut (Standard)
+  <font color="#924B72">#PB_Path_Relative</font>: Die neue Position ist relativ zur letzten Cursor-Position.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das nachfolgende Bild zeigt die Position der Referenzpunkte. 
+Siehe <a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve">hier</a> für weitere 
+Informationen über Bezier-Kurven. 
+
+<p><img src="../HelpPictures/addpathcurve.png"></p>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+<font color="#006666">      MovePathCursor</font>(50, 100)
+<font color="#006666">      AddPathCurve</font>(90, 30, 250, 180, 350, 100)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">      StrokePath</font>(10)
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="movepathcursor.html">MovePathCursor()</a>, <a href="addpathline.html">AddPathLine()</a>, <a href="addpatharc.html">AddPathArc()</a>, 
+<a href="addpathcircle.html">AddPathCircle()</a>, <a href="addpathellipse.html">AddPathEllipse()</a>, <a href="addpathbox.html">AddPathBox()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addpathcircle.html>AddPathCircle()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=addpathellipse.html>AddPathEllipse()</a> -><br><br>
+
+</body></html>

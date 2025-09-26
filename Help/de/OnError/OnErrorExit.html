@@ -1,0 +1,39 @@
+<html><head><title>OnErrorExit</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorExit()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorExit</b></font>()</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die beim Auftreten eines Fehlers ausgeführte Aktion auf direktes Beenden des Programms, 
+auch wenn die Standard-Aktion auf dem System bei dieser Art von Fehler kein Beenden des Programms 
+vorsieht. Das System zeigt beim Beenden möglicherweise einen Fehler-Dialog an oder gibt eine 
+Fehlermeldung auf der Konsole aus. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um ein Programm unauffällig zu beenden und eine Systemmeldung zu vermeiden, verwenden Sie 
+<a href="onerrorcall.html">OnErrorCall()</a> und beenden das Programm vom &quot;Error-Handler&quot; aus. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;OnError Test&quot;, &quot;Test starten&quot;)
+
+<font color="#006666">  OnErrorExit</font>()
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; verursacht einen #PB_OnError_InvalidMemory Fehler</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError Test&quot;, &quot;Dies sollte niemals angezeigt werden&quot;)
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=onerrordefault.html>OnErrorDefault()</a> - <a href=index.html>OnError Inhaltsverzeichnis</a> - <a href=onerrorgoto.html>OnErrorGoto()</a> -><br><br>
+
+</body></html>

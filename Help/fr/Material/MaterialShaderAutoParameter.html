@@ -1,0 +1,196 @@
+<html><head><title>MaterialShaderAutoParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MaterialShaderAutoParameter()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MaterialShaderAutoParameter</b></font>(#Matiere, TypeProgramme, NomParametre$, TypeParametre, Extra.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Définit une valeur de paramètre pour la matière basée sur le shader créé précédemment avec <a href="createshadermaterial.html">CreateShaderMaterial()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Matiere</i></td>
+<td width="90%"> 
+La matière à utiliser. 
+
+</td></tr>
+<tr><td><i>TypeProgramme</i></td>
+<td> 
+Type de programme. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shader_Vertex</font>  : Utiliser le programme vertex.
+  <font color="#924B72">#PB_Shader_Fragment</font>: Utiliser le programme vertex de fragment.
+</font></pre>
+
+</td></tr>
+<tr><td><i>NomParametre$</i></td>
+<td> 
+Nom du paramètre à utiliser avec le programme GLSL. 
+
+</td></tr>
+<tr><td><i>TypeParametre</i></td>
+<td> 
+Type de paramètre. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shader_AmbientLightColour</font>
+  <font color="#924B72">#PB_Shader_AnimationParametric</font>
+  <font color="#924B72">#PB_Shader_CameraPosition</font>
+  <font color="#924B72">#PB_Shader_CameraPositionObjectSpace</font>
+  <font color="#924B72">#PB_Shader_Costime02pi</font>
+  <font color="#924B72">#PB_Shader_Costime0X</font>
+  <font color="#924B72">#PB_Shader_Custom</font>
+  <font color="#924B72">#PB_Shader_DerivedAmbientLightColour</font>
+  <font color="#924B72">#PB_Shader_DerivedLightDiffuseColour</font>
+  <font color="#924B72">#PB_Shader_DerivedLightDiffuseColourArray</font>
+  <font color="#924B72">#PB_Shader_DerivedLightSpecularColour</font>
+  <font color="#924B72">#PB_Shader_DerivedLightSpecularColourArray</font>
+  <font color="#924B72">#PB_Shader_DerivedSceneColour</font>
+  <font color="#924B72">#PB_Shader_FarClipDistance</font>
+  <font color="#924B72">#PB_Shader_FogColour</font>
+  <font color="#924B72">#PB_Shader_Fov</font>
+  <font color="#924B72">#PB_Shader_Fps</font>
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  <font color="#924B72">#PB_Shader_Integer</font>
+  <font color="#924B72">#PB_Shader_InverseProjectionMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTextureSize</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeProjectionMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeViewMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeWorldMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeWorldviewMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseTransposeWorldviewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseViewMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseViewportHeight</font>
+  <font color="#924B72">#PB_Shader_InverseViewportWidth</font>
+  <font color="#924B72">#PB_Shader_InverseViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseWorldMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseWorldviewMatrix</font>
+  <font color="#924B72">#PB_Shader_InverseWorldviewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_LightAttenuation</font>
+  <font color="#924B72">#PB_Shader_LightAttenuationArray</font>
+  <font color="#924B72">#PB_Shader_LightCastsShadows</font>
+  <font color="#924B72">#PB_Shader_LightCount</font>
+  <font color="#924B72">#PB_Shader_LightCustom</font>
+  <font color="#924B72">#PB_Shader_LightDiffuseColour</font>
+  <font color="#924B72">#PB_Shader_LightDiffuseColourArray</font>
+  <font color="#924B72">#PB_Shader_LightDiffuseColourPowerScaled</font>
+  <font color="#924B72">#PB_Shader_LightDiffuseColourPowerScaledArray</font>
+  <font color="#924B72">#PB_Shader_LightDirection</font>
+  <font color="#924B72">#PB_Shader_LightDirectionArray</font>
+  <font color="#924B72">#PB_Shader_LightDirectionObjectSpace</font>
+  <font color="#924B72">#PB_Shader_LightDirectionObjectSpaceArray</font>
+  <font color="#924B72">#PB_Shader_LightDirectionViewSpace</font>
+  <font color="#924B72">#PB_Shader_LightDirectionViewSpaceArray</font>
+  <font color="#924B72">#PB_Shader_LightDistanceObjectSpace</font>
+  <font color="#924B72">#PB_Shader_LightDistanceObjectSpaceArray</font>
+  <font color="#924B72">#PB_Shader_LightNumber</font>
+  <font color="#924B72">#PB_Shader_LightPosition</font>
+  <font color="#924B72">#PB_Shader_LightPositionArray</font>
+  <font color="#924B72">#PB_Shader_LightPositionObjectSpace</font>
+  <font color="#924B72">#PB_Shader_LightPositionObjectSpaceArray</font>
+  <font color="#924B72">#PB_Shader_LightPositionViewSpace</font>
+  <font color="#924B72">#PB_Shader_LightPositionViewSpaceArray</font>
+  <font color="#924B72">#PB_Shader_LightPowerScale</font>
+  <font color="#924B72">#PB_Shader_LightPowerScaleArray</font>
+  <font color="#924B72">#PB_Shader_LightSpecularColour</font>
+  <font color="#924B72">#PB_Shader_LightSpecularColourArray</font>
+  <font color="#924B72">#PB_Shader_LightSpecularColourPowerScaled</font>
+  <font color="#924B72">#PB_Shader_LightSpecularColourPowerScaledArray</font>
+  <font color="#924B72">#PB_Shader_LodCameraPosition</font>
+  <font color="#924B72">#PB_Shader_LodCameraPositionObjectSpace</font>
+  <font color="#924B72">#PB_Shader_NearClipDistance</font>
+  <font color="#924B72">#PB_Shader_PackedTextureSize</font>
+  <font color="#924B72">#PB_Shader_PassIterationNumber</font>
+  <font color="#924B72">#PB_Shader_PassNumber</font>
+  <font color="#924B72">#PB_Shader_ProjectionMatrix</font>
+  <font color="#924B72">#PB_Shader_SceneDepthRange</font>
+  <font color="#924B72">#PB_Shader_ShadowColour</font>
+  <font color="#924B72">#PB_Shader_ShadowExtrusionDistance</font>
+  <font color="#924B72">#PB_Shader_ShadowSceneDepthRange</font>
+  <font color="#924B72">#PB_Shader_Sintime01</font>
+  <font color="#924B72">#PB_Shader_Sintime02pi</font>
+  <font color="#924B72">#PB_Shader_Sintime0X</font>
+  <font color="#924B72">#PB_Shader_SpotlightParams</font>
+  <font color="#924B72">#PB_Shader_SpotlightParamsArray</font>
+  <font color="#924B72">#PB_Shader_SpotlightViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_SpotlightViewprojMatrixArray</font>
+  <font color="#924B72">#PB_Shader_SpotlightWorldviewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_SurfaceAmbientColour</font>
+  <font color="#924B72">#PB_Shader_SurfaceDiffuseColour</font>
+  <font color="#924B72">#PB_Shader_SurfaceEmissiveColour</font>
+  <font color="#924B72">#PB_Shader_SurfaceShininess</font>
+  <font color="#924B72">#PB_Shader_SurfaceSpecularColour</font>
+  <font color="#924B72">#PB_Shader_Tantime01</font>
+  <font color="#924B72">#PB_Shader_Tantime02pi</font>
+  <font color="#924B72">#PB_Shader_Tantime0X</font>
+  <font color="#924B72">#PB_Shader_TexelOffsets</font>
+  <font color="#924B72">#PB_Shader_TextureMatrix</font>
+  <font color="#924B72">#PB_Shader_TextureSize</font>
+  <font color="#924B72">#PB_Shader_TextureViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_TextureViewprojMatrixArray</font>
+  <font color="#924B72">#PB_Shader_TextureWorldviewprojMatrixArray</font>
+  <font color="#924B72">#PB_Shader_Time</font>
+  <font color="#924B72">#PB_Shader_Time01</font>
+  <font color="#924B72">#PB_Shader_Time01Packed</font>
+  <font color="#924B72">#PB_Shader_Time02pi</font>
+  <font color="#924B72">#PB_Shader_Time02piPacked</font>
+  <font color="#924B72">#PB_Shader_Time0X</font>
+  <font color="#924B72">#PB_Shader_Time0XPacked</font>
+  <font color="#924B72">#PB_Shader_TransposeProjectionMatrix</font>
+  <font color="#924B72">#PB_Shader_TransposeViewMatrix</font>
+  <font color="#924B72">#PB_Shader_TransposeViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_TransposeWorldMatrix</font>
+  <font color="#924B72">#PB_Shader_TransposeWorldviewMatrix</font>
+  <font color="#924B72">#PB_Shader_TransposeWorldviewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_Vector3</font>
+  <font color="#924B72">#PB_Shader_Vector4</font>
+  <font color="#924B72">#PB_Shader_Vertex</font>
+  <font color="#924B72">#PB_Shader_VertexWinding</font>
+  <font color="#924B72">#PB_Shader_ViewDirection</font>
+  <font color="#924B72">#PB_Shader_ViewMatrix</font>
+  <font color="#924B72">#PB_Shader_ViewportSize</font>
+  <font color="#924B72">#PB_Shader_ViewportWidth</font>
+  <font color="#924B72">#PB_Shader_ViewprojMatrix</font>
+  <font color="#924B72">#PB_Shader_ViewSideVector</font>
+  <font color="#924B72">#PB_Shader_ViewUpVector</font>
+  <font color="#924B72">#PB_Shader_WorldDualquaternionArray2x4</font>
+  <font color="#924B72">#PB_Shader_WorldMatrix</font>
+  <font color="#924B72">#PB_Shader_WorldMatrixArray</font>
+  <font color="#924B72">#PB_Shader_WorldMatrixArray3x4</font>
+  <font color="#924B72">#PB_Shader_WorldviewMatrix</font>
+  <font color="#924B72">#PB_Shader_WorldviewprojMatrix</font>
+
+</font></pre>
+
+</td></tr>
+<tr><td><i>Extra.f</i></td>
+<td> 
+Valeur supplémentaire transmise au paramètre de programme. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les paramètres automatiques correspondent aux paramètres du moteur 3D (positions de la caméra, lumières, couleur du matériau, 
+brouillard...) cette fonction permet de faire le lien entre la variable 'uniform' du shader et ces paramètres.<br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MaterialShaderAutoParameter</font>(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Shader_Fragment</font>, <font color="#924B72">#PB_Shader_CameraPosition</font>, &quot;camerapos&quot;, 0)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createshadermaterial.html">CreateShaderMaterial()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=materialid.html>MaterialID()</a> - <a href=index.html>Material Index</a> - <a href=materialshaderparameter.html>MaterialShaderParameter()</a> -><br><br>
+
+</body></html>

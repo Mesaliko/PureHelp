@@ -1,0 +1,65 @@
+<html><head><title>ReceiveFTPFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveFTPFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReceiveFTPFile</b></font>(#Ftp, RemoteDateiname$, Dateiname$ [, Asynchron])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Empfängt eine Datei von einem FTP-Server. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Ftp</i></td>
+<td width="90%"> 
+Die zu verwendende FTP-Verbindung. 
+
+</td></tr>
+<tr><td><i>RemoteDateiname$</i></td>
+<td> 
+Die Datei (auf dem Server), welche herunter geladen werden soll. 
+Sie muss sich im aktuellen FTP-Verzeichnis befinden 
+(siehe <a href="getftpdirectory.html">GetFTPDirectory()</a> und <a href="setftpdirectory.html">SetFTPDirectory()</a>). 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Speicherort, wohin die Datei auf dem lokalen System gespeichert werden soll. 
+Wenn der Dateiname keinen vollständigen Pfad enthält, wird dieser relativ zum 
+<a href="../filesystem/getcurrentdirectory.html">aktuellen Verzeichnis</a> interpretiert. 
+  Wenn die Datei existiert, wird sie überschrieben. 
+
+</td></tr>
+<tr><td><i>Asynchron (optional)</i></td>
+<td> 
+Wenn auf <font color="#924B72">#True</font> gesetzt, wird der Transfer im Hintergrund erfolgen. 
+Standardmäßig wird das Programm blockiert, bis die Datei empfangen wurde (= &quot;synchron&quot;). 
+Der Fortschritt einer asynchronen Übertragung kann mit der Funktion <a href="ftpprogress.html">FTPProgress()</a> 
+ermittelt werden, und sie kann mit Hilfe von <a href="abortftpfile.html">AbortFTPFile()</a> abgebrochen werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Datei korrekt herunter geladen wurde, 
+oder wenn der asynchrone Transfer korrekt initialisiert wurde. 
+Bei einem Fehler ist der Rückgabewert gleich Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Nur eine Datei kann im Hintergrund auf einmal herunter- oder hochgeladen (siehe <a href="sendftpfile.html">SendFTPFile()</a>) 
+werden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="sendftpfile.html">SendFTPFile()</a>, <a href="setftpdirectory.html">SetFTPDirectory()</a>, <a href="getftpdirectory.html">GetFTPDirectory()</a>, 
+<a href="ftpprogress.html">FTPProgress()</a>, <a href="abortftpfile.html">AbortFTPFile()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=openftp.html>OpenFTP()</a> - <a href=index.html>Ftp Inhaltsverzeichnis</a> - <a href=renameftpfile.html>RenameFTPFile()</a> -><br><br>
+
+</body></html>

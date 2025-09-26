@@ -1,0 +1,70 @@
+<html><head><title>CreateTerrain</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateTerrain()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateTerrain</b></font>(#Terrain, Size, WorldSize, Scale, NbLayers, Filename$, Extension$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new terrain. <a href="setupterrains.html">SetupTerrains()</a> has to be called before to set the default parameter 
+for the new terrain. After the terrain creation, new tiles can be defined with 
+<a href="defineterraintile.html">DefineTerrainTile()</a> and textures applied with <a href="addterraintexture.html">AddTerrainTexture()</a>. Once the terrain definition 
+is finished, <a href="buildterrain.html">BuildTerrain()</a> needs to be called to build the final terrain. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Terrain</i></td>
+<td width="90%"> 
+The number to identify the new terrain. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The size of the new terrain down one edge in vertices. 
+
+</td></tr>
+<tr><td><i>WorldSize</i></td>
+<td> 
+The world size of the new terrain. 
+
+</td></tr>
+<tr><td><i>Scale</i></td>
+<td> 
+The scale factor to apply to the new terrain. 
+
+</td></tr>
+<tr><td><i>NbLayers</i></td>
+<td> 
+The number of texture layers the new terrain will have. To add a texture layer, use <a href="addterraintexture.html">AddTerrainTexture()</a>. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The filename (without the extension) to store the precomputed terrain data. As the terrain can be complex 
+and take a lot of time to create, a cache will be written to disk and reloaded automatically if present (and not outdated). 
+
+</td></tr>
+<tr><td><i>Extension$</i></td>
+<td> 
+The extension used by the data files. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns zero if the #Terrain can't be created. If <a href="../reference/purebasic_objects.html">#PB_Any</a> is used 
+as '#Terrain' parameter, the new terrain number is returned. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freeterrain.html">FreeTerrain()</a>, <a href="setupterrains.html">SetupTerrains()</a>, <a href="buildterrain.html">BuildTerrain()</a>, <a href="defineterraintile.html">DefineTerrainTile()</a>, <a href="addterraintexture.html">AddTerrainTexture()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=buildterrain.html>BuildTerrain()</a> - <a href=index.html>Terrain Index</a> - <a href=createterrainbody.html>CreateTerrainBody()</a> -><br><br>
+
+</body></html>

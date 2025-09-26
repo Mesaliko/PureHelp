@@ -1,0 +1,57 @@
+<html><head><title>ToolBarSeparator</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ToolBarSeparator()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ToolBarSeparator</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un séparateur vertical à la barre 
+d'outils en cours de création. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La fonction <a href="createtoolbar.html">CreateToolBar()</a> doit avoir été 
+appelée avant d'utiliser cette fonction. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 150, 25, &quot;Barre d'outils&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateToolBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      UsePNGImageDecoder</font>()
+      Path$ = <font color="#924B72">#PB_Compiler_Home</font>  + &quot;Examples&quot; + <font color="#924B72">#PS$</font> + &quot;Sources&quot; + <font color="#924B72">#PS$</font> + &quot;Data&quot; + <font color="#924B72">#PS$</font> + &quot;ToolBar&quot; + <font color="#924B72">#PS$</font> + &quot;&quot;
+<font color="#006666">      ToolBarImageButton</font>(0,<font color="#006666"> LoadImage</font>(0, Path$ + &quot;New.png&quot;))
+<font color="#006666">      ToolBarSeparator</font>()
+<font color="#006666">      ToolBarImageButton</font>(1,<font color="#006666"> LoadImage</font>(1, Path$ + &quot;Open.png&quot;))
+<font color="#006666">      ToolBarSeparator</font>()
+<font color="#006666">      ToolBarImageButton</font>(2,<font color="#006666"> LoadImage</font>(2, Path$ + &quot;Save.png&quot;))
+<font color="#006666">      ToolBarSeparator</font>()
+<font color="#006666">      ToolBarSeparator</font>()
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Menu</font>
+        <b><font color="#006666">Debug</font></b> &quot;Identifiant de la barre d'outils : &quot;+<font color="#006666">Str</font>(<font color="#006666">EventMenu</font>())
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/toolbarseparator.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createtoolbar.html">CreateToolBar()</a>, <a href="toolbarimagebutton.html">ToolBarImageButton()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=toolbarimagebutton.html>ToolBarImageButton()</a> - <a href=index.html>ToolBar Index</a> - <a href=toolbartooltip.html>ToolBarToolTip()</a> -><br><br>
+
+</body></html>

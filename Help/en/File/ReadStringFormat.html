@@ -1,0 +1,71 @@
+<html><head><title>ReadStringFormat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadStringFormat()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReadStringFormat</b></font>(#File)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Checks if the current file position contains a BOM (Byte Order Mark) and tries to identify the 
+String encoding used in the file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#File</i></td>
+<td width="90%"> 
+The file to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : No BOM detected. This usually means a plain text file.
+  <font color="#924B72">#PB_UTF8</font>   : UTF-8 BOM detected.
+  <font color="#924B72">#PB_Unicode</font>: UTF-16 (little endian) BOM detected.
+
+  <font color="#924B72">#PB_UTF16BE</font>: UTF-16 (big endian) BOM detected.
+  <font color="#924B72">#PB_UTF32</font>  : UTF-32 (little endian) BOM detected.
+  <font color="#924B72">#PB_UTF32BE</font>: UTF-32 (big endian) BOM detected.
+</font></pre>
+The <font color="#924B72">#PB_Ascii</font>, <font color="#924B72">#PB_UTF8</font> and <font color="#924B72">#PB_Unicode</font> results may be used directly 
+in further calls to <a href="readstring.html">ReadString()</a> to read the file. The other results represent string 
+formats that cannot be directly read with PureBasic string functions. They are included for completeness so that an 
+application can display a proper error-message. 
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If a BOM is detected, the <a href="fileseek.html">file pointer</a> will be placed 
+at the end of the BOM. If no BOM is detected, the file pointer remains unchanged. 
+
+<br>
+<br>
+
+The Byte Order Mark is a commonly used way to indicate the encoding for a textfile. It is usually placed 
+at the beginning of the file. It is however not a standard, just a commonly used practice. So if no BOM is 
+detected at the start of a file, it does not necessarily mean that it is a plain text file. It could also 
+just mean that the program that created the file did not use this practice. 
+<a href="writestringformat.html">WriteStringFormat()</a> may be used to place such a BOM in a file. 
+
+<br>
+<br>
+
+For more information, see this <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia Article.</a> 
+
+<br>
+
+More information about using unicode in a PureBasic program can also be found <a href="../reference/unicode.html">here</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="writestringformat.html">WriteStringFormat()</a>, <a href="readstring.html">ReadString()</a>, <a href="openfile.html">OpenFile()</a>, <a href="readfile.html">ReadFile()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=readstring.html>ReadString()</a> - <a href=index.html>File Index</a> - <a href=readunicodecharacter.html>ReadUnicodeCharacter()</a> -><br><br>
+
+</body></html>

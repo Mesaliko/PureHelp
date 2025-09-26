@@ -1,0 +1,70 @@
+<html><head><title>EntityCustomParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EntityCustomParameter()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>EntityCustomParameter</b></font>(#Entity, SousEntity, IndexParametre, Valeur1.f, Valeur2.f, Valeur3.f, Valeur4.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Définit des paramètres personnalisés pour le 'script shader' matériau d'une entité. 
+<br>
+Pour avoir un effet, le matériau associé à l'entité doit avoir un 'script shader', soit GLSL soit HLSL. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+L'entité à utiliser. 
+
+</td></tr>
+<tr><td><i>SousEntity</i></td>
+<td> 
+La sous-entité à utiliser. 
+<br>
+<br>
+Le premier indice commence à 0 (reprensentant l'entité principale). 
+
+</td></tr>
+<tr><td><i>IndexParametre</i></td>
+<td> 
+L'indice de paramètre dans le shader script. 
+
+</td></tr>
+<tr><td><i>Valeur1.f, Valeur2.f, Valeur3.f, Valeur4.f</i></td>
+<td> 
+Les valeurs du paramètre. 
+<br>
+<br>
+Si le paramètre ne peut accepter une valeur, cette valeur sera ignorée. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour définir des paramètres dans un matériau, vous devez les définir dans le script du matériau sous la forme param_named_auto 'VariableName' 
+custom 'ParameterIndex', par exemple : 
+<pre><font face="Courier New, Courier, mono" size="2">   param_named_auto foo custom 1
+   param_named_auto barre custom 2
+</font></pre>
+La définition et la taille du paramètre sont définies dans le script shaders, par exemple : 
+<pre><font face="Courier New, Courier, mono" size="2">  uniform float foo;
+  uniform vec3 bar;
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="entityvelocity.html">EntityVelocity()</a>, <a href="entitylinearfactor.html">EntityLinearFactor()</a>, 
+<a href="entityangularfactor.html">EntityAngularFactor()</a>, <a href="moveentity.html">MoveEntity()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=entitycollide.html>EntityCollide()</a> - <a href=index.html>Entity Index</a> - <a href=entitydirection.html>EntityDirection()</a> -><br><br>
+
+</body></html>

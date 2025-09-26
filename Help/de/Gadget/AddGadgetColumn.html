@@ -1,0 +1,104 @@
+<html><head><title>AddGadgetColumn</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddGadgetColumn()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddGadgetColumn</b></font>(#Gadget, Position, Titel$, Breite)</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Fügt eine Spalte zum angegebenen Gadget hinzu. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+Der Spaltenindex, wo der neue Eintrag eingefügt werden soll. 
+Ein Spaltenindex beginnt bei 0, was die am weitesten links befindliche Spalte bezeichnet, 
+jede weitere Spalte nach rechts hat einen um 1 höheren Index. Wenn Sie eine Spalte 
+hinzufügen, erhalten alle bisherigen Spalten rechts von der neuen Spalte einen um eins 
+höheren Spaltenindex als sie vorher hatten. 
+
+</td></tr>
+<tr><td><i>Titel$</i></td>
+<td> 
+Der Text für die Spalten-Überschrift. 
+
+</td></tr>
+<tr><td><i>Breite</i></td>
+<td> 
+Die anfängliche Breite der neuen Spalte. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl kann mit den folgenden Gadget-Typen verwendet werden: 
+<br>
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> 
+<br>
+- <a href="explorerlistgadget.html">ExplorerListGadget()</a> 
+<br>
+<br>
+Beim <a href="explorerlistgadget.html">ExplorerListGadget()</a> können Sie diese Funktion benutzen, um vollständig die vom Gadget 
+angezeigten Informationen anzupassen, indem Sie zuerst die Standardspalten mittels <a href="removegadgetcolumn.html">RemoveGadgetColumn()</a> 
+entfernen und dann neue Ihrer Wahl hinzufügen. Beachten Sie, dass die Spalte 'Name' nicht die erste im 
+Gadget sein muss. 
+<br>
+Hinweis: Um die Gadget-Inhalte nach dem Hinzufügen neuer Spalten zu aktualisieren, benutzen 
+Sie <a href="setgadgettext.html">SetGadgetText()</a>. Um eine selbsterstellte (&quot;custom&quot;) Spalte zu füllen, verwenden 
+Sie <a href="setgadgetitemtext.html">SetGadgetItemText()</a> für jeden Eintrag, nachdem Sie ein <font color="#924B72">#PB_EventType_Change</font> Ereignis 
+für das Gadget empfangen haben. 
+<br>
+<br>
+Beim Hinzufügen einer Spalte benutzen Sie eine der folgenden Konstanten im 'Titel$' Feld, um 
+eine Spalte zu erstellen, deren Inhalt durch das Gadget automatisch aktualisiert wird. Oder verwenden 
+Sie einen selbst ausgewählten Text als Titel-String, wenn Sie eine leere Spalte erstellen möchten, 
+welche Sie dann mit <a href="setgadgetitemtext.html">SetGadgetItemText()</a> füllen können. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_Name</font>       : zeigt den Namen der Datei/des Verzeichnisses an
+  <font color="#924B72">#PB_Explorer_Size</font>       : zeigt die Dateigröße in KB an
+  <font color="#924B72">#PB_Explorer_Type</font>       : zeigt einen String an, der den Dateityp beschreibt
+  <font color="#924B72">#PB_Explorer_Attributes</font> : zeigt die Attribute der Datei/des Verzeichnisses an
+  <font color="#924B72">#PB_Explorer_Created</font>    : zeigt die Zeit an, zu der die Datei/das Verzeichnis erstellt wurde
+  <font color="#924B72">#PB_Explorer_Modified</font>   : zeigt die Zeit an, zu der die Datei/das Verzeichnis zuletzt geändert wurde
+  <font color="#924B72">#PB_Explorer_Accessed</font>   : zeigt die Zeit an, zu der zuletzt auf die Datei/das Verzeichnis zugegriffen wurde
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 150, &quot;ListIcon - Spalten hinzufügen&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ListIconGadget</font>(0, 10, 10, 380, 100, &quot;Standard-Spalte&quot;, 150, <font color="#924B72">#PB_ListIcon_GridLines</font>)
+<font color="#006666">    ButtonGadget</font>(1, 10, 120, 150, 20, &quot;Neue Spalte hinzufügen&quot;)
+    index = 1     <font color="#006666">; &quot;Standard-Spalte&quot; hat bereits den Index 0</font>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 1
+<font color="#006666">          AddGadgetColumn</font>(0, index, &quot;Spalte &quot;+<font color="#006666">Str</font>(index), 80)
+          index + 1
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removegadgetcolumn.html">RemoveGadgetColumn()</a>, <a href="listicongadget.html">ListIconGadget()</a>, <a href="explorerlistgadget.html">ExplorerListGadget()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=addgadgetitem.html>AddGadgetItem()</a> -><br><br>
+
+</body></html>

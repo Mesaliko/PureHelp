@@ -1,0 +1,53 @@
+<html><head><title>CanvasOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CanvasOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>CanvasOutput</b></font>(#Gadget)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the OutputID of a CanvasGadget to perform 2D rendering operation on it. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to draw on. This must be a <a href="canvasgadget.html">CanvasGadget()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the output ID or zero if drawing is not possible. This value should be passed directly to the 
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> function to start the drawing operation. The return-value 
+is valid only for one drawing operation and cannot be reused. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  ...
+<font color="#006666">  StartDrawing</font>(<font color="#006666">CanvasOutput</font>(<font color="#924B72">#Gadget</font>))
+    <font color="#006666">; do some drawing stuff here...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The <a href="canvasgadget.html">CanvasGadget()</a> does not have an alpha channel so the <font color="#924B72">#PB_2DDrawing_AlphaChannel</font> modes of the <a href="../2ddrawing/drawingmode.html">DrawingMode()</a> function will have no effect 
+and the <font color="#924B72">#PB_2DDrawing_AllChannels</font> mode will be equivalent to <font color="#924B72">#PB_2DDrawing_Default</font>. 
+<br>
+<br>
+Drawing on a <a href="canvasgadget.html">CanvasGadget()</a> is double-buffered. This means that the drawing operations only become visible 
+at the <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> command to avoid visible flicker during the drawing. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="canvasgadget.html">CanvasGadget()</a>, <a href="canvasvectoroutput.html">CanvasVectorOutput()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=canvasgadget.html>CanvasGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=canvasvectoroutput.html>CanvasVectorOutput()</a> -><br><br>
+
+</body></html>

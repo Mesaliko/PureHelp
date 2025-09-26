@@ -1,0 +1,59 @@
+<html><head><title>ATan2</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ATan2()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.f(.d) = <font color="#006666"><b>ATan2</b></font>(x.f(.d), y.f(.d))</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Berechnet den Winkel im Bogenmaß (Radiant) zwischen der X-Achse und einer Linie, welche in 
+der von 'x' und 'y' definierten Richtung gezeichnet wird. Der Winkel kann zum Berechnen 
+von Winkeln zwischen Linien in 2D verwendet werden, oder zum Umwandeln rechtwinkeliger 
+Koordinaten in Polarkoordinaten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.f, y.f oder x.d, y.d</i></td>
+<td width="90%"> 
+Die Richtung der Linie, von welcher der Winkel berechnet werden soll. 
+Null-Werte sind erlaubt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den resultierenden Winkel im Bogenmaß (Radiant) zurück. 
+Dieser kann mittels der Funktion <a href="degree.html">Degree()</a> in Grad umgewandelt werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion berechnet den Wert <a href="atan.html">ATan(y/x)</a> und prüft das Vorzeichen von x und y, 
+um den Winkel im richtigen Quadranten zu setzen. Sie kann auch mit den Fällen umgehen, wo y gleich 
+null ist, um die &quot;Division durch Null&quot; Fehler zu vermeiden. 
+<br>
+<br>
+Das Ergebnis liegt immer zwischen <font color="#924B72">-#PI</font> und <font color="#924B72">+#PI</font>. Negative 
+Winkel zeigen an, dass die Linie unterhalb der X-Achse liegt; positive Werte zeigen an, dass 
+die Linie über der X-Achse liegt. Wenn 'x' und 'y' gleich null sind, dann gibt die Funktion 
+0.0 zurück. 
+<br>
+<br>
+Diese Funktion verarbeitet und gibt <a href="../reference/variables.html">Float oder Double</a> Werte zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(10, 10) <font color="#006666">; wird #PI/4 anzeigen (45 Grad im Bogenmaß)</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="atan.html">ATan()</a>, <a href="degree.html">Degree()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=atan.html>ATan()</a> - <a href=index.html>Math Inhaltsverzeichnis</a> - <a href=atanh.html>ATanH()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,49 @@
+<html><head><title>ExaminePreferenceKeys</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExaminePreferenceKeys()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ExaminePreferenceKeys</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Startet die Aufzählung aller in der aktuellen Gruppe der Preference-Datei gefundenen Schlüssel (englisch &quot;Keys&quot;). 
+Die aktuelle Gruppe kann mittels <a href="preferencegroup.html">PreferenceGroup()</a> ausgewählt werden, 
+oder durch Untersuchung aller Gruppen mittels <a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a>. 
+<br>
+<br>
+<a href="nextpreferencekey.html">NextPreferenceKey()</a> kann verwendet werden, um alle gefundenen Schlüssel aufzulisten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn die Aufzählung erfolgreich gestartet wurde, andernfalls Null. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Öffnet eine Preference-Datei</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Wählt eine Gruppe aus</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+  
+  <font color="#006666">; Untersucht die Schlüssel in der Gruppe 'Window'</font>
+<font color="#006666">  ExaminePreferenceKeys</font>()
+  <b><font color="#006666">While</font></b> <font color="#006666">NextPreferenceKey</font>() <font color="#006666">; Solange ein Schlüssel existiert...</font>
+    <b><font color="#006666">Debug</font></b> &quot;Schlüssel-Gruppe 'Window': &quot; +<font color="#006666"> PreferenceKeyName</font>() + &quot; = &quot; +<font color="#006666"> PreferenceKeyValue</font>()  <font color="#006666">; ...wird der Schlüssel mit seinen Daten angezeigt</font>
+  <b><font color="#006666">Wend</font></b>
+  
+  <font color="#006666">; Schließt die Preference-Datei</font>
+<font color="#006666">  ClosePreferences</font>()  
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a>, <a href="nextpreferencegroup.html">NextPreferenceGroup()</a>, <a href="nextpreferencekey.html">NextPreferenceKey()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=examinepreferencegroups.html>ExaminePreferenceGroups()</a> - <a href=index.html>Preference Inhaltsverzeichnis</a> - <a href=flushpreferencebuffers.html>FlushPreferenceBuffers()</a> -><br><br>
+
+</body></html>

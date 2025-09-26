@@ -1,0 +1,114 @@
+<html><head><title>CatchSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchSprite()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchSprite</b></font>(#Sprite, *AdresseMemoire [, Mode])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Charge le sprite situé à l'adresse 
+mémoire spécifiée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+sprite. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>*AdresseMemoire</i></td>
+<td> 
+L'adresse mémoire de l'image 
+utilisée pour créer le sprite. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une combinaison de (utiliser 
+l'opérateur '|'): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Ajoute des informations spéciales pour gérer les collisions de pixels à travers <a href="spritepixelcollision.html">SpritePixelCollision()</a>.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Le sprite est créé avec un canal alpha (transparence), nécessaire pour utiliser <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>.
+                             Le format de l'image doit le supporter (seulement PNG et TIFF pour l'instant).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le sprite 
+a été créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le sprite peut être au format BMP (non 
+compressé = non RLE) ou dans un des 
+formats supportés par la bibliothèque 
+<a href="../imageplugin/index.html">ImagePlugin</a>. 
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> 
+<br>
+<br>
+Avant de charger un sprite, un écran doit 
+être ouvert à l'aide de la commande 
+<a href="../screen/openscreen.html">OpenScreen()</a> ou <a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a>.<br>
+Un Sprite chargé peut être par la suite 
+libéré par la fonction <a href="freesprite.html">FreeSprite()</a>. <br>
+La commande 'CatchSprite' est utile quand il 
+est nécessaire d'inclure directement 
+les sprites dans l'exécutable (en utilisant 
+<a href="../reference/includes.html">IncludeBinary</a>). 
+Cette méthode n'est pas idéale 
+et devrait être évitée au maximum car en 
+faisant ceci, les sprites prennent deux 
+fois plus de mémoire (une première fois dans 
+l'exécutable, et une deuxième fois quand ils 
+sont chargés). <br>
+Une autre utilisation souvent utilisée est de 
+récupérer un sprite dans une banque 
+de données compressée. 
+<br>
+<br>
+Le &quot;?&quot; est un pointeur sur une étiquette. 
+<br>
+Plus d'informations sur les pointeurs et 
+l'accès à la mémoire peuvent être trouvés 
+<a href="../reference/memory.html">ici</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666"> InitSprite</font>()
+
+<font color="#006666">  OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+  <b><font color="#006666">DataSection</font></b>
+    Pic: 
+    <b><font color="#006666">IncludeBinary</font></b> <font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/Sources/Data/PureBasicLogo.bmp&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+
+<font color="#006666">  CatchSprite</font>(0,?Pic)
+
+<font color="#006666">  DisplaySprite</font>(0, 210, 260)
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  Delay</font>(3000)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createsprite.html">CreateSprite()</a>, <a href="loadsprite.html">LoadSprite()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Sprite Index</a> - <a href=clipsprite.html>ClipSprite()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,114 @@
+<html><head><title>CreateVehicleBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateVehicleBody()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CreateVehicleBody</b></font>(#Entity, Masse.f, Restitution.f, Friction.f [, SuspensionRigidité.f, SuspensionCompression.f, SuspensionAmortissement.f, SuspensionCompressionMax.f, AdherencePneu.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un corps physique associé à une entité véhicule. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Masse</i></td>
+<td width="90%"> 
+Masse du véhicule. 
+<br>
+<br>
+Ne pas utiliser une trop grande valeur car il pourrait se produire des incohérences 
+physiques (1 est la valeur préférée). 
+
+</td></tr>
+<tr><td><i>Restitution</i></td>
+<td> 
+Restitution du véhicule. 
+<br>
+<br>
+Cette valeur peut également être obtenue ou configurer via <a href="../entity/getentityattribute.html">GetEntityAttribute()</a> et <a href="../entity/setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Friction</i></td>
+<td> 
+Friction du véhicule. 
+<br>
+<br>
+Cette valeur peut également être obtenue ou configurer via <a href="../entity/getentityattribute.html">GetEntityAttribute()</a> et <a href="../entity/setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>SuspensionRigidité (optionnel)</i></td>
+<td> 
+La rigidité de la suspension (10: Buggy tout terrain, 50: Voiture de sports, 200: Voiture F1) 
+
+</td></tr>
+<tr><td><i>SuspensionCompression (optionnel)</i></td>
+<td> 
+Le coefficient d'amortissement à utiliser lorsque la suspension est comprimée. 
+<br>
+<br>
+Mettre à valeur * 2 * RacineCarrée(SuspensionRigidité), elle est donc proportionnelle 
+à l'amortissement critique. 
+<br>
+<br>
+Exemples de valeur: 
+<pre><font face="Courier New, Courier, mono" size="2">  valeur = 0: non amortie et bondissant
+  valeur = 1: amortissement critique
+</font></pre>
+Les valeurs recommandées vont de 0.1 à 0.3. 
+
+</td></tr>
+<tr><td><i>SuspensionAmortissement (optionnel)</i></td>
+<td> 
+L'amortissement lorsque la suspension est totallement étirée. 
+<br>
+<br>
+Voir SuspensionCompression pour définir cette valeur.  <br>
+La valeur de SuspensionAmortissement doit être légèrement plus grande que 
+SuspensionCompression. 
+<br>
+<br>
+Les valeurs recommandées vont de 0.2 à 0.5. 
+
+</td></tr>
+<tr><td><i>SuspensionCompressionMax (optionnel)</i></td>
+<td> 
+La longueur à laquelle la suspension peut être comprimée (en centimètres). 
+
+</td></tr>
+<tr><td><i>AdherencePneu (optionnel)</i></td>
+<td> 
+Le frottement entre le pneumatique et le sol. 
+<br>
+<br>
+Devrait être d'environ 0,8 pour les voitures réalistes mais peut augmenter 
+pour une meilleure manipulation.<br>
+Une grande valeur (10000.0) peut être utilisé pour les karts. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour que les collisions  soient gérées par le moteur physique, 
+l'entité doit avoir un corps (body).<br>
+En fait, seul le corps est connu par le moteur physique qui fera tout le calcul 
+sur l'entité, vérifier la masse, la friction et s'il entre en collision. 
+<br>
+<br>
+Pour avoir un effet, le moteur physique doit être activé avec <a href="../engine3d/enableworldphysics.html">EnableWorldPhysics()</a>. 
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../entity/freeentitybody.html">FreeEntityBody()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createvehicle.html>CreateVehicle()</a> - <a href=index.html>Vehicle Index</a> - <a href=getvehicleattribute.html>GetVehicleAttribute()</a> -><br><br>
+
+</body></html>

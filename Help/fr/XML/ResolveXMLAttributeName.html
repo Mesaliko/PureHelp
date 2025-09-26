@@ -1,0 +1,76 @@
+<html><head><title>ResolveXMLAttributeName</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResolveXMLAttributeName()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>ResolveXMLAttributeName</b></font>(Noeud, Attribut$ [, Separateur$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le nom complet du noeud 
+donné en attribut dans un document qui 
+utilise les espaces de noms XML. 
+<br>
+<br>
+Le nom complet se compose de 
+l'URI (Uniform Resource Identifier) de l'espace de noms (s'il existe) et 
+du nom de l'attribut local), séparé par le 
+séparateur donné par 'Separateur$'. Le 
+caractère de séparation (séparateur) par 
+défaut est &quot;/&quot;. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Noeud</i></td>
+<td width="90%"> 
+Le noeud à utiliser. 
+
+</td></tr>
+<tr><td><i>Attribut$</i></td>
+<td> 
+L'attribut à trouver. 
+
+</td></tr>
+<tr><td><i>Separateur$ (optionnel)</i></td>
+<td> 
+Le séparateur (chaîne de caractères) à 
+utiliser.<br>
+Par défaut : &quot;/&quot;. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Dans un document utilisant les espaces de 
+noms, renvoie le nom complet de l'attribut 
+s'il peut-être correctement résolu ou une 
+chaîne vide si le préfixe de l'espace de 
+noms est utilisé sans être jamais déclaré 
+(ce qui n'est pas valide). 
+<br>
+<br>
+Dans un document sans espaces de noms, 
+renvoie le nom de l'attribut. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<b>Note: </b> à la différence des 
+<a href="resolvexmlnodename.html">noms de noeuds</a>, 
+l'espace de noms par défaut n'est pas 
+utilisé pour qualifier un nom qui n'a pas 
+de préfixe lié à un espace de noms. 
+Ainsi, les noms qualifiés sans préfixe 
+d'espace de noms ont simplement leur nom 
+local renvoyé. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="resolvexmlnodename.html">ResolveXMLNodeName()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removexmlattribute.html>RemoveXMLAttribute()</a> - <a href=index.html>XML Index</a> - <a href=resolvexmlnodename.html>ResolveXMLNodeName()</a> -><br><br>
+
+</body></html>

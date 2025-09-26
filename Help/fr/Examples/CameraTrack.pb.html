@@ -1,0 +1,326 @@
+<html><head><title>CameraTrack.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono"size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CameraTrack
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; Code adapted from this tutorial
+</font><font color="#006666">; http://www.ogre3d.org/tikiwiki/3rd+person+camera+system+tutorial
+</font>
+<b><font color="#006666">IncludeFile</font></b> <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Screen3DRequester.pb&quot;
+
+<font color="#924B72">#PlayerSpeed</font> = 2
+
+<b><font color="#006666">Enumeration</font></b>
+  <font color="#924B72">#MainWindow</font>
+  <font color="#924B72">#StMode</font>
+  <font color="#924B72">#StFPS</font>
+  <font color="#924B72">#Editor</font>
+<b><font color="#006666">EndEnumeration</font></b>
+
+<b><font color="#006666">Enumeration</font></b>
+  <font color="#924B72">#ThirdPersonChase</font>
+  <font color="#924B72">#ThirdPersonFixed</font>
+  <font color="#924B72">#FirstPerson</font>
+<b><font color="#006666">EndEnumeration</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Key
+  Up.i
+  Down.i
+  Left.i
+  Right.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Entity
+  Entity.i
+  elapsedTime.f
+  Key.s_Key
+  SightNode.i
+  CameraNode.i
+  DirectionNode.i
+  Offset.Vector3 <font color="#006666">; if needed for FirstPerson
+</font><b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Camera
+  Camera.i
+  Mode.i
+  Tightness.f
+  CameraNode.i
+  TargetNode.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">GetNodePosition</font>(Position, Node)
+  Position\x =<font color="#006666"> NodeX</font>(Node)
+  Position\y =<font color="#006666"> NodeY</font>(Node)
+  Position\z =<font color="#006666"> NodeZ</font>(Node)
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">GetEntityPosition</font>(Position, Node)
+  Position\x =<font color="#006666"> EntityX</font>(Node)
+  Position\y =<font color="#006666"> EntityY</font>(Node)
+  Position\z =<font color="#006666"> EntityZ</font>(Node)
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">SetVector3</font>(V, xx, yy, zz)
+  V\x = xx
+  V\y = yy
+  V\z = zz
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">AddVector3</font>(V, V1, V2)
+  V\x = V1\x + V2\x
+  V\y = V1\y + V2\y
+  V\z = V1\z + V2\z
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">SubVector3</font>(V, V1, V2)
+  V\x = V1\x - V2\x
+  V\y = V1\y - V2\y
+  V\z = V1\z - V2\z
+<b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">;-Declare
+</font><b><font color="#006666">Declare</font></b> <font color="#006666">HandleEntity</font>(*Entity.s_Entity)
+<b><font color="#006666">Declare</font></b> <font color="#006666">CameraMode</font>(*Camera.s_Camera, *Entity.s_Entity)
+<b><font color="#006666">Declare</font></b> <font color="#006666">CameraTrack</font>(*Camera.s_Camera, *Entity.s_Entity)
+<b><font color="#006666">Declare</font></b> <font color="#006666">CameraInstantUpdate</font>(*Camera.s_Camera, *CameraPosition.Vector3, *TargetPosition.Vector3)
+<b><font color="#006666">Declare</font></b> <font color="#006666">CameraUpdate</font>(*Camera.s_Camera, *CameraPosition.Vector3, *TargetPosition.Vector3)
+
+<b><font color="#006666">Define</font></b>.f RatioX, RatioY
+<b><font color="#006666">Define</font></b> Robot.s_Entity
+<b><font color="#006666">Define</font></b> Camera.s_Camera
+
+<b><font color="#006666">If</font></b> <font color="#006666">InitEngine3D</font>()
+  
+<font color="#006666">  InitSprite</font>()
+<font color="#006666">  InitKeyboard</font>()
+<font color="#006666">  InitMouse</font>()
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">Screen3DRequester</font>()
+    
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;        , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;          , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/GUI&quot;             , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+    
+<font color="#006666">    WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>)
+    
+    <font color="#006666">;Change the texture filtering mode for all materials
+</font><font color="#006666">    MaterialFilteringMode</font>(<font color="#924B72">#PB_Default</font>, <font color="#924B72">#PB_Material_Anisotropic</font>, 8)
+    
+<font color="#006666">    CreateTexture</font>(1, 256, 256)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">TextureOutput</font>(1))
+<font color="#006666">    Box</font>(0, 0, 256, 256,<font color="#006666"> RGB</font>(0, 34, 85))
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font>)
+<font color="#006666">    Box</font>(0, 0, 256, 256,<font color="#006666"> RGB</font>(255, 255, 255))
+<font color="#006666">    Box</font>(10, 10, 236, 236,<font color="#006666"> RGB</font>(0, 255, 255))
+<font color="#006666">    StopDrawing</font>()
+    
+<font color="#006666">    CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;r2skin.jpg&quot;))
+<font color="#006666">    CreateMaterial</font>(1,<font color="#006666"> TextureID</font>(1))
+    
+    <font color="#006666">;robot
+</font><font color="#006666">    LoadMesh   </font>(0, &quot;robot.mesh&quot;)
+<font color="#006666">    CreateEntity </font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))<font color="#006666">;
+</font><font color="#006666">    StartEntityAnimation</font>(0, &quot;Walk&quot;)
+    
+    <font color="#006666">;Sol
+</font><font color="#006666">    CreatePlane</font>(1, 5000, 5000, 100, 100, 100,100)
+<font color="#006666">    CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1))
+    
+    
+    <b><font color="#006666">With</font></b> Robot
+      \Entity = 0
+      \Key\Down  = <font color="#924B72">#PB_Key_Down</font>
+      \Key\Left  = <font color="#924B72">#PB_Key_Left</font>
+      \Key\Right = <font color="#924B72">#PB_Key_Right</font>
+      \Key\Up    = <font color="#924B72">#PB_Key_Up</font>
+      \Offset\x = 0
+      \Offset\y = 50 <font color="#006666">; Offset could be needed for FirstPerson
+</font>      \Offset\z = 0
+      <font color="#006666">; Entity use 3 nodes
+</font>      \SightNode=<font color="#006666">CreateNode</font>(<font color="#924B72">#PB_Any</font>, 120, 20, 0) <font color="#006666">; For cameraLookAt
+</font>      \CameraNode=<font color="#006666">CreateNode</font>(<font color="#924B72">#PB_Any</font>, -140, 100, 0) <font color="#006666">; Camera position
+</font>      \DirectionNode=<font color="#006666">CreateNode</font>(<font color="#924B72">#PB_Any</font>, 1, 0, 0) <font color="#006666">; Direction normalized
+</font>      
+<font color="#006666">      AttachEntityObject</font>(\Entity, &quot;&quot;,<font color="#006666"> NodeID</font>(\SightNode))
+<font color="#006666">      AttachEntityObject</font>(\Entity, &quot;&quot;,<font color="#006666"> NodeID</font>(\CameraNode))
+<font color="#006666">      AttachEntityObject</font>(\Entity, &quot;&quot;,<font color="#006666"> NodeID</font>(\DirectionNode))
+    <b><font color="#006666">EndWith</font></b>
+    
+    <font color="#006666">;-Camera
+</font><font color="#006666">    CreateCamera</font>(0, 0, 0, 100, 100)
+    <b><font color="#006666">With</font></b> Camera
+      \Camera = 0
+      \Mode = <font color="#924B72">#ThirdPersonChase</font>
+      \Tightness = 0.01
+      <font color="#006666">; Camera use 2 nodes
+</font>      \CameraNode =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>, -3000, 700, 0) <font color="#006666">; Camera position
+</font>      \TargetNode =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>) <font color="#006666">; For cameraLookAt
+</font><font color="#006666">      AttachNodeObject</font>(\CameraNode,<font color="#006666"> CameraID</font>(\Camera))
+    <b><font color="#006666">EndWith</font></b>
+    
+    <font color="#006666">;-Light
+</font><font color="#006666">    CreateLight</font>(0,<font color="#006666">RGB</font>(125,125,125),700,500,0)
+<font color="#006666">    AmbientColor</font>(<font color="#006666">RGB</font>(85,85,85))
+    
+<font color="#006666">    SkyBox</font>(&quot;desert07.jpg&quot;)
+    
+    <font color="#006666">;-GUI
+</font>    RatioX =<font color="#006666"> CameraViewWidth</font>(0) / 800
+    RatioY =<font color="#006666"> CameraViewHeight</font>(0) / 600
+<font color="#006666">    OpenWindow3D</font>(<font color="#924B72">#MainWindow</font>, 0, 0, 280 * RatioX, 130 * RatioY, &quot;Camera Track&quot;)
+<font color="#006666">    TextGadget3D</font>(<font color="#924B72">#StFPS</font> , 10 * RatioX, 10 * RatioY, 240 * RatioX, 30 * RatioY, &quot;FPS&quot;)
+<font color="#006666">    TextGadget3D</font>(<font color="#924B72">#StMode</font>, 10 * RatioX, 35 * RatioY, 240 * RatioX, 30 * RatioY, &quot;ThirdPersonChase&quot;)
+<font color="#006666">    TextGadget3D</font>(<font color="#924B72">#Editor</font>, 10 * RatioX, 65 * RatioY, 240 * RatioX, 30 * RatioY, &quot;Use F2, F3 Or F4 To change Mode&quot;)
+
+<font color="#006666">    ShowGUI</font>(128, 1) <font color="#006666">; Display the GUI, semi-transparent and display the mouse cursor
+</font>    
+    <b><font color="#006666">Repeat</font></b>
+<font color="#006666">      Screen3DEvents</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">Engine3DStatus</font>(<font color="#924B72">#PB_Engine3D_CurrentFPS</font>)
+        Robot\elapsedTime = 40/<font color="#006666">Engine3DStatus</font>(<font color="#924B72">#PB_Engine3D_CurrentFPS</font>)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+<font color="#006666">        InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>), &quot;&quot;, 0)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+<font color="#006666">        CameraMode</font>(@Camera, @robot)
+<font color="#006666">        HandleEntity</font>(@Robot)
+      <b><font color="#006666">EndIf</font></b>
+      
+      
+      <b><font color="#006666">Repeat</font></b>
+        Event3D =<font color="#006666"> WindowEvent3D</font>()
+      <b><font color="#006666">Until</font></b> Event3D = 0
+      
+<font color="#006666">      CameraTrack</font>(@Camera, @Robot)
+      
+<font color="#006666">      SetGadgetText3D</font>(<font color="#924B72">#StFPS</font>, &quot;FPS = &quot; +<font color="#006666"> Str</font>(<font color="#006666">Engine3DStatus</font>(<font color="#924B72">#PB_Engine3D_CurrentFPS</font>)))
+      
+<font color="#006666">      RenderWorld</font>()
+<font color="#006666">      FlipBuffers</font>()
+    <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">Else</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;The 3D Engine can't be initialized&quot;,0)
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">HandleEntity</font>(*Entity.s_Entity)
+  <b><font color="#006666">Protected</font></b> Direction.Vector3, PosMain.Vector3, PosDir.Vector3
+  <b><font color="#006666">Protected</font></b> Speed.f, Speed2.f
+  <b><font color="#006666">With</font></b> *Entity
+<font color="#006666">    GetEntityPosition</font>(PosMain, \Entity)
+<font color="#006666">    GetNodePosition</font>(PosDir, \DirectionNode)
+<font color="#006666">    SubVector3</font>(Direction, PosDir, PosMain)
+    Speed = <font color="#924B72">#PlayerSpeed</font> * \elapsedTime
+    Speed2 = -Speed / 2
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Up)
+<font color="#006666">      MoveEntity</font>(\Entity, Direction\x * Speed, Direction\y * Speed, Direction\z * Speed)
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Down)
+<font color="#006666">      MoveEntity</font>(\Entity, Direction\x * Speed2, Direction\y * Speed2, Direction\z * Speed2)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Left)
+<font color="#006666">      RotateEntity</font>(\Entity, 0,<font color="#924B72">#PlayerSpeed</font>/2 * \elapsedTime, 0, <font color="#924B72">#PB_Relative</font>)
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Right)
+<font color="#006666">      RotateEntity</font>(\Entity, 0, -<font color="#924B72">#PlayerSpeed</font>/2 * \elapsedTime, 0, <font color="#924B72">#PB_Relative</font>)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndWith</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraMode</font>(*Camera.s_Camera, *Entity.s_Entity)
+  <b><font color="#006666">Protected</font></b> CameraPosition.Vector3, TargetPosition.Vector3, Temp.Vector3
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F2</font>)
+    *Camera\Mode = <font color="#924B72">#ThirdPersonChase</font>
+<font color="#006666">    HideEntity</font>(*Entity\Entity, <font color="#924B72">#False</font>)
+<font color="#006666">    GetNodePosition</font>(CameraPosition, *Entity\CameraNode)
+<font color="#006666">    GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">    CameraInstantUpdate</font>(*Camera, @CameraPosition, @TargetPosition)
+    *Camera\Tightness = 0.01
+<font color="#006666">    SetGadgetText3D</font>(<font color="#924B72">#StMode</font>, &quot;ThirdPersonChase&quot;)
+    
+  <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F3</font>)
+    *Camera\Mode = <font color="#924B72">#ThirdPersonFixed</font>
+<font color="#006666">    HideEntity</font>(*Entity\Entity, <font color="#924B72">#False</font>)
+<font color="#006666">    SetVector3</font>(CameraPosition, 0, 200, 0)
+<font color="#006666">    GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">    CameraInstantUpdate</font>(*Camera, @CameraPosition, @TargetPosition)
+    *Camera\Tightness = 0.01
+<font color="#006666">    SetGadgetText3D</font>(<font color="#924B72">#StMode</font>, &quot;ThirdPersonFixed&quot;)
+    
+  <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F4</font>)
+    *Camera\Mode = <font color="#924B72">#FirstPerson</font>
+<font color="#006666">    HideEntity</font>(*Entity\Entity, <font color="#924B72">#True</font>)
+<font color="#006666">    GetEntityPosition</font>(Temp, *Entity\Entity)
+<font color="#006666">    AddVector3</font>(CameraPosition, Temp, *Entity\Offset)
+<font color="#006666">    GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">    CameraInstantUpdate</font>(*Camera, @CameraPosition, @TargetPosition)
+    *Camera\Tightness = 1
+<font color="#006666">    SetGadgetText3D</font>(<font color="#924B72">#StMode</font>, &quot;FirstPerson&quot;)
+    
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraTrack</font>(*Camera.s_Camera, *Entity.s_Entity)
+  <b><font color="#006666">Protected</font></b> CameraPosition.Vector3, TargetPosition.Vector3, Temp.Vector3
+  
+  <b><font color="#006666">Select</font></b> *Camera\Mode
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#ThirdPersonChase</font>
+<font color="#006666">      GetNodePosition</font>(CameraPosition, *Entity\CameraNode)
+<font color="#006666">      GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">      CameraUpDate</font>(*Camera, @CameraPosition, @TargetPosition)
+      
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#ThirdPersonFixed</font>
+<font color="#006666">      SetVector3</font>(CameraPosition, 0, 200, 0)
+<font color="#006666">      GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">      CameraUpDate</font>(*Camera, @CameraPosition, @TargetPosition)
+      
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#FirstPerson</font>
+<font color="#006666">      GetEntityPosition</font>(Temp, *Entity\Entity)
+<font color="#006666">      AddVector3</font>(CameraPosition, Temp, *Entity\Offset)
+<font color="#006666">      GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+<font color="#006666">      CameraUpDate</font>(*Camera, @CameraPosition, @TargetPosition)
+      
+  <b><font color="#006666">EndSelect</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraInstantUpdate</font>(*Camera.s_Camera, *CameraPosition.Vector3, *TargetPosition.Vector3)
+  <b><font color="#006666">Protected</font></b> V1.Vector3, V2.Vector3
+  
+<font color="#006666">  MoveNode</font>(*Camera\CameraNode, *CameraPosition\x, *CameraPosition\y, *CameraPosition\z, <font color="#924B72">#PB_Absolute</font>)
+  
+<font color="#006666">  MoveNode</font>(*Camera\TargetNode, *TargetPosition\x, *TargetPosition\y, *TargetPosition\z, <font color="#924B72">#PB_Absolute</font>)
+  
+<font color="#006666">  CameraLookAt</font>(*Camera\Camera,<font color="#006666"> NodeX</font>(*Camera\TargetNode),<font color="#006666"> NodeY</font>(*Camera\TargetNode),<font color="#006666"> NodeZ</font>(*Camera\TargetNode))
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraUpdate</font>(*Camera.s_Camera, *CameraPosition.Vector3, *TargetPosition.Vector3)
+  <b><font color="#006666">Protected</font></b> V1.Vector3, V2.Vector3
+  
+  V1\x = (*CameraPosition\x -<font color="#006666"> NodeX</font>(*Camera\CameraNode)) *  *Camera\Tightness
+  V1\y = (*CameraPosition\y -<font color="#006666"> NodeY</font>(*Camera\CameraNode)) *  *Camera\Tightness
+  v1\z = (*CameraPosition\z -<font color="#006666"> NodeZ</font>(*Camera\CameraNode)) *  *Camera\Tightness
+<font color="#006666">  MoveNode</font>(*Camera\CameraNode, V1\x, V1\y, V1\z)
+  
+  V2\x = (*TargetPosition\x -<font color="#006666"> NodeX</font>(*Camera\TargetNode)) *  *Camera\Tightness
+  V2\y = (*TargetPosition\y -<font color="#006666"> NodeY</font>(*Camera\TargetNode)) *  *Camera\Tightness
+  V2\z = (*TargetPosition\z -<font color="#006666"> NodeZ</font>(*Camera\TargetNode)) *  *Camera\Tightness
+<font color="#006666">  MoveNode</font>(*Camera\TargetNode, V2\x, V2\y, V2\z)
+  
+<font color="#006666">  CameraLookAt</font>(*Camera\Camera,<font color="#006666"> NodeX</font>(*Camera\TargetNode),<font color="#006666"> NodeY</font>(*Camera\TargetNode),<font color="#006666"> NodeZ</font>(*Camera\TargetNode))
+<b><font color="#006666">EndProcedure</font></b></font></pre>
+</body></html>

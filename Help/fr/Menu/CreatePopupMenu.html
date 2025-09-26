@@ -1,0 +1,110 @@
+<html><head><title>CreatePopupMenu</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePopupMenu()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreatePopupMenu</b></font>(#Menu) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau menu contextuel (PopUp). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+Le numéro d'identification du menu. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, 
+zéro sinon.<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé le numéro du menu 
+est renvoyé en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il est possible d'utiliser des images en 
+créant un menu popup avec CreatePopupImageMenu. 
+<br>
+<br>
+Une fois créé, il devient le menu courant 
+et il est alors possible d'utiliser les 
+fonctions <a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="menubar.html">MenuBar()</a>, 
+et <a href="opensubmenu.html">OpenSubMenu()</a> pour remplir le menu. 
+<br>
+<br>
+La fonction <a href="displaypopupmenu.html">DisplayPopupMenu()</a> sera ensuite 
+utilisée pour afficher ce menu contextuel à 
+l'écran. 
+<br>
+<br>
+Pour gérer les évènements relatifs aux menus, 
+voir la description des commandes suivantes: 
+<br>
+<br>
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> (ou <a href="../window/windowevent.html">WindowEvent()</a>) 
+<br>
+<a href="../window/eventwindow.html">EventWindow()</a> 
+<br>
+<a href="../window/eventmenu.html">EventMenu()</a> 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 220, 120, &quot;Exemple de menu contextuel&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreatePopupMenu</font>(0)        <font color="#006666">; La création du menu contextuel commence...</font>
+<font color="#006666">      MenuTitle</font>(&quot;Projet&quot;)        <font color="#006666">; Vous pouvez utiliser toutes les commandes relatives au menu,</font>
+<font color="#006666">        MenuItem</font>(1, &quot;Ouvrir&quot;)    <font color="#006666">; comme si c'était un menu normal...</font>
+<font color="#006666">        MenuItem</font>(2, &quot;Enregistrer&quot;)
+<font color="#006666">        MenuItem</font>(3, &quot;Enregistrer sous&quot;)
+<font color="#006666">        MenuItem</font>(4, &quot;Quitter&quot;)
+<font color="#006666">        MenuBar</font>()
+<font color="#006666">        OpenSubMenu</font>(&quot;Fic&amp;hiers récents&quot;)
+<font color="#006666">          MenuItem</font>(5, &quot;PureBasic.exe&quot;)
+<font color="#006666">          MenuItem</font>(6, &quot;Test.txt&quot;)
+<font color="#006666">        CloseSubMenu</font>()
+
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">Select</font></b> Event                        <font color="#006666">; Examine quel type d'évènement est survenu sur la fenêtre</font>
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_RightClick</font>         <font color="#006666">; Le bouton droit de la souris a été clické =&gt;</font>
+<font color="#006666">          DisplayPopupMenu</font>(0,<font color="#006666">WindowID</font>(0)) <font color="#006666">; On affiche le menu contextuel</font>
+        
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>      <font color="#006666">; Un élément du menu a été sélectionné</font>
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()     <font color="#006666">; On recupère le numéro de cet élement...</font>
+            <b><font color="#006666">Case</font></b> 1 : <b><font color="#006666">Debug</font></b> &quot;Menu : Ouvrir&quot;
+            <b><font color="#006666">Case</font></b> 2 : <b><font color="#006666">Debug</font></b> &quot;Menu : Enregistrer&quot;
+            <b><font color="#006666">Case</font></b> 3 : <b><font color="#006666">Debug</font></b> &quot;Menu : Enregistrer sous&quot;
+            <b><font color="#006666">Case</font></b> 4 : <b><font color="#006666">End</font></b>
+            <b><font color="#006666">Case</font></b> 5 : <b><font color="#006666">Debug</font></b> &quot;Menu : PureBasic.exe&quot;
+            <b><font color="#006666">Case</font></b> 6 : <b><font color="#006666">Debug</font></b> &quot;Menu : Text.txt&quot;
+          <b><font color="#006666">EndSelect</font></b>
+
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/createpopupmenu.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createpopupimagemenu.html">CreatePopupImageMenu()</a>, <a href="displaypopupmenu.html">DisplayPopupMenu()</a>, 
+<a href="createmenu.html">CreateMenu()</a>, <a href="createimagemenu.html">CreateImageMenu()</a>, <a href="freemenu.html">FreeMenu()</a>, 
+<a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="menubar.html">MenuBar()</a>, 
+<a href="opensubmenu.html">OpenSubMenu()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createpopupimagemenu.html>CreatePopupImageMenu()</a> - <a href=index.html>Menu Index</a> - <a href=disablemenuitem.html>DisableMenuItem()</a> -><br><br>
+
+</body></html>

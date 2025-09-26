@@ -1,0 +1,90 @@
+<html><head><title>CompareMemoryString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareMemoryString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CompareMemoryString</b></font>(*Texte1, *Texte2 [, Mode [, Longueur [, Options]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Compare deux chaînes de caractères situées 
+en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Texte1, *Texte2</i></td>
+<td width="90%"> 
+Les adresses des deux chaînes de caractères à comparer. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : La recherche est sensible à  la casse (a=a) (Par défaut).
+  <font color="#924B72">#PB_String_NoCase</font>        : Comparaison insensible à la casse (a=A).
+  <font color="#924B72">#PB_String_NoCaseAscii</font>   : Recherche insensible à la casse utilisant uniquement le jeu de caractères ascii (a=A). 
+                             Beaucoup plus rapide que <font color="#924B72">#PB_String_NoCase</font> lorsque la prise en charge complète d'Unicode n'est pas requise.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Longueur (optionnel)</i></td>
+<td> 
+Le nombre de caractères à comparer. 
+<br>
+<br>
+Si ce paramètre ne est pas spécifié ou égal à 
+-1 alors les chaînes sont comparées jusqu'à 
+ce qu'un caractère <font color="#924B72">#Null</font> soit atteint.<br>
+Si les chaînes ne sont pas terminées par un 
+caractère <font color="#924B72">#Null</font>, ce paramètre doit alors 
+être spécifié. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Compare la chaîne de caractères au format ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Compare la chaîne de caractères au format  UTF-8
+  <font color="#924B72">#PB_Unicode</font>: Compare la chaîne de caractères au format  Unicode
+</font></pre>
+La valeur par défaut est <font color="#924B72">#PB_Unicode</font>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_Equal</font>  : Le 'Texte1' est égal au 'Texte2'.
+  <font color="#924B72">#PB_String_Lower</font>  : Le 'Texte1' est inférieur au 'Texte2'.
+  <font color="#924B72">#PB_String_Greater</font>: Le 'Texte1' est supérieur au 'Texte2'.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte1$ = &quot;OK&quot;
+  Texte2$ = &quot;KO&quot;
+
+  Comp =<font color="#006666"> CompareMemoryString</font>(@Texte1$, @Texte2$)
+  <b><font color="#006666">Select</font></b> Comp
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_String_Equal</font>
+      <b><font color="#006666">Debug</font></b> &quot;Le 'Texte1' est égal au 'Texte2'.&quot;
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_String_Lower</font>  
+      <b><font color="#006666">Debug</font></b> &quot;Le 'Texte1' est inférieur au 'Texte2'.&quot;
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_String_Greater</font>
+      <b><font color="#006666">Debug</font></b> &quot;Le 'Texte1' est supérieur au 'Texte2'.&quot;
+  <b><font color="#006666">EndSelect</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pokes.html">PokeS()</a>, <a href="peeks.html">PeekS()</a>, <a href="memorystringlength.html">MemoryStringLength()</a>, 
+<a href="copymemorystring.html">CopyMemoryString()</a>, <a href="comparememory.html">CompareMemory()</a>, 
+<a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=comparememory.html>CompareMemory()</a> - <a href=index.html>Memory Index</a> - <a href=copymemory.html>CopyMemory()</a> -><br><br>
+
+</body></html>

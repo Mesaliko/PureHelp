@@ -1,0 +1,113 @@
+<html><head><title>ExplorerTreeGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExplorerTreeGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ExplorerTreeGadget</b></font>(#Gadget, x, y, Width, Height, Directory$, [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a tree listing of the directory tree just as Explorer does. 
+It lets the user navigate through his file-system, and choose a file or folder. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Directory$</i></td>
+<td> 
+The directory that will be initially selected. It can include 
+one or multiple patterns, like &quot;C:\*.pb;*.pbi&quot;. If no pattern is included, the 
+directory must end with a '\'. Including no directory will display the root 
+containing the drives. Including no pattern defaults to '*.*'. So a Directory$ 
+of &quot;&quot; will display the root and set '*.*' as pattern. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_BorderLess</font>          : Create Gadget without borders.
+  <font color="#924B72">#PB_Explorer_AlwaysShowSelection</font> : The selection is still visible, even when the gadget is not activated.
+  <font color="#924B72">#PB_Explorer_NoLines</font>             : Hide the little lines between each node.
+  <font color="#924B72">#PB_Explorer_NoButtons</font>           : Hide the '+' node buttons.
+
+  <font color="#924B72">#PB_Explorer_NoFiles</font>             : No files will be displayed.
+  <font color="#924B72">#PB_Explorer_NoDriveRequester</font>    : There will be no 'please insert drive X:' displayed.
+  <font color="#924B72">#PB_Explorer_NoMyDocuments</font>       : The 'My Documents' Folder will not be displayed as a separate item.
+  <font color="#924B72">#PB_Explorer_AutoSort</font>            : The content will be sorted automatically by name.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+The following functions can be used to control the gadget: 
+<br>
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Get the full path of the currently selected directory/file. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Set the currently selected file/directory. 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Check if the selected item is a file or a directory. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Returns the full path of the specified item. 
+<br>
+<br>
+
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textcolor
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Backgroundcolor
+  <font color="#924B72">#PB_Gadget_LineColor</font> : Color for the lines and buttons if they are displayed
+</font></pre>
+
+ExplorerTreeGadget() supports the following Events reported by <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>           : The selection has changed.
+  <font color="#924B72">#PB_EventType_LeftClick</font>        : User clicked on an item with the left mouse button.
+  <font color="#924B72">#PB_EventType_RightClick</font>       : User clicked on an item with the right mouse button.
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>  : User double-clicked on an item with the left mouse button.
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font> : User double-clicked on an item with the right mouse button.
+  <font color="#924B72">#PB_EventType_DragStart</font>        : User tried to start a Drag &amp; Drop operation. <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> can be used to get the dragged items information.
+</font></pre>
+After a <font color="#924B72">#PB_EventType_DragStart</font> event, the <a href="../dragdrop/index.html">Drag & Drop library</a> can be used to start 
+a Drag &amp; Drop operation. On MacOS X the <font color="#924B72">#PB_EventType_DragStart</font> event has to be handled using <a href="../window/bindevent.html">BindEvent()</a> or <a href="bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 300, &quot;ExplorerTreeGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ExplorerTreeGadget</font>(0, 10, 10, 280, 280, &quot;*.pb;*.pbi&quot;)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/explorertreegadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="explorercombogadget.html">ExplorerComboGadget()</a>, <a href="explorerlistgadget.html">ExplorerListGadget()</a>, <a href="treegadget.html">TreeGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=explorerlistgadget.html>ExplorerListGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=framegadget.html>FrameGadget()</a> -><br><br>
+
+</body></html>

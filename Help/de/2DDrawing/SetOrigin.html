@@ -1,0 +1,72 @@
+<html><head><title>SetOrigin</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetOrigin()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetOrigin</b></font>(x, y)  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Legt einen Offset (Ausgangspunkt) fest, von dem aus die gesamten Zeichenoperationen 
+in der aktuellen Ausgabe stattfinden. Dies definiert die Position der Koordinaten 
+(0, 0) innerhalb der Ausgabe für alle folgenden Zeichenbefehle. Standardmäßig 
+befindet sich der Offset in der linken oberen Ecke der Zeichenausgabe. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+Die neue Position des Zeichnungsursprungs (&quot;drawing origin&quot;). Dies ist eine absolute 
+Position und wird von keinerlei früheren Aufrufen dieser Funktion beeinflusst. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl beeinflusst die Lage aller künftigen Zeichenbefehle - mit Ausnahme des 
+<a href="clipoutput.html">ClipOutput()</a> Befehls und des <a href="setorigin.html">SetOrigin()</a> Befehls selbst. Auch die in einem 
+<a href="customgradient.html">CustomGradient()</a> oder <a href="customfiltercallback.html">CustomFilterCallback()</a> Callback empfangenen Koordinaten sind 
+immer absolut, unabhängig von jeglichen Aufrufen dieser Funktion. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;2DDrawing Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200, 24, $FFFFFF) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+        
+      <font color="#006666">; Zeichne die gleiche Figur an verschiedenen Stellen, indem der Zeichnungsursprung verschoben wird</font>
+      <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> 120 <b><font color="#006666">Step</font></b> 40
+        <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> 120 <b><font color="#006666">Step</font></b> 60
+<font color="#006666">          SetOrigin</font>(x, y)
+<font color="#006666">          Box</font>(0, 0, 30, 30, $FF0000)
+<font color="#006666">          Circle</font>(15, 15, 10, $00FF00)
+        <b><font color="#006666">Next</font></b> y
+      <b><font color="#006666">Next</font></b> x   
+         
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))      
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/setorigin.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getoriginx.html">GetOriginX()</a>, <a href="getoriginy.html">GetOriginY()</a>, <a href="clipoutput.html">ClipOutput()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=roundbox.html>RoundBox()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=startdrawing.html>StartDrawing()</a> -><br><br>
+
+</body></html>

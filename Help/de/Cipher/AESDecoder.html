@@ -1,0 +1,86 @@
+<html><head><title>AESDecoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AESDecoder()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>AESDecoder</b></font>(*Eingabe, *Ausgabe, Größe, *Schlüssel, Bits, *InitialisierungsVektor [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Dekodiert den angegebenen Eingabepuffer mit Hilfe des AES-Algorithmus in den Ausgabepuffer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Eingabe</i></td>
+<td width="90%"> 
+Der Eingabepuffer mit den kodierten Daten. 
+
+</td></tr>
+<tr><td><i>*Ausgabe</i></td>
+<td> 
+Der Ausgabepuffer, welcher die reinen Daten empfängt. Dieser muss ein 
+anderer als der Eingabepuffer sein. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Anzahl an zu dekodierenden Bytes. Dies müssen mindestens 16 Bytes sein. 
+Um etwas Kleineres zu entschlüsseln, müssen Leerzeichen vor dem Dekodieren hinzugefügt werden. 
+
+</td></tr>
+<tr><td><i>*Schlüssel</i></td>
+<td> 
+Ein Puffer, welcher den Schlüssel für das Dekodieren enthält. 
+Seine Größe hängt vom Parameter 'Bits' ab: 16 Bytes für 128 Bit-Verschlüsselung, 24 Bytes 
+für 192 Bit und 32 Bytes für 256 Bit. 
+<a href="derivecipherkey.html">DeriveCipherKey()</a> kann verwendet werden, um diesen Schlüssel aus einem Passwort zu erstellen. 
+
+</td></tr>
+<tr><td><i>Bits</i></td>
+<td> 
+Die Größe des für die Verschlüsselung verwendeten Schlüssels. Gültige Werte sind 
+128, 192 und 256. 
+
+</td></tr>
+<tr><td><i>*InitialisierungsVektor</i></td>
+<td> 
+Der InitialisierungsVektor ist ein zufälliger Datenblock, 
+welcher für das Initialisieren der Verschlüsselung verwendet wird, um ein Knacken beim Dekodieren 
+zu verhindern (wird nur bei Verwendung des <font color="#924B72">#PB_Cipher_CBC</font> Modus benötigt). 
+Seine Größe hängt vom Parameter 'Bits' ab: 16 Bytes für 128 Bit-Verschlüsselung, 24 Bytes für 
+196 Bit und 32 Bytes für 256 Bit. Die Inhalte diesen Daten-Blocks müssen mit denen übereinstimmen, 
+welche beim <a href="aesencoder.html">Kodieren</a> der Daten verwendet wurden. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CBC</font>: Standard-Modus der Kodierung (Cipher Block Chaining). Benötigt einen '*InitialisierungsVektor'.
+                  Empfohlen als sicherer gegenüber dem ECB-Modus.
+  <font color="#924B72">#PB_Cipher_ECB</font>: Alternativer Modus (Electronic CodeBook). Verwendet weder einen Zufallswert noch Verkettung
+                  (jeder Block wird unabhängig voneinander kodiert), was ihn sehr schwach im Vergleich zu CBC macht,
+                  weshalb er nicht für ernsthafte Verschlüsselung verwendet werden sollte.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Entschlüsselung erfolgreich war, 
+andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Für weitere Informationen über AES und Quellcode-Beispiele siehe <a href="aesencoder.html">AESEncoder()</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="aesencoder.html">AESEncoder()</a>, <a href="startaescipher.html">StartAESCipher()</a>, <a href="derivecipherkey.html">DeriveCipherKey()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=aesencoder.html>AESEncoder()</a> -><br><br>
+
+</body></html>

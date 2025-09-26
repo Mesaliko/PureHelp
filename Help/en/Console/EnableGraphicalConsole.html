@@ -1,0 +1,55 @@
+<html><head><title>EnableGraphicalConsole</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableGraphicalConsole()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>EnableGraphicalConsole</b></font>(State)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the way the characters are drawn on the console between a graphical and a text-only mode. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>State</i></td>
+<td width="90%"> 
+If 'State' is 1, then console will be switched to graphical mode, else if 'State' is 0, it will switch back to text mode. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The default mode of the console is the text mode, which means the text can't be positioned anywhere 
+in the console, but redirections (through pipes) work correctly. 
+<br>
+<br>
+When being in the graphical mode, functions like <a href="clearconsole.html">ClearConsole()</a> or 
+<a href="consolelocate.html">ConsoleLocate()</a> are available and the text can be positioned anywhere in the console 
+screen, which allow to do console games or text only applications (which can be useful when accessed remotely 
+through telnet or ssh). The redirection (pipes) doesn't work correctly when being in graphical mode. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    EnableGraphicalConsole</font>(1)
+<font color="#006666">    ConsoleLocate</font>(7, 8)
+<font color="#006666">    PrintN</font>(&quot;Press return to exit&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="consolelocate.html">ConsoleLocate()</a>, <a href="consolecolor.html">ConsoleColor()</a>, <a href="clearconsole.html">ClearConsole()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=consoletitle.html>ConsoleTitle()</a> - <a href=index.html>Console Index</a> - <a href=inkey.html>Inkey()</a> -><br><br>
+
+</body></html>

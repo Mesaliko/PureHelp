@@ -1,0 +1,85 @@
+<html><head><title>GetURLPart</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetURLPart()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>GetURLPart</b></font>(URL$, Parametre$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie une partie d'une URL. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+L'URL à utiliser. 
+<br>
+<br>
+Une URL peut contenir des 
+paramètres.<br>
+C'est utile quand un langage 
+de script est utilisé sur le 
+serveur Web (comme PHP). <br>
+La syntaxe est la suivante: 
+http://www.purebasic.com/index.php?test=1. 
+<br>
+Ici le paramètre se nomme &quot;test&quot; 
+et sa valeur associée est &quot;1&quot;. 
+
+</td></tr>
+<tr><td><i>Parametre$</i></td>
+<td> 
+La valeur à envoyer. 
+<br>
+<br>
+Les paramètres ne sont pas 
+sensibles à la casse. 
+<br>
+<br>
+De plus, il peut prendre l'une 
+des valeurs prédéfinies 
+suivantes pour accéder facilement 
+à une partie standard de l'URL: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_URL_Protocol</font>  : Pour renvoyer le protocole
+  <font color="#924B72">#PB_URL_Site</font>      : Pour renvoyer le site
+  <font color="#924B72">#PB_URL_Port</font>      : Pour renvoyer le port (s'il existe)
+  <font color="#924B72">#PB_URL_Parameters</font>: Pour renvoyer tous les paramètres
+  <font color="#924B72">#PB_URL_Path</font>      : Pour renvoyer le chemin
+  <font color="#924B72">#PB_URL_User</font>      : Pour renvoyer le nom d'utilisateur (s'il existe)
+  <font color="#924B72">#PB_URL_Password</font>  : Pour renvoyer le mot de passe (s'il existe)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur du paramètre 
+ou une autre partie de l'URL. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  URL$ = &quot;http://user:pass@www.purebasic.com:80/index.php?test=1&amp;ok=2&quot;
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Protocol</font>)   <font color="#006666">; Affiche &quot;http&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Site</font>)       <font color="#006666">; Affiche &quot;www.purebasic.com&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Port</font>)       <font color="#006666">; Affiche &quot;80&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Parameters</font>) <font color="#006666">; Affiche &quot;test=1&amp;ok=2&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Path</font>)       <font color="#006666">; Affiche &quot;index.php&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_User</font>)       <font color="#006666">; Affiche &quot;user&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Password</font>)   <font color="#006666">; Affiche &quot;pass&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;test&quot;)             <font color="#006666">; Affiche &quot;1&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;ok&quot;)               <font color="#006666">; Affiche &quot;2&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="seturlpart.html">SetURLPart()</a>, <a href="urldecoder.html">URLDecoder()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=finishhttp.html>FinishHTTP()</a> - <a href=index.html>Http Index</a> - <a href=httpinfo.html>HTTPInfo()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,79 @@
+<html><head><title>NewList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">NewList</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">NewList</font></b> Name.&lt;Typ&gt;()      
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">NewList</font></b> ermöglicht die Einrichtung einer dynamisch verknüpften Liste (&quot;Dynamic Linked List&quot;). 
+<br>
+<br>
+Jedes Element einer Liste wird dynamisch zugewiesen. Es gibt keine Einschränkungen in der Anzahl 
+der Elemente, es können so viele wie nötig benutzt werden. Eine Liste kann jeden <a href="../reference/variables.html">Standard-</a> oder 
+<a href="../reference/structures.html">Struktur-Typ</a> haben. 
+<br>
+<br>
+Für eine Liste aller Befehle zum Verwalten von Listen siehe die <a href="../list/index.html">Linked List</a> Bibliothek. 
+<br>
+<br>
+Die neuen verknüpften Listen sind immer lokal. Dies bedeutet, dass die <a href="../reference/global.html">Global</a> oder 
+<a href="../reference/shared.html">Shared</a> Befehle benutzt werden müssen, wenn eine im Haupt-Quellcode deklarierte 
+Liste in Prozeduren verwendet werden soll. Es ist auch möglich, mit dem <b><font color="#006666">List</font></b>-Schlüsselwort eine verknüpfte Liste als Parameter an eine 
+<a href="../reference/procedures.html">Prozedur</a> zu übergeben. 
+<br>
+<br>
+Für schnelles Vertauschen von Listen-Inhalten steht das <a href="../reference/others.html">Swap</a> Schlüsselwort 
+zur Verfügung. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">MyList</font>.l()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 10
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 20
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 30
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">MyList</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">MyList</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Liste als Parameter für eine Prozedur</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Test</font>()
+  
+  <font color="#006666">; Erste 2 Einträge der Liste hinzufügen:</font>
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>() = 1
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>() = 2
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">DebugList</font>(count, <b><font color="#006666">List</font></b> <font color="#006666">ParameterList</font>())
+    <font color="#006666">; Weitere Einträge der Liste hinzufügen:</font>
+    <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> count
+<font color="#006666">      AddElement</font>(<font color="#006666">ParameterList</font>())
+<font color="#006666">      ParameterList</font>() = i
+    <b><font color="#006666">Next</font></b> 
+    
+    <font color="#006666">; Alle Einträge in der Liste ausgeben:</font>
+    i = 1
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">ParameterList</font>() 
+<font color="#006666">      MessageRequester</font>(&quot;List&quot;, &quot;Entry&quot; +<font color="#006666"> Str</font>(i) + &quot; = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ParameterList</font>()))
+      i + 1
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; Drei weitere Einträge der Liste hinzufügen und deren gesamten Inhalt ausgeben:</font>
+<font color="#006666">  DebugList</font>(3,<font color="#006666"> Test</font>())
+</font></pre>
+</blockquote>
+</font></body></html>

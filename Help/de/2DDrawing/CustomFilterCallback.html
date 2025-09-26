@@ -1,0 +1,97 @@
+<html><head><title>CustomFilterCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CustomFilterCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CustomFilterCallback</b></font>(@FilterCallback())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Bestimmt einen Callback, welcher für jeden Pixel aufgerufen wird, der Teil einer Zeichenoperation 
+im <font color="#924B72">#PB_2DDrawing_CustomFilter</font> <a href="drawingmode.html">Zeichenmodus</a> ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@FilterCallback()</i></td>
+<td width="90%"> 
+Die Adresse einer Callback-Funktion, welche aufgerufen werden soll. 
+Sie muss die folgende Form haben: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">CustomCallback</font>(x, y, QuellFarbe.l, ZielFarbe.l)
+    <font color="#006666">;</font>
+    <font color="#006666">; Berechne die ErgebnisFarbe anhand der gemachten Eingaben</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">ProcedureReturn</font></b> ErgebnisFarbe
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Der Callback wird für jeden Pixel aufgerufen, der als Ergebnis eines Aufrufs von Zeichenfunktionen 
+wie <a href="line.html">Line()</a>, <a href="box.html">Box()</a> oder <a href="drawtext.html">DrawText()</a> gezeichnet wird. 
+Der Parameter 'QuellFarbe' definiert die in der Zeichenoperation angegebene Farbe und der Parameter 
+'ZielFarbe' definiert die Farbe des Zielpixels im Zeichenbereich. Beide Farben sind immer 32 Bit mit 
+Alpha-Kanal - unabhängig von der Farbtiefe der Ausgabe. Der Callback hat die Farbe zu berechnen, 
+die der Zielpixel nach dem Zeichnen haben soll, und diese zurückzugeben. 
+<br>
+<br>
+Die im Callback empfangenen x und y Koordinaten sind immer relativ zu oberen linken Ecke 
+der Zeichenausgabe. Die Koordinaten werden durch Aufrufe von <a href="setorigin.html">SetOrigin()</a> oder <a href="clipoutput.html">ClipOutput()</a> 
+nicht beeinflusst. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Callback wird sehr oft aufgerufen (für jeden zu zeichnenden Pixel), weshalb er sehr klein 
+und schnell sein sollte, um nicht zu große Auswirkungen auf die Zeichen-Performanz zu haben. 
+<br>
+<br>
+Hinweis: Der <font color="#924B72">#PB_2DDrawing_CustomFilter</font> <a href="drawingmode.html">Zeichenmodus</a> 
+arbeitet nur mit <a href="../image/imageoutput.html">ImageOutput()</a> und <a href="../gadget/canvasoutput.html">CanvasOutput()</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">FilterCallback</font>(x, y, QuellFarbe.l, ZielFarbe.l)
+    <font color="#006666">; Nehme nur die Rot-Komponente aus der Quelle, ändere nicht die anderen</font>
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">RGBA</font>(<font color="#006666">Red</font>(QuellFarbe),<font color="#006666"> Green</font>(ZielFarbe),<font color="#006666"> Blue</font>(ZielFarbe),<font color="#006666"> Alpha</font>(ZielFarbe))
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  UseJPEGImageDecoder</font>()
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;2DDrawing Beispiel&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    LoadImage</font>(1, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/clouds.jpg&quot;)
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 400, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawImage</font>(<font color="#006666">ImageID</font>(1), 0, 0, 400, 200)
+      
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_CustomFilter</font>)      
+<font color="#006666">      CustomFilterCallback</font>(@FilterCallback())
+<font color="#006666">      Circle</font>(100, 100, 100, $0000FF)   
+<font color="#006666">      Circle</font>(300, 100, 100, $000000)
+      
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 400, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/customfilter.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="drawingmode.html">DrawingMode()</a>, <a href="customgradient.html">CustomGradient()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=conicalgradient.html>ConicalGradient()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=customgradient.html>CustomGradient()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,104 @@
+<html><head><title>ResetMaterial.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - ResetMaterial
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;Use [F5]
+
+</font>
+
+<b><font color="#006666">Declare</font></b> <font color="#006666">CreateMaterialScript</font>(texture.s)
+
+<font color="#006666">CreateMaterialScript</font>(&quot;r2skin.jpg&quot;)
+
+<font color="#924B72">#PB_Engine3D_Entity</font> = 2
+
+<font color="#006666">InitEngine3D</font>(<font color="#924B72">#PB_Engine3D_DebugOutput</font>)
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; ResetMaterial -  [F5]  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;  , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot; , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+
+<font color="#006666">;- Material
+</font><font color="#006666">GetScriptMaterial</font>(0, &quot;TestReset&quot;)
+
+<font color="#006666">;- Mesh
+</font><font color="#006666">LoadMesh</font>(0, &quot;robot.mesh&quot;)
+
+<font color="#006666">;- Entity
+</font><font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0), -60, 0, 0)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0),  60, 0, 0)
+
+<font color="#006666">;This one will keep his material
+</font><font color="#006666">CreateEntity</font>(3,<font color="#006666"> MeshID</font>(0), <font color="#924B72">#PB_Material_None</font>, -60, 0, 60)
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 150, 90, 150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, 0, 50, 0)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(0, 0, 30))
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font><font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(75, 75, 75))
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), 0, 500, 0)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F5</font>)
+<font color="#006666">      CreateMaterialScript</font>(&quot;nskingr.jpg&quot;) <font color="#006666">; Change texture
+</font><font color="#006666">      ReloadMaterial</font>(&quot;TestReset&quot;, &quot;ResetMaterial.material&quot;, <font color="#924B72">#True</font>)
+<font color="#006666">      GetScriptMaterial</font>(0, &quot;TestReset&quot;)
+<font color="#006666">      ResetMaterial</font>(<font color="#924B72">#PB_Engine3D_Entity</font>)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CreateMaterialScript</font>(Texture$)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts/ResetMaterial.material&quot;)
+    Material$ = &quot;material TestReset&quot; + <font color="#924B72">#LF$</font> +
+                &quot;{&quot; +
+                &quot;	 technique&quot; +
+                &quot;	 {&quot; +
+                &quot;		 pass&quot; +
+                &quot;		 {&quot; +
+                &quot;			 texture_unit&quot; +
+                &quot;			 {&quot; + 
+                &quot;				 texture &quot;+ Texture$ + 
+                &quot;			 }&quot; +
+                &quot;		 }&quot; +
+                &quot;	 }&quot; +
+                &quot;}&quot;
+    
+<font color="#006666">    WriteStringN</font>(0, Material$)
+<font color="#006666">    CloseFile</font>(0)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;,&quot;may not create the file!&quot;)
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+</font></pre>
+</body></html>

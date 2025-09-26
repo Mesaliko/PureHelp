@@ -1,0 +1,60 @@
+<html><head><title>ConsoleLocate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConsoleLocate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ConsoleLocate</b></font>(x, y)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Bewegt den Cursor an die angegebene Position, in Zeichen-Koordinaten. Jeder von 
+Ihnen nach diesem Befehl ausgegebene Text beginnt an den angegebenen Koordinaten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x</i></td>
+<td width="90%"> 
+Die horizontale Position in der Konsole (beginnend bei 0), zu der der Cursor bewegt werden soll. 
+
+</td></tr>
+<tr><td><i>y</i></td>
+<td> 
+Die vertikale Position in der Konsole (beginnend bei 0), zu der der Cursor bewegt werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Konsole muss sich im Grafikmodus befinden, siehe <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    EnableGraphicalConsole</font>(1)
+    
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 200
+<font color="#006666">      ConsoleLocate</font>(<font color="#006666">Random</font>(79),<font color="#006666"> Random</font>(24))
+<font color="#006666">      Print</font>(&quot;*&quot;)
+    <b><font color="#006666">Next</font></b>
+    
+<font color="#006666">    ConsoleLocate</font>(30, 10)
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Return zum Beenden.&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=consoleerror.html>ConsoleError()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=consoletitle.html>ConsoleTitle()</a> -><br><br>
+
+</body></html>

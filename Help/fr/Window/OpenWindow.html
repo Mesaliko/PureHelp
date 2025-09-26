@@ -1,0 +1,137 @@
+<html><head><title>OpenWindow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenWindow()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenWindow</b></font>(#Fenetre, X, Y, LargeurInterne, HauteurInterne, Titre$ [, Options [, FenetreMereID]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une nouvelle fenêtre avec les 
+paramètres spécifiés. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+Le numéro identifiant la nouvelle 
+fenêtre. 
+<br>
+<br>
+Si <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+est utilisé pour le paramètre '#Fenetre', 
+le numéro de la fenêtre sera renvoyé 
+dans 'Resultat'. 
+
+</td></tr>
+<tr><td><i>X, Y</i></td>
+<td> 
+Les coordonnées en pixels, de la 
+position de la fenêtre (sauf si l'une 
+des options de centrage est utilisée). 
+<br>
+<br>
+Si l'une d'elle est définie avec 
+<font color="#924B72">#PB_Ignore</font> alors le système choisira 
+une position pour la fenêtre. 
+
+</td></tr>
+<tr><td><i>LargeurInterne, HauteurInterne</i></td>
+<td> 
+Les dimensions de la zone interne de 
+la fenêtre (dite zone cliente), sans 
+les bordures, la barre de titre et 
+autres décorations. 
+
+</td></tr>
+<tr><td><i>Titre$</i></td>
+<td> 
+Le titre de la nouvelle fenêtre. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_SystemMenu</font>     : Autorise le menu système sur la barre de titre (par défaut).
+  <font color="#924B72">#PB_Window_MinimizeGadget</font> : Ajoute l'icône 'Réduire' sur la barre de titre. <font color="#924B72">#PB_Window_SystemMenu</font> est ajouté automatiquement.
+  <font color="#924B72">#PB_Window_MaximizeGadget</font> : Ajoute l'icône 'Agrandir' sur la barre de titre. <font color="#924B72">#PB_Window_SystemMenu</font> est ajouté automatiquement.
+                              (MacOS : <font color="#924B72">#PB_Window_SizeGadget</font> sera également ajouté automatiquement).
+  <font color="#924B72">#PB_Window_SizeGadget</font>     : Ajoute les possibilités de redimensionnement à la fenêtre.
+  <font color="#924B72">#PB_Window_Invisible</font>      : Crée la fenêtre mais ne l'affiche pas.
+  <font color="#924B72">#PB_Window_TitleBar</font>       : Crée la fenêtre avec une barre de titre.
+  <font color="#924B72">#PB_Window_Tool</font>           : Crée une fenêtre non visible dans la barre des tâches.
+  <font color="#924B72">#PB_Window_BorderLess</font>     : Crée une fenêtre sans bordure.
+  <font color="#924B72">#PB_Window_ScreenCentered</font> : Centre la fenêtre au milieu de l'écran. Les paramètres X,Y sont ignorés.
+  <font color="#924B72">#PB_Window_WindowCentered</font> : Centre la fenêtre au milieu de la fenêtre mère ('FenetreMereID' doit être spécifié). Les paramètres x,y sont ignorés.
+  <font color="#924B72">#PB_Window_Maximize</font>       : Ouvre la fenêtre en mode maximisé. (Note: sous Linux, certains gestionnaires de fenêtres ne supportent pas cela)
+  <font color="#924B72">#PB_Window_Minimize</font>       : Ouvre la fenêtre en mode minimisé.
+  <font color="#924B72">#PB_Window_NoGadgets</font>      : Empêche la création d'une GadgetList. <a href="../gadget/usegadgetlist.html">UseGadgetList()</a> peut être utilisé pour le faire plus tard.
+  <font color="#924B72">#PB_Window_NoActivate</font>     : Ne pas activer la fenêtre après son ouverture.
+</font></pre>
+
+</td></tr>
+<tr><td><i>FenetreMereID'  (optionnel)</i></td>
+<td>
+L'identifiant de la fenêtre mère. <br>
+Un identifiant de fenêtre valide peut être récupéré avec <a href="windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la 
+création de la nouvelle fenêtre s'est 
+bien déroulée, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé comme paramètre 
+alors le numéro de la nouvelle 
+fenêtre est renvoyé dans 'Resultat'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Tous les évènements possibles dans une fenêtre sont gérés par les commandes <a href="windowevent.html">WindowEvent()</a> et <a href="waitwindowevent.html">WaitWindowEvent()</a>.<br>
+Pour les situations spéciales les callbacks sont utilisées, voir la description de <a href="setwindowcallback.html">SetWindowCallback()</a>.<br>
+Sous Windows, la largeur et la hauteur d'une fenêtre avec une barre de titre ne peuvent pas être inférieures à environ 
+100 pixels. Pour ouvrir une fenêtre plus petite, utiliser l'option <font color="#924B72">#PB_Window_BorderLess</font>.<br>
+Sous Windows, l'option <font color="#924B72">#PB_Window_Maximize</font> sans le gadget d'agrandissement occupera la taille maximale de l'écran 
+couvrant ainsi la barre des tâches. 
+<br>
+<br>
+<b>Note:</b> Une fenêtre ne devrait pas être ouverte dans un <a href="../thread/index.html">thread</a>, car il 
+y a une limitation sur OS X et Linux. Une erreur du débogueur sera levée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Exemple...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+<font color="#006666">   ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Fermer&quot;)
+   
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+     
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1 
+<font color="#006666">              CloseWindow</font>(0)
+              <b><font color="#006666">End</font></b>  
+         <b><font color="#006666">EndSelect</font></b>
+            
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closewindow.html">CloseWindow()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=iswindow.html>IsWindow()</a> - <a href=index.html>Window Index</a> - <a href=postevent.html>PostEvent()</a> -><br><br>
+
+</body></html>

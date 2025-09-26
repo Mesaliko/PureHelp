@@ -1,0 +1,64 @@
+<html><head><title>CloseProgram</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseProgram()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CloseProgram</b></font>(Programme)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ferme la connexion avec le programme 
+lancé avec <a href="runprogram.html">RunProgram()</a> et libère 
+toutes les ressources associées. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programme</i></td>
+<td width="90%"> 
+Le programme à utiliser. 
+<br>
+<br>
+Le programme doit avoir été lancé 
+avec <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande ne force pas le 
+programme à se terminer, seule la 
+connexion avec lui est fermée. Pour 
+forcer le programme à quitter, la 
+commande <a href="killprogram.html">KillProgram()</a> est disponible. 
+De plus, même si le programme 
+se termine de façon normale, il est 
+important d'appeler CloseProgram() 
+pour libérer toutes les ressources. 
+<br>
+<br>
+Si le programme a été lancé avec 
+l'option <font color="#924B72">#PB_Program_Write</font>, 
+CloseProgram() enverra un signal 
+EOF (fin de fichier) sur l'entrée 
+standard du 'Programme'. Ce signal 
+peut aussi être artificiellement 
+provoqué sans fermer la connexion 
+avec le programme en appelant 
+<a href="writeprogramdata.html">WriteProgramData()</a> avec la valeur 
+spéciale <font color="#924B72">#PB_Program_Eof</font>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="killprogram.html">KillProgram()</a>, <a href="runprogram.html">RunProgram()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=availableprogramoutput.html>AvailableProgramOutput()</a> - <a href=index.html>Process Index</a> - <a href=countprogramparameters.html>CountProgramParameters()</a> -><br><br>
+
+</body></html>

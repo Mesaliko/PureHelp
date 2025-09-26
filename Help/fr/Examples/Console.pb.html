@@ -1,0 +1,90 @@
+<html><head><title>Console.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Console example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>    text$  = &quot;Feel the Power of PureBasic!&quot;        <font color="#006666">; just a small text$ string
+</font>    dlay   = 4000                                  <font color="#006666">; delay will set to 4000
+</font>
+<font color="#006666">;
+</font><font color="#006666">;-------- Open our Console --------
+</font><font color="#006666">;
+</font>
+<font color="#006666">    OpenConsole</font>()                                  <font color="#006666">; First we must open a console
+</font><font color="#006666">    ConsoleTitle </font>(&quot;PureBasic - Console Example:&quot;)  <font color="#006666">; Now we can give the opened console a Titlename ;)
+</font><font color="#006666">    EnableGraphicalConsole</font>(1)
+
+<font color="#006666">;
+</font><font color="#006666">;-------- Ask and display the UserName --------
+</font><font color="#006666">;
+</font>    
+<font color="#006666">    ConsoleLocate </font>(18,12)                          <font color="#006666">; x y position
+</font><font color="#006666">    Print </font>(&quot;Please enter your name:   &quot;)           <font color="#006666">; Ask for name
+</font>    name$=<font color="#006666">Input</font>()                                  <font color="#006666">; Wait for user input
+</font>
+<font color="#006666">    ClearConsole</font>()                                 <font color="#006666">; This will clean the ConsoleScreen
+</font>    
+<font color="#006666">    ConsoleLocate </font>(24,10)                          <font color="#006666">; x y position
+</font><font color="#006666">    PrintN </font>(&quot;Welcome &quot;+name$)                      <font color="#006666">; Print our text and the UserName
+</font><font color="#006666">    ConsoleLocate </font>(24,12)                          <font color="#006666">; x y position
+</font><font color="#006666">    PrintN </font>(text$)                                 <font color="#006666">; Print our text
+</font>
+<font color="#006666">    Delay </font>(dlay)                                   <font color="#006666">; Waits for moment
+</font>
+<font color="#006666">;
+</font><font color="#006666">;-------- Cls and Cycle the Text-BG-Color 0 to 15 --------
+</font><font color="#006666">;
+</font>
+<font color="#006666">    ClearConsole</font>()                                 <font color="#006666">; This will clean the ConsoleScreen
+</font>                                                   <font color="#006666">; Info: Standard colors are (8 for text, 0 for backround)
+</font>    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 15
+<font color="#006666">        ConsoleColor </font>(0,i)                         <font color="#006666">; Change BackGround text color (max 15) in every loop
+</font><font color="#006666">        ConsoleLocate </font>(24,4+i)                     <font color="#006666">; x y position
+</font><font color="#006666">        Print </font>(text$)                              <font color="#006666">; Print our text
+</font>    <b><font color="#006666">Next</font></b> i
+
+<font color="#006666">    Delay </font>(dlay)                                   <font color="#006666">; Waits for moment
+</font>
+<font color="#006666">;
+</font><font color="#006666">;-------- Cls and Cycle the Text-FG-Color 0 to 15 --------
+</font><font color="#006666">;
+</font>
+<font color="#006666">    ConsoleColor</font>(0,0)                              <font color="#006666">; Set back to black (0,0) for complete background...
+</font><font color="#006666">    ClearConsole</font>()                                 <font color="#006666">; This will clean the ConsoleScreen
+</font>                                                   <font color="#006666">; Info: Standard colors are (8 for text, 0 for backround)
+</font>    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 15
+<font color="#006666">        ConsoleColor </font>(i,0)                         <font color="#006666">; Change ForGround text color (max 15) in every loop
+</font><font color="#006666">        ConsoleLocate </font>(24,4+i)                     <font color="#006666">; x y position
+</font><font color="#006666">        Print </font>(text$)                              <font color="#006666">; Print our text
+</font>    <b><font color="#006666">Next</font></b> i
+
+<font color="#006666">    Delay </font>(dlay)                                   <font color="#006666">; Waits for moment
+</font>
+<font color="#006666">;
+</font><font color="#006666">;-------- Cls and Cycle the Background-Color 0 to 15 --------
+</font><font color="#006666">;
+</font>
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 15
+<font color="#006666">        ConsoleColor</font>(a,a)                          <font color="#006666">; Cycle background color...
+</font><font color="#006666">        ClearConsole</font>()                             <font color="#006666">; This will clean the ConsoleScreen
+</font>        <font color="#006666">;                                          ; Info: Standard colors are (8 for text, 0 for backround)
+</font>        <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 15
+<font color="#006666">            ConsoleColor </font>(i,a)                     <font color="#006666">; Change ForGround text color (max 15) in every loop
+</font><font color="#006666">            ConsoleLocate </font>(24,4+i)                 <font color="#006666">; x y position
+</font><font color="#006666">            Print </font>(text$)                          <font color="#006666">; Print our text
+</font>        <b><font color="#006666">Next</font></b> i
+        <font color="#006666">;
+</font><font color="#006666">        Delay</font>(dlay/10)                             <font color="#006666">; Waits for moment
+</font>    <b><font color="#006666">Next</font></b> a
+
+    <font color="#006666">;-------- Exit --------
+</font>
+<font color="#006666">    CloseConsole</font>()
+<b><font color="#006666">End</font></b></font></pre>
+</body></html>

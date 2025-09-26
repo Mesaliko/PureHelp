@@ -1,0 +1,167 @@
+<html><head><title>ExplorerListGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExplorerListGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ExplorerListGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Repertoire$, [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Créé un gadget qui affiche une liste des 
+dossiers.<br>
+Il permet à l'utilisateur de choisir un 
+fichier ou un dossier situé à n'importe 
+quel endroit des disques. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Repertoire$</i></td>
+<td> 
+Le répertoire initial affiché. 
+<blockquote>
+
+'Repertoire$' est l'emplacement de départ 
+lorsque le gadget est créé. 
+Il peut être composé de motifs ('patterns'), 
+tels que: &quot;C:\*.pb;*.pbi&quot;. Si aucun 
+'pattern' n'est spécifié, le répertoire 
+doit se terminer par un '\'. Si 
+'Repertoire$' est nul (chaîne vide) alors 
+la liste des disques disponibles sera 
+affichée. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_BorderLess</font>         : Crée un #Gadget sans bordure.
+  <font color="#924B72">#PB_Explorer_AlwaysShowSelection</font>: Affiche la sélection même quand le gadget n'est plus actif.
+  <font color="#924B72">#PB_Explorer_MultiSelect</font>        : Active le mode 'sélection multiple'.
+  <font color="#924B72">#PB_Explorer_GridLines</font>          : Affiche des lignes de séparation.
+  <font color="#924B72">#PB_Explorer_HeaderDragDrop</font>     : L'ordre des colonnes peut être changé avec un glisser/déposer (drag'n'drop).
+  <font color="#924B72">#PB_Explorer_FullRowSelect</font>      : La sélection s'étend à toute la ligne au lieu de la première colonne.
+
+  <font color="#924B72">#PB_Explorer_NoFiles</font>            : Aucun fichier ne sera affiché.
+  <font color="#924B72">#PB_Explorer_NoFolders</font>          : Aucun répertoire ne sera affiché.
+  <font color="#924B72">#PB_Explorer_NoParentFolder</font>     : Le 'pseudo' répertoire père [..] ne sera pas affiché.
+  <font color="#924B72">#PB_Explorer_NoDirectoryChange</font>  : Le répertoire ne pourra pas être changé par l'utilisateur.
+  <font color="#924B72">#PB_Explorer_NoDriveRequester</font>   : Aucun message du type 'Insérer un disque dans le lecteur A:' ne sera affiché.
+  <font color="#924B72">#PB_Explorer_NoSort</font>             : L'utilisateur ne pourra pas trier les colonnes en cliquant sur les titres des colonnes.
+  <font color="#924B72">#PB_Explorer_NoMyDocuments</font>      : Le répertoire spécial 'Mes documents' ne sera pas affiché séparément.
+  <font color="#924B72">#PB_Explorer_AutoSort</font>           : Le contenu sera automatiquement trié par nom.
+  <font color="#924B72">#PB_Explorer_HiddenFiles</font>        : Affiche les fichiers cachés (seulement avec Linux et OS X).
+
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les commandes suivantes sont disponibles pour contrôler le gadget:
+  - <a href="addgadgetcolumn.html">AddGadgetColumn()</a>   : Ajoute une colonne (prédéfinie ou additionnelle). Voir <a href="addgadgetcolumn.html">AddGadgetColumn()</a> pour plus d'informations.
+  - <a href="removegadgetcolumn.html">RemoveGadgetColumn()</a>: Supprime une colonne (ainsi que ses données).
+  - <a href="getgadgettext.html">GetGadgetText()</a>     : Renvoie le répertoire affiché.
+  - <a href="setgadgettext.html">SetGadgetText()</a>     : Change le répertoire affiché, ou les 'patterns' actuellement utilisés.
+  - <a href="getgadgetstate.html">GetGadgetState()</a>    : Renvoie l'index du premier élément selectionné (-1: aucune selection).
+  - <a href="getgadgetitemtext.html">GetGadgetItemText()</a> : Renvoie le texte de l'élément, ou du titre de la colonne si 'Position' = -1.
+  - <a href="setgadgetitemtext.html">SetGadgetItemText()</a> : Modifie le texte de l'élément, ou du titre de la colonne si 'Position' = -1.
+  - <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Vérifie si un élément est un répertoire ou un fichier et si il est sélectionné.
+  - <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Modifier l'état sélectionné de l'élément spécifié.
+  - <a href="countgadgetitems.html">CountGadgetItems()</a>  : Compte le nombre d'éléments dans le répertoire.
+
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> / <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: avec l'attribut suivant(seulement sous Windows):
+    <font color="#924B72">#PB_Explorer_DisplayMode</font> : Change le mode d'affichage du gadget. Le mode peut être l'une des constantes suivantes:
+    <font color="#924B72">#PB_Explorer_LargeIcon</font>   : Mode grandes icônes
+    <font color="#924B72">#PB_Explorer_SmallIcon</font>   : Mode petites icônes
+    <font color="#924B72">#PB_Explorer_List</font>        : Mode Liste
+    <font color="#924B72">#PB_Explorer_Report</font>      : Mode Détails (colonnes, mode par défaut)
+
+  - <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a> / <a href="setgadgetitemattribute.html">SetGadgetItemAttribute()</a>: Avec l'attribut suivant:
+
+    <font color="#924B72">#PB_Explorer_ColumnWidth</font> : Renvoie / Change la largeur de la 'Colonne' spécifiée. Le paramètre 'Element' est ignoré.
+
+  - <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les valeurs suivantes comme 'TypeCouleur':
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Couleur du texte 
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Couleur du fond
+    <font color="#924B72">#PB_Gadget_LineColor</font> : Couleur de la grille si l'option <font color="#924B72">#PB_Explorer_GridLines</font> est utilisée.
+
+  Note: <a href="setgadgetcolor.html">SetGadgetColor()</a> n'est pas pris en charge sur la plate-forme MacOS X.
+</font></pre>
+
+Les évènements suivants sont disponibles par l'intermédiaire d' <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>          : La sélection de l'élément courant vient de changer.
+  <font color="#924B72">#PB_EventType_LeftClick</font>       : L'utilisateur a cliqué sur un élément avec le bouton gauche de la souris.
+  <font color="#924B72">#PB_EventType_RightClick</font>      : L'utilisateur a cliqué sur un élément avec le bouton droit de la souris.
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font> : L'utilisateur a double-cliqué sur un élément avec le bouton gauche de la souris.
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>: L'utilisateur a double-cliqué sur un élément avec le bouton droit de la souris.
+  <font color="#924B72">#PB_EventType_DragStart</font>       : L'utilisateur a essayé de lancer une opération 'Glisser &amp; Déposer'. 
+                                  <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> peut être utilisé pour obtenir les informations sur les éléments déplacés.
+  <font color="#924B72">#PB_EventType_Refresh</font>         : Le contenu du gadget a été actualisé en raison d'un changement de système de fichiers dans le répertoire affiché (Windows uniquement).
+</font></pre>
+Après un évènement <font color="#924B72">#PB_EventType_DragStart</font>, la bibliothèque <a href="../dragdrop/index.html">Drag & Drop</a> 
+peut être utilisée pour commencer une opération de 'Glisser &amp; Déposer'. Sous MacOS X, l'événement 
+<font color="#924B72">#PB_EventType_DragStart</font> doit être géré à l'aide de <a href="../window/bindevent.html">BindEvent()</a> ou de <a href="bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;ExplorerListGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    ExplorerListGadget</font>(0, 10, 10, 380, 180, &quot;*.*&quot;, <font color="#924B72">#PB_Explorer_MultiSelect</font>)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/explorerlistgadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addgadgetcolumn.html">AddGadgetColumn()</a>, <a href="removegadgetcolumn.html">RemoveGadgetColumn()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, 
+<a href="setgadgetitemstate.html">SetGadgetItemState()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, 
+<a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>, 
+<a href="setgadgetitemattribute.html">SetGadgetItemAttribute()</a>,<a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="explorercombogadget.html">ExplorerComboGadget()</a>, 
+<a href="explorertreegadget.html">ExplorerTreeGadget()</a>, <a href="listicongadget.html">ListIconGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=explorercombogadget.html>ExplorerComboGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=explorertreegadget.html>ExplorerTreeGadget()</a> -><br><br>
+
+</body></html>

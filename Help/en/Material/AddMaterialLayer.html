@@ -1,0 +1,59 @@
+<html><head><title>AddMaterialLayer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMaterialLayer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddMaterialLayer</b></font>(#Material, TextureID [, Mode [, TextureCoordinateIndex]])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Adds a new layer to the material and put the specified texture in it. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+The material to use. 
+
+</td></tr>
+<tr><td><i>TextureID</i></td>
+<td> 
+The texture to add. A valid 'TextureID' can be easily obtained with <a href="../texture/textureid.html">TextureID()</a>. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_Add</font>        : Performs a pixel 'Add' operation over previous layer (black color is like transparent)
+  <font color="#924B72">#PB_Material_AddSigned</font>  : Performs a pixel signed 'Add' operation over previous layer (black color is like transparent)
+  <font color="#924B72">#PB_Material_Substract</font>  : Performs a pixel 'Substract' operation over previous layer (black color is like transparent)
+  <font color="#924B72">#PB_Material_Replace</font>    : Performs a pixel 'Replace' operation over previous layer
+  <font color="#924B72">#PB_Material_AlphaBlend</font> : Use the AlphaChannel layer of the texture (should be a TGA or PNG one) and blend it with the previous layer
+  <font color="#924B72">#PB_Material_Modulate</font>   : Performs a pixel 'Multiply' operation over previous layer
+  <font color="#924B72">#PB_Material_ModulateX2</font> : Performs a pixel 'Multiply' operation over previous layer and brighten afterwards (x2)
+  <font color="#924B72">#PB_Material_ModulateX4</font> : Performs a pixel 'Multiply' operation over previous layer and brighten afterwards (x4)
+  <font color="#924B72">#PB_Material_BlendDiffuseAlpha</font>: Use the AlphaChannel layer of the texture and blend it with the previous layer with diffuse
+  <font color="#924B72">#PB_Material_BlendCurrentAlpha</font>: Use the AlphaChannel layer of the current stage and blend it with the previous layer
+</font></pre>
+
+</td></tr>
+<tr><td><i>TextureCoordinateIndex (optional)</i></td>
+<td> 
+Texture coordinate index (default value is 0). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="removemateriallayer.html">RemoveMaterialLayer()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Material Index</a> - <a href=copymaterial.html>CopyMaterial()</a> -><br><br>
+
+</body></html>

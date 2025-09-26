@@ -1,0 +1,73 @@
+<html><head><title>ShaderCubicEnv.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Shader Cubic Environment
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+
+</font><font color="#006666">InitEngine3D</font>():<font color="#006666">InitSprite</font>():<font color="#006666">InitKeyboard</font>():<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;CreateShaderMaterial - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/nvidia&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+tx_Cubic=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;desert07.jpg&quot;)
+tx_rock_diff=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;dirt_grayrocky_diffusespecular.jpg&quot;)
+tx_rock_normal=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;dirt_grayrocky_normalheight.jpg&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100):<font color="#006666">MoveCamera</font>(0,0,2,0):<font color="#006666">CameraLookAt</font>(0,2,0,10)
+<font color="#006666">CreateLight</font>(0, $ffffff, 8000, 5700,4500)<font color="#006666">;  ;light on the sun of the skybox !
+</font><font color="#006666">AmbientColor</font>($444444)
+
+<font color="#006666">CreateCylinder</font>(0,1.5,2,32,1,1)
+<font color="#006666">CreateCapsule</font>(1,1,1.5)
+<font color="#006666">CreateSphere</font>(2,1.5,32,32)
+<font color="#006666">CreateTorus</font>(3,1.5,0.6,32,32)
+<font color="#006666">CreateCube</font>(4,2.5)
+
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 9
+<font color="#006666">	CreateShaderMaterial</font>(i,<font color="#924B72">#PB_Material_CubicEnvBumpShader</font>)
+<font color="#006666">	MaterialShaderTexture</font>(i,<font color="#006666">TextureID</font>(tx_Cubic),<font color="#006666">TextureID</font>(tx_rock_diff),<font color="#006666">TextureID</font>(tx_rock_normal),0)
+<font color="#006666">	SetMaterialAttribute</font>(i,<font color="#924B72">#PB_Material_TAM</font>,<font color="#924B72">#PB_Material_ClampTAM</font>,0)
+<font color="#006666">	SetMaterialColor</font>(i,3,<font color="#006666">RGB</font>(128+<font color="#006666">Random</font>(127),128+<font color="#006666">Random</font>(127),128+<font color="#006666">Random</font>(127)))
+<font color="#006666">	MaterialShininess</font>(i,32*<font color="#006666">Pow</font>(2,<font color="#006666">Random</font>(5)),$ffffff)
+<font color="#006666">	MaterialShaderParameter</font>(i,<font color="#924B72">#PB_Shader_Fragment</font>,&quot;bumpy&quot;,<font color="#924B72">#PB_Shader_Float</font>,<font color="#006666">Random</font>(3,0)/3,0,0,0)
+<font color="#006666">	MaterialShaderParameter</font>(i,<font color="#924B72">#PB_Shader_Fragment</font>,&quot;glossy&quot;,<font color="#924B72">#PB_Shader_Float</font>,<font color="#006666">Random</font>(3,1)/6,0,0,0)
+<font color="#006666">	CreateEntity</font>(i,<font color="#006666">MeshID</font>(i%5),<font color="#006666">MaterialID</font>(i)):<font color="#006666">RotateEntity</font>(i,<font color="#006666">Random</font>(360),<font color="#006666">Random</font>(360),<font color="#006666">Random</font>(360),<font color="#924B72">#PB_Absolute</font>)
+<b><font color="#006666">Next</font></b>
+
+<b><font color="#006666">Define</font></b>.f a,da,r,MouseX,Mousey,depx,depz,dist
+
+<b><font color="#006666">Repeat</font></b>
+	<b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">	ExamineKeyboard</font>()
+<font color="#006666">	ExamineMouse</font>()
+	depx=(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)))*0.1
+	depz=(-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>))+<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>   )))*0.1+<font color="#006666">MouseWheel</font>()*2
+	MouseX = -<font color="#006666">MouseDeltaX</font>() *  0.05
+	MouseY = -<font color="#006666">MouseDeltaY</font>() *  0.05
+<font color="#006666">	RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+	dist+(depz-dist)*0.05:<font color="#006666">MoveCamera  </font>(0, depX, 0, -dist)
+	da+0.001
+	<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 9
+		a.f=i*2*<font color="#924B72">#PI</font>/10+da
+<font color="#006666">		MoveEntity</font>(i,<font color="#006666">Cos</font>(a)*8,2,<font color="#006666">Sin</font>(a)*8,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">		RotateEntity</font>(i,0.2,0.2,0.2,<font color="#924B72">#PB_Relative</font>)
+	<b><font color="#006666">Next</font></b>
+<font color="#006666">	RenderWorld</font>()
+<font color="#006666">	FlipBuffers</font>()    
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(3)
+
+</font></pre>
+</body></html>

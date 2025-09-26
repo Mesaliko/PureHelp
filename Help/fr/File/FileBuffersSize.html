@@ -1,0 +1,95 @@
+<html><head><title>FileBuffersSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FileBuffersSize()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FileBuffersSize</b></font>(#Fichier, Taille)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la taille des caches de 
+lecture/écriture. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fichier</i></td>
+<td width="90%"> 
+Le fichier à utiliser. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Default</font> est utilisé alors la valeur 
+par défaut de la taille des caches sera 
+changée, et tous les futurs appels à 
+<a href="openfile.html">OpenFile()</a>, <a href="createfile.html">CreateFile()</a> et <a href="readfile.html">ReadFile()</a> 
+utiliseront cette nouvelle valeur. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La nouvelle taille du cache (en octet). 
+<br>
+<br>
+La taille par défaut du cache est de 4096 
+octets. 
+<br>
+<br>
+Une taille de zéro désactive complètement 
+le cache et les informations sont 
+immédiatement écrites dans le fichier. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour des raisons de performances, le cache 
+devrait être d'au moins 1024 octets. Quand 
+le cache est actif, les informations ne 
+sont réellement écrites dans le fichier que 
+lorsque le cache est plein, ou que le 
+fichier est fermé. La commande 
+<a href="flushfilebuffers.html">FlushFileBuffers()</a> permet de forcer cette 
+écriture à tout moment. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Fichier$=<font color="#006666">OpenFileRequester</font>(&quot;Ouvrir un fichier&quot;,&quot;&quot;,&quot;&quot;,0)
+  texte$=&quot;FileBuffersSize() resultats:&quot;+<font color="#924B72">#CRLF$</font>+&quot;===============&quot;+<font color="#924B72">#CRLF$</font>
+
+  TailleTampon=4096
+  <b><font color="#006666">While</font></b> TailleTampon&lt;1048577
+  texte$=texte$+&quot;Buffer: &quot;+<font color="#006666">Str</font>(TailleTampon)+<font color="#924B72">#CRLF$</font>
+
+    <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0,Fichier$)
+<font color="#006666">    FileBuffersSize</font>(0,TailleTampon) <font color="#006666">; Changement de la taille du tampon</font>
+    start=<font color="#006666">ElapsedMilliseconds</font>()     <font color="#006666">; Début du chronométrage</font>
+
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(0)=<font color="#924B72">#False</font>        <font color="#006666">; Lecture du fichier octet par octet</font>
+<font color="#006666">        ReadByte</font>(0)
+    <b><font color="#006666">Wend</font></b>
+    stop=<font color="#006666">ElapsedMilliseconds</font>()  <font color="#006666">; Fin du chronométrage</font>
+
+<font color="#006666">    CloseFile</font>(0)
+    <b><font color="#006666">EndIf</font></b>
+    texte$+&quot;ReadByte: &quot;+<font color="#006666">Str</font>(stop-start)+<font color="#924B72">#CRLF$</font>+<font color="#924B72">#CRLF$</font>
+
+  TailleTampon = TailleTampon*2 <font color="#006666">; Augmentation du tampon</font>
+  <b><font color="#006666">Wend</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;FileBuffersSize&quot;,texte$) <font color="#006666">; Affichage</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="flushfilebuffers.html">FlushFileBuffers()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=eof.html>Eof()</a> - <a href=index.html>File Index</a> - <a href=fileid.html>FileID()</a> -><br><br>
+
+</body></html>

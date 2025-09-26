@@ -1,0 +1,127 @@
+<html><head><title>Integrierter Form-Designer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Integrierter Form-Designer</font></b></p>
+
+Die PureBasic IDE hat einen sehr leistungsfähigen integrierten Form-Designer (auch 
+&quot;Formular-Designer&quot;), welcher einfach die Gestaltung von Fenstern und das Anordnen von 
+Gadgets darauf ermöglicht. Er unterstützt nahezu alle nativen PureBasic 
+<a href="../gadget/index.html">Gadgets</a>, <a href="../menu/index.html">Menüs</a> und sogar 
+<a href="../statusbar/index.html">Statusleisten</a>. Eine Form-Datei (auch &quot;Formular-Datei&quot;) ist eine 
+reguläre PureBasic-Datei, welche somit einfach verändert werden kann, ohne den Form-Designer 
+zu öffnen. Der Code-Parser ist nicht der Gleiche, wie er vom Compiler verwendet wird, 
+und unterstützt daher nicht alle Funktionen - wenn Sie daher manuelle Änderungen an 
+einer Form-Datei vornehmen, müssen diese grundlegend bleiben. 
+
+</blockquote>
+<p><b>Inhalt des "Form" Menüs:</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_form.png"></p>
+
+<b>Neues Formular</b> 
+<br>
+Erstellt ein neues leeres Formular. Dies bringt automatisch die Form-Werkzeugleiste in den Vordergrund. 
+<br>
+<br>
+
+<b>Ansicht umschalten (Code/Design)</b> 
+<br>
+Ändert die Formular-Ansicht, wechselt vom Design-Modus in die Code-Ansicht. Ein Formular wird 
+aus Quellcode erstellt - wenn daher eine Änderung direkt in der Code-Ansicht erfolgt, so wird 
+diese auch visuell wiedergespiegelt. 
+<br>
+<br>
+
+<b>Objekt duplizieren</b> 
+<br>
+Dupliziert das aktuell ausgewählte Objekt. 
+<br>
+<br>
+
+<b>Bild-Manager</b> 
+<br>
+<p><img src="images/ide_form_imagemanager.png"></p>
+<br>
+<br>
+Zeigt alle Bilder an, die aktuell vom Formular verwendet werden. Das Bild und sein Pfad können 
+hier einfach verändert werden. 
+
+</blockquote>
+<p><b>Form-Designleiste</b></p><blockquote>
+
+
+<p><img src="images/ide_form_designpanel.png"></p>
+
+Diese Werkzeugleiste listet alle verfügbaren Gadgets auf. Wählen Sie eins aus, und zeichnen 
+Sie direkt auf dem Formular die benötigte Größe. Wenn ein Gadget auf dem Formular ausgewählt 
+wird, dann werden seine Eigenschaften auf dieser Leiste angezeigt und können auch hier 
+verändert werden. 
+
+</blockquote>
+<p><b>Verwendung des Form-Designers in echten Projekten</b></p><blockquote>
+
+
+Der Form-Designer wurde erschaffen, um modulare Formulare und deren einfache Wartung zu ermöglichen. 
+Jedes Formular muss seine eigene Datei haben. Es können sich keine zwei Formulare in der gleichen 
+Datei befinden (mit anderen Worten, es sollten sich niemals zwei <a href="../window/openwindow.html">OpenWindow()</a> in der gleichen Datei 
+befinden). Jedem Gadget kann eine Ereignis-Prozedur zugewiesen werden, welche automatisch in der 
+Ereignisschleife behandelt werden. Die Ereignis-Prozeduren müssen irgendwo im Quellcode definiert 
+werden. Jede Formular-Datei sollte mit der '.pbf' Endung benannt werden, damit sie von der IDE 
+richtig erkannt werden. Formular-Dateien können auch zu einem <a href="../reference/ide_projects.html">Projekt</a> 
+hinzugefügt werden. 
+<br>
+<br>
+Um zum Beispiel ein Programm, welches zwei Fenster besitzt, zu erstellen, müssen wir zwei Formular-Dateien 
+und eine Haupt-Datei erstellen. Die Verzeichnisstruktur könnte wie folgt aussehen: 
+<pre><font face="Courier New, Courier, mono" size="2">  Main.pb        ; Die Haupt-PureBasic-Datei, welche die zwei Formular-Dateien einbindet und die Ereignisse definiert.
+  MainWindow.pbf ; Das Hauptfenster.
+  DateWindow.pbf ; Ein anderes Fenster.
+</font></pre>
+Wenn wir davon ausgehen, dass MainWindow.pbf über zwei <a href="../gadget/buttongadget.html">Tasten</a> ('OK' 
+und 'Cancel') verfügt und DateWindow.pbf ein <a href="../gadget/calendargadget.html">CalendarGadget</a> besitzt, 
+dann würde die Haupt-Datei wie folgt aussehen (die Haupt-Datei wird nicht über den Form-Designer 
+verwaltet und muss manuell geschrieben werden): 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">XIncludeFile</font></b> &quot;MainWindow.pbf&quot; <font color="#006666">; Einbinden der ersten Fenster-Definition</font>
+  <b><font color="#006666">XIncludeFile</font></b> &quot;DateWindow.pbf&quot; <font color="#006666">; Einbinden der zweiten Fenster-Definition</font>
+  
+<font color="#006666">  OpenMainWindow</font>() <font color="#006666">; Öffnet das erste Fenster. Dieser Prozedurname ist immer 'Open' gefolgt vom Fensternamen.</font>
+<font color="#006666">  OpenDateWindow</font>() <font color="#006666">; Öffnet das zweite Fenster.</font>
+  
+  <font color="#006666">; Die Ereignis-Prozedur, wie diese in der Eigenschaft 'Ereignis-Prozedur' jedes Gadgets definiert wurde.</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">OkButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;OkButton event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">CancelButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;CancelButton event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">TrainCalendarEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;TrainCalendar event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; Die übliche Haupt-Ereignisschleife, die einzige Änderung ist der automatische Aufruf der</font>
+  <font color="#006666">; für jedes Fenster generierten Ereignis-Prozedur.</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> <font color="#006666">EventWindow</font>()
+      <b><font color="#006666">Case</font></b> MainWindow
+<font color="#006666">        MainWindow_Events</font>(Event) <font color="#006666">; Dieser Prozedurname ist immer der Fenstername gefolgt von '_Events'</font>
+        
+      <b><font color="#006666">Case</font></b> DateWindow
+<font color="#006666">        DateWindow_Events</font>(Event)
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> <font color="#006666">; Beenden, wenn eines der Fenster geschlossen wird.</font>
+</font></pre>
+
+Wie man sieht, ist es einfach, visuell entworfene Formulare in ein Programm zu integrieren. 
+In der Tat ist es auch weiterhin möglich, Fenster manuell zu erstellen, oder beides zu mischen. 
+Um die komplette Kontrolle über den generierten Code zu haben, wechseln Sie einfach die 
+Ansicht in den Code-Modus und überprüfen diesen. 
+<br>
+</blockquote>
+</font></body></html>

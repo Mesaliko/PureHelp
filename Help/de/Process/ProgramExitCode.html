@@ -1,0 +1,47 @@
+<html><head><title>ProgramExitCode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramExitCode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ProgramExitCode</b></font>(Programm)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den &quot;Exitcode&quot; zurück, der vom angegebenen Programm bei dessen Beendigung zurückgegeben wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programm</i></td>
+<td width="90%"> 
+Das zu verwendende Programm. Dieses muss zuvor mittels <a href="runprogram.html">RunProgram()</a> gestartet worden sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der 'ExitCode', der zurückgegeben wurde, als das angegebene Programm endete. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl sollte nur verwendet werden, nachdem das angegebene Programm beendet wurde. 
+Verwenden Sie <a href="programrunning.html">ProgramRunning()</a> oder <a href="waitprogram.html">WaitProgram()</a>, um hierbei sicher zu gehen. 
+<br>
+<br>
+Der Exitcode ermöglicht die Rückgabe eines einzelnen Wertes durch das Programm an das Programm, welches 
+es ausgeführt hat. Dieser wird üblicherweise verwendet, um einen Fehler oder Erfolg des Programms anzuzeigen. 
+Bitte beachten, dass aufgrund von OS-Limitierungen auf OS X und Linux die unterstützten Exitcodes zwischen 
+0 und 255 liegen. 
+<br>
+<br>
+Um einen &quot;Exitcode&quot; durch ein PB Programm zurückgeben zu lassen, verwenden Sie den optionalen 
+Wert bei der <b><font color="#006666">End</font></b> Anweisung: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">End</font></b> 1   <font color="#006666">; gibt den Exitcode 1 zurück</font>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextenvironmentvariable.html>NextEnvironmentVariable()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=programfilename.html>ProgramFilename()</a> -><br><br>
+
+</body></html>

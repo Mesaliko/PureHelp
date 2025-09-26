@@ -1,0 +1,86 @@
+<html><head><title>DragImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>DragImage</b></font>(ImageID [, Aktionen])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Startet eine Drag &amp; Drop Operation mit Bild-Daten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ImageID</i></td>
+<td width="90%"> 
+Das zu &quot;ziehende&quot; (englisch &quot;to drag&quot;) Bild. 
+<a href="../image/imageid.html">ImageID()</a> kann verwendet werden, um diese ID für ein Bild zu erhalten. 
+
+</td></tr>
+<tr><td><i>Aktionen (optional)</i></td>
+<td> 
+Eine Kombination der Drag &amp; Drop Aktionen, welche für das Bild erlaubt sein sollen. 
+Wenn der Parameter nicht angegeben wird, wird <font color="#924B72">#PB_Drag_Copy</font> die einzige erlaubte Aktion sein. 
+Mögliche Aktionen sind: (sie können mittels '|' kombiniert werden) 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: Das Bild kann kopiert werden
+  <font color="#924B72">#PB_Drag_Move</font>: Das Bild kann verschoben werden
+  <font color="#924B72">#PB_Drag_Link</font>: Das Bild kann verlinkt werden
+</font></pre>
+
+Der Anwender kann durch Drücken der Zusatztasten wie 'Strg' oder 'Shift' entscheiden, welche dieser 
+Aktionen verwendet werden soll. Die Aktionen, welche tatsächlich stattfinden können, richten sich 
+auch nach den vom Zielobjekt (englisch &quot;drop target&quot;) erlaubten Aktionen. 
+<br>
+(Auf MacOSX werden die Aktionen nur als ein Vorschlag übergeben. Das Zielobjekt kann immer 
+noch eine andere Aktion auswählen.) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen der oben genannten Drag &amp; Drop Aktions-Werte zurück, welche die vom Anwender genutzte Aktion 
+anzeigen, oder <font color="#924B72">#PB_Drag_None</font> wenn der Anwender die Drag &amp; Drop Operation abgebrochen hat. 
+<br>
+<br>
+Bitte beachten Sie, dass es bei Rückgabe von <font color="#924B72">#PB_Drag_Move</font> in Ihrer Verantwortung liegt, 
+das verschobene Bild von Ihrer Applikation zu entfernen. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Drag &amp; Drop kann grundsätzlich jederzeit gestartet 
+werden, aber die linke Maustaste sollte aktuell gedrückt sein, da andernfalls die Operation umgehend 
+und ohne Erfolg beendet wird. Der übliche Zeitpunkt zum Starten einer Drag &amp; Drop Operation ist, wenn 
+ein <a href="../gadget/index.html">Gadget</a> über <a href="../window/eventtype.html">EventType()</a> ein Ereignis vom Typ 
+<font color="#924B72">#PB_EventType_DragStart</font> zurückmeldet. Unter MacOS X muss das Ereignis <font color="#924B72">#PB_EventType_DragStart</font> mit 
+<a href="../window/bindevent.html">BindEvent()</a> oder <a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a> behandelt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Verschieben Sie das Bild zu einer Applikation, welche Bilder akzeptiert (wie Office- oder Grafikprogramme).</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">LoadImage</font>(1, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/data/PureBasicLogo.bmp&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(1, 200, 200, 400, 90, &quot;Drag &amp; Drop&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+<font color="#006666">      ImageGadget</font>(1, 10, 10, 380, 70,<font color="#006666"> ImageID</font>(1))
+    
+      <b><font color="#006666">Repeat</font></b>
+        Event =<font color="#006666"> WaitWindowEvent</font>()      
+        <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventGadget</font>() = 1 <b><font color="#006666">And</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_DragStart</font>
+<font color="#006666">          DragImage</font>(<font color="#006666">ImageID</font>(1))
+        <b><font color="#006666">EndIf</font></b>      
+      <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="dragfiles.html">DragFiles()</a>, <a href="dragtext.html">DragText()</a>, <a href="dragprivate.html">DragPrivate()</a>, <a href="dragosformats.html">DragOSFormats()</a>, 
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=dragfiles.html>DragFiles()</a> - <a href=index.html>DragDrop Inhaltsverzeichnis</a> - <a href=dragosformats.html>DragOSFormats()</a> -><br><br>
+
+</body></html>

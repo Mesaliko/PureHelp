@@ -1,0 +1,44 @@
+<html><head><title>Mail.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Mail example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;fred@purebasic.com&quot;, &quot;Hello !&quot;)
+
+<font color="#006666">  SetMailBody</font>(0, &quot;Hello !&quot; + <font color="#924B72">#CRLF$</font> +
+                 &quot;This is a multi-&quot; + <font color="#924B72">#CRLF$</font> +
+                 &quot;line mail !&quot;)
+  
+<font color="#006666">  AddMailAttachment</font>(0, &quot;Geebee !&quot;  , &quot;Data/Geebee2.bmp&quot;)
+<font color="#006666">  AddMailAttachment</font>(0, &quot;World icon&quot;, &quot;Data/world.png&quot;)
+  
+  <font color="#006666">; Change the recipients to real one
+</font>  <font color="#006666">;
+</font><font color="#006666">  AddMailRecipient</font>(0, &quot;test@yourdomain.com&quot;, <font color="#924B72">#PB_Mail_To</font>)
+<font color="#006666">  AddMailRecipient</font>(0, &quot;test_cc@yourdomain.com&quot;, <font color="#924B72">#PB_Mail_Cc</font>)
+  
+  <font color="#006666">; Set the SMTP server to use
+</font>  <font color="#006666">;
+</font>  Result =<font color="#006666"> SendMail</font>(0, &quot;smtp.free.fr&quot;, 25, <font color="#924B72">#PB_Mail_Asynchronous</font>)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Progress =<font color="#006666"> MailProgress</font>(0)
+<font color="#006666">    Delay</font>(300)
+  <b><font color="#006666">Until</font></b> Progress = <font color="#924B72">#PB_Mail_Finished</font> <b><font color="#006666">Or</font></b> Progress = <font color="#924B72">#PB_Mail_Error</font>
+  
+  <b><font color="#006666">If</font></b> Progress = <font color="#924B72">#PB_Mail_Finished</font>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Mail correctly sent !&quot;)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Error&quot;, &quot;Can't sent the mail !&quot;)
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

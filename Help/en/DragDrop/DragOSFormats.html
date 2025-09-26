@@ -1,0 +1,111 @@
+<html><head><title>DragOSFormats</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragOSFormats()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DragOSFormats</b></font>(Formats(), Count [, Actions])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Starts a Drag &amp; Drop operation with a list of custom data formats. The types of formats available and the 
+way in which they are represented depends on the Operating system. This function offers the possibility to 
+work with formats not natively supported by PureBasic, while still using the simple mechanisms provided 
+by this library to carry out the Drag &amp; Drop operation. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Formats()</i></td>
+<td width="90%"> 
+An <a href="../reference/dim.html">array</a> of DragDataFormat <a href="../reference/structures.html">structures</a> 
+containing one or more formats to drag. 
+The structure has the following form: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> DragDataFormat
+    Format.i    <font color="#006666">; The OS specific ID for the format to drag (see below for more information)</font>
+   *Buffer      <font color="#006666">; The memory buffer containing the data in this format</font>
+    Size.i      <font color="#006666">; The size of the data in the buffer</font>
+  <b><font color="#006666">EndStructure</font></b>
+</font></pre>
+
+<b>Windows:</b> 
+<blockquote>
+
+On Windows, the 'Format' field specifies a CLIPBOARDFORMAT value. It can be any standard clipboard format 
+(found in the Windows SDK), or a format registered with the RegisterClipboardFormat_() API. 
+</blockquote>
+
+
+<b>Linux:</b> 
+<blockquote>
+
+On Linux, the 'Format' field specifies a GdkAtom value. It can be created with the gdk function gdk_atom_intern_(). 
+Widely understood atoms are the common mime types (ie &quot;text/html&quot; for html data). The atom can also be 
+created with any string that is understood by the target application. 
+</blockquote>
+
+
+<b>MacOSX:</b> 
+<blockquote>
+
+On MacOSX, the 'Format' field specifies a clipboard scrap type. These are 4 letter numeric character constants, 
+for example 'TEXT'. There are a number of predefined scrap types, but also custom values 
+can be used if the target program understands them. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Count</i></td>
+<td> 
+The number of formats in the array. 
+<br>
+<br>
+If multiple formats are dragged, the target will accept the first one it recognizes. So 
+the format that provides the most information (i.e. represents the data most accurately) should be 
+first in the array, with less descriptive but more common formats later. This way each application 
+will get the best representation of the data that it understands. 
+
+</td></tr>
+<tr><td><i>Actions (optional)</i></td>
+<td> 
+A combination of the Drag &amp; Drop actions that should be allowed for the data. 
+If the parameter is not specified, <font color="#924B72">#PB_Drag_Copy</font> will be the only allowed action. 
+Possible actions are: (they can be combined with '|') 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: The data can be copied
+  <font color="#924B72">#PB_Drag_Move</font>: The data can be moved
+  <font color="#924B72">#PB_Drag_Link</font>: The data can be linked
+</font></pre>
+
+The user can decide which of these actions to take by pressing modifier keys like Ctrl or Shift. The actions 
+that can really be taken also depend on the actions allowed by the drop target. 
+(On MacOSX, the actions are only treated as a suggestion. The drop target can still choose another action.) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the above Drag &amp; Drop action values to indicate what action the user took, or 
+<font color="#924B72">#PB_Drag_None</font> if the user aborted the Drag &amp; Drop operation. 
+<br>
+<br>
+Note that if <font color="#924B72">#PB_Drag_Move</font> is returned, it is your responsibility to remove the 
+dragged data from your application. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Drag &amp; Drop can basically be started any time, but the 
+left mouse button should be currently pressed as otherwise the operation will end immediately without success. 
+The usual time to start a Drag &amp; Drop operation is when a <a href="../gadget/index.html">Gadget</a> reported an event with 
+<a href="../window/eventtype.html">EventType()</a> of <font color="#924B72">#PB_EventType_DragStart</font>. 
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="dragtext.html">DragText()</a>, <a href="dragimage.html">DragImage()</a>, <a href="dragfiles.html">DragFiles()</a>, <a href="dragprivate.html">DragPrivate()</a>, 
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=dragimage.html>DragImage()</a> - <a href=index.html>DragDrop Index</a> - <a href=dragprivate.html>DragPrivate()</a> -><br><br>
+
+</body></html>

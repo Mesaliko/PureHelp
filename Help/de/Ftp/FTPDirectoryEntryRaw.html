@@ -1,0 +1,57 @@
+<html><head><title>FTPDirectoryEntryRaw</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FTPDirectoryEntryRaw()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Eintrag$ = <font color="#006666"><b>FTPDirectoryEntryRaw</b></font>(#Ftp)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die &quot;rohen&quot; (unbearbeiteten) Informationen des aktuellen Eintrags - in der mittels der 
+<a href="examineftpdirectory.html">ExamineFTPDirectory()</a> und <a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a> Funktionen aufgelisteten FTP-Quelle - 
+so zurück, wie diese vom FTP-Server gesendet wurden. Dies kann nützlich sein, wenn der Server von 
+<a href="examineftpdirectory.html">ExamineFTPDirectory()</a> nicht unterstützt wird, um trotzdem die Informationen zum 
+Verzeichnis-Listing zu empfangen und entsprechend zu verarbeiten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Ftp</i></td>
+<td width="90%"> 
+Die zu verwendende FTP-Verbindung. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Informationen zum Eintrag zurück, wie diese vom FTP-Server gesendet wurden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenFTP</font>(0, &quot;ftp.free.fr&quot;, &quot;anonymous&quot;, &quot;&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineFTPDirectory</font>(0)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextFTPDirectoryEntry</font>(0)
+        <b><font color="#006666">Debug</font></b> <font color="#006666">FTPDirectoryEntryRaw</font>(0)
+      <b><font color="#006666">Wend</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Konnte keine Verbindung zu ftp.free.fr aufbauen.&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="examineftpdirectory.html">ExamineFTPDirectory()</a>, 
+<a href="nextftpdirectoryentry.html">NextFTPDirectoryEntry()</a>, 
+<a href="ftpdirectoryentrytype.html">FTPDirectoryEntryType()</a>, 
+<a href="ftpdirectoryentryname.html">FTPDirectoryEntryName()</a>, 
+<a href="ftpdirectoryentrydate.html">FTPDirectoryEntryDate()</a>, 
+<a href="ftpdirectoryentrysize.html">FTPDirectoryEntrySize()</a>, 
+<a href="ftpdirectoryentryattributes.html">FTPDirectoryEntryAttributes()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=ftpdirectoryentryname.html>FTPDirectoryEntryName()</a> - <a href=index.html>Ftp Inhaltsverzeichnis</a> - <a href=ftpdirectoryentrysize.html>FTPDirectoryEntrySize()</a> -><br><br>
+
+</body></html>

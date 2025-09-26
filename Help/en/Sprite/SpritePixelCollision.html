@@ -1,0 +1,63 @@
+<html><head><title>SpritePixelCollision</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpritePixelCollision()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SpritePixelCollision</b></font>(#Sprite1, x1, y1, #Sprite2, x2, y2)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Tests if the two sprites are overlapping. <font color="#924B72">#PB_Sprite_PixelCollision</font> 
+has to be specified at the sprite creation to have this command working. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite1</i></td>
+<td width="90%"> 
+The first sprite to test. 
+
+</td></tr>
+<tr><td><i>x1, y1</i></td>
+<td> 
+Coordinates of the first sprite, in pixels. 
+
+</td></tr>
+<tr><td><i>#Sprite2</i></td>
+<td> 
+The second sprite to test. 
+
+</td></tr>
+<tr><td><i>x2, y2</i></td>
+<td> 
+Coordinates of the second sprite, in pixels. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the two sprites are overlapping, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This routine performs a transparent pixel exact collision check, giving a slower but very accurate result. 
+To optimize the comparison you should always remove as many transparent pixels as possible so that 
+the sprite size is fully used by the sprite (i.e. do not have large transparent borders around 
+the actual image of the sprite). Zoomed sprites are also supported. 
+<br>
+<br>
+For a faster collision check based only on rectangular bounds, use <a href="spritecollision.html">SpriteCollision()</a>. 
+<br>
+<br>
+Attention, it does not work with sprites that have been rotated or transformed. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="spritecollision.html">SpriteCollision()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=spriteoutput.html>SpriteOutput()</a> - <a href=index.html>Sprite Index</a> - <a href=spritequality.html>SpriteQuality()</a> -><br><br>
+
+</body></html>

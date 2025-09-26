@@ -1,0 +1,787 @@
+<html><head><title>Les fonctions du compilateur</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les fonctions du compilateur</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Bool"><u>Bool</u></a></td>  
+    <td align="center" vAlign="center" nowrap><a href="#Defined"><u>Defined</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Subsystem"><u>Subsystem</u></a></td>
+  </tr>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#OffsetOf"><u>OffsetOf</u></a></td>  
+    <td align="center" vAlign="center" nowrap><a href="#SizeOf"><u>SizeOf</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#TypeOf"><u>TypeOf</u></a></td>
+  </tr>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#InitializeStructure"><u>InitializeStructure</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#CompareStructure"><u>CompareStructure</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#CopyStructure"><u>CopyStructure</u></a></td>
+  </tr>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#ClearStructure"><u>ClearStructure</u></a></td>
+  
+    <td align="center" vAlign="center" nowrap><a href="#ResetStructure"><u>ResetStructure</u></a></td>
+  </tr>  
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Bool"></a>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">Bool</font></b>(&lt;expression booléenne&gt;)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Bool</font></b> permet d'évaluer une 
+expression booléenne en dehors des 
+opérateurs conditionnels réguliers comme 
+<b><font color="#006666">If</font></b>, <b><font color="#006666">While</font></b>, <b><font color="#006666">Until</font></b>, etc. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>expression booléenne</i></td>
+<td width="90%"> 
+L'expression booléenne à tester. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie <font color="#924B72">#True</font> si l'expression booléenne est vraie, 
+<font color="#924B72">#False</font> sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Salut$ = &quot;Salut&quot;
+  LeMonde$ = &quot;Le Monde&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Bool</font>(Salut$ = &quot;Salut&quot;)  <font color="#006666">; Affichera 1</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Bool</font>(Salut$ &lt;&gt; &quot;Salut&quot; <b><font color="#006666">Or</font></b> LeMonde$ = &quot;Le Monde&quot;) <font color="#006666">; Affichera 1</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Chiffre</font>(char.c)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Bool</font>(char &gt;= <font color="#924B72">'0'</font> <b><font color="#006666">And</font></b> char &lt;= <font color="#924B72">'9'</font>)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chiffre</font>(<font color="#924B72">'0'</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chiffre</font>(<font color="#924B72">'1'</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chiffre</font>(<font color="#924B72">'a'</font>)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chiffre</font>(<font color="#924B72">'z'</font>)
+</font></pre>
+
+<br><hr><br>
+<a name="Defined"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">Defined</font></b>(Nom, Type)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Defined</font></b> détermine si un objet tel qu'une 
+<a href="../reference/structures.html">structure</a>, 
+<a href="../reference/interfaces.html">interface</a>, 
+<a href="../reference/variables.html">variables</a> etc. 
+est déjà défini dans le programme. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Nom</i></td>
+<td width="90%"> 
+Le nom de l'objet. 
+<br>
+<br>
+Le paramètre 'Nom' doit être spécifié sans aucune 
+forme de décoration (sans le '#' pour une 
+<a href="../reference/general_rules.html">constante</a>, sans 
+les '()' pour un <a href="../reference/dim.html">tableau</a>, 
+une <a href="../reference/newlist.html">liste</a>,  une 
+<a href="../reference/newmap.html">map</a> ou une 
+<a href="../reference/procedures.html">procédure</a>). 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+Peut prendre une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Constant</font>
+  <font color="#924B72">#PB_Variable</font>
+  <font color="#924B72">#PB_Array</font>
+  <font color="#924B72">#PB_List</font>
+  <font color="#924B72">#PB_Map</font>
+  <font color="#924B72">#PB_Structure</font>
+  <font color="#924B72">#PB_Interface</font>
+  <font color="#924B72">#PB_Procedure</font>
+  <font color="#924B72">#PB_Function</font>
+  <font color="#924B72">#PB_OSFunction</font>
+  <font color="#924B72">#PB_Label</font>
+  <font color="#924B72">#PB_Prototype</font>
+  <font color="#924B72">#PB_Module</font>
+  <font color="#924B72">#PB_Enumeration</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'objet est défini, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PureConstante</font> = 10
+  
+  <b><font color="#006666">CompilerIf</font></b> <font color="#006666">Defined</font>(PureConstante, <font color="#924B72">#PB_Constant</font>)
+    <b><font color="#006666">Debug</font></b> &quot;La constante 'PureConstante' est déjà déclarée&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  Test = 25
+  
+  <b><font color="#006666">CompilerIf</font></b> <font color="#006666">Defined</font>(Test, <font color="#924B72">#PB_Variable</font>)
+    <b><font color="#006666">Debug</font></b> &quot;La variable 'Test' est déjà déclarée&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="Subsystem"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">Subsystem</font></b>(&lt;expression texte constante&gt;)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Subsystem</font></b> permet de savoir si un <a href="../reference/subsystems.html">sous-système</a> est utilisé pour le programme en cours de 
+compilation. 
+<br>
+Le nom du sous-système est insensible à la casse. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>expression texte constante</i></td>
+<td width="90%"> 
+Le nom du sous-système.<br>
+Windows: DirectX9, DirectX11 <br>
+Linux  : Gtk2, Qt <br>
+MacOS X: Rien 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le sous-système est utilisé, zéro sinon. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#006666">Subsystem</font>(&quot;OpenGL&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Compilation avec le sous-système OpenGL&quot; 
+  <b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="OffsetOf"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">OffsetOf</font></b>(Structure\Champ)
+Resultat = <b><font color="#006666">OffsetOf</font></b>(Interface\Fonction())
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+La commande <b><font color="#006666">OffsetOf</font></b> permet de 
+déterminer la position en mémoire d'un champ d'une 
+<a href="../reference/structures.html">structure</a> ou 
+la position en mémoire d'une fonction dans le cas d'une 
+<a href="../reference/interfaces.html">interface</a> (soit 
+IndexDeLaFunction*SizeOf(Integer)). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Structure\Champ ou Interface\Fonction()</i></td>
+<td width="90%"> 
+Le champ de la structure ou la fonction 
+de l'interface. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'index du champ ou de la fonction, 
+zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom.s
+    Prenom.s
+    Age.w
+  <b><font color="#006666">EndStructure</font></b>
+ 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Personne\Nom) <font color="#006666">; Affichera 0</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(Personne\Age) <font color="#006666">; Affichera 16 avec un compilateur 64 bits ou 8 avec un compilateur 32 bits</font>
+                               <font color="#006666">; car une un pointeur 'string' occupe 8 ou 4 octets en mémoire</font>
+ 
+  <b><font color="#006666">Interface</font></b> ITest
+<font color="#006666">    Creer</font>()
+<font color="#006666">    Detruire</font>(Options)
+  <b><font color="#006666">EndInterface</font></b>
+ 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">OffsetOf</font>(ITest\<font color="#006666">Detruire</font>()) <font color="#006666">; Affichera 8 ou 4</font>
+</font></pre>
+
+<br><hr><br>
+<a name="SizeOf"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">SizeOf</font></b>(Type)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+La commande <b><font color="#006666">SizeOf</font></b> permet de renvoyer la taille en octets que prendra une 
+<a href="../reference/structures.html">structure</a>, les types de base tels que les 'word', les 'float', 
+etc.), une <a href="../reference/interfaces.html">interface</a> ou même une variable 
+(Si une variable et une structure ont le même nom, la structure aura la priorité sur la 
+variable.). 
+<br>
+Comme <b><font color="#006666">SizeOf</font></b> est une fonction du compilateur, 
+elle ne fonctionne pas avec les tableaux, les Listes ou les Maps. 
+Utilisez <a href="../array/arraysize.html">ArraySize()</a>, <a href="../list/listsize.html">ListSize()</a> ou <a href="../map/mapsize.html">MapSize()</a> à la place. 
+<br>
+En tant que fonction du compilateur, SizeOf(x) est affectée à une constante et ne nécessite 
+pas d'affectation à une autre variable si elle se trouve à l'intérieur d'une boucle ou 
+d'une procédure appelée à plusieurs reprise. 
+
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Le type de l'objet. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La taille de l'objet en mémoire, en octets. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est très utile dans de nombreux cas, notamment 
+lors de l'utilisation des commandes API. 
+<br>
+<br>
+Note : Une variable de type caractère (CHARACTER) (.c) est unicode et occupe 2 octets et 
+une variable de type ASCII (.a) n'occupe qu'1 octet. 
+
+</blockquote><p><b>Exemple:</b> 1</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  VariableCaractere.c = <font color="#924B72">'!'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(VariableCaractere) <font color="#006666">; affiche 2, c'est à dire 2 octets</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(CHARACTER)         <font color="#006666">; affiche 2, c'est à dire 2 octets</font>
+  
+  VariableAscii.a = <font color="#924B72">'!'</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(VariableAscii)     <font color="#006666">; affiche 1, c'est à dire 1 octets</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(ASCII)             <font color="#006666">; affiche 1, c'est à dire 1 octets</font>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> 2</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom.s
+    Prenom.s
+    Age.w
+  <b><font color="#006666">EndStructure</font></b>
+ 
+  <b><font color="#006666">Debug</font></b> &quot;La taille de la structure 'Personne' est &quot;+<font color="#006666">Str</font>(<font color="#006666">Sizeof</font>(Personne))+&quot; octets&quot; <font color="#006666">; Affichera 18 avec un compilateur 64 bits(8+8+2)</font>
+                                                                                    <font color="#006666">; ou 10 avec un compilateur 32 bits (4+4+2)</font>
+ 
+  Jean.Personne\Nom = &quot;Jean&quot;
+ 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(Jean) <font color="#006666">; Affichera 18 ou 10 aussi</font>
+</font></pre>
+
+<br><hr><br>
+<a name="TypeOf"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">TypeOf</font></b>(Objet)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">TypeOf</font></b> permet de déterminer le type d'une 
+<a href="../reference/variables.html">variable</a>, 
+ou d'un champ de <a href="../reference/structures.html">structure</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Objet</i></td>
+<td width="90%"> 
+L'objet à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le type de l'objet. 
+<br>
+<br>
+Le type peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>      
+  <font color="#924B72">#PB_Word</font>      
+  <font color="#924B72">#PB_Long</font>      
+  <font color="#924B72">#PB_String</font>    
+  <font color="#924B72">#PB_Structure</font>
+  <font color="#924B72">#PB_Float</font>
+  <font color="#924B72">#PB_Character</font>
+  <font color="#924B72">#PB_Double</font>
+  <font color="#924B72">#PB_Quad</font>
+  <font color="#924B72">#PB_List</font>
+  <font color="#924B72">#PB_Array</font>
+  <font color="#924B72">#PB_Integer</font>
+  <font color="#924B72">#PB_Map</font>
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font> 
+  <font color="#924B72">#PB_Interface</font>  
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom.s
+    Prenom.s 
+    Age.w 
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">TypeOf</font>(Personne\Age) = <font color="#924B72">#PB_Word</font>
+    <b><font color="#006666">Debug</font></b> &quot;Age est un 'Word'&quot;
+  <b><font color="#006666">EndIf</font></b>
+            
+  Surface.f                 
+  <b><font color="#006666">If</font></b> <font color="#006666">TypeOf</font>(Surface) = <font color="#924B72">#PB_Float</font>
+    <b><font color="#006666">Debug</font></b> &quot;Surface est un 'Float'&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="InitializeStructure"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">InitializeStructure</font></b>(*Memoire, Structure)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise un objet <a href="../reference/structures.html">structuré</a> 
+en mémoire. 
+<br>
+<br>
+En fait, cette fonction initialise les membres 
+d'une <a href="../reference/structures.html">structure</a>. 
+Ces membres sont de type 
+<a href="../array/index.html">Array</a>, 
+<a href="../list/index.html">List</a> ou 
+<a href="../map/index.html">Map</a> mais les autres 
+types ne sont pas affectés (.s .l, .i, etc.). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire à utiliser. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le nom de la structure qui doit être utilisé 
+pour effectuer l'initialisation.<br>
+Il n'y a pas de contrôle pour s'assurer que 
+la zone mémoire corresponde à la structure. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Attention: plusieurs appels à 
+<b><font color="#006666">InitializeStructure</font></b> crée une fuite 
+de mémoire parce que les anciens membres 
+de la structure ne sont pas libérés de la 
+mémoire. <b><font color="#006666">ClearStructure</font></b> doit être 
+appelée avant d'appeler une nouvelle fois 
+<b><font color="#006666">InitializeStructure</font></b>.<br>
+Cette fonction est pour les utilisateurs 
+avancés et doit être utilisée avec précaution. <br>
+Pour allouer une structure dynamique, 
+utiliser <a href="../memory/allocatestructure.html">AllocateStructure()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Prenom$
+    Age.l
+    <b><font color="#006666">List</font></b> <font color="#006666">Amis</font>.s()
+  <b><font color="#006666">EndStructure</font></b>
+
+  *Etudiant.Personne =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(Personne))
+<font color="#006666">  InitializeStructure</font>(*Etudiant, Personne)
+
+  <font color="#006666">; Maintenant, la liste est prête à l'emploi</font>
+  <font color="#006666">;</font>
+<font color="#006666">  AddElement</font>(*Etudiant\<font color="#006666">Amis</font>())
+  *Etudiant\<font color="#006666">Amis</font>() = &quot;John&quot;
+  
+<font color="#006666">  AddElement</font>(*Etudiant\<font color="#006666">Amis</font>())
+  *Etudiant\<font color="#006666">Amis</font>() = &quot;Yann&quot;
+
+  <font color="#006666">; Affichage du contenu de la liste</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> *Etudiant\<font color="#006666">Amis</font>()
+    <b><font color="#006666">Debug</font></b> *Etudiant\<font color="#006666">Amis</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+
+<br><hr><br>
+<a name="CompareStructure"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CompareStructure</font></b>(*Pointeur1, *Pointeur2, Structure [, Options])
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">CompareStructure</font></b> compare la mémoire de deux <a href="../reference/structures.html">structures</a> pour 
+vérifier leur égalité. 
+La comparaison est également appliquée de manière récursive aux éléments enfants tels que 
+<a href="../reference/dim.html">arrays</a>, <a href="../reference/newlist.html">listes</a> et <a href="../reference/newmap.html">maps</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Pointeur1</i></td>
+<td width="90%"> 
+L'adresse mémoire de la première variable structurée a tester. 
+
+</td></tr>
+<tr><td><i>*Pointeur2</i></td>
+<td> 
+L'adresse mémoire de la seconde variable structurée a tester. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+La structure utilisée. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Le paramètre &quot;Options&quot; est facultatif et peut prendre l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_String_CaseSensitive</font>  : La comparaison de chaînes est sensible à la casse (a=a). (par défaut)
+   <font color="#924B72">#PB_String_NoCase</font>         : La comparaison de chaînes n'est pas sensible à la casse (A=a).
+   <font color="#924B72">#PB_Memory_FollowPointers</font> : Si un élément de structure est un pointeur qui n'est pas 0, comparez récursivement la cible du pointeur.
+                               La valeur par défaut consiste à comparer uniquement la valeur (existante) du pointeur elle-même.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<b>Attention:</b> 
+L'option <font color="#924B72">#PB_Memory_FollowPointers</font> est destinée aux utilisateurs avancés et nécessite une attention 
+particulière pour éviter les plantages. Si cette option est utilisée, alors toutes les valeurs de 
+pointeur doivent pointer vers une mémoire valide et initialisée ou avoir la valeur 0. Il n'est 
+pas non plus autorisé d'avoir des boucles dans les éléments pointés (une chaîne de pointeurs qui 
+se renvoie à elle-même). 
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les structures sont les identiques, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Structure</font></b> Personne
+     Nom$
+     Prenom$
+     <b><font color="#006666">Map</font></b> <font color="#006666">Amis$</font>()
+     Age.l
+  <b><font color="#006666">EndStructure</font></b>
+
+ EtudiantA.Personne\Prenom$ = &quot;Paul&quot;
+ EtudiantA\Nom$ = &quot;Morito&quot;
+ EtudiantA\<font color="#006666">Amis$</font>(&quot;Tom&quot;) = &quot;Dupont&quot;
+ EtudiantA\<font color="#006666">Amis$</font>(&quot;Jim&quot;) = &quot;Durand&quot;
+
+ EtudiantB.Personne\Prenom$ = &quot;Paul&quot;
+ EtudiantB\Nom$ = &quot;Morito&quot;
+ EtudiantB\<font color="#006666">Amis$</font>(&quot;Tom&quot;) = &quot;Dupont&quot;
+ EtudiantB\<font color="#006666">Amis$</font>(&quot;Jim&quot;) = &quot;Durand&quot;
+
+ EtudiantC.Personne\Prenom$ = &quot;Paul&quot;
+ EtudiantC\Nom$ = &quot;Morito&quot;
+ EtudiantC\<font color="#006666">Amis$</font>(&quot;Tom&quot;) = &quot;Fontaine&quot; <font color="#006666">; Différent dans EtudiantA</font>
+ EtudiantC\<font color="#006666">Amis$</font>(&quot;Jim&quot;) = &quot;Durand&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareStructure</font>(@EtudiantA, @EtudiantB, Personne) <font color="#006666">; Egal</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareStructure</font>(@EtudiantA, @EtudiantC, Personne) <font color="#006666">; Pas égal</font>
+</font></pre>
+
+
+<br><hr><br>
+<a name="CopyStructure"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CopyStructure</font></b>(*Source, *Destination, Structure)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Copie une <a href="../reference/structures.html">structure</a> 
+en mémoire vers une autre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Source</i></td>
+<td width="90%"> 
+L'adresse mémoire contenant la structure à copier. 
+
+</td></tr>
+<tr><td><i>*Destination</i></td>
+<td> 
+L'adresse mémoire de la copie. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le nom de la structure qui doit être utilisé 
+pour effectuer la copie. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est particulièrement utile lors de l'utilisation 
+de mémoire dynamique avec les pointeurs. Chaque 
+champ de la structure sera dupliqué, y compris 
+les <a href="../array/index.html">tableaux</a> dynamiques, 
+les <a href="../list/index.html">listes</a> ou 
+les <a href="../map/index.html">maps</a>. 
+La structure de destination sera automatiquement 
+effacée avant de faire la copie, il n'est pas 
+nécessaire d'appeler <b><font color="#006666">ClearStructure</font></b> avant 
+<b><font color="#006666">CopyStructure</font></b>. <br>
+Attention : La destination doit être une zone de 
+mémoire de structure valide, ou une zone mémoire effacée. 
+Si la zone de mémoire n'est pas effacée, cela pourrait 
+provoquer un crash, car des valeurs aléatoires seront 
+utilisées. <br>
+Il n'y a pas de contrôle pour s'assurer que les deux 
+zones mémoires sont bien du type 'Structure', 
+donc il est impératif de manipuler cette commande avec 
+précaution. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Prenom$
+    Nom$
+    <b><font color="#006666">Map</font></b> <font color="#006666">Amis$</font>()
+    Age.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  Etudiant.Personne\Prenom$ = &quot;Paul&quot;
+  Etudiant\Nom$ = &quot;Morito&quot;
+  Etudiant\<font color="#006666">Amis$</font>(&quot;Tom&quot;) = &quot;Jones&quot;
+  Etudiant\<font color="#006666">Amis$</font>(&quot;Jim&quot;) = &quot;Doe&quot;
+  
+<font color="#006666">  CopyStructure</font>(@Etudiant, @EtudiantCopy.Personne, Personne)
+  
+  <b><font color="#006666">Debug</font></b> EtudiantCopy\Prenom$
+  <b><font color="#006666">Debug</font></b> EtudiantCopy\Nom$
+  <b><font color="#006666">Debug</font></b> EtudiantCopy\<font color="#006666">Amis$</font>(&quot;Tom&quot;)
+  <b><font color="#006666">Debug</font></b> EtudiantCopy\<font color="#006666">Amis$</font>(&quot;Jim&quot;)
+</font></pre>
+
+<br><hr><br>
+<a name="ClearStructure"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">Resultat = <b><font color="#006666">ClearStructure</font></b>(*Memoire, Structure)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Vide la zone mémoire 
+<a href="../reference/structures.html">structurée</a> et 
+met la valeur de tous les champs à zéro. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire contenant la structure à 
+effacer. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le nom de la structure qui sera utilisée 
+pour effectuer le nettoyage. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est particulièrement utile quand la structure 
+contient des chaînes de caractères, 
+des <a href="../array/index.html">tableaux</a>, 
+des <a href="../list/index.html">listes</a> ou 
+des <a href="../map/index.html">maps</a> qui ont été 
+alloués en interne par PureBasic. 
+Tous les champs seront mis à zéro, même les types 
+natifs comme long, integer, etc. <br>
+Il n'y a pas de contrôle pour s'assurer que la zone 
+mémoire est bien du type 'Structure' spécifié, donc 
+il est impératif de manipuler cette commande avec 
+précaution. Cette fonction est réservée aux utilisateurs 
+avancés. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Prenom$
+    Nom$
+    Age.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  Etudiant.Personne\Prenom$ = &quot;Paul&quot;
+  Etudiant\Nom$ = &quot;Morito&quot;
+  Etudiant\Age = 10
+  
+<font color="#006666">  ClearStructure</font>(@Etudiant, Personne)
+  
+  <font color="#006666">; Affichera des chaines vide, car la structure entiere a ete videe. Tous les autres champs ont ete remis a zero</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Debug</font></b> Etudiant\Prenom$
+  <b><font color="#006666">Debug</font></b> Etudiant\Nom$
+  <b><font color="#006666">Debug</font></b> Etudiant\Age
+</font></pre>
+
+<br><hr><br>
+<a name="ResetStructure"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">ResetStructure</font></b>(*Memoire, Structure)
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">ResetStructure</font></b>, vide la zone mémoire 
+<a href="../reference/structures.html">structurée</a> 
+et l'initialise pour être prête à être utilisée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire contenant la structure à réinitialiser. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+Le nom de la structure utilisée. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est particulièrement utile quand la structure 
+contient des chaînes de caractères, 
+des <a href="../array/index.html">tableaux</a>, 
+des <a href="../list/index.html">listes</a> ou 
+des <a href="../map/index.html">maps</a> qui ont été 
+alloués en interne par PureBasic. 
+Tous les champs seront mis à zéro, même les types 
+natifs comme long, integer, etc. <br>
+Il n'y a pas de contrôle pour s'assurer que la zone 
+mémoire est bien du type 'Structure' spécifié, donc 
+il est impératif de manipuler cette commande avec 
+précaution. Cette fonction est réservée aux utilisateurs 
+avancés. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    <b><font color="#006666">Map</font></b> <font color="#006666">Amis</font>.s()
+  <b><font color="#006666">EndStructure</font></b>
+
+  Henri.Personne\<font color="#006666">Amis</font>(&quot;1&quot;) = &quot;Paul&quot;
+  
+<font color="#006666">  ResetStructure</font>(@Henri, Personne)
+  
+  <font color="#006666">; Affiche une chaîne vide car l'ensemble de la structure a été réinitialisée. </font>
+  <font color="#006666">; La map est encore utilisable, mais vide.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Debug</font></b> Henri\<font color="#006666">Amis</font>(&quot;1&quot;)
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

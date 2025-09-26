@@ -1,0 +1,74 @@
+<html><head><title>CopySprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CopySprite()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CopySprite</b></font>(#Sprite1, #Sprite2 [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Copie le #Sprite1 sur le #Sprite2. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite1</i></td>
+<td width="90%"> 
+Le numéro d'identifiant du sprite à copier. 
+
+</td></tr>
+<tr><td><i>#Sprite2</i></td>
+<td> 
+Un numéro d'identifiant du sprite de 
+destination. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+<br>
+<br>
+Si le #Sprite2 n'existe pas, il est créé. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une combinaison de (utiliser '|') 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Ajoute des informations spéciales pour gérer les collisions de pixels à travers <a href="spritepixelcollision.html">SpritePixelCollision()</a>.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Le sprite est créé avec un canal alpha (transparence), nécessaire pour utiliser <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le sprite 
+a été copié avec succès, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+
+<font color="#006666">LoadSprite</font>(0,<font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/Sources/Data/PureBasicLogo.bmp&quot;)  
+
+ <font color="#006666">;Copie du sprite 0 dans le sprite 1</font>
+<font color="#006666">CopySprite</font>(0,1)
+
+<font color="#006666">DisplaySprite</font>(0, 210, 160)
+<font color="#006666">DisplaySprite</font>(1, 210, 260)
+<font color="#006666">FlipBuffers</font>()
+<font color="#006666">Delay</font>(3000)  
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+<a href="createsprite.html">CreateSprite()</a>, <a href="clipsprite.html">ClipSprite()</a>, 
+<a href="grabsprite.html">GrabSprite()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=clipsprite.html>ClipSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=createsprite.html>CreateSprite()</a> -><br><br>
+
+</body></html>

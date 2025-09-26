@@ -1,0 +1,134 @@
+<html><head><title>Engine3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - Engine3D</font></b></p>
+
+<p><b>Overview</b></p><blockquote>
+
+
+PureBasic provides easy access to a very powerful OpenSource 
+3D Engine called OGRE. This choice has been made because we don't like to reinvent the 
+wheel every time and when we saw the OGRE code quality, we felt that it would make a considerable contribution to the PureBasic 3D library. 
+<br>
+<br>
+OGRE is still under heavy development and will probably become a 
+very advanced engine soon. Its community is growing more and more and many tools 
+are available to make the most of this engine (e.g. Blender, Lightwave and 3DS Max exporters, 
+Terrain manager etc.). More information about OGRE is available at <a href="http://www.ogre3d.org">OGRE web site</a>. 
+The OGRE license file can be consulted <a href="../reference/license_engine3d.html">here</a> (read more in <a href="http://www.ogre3d.org/licensing/licensing-faq">Licensing FAQ</a>). 
+<br>
+<br>
+Note: If you use the 3D engine of PureBasic in your projects and you 
+intent to distribute your executable, you will have to copy the Engine3D.dll from 
+the PureBasic/Compilers directory to your main project directory. 
+<br>
+<br>
+
+<p><b>Spatial conventions</b></p><blockquote>
+
+OGRE uses the following spatial conventions: <br>
+The spatial reference of OGRE is direct and the rule of the 'three fingers' of the right hand 
+allows us to find easily the position of the axes X, Y and Z in the 3D World. 
+<p><img src="../HelpPictures/ogre_axes.png"></p>
+<u>Attention, the Z axis is facing you.</u> 
+<br>
+<br>
+<b>Definition of: Roll, Pitch and Yaw:</b> <br>
+- Pitch is a rotation around the x axis. <br>
+- Yaw is a rotation around the y axis. <br>
+- Roll is a rotation around the z axis. 
+<br>
+<br>
+<b>Positive direction:</b> <br>
+The positive direction for a rotation around an axis. <br>
+Thumb in the direction of the axis as indicated, the direction of the fingers gives the positive 
+direction of the rotation. <br>
+(Use your right hand). 
+<p><img src="../HelpPictures/ogre_directrotation.png"></p>
+<br>
+<br>
+
+</blockquote>
+<p><b>Important note:</b></p><blockquote>
+
+In all 3D libraries supplied with PureBasic, all variables and returned values are 
+Float-type except for IDs and indexes, even if not indicated by a '.f'. 
+<br>
+<br>
+
+</blockquote><p><b>Command Index</b><blockquote>
+<a href="add3darchive.html">Add3DArchive</a><br>
+<a href="ambientcolor.html">AmbientColor</a><br>
+<a href="antialiasingmode.html">AntialiasingMode</a><br>
+<a href="bodypick.html">BodyPick</a><br>
+<a href="convertlocaltoworldposition.html">ConvertLocalToWorldPosition</a><br>
+<a href="convertworldtolocalposition.html">ConvertWorldToLocalPosition</a><br>
+<a href="createwater.html">CreateWater</a><br>
+<a href="enableworldcollisions.html">EnableWorldCollisions</a><br>
+<a href="enableworldphysics.html">EnableWorldPhysics</a><br>
+<a href="engine3dstatus.html">Engine3DStatus</a><br>
+<a href="examineworldcollisions.html">ExamineWorldCollisions</a><br>
+<a href="fetchorientation.html">FetchOrientation</a><br>
+<a href="firstworldcollisionentity.html">FirstWorldCollisionEntity</a><br>
+<a href="fog.html">Fog</a><br>
+<a href="getw.html">GetW</a><br>
+<a href="getworldattribute.html">GetWorldAttribute</a><br>
+<a href="getx.html">GetX</a><br>
+<a href="gety.html">GetY</a><br>
+<a href="getz.html">GetZ</a><br>
+<a href="initengine3d.html">InitEngine3D</a><br>
+<a href="loadworld.html">LoadWorld</a><br>
+<a href="mousepick.html">MousePick</a><br>
+<a href="mouseraycast.html">MouseRayCast</a><br>
+<a href="nextworldcollision.html">NextWorldCollision</a><br>
+<a href="normalx.html">NormalX</a><br>
+<a href="normaly.html">NormalY</a><br>
+<a href="normalz.html">NormalZ</a><br>
+<a href="parse3dscripts.html">Parse3DScripts</a><br>
+<a href="pickx.html">PickX</a><br>
+<a href="picky.html">PickY</a><br>
+<a href="pickz.html">PickZ</a><br>
+<a href="pitch.html">Pitch</a><br>
+<a href="pointpick.html">PointPick</a><br>
+<a href="raycast.html">RayCast</a><br>
+<a href="raycollide.html">RayCollide</a><br>
+<a href="raypick.html">RayPick</a><br>
+<a href="renderworld.html">RenderWorld</a><br>
+<a href="roll.html">Roll</a><br>
+<a href="secondworldcollisionentity.html">SecondWorldCollisionEntity</a><br>
+<a href="setguitheme3d.html">SetGUITheme3D</a><br>
+<a href="setorientation.html">SetOrientation</a><br>
+<a href="setrenderqueue.html">SetRenderQueue</a><br>
+<a href="setworldattribute.html">SetWorldAttribute</a><br>
+<a href="showgui.html">ShowGUI</a><br>
+<a href="skybox.html">SkyBox</a><br>
+<a href="skydome.html">SkyDome</a><br>
+<a href="worldcollisionappliedimpulse.html">WorldCollisionAppliedImpulse</a><br>
+<a href="worldcollisioncontact.html">WorldCollisionContact</a><br>
+<a href="worldcollisionnormal.html">WorldCollisionNormal</a><br>
+<a href="worlddebug.html">WorldDebug</a><br>
+<a href="worldgravity.html">WorldGravity</a><br>
+<a href="worldshadows.html">WorldShadows</a><br>
+<a href="yaw.html">Yaw</a><br>
+</blockquote></p>
+
+<p><b>Example</b></p><blockquote>
+<a href="../Examples/ConvertLocalToWorldPosition.pb.html">ConvertLocalToWorldPosition.pb</a>
+<br><a href="../Examples/ConvertWorldToLocalPosition.pb.html">ConvertWorldToLocalPosition.pb</a>
+<br><a href="../Examples/MousePick.pb.html">MousePick.pb</a>
+<br><a href="../Examples/MouseRayCast.pb.html">MouseRayCast.pb</a>
+<br><a href="../Examples/PointPick.pb.html">PointPick.pb</a>
+<br><a href="../Examples/PointPick_2D3D.pb.html">PointPick_2D3D.pb</a>
+<br><a href="../Examples/RayPick.pb.html">RayPick.pb</a>
+<br><a href="../Examples/SetOrientation.pb.html">SetOrientation.pb</a>
+<br><a href="../Examples/SkyBox.pb.html">SkyBox.pb</a>
+<br><a href="../Examples/Water.pb.html">Water.pb</a>
+<br><a href="../Examples/WorldDebug.pb.html">WorldDebug.pb</a>
+<br><a href="../Examples/WorldShadows.pb.html">WorldShadows.pb</a>
+<br>
+<br>
+<br><a href="../Examples/Bridge.pb.html">Bridge.pb</a>
+<br><a href="../Examples/Pendulum.pb.html">Pendulum.pb</a>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=../reference/reference.html>Reference Manual - Index</a></center><br><br>
+
+</body></html>

@@ -1,0 +1,47 @@
+<html><head><title>CloseProgram</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseProgram()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CloseProgram</b></font>(Programm)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Schließt die Verbindung mit dem angegebenen Programm (welches mit <a href="runprogram.html">RunProgram()</a> gestartet 
+wurde) und gibt alle zugehörigen Daten frei. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programm</i></td>
+<td width="90%"> 
+Das zu schließende Programm. Dies muss zuvor mit <a href="runprogram.html">RunProgram()</a> gestartet worden sein. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dies beendet nicht das Programm, sondern schließt lediglich die Verbindung mit ihm. 
+Um das Programm zu beenden, rufen Sie erst <a href="killprogram.html">KillProgram()</a> auf. Auch wenn das 
+Programm normal beendet wurde, muss dieser Befehl zum richtigen Freigeben aller Daten aufgerufen werden. 
+<br>
+<br>
+Wenn das Programm mit dem <font color="#924B72">#PB_Program_Write</font> Flag gestartet wurde, veranlasst CloseProgram() 
+das Programm, ein 'EOF' (Ende der Datei) auf seiner Standardeingabe zu empfangen. Diese 
+Bedingung kann auch &quot;produziert&quot; werden, ohne die Verbindung zum Programm zu schließen, 
+indem <a href="writeprogramdata.html">WriteProgramData()</a> mit dem speziellen <font color="#924B72">#PB_Program_Eof</font> Wert aufgerufen wird. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="killprogram.html">KillProgram()</a>, <a href="runprogram.html">RunProgram()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=availableprogramoutput.html>AvailableProgramOutput()</a> - <a href=index.html>Process Inhaltsverzeichnis</a> - <a href=countprogramparameters.html>CountProgramParameters()</a> -><br><br>
+
+</body></html>

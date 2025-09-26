@@ -1,0 +1,163 @@
+<html><head><title>TreeGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TreeGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>TreeGadget</b></font>(#Gadget, x, y, Breite, Höhe [, Flags]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein Tree-Gadget (Baum-Gadget) innerhalb der aktuellen Gadgetliste. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags zum Verändern des Gadget-Verhaltens. Dies kann eine Kombination 
+(verknüpft mit dem bitweisen '|' OR-Operator) der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_AlwaysShowSelection</font> : Die Auswahl ist noch sichtbar, auch wenn das Gadget nicht aktiviert ist.
+  <font color="#924B72">#PB_Tree_NoLines</font>             : Versteckt die kleinen Linien zwischen allen Knoten (&quot;Nodes&quot;).
+  <font color="#924B72">#PB_Tree_NoButtons</font>           : Versteckt die '+' Knoten (&quot;Node&quot;) Schalter.
+  <font color="#924B72">#PB_Tree_CheckBoxes</font>          : Fügt ein Häkchen (Checkbox) vor jedem Eintrag hinzu.
+  <font color="#924B72">#PB_Tree_ThreeState</font>          : Die Häkchen-Boxen haben einen &quot;Dazwischen&quot;-Status.
+</font></pre>
+
+Das <font color="#924B72">#PB_Tree_ThreeState</font> Flag kann in Verbindung mit dem 
+<font color="#924B72">#PB_Tree_CheckBoxes</font> Flag verwendet werden, um Checkboxen (Häkchen-Boxen) zu erhalten, 
+welche einen &quot;An&quot;, &quot;Aus&quot; und &quot;Dazwischen&quot; Status haben können. 
+Der Anwender kann nur die &quot;An&quot;- bzw. &quot;Aus&quot;-Status auswählen. Der &quot;Dazwischen&quot;-Status kann programmseitig 
+mittels der <a href="setgadgetitemstate.html">SetGadgetItemState()</a> Funktion gesetzt werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, oder Null bei einem Fehler. Wenn 
+<font color="#924B72">#PB_Any</font> als #Gadget Parameter verwendet wurde, dann beinhaltet der Rückgabewert 
+bei Erfolg die automatisch generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Jeder Eintrag im Tree hat einen ihm zugewiesenen Unterebenen-Wert (&quot;Sublevel&quot;), welcher die Verbindung zwischen dem 
+Eintrag darüber und darunter bestimmt. Einträge mit dem gleichen Sublevel gehören zum gleichen Knoten (&quot;Node&quot;), 
+Einträge mit einem höheren Sublevel sind untergeordnete Einträge (&quot;Childitems&quot;) und so weiter. Dieser Sublevel-Wert 
+kann verwendet werden, um die Verbindung zwischen zwei Einträgen durch Vergleichen ihres Sublevel-Werts zu bestimmen. 
+Der Parameter 'Flags' von <a href="addgadgetitem.html">AddGadgetItem()</a> wird bei TreeGadget-Einträgen immer benötigt und 
+wird verwendet, um den Sublevel festzulegen, an dem der neue Eintrag hinzugefügt werden soll. Beachten Sie bitte: 
+wenn die Funktion mit einem Sublevel aufgerufen wird, an dem der Eintrag nicht hinzugefügt werden kann, dann wird 
+der Eintrag an dem Sublevel hinzugefügt, wo dies möglich ist. 
+<br>
+<br>
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Befehle können benutzt werden, um auf den Tree-Inhalt zuzugreifen: 
+<br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: Fügt einen Eintrag (mit optionalem Bild in der 16x16 Standard Icon-Größe) hinzu. 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: Entfernt einen Eintrag (und all seine Untereinträge). 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: Entfernt alle Einträge. 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: Ermittelt die Anzahl der aktuell im Gadget befindlichen Einträge. 
+<br>
+- <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Ermittelt den aktuellen Status des angegebenen Eintrags. 
+<br>
+- <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Ändert den aktuellen Status des angegebenen Eintrags. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Ermittelt den aktuellen Textinhalt des angegebenen Eintrags. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: Ändert den aktuellen Text des angegebenen Eintrags. 
+<br>
+- <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>: Ändert das aktuelle Bild des angegebenen Eintrags. 
+<br>
+- <a href="getgadgetitemdata.html">GetGadgetItemData()</a>: Gibt den Wert zurück, welcher mit dem Eintrag gespeichert wurde. 
+<br>
+- <a href="setgadgetitemdata.html">SetGadgetItemData()</a>: Speichert einen Wert mit dem Eintrag. 
+<br>
+- <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a>: Gibt die Text- oder Hintergrundfarbe des Eintrags zurück. 
+<br>
+- <a href="setgadgetitemcolor.html">SetGadgetItemColor()</a>: Ändert die Text- oder Hintergrundfarbe des Eintrags. (nicht auf MacOS X unterstützt) 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Ermittelt den aktuell ausgewählten Eintrag. 
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: Ändert den aktuell ausgewählten Eintrag. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Ermittelt den Textinhalt des aktuell ausgewählten Eintrags. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Ändert den Textinhalt des aktuell ausgewählten Eintrags. 
+<br>
+- <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>: Mit dem folgenden Attribut: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_SubLevel</font>: Gibt den Sublevel-Wert des angegebenen Eintrags zurück.
+</font></pre>
+- <a href="gadgetitemid.html">GadgetItemID()</a>: Gibt das OS-Handle des angegebenen Eintrags zurück (nützlich für API-Funktionen). 
+<br>
+<br>
+
+Dieses Gadget unterstützt die <a href="setgadgetcolor.html">SetGadgetColor()</a> und <a href="getgadgetcolor.html">GetGadgetColor()</a> 
+Befehle mit den folgenden Werten als 'FarbTyp': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textfarbe
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Hintergrundfarbe
+</font></pre>
+
+Die folgenden Ereignisse (&quot;Events&quot;) werden durch <a href="../window/eventtype.html">EventType()</a> unterstützt: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font> : linker Mausklick auf einen Eintrag, oder ein Häkchen wurde gesetzt/entfernt
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>
+  <font color="#924B72">#PB_EventType_RightClick</font>
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>
+  <font color="#924B72">#PB_EventType_Change</font>    : der aktuelle Eintrag wurde verändert
+  <font color="#924B72">#PB_EventType_DragStart</font> : der Anwender versucht, eine Drag &amp; Drop Operation zu starten. <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a>
+                            kann verwendet werden, um die Informationen zu den gezogenen Elementen abzurufen.
+</font></pre>
+Nach einem <font color="#924B72">#PB_EventType_DragStart</font> Ereignis kann die <a href="../dragdrop/index.html">Drag & Drop Library</a> verwendet 
+werden, um eine Drag &amp; Drop Operation zu starten. Unter MacOS X muss das Ereignis <font color="#924B72">#PB_EventType_DragStart</font> mit 
+<a href="../window/bindevent.html">BindEvent()</a> oder <a href="bindgadgetevent.html">BindGadgetEvent()</a> behandelt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 355, 180, &quot;TreeGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TreeGadget</font>(0, 10, 10, 160, 160)                                         <font color="#006666">; TreeGadget Standard</font>
+<font color="#006666">    TreeGadget</font>(1, 180, 10, 160, 160, <font color="#924B72">#PB_Tree_CheckBoxes</font> | <font color="#924B72">#PB_Tree_NoLines</font>)  <font color="#006666">; TreeGadget mit Checkboxen + ohne Linien</font>
+    <b><font color="#006666">For</font></b> ID = 0 <b><font color="#006666">To</font></b> 1
+      <b><font color="#006666">For</font></b> a = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;Normal Item &quot;+<font color="#006666">Str</font>(a), 0, 0) <font color="#006666">; wenn Sie ein Bild hinzufügen möchten, dann </font>
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;Node &quot;+<font color="#006666">Str</font>(a), 0, 0)        <font color="#006666">; benutzen Sie ImageID(x) als 4. Parameter</font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 1&quot;, 0, 1)     <font color="#006666">; diese sind auf dem ersten Sublevel</font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 2&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 3&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 4&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;File &quot;+<font color="#006666">Str</font>(a), 0, 0)  <font color="#006666">; hier wieder Sublevel 0</font>
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/treegadget.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>, <a href="getgadgetitemdata.html">GetGadgetItemData()</a>, <a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>, <a href="gadgetitemid.html">GadgetItemID()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="explorertreegadget.html">ExplorerTreeGadget()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=trackbargadget.html>TrackBarGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=unbindgadgetevent.html>UnbindGadgetEvent()</a> -><br><br>
+
+</body></html>

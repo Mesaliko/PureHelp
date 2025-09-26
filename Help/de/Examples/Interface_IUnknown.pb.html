@@ -1,0 +1,132 @@
+<html><head><title>Interface_IUnknown.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font>
+<font color="#006666">;   PureBasic - Interface IUnknown (Windows only)
+</font>
+<font color="#006666">;    (c) Fantaisie Software
+</font>
+<font color="#006666">; ------------------------------------------------------------
+</font>
+
+
+<b><font color="#006666">EnableExplicit</font></b>
+
+<font color="#924B72">#CLSCTX_INPROC_SERVER</font>  = $01
+<font color="#924B72">#CLSCTX_INPROC_HANDLER</font> = $02
+<font color="#924B72">#CLSCTX_LOCAL_SERVER</font>   = $04
+<font color="#924B72">#CLSCTX_REMOTE_SERVER</font>  = $10
+
+<font color="#924B72">#CLSCTX_ALL</font>    = <font color="#924B72">#CLSCTX_INPROC_SERVER</font>|<font color="#924B72">#CLSCTX_INPROC_HANDLER</font>|<font color="#924B72">#CLSCTX_LOCAL_SERVER</font>|<font color="#924B72">#CLSCTX_REMOTE_SERVER</font>
+<font color="#924B72">#CLSCTX_INPROC</font> = <font color="#924B72">#CLSCTX_INPROC_SERVER</font>|<font color="#924B72">#CLSCTX_INPROC_HANDLER</font>
+<font color="#924B72">#CLSCTX_SERVER</font> = <font color="#924B72">#CLSCTX_INPROC_SERVER</font>|<font color="#924B72">#CLSCTX_LOCAL_SERVER</font>|<font color="#924B72">#CLSCTX_REMOTE_SERVER</font>
+
+<b><font color="#006666">Interface</font></b> IMMDeviceEnumerator <b><font color="#006666">Extends</font></b> IUnknown
+<font color="#006666">  EnumAudioEndpoints</font>(dataFlow, dwStateMask, *ppDevices)
+<font color="#006666">  GetDefaultAudioEndpoint</font>(dataFlow, role, ppEndpoint)
+<font color="#006666">  GetDevice</font>(pwstrId, ppDevice)
+<font color="#006666">  RegisterEndpointNotificationCallback</font>(pClient)
+<font color="#006666">  UnregisterEndpointNotificationCallback</font>(pClient)
+<b><font color="#006666">EndInterface</font></b>
+
+<b><font color="#006666">Interface</font></b> IAudioEndpointVolume <b><font color="#006666">Extends</font></b> IUnknown
+<font color="#006666">  RegisterControlChangeNotify</font>( *pNotify)
+<font color="#006666">  UnregisterControlChangeNotify</font>( *pNotify)
+<font color="#006666">  GetChannelCount</font>( *pnChannelCount)
+<font color="#006666">  SetMasterVolumeLevel</font>( fLevelDB.f)
+<font color="#006666">  SetMasterVolumeLevelScalar</font>( fLevel.f,pguidEventContext)
+<font color="#006666">  GetMasterVolumeLevel</font>(*pfLevelDB)
+<font color="#006666">  GetMasterVolumeLevelScalar</font>(*pfLevel)
+<font color="#006666">  SetChannelVolumeLevel</font>(nChannel,fLevelDB.f,pguidEventContext)
+<font color="#006666">  SetChannelVolumeLevelScalar</font>( nChannel,fLevel.f,pguidEventContext)
+<font color="#006666">  GetChannelVolumeLevel</font>( nChannel,*pfLevelDB.f)
+<font color="#006666">  GetChannelVolumeLevelScalar</font>( nChannel,*pfLevel.f)
+<font color="#006666">  SetMute</font>( bMute, pguidEventContext)
+<font color="#006666">  GetMute</font>( *pbMute)
+<font color="#006666">  GetVolumeStepInfo</font>( *pnStep, *pnStepCount)
+<font color="#006666">  VolumeStepUp</font>( pguidEventContext)
+<font color="#006666">  VolumeStepDown</font>( pguidEventContext)
+<font color="#006666">  QueryHardwareSupport</font>( *pdwHardwareSupportMask)
+<font color="#006666">  GetVolumeRange</font>( *pflVolumeMindB, *pflVolumeMaxdB, *pflVolumeIncrementdB)
+<b><font color="#006666">EndInterface</font></b>
+
+<b><font color="#006666">Interface</font></b> IMMDevice <b><font color="#006666">Extends</font></b> IUnknown
+<font color="#006666">  Activate</font>(iid, dwClsCtx, pActivationParams, ppInterface)
+<font color="#006666">  OpenPropertyStore</font>( stgmAccess, ppProperties)
+<font color="#006666">  GetId</font>(ppstrId)
+<font color="#006666">  GetState</font>(pdwState)
+<b><font color="#006666">EndInterface</font></b>
+
+<b><font color="#006666">Declare</font></b>  <font color="#006666">getendpointvolume</font>(*endpointvolume)
+<b><font color="#006666">Declare</font></b>  <font color="#006666">freeendpointvolume</font>(*endpointvolume.iaudioendpointvolume)
+<b><font color="#006666">Declare</font></b>  <font color="#006666">mediagetvolume</font>()
+<b><font color="#006666">Declare</font></b>  <font color="#006666">mediasetvolume</font>(vol)
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">GetEndPointVolume</font>(*endpointvolume)
+  <b><font color="#006666">Protected</font></b> deviceEnumerator.IMMDeviceEnumerator
+  <b><font color="#006666">Protected</font></b> hr, defaultDevice.IMMDevice
+ 
+<font color="#006666">  CoInitialize_</font>(<font color="#924B72">#Null</font>)
+ 
+  hr =<font color="#006666"> CoCreateInstance_</font>(?uuidof_MMDeviceEnumerator, <font color="#924B72">#Null</font>, <font color="#924B72">#CLSCTX_INPROC_SERVER</font>, ?uuidof_IMMDeviceEnumerator,@deviceEnumerator)<font color="#006666">;#CLSCTX_ALL
+</font>
+  hr = deviceEnumerator\<font color="#006666">GetDefaultAudioEndpoint</font>(0, 1, @defaultDevice)
+  deviceEnumerator\<font color="#006666">Release</font>()
+
+  hr = defaultDevice\<font color="#006666">Activate</font>(?uuidof_IAudioEndpointVolume, <font color="#924B72">#CLSCTX_INPROC_SERVER</font>, <font color="#924B72">#Null</font>, *endpointVolume)
+  defaultDevice\<font color="#006666">release</font>()
+ 
+  <b><font color="#006666">ProcedureReturn</font></b> *endpointvolume
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">FreeEndPointVolume</font>(*endpointvolume.IAudioEndpointVolume)
+  *endpointvolume\<font color="#006666">release</font>()
+<font color="#006666">  CoUninitialize_</font>()
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">MediaGetVolume</font>()
+  <b><font color="#006666">Protected</font></b> Volume.IAudioEndpointVolume
+  <b><font color="#006666">Protected</font></b> volf.f
+
+<font color="#006666">  GetEndPointVolume</font>(@Volume)
+  Volume\<font color="#006666">GetMasterVolumeLevelScalar</font>(@volf)
+  volf =<font color="#006666"> Round</font>(volf * 100, <font color="#924B72">#PB_Round_Nearest</font>)
+<font color="#006666">  FreeEndPointVolume</font>(Volume)
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Int</font>(volf)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">MediaSetVolume</font>(vol)
+  <b><font color="#006666">Protected</font></b> Volume.IAudioEndpointVolume
+  <b><font color="#006666">Protected</font></b> volf.f
+  <b><font color="#006666">If</font></b> vol &lt; 0 : vol = 0 : <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> vol &gt; 100 : vol = 100 : <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  GetEndPointVolume</font>(@Volume)
+  volf = vol / 100
+  Volume\<font color="#006666">SetMasterVolumeLevelScalar</font>(volf, <font color="#924B72">#Null</font>)
+<font color="#006666">  FreeEndPointVolume</font>(Volume)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">DataSection</font></b>
+  uuidof_IAudioEndpointVolume:
+  <b><font color="#006666">Data</font></b>.l $5CDF2C82
+  <b><font color="#006666">Data</font></b>.w $841E,$4546
+  <b><font color="#006666">Data</font></b>.b $97,$22,$0C,$F7,$40,$78,$22,$9A
+ 
+  uuidof_MMDeviceEnumerator:
+  <b><font color="#006666">Data</font></b>.l $BCDE0395
+  <b><font color="#006666">Data</font></b>.w $E52F,$467C
+  <b><font color="#006666">Data</font></b>.b $8E,$3D,$C4,$57,$92,$91,$69,$2E
+ 
+  uuidof_IMMDeviceEnumerator:
+  <b><font color="#006666">Data</font></b>.l $A95664D2
+  <b><font color="#006666">Data</font></b>.w $9614
+  <b><font color="#006666">Data</font></b>.w $4F35
+  <b><font color="#006666">Data</font></b>.b $A7,$46,$DE,$8D,$B6,$36,$17,$E6
+ 
+<b><font color="#006666">EndDataSection</font></b>
+
+<b><font color="#006666">Debug</font></b> <font color="#006666">MediaGetVolume</font>()
+<font color="#006666">MediaSetVolume</font>(50)
+<b><font color="#006666">Debug</font></b> <font color="#006666">MediaGetVolume</font>()</font></pre>
+</body></html>

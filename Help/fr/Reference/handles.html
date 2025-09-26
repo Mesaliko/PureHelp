@@ -1,0 +1,63 @@
+<html><head><title>Numéros et Identifiants (Handles)</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Numéros et Identifiants (Handles)</font></b></p>
+
+<p><b>Les numéros</b></p><blockquote>
+
+
+Tous les objets crées sont identifiés par un numéro arbitraire (qui n'est pas l'identifiant de l'objet, comme défini ci-dessous). 
+Dans ce manuel, les numéros s'écrivent sous la forme #Numéro (par exemple, chaque gadget créé a un numéro #Gadget). 
+<br>
+<br>
+Les numéros que vous leurs attribuez n'ont pas besoin d'être des constantes, 
+mais ils doivent être uniques pour chaque objet de votre programme (une image peut avoir le même numéro qu'un gadget, 
+parce que ce sont des types d'objets différents). Ces numéros sont utilisés pour accéder ultérieurement à ces objets dans votre programme. 
+<br>
+<br>
+Par exemple, les fonctions de gestion des évènements renvoient des numéros : 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  EventGadget</font>()
+<font color="#006666">  EventMenu</font>()
+<font color="#006666">  EventWindow</font>()
+</font></pre>
+
+
+</blockquote>
+<p><b>Les identifiants</b></p><blockquote>
+
+
+Tous les objets ont également un numéro unique qui leur est attribué par le système. 
+Ces numéros uniques sont appelés identifiants. 
+
+Parfois, une fonction PureBasic n'a pas besoin du numéro comme paramètre, 
+mais de l'identifiant. Dans ce manuel, ce genre de besoin est indiqué, à l'aide du suffixe ID. 
+
+<p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ImageGadget</font>(<font color="#924B72">#Gadget</font>, x, y, Largeur, Hauteur, ImageID [, Options])
+  <font color="#006666">; #Gadget doit être le numéro que vous voulez attribuer au Gadget</font>
+  <font color="#006666">; ImageID doit être l'IDentifiant (numéro unique) de l'image.</font>
+</font></pre>
+
+Pour obtenir l'identifiant d'un objet, il y a des fonctions spéciales telles que : 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  FontID</font>()
+<font color="#006666">  GadgetID</font>()
+<font color="#006666">  ImageID</font>()
+<font color="#006666">  ThreadID</font>()
+<font color="#006666">  WindowID</font>()
+</font></pre>
+
+La plupart des fonctions qui créent ces objets renvoient cet identifiant comme résultat, 
+si tout s'est bien passé. Ceci est seulement le cas si <font color="#924B72">#PB_Any</font> n'a pas été utilisé pour créer l'objet. 
+Si <font color="#924B72">#PB_Any</font> est utilisé, ces fonctions renvoient le numéro de l'objet qui a été attribué par PB pour elles, mais pas l'identifiant. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  GadgetHandle =<font color="#006666"> ImageGadget</font>(...)
+</font></pre>
+
+</blockquote>
+</font></body></html>

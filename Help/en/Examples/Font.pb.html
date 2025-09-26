@@ -1,0 +1,56 @@
+<html><head><title>Font.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Font example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; NOTE: This file doesn't compile with the demo version !
+</font><font color="#006666">;
+</font>
+<font color="#006666">LoadFont </font>(0, &quot;Courier&quot;, 15)            <font color="#006666">; Load Courier Font, Size 15
+</font><font color="#006666">LoadFont </font>(1, &quot;Arial&quot;, 24)              <font color="#006666">; Load Arial Font, Size 24
+</font>
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 200, 460, 148, &quot;Font Test&quot;) = 0
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;Can't open Window&quot;, 0)
+  <b><font color="#006666">End</font></b>
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0,<font color="#006666"> DesktopScaledX</font>(450),<font color="#006666"> DesktopScaledY</font>(130))
+
+  <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">    Box</font>(0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> RGB</font>(255, 255, 255)) <font color="#006666">; White background
+</font>  
+<font color="#006666">    DrawingMode</font>(1)                          <font color="#006666">; Transparent TextBackground
+</font>  
+<font color="#006666">    DrawingFont</font>(<font color="#006666">FontID</font>(0))                  <font color="#006666">; Use the 'Courier' font
+</font><font color="#006666">    DrawText</font>(10,10, &quot;Font: Courier - Size: 15 - Red&quot;,<font color="#006666"> RGB</font>(255, 0, 0))    <font color="#006666">; Print our text
+</font>                
+<font color="#006666">    DrawingFont</font>(<font color="#006666">FontID</font>(1))                  <font color="#006666">; Use the Arial font
+</font><font color="#006666">    DrawText</font>(10,40, &quot;Font: Arial - Size: 24&quot;,<font color="#006666"> RGB</font>(0, 0, 0))     <font color="#006666">; Print our text
+</font>
+<font color="#006666">    StopDrawing</font>()                           <font color="#006666">; This is absolutely needed when the drawing operations are
+</font>  <b><font color="#006666">EndIf</font></b>                                     <font color="#006666">; finished !!! Never forget it !
+</font>
+<b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">; Display the image on the window
+</font><font color="#006666">;
+</font><font color="#006666">ImageGadget</font>(0, 5, 10,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> ImageID</font>(0))
+
+<font color="#006666">;
+</font><font color="#006666">; This is the 'event loop'. All the user actions are processed here.
+</font><font color="#006666">; It's very easy to understand: when an action occurs, the Event
+</font><font color="#006666">; isn't 0 and we just have to see what have happened...
+</font><font color="#006666">;
+</font><b><font color="#006666">Repeat</font></b>
+  Event =<font color="#006666"> WaitWindowEvent</font>()
+<b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>    <font color="#006666">; If the user has pressed on the close button
+</font>
+<b><font color="#006666">End</font></b>                                    <font color="#006666">; All the opened windows are closed automatically by PureBasic
+</font>  </font></pre>
+</body></html>

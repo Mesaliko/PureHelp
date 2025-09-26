@@ -1,0 +1,81 @@
+<html><head><title>RemoveString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RemoveString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>RemoveString</b></font>(Chaine$, ChaineASupprimer$ [, Mode [, Position [, NbOccurences]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprime une sous-chaîne dans une 
+chaîne. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne de caractères à utiliser. 
+
+</td></tr>
+<tr><td><i>ChaineASupprimer$ </i></td>
+<td> 
+La chaîne de caractères à supprimer. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une combinaison des 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : La suppression est sensible à la casse (A&lt;&gt;a). Par défaut.
+  <font color="#924B72">#PB_String_NoCase</font>        : La suppression est insensible à la casse (A=a). 
+</font></pre>
+
+</td></tr>
+<tr><td><i>Position (optionnel)</i></td>
+<td> 
+Position du premier caractère à 
+partir de laquelle la suppression 
+s'effectue. 
+<br>
+<br>
+La position du premier caractère 
+est 1. 
+
+</td></tr>
+<tr><td><i>NbOccurences (optionnel)</i></td>
+<td> 
+La suppression s'arrêtera une fois 
+'NbOccurences' atteint. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une chaîne dont toutes les 
+occurrences ChaineASupprimer$ ont 
+été supprimées. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">RemoveString</font>(&quot;deviser de l'Art&quot;, &quot;de&quot;)          <font color="#006666">; Affichera &quot;viser  l'Art&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RemoveString</font>(&quot;deviser de l'Art&quot;, &quot;de&quot;, 0, 1, 1) <font color="#006666">; Affichera &quot;viser de l'Art&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="countstring.html">CountString()</a>, 
+<a href="findstring.html">FindString()</a>, 
+<a href="insertstring.html">InsertString()</a>, 
+<a href="replacestring.html">ReplaceString()</a>, 
+<a href="reversestring.html">ReverseString()</a>, 
+<a href="stringbytelength.html">StringByteLength()</a>, 
+<a href="stringfield.html">StringField()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=rtrim.html>RTrim()</a> - <a href=index.html>String Index</a> - <a href=replacestring.html>ReplaceString()</a> -><br><br>
+
+
+</body></html>

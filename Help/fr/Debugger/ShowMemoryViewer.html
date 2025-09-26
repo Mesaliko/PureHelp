@@ -1,0 +1,50 @@
+<html><head><title>ShowMemoryViewer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ShowMemoryViewer()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ShowMemoryViewer</b></font>([*AdresseMemoire, Longueur])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre <a href="../reference/ide_debugtools.html">le visualisateur de mémoire</a> 
+ou le ramène au premier plan si il était déjà 
+ouvert. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*AdresseMemoire, Longueur (optionnel)</i></td>
+<td width="90%"> 
+Si une zone mémoire (Buffer) représentée par 
+*AdresseMemoire' de longueur 'Longueur' est 
+spécifiée alors le contenu de cette zone mémoire 
+sera affiché dans le visualisateur de mémoire. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Memoire =<font color="#006666"> AllocateMemory</font>(1000)
+  <b><font color="#006666">If</font></b> *Memoire
+<font color="#006666">    RandomData</font>(*Memoire, 1000)       <font color="#006666">; Remplir la mémoire avec des données</font>
+  
+<font color="#006666">    ShowMemoryViewer</font>(*Memoire, 1000) <font color="#006666">; Ouvrir le visualisateur de mémoire</font>
+    <b><font color="#006666">CallDebugger</font></b>                     <font color="#006666">; Stoppe le programme qui ne se termine pas correctement</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../reference/ide_debugtools.html">Débogueur interne</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=showlibraryviewer.html>ShowLibraryViewer()</a> - <a href=index.html>Debugger Index</a> - <a href=showprofiler.html>ShowProfiler()</a> -><br><br>
+
+</body></html>

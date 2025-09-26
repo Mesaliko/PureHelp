@@ -1,0 +1,58 @@
+<html><head><title>DesktopX</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DesktopX()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DesktopX</b></font>(#Bureau)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la position 'X' d'un bureau. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Bureau</i></td>
+<td width="90%"> 
+Le numéro du bureau à tester. 
+<br>
+<br>
+Le bureau principal a toujours la valeur 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la position 'X' en pixels, à partir 
+du coin supérieur gauche du bureau. 
+<br>
+<br>
+La coordonnée est relative au coin supérieur 
+gauche de l'écran principal. <br>
+Elle est négative si le bureau est indiqué 
+à gauche de l'écran principal. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="examinedesktops.html">ExamineDesktops()</a> doit être appelée avant 
+cette commande pour mettre à jour les 
+informations concernant les bureaux. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ExamineDesktops</font>()
+<font color="#006666">  MessageRequester</font>(&quot;Position du bureau principal&quot;, &quot;Position en X = &quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopX</font>(0)) + <font color="#924B72">#LF$</font> + &quot;Position en Y = &quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopY</font>(0)))
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinedesktops.html">ExamineDesktops()</a>, 
+<a href="desktopdepth.html">DesktopDepth()</a>, <a href="desktopy.html">DesktopY()</a>, 
+<a href="desktopheight.html">DesktopHeight()</a>, <a href="desktopwidth.html">DesktopWidth()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=desktopwidth.html>DesktopWidth()</a> - <a href=index.html>Desktop Index</a> - <a href=desktopy.html>DesktopY()</a> -><br><br>
+
+</body></html>

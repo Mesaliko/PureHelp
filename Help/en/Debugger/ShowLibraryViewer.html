@@ -1,0 +1,59 @@
+<html><head><title>ShowLibraryViewer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ShowLibraryViewer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ShowLibraryViewer</b></font>([Library$ [, #Object]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Open the <a href="../reference/ide_debugtools.html">library viewer</a> window or bring it to the front if it is already open. If Library$ is specified then 
+the viewer will show the objects of that library. If an #Object number is specified, then the viewer 
+will display the specified object of that library. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Library$ (optional)</i></td>
+<td width="90%"> 
+The library that should be displayed in the viewer. 
+If this parameter is not specified then the viewer will be opened without 
+displaying a specific library. 
+
+</td></tr>
+<tr><td><i>#Object (optional)</i></td>
+<td> 
+An object of the library to display in the viewer. If this parameter 
+is not specified, then no object is displayed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">    Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30
+<font color="#006666">      DrawText</font>(<font color="#006666">Random</font>(200),<font color="#006666"> Random</font>(200), &quot;Hello World!&quot;,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+    <b><font color="#006666">Next</font></b> i
+<font color="#006666">    StopDrawing</font>() 
+    
+<font color="#006666">    ShowLibraryViewer</font>(&quot;Image&quot;, 0)  <font color="#006666">; Show the image</font>
+    <b><font color="#006666">CallDebugger</font></b>                 <font color="#006666">; Halt the program so it does not end right away</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../reference/ide_debugtools.html">Included debugging tools</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=showdebugoutput.html>ShowDebugOutput()</a> - <a href=index.html>Debugger Index</a> - <a href=showmemoryviewer.html>ShowMemoryViewer()</a> -><br><br>
+
+</body></html>

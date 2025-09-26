@@ -1,0 +1,84 @@
+<html><head><title>BeginVectorLayer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BeginVectorLayer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>BeginVectorLayer</b></font>([Alpha])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Begins a new empty layer on top of the current vector drawing output. 
+All future drawing operations will be performed on this layer until <a href="endvectorlayer.html">EndVectorLayer()</a> is called. 
+This command also saves the current drawing state in the same way as <a href="savevectorstate.html">SaveVectorState()</a>. 
+Multiple layers can be created. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Alpha (optional)</i></td>
+<td width="90%"> 
+Specifies the alpha transparency of the new vector layer. 
+Allowed values are from 0 (fully transparent) to 255 (fully opaque). 
+The default is 255 (fully opaque). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The resources needed to create the temporary layer depend on the size of the current 
+<a href="clippath.html">clipping path</a>. It is therefore recommended to set a clipping 
+path that covers only the area where the temporary layer will contain any drawing 
+to save resources and improve drawing performance. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+      <font color="#006666">; Semi-transparent drawing on the base layer</font>
+<font color="#006666">      AddPathCircle</font>(75, 100, 60)      
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 127))
+<font color="#006666">      FillPath</font>()      
+<font color="#006666">      AddPathCircle</font>(125, 100, 60)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 127))
+<font color="#006666">      FillPath</font>()    
+      
+      <font color="#006666">; Opaque drawing on a semi-transparent layer</font>
+<font color="#006666">      BeginVectorLayer</font>(127)
+<font color="#006666">        AddPathCircle</font>(275, 100, 60)    
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">        FillPath</font>()        
+<font color="#006666">        AddPathCircle</font>(325, 100, 60)
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+<font color="#006666">        FillPath</font>()    
+<font color="#006666">      EndVectorLayer</font>()
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/beginvectorlayer.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="endvectorlayer.html">EndVectorLayer()</a>, <a href="savevectorstate.html">SaveVectorState()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addpathtext.html>AddPathText()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=clippath.html>ClipPath()</a> -><br><br>
+
+</body></html>

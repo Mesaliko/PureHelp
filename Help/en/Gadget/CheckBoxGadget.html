@@ -1,0 +1,83 @@
+<html><head><title>CheckBoxGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CheckBoxGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CheckBoxGadget</b></font>(#Gadget, x, y, Width, Height, Text$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create a checkbox gadget in the current GadgetList. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The text to display next to the checkbox. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination 
+of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_CheckBox_Right</font>     : Aligns the text to right.
+  <font color="#924B72">#PB_CheckBox_Center</font>    : Centers the text.
+  <font color="#924B72">#PB_CheckBox_ThreeState</font>: Create a checkbox that can have a third &quot;in between&quot; state.
+</font></pre>
+The <font color="#924B72">#PB_CheckBox_ThreeState</font> flag can be used for a checkbox that represents the 
+state of multiple items. The &quot;in between&quot; state can then be used to indicate that the setting is not the 
+same for all items. By clicking on the checkbox, the user can bring it back to either the &quot;on&quot; or &quot;off&quot; state 
+to apply this to all the items. Therefore the &quot;in between&quot; state can only be set by the program via 
+<a href="setgadgetstate.html">SetGadgetState()</a> and not by the user by clicking on the checkbox. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a> can be used to get the current gadget state. <br>
+- <a href="setgadgetstate.html">SetGadgetState()</a> can be used to change the gadget state. <br>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;CheckBoxGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CheckBoxGadget</font>(0, 10,  10, 250, 20, &quot;CheckBox standard&quot;)
+<font color="#006666">    CheckBoxGadget</font>(1, 10,  40, 250, 20, &quot;CheckBox checked&quot;):<font color="#006666"> SetGadgetState</font>(1, <font color="#924B72">#PB_Checkbox_Checked</font>)
+<font color="#006666">    CheckBoxGadget</font>(2, 10,  70, 250, 20, &quot;CheckBox three state&quot;, <font color="#924B72">#PB_CheckBox_ThreeState</font>):<font color="#006666"> SetGadgetState</font>(2, <font color="#924B72">#PB_Checkbox_Inbetween</font>)
+<font color="#006666">    CheckBoxGadget</font>(3, 10, 100, 250, 20, &quot;CheckBox right&quot;, <font color="#924B72">#PB_CheckBox_Right</font>)
+<font color="#006666">    CheckBoxGadget</font>(4, 10, 130, 250, 20, &quot;CheckBox center&quot;, <font color="#924B72">#PB_CheckBox_Center</font>)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/checkboxgadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="optiongadget.html">OptionGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=canvasvectoroutput.html>CanvasVectorOutput()</a> - <a href=index.html>Gadget Index</a> - <a href=cleargadgetitems.html>ClearGadgetItems()</a> -><br><br>
+
+</body></html>

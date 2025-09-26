@@ -1,0 +1,145 @@
+<html><head><title>SortStructuredArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SortStructuredArray()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SortStructuredArray</b></font>(Tableau(), Options, OffsetOf(Structure\Champs), TypeOf(Structure\Champs) [, Debut, Fin])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Trie un tableau de structures. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Tableau()</i></td>
+<td width="90%"> 
+Le tableau de structures à trier selon 
+les options souhaitées.<br>
+Le tableau doit avoir une 
+<a href="../reference/structures.html">structure</a> 
+associée. 
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+Peut être une combinaison des constantes 
+suivantes: 
+<br>
+<br>
+<font color="#924B72">#PB_Sort_Ascending</font> : Trie le tableau 
+par ordre croissant (les plus petites 
+valeurs en tête) <br>
+<font color="#924B72">#PB_Sort_Descending</font>: Trie le tableau 
+par ordre décroissant (les plus grandes 
+valeurs en tête) <br>
+<br>
+Et la constante suivante : <br>
+<font color="#924B72">#PB_Sort_NoCase</font> : Trie le tableau de 
+chaînes de caractères en ne tenant pas 
+compte de la casse (a=A, b=B etc..). 
+<br>
+Par défaut le tri est sensible à la 
+casse. 
+
+</td></tr>
+<tr><td><i>OffsetOf(Structure\Champs)</i></td>
+<td> 
+<a href="../reference/compilerfunctions.html">OffsetOf()</a> 
+peut être utilisé pour obtenir l'offset 
+du champ dans la structure associée au 
+tableau. 
+
+</td></tr>
+<tr><td><i>TypeOf(Structure\Champs</i></td>
+<td> 
+<a href="../reference/compilerfunctions.html">TypeOf()</a> 
+définit le type du champ de la structure 
+qui sert pour le tri. Les types 
+disponibles sont: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>     : Le champ de la structure est un octet (.b)
+  <font color="#924B72">#PB_Word</font>     : Le champ de la structure est un word (.w)
+  <font color="#924B72">#PB_Long</font>     : Le champ de la structure est un long (.l)
+  <font color="#924B72">#PB_String</font>   : Le champ de la structure est un string (.s ou $). Les strings fixes (fixed strings) ne sont pas supportées)
+  <font color="#924B72">#PB_Float</font>    : Le champ de la structure est un flottant (.f)
+  <font color="#924B72">#PB_Double</font>   : Le champ de la structure est un double (.d)
+  <font color="#924B72">#PB_Quad</font>     : Le champ de la structure est un quad (.q)
+  <font color="#924B72">#PB_Character</font>: Le champ de la structure est un caractère (.c)
+  <font color="#924B72">#PB_Integer</font>  : Le champ de la structure est un integer (.i)
+  <font color="#924B72">#PB_Ascii</font>    : Le champ de la structure est un caractère ascii (.a)
+  <font color="#924B72">#PB_Unicode</font>  : Le champ de la structure est un caractère unicode (.u)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Debut, Fin (optionnel)</i></td>
+<td> 
+Ne trie que la plage de 'Debut' à 'Fin'. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Notes: Si un tableau n'est pas totalement 
+plein, les éléments vides seront placés 
+en tête dans l'ordre croissant et en fin 
+dans l'ordre décroissant. <br>
+Les <a href="../reference/variables.html">chaînes fixes</a> 
+(fixed strings) ne sont pas supportées dans 
+les commandes de tri.<br>
+<br>
+<a href="../math/isnan.html">Nombres NaN (not a number)</a> ne sont pas acceptés lors du tri car 
+ils produisent des résultats aléatoires. 
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Animal
+    Nom$
+    Vitesse.l
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Animaux</font>.Animal(2)
+  
+<font color="#006666">  Animaux</font>(0)\Nom$ = &quot;Tigre&quot;
+<font color="#006666">  Animaux</font>(0)\Vitesse = 10
+  
+<font color="#006666">  Animaux</font>(1)\Nom$ = &quot;Jaguar&quot;
+<font color="#006666">  Animaux</font>(1)\Vitesse = 40
+  
+<font color="#006666">  Animaux</font>(2)\Nom$ = &quot;Zèbre&quot;
+<font color="#006666">  Animaux</font>(2)\Vitesse = 30
+  
+  <font color="#006666">; Trie le tableau en fonction du champ 'Nom$'qui est une chaîne de caractères (String) </font>
+  <font color="#006666">;</font>
+<font color="#006666">  SortStructuredArray</font>(<font color="#006666">Animaux</font>(), <font color="#924B72">#PB_Sort_Ascending</font>,<font color="#006666"> OffsetOf</font>(Animal\Nom$),<font color="#006666"> TypeOf</font>(Animal\Nom$))
+  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 2
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animaux</font>(k)\Nom$+&quot; - Vitesse : &quot;+<font color="#006666">Str</font>(<font color="#006666">Animaux</font>(k)\Vitesse)
+  <b><font color="#006666">Next</font></b>
+  
+  <font color="#006666">; Trie le tableau en fonction du champ 'Vitesse' qui est un long</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SortStructuredArray</font>(<font color="#006666">Animaux</font>(), <font color="#924B72">#PB_Sort_Ascending</font>,<font color="#006666"> OffsetOf</font>(Animal\Vitesse),<font color="#006666">  TypeOf</font>(Animal\Vitesse))
+  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 2
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Animaux</font>(k)\Nom$+&quot; - Vitesse : &quot;+<font color="#006666">Str</font>(<font color="#006666">Animaux</font>(k)\Vitesse)
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="sortarray.html">SortArray()</a>, <a href="customsortarray.html">CustomSortArray()</a>, <a href="sortlist.html">SortList()</a>, 
+<a href="sortstructuredlist.html">SortStructuredList()</a> , 
+<a href="randomizearray.html">RandomizeArray()</a>, 
+<a href="randomizelist.html">RandomizeList()</a>, 
+<a href="../math/random.html">Random()</a>, 
+<a href="../math/randomseed.html">RandomSeed()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=sortlist.html>SortList()</a> - <a href=index.html>Sort Index</a> - <a href=sortstructuredlist.html>SortStructuredList()</a> -><br><br>
+
+</body></html>

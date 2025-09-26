@@ -1,0 +1,663 @@
+<html><head><title>Enthaltene Debugging-Werkzeuge</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Enthaltene Debugging-Werkzeuge</font></b></p>
+
+Diese Werkzeuge bieten viele Funktionen, um Ihr Programm zu untersuchen, während dies läuft. 
+Sie können nicht verwendet werden, während Sie den Quellcode bearbeiten. Diese Werkzeuge 
+sind sowohl im integrierten als auch im eigenständigen Debugger 
+verfügbar. Der Konsolen-Debugger bietet auch viele dieser Funktionen, jedoch über die 
+Debugger-Konsole. 
+
+<br>
+<br>
+
+Einige der Werkzeuge beinhalten das Anzeigen von Variablen. 
+Hier folgt eine Erklärung der üblichen Fehler in allen dieser Variablenanzeigen: 
+
+<br>
+<br>
+
+<b>Gültigkeit</b> 
+<br>
+Der Gültigkeitsbereich einer Variablen ist der Bereich, in dem die Variable gültig ist. 
+Dies kann <a href="../reference/global.html">Global</a>, <a href="../reference/procedures.html">Local</a>, 
+<a href="../reference/shared.html">Shared</a>, <a href="../reference/static.html">Static</a> oder 
+<a href="../reference/threaded.html">Threaded</a> sein, abhängig 
+von der Verwendung in Ihrem Quellcode. 'byref' (&quot;By Reference&quot;, d.h. Verwendung der Adresse) 
+wird verwendet, um ein <a href="../reference/dim.html">Array</a> oder eine <a href="../reference/newlist.html">Liste</a> 
+zu kennzeichnen, welches als Parameter an eine Prozedur übergeben wurde. 
+
+<br>
+<br>
+
+<b>Variablentyp</b> 
+<br>
+Der <a href="../reference/variables.html">Variablentyp</a> wird durch ein farbiges Icon gekennzeichnet: 
+<br>
+
+
+<table border=0>
+<tr>
+  <td><img src="../HelpPictures/debugger_byte.png"></td>
+  <td><font size=2>Byte</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_ascii.png"></td>
+  <td><font size=2>Ascii</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_char.png"></td>
+  <td><font size=2>Character</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_word.png"></td>
+  <td><font size=2>Word</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_unicode.png"></td>
+  <td><font size=2>Unicode</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_long.png"></td>
+  <td><font size=2>Long</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_integer.png"></td>
+  <td><font size=2>Integer</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_quad.png"></td>
+  <td><font size=2>Quad</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_float.png"></td>
+  <td><font size=2>Float (Fließkomma)</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_double.png"></td>
+  <td><font size=2>Double</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_string.png"></td>
+  <td><font size=2>String (Zeichenfolge)</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_fixed.png"></td>
+  <td><font size=2>String mit fester Länge</font></td>
+</tr>
+</table>
+<br>
+Eine <a href=../reference/structures.html>Struktur</a> wird entweder durch einen 
+Punkt <img src="../HelpPictures/debugger_struct.png"> oder
+einen Pfeil <img src="../HelpPictures/debugger_struct1.png"> gekennzeichnet. 
+
+
+Wenn die Markierung mit einem Pfeil erfolgte, kann die Struktur mit einem 
+Doppelklick auf den Pfeil aufgeklappt werden, um die Bestandteile der Struktur zu sehen. 
+Ein nach unten zeigender Pfeil kennzeichnet eine aufgeklappte Struktur. Eine mit einem 
+Punkt markierte Struktur kann nicht aufgeklappt werden (üblicherweise weil es sich einfach 
+um einen Strukturen-Zeiger handelt). 
+
+<br>
+<br>
+Dynamische Arrays innerhalb von Strukturen werden mit ihren aktuell zugewiesenen Dimensionen 
+angezeigt. Listen und Maps innerhalb von Strukturen werden mit ihrer Größe und ihrem 
+aktuellen Element (sofern vorhanden) angezeigt. 
+
+
+<p><b>Das Debugger-Ausgabefenster</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_output.png"></p>
+
+In diesem Fenster wird die Ausgabe der <b><font color="#006666">Debug</font></b> Anweisung angezeigt. Die Debug-Anweisung 
+ist ein schneller und einfacher Weg, um Nachrichten für Debugging-Zwecke auszugeben. 
+
+<br>
+<br>
+
+Das Fenster mit der Debugger-Ausgabe wird automatisch geöffnet, sobald die erste Ausgabe 
+durch Ihr Programm produziert wird. Wenn Sie es dann schließen, wird es bei nachfolgenden 
+Nachrichten nicht automatisch geöffnet, diese werden jedoch trotzdem aufgezeichnet. 
+Sie können diese Ausgabe in die Zwischenablage kopieren oder in eine Datei speichern. 
+Es gibt auch einen Schalter, um die Nachrichten im Fenster zu löschen. 
+
+<br>
+<br>
+
+Das Eingabefeld am unteren Rand des Fensters erlaubt die Eingabe eines Ausdrucks, welcher 
+ausgewertet und das Ergebnis im Ausgabebereich angezeigt wird. Dies ermöglicht die 
+schnelle Überprüfung des Status von Variablen oder Array-Feldern, ohne nach diesen 
+in einem der Debugger-Werkzeuge sehen zu müssen. Die Auswertung wird gestartet durch 
+Return oder Anklicken des &quot;Anzeigen&quot; Schalters. Wenn der Ausdruck aus irgendeinem 
+Grund nicht ausgewertet werden kann, wird eine Fehlermeldung in der Statusleiste 
+angezeigt. 
+
+<br>
+<br>
+
+Der Ausdruck kann ein gültiger <a href="../reference/general_rules.html">PB Ausdruck</a> (ohne logische 
+Ausdrücke oder welche, die <a href="../reference/reference.html">PB Schlüsselwörter</a> enthalten) sein. 
+Er kann <a href="../reference/variables.html">Variablen</a>, <a href="../reference/dim.html">Arrays</a>, 
+<a href="../list/index.html">verknüpfte Listen</a>, <a href="../reference/general_rules.html">Konstanten</a> 
+und auch einige Befehle der <a href="../math/index.html">Math</a>, <a href="../memory/index.html">Memory</a> und 
+<a href="../string/index.html">String</a> Bibliotheken enthalten. 
+
+
+</blockquote>
+<p><b>Die Beobachtungsliste</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_observer.png"></p>
+
+Die Beobachtungsliste kann verwendet werden, um die Veränderungen an <a href="../reference/variables.html">Variablen</a> 
+in Ihrem Programm in Echtzeit zu verfolgen. Sie kann nur einzelne Variablen (keine 
+ganzen <a href="../reference/structures.html">Strukturen</a>) darstellen, dennoch können diese 
+Variablen Teil einer Struktur sein. 
+Elemente eines dynamischen Arrays, einer Liste oder einer Map innerhalb von Strukturen 
+können nicht in der Beobachtungsliste angezeigt werden. 
+
+<br>
+<br>
+
+Um eine Variable hinzuzufügen, wählen Sie deren <a href="../reference/procedures.html">Prozedur</a> (wenn 
+es eine lokale Variable ist) oder wählen Sie &quot;--- Haupt ---&quot;, wenn es sich um eine 
+<a href="../reference/global.html">globale</a> Variable oder Teil eines <a href="../reference/dim.html">Arrays</a> 
+bzw. einer <a href="../reference/newlist.html">Liste</a> handelt. Dann geben Sie den Variablennamen, 
+(wie wenn Sie darauf in Ihrem Quellcode zurückgreifen würden) in das Variablenfeld ein 
+und drücken &quot;Hinzufügen&quot;. 
+
+<br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  Beispiele:
+  MyVariable$                      - eine normale String-Variable hinzufügen
+  Array(1, 5)                      – ein Array-Feld hinzufügen
+  Structure\subfield[5]\value      – eine Variable innerhalb einer Struktur hinzufügen
+  MyLinkedList()\structuresubfield – eine Variable innerhalb einer strukturierten Liste hinzufügen
+</font></pre>
+
+Sie können auch neu zu beobachtende Variablen über die Variablenliste hinzufügen, indem Sie 
+diese dort mit der rechten Maustaste anklicken und &quot;Zur Beobachtungsliste hinzufügen&quot; auswählen. 
+
+
+<br>
+<br>
+
+In der Liste werden Sie die Werte der überwachten Variablen sehen. Ist der Wert 
+dargestellt als &quot;---&quot;, bedeutet dies, dass diese Variable zum jetzigen Zeitpunkt 
+im Quellcode nicht gültig ist. (Zum Beispiel wenn Sie eine lokale Variable 
+beobachten oder ein Element einer verknüpften Liste und die Liste kein aktuelles 
+Element hat.) 
+
+<br>
+<br>
+
+Die beobachteten Variablen werden zwischen den Debugger-Sitzungen gespeichert 
+und sogar mit den Compiler-Optionen gespeichert, weshalb Sie diese Liste nicht 
+ständig neu füllen müssen. 
+
+
+</blockquote>
+<p><b>Die Variablenliste</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_variablelist.png"></p>
+
+Die Variablenliste ermöglicht das Untersuchen der Programm-Variablen, 
+<a href="../reference/dim.html">Arrays</a>, <a href="../reference/newlist.html">Listen</a> und 
+<a href="../reference/newmap.html">Maps</a>. Die individuellen Tabs zeigen 
+<a href="../reference/global.html">globale</a> und <a href="../reference/threaded.html">threaded</a> 
+Einträge im oberen Bereich sowie <a href="../reference/procedures.html">lokale</a>, 
+<a href="../reference/shared.html">shared</a> und <a href="../reference/static.html">statische</a> 
+Einträge im unteren Bereich. 
+<br>
+<br>
+Der Schalter &quot;Aktualisieren&quot; kann verwendet werden, um die aktuellsten Daten 
+vom Programm zu erhalten. Ist das Programm angehalten oder im Schritt-Modus, 
+wird der Inhalt bei jedem Schritt automatisch aktualisiert. Durch einen 
+Rechtsklick auf eine Variable oder ein Array/Listen-Feld können Sie 
+diese Variable kopieren oder zur Beobachtungsliste hinzufügen, um deren 
+Wert in Echtzeit zu verfolgen. 
+
+<br>
+<br>
+Auf Windows kann der Inhalt der Variablenliste nach Name, Gültigkeitsbereich 
+oder dem Wert der Variablen sortiert werden, indem Sie auf die Überschrift 
+der entsprechenden Spalte klicken. 
+
+<br>
+<br>
+
+<b>Das Register 'Variablen'</b> 
+<br>
+Dieses Register zeigt die Variablen des Programms. 
+Durch Rechtsklick auf eine Variable, kann diese zur Beobachtungsliste hinzugefügt werden. 
+
+<br>
+<br>
+
+<b>Das Register 'Arrays'</b> 
+<br>
+Dieses Register zeigt eine Liste aller Arrays im Programm und die Dimensionen, mit 
+denen sie aktuell definiert sind (-1 bedeutet, dass <a href="../reference/dim.html">Dim</a> noch 
+nicht aufgerufen wurde). 
+Durch einen Rechtsklick auf ein Array kann der Inhalt des Arrays im 
+&quot;Array/Liste/Map anzeigen&quot;-Register angesehen werden. 
+
+<br>
+<br>
+
+<b>Das Register 'Listen'</b> 
+<br>
+Dieses Register zeigt eine Liste aller (verknüpften) Listen, die Anzahl 
+der aktuell beinhalteten Elemente (&quot;-&quot; zeigt an, dass <a href="../reference/newlist.html">NewList</a> 
+noch nicht aufgerufen wurde) und den Index des aktuellen Elements in der Liste (&quot;-&quot; zeigt an, 
+dass es kein aktuelles Element gibt). 
+Durch einen Rechtsklick auf eine Liste kann der Inhalt der Liste im 
+&quot;Array/Liste/Map anzeigen&quot;-Register angesehen werden. 
+
+<br>
+<br>
+
+<b>Das Register 'Maps'</b> 
+<br>
+Dieses Register zeigt eine Liste aller &quot;Maps&quot;, die Anzahl der aktuell beinhalteten 
+Elemente (&quot;-&quot; zeigt an, dass <a href="../reference/newmap.html">NewMap</a> noch nicht aufgerufen 
+wurde) und den Schlüssel des aktuellen Elements der Map (&quot;-&quot; zeigt an, dass es kein 
+aktuelles Element gibt). 
+Durch einen Rechtsklick auf eine Map kann der Inhalt der Map im 
+&quot;Array/Liste/Map anzeigen&quot;-Register angesehen werden. 
+
+<br>
+<br>
+
+<b>Das Register 'Array/Liste/Map anzeigen'</b> 
+<br>
+Dieses Register kann verwendet werden, um individuelle Einträge eines Arrays, einer 
+verknüpften Liste oder einer Map anzusehen. Dies beinhaltet auch Arrays, Listen oder Maps 
+innerhalb von Strukturen. 
+<br>
+Um dies durchzuführen, geben Sie den Namen des Arrays, der Map oder der Liste 
+einschließlich eines abschließenden &quot;()&quot; ein, wählen Sie die Art der 
+anzuzeigenden Einträge aus und drücken auf &quot;Anzeigen&quot;. Beachten Sie dabei, dass 
+der Inhalt der Anzeige nicht automatisch aktualisiert wird, wenn sich das Programm 
+im Schritt-Modus befindet. 
+<br>
+<br>
+&quot;Alle Einträge anzeigen&quot; zeigt einfach alles an. &quot;Nur Nicht-Null Einträge anzeigen&quot; wird nur die Einträge 
+anzeigen, die nicht den Wert 0 oder einen leeren String beinhalten. Dies macht das Ansehen von großen 
+Arrays/Listen mit nur wenigen gültigen Einträgen darin einfacher. Eine <a href="../reference/structures.html">Struktur</a> 
+wird als &quot;null&quot; angesehen, wenn alle ihrer Einträge entweder den Wert 0 oder einen leeren String beinhalten. 
+<br>
+<br>
+&quot;Bereich anzeigen&quot; ermöglicht es, nur einen bestimmten Bereich eines Arrays, einer Liste oder einer Map anzuzeigen. 
+Der Bereich kann für jede Array-Dimension separat, getrennt durch Kommas, angegeben werden. Wenn eine 
+Dimension nicht angegeben wird, werden alle ihrer Einträge angezeigt. 
+<br>
+Hier einige Beispiele für gültige Eingaben zu einem Bereich: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;1-2, 2-5, 2&quot; : der erste Index zwischen 1 und 2, ein zweiter Index zwischen 2 und 5 und ein dritter Index von 2.
+  &quot;1, 2-5&quot;      : der erste Index von 1 und ein zweiter Index zwischen 2 und 5.
+  &quot;1, , 5&quot;      : der erste Index von 1, jeder zweite Index und ein dritter Index von 5.
+</font></pre>
+
+Bei der Listen-Anzeige kann die Option &quot;Bereich anzeigen&quot; verwendet werden, um eine Auswahl an 
+Listen-Elementen anhand ihres Index (Null-basiert) anzuzeigen. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;0&quot;     : erstes Element
+  &quot;1-3&quot;   : zweites bis viertes Element
+</font></pre>
+
+Bei der Map-Anzeige kann die Option &quot;Bereich anzeigen&quot; verwendet werden, um die anzuzeigenden Schlüssel 
+zu filtern. Sie muss eine Maske für den Schlüssel-String der Map-Elemente beinhalten (keine Anführungszeichen). 
+Ein &quot;?&quot; steht für ein Zeichen, ein &quot;*&quot; steht für eine beliebige Anzahl an Zeichen. Hier einige Beispiele 
+für eine gültige Masken-Eingabe: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;hat&quot; : findet nur den Eintrag mit &quot;hat&quot; als Schlüssel.
+  &quot;?at&quot; : findet Einträge mit &quot;hat&quot;, &quot;bat&quot; etc. als Schlüssel.
+  &quot;h*t&quot; : findet Einträge mit Schlüsseln, welche mit &quot;h&quot; beginnen und mit &quot;t&quot; enden und irgendetwas dazwischen.
+</font></pre>
+
+
+</blockquote>
+<p><b>Der Profiler</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_profiler.png"></p>
+
+Das Profiler-Werkzeug (auch &quot;Prüfer&quot; oder &quot;Analytiker&quot;) zur Programmanalyse kann zählen, wie oft jede Zeile 
+des Quellcodes ausgeführt wird. Diese gesammelten Daten können für das Überprüfen genutzt werden, 
+welche Teile des Codes am häufigsten verwendet werden und wo Verbesserungen am sinnvollsten sind. 
+Es hilft auch beim Erkennen, wo ein Teil des Codes - als Resultat eines Fehlers - 
+zu oft ausgeführt wird. 
+
+<br>
+<br>
+
+<b>Aufzeichnen der Daten</b> 
+<br>
+Das Aufzeichnen der Daten kann durch die Schalter &quot;Start&quot;, &quot;Stop&quot; und &quot;Zurücksetzen&quot; (um alle 
+Zähler auf 0 zu setzen) im Profiler-Fenster kontrolliert werden. Der Schalter &quot;Aktualisierung&quot; 
+kann verwendet werden, um das Diagramm zu aktualisieren, während das Programm läuft. 
+Jedes Mal, wenn das Programm angehalten wurde oder sich im &quot;Schritt&quot;-Modus befindet, werden 
+die Daten automatisch aktualisiert. Standardmäßig zeichnet der Profiler die Daten ab dem 
+Start des Programms auf. Dies kann in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+geändert werden. 
+
+<br>
+<br>
+
+<b>Untersuchen der Daten</b> 
+<br>
+Die aufgezeichneten Daten werden als ein Diagramm dargestellt, wobei die vertikale Achse 
+die Zeilennummer im Quellcode anzeigt und die horizontale Achse wie oft die Zeilen ausgeführt 
+wurden. Wenn das laufende Programm aus mehr als einem Quellcode besteht, dann wird eine 
+Liste der Quellcode-Dateien unterhalb des Diagramms angezeigt. Um das Diagramm zu einer 
+Datei anzuzeigen, wählen Sie entweder die Datei aus oder setzen das Häkchen davor. 
+Mehrere Dateien können gleichzeitig im Diagramm angezeigt werden, um sie besser 
+vergleichen zu können. Rechtsklick mit der Maus auf einen der Dateinamen ermöglicht das 
+Ändern der Farbe, welche zum Darstellen dieser Datei im Diagramm verwendet wird. 
+
+<br>
+<br>
+
+<b>Maus-Modi innerhalb des Diagramms</b> 
+<br>
+Ein Rechtsklick mit der Maus innerhalb des Diagramms öffnet ein Popup-Menü, welches folgende 
+Möglichkeiten bietet: Hinein- oder Herauszoomen sowie Anzeigen der angeklickten 
+Quellcode-Zeile in der IDE oder der Code-Anzeige des Debuggers. 
+Die durch einen Linksklick ausgelösten Aktionen können über die Schalter auf der linken 
+Seite kontrolliert werden: 
+<br>
+<br>
+
+
+<table border=0 cellspacing=2>
+<tr>
+  <td><img src="../HelpPictures/debugger_arrow.png"></td>
+  <td><font size=2>Linksklick und Ziehen des Mauspfeils ermöglicht das Scrollen der Diagramm-Anzeige.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_select.png"></td>
+  <td><font size=2>Linksklick und Ziehen des Mauspfeils ermöglicht die Auswahl eines Bereichs, in den hineingezoomt wird.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_cross.png"></td>
+  <td><font size=2>Während dieser Schalter aktiviert (eingedrückt) ist, wird beim Bewegen des Mauspfeils auf der Anzeige ein Fadenkreuz dargestellt, um besser die Zeile und den Aufrufzähler unter dem Mauspfeil anzuzeigen.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomin.png"></td>
+  <td><font size=2>Hineinzoomen</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomout.png"></td>
+  <td><font size=2>Herauszoomen</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomall.png"></td>
+  <td><font size=2>Herauszoomen, bis alle Zeilen sichtbar sind</font></td>
+</tr>
+</table>
+
+
+
+</blockquote>
+<p><b>Die Aufrufverfolgung</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_callstats.png"></p>
+
+Die <a href="../reference/procedures.html">Prozeduren</a>-Aufrufverfolgung (auch &quot;Callstack Viewer&quot;) zeigt, welche verschachtelten 
+Prozeduraufrufe zur aktuellen Position im Code führten. Jeder Eintrag in der Liste stellt 
+eine Prozedur dar, die gerade offen ist. Sie zeigt die Zeile und die Datei, von welcher 
+sie aufgerufen wurde, ebenso die beim Aufruf der Prozedur verwendeten Argumente. 
+Durch Anklicken des Variablen-Schalters bei jeder Prozedur können Sie einen Blick auf 
+die <a href="../reference/variables.html">Variablen</a> dieser Instanz der Prozedur werfen. 
+
+<br>
+<br>
+
+Dies ermöglicht das einfache Nachverfolgen, von welchem Teil des Codes eine Prozedur 
+aufgerufen wurde. Die Aufrufverfolgung wird nur beim Stoppen des Programms oder der 
+schrittweisen Ausführung einzelner Zeilen automatisch aktualisiert. Während das Programm 
+läuft, müssen Sie den Schalter &quot;Aktualisierung&quot; drücken, um die Anzeige für die aktuelle 
+Code-Position zu aktualisieren. 
+
+<br>
+<br>
+
+Der Bereich &quot;Statistiken&quot; zeigt die Anzahl, wie oft jede Prozedur im Code aufgerufen 
+wurde. Sie können die Zählung für alle Prozeduren durch Anklicken von &quot;Alle zurücksetzen&quot; 
+zurücksetzen, oder für den aktuell markierten Eintrag mit dem Schalter &quot;Zurücksetzen&quot;. 
+Wie bei der Aufrufverfolgung wird die Anzeige nicht automatisch aktualisiert, solange 
+das Programm nicht angehalten wird. Benutzen Sie den Schalter &quot;Aktualisierung&quot; dafür. 
+
+
+
+</blockquote>
+<p><b>Die Speicheranzeige</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_memoryviewer.png"></p>
+
+Die Speicheranzeige lässt Sie einen Blick auf einen Speicherbereich in Ihrem Programm 
+werfen. Geben Sie den Bereich (in dezimal), den Sie sehen möchten, in den &quot;Bereich&quot;-Feldern 
+ein und klicken Sie auf &quot;Anzeigen&quot;. Ist der Speicherbereich gültig für das Anzeigen, 
+wird dieser in der Anzeige darunter dargestellt. Wenn Teile des Bereichs nicht gültig 
+für das Anzeigen sind, erhalten Sie eine Fehlernachricht. 
+
+<br>
+<br>
+
+Die Art der Anzeige kann über das Aufklappmenü in der linken unteren Ecke geändert 
+werden. Die folgenden Ansichtsarten sind verfügbar: 
+
+<br>
+<br>
+
+<b>Hex-Ansicht</b> 
+<br>
+Der Speicher wird angezeigt wie in einem Hex-Anzeiger, zuerst die Speicherposition 
+in Hex-Anzeige auf der linken Seite, gefolgt von den hexadezimalen Byte-Werten und 
+schließlich deren String-Entsprechung in der rechten Spalte. 
+
+<br>
+<br>
+
+<b>Byte/Character/Word/Long/Quad/Float/Double-Tabelle</b> 
+<br>
+Der Speicherbereich wird als eine Tabelle des angegebenen Variablentyps angezeigt. 
+Ob diese Tabelle ein- oder mehrspaltig ist, lässt sich in den Einstellungen festlegen 
+(siehe <a href="../reference/ide_preferences.html">Anpassen der IDE</a>.) 
+<br>
+Die Daten werden als Dezimal-, Oktal- oder Hexadezimalzahlen angezeigt - mit Hilfe 
+des nächsten Aufklappmenüs zum Wechseln des Modus. 
+
+<br>
+<br>
+
+<b>String-Ansicht ASCII, Unicode bzw. Utf-8</b> 
+<br>
+Dies stellt den Speicherbereich als einen String dar, mit allen &quot;Nicht-String&quot; 
+Zeichen in [] dargestellt (zum Beispiel &quot;[NULL]&quot; für ein 0-Byte). Nach 'NewLine' 
+Zeichen (stehen für &quot;neue Zeile&quot;) wird ein Zeilenumbruch und [NULL] hinzugefügt, 
+um die Lesbarkeit der Ausgabe zu erhöhen. Der Speicherbereich kann als ein 
+ASCII, Unicode oder UTF8 String interpretiert werden. 
+
+<br>
+<br>
+
+<b>Data</b> 
+<br>
+Mit Hilfe des 'Data'-Häkchens können Sie die Tabellenansicht beim Kopieren oder 
+Speichern als <a href="../reference/data.html">Data Section</a> formatiert exportieren. 
+
+<br>
+<br>
+Sie können den angezeigten Speicherbereich auch aus dem Speicheranzeiger exportieren: 
+
+<br>
+<br>
+
+<b>Kopieren (Text)</b>: Kopiert den angezeigten Bereich als Text in die Zwischenablage. 
+<br>
+<b>Speichern (Text)</b>: Speichert den angezeigten Bereich als Text in eine Datei. 
+<br>
+<b>Speichern (Raw)</b>: Speichert den Speicherbereich im Rohformat (als &quot;raw binary&quot;) in eine Datei. 
+<br>
+
+
+</blockquote>
+<p><b>Der Library Anzeiger</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_librarycalls.png"></p>
+
+Der Library Anzeiger bietet Informationen über Objekte, welche von einigen Befehls-Bibliotheken (Libraries) 
+erstellt wurden. Zum Beispiel ermöglicht dies das schnelle Überprüfen, welche Bilder (Images) gerade im Programm 
+geladen sind oder welche Gadgets erstellt wurden. 
+
+<br>
+<br>
+
+Sobald das Programm gestartet wurde, kann die Auswahlbox am oberen Fensterrand zur Auswahl der 
+anzuzeigenden Library verwendet werden. Die Liste darunter wird dann alle Objekte der Library - 
+zusammen mit einigen zusätzlichen Informationen über jedes Objekt - anzeigen, welche derzeit 
+im Executable existieren. Der Schalter &quot;Aktualisieren&quot; wird diese Liste mit Objekten aktualisieren. 
+Die Auswahl eines Objekts in der Liste zeigt detailliertere Informationen darüber im Textbereich 
+auf der linken Seite an, und - wenn durch die Library unterstützt - auch eine visuelle Anzeige 
+des Objekts auf der rechten Seite. (für Bilder, Sprites, ...) 
+
+<br>
+<br>
+
+Wenn die Auswahlbox &quot;Keine Informationen&quot; anzeigt, bedeutet dies, dass Ihr Executable keine Bibliotheken verwendet, 
+welche dieses Feature unterstützen. 
+
+<br>
+<br>
+
+Derzeit wird der Library Anzeiger von den folgenden Bibliotheken unterstützt: 
+<br>
+<a href="../thread/index.html">Thread</a> 
+<br>
+<a href="../gadget/index.html">Gadget</a> 
+<br>
+<a href="../window/index.html">Window</a> 
+<br>
+<a href="../file/index.html">File</a> 
+<br>
+<a href="../image/index.html">Image</a> 
+<br>
+<a href="../sprite/index.html">Sprite</a> 
+<br>
+<a href="../xml/index.html">XML</a> 
+<br>
+
+
+
+</blockquote>
+<p><b>Der Assembler-Debugger</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_asm.png"></p>
+
+Der Asm-Debugger wird für fortgeschrittene Programmierer angeboten, um den Inhalt 
+der CPU-Register zu untersuchen und zu verändern. Ebenfalls um den Programmstack für 
+das Debuggen von <a href="../reference/inlinedasm.html">InlineASM</a>-Code zu untersuchen. 
+
+<br>
+<br>
+
+Die &quot;Prozessor-Register&quot; Anzeige ist nur verfügbar, während die Programmausführung angehalten 
+ist. Durch Ändern irgendeines der Register-Werte und Anklicken von &quot;Setzen&quot; können Sie den 
+Wert in diesem Register verändern. 
+
+<br>
+<br>
+
+Die &quot;Stapelverfolgung&quot; zeigt den Inhalt des Programmstapels (&quot;Stack&quot;), angegeben in Relation 
+zum ESP-Register. Wenn die aktuelle Stapelposition sich nicht an einer 4 Byte Grenze ausrichtet, 
+kann keine Information über den Inhalt des Stacks ausgegeben werden. In diesem Fall wird der 
+Stack in einer Hexadezimal-Anzeige dargestellt. 
+<br>
+<br>
+Wenn der Stack-Zeiger richtig ausgerichtet ist, werden die Stackinhalte mit Kommentaren 
+über die Bedeutung der enthaltenen Werte dargestellt. (Stellen dann die &quot;pushed&quot; Register 
+und andere Werte bei einem PB Prozeduraufruf dar.) 
+
+
+<br>
+<br>
+
+Die Stack- oder Stapelverfolgung wird automatisch aktualisiert, wenn Sie die Programmausführung 
+stoppen oder sich schrittweise durch das Programm bewegen, es sei denn Sie haben etwas anderes 
+in den <a href="../reference/ide_preferences.html">Voreinstellungen</a> angegeben. Wenn Sie das automatische 
+Aktualisieren ausschalten, wird ein Schalter &quot;Aktualisieren&quot; dargestellt, um dies manuell 
+auszuführen. 
+
+<br>
+<br>
+
+Hinweis: Der Assembler-Debugger ist derzeit nicht auf MaxOSX verfügbar. 
+
+
+
+</blockquote>
+<p><b>Der Purifier</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_purifier.png"></p>
+
+Der Purifier kann Speicherfehler aufspüren, wie z.B. das Schreiben über das Ende eines reservierten 
+Speicherpuffers oder Strings hinaus. Ohne den Purifier werden einige dieser Fehler zu Abstürzen führen, 
+andere bleiben unerkannt, weil die Schreiboperation einen anderen gültigen Speicherbereich überschreibt. 
+
+<br>
+<br>
+
+Der Purifier benötigt zum Arbeiten eine spezielle Ausgabe vom Compiler. Daher ist dieser nur verfügbar, 
+wenn beim Kompilieren die Option &quot;Purifier einschalten&quot; in den <a href="../reference/ide_compiler.html">Compiler-Optionen</a> 
+aktiviert ist. 
+
+<br>
+<br>
+
+Der Purifier erkennt diese Fehler, indem er einen speziellen 'Salt'-Wert um globale und lokale Variablen, 
+Strings und Speicherpuffer platziert. Diese 'Salt'-Werte werden dann in regelmäßigen Abständen überprüft 
+und ein Fehler wird angezeigt, wenn sie verändert wurden. Diese Kontrollen verlangsamen die Ausführung 
+des Programms erheblich, insbesondere bei großen Programmen. Deshalb kann die Häufigkeit, mit der die 
+Kontrollen durchgeführt werden, im Purifier-Fenster eingestellt werden: 
+
+<br>
+<br>
+
+<b>Speicherplatz der globalen Variablen</b> 
+<br>
+Definiert das Intervall in Quellcode-Zeilen, nach dem die globalen Variablen überprüft werden. 
+
+<br>
+<br>
+
+<b>Speicherplatz der lokalen Variablen</b> 
+<br>
+Definiert das Intervall in Quellcode-Zeilen, nach dem die lokalen Variablen überprüft werden. 
+
+<br>
+<br>
+
+<b>String-Variablen</b> 
+<br>
+Definiert das Intervall in Quellcode-Zeilen, nach dem der von den String-Variablen verwendete 
+Speicher überprüft wird. 
+
+<br>
+<br>
+
+<b>Reservierter Speicher</b> 
+<br>
+Definiert das Intervall in Quellcode-Zeilen, nach dem der mittels <a href="../memory/allocatememory.html">AllocateMemory()</a> 
+reservierte Speicher überprüft wird. 
+
+</blockquote>
+</font></body></html>

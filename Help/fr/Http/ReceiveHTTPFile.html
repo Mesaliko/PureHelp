@@ -1,0 +1,91 @@
+<html><head><title>ReceiveHTTPFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveHTTPFile()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ReceiveHTTPFile</b></font>(URL$, NomFichier$ [, Options [, AgentUtilisateur$]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Télécharge un fichier sur le disque à partir d'une URL. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+L'URL de téléchargement. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Le nom du fichier qui sera enregistré sur le disque. 
+<br>
+<br>
+Si le nom de fichier ne contient 
+pas de chemin complet, il sera 
+enregistré dans le 
+<a href="../filesystem/getcurrentdirectory.html">répertoire courant</a>. 
+<br>
+Si le fichier existe, il sera écrasé. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: Démarre le téléchargement asynchrone.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : Ne pas suivre les redirections automatiques.
+</font></pre>
+
+</td></tr>
+<tr><td><i>AgentUtilisateur$ (optionnel)</i></td>
+<td> 
+Change l'agent utilisateur (UserAgent) pour la requête HTTP.<br>
+L'agent utilisateur par défaut est défini sur &quot;Mozilla / 5.0 Gecko / 41.0 
+Firefox / 41.0&quot; pour une compatibilité maximale. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle 
+en cas de succès, zéro sinon. 
+<br>
+Si <font color="#924B72">#PB_HTTP_Asynchronous</font> a été 
+spécifié, la fonction renvoie la 
+valeur 'ConnexionHttp' nécessaire 
+pour <a href="httpprogress.html">HTTPProgress()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+et <a href="finishhttp.html">FinishHTTP()</a>. 
+<br>
+Si #PB_HTTP_Asynchronous est utilisé alors <a href="finishhttp.html">FinishHTTP()</a> doit être appelé, que le 
+téléchargement ait été effectué avec succès ou non. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Sous Linux, 'libcurl' doit être installé pour que cette commande fonctionne (déjà installé dans la plupart des distributions Linux). 
+<br>
+<br>
+Si le fichier distant n'a pas été trouvé, le fichier créé contiendra l'erreur du serveur Web. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  NomDeFichier$ =<font color="#006666"> SaveFileRequester</font>(&quot;Enregistrer index.php ?&quot;, &quot;&quot;, &quot;&quot;, 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">ReceiveHTTPFile</font>(&quot;https://www.purebasic.com/index.php&quot;, NomDeFichier$)
+    <b><font color="#006666">Debug</font></b> &quot;Fichier reçu et écrit sur le disque. Si le fichier distant n'a pas été trouvé, il contiendra l'erreur du serveur Web.&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Aucun fichier reçu (erreur réseau).&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=httptimeout.html>HTTPTimeout()</a> - <a href=index.html>Http Index</a> - <a href=receivehttpmemory.html>ReceiveHTTPMemory()</a> -><br><br>
+
+</body></html>

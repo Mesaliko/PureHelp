@@ -1,0 +1,98 @@
+<html><head><title>MessageRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MessageRequester()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>MessageRequester</b></font>(Titre$, Message$ [, Options [, ParentID]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une boîte de dialogue permettant 
+d'afficher un message destiné à fournir 
+des informations à l'utilisateur. 
+L'exécution du programme est interrompue 
+tant que l'utilisateur n'a pas refermé la boîte. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titre$</i></td>
+<td width="90%"> 
+Titre de la boîte de dialogue. 
+
+</td></tr>
+<tr><td><i>Message$</i></td>
+<td> 
+Message affiché dans la boîte de dialogue. 
+
+</td></tr>
+<tr><td><i>Option (optionnel)</i></td>
+<td> 
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Ok</font>          : Pour afficher seulement le bouton 'OK' (Par défaut)
+  <font color="#924B72">#PB_MessageRequester_YesNo</font>       : Pour afficher les boutons 'Oui' et 'Non' 
+  <font color="#924B72">#PB_MessageRequester_YesNoCancel</font> : Pour afficher les boutons 'Oui', 'Non' et 'Annuler' 
+</font></pre>
+Combiné avec l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Info</font>   : Affiche une icône Info (I majuscule)
+  <font color="#924B72">#PB_MessageRequester_Warning</font>: Affiche une icône Attention (!)
+  <font color="#924B72">#PB_MessageRequester_Error</font>  : Affiche une icône erreur (X)
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optionnel)</i></td>
+<td> 
+L'identifiant de la fenêtre parent. 
+<br>
+<br>
+Un identifiant de fenêtre valide peut être récupéré avec <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Les valeurs de retour sont les suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Yes</font>    : Le bouton 'Oui' a été pressé
+  <font color="#924B72">#PB_MessageRequester_No</font>     : Le bouton 'Non' a été pressé
+  <font color="#924B72">#PB_MessageRequester_Cancel</font> : Le bouton 'Annuler' a été pressé
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> MessageRequester simple (normalement utilisé uniquement pour afficher des informations)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;MessageRequester Simple&quot;,&quot;Juste un petit texte d'information.&quot;,<font color="#924B72">#PB_MessageRequester_Ok</font> | <font color="#924B72">#PB_MessageRequester_Info</font>)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> MessageRequester avec boutons Oui / Non (habituellement utilisé pour les questions)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Resultat =<font color="#006666"> MessageRequester</font>(&quot;MessageRequester avec boutons Oui/Non &quot;,&quot;Veuillez faire votre choix :&quot;,<font color="#924B72">#PB_MessageRequester_YesNo</font>)
+  a$ = &quot;Le résultat du MessageRequester était : &quot;
+  <b><font color="#006666">If</font></b> Resultat = 6     <font color="#006666">; le bouton Oui a été choisi (Resultat = 6)</font>
+    a$ + &quot;Oui&quot;
+  <b><font color="#006666">Else</font></b>                <font color="#006666">; le bouton Non a été choisi (Resultat = 7)</font>
+    a$ + &quot;Non&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;,a$,<font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> MessageRequester avec boutons Oui / Non / Annuler (habituellement utilisé pour les questions)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Resultat =<font color="#006666"> MessageRequester</font>(&quot;MessageRequester avec boutons Oui / Non / Annuler&quot;,&quot;Veuillez faire votre choix :&quot;,<font color="#924B72">#PB_MessageRequester_YesNoCancel</font>)
+  a$ = &quot;Le résultat du MessageRequester était : &quot;
+  <b><font color="#006666">If</font></b> Result = 6        <font color="#006666">; le bouton Oui a été choisi (Resultat = 6)</font>
+    a$ + &quot;Oui&quot;
+  <b><font color="#006666">ElseIf</font></b> Result = 7    <font color="#006666">; le bouton Non a été choisi (Resultat = 7)</font>
+    a$ + &quot;Non&quot;
+  <b><font color="#006666">Else</font></b>                 <font color="#006666">; le bouton Annuler a été choisi ou la touche Echap a été appuyée (Resultat = 2)</font>
+    a$ + &quot;Annuler&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;,a$,<font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/messagerequester.png"></p>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=inputrequester.html>InputRequester()</a> - <a href=index.html>Requester Index</a> - <a href=nextselectedfilename.html>NextSelectedFileName()</a> -><br><br>
+
+</body></html>

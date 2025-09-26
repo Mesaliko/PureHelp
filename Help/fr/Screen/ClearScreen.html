@@ -1,0 +1,72 @@
+<html><head><title>ClearScreen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearScreen()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ClearScreen</b></font>(Couleur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Efface la totalité de l'écran avec la 
+couleur spécifiée. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Couleur</i></td>
+<td width="90%"> 
+La couleur qui remplira l'écran. 
+<br>
+<br>
+<a href="../2ddrawing/rgb.html">RGB()</a>  peut être utilisé pour obtenir une 
+valeur de couleur valide.<br>
+Un tableau avec les couleurs communes est 
+disponible 
+<a href="../reference/colortable.html">ici</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+ClearScreen() doit toujours être appelé 
+en dehors d'un bloc <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : 
+<a href="../2ddrawing/stopdrawing.html">StopDrawing()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">;Initialisation du système d'affichage.</font>
+<font color="#006666">  InitSprite</font>()
+
+ <font color="#006666">;Ouverture d'un écran 800*600 32 bits, noir par défaut</font>
+<font color="#006666">  OpenScreen</font>(800, 600, 32, &quot;Sprite&quot;)
+
+ <font color="#006666">; Attendre 3 secondes</font>
+<font color="#006666">  Delay</font>(3000) 
+
+ <font color="#006666">; L'écran est noir pendant 3s</font>
+
+ <font color="#006666">; L'écran est rouge mais dans l'autre buffer </font>
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(255,0,0))
+
+ <font color="#006666">; Il faut inverser les buffers pour afficher l'écran rouge</font>
+<font color="#006666">  FlipBuffers</font>() 
+
+ <font color="#006666">; Attendre 3 secondes</font>
+<font color="#006666">  Delay</font>(3000) 
+ <font color="#006666">; L'écran est rouge pendant 1s </font>
+
+ <font color="#006666">; Fermer l'écran</font>
+<font color="#006666">  CloseScreen</font>()  
+
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=changegamma.html>ChangeGamma()</a> - <a href=index.html>Screen Index</a> - <a href=closescreen.html>CloseScreen()</a> -><br><br>
+
+</body></html>

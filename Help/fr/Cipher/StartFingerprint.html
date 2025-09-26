@@ -1,0 +1,111 @@
+<html><head><title>StartFingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartFingerprint()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>StartFingerprint</b></font>(#Fingerprint, Plugin [, Bits [, CleHmac$ [,FormatCleHmac]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise le calcul d'une empreinte en plusieurs étapes. 
+<br>
+<br>
+Contrairement à la commande <a href="fingerprint.html">Fingerprint()</a>, elle permet de calculer l'empreinte de grandes 
+quantités de données sans avoir à charger le tout dans un tampon de mémoire continue. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fingerprint</i></td>
+<td width="90%"> 
+L'identifiant de ce calcul de type 'checksum'. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut est utilisé pour générer automatiquement ce nombre. 
+
+</td></tr>
+<tr><td><i>Plugin</i></td>
+<td> 
+Le plugin à utiliser. Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CRC32</font>: utilise l'algorithme CRC32. <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_MD5</font>  : utilise l'algorithme MD5.   <a href="usemd5fingerprint.html">UseMD5Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA1</font> : utilise l'algorithme SHA1.  <a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA2</font> : utilise l'algorithme SHA2.  <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : utilise l'algorithme SHA3.  <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a> doit être appelé avant pour utiliser le plugin.
+</font></pre>
+Le plugin à utiliser peut être combiné avec l'indicateur <font color="#924B72">#PB_Cipher_HMAC</font> pour calculer un HMAC (code 
+d'authentification de message basé sur le hachage) au lieu d'une empreinte digitale normale. Dans ce 
+cas, le paramètre &quot;CleHmac$&quot; est également nécessaire.<br>
+Voir <a href="stringfingerprint.html">StringFingerprint()</a> pour un exemple d'utilisation de l'indicateur HMAC. 
+
+</td></tr>
+<tr><td><i>Bits (optionnel)</i></td>
+<td> 
+Le nombre de bits à utiliser pour l'empreinte. Supporté seulement avec les plugins suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_SHA2</font> : peut être 224, 256 (par defaut), 384 ou 512.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : peut être 224, 256 (par defaut), 384 or 512.
+</font></pre>
+
+</td></tr>
+<tr><td><i>CleHmac$ (optionnel)</i></td>
+<td> 
+La clé secrète à utiliser dans le calcul HMAC. 
+<br>
+<br>
+Ce paramètre n'est utilisé que si le <font color="#924B72">#PB_Cipher_HMAC</font> est ajouté au paramètre du plugin. 
+
+</td></tr>
+<tr><td><i>FormatCleHmac (optionnel)</i></td>
+<td> 
+Le format de chaîne à utiliser pour la clé HMAC. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Encoder la clé en ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Encoder la clé en UTF-8 (par défaut).
+  <font color="#924B72">#PB_Unicode</font>: Encoder la clé en Unicode
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur #FingerPrint si <font color="#924B72">#PB_Any</font> a été utilisé pour ce paramètre. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="addfingerprintbuffer.html">AddFingerprintBuffer()</a> permet d'ajouter des blocs de données au calcul et 
+<a href="finishfingerprint.html">FinishFingerprint()</a> le terminera et renverra le résultat. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMD5Fingerprint</font>()
+
+  *Buffer =<font color="#006666"> AllocateMemory</font>(200) <font color="#006666">; Prépare un tampon de données                 </font>
+  <b><font color="#006666">If</font></b> *Buffer
+<font color="#006666">    PokeS</font>(*Buffer, &quot;Le renard brun rapide saute sur le chien paresseux.&quot;, -1, <font color="#924B72">#PB_Ascii</font>)
+    Taille =<font color="#006666"> MemoryStringLength</font>(*Buffer, <font color="#924B72">#PB_Ascii</font>)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartFingerprint</font>(0, <font color="#924B72">#PB_Cipher_MD5</font>)                <font color="#006666">; démarre le calcul</font>
+<font color="#006666">      AddFingerprintBuffer</font>(0, *Buffer, Taille/2)          <font color="#006666">; calcule la partie 1</font>
+<font color="#006666">      AddFingerprintBuffer</font>(0, *Buffer+Taille/2, Taille/2) <font color="#006666">; calcule la partie 2</font>
+      
+      MD5$ =<font color="#006666"> FinishFingerprint</font>(0)                <font color="#006666">; termine le calcul</font>
+      <b><font color="#006666">Debug</font></b> &quot;MD5 checksum = &quot; + MD5$
+      
+      MD5$ =<font color="#006666"> Fingerprint</font>(*Buffer, Length, <font color="#924B72">#PB_Cipher_MD5</font>)       <font color="#006666">; comparaison avec le calcul en une seule étape</font>
+      <b><font color="#006666">Debug</font></b> &quot;MD5 checksum = &quot; + MD5$      
+    <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">    FreeMemory</font>(*Buffer)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="fingerprint.html">Fingerprint()</a>, <a href="filefingerprint.html">FileFingerprint()</a>, <a href="stringfingerprint.html">StringFingerprint()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=startaescipher.html>StartAESCipher()</a> - <a href=index.html>Cipher Index</a> - <a href=stringfingerprint.html>StringFingerprint()</a> -><br><br>
+
+</body></html>

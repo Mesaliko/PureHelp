@@ -1,0 +1,108 @@
+<html><head><title>CheckBoxGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CheckBoxGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CheckBoxGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Texte$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget case à cocher dans la 
+GadgetList en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du 
+nouveau gadget. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Le texte à afficher à côté de la case, il 
+est placé à sa droite. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_CheckBox_Right</font>     : Aligne le texte de la case à cocher à droite.
+  <font color="#924B72">#PB_CheckBox_Center</font>    : Centre le texte de la case à cocher.
+  <font color="#924B72">#PB_CheckBox_ThreeState</font>: Crée une case à cocher qui peut avoir trois états (dont un état intermédiaire).
+</font></pre>
+<blockquote>
+
+L'option <font color="#924B72">#PB_CheckBox_ThreeState</font> permet à 
+une case à cocher de représenter l'état de 
+plusieurs éléments. 
+L'état indéterminé (ni coché, ni décoché) 
+indique alors que certains éléments sont 
+dans un état différent des autres. 
+En cliquant sur la case à cocher, 
+l'utilisateur peut alors les remettre tous 
+dans le même état, soit coché, soit 
+décoché. L'état indéterminé peut donc 
+uniquement être activé à l'aide de 
+<a href="setgadgetstate.html">SetGadgetState()</a>. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget.
+
+  - <a href="getgadgetstate.html">GetGadgetState()</a> est utilisé pour récupérer l'état du gadget. 
+  - <a href="setgadgetstate.html">SetGadgetState()</a> est utilisé pour changer l'état du gadget. 
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;CheckBoxGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    CheckBoxGadget</font>(0, 10,  10, 250, 20, &quot;Case à cocher standard&quot;)
+<font color="#006666">    CheckBoxGadget</font>(1, 10,  40, 250, 20, &quot;Case à cocher (cochée)&quot;) :<font color="#006666"> SetGadgetState</font>(1, <font color="#924B72">#PB_Checkbox_Checked</font>)
+<font color="#006666">    CheckBoxGadget</font>(2, 10,  70, 250, 20, &quot;Case à cocher à trois états&quot;, <font color="#924B72">#PB_CheckBox_ThreeState</font>) :<font color="#006666"> SetGadgetState</font>(2, <font color="#924B72">#PB_Checkbox_Inbetween</font>)
+<font color="#006666">    CheckBoxGadget</font>(3, 10, 100, 250, 20, &quot;Case à cocher (texte aligné à droite)&quot;, <font color="#924B72">#PB_CheckBox_Right</font>)
+<font color="#006666">    CheckBoxGadget</font>(4, 10, 130, 250, 20, &quot;Case à cocher (texte centré)&quot;, <font color="#924B72">#PB_CheckBox_Center</font>)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/checkboxgadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="optiongadget.html">OptionGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=canvasvectoroutput.html>CanvasVectorOutput()</a> - <a href=index.html>Gadget Index</a> - <a href=cleargadgetitems.html>ClearGadgetItems()</a> -><br><br>
+
+</body></html>

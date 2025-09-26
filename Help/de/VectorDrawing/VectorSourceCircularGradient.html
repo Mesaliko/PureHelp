@@ -1,0 +1,90 @@
+<html><head><title>VectorSourceCircularGradient</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">VectorSourceCircularGradient()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>VectorSourceCircularGradient</b></font>(x.d, y.d, Radius.d, [MitteX.d, MitteY.d]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Wählt einen kreisförmigen Farbverlauf (englisch &quot;color gradient&quot;) als Quelle für 
+Vektorzeichnen-Operationen wie <a href="fillpath.html">FillPath()</a> oder <a href="strokepath.html">StrokePath()</a>. Anfänglich ist der 
+Farbverlauf durchgängig schwarz. &quot;Farbstopps&quot; müssen nach dieser Funktion mittels 
+<a href="vectorsourcegradientcolor.html">VectorSourceGradientColor()</a> hinzugefügt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.d, y.d</i></td>
+<td width="90%"> 
+Geben den Mittelpunkt des Kreises an, welcher den Farbverlauf definiert. 
+Die Koordinaten werden in Bezug auf das <font color="#924B72">#PB_Coordinate_Source</font> Koordinatensystem 
+angegeben. 
+<br>
+<br>
+Der Mittelpunkt des Kreises repräsentiert den Start (Position 0.0) des Farbverlaufs 
+und der Umfang des Kreises repräsentiert das Ende (Position 1.0) des Farbverlaufs. 
+
+</td></tr>
+<tr><td><i>Radius.d</i></td>
+<td> 
+Gibt den Radius des Kreises an, welcher den Farbverlauf definiert. 
+
+</td></tr>
+<tr><td><i>MitteX.d, MitteY.d (optional)</i></td>
+<td> 
+Geben einen optionalen &quot;Offset&quot; (Versatz) für den Startpunkt des Farbverlaufs von der 
+Mitte des Kreises an. Mit diesen Parametern kann der Farbverlauf an jedem Punkt innerhalb 
+des Kreises gestartet werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Siehe den <a href="../vectordrawing/index.html">Vektorzeichnen Überblick</a> für eine Einführung in die 
+verschiedenen Koordinatensysteme. 
+<br>
+<br>
+Der Farbverlauf wird nur im Bereich innerhalb des Kreises definiert. 
+Außerhalb des Kreises hängt die verwendete Quellfarbe vom Betriebssystem ab, so dass 
+Zeichenoperationen außerhalb der Fläche des definierten Farbverlaufs vermieden werden sollten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+<font color="#006666">      VectorSourceCircularGradient</font>(200, 100, 150, -50, -50)
+<font color="#006666">      VectorSourceGradientColor</font>(<font color="#006666">RGBA</font>(255, 255, 255, 255), 0.0)
+<font color="#006666">      VectorSourceGradientColor</font>(<font color="#006666">RGBA</font>(0, 0, 0, 255), 1.0)
+      
+<font color="#006666">      FillVectorOutput</font>()
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/vectorsourcecirculargradient.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="vectorsourcegradientcolor.html">VectorSourceGradientColor()</a>, <a href="vectorsourcelineargradient.html">VectorSourceLinearGradient()</a>, <a href="vectorsourcecolor.html">VectorSourceColor()</a>, <a href="vectorsourceimage.html">VectorSourceImage()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=vectorresolutiony.html>VectorResolutionY()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=vectorsourcecolor.html>VectorSourceColor()</a> -><br><br>
+
+</body></html>

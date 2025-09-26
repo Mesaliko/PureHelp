@@ -1,0 +1,57 @@
+<html><head><title>RegisterFontFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegisterFontFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>RegisterFontFile</b></font>(DateiName$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Registriert eine Zeichensatz-Datei für die Verwendung mit dem <a href="loadfont.html">LoadFont()</a> Befehl. Alle in der Datei 
+enthaltenen Zeichensätze sind dann verfügbar. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>DateiName$</i></td>
+<td width="90%"> 
+Die Datei, welche den Zeichensatz beinhaltet. Die Datei muss im TrueType-Format vorliegen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Datei erfolgreich registriert wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Zeichensatz-Datei wird nur für das aktuelle Programm registriert. Dies bedeutet, dass die 
+Schrift(en) nicht für andere Programme zugänglich ist (sind) und sie auch nicht mehr registriert 
+sein wird (werden), wenn das Programm endet. Durch diesen Befehl werden keine systemweiten 
+Änderungen vorgenommen. 
+<br>
+<br>
+Sie können keine registrierte Schriftart mit der <a href="../vectordrawing/index.html">VectorDrawing</a>-Bibliothek verwenden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Nun lasst uns einen neuen Zeichensatz nutzen, der aus dem Internet in das temporäre Verzeichnis geladen wurde...</font>
+  <font color="#006666">; Der Zeichensatz-Name lautet &quot;ascii&quot; und dessen Datei ist die &quot;ascii.ttf&quot;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">RegisterFontFile</font>(<font color="#006666">GetTemporaryDirectory</font>() + &quot;ascii.ttf&quot;) <font color="#006666">; Wir müssen sie registrieren, bevor wir sie nutzen können</font>
+<font color="#006666">    LoadFont</font>(0, &quot;ascii&quot;, 12) <font color="#006666">; Jetzt können wir den Zeichensatz laden, das Betriebssystem kennt ihn</font>
+<font color="#006666">    SetGadgetFont</font>(0,<font color="#006666"> FontID</font>(0))
+  ...
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/FontRegister.pb.html">FontRegister.pb</a>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="loadfont.html">LoadFont()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=loadfont.html>LoadFont()</a> - <a href=index.html>Font Inhaltsverzeichnis</a><br><br></blockquote>
+</font></body></html>

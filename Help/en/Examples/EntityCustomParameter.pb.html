@@ -1,0 +1,59 @@
+<html><head><title>EntityCustomParameter.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - EntityCustomParameter
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+
+</font><font color="#006666">InitEngine3D</font>():<font color="#006666">InitSprite</font>():<font color="#006666">InitKeyboard</font>():<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;EntityCustomParameter - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100):<font color="#006666">MoveCamera</font>(0,0,0,-10):<font color="#006666">CameraLookAt</font>(0,0,0,0)
+<font color="#006666">CreateLight</font>(0,$ffffff, -10000, 10000, 0)
+<font color="#006666">AmbientColor</font>($111111*3)
+<font color="#006666">CameraBackColor</font>(0,$444488)
+
+<b><font color="#006666">Define</font></b>.s vert_pg,frag_pg
+vert_pg=&quot;%#version 130%%uniform float einflate;//+90 1%uniform mat4 worldviewproj_matrix;//+25%uniform vec4 camera_pos_os;//+80%uniform vec4 light_pos_os;//+46 0%uniform vec4 light_att;//+43 0%uniform vec4 fog_params;//+32%%varying vec3 oviewdir;%varying vec3 olightdir;%varying vec3 onormal;%varying vec4 ovcolor;%varying float olightatt;%varying float ofogf;%%void main()%{%vec3 vertex=gl_Vertex.xyz+(gl_Normal*einflate);%oviewdir=normalize(camera_pos_os.xyz-vertex);%olightdir=normalize(light_pos_os.xyz-vertex);%gl_Position=worldviewproj_matrix*vec4(vertex,1);%onormal=gl_Normal;%float Dist=distance(light_pos_os,gl_Vertex);%olightatt=1/(light_att.y+light_att.z*Dist+light_att.w*Dist*Dist);%ovcolor=gl_Color;%ofogf=fog_params.z&gt;0?min(abs(gl_Position.z)*fog_params.w,1):0;%}%&quot;
+frag_pg=&quot;%#version 130%%uniform vec4 ecolor;//+90 2%uniform vec4 diffuse_ml;//+71 0%uniform vec4 specular_ml;//+72 0%uniform vec4 ambient_ml;//+69 0%uniform float shininess;//+37%uniform vec4 fog_colour;//+31%%varying vec3 oviewdir;%varying vec3 olightdir;%varying vec3 onormal;%varying vec4 ovcolor;%varying float olightatt;%varying float ofogf;%%void main()%{%vec3 normal=normalize(onormal);if(gl_FrontFacing==false)normal*=-1;%vec3 viewdir=normalize(oviewdir);%vec3 lightdir=normalize(olightdir);%float dif=max(dot(lightdir,normal),0)*olightatt;%float spe=pow(max(dot(normalize(lightdir+viewdir),normal),0),shininess);%vec4 color=ecolor*(ambient_ml+diffuse_ml*dif)+specular_ml*spe;%gl_FragColor=mix(color,fog_colour,ofogf);%}%&quot;
+
+<font color="#006666">CreateShader</font>(0,vert_pg,frag_pg)
+<font color="#006666">CreateShaderMaterial</font>(0,0)
+<font color="#006666">MaterialShininess</font>(0,64,$ffffff)
+<font color="#006666">CreateTorus</font>(0,1,0.5,32,32)
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 4
+<font color="#006666">  CreateEntity</font>(i,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0),(i-2)*3,0,0)
+  col=<font color="#006666">Random</font>($ffffff)
+<b><font color="#006666">Next</font></b>
+
+<b><font color="#006666">Define</font></b>.f MouseX,Mousey,depx,depz,dist,angle,anglei
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">  ExamineKeyboard</font>()
+<font color="#006666">  ExamineMouse</font>()
+  angle+0.1
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 4
+<font color="#006666">    RotateEntity</font>(i,0.2,0.2,0.2, <font color="#924B72">#PB_Relative</font>)
+    
+    <font color="#006666">;we can Define a different inflate value For each entity
+</font><font color="#006666">    EntityCustomParameter</font>(i,0,1,<font color="#006666">Sin</font>(angle+i)*0.25,0,0,0)
+    
+    <font color="#006666">;we can define a different color for each entity
+</font>    anglei=angle+i
+    col=<font color="#006666">RGB</font>((<font color="#006666">Sin</font>(anglei)+1)/2*255,(<font color="#006666">Sin</font>(anglei+2)+1)/2*255,(<font color="#006666">Sin</font>(anglei+4)+1)/2*255)
+<font color="#006666">    EntityCustomParameter</font>(i,0,2,<font color="#006666">Red</font>(col)/255,<font color="#006666">Green</font>(col)/255,<font color="#006666">Blue</font>(col)/255,0)<font color="#006666">; color must be converted in 4 float (0-&gt;1)
+</font>  <b><font color="#006666">Next</font></b>  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()    
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(3)
+
+</font></pre>
+</body></html>

@@ -1,0 +1,281 @@
+<html><head><title>Screen3DRequester.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono"size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Common 3D functions
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#WINDOW_Screen3DRequester</font> = 0
+
+<font color="#924B72">#GADGET_FullScreen</font>        = 1
+<font color="#924B72">#GADGET_Windowed</font>          = 2
+<font color="#924B72">#GADGET_ScreenModesLabel</font>  = 3
+<font color="#924B72">#GADGET_WindowedModes</font>     = 4
+<font color="#924B72">#GADGET_Launch</font>            = 5
+<font color="#924B72">#GADGET_Cancel</font>            = 6
+<font color="#924B72">#GADGET_Logo</font>              = 7
+<font color="#924B72">#GADGET_Frame</font>             = 8
+<font color="#924B72">#GADGET_ScreenModes</font>       = 9
+<font color="#924B72">#GADGET_Antialiasing</font>      = 10
+<font color="#924B72">#GADGET_AntialiasingModes</font> = 11
+
+<font color="#924B72">#MENU_Quit</font> = 0
+<font color="#924B72">#MENU_About</font> = 1
+
+
+<b><font color="#006666">Global</font></b> Screen3DRequester_FullScreen, Screen3DRequester_ShowStats
+
+<font color="#006666">UsePNGImageDecoder</font>()
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Screen3DRequester</font>()
+
+<font color="#006666">  OpenPreferences</font>(<font color="#006666">GetHomeDirectory</font>()+&quot;PureBasicDemos3D.prefs&quot;)
+    FullScreen          =<font color="#006666"> ReadPreferenceLong  </font>(&quot;FullScreen&quot;        , 0)
+    FullScreenMode$     =<font color="#006666"> ReadPreferenceString</font>(&quot;FullScreenMode&quot;    , &quot;800x600&quot;)
+    WindowedScreenMode$ =<font color="#006666"> ReadPreferenceString</font>(&quot;WindowedScreenMode&quot;, &quot;800x600&quot;)
+    AAMode              =<font color="#006666"> ReadPreferenceLong  </font>(&quot;Antialiasing&quot;      , 0)
+    
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineDesktops</font>()
+    ScreenX =<font color="#006666"> DesktopWidth</font>(0)
+    ScreenY =<font color="#006666"> DesktopHeight</font>(0)
+    ScreenD =<font color="#006666"> DesktopDepth</font>(0)
+    ScreenF =<font color="#006666"> DesktopFrequency</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Linux</font>
+    GadgetHeight = 30
+  <b><font color="#006666">CompilerElse</font></b>
+    GadgetHeight = 20
+  <b><font color="#006666">CompilerEndIf</font></b>
+   
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(<font color="#924B72">#WINDOW_Screen3DRequester</font>, 0, 0, 396, GadgetHeight*4 + 155, &quot;PureBasic - 3D Demos&quot;, <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_Invisible</font>)
+   
+    Top = 6
+    
+<font color="#006666">    LoadImage</font>(0,<font color="#924B72">#PB_Compiler_Home</font>+&quot;examples/3d/Data/PureBasic3DLogo.png&quot;)
+<font color="#006666">    ResizeImage</font>(0,<font color="#006666"> DesktopScaledX</font>(<font color="#006666">ImageWidth</font>(0)),<font color="#006666"> DesktopScaledX</font>(<font color="#006666">ImageHeight</font>(0)))
+    
+<font color="#006666">    ImageGadget  </font>(<font color="#924B72">#GADGET_Logo</font>, 6, Top, 0, 0,<font color="#006666"> ImageID</font>(0), <font color="#924B72">#PB_Image_Border</font>) : Top+76
+   
+<font color="#006666">    FrameGadget</font>(<font color="#924B72">#GADGET_Frame</font>, 6, Top, 384, GadgetHeight*3 +45, &quot;&quot;, 0) : Top+20
+   
+<font color="#006666">    OptionGadget</font>(<font color="#924B72">#GADGET_FullScreen</font>, 40, Top, 130, GadgetHeight, &quot;Fullscreen&quot;)        : Top+GadgetHeight+5
+<font color="#006666">    OptionGadget</font>(<font color="#924B72">#GADGET_Windowed</font>  , 40, Top, 130, GadgetHeight, &quot;Windowed&quot;)          : Top+GadgetHeight+5
+<font color="#006666">    TextGadget</font>(<font color="#924B72">#GADGET_Antialiasing</font>, 40, Top+5, 130, GadgetHeight, &quot;Antialiasing mode&quot;) : Top - ((GadgetHeight+5) * 2)
+   
+<font color="#006666">    ComboBoxGadget </font>(<font color="#924B72">#GADGET_ScreenModes</font>  , 190, Top, 150, GadgetHeight+1)     : Top+GadgetHeight+5
+<font color="#006666">    ComboBoxGadget </font>(<font color="#924B72">#GADGET_WindowedModes</font>, 190, Top, 150, GadgetHeight+1)     : Top+GadgetHeight+5
+<font color="#006666">    ComboBoxGadget </font>(<font color="#924B72">#GADGET_AntialiasingModes</font>, 190, Top, 150, GadgetHeight+1) : Top+GadgetHeight+25
+  
+<font color="#006666">    ButtonGadget </font>(<font color="#924B72">#GADGET_Launch</font>,   6, Top, 180, GadgetHeight+5, &quot;Launch&quot;, <font color="#924B72">#PB_Button_Default</font>)
+<font color="#006666">    ButtonGadget </font>(<font color="#924B72">#GADGET_Cancel</font>, 200, Top, 190, GadgetHeight+5, &quot;Cancel&quot;)
+      
+<font color="#006666">    AddGadgetItem</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>,-1,&quot;None&quot;)
+<font color="#006666">    AddGadgetItem</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>,-1,&quot;FSAA x2&quot;)
+<font color="#006666">    AddGadgetItem</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>,-1,&quot;FSAA x4&quot;)
+<font color="#006666">    AddGadgetItem</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>,-1,&quot;FSAA x6&quot;)
+  
+<font color="#006666">    SetGadgetState</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>,AAMode)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineScreenModes</font>()
+      
+      Position = 0
+      <b><font color="#006666">While</font></b> <font color="#006666">NextScreenMode</font>()
+        
+        Position + 1
+        Width       =<font color="#006666"> ScreenModeWidth</font>()
+        Height      =<font color="#006666"> ScreenModeHeight</font>()
+        Depth       =<font color="#006666"> ScreenModeDepth</font>()
+        RefreshRate =<font color="#006666"> ScreenModeRefreshRate</font>()
+        
+        <b><font color="#006666">If</font></b> Depth &gt; 8
+<font color="#006666">          AddGadgetItem</font>(<font color="#924B72">#GADGET_ScreenModes</font>, -1,<font color="#006666"> Str</font>(Width)+&quot;x&quot;+<font color="#006666">Str</font>(Height)+&quot;x&quot;+<font color="#006666">Str</font>(Depth)+&quot;@&quot;+<font color="#006666">Str</font>(RefreshRate))
+          <b><font color="#006666">If</font></b> ScreenX = Width <b><font color="#006666">And</font></b> ScreenY = Height <b><font color="#006666">And</font></b> ScreenD = Depth <b><font color="#006666">And</font></b> ScreenF = RefreshRate
+<font color="#006666">            SetGadgetState</font>(<font color="#924B72">#GADGET_ScreenModes</font>, Position)
+            FullScreenMode$ =<font color="#006666"> Str</font>(Width)+&quot;x&quot;+<font color="#006666">Str</font>(Height)+&quot;x&quot;+<font color="#006666">Str</font>(Depth)+&quot;@&quot;+<font color="#006666">Str</font>(RefreshRate)
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndIf</font></b>
+       
+      <b><font color="#006666">Wend</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    ExamineDesktops</font>()
+    NbScreenModes = 7
+    
+    <b><font color="#006666">Restore</font></b> WindowedScreenDimensions
+
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Read</font></b>.l CurrentWidth
+      <b><font color="#006666">Read</font></b>.l CurrentHeight
+      
+      <b><font color="#006666">If</font></b> CurrentWidth &lt;<font color="#006666"> DesktopWidth</font>(0) <b><font color="#006666">And</font></b> CurrentHeight &lt;<font color="#006666"> DesktopHeight</font>(0)
+<font color="#006666">        AddGadgetItem</font>(<font color="#924B72">#GADGET_WindowedModes</font>, -1,<font color="#006666"> Str</font>(CurrentWidth)+ &quot;x&quot;+<font color="#006666">Str</font>(CurrentHeight))
+        NbScreenModes - 1
+      <b><font color="#006666">Else</font></b>
+        NbScreenModes = 0
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Until</font></b> NbScreenModes = 0
+    
+    <b><font color="#006666">If</font></b> FullScreen
+<font color="#006666">      SetGadgetState</font>(<font color="#924B72">#GADGET_FullScreen</font>, 1)
+    <b><font color="#006666">Else</font></b>
+<font color="#006666">      SetGadgetState</font>(<font color="#924B72">#GADGET_Windowed</font>  , 1)
+    <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">    SetGadgetText </font>(<font color="#924B72">#GADGET_ScreenModes</font>  , FullScreenMode$)
+<font color="#006666">    SetGadgetText </font>(<font color="#924B72">#GADGET_WindowedModes</font>, WindowedScreenMode$)
+    
+<font color="#006666">    DisableGadget </font>(<font color="#924B72">#GADGET_ScreenModes</font>  , 1-FullScreen)
+<font color="#006666">    DisableGadget </font>(<font color="#924B72">#GADGET_WindowedModes</font>, FullScreen)
+    
+<font color="#006666">    HideWindow</font>(<font color="#924B72">#WINDOW_Screen3DRequester</font>, 0)
+    
+    <b><font color="#006666">Repeat</font></b>
+      
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">Select</font></b> Event
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#GADGET_Launch</font>
+          Quit = 2
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#GADGET_Cancel</font>
+          Quit = 1
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#GADGET_FullScreen</font>
+<font color="#006666">          DisableGadget</font>(<font color="#924B72">#GADGET_ScreenModes</font>  , 0)
+<font color="#006666">          DisableGadget</font>(<font color="#924B72">#GADGET_WindowedModes</font>, 1)
+        
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#GADGET_Windowed</font>
+<font color="#006666">          DisableGadget</font>(<font color="#924B72">#GADGET_ScreenModes</font>  , 1)
+<font color="#006666">          DisableGadget</font>(<font color="#924B72">#GADGET_WindowedModes</font>, 0)
+                 
+        <b><font color="#006666">EndSelect</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        Quit = 1
+        
+      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">Until</font></b> Quit &gt; 0
+    
+    FullScreen          =<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#GADGET_FullScreen</font>)
+    FullScreenMode$     =<font color="#006666"> GetGadgetText </font>(<font color="#924B72">#GADGET_ScreenModes</font>)
+    WindowedScreenMode$ =<font color="#006666"> GetGadgetText </font>(<font color="#924B72">#GADGET_WindowedModes</font>)
+    AAMode              =<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#GADGET_AntialiasingModes</font>)
+    
+<font color="#006666">    CloseWindow</font>(<font color="#924B72">#WINDOW_Screen3DRequester</font>)
+      
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> Quit = 2 <font color="#006666">; Launch button has been pressed
+</font>  
+<font color="#006666">    CreatePreferences</font>(<font color="#006666">GetHomeDirectory</font>()+&quot;PureBasicDemos3D.prefs&quot;)
+<font color="#006666">      WritePreferenceLong  </font>(&quot;FullScreen&quot;        , FullScreen)
+<font color="#006666">      WritePreferenceString</font>(&quot;FullScreenMode&quot;    , FullScreenMode$)
+<font color="#006666">      WritePreferenceString</font>(&quot;WindowedScreenMode&quot;, WindowedScreenMode$)
+<font color="#006666">      WritePreferenceLong  </font>(&quot;Antialiasing&quot;      , AAMode)
+      
+    <b><font color="#006666">If</font></b> FullScreen
+      ScreenMode$ = FullScreenMode$
+    <b><font color="#006666">Else</font></b>
+      ScreenMode$ = WindowedScreenMode$
+    <b><font color="#006666">EndIf</font></b>
+    
+    RefreshRate =<font color="#006666"> Val</font>(<font color="#006666">StringField</font>(ScreenMode$, 2, &quot;@&quot;))
+    
+    ScreenMode$ =<font color="#006666"> StringField</font>(ScreenMode$, 1, &quot;@&quot;) <font color="#006666">; Remove the refresh rate info, so we can parse it easily
+</font>    
+    ScreenWidth  =<font color="#006666"> Val</font>(<font color="#006666">StringField</font>(ScreenMode$, 1, &quot;x&quot;))
+    ScreenHeight =<font color="#006666"> Val</font>(<font color="#006666">StringField</font>(ScreenMode$, 2, &quot;x&quot;))
+    ScreenDepth  =<font color="#006666"> Val</font>(<font color="#006666">StringField</font>(ScreenMode$, 3, &quot;x&quot;))
+    
+    Screen3DRequester_FullScreen = FullScreen <font color="#006666">; Global variable, for the Screen3DEvents
+</font>    
+    <b><font color="#006666">Select</font></b> AAMode
+      <b><font color="#006666">Case</font></b> 0:
+<font color="#006666">        AntialiasingMode</font>(<font color="#924B72">#PB_AntialiasingMode_None</font>)
+      <b><font color="#006666">Case</font></b> 1:
+<font color="#006666">        AntialiasingMode</font>(<font color="#924B72">#PB_AntialiasingMode_x2</font>)
+      <b><font color="#006666">Case</font></b> 2:
+<font color="#006666">        AntialiasingMode</font>(<font color="#924B72">#PB_AntialiasingMode_x4</font>)
+      <b><font color="#006666">Case</font></b> 3:
+<font color="#006666">        AntialiasingMode</font>(<font color="#924B72">#PB_AntialiasingMode_x6</font>)
+    <b><font color="#006666">EndSelect</font></b>
+    
+    <b><font color="#006666">If</font></b> FullScreen
+      Result =<font color="#006666"> OpenScreen</font>(ScreenWidth, ScreenHeight, ScreenDepth, &quot;3D Demos&quot;, <font color="#924B72">#PB_Screen_WaitSynchronization</font>, RefreshRate)
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0,<font color="#006666"> DesktopUnscaledX</font>(ScreenWidth),<font color="#006666"> DesktopUnscaledY</font>(ScreenHeight+<font color="#006666">MenuHeight</font>()), &quot;PureBasic - 3D Demos&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+      
+<font color="#006666">        CreateMenu</font>(0,<font color="#006666"> WindowID</font>(<font color="#924B72">#WINDOW_Screen3DRequester</font>))
+<font color="#006666">          MenuTitle</font>(&quot;Project&quot;)
+<font color="#006666">          MenuItem</font>(<font color="#924B72">#MENU_Quit</font>, &quot;Quit&quot;)
+    
+<font color="#006666">          MenuTitle</font>(&quot;About&quot;)
+<font color="#006666">          MenuItem</font>(<font color="#924B72">#MENU_About</font>, &quot;About...&quot;)
+              
+        Result =<font color="#006666"> OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(<font color="#924B72">#WINDOW_Screen3DRequester</font>), 0, 0, ScreenWidth, ScreenHeight, 0, 0, 0)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+     
+  <b><font color="#006666">ProcedureReturn</font></b> Result
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Screen3DEvents</font>()
+
+  <b><font color="#006666">If</font></b> Screen3DRequester_FullScreen = 0 <font color="#006666">; Handle all the events relatives to the window..
+</font>  
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WindowEvent</font>()
+      
+      <b><font color="#006666">Select</font></b> Event
+      
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+          
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_Quit</font>
+              Quit = 1
+          
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#MENU_About</font>
+<font color="#006666">              MessageRequester</font>(&quot;Info&quot;, &quot;Windowed 3D in PureBasic !&quot;, 0)
+              
+          <b><font color="#006666">EndSelect</font></b>
+             
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+          Quit = 1
+        
+      <b><font color="#006666">EndSelect</font></b>
+      
+      <b><font color="#006666">If</font></b> Quit = 1 : <b><font color="#006666">End</font></b> : <b><font color="#006666">EndIf</font></b>  <font color="#006666">; Quit the app immediately
+</font>    <b><font color="#006666">Until</font></b> Event = 0
+    
+  <b><font color="#006666">EndIf</font></b>
+          
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">DataSection</font></b>
+  WindowedScreenDimensions:
+    <b><font color="#006666">Data</font></b>.l  320, 240
+    <b><font color="#006666">Data</font></b>.l  512, 384
+    <b><font color="#006666">Data</font></b>.l  640, 480
+    <b><font color="#006666">Data</font></b>.l  800, 600
+    <b><font color="#006666">Data</font></b>.l 1024, 768
+    <b><font color="#006666">Data</font></b>.l 1280, 1024
+    <b><font color="#006666">Data</font></b>.l 1600, 1200
+<b><font color="#006666">EndDataSection</font></b></font></pre>
+</body></html>

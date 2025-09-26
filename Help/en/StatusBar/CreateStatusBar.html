@@ -1,0 +1,63 @@
+<html><head><title>CreateStatusBar</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateStatusBar()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateStatusBar</b></font>(#StatusBar, WindowID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create and add an empty #StatusBar to the specified WindowID. 
+Once the bar is created, <a href="addstatusbarfield.html">AddStatusBarField()</a> can be 
+used to setup the different parts of the bar. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#StatusBar</i></td>
+<td width="90%"> 
+A number to identify the new status bar. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>WindowID</i></td>
+<td> 
+The window on which the status bar needs to be created. <a href="../window/windowid.html">WindowID()</a> can be used to get this value. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the status bar has been successfully created, zero otherwise. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 440, 50, &quot;StatusBar&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      AddStatusBarField</font>(90)
+<font color="#006666">      AddStatusBarField</font>(100)
+<font color="#006666">      AddStatusBarField</font>(<font color="#924B72">#PB_Ignore</font>) <font color="#006666">; automatically resize this field</font>
+<font color="#006666">      AddStatusBarField</font>(100)
+    <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">    StatusBarText</font>(0, 0, &quot;Area normal&quot;)
+<font color="#006666">    StatusBarText</font>(0, 1, &quot;Area borderless&quot;, <font color="#924B72">#PB_StatusBar_BorderLess</font>)
+<font color="#006666">    StatusBarText</font>(0, 2, &quot;Area right&quot;, <font color="#924B72">#PB_StatusBar_Right</font>) 
+<font color="#006666">    StatusBarText</font>(0, 3, &quot;Area centered&quot;, <font color="#924B72">#PB_StatusBar_Center</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/createstatusbar.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freestatusbar.html">FreeStatusBar()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addstatusbarfield.html>AddStatusBarField()</a> - <a href=index.html>StatusBar Index</a> - <a href=freestatusbar.html>FreeStatusBar()</a> -><br><br>
+
+</body></html>

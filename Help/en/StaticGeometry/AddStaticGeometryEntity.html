@@ -1,0 +1,74 @@
+<html><head><title>AddStaticGeometryEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddStaticGeometryEntity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddStaticGeometryEntity</b></font>(#StaticGeometry, EntityID, x, y, z [, ScaleX, ScaleY, ScaleZ [, RotationX, RotationY, RotationZ [, RotationW, Mode]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Add an entity to the specified #StaticGeometry. The original entity is left untouched by this function and 
+can be freed after the add. The same entity can be added multiple times. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#StaticGeometry</i></td>
+<td width="90%"> 
+StaticGeometry to use. 
+
+</td></tr>
+<tr><td><i>EntityID</i></td>
+<td> 
+The <a href="../entity/entityid.html">EntityID</a> of the entity to add to the static geometry. 
+
+</td></tr>
+<tr><td><i>x, y, z</i></td>
+<td> 
+The position of the entity in the static geometry. 
+
+</td></tr>
+<tr><td><i>ScaleX, ScaleY, ScaleZ (optional)</i></td>
+<td> 
+The scale factor to apply to the added entity. 
+
+</td></tr>
+<tr><td><i>RotationX, RotationY, RotationZ (optional)</i></td>
+<td> 
+The rotation to apply to the added entity. 
+
+</td></tr>
+<tr><td><i>RotationW (optional)</i></td>
+<td> 
+The rotation to apply to the added entity (only used for <font color="#924B72">#PB_Orientation_Quaternion</font> and <font color="#924B72">#PB_Orientation_Direction</font>). 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The rotation mode. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Orientation_PitchYawRoll</font>: 'RotationX' (pitch), 'RotationY' (yaw), 'RotationZ' (roll), applied in this order (default).
+  <font color="#924B72">#PB_Orientation_Quaternion</font>  : 'RotationX', 'RotationY', 'RotationZ', 'RotationW' for quaternion values
+  <font color="#924B72">#PB_Orientation_Direction</font>   : 'RotationX', 'RotationY', 'RotationZ' for direction vector, and 'RotationW' for rotation (roll).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Once all the entities have been added, the command <a href="buildstaticgeometry.html">BuildStaticGeometry()</a> has to be called to generate 
+the static geometry. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createstaticgeometry.html">CreateStaticGeometry()</a>, <a href="buildstaticgeometry.html">BuildStaticGeometry()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>StaticGeometry Index</a> - <a href=buildstaticgeometry.html>BuildStaticGeometry()</a> -><br><br>
+
+</body></html>

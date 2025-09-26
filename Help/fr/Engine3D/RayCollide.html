@@ -1,0 +1,75 @@
+<html><head><title>RayCollide</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RayCollide()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>RayCollide</b></font>(X, Y, Z, DestinationX, DestinationY, DestinationZ, [CollisionGroupe , CollisionMasque]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lance un rayon entre deux points et 
+vérifie si le rayon rencontre une 
+<a href="../entity/index.html">entité</a> avec 
+un corps (body). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X, Y, Z</i></td>
+<td width="90%"> 
+Coordonnée du point de départ du 
+rayon, dans l'unité de monde. 
+
+</td></tr>
+<tr><td><i>DestinationX, DestinationY, DestinationZ</i></td>
+<td> 
+Coordonnée du point d'arrivée du rayon, 
+dans l'unité de monde. 
+
+</td></tr>
+<tr><td><i>CollisionGroupe, CollisionMasque (optionnel)</i></td>
+<td> 
+Le groupe de collision et le masque de collision à utiliser. 
+<br>
+<br>
+Peut être utile pour filtrer l'entité qui doit entrer en collision 
+avec le rayon.<br>
+Le groupe et le masque de collision peuvent être modifiés avec 
+<a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur le numéro de 
+<a href="../entity/index.html">l'entité</a> 
+rencontrée par le rayon ou -1 sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour avoir un quelconque effet, le 
+moteur physique doit être activé avec 
+la fonction <a href="enableworldphysics.html">EnableWorldPhysics()</a>. 
+<br>
+<br>
+Seules les entités avec un corps (body) 
+réagissent au contact du rayon. 
+<br>
+<br>
+Pour obtenir la position du point de 
+collision, utiliser <a href="pickx.html">PickX()</a>, <a href="picky.html">PickY()</a> 
+et <a href="pickz.html">PickZ()</a>. <br>
+Les valeurs normales au point de 
+collision sont disponibles avec 
+<a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a> et <a href="normalz.html">NormalZ()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a>, <a href="normalz.html">NormalZ()</a>, <a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=raycast.html>RayCast()</a> - <a href=index.html>Engine3D Index</a> - <a href=raypick.html>RayPick()</a> -><br><br>
+
+</body></html>

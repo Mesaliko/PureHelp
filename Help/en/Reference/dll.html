@@ -1,0 +1,87 @@
+<html><head><title>Building a DLL</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Building a DLL</font></b></p>
+
+PureBasic allows to create standard Microsoft Windows DLL (Dynamic Linked Library), shared objects (.so) on Linux, 
+and dynamic libraries (.dylib) on MacOS X. 
+The DLL code is like a PureBasic code excepts than no real code should be written outside of procedure. <br>
+<br>
+When writing a DLL, all the code is done inside procedures. When a procedure should be public 
+(ie: accessible by third programs which will use the DLL), the keyword <b><font color="#006666">ProcedureDLL</font></b> (or <b><font color="#006666">ProcedureCDLL</font></b> if 
+the procedure needs to be in 'CDecl' format, which is not the case of regular Windows DLL) is used instead 
+of <b><font color="#006666">Procedure</font></b> (and <b><font color="#006666">DeclareDLL</font></b> or <b><font color="#006666">DeclareCDLL</font></b> if are used instead of Declare). This is the only change 
+to do to a program. <br>
+<br>
+When this is done, select 'Shared DLL' as output format ('Compiler Option' window in the PureBasic editor 
+or /DLL switch in command line) and a DLL with the name you set (in the save-requester when using the IDE) 
+will be created in the selected directory. 
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyFunction</font>()
+<font color="#006666">    MessageRequester</font>(&quot;Hello&quot;, &quot;This is a PureBasic DLL !&quot;, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+    
+  <font color="#006666">; Now the client program, which use the DLL</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;PureBasic.dll&quot;)
+<font color="#006666">    CallFunction</font>(0, &quot;MyFunction&quot;)
+<font color="#006666">    CloseLibrary</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<b>For advanced programmers:</b> there is 4 special procedures which are called automatically by the OS when one 
+of the following events happen: <br>
+<br>
+- DLL is attached to a new process <br>
+- DLL is detached from a process <br>
+- DLL is attached to a new thread <br>
+- DLL is detached from a thread <br>
+<br>
+To handle that, it's possible to declare 4 special procedures called: <font color="#006666">AttachProcess</font>(Instance), <font color="#006666">DetachProcess</font>(Instance), 
+<font color="#006666">AttachThread</font>(Instance) and <font color="#006666">DetachThread</font>(Instance). This means these 4 procedures names are reserved and 
+can't be used by the programmer for other purposes. <br>
+<br>
+<b>Notes about creating DLL's:</b> <br>
+<br>
+- The declaration of arrays, lists or map with <a href="../reference/dim.html">Dim</a>, <a href="../reference/newlist.html">NewList</a> or <a href="../reference/newmap.html">NewMap</a> must always be done inside the procedure AttachProcess. <br>
+- Don't write program code outside procedures. The only exception is the declaration of variables or structures. <br>
+- Default values in procedure parameters have no effect. <br>
+- DirectX initialization routines must not be written in the AttachProcess procedure. <br>
+<br>
+<b>Note about returning strings from DLL's:</b> <br>
+<br>
+If you want to return a string out of a DLL, the string has to be declared as <a href="../reference/global.html">Global</a> before using it. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> ReturnString$
+  
+  <b><font color="#006666">ProcedureDLL</font></b>.s <font color="#006666">MyFunction</font>(var.s)
+    ReturnString$ = var + &quot; test&quot;
+    <b><font color="#006666">ProcedureReturn</font></b> ReturnString$
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Without declaring it as <a href="../reference/global.html">Global</a> first, the string is local to the ProcedureDLL 
+and can't be accessed from outside. 
+<br>
+<br>
+When using <a href="../library/callfunction.html">CallFunction()</a> (or one of its similar CallXXX functions) on 
+a DLL function you will get a pointer on the return string, which you could read with 
+<a href="../memory/peeks.html">PeekS()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  String.s =<font color="#006666"> PeekS</font>(<font color="#006666">CallFunction</font>(0, &quot;FunctionName&quot;, Parameter1, Parameter2))
+</font></pre>
+
+<b>Here a complete code example:</b> 
+<br>
+
+</blockquote><p><b>Example</b></p><blockquote>
+<a href="../Examples/DLLSample.pb.html">DLLSample.pb</a>
+</font></body></html>

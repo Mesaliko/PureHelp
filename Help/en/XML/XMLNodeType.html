@@ -1,0 +1,96 @@
+<html><head><title>XMLNodeType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeType()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>XMLNodeType</b></font>(Node)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the type of the given XML node. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Node</i></td>
+<td width="90%"> 
+The XML node to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+It can be one of the following: 
+<br>
+<br>
+
+<font color="#924B72">#PB_XML_Root</font> 
+<blockquote>
+
+This is the trees root node. It represents the document itself. This node cannot be 
+created or deleted manually. Inside the root node, there can be only one node of type 
+<font color="#924B72">#PB_XML_Normal</font> and also no plain text. (this is required to be a well-formed XML document) 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Normal</font> 
+<blockquote>
+
+This is a normal node in the tree. It can have a list of attributes and contain text and/or child nodes. 
+<br>
+<b>Example: </b>&lt;node attribute=&quot;hello&quot;&gt; contained text &lt;/node&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Comment</font> 
+<blockquote>
+
+This node represents a comment. It can have no children or attributes. Its text represents the content of the comment. 
+<br>
+<b>Example: </b>&lt;!--  comment text  --&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_CData</font> 
+<blockquote>
+
+This is a CData section. A CData section contains only text. Its content is not interpreted by the parser so it can 
+contain unescaped &quot;&lt;&quot; and &quot;&gt;&quot; characters for example. CData sections can be used to include other markup or code 
+inside a document without having to escape all characters that could be interpreted as XML. 
+<br>
+<b>Example: </b>&lt;![CDATA[  cdata content  ]]&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_DTD</font> 
+<blockquote>
+
+This is a document type declaration (DTD). This library does not use a validating parser, so these declarations are 
+actually ignored when parsing a document. In order to save them back correctly, they are contained within such a DTD node. 
+The text content of the node is the entire DTD tag. It can be read and modified through commands like 
+<a href="setxmlnodetext.html">SetXMLNodeText()</a> and will be written back to the document when exporting/saving without modification. 
+The <a href="setxmlstandalone.html">SetXMLStandalone()</a> command could be useful as well when working with DTDs. 
+<br>
+<b>Example: </b>&lt;!DOCTYPE name SYSTEM &quot;external dtd uri&quot;&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Instruction</font> 
+<blockquote>
+
+This node represents a Processing Instruction. Processing Instructions contain information that is intended 
+to be interpreted/executed by the target application. They have a <a href="getxmlnodename.html">name</a> to specify the 
+content of the instruction and the instruction data which can be accessed with <a href="getxmlnodetext.html">GetXMLNodeText()</a>. 
+<br>
+<b>Example: </b>&lt;?php if (...) ... ?&gt; 
+<br>
+(here &quot;php&quot; is the node name, and the rest up to the &quot;?&gt;&quot; is the node text.) 
+</blockquote>
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=xmlnodepath.html>XMLNodePath()</a> - <a href=index.html>XML Index</a> - <a href=xmlstatus.html>XMLStatus()</a> -><br><br>
+
+</body></html>

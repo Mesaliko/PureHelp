@@ -1,0 +1,36 @@
+<html><head><title>Music.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Music example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+<b><font color="#006666">If</font></b> <font color="#006666">InitSound</font>() = 0
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;Sound system not available.&quot;) : <b><font color="#006666">End</font></b>
+<b><font color="#006666">EndIf</font></b>
+
+FileName$ =<font color="#006666"> OpenFileRequester</font>(&quot;&quot;,&quot;&quot;,&quot;Music Modules (*.mod, *.xm, *.it)|*.mod;*.xm;*.it&quot;, 0)
+<b><font color="#006666">If</font></b> FileName$
+  <b><font color="#006666">If</font></b> <font color="#006666">LoadMusic</font>(0, FileName$)
+<font color="#006666">    PlayMusic</font>(0)
+<font color="#006666">    MessageRequester</font>(&quot;PureBasic - Module player&quot;, &quot;Playing the music module...&quot;)
+    
+    <font color="#006666">; Now, perform a nice fading...
+</font>    <font color="#006666">;
+</font>    <b><font color="#006666">For</font></b> k=100 <b><font color="#006666">To</font></b> 0 <b><font color="#006666">Step</font></b> -1
+<font color="#006666">      Delay</font>(20)
+<font color="#006666">      MusicVolume</font>(0, k)
+    <b><font color="#006666">Next</font></b>
+    
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Error&quot;, &quot;Can't load the music module or bad module format.&quot;)
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

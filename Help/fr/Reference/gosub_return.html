@@ -1,0 +1,80 @@
+<html><head><title>Gosub : Return</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Gosub : Return</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Gosub"><u>Gosub/Return</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#FakeReturn"><u>FakeReturn</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Gosub"></a>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Gosub</font></b> MonLabel
+
+MonLabel: 
+  ...
+<b><font color="#006666">Return</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Gosub</font></b> signifie 'Go to sub routine', en français: 'Aller au sous-programme'. Un label doit être spécifié 
+après Gosub pour que l'exécution du programme se poursuive à la position du label et jusqu'à ce qu'un 
+<b><font color="#006666">Return</font></b> soit rencontré. Lorsque le <b><font color="#006666">Return</font></b> est atteint, le programme revient à l'instruction suivant 
+le <b><font color="#006666">Gosub</font></b>. <b><font color="#006666">Gosub</font></b> est pratique pour construire rapidement un code structuré. 
+<br>
+<br>
+Les <a href="../reference/procedures.html">procédures</a> sont une autre alternative pour la conception rapide d'un programme 
+structuré. <b><font color="#006666">Gosub</font></b> peut être seulement utilisé dans la partie principale du programme, pas dans 
+les <a href="../reference/procedures.html">procedures</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 1
+  b = 2
+  <b><font color="#006666">Gosub</font></b> OperationComplexe
+  <b><font color="#006666">Debug</font></b> a 
+  <b><font color="#006666">End</font></b>
+       
+  OperationComplexe: 
+    a = b*2+a*3+(a+b) 
+    a = a+a*a 
+  <b><font color="#006666">Return</font></b> 
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="FakeReturn"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">FakeReturn</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Lorsque vous souhaitez sauter d'un sous-programme à une autre partie du code extérieur au sous-programme 
+(en utilisant une commande <a href="../reference/others.html">Goto</a>), vous pouvez utiliser un <b><font color="#006666">FakeReturn</font></b> qui 
+simule un <b><font color="#006666">Return</font></b> sans l'effectuer réellement. Si vous n'utilisez pas ce dispositif, votre programme 
+génèrera une erreur. Cette commande ne devrait pas avoir d'utilité car un programme bien conçu ne devrait pas 
+utiliser de <a href="../reference/others.html">Goto</a>. Toutefois, dans certains cas où la performance est critique, cela 
+peut aider le programmeur. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Gosub</font></b> SousProgramme1
+     
+  SousProgramme1:
+    ...
+    <b><font color="#006666">If</font></b> a = 10
+      <b><font color="#006666">FakeReturn</font></b> 
+      <b><font color="#006666">Goto</font></b> ProgrammePrincipal 
+    <b><font color="#006666">EndIf</font></b> 
+  <b><font color="#006666">Return</font></b>
+</font></pre>
+
+</blockquote>
+</font></body></html>

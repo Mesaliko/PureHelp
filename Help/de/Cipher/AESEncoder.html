@@ -1,0 +1,140 @@
+<html><head><title>AESEncoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AESEncoder()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>AESEncoder</b></font>(*Eingabe, *Ausgabe, Größe, *Schlüssel, Bits, *InitialisierungsVektor [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Kodiert den angegebenen Eingabepuffer mit Hilfe des AES-Algorithmus in den Ausgabepuffer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Eingabe</i></td>
+<td width="90%"> 
+Der Eingabepuffer mit den reinen Daten. 
+
+</td></tr>
+<tr><td><i>*Ausgabe</i></td>
+<td> 
+Der Ausgabepuffer, welcher die kodierten Daten empfängt. Dieser muss ein 
+anderer als der Eingabepuffer sein. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Anzahl an zu kodierenden Bytes. Dies müssen mindestens 16 Bytes sein. 
+Um etwas Kleineres zu verschlüsseln, müssen Leerzeichen vor dem Kodieren hinzugefügt werden. 
+
+</td></tr>
+<tr><td><i>*Schlüssel</i></td>
+<td> 
+Ein Puffer, welcher den Schlüssel für das Kodieren enthält. 
+Seine Größe hängt vom Parameter 'Bits' ab: 16 Bytes für 128 Bit-Verschlüsselung, 24 Bytes 
+für 192 Bit und 32 Bytes für 256 Bit. 
+<a href="derivecipherkey.html">DeriveCipherKey()</a> kann verwendet werden, um diesen Schlüssel aus einem Passwort zu erstellen. 
+
+</td></tr>
+<tr><td><i>Bits</i></td>
+<td> 
+Die Größe des für die Verschlüsselung verwendeten Schlüssels. Gültige Werte sind 
+128, 192 und 256. 
+
+</td></tr>
+<tr><td><i>*InitialisierungsVektor</i></td>
+<td> 
+Der InitialisierungsVektor ist ein zufälliger Datenblock, 
+welcher für das Initialisieren der Verschlüsselung verwendet wird, um ein Knacken beim Dekodieren 
+zu verhindern (wird nur bei Verwendung des <font color="#924B72">#PB_Cipher_CBC</font> Modus benötigt). 
+Der InitialisierungsVektor ist immer 16 Bytes lang. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CBC</font>: Standard-Modus der Kodierung (Cipher Block Chaining). Benötigt einen '*InitialisierungsVektor'.
+                  Empfohlen als sicherer gegenüber dem ECB-Modus.
+  <font color="#924B72">#PB_Cipher_ECB</font>: Alternativer Modus (Electronic CodeBook). Verwendet weder einen Zufallswert noch Verkettung
+                  (jeder Block wird unabhängig voneinander kodiert), was ihn sehr schwach im Vergleich zu CBC macht,
+                  weshalb er nicht für ernsthafte Verschlüsselung verwendet werden sollte.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Verschlüsselung erfolgreich war, 
+andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+AES ist ein industrieller Verschlüsselungs-Algorithmus und ist gut ausgewogen zwischen Geschwindigkeit 
+und Sicherheit. Hier die (englische) Wikipedia-Einführung über AES: 
+'In cryptography, the Advanced Encryption Standard (AES) is an encryption standard adopted by the U.S. government. 
+The standard comprises three block ciphers, AES-128, AES-192 and AES-256, adopted from a larger collection originally 
+published as Rijndael. Each AES cipher has a 128-bit block size, with key sizes of 128, 192 and 256-bit, respectively. 
+The AES ciphers have been analyzed extensively and are now used worldwide.' 
+<br>
+<br>
+PureBasic verwendet eine RFC-konforme Implementierung von AES. 
+Weitere Informationen sind zu finden in der RFC 3602: <a href="http://www.ietf.org/rfc/rfc3602.txt">http://www.ietf.org/rfc/rfc3602.txt</a>. 
+
+</blockquote><p><b>Beispiel:</b> CBC</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Verschlüsseln eines Strings</font>
+  <font color="#006666">;</font>
+  String$ = &quot;Hello this is a test for AES&quot;
+  
+  StringMemorySize =<font color="#006666"> StringByteLength</font>(String$) +<font color="#006666"> SizeOf</font>(Character) <font color="#006666">; Platz für den null-terminierten String mit seiner abschließenden Null</font>
+  *CipheredString =<font color="#006666"> AllocateMemory</font>(StringMemorySize)   
+  *DecipheredString =<font color="#006666"> AllocateMemory</font>(StringMemorySize) 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">AESEncoder</font>(@String$, *CipheredString,<font color="#006666"> StringByteLength</font>(String$), ?Key, 128, ?InitializationVector)
+    <b><font color="#006666">Debug</font></b> &quot;Ciphered: &quot;+<font color="#006666">PeekS</font>(*CipheredString) <font color="#006666">; Warning: wird beim ersten Null-Byte angehalten, nur für Demo-Zwecke</font>
+    
+<font color="#006666">    AESDecoder</font>(*CipheredString, *DecipheredString,<font color="#006666"> StringByteLength</font>(String$), ?Key, 128, ?InitializationVector)
+    <b><font color="#006666">Debug</font></b> &quot;Deciphered: &quot;+<font color="#006666">PeekS</font>(*DecipheredString)
+  <b><font color="#006666">EndIf</font></b>
+
+  <b><font color="#006666">DataSection</font></b>
+    Key:
+      <b><font color="#006666">Data</font></b>.b $06, $a9, $21, $40, $36, $b8, $a1, $5b, $51, $2e, $03, $d5, $34, $12, $00, $06
+  
+    InitializationVector:
+      <b><font color="#006666">Data</font></b>.b $3d, $af, $ba, $42, $9d, $9e, $b4, $30, $b4, $22, $da, $80, $2c, $9f, $ac, $41
+  <b><font color="#006666">EndDataSection</font></b>
+  
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> ECB</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  String$ = &quot;Hello this is a test for AES&quot;
+  
+  *CipheredString   =<font color="#006666"> AllocateMemory</font>(<font color="#006666">StringByteLength</font>(String$) +<font color="#006666"> SizeOf</font>(Character)) <font color="#006666">; Platz für den null-terminierten String</font>
+  *DecipheredString =<font color="#006666"> AllocateMemory</font>(<font color="#006666">StringByteLength</font>(String$) +<font color="#006666"> SizeOf</font>(Character)) <font color="#006666">; mit seiner abschließenden Null</font>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">AESEncoder</font>(@String$, *CipheredString,<font color="#006666"> MemorySize</font>(*CipheredString), ?Key, 128, 0, <font color="#924B72">#PB_Cipher_ECB</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Ciphered: &quot; +<font color="#006666"> PeekS</font>(*CipheredString)
+    
+<font color="#006666">    AESDecoder</font>(*CipheredString, *DecipheredString,<font color="#006666"> MemorySize</font>(*DecipheredString), ?Key, 128, 0, <font color="#924B72">#PB_Cipher_ECB</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Deciphered: &quot; +<font color="#006666"> PeekS</font>(*DecipheredString)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">DataSection</font></b>
+    Key:
+    <b><font color="#006666">Data</font></b>.a $06, $a9, $21, $40, $36, $b8, $a1, $5b, $51, $2e, $03, $d5, $34, $12, $00, $06
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="aesdecoder.html">AESDecoder()</a>, <a href="startaescipher.html">StartAESCipher()</a>, <a href="derivecipherkey.html">DeriveCipherKey()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=aesdecoder.html>AESDecoder()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=addcipherbuffer.html>AddCipherBuffer()</a> -><br><br>
+
+</body></html>

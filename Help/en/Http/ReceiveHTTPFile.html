@@ -1,0 +1,75 @@
+<html><head><title>ReceiveHTTPFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveHTTPFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReceiveHTTPFile</b></font>(URL$, Filename$ [, Flags [, UserAgent$]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Download a file to disk from the given URL$. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+The URL to download from. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The local filename to write the file to. If the filename does not include a full path, it 
+is interpreted relative to the <a href="../filesystem/getcurrentdirectory.html">current directory</a>. 
+If the file exists, it will be overwritten. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: starts the download asynchronously.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : don't follow automatic redirections.
+</font></pre>
+
+</td></tr>
+<tr><td><i>UserAgent$ (optional)</i></td>
+<td> 
+Change the user agent for the HTTP request. Default user agent is set to 
+&quot;Mozilla/5.0 Gecko/41.0 Firefox/41.0&quot; for maximum compatibility. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the download was successful, zero otherwise. If <font color="#924B72">#PB_HTTP_Asynchronous</font> 
+was specified, it returns the 'HttpConnection' value needed for <a href="httpprogress.html">HTTPProgress()</a>, 
+<a href="aborthttp.html">AbortHTTP()</a> and <a href="finishhttp.html">FinishHTTP()</a>. When using <font color="#924B72">#PB_HTTP_Asynchronous</font>, <a href="finishhttp.html">FinishHTTP()</a> needs to be called 
+when the download is finished (successfully or not). 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux, 'libcurl' needs to be installed to have this command working (most of Linux 
+distributions comes with it already installed). <br>
+If the remote file was not found, it will contains the webserver error. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Filename$ =<font color="#006666"> SaveFileRequester</font>(&quot;Where to save index.php ?&quot;, &quot;&quot;, &quot;&quot;, 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">ReceiveHTTPFile</font>(&quot;https://www.purebasic.com/index.php&quot;, Filename$)
+    <b><font color="#006666">Debug</font></b> &quot;File received and written to disk. If the remote file was not found, it will contains the webserver error.&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;No file received (network error).&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=httptimeout.html>HTTPTimeout()</a> - <a href=index.html>Http Index</a> - <a href=receivehttpmemory.html>ReceiveHTTPMemory()</a> -><br><br>
+
+</body></html>

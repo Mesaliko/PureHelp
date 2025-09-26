@@ -1,0 +1,34 @@
+<html><head><title>Migration de PureBasic 5.50 vers 5.60</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Migration de PureBasic 5.50 vers 5.60</font></b></p>
+
+<p><b>Cipher library</b></p><blockquote>
+
+
+<br>
+Base64Encoder: Fonction renommée 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Ancien</font>
+<font color="#006666">  Base64Encoder</font>()
+
+  <font color="#006666">; Nouveau</font>
+<font color="#006666">  Base64EncoderBuffer</font>()
+</font></pre>
+
+Base64Decoder: Fonction renommée 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Ancien</font>
+<font color="#006666">  Base64Decoder</font>()
+
+  <font color="#006666">; Nouveau</font>
+<font color="#006666">  Base64DecoderBuffer</font>()
+</font></pre>
+
+</blockquote>
+<p><b>Autres</b></p><blockquote>
+
+La syntaxe autonome 'Define.b', pour changer le type par défaut des variables non typées, 
+est désormais interdite et lèvera une 'Erreur de syntaxe'. Il suffit de supprimer 
+cette instruction de vos code tout simplement (assurez-vous de typer vos variables 
+non typées convenablement).<br>
+Remarque: La syntaxe 'Define.b a, b, c' est toujours pris en charge. 
+</blockquote>
+</font></body></html>

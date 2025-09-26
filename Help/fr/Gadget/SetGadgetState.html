@@ -1,0 +1,82 @@
+<html><head><title>SetGadgetState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetState()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetGadgetState</b></font>(#Gadget, Etat)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change l'état d'un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+
+</td></tr>
+<tr><td><i>Etat</i></td>
+<td> 
+Le nouvel état de l'élément. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction est universelle et 
+s'applique à pratiquement tous les gadgets : 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="buttongadget.html">ButtonGadget()</a>     : change l'état d'un bouton poussoir (<font color="#924B72">#PB_Button_Toggle</font>): 1 = pressé, 0 = normal. 
+  - <a href="buttonimagegadget.html">ButtonImageGadget()</a>: change l'état d'un bouton poussoir (<font color="#924B72">#PB_Button_Toggle</font>): 1 = pressé, 0 = normal. 
+  - <a href="calendargadget.html">CalendarGadget()</a>   : Change la date affichée. 
+  - <a href="checkboxgadget.html">CheckBoxGadget()</a>   : Change l'etat de la case à cocher. Valeurs disponibles:
+    <font color="#924B72">#PB_CheckBox_Checked</font>  : Coche la case.
+    <font color="#924B72">#PB_CheckBox_Unchecked</font>: Décoche la case.
+    <font color="#924B72">#PB_CheckBox_Inbetween</font>: Active l'état intermédiaire 
+                            (seulement pour les case à cocher de type <font color="#924B72">#PB_CheckBox_ThreeState</font>).
+  - <a href="comboboxgadget.html">ComboBoxGadget()</a>   : Change l'élément sélectionné en cours. 
+  - <a href="dategadget.html">DateGadget()</a>       : Change la date ou l'heure affichée. Si <font color="#924B72">#PB_Date_CheckBox</font> est utilisé, 
+                         mettre 'Etat' à 0 pour décocher la case à cocher.
+  - <a href="imagegadget.html">ImageGadget()</a>      : Change l'image affichée par le gadget ('Etat' sera un <a href="../image/imageid.html">ImageID()</a>). 
+                         Si Etat = 0, l'image est retirée du gadget. 
+  - <a href="ipaddressgadget.html">IPAddressGadget()</a>  : change l'adresse IP courante.
+  - <a href="listicongadget.html">ListIconGadget()</a>   : Change l'élément sélectionné (tous les autres éléments sont alors désélectionnés). 
+                         Si 'Etat' = -1, alors aucun élément n'est sélectionné. 
+  - <a href="listviewgadget.html">ListViewGadget()</a>   : Change l'élément sélectionné. Si 'Etat' = -1, alors aucun élément n'est sélectionné.
+  - <a href="mdigadget.html">MDIGadget()</a>        : Change la fenêtre fille active (En indiquant son numéro de #fenetre), ou exécute une des actions suivantes:
+    <font color="#924B72">#PB_MDI_Cascade</font>         : Ré-organise les fenêtres filles sous forme de cascade.
+    <font color="#924B72">#PB_MDI_TileVertically</font>  : Ré-organise les fenêtres filles sous forme de mosaïque verticale.
+    <font color="#924B72">#PB_MDI_TileHorizontally</font>: Ré-organise les fenêtres filles sous forme de mosaïque horizontale.
+    <font color="#924B72">#PB_MDI_Next</font>            : Active la fenêtre fille suivante.
+    <font color="#924B72">#PB_MDI_Previous</font>        : Active la fenêtre fille précédente.
+    <font color="#924B72">#PB_MDI_Arrange</font>         : Ré-organise les fenêtres filles qui sont réduites.
+
+  - <a href="optiongadget.html">OptionGadget()</a>     : 'Etat' = 1 pour l'activer, sinon 0. 
+  - <a href="panelgadget.html">PanelGadget()</a>      : Change l'onglet en cours. 
+  - <a href="progressbargadget.html">ProgressBarGadget()</a>: Change la valeur de la barre de progression. 
+  - <a href="scrollbargadget.html">ScrollBarGadget()</a>  : Change la position du curseur. 
+  - <a href="shortcutgadget.html">ShortcutGadget()</a>   : Change le raccourci clavier.  
+  - <a href="spingadget.html">SpinGadget()</a>       : Change la valeur actuelle. 
+  - <a href="splittergadget.html">SplitterGadget()</a>   : Change la position de la barre de séparation (en pixels). 
+  - <a href="trackbargadget.html">TrackBarGadget()</a>   : Change la valeur du curseur. La valeur <font color="#924B72">#PB_ProgressBar_Unknown</font> 
+                         peut être utilisée pour indiquer que la progression est inconnue. 
+  - <a href="treegadget.html">TreeGadget()</a>       : Change l'élément actuellement sélectionné, -1 pour tout déselectionner. 
+  - <a href="webgadget.html">WebGadget()</a>        : Effectue des actions sur le navigateur.
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, 
+<a href="setgadgetitemstate.html">SetGadgetItemState()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setgadgetitemtext.html>SetGadgetItemText()</a> - <a href=index.html>Gadget Index</a> - <a href=setgadgettext.html>SetGadgetText()</a> -><br><br>
+
+</body></html>

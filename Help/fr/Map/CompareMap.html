@@ -1,0 +1,72 @@
+<html><head><title>CompareMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareMap()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CompareMap</b></font>(Map1(), Map2() [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Compare chaque élément des deux cartes pour vérifier leur égalité. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map1(), Map2()</i></td>
+<td width="90%"> 
+Les maps à comparer. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_String_CaseSensitive</font>  : La comparaison de chaînes est sensible à la casse (a=a). (par défaut)
+   <font color="#924B72">#PB_String_NoCase</font>         : La comparaison de chaînes n'est pas sensible à la casse (A=a).
+   <font color="#924B72">#PB_Memory_FollowPointers</font> : Si un élément de structure est un pointeur qui n'est pas 0, compare récursivement la cible du pointeur.
+                               La valeur par défaut consiste à comparer uniquement la valeur (existante) du pointeur elle-même.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les deux maps sont identiques, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Compare de manière récursive également le contenu de cartes structurées avec des éléments 
+dynamiques (tels que des tableaux intégrés, des listes ou des maps).<br>
+Les deux maps sont considérées comme égales si elles ont le même type et la même taille et si 
+chaque paire d’éléments est identique. 
+<br>
+<br>
+L'option <font color="#924B72">#PB_Memory_FollowPointers</font> est destinée aux utilisateurs avancés et nécessite une attention 
+particulière pour éviter les plantages. Si cette option est utilisée, alors toutes les valeurs de 
+pointeur doivent pointer vers une mémoire valide et initialisée ou avoir la valeur 0. Il n'est 
+pas non plus autorisé d'avoir des boucles dans les éléments pointés (une chaîne de pointeurs qui 
+se renvoie à elle-même). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">A</font>()
+<font color="#006666">  A</font>(&quot;de&quot;) = 49
+<font color="#006666">  A</font>(&quot;fr&quot;) = 33
+<font color="#006666">  A</font>(&quot;uk&quot;) = 44
+
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">B</font>() <font color="#006666">; un élément est manquant</font>
+<font color="#006666">  B</font>(&quot;de&quot;) = 49
+<font color="#006666">  B</font>(&quot;uk&quot;) = 44 
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareMap</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>()) <font color="#006666">; Pas égal</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../array/comparearray.html">CompareArray()</a>, <a href="../list/comparelist.html">CompareList()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=clearmap.html>ClearMap()</a> - <a href=index.html>Map Index</a> - <a href=copymap.html>CopyMap()</a> -><br><br>
+
+</body></html>

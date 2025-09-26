@@ -1,0 +1,150 @@
+<html><head><title>Module</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Module</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DeclareModule</font></b> &lt;name&gt;
+  ...
+<b><font color="#006666">EndDeclareModule</font></b>
+
+<b><font color="#006666">Module</font></b> &lt;name&gt;
+  ...
+<b><font color="#006666">EndModule</font></b>
+
+<b><font color="#006666">UseModule</font></b> &lt;name&gt;
+<b><font color="#006666">UnuseModule</font></b> &lt;name&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Modules are an easy way to isolate code parts from the main code, allowing code reuse and sharing 
+without risk of name conflict. In some other programming languages, modules are known as 'namespaces'. 
+A module must have a <b><font color="#006666">DeclareModule</font></b> section (which is the public interface) and an associated 
+<b><font color="#006666">Module</font></b> section (which is the implementation). 
+Only items declared in the <b><font color="#006666">DeclareModule</font></b> section will be accessible from outside the module. All the 
+code put in the <b><font color="#006666">Module</font></b> section will be kept private to this module. Items from main code 
+like procedures, variables etc. won't be accessible inside the module, even if they are <a href="../reference/global.html">global</a>. A module can be seen 
+as a blackbox, an empty code sheet where item names can not conflict with the main code. It makes it easier 
+to write specific code, as simple names can be reused within each module without risk of conflict. 
+<br>
+<br>
+Items allowed in the <b><font color="#006666">DeclareModule</font></b> section can be the following: procedure (only procedure declaration allowed), structure, macro, variable, 
+constant, enumeration, array, list, map and label. 
+<br>
+<br>
+To access a module item from outside the module, the module name has to be specified followed by the '::' separator. When explicitly specifying 
+the module name, the module item is available everywhere in the code source, even in another module. 
+All items in the <b><font color="#006666">DeclareModule</font></b> section can be automatically imported into another module or in the main code using <b><font color="#006666">UseModule</font></b>. 
+In the case of a module name conflict, the module items won't be imported and a compiler error will be raised. 
+<b><font color="#006666">UnuseModule</font></b> removes the module items. <b><font color="#006666">UseModule</font></b> is not mandatory to access a module item, but the module name needs to be specified. 
+<br>
+<br>
+To share information between modules, a common module can be created and then used in every module which needs it. It's the common way 
+have global data available for all modules. 
+<br>
+<br>
+Default items available in modules are all PureBasic commands, structure and constants. Therefore module items can not be named like 
+internal PureBasic commands, structures or constants. 
+<br>
+<br>
+All code put inside <b><font color="#006666">DeclareModule</font></b> and <b><font color="#006666">Module</font></b> sections is executed like any other code when the program flow reaches the module. 
+<br>
+<br>
+When the statements <b><font color="#006666">Define</font></b>, <b><font color="#006666">EnableExplicit</font></b>, <b><font color="#006666">EnableASM</font></b> are used inside a module, they have no effect outside the respective module, and vice versa. 
+<br>
+<br>
+Note: modules are not mandatory in PureBasic but are recommended when building big projects. They help to build more maintainable 
+code, even if it is slightly more verbose than module-free code. Having a <b><font color="#006666">DeclareModule</font></b> section make the module pretty much self-documented 
+for use when reusing and sharing it. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <font color="#006666">; Every items in this sections will be available from outside</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+    <font color="#924B72">#FerrariName$</font> = &quot;458 Italia&quot;
+
+    <b><font color="#006666">Declare</font></b> <font color="#006666">CreateFerrari</font>()
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <font color="#006666">; Every items in this sections will be private. Every names can be used without conflict</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Module</font></b> Ferrari
+
+    <b><font color="#006666">Global</font></b> Initialized = <font color="#924B72">#False</font>
+
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>() <font color="#006666">; Private init procedure</font>
+      <b><font color="#006666">If</font></b> Initialized = <font color="#924B72">#False</font>
+        Initialized = <font color="#924B72">#True</font>
+        <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndProcedure</font></b>
+
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">CreateFerrari</font>()
+<font color="#006666">      Init</font>()
+      <b><font color="#006666">Debug</font></b> &quot;CreateFerrari()&quot;
+    <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">EndModule</font></b>
+
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>() <font color="#006666">; Main init procedure, doesn't conflict with the Ferrari Init() procedure</font>
+    <b><font color="#006666">Debug</font></b> &quot;Main init()&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  Init</font>()
+
+  Ferrari::<font color="#006666">CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> Ferrari::<font color="#924B72">#FerrariName$</font>
+
+  <b><font color="#006666">Debug</font></b> &quot;------------------------------&quot;
+
+  <b><font color="#006666">UseModule</font></b> Ferrari <font color="#006666">; Now import all public item directly in the main program scope</font>
+
+<font color="#006666">  CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font>
+
+</font></pre>
+
+</blockquote><p><b>Example:</b> With a common module</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <font color="#006666">; The common module, which will be used by others to share data</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">DeclareModule</font></b> Cars
+    <b><font color="#006666">Global</font></b> NbCars = 0
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <b><font color="#006666">Module</font></b> Cars
+  <b><font color="#006666">EndModule</font></b>
+
+  <font color="#006666">; First car module</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <b><font color="#006666">Module</font></b> Ferrari
+    <b><font color="#006666">UseModule</font></b> Cars
+
+    NbCars+1
+  <b><font color="#006666">EndModule</font></b>
+
+  <font color="#006666">; Second car module</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">DeclareModule</font></b> Porsche
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <b><font color="#006666">Module</font></b> Porsche
+    <b><font color="#006666">UseModule</font></b> Cars
+
+    NbCars+1
+  <b><font color="#006666">EndModule</font></b>
+
+  <b><font color="#006666">Debug</font></b> Cars::NbCars
+
+</font></pre>
+
+</blockquote>
+</font></body></html>

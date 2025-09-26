@@ -1,0 +1,68 @@
+<html><head><title>KeyboardReleased</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">KeyboardReleased()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>KeyboardReleased</b></font>(KeyID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Checks if the specified key has been pushed and released. This function is useful for 
+switch key checks, like a 'Pause' key in a game (one time the game is paused, next time 
+it will continue). The function <a href="examinekeyboard.html">ExamineKeyboard()</a> must be called before this function to update the keyboard 
+state. The keyboard behavior can be changed with <a href="keyboardmode.html">KeyboardMode()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>KeyID</i></td>
+<td width="90%"> 
+The identifier of the key to be checked. For a full list of available keys see <a href="keyboardpushed.html">KeyboardPushed()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the specified key has been pushed and released, zero otherwise. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() <b><font color="#006666">And</font></b> <font color="#006666">InitKeyboard</font>() <b><font color="#006666">And</font></b> <font color="#006666">OpenScreen</font>(800,600,16,&quot;&quot;)
+    Paused = <font color="#924B72">#False</font>
+    <b><font color="#006666">Repeat</font></b>
+<font color="#006666">      FlipBuffers</font>()
+
+      <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+
+<font color="#006666">        ExamineKeyboard</font>()
+        <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_P</font>)
+          <b><font color="#006666">If</font></b> Paused = <font color="#924B72">#False</font>
+            Paused = <font color="#924B72">#True</font>
+          <b><font color="#006666">Else</font></b>
+            Paused = <font color="#924B72">#False</font>
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">        DrawingMode</font>(0)
+
+        <b><font color="#006666">If</font></b> Paused = <font color="#924B72">#False</font>
+<font color="#006666">          DrawText</font>(20, 20, &quot;Program is running...&quot;)
+        <b><font color="#006666">Else</font></b>
+<font color="#006666">          DrawText</font>(20, 20, &quot;Program paused...    &quot;)
+        <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">        StopDrawing</font>()
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examinekeyboard.html">ExamineKeyboard()</a>, <a href="keyboardpushed.html">KeyboardPushed()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=keyboardpushed.html>KeyboardPushed()</a> - <a href=index.html>Keyboard Index</a><br><br></blockquote>
+</font></body></html>

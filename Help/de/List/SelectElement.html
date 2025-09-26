@@ -1,0 +1,74 @@
+<html><head><title>SelectElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SelectElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Ergebnis = <font color="#006666"><b>SelectElement</b></font>(Liste(), Position)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert das aktuelle Listenelement auf das Element an der angegebenen Position. 
+Dies ist sehr nützlich, wenn Sie zu einer bestimmten Position in der Liste springen 
+möchten, ohne die Liste manuell mithilfe einer Schleife zu durchlaufen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+Der Variablenname der verknüpften Liste, welche mit dem <a href="../reference/newlist.html">NewList</a> Befehl erstellt 
+wurde. Sie müssen die Klammern nach dem Listennamen immer angeben. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+Die Position, zu der in der Liste gesprungen werden soll. Dabei wird davon ausgegangen, dass sich 
+das erste Element in der Liste an Position 0 befindet, das nächste an 1 und so weiter. Sie 
+müssen sicherstellen, dass Sie keine Position angeben, die außerhalb der Anzahl an Elementen 
+in der Liste liegt! 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall die Daten-Adresse des ausgewählten Elements zurück - 
+oder Null, wenn die Position außerhalb des gültigen Bereichs liegt. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Da verknüpfte Listen intern keinen Index verwenden, springt diese Funktion zwangsläufig zu jedem 
+Element in der Liste, bis die Zielposition erreicht ist, was bei einer großen Liste Zeit benötigt. 
+Wird eine schnellere Methode benötigt, sollte <a href="changecurrentelement.html">ChangeCurrentElement()</a> genutzt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">mylist</font>.l()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 23
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 56
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 12
+<font color="#006666">  AddElement</font>(<font color="#006666">mylist</font>()) :<font color="#006666"> mylist</font>() = 73
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 0)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;An Position 0, der Wert lautet &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 2)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;An Position 2, der Wert lautet &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 1)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;An Position 1, der Wert lautet &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+
+<font color="#006666">  SelectElement</font>(<font color="#006666">mylist</font>(), 3)
+<font color="#006666">  MessageRequester</font>(&quot;Position&quot;, &quot;An Position 3, der Wert lautet &quot;+<font color="#006666">Str</font>(<font color="#006666">mylist</font>()),0)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="changecurrentelement.html">ChangeCurrentElement()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=resetlist.html>ResetList()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=splitlist.html>SplitList()</a> -><br><br>
+
+</body></html>

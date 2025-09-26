@@ -1,0 +1,80 @@
+<html><head><title>Gosub : Return</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Gosub : Return</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Gosub</font></b> Sprungmarke
+
+Sprungmarke:
+  ...
+<b><font color="#006666">Return</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Gosub</font></b> steht für 'Go to sub routine' (&quot;... gehe zu einer Unterroutine&quot;). Nach <b><font color="#006666">Gosub</font></b> muss eine 
+<a href="../reference/general_rules.html">Sprungmarke</a> angegeben werden, dann wird die Programmausführung unmittelbar 
+ab der Position nach der Sprungmarke bis zum nächsten <b><font color="#006666">Return</font></b> fortgesetzt. Wenn das 
+<b><font color="#006666">Return</font></b> erreicht wurde, wird die Programmausführung unmittelbar nach dem aufrufenden <b><font color="#006666">Gosub</font></b> fortgesetzt. 
+<br>
+<b><font color="#006666">Gosub</font></b> ist nützlich, um schnellen strukturierten Code zu erstellen. 
+<br>
+<br>
+Eine weitere Technik, die verwendet werden kann, um eine Unterroutine in einen eigenständigen Programmteil einzufügen, 
+besteht in der Nutzung von <a href="../reference/procedures.html">Prozeduren</a>. 
+<b><font color="#006666">Gosub</font></b> kann nur im Hauptteil des Quellcodes verwendet werden, jedoch nicht innerhalb von 
+<a href="../reference/procedures.html">Prozeduren</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 1
+  b = 2
+  <b><font color="#006666">Gosub</font></b> ComplexOperation
+  <b><font color="#006666">Debug</font></b> a
+  <b><font color="#006666">End</font></b>
+
+  ComplexOperation:
+    a = b*2+a*3+(a+b)
+    a = a+a*a
+  <b><font color="#006666">Return</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">FakeReturn</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+
+Wenn mit Hilfe des Schlüsselworts <a href="../reference/others.html">Goto</a> aus einer Unterroutine in einen anderen Programmteil 
+(außerhalb dieser Unterroutine) gesprungen werden soll, muss <b><font color="#006666">FakeReturn</font></b> verwendet werden. 
+<b><font color="#006666">FakeReturn</font></b> simuliert ein Return, ohne tatsächlich ein Return auszuführen. Wenn es nicht verwendet wird, 
+wird das Programm abstürzen. 
+<br>
+Hinweis: Um eine Schleife sicher zu verlassen, sollte <a href="../reference/break_continue.html">Break</a> anstelle von <b><font color="#006666">Goto</font></b> verwendet werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Gosub</font></b> SubRoutine1
+
+  SubRoutine1:
+    ...
+    <b><font color="#006666">If</font></b> a = 10
+      <b><font color="#006666">FakeReturn</font></b>
+      <b><font color="#006666">Goto</font></b> Main_Loop
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Return</font></b>
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

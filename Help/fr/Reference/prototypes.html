@@ -1,0 +1,87 @@
+<html><head><title>Prototypes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Prototypes</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Prototype</font></b>.&lt;type&gt; nom(&lt;parametre&gt;, [, &lt;parametre&gt; [= ValeurDefaut]...])
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Pour les programmeurs chevronnés. Un <b><font color="#006666">Prototype</font></b> permet la déclaration d'un 
+type particulier qui servira à appeler une fonction. Cela permet de faire facilement des pointeurs 
+de fonctions, car ce type peut être affecté à une variable. 
+<br>
+<br>
+Cette fonctionnalité peut remplacer <a href="../library/callfunction.html">CallFunction()</a> 
+car elle présente quelques avantages: vérification du type de paramètre, du nombre 
+de paramètres. 
+<br>
+<br>
+Contrairement à  <a href="../library/callfunction.html">CallFunction()</a>, le prototype peut gérer les paramètres de 
+types 'double', 'float' et 'quad' sans aucun problème. <a href="../library/getfunction.html">GetFunction()</a> permet d'obtenir 
+facilement le pointeur d'une fonction dans une bibliothèque. 
+<br>
+<br>
+Les paramètres en fin de prototype peuvent avoir une valeur par défaut (une expression constante est requise). 
+Les paramètres ayant une valeur par défaut pourront être omis lors de l'appel du prototype, la valeur 
+par défaut de chaque paramètre manquant sera utilisée. 
+<br>
+<br>
+Par défaut, la fonction utilisera la convention d'appel <a href="https://fr.wikipedia.org/wiki/Convention_d%27appel">stdcall</a> sur x86, ou 'fastcall' sur x64. Si le pointeur de fonction appelle 
+une fonction C utilisant la convention d'appel <a href="https://fr.wikipedia.org/wiki/Convention_d%27appel">cdecl</a>, <b><font color="#006666">PrototypeC</font></b> est fortement conseillé. 
+<br>
+<br>
+Les <a href="../reference/pseudotypes.html">pseudotypes</a> peuvent être utilisés pour les paramètres, mais pas pour le 
+type de retour. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Cet exemple ne fonctionne que sous Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  
+  <b><font color="#006666">Prototype</font></b>.i <font color="#006666">ProtoMessageBox</font>(Fenetre.i, Corps$, Titre$, Options.i = 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;User32.dll&quot;)
+   
+    <font color="#006666">; 'MsgBox' est une variable de type 'ProtoMessageBox' </font>
+    <font color="#006666">;</font>
+    MsgBox.ProtoMessageBox =<font color="#006666"> GetFunction</font>(0, &quot;MessageBoxW&quot;)
+    
+<font color="#006666">    MsgBox</font>(0, &quot;Le Monde&quot;, &quot;Bonjour&quot;) <font color="#006666">; Les options peuvent être omises</font>
+  <b><font color="#006666">EndIf</font></b>
+    
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Avec des pseudotypes</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Cet exemple ne fonctionne que sous Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  <font color="#006666">; Nous spécifions le pseudotype 'p-unicode'pour les 2 paramètres de type string</font>
+  <font color="#006666">; (texte à afficher et titre) car l'api MessageBoxW est une fonction unicode. Le compilateur</font>
+  <font color="#006666">; convertira automatiquement les chaînes ascii en unicode pour les besoins de la fonction </font>
+  <font color="#006666">;</font>
+ 
+  <b><font color="#006666">Prototype</font></b>.i <font color="#006666">ProtoMessageBoxA</font>(Fenetre.i, Corps.p-ascii, Titre.p-ascii, Options.i = 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;User32.dll&quot;)
+   
+    <font color="#006666">; 'MsgBox' est une variable de type 'ProtoMessageBoxA' </font>
+    <font color="#006666">;</font>
+    MsgBox.ProtoMessageBoxA =<font color="#006666"> GetFunction</font>(0, &quot;MessageBoxA&quot;)
+    
+<font color="#006666">    MsgBox</font>(0, &quot;Le Monde&quot;, &quot;Bonjour&quot;) <font color="#006666">; Les options peuvent être omises</font>
+  <b><font color="#006666">EndIf</font></b>
+    
+</font></pre>
+
+
+
+</blockquote>
+</font></body></html>

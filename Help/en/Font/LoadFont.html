@@ -1,0 +1,86 @@
+<html><head><title>LoadFont</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadFont()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>LoadFont</b></font>(#Font, Name$, YSize [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Tries to open the specified font. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Font</i></td>
+<td width="90%"> 
+A number to identify the new font. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Name$</i></td>
+<td> 
+The name of the font to load. 
+
+</td></tr>
+<tr><td><i>YSize</i></td>
+<td> 
+The vertical size of the font in points. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+A combination of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Font_Bold</font>       : The font will be bold
+  <font color="#924B72">#PB_Font_Italic</font>     : The font will be italic
+  <font color="#924B72">#PB_Font_Underline</font>  : The font will be underlined (Windows only)
+  <font color="#924B72">#PB_Font_StrikeOut</font>  : The font will be strikeout (Windows only)
+  <font color="#924B72">#PB_Font_HighQuality</font>: The font will be in high-quality mode (slower) (Windows only)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the font was loaded successfully and zero if not. If <font color="#924B72">#PB_Any</font> 
+was used for the #Font parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If another font was previously loaded with the same #Font number, then the 
+older font will be automatically freed when loading the new one. 
+<br>
+<br>
+On Windows and OS X the font mapper will always attempt to locate a font. 
+If a font name which does not exist such as: &quot;Tim Now Ronin&quot;, is used, 
+then the font mapper will attempt to find the closest match. This will be 
+based upon such criteria as: the font name, the font height, the style and 
+so forth. Therefore, the assumption can not be made that a font will not be 
+loaded, due only to an incorrect font name, size, etc. 
+<br>
+<br>
+On Windows and macOS, you can change the size and style of the application's 
+system font without specifying its name like this: LoadFont(1, &quot;&quot;, 24) 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;Loading font...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadFont</font>(1, &quot;Arial&quot;, 24)
+<font color="#006666">      SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>,<font color="#006666"> FontID</font>(1))
+<font color="#006666">      TextGadget</font>(0, 10, 10, 250, 40, &quot;Arial 24&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<br>
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="fontid.html">FontID()</a>, <a href="freefont.html">FreeFont()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=isfont.html>IsFont()</a> - <a href=index.html>Font Index</a> - <a href=registerfontfile.html>RegisterFontFile()</a> -><br><br>
+
+</body></html>

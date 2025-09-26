@@ -1,0 +1,59 @@
+<html><head><title>ProgramID</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramID()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ProgramID</b></font>(Programme)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'identifiant système 
+unique d'un programme. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programme</i></td>
+<td width="90%"> 
+Le programme à utiliser. 
+<br>
+<br>
+Le programme doit avoir été lancé 
+avec <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'identifiant système unique d'un 
+programme, souvent nommé ID ou PID. 
+
+<br>
+<br>
+Si l'identifiant ne peut être retourné, 
+-1 sera renvoyé. 
+<br>
+Cela se produit si <a href="runprogram.html">RunProgram()</a> est utilisé 
+pour ouvrir un fichier dans un autre 
+programme, comme RunProgram(&quot;Source.pb&quot;). 
+<br>
+<br>
+Note: la valeur renvoyée ici n'est pas 
+un 'handle' (comme la plupart des 
+autres commandes xxxID()). C'est 
+le &quot;Process ID&quot;, qui peut être lu 
+dans le 'Gestionnaire des tâches'. 
+Pour obtenir un 'Process handle', 
+utiliser l'API OpenProcess_(). 
+<br>
+<br>
+Note: La valeur renvoyée peut être fausse si le process est lancé par un wrapper 
+comme c'est le cas avec Windows 10 et les applications UWP (Universal Windows Platform) 
+lancées par ApplicationFrameHost.exe (AFH). 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=programfilename.html>ProgramFilename()</a> - <a href=index.html>Process Index</a> - <a href=programparameter.html>ProgramParameter()</a> -><br><br>
+
+</body></html>

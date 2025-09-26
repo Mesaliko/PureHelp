@@ -1,0 +1,56 @@
+<html><head><title>InitEngine3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InitEngine3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>InitEngine3D</b></font>([Flags [, LibraryName$]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initializes the 3D environment for later use. You must put this function at 
+the top of your source code if you want to use any of the 3D functions. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Flags (optional)</i></td>
+<td width="90%"> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Engine3D_NoLog</font>      : No log will be written to disk or printed to the console (default).
+  <font color="#924B72">#PB_Engine3D_DebugLog</font>   : A debug log file named 'Ogre.log' will be created in the current directory, to help
+                            debugging or user reports. A lot of actions are logged in this file, but it shouldn't 
+                            affect performances so it can even be activated for a release product.
+  <font color="#924B72">#PB_Engine3D_DebugOutput</font>: The actions are printed to the console. You must remember to set the executable format 
+                            to 'Console' when you are compiling your programs.
+</font></pre>
+
+</td></tr>
+<tr><td><i>LibraryName$ (optional)</i></td>
+<td> 
+Name of the Engine3D file which should be loaded. If it is put to another place than the current 
+directory, it could be specified here. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns non-zero if the library has been successfully loaded, zero otherwise. 
+If initialization fails, the program should quit or all 3D function calls should be disabled. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+InitEngine3D() tries to load the Engine3D library (named 'Engine3D.dll' on Windows, 'engine3d.so' on Linux 
+and 'engine3d.dylib' on OS X, found in the PureBasic/compilers/ directory). If it fails, it's probably because the library 
+is not found or doesn't match the current PureBasic version. On Windows, a recent version of openGL drivers needs to be installed. <br>
+After calling this function, you will not be able to use the <a href="../screen/screenoutput.html">ScreenOutput()</a> function. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../screen/openscreen.html">OpenScreen()</a>, <a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a>, <a href="add3darchive.html">Add3DArchive()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=getz.html>GetZ()</a> - <a href=index.html>Engine3D Index</a> - <a href=loadworld.html>LoadWorld()</a> -><br><br>
+
+</body></html>

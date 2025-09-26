@@ -1,0 +1,118 @@
+<html><head><title>StringGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StringGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>StringGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Texte$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget de saisie de texte (une 
+seule ligne) dans la GadgetList en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Le texte initial. 
+<br>
+<br>
+Ce gadget accepte une seule ligne de texte. 
+Pour obtenir plusieurs lignes d'entrée, 
+utiliser le gadget <a href="editorgadget.html">EditorGadget()</a>. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_Numeric</font>   : Seuls des nombres entiers positifs peuvent être saisis.
+  <font color="#924B72">#PB_String_Password</font>  : Mode 'mot de passe', n'affiche que des '*'.
+  <font color="#924B72">#PB_String_ReadOnly</font>  : Mode 'lecture seulement'.
+  <font color="#924B72">#PB_String_LowerCase</font> : Tous les caractères saisis sont transformés en minuscules.
+  <font color="#924B72">#PB_String_UpperCase</font> : Tous les caractères saisis sont transformés en majuscules.
+  <font color="#924B72">#PB_String_BorderLess</font>: Aucune bordure n'est affichée autour du gadget.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget.
+
+  - Le texte pourra être ensuite modifié par les fonctions <a href="setgadgettext.html">SetGadgetText()</a> et <a href="getgadgettext.html">GetGadgetText()</a>. 
+
+  - Les évènements suivants sont disponibles par l'intermédiaire d'<a href="../window/eventtype.html">EventType()</a>:
+    <font color="#924B72">#PB_EventType_Change</font>    : Le texte a été modifié par l'utilisateur.
+    <font color="#924B72">#PB_EventType_Focus</font>     : Le StringGadget obtient le focus.
+    <font color="#924B72">#PB_EventType_LostFocus</font> : Le StringGadget a perdu le focus.
+
+  - Les fonctions suivantes peuvent agir sur le gadget:
+    <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les valeurs 'TypeCouleur' suivantes:
+      <font color="#924B72">#PB_Gadget_BackColor</font>    : Couleur de fond
+      <font color="#924B72">#PB_Gadget_FrontColor</font>   : Couleur du texte
+
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec les attributs suivants:
+      <font color="#924B72">#PB_String_MaximumLength</font>: Renvoie le nombre maximal de caractères qui peuvent être entrés.
+
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a> avec les attributs suivants:
+      <font color="#924B72">#PB_String_MaximumLength</font>: Limite le nombre maximum de caractères qui peuvent être entrés.
+
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Démonstration des options possibles pour le gadget de saisie de texte...</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 322, 205, &quot;Les options de StringGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    StringGadget</font>(0, 8,  10, 306, 20, &quot;Gadget saisie de texte normal...&quot;)
+<font color="#006666">    StringGadget</font>(1, 8,  35, 306, 20, &quot;1234567&quot;, <font color="#924B72">#PB_String_Numeric</font>)
+<font color="#006666">    StringGadget</font>(2, 8,  60, 306, 20, &quot;Gadget saisie de texte en lecture seule&quot;, <font color="#924B72">#PB_String_ReadOnly</font>)
+<font color="#006666">    StringGadget</font>(3, 8,  85, 306, 20, &quot;minuscules...&quot;, <font color="#924B72">#PB_String_LowerCase</font>)
+<font color="#006666">    StringGadget</font>(4, 8, 110, 306, 20, &quot;majuscules...&quot;, <font color="#924B72">#PB_String_UpperCase</font>)
+<font color="#006666">    StringGadget</font>(5, 8, 140, 306, 20, &quot;Gadget saisie de texte sans bordure&quot;, <font color="#924B72">#PB_String_BorderLess</font>)
+<font color="#006666">    StringGadget</font>(6, 8, 170, 306, 20, &quot;Mot de passe&quot;, <font color="#924B72">#PB_String_Password</font>)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/stringgadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="editorgadget.html">EditorGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=splittergadget.html>SplitterGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=textgadget.html>TextGadget()</a> -><br><br>
+
+</body></html>

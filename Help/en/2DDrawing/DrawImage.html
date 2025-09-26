@@ -1,0 +1,59 @@
+<html><head><title>DrawImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawImage</b></font>(ImageID, x, y [, Width, Height])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Draws an image to the current drawing output. 
+The filling mode is determined by <a href="drawingmode.html">DrawingMode()</a>. 
+The current output is set with <a href="startdrawing.html">StartDrawing()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ImageID</i></td>
+<td width="90%"> 
+The ID of the image to draw. This value can be obtained 
+using the <a href="../image/imageid.html">ImageID()</a> function from the image library. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+The position of the top/left corner of the image in the drawing output. 
+
+</td></tr>
+<tr><td><i>Width, Height (optional)</i></td>
+<td> 
+The image will be resized and drawn. If these parameters are not specified then 
+the image will be drawn in its original size. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The image will be alpha-blended if the current <a href="drawingmode.html">DrawingMode()</a> specifies one of the 
+alpha-blending flags, otherwise the image is just copied to the output. To draw an image using 
+alpha-blending in any case, use the <a href="drawalphaimage.html">DrawAlphaImage()</a> command. 
+<br>
+<br>
+A number of backends (including <a href="../window/windowoutput.html">WindowOutput()</a> on Linux) can not ignore the alphachannel 
+when drawing images. So DrawImage() is equal to <a href="drawalphaimage.html">DrawAlphaImage()</a> there. If you want consistent 
+results, just use <a href="drawalphaimage.html">DrawAlphaImage()</a> which should produce the same output on all backends. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="drawalphaimage.html">DrawAlphaImage()</a>, <a href="../image/imageid.html">ImageID()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawalphaimage.html>DrawAlphaImage()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawrotatedtext.html>DrawRotatedText()</a> -><br><br>
+
+</body></html>

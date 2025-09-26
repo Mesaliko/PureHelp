@@ -1,0 +1,97 @@
+<html><head><title>CreatePopupMenu</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePopupMenu()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreatePopupMenu</b></font>(#Menu)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new empty popup menu. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+A number to identify the new menu. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the menu was successfully created, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Menu parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To create a popup menu with support for images, use <a href="createpopupimagemenu.html">CreatePopupImageMenu()</a>. 
+<br>
+<br>
+Once created, this menu becomes the current menu for further item additions. It's now 
+possible to use functions such as <a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="menubar.html">MenuBar()</a>, <a href="opensubmenu.html">OpenSubMenu()</a> to populate the menu. 
+<br>
+<br>
+<a href="displaypopupmenu.html">DisplayPopupMenu()</a> can be used to display this popup menu at any position on the screen. 
+<br>
+<br>
+To handle menu events properly, see the description of following functions: 
+<br>
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> (alternatively <a href="../window/windowevent.html">WindowEvent()</a>) 
+<br>
+<a href="../window/eventwindow.html">EventWindow()</a> 
+<br>
+<a href="../window/eventmenu.html">EventMenu()</a> 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 120, &quot;Popup-Menu Example&quot;)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">CreatePopupMenu</font>(0)      <font color="#006666">; creation of the pop-up menu begins...</font>
+<font color="#006666">      MenuItem</font>(1, &quot;Open&quot;)      <font color="#006666">; You can use all commands for creating a menu</font>
+<font color="#006666">      MenuItem</font>(2, &quot;Save&quot;)      <font color="#006666">; just like in a normal menu...</font>
+<font color="#006666">      MenuItem</font>(3, &quot;Save as&quot;)
+<font color="#006666">      MenuItem</font>(4, &quot;Quit&quot;)
+<font color="#006666">      MenuBar</font>()
+<font color="#006666">      OpenSubMenu</font>(&quot;Recent files&quot;)
+<font color="#006666">        MenuItem</font>(5, &quot;PureBasic.exe&quot;)
+<font color="#006666">        MenuItem</font>(6, &quot;Test.txt&quot;)
+<font color="#006666">      CloseSubMenu</font>()
+    <b><font color="#006666">EndIf</font></b>
+
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()     <font color="#006666">; check for window events</font>
+
+      <b><font color="#006666">Select</font></b> Event
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_RightClick</font>       <font color="#006666">; right mouse button was clicked =&gt;</font>
+<font color="#006666">          DisplayPopupMenu</font>(0,<font color="#006666"> WindowID</font>(0))  <font color="#006666">; now display the popup-menu</font>
+
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>        <font color="#006666">; an item of the popup-menu was clicked</font>
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()       <font color="#006666">; get the clicked menu item...</font>
+            <b><font color="#006666">Case</font></b> 1 : <b><font color="#006666">Debug</font></b> &quot;Menu: Open&quot;
+            <b><font color="#006666">Case</font></b> 2 : <b><font color="#006666">Debug</font></b> &quot;Menu: Save&quot;
+            <b><font color="#006666">Case</font></b> 3 : <b><font color="#006666">Debug</font></b> &quot;Menu: Save as&quot;
+            <b><font color="#006666">Case</font></b> 4 : <b><font color="#006666">End</font></b>
+            <b><font color="#006666">Case</font></b> 5 : <b><font color="#006666">Debug</font></b> &quot;Menu: PureBasic.exe&quot;
+            <b><font color="#006666">Case</font></b> 6 : <b><font color="#006666">Debug</font></b> &quot;Menu: Text.txt&quot;
+          <b><font color="#006666">EndSelect</font></b>
+
+      <b><font color="#006666">EndSelect</font></b>
+
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/createpopupmenu.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createpopupimagemenu.html">CreatePopupImageMenu()</a>, <a href="displaypopupmenu.html">DisplayPopupMenu()</a>, 
+<a href="createmenu.html">CreateMenu()</a>, <a href="createimagemenu.html">CreateImageMenu()</a>, <a href="freemenu.html">FreeMenu()</a>, <a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="menubar.html">MenuBar()</a>, <a href="opensubmenu.html">OpenSubMenu()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createpopupimagemenu.html>CreatePopupImageMenu()</a> - <a href=index.html>Menu Index</a> - <a href=disablemenuitem.html>DisableMenuItem()</a> -><br><br>
+
+</body></html>

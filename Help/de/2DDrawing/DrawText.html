@@ -1,0 +1,87 @@
+<html><head><title>DrawText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawText()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>DrawText</b></font>(x.d, y.d, Text$ [, VordergrundFarbe [, HintergrundFarbe]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Stellt den angegebenen String auf dem aktuellen Ausgabekanal an der angegebenen (x,y) 
+Position dar. Der aktuelle Ausgabekanal wird mittels <a href="startdrawing.html">StartDrawing()</a> definiert. 
+Um eine Gadget-ähnliche Textausgabe zu erhalten, kann der Zeichenmodus <font color="#924B72">#PB_2DDrawing_NativeText</font> 
+verwendet werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.d, y.d</i></td>
+<td width="90%"> 
+Die Position, an welcher der Text gezeichnet werden soll. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der zu zeichnende Text. 
+
+</td></tr>
+<tr><td><i>VordergrundFarbe (optional)</i></td>
+<td> 
+Die für den Text zu verwendende Farbe. Wenn dieser Parameter nicht angegeben wird, 
+dann wird die mit <a href="frontcolor.html">FrontColor()</a> festgelegte Standardfarbe verwendet. 
+Diese Farbe kann im <a href="../2ddrawing/rgb.html">RGB</a>- oder <a href="../2ddrawing/rgba.html">RGBA</a>-Format vorliegen. 
+
+</td></tr>
+<tr><td><i>HintergrundFarbe (optional)</i></td>
+<td> 
+Die für den Hintergrund zu verwendende Farbe. Wenn dieser Parameter nicht angegeben wird, 
+dann wird die mit <a href="backcolor.html">BackColor()</a> festgelegte Standardfarbe verwendet. 
+<br>
+<br>
+Wenn der aktuelle Zeichmodus (<a href="drawingmode.html">DrawingMode()</a>) den <font color="#924B72">#PB_2DDrawing_Transparent</font> 
+Flag beinhaltet, dann wird dieser Parameter ignoriert und der Hintergrund ist transparent. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die neue x-Position des Text-Cursors zurück (d.h. die Position direkt nach dem gezeichneten Text). 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn <a href="drawingmode.html">DrawingMode()</a> auf nicht transparenten Hintergrund 
+gesetzt ist und der aktuelle Zeichenmodus (DrawingMode) den Alpha-Kanal verwendet, dann wird der Text 
+zuerst auf den Hintergrund gemischt und dann auf den Ausgabekanal angewandt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;2DDrawing Beispiel&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 30
+<font color="#006666">        DrawText</font>(<font color="#006666">Random</font>(200),<font color="#006666"> Random</font>(200), &quot;Hello World!&quot;,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+      <b><font color="#006666">Next</font></b> i
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/text.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="drawrotatedtext.html">DrawRotatedText()</a>, <a href="drawingfont.html">DrawingFont()</a>, <a href="frontcolor.html">FrontColor()</a>, <a href="backcolor.html">BackColor()</a>, <a href="drawingmode.html">DrawingMode()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=drawrotatedtext.html>DrawRotatedText()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=drawingbuffer.html>DrawingBuffer()</a> -><br><br>
+
+</body></html>

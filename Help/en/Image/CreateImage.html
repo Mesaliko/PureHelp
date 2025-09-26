@@ -1,0 +1,76 @@
+<html><head><title>CreateImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateImage</b></font>(#Image, Width, Height [, Depth [, BackColor]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create an empty image (with black background) which can be used to do rendering on it. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+A number to identify the new image. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be specified to 
+auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The dimensions of the new image. Both the width and height must be greater than zero. 
+
+</td></tr>
+<tr><td><i>Depth (optional)</i></td>
+<td> 
+The color depth for the new image. 
+Valid values can be: 24 and 32. The default is 24-bit if no depth is specified. 
+
+</td></tr>
+<tr><td><i>BackColor (optional)</i></td>
+<td> 
+The back <a href="../2ddrawing/rgb.html">RGB()</a> color used when the image is created. This color can be set to <font color="#924B72">#PB_Image_Transparent</font> to create an image with the 
+alpha channel set to full transparent. This only has an effect on 32-bit images. The default 
+backcolor is black if not specified. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the image was created successfully and zero if the image could not be created. 
+If <font color="#924B72">#PB_Any</font> was specified as the #Image parameter then the auto-generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The limit for the image size that can be handled depends on the operating system and the available amount of memory. 
+If enough memory is available, then images up to at least 8192x8192 pixels can be handled by all operating systems supported by PureBasic. 
+<br>
+<br>
+You can use the several other functions for acting with the created image: 
+<br>
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> with <a href="imageoutput.html">ImageOutput()</a> to draw on the created image 
+<br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> with <a href="imagevectoroutput.html">ImageVectorOutput()</a> to draw on the created image using vector drawing 
+<br>
+<a href="copyimage.html">CopyImage()</a> to create another image from the actual one 
+<br>
+<a href="grabimage.html">GrabImage()</a> to create another image from a given area of the actual one 
+<br>
+<a href="../2ddrawing/drawimage.html">DrawImage()</a> with <a href="imageid.html">ImageID()</a> to draw the image on actual output channel. 
+<br>
+<a href="../gadget/imagegadget.html">ImageGadget()</a> for displaying image on an application window 
+<br>
+<a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> for creating an image button on an application window 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="freeimage.html">FreeImage()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copyimage.html>CopyImage()</a> - <a href=index.html>Image Index</a> - <a href=encodeimage.html>EncodeImage()</a> -><br><br>
+
+</body></html>

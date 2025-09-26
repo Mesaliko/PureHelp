@@ -1,0 +1,49 @@
+<html><head><title>FinishHTTP</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FinishHTTP()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>FinishHTTP</b></font>(ConnexionHttp)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Libère les ressources associées au téléchargement asynchrone spécifié, commencé soit avec <a href="receivehttpfile.html">ReceiveHTTPFile()</a> soit avec 
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ConnexionHttp</i></td>
+<td width="90%"> 
+La connexion Http à libérer. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Selon la commande de réception utilisée pour démarrer le téléchargement, 
+FinishHTTP() renvoie l'un des résultats suivants: 
+<br>
+Depuis <a href="receivehttpfile.html">ReceiveHTTPFile()</a>, la quantité d'octets reçus (taille du fichier stocké) est renvoyée. 
+<br>
+Depuis <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a> avec l'option <font color="#924B72">#PB_HTTP_Asynchronous</font>, l'adresse de la 
+zone de mémoire où les données reçues ont été stockées, est renvoyée. <a href="../memory/memorysize.html">MemorySize()</a> 
+permet de connaitre la quantité de données reçues peut alors être déterminée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La valeur <font color="#924B72">#PB_HTTP_Aborted</font> sera envoyée par la fonction <a href="httpprogress.html">HTTPProgress()</a>. 
+<br>
+<br>
+Il doit toujours être appelé après un appel réussi de <a href="receivehttpfile.html">ReceiveHTTPFile()</a> ou <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="httpprogress.html">HTTPProgress()</a>, <a href="aborthttp.html">AbortHTTP()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=aborthttp.html>AbortHTTP()</a> - <a href=index.html>Http Index</a> - <a href=geturlpart.html>GetURLPart()</a> -><br><br>
+
+</body></html>

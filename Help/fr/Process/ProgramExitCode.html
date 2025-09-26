@@ -1,0 +1,62 @@
+<html><head><title>ProgramExitCode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgramExitCode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ProgramExitCode</b></font>(Programme)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le code de retour d'un programme 
+quand il s'est terminé. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programme</i></td>
+<td width="90%"> 
+Le programme à utiliser. 
+<br>
+<br>
+Le programme doit avoir été lancé 
+avec <a href="runprogram.html">RunProgram()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le code de retour (exitcode) renvoyé quand 
+le programme spécifié se ferme. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande doit seulement être 
+utilisée après que l'exécution du 
+programme se soit réellement terminée. 
+Les commandes <a href="programrunning.html">ProgramRunning()</a> ou 
+<a href="waitprogram.html">WaitProgram()</a> permettent 
+de faire cette vérification. 
+<br>
+<br>
+Le code de retour permet de renvoyer 
+une valeur numérique au programme qui 
+l'a exécuté. 
+C'est souvent utilisé pour signaler 
+si une erreur est survenue dans le 
+programme lancé. 
+De plus, sur OSX et Linux le code de retour est compris entre 0 et 255. 
+<br>
+<br>
+Pour renvoyer un code de retour à 
+partir d'un programme PureBasic, 
+il faut utiliser le paramètre 
+optionnel du mot-clef <b><font color="#006666">End</font></b>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">End</font></b> 1   <font color="#006666">; renvoie le code de retour 1</font>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextenvironmentvariable.html>NextEnvironmentVariable()</a> - <a href=index.html>Process Index</a> - <a href=programfilename.html>ProgramFilename()</a> -><br><br>
+
+</body></html>

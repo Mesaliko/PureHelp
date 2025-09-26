@@ -1,0 +1,57 @@
+<html><head><title>Input</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Input()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+String$ = <font color="#006666"><b>Input</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermöglicht dem Programm, eine ganze Zeichenkette zu erfassen. Dieser Befehl hält die 
+Programmausführung an und wartet bis der Benutzer die Return-Taste drückt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den String zurück, welchen der Anwender vor dem Drücken der Return-Taste eingegeben hat. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn die Konsole sich im Grafikmodus befindet (siehe <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a>), 
+kann die Eingabezeile (Zeichenkette) nicht länger als die Konsolen-Breite sein (es werden keine weiteren 
+Zeichen akzeptiert, wenn die Zeile zu lang wird). 
+<br>
+<br>
+Im nicht-grafischen Modus (Text-Modus) wird ein spezieller Rückgabewert <font color="#924B72">#PB_Input_Eof</font> 
+(entspricht Chr(4)) empfangen, wenn der Anwender ein einfaches Strg+D in der Konsole eingibt oder wenn 
+das Ende einer in die Eingabe des Programms umgeleiteten Datei erreicht wurde. 
+Zwecks Kompatibilität mit anderen Konsolen-Anwendungen unter Windows wird <font color="#924B72">#PB_Input_Eof</font> 
+auch empfangen, wenn Strg+Z in der Konsole eingegeben wurde. 
+
+<br>
+<br>
+Wenn keine zeilenbasierte oder eine &quot;rohe&quot; Eingabe benötigt wird, dann kann <a href="readconsoledata.html">ReadConsoleData()</a> 
+im nicht-grafischen Modus verwendet werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    Print</font>(&quot;Geben Sie Ihren Namen ein und druecken Sie Return: &quot;)
+    Name$ =<font color="#006666"> Input</font>()
+
+<font color="#006666">    PrintN</font>(&quot;Hallo &quot; + Name$ + &quot;, nett Sie zu treffen.&quot;)
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Return zum Beenden.&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="inkey.html">Inkey()</a>, <a href="rawkey.html">RawKey()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=inkey.html>Inkey()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=openconsole.html>OpenConsole()</a> -><br><br>
+
+</body></html>

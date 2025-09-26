@@ -1,0 +1,63 @@
+<html><head><title>CreateMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateMesh()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateMesh</b></font>(#Mesh [, Typ [, Modus])</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein neues leeres '#Mesh'. Nach der Erstellung können weitere Befehle dieser 
+Bibliothek wie <a href="meshvertexposition.html">MeshVertexPosition()</a> oder <a href="meshface.html">MeshFace()</a> verwendet werden, um es weiter 
+aufzubauen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren des neuen Mesh. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Der Typ des neuen Mesh. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_TriangleList</font> : das Mesh wird aus einer Liste von Dreiecken zusammengesetzt (Standard).
+  <font color="#924B72">#PB_Mesh_TriangleStrip</font>: das Mesh wird aus einer Liste verbundener Dreiecke zusammengesetzt
+                          (Scheitelpunkte werden geteilt).
+  <font color="#924B72">#PB_Mesh_TriangleFan</font>  : das Mesh wird aus einer Liste verbundener Dreiecke zusammengesetzt,
+                          welche den gleichen zentralen Scheitelpunkt gemeinsam haben.
+  <font color="#924B72">#PB_Mesh_PointList</font>    : das Mesh wird aus einer Liste von Punkten zusammengesetzt.
+  <font color="#924B72">#PB_Mesh_LineList</font>     : das Mesh wird aus einer Liste von Linien zusammengesetzt.
+  <font color="#924B72">#PB_Mesh_LineStrip</font>    : das Mesh wird aus einer Liste verbundener Linien zusammengesetzt
+                          (Scheitelpunkte werden geteilt).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Modus des neuen Mesh. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_Static</font> : sobald es erstellt wurde, kann das Mesh nicht mehr mit den Mesh-Update-Funktionen
+                    verändert werden (Standard).
+  <font color="#924B72">#PB_Mesh_Dynamic</font>: sobald es erstellt wurde, kann das Mesh mit den Mesh-Update-Funktionen verändert werden.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich null zurück, wenn das Mesh erfolgreich erstellt wurde und 
+null, wenn ein Fehler auftrat. 
+Wenn <font color="#924B72">#PB_Any</font> als #Mesh Parameter verwendet wurde, dann wird bei Erfolg 
+die neu generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn das #Mesh bereits existierte, dann wird dieses freigegeben und durch ein neues ersetzt. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createline3d.html>CreateLine3D()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=createplane.html>CreatePlane()</a> -><br><br>
+
+</body></html>

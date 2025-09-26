@@ -1,0 +1,96 @@
+<html><head><title>WindowOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+AusgabeID = <font color="#006666"><b>WindowOutput</b></font>(#Window)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die 'AusgabeID' des angegebenen Fensters zurück, um darauf 2D-Zeichenoperationen 
+auszuführen. Hierfür wird die PureBasic <a href="../2ddrawing/index.html">2DDrawing Bibliothek</a> genutzt. 
+<br>
+<br>
+WindowOutput() kann nur innerhalb eines <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> / <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> Blocks verwendet werden. 
+Der von WindowOutput() reservierte Speicher wird beim Aufruf von StopDrawing() freigegeben. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+Das zu verwendende Fenster. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die AusgabeID des angegebenen Fensters, um darauf 2D-Zeichenoperationen mittels 
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> auszuführen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Example...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Repaint</font> <font color="#006666">; Erneut auf dem Fenster zeichnen, jedes Mal wenn das Fenster neu gezeichnet wird</font>
+<font color="#006666">        StartDrawing</font>(<font color="#006666">WindowOutput</font>(0))
+<font color="#006666">          Box</font>(10, 10, 50, 50,<font color="#006666"> RGB</font>(255, 0, 0)) 
+<font color="#006666">        StopDrawing</font>()
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Auf ein Fenster gezeichneter Inhalt wird gelöscht, wann immer das Fenster oder ein Teil 
+davon von einem anderen Fenster verdeckt wird, außerhalb des Bildschirms verschoben wird, oder 
+wenn das Fenster versteckt oder minimiert wird. Um daher den gezeichneten Inhalt sichtbar zu 
+halten, muss dieser nach jedem <font color="#924B72">#PB_Event_Repaint</font> Ereignis erneut gezeichnet werden. 
+<br>
+<br>
+Eine komfortablere Lösung ist es, den Inhalt via <a href="../image/imageoutput.html">ImageOutput()</a> auf ein Bild zu zeichnen 
+und dieses als <a href="../gadget/imagegadget.html">ImageGadget()</a> im Applikations-Fenster darzustellen, und 
+wenn nötig dessen Aktualisierung mittels <a href="../gadget/setgadgetstate.html">SetGadgetState()</a>. Auf diesem 
+Weg wird jegliches nötige Auffrischen durch das ImageGadget erledigt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Beispiel...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    
+<font color="#006666">    ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Auf das Fenster zeichnen&quot;)
+   
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+      <b><font color="#006666">Select</font></b> Event
+     
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+          <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+            <b><font color="#006666">Case</font></b> 1
+              <font color="#006666">; Zeichnet einen roten Kasten auf das Fenster</font>
+              <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">WindowOutput</font>(0))
+<font color="#006666">                Box</font>(10,10, 200, 30,<font color="#006666"> RGB</font>(255, 0, 0))
+<font color="#006666">                StopDrawing</font>()
+              <b><font color="#006666">EndIf</font></b>
+                                                          
+          <b><font color="#006666">EndSelect</font></b>
+            
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="windowvectoroutput.html">WindowVectorOutput()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=windowmousey.html>WindowMouseY()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=windowvectoroutput.html>WindowVectorOutput()</a> -><br><br>
+
+</body></html>

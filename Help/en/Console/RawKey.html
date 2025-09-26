@@ -1,0 +1,59 @@
+<html><head><title>RawKey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RawKey()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RawKey</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the raw key code of the last <a href="inkey.html">Inkey()</a> function call. 
+It's useful for extended (non-ASCII) keys (for example, function keys, arrows, etc). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the key code of the last pressed key. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+It is not only alphanumeric keys that have an ASCII value. The escape key (27), 
+return key (13) tab key (9) and backspace key (8) are just four examples. 
+A table with ASCII codes you find <a href="../reference/ascii.html">here</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    PrintN</font>(&quot;Press Escape to exit&quot;)
+  
+    <b><font color="#006666">Repeat</font></b>
+      KeyPressed$ =<font color="#006666"> Inkey</font>()
+      
+      <b><font color="#006666">If</font></b> KeyPressed$ &lt;&gt; &quot;&quot;
+        
+<font color="#006666">        PrintN</font>(&quot;You pressed: &quot; + KeyPressed$)
+<font color="#006666">        PrintN</font>(&quot;It has a raw code of: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">RawKey</font>()
+      
+<font color="#006666">        PrintN</font>(&quot;You pressed a non ASCII key.&quot;)
+<font color="#006666">        PrintN</font>(&quot;It has a raw code of: &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+        
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        Delay</font>(20) <font color="#006666">; Don't eat all the CPU time, we're on a multitask OS</font>
+      <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Until</font></b> KeyPressed$ =<font color="#006666"> Chr</font>(27) <font color="#006666">; Wait until escape is pressed</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="inkey.html">Inkey()</a>, <a href="input.html">Input()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=printn.html>PrintN()</a> - <a href=index.html>Console Index</a> - <a href=readconsoledata.html>ReadConsoleData()</a> -><br><br>
+
+</body></html>

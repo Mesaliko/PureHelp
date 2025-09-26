@@ -1,0 +1,69 @@
+<html><head><title>Base64Encoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Base64Encoder()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>Base64Encoder</b></font>(*TamponSource, LongueurSource [, Options])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Encode le tampon spécifié à l'aide de l'algorithme Base64. 
+Ceci est largement utilisé dans les programmes de courrier électronique mais peut être utile 
+pour tous les autres programmes qui ont besoin d'un codage ASCII uniquement (7 bits, 
+seulement de 32 à 127 caractères) pour les fichiers binaires bruts. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*TamponSource</i></td>
+<td width="90%"> 
+Le tampon contenant les données brutes. 
+
+</td></tr>
+<tr><td><i>LongueurSource</i></td>
+<td> 
+La taille du tampon d'entrée. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_NoPadding</font>: Pas de '=' supplémentaire à la fin de la mémoire tampon pour la combler à 3 octets.
+  <font color="#924B72">#PB_Cipher_URL</font>      : Codage légèrement différent, principalement utilisé dans les URLs. Les caractères '+' et '/' habituels
+                        seront encodés respectivement en '-' et '_'
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie les données codées sous forme de chaîne. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  String$ = &quot;Voici un texte !&quot;
+  
+  <font color="#006666">; Encodage d'une chaîne </font>
+  *Texte =<font color="#006666"> UTF8</font>( String$)
+    
+  Encoder$ =<font color="#006666"> Base64Encoder</font>(*Texte,<font color="#006666"> StringByteLength</font>(String$, <font color="#924B72">#PB_UTF8</font>))
+  <b><font color="#006666">Debug</font></b> &quot;Texte encodé: &quot; + Encoder$
+  
+  *TamponDecoder =<font color="#006666"> AllocateMemory</font>(1024)
+<font color="#006666">  Base64Decoder</font>(Encoder$, *TamponDecoder, 1024)
+  <b><font color="#006666">Debug</font></b> &quot;Texte décodé: &quot; +<font color="#006666"> PeekS</font>(*TamponDecoder, -1, <font color="#924B72">#PB_UTF8</font>) + &quot;'&quot;
+  
+<font color="#006666">  FreeMemory</font>(*Texte)
+<font color="#006666">  FreeMemory</font>(*TamponDecoder)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="base64decoder.html">Base64Decoder()</a>, <a href="base64decoderbuffer.html">Base64DecoderBuffer()</a>, <a href="base64encoderbuffer.html">Base64EncoderBuffer()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=base64decoderbuffer.html>Base64DecoderBuffer()</a> - <a href=index.html>Cipher Index</a> - <a href=base64encoderbuffer.html>Base64EncoderBuffer()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,137 @@
+<html><head><title>JSONType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">JSONType()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>JSONType</b></font>(JSONValeur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le type de la valeur JSON donné. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Peut être l'une des valeurs suivantes: 
+<br>
+<br>
+
+<font color="#924B72">#PB_JSON_Null</font> 
+<blockquote>
+
+La valeur représente la valeur 'null' 
+JSON. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_String</font> 
+<blockquote>
+
+La valeur contient une chaîne de caractères. 
+<br>
+<a href="getjsonstring.html">GetJSONString()</a> peut être utilisé pour 
+lire la chaîne de caractères. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Number</font> 
+<blockquote>
+
+La valeur contient un nombre.<br>
+<a href="getjsondouble.html">GetJSONDouble()</a>, <a href="getjsonfloat.html">GetJSONFloat()</a>, 
+<a href="getjsoninteger.html">GetJSONInteger()</a> ou <a href="getjsonquad.html">GetJSONQuad()</a> peuvent 
+être utilisées pour lire le nombre. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Boolean</font> 
+<blockquote>
+
+La valeur contient un booléen. <br>
+<a href="getjsonboolean.html">GetJSONBoolean()</a> peut être utilisé pour 
+lire la valeur booléenne. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Array</font> 
+<blockquote>
+
+La valeur contient un tableau d'éléments 
+JSON. <br>
+<a href="jsonarraysize.html">JSONArraySize()</a> renvoie la taille du 
+tableau.<br>
+<a href="getjsonelement.html">GetJSONElement()</a> peut être utilisé pour 
+obtenir un élément du tableau.<br>
+<a href="addjsonelement.html">AddJSONElement()</a>, <a href="removejsonelement.html">RemoveJSONElement()</a>, 
+<a href="resizejsonelements.html">ResizeJSONElements()</a> ou 
+<a href="clearjsonelements.html">ClearJSONElements()</a> peuvent être utilisés 
+pour modifier le tableau. 
+</blockquote>
+
+
+<font color="#924B72">#PB_JSON_Object</font> 
+<blockquote>
+
+La valeur contient un objet (un ensemble 
+de paires clé/valeur). <br>
+<a href="jsonobjectsize.html">JSONObjectSize()</a> renvoie le nombre de 
+membres dans l'objet. <br>
+<a href="getjsonmember.html">GetJSONMember()</a> renvoie la valeur d'un 
+membre.<br>
+<a href="examinejsonmembers.html">ExamineJSONMembers()</a> peut être utilisé 
+pour examiner les valeurs d'un membre. 
+<a href="addjsonmember.html">AddJSONMember()</a>, <a href="removejsonmember.html">RemoveJSONMember()</a> ou 
+<a href="clearjsonmembers.html">ClearJSONMembers()</a> peuvent être utilisés 
+pour modifier l'objet. 
+</blockquote>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Une procédure qui accepte n'importe quelle valeur JSON et renvoie une chaîne</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">GetAnyValue</font>(Value)
+    <b><font color="#006666">Select</font></b> <font color="#006666">JSONType</font>(Value)
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Null</font>:    <b><font color="#006666">ProcedureReturn</font></b> &quot;L'élément null&quot;
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_String</font>:  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">GetJSONString</font>(Value)
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Number</font>:  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">StrD</font>(<font color="#006666">GetJSONDouble</font>(Value))    
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Boolean</font>: <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">Str</font>(<font color="#006666">GetJSONBoolean</font>(Value))
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Array</font>:   <b><font color="#006666">ProcedureReturn</font></b> &quot;Tableau&quot;
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_JSON_Object</font>:  <b><font color="#006666">ProcedureReturn</font></b> &quot;Objet&quot;
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  ParseJSON</font>(0, &quot;[1, 2, true, null, &quot; +<font color="#006666"> Chr</font>(34) + &quot;hello&quot; +<font color="#006666"> Chr</font>(34) + &quot;]&quot;)
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> <font color="#006666">JSONArraySize</font>(<font color="#006666">JSONValue</font>(0)) - 1
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetAnyValue</font>(<font color="#006666">GetJSONElement</font>(<font color="#006666">JSONValue</font>(0), i))
+  <b><font color="#006666">Next</font></b> i
+  
+  <font color="#006666">; Resultat : 1</font>
+  <font color="#006666">;            2</font>
+  <font color="#006666">;            1</font>
+  <font color="#006666">;            L'élément null</font>
+  <font color="#006666">;            hello</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="jsonvalue.html">JSONValue()</a>, <a href="setjsonarray.html">SetJSONArray()</a>, 
+<a href="setjsonboolean.html">SetJSONBoolean()</a>, <a href="setjsondouble.html">SetJSONDouble()</a>, 
+<a href="setjsonfloat.html">SetJSONFloat()</a>, <a href="setjsoninteger.html">SetJSONInteger()</a>, 
+<a href="setjsonnull.html">SetJSONNull()</a>, <a href="setjsonobject.html">SetJSONObject()</a>, 
+<a href="setjsonstring.html">SetJSONString()</a>, <a href="setjsonquad.html">SetJSONQuad()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=jsonobjectsize.html>JSONObjectSize()</a> - <a href=index.html>Json Index</a> - <a href=jsonvalue.html>JSONValue()</a> -><br><br>
+
+</body></html>

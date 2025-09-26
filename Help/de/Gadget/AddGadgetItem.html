@@ -1,0 +1,117 @@
+<html><head><title>AddGadgetItem</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddGadgetItem()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>AddGadgetItem</b></font>(#Gadget, Position, Text$ [, ImageID [, Flags]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt einen neuen Eintrag zum angegebenen Gadget hinzu. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+Der Eintrag-Index, wo der neue Eintrag eingefügt werden 
+soll. Um diesen Eintrag am Anfang einzufügen, benutzen Sie einen Index von 0. 
+Um diesen Eintrag am Ende der aktuellen Eintrag-Liste hinzuzufügen, benutzen 
+Sie einen Wert von -1. Denken Sie beim Einfügen eines Eintrags daran, dass alle 
+aktuellen Einträge, die auf diesen neuen Eintrag folgen, einen um 1 höheren Positions-Index 
+erhalten. 
+<br>
+<br>
+Für das <a href="mdigadget.html">MDIGadget()</a> gibt dieser Parameter die #Window Nummer für das neue MDI-Childwindow an. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, in diesem Fall ist der Rückgabewert die 
+neue von PB zugewiesene Window Nummer. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der Text für den neuen Eintrag. 
+<br>
+<br>
+Beim Hinzufügen eines Eintrags zu einem <a href="listicongadget.html">ListIconGadget()</a> kann dieser Parameter den Text für 
+mehrere Spalten enthalten - jeweils getrennt von einem <a href="../string/chr.html">Chr(10)</a> Zeichen. 
+
+</td></tr>
+<tr><td><i>ImageID (optional)</i></td>
+<td> 
+Ein optionales Bild, welches für Einträge in Gadgets verwendet werden kann, die 
+dies unterstützen (wie <a href="listicongadget.html">ListIconGadget()</a>). Das verwendete Bild sollte in der Standard 
+16x16 Größe vorliegen. Verwenden Sie den <a href="../image/imageid.html">ImageID()</a> Befehl, um die ID für diesen 
+Parameter zu erhalten. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dieser Parameter hat eine Bedeutung nur bei den folgenden Gadget-Typen: 
+<br>
+<br>
+<a href="treegadget.html">TreeGadget()</a> 
+<blockquote>
+
+Dieser Parameter gibt die neue Unterebene für den Eintrag an. 
+Ist der Wert für die Unterebene größer als der vom vorherigen Eintrag, wird der neue Eintrag 
+dessen &quot;Kind&quot; (Child). Ist er niedriger, wird er nach dem &quot;Eltern&quot;-Eintrag (Parent) des 
+vorherigen Eintrags hinzugefügt. 
+</blockquote>
+
+
+<a href="mdigadget.html">MDIGadget()</a> 
+<blockquote>
+
+Dieser Parameter kann verwendet werden, um die Flags für das neue Fenster (siehe 
+<a href="../window/openwindow.html">OpenWindow()</a>) anzugeben. Die <font color="#924B72">#PB_Window_Borderless</font>, <font color="#924B72">#PB_Window_Screencentered</font> 
+und <font color="#924B72">#PB_Window_WindowCentered</font> Flags werden bei MDI-Fenstern nicht unterstützt. 
+</blockquote>
+
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der Rückgabewert ist nur gültig mit dem <a href="mdigadget.html">MDIGadget()</a>. 
+<br>
+<br>
+Wenn <font color="#924B72">#PB_Any</font> als Parameter 'Position' beim Hinzufügen eines Eintrags zum <a href="mdigadget.html">MDIGadget()</a> 
+verwendet wurde, ist der Rückgabewert die Nummer, welche das neue MDI-Fenster identifiziert. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die folgenden Gadgets werden unterstützt: 
+<br>
+<br>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a> : unterstützt die ImageID, wenn <font color="#924B72">#PB_ComboBox_Image</font> gesetzt wurde. 
+<br>
+- <a href="editorgadget.html">EditorGadget()</a> 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> : unterstützt die ImageID. 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a> 
+<br>
+- <a href="mdigadget.html">MDIGadget()</a> : ImageID kann ein Icon für die Titelleiste des &quot;ChildWindow&quot;s enthalten. 
+'Flags' können die neuen Window-Flags bezeichnen. 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a> : unterstützt die ImageID. 
+<br>
+- <a href="treegadget.html">TreeGadget()</a>: unterstützt die ImageID. 'Flags' wird benötigt und gibt die neue Unterebene (&quot;Sublevel&quot;) an. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="comboboxgadget.html">ComboBoxGadget()</a>, <a href="listicongadget.html">ListIconGadget()</a>, 
+<a href="listviewgadget.html">ListViewGadget()</a>, <a href="mdigadget.html">MDIGadget()</a>, <a href="panelgadget.html">PanelGadget()</a>, <a href="treegadget.html">TreeGadget()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addgadgetcolumn.html>AddGadgetColumn()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=bindgadgetevent.html>BindGadgetEvent()</a> -><br><br>
+
+</body></html>

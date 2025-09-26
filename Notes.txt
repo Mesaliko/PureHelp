@@ -1,0 +1,67 @@
+﻿
+How to update help files from old version of pb to a new one:
+=============================================================
+The goal is to replace the old html and xml files by the new ones and to update PureHelp files by clicking on Options/Update from PureHelp.
+
+So, to do that,
+1) Go to https://github.com/fantaisie-software/purebasic
+Click the green button "Code" and click on "Download ZIP"
+Save the "purebasic-devel.zip" file and unzip it.
+or
+Launch https://download-directory.github.io/
+paste https://github.com/fantaisie-software/purebasic/tree/devel/Documentation
+Save the "fantaisie-software purebasic devel Documentation.zip" file and unzip
+
+2) Then
+Launch the docmaker (PureBasic\SDK\DocMaker) and make html files from the unzipped file (purebasic-devel\Documentation\English (or French, ...))
+Copy and replace all html files (folders in fact) + all xml files in the right PureHelp folder
+or 
+copy html files and xml file from your linux or macos help folder in the right PureHelp folder
+ 
+3) Finally, launch PureHelp and click on Options/Update
+ 
+ 
+ 
+ 
+ 
+.---------------------. 
+|For programmers only.|
+.---------------------.
+
+How to add a menu:
+==================
+- H_Main.pb: add an ID in the Enumeration ExtraStuff section (ex:  #Treeview_Popup_ItemTextColor)
+- H_Procedures.pbi: Add and bind the menu in the Procedure PopUpMenus()
+  ex: MenuItem(#Treeview_Popup_ItemTextColor, Language::Get("PopUpMenus", "ItemTextColor"))
+      BindMenuEvent(#MainForm_Treeview_PopUp, #Treeview_Popup_ItemTextColor, @TreeItemTextColor())
+- H_Language.pbi:   Add any entries for the 3 languages (ex: Data.s "ItemTextColor",        "Item text color")
+- H_Procedures.pbi: Create the procedure binded to the menu (ex: Procedure TreeItemTextColor():EndProcedure)
+
+
+
+
+How to add a function in the preference file:
+=============================================
+- PureHelp.prefs: Add a group (ex: [COLOREDITEMS]) in this file
+- H_initialization.pbi: Add global var if needed
+- H_Procedures.pbi: Modify the Procedure PreferencesRead() or PreferencesInit() as appropriate.
+-                 : Add a procedure xxxinit() if needed because PreferencesRead() and PreferencesInit() are launched very early
+-                 : Add xxxinit() in the Procedure Init() if needed
+-                 : Modify PreferencesUpdate() if needed (to keep changes in the file)
+
+
+
+
+How to add a language:
+======================
+- H_Language.pbi: Add the new lang. in the DataSection
+                  For Windows XP only, modify the Procedure.s FindUserLanguage()
+- H_Procedures.pbi: Modify Procedure Setlang(changed = #False)
+                    Modify Procedure Lang()
+                    Modify Procedure Update()
+                    Modify Procedure PopUpMenus()
+
+
+
+
+

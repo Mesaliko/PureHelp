@@ -1,0 +1,61 @@
+<html><head><title>GetMailAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMailAttribute()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>GetMailAttribute</b></font>(#Courrier, Attribut)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'attribut d'un courrier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Courrier</i></td>
+<td width="90%"> 
+Le courrier à utiliser. 
+
+</td></tr>
+<tr><td><i>Attribut</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mail_From</font>   : Renvoie l'adresse de retour définie par <a href="createmail.html">CreateMail()</a>.
+  <font color="#924B72">#PB_Mail_Subject</font>: Renvoie l'objet défini par <a href="createmail.html">CreateMail()</a>.
+  <font color="#924B72">#PB_Mail_XMailer</font>: Renvoie le champ 'X-Mailer' (s'il existe)
+  <font color="#924B72">#PB_Mail_Date</font>   : Renvoie le champ 'Date' (s'il existe)
+  <font color="#924B72">#PB_Mail_Custom</font> : Renvoie les champs utilisateurs (s'ils existent)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'attribut dans une chaîne 
+de caractères. 
+Une chaîne vide est renvoyée si 
+l'attribut n'existe pas. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="setmailattribute.html">SetMailAttribute()</a> peut être utilisé 
+pour modifier les attributs. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Salut&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetMailAttribute</font>(0, <font color="#924B72">#PB_Mail_From</font>)    <font color="#006666">; Affiche &quot;test@purebasic.com&quot;</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">GetMailAttribute</font>(0, <font color="#924B72">#PB_Mail_Subject</font>) <font color="#006666">; Affiche &quot;Salut&quot;</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setmailattribute.html">SetMailAttribute()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=freemail.html>FreeMail()</a> - <a href=index.html>Mail Index</a> - <a href=getmailbody.html>GetMailBody()</a> -><br><br>
+
+</body></html>

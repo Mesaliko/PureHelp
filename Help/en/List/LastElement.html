@@ -1,0 +1,88 @@
+<html><head><title>LastElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LastElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Result = <font color="#006666"><b>LastElement</b></font>(List())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the current list element to the last list element. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the address of the data in the last list element if successful and zero 
+if there if there are no elements in the list. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; An example of simple usage</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>.w()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 5
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 8
+
+<font color="#006666">  LastElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Last element value is &quot;+<font color="#006666">Str</font>(<font color="#006666">Numbers</font>()), <font color="#924B72">#PB_MessageRequester_OK</font>)
+
+
+  <font color="#006666">; An example which uses the return-value</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>.w()
+
+  <b><font color="#006666">If</font></b> <font color="#006666">LastElement</font>(<font color="#006666">Numbers</font>()) &lt;&gt; 0
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Last element value is &quot;+<font color="#006666">Str</font>(<font color="#006666">Numbers</font>()), <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;List is empty&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 5
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 8
+
+  <b><font color="#006666">If</font></b> <font color="#006666">LastElement</font>(<font color="#006666">Numbers</font>()) &lt;&gt; 0
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Last element value is &quot;+<font color="#006666">Str</font>(<font color="#006666">Numbers</font>()), <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;List is empty&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">EndIf</font></b>
+
+
+  <font color="#006666">; An example which is only for advanced users</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>.w()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 5
+<font color="#006666">  AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">  Numbers</font>() = 8
+
+  *Element.Word =<font color="#006666"> LastElement</font>(<font color="#006666">Numbers</font>())
+  <b><font color="#006666">If</font></b> *Element
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;Last element value is &quot;+<font color="#006666">Str</font>(*Element\w), <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;, &quot;List is empty&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="firstelement.html">FirstElement()</a>, <a href="previouselement.html">PreviousElement()</a>, <a href="nextelement.html">NextElement()</a>, 
+<a href="selectelement.html">SelectElement()</a>, <a href="listindex.html">ListIndex()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=insertelement.html>InsertElement()</a> - <a href=index.html>List Index</a> - <a href=listindex.html>ListIndex()</a> -><br><br>
+
+</body></html>

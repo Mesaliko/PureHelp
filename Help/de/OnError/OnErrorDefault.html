@@ -1,0 +1,50 @@
+<html><head><title>OnErrorDefault</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorDefault()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorDefault</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die beim Auftreten eines Fehlers ausgeführte Aktion auf die Standard-Systemeinstellung. 
+Dies bedeutet üblicherweise die Anzeige eines Fehler-Dialogs und Beenden des Programms, aber 
+es meint sicherlich auch, weitere Fehler einfach zu ignorieren. Um ein Programm bei jedem 
+Fehler zu beenden, verwenden Sie <a href="onerrorexit.html">OnErrorExit()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Bei Verwendung der OnError Bibliothek innerhalb einer <a href="../reference/dll.html">DLL</a> 
+ist die beste Vorgehensweise, den &quot;Error-Handler&quot; zu Beginn jeder öffentlichen DLL-Funktion 
+festzulegen und diesen mit diesem Befehl auf die Standardeinstellung zurückzusetzen, bevor zum 
+aufrufenden Programm zurückgekehrt wird. Damit gehen Sie sicher, dass es zu keinen gegenseitigen 
+Störungen zwischen der OnError Bibliothek und jedweder Ausnahmebehandlung im aufrufenden Programm 
+kommt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+<font color="#006666">    MessageRequester</font>(&quot;OnError Test&quot;, &quot;Der folgende Fehler trat auf: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;OnError Test&quot;, &quot;Test starten&quot;)
+
+<font color="#006666">  OnErrorCall</font>(@ErrorHandler())
+<font color="#006666">  OnErrorDefault</font>()         <font color="#006666">; Kommentieren Sie diese Zeile, um den ErrorHandler-Aufruf weiterhin </font>
+                           <font color="#006666">; anstelle der Standardfehlerbehandlung des Systems aktiv zu haben</font>
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; verursacht einen #PB_OnError_InvalidMemory Fehler</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError Test&quot;, &quot;Dies sollte niemals angezeigt werden&quot;)
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=onerrorcall.html>OnErrorCall()</a> - <a href=index.html>OnError Inhaltsverzeichnis</a> - <a href=onerrorexit.html>OnErrorExit()</a> -><br><br>
+
+</body></html>

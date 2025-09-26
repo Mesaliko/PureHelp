@@ -1,0 +1,82 @@
+<html><head><title>LineXY</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LineXY()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>LineXY</b></font>(X1, Y1, X2, Y2 [, Couleur])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Trace une ligne sur la surface de dessin 
+en cours en fonction de ses coordonnées 
+de début et de fin. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X1, Y1</i></td>
+<td width="90%"> 
+Position du point de départ. 
+
+</td></tr>
+<tr><td><i>X2, Y2</i></td>
+<td> 
+Position du point d'arrivée. 
+
+</td></tr>
+<tr><td><i>Couleur (optionnel)</i></td>
+<td> 
+Couleur de la ligne. <br>
+<br>
+Si ce paramètre n'est pas spécifié, 
+la couleur fixée par la fonction 
+<a href="frontcolor.html">FrontColor()</a> sera utilisée. <br>
+<br>
+Les fonctions <a href="rgb.html">RGB()</a> ou <a href="rgba.html">RGBA()</a> peuvent 
+être utilisées pour définir facilement 
+une couleur. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour dessiner une ligne en fonction de 
+ses dimensions, utiliser la fonction 
+<a href="line.html">Line()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;LineXY&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> Angle = 0 <b><font color="#006666">To</font></b> 360 <b><font color="#006666">Step</font></b> 3
+<font color="#006666">        LineXY</font>(100, 100, 100+<font color="#006666">Cos</font>(Angle)*90, 100+<font color="#006666">Sin</font>(Angle)*90,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+      <b><font color="#006666">Next</font></b> Angle
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/linexy.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="line.html">Line()</a>, <a href="box.html">Box()</a>, <a href="roundbox.html">RoundBox()</a>, <a href="ellipse.html">Ellipse()</a>, 
+<a href="circle.html">Circle()</a>, <a href="frontcolor.html">FrontColor()</a>, <a href="rgb.html">RGB()</a>, <a href="rgba.html">RGBA()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=line.html>Line()</a> - <a href=index.html>2DDrawing Index</a> - <a href=lineargradient.html>LinearGradient()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,68 @@
+<html><head><title>Ascii</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Ascii()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>Ascii</b></font>(Chaine$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un tampon en mémoire contenant la version au format  ASCII d'une chaîne de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne à convertir au format ASCII. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La représentation  ASCII de la chaîne. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lorsque le tampon n'est plus nécessaire, il doit être libéré avec <a href="../memory/freememory.html">FreeMemory()</a>. 
+<br>
+<br>
+Cette fonction est surtout utile lors de l'utilisation de bibliothèques tiers 
+qui requièrent des chaînes de caractères au format ASCII en entrée.<br>
+Le <a href="../reference/pseudotypes.html">pseudotype</a> 'p-ascii' peuvent également être utilisé 
+pour automatiser le processus de conversion lors de l'importation des fonctions externes. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Ascii =<font color="#006666"> Ascii</font>(&quot;Hélé&quot;)
+<font color="#006666">  ShowMemoryViewer</font>(*Ascii,<font color="#006666"> MemorySize</font>(*Ascii)) <font color="#006666">; Affiche l'adresse du tampon suivi de 48 E9 6C E9 00</font>
+    
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*Ascii, -1, <font color="#924B72">#PB_Ascii</font>) <font color="#006666">; Affiche &quot;Hélé&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">Unicode</font>(Mem, Type = <font color="#924B72">#PB_Ascii</font>)
+<font color="#006666">    PeekS</font>(Mem, -1, Type)
+  <b><font color="#006666">EndMacro</font></b>
+
+  *Mem1 =<font color="#006666"> Ascii</font>(&quot;Test - éàîöÊÜ&quot;)
+  *Mem2 =<font color="#006666"> UTF8</font>(&quot;Test - éàîöÊÜ&quot;)
+
+  Texte.s =<font color="#006666"> Unicode</font>(*Mem1)
+  <b><font color="#006666">Debug</font></b> Texte <font color="#006666">; Affiche &quot;Test - éàîöÊÜ&quot;</font>
+
+  Texte.s =<font color="#006666"> Unicode</font>(*Mem2, <font color="#924B72">#PB_UTF8</font>)
+  <b><font color="#006666">Debug</font></b> Texte <font color="#006666">; Affiche &quot;Test - éàîöÊÜ&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="utf8.html">UTF8()</a>, <a href="../memory/freememory.html">FreeMemory()</a>, <a href="../memory/memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=asc.html>Asc()</a> - <a href=index.html>String Index</a> - <a href=bin.html>Bin()</a> -><br><br>
+
+</body></html>

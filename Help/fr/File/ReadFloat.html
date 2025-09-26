@@ -1,0 +1,55 @@
+<html><head><title>ReadFloat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadFloat()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.f = <font color="#006666"><b>ReadFloat</b></font>(#Fichier)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit un nombre à virgule 'float' (4 octets). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fichier</i></td>
+<td width="90%"> 
+Le fichier à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre à virgule flottante en 
+simple précision ou zéro si une erreur 
+s'est produite. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0, &quot;Test.txt&quot;)  <font color="#006666">; Ouvre un fichier existant ou en crée un nouveau s'il n'existait pas</font>
+<font color="#006666">    FileSeek</font>(0,<font color="#006666"> Lof</font>(0))         <font color="#006666">; Place le pointeur à la fin du fichier en utilisant le résultat de Lof() </font>
+<font color="#006666">    WriteFloat</font>(0,1234.1234)
+<font color="#006666">    WriteStringN</font>(0, &quot;... une autre ligne à la fin du fichier.&quot;)
+<font color="#006666">    CloseFile</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, &quot;Test.txt&quot;)  <font color="#006666">; Si le fichier peut être lu , on continue...</font>
+    <b><font color="#006666">While</font></b> <font color="#006666">Eof</font>(0) = 0          <font color="#006666">; Boucle tant que la fin du fichier n'est pas atteinte. (Eof = 'End Of File') </font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">ReadFloat</font>(0)      <font color="#006666">; Affiche ligne par ligne le contenu du fichier</font>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    CloseFile</font>(0)              <font color="#006666">; Ferme le fichier précédemment ouvert</font>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Information&quot;,&quot;Impossible d'ouvrir le fichier!&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="writefloat.html">WriteFloat()</a>, <a href="readdouble.html">ReadDouble()</a>, <a href="openfile.html">OpenFile()</a>, 
+<a href="readfile.html">ReadFile()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=readfile.html>ReadFile()</a> - <a href=index.html>File Index</a> - <a href=readinteger.html>ReadInteger()</a> -><br><br>
+
+</body></html>

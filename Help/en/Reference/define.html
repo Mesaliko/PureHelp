@@ -1,0 +1,60 @@
+<html><head><title>Define</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Define</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Define</font></b>.&lt;type&gt; [&lt;variable&gt; [= &lt;expression&gt;], &lt;variable&gt; [= &lt;expression&gt;], ...]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Assign the same data type to a series of <a href="../reference/variables.html">variables</a>. 
+<br>
+Without this keyword, variables are created with the default type of PureBasic 
+which is the type INTEGER. As a reminder, the type INTEGER is: <br>
+4 bytes (with a 32-bit compiler) ranging from -2147483648 to + 2147483647 <br>
+8 bytes (with a 64-bit compiler) ranging from -9223372036854775808 to +9223372036854775807 <br>
+<br>
+<b><font color="#006666">Define</font></b> is very flexible because it also allows you to assign a different type to a 
+particular variable within a series.<br>
+<br>
+<b><font color="#006666">Define</font></b> can also be used with <a href="../reference/dim.html">arrays</a>, 
+the <a href="../reference/newlist.html">lists</a> and the <a href="../reference/newmap.html">maps</a>. 
+
+</blockquote><p><b>Example:</b> Serial assignment</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Define</font></b>.b a, b = 10, c = b*2, d <font color="#006666">; these 4 variables will be byte typed (.b)</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Mix of individual and serial assignments</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Define</font></b>.q a, b.w, c, d, st.s = &quot;ok&quot;  <font color="#006666">; a, c, and d are Quad (.q), b is a Word (.w) and st a String (.s)</font>
+
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(a)  <font color="#006666">; will print 8</font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(b)  <font color="#006666">; will print 2, because it doesn't have the default type</font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(c)  <font color="#006666">; will print 8 </font>
+   <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(d)  <font color="#006666">; will print 8 </font>
+   <b><font color="#006666">Debug</font></b> st         <font color="#006666">; will print ok</font>
+</font></pre>
+
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Define</font></b> &lt;variable&gt;.&lt;type&gt; [= &lt;expression&gt;] [, &lt;variable&gt;.&lt;type&gt; [= &lt;expression&gt;], ...] 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Alternative possibility for the variable declaration using <b><font color="#006666">Define</font></b>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> MyChar.c 
+  <b><font color="#006666">Define</font></b> MyLong.l 
+  <b><font color="#006666">Define</font></b> MyWord.w 
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MyChar)   <font color="#006666">; will print 2</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MyLong)   <font color="#006666">; will print 4</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">SizeOf</font>(MyWord)   <font color="#006666">; will print 2</font>
+</font></pre>
+</blockquote>
+</font></body></html>

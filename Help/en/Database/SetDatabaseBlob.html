@@ -1,0 +1,80 @@
+<html><head><title>SetDatabaseBlob</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDatabaseBlob()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDatabaseBlob</b></font>(#Database, StatementIndex, *Buffer, BufferLength)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Set the blob for future use with <a href="databaseupdate.html">DatabaseUpdate()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Database</i></td>
+<td width="90%"> 
+The database to use. 
+
+</td></tr>
+<tr><td><i>StatementIndex</i></td>
+<td> 
+Undefined query parameter index the blob should be inserted for. 
+The first undefined parameter index starts from zero. 
+The SQL syntax to specify undefined parameter is database manager dependent. 
+See the following examples to see how to proceed. 
+
+</td></tr>
+<tr><td><i>*Buffer</i></td>
+<td> 
+The address of the blob data. 
+
+</td></tr>
+<tr><td><i>BufferLength</i></td>
+<td> 
+The size of the blob data in bytes. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example:</b> SQLite, MySQL and ODBC</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; SQLite, MySQL and ODBC shares the same syntax to insert blob. It is indicated by the '?' character</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; The database should be opened and a table PHOTOS with 3 column (BLOB, VARCHAR(255), BLOB)</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseBlob</font>(0, 0, ?Picture, PictureLength)
+<font color="#006666">  SetDatabaseBlob</font>(0, 1, ?SmallPicture, SmallPictureLength)
+<font color="#006666">  DatabaseUpdate</font>(0, &quot;INSERT INTO PHOTOS (picture, name, small_picture) values (?, 'my description', ?);&quot;)
+</font></pre>
+
+
+</blockquote><p><b>Example:</b> PostgreSQL</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; PostgreSQL uses another syntax: $1, $2.. into the statement to indicate the undefined parameter</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; The database should be opened and a table PHOTOS with 3 column (BYTEA, VARCHAR(255), BYTEA)</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseBlob</font>(0, 0, ?Picture, PictureLength)
+<font color="#006666">  SetDatabaseBlob</font>(0, 1, ?SmallPicture, SmallPictureLength)
+<font color="#006666">  DatabaseUpdate</font>(0, &quot;INSERT INTO PHOTOS (picture, name, small_picture) values ($1, 'my description', $2);&quot;)
+</font></pre>
+<b>Note:</b> PostgreSQL uses BYTEA to store large objects. The escaping needed to store binary data into 
+such a column make it often bigger than expected. A good way to store binary data is to encode it 
+with <a href="../cipher/base64encoder.html">Base64Encoder()</a> before submitting to the database manager. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="databaseupdate.html">DatabaseUpdate()</a>, <a href="getdatabaseblob.html">GetDatabaseBlob()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=previousdatabaserow.html>PreviousDatabaseRow()</a> - <a href=index.html>Database Index</a> - <a href=setdatabasedouble.html>SetDatabaseDouble()</a> -><br><br>
+
+</body></html>

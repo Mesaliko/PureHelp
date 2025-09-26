@@ -1,0 +1,63 @@
+<html><head><title>RestoreVectorState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RestoreVectorState()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>RestoreVectorState</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Restaure l'état de dessin vectoriel 
+qui a été stocké avec l'appel à 
+<a href="savevectorstate.html">SaveVectorState()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)    
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0))
+      
+<font color="#006666">      MovePathCursor</font>(20, 20)
+<font color="#006666">      DrawVectorText</font>(&quot;Texte normal&quot;)
+      
+      <font color="#006666">; Les modifications apportées à l'état de dessin au sein de ce bloc ne touchent pas les autres commandes</font>
+<font color="#006666">      SaveVectorState</font>()
+<font color="#006666">        MovePathCursor</font>(120, 160)
+<font color="#006666">        RotateCoordinates</font>(120, 160, -50)
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+<font color="#006666">        DrawVectorText</font>(&quot;Rotation de texte&quot;)
+<font color="#006666">      RestoreVectorState</font>()
+      
+<font color="#006666">      MovePathCursor</font>(220, 140)
+<font color="#006666">      DrawVectorText</font>(&quot;Texte normal&quot;)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="savevectorstate.html">SaveVectorState()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=resetpath.html>ResetPath()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=rotatecoordinates.html>RotateCoordinates()</a> -><br><br>
+
+</body></html>

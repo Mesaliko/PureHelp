@@ -1,0 +1,59 @@
+<html><head><title>ElapsedMilliseconds</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ElapsedMilliseconds()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.q = <font color="#006666"><b>ElapsedMilliseconds</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le nombre de millisecondes qui se 
+sont écoulées depuis le démarrage de 
+l'ordinateur. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le temps écoulé en millisecondes. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La valeur absolue qui est retournée n'est 
+d'aucune utilité, car elle varie en fonction 
+du système d'exploitation. 
+Au lieu de cela, cette fonction doit être 
+utilisée pour calculer les différences de 
+temps entre plusieurs appels à 
+ElapsedMilliseconds(). 
+<br>
+<br>
+Cette fonction est relativement précise: il 
+peut y avoir de légères différences en 
+fonction de l'OS sur lequel le programme 
+s'exécute. 
+cela est dû au fait que certains systèmes 
+ont une minuterie avec une résolution 
+inférieure à d'autres. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;</font>
+  <font color="#006666">; exemple d'utilisation comme chronomètre</font>
+  <font color="#006666">;</font>
+  TempsDepart.q =<font color="#006666"> ElapsedMilliseconds</font>()  <font color="#006666">; Récupère la valeur actuelle</font>
+<font color="#006666">  Delay</font>(1000)  <font color="#006666">; Attend 1000 millisecondes</font>
+  TempsEcoule.q =<font color="#006666"> ElapsedMilliseconds</font>()-TempsDepart  <font color="#006666">; La valeur 'TempsEcoule' devrait être d'environ 1000 millisecondes</font>
+
+  <b><font color="#006666">Debug</font></b> &quot;Temps écoulé : &quot;+<font color="#006666">Str</font>(TempsEcoule)+&quot; millisecondes&quot; 
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="delay.html">Delay()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=doubleclicktime.html>DoubleClickTime()</a> - <a href=index.html>System Index</a> - <a href=memorystatus.html>MemoryStatus()</a> -><br><br>
+
+</body></html>

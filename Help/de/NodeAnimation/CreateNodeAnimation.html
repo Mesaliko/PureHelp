@@ -1,0 +1,72 @@
+<html><head><title>CreateNodeAnimation</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateNodeAnimation()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateNodeAnimation</b></font>(#NodeAnimation, NodeID, Länge, Interpolation, RotationsInterpolation)</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt eine neue Node-Animation der angegebenen Länge. Eine Node-Animation ist physikalisch 
+in der 3D-Welt nicht vorhanden, es ist eine virtuelle Spur, um einen Knoten (oder auch &quot;Node&quot;, 
+und sein beigefügtes Objekt) leicht durch die Welt zu bewegen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#NodeAnimation</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren der neuen Node-Animation. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>NodeID</i></td>
+<td> 
+Der automatisch zu bewegende Knoten (Node). <a href="../node/nodeid.html">NodeID()</a> kann verwendet werden, um eine gültige Node ID 
+zu erhalten. 
+
+</td></tr>
+<tr><td><i>Länge</i></td>
+<td> 
+Die Länge der neuen Animation (in Millisekunden). 
+
+</td></tr>
+<tr><td><i>Interpolation</i></td>
+<td> 
+Die Art der zwischen den Punkten anzuwendenden Interpolation. Dies kann einer der folgenden 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_NodeAnimation_Linear</font>: alle Punkte werden durch eine gerade Linie miteinander verbunden,
+                            was zu einer abrupten Richtungsänderung führen kann
+  <font color="#924B72">#PB_NodeAnimation_Spline</font>: alle Punkte werden durch ein Spline (auch &quot;Polynomzug&quot;) miteinander
+                            verbunden, was in einer sanfteren Richtungsänderung mündet, jedoch
+                            auch langsamer ist.
+</font></pre>
+
+</td></tr>
+<tr><td><i>RotationsInterpolation</i></td>
+<td> 
+Die Art der Interpolation, die auf die Rotation zwischen Punkten anzuwenden ist. Dies kann einer 
+der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_NodeAnimation_LinearRotation</font>:    alle Punkte werden durch eine gerade Linie miteinander
+                                       verbunden, was zu einer abrupten Rotation führen kann
+  <font color="#924B72">#PB_NodeAnimation_SphericalRotation</font>: alle Punkte werden durch eine Kurve miteinander
+                                       verbunden, was zu einer sanfteren Rotation führt, aber
+                                       auch langsamer ist.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn die #NodeAnimation nicht erstellt werden konnte. Wenn <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+als '#NodeAnimation' Parameter verwendet wurde, dann wird die Nummer der neuen Node-Animation zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freenodeanimation.html">FreeNodeAnimation()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addnodeanimationtime.html>AddNodeAnimationTime()</a> - <a href=index.html>NodeAnimation Inhaltsverzeichnis</a> - <a href=createnodeanimationkeyframe.html>CreateNodeAnimationKeyFrame()</a> -><br><br>
+
+</body></html>

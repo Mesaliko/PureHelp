@@ -1,0 +1,81 @@
+<html><head><title>HideWindow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HideWindow()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>HideWindow</b></font>(#Fenetre, Etat, [, Options]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Cache ou rend visible une fenêtre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>Etat</i></td>
+<td> 
+Peut prendre une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>  : La fenêtre est masquée
+  <font color="#924B72">#False</font> : La fenêtre est affichée. Elle est aussi activée (focus) 
+           sauf avec l'option <font color="#924B72">#PB_Window_NoActivate</font>.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+Peut être une combinaison des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_NoActivate</font>    : La fenêtre s'affiche mais n'est pas activée. (valable uniquement si la fenêtre est visible).
+  <font color="#924B72">#PB_Window_ScreenCentered</font>: La fenêtre sera centrée dans l'écran (valable uniquement si la fenêtre est visible).
+  <font color="#924B72">#PB_Window_WindowCentered</font>: La fenêtre sera centrée dans la fenêtre (valable uniquement si la fenêtre est visible).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 220, 100, &quot;Exemple...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+   
+<font color="#006666">   ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Cacher la fenêtre&quot;)
+   
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1
+             
+<font color="#006666">             HideWindow</font>(0, <font color="#924B72">#True</font>)  
+             <b><font color="#006666">Debug</font></b> &quot;La fenêtre est cachée.&quot;
+<font color="#006666">             MessageRequester</font>(&quot;Info&quot;, &quot;La fenêtre est cachée. Cliquez sur OK pour la faire réapparaitre&quot;)
+<font color="#006666">             HideWindow</font>(0, <font color="#924B72">#False</font>)  
+             <b><font color="#006666">Debug</font></b> &quot;La fenêtre est visible.&quot;
+                              
+           <b><font color="#006666">EndSelect</font></b>
+            
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="openwindow.html">OpenWindow()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getwindowtitle.html>GetWindowTitle()</a> - <a href=index.html>Window Index</a> - <a href=iswindow.html>IsWindow()</a> -><br><br>
+
+</body></html>

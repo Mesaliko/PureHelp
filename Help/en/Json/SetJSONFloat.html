@@ -1,0 +1,61 @@
+<html><head><title>SetJSONFloat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetJSONFloat()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetJSONFloat</b></font>(JSONValue, Value.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the <a href="jsontype.html">type</a> of the JSON value to <font color="#924B72">#PB_JSON_Number</font> and 
+store the given float value. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValue</i></td>
+<td width="90%"> 
+The JSON value. 
+
+</td></tr>
+<tr><td><i>Value.f</i></td>
+<td> 
+The value to store. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Note that JSON does not permit the special floating point values +Infinity, -Infinity or NaN in JSON data. 
+If such a value is set with this function, it will be replaced by a JSON 'null' literal when the 
+data is being saved or encoded. The functions <a href="../math/isinfinity.html">IsInfinity()</a> or <a href="../math/isnan.html">IsNaN()</a> can be used to detect 
+this case. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+    ArrayValue =<font color="#006666"> SetJSONArray</font>(<font color="#006666">JSONValue</font>(0))
+<font color="#006666">    SetJSONFloat</font>(<font color="#006666">AddJSONElement</font>(ArrayValue), 1.23)
+<font color="#006666">    SetJSONFloat</font>(<font color="#006666">AddJSONElement</font>(ArrayValue), 4.56)
+    
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getjsonfloat.html">GetJSONFloat()</a>, 
+<a href="setjsonarray.html">SetJSONArray()</a>, <a href="setjsonboolean.html">SetJSONBoolean()</a>, <a href="setjsondouble.html">SetJSONDouble()</a>, 
+<a href="setjsoninteger.html">SetJSONInteger()</a>, <a href="setjsonnull.html">SetJSONNull()</a>, 
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="setjsonstring.html">SetJSONString()</a>, <a href="setjsonquad.html">SetJSONQuad()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setjsondouble.html>SetJSONDouble()</a> - <a href=index.html>Json Index</a> - <a href=setjsoninteger.html>SetJSONInteger()</a> -><br><br>
+
+</body></html>

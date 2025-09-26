@@ -1,0 +1,99 @@
+<html><head><title>DragFiles</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragFiles()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>DragFiles</b></font>(Dateien$ [, Aktionen])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Startet eine Drag &amp; Drop Operation mit einer Liste von Dateinamen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateien$</i></td>
+<td width="90%"> 
+Eine Liste der zu &quot;ziehenden&quot; (englisch &quot;to drag&quot;) Dateinamen oder Verzeichnisse. Mehrere Dateinamen sollten 
+mit einem <a href="../string/chr.html">Chr(10)</a> (Zeilenvorschub) Zeichen getrennt werden. Jeder Dateiname muss 
+seinen vollen Pfad beinhalten, da die Ziel-Applikation nicht weiß, wie sie relative Namen auflösen soll. 
+Die Dateinamen müssen auf existierende Dateien verweisen, sodass die Ziel-Applikation auf sie zugreifen kann. 
+
+</td></tr>
+<tr><td><i>Aktionen (optional)</i></td>
+<td> 
+Eine Kombination der Drag &amp; Drop Aktionen, welche für die Dateien erlaubt sein sollen. 
+Wenn der Parameter nicht angegeben wird, wird <font color="#924B72">#PB_Drag_Copy</font> die einzige erlaubte Aktion sein. 
+Mögliche Aktionen sind: (sie können mittels '|' kombiniert werden) 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: Die Dateien können kopiert werden
+  <font color="#924B72">#PB_Drag_Move</font>: Die Dateien können verschoben werden
+  <font color="#924B72">#PB_Drag_Link</font>: Die Dateien können verlinkt werden
+</font></pre>
+
+Der Anwender kann durch Drücken der Zusatztasten wie 'Strg' oder 'Shift' entscheiden, welche dieser 
+Aktionen verwendet werden soll. Die Aktionen, welche tatsächlich stattfinden können, richten sich 
+auch nach den vom Zielobjekt (englisch &quot;drop target&quot;) erlaubten Aktionen. 
+<br>
+(Auf MacOSX werden die Aktionen nur als ein Vorschlag übergeben. Das Zielobjekt kann immer 
+noch eine andere Aktion auswählen.) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen der oben genannten Drag &amp; Drop Aktions-Werte zurück, welche die vom Anwender genutzte Aktion 
+anzeigen, oder <font color="#924B72">#PB_Drag_None</font> wenn der Anwender die Drag &amp; Drop Operation abgebrochen hat. 
+<br>
+<br>
+Bitte beachten Sie, dass - anders als bei anderen Funktionen zum Starten von Drag &amp; Drop - nichts unternommen 
+werden sollte, wenn <font color="#924B72">#PB_Drag_Move</font> zurückgegeben wird. Da es sich bei den &quot;gezogenen&quot; Dateien 
+nur um den Dateinamen und nicht um die Datei selbst handelt, muss jede auf die Datei anzuwendende Aktion vom 
+Zielobjekt ausgeführt werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Drag &amp; Drop kann grundsätzlich jederzeit gestartet 
+werden, aber die linke Maustaste sollte aktuell gedrückt sein, da andernfalls die Operation umgehend 
+und ohne Erfolg beendet wird. Der übliche Zeitpunkt zum Starten einer Drag &amp; Drop Operation ist, wenn 
+ein <a href="../gadget/index.html">Gadget</a> über <a href="../window/eventtype.html">EventType()</a> ein Ereignis vom Typ 
+<font color="#924B72">#PB_EventType_DragStart</font> zurückmeldet. Unter MacOS X muss das Ereignis <font color="#924B72">#PB_EventType_DragStart</font> mit 
+<a href="../window/bindevent.html">BindEvent()</a> oder <a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a> behandelt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragStartHandler</font>()
+<font color="#006666">    ExamineDraggedItems</font>()
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDraggedItem</font>()
+      Files$ +<font color="#006666"> GetGadgetText</font>(0) +<font color="#006666"> GetGadgetItemText</font>(0,<font color="#006666"> DraggedItemIndex</font>()) +<font color="#006666"> Chr</font>(10)
+    <b><font color="#006666">Wend</font></b>
+    
+    <b><font color="#006666">Debug</font></b> &quot;Dragging files: &quot;+Files$
+    
+<font color="#006666">    DragFiles</font>(Files$)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <font color="#006666">; Wählen Sie einige Dateien oder Ordner und ziehen Sie diese zu einer anderen Applikation</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 400, 400, &quot;Drag &amp; Drop&quot;)
+<font color="#006666">    ExplorerListGadget</font>(0, 10, 10, 380, 380,<font color="#006666"> GetHomeDirectory</font>(), <font color="#924B72">#PB_Explorer_MultiSelect</font>)
+    
+    <font color="#006666">; BindGadgetEvent() ist erforderlich, um das Drag-Start-Ereignis zu verarbeiten</font>
+<font color="#006666">    BindGadgetEvent</font>(0, @DragStartHandler(), <font color="#924B72">#PB_EventType_DragStart</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()  
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="dragtext.html">DragText()</a>, <a href="dragimage.html">DragImage()</a>, <a href="dragprivate.html">DragPrivate()</a>, <a href="dragosformats.html">DragOSFormats()</a>, 
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows, Linux</Blockquote></p><center><a href=index.html>DragDrop Inhaltsverzeichnis</a> - <a href=dragimage.html>DragImage()</a> -><br><br>
+
+</body></html>

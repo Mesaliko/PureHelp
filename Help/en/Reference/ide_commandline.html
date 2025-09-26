@@ -1,0 +1,70 @@
+<html><head><title>Command-line options for the IDE</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Command-line options for the IDE</font></b></p>
+
+The PureBasic IDE allows you to modify the paths and files being used 
+from the command-line. This allows you to create several shortcuts that 
+start the IDE with different configurations for different users, or for 
+different projects. 
+
+<br>
+<br>
+
+There are also options for compiling PureBasic projects directly from the command-line. 
+Building a project from the command-line involves the same actions like at choosing the 
+'Build Target' or 'Build all Targets' from the <a href="../reference/ide_compiler.html">compiler menu</a>. 
+
+<br>
+<br>
+
+
+General options: 
+<pre><font face="Courier New, Courier, mono" size="2">  /VERSION                 displays the IDE version and exits
+  /HELP or /?              displays a description of the command-line arguments
+</font></pre>
+
+Options for launching the IDE: 
+<pre><font face="Courier New, Courier, mono" size="2">  /P &lt;Preferences file&gt;    loads/saves all the configuration to/from the given file
+  /T &lt;Templates file&gt;      loads/saves the code templates from/to the given file
+  /A &lt;tools file&gt;          loads/saves the configuration of the external tool from/to this file
+  /S &lt;Source path&gt;         overwrites the &quot;Source path&quot; setting from the preferences
+  /E &lt;Explorer path&gt;       starts the Explorer tool with the given path
+  /L &lt;Line number&gt;         moves the cursor to the given line number in the last opened file
+  /H &lt;HistoryDatabase&gt;     specify the file to use for the session history database
+  /NOEXT                   disables the registering of the .pb extension in the registry
+  /LOCAL                   puts all preferences in the PureBasic directory instead of the user profile location
+  /PORTABLE                the same as /LOCAL and /NOEXT combined
+</font></pre>
+
+Options for building projects: 
+<pre><font face="Courier New, Courier, mono" size="2">  /BUILD &lt;file&gt;            specifies the project file to build
+  /TARGET &lt;target&gt;         specifies the target to build (the default is to build all targets)
+  /QUIET                   hides all build messages except errors
+  /READONLY                does not update the project file after compiling (with new access time and build counters)
+</font></pre>
+
+The default files for /P /T and /A are saved in the %APPDATA%\PureBasic\ directory on the system. 
+<br>
+<br>
+The /NOEXT command is useful when you have <a href="../reference/several_pb.html">several different PB versions at once</a> 
+(for testing of beta versions for example), but want the .pb extension to be associated 
+with only one of them. 
+The /PORTABLE command can be used to keep all configuration inside the local directory to easily copy 
+PureBasic to different computers (or run it from USB sticks for example). 
+
+<br>
+<br>
+Example: 
+<pre><font face="Courier New, Courier, mono" size="2">  PureBasic.exe Example.pb /PORTABLE
+</font></pre>
+
+
+<br>
+<br>
+
+You can also put the filenames of source files to load on the command-line. You can 
+even specify wildcards for them (so with &quot;*.pb&quot; you can load a whole directory). 
+
+
+
+</font></body></html>

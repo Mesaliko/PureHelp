@@ -1,0 +1,68 @@
+<html><head><title>Base64Encoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Base64Encoder()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>Base64Encoder</b></font>(*EingabePuffer, EingabeGröße [, Flags])  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Kodiert den angegebenen Speicherpuffer unter Verwendung des &quot;Base64-Algorithmus&quot;. 
+Dieser wird hauptsächlich in Email-Programmen benutzt, kann aber auch nützlich für 
+alle anderen Programme sein, die das Kodieren von rohen Binär-Dateien zu Dateien 
+im ASCII-Format (7 Bit, Zeichen nur von 32 bis 127 der ASCII-Tabelle) benötigen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*EingabePuffer</i></td>
+<td width="90%"> 
+Der Puffer, welcher die reinen Daten enthält. 
+
+</td></tr>
+<tr><td><i>EingabeGröße</i></td>
+<td> 
+Die Größe des Eingabepuffers. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_NoPadding</font>: es wird am Ende des kodierten Puffers kein zusätzliches '=' eingefügt, um es auf die 3 Bytes-Grenze zu &quot;padden&quot;
+  <font color="#924B72">#PB_Cipher_URL</font>      : es verwendet eine etwas andere Kodierung, hauptsächlich verwendet in URLs. Die üblicherweise als '+' und '/'
+                        kodierten Zeichen, werden jeweils in '-' bzw. '_' kodiert.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die kodierten Daten als einen String zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  String$ = &quot;This is a test string!&quot;
+  
+  <font color="#006666">; Kodieren eines UTF-8 Strings</font>
+  *Text =<font color="#006666"> UTF8</font>(String$)
+  Encoded$ =<font color="#006666"> Base64Encoder</font>(*Text,<font color="#006666"> StringByteLength</font>(String$, <font color="#924B72">#PB_UTF8</font>))
+  <b><font color="#006666">Debug</font></b> &quot;Encoded: &quot; + Encoded$
+  
+  *DecodedBuffer =<font color="#006666"> AllocateMemory</font>(1024)
+<font color="#006666">  Base64Decoder</font>(Encoded$, *DecodedBuffer, 1024)
+  <b><font color="#006666">Debug</font></b> &quot;Decoded: '&quot; +<font color="#006666"> PeekS</font>(*DecodedBuffer, -1, <font color="#924B72">#PB_UTF8</font>) + &quot;'&quot;
+  
+<font color="#006666">  FreeMemory</font>(*Text)
+<font color="#006666">  FreeMemory</font>(*DecodedBuffer)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="base64decoder.html">Base64Decoder()</a>, <a href="base64decoderbuffer.html">Base64DecoderBuffer()</a>, <a href="base64encoderbuffer.html">Base64EncoderBuffer()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=base64decoderbuffer.html>Base64DecoderBuffer()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=base64encoderbuffer.html>Base64EncoderBuffer()</a> -><br><br>
+
+</body></html>

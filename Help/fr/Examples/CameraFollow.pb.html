@@ -1,0 +1,100 @@
+<html><head><title>CameraFollow.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - CameraFollow
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> = 2
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;CameraFollow - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/Desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">; First create materials
+</font><font color="#006666">;
+
+</font>GrassMaterial =<font color="#006666"> CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> TextureID</font>(<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;grass1.png&quot;)))
+<font color="#006666">SetMaterialAttribute</font>(GrassMaterial,<font color="#924B72">#PB_Material_AlphaReject</font>,128)
+<font color="#006666">SetMaterialAttribute</font>(GrassMaterial,<font color="#924B72">#PB_Material_TAM</font>,<font color="#924B72">#PB_Material_ClampTAM</font>)
+DirtMaterial =<font color="#006666"> CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> TextureID</font>(<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;Dirt.jpg&quot;)))
+NinjaRed =<font color="#006666"> CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> TextureID</font>(<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;nskinrd.jpg&quot;)))
+
+<font color="#006666">; Then create the billboard group and use the previous material
+</font><font color="#006666">;
+</font><font color="#006666">;-Billboard
+
+</font>Billboard =<font color="#006666"> CreateBillboardGroup</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MaterialID</font>(GrassMaterial), 60, 60)
+<b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1000
+<font color="#006666">  AddBillboard</font>(Billboard,<font color="#006666"> Random</font>(2000)-1000, 30,<font color="#006666"> Random</font>(2000) - 1000)
+<b><font color="#006666">Next</font></b> i
+
+<font color="#006666">; create ground
+</font>MeshPlane =<font color="#006666"> CreatePlane</font>(<font color="#924B72">#PB_Any</font>, 2000, 2000, 40, 40, 4, 4)
+<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshPlane),<font color="#006666"> MaterialID</font>(DirtMaterial))
+
+<font color="#006666">; Add house
+</font>MeshHouse =<font color="#006666"> LoadMesh</font>(<font color="#924B72">#PB_Any</font>, &quot;tudorhouse.mesh&quot;)
+House =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshHouse), <font color="#924B72">#PB_Material_None</font>, 0, 280, 0)
+<font color="#006666">ScaleEntity</font>(House, 0.5, 0.5, 0.5)
+
+<font color="#006666">;- Ninja
+</font>NinjaMesh =<font color="#006666"> LoadMesh</font>(<font color="#924B72">#PB_Any</font>, &quot;ninja.mesh&quot;)
+Ninja =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(NinjaMesh),<font color="#006666"> MaterialID</font>(NinjaRed), 500, 0, 400)
+<font color="#006666">ScaleEntity</font>(Ninja, 0.5, 0.5, 0.5)
+<font color="#006666">StartEntityAnimation</font>(Ninja, &quot;Walk&quot;)
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">; light
+</font><font color="#006666">CreateLight</font>(0,$ffffff,1000,1000,1000)
+
+<font color="#006666">; create camera
+</font>Camera =<font color="#006666"> CreateCamera</font>(<font color="#924B72">#PB_Any</font>, 0, 0, 100, 100)
+
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.03
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()   
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  
+<font color="#006666">  MoveEntity</font>(Ninja, KeyX, 0, KeyY, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  Yaw</font>(<font color="#006666">EntityID</font>(Ninja), MouseX, <font color="#924B72">#PB_World</font>|<font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  CameraFollow</font>(Camera,<font color="#006666"> EntityID</font>(Ninja), 0,<font color="#006666"> EntityY</font>(Ninja) + 80, 160, 0.1, 0.1, <font color="#924B72">#False</font>)
+<font color="#006666">  CameraLookAt</font>(Camera,<font color="#006666"> EntityX</font>(Ninja), 40,<font color="#006666"> EntityZ</font>(Ninja))
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

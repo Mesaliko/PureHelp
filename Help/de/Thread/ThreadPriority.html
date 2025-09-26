@@ -1,0 +1,112 @@
+<html><head><title>ThreadPriority</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ThreadPriority()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+AltePriorität = <font color="#006666"><b>ThreadPriority</b></font>(Thread, Priorität)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die Priorität des angegebenen Threads und gibt die alte Priorität 
+zurück. 
+<br>
+<br>
+Der Prioritäts-Wert kann zwischen 1 und 32 liegen. 1 ist die niedrigste 
+Priorität, 16 ist die normale Priorität und 32 ist die zeitkritische Priorität (die 
+höchste Priorität; bitte benutzen Sie diese nicht - außer Sie wissen, was Sie tun). 
+<br>
+<br>
+Wird als neue Priorität 0 übergeben, dann wird die Priorität nicht verändert (nützlich, 
+um nur die Priorität des Threads zu ermitteln, aber nicht zu verändern). Alle Threads 
+werden mit normaler Priorität erstellt. 
+<br>
+<br>
+Normalerweise werden Sie einem ständig laufenden Thread (zum Beispiel, einem Bild 
+verarbeitenden Thread) eine Priorität geben, die nicht größer als die jedes anderen 
+Threads in Ihrem System ist. Der Grund dafür ist, wenn der Thread ständig läuft und 
+eine hohe Priorität hat, dass dann kein anderer Thread die Chance hat, ausgeführt zu werden. 
+Wenn ein Thread schnell reagieren muss, aber die meiste Zeit mit dem Warten auf einige 
+Ereignisse (Events) verbringt, dann können Sie ihm möglicherweise eine höhere als die 
+normale Priorität geben. 
+<br>
+<br>
+
+Windows managet Threads (wählt aus, welcher Thread für eine kurze Zeit läuft) 
+durch preemptives Multitasking, welches durch Prioritäten geregelt wird. Dabei 
+können verschiedene Threads unterschiedliche Prioritäten-Stufen haben. 
+Dies bedeutet, wenn es Zeit zur Ausführung eines anderen Threads wird (bekannt als 
+Context-Switch), dann wird der Thread mit der höchsten Priorität (der fertig zum 
+Starten ist) als nächster ausgeführt. Wenn es mehr als einen Thread mit der höchsten 
+Priorität gibt (und sie auch fertig zum Starten sind), dann wird ein Thread nach 
+dem anderen (basierend auf &quot;Successive Context-Switches&quot;) ausgeführt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Thread</i></td>
+<td width="90%"> 
+Der Thread, dessen Priorität geändert werden soll. Dieser Wert wird von <a href="createthread.html">CreateThread()</a> zurückgegeben. 
+
+</td></tr>
+<tr><td><i>Priorität</i></td>
+<td> 
+Die neue Priorität, welche dem Thread zugewiesen werden soll. Die Priorität kann 0 sein (bedeutet, dass die 
+Priorität nicht geändert wird) oder im Bereich von 1 (niedrigste Priorität) bis 32 (höchste Priorität) liegen. 16 ist die 
+normale Priorität. Windows unterstützt nicht 32 verschiedene Level der Priorität - hier ist eine 
+entsprechende Tabelle: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1: niedrigste
+  - zwischen 2 und 15: geringer als normal
+  - 16: normal
+  - zwischen 17 und 30: höher als normal
+  - 31: höchste
+  - 32: zeitkritisch
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Dieser Befehl gibt die vor dem Aufrufen dieses Befehls aktuelle Priorität des Threads zurück. 
+Dies kann nützlich sein, wenn Sie die Priorität des Threads nur für eine kurze Zeit erhöhen 
+möchten und danach zur vorher eingestellten Priorität zurückkehren möchten. Der zurückgegebene 
+Wert ist nicht so notwendig wie der von ThreadPriority(), da es auch von der vom System 
+angebotenen Prioritätsoptimierung abhängt. 
+<br>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Prozedur, die immer läuft (beachten Sie, es wird kein Delay Befehl</font>
+  <font color="#006666">; verwendet, da dies ein Anhalten des Threads während der Pause</font>
+  <font color="#006666">; verursachen würde)</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">PrintStuff</font>(*Interval)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1000000000
+      <font color="#006666">; böse Wartezeit</font>
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+    thread =<font color="#006666"> CreateThread</font>(@PrintStuff(), 500)
+    <b><font color="#006666">If</font></b> thread
+      <font color="#006666">; Priorität über die des Haupt-Threads erhöhen.</font>
+      <font color="#006666">; Sie sollten die Wartezeit vor dem Ausführen des</font>
+      <font color="#006666">; Print Befehls beachten. Ändern Sie jetzt die 17</font>
+      <font color="#006666">; in eine 15 (niedrige als die normale Priorität)</font>
+      <font color="#006666">; und Sie werden feststellen, dass die Ausgabe</font>
+      <font color="#006666">; umgehend beginnt.</font>
+<font color="#006666">      ThreadPriority</font>(thread, 17)
+<font color="#006666">      PrintN</font>(&quot;Warte auf Thread mit hoeherer Prioritaet zum Beenden&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Return zum Beenden&quot;)
+<font color="#006666">    Input</font>()
+<font color="#006666">    CloseConsole</font>()
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">End</font></b>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=threadid.html>ThreadID()</a> - <a href=index.html>Thread Inhaltsverzeichnis</a> - <a href=trylockmutex.html>TryLockMutex()</a> -><br><br>
+
+</body></html>

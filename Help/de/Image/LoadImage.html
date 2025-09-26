@@ -1,0 +1,99 @@
+<html><head><title>LoadImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>LoadImage</b></font>(#Image, Dateiname$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Lädt das angegebene Bild aus einer Datei. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Die Nummer, mit der das geladene Bild identifiziert wird. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann angegeben werden, um diese Nummer 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Name der zu ladenden Datei. Wenn der Dateiname keinen vollständigen Pfad 
+beinhaltet, wird dieser relativ zum <a href="../filesystem/getcurrentdirectory.html">aktuellen Verzeichnis</a> 
+interpretiert. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dieser Parameter hat derzeit keine Bedeutung. Wenn er angegeben wird, sollte 0 für 
+zukünftige Kompatibilität verwendet werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Bild erfolgreich geladen wurde, und Null 
+wenn das Bild nicht geladen werden konnte. 
+Wenn <font color="#924B72">#PB_Any</font> als #Image Parameter angegeben wurde, dann wird bei Erfolg die 
+automatisch generierte Nummer zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das Limit für die Bildgröße, welche verarbeitet werden kann, hängt vom Betriebssystem und 
+dem verfügbaren Speicher ab. Wenn genügend Speicher verfügbar ist, dann können von allen 
+von PureBasic unterstützten Betriebssystemen Bilder bis mindestens 8192x8192 Pixel 
+verarbeitet werden. 
+<br>
+<br>
+Wenn ein Bild geladen wird, dann wird es entweder in 24 Bit konvertiert (wenn die Bildtiefe 
+kleiner oder gleich 24 Bit ist), oder in 32 Bit (wenn das Bild einen Alpha-Kanal hat). 
+Ein geladenes Bild kann mit Hilfe des <a href="freeimage.html">FreeImage()</a> Befehls freigegeben werden. 
+<br>
+<br>
+Das Bild kann im BMP-, Icon- (.ico, nur unter Windows) oder einem anderen von der 
+<a href="../imageplugin/index.html">ImagePlugin</a>-Bibliothek unterstützten Format vorliegen. 
+Der Alphakanal wird für 32-Bit-BMP-Bilder unterstützt. 
+<br>
+<br>
+Die folgenden Befehle können verwendet werden, um automatisch weitere Bildformate zu aktivieren: 
+<br>
+<br>
+- <a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+- <a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+- <a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+- <a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+- <a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+- <a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+<br>
+Sie können verschiedene andere Funktionen benutzen, um auf das geladene Bild zuzugreifen: 
+<br>
+- <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> mit <a href="imageoutput.html">ImageOutput()</a> zum Zeichnen auf das erstellte Bild 
+<br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> mit <a href="imagevectoroutput.html">ImageVectorOutput()</a> zum Zeichnen auf das erstellte Bild mittels Vektorzeichnen 
+<br>
+- <a href="copyimage.html">CopyImage()</a> zum Erstellen eines weiteren Bildes vom aktuellen Bild 
+<br>
+- <a href="grabimage.html">GrabImage()</a> zum Erstellen eines weiteren Bildes aus einem angegebenen Bildausschnitt des aktuellen Bildes 
+<br>
+- <a href="../2ddrawing/drawimage.html">DrawImage()</a> mit <a href="imageid.html">ImageID()</a> zum Zeichnen des Bildes auf dem aktuellen Ausgabekanal 
+<br>
+- <a href="../2ddrawing/drawalphaimage.html">DrawAlphaImage()</a> mit <a href="imageid.html">ImageID()</a> zum Zeichnen des Bildes (mit Alpha-Kanal) auf dem aktuellen Ausgabekanal 
+<br>
+- <a href="../gadget/imagegadget.html">ImageGadget()</a> zum Anzeigen des Bildes auf einem Programmfenster 
+<br>
+- <a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> zum Erstellen eines Bild-Schalters auf einem Programmfenster 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="copyimage.html">CopyImage()</a>, <a href="grabimage.html">GrabImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin Bibliothek</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=isimage.html>IsImage()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=removeimageframe.html>RemoveImageFrame()</a> -><br><br>
+
+</body></html>

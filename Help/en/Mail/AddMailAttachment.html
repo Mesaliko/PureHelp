@@ -1,0 +1,143 @@
+<html><head><title>AddMailAttachment</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMailAttachment()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>AddMailAttachment</b></font>(#Mail, Description$, Filename$ [, MimeType$])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Add a file attachment to the mail. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+The mail to use. 
+
+</td></tr>
+<tr><td><i>Description$</i></td>
+<td> 
+The information string displayed for the attachment in the mail. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The file to be added as an attachment. If the filename does not include a full path, it 
+is interpreted relative to the <a href="../filesystem/getcurrentdirectory.html">current directory</a>. 
+Once the attachment is added, the local 
+file may changed or deleted, as the entire content of the file is copied and attached to the mail. 
+
+</td></tr>
+<tr><td><i>MimeType$ (optional)</i></td>
+<td> 
+The type of the attached file. 
+If this parameter is omitted, then the file extension will be used to determine that files mime type. 
+Below there is a list of the available mime types. If the extension of the file does not match any of 
+the available mime types, then the &quot;application/octet-stream&quot; mime type will be used. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the attachment was added successfully and zero if not. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Any number of attachments may be added to the mail, but the size limit available for a single 
+attachment is currently set at 100MB. Most servers and clients do not have the capacity to handle 
+attachments of that size, therefore it is advised that each attachment be kept to a reasonable size 
+<br>
+<br>
+The available mime types are: 
+<pre><font face="Courier New, Courier, mono" size="2">  application/acad          | AutoCAD    dwg
+  application/clariscad     | ClarisCAD  ccad
+  application/drafting      | MATRA Prelude drafting   drw
+  application/dxf           | AutoCAD  dxf
+  application/i-deas        | SDRC I-deas  unv
+  application/iges          | Exchange format CAO IGES   igs,iges
+  application/oda           | ODA  oda
+  application/pdf           | Adobe Acrobat  pdf
+  application/postscript    | PostScript   ai,eps,ps
+  application/pro_eng       | ProEngineer  prt
+  application/rtf           | Rich text   rtf
+  application/set           | CAO SET  set
+  application/sla           | stereolithography   stl
+  application/solids        |  MATRA Solids   dwg
+  application/step          | data STEP  step
+  application/vda           | surface   vda
+  application/x-mif         | Framemaker   mif
+  application/x-csh         | Script C-Shell (UNIX)   dwg
+  application/x-dvi         | text dvi  dvi
+  application/hdf           | data hdf
+  application/x-latex       | LaTEX  latex
+  application/x-netcdf      | netCDF   nc,cdf
+  application/x-sh          | Script Bourne Shell   dwg
+  application/x-tcl         | Script Tcl  tcl
+  application/x-tex         | file Tex  tex
+  application/x-texinfo     | eMacs  texinfo,texi
+  application/x-troff       | Troff  t,tr,troff
+  application/x-troff-man   | Troff/macro man  man
+  application/x-troff-me    | Troff/macro ME   me
+  application/x-troff-ms    | Troff/macro MS   ms
+  application/x-wais-source | Source Wais   src
+  application/x-bcpio       | CPIO binary  bcpio
+  application/x-cpio        | CPIO Posix  cpio
+  application/x-gtar        | Tar GNU   gtar
+  application/x-shar        | Archives Shell  shar
+  application/x-sv4cpio     | CPIO SVR4n  sv4cpio
+  application/x-sv4crc      | CPIO SVR4 avec CRC  sc4crc
+  application/x-tar         | archive tar   tar
+  application/x-ustar       | archive tar Posix   man
+  application/zip           | archive ZIP   man
+  audio/basic               | audio au,snd
+  audio/x-aiff              | audio AIFF   aif,aiff,aifc
+  audio/x-wav               | audio Wave   wav
+  image/gif                 | Images gif  man
+  image/ief                 | Images exchange format  ief
+  image/jpeg                | Images Jpeg   jpg,jpeg,jpe
+  image/png                 | Images Png  png
+  image/tiff                | Images Tiff   tiff,tif
+  image/x-cmu-raster        | Raster cmu  cmu
+  image/x-portable-anymap   | Anymap PBM   pnm
+  image/x-portable-bitmap   | Bitmap PBM   pbm
+  image/x-portable-graymap  | Graymap PBM  pgm
+  image/x-portable-pixmap   | Pixmap PBM   ppm
+  image/x-rgb               | Image RGB   rgb
+  image/x-xbitmap           | Images Bitmap X   xbm
+  image/x-xpixmap           | Images Pixmap X   xpm
+  image/x-xwindowdump       | Images dump X Window  man
+  multipart/x-zip           | archive zip  zip
+  multipart/x-gzip          | archive GNU zip  gz,gzip
+  text/html                 | HTML   htm,html
+  text/plain                | raw text txt,g,h,c,cc,hh,m,f90
+  text/richtext             | rich text   rtx
+  text/tab-separated-value  | value split text  tsv
+  text/x-setext             | text Struct   etx
+  video/mpeg                | Video MPEG   mpeg,mpg,mpe
+  video/quicktime           | Video QuickTime  qt,mov
+  video/msvideo             | Video Microsoft Windows  avi
+  video/x-sgi-movie         | Video MoviePlayer  movie
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Hello&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">AddMailAttachment</font>(0, &quot;Attachment 1&quot;,<font color="#006666"> OpenFileRequester</font>(&quot;Choose an attachment&quot;, &quot;&quot;, &quot;&quot;, 0))
+      <b><font color="#006666">Debug</font></b> &quot;Attachment correctly added&quot;
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Attachment failed&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addmailattachmentdata.html">AddMailAttachmentData()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Mail Index</a> - <a href=addmailattachmentdata.html>AddMailAttachmentData()</a> -><br><br>
+
+</body></html>

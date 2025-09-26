@@ -1,0 +1,86 @@
+<html><head><title>ContainerGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ContainerGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ContainerGadget</b></font>(#Gadget, x, y, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a container gadget in the current GadgetList. It's a simple panel gadget which 
+can contain other gadgets. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be composed of one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Container_BorderLess</font> : Without any border (Default).
+  <font color="#924B72">#PB_Container_Flat</font>       : Flat frame.
+  <font color="#924B72">#PB_Container_Raised</font>     : Raised frame.
+  <font color="#924B72">#PB_Container_Single</font>     : Single sunken frame.
+  <font color="#924B72">#PB_Container_Double</font>     : Double sunken frame.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Once the gadget is created, 
+all future created gadgets will be created inside the container. When all the needed 
+gadgets have been created, <a href="closegadgetlist.html">CloseGadgetList()</a> must be called to return to the 
+previous GadgetList. <a href="opengadgetlist.html">OpenGadgetList()</a> can be used later to add others gadgets 
+on the fly in the container area. 
+<br>
+<br>
+The following event is supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Resize</font>: The gadget has been resized.
+</font></pre>
+<br>
+<br>
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+<font color="#924B72">#PB_Gadget_BackColor</font> as type to change the gadget background. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 322, 150, &quot;ContainerGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ContainerGadget</font>(0, 8, 8, 306, 133, <font color="#924B72">#PB_Container_Raised</font>)
+<font color="#006666">      ButtonGadget</font>(1, 10, 15, 80, 24, &quot;Button 1&quot;)
+<font color="#006666">      ButtonGadget</font>(2, 95, 15, 80, 24, &quot;Button 2&quot;)
+<font color="#006666">    CloseGadgetList</font>()
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/containergadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="opengadgetlist.html">OpenGadgetList()</a>, <a href="closegadgetlist.html">CloseGadgetList()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=comboboxgadget.html>ComboBoxGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=countgadgetitems.html>CountGadgetItems()</a> -><br><br>
+
+</body></html>

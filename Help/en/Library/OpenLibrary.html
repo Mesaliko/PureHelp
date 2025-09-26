@@ -1,0 +1,49 @@
+<html><head><title>OpenLibrary</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenLibrary()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>OpenLibrary</b></font>(#Library, Filename$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens a shared library in order that the functions within it may be accessed. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Library</i></td>
+<td width="90%"> 
+A number to identify this library. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used 
+to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Filename$</i></td>
+<td> 
+The filename of the library to load. If the filename does not include a path, then the 
+operating system will search for the library in its system folders, the applications directory and 
+the current directory. On Linux and MacOS, to load the library from the current directory, the 
+'./' path prefix needs to be specified. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the library was opened successfully and zero if not. 
+If <font color="#924B72">#PB_Any</font> was used as the #Library parameter then the generated number for the 
+library is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+It's mandatory, that the created PureBasic executable and the shared library are using 
+the same architecture (for example a x86 DLL can't be opened by x64 executables). 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="closelibrary.html">CloseLibrary()</a>, <a href="getfunction.html">GetFunction()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextlibraryfunction.html>NextLibraryFunction()</a> - <a href=index.html>Library Index</a><br><br></blockquote>
+</font></body></html>

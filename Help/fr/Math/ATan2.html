@@ -1,0 +1,75 @@
+<html><head><title>ATan2</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ATan2()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.f(d) = <font color="#006666"><b>ATan2</b></font>(X.f(d), Y.f(d))</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'angle formé par la droite qui passe par (X;Y) 
+et par l'origine (0;0) d'une part et par l'axe des 
+abscisses (axe des X) d'autre part. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X.f ou X.d, Y.f ou Y.d</i></td>
+<td width="90%"> 
+Nombres à virgule flottante 
+(<a href="../reference/variables.html">float ou double</a>) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'angle en radian. 
+<br>
+<br>
+Le résultat est toujours compris entre 
+<font color="#924B72">- #PI</font> et <font color="#924B72">+ #PI</font>. 
+<br>
+<br>
+<b>ATTENTION:</b> Si X et Y sont égaux à zéro alors la commande renvoie zéro au lieu de 
+lever une erreur de type 'division par zéro'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La valeur renvoyée peut être transformée en degré 
+en utilisant la fonction <a href="degree.html">Degree()</a>. 
+<br>
+<br>
+C'est la fonction réciproque de <a href="tan.html">Tan()</a> 
+<br>
+<br>
+L'intérêt de cette fonction et qu'elle prend en compte 
+le signe des deux coordonnées x, y et place l'angle 
+dans le bon quadrant. Ainsi, atan2(1, 1) = PI/4 
+et atan2(-1, -1) = -3 x PI/4 contrairement à <a href="atan.html">ATan()</a> qui 
+renverrait PI/4 dans les deux cas. 
+<br>
+<br>
+C'est utile pour calculer des angles entre des lignes 
+en 2D, ou pour transformer des coordonnées 
+rectangulaires en coordonnées polaires. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(0, 0)    <font color="#006666">; Affiche 0.0 au lieu de lever une alerte division par zéro.</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(1, 1)    <font color="#006666">; Affiche #PI/4   (45 degrés)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(-1, 1)   <font color="#006666">; Affiche 3#PI/4  (135 degrés)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(-1, -1)  <font color="#006666">; Affiche -3#PI/4 (5#PI/4, 225 degrés) </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(1, -1)   <font color="#006666">; Affiche -#PI/4  (7#PI/4 315 degrés)</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ATan2</font>(1, 0)    <font color="#006666">; Affiche 0.0</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="atan.html">ATan()</a>, <a href="degree.html">Degree()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=atan.html>ATan()</a> - <a href=index.html>Math Index</a> - <a href=atanh.html>ATanH()</a> -><br><br>
+
+</body></html>

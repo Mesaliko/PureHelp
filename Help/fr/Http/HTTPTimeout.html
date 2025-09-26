@@ -1,0 +1,70 @@
+<html><head><title>HTTPTimeout</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPTimeout()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>HTTPTimeout</b></font>(DelaideConnexion [, DelaiGlobal])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Spécifie le délai d'attente à utiliser pour les commandes HTTP suivantes: <a href="receivehttpfile.html">ReceiveHTTPFile()</a>, 
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a> et <a href="httprequestmemory.html">HTTPRequestMemory()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>DelaideConnexion</i></td>
+<td width="90%"> 
+Le délai d'attente, en millisecondes, avant d'abandonner la requête HTTP si l'hôte distant ne se connecte pas.<br>
+Le délai d'attente par défaut est défini sur 30 secondes.<br>
+<font color="#924B72">#PB_Default</font> peut être utilisé pour revenir à la valeur de délai d'attente par défaut (30 secondes). 
+
+</td></tr>
+<tr><td><i>DelaiGlobal (optionnel)</i></td>
+<td> 
+Délai d'attente global, en millisecondes, avant d'abandonner la requête HTTP.<br>
+Il n'y a pas de délai d'attente par défaut.<br>
+<font color="#924B72">#PB_Default</font> peut être utilisé pour revenir au comportement par défaut (pas de délai d'attente (timeout)).<br>
+Note : Si une connexion est lente, elle peut abandonner une requête valide en cours. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si &quot;Créer un exécutable thread-safe&quot; est activé dans les <a href="../reference/ide_compiler.html">options du compilateur</a> alors 
+chaque thread a ses propres délais d'attente, ce qui signifie que deux threads peuvent avoir des délais d'attente différents en même temps. 
+<br>
+<br>
+Sous Linux, &quot;libcurl&quot; doit être installé pour que cette commande fonctionne ce qui est déjà le cas de 
+la plupart des distributions Linux. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  HTTPTimeout</font>(5000) <font color="#006666">;Laisse 5 secondes pour se connecter au serveur</font>
+
+  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;Code d'état : &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Réponse : &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;La création de la demande a échoué&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>, <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a>, <a href="httprequestmemory.html">HTTPRequestMemory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=httprequestmemory.html>HTTPRequestMemory()</a> - <a href=index.html>Http Index</a> - <a href=receivehttpfile.html>ReceiveHTTPFile()</a> -><br><br>
+
+</body></html>

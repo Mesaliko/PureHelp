@@ -1,0 +1,49 @@
+<html><head><title>InitCGI</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InitCGI()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>InitCGI</b></font>([MaxRequestSize])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initializes the CGI environment. This function has to be called successfully before using any other commands 
+of this library. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>MaxRequestSize (optional)</i></td>
+<td width="90%"> 
+The maximum request size, in bytes (default is 50 MB). When sending big data through CGI (like binary files), 
+it could be useful to specify a larger value. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns non-zero if the CGI environment has been correctly initialized. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Write the headers to inform the browser of the content format</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - variables&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;Hello from PureBasic CGI !&quot; +
+                 &quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="readcgi.html">ReadCGI()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=finishfastcgirequest.html>FinishFastCGIRequest()</a> - <a href=index.html>CGI Index</a> - <a href=initfastcgi.html>InitFastCGI()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,108 @@
+<html><head><title>ScrollBarGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScrollBarGadget3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ScrollBarGadget3D</b></font>(#Gadget3D, X, Y, Largeur, Hauteur, Minimum, Maximum, LongueurPage [, Options]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une barre de défilement 
+(ascenseur vertical ou horizontal). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Le numéro d'identification du gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+Les valeurs minimales et maximales possibles. 
+<br>
+<br>
+Il est préférable de se limiter à un minimum 
+de 0 et un maximum de 10 000 pour garder une 
+compatibilité entre les systèmes 
+d'exploitation. 
+
+</td></tr>
+<tr><td><i>LongueurPage</i></td>
+<td> 
+La proportion de la page affichée. 
+<br>
+<br>
+Par exemple, avec un ascenseur horizontal 
+et une image d'une largeur de 100 pixels 
+et un paramètre &quot;LongueurPage&quot; de 25, 
+seulement 25 pixels de large seront affichés. 
+Le minimum affiché sera de 0 et le maximum 
+sera de 100. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combination de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Vertical</font>: La barre de défilement est verticale (horizontale par défaut).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le gadget a 
+été créé avec succès, zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Gadget3D alors le numéro généré 
+automatiquement  est renvoyé dans 'Resultat' 
+en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Vous pouvez ajouter une 'mini aide' à ce 
+gadget en utilisant <a href="gadgettooltip3d.html">GadgetToolTip3D()</a>. 
+<br>
+<br>
+Les fonctions suivantes peuvent être 
+appelées pour agir sur la barre de 
+déplacement : 
+<br>
+<br>
+- <a href="getgadgetstate3d.html">GetGadgetState3D()</a>: Renvoie la position 
+actuelle du curseur (valeur comprise dans 
+l'intervalle Minimum-Maximum) <br>
+- <a href="setgadgetstate3d.html">SetGadgetState3D()</a>: Change la position 
+actuelle du curseur. <br>
+- <a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a> avec un des 
+attributs suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Minimum</font>   : Renvoie la position minimale de l'ascenseur.
+  <font color="#924B72">#PB_ScrollBar3D_Maximum</font>   : Renvoie la position maximale de l'ascenseur.
+  <font color="#924B72">#PB_ScrollBar3D_PageLength</font>: Renvoie la longueur de la page. 
+</font></pre>
+
+- <a href="setgadgetattribute3d.html">SetGadgetAttribute3D()</a>: avec un des 
+attributs suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollBar3D_Minimum</font>   : Change la position minimale de l'ascenseur.
+  <font color="#924B72">#PB_ScrollBar3D_Maximum</font>   : Change la position maximale de l'ascenseur.
+  <font color="#924B72">#PB_ScrollBar3D_PageLength</font>: Change la longueur de la page. 
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=scrollareagadget3d.html>ScrollAreaGadget3D()</a> - <a href=index.html>Gadget3D Index</a> - <a href=setactivegadget3d.html>SetActiveGadget3D()</a> -><br><br>
+
+</body></html>

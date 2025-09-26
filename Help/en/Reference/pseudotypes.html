@@ -1,0 +1,60 @@
+<html><head><title>Pseudotypes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Pseudotypes</font></b></p>
+
+<b>Description</b><br><blockquote>
+
+
+For advanced programmers. The pseudotypes are a way to ease the programming when dealing with 
+external libraries which need datatypes that are not internally supported by PureBasic. In this 
+case, it is possible to use the predefined pseudotype which will do the appropriate conversion 
+on the fly, without extra work. As they are not 'real' types, the chosen naming scheme is explicitly 
+different: a 'p-' prefix (for 'pseudo') is part of the type name. The available pseudotypes are: 
+<pre><font face="Courier New, Courier, mono" size="2">  p-ascii: acts as a string type, but will always convert the string to ascii before
+           calling the function, even when the program is compiled in <a href="../reference/unicode.html">unicode</a> mode. 
+           It is very useful when accessing a shared library which doesn't have unicode 
+           support in an unicode program for example.
+           
+  p-utf8: acts as a string type, but will always convert the string to utf8 before calling the
+          function. It is very useful when accessing a shared library which needs its <a href="../reference/unicode.html">unicode</a>
+          string be passed as UTF8 instead of ascii or unicode strings.
+
+  p-bstr: acts as a string type, but will always convert the string to bstr before calling the
+          function. It is very useful when accessing a shared library which needs bstr parameters,
+          like COM components.
+
+  p-unicode: acts as a string type, but will always convert the string to <a href="../reference/unicode.html">unicode</a> before
+             calling the function, even when the program is compiled in ascii mode. 
+             It is very useful when accessing a shared library which only supports unicode
+             in an ascii program for example.
+
+  p-variant: acts as a numeric type, will adjust the function call to use the variant parameter
+             correctly. It is very useful when accessing a shared library which needs 'variant' parameters,
+             like COM components.
+</font></pre>
+
+The pseudotypes can only be used with <a href="../reference/prototypes.html">prototypes</a>, <a href="../reference/interfaces.html">interfaces</a> 
+and <a href="../reference/import_endimport.html">imported</a> functions. The pseudotypes does the appropriate 
+conversion only if it is necessary. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; We use the 'p-ascii' pseudotype for the string parameters, as</font>
+    <font color="#006666">; MessageBoxA() is an ASCII only function. The compiler will </font>
+    <font color="#006666">; automatically converts the strings to ASCII when needed.</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxA</font>(Window.i, Body.p-ascii, Title.p-ascii, Flags.i = 0)
+                                                  
+  <b><font color="#006666">EndImport</font></b>
+  
+  <font color="#006666">; It will work correctly even if the internal PureBasic strings are in unicode</font>
+  <font color="#006666">; because the compiler will take care of the ASCII conversion automatically.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  MessageBoxA</font>(0, &quot;Hello&quot;, &quot;World&quot;)
+    
+</font></pre>
+</blockquote>
+</font></body></html>

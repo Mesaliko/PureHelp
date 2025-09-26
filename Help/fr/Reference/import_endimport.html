@@ -1,0 +1,91 @@
+<html><head><title>Import : EndImport</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Import : EndImport</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Import</font></b> &quot;NomFichier&quot;
+  NomFonction.&lt;type&gt;(&lt;parametre&gt;, [, &lt;parametre&gt; [= ValeurDefaut]...]) [As &quot;NomSymbole&quot;]
+  ...
+  NomVariable.&lt;type&gt; [As &quot;NomSymbole&quot;]
+<b><font color="#006666">EndImport</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Pour les programmeurs chevronnés. <b><font color="#006666">Import</font></b> : <b><font color="#006666">EndImport</font></b> permet de déclarer facilement des fonctions 
+et des variables externes à partir d'un fichier bibliothèque (.lib) ou objet (.obj). 
+<br>
+<br>
+Une fois déclarées, les fonctions importées sont directement disponibles dans le programme, comme n'importe 
+quelle autre commande. Le compilateur ne vérifie pas si la fonction existe réellement dans le 
+fichier importé, donc si une erreur survient, elle sera reportée par le linker. 
+<br>
+<br>
+Les fonctions importées remplacent avantageusement les commandes <a href="../library/openlibrary.html">OpenLibrary()</a>/<a href="../library/callfunction.html">CallFunction()</a>: 
+la vérification du type, le nombre de paramètres sont validés par le compilateur. De plus, contrairement à CallFunction(), 
+une fonction importée peut gérer les types 'double', 'float' et 'quad' sans aucun problème. 
+<br>
+<br>
+Les paramètres en fin de fonction peuvent avoir une valeur par défaut (une expression constante est requise). 
+Les paramètres ayant une valeur par défaut pourront être omis lors de l'appel de la fonction, la valeur 
+par défaut de chaque paramètre manquant sera utilisée. 
+<br>
+<br>
+Par défaut, le symbole de la fonction importée est décoré suivant le schéma suivant: _NomFonction@tailleargument. Cela 
+devrait fonctionner pour la plupart des fonctions qui utilise la convention standard d'appel (stdcall). Par contre, si 
+la bibliothèque est écrite en C, et que les fonctions exportées ne sont pas stdcall, <b><font color="#006666">ImportC</font></b> devra être utilisé 
+à la place de <b><font color="#006666">Import</font></b>. Dans ce cas, par défaut le symbole est préfixé comme ceci: _NomFonction. 
+<br>
+<br>
+Les <a href="../reference/pseudotypes.html">pseudotypes</a> peuvent être utilisés pour les paramètres, mais pas pour le type de la valeur de retour. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+En 64 bits, il n'y a qu'une seule convention d'appel, alors <b><font color="#006666">ImportC</font></b> fait la même chose que <b><font color="#006666">Import</font></b>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Cet exemple ne fonctionne que sous Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Pas besoin d'utiliser 'As' car PureBasic préfixe la fonction correctement</font>
+    <font color="#006666">; Nous définissons également le paramètre 'Options' comme facultatif, avec une valeur par défaut de 0 (quand il est omis)</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBox</font>(Fenetre.i, Corps$, Titre$, Options.i = 0)
+
+  <b><font color="#006666">EndImport</font></b>
+ 
+<font color="#006666">  MessageBoxW</font>(0, &quot;Salut&quot;, &quot;le Monde&quot;) <font color="#006666">; Nous ne précisons pas les options</font>
+
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Avec les pseudotypes</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Cet exemple ne fonctionne que sous Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+  
+  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Nous utilisons le pseudotype 'p-unicode' pour les paramètres chaîne, car</font>
+    <font color="#006666">; MessageBoxW() est une fonction unicode seulement. Le compilateur va</font>
+    <font color="#006666">; automatiquement convertir les chaînes en unicode quand nécessaire.</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxA</font>(Fenetre.i, Corps.p-ascii, Titre.p-ascii, Options.i = 0)
+                                                 
+  <b><font color="#006666">EndImport</font></b>
+ 
+  <font color="#006666">;</font>
+<font color="#006666">  MessageBoxA</font>(0, &quot;Salut&quot;, &quot;le Monde&quot;) 
+    
+</font></pre>
+
+
+
+</blockquote>
+</font></body></html>

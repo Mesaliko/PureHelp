@@ -1,0 +1,43 @@
+<html><head><title>FlipBuffers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FlipBuffers()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FlipBuffers</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Vertauscht den hinteren mit dem vorderen Puffer des aktuellen Bildschirms. Der 
+unsichtbare Bereich wird nun sichtbar und umgekehrt, welches einen 'Double-Buffering' Effekt (flickerfreie 
+grafische Darstellung) ermöglicht. Ein Bildschirm muss mittels <a href="openscreen.html">OpenScreen()</a> bzw. 
+<a href="openwindowedscreen.html">OpenWindowedScreen()</a> geöffnet worden sein. 
+<br>
+<br>
+Die Art und Weise, wie die Puffer vertauscht (&quot;geflippt&quot;) werden (mit oder ohne Synchronisation), 
+wird von <a href="openscreen.html">OpenScreen()</a> bzw. <a href="openwindowedscreen.html">OpenWindowedScreen()</a> festgelegt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+FlipBuffers() muss stets außerhalb eines <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : ... : 
+<a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> Programmblocks aufgerufen werden. 
+<br>
+<br>
+FlipBuffers() muss in jeder Ereignisschleife auf einem <a href="../screen/openscreen.html">Vollbildschirm</a> 
+aufgerufen werden, um die Ereignisse für <a href="../joystick/examinejoystick.html">Joystick</a> / 
+<a href="../keyboard/examinekeyboard.html">Keyboard</a>&quot; / <a href="../mouse/examinemouse.html">Mouse</a> korrekt zu verarbeiten. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="openscreen.html">OpenScreen()</a>, <a href="openwindowedscreen.html">OpenWindowedScreen()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=examinescreenmodes.html>ExamineScreenModes()</a> - <a href=index.html>Screen Inhaltsverzeichnis</a> - <a href=isscreenactive.html>IsScreenActive()</a> -><br><br>
+
+</body></html>

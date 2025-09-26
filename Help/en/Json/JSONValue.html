@@ -1,0 +1,69 @@
+<html><head><title>JSONValue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">JSONValue()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>JSONValue</b></font>(#JSON)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the value of the specified #JSON data. The type of the value can be 
+checked with <a href="jsontype.html">JSONType()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+The JSON data to return the value of. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The JSON value. The result is never 0 for a valid #JSON data. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Every #JSON data contains exactly one JSON value (containing possibly nested values). 
+Newly created #JSON data from <a href="createjson.html">CreateJSON()</a> contains a value of type <font color="#924B72">#PB_JSON_Null</font>. 
+<br>
+<br>
+The type of the JSON value or its content can be modified with one of the following 
+functions: 
+<br>
+- <a href="setjsonarray.html">SetJSONArray()</a>: Change the value to an (empty) array 
+<br>
+- <a href="setjsonboolean.html">SetJSONBoolean()</a>: Change the value to a boolean 
+<br>
+- <a href="setjsondouble.html">SetJSONDouble()</a>: Change the value to a number 
+<br>
+- <a href="setjsonfloat.html">SetJSONFloat()</a>: Change the value to a number 
+<br>
+- <a href="setjsoninteger.html">SetJSONInteger()</a>: Change the value to a number 
+<br>
+- <a href="setjsonnull.html">SetJSONNull()</a>: Change the value to a 'null' 
+<br>
+- <a href="setjsonobject.html">SetJSONObject()</a>: Change the value to an (empty) object 
+<br>
+- <a href="setjsonstring.html">SetJSONString()</a>: Change the value to a string 
+<br>
+- <a href="setjsonquad.html">SetJSONQuad()</a>: Change the value to a number 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ParseJSON</font>(0,<font color="#006666"> Chr</font>(34) + &quot;The quick brown fox jumped over the lazy dog&quot; +<font color="#006666"> Chr</font>(34))
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONString</font>(<font color="#006666">JSONValue</font>(0))  
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=jsontype.html>JSONType()</a> - <a href=index.html>Json Index</a> - <a href=loadjson.html>LoadJSON()</a> -><br><br>
+
+</body></html>

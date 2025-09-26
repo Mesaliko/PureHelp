@@ -1,0 +1,91 @@
+<html><head><title>DragText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DragText()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DragText</b></font>(Text$ [, Actions])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Starts a Drag &amp; Drop operation with text data. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+The text to drag. 
+
+</td></tr>
+<tr><td><i>Actions (optional)</i></td>
+<td> 
+A combination of the Drag &amp; Drop actions that should be allowed for the data. 
+If the parameter is not specified, <font color="#924B72">#PB_Drag_Copy</font> will be the only allowed action. 
+Possible actions are: (they can be combined with '|') 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Copy</font>: The text can be copied
+  <font color="#924B72">#PB_Drag_Move</font>: The text can be moved
+  <font color="#924B72">#PB_Drag_Link</font>: The text can be linked
+</font></pre>
+
+The user can decide which of these actions to take by pressing modifier keys like Ctrl or Shift. The actions 
+that can really be taken also depend on the actions allowed by the drop target. 
+(On MacOSX, the actions are only treated as a suggestion. The drop target can still choose another action.) 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the above Drag &amp; Drop action values to indicate what action the user took, or 
+<font color="#924B72">#PB_Drag_None</font> if the user aborted the Drag &amp; Drop operation. 
+<br>
+<br>
+Note that if <font color="#924B72">#PB_Drag_Move</font> is returned, it is your responsibility to remove the 
+dragged text data from your application. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Drag &amp; Drop can basically be started any time, but the 
+left mouse button should be currently pressed as otherwise the operation will end immediately without success. 
+The usual time to start a Drag &amp; Drop operation is when a <a href="../gadget/index.html">Gadget</a> reported an event with 
+<a href="../window/eventtype.html">EventType()</a> of <font color="#924B72">#PB_EventType_DragStart</font>. On MacOS X the <font color="#924B72">#PB_EventType_DragStart</font> event has to be handled using <a href="../window/bindevent.html">BindEvent()</a> or <a href="../gadget/bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragStartHandler</font>()
+<font color="#006666">    ExamineDraggedItems</font>()
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDraggedItem</font>()
+      Text$ +<font color="#006666"> GetGadgetItemText</font>(0,<font color="#006666"> DraggedItemIndex</font>()) +<font color="#006666"> Chr</font>(10)
+    <b><font color="#006666">Wend</font></b>
+    
+    <b><font color="#006666">Debug</font></b> &quot;Dragging text: &quot; + Text$
+    
+<font color="#006666">    DragText</font>(Text$)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <font color="#006666">; Select some files or folders and drag them to another application</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 400, 400, &quot;Drag &amp; Drop&quot;)
+<font color="#006666">    ListViewGadget</font>(0, 10, 10, 380, 380, <font color="#924B72">#PB_ListView_MultiSelect</font>)
+<font color="#006666">    AddGadgetItem</font>(0, -1, &quot;Item 1&quot;)
+<font color="#006666">    AddGadgetItem</font>(0, -1, &quot;Item 2&quot;)
+<font color="#006666">    AddGadgetItem</font>(0, -1, &quot;Item 3&quot;)
+    
+    <font color="#006666">; BindGadgetEvent() is required to handle the drag start event</font>
+<font color="#006666">    BindGadgetEvent</font>(0, @DragStartHandler(), <font color="#924B72">#PB_EventType_DragStart</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="dragfiles.html">DragFiles()</a>, <a href="dragimage.html">DragImage()</a>, <a href="dragprivate.html">DragPrivate()</a>, <a href="dragosformats.html">DragOSFormats()</a>, 
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows, Linux</Blockquote></p><center><- <a href=dragprivate.html>DragPrivate()</a> - <a href=index.html>DragDrop Index</a> - <a href=draggeditemindex.html>DraggedItemIndex()</a> -><br><br>
+
+</body></html>

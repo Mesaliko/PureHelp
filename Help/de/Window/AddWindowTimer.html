@@ -1,0 +1,88 @@
+<html><head><title>AddWindowTimer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddWindowTimer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>AddWindowTimer</b></font>(#Window, Timer, Timeout)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt einen neuen Timer (in Deutsch &quot;Zeitgeber&quot;) zum angegebenen Fenster hinzu. 
+Dies verursacht <font color="#924B72">#PB_Event_Timer</font> Ereignisse, die in regelmäßigen 
+Zeitabständen von den <a href="windowevent.html">WindowEvent()</a> bzw. <a href="waitwindowevent.html">WaitWindowEvent()</a> 
+Funktionen empfangen werden. Die Funktion <a href="removewindowtimer.html">RemoveWindowTimer()</a> kann 
+verwendet werden, um den Timer wieder zu entfernen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+Das zu verwendende Fenster. Ein Timer wird immer zu einem Fenster hinzugefügt 
+und wird entfernt, wenn dieses Fenster geschlossen wird. 
+
+</td></tr>
+<tr><td><i>Timer</i></td>
+<td> 
+Eine benutzerdefinierte Zahl, welche diesen Timer identifiziert. Timer auf 
+verschiedenen Fenstern dürfen sich überschneidende Nummern haben. Dieser 
+Wert wird später von <a href="eventtimer.html">EventTimer()</a> zurückgegeben, wenn ein <font color="#924B72">#PB_Event_Timer</font> 
+empfangen wurde. Er kann auch verwendet werden, um den Timer mit der 
+<a href="removewindowtimer.html">RemoveWindowTimer()</a> Funktion wieder zu entfernen. 
+
+</td></tr>
+<tr><td><i>Timeout</i></td>
+<td> 
+Definiert die Zeit (in Millisekunden) zwischen den <font color="#924B72">#PB_Event_Timer</font> Ereignissen. 
+<br>
+<br>
+Die Timer-Ereignisse werden nur generiert, wenn keine anderen Ereignisse zu verarbeiten 
+sind (Timer sind Ereignisse mit niedriger Priorität). Dies bedeutet, dass die zwischen zwei 
+Timern vergangene Zeit größer sein kann, als der definierte 'TimeOut'-Wert. Timer sind 
+daher nicht geeignet für exaktes Timing (Zeitsteuerung), sondern eher gedacht für das 
+Ausführen regelmäßiger Aufgaben wie das Aktualisieren eines Gadget-Inhalts oder Ähnliches. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 100, &quot;Timer Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ProgressBarGadget</font>(0, 10, 10, 380, 20, 0, 100)
+<font color="#006666">    AddWindowTimer</font>(0, 123, 250)
+    
+    Value = 0
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Timer</font> <b><font color="#006666">And</font></b> <font color="#006666">EventTimer</font>() = 123
+        Value = (Value + 5) % 100
+<font color="#006666">        SetGadgetState</font>(0, Value)
+      <b><font color="#006666">EndIf</font></b>    
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um den Zeitabstand zwischen den Timer-Ereignissen zu ändern, müssen Sie den Timer zuerst 
+<a href="removewindowtimer.html">entfernen</a>, und diesen dann mit einem neuen 'Timeout'-Wert 
+erneut hinzufügen: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">    RemoveWindowTimer</font>(<font color="#924B72">#Window</font>, Timer)
+<font color="#006666">    AddWindowTimer</font>(<font color="#924B72">#Window</font>, Timer, Timeout)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removewindowtimer.html">RemoveWindowTimer()</a>, <a href="eventtimer.html">EventTimer()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addkeyboardshortcut.html>AddKeyboardShortcut()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=bindevent.html>BindEvent()</a> -><br><br>
+
+</body></html>

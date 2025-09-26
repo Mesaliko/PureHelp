@@ -1,0 +1,84 @@
+<html><head><title>FileFingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FileFingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>FileFingerprint</b></font>(Dateiname$, Plugin [, Bits [, Offset [, Länge [, HmacKey$ [, HmacKeyFormat]]]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt einen Fingerprint (&quot;Fingerabdruck&quot; oder Prüfsumme) für die angegebene Datei zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateiname$</i></td>
+<td width="90%"> 
+Die Datei, von welcher die Prüfsumme (Fingerprint) berechnet werden soll. 
+
+</td></tr>
+<tr><td><i>Plugin</i></td>
+<td> 
+Das zu verwendende Plugin. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_CRC32</font>: verwendet den CRC32 Algorithmus. <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a> muss vorher aufgerufen werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_Cipher_MD5</font>  : verwendet den MD5 Algorithmus. <a href="usemd5fingerprint.html">UseMD5Fingerprint()</a> muss vorher aufgerufen werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_Cipher_SHA1</font> : verwendet den SHA1 Algorithmus. <a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a> muss vorher aufgerufen werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_Cipher_SHA2</font> : verwendet den SHA2 Algorithmus. <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a> muss vorher aufgerufen werden, um dieses Plugin zu registrieren.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : verwendet den SHA3 Algorithmus. <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a> muss vorher aufgerufen werden, um dieses Plugin zu registrieren.
+</font></pre>
+Das zu verwendende Plugin kann mit dem <font color="#924B72">#PB_Cipher_HMAC</font> Flag kombiniert werden, um einen HMAC 
+(Hash-basierter Nachrichtenauthentifizierungscode, englisch &quot;hash based message authentication code&quot;) 
+anstelle eines regulären 'Fingerprints' zu berechnen. In diesem Fall wird zusätzlich der Parameter 
+&quot;HmacKey$&quot; benötigt. 
+Ein Beispiel für die Verwendung des HMAC-Flags finden Sie unter <a href="stringfingerprint.html">StringFingerprint()</a>. 
+
+</td></tr>
+<tr><td><i>Bits (optional)</i></td>
+<td> 
+Die für die Prüfsumme zu verwendende Anzahl Bits. Dies wird nur bei den folgenden Plugins unterstützt: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cipher_SHA2</font> : kann 224, 256 (Standard), 384 oder 512 lauten.
+  <font color="#924B72">#PB_Cipher_SHA3</font> : kann 224, 256 (Standard), 384 oder 512 lauten.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Offset (optional)</i></td>
+<td> 
+Der Offset (in Bytes) ausgehend vom Beginn der Datei, an dem mit der Prüfsummen-Berechnung begonnen werden soll. 
+
+</td></tr>
+<tr><td><i>Länge (optional)</i></td>
+<td> 
+Die Länge (in Bytes), welche für die Prüfsummen-Berechnung verwendet werden soll. 
+
+</td></tr>
+<tr><td><i>HmacKey$ (optional)</i></td>
+<td> 
+Der geheime Schlüssel, der bei der HMAC-Berechnung verwendet werden soll. Dieser Parameter wird nur 
+verwendet, wenn <font color="#924B72">#PB_Cipher_HMAC</font> beim 'Plugin'-Parameter hinzugefügt wird. 
+
+</td></tr>
+<tr><td><i>HmacKeyFormat (optional)</i></td>
+<td> 
+Das für den HMAC-Schlüssel zu verwendende Stringformat. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : kodiert den Schlüssel in ASCII
+  <font color="#924B72">#PB_UTF8</font>   : kodiert den Schlüssel in UTF-8 (Standard).
+  <font color="#924B72">#PB_Unicode</font>: kodiert den Schlüssel in Unicode
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Fingerprint (Prüfsumme, &quot;Fingerabdruck&quot; oder &quot;Hash-Code&quot;) zurück, wenn die Berechnung erfolgreich war. 
+Wenn die Datei nicht gefunden wurde oder ein Fehler auftrat, wird das Ergebnis ein leerer String sein. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="fingerprint.html">Fingerprint()</a>, <a href="startfingerprint.html">StartFingerprint()</a>, <a href="stringfingerprint.html">StringFingerprint()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=derivecipherkey.html>DeriveCipherKey()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=fingerprint.html>Fingerprint()</a> -><br><br>
+
+</body></html>

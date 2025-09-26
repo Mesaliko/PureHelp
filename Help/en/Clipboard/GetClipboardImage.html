@@ -1,0 +1,54 @@
+<html><head><title>GetClipboardImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetClipboardImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GetClipboardImage</b></font>(#Image [, Depth])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new image from the clipboard image data (if any). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The number for the new image. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Depth (optional)</i></td>
+<td> 
+The depth of the new image. Valid values are 24 (default) or 32-bit. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. 
+If <font color="#924B72">#PB_Any</font> was used as the #Image parameter, then the new image number is returned. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Windows, transparency may not be detected after pasting the clipboard image into third-party 
+software. (Saving this image as a .png preserves transparency.) 
+This is a problem of the BMP format and how Windows handles it. It is possible to have a 32bit bitmap 
+without alpha channel. In this case all alpha values are 0 but the image is supposed to be opaque. 
+Since images in GetClipboardImage() can come from outside of PB we cannot know whether this is supposed 
+to be a fully transparent or fully opaque image. This is why we only use the alpha channel if there is 
+at least one pixel with a value other than 0. Otherwise we treat it as an opaque image.<br>
+The image may be freed by using the <a href="../image/freeimage.html">FreeImage()</a> function.<br>
+For further use of the image, there are functions available such as <a href="../2ddrawing/drawimage.html">DrawImage()</a> 
+or <a href="../gadget/imagegadget.html">ImageGadget()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getclipboardtext.html">GetClipboardText()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=clearclipboard.html>ClearClipboard()</a> - <a href=index.html>Clipboard Index</a> - <a href=getclipboardtext.html>GetClipboardText()</a> -><br><br>
+
+</body></html>

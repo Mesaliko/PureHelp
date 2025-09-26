@@ -1,0 +1,56 @@
+<html><head><title>CompareMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareMemory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CompareMemory</b></font>(*Memoire1, *Memoire2, Taille)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Compare deux zones mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire1, *Memoire2</i></td>
+<td width="90%"> 
+Les adresses des deux mémoires à comparer. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+Le nombre d'octets à comparer. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si les deux 
+mémoires sont identiques, zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Memoire1 =<font color="#006666"> AllocateMemory</font>(5000)
+<font color="#006666">  PokeB</font>(*Memoire1, 65)     <font color="#006666">; Stocke cette valeur dans la zone mémoire)</font>
+  *Memoire2 =<font color="#006666"> AllocateMemory</font>(50)
+<font color="#006666">  PokeB</font>(*Memoire2, 65) 
+  *Memoire3 =<font color="#006666"> AllocateMemory</font>(100)
+<font color="#006666">  PokeB</font>(*Memoire3, 90)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">CompareMemory</font>(*Memoire1, *Memoire2, 1) <font color="#006666">; Affiche 1</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">CompareMemory</font>(*Memoire1, *Memoire3, 1) <font color="#006666">; Affiche 0</font>
+<font color="#006666">  FreeMemory</font>(*Memoire1) 
+<font color="#006666">  FreeMemory</font>(*Memoire2) 
+<font color="#006666">  FreeMemory</font>(*Memoire3) 
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="allocatememory.html">AllocateMemory()</a>, <a href="comparememorystring.html">CompareMemoryString()</a>, 
+<a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=allocatestructure.html>AllocateStructure()</a> - <a href=index.html>Memory Index</a> - <a href=comparememorystring.html>CompareMemoryString()</a> -><br><br>
+
+</body></html>

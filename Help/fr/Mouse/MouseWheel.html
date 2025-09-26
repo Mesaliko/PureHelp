@@ -1,0 +1,84 @@
+<html><head><title>MouseWheel</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MouseWheel()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>MouseWheel</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Teste la molette centrale de la souris. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre de &quot;ticks&quot; (unité pas-à-pas 
+du système) réalisé par la molette de la 
+souris depuis le dernier appel de cette fonction. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La valeur est positive si la molette a été 
+déplacée vers l'avant et négative si la molette 
+a été déplacée vers l'arrière. 
+<br>
+<br>
+<a href="examinemouse.html">ExamineMouse()</a> doit être appelé avant cette 
+fonction pour mettre les informations sur la 
+souris à jour. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">; Initialisation du monde 2D</font>
+<font color="#006666"> InitSprite</font>()
+<font color="#006666"> InitKeyboard</font>()
+<font color="#006666"> InitMouse</font>()
+
+  <font color="#006666">; Ouverture de la fenêtre</font>
+<font color="#006666">  OpenWindow</font>(0,0,0,800,600,&quot;Souris - Utiliser la molette&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>|<font color="#924B72">#PB_Window_SystemMenu</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0),0,0,800,600,1,0,0)
+
+  <font color="#006666">; Gestion de la fenêtre et de l'écran</font>
+  <b><font color="#006666">Repeat</font></b>
+   <b><font color="#006666">Repeat</font></b>         <font color="#006666">; Gestion de la fenêtre</font>
+     Event  =<font color="#006666"> WindowEvent</font>() 
+   <b><font color="#006666">Until</font></b> Event = 0
+  
+<font color="#006666">   ExamineMouse</font>() <font color="#006666">; Etat de la souris</font>
+   
+  <font color="#006666">; Molette de la souris = Rotation du curseur</font>
+   tiks =<font color="#006666"> MouseWheel</font>()
+   <font color="#006666">; Affichage de l'état des boutons de la souris</font>
+<font color="#006666">   StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">   DrawText</font>(10,10, &quot;Appuyer sur une touche du clavier pour quitter.&quot;,<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">   DrawText</font>(250,180, &quot;Utilisez la molette centrale de la souris.&quot;,<font color="#006666"> RGB</font>(255,0,0),<font color="#006666">RGB</font>(255,255,0))
+    <b><font color="#006666">If</font></b> tiks &gt; 0
+<font color="#006666">     DrawText</font>(250,230, &quot;Molette vers le haut&quot; ,<font color="#006666"> RGB</font>(255,0,0),<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">     Delay</font>(100)
+   <b><font color="#006666">ElseIf</font></b> tiks &lt; 0
+<font color="#006666">     DrawText</font>(450,230, &quot;Molette vers le bas&quot;  ,<font color="#006666"> RGB</font>(255,0,0),<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">     Delay</font>(100)
+   <b><font color="#006666">Else</font></b>
+<font color="#006666">     DrawText</font>(350,230, &quot;Molette au repos&quot; ,<font color="#006666"> RGB</font>(255,255,255))
+   <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">   StopDrawing</font>()
+   
+<font color="#006666">   FlipBuffers</font>()
+<font color="#006666">   ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0)) 
+  
+<font color="#006666">   ExamineKeyboard</font>()
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_All</font>)
+  <b><font color="#006666">End</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinemouse.html">ExamineMouse()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows</Blockquote></p><center><- <a href=mouselocate.html>MouseLocate()</a> - <a href=index.html>Mouse Index</a> - <a href=mousex.html>MouseX()</a> -><br><br>
+
+</body></html>

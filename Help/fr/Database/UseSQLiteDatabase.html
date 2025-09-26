@@ -1,0 +1,79 @@
+<html><head><title>UseSQLiteDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseSQLiteDatabase()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>UseSQLiteDatabase</b></font>([NomBibliotheque$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise l'environnement de base de données SQLite pour un usage ultérieur. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NomBibliotheque$ (optionnel)</i></td>
+<td width="90%"> 
+Nom de fichier (et chemin si nécessaire) de la bibliothèque dynamique à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Lors de l'utilisation du paramètre facultatif 'NomBibliotheque$', la fonction renverra <font color="#924B72">#True</font> 
+si la bibliothèque dynamique a été correctement chargée ou <font color="#924B72">#False</font> dans le cas contraire. 
+S'il n'est pas spécifié, elle renverra toujours <font color="#924B72">#True</font>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+SQLite est un gestionnaire de base de données sans serveur, utilisant un fichier comme stockage. 
+Il n'y a rien à déployer ou à configurer, il est tout de suite opérationnel. SQLite est 
+largement utilisé dans l'industrie et est considéré comme un des meilleurs gestionnaire 
+de base de données embarqué. Pour plus d'informations: 
+<a href="http://www.sqlite.org">http://www.sqlite.org</a>. 
+<br>
+<br>
+Pour créer une nouvelle base de données vide, il suffit de créer un fichier vide à l'aide de <a href="../file/createfile.html">CreateFile()</a>. 
+Les commandes SQL sont maintenant disponibles pour créer les tables et insérer des enregistrements. 
+<br>
+<br>
+La base SQLite doit être ouverte avec <a href="opendatabase.html">OpenDatabase()</a> avant de pouvoir utiliser les commandes de 
+cette bibliothèque. 
+<br>
+<br>
+En utilisant &quot;NomBibliotheque$&quot;, vous pourrez ainsi utiliser la dernière version du 
+fichier 'dll' (so, dylib) sans attendre une mise à jour PB. 
+<br>
+Sans ce fichier, c'est la bibliothèque statique qui sera utilisée comme d'habitude 
+et l'exécutable sera plus gros. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseSQLiteDatabase</font>()
+
+  Filename$ =<font color="#006666"> OpenFileRequester</font>(&quot;Choisissez le nom d'un fichier&quot;, &quot;PureBasic.sqlite&quot;, &quot;*.sqlite|*.sqlite&quot;, 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateFile</font>(0, Filename$)
+    <b><font color="#006666">Debug</font></b> &quot;Fichier de base de données créé&quot;
+<font color="#006666">    CloseFile</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, Filename$, &quot;&quot;, &quot;&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Connecté à PureBasic.sqlite&quot;
+    <b><font color="#006666">If</font></b> <font color="#006666">DatabaseUpdate</font>(0, &quot;CREATE TABLE info (test VARCHAR(255));&quot;)
+      <b><font color="#006666">Debug</font></b> &quot;Table créée&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a>, 
+<a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usemysqldatabase.html">UseMySQLDatabase()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=usepostgresqldatabase.html>UsePostgreSQLDatabase()</a> - <a href=index.html>Database Index</a><br><br>
+
+</body></html>

@@ -1,0 +1,105 @@
+<html><head><title>IsInsidePath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">IsInsidePath()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>IsInsidePath</b></font>(X.d, Y.d [, CoordonneeSysteme])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Teste si les coordonnées données sont 
+dans une figure fermée dans le chemin 
+du dessin vectoriel en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X.d, Y.d</i></td>
+<td width="90%"> 
+Les coordonnées du point à tester. 
+
+</td></tr>
+<tr><td><i>CoordonneeSysteme (optionnel)</i></td>
+<td> 
+Indique le système de coordonnées à 
+utiliser. <br>
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Coordinate_Device</font>: Le système de coordonnées du dispositif de sortie
+  <font color="#924B72">#PB_Coordinate_Output</font>: Le système de coordonnées comme il a été créé avec la fonction de sortie de dessin
+  <font color="#924B72">#PB_Coordinate_User</font>  : Le système de coordonnées des points du chemin de dessin (Par défaut)
+  <font color="#924B72">#PB_Coordinate_Source</font>: Le système de coordonnées de la source du dessin vectoriel
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle 
+si le point est dans le chemin, 
+zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction renvoie une valeur non nulle 
+si le point donné serait comblé par un appel 
+à <a href="fillpath.html">FillPath()</a>. 
+<br>
+<br>
+Voir l'aperçu de 
+<a href="../vectordrawing/index.html">VectorDrawing</a> 
+pour une introduction aux différents 
+systèmes de coordonnées. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cet exemple utilise la fonction IsInsidePath() pour colorer la figure en vert</font>
+  <font color="#006666">; tant que la souris est à l'intérieur du chemin, en bleu sinon</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Draw</font>()    
+    x =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseX</font>)
+    y =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseY</font>)
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 255, 255, 255))   <font color="#006666">; efface le contenu précédent</font>
+<font color="#006666">      FillVectorOutput</font>()
+      
+<font color="#006666">      AddPathEllipse</font>(200, 100, 150, 75)             <font color="#006666">; prépare le chemin</font>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">IsInsidePath</font>(x, y, <font color="#924B72">#PB_Coordinate_Device</font>)  <font color="#006666">; vérifie si la souris est à l'intérieur</font>
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 255, 0, 255))
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      FillPath</font>()                                    <font color="#006666">; remplit le chemin </font>
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>      
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)
+<font color="#006666">    Draw</font>()
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventGadget</font>() = 0 <b><font color="#006666">And</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_MouseMove</font>
+<font color="#006666">        Draw</font>()
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="isinsidestroke.html">IsInsideStroke()</a>, <a href="fillpath.html">FillPath()</a>, 
+<a href="closepath.html">ClosePath()</a>, <a href="resetpath.html">ResetPath()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=flipcoordinatesy.html>FlipCoordinatesY()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=isinsidestroke.html>IsInsideStroke()</a> -><br><br>
+
+</body></html>

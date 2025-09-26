@@ -1,0 +1,89 @@
+<html><head><title>ClipPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClipPath()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ClipPath</b></font>([Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Clip du chemin de dessin vectoriel en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Options (optionnel)</i></td>
+<td width="90%"> 
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Path_Default</font> : Pas de comportement spécial (Par défaut)
+  <font color="#924B72">#PB_Path_Preserve</font>: Ne pas réinitialiser le chemin après cette fonction
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les futures opérations de dessin ne toucheront que les zones clippées dans le chemin courant. La zone sera 
+combinée avec tout clipping qui existait auparavant. 
+<br>
+<br>
+Par défaut, le chemin est réinitialisé après l'appel à cette fonction. Ceci peut être évité avec les options 
+appropriées. 
+<br>
+<br>
+Il n'y a pas de fonction &quot;UnclipPath()&quot;. La zone de découpage de la sortie de dessin peut être réduite en ajoutant 
+plus de clipping, mais ne peut pas être agrandie. Cependant, la zone découpée peut être sauvegardée et restaurée 
+en utilisant les fonctions <a href="savevectorstate.html">SaveVectorState()</a> et <a href="restorevectorstate.html">RestoreVectorState()</a> respectivement. Ainsi, pour appliquer 
+une découpe temporaire, il suffit d'enregistrer l'état du dessin puis de le restaurer plus tard pour revenir 
+à la découpe originale. 
+<br>
+<br>
+Sous Windows, Le résultat obtenu sera pixelisé sur les bordures, sans antialiasing, ce qui est une limitation de GDI+. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      <font color="#006666">; Mise en place d'un chemin de découpe complexe avec des ellipses imbriquées </font>
+      <font color="#006666">;(chaque seconde ellipse sera tronquée)</font>
+   
+      <b><font color="#006666">For</font></b> i = 10 <b><font color="#006666">To</font></b> 150 <b><font color="#006666">Step</font></b> 5
+<font color="#006666">        AddPathEllipse</font>(200, 100, 2*i, i)
+      <b><font color="#006666">Next</font></b> i
+<font color="#006666">      ClipPath</font>()
+    
+      <font color="#006666">; Dessin d'un texte avec cet écrêtage</font>
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 150)      
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+      
+<font color="#006666">      MovePathCursor</font>(50, 25)
+<font color="#006666">      DrawVectorText</font>(&quot;Text&quot;)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/clippath.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=beginvectorlayer.html>BeginVectorLayer()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=closepath.html>ClosePath()</a> -><br><br>
+
+</body></html>

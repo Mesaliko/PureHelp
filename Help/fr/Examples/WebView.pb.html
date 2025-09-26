@@ -1,0 +1,53 @@
+<html><head><title>WebView.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - WebView example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) 2024 - Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">Procedure</font></b> <font color="#006666">IncrementCallback</font>(JsonParameters$)
+  <b><font color="#006666">Static</font></b> Count
+  
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#PB_Compiler_Procedure</font> +&quot;: &quot; + JsonParameters$
+  
+  Count + 1
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(~&quot;{ \&quot;count\&quot;: &quot;+<font color="#006666">Str</font>(Count)+ &quot;}&quot;)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ComputeCallback</font>(JsonParameters$)
+  
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#PB_Compiler_Procedure</font> +&quot;: &quot; + JsonParameters$
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Parameters</font>(0)
+  
+  <font color="#006666">; Extract the parameters from the JSON
+</font><font color="#006666">  ParseJSON</font>(0, JsonParameters$)
+<font color="#006666">  ExtractJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> Parameters</font>())
+  
+  <b><font color="#006666">Debug</font></b> &quot;Parameter 1: &quot; +<font color="#006666"> Parameters</font>(0)
+  <b><font color="#006666">Debug</font></b> &quot;Parameter 2: &quot; +<font color="#006666"> Parameters</font>(1)
+    
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">UTF8</font>(<font color="#006666">Str</font>(<font color="#006666">Parameters</font>(0) +<font color="#006666"> Parameters</font>(1)))
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">OpenWindow</font>(0, 100, 100, 400, 400, &quot;Hello&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_Invisible</font>)
+
+<font color="#006666">WebViewGadget</font>(0, 0, 0, 400, 400)
+<font color="#006666">SetGadgetText</font>(0, &quot;file://&quot; + <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/WebView/webview.html&quot;)
+  
+<font color="#006666">BindWebViewCallback</font>(0, &quot;increment&quot;, @IncrementCallback())
+<font color="#006666">BindWebViewCallback</font>(0, &quot;compute&quot;, @ComputeCallback())
+
+<font color="#006666">; Show the window once the webview has been fully loaded
+</font><font color="#006666">HideWindow</font>(0, <font color="#924B72">#False</font>)
+
+<b><font color="#006666">Repeat</font></b> 
+  Event =<font color="#006666"> WaitWindowEvent</font>()
+<b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+</body></html>

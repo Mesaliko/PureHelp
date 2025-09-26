@@ -1,0 +1,45 @@
+<html><head><title>TextureOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TextureOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>TextureOutput</b></font>(#Texture)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the OutputID of the image to perform <a href="../2ddrawing/index.html">2D rendering operation</a> on it. 
+Textures created with <a href="createrendertexture.html">CreateRenderTexture()</a> are not supported. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Texture</i></td>
+<td width="90%"> 
+The texture to draw on. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the output ID or zero if drawing is not possible. This value should be passed directly to the 
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> function to start the drawing operation. The return-value 
+is valid only for one drawing operation and cannot be reused. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  ...
+<font color="#006666">  StartDrawing</font>(<font color="#006666">TextureOutput</font>(<font color="#924B72">#Texture</font>))
+    <font color="#006666">; do some drawing stuff here...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="createrendertexture.html">CreateRenderTexture()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=textureid.html>TextureID()</a> - <a href=index.html>Texture Index</a> - <a href=texturewidth.html>TextureWidth()</a> -><br><br>
+
+</body></html>

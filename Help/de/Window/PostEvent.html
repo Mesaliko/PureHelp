@@ -1,0 +1,108 @@
+<html><head><title>PostEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PostEvent()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>PostEvent</b></font>(Event [, Window, Objekt [, Typ [, Daten]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Sendet ein Ereignis am Ende der internen Ereignis-Warteschlange und setzt die Programmausführung 
+fort, ohne auf die Verarbeitung der Nachricht zu warten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Event</i></td>
+<td width="90%"> 
+Das zu sendende Ereignis. Für eine Liste der PureBasic-Ereignisse siehe <a href="windowevent.html">WindowEvent()</a>. Bei der Verwendung 
+von benutzerdefinierten Ereignissen (englisch &quot;custom events&quot;) muss der erste Wert mindestens 
+<font color="#924B72">#PB_Event_FirstCustomValue</font> entsprechen, um nicht mit internen Ereignissen zu kollidieren. 
+
+</td></tr>
+<tr><td><i>Window (optional)</i></td>
+<td> 
+Die mit dem Ereignis verknüpfte Fenster-Nummer. Bei der Verwendung eines benutzerdefinierten 
+Ereignisses, kann dies jede Ganzzahl sein. Dieser Wert kann mit <a href="eventwindow.html">EventWindow()</a> ermittelt werden. 
+
+</td></tr>
+<tr><td><i>Objekt (optional)</i></td>
+<td> 
+Die mit dem Ereignis verknüpfte Objekt-Nummer. Dies kann zum Beispiel ein <a href="../gadget/index.html">Gadget</a> 
+oder eine <a href="../menu/index.html">Menü</a>-Nummer sein. Bei der Verwendung eines benutzerdefinierten 
+Ereignisses, kann dies jede positive Ganzzahl sein (inklusive der Null). Dieser Wert kann mit <a href="eventgadget.html">EventGadget()</a> ermittelt werden. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Der mit dem Ereignis verknüpfte Typ. Bei der Verwendung eines benutzerdefinierten 
+Ereignisses, muss der erste Wert mindestens <font color="#924B72">#PB_EventType_FirstCustomValue</font> entsprechen, 
+um nicht mit internen Werten zu kollidieren. 
+Dieser Wert kann mit <a href="eventtype.html">EventType()</a> ermittelt werden. 
+
+</td></tr>
+<tr><td><i>Daten (optional)</i></td>
+<td> 
+Die mit dem Ereignis verknüpften Daten. Diese sind nur gültig bei Verwendung eines benutzerdefinierten 
+Ereignisses und können jede Ganzzahl sein. Dieser Wert kann mit <a href="eventdata.html">EventData()</a> ermittelt werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Ereignis ohne Fehler gesandt wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl kann sehr nützlich für die Kommunikation zwischen <a href="../thread/index.html">Threads</a> 
+und der Haupt-Ereignis-Warteschlange sein. Zum Beispiel kann ein Thread ein benutzerdefiniertes Ereignis 
+(mit zugewiesenen Daten) senden, wenn er mit seiner Verarbeitung fertig ist, wodurch die 
+Haupt-Ereignis-Warteschlange dieses erhält und die weitere Verarbeitung stattfinden kann. 
+<br>
+<br>
+Alle von PureBasic generierten Ereignisse werden immer vor Systemereignissen verarbeitet (wenn Sie also ein 
+neues Ereignis hinzufügen, ohne andere zu verarbeiten, kommt dieses immer zuerst). 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alle unsere beutzerdefinierten Ereignisse</font>
+  <b><font color="#006666">Enumeration</font></b> <font color="#924B72">#PB_Event_FirstCustomValue</font>
+    <font color="#924B72">#EventBeginProcessing</font>
+    <font color="#924B72">#EventProcessingFinished</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(Value)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EventBeginProcessing</font>)
+    
+<font color="#006666">    Delay</font>(3000)
+<font color="#006666">    PostEvent</font>(<font color="#924B72">#EventProcessingFinished</font>)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 200, 200, 100, 100, &quot;PostEvent&quot;)
+  
+<font color="#006666">  CreateThread</font>(@Thread(), 0)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EventBeginProcessing</font>
+        <b><font color="#006666">Debug</font></b> &quot;Thread begin processing &quot;
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#EventProcessingFinished</font>
+        <b><font color="#006666">Debug</font></b> &quot;Thread processing finished&quot;
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="windowevent.html">WindowEvent()</a>, <a href="eventwindow.html">EventWindow()</a>, <a href="eventgadget.html">EventGadget()</a>, <a href="eventtype.html">EventType()</a>, <a href="eventdata.html">EventData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=openwindow.html>OpenWindow()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=removekeyboardshortcut.html>RemoveKeyboardShortcut()</a> -><br><br>
+
+</body></html>

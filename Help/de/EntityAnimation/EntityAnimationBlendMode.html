@@ -1,0 +1,54 @@
+<html><head><title>EntityAnimationBlendMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EntityAnimationBlendMode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>EntityAnimationBlendMode</b></font>(#Entity, Modus)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den Mischmodus (englisch &quot;blendmode&quot;) der #Entity Animation. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Das zu verwendende Entity-Objekt. 
+
+</td></tr>
+<tr><td><i>Modus</i></td>
+<td> 
+Der Mischmodus (oder &quot;blend mode&quot;) kann einer der folgenden Werte sein: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EntityAnimation_Average</font>:    Die Mischung resultiert aus dem Mittelwert der zwei Animationen (Standard).
+                                  Zum Beispiel wenn die erste Animation einen Arm um 40 Grad dreht und die
+                                  zweite Animation dreht den Arm um 90 Grad, dann wird der Arm um (40+90)/2 =
+                                  65 Grad rotieren (wenn beide Animationen mit vollem Gewicht abgespielt werden).
+  <font color="#924B72">#PB_EntityAnimation_Cumulative</font>: Die Mischung wird die beiden Animationen addieren. Zum Beispiel wenn die
+                                  die erste Animation den Arm um 40 Grad dreht und die zweite Animation dreht
+                                  den Arm um 90 Grad, dann wird der Arm um 40+90 = 130 Grad rotieren (wenn
+                                  beide Animationen mit vollem Gewicht abgespielt werden).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Beim Wechsel von einer Animation zu einer anderen mittels <a href="setentityanimationweight.html">SetEntityAnimationWeight()</a>, 
+wird eine Mischung angelegt, um einen sanften Übergang zwischen den Animationen zu haben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="startentityanimation.html">StartEntityAnimation()</a>, <a href="setentityanimationweight.html">SetEntityAnimationWeight()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addentityanimationtime.html>AddEntityAnimationTime()</a> - <a href=index.html>EntityAnimation Inhaltsverzeichnis</a> - <a href=entityanimationstatus.html>EntityAnimationStatus()</a> -><br><br>
+
+</body></html>

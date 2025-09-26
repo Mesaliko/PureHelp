@@ -1,0 +1,166 @@
+<html><head><title>DrawingMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingMode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawingMode</b></font>(Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change the drawing mode for text and graphics output. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mode</i></td>
+<td width="90%"> 
+The behavior for further drawing operations. It can be a combination of the following flags: 
+<br>
+<br>
+
+<font color="#924B72">#PB_2DDrawing_Default</font> 
+<blockquote>
+
+This is the default drawing mode when the drawing starts. 
+Text is displayed with a solid background and graphic shapes are filled. 
+If the current output has an alpha channel, the drawing operations will only modify the  color components 
+and leave the alpha channel unchanged. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Default.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Transparent</font> 
+<blockquote>
+
+If this flag is set then the background will be transparent with the <a href="drawtext.html">DrawText()</a> command. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Transparent.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_NativeText</font> 
+<blockquote>
+
+If this flag is set then the <a href="drawtext.html">DrawText()</a> and <a href="drawrotatedtext.html">DrawRotatedText()</a> commands will use native text output to have gadget-like text rendering. 
+All special effects like XOR, AlphaBlend, CustomFilters, etc. are not available with this mode. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_XOr</font> 
+<blockquote>
+
+Enables the XOR mode. All graphics will be XOR'ed with the current background. This mode cannot be combined 
+with the below alpha channel modes. 
+<br>
+<br>
+Note: This mode does not work with <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_XOr.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Outlined</font> 
+<blockquote>
+
+If this flag is set then shapes will be drawn as outlines only and not filled. This applies to commands 
+such as <a href="circle.html">Circle</a>, <a href="box.html">Box</a>, etc. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Outlined.png"></p>
+</blockquote>
+
+
+<b>Note:</b> The following modes only work with <a href="../image/imageoutput.html">ImageOutput()</a>, <a href="../gadget/canvasoutput.html">CanvasOutput()</a> and <a href="../sprite/spriteoutput.html">SpriteOutput()</a>. They are ignored for all other outputs: 
+<br>
+<br>
+
+<font color="#924B72">#PB_2DDrawing_AlphaBlend</font> 
+<blockquote>
+
+The drawing operations will be alpha-blended onto the background. The <a href="rgba.html">RGBA()</a> command can be used 
+to specify colors with alpha transparency in commands like <a href="frontcolor.html">FrontColor()</a>, <a href="box.html">Box()</a>, 
+<a href="drawtext.html">DrawText()</a> etc. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_AlphaBlend.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AlphaClip</font> 
+<blockquote>
+
+The drawing operations will be alpha-blended onto the background like with the <font color="#924B72">#PB_2DDrawing_AlphaBlend</font> mode, 
+with the addition that the alpha channel of the drawing output acts as a mask. This means that areas of the output that are 
+transparent before the blending will also remain transparent afterwards. If the drawing output has no alpha channel then this 
+mode acts just like the <font color="#924B72">#PB_2DDrawing_AlphaBlend</font> mode. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AlphaChannel</font> 
+<blockquote>
+
+The drawing operations will only modify the alpha channel of the drawing output. All color information is ignored. 
+For example drawing a <a href="circle.html">circle</a> with a color value of <a href="../2ddrawing/rgba.html">RGBA</a>(0, 0, 0, 0) will &quot;cut&quot; a hole 
+into the drawing output by making the circle area fully transparent. If the drawing output has no alpha channel, as the CanvasGadget, 
+then no drawing will have an effect in this mode. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AllChannels</font> 
+<blockquote>
+
+The drawing operations will modify the color channels and the alpha channel of the drawing output. The content of the 
+channels is replaced by the drawing operation without any blending. Drawing in this mode has the same effect as drawing 
+first using the <font color="#924B72">#PB_2DDrawing_Default</font> mode and then drawing the same operation using the 
+<font color="#924B72">#PB_2DDrawing_AlphaChannel</font> mode. If the drawing output has no alpha channel, as the CanvasGadget, then this mode is 
+equivalent to the <font color="#924B72">#PB_2DDrawing_Default</font> mode. 
+<br>
+<p><img src="../HelpPictures/AlphaBlending.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Gradient</font> 
+<blockquote>
+
+This mode allows drawing with a gradient instead of a solid color. The gradient shape can be defined with commands such as 
+<a href="lineargradient.html">LinearGradient()</a>, <a href="circulargradient.html">CircularGradient()</a> etc. and the colors used in the 
+gradient can be set with <a href="gradientcolor.html">GradientColor()</a>. The color parameters given to the individual drawing commands 
+will be ignored in this mode. This mode can be combined with the above alpha channel modes to have gradients with semitransparent 
+colors. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Gradient.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_CustomFilter</font> 
+<blockquote>
+
+In this mode, the drawing of the pixels can be defined by a custom procedure with the <a href="customfiltercallback.html">CustomFilterCallback()</a> 
+command. This allows the implementation of custom drawing effects while still using the default functions to do the actual drawing. 
+<br>
+<p><img src="../HelpPictures/customfilter.png"></p>
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To use several modes at once, you have to use the '|' (OR) operator. The following is an example for 
+XOR'ed outlined shapes: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font> | <font color="#924B72">#PB_2DDrawing_XOr</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="frontcolor.html">FrontColor()</a>, <a href="backcolor.html">BackColor()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawingfont.html>DrawingFont()</a> - <a href=index.html>2DDrawing Index</a> - <a href=ellipse.html>Ellipse()</a> -><br><br>
+
+</body></html>

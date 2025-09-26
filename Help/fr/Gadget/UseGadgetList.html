@@ -1,0 +1,83 @@
+<html><head><title>UseGadgetList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseGadgetList()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>UseGadgetList</b></font>(FenetreID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sélectionne la GadgetList dans laquelle 
+les gadgets seront ajoutés.<br>
+Si la GadgetList n'existe pas pour cette 
+fenêtre alors elle sera créée.<br>
+(Par exemple dans le cas d'une fenêtre 
+créée avec l'option <font color="#924B72">#PB_Window_NoGadgets</font>, 
+voir <a href="../window/openwindow.html">OpenWindow()</a> ou parce que ce n'est 
+pas une fenêtre PB) 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>FenetreID</i></td>
+<td width="90%"> 
+L'identifiant de la nouvelle fenêtre dans 
+laquelle les gadgets seront ajoutés. 
+<br>
+<br>
+'FenetreID' peut être obtenu  facilement 
+avec la commande <a href="../window/windowid.html">WindowID()</a>. 
+<br>
+<br>
+Si égal à 0, c'est la GadgetList courante 
+qui sera renvoyée par la commande et il 
+n'y aura aucun changement. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'identifiant 'FenetreID' de la 
+GadgetList précédente, ou zéro s'il n'y 
+en a pas. 
+<br>
+<br>
+Cette valeur peut être utilisée pour 
+revenir à la GadgetList précédente. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+Cet exemple montre comment utiliser cette 
+commande pour créer une nouvelle fenêtre 
+avec des gadgets sans interrompre la 
+création de gadgets sur la première 
+fenêtre : 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 500, 500, &quot;Fenêtre principale&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0, 10, 10, 150, 25, &quot;Bouton 1&quot;)
+    
+    <font color="#006666">; Creation d'une seconde fenêtre avec #PB_Window_NoGadgets pour empêcher la création automatique d'une GadgetList</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(1, 0, 0, 300, 200, &quot;Fenêtre secondaire&quot;, <font color="#924B72">#PB_Window_TitleBar</font> | <font color="#924B72">#PB_Window_WindowCentered</font> | <font color="#924B72">#PB_Window_NoGadgets</font>,<font color="#006666"> WindowID</font>(0))     
+      OldGadgetList =<font color="#006666"> UseGadgetList</font>(<font color="#006666">WindowID</font>(1)) <font color="#006666">; Creation d'une GadgetList et sauvegarde l'ancienne GadgetList</font>
+      
+<font color="#006666">      ButtonGadget</font>(10, 10, 10, 150, 25, &quot;Bouton Fenêtre secondaire&quot;) <font color="#006666">; Ajoute ce bouton dans la nouvelle GadgetList(Fenêtre secondaire)</font>
+      
+<font color="#006666">      UseGadgetList</font>(OldGadgetList)               <font color="#006666">; Retour à la GadgetList précédente</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    ButtonGadget</font>(1, 10, 45, 150, 25, &quot;Bouton 2&quot;) <font color="#006666">; Ce bouton sera sur la fenêtre principale </font>
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../window/openwindow.html">OpenWindow()</a>, <a href="../window/windowid.html">WindowID()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=unbindgadgetevent.html>UnbindGadgetEvent()</a> - <a href=index.html>Gadget Index</a> - <a href=webgadget.html>WebGadget()</a> -><br><br>
+
+</body></html>

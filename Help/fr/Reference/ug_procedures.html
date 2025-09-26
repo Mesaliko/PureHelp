@@ -1,0 +1,261 @@
+<html><head><title>UserGuide - Structuring code in Procedures</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Structuring code in Procedures</font></b></p>
+
+We're going to revisit the file properties example again. This time to introduce 
+<a href="../reference/procedures.html">procedures</a> and to address some of the limitations 
+identified in the program in previous items. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; The structure for file information as before.</font>
+  <b><font color="#006666">Structure</font></b> FILEITEM
+    Name.s
+    Attributes.i
+    Size.q
+    DateCreated.i
+    DateAccessed.i
+    DateModified.i
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <font color="#006666">; This is a constant to identify the window.</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#WindowFiles</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; This is an enumeration to identify controls that will appear on the window.</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#FolderButton</font>
+    <font color="#924B72">#UpdateButton</font>
+    <font color="#924B72">#FolderText</font>
+    <font color="#924B72">#FilesList</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FilesExamine</font>(Folder.s, <b><font color="#006666">List</font></b> <font color="#006666">Files</font>.FILEITEM())
+    <font color="#006666">; Obtains file properties from Folder into Files.</font>
+    
+    <b><font color="#006666">Protected</font></b>.l Result
+    
+    <font color="#006666">; Clear current contents.</font>
+<font color="#006666">    ClearList</font>(<font color="#006666">Files</font>())
+    
+    <font color="#006666">; Open the directory to enumerate its contents.</font>
+    Result =<font color="#006666"> ExamineDirectory</font>(0, Folder, &quot;*.*&quot;)  
+    
+    <font color="#006666">; If this is ok, begin enumeration of entries.</font>
+    <b><font color="#006666">If</font></b> Result
+      <font color="#006666">; Loop through until NextDirectoryEntry(0) becomes zero - indicating that there are no more entries.</font>
+      <b><font color="#006666">While</font></b> <font color="#006666">NextDirectoryEntry</font>(0)
+        <font color="#006666">; If the directory entry is a file, not a folder.</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">DirectoryEntryType</font>(0) = <font color="#924B72">#PB_DirectoryEntry_File</font>
+          <font color="#006666">; Add a new element to the list.</font>
+<font color="#006666">          AddElement</font>(<font color="#006666">Files</font>())
+          <font color="#006666">; And populate it with the properties of the file.</font>
+<font color="#006666">          Files</font>()\Name =<font color="#006666"> DirectoryEntryName</font>(0)
+<font color="#006666">          Files</font>()\Size =<font color="#006666"> DirectoryEntrySize</font>(0)
+<font color="#006666">          Files</font>()\Attributes =<font color="#006666"> DirectoryEntryAttributes</font>(0)
+<font color="#006666">          Files</font>()\DateCreated =<font color="#006666"> DirectoryEntryDate</font>(0, <font color="#924B72">#PB_Date_Created</font>)
+<font color="#006666">          Files</font>()\DateAccessed =<font color="#006666"> DirectoryEntryDate</font>(0, <font color="#924B72">#PB_Date_Accessed</font>)
+<font color="#006666">          Files</font>()\DateModified =<font color="#006666"> DirectoryEntryDate</font>(0, <font color="#924B72">#PB_Date_Modified</font>)
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">Wend</font></b>
+      
+      <font color="#006666">; Close the directory.</font>
+<font color="#006666">      FinishDirectory</font>(0)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Sort the list into ascending alphabetical order of file name.</font>
+<font color="#006666">    SortStructuredList</font>(<font color="#006666">Files</font>(), <font color="#924B72">#PB_Sort_Ascending</font>,<font color="#006666"> OffsetOf</font>(FILEITEM\Name), <font color="#924B72">#PB_String</font>)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.s <font color="#006666">FolderSelect</font>(Folder.s)
+    <font color="#006666">; Displays a path requester and returns the new path, or the old one if the requester is cancelled.</font>
+    <b><font color="#006666">Protected</font></b>.s SelectedPath
+    
+    SelectedPath =<font color="#006666"> PathRequester</font>(&quot;Choose a folder.&quot;, Folder)
+    
+    <b><font color="#006666">If</font></b> SelectedPath = &quot;&quot;
+      SelectedPath = Folder
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">ProcedureReturn</font></b> SelectedPath
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">LabelUpdate</font>(Folder.s)
+    <font color="#006666">; Updates the folder label.</font>
+<font color="#006666">    SetGadgetText</font>(<font color="#924B72">#FolderText</font>, Folder)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">ListLoad</font>(ListView.l, <b><font color="#006666">List</font></b> <font color="#006666">Files</font>.FILEITEM())
+    <font color="#006666">; Load the files properties from list Files() into the list view #FilesList.</font>
+    <b><font color="#006666">Protected</font></b>.s Access, Attrib, Create, Folder, Modify, Msg, Num, Size
+    
+    <font color="#006666">; Remove previous contents.</font>
+<font color="#006666">    ClearGadgetItems</font>(ListView)
+    
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">Files</font>()
+      <font color="#006666">; Display the item number and file name.</font>
+      Num =<font color="#006666"> StrU</font>(<font color="#006666">ListIndex</font>(<font color="#006666">Files</font>()) + 1)
+      
+      <font color="#006666">; These lines convert the three date values to something more familiar.</font>
+      Create =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateCreated)
+      Access =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateAccessed)
+      Modify =<font color="#006666"> FormatDate</font>(&quot;%dd/%mm/%yyyy&quot;,<font color="#006666"> Files</font>()\DateModified)
+      
+      <font color="#006666">; Convert the file size to a padded string the same as with the index value above,</font>
+      <font color="#006666">; but allow space for the maximum size of a quad.</font>
+      Size =<font color="#006666"> StrU</font>(<font color="#006666">Files</font>()\Size)
+      
+      <font color="#006666">; Convert the attributes to a string, for now.</font>
+      Attrib =<font color="#006666"> StrU</font>(<font color="#006666">Files</font>()\Attributes)
+      
+      <font color="#006666">; Build a row string.  </font>
+      <font color="#006666">; The Line Feed character 'Chr(10)' tells the gadget to move to the next column.</font>
+      Msg = Num +<font color="#006666"> Chr</font>(10) +<font color="#006666"> Files</font>()\Name +<font color="#006666"> Chr</font>(10) + Create +<font color="#006666"> Chr</font>(10) + Access +<font color="#006666"> Chr</font>(10) + Modify +<font color="#006666"> Chr</font>(10) + Attrib +<font color="#006666"> Chr</font>(10) + Size
+      
+      <font color="#006666">; Add the row to the list view gadget.</font>
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#FilesList</font>, -1, Msg)
+    <b><font color="#006666">Next</font></b> <font color="#006666">Files</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowCreate</font>()
+    <font color="#006666">; Creates the wdwFiles window.</font>
+    <b><font color="#006666">Protected</font></b> Flags
+    
+    <font color="#006666">; This line defines a flag for the window attributes by OR-ing together the desired attribute constants.</font>
+    Flags = <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_MaximizeGadget</font>| <font color="#924B72">#PB_Window_TitleBar</font>
+    
+    <font color="#006666">; Open a window.</font>
+<font color="#006666">    OpenWindow</font>(<font color="#924B72">#WindowFiles</font>, 50, 50, 450, 400, &quot;File Properties&quot;, Flags)
+    <font color="#006666">; A button to choose a folder.</font>
+<font color="#006666">    ButtonGadget</font>(<font color="#924B72">#FolderButton</font>, 5, 5, 100, 30, &quot;Select Folder&quot;)
+    <font color="#006666">; A button to update the list.</font>
+<font color="#006666">    ButtonGadget</font>(<font color="#924B72">#UpdateButton</font>, 112, 5, 100, 30, &quot;Update List&quot;)
+    <font color="#006666">; A text gadget to show the name of the folder.</font>
+<font color="#006666">    TextGadget</font>(<font color="#924B72">#FolderText</font>, 5, 40, 400, 25, &quot;&quot;)
+    <font color="#006666">; A list icon gadget to hold the file list and properties.</font>
+<font color="#006666">    ListIconGadget</font>(<font color="#924B72">#FilesList</font>, 5, 70, 400, 326, &quot;#&quot;, 35)
+    <font color="#006666">; Add columns to the ListIconGadget to hold each property.</font>
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 1, &quot;Name&quot;, 200)
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 2, &quot;Created&quot;, 100)
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 3, &quot;Accessed&quot;, 100)
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 4, &quot;Modified&quot;, 100)
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 5, &quot;Attributes&quot;, 150)
+<font color="#006666">    AddGadgetColumn</font>(<font color="#924B72">#FilesList</font>, 6, &quot;Size&quot;, 100)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowDestroy</font>()
+    <font color="#006666">; Closes the window.</font>
+    <font color="#006666">; If necessary, you could do other tidying up jobs here too.</font>
+<font color="#006666">    CloseWindow</font>(<font color="#924B72">#WindowFiles</font>)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowResize</font>()
+    <font color="#006666">; Resizes window gadgets to match the window size.</font>
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#FolderText</font>, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> WindowWidth</font>(<font color="#924B72">#WindowFiles</font>) - 10, <font color="#924B72">#PB_Ignore</font>)
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#FilesList</font>, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> WindowWidth</font>(<font color="#924B72">#WindowFiles</font>) - 10,<font color="#006666"> WindowHeight</font>(<font color="#924B72">#WindowFiles</font>) - 74)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Main</font>
+  <font color="#006666">; Now we define a list of files using the structure previously specified.</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Files</font>.FILEITEM()
+  
+  <font color="#006666">; And some working variables to make things happen.</font>
+  <b><font color="#006666">Define</font></b>.s Folder
+  <b><font color="#006666">Define</font></b>.l Event, EventWindow, EventGadget, EventType, EventMenu
+  
+  <font color="#006666">; This function gets the home directory for the logged on user.</font>
+  Folder =<font color="#006666"> GetHomeDirectory</font>()
+  
+  <font color="#006666">; Create the window and set the initial contents.</font>
+<font color="#006666">  WindowCreate</font>()
+<font color="#006666">  WindowResize</font>()
+<font color="#006666">  LabelUpdate</font>(Folder)
+<font color="#006666">  FilesExamine</font>(Folder,<font color="#006666"> Files</font>())
+<font color="#006666">  ListLoad</font>(<font color="#924B72">#FilesList</font>,<font color="#006666"> Files</font>())
+  
+  <font color="#006666">;- Event Loop</font>
+  <b><font color="#006666">Repeat</font></b>
+    <font color="#006666">; Wait until a new window or gadget event occurs.</font>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    EventWindow =<font color="#006666"> EventWindow</font>()
+    EventGadget =<font color="#006666"> EventGadget</font>()
+    EventType =<font color="#006666"> EventType</font>()
+    
+    <font color="#006666">; Take some action.</font>
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <font color="#006666">; A gadget event occurred.</font>
+        <b><font color="#006666">If</font></b> EventGadget = <font color="#924B72">#FolderButton</font>
+          <font color="#006666">; The folder button was clicked.</font>
+          Folder =<font color="#006666"> FolderSelect</font>(Folder)
+<font color="#006666">          LabelUpdate</font>(Folder)
+<font color="#006666">          FilesExamine</font>(Folder,<font color="#006666"> Files</font>())
+<font color="#006666">          ListLoad</font>(<font color="#924B72">#FilesList</font>,<font color="#006666"> Files</font>())
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#UpdateButton</font>
+          <font color="#006666">; The update button was clicked.</font>
+<font color="#006666">          FilesExamine</font>(Folder,<font color="#006666"> Files</font>())
+<font color="#006666">          ListLoad</font>(<font color="#924B72">#FilesList</font>,<font color="#006666"> Files</font>())
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#FolderText</font>
+          <font color="#006666">; Do nothing here.</font>
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#FilesList</font>
+          <font color="#006666">; Do nothing here.</font>
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_SizeWindow</font>
+        <font color="#006666">; The window was moved or resized.</font>
+        <b><font color="#006666">If</font></b> EventWindow = <font color="#924B72">#WindowFiles</font>
+<font color="#006666">          WindowResize</font>()  
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <font color="#006666">; The window was closed.</font>
+        <b><font color="#006666">If</font></b> EventWindow = <font color="#924B72">#WindowFiles</font>
+<font color="#006666">          WindowDestroy</font>()
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+Previously, we mentioned four limitations to this program. This new version uses 
+<a href="../reference/procedures.html">procedures</a> to address three of them. 
+<br>
+<br>
+1) You couldn't choose a folder to show. 
+<br>
+The &quot;FolderSelect&quot; procedure shows a <a href="../requester/pathrequester.html">path requester</a> 
+to allow the user to select a folder. The <a href="../reference/variables.html">variable</a> &quot;Folder&quot; 
+is updated with the result of this procedure. The button also calls &quot;LabelUpdate&quot;, 
+&quot;FilesExamine&quot; and &quot;ListLoad&quot; to display the contents of the new folder in the 
+<a href="../window/index.html">window</a>. 
+<br>
+<br>
+2) You can't update the list contents without closing and restarting the program. 
+<br>
+Now, when the &quot;Update List&quot; button is clicked, &quot;FilesExamine&quot; and &quot;ListLoad&quot; are called 
+again to update the display. 
+<br>
+<br>
+3) If you resize the window, the gadgets don't resize with it. 
+<br>
+The &quot;WindowResize&quot; procedure is called in the event loop to resize the 
+<a href="../gadget/index.html">gadgets</a> when the form is resized. Also, although this program 
+didn't really need to, this procedure is called after calling &quot;WindowCreate&quot; to 
+make sure the gadgets are the right size initially. 
+<br>
+<br>
+Notice how several of the procedures are called more than once to perform similar but 
+not identical functions. This improves the efficiency of the program. 
+<br>
+<br>
+We have one final limitation to overcome in a later item. 
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_graphics.html">< Previous: Displaying graphics output & simple drawing</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_directives.html">Next: Compiler directives ></a> 
+</blockquote>
+</font></body></html>

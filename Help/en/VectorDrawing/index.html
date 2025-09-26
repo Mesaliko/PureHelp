@@ -1,0 +1,214 @@
+<html><head><title>VectorDrawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - VectorDrawing</font></b></p>
+
+<p><b>Overview</b></p><blockquote>
+
+The VectorDrawing library provides resolution independent, high-quality 
+drawing operations for display, image manipulation or printing. Unlike the 
+<a href="../2ddrawing/index.html">2DDrawing</a> library, function in this library can 
+operate in a variety of measurement units and allows for arbitrary coordinate 
+transformations. This allows to easily write drawing routines that are independent 
+of the actual output resolution and can easily scale to different sizes. 
+The VectorDrawing library supports alpha transparency in all its operations. 
+Only vector fonts are allowed, like TrueType, bitmap fonts are not allowed. 
+You also cannot use a registered font with <a href="../font/registerfontfile.html">RegisterFontFile()</a>. 
+
+<p><b>Drawing sequence</b></p><blockquote>
+
+Drawing operations in this library involve three basic steps: 
+<br>
+<br>
+1) Construct a path with functions such as <a href="addpathline.html">AddPathLine()</a>, <a href="addpathcurve.html">AddPathCurve()</a>, etc. 
+<br>
+2) Select a drawing source such as <a href="vectorsourcecolor.html">VectorSourceColor()</a> 
+<br>
+3) <a href="strokepath.html">stroke</a>, <a href="fillpath.html">fill</a>, <a href="dotpath.html">dot</a> or <a href="dashpath.html">dash</a> the path 
+<br>
+<br>
+After stroking or filling a path, the path is reset and a new path can be constructed 
+for the next drawing operation. The selection of the drawing source (step 2) does not need to 
+be repeated every time, as the drawing source is not reset. 
+<br>
+<br>
+The path based drawing model allows the drawing complex shapes with properties such as 
+thick lines with rounded/diagonal corners and dot/dash patterns without introducing any 
+visible artifacts in the places where segments of the figures meet. Since the entire path 
+is drawn at once, such artifacts can be avoided. 
+<br>
+<br>
+See the <a href="addpathline.html">AddPathLine()</a> function for a basic example of the drawing steps. 
+
+</blockquote>
+<p><b>Measurement units</b></p><blockquote>
+
+Every drawing output has a default unit of measurement. The default unit is pixels for screen or 
+raster image outputs and points for printer or vector image outputs. It is however possible to 
+select a different unit of measurement for the output when creating it with the <a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>, 
+<a href="../printer/printervectoroutput.html">PrinterVectorOutput()</a> or similar function. All drawing operations will use the selected unit of 
+measurement and internally convert the values to the actual device coordinates. 
+This allows to write the drawing code in the preferred unit of measurement independent of the used output. 
+The selected unit of measurement for an output can be checked with <a href="vectorunit.html">VectorUnit()</a>. 
+
+</blockquote>
+<p><b>Coordinate transformation</b></p><blockquote>
+
+It is possible to <a href="translatecoordinates.html">move</a>, <a href="scalecoordinates.html">scale</a>, 
+<a href="rotatecoordinates.html">rotate</a>, <a href="flipcoordinatesx.html">flip</a> or <a href="skewcoordinates.html">skew</a> 
+the coordinate system used for drawing. The transformations can be freely combined. Such 
+transformations affect all drawing operations. 
+<br>
+<br>
+Possible uses of coordinate transformations is to draw figures in a rotated or stretched manner 
+without the need to modify the actual drawing code. For example, printing code can easily switch 
+to landscape printing by simply rotating the coordinates (and therefore all output) at the start 
+of the drawing options. 
+<br>
+<br>
+There are four different coordinate systems and some functions take an optional parameter to 
+select which system should be used. These are the available options: 
+<br>
+<br>
+
+<font color="#924B72">#PB_Coordinate_Device</font> 
+<blockquote>
+
+This coordinate system represents the physical coordinates of the output device. It cannot 
+be transformed. This coordinate system is useful when converting values between the device 
+and the actual drawing coordinate system with <a href="convertcoordinatex.html">ConvertCoordinateX()</a> and <a href="convertcoordinatey.html">ConvertCoordinateY()</a>. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_Output</font> 
+<blockquote>
+
+This coordinate system represents the initial output coordinates in the selected unit 
+of measurement. This coordinate system is equal to <font color="#924B72">#PB_Coordinate_Device</font> except for possible 
+scaling by a different measurement unit. This coordinate system cannot be transformed. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_User</font> 
+<blockquote>
+
+This is the coordinate system used for all drawing operations. This coordinate system is used 
+whenever a different system is not explicitly specified. It can be freely transformed. 
+Initially, this coordinate system is equal to the <font color="#924B72">#PB_Coordinate_Output</font> system and can be 
+reset that way with <a href="resetcoordinates.html">ResetCoordinates()</a>. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_Source</font> 
+<blockquote>
+
+This coordinate system is used by the commands that select the vector drawing source. It is 
+most useful together with the <a href="vectorsourceimage.html">VectorSourceImage()</a> command to transform the used source image. 
+This coordinate system is relative to the <font color="#924B72">#PB_Coordinate_User</font> system, so any transformation 
+to the <font color="#924B72">#PB_Coordinate_User</font> system will affect this system as well. 
+</blockquote>
+
+
+For most purposes, the <font color="#924B72">#PB_Coordinate_User</font> is the interesting coordinate system and is therefore 
+the default. The other systems are useful mainly for coordinate conversion or for special purposes 
+such as transforming the source image. 
+
+
+
+</blockquote><p><b>Example:</b> Rotating the coordinate system</p><blockquote>
+
+<p><img src="../HelpPictures/rotatecoordinates.png"></p>
+
+</blockquote><p><b>Example:</b> Combining coordinate transformations (translation & skew)</p><blockquote>
+
+<p><img src="../HelpPictures/transformcoordinates.png"></p>
+
+</blockquote>
+<p><b>Drawing state and layers</b></p><blockquote>
+
+A number of properties of the drawing output such as coordinate transformations, clipping or the 
+drawing source can be saved and later restored with <a href="savevectorstate.html">SaveVectorState()</a> and <a href="restorevectorstate.html">RestoreVectorState()</a> 
+respectively. This allows to make temporary modifications to the drawing output and later 
+restoring the previous state. The commands work in a stack, so it is possible to save/restore 
+multiple drawing states. 
+<br>
+<br>
+The <a href="beginvectorlayer.html">BeginVectorLayer()</a> allows to save the current drawing state, constructs a new virtual drawing 
+layer. Future drawing operations will be directed to that layer. A call to <a href="endvectorlayer.html">EndVectorLayer()</a> will 
+combine the layer with the below drawing output and restore the previous drawing state. This allows 
+to combine a number of drawing operations and then applying them as a layer to the output. 
+Multiple temporary layers can be created this way. 
+
+</blockquote><p><b>Command Index</b><blockquote>
+<a href="addpatharc.html">AddPathArc</a><br>
+<a href="addpathbox.html">AddPathBox</a><br>
+<a href="addpathcircle.html">AddPathCircle</a><br>
+<a href="addpathcurve.html">AddPathCurve</a><br>
+<a href="addpathellipse.html">AddPathEllipse</a><br>
+<a href="addpathline.html">AddPathLine</a><br>
+<a href="addpathsegments.html">AddPathSegments</a><br>
+<a href="addpathtext.html">AddPathText</a><br>
+<a href="beginvectorlayer.html">BeginVectorLayer</a><br>
+<a href="clippath.html">ClipPath</a><br>
+<a href="closepath.html">ClosePath</a><br>
+<a href="convertcoordinatex.html">ConvertCoordinateX</a><br>
+<a href="convertcoordinatey.html">ConvertCoordinateY</a><br>
+<a href="customdashpath.html">CustomDashPath</a><br>
+<a href="dashpath.html">DashPath</a><br>
+<a href="dotpath.html">DotPath</a><br>
+<a href="drawvectorimage.html">DrawVectorImage</a><br>
+<a href="drawvectorparagraph.html">DrawVectorParagraph</a><br>
+<a href="drawvectortext.html">DrawVectorText</a><br>
+<a href="endvectorlayer.html">EndVectorLayer</a><br>
+<a href="fillpath.html">FillPath</a><br>
+<a href="fillvectoroutput.html">FillVectorOutput</a><br>
+<a href="flipcoordinatesx.html">FlipCoordinatesX</a><br>
+<a href="flipcoordinatesy.html">FlipCoordinatesY</a><br>
+<a href="isinsidepath.html">IsInsidePath</a><br>
+<a href="isinsidestroke.html">IsInsideStroke</a><br>
+<a href="ispathempty.html">IsPathEmpty</a><br>
+<a href="movepathcursor.html">MovePathCursor</a><br>
+<a href="newvectorpage.html">NewVectorPage</a><br>
+<a href="pathboundsheight.html">PathBoundsHeight</a><br>
+<a href="pathboundswidth.html">PathBoundsWidth</a><br>
+<a href="pathboundsx.html">PathBoundsX</a><br>
+<a href="pathboundsy.html">PathBoundsY</a><br>
+<a href="pathcursorx.html">PathCursorX</a><br>
+<a href="pathcursory.html">PathCursorY</a><br>
+<a href="pathlength.html">PathLength</a><br>
+<a href="pathpointangle.html">PathPointAngle</a><br>
+<a href="pathpointx.html">PathPointX</a><br>
+<a href="pathpointy.html">PathPointY</a><br>
+<a href="pathsegments.html">PathSegments</a><br>
+<a href="pdfvectoroutput.html">PdfVectorOutput</a><br>
+<a href="resetcoordinates.html">ResetCoordinates</a><br>
+<a href="resetpath.html">ResetPath</a><br>
+<a href="restorevectorstate.html">RestoreVectorState</a><br>
+<a href="rotatecoordinates.html">RotateCoordinates</a><br>
+<a href="savevectorstate.html">SaveVectorState</a><br>
+<a href="scalecoordinates.html">ScaleCoordinates</a><br>
+<a href="skewcoordinates.html">SkewCoordinates</a><br>
+<a href="startvectordrawing.html">StartVectorDrawing</a><br>
+<a href="stopvectordrawing.html">StopVectorDrawing</a><br>
+<a href="strokepath.html">StrokePath</a><br>
+<a href="svgvectoroutput.html">SvgVectorOutput</a><br>
+<a href="translatecoordinates.html">TranslateCoordinates</a><br>
+<a href="vectorfont.html">VectorFont</a><br>
+<a href="vectoroutputheight.html">VectorOutputHeight</a><br>
+<a href="vectoroutputwidth.html">VectorOutputWidth</a><br>
+<a href="vectorparagraphheight.html">VectorParagraphHeight</a><br>
+<a href="vectorresolutionx.html">VectorResolutionX</a><br>
+<a href="vectorresolutiony.html">VectorResolutionY</a><br>
+<a href="vectorsourcecirculargradient.html">VectorSourceCircularGradient</a><br>
+<a href="vectorsourcecolor.html">VectorSourceColor</a><br>
+<a href="vectorsourcegradientcolor.html">VectorSourceGradientColor</a><br>
+<a href="vectorsourceimage.html">VectorSourceImage</a><br>
+<a href="vectorsourcelineargradient.html">VectorSourceLinearGradient</a><br>
+<a href="vectortextheight.html">VectorTextHeight</a><br>
+<a href="vectortextwidth.html">VectorTextWidth</a><br>
+<a href="vectorunit.html">VectorUnit</a><br>
+</blockquote></p>
+
+
+<p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=../reference/reference.html>Reference Manual - Index</a></center><br><br>
+
+</body></html>

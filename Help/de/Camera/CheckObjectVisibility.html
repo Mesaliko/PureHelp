@@ -1,0 +1,89 @@
+<html><head><title>CheckObjectVisibility</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CheckObjectVisibility()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CheckObjectVisibility</b></font>(#Kamera, ObjektID)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Überprüft, ob ein Objekt innerhalb einer Kameraansicht sichtbar ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Kamera</i></td>
+<td width="90%"> 
+Die zu verwendende Kamera. 
+
+</td></tr>
+<tr><td><i>ObjektID</i></td>
+<td> 
+Das zu überprüfende Objekt. Dies kann einer der folgenden Typen sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  - Entity         : verwenden Sie <a href="../entity/entityid.html">EntityID()</a> zur Ermittlung einer gültigen ID.
+  - Light          : verwenden Sie <a href="../light/lightid.html">LightID()</a> zur Ermittlung einer gültigen ID.
+  - Node           : verwenden Sie <a href="../node/nodeid.html">NodeID()</a> zur Ermittlung einer gültigen ID.
+  - ParticleEmitter: verwenden Sie <a href="../particle/particleemitterid.html">ParticleEmitterID()</a> zur Ermittlung einer gültigen ID.
+  - BillboardGroup : verwenden Sie <a href="../billboard/billboardgroupid.html">BillboardGroupID()</a> zur Ermittlung einer gültigen ID.
+  - Text3D         : verwenden Sie <a href="../text3d/text3did.html">Text3DID()</a> zur Ermittlung einer gültigen ID.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt <font color="#924B72">#True</font> zurück, wenn sich das Objekt innerhalb der ausgewählten Kameraansicht befindet - 
+oder <font color="#924B72">#False</font>, wenn es sich außerhalb des sichtbaren Bereichs befindet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  InitEngine3D</font>()
+<font color="#006666">  InitSprite</font>()
+<font color="#006666">  InitKeyboard</font>()
+  
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 800, 600, &quot;Object Visibility&quot;, <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0),0, 0, 800, 600)
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100)
+  
+<font color="#006666">  CreateCube</font>(0, 1)
+<font color="#006666">  CreateTexture</font>(0, 100, 100)
+  <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">TextureOutput</font>(0))
+<font color="#006666">    DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Gradient</font>)
+<font color="#006666">    CircularGradient</font>(50, 50, 48)
+<font color="#006666">    Circle</font>(50, 50, 48)
+<font color="#006666">    StopDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  CreateMaterial</font>(0,<font color="#006666"> TextureID</font>(0))
+<font color="#006666">  ScaleMaterial</font>(0, 0.1, 0.1)
+<font color="#006666">  CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0), 0, 0, -2)
+  
+  <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Repeat</font></b> : Event =<font color="#006666"> WindowEvent</font>() : <b><font color="#006666">Until</font></b> Event = 0
+    
+<font color="#006666">    RenderWorld</font>()
+<font color="#006666">    RotateEntity</font>(0, 0.1, -0.3, 0.3, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">    ExamineKeyboard</font>()
+      
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+<font color="#006666">      MoveEntity</font>(0, -0.1, 0, 0,<font color="#924B72">#PB_Relative</font>)
+    <b><font color="#006666">ElseIf</font></b>  <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+<font color="#006666">      MoveEntity</font>(0, 0.1, 0, 0,<font color="#924B72">#PB_Relative</font>)
+    <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">If</font></b> <font color="#006666">CheckObjectVisibility</font>(0,<font color="#006666"> EntityID</font>(0)) = <font color="#924B72">#False</font>
+      <b><font color="#006666">Debug</font></b> &quot;Can't see the object anymore&quot;
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;I see it !&quot;
+    <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">    FlipBuffers</font>()
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=cameraz.html>CameraZ()</a> - <a href=index.html>Camera Inhaltsverzeichnis</a> - <a href=createcamera.html>CreateCamera()</a> -><br><br>
+
+</body></html>

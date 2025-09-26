@@ -1,0 +1,80 @@
+<html><head><title>Thread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - Thread</font></b></p>
+
+<p><b>Einleitung</b></p><blockquote>
+
+Ein Thread (auch &quot;Teilprozess&quot;) ist ein Programmteil, welcher asynchron, d.h. im Hintergrund des 
+Hauptprogramms, läuft. Dies bedeutet: es ist möglich, langwierige Operationen 
+(Packen, Bildverarbeitung...) durchzuführen, ohne das gesamte Programm anzuhalten 
+und damit dem Benutzer das Weiterarbeiten zu ermöglichen. Ein Thread läuft innerhalb 
+Ihres Programms, es ist kein weiterer Prozess. Wenn das Hauptprogramm beendet wird, 
+werden alle Threads zerstört. Unter PureBasic sind Threads einfach 
+eine <a href="../reference/procedures.html">Prozedur</a>, welche asynchron aufgerufen wird. Der Thread läuft, bis die 
+Prozedur endet. 
+<br>
+<br>
+Beispiele für Einsatzmöglichkeiten von Programmen - bei denen Threads sinnvoll sind - 
+bestehen z.B. darin, wenn Sie verschiedene Situationen mit verschiedenen Antwortzeiten oder 
+Situationen, die in verschiedenen Intervallen auftreten, handhaben müssen. Um auf den 
+vorigen Absatz zurückzukommen: die Antwortzeiten der eigentlichen Bild-Verarbeitung und 
+der Benutzeroberfläche sind ziemlich verschieden (Sie können auf die Verarbeitung des 
+Bildes warten, haben aber gleichzeitig eine reagierende Benutzerschnittstelle). 
+<br>
+<br>
+PureBasic hat eine spezielle Compiler-Einstellung, um threadsichere Executable zu erstellen. 
+(/THREAD <a href="../reference/cli_compiler.html">Kommandozeilen-Option</a> oder &quot;Erstelle threadsicheres Executable&quot; in den <a href="../reference/ide_compiler.html">IDE-Optionen</a>.) 
+Ohne diesen Modus sind bestimmte Funktionen (und auch der String-Zugriff) schneller, aber 
+nicht sicher zur Verwendung in Threads. Es ist dennoch möglich, Threads ohne diesen Modus 
+zu erstellen, aber nicht empfehlenswert, da selbst eine einfache Sache wie der lokale Zugriff 
+auf Strings gefährlich sein kann und geschützt werden muss. 
+Das Aktivieren dieser Option macht diese Dinge sicher innerhalb von Threads, geht jedoch 
+zu Lasten von etwas Geschwindigkeit. Die Entscheidung, ob Threads verwendet werden oder 
+nicht, sollte mit Bedacht gefällt werden, und der Thread-Modus sollte nur dann verwendet 
+werden, wenn wirklicher Bedarf dafür besteht. 
+<br>
+<br>
+Hinweis: Threads müssen vorsichtig benutzt werden, da es möglich ist, dass Sie gleichzeitigen 
+Zugriff auf geteilte (shared) Ressourcen (Speicher, Variablen, Dateien, etc.) haben und Sie 
+dann manuell sicherstellen müssen, deshalb nicht in Konflikte zu geraten. Die Mutex-Befehle 
+in dieser Library können verwendet werden, um den Zugriff auf solche geteilten Ressourcen 
+zu synchronisieren. 
+<br>
+<br>
+Mittels des <a href="../reference/threaded.html">Threaded</a> Schlüsselworts ist es möglich, thread-basierte 
+beständige Objekte (<a href="../reference/variables.html">Variablen</a>, <a href="../array/index.html">Arrays</a>, 
+<a href="../list/index.html">verknüpfte Listen</a>, <a href="../map/index.html">Maps</a>) zu erstellen. 
+
+<br>
+<br>
+Hinweis: Benutzen Sie innerhalb von Threads kein DirectX (MS Windows Einschränkung)! Wenn 
+Sie auf Grafikdarstellung in Threads angewiesen sind, verwenden Sie stattdessen 
+<a href="../image/index.html">Images</a> und <a href="../2ddrawing/index.html">2DDrawing</a>. 
+
+</blockquote><p><b>Befehlsübersicht</b><blockquote>
+<a href="createmutex.html">CreateMutex</a><br>
+<a href="createsemaphore.html">CreateSemaphore</a><br>
+<a href="createthread.html">CreateThread</a><br>
+<a href="freemutex.html">FreeMutex</a><br>
+<a href="freesemaphore.html">FreeSemaphore</a><br>
+<a href="isthread.html">IsThread</a><br>
+<a href="killthread.html">KillThread</a><br>
+<a href="lockmutex.html">LockMutex</a><br>
+<a href="pausethread.html">PauseThread</a><br>
+<a href="resumethread.html">ResumeThread</a><br>
+<a href="signalsemaphore.html">SignalSemaphore</a><br>
+<a href="threadid.html">ThreadID</a><br>
+<a href="threadpriority.html">ThreadPriority</a><br>
+<a href="trylockmutex.html">TryLockMutex</a><br>
+<a href="trysemaphore.html">TrySemaphore</a><br>
+<a href="unlockmutex.html">UnlockMutex</a><br>
+<a href="waitsemaphore.html">WaitSemaphore</a><br>
+<a href="waitthread.html">WaitThread</a><br>
+</blockquote></p>
+
+<p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/Thread.pb.html">Thread.pb</a>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=../reference/reference.html>Referenz-Handbuch - Inhaltsverzeichnis</a></center><br><br>
+
+</body></html>

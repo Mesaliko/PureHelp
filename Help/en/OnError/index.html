@@ -1,0 +1,57 @@
+<html><head><title>OnError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - OnError</font></b></p>
+
+<p><b>Overview</b></p><blockquote>
+
+This library provides a way to track program errors (program crashes) similar to the 
+<a href="../reference/ide_debugger.html">PureBasic debugger</a> but without the drawbacks of a bigger filesize and lower execution speed when 
+using the debugger. This way the final version of a program which is shipped to the end user 
+can still intercept program errors and provide some information about the error to the user 
+so he can report it back to the developer. 
+<br>
+<br>
+The <a href="../reference/ide_debugger.html">PureBasic debugger</a> is still the better tool for finding bugs during the development phase, 
+as it provides much more detailed information about the state of the program (like actual <a href="../reference/variables.html">variable</a> values) 
+and also has a number of interactive features to quickly locate bugs. 
+<br>
+<br>
+<b>Note:</b> If both this library and the <a href="../reference/ide_debugger.html">PureBasic debugger</a> are used, not all errors will be caught 
+by the OnError library as some checks are made and reported by the debugger even before the actual code with 
+the error is executed. To test OnError in the IDE, be sure to turn off the debugger (<b><font color="#006666">DisableDebugger</font></b> is not enough). 
+<br>
+<br>
+This library can provide information about the source code file and line at which the error occurred through 
+the <a href="errorfile.html">ErrorFile()</a> and <a href="errorline.html">ErrorLine()</a> commands, but only if this feature is enabled 
+when compiling the program (it causes a very small slowdown in execution speed to track the line numbers). 
+To enable this feature, enable the &quot;Enable OnError lines support&quot; checkbox in the <a href="../reference/ide_compiler.html">compiler options</a> 
+or specify the /LINENUMBERING (Windows) or --linenumbering (Linux, Mac OSX) command-line switch when compiling 
+from the <a href="../reference/cli_compiler.html">command-line</a>. 
+<br>
+<br>
+On Linux, in a fatal error handler, UI shouldn't be used, and the program should exits as fast as possible as it is in an unstable state. 
+</blockquote><p><b>Command Index</b><blockquote>
+<a href="erroraddress.html">ErrorAddress</a><br>
+<a href="errorcode.html">ErrorCode</a><br>
+<a href="errorfile.html">ErrorFile</a><br>
+<a href="errorline.html">ErrorLine</a><br>
+<a href="errormessage.html">ErrorMessage</a><br>
+<a href="errorregister.html">ErrorRegister</a><br>
+<a href="errortargetaddress.html">ErrorTargetAddress</a><br>
+<a href="examineassembly.html">ExamineAssembly</a><br>
+<a href="instructionaddress.html">InstructionAddress</a><br>
+<a href="instructionstring.html">InstructionString</a><br>
+<a href="nextinstruction.html">NextInstruction</a><br>
+<a href="onerrorcall.html">OnErrorCall</a><br>
+<a href="onerrordefault.html">OnErrorDefault</a><br>
+<a href="onerrorexit.html">OnErrorExit</a><br>
+<a href="onerrorgoto.html">OnErrorGoto</a><br>
+<a href="raiseerror.html">RaiseError</a><br>
+</blockquote></p>
+
+<p><b>Example</b></p><blockquote>
+<a href="../Examples/OnError.pb.html">OnError.pb</a>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=../reference/reference.html>Reference Manual - Index</a></center><br><br>
+
+</body></html>

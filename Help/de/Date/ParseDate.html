@@ -1,0 +1,64 @@
+<html><head><title>ParseDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ParseDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Datum.q = <font color="#006666"><b>ParseDate</b></font>(Maske$, String$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Wandelt einen Datums-String in einen regulären Datums-Wert um, welcher danach mit 
+den anderen Datums-Funktionen verwendet werden kann. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Maske$</i></td>
+<td width="90%"> 
+Ein Masken-String, welcher definiert, wie der Datums-String formatiert ist. 
+Mögliche &quot;Tokens&quot; (reservierte Zeichen) sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  %yyyy: wird durch den Jahres-Wert ersetzt, auf 4 Stellen.
+  %yy: wird durch den Jahres-Wert ersetzt, auf 2 Stellen.
+  %mm: wird durch den Monats-Wert ersetzt, auf 2 Stellen.
+  %dd: wird durch den Tages-Wert ersetzt, auf 2 Stellen.
+  %hh: wird durch den Stunden-Wert ersetzt, auf 2 Stellen.
+  %ii: wird durch den Minuten-Wert ersetzt, auf 2 Stellen.
+  %ss: wird durch den Sekunden-Wert ersetzt, auf 2 Stellen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>String$</i></td>
+<td> 
+Der String mit dem zu analysierenden (zu &quot;parsenden&quot;) Datum. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt das Datum entsprechend dem analysierten String zurück. Wenn der Eingabestring 
+nicht mit der Maske übereinstimmt, dann ist das Ergebnis gleich -1. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion ist sehr nützlich, um bereits gespeicherte Daten (zum Beispiel in einer 
+Log-Datei) zu ermitteln und weitere Operationen damit auszuführen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ParseDate</font>(&quot;%yy/%mm/%dd&quot;, &quot;10/01/07&quot;) <font color="#006666">; Gibt den Datums-Wert von &quot;10/01/07&quot; aus</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">ParseDate</font>(&quot;%mm/%dd/%yyyy&quot;, &quot;01/07/2010&quot;) <font color="#006666">; Gibt den Datums-Wert von &quot;01/07/2010&quot; aus</font>
+
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="date.html">Date()</a>, <a href="formatdate.html">FormatDate()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=month.html>Month()</a> - <a href=index.html>Date Inhaltsverzeichnis</a> - <a href=second.html>Second()</a> -><br><br>
+</blockquote>
+</font></body></html>

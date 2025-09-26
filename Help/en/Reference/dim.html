@@ -1,0 +1,123 @@
+<html><head><title>Dim</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Dim</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Dim</font></b> name.&lt;type&gt;(&lt;expression&gt;, [&lt;expression&gt;], ...) 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Dim</font></b> is used to create new arrays (the initial value of each element will be zero). 
+An array in PureBasic can be of any types, including <a href="../reference/structures.html">structured</a>, 
+and user defined types. Once an array is defined it can be resized with <b><font color="#006666">ReDim</font></b>. 
+Arrays are dynamically allocated which means a <a href="../reference/variables.html">variable</a> or 
+an <a href="../reference/general_rules.html">expression</a> can be used to size them. 
+To view all commands used to manage arrays, see the <a href="../array/index.html">Array</a> library. 
+<br>
+<br>
+When you define a new array, please note that it will have one more element than you used as parameter, 
+because the numbering of the elements in PureBasic (like in other BASIC's) starts at element 0. 
+For example when you define <b><font color="#006666">Dim</font></b>(10) the array will have 11 elements, elements 0 to 10. 
+This behavior is different for static arrays in <a href="../reference/structures.html">structures</a>. 
+Static arrays use brackets &quot;[]&quot;, for example ArrayStatic[2] has only 2 elements from 0 to 1 
+and library functions <a href="../array/index.html">Array</a> don't work with them. 
+<br>
+<br>
+The new arrays are always locals, which means <a href="../reference/global.html">Global</a> or <a href="../reference/shared.html">Shared</a> commands 
+have to be used if an array declared in the main source need to be used in procedures. 
+It is also possible to pass an array as parameter to a <a href="../reference/procedures.html">procedure</a> - 
+by using the keyword <b><font color="#006666">Array</font></b>. It will be passed &quot;by reference&quot; (which means, that the array will not be copied, instead the 
+functions in the procedure will manipulate the original array). 
+<br>
+<br>
+To delete the content of an array and release its used memory during program flow, 
+call <a href="../array/freearray.html">FreeArray()</a>. 
+<br>
+<br>
+If <b><font color="#006666">Dim</font></b> is used on an existing array, it will reset its contents to zero. 
+<br>
+<br>
+For fast swapping of array contents the <a href="../reference/others.html">Swap</a> keyword is available. 
+<br>
+<br>
+Note: Array bound checking is only done when the runtime <a href="../reference/debugger.html">Debugger</a> is enabled. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MyArray</font>(41)
+<font color="#006666">  MyArray</font>(0) = 1
+<font color="#006666">  MyArray</font>(1) = 2 
+</font></pre>
+
+</blockquote><p><b>Example:</b> Multidimensional array</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MultiArray</font>.b(NbColumns, NbLines)
+<font color="#006666">  MultiArray</font>(10, 20) = 10
+<font color="#006666">  MultiArray</font>(20, 30) = 20
+</font></pre>
+
+</blockquote><p><b>Example:</b> Array as procedure parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">fill</font>(<b><font color="#006666">Array</font></b> <font color="#006666">Numbers</font>(1), Length)  <font color="#006666">; the 1 stands for the number of dimensions in the array</font>
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> Length
+<font color="#006666">      Numbers</font>(i) = i
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Numbers</font>(10)
+<font color="#006666">  fill</font>(<font color="#006666">Numbers</font>(), 10)  <font color="#006666">; the array Numbers() will be passed as parameter here</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Numbers</font>(5)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Numbers</font>(10)
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">ReDim</font></b> name.&lt;type&gt;(&lt;expression&gt;, [&lt;expression&gt;], ...) 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">ReDim</font></b> is used to 'resize' an already declared array while preserving its content. The 
+new size can be larger or smaller, but the number of dimension of the array cannot be changed. 
+<br>
+<br>
+If <b><font color="#006666">ReDim</font></b> is used with a multi-dimension array, only its last dimension can be changed. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MyArray</font>.l(1) <font color="#006666">; We have 2 elements</font>
+<font color="#006666">  MyArray</font>(0) = 1
+<font color="#006666">  MyArray</font>(1) = 2
+  
+  <b><font color="#006666">ReDim</font></b> <font color="#006666">MyArray</font>(4) <font color="#006666">; Now we want 5 elements</font>
+<font color="#006666">  MyArray</font>(2) = 3
+  
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 2
+    <b><font color="#006666">Debug</font></b> <font color="#006666">MyArray</font>(k)
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Multi-dimension array</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">MyTab</font>.l(1,1,1) 
+  
+  <font color="#006666">;  ReDim MyTab(4,1,1) ; NO !</font>
+  <font color="#006666">;  ReDim MyTab(1,4,1) ; NO !</font>
+  <b><font color="#006666">ReDim</font></b> <font color="#006666">MyTab</font>(1,1,4) <font color="#006666">; YES, only its last dimension can be changed!</font>
+<font color="#006666">  MyTab</font>(1,1,4) = 3
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

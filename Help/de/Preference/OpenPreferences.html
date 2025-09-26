@@ -1,0 +1,104 @@
+<html><head><title>OpenPreferences</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenPreferences()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenPreferences</b></font>(Dateiname$ [, Flags] [, Kodierung]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet eine bereits existierende Preference-Datei. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateiname$</i></td>
+<td width="90%"> 
+Der Dateiname der Preference-Datei. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Preference_NoSpace</font>: es werden keine Leerzeichen rings um das Gleichheitszeichen (=) - zwischen
+                          Schlüssel und Wert - eingefügt,
+                          Dies kann nützlich beim Umgang mit externen Voreinstellungs-Dateien
+                          sein, welche kein Leerzeichen rings um das Leerzeichen akzeptieren.
+  <font color="#924B72">#PB_Preference_GroupSeparator</font>: fügt eine leere Zeile zwischen den Gruppen ein, um die
+                                 Lesbarkeit der Datei zu erhöhen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Kodierung (optional)</i></td>
+<td> 
+Um eine String-Kodierung beim Lesen der Preference-Datei zu erzwingen. Wenn am Anfang der Datei 
+ein UTF-8-BOM gefunden wird, wird dieser Parameter ignoriert und UTF-8 verwendet. 
+Es kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>: Die Datei wird als UTF-8 gelesen, auch wenn sie kein BOM hat.
+  <font color="#924B72">#PB_Ascii</font>: Die Datei wird als ASCII gelesen, es sei denn, es gibt ein UTF-8-BOM. Wenn die
+             Einstellungen in die Datei zurückgeschrieben werden, wird UTF-8 verwendet.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Datei erfolgreich geöffnet wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn auch die Datei nicht gefunden oder geöffnet werden konnte, ist es trotzdem möglich, 
+die Lese-Funtionen zu nutzen, die dann jeweils die angegebenen Standardwerte zurückgeben. 
+Dies ist sehr nützlich, um in einem Schritt die Programmvariablen zu initialisieren. 
+Die Befehle wie <a href="readpreferencestring.html">ReadPreferenceString()</a> können zum Lesen der 
+in der Datei gespeicherten Voreinstellungswerte genutzt werden. 
+<br>
+<br>
+Zum Entfernen eines Schlüssels oder einer Gruppe sind die Befehle <a href="removepreferencekey.html">RemovePreferenceKey()</a> 
+und <a href="removepreferencegroup.html">RemovePreferenceGroup()</a> verfügbar. Zum Erstellen oder Ändern einer 
+Gruppe verwenden Sie <a href="preferencegroup.html">PreferenceGroup()</a>. 
+<br>
+<br>
+Es ist möglich, existierende Werte mittels <a href="writepreferencestring.html">WritePreferenceString()</a> und 
+ähnlichen Befehlen zu ändern. 
+<br>
+<br>
+Sobald alle Schreib-Operationen erfolgt sind, muss <a href="closepreferences.html">ClosePreferences()</a> aufgerufen werden, damit die Voreinstellungen 
+tatsächlich auf Disk geschrieben werden (sofern sie in der Zwischenzeit verändert wurden). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Öffnet eine Preference-Datei</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Gruppen untersuchen</font>
+<font color="#006666">  ExaminePreferenceGroups</font>()
+  <font color="#006666">; Für jede Gruppe</font>
+  <b><font color="#006666">While</font></b> <font color="#006666">NextPreferenceGroup</font>()
+    text$ = text$ +<font color="#006666"> PreferenceGroupName</font>() + <font color="#924B72">#LF$</font> <font color="#006666">; deren Name</font>
+    <font color="#006666">; Schlüssel der aktuellen Gruppe untersuchen</font>
+<font color="#006666">    ExaminePreferenceKeys</font>()
+    <font color="#006666">; Für jeden Schlüssel</font>
+    <b><font color="#006666">While</font></b>  <font color="#006666">NextPreferenceKey</font>()                          
+      text$ = text$ +<font color="#006666"> PreferenceKeyName</font>() + &quot; = &quot; +<font color="#006666"> PreferenceKeyValue</font>() + <font color="#924B72">#LF$</font> <font color="#006666">; dessen Name und seine Daten</font>
+    <b><font color="#006666">Wend</font></b>
+    text$ = text$ + <font color="#924B72">#LF$</font>
+  <b><font color="#006666">Wend</font></b>
+
+  <font color="#006666">; Anzeigen aller Gruppen und aller Schlüssel mit Daten</font>
+<font color="#006666">  MessageRequester</font>(&quot;test.pref&quot;, text$)
+
+  <font color="#006666">; Schließt die Preference-Datei</font>
+<font color="#006666">  ClosePreferences</font>()    
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closepreferences.html">ClosePreferences()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextpreferencekey.html>NextPreferenceKey()</a> - <a href=index.html>Preference Inhaltsverzeichnis</a> - <a href=preferencecomment.html>PreferenceComment()</a> -><br><br>
+
+</body></html>

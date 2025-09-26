@@ -1,0 +1,80 @@
+<html><head><title>MaterialShaderParameter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MaterialShaderParameter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>MaterialShaderParameter</b></font>(#Material, ProgrammTyp, ParameterName$, ParameterTyp, v1.f, v2.f, v3.f, v4.f)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Legt bestimmte Parameter für den Shader fest. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+Das zu verwendende Material. 
+
+</td></tr>
+<tr><td><i>ProgrammTyp</i></td>
+<td> 
+Der Programm-Typ. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shader_Vertex</font>  : verwendet das Vertex-Programm.
+  <font color="#924B72">#PB_Shader_Fragment</font>: verwendet das Fragment-Programm.
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParameterName$</i></td>
+<td> 
+Name des Parameters mit dem zu verwendenden GLSL-Programm, für das der neue Wert definiert wird. 
+
+</td></tr>
+<tr><td><i>ParameterTyp</i></td>
+<td> 
+Der Parameter-Typ. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shader_Integer</font>: der Parameter verwendet einen Ganzzahl-Typ (v2, v3 und v4 Parameter werden ignoriert)
+  <font color="#924B72">#PB_Shader_Float</font>  : der Parameter verwendet einen Fließkommazahl-Typ (v2, v3 und v4 Parameter werden ignoriert)
+  <font color="#924B72">#PB_Shader_Vector3</font>: der Parameter verwendet einen Vector3 Typ (v4 Parameter wird ignoriert)
+  <font color="#924B72">#PB_Shader_Vector4</font>: der Parameter verwendet einen Vector4 Typ
+</font></pre>
+
+</td></tr>
+<tr><td><i>v1</i></td>
+<td> 
+Erster Parameterwert. Obligatorisch für alle Parametertypen. 
+
+</td></tr>
+<tr><td><i>v2</i></td>
+<td> 
+Zweiter Parameterwert. Obligatorisch für #PB_Shader_Vector3 und #PB_Shader_Vector4 Typen. 
+
+</td></tr>
+<tr><td><i>v3</i></td>
+<td> 
+Dritter Parameterwert. Obligatorisch für #PB_Shader_Vector3 und #PB_Shader_Vector4 Typen. 
+
+</td></tr>
+<tr><td><i>v4</i></td>
+<td> 
+Vierter Parameterwert. Obligatorisch für den #PB_Shader_Vector4 Typ. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+GLSL-Shader verwenden den Typ vec4, um eine Farbe zu übergeben. Beispiel: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MaterialShaderParameter</font>(0, <font color="#924B72">#PB_Shader_Fragment</font>, 4,<font color="#006666"> Red</font>(Color)/255,<font color="#006666"> Green</font>(Color)/255,<font color="#006666"> Blue</font>(Color)/255,<font color="#006666"> Alpha</font>(Color)/255)
+<font color="#006666">  MaterialShaderParameter</font>(<font color="#924B72">#Material</font>, <font color="#924B72">#PB_Shader_Fragment</font>, &quot;bumpy&quot;, <font color="#924B72">#PB_Shader_Float</font>, 0.5,0,0,0)
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=materialshaderautoparameter.html>MaterialShaderAutoParameter()</a> - <a href=index.html>Material Inhaltsverzeichnis</a> - <a href=materialshadertexture.html>MaterialShaderTexture()</a> -><br><br>
+
+</body></html>

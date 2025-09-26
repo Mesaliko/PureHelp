@@ -1,0 +1,494 @@
+<html><head><title>Bearbeitungsfunktionen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Bearbeitungsfunktionen</font></b></p>
+
+Die PureBasic IDE verhält sich wie jeder andere Texteditor, wenn wir auf die grundlegenden 
+Bearbeitungsfunktionen zu sprechen kommen. Die Cursortasten, genauso wie die Bild auf-/Bild ab-, 
+Pos 1- und Ende-Tasten können zur Navigation durch den Code verwendet werden. 
+Strg+Pos 1 springt an den Anfang der Datei und Strg+Ende an das Ende. 
+<br>
+<br>
+Die Standard-Tastenkürzel Strg+A (Alles markieren), Strg+C (Kopieren), Strg+X (Ausschneiden) und Strg+V (Einfügen) können 
+für das Bearbeiten verwendet werden. Über die &quot;Einfg&quot;-Taste wird bestimmt, ob Text eingefügt oder 
+überschrieben wird. Die &quot;Entf&quot;-Taste veranlasst ein vorwärts löschen. Durch Festhalten der 
+Umschalt-Taste (Shift) und Benutzung der Pfeiltasten wird Text ausgewählt. 
+<br>
+<br>
+Die Tastenkürzel Strg+Shift+Up und Strg+Shift+Down ermöglichen Ihnen, eine Zeile nach 
+oben oder unten zu verschieben. 
+<br>
+Das Tastenkürzel Strg+D dupliziert eine Auswahl. 
+<br>
+<br>
+Auf Windows ermöglichen Ihnen die Tastenkürzel Strg+Plus und Strg+Minus das Rein- bzw. Rauszoomen 
+der Anzeige in allen Tabs, und Strg+0 stellt den Standardzoom wieder her. Linux- und OSX-Nutzer 
+können diese selbst erstellen. Das Tastenkürzel Strg+Mausrad zoomt nur im aktuellen Tab. 
+<br>
+<br>
+Die Tastenkürzel Strg+Tab bzw. Strg+Shift+Tab ermöglichen Ihnen das Verschieben der offenen Tabs. 
+<br>
+<br>
+Es sind viele weitere Tastenkürzel verfügbar, wie z.B. Strg+Shift+U/L/X zum Verändern der Groß-/Kleinschreibung. 
+Gehen Sie in die <a href="../reference/ide_preferences.html">Einstellungen</a> (Menü &quot;Datei&quot; / &quot;Einstellungen / Allgemein / Tastenkürzel&quot;. 
+<br>
+<br>
+Weiterhin hat die IDE viele zusätzliche Bearbeitungsfunktionen, die speziell für die 
+Programmierung bzw. PureBasic sind. 
+<br>
+<br>
+
+
+<p><b>Einrückung:</b></p><blockquote>
+
+Wenn Sie Return/Enter drücken, dann wird die Einrückung (Anzahl an Leerzeichen/Tabs am Anfang der Zeile) 
+der aktuellen und der nächsten Zeile automatisch korrigiert, abhängig von den auf diesen Zeilen 
+vorhandenen <a href="../reference/general_rules.html">Schlüsselwörtern</a>. 
+<br>
+Ein &quot;Block-Modus&quot; ist ebenfalls verfügbar, wobei die neue Zeile einfach die gleiche Einrückung 
+wie die vorherige erhält. Die Details dieser Funktion können in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+angepasst werden. 
+
+
+</blockquote>
+<p><b>Tabulator-Zeichen:</b></p><blockquote>
+
+Standardmäßig fügt die IDE beim Drücken der Tabulator-Taste keine echten Tabulator-Zeichen 
+ein, da viele Programmierer es als eine nicht so gute Sache ansehen, echte Tabs im Quellcode 
+zu verwenden. 
+<br>
+<br>
+Die IDE fügt stattdessen zwei Leerzeichen ein. Dieses Verhalten kann in den Voreinstellungen 
+geändert werden. Siehe <a href="../reference/ide_preferences.html">Anpassen der IDE</a> für weitere 
+Informationen. 
+
+
+</blockquote>
+<p><b>Spezielles Tabulator-Verhalten:</b></p><blockquote>
+
+Wenn die Tabulator-Taste gedrückt wird, während nichts oder nur einige Zeichen ausgewählt 
+sind, agiert die Tab-Taste wie oben beschrieben (es werden eine Anzahl Leerzeichen oder 
+ein echtes Tab-Zeichen eingefügt, wenn entsprechend konfiguriert). 
+<br>
+<br>
+Wenn jedoch eine oder mehrere vollständige Zeilen selektiert sind, dann ist die Reaktion 
+anders. In diesem Fall werden am Anfang jeder ausgewählten Zeile Leerzeichen oder ein 
+Tab-Zeichen (abhängig von der Konfiguration) eingefügt. Dies vergrößert die Einrückung 
+des gesamten selektierten Blocks. 
+<br>
+<br>
+Das Markieren mehrerer Zeilen Text und Drücken von Shift+Tab kehrt dieses Verhalten um. 
+Es entfernt Leerzeichen/Tabs am Anfang jeder Zeile, um die Einrückung des gesamten Blocks 
+zu verringern. 
+
+
+</blockquote>
+<p><b>Einrückung/Ausrichtung von Kommentaren:</b></p><blockquote>
+
+Ähnlich dem speziellen Tabulator-Verhalten oben können die Tastenkürzel Strg+E und 
+Strg+Shift+E (CMD+E und CMD+Shift+E auf OSX) verwendet werden, um nur die Einrückung 
+der Kommentare in einem ausgewählten Block des Quellcodes zu verändern. Dies hilft 
+beim Ausrichten von Kommentaren am Ende von Code-Zeilen, um den Code besser lesbar 
+zu machen. Die verwendeten Tastenkürzel können in den 
+<a href="../reference/ide_preferences.html">Einstellungen</a> geändert werden. 
+
+
+</blockquote>
+<p><b>Auswahl von Code-Blöcken:</b></p><blockquote>
+
+Das Tastenkürzel Strg+M (CMD+M auf OSX) kann verwendet werden, um den Block des 
+Quellcodes auszuwählen, der die aktuelle Cursor-Position beinhaltet (d.h. der 
+umgebende If-Block, die Schleife oder Prozedur). Die wiederholte Nutzung dieses 
+Tastenkürzels wählt weitere umgebende Code-Blöcke aus. 
+<br>
+<br>
+Das Tastenkürzel Strg+Shift+M (CMD+Shift+M auf OSX) kehrt dieses Verhalten um 
+und ändert die Auswahl wieder auf den Block, der vor der letzten Verwendung des 
+Strg+M Tastenkürzels ausgewählt war. 
+<br>
+<br>
+Die verwendeten Tastenkürzel können in den 
+<a href="../reference/ide_preferences.html">Einstellungen</a> geändert werden. 
+
+
+</blockquote>
+<p><b>Doppelklick auf Quellcode-Text:</b></p><blockquote>
+
+Ein Doppelklick auf ein &quot;Wort&quot; markiert wie üblich das gesamte Wort. Dennoch hat unter 
+manchen Umständen ein Doppelklick eine spezielle Bedeutung: 
+<br>
+<br>
+Beim Doppelklick auf den Namen eines <a href="../reference/procedures.html">Prozedur</a>-Aufrufs, 
+während die Strg-Taste gedrückt ist, springt der Cursor automatisch zur Prozedur-Deklaration 
+(der Quellcode, der diese enthält, muss geöffnet oder Teil des selben Projektes sein). 
+<br>
+<br>
+Beim Doppelklick auf eine <a href="../reference/includes.html">IncludeFile</a> bzw. 
+<a href="../reference/includes.html">XincludeFile</a> Anweisung wird die IDE versuchen, diese 
+Datei zu öffnen. (Die ist nur möglich, wenn der Name der einzubindenden Datei als ein 
+Buchstaben-String geschrieben wurde, und nicht z.B. als Konstante.) 
+<br>
+<br>
+In der gleichen Art und Weise wird bei einem Doppelklick auf die 
+<a href="../reference/includes.html">IncludeBinary</a> Anweisung die IDE versuchen, diese 
+Datei mit dem internen <a href="../reference/ide_tools.html">Dateibetrachter</a> anzuzeigen. 
+
+
+</blockquote>
+<p><b>Markierung passender Klammern und Schlüsselwörter:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_match.png"></p>
+
+Wenn sich der Cursor auf einer öffnenden oder schließenden Klammer befindet, wird die IDE die andere 
+dazugehörende Klammer hervorheben. Wenn eine passende Klammer nicht gefunden werden konnte (was in 
+PureBasic einen Syntax-Fehler darstellt), wird die IDE die aktuelle Klammer in rot hervorheben. 
+Das gleiche Konzept gilt auch für Schlüsselwörter. Befindet sich der Cursor auf einem Schlüsselwort 
+wie &quot;If&quot;, wird die IDE dieses Schlüsselwort unterstreichen und ebenso alle dazugehörigen Schlüsselwörter 
+wie &quot;Else&quot; oder &quot;EndIf&quot;. Gibt es unter den Schlüsselwörtern eine Nichtübereinstimmung, werden diese 
+in rot unterstrichen. Der weiter unten beschriebene Menüeintrag &quot;Gehe zum dazugehörenden Schlüsselwort&quot; 
+kann verwendet werden, um schnell zwischen zusammengehörenden Schlüsselwörtern hin und her zu springen. 
+<br>
+<br>
+Die Klammern- und Schlüsselwort-Übereinstimmung kann in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+angepasst werden. 
+
+
+</blockquote>
+<p><b>Befehls-Hilfe in der Statuszeile:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_commandhelp.png"></p>
+Während der Eingabe wird die IDE für jede PureBasic-Funktion, deren Parameter gerade 
+eingegeben werden, alle benötigten Parameter anzeigen. Dies macht es einfach zu sehen, 
+welche Parameter Sie noch zu dieser Funktion hinzufügen müssen. Dies funktioniert auch 
+bei <a href="../reference/procedures.html">Prozeduren</a>, <a href="../reference/prototypes.html">Prototypes</a>, 
+<a href="../reference/interfaces.html">Interfaces</a> und <a href="../reference/import_endimport.html">importierten Funktionen</a> 
+in Ihrem Code, solange sie im gleichen Quellcode bzw. <a href="../reference/ide_projects.html">Projekt</a> 
+deklariert wurden. 
+
+
+</blockquote>
+<p><b>Faltungs-Optionen:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_folding.png"></p>
+Wenn die IDE auf spezielle Faltungs-Schlüsselwörter stößt (<b><font color="#006666">Procedure</font></b> / 
+<b><font color="#006666">EndProcedure</font></b> zum Beispiel, weitere können hinzugefügt werden), dann markiert 
+die IDE den Bereich zwischen diesen Schlüsselwörtern auf der linken Seite neben den 
+Zeilennummern mit einem [-] am Startpunkt, gefolgt von einer senkrechten Linie bis 
+zum Endpunkt. 
+<br>
+<br>
+Durch Anklicken des [-] können Sie diesen Teil des Quellcodes verstecken (&quot;falten&quot;), um bei 
+größeren Quellcode-Dateien einen besseren Überblick zu behalten. Das [-] wird dann in ein 
+[+] geändert. Durch erneutes Anklicken wird der Code wieder angezeigt (&quot;entfaltet&quot;). 
+<br>
+<br>
+Hinweis: Auch wenn der Status dieser gefalteten Code-Zeilen erhalten bleibt, wenn Sie die 
+Datei speichern/erneut öffnen, so behält doch die gerade erstellte Quellcode-Datei alle 
+Zeilen. Die Faltung wirkt sich nur auf die Darstellung des Codes in der IDE aus, nicht 
+auf den Code selbst. 
+<br>
+<br>
+Weitere Standardschlüsselwörter für das Falten sind &quot;;{&quot; und &quot;;}&quot;. Da &quot;;&quot; einen Kommentar 
+in PB markiert, wird dieser vom Compiler vollständig ignoriert. Diese bieten damit jedoch 
+die Möglichkeit, selbst erstellte Faltungspunkte - die nicht einem speziellen PB-Schlüsselwort 
+entsprechen - im Code zu platzieren. 
+
+
+</blockquote>
+<p><b>Automatisches Vervollständigen:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_autocomplete.png"></p>
+Damit Sie sich nicht den exakten Namen jedes einzelnen Befehls merken müssen, gibt es die 
+Funktion zum &quot;Automatischen Vervollständigen&quot;, um Ihnen das Leben einfacher zu machen. 
+<br>
+<br>
+Nachdem Sie den Anfang eines Befehls eingegeben haben, wird eine Liste möglicher 
+Übereinstimmungen mit dem eben von Ihnen eingegebenen Anfangswort angezeigt. Eine Liste 
+mit Optionen wird auch angezeigt, wenn Sie eine strukturierte Variable oder Interface 
+gefolgt von einem &quot;\&quot; eingegeben haben. 
+<br>
+<br>
+Sie können nun eines dieser Worte mit den Hoch-/Runter-Pfeiltasten auswählen und an der 
+aktuellen Cursor-Stelle mittels der Tab-Taste einfügen. Sie können auch einfach 
+weiterschreiben, während die Liste geöffnet ist. Es wird dann 
+die erste Übereinstimmung - die nach Ihrem Weiterschreiben immer noch möglich ist - genommen 
+und die Liste automatisch geschlossen, wenn entweder eine exakte Übereinstimmung vorliegt 
+oder es keine weiteren möglichen Übereinstimmungen in der Liste mehr gibt. 
+<br>
+<br>
+Escape schließt die &quot;Auto-Vervollständigen&quot; Liste zu jeder Zeit. Sie wird auch geschlossen, 
+wenn Sie mit der Maus irgendwohin in die IDE klicken. 
+<br>
+<br>
+Hinweis: Sie können in den Voreinstellungen konfigurieren, was in der &quot;Auto-Vervollständigen&quot;-Liste 
+angezeigt wird, genauso wie auch das automatische Aufklappen der Liste ausschalten (benötigt 
+dann einen Tastenkürzel wie Strg+Leertaste, um die Liste zu öffnen). 
+Siehe auch den Abschnitt zum &quot;Automatischen Vervollständigen&quot; in 
+<a href="../reference/ide_preferences.html">Anpassung der IDE</a> für weitere Informationen. 
+
+
+</blockquote>
+<p><b>Werkzeugtafel an der Seite:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_toolspanel.png"></p>
+Viele Werkzeuge, um das Navigieren/Bearbeiten des Quellcodes einfacher zu machen, können zur 
+Werkzeugtafel an der Seite des Editorfensters hinzugefügt werden. Für einen Überblick darüber 
+und wie Sie diese konfigurieren, sehen Sie in <a href="../reference/ide_tools.html">Eingebaute Werkzeuge</a>. 
+
+
+</blockquote>
+<p><b>Das Bearbeiten-Menü:</b></p><blockquote>
+
+Im folgenden Abschnitt erhalten Sie eine Erklärung der Einträge im Bearbeiten-Menü. 
+Beachten Sie, dass auf viele der Bearbeiten-Menüeinträge auch durch einen Rechtsklick 
+in den Quellcode zugegriffen werden kann, weil dann ein Aufklapp-Menü geöffnet wird. 
+
+<p><img src="images/ide_menu_edit.png"></p>
+
+<b>Rückgängig</b> 
+<br>
+Macht die zuletzt im Editier-Bereich gemachte Änderung am Code rückgängig. 
+Es gibt einen Puffer dafür, weshalb mehrere Aktionen rückgängig gemacht werden können. 
+
+<br>
+<br>
+
+<b>Wiederholen</b> 
+<br>
+Wiederholt die letzte Aktion, die durch die Rückgängig-Funktion rückgängig gemacht wurde. 
+
+<br>
+<br>
+
+<b>Ausschneiden</b> 
+<br>
+Kopiert den ausgewählten Teil des Quellcodes in die Zwischenablage und entfernt ihn 
+aus dem Code. 
+
+<br>
+<br>
+
+<b>Kopieren</b> 
+<br>
+Kopiert den ausgewählten Text in die Zwischenablage, ohne diesen aus dem Code zu löschen. 
+
+<br>
+<br>
+
+<b>Einfügen</b> 
+<br>
+Fügt den Inhalt der Zwischenablage an der aktuellen Position in den Code ein. 
+Wenn irgendwelcher Text vorher markiert war, wird dieser entfernt und durch den 
+Inhalt der Zwischenablage ersetzt. 
+
+<br>
+<br>
+
+<b>Blockkommentar einfügen</b> 
+<br>
+Fügt einen Kommentar (&quot;;&quot;) vor jeder Zeile des ausgewählten Code-Blocks ein. 
+Dies macht das Auskommentieren größerer Code-Abschnitte einfacher, als das &quot;;&quot; 
+manuell vor jeder Zeile einzufügen. 
+
+<br>
+<br>
+
+<b>Blockkommentar entfernen</b> 
+<br>
+Entfernt die Kommentar-Zeichen am Anfang jeder ausgewählten Zeile. Dies kehrt 
+den Menü-Befehl &quot;Blockkommentar einfügen&quot; um, funktioniert jedoch auch mit 
+manuell gesetzten Kommentaren. 
+
+<br>
+<br>
+
+<b>Einrückung formatieren</b> 
+<br>
+Formatiert den Einzug (Einrückung) der markierten Zeilen neu - ausgerichtet am Code über ihnen 
+und unter Beachtung ihrer enthaltenen <a href="../reference/general_rules.html">Schlüsselwörter</a>. 
+Die Regeln für den Einzug können in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+angegeben werden. 
+
+<br>
+<br>
+
+<b>Alles auswählen</b> 
+<br>
+Markiert den gesamten Quellcode. 
+
+<br>
+<br>
+
+<b>Gehe zu</b> 
+<br>
+Dies ermöglicht Ihnen, zu einer bestimmten Zeile in Ihrem Quellcode zu springen. 
+
+<br>
+<br>
+
+<b>Gehe zum dazugehörenden Schlüsselwort</b> 
+<br>
+Befindet sich der Cursor aktuell auf einem Schlüsselwort wie &quot;If&quot;, springt die Menü-Option direkt 
+zum dazugehörenden Schlüsselwort (in diesem Fall &quot;EndIf&quot;). 
+
+<br>
+<br>
+
+<b>Letzte Zeile</b> 
+<br>
+Die IDE merkt sich die Zeilen, die Sie angesehen haben (wo der Cursor stand). Zum Beispiel, 
+wenn Sie mit der oben beschriebenen &quot;Gehe zu&quot;-Funktion oder dem <a href="../reference/ide_tools.html">Prozedurliste</a>-Werkzeug 
+zu einer anderen Zeile springen. Mit diesem Menü-Befehl springen Sie an die zuletzt 
+aufgesuchte Position zurück. 20 solcher letzten Positionen werden aufgezeichnet. 
+<br>
+<br>
+Beachten Sie, dass hier nur größere Sprünge im Code aufgezeichnet werden. Nicht, wenn Sie 
+sich einfach ein paar Zeilen mit den Pfeiltasten hoch oder runter bewegen. 
+
+<br>
+<br>
+
+<b>Aktuelle Faltung umschalten</b> 
+<br>
+Dies öffnet/schließt den Faltungspunkt, an dem sich der Cursor gerade befindet. 
+
+<br>
+<br>
+
+<b>Faltung umschalten</b> 
+<br>
+Dies öffnet/schließt alle Faltungspunkte im aktuellen Quellcode. Sehr nützlich, um zum 
+Beispiel alle Prozeduren im Code zu verstecken. Oder um auf die Schnelle wieder den 
+gesamten Code sehen zu können, wenn manche Code-Abschnitte zusammengefaltet sind. 
+
+<br>
+<br>
+
+<b>Markierung hinzufügen/entfernen</b> 
+<br>
+Markierungen verhalten sich wie Lesezeichen im Quellcode. Ihre Anwesenheit wird durch 
+einen kleinen Pfeil nahe der Zeilennummer angezeigt. Sie können später mit dem &quot;Springe 
+zu Markierung&quot; Menü-Befehl zu diesen Markierungen springen. 
+<br>
+<br>
+&quot;Markierung hinzufügen/entfernen&quot; setzt oder entfernt eine Markierung auf der gerade 
+von Ihnen bearbeiteten Zeile. 
+<br>
+<br>
+Hinweis: Sie können Markierungen auch hinzufügen/entfernen, indem Sie die Strg-Taste 
+gedrückt halten und auf den Rand (welcher die Markierungen beinhaltet, nicht auf den 
+Bereich der Zeilennummern) klicken. 
+
+<br>
+<br>
+
+<b>Springe zu Markierung</b> 
+<br>
+Die veranlasst den Cursor, ausgehend von der aktuellen Cursor-Position zur nächsten 
+Markierung weiter unten zu springen. Gibt es keine weitere Markierung nach der aktuellen 
+Cursor-Position, springt er zur ersten Markierung im Quellcode. 
+<br>
+<br>
+Wenn Sie also das &quot;Springe zu Markierung&quot; Tastenkürzel (standardmäßig F2) mehrere Male 
+drücken, können Sie zu allen Markierungen im Code springen. 
+
+<br>
+<br>
+
+<b>Markierungen entfernen</b> 
+Dies entfernt alle Markierungen im aktuellen Quellcode. 
+
+<br>
+<br>
+
+<b>Suchen/Ersetzen</b> 
+
+<p><img src="images/ide_edit_search.png"></p>
+
+Der &quot;Suchen/Ersetzen&quot;-Dialog gibt Ihnen die Möglichkeit, nach speziellen Worten in 
+Ihrem Code zu suchen und diese auch mit etwas anderem zu ersetzen. 
+<br>
+<br>
+Der &quot;Weitersuchen&quot;-Schalter startet die Suche. Die Suche kann nach einer Übereinstimmung 
+auch mit dem &quot;Weitersuchen&quot; Menü-Befehl (standardmäßig F3) fortgesetzt werden. 
+<br>
+<br>
+Sie können die Suche genauer machen, indem Sie eines oder mehrere der Häkchen setzen: 
+<br>
+<u>Groß-/Kleinschreibung beachten</u> : Nur Text, der auch in der Groß-/Kleinschreibung 
+exakt mit dem Suchbegriff übereinstimmt, wird gefunden. 
+<br>
+<u>Nur ganze Wörter</u> : Sucht nach dem angegebenen Suchbegriff als ganzes Wort. In diesem 
+Fall werden keine Ergebnisse angezeigt, bei denen der Suchbegriff ein Teil des Worts ist. 
+<br>
+<u>Nicht in Kommentaren suchen</u> : Jede gefundene Übereinstimmung in einem Kommentar wird ignoriert. 
+<br>
+<u>Nicht in Strings suchen</u> : Jede gefundene Übereinstimmung, welche in einer Zeichenfolge 
+(String, innerhalb von &quot; &quot;) auftritt, wird ignoriert. 
+<br>
+<u>Nur innerhalb der Auswahl suchen</u> : Sucht nur in dem markieren Bereich des Quellcodes. Dies ist 
+nur bei der Verwendung mit dem &quot;Alle ersetzen&quot;-Schalter nützlich, bei dem jede Übereinstimmung ersetzt 
+wird, jedoch nur innerhalb des ausgewählten Bereichs. 
+<br>
+<br>
+Durch Setzen des &quot;Ersetzen mit&quot; Häkchens gelangen Sie in den Ersetzen-Modus. &quot;Weitersuchen&quot; wird 
+weiterhin nur Suchen, aber mit jedem Klick auf den &quot;Ersetzen&quot;-Schalter wird die nächste Übereinstimmung 
+der Suche mit dem ersetzt, was zuvor in der &quot;Ersetzen mit:&quot;-Box eingegeben wurde. 
+<br>
+<br>
+Durch Anklicken von &quot;Alle ersetzen&quot; werden alle Übereinstimmungen von der aktuellen Position abwärts 
+ersetzt (außer &quot;Nur innerhalb der Auswahl suchen&quot; ist markiert). 
+
+<br>
+<br>
+
+<b>Weitersuchen</b> 
+<br>
+Dies setzt die Suche nach der nächsten Übereinstimmung entsprechend der letzten über den 
+&quot;Suchen/Ersetzen&quot;-Dialog gestarteten Suche fort. 
+
+<br>
+<br>
+
+<b>Vorheriges finden</b> 
+<br>
+Dies setzt die Suche nach der vorherigen Übereinstimmung entsprechend der letzten über den 
+&quot;Suchen/Ersetzen&quot;-Dialog gestarteten Suche fort. 
+
+<br>
+<br>
+
+<b>Suchen in Dateien</b> 
+
+<p><img src="images/ide_edit_searchfiles.png"></p>
+
+Der &quot;Suchen in Dateien&quot;-Dialog gibt Ihnen die Möglichkeit, eine Suche innerhalb vieler 
+Dateien eines bestimmten Verzeichnisses auszuführen. 
+<br>
+<br>
+Sie müssen dazu einen Suchbegriff angeben, genauso wie ein Stammverzeichnis (&quot;root&quot; oder 
+Ausgangsverzeichnis), in welchem gesucht werden soll. Sie können die zu durchsuchenden 
+Dateien durch Angabe eines Dateiendungs-Filter genauer spezifizieren. Eine beliebige 
+Anzahl an Filtern kann getrennt durch &quot;,&quot; angegeben werden (*.* oder ein leeres 
+Dateiendungs-Feld sucht in allen Dateien). Wie bei &quot;Suchen/Ersetzen&quot; gibt es Häkchen-Boxen, 
+um die Suche genauer einzugrenzen. 
+<br>
+<br>
+Das Häkchen &quot;Unterverzeichnisse einschließen&quot; veranlasst die IDE, auch (rekursiv) innerhalb 
+aller Unterverzeichnisse des angegebenen Stammverzeichnisses zu suchen. 
+<br>
+<br>
+Nach dem Starten der Suche wird ein separates Fenster geöffnet, welches alle Suchresultate 
+beinhaltet. Dort werden die gefundenen Ergebnisse angezeigt - mit Pfad und Dateinamen, 
+Zeilennummer und zutreffender Zeile jedes gefundenen Suchresultats. 
+<br>
+<br>
+Durch einen Doppelklick auf einen Eintrag im Ergebnisfenster wird die Datei in der IDE 
+geöffnet und der Cursor auf die zutreffende Ergebniszeile gesetzt. 
+
+</blockquote>
+</font></body></html>

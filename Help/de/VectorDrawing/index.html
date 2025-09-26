@@ -1,0 +1,229 @@
+<html><head><title>VectorDrawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - VectorDrawing</font></b></p>
+
+<p><b>Einleitung</b></p><blockquote>
+
+Die VectorDrawing Bibliothek bietet auflösungsunabhängige, hoch-qualitative Zeichenoperationen 
+für das Anzeigen, die Bild-Manipulation oder für das Drucken. Anders als die 
+<a href="../2ddrawing/index.html">2DDrawing</a> Bibliothek können die Funktionen in dieser Bibliothek 
+in einer Vielzahl von Maßeinheiten operieren und erlauben die gewünschten Koordinaten-Umwandlungen. 
+Dies ermöglicht das einfache Programmieren von Zeichenoperationen, welche unabhängig von der 
+aktuellen Ausgabeauflösung sind und einfach in verschiedene Größen skaliert werden können. 
+<br>
+Die VectorDrawing Bibliothek unterstützt Alpha-Transparenz bei all ihren Operationen. 
+Es sind nur Vektorschriftarten wie TrueType zulässig, dagegen ist die Verwendung von 
+Bitmap-Schriftarten nicht möglich. 
+Sie können auch keine mittels <a href="../font/registerfontfile.html">RegisterFontFile()</a> registrierte Schriftart verwenden. 
+
+<p><b>Zeichen-Sequenz</b></p><blockquote>
+
+Die Zeichenoperationen in dieser Bibliothek beinhalten drei grundlegende Schritte: 
+<br>
+<br>
+1) Konstruieren eines Pfades (englisch &quot;path&quot;) mit Funktionen wie <a href="addpathline.html">AddPathLine()</a>, <a href="addpathcurve.html">AddPathCurve()</a>, etc. 
+<br>
+2) Auswählen einer Zeichenquelle (englisch &quot;drawing source&quot;) wie <a href="vectorsourcecolor.html">VectorSourceColor()</a> 
+<br>
+3) <a href="strokepath.html">Zeichnen</a> (stroke), <a href="fillpath.html">Füllen</a> (fill), <a href="dotpath.html">Punkten</a> (dot) oder 
+<a href="dashpath.html">Schraffieren</a> des Pfades 
+<br>
+<br>
+Nach dem Stricheln oder Füllen eines Pfades (englisch &quot;stroking or filling a path&quot;) 
+wird der Pfad zurückgesetzt und ein neuer Pfad kann für die nächste Zeichenoperation 
+konstruiert werden. Die Auswahl der Zeichenquelle (Schritt 2) muss nicht jedes Mal 
+wiederholt werden, da die Zeichenquelle nicht zurückgesetzt wird. 
+<br>
+<br>
+Das Pfad-basierte Zeichenmodell ermöglicht das Zeichnen komplexer Flächen (englisch &quot;shapes&quot;) 
+mit Eigenschaften wie dicke Linien mit abgerundeten/diagonalen Ecken und Punkt-/Strich-Mustern 
+(englisch &quot;dot/dash patterns&quot;) ohne das Auftreten sichtbarer Artefakte an Stellen, wo sich Teile 
+der Figuren treffen. Da der gesamte Pfad auf einmal gezeichnet wird, können solche Artefakte 
+vermieden werden. 
+<br>
+<br>
+Siehe die <a href="addpathline.html">AddPathLine()</a> Funktion für ein einfaches Beispiel der Zeichenschritte. 
+
+</blockquote>
+<p><b>Maßeinheiten</b></p><blockquote>
+
+Jede Zeichenausgabe hat eine Standard-Maßeinheit. Die Standardeinheiten sind Pixel für die 
+Bildschirm- oder Rasterbild-Ausgabe, und Punkte für die Drucker- oder Vektorbild-Ausgabe. 
+Es ist jedoch möglich, eine andere Maßeinheit für die Ausgabe auszuwählen, wenn diese 
+mit <a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>, <a href="../printer/printervectoroutput.html">PrinterVectorOutput()</a> oder einer ähnlichen Funktion erstellt wird. 
+Alle Zeichenoperationen werden die ausgewählte Maßeinheit verwenden und die Werte intern 
+in die aktuellen Geräte (Device) - Koordinaten umwandeln. 
+<br>
+Dies ermöglicht das Schreiben von Zeichencode in der bevorzugten Maßeinheit, unabhängig 
+von der verwendeten Ausgabe. Die ausgewählte Maßeinheit für die Ausgabe kann mit <a href="vectorunit.html">VectorUnit()</a> 
+überprüft werden. 
+
+</blockquote>
+<p><b>Koordinaten-Umwandlung</b></p><blockquote>
+
+Es ist möglich, das für das Zeichnen verwendete Koordinatensystem zu <a href="translatecoordinates.html">bewegen</a>, 
+zu <a href="scalecoordinates.html">skalieren</a>, zu <a href="rotatecoordinates.html">drehen</a>, zu 
+<a href="flipcoordinatesx.html">flippen</a> oder zu <a href="skewcoordinates.html">verzerren</a> (englisch &quot;skew&quot;). 
+Die Transformationen können frei kombiniert werden. Solche Tranformationen (oder Umwandlungen) 
+wirken sich auf alle Zeichenoperationen aus. 
+<br>
+<br>
+Mögliche Anwendungszwecke der Koordinaten-Umwandlung sind das Zeichnen von Figuren in einer 
+gedrehten oder gestreckten Weise, ohne den aktuellen Zeichenmodus verändern zu müssen. 
+Zum Beispiel kann Drucker-Code leicht ins Querformat umgewandelt werden, indem einfach 
+die Koordinaten (und damit die gesamte Ausgabe) beim Start der Zeichenoperationen rotiert 
+werden. 
+<br>
+<br>
+Es gibt vier verschiedene Koordinatensysteme und einige Funktionen verwenden einen optionalen 
+Parameter, um das zu verwendende System auszuwählen. Dies sind die verfügbaren Optionen: 
+<br>
+<br>
+
+<font color="#924B72">#PB_Coordinate_Device</font> 
+<blockquote>
+
+Dieses Koordinatensystem repräsentiert die physischen Koordinaten des Ausgabegeräts. 
+Es kann nicht umgewandelt / transformiert werden. Dieses Koordinatensystem ist nützlich 
+beim Umwandeln von Werten zwischen dem Geräte- und dem aktuellen Zeichen-Koordinatensystem 
+mittels <a href="convertcoordinatex.html">ConvertCoordinateX()</a> und <a href="convertcoordinatey.html">ConvertCoordinateY()</a>. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_Output</font> 
+<blockquote>
+
+Dieses Koordinatensystem repräsentiert die anfänglichen Ausgabekoordinaten in der ausgewählten 
+Maßeinheit. Dieses Koordinatensystem entspricht dem <font color="#924B72">#PB_Coordinate_Device</font>, außer der möglichen 
+Skalierung (Größenänderung) durch eine abweichende Maßeinheit. Dieses Koordinatensystem kann 
+nicht umgewandelt / transformiert werden. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_User</font> 
+<blockquote>
+
+Dies ist das für alle Zeichenoperationen verwendete Koordinatensystem. Dieses Koordinatensystem 
+wird immer dann verwendet, wenn nicht ausdrücklich ein abweichendes System angegeben wird. 
+Es kann frei umgewandelt / transformiert werden. Anfänglich entspricht dieses Koordinatensystem 
+dem <font color="#924B72">#PB_Coordinate_Output</font> System und kann mittels <a href="resetcoordinates.html">ResetCoordinates()</a> darauf zurückgesetzt werden. 
+</blockquote>
+
+
+<font color="#924B72">#PB_Coordinate_Source</font> 
+<blockquote>
+
+Dieses Koordinatensystem wird von den Befehlen verwendet, welche die Vektorzeichnen-Quelle 
+auswählen. Es ist am nützlichsten mit dem <a href="vectorsourceimage.html">VectorSourceImage()</a> Befehl, um das verwendete 
+Quellbild umzuwandeln. Dieses Koordinatensystem ist relativ zum <font color="#924B72">#PB_Coordinate_User</font> System, 
+daher wirkt sich jede Transformation des <font color="#924B72">#PB_Coordinate_User</font> Systems auch auf dieses System 
+aus. 
+</blockquote>
+
+
+Für die meisten Anwendungszwecke ist <font color="#924B72">#PB_Coordinate_User</font> das interessanteste Koordinatensystem 
+und daher auch der Standard. Die anderen Systeme sind hauptsächlich nützlich für die 
+Koordinaten-Umwandlung oder für spezielle Zwecke wie das Umwandeln eines Quellbildes. 
+
+
+
+</blockquote><p><b>Beispiel:</b> Rotieren des Koordinatensystems</p><blockquote>
+
+<p><img src="../HelpPictures/rotatecoordinates.png"></p>
+
+</blockquote><p><b>Beispiel:</b> Kombinieren von Koordinaten-Transformationen (Übersetzen & Verzerren, englisch "translation & skew")</p><blockquote>
+
+<p><img src="../HelpPictures/transformcoordinates.png"></p>
+
+</blockquote>
+<p><b>Zeichenstatus und Layer (Schichten)</b></p><blockquote>
+
+Eine Anzahl an Eigenschaften der Zeichenausgabe wie die Koordinaten-Umwandlungen, das 
+Clipping oder die Zeichen-Quelle können gespeichert und später wiederhergestellt werden 
+mittels <a href="savevectorstate.html">SaveVectorState()</a> bzw. <a href="restorevectorstate.html">RestoreVectorState()</a>. Dies ermöglicht vorübergehende 
+Veränderungen an der Zeichenausgabe und das spätere Wiederherstellen des vorhergehenden 
+Status. Die Befehle arbeiten in einem Stack - daher ist es möglich, verschiedene 
+Zeichen-Status zu speichern/wieder herzustellen. 
+<br>
+<br>
+<a href="beginvectorlayer.html">BeginVectorLayer()</a> erlaubt das Speichern des aktuellen Zeichenstatus und das Konstruieren 
+einer neuen virtuellen Zeichenschicht (Layer). Künftige Zeichenoperationen werden auf diesen 
+Layer geleitet. Der Aufruf von <a href="endvectorlayer.html">EndVectorLayer()</a> wird den Layer mit der darunter liegenden Zeichenausgabe 
+kombinieren und den vorherigen Zeichenstatus wiederherstellen. Dies ermöglicht das Kombinieren 
+einer Anzahl an Zeichenoperationen, um diese dann als einen Layer (Schicht) auf die Ausgabe 
+anzuwenden. Mehrere temporäre Layer können auf diese Art und Weise erstellt werden. 
+
+</blockquote><p><b>Befehlsübersicht</b><blockquote>
+<a href="addpatharc.html">AddPathArc</a><br>
+<a href="addpathbox.html">AddPathBox</a><br>
+<a href="addpathcircle.html">AddPathCircle</a><br>
+<a href="addpathcurve.html">AddPathCurve</a><br>
+<a href="addpathellipse.html">AddPathEllipse</a><br>
+<a href="addpathline.html">AddPathLine</a><br>
+<a href="addpathsegments.html">AddPathSegments</a><br>
+<a href="addpathtext.html">AddPathText</a><br>
+<a href="beginvectorlayer.html">BeginVectorLayer</a><br>
+<a href="clippath.html">ClipPath</a><br>
+<a href="closepath.html">ClosePath</a><br>
+<a href="convertcoordinatex.html">ConvertCoordinateX</a><br>
+<a href="convertcoordinatey.html">ConvertCoordinateY</a><br>
+<a href="customdashpath.html">CustomDashPath</a><br>
+<a href="dashpath.html">DashPath</a><br>
+<a href="dotpath.html">DotPath</a><br>
+<a href="drawvectorimage.html">DrawVectorImage</a><br>
+<a href="drawvectorparagraph.html">DrawVectorParagraph</a><br>
+<a href="drawvectortext.html">DrawVectorText</a><br>
+<a href="endvectorlayer.html">EndVectorLayer</a><br>
+<a href="fillpath.html">FillPath</a><br>
+<a href="fillvectoroutput.html">FillVectorOutput</a><br>
+<a href="flipcoordinatesx.html">FlipCoordinatesX</a><br>
+<a href="flipcoordinatesy.html">FlipCoordinatesY</a><br>
+<a href="isinsidepath.html">IsInsidePath</a><br>
+<a href="isinsidestroke.html">IsInsideStroke</a><br>
+<a href="ispathempty.html">IsPathEmpty</a><br>
+<a href="movepathcursor.html">MovePathCursor</a><br>
+<a href="newvectorpage.html">NewVectorPage</a><br>
+<a href="pathboundsheight.html">PathBoundsHeight</a><br>
+<a href="pathboundswidth.html">PathBoundsWidth</a><br>
+<a href="pathboundsx.html">PathBoundsX</a><br>
+<a href="pathboundsy.html">PathBoundsY</a><br>
+<a href="pathcursorx.html">PathCursorX</a><br>
+<a href="pathcursory.html">PathCursorY</a><br>
+<a href="pathlength.html">PathLength</a><br>
+<a href="pathpointangle.html">PathPointAngle</a><br>
+<a href="pathpointx.html">PathPointX</a><br>
+<a href="pathpointy.html">PathPointY</a><br>
+<a href="pathsegments.html">PathSegments</a><br>
+<a href="pdfvectoroutput.html">PdfVectorOutput</a><br>
+<a href="resetcoordinates.html">ResetCoordinates</a><br>
+<a href="resetpath.html">ResetPath</a><br>
+<a href="restorevectorstate.html">RestoreVectorState</a><br>
+<a href="rotatecoordinates.html">RotateCoordinates</a><br>
+<a href="savevectorstate.html">SaveVectorState</a><br>
+<a href="scalecoordinates.html">ScaleCoordinates</a><br>
+<a href="skewcoordinates.html">SkewCoordinates</a><br>
+<a href="startvectordrawing.html">StartVectorDrawing</a><br>
+<a href="stopvectordrawing.html">StopVectorDrawing</a><br>
+<a href="strokepath.html">StrokePath</a><br>
+<a href="svgvectoroutput.html">SvgVectorOutput</a><br>
+<a href="translatecoordinates.html">TranslateCoordinates</a><br>
+<a href="vectorfont.html">VectorFont</a><br>
+<a href="vectoroutputheight.html">VectorOutputHeight</a><br>
+<a href="vectoroutputwidth.html">VectorOutputWidth</a><br>
+<a href="vectorparagraphheight.html">VectorParagraphHeight</a><br>
+<a href="vectorresolutionx.html">VectorResolutionX</a><br>
+<a href="vectorresolutiony.html">VectorResolutionY</a><br>
+<a href="vectorsourcecirculargradient.html">VectorSourceCircularGradient</a><br>
+<a href="vectorsourcecolor.html">VectorSourceColor</a><br>
+<a href="vectorsourcegradientcolor.html">VectorSourceGradientColor</a><br>
+<a href="vectorsourceimage.html">VectorSourceImage</a><br>
+<a href="vectorsourcelineargradient.html">VectorSourceLinearGradient</a><br>
+<a href="vectortextheight.html">VectorTextHeight</a><br>
+<a href="vectortextwidth.html">VectorTextWidth</a><br>
+<a href="vectorunit.html">VectorUnit</a><br>
+</blockquote></p>
+
+
+<p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=../reference/reference.html>Referenz-Handbuch - Inhaltsverzeichnis</a></center><br><br>
+
+</body></html>

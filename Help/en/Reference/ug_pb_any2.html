@@ -1,0 +1,825 @@
+<html><head><title>UserGuide - Managing multiple windows with different content</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Managing multiple windows with different content</font></b></p>
+
+In the <a href="../reference/ug_pb_any1.html">previous article</a> we examined one way in which a program 
+can support multiple instances of a single type of <a href="../window/index.html">window</a>. In this 
+one we are going to extend this concept further – developing a program that can support 
+multiple instances of several different types of window, in this case three: 
+<blockquote>
+
+- The Button window – contains a <a href="../gadget/listviewgadget.html">list view</a> and two 
+<a href="../gadget/buttongadget.html">buttons</a> labelled 'Add' and 'Remove'. When the 'Add' button 
+is clicked a <a href="../math/random.html">random</a> integer is added to the list view, when the 
+'Remove' button is clicked the currently highlighted entry in the list view is removed. 
+<br>
+- The Date window – contains a list view and two buttons in the same way as the Button 
+window but also contains a <a href="../gadget/calendargadget.html">calendar gadget</a> too, the 
+window layout is altered to accommodate this additional control. When the 'Add' button 
+is clicked, it is the currently selected date that is added to the list view. 
+- The Track window – contains two <a href="../gadget/trackbargadget.html">track bars</a>, with a 
+value between 0 and 100, and a <a href="../gadget/stringgadget.html">string gadget</a>. When the 
+track bars are moved the string gadget is updated with the value of the second track 
+bar subtracted from the first. 
+</blockquote>
+
+
+Each window contains a <a href="../menu/index.html">menu bar</a> with items to create a new instance 
+of any of the three supported window types or to close the current window. 
+<br>
+<br>
+Things to notice about this program are: 
+<br>
+<br>
+In the Structures section 4 <a href="../reference/structures.html">structures</a> are defined. The 
+first, BASEWINDOW, defines a WindowClass value and a Menu value – these values are 
+common to each window type. 
+<br>
+<br>
+The remaining structures extend the BASEWINDOW structure with values for each of the 
+unique controls that they require and which are not provided for by the BASEWINDOW structure. 
+<br>
+<br>
+In the <a href="../reference/variables.html">Variables</a> section note that again a <a href="../reference/newmap.html">map</a> 
+called ActiveWindows is created, however this time it is of integer type, it doesn’t use 
+any of the defined structures. There is a good reason for this, we need to store three 
+different structure types to make this program work – and we can’t do this in a single map. 
+<br>
+<br>
+Also notice that *EventGadgets is defined using the BASEWINDOW structure. 
+<br>
+<br>
+Now look at the CreateButtonWindow <a href="../reference/procedures.html">procedure</a>. As before we 
+use <a href="../reference/purebasic_objects.html">#PB_Any</a> to create the <a href="../window/index.html">window</a> 
+and all the <a href="../gadget/index.html">gadgets</a>. 
+<br>
+<br>
+However this time the results are not stored directly in the ActiveWindows map. Instead we 
+use the <a href="../memory/allocatememory.html">AllocateMemory</a> function to allocate memory for a 
+BUTTONWINDOW structure, we then store a <a href="../reference/memory.html">pointer</a> to this memory 
+allocation in the ActiveWindows map. This is how we get around the problem of not being 
+able to store all three of the different structures in the same map. 
+<br>
+<br>
+We also set the WindowClass value in the structure to #WindowClassButton to indicate which 
+type of window, and therefore which type of structure, has been created – we will need to 
+know this later on. 
+<br>
+<br>
+There are two more CreateWindow procedures this time – one for each class of the other 
+window types. They work in a similar way to that described, differing only where the 
+window’s gadgets are different and setting a different value in WindowClass. 
+<br>
+<br>
+Similarly we provide DestroyWindow and ResizeWindow procedures to take care of these functions. 
+<br>
+<br>
+We also provide a new procedure – EventsButtonWindow. This procedure knows what to do when 
+any of the gadgets on the window are activated by the user. Similar procedures are provided 
+for the other window types too. 
+<br>
+<br>
+In all these procedures we use the ActiveWindows map to retrieve the pointer to the memory 
+allocation. We can then use this pointer to retrieve the references to the actual controls 
+that we need to work with in each of these procedures: 
+<pre><font face="Courier New, Courier, mono" size="2">  *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+  *ThisData\ListView ...
+</font></pre>
+Each procedure only knows how to handle one type of window – so before we start work we 
+check the WindowClass value to make sure that a window of the correct type has been 
+supplied as the argument something like this: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassButton</font>
+</font></pre>
+The <a href="../window/waitwindowevent.html">event loop</a> is a bit different too. For each event 
+type there is a determination like this: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Use *EventGadgets\WindowClass to call the correct resize window procedure.</font>
+  <b><font color="#006666">Select</font></b> *EventGadgets\WindowClass ...
+</font></pre>
+Although the memory allocations actually made by the CreateWindow procedures will be of 
+the BUTTONWINDOW, DATEWINDOW or TRACKWINDOW type we can use *EventGadgets this way because 
+it is defined as the BASEWINDOW type and BASEWINDOW is the ancestor structure to the other 
+structures. 
+<br>
+<br>
+Providing we don’t attempt to change any of the stored values using *EventGadgets – and 
+we’ve no reason to do so – all should be well. 
+<br>
+<br>
+Finally, we dispatch the recorded event values in EventWindow, EventGadget, EventType 
+straight through to the event procedures and let them worry about getting the jobs done. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;- Constants</font>
+  <font color="#924B72">#DateFormat</font> = &quot;%dd/%mm/%yyyy&quot;
+  
+  <font color="#006666">;- Enumerations</font>
+  <b><font color="#006666">Enumeration</font></b> 
+    <font color="#924B72">#WindowClassButton</font> = 1
+    <font color="#924B72">#WindowClassDate</font>
+    <font color="#924B72">#WindowClassTrack</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; The menu commands will be the same on all the windows.</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#MenuNewButton</font>
+    <font color="#924B72">#MenuNewDate</font>
+    <font color="#924B72">#MenuNewTrack</font>
+    <font color="#924B72">#MenuClose</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">;- Structures</font>
+  <b><font color="#006666">Structure</font></b> BASEWINDOW
+    WindowClass.i 
+    Menu.i  
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Structure</font></b> BUTTONWINDOW <b><font color="#006666">Extends</font></b> BASEWINDOW
+    ListView.i
+    AddButton.i
+    RemoveButton.i  
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Structure</font></b> DATEWINDOW <b><font color="#006666">Extends</font></b> BASEWINDOW
+    Calendar.i
+    AddButton.i
+    RemoveButton.i
+    ListView.i
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Structure</font></b> TRACKWINDOW <b><font color="#006666">Extends</font></b> BASEWINDOW
+    TrackBar1.i
+    TrackBar2.i
+    Label.i
+    Difference.i
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <font color="#006666">;- Variables</font>
+  <font color="#006666">; This map will track all the active windows as before, however as the structure for each window class</font>
+  <font color="#006666">; differs we will be storing pointers to structures in the map not the gadget references directly.</font>
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">ActiveWindows</font>.i()
+  
+  <font color="#006666">; These values will be used to give new windows a unique label.</font>
+  <b><font color="#006666">Define</font></b>.i Buttons, Dates, Tracks
+  
+  <font color="#006666">; Event variables.</font>
+  <font color="#006666">; Notice the type of *EventGadgets.</font>
+  <b><font color="#006666">Define</font></b>.i Event, EventWindow, EventGadget, EventType, EventMenu, EventQuit
+  <b><font color="#006666">Define</font></b>.s EventWindowKey
+  <b><font color="#006666">Define</font></b> *EventGadgets.BASEWINDOW  
+  
+  <font color="#006666">;- Button Window</font>
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">CreateButtonWindow</font>()
+    <font color="#006666">; Creates a new Button window and adds it to the tracking map, </font>
+    <font color="#006666">; allocates memory for gadget references, creates the gadgets </font>
+    <font color="#006666">; and stores these references in the memory structure.</font>
+    <b><font color="#006666">Shared</font></b> Buttons,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.BUTTONWINDOW
+    <b><font color="#006666">Protected</font></b>.i ThisWindow
+    <b><font color="#006666">Protected</font></b>.s ThisKey, ThisTitle
+    
+    <font color="#006666">; Set the window caption.</font>
+    Buttons + 1
+    ThisTitle = &quot;Button Window &quot; +<font color="#006666"> StrU</font>(Buttons)
+    
+    <font color="#006666">; Open the window.</font>
+    ThisWindow =<font color="#006666"> OpenWindow</font>(<font color="#924B72">#PB_Any</font>, 30, 30, 225, 300, ThisTitle, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)
+    
+    <font color="#006666">; Check that the OpenWindow command worked.</font>
+    <b><font color="#006666">If</font></b> ThisWindow
+      <font color="#006666">; Set minimum window dimensions.</font>
+<font color="#006666">      WindowBounds</font>(ThisWindow, 220, 100, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+      
+      <font color="#006666">; Convert the window reference to a string to use as the map key value.</font>
+      ThisKey =<font color="#006666"> StrU</font>(ThisWindow)
+      
+      <font color="#006666">; Allocate memory to store the gadget references in.</font>
+      *ThisData =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(BUTTONWINDOW))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that the memory allocation worked.</font>
+    <b><font color="#006666">If</font></b> *ThisData
+      <font color="#006666">; Store the window reference and memory pointer values in the map.</font>
+<font color="#006666">      ActiveWindows</font>(ThisKey) = *ThisData
+      
+      <font color="#006666">; Set the window class.</font>
+      *ThisData\WindowClass = <font color="#924B72">#WindowClassButton</font>
+      
+      <font color="#006666">; Create the menu bar.</font>
+      *ThisData\Menu =<font color="#006666"> CreateMenu</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> WindowID</font>(ThisWindow))
+      
+      <font color="#006666">; If the menu creation worked, create the menu items.</font>
+      <b><font color="#006666">If</font></b> *ThisData\Menu
+<font color="#006666">        MenuTitle</font>(&quot;Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewButton</font>, &quot;New Button Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewDate</font>, &quot;New Date Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewTrack</font>, &quot;New Track Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuClose</font>, &quot;Close Window&quot;)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Create the window gadgets.</font>
+      *ThisData\ListView =<font color="#006666"> ListViewGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 10, 200, 225)
+      *ThisData\AddButton =<font color="#006666"> ButtonGadget</font>(<font color="#924B72">#PB_Any</font>, 15, 245, 90, 30, &quot;Add&quot;)
+      *ThisData\RemoveButton =<font color="#006666"> ButtonGadget</font>(<font color="#924B72">#PB_Any</font>, 115, 245, 90, 30, &quot;Remove&quot;)
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Memory allocation failed.</font>
+<font color="#006666">      CloseWindow</font>(ThisWindow)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the return value.</font>
+    <b><font color="#006666">If</font></b> ThisWindow &gt; 0 <b><font color="#006666">And</font></b> *ThisData &gt; 0
+      <font color="#006666">; Return the reference to the new window.</font>
+      <b><font color="#006666">ProcedureReturn</font></b> ThisWindow
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Return 0</font>
+      <b><font color="#006666">ProcedureReturn</font></b> 0
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">DestroyButtonWindow</font>(Window.i)
+    <font color="#006666">; Remove Window from the ActiveWindows map, release the allocated memory,</font>
+    <font color="#006666">; close the window and set the quit flag, if appropriate.</font>
+    <b><font color="#006666">Shared</font></b> EventQuit,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.BUTTONWINDOW
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassButton</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Release the memory allocation.</font>
+<font color="#006666">    FreeMemory</font>(*ThisData)
+    
+    <font color="#006666">; Delete the map entry.</font>
+<font color="#006666">    DeleteMapElement</font>(<font color="#006666">ActiveWindows</font>(), ThisKey)
+    
+    <font color="#006666">; Close the window.</font>
+<font color="#006666">    CloseWindow</font>(Window)
+    
+    <font color="#006666">; Check if there are still open windows.</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">MapSize</font>(<font color="#006666">ActiveWindows</font>()) = 0
+      EventQuit = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the successful return value.</font>
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">ResizeButtonWindow</font>(Window.i)
+    <font color="#006666">; Resize the child gadgets on Window.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.BUTTONWINDOW
+    <b><font color="#006666">Protected</font></b>.i X, Y, W, H
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassButton</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Resize list view.</font>
+    W =<font color="#006666"> WindowWidth</font>(Window) - 25
+    H =<font color="#006666"> WindowHeight</font>(Window) - 85
+<font color="#006666">    ResizeGadget</font>(*ThisData\ListView, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, H)
+    
+    <font color="#006666">; Recenter buttons.</font>
+    X =<font color="#006666"> WindowWidth</font>(Window)/2 - 95
+    Y =<font color="#006666"> WindowHeight</font>(Window) - 65
+<font color="#006666">    ResizeGadget</font>(*ThisData\AddButton, X, Y, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+    
+    X =<font color="#006666"> WindowWidth</font>(Window)/2 + 5
+<font color="#006666">    ResizeGadget</font>(*ThisData\RemoveButton, X, Y, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+    
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">EventsButtonWindow</font>(Window, Gadget, Type)
+    <font color="#006666">; Handle events for a button window.</font>
+    <b><font color="#006666">Shared</font></b> Buttons,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.BUTTONWINDOW
+    <b><font color="#006666">Protected</font></b>.i NewValue, Index
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassButton</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Select</font></b> Gadget
+      <b><font color="#006666">Case</font></b> *ThisData\AddButton
+        NewValue =<font color="#006666"> Random</font>(2147483647)
+<font color="#006666">        AddGadgetItem</font>(*ThisData\ListView, -1,<font color="#006666"> StrU</font>(NewValue))
+        
+      <b><font color="#006666">Case</font></b> *ThisData\RemoveButton
+        Index =<font color="#006666"> GetGadgetState</font>(*ThisData\ListView)
+        <b><font color="#006666">If</font></b> Index &gt;= 0 <b><font color="#006666">And</font></b> Index &lt;=<font color="#006666"> CountGadgetItems</font>(*ThisData\ListView)
+<font color="#006666">          RemoveGadgetItem</font>(*ThisData\ListView, Index)
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> *ThisData\ListView
+        <font color="#006666">; Do nothing.</font>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Date Window</font>
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">CreateDateWindow</font>()
+    <font color="#006666">; Creates a new Date window and adds it to the tracking map, </font>
+    <font color="#006666">; allocates memory for gadget references, creates the gadgets </font>
+    <font color="#006666">; and stores these references in the memory Structure.</font>
+    <b><font color="#006666">Shared</font></b> Dates,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.DATEWINDOW
+    <b><font color="#006666">Protected</font></b>.i ThisWindow
+    <b><font color="#006666">Protected</font></b>.s ThisKey, ThisTitle
+    
+    Dates + 1
+    ThisTitle = &quot;Date Window &quot; +<font color="#006666"> StrU</font>(Dates)
+    ThisWindow =<font color="#006666"> OpenWindow</font>(<font color="#924B72">#PB_Any</font>, 30, 30, 310, 420, ThisTitle , <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)
+    
+    <font color="#006666">; Check that the OpenWindow command worked.</font>
+    <b><font color="#006666">If</font></b> ThisWindow
+      <font color="#006666">; Set minimum window dimensions.</font>
+<font color="#006666">      WindowBounds</font>(ThisWindow, 310, 245, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+      
+      <font color="#006666">; Convert the window reference to a string to use as the map key value.</font>
+      ThisKey =<font color="#006666"> StrU</font>(ThisWindow)
+      
+      <font color="#006666">; Allocate memory to store the gadget references in.</font>
+      *ThisData =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(DATEWINDOW))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that the memory allocation worked.</font>
+    <b><font color="#006666">If</font></b> *ThisData
+      <font color="#006666">; Store the window reference and memory pointer values in the map.</font>
+<font color="#006666">      ActiveWindows</font>(ThisKey) = *ThisData
+      
+      <font color="#006666">; Set the window class.</font>
+      *ThisData\WindowClass = <font color="#924B72">#WindowClassDate</font>
+      
+      <font color="#006666">; Create the menu bar.</font>
+      *ThisData\Menu =<font color="#006666"> CreateMenu</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> WindowID</font>(ThisWindow))
+      
+      <font color="#006666">; If the menu creation worked, create the menu items.</font>
+      <b><font color="#006666">If</font></b> *ThisData\Menu
+<font color="#006666">        MenuTitle</font>(&quot;Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewButton</font>, &quot;New Button Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewDate</font>, &quot;New Date Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewTrack</font>, &quot;New Track Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuClose</font>, &quot;Close Window&quot;)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Create the window gadgets.</font>
+      *ThisData\Calendar =<font color="#006666"> CalendarGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 10, 182, 162)
+      *ThisData\AddButton =<font color="#006666"> ButtonGadget</font>(<font color="#924B72">#PB_Any</font>, 210, 10, 90, 30, &quot;Add&quot;)
+      *ThisData\RemoveButton =<font color="#006666"> ButtonGadget</font>(<font color="#924B72">#PB_Any</font>, 210, 45, 90, 30, &quot;Remove&quot;)
+      *ThisData\ListView =<font color="#006666"> ListViewGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 187, 290, 200)
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Memory allocation failed.</font>
+<font color="#006666">      CloseWindow</font>(ThisWindow)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the return value.</font>
+    <b><font color="#006666">If</font></b> ThisWindow &gt; 0 <b><font color="#006666">And</font></b> *ThisData &gt; 0 
+      <font color="#006666">; Return the reference to the new window.</font>
+      <b><font color="#006666">ProcedureReturn</font></b> ThisWindow
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Return 0</font>
+      <b><font color="#006666">ProcedureReturn</font></b> 0
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">DestroyDateWindow</font>(Window.i)
+    <font color="#006666">; Remove Window from the ActiveWindows map, release the allocated memory,</font>
+    <font color="#006666">; close the window and set the quit flag, if appropriate.</font>
+    <b><font color="#006666">Shared</font></b> EventQuit,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.DATEWINDOW
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop as this procedure can't destroy this window.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassDate</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Release the memory allocation.</font>
+<font color="#006666">    FreeMemory</font>(*ThisData)
+    
+    <font color="#006666">; Delete the map entry.</font>
+<font color="#006666">    DeleteMapElement</font>(<font color="#006666">ActiveWindows</font>(), ThisKey)
+    
+    <font color="#006666">; Close the window.</font>
+<font color="#006666">    CloseWindow</font>(Window)
+    
+    <font color="#006666">; Check if there are still open windows.</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">MapSize</font>(<font color="#006666">ActiveWindows</font>()) = 0
+      EventQuit = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the successful return value.</font>
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">ResizeDateWindow</font>(Window.i)
+    <font color="#006666">; Resize the child gadgets on Window.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.DATEWINDOW
+    <b><font color="#006666">Protected</font></b>.i X, Y, W, H
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassDate</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Resize list view.</font>
+    W =<font color="#006666"> WindowWidth</font>(Window) - 20
+    H =<font color="#006666"> WindowHeight</font>(Window) - 220
+<font color="#006666">    ResizeGadget</font>(*ThisData\ListView, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, H)
+    
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">EventsDateWindow</font>(Window, Gadget, Type)
+    <font color="#006666">; Handle events for a Date window.</font>
+    <b><font color="#006666">Shared</font></b> Buttons,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.DATEWINDOW
+    <b><font color="#006666">Protected</font></b>.i NewValue, Index
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassDate</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Select</font></b> Gadget
+      <b><font color="#006666">Case</font></b> *ThisData\AddButton
+        NewValue =<font color="#006666"> GetGadgetState</font>(*ThisData\Calendar)
+<font color="#006666">        AddGadgetItem</font>(*ThisData\ListView, -1,<font color="#006666"> FormatDate</font>(<font color="#924B72">#DateFormat</font>, NewValue))
+        
+      <b><font color="#006666">Case</font></b> *ThisData\RemoveButton
+        Index =<font color="#006666"> GetGadgetState</font>(*ThisData\ListView)
+        <b><font color="#006666">If</font></b> Index &gt;= 0 <b><font color="#006666">And</font></b> Index &lt;=<font color="#006666"> CountGadgetItems</font>(*ThisData\ListView)
+<font color="#006666">          RemoveGadgetItem</font>(*ThisData\ListView, Index)
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> *ThisData\Calendar, *ThisData\ListView
+        <font color="#006666">; Do nothing.</font>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Track Window</font>
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">CreateTrackWindow</font>()
+    <font color="#006666">; Creates a new Track window and adds it to the tracking map, </font>
+    <font color="#006666">; allocates memory for gadget references, creates the gadgets </font>
+    <font color="#006666">; and stores these references in the memory Structure.</font>
+    <b><font color="#006666">Shared</font></b> Tracks,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.TRACKWINDOW
+    <b><font color="#006666">Protected</font></b>.i ThisWindow, ThisSum
+    <b><font color="#006666">Protected</font></b>.s ThisKey, ThisTitle
+    
+    Tracks + 1
+    ThisTitle = &quot;Track Bar Window &quot; +<font color="#006666"> StrU</font>(Tracks)
+    ThisWindow =<font color="#006666"> OpenWindow</font>(<font color="#924B72">#PB_Any</font>, 30, 30, 398, 130, ThisTitle, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)
+    
+    <font color="#006666">; Check that the OpenWindow command worked.</font>
+    <b><font color="#006666">If</font></b> ThisWindow
+      <font color="#006666">; Set minimum window dimensions.</font>
+<font color="#006666">      WindowBounds</font>(ThisWindow, 135, 130, <font color="#924B72">#PB_Ignore</font>, 130)
+      
+      <font color="#006666">; Convert the window reference to a string to use as the map key value.</font>
+      ThisKey =<font color="#006666"> StrU</font>(ThisWindow)
+      
+      <font color="#006666">; Allocate memory to store the gadget references in.</font>
+      *ThisData =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(TRACKWINDOW))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that the memory allocation worked.</font>
+    <b><font color="#006666">If</font></b> *ThisData
+      <font color="#006666">; Store the window reference and memory pointer values in the map.</font>
+<font color="#006666">      ActiveWindows</font>(ThisKey) = *ThisData
+      
+      <font color="#006666">; Set the window class.</font>
+      *ThisData\WindowClass = <font color="#924B72">#WindowClassTrack</font>
+      
+      <font color="#006666">; Create the menu bar.</font>
+      *ThisData\Menu =<font color="#006666"> CreateMenu</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> WindowID</font>(ThisWindow))
+      
+      <font color="#006666">; If the menu creation worked, create the menu items.</font>
+      <b><font color="#006666">If</font></b> *ThisData\Menu
+<font color="#006666">        MenuTitle</font>(&quot;Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewButton</font>, &quot;New Button Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewDate</font>, &quot;New Date Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuNewTrack</font>, &quot;New Track Window&quot;)
+<font color="#006666">        MenuItem</font>(<font color="#924B72">#MenuClose</font>, &quot;Close Window&quot;)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Create the window gadgets.</font>
+      *ThisData\TrackBar1 =<font color="#006666"> TrackBarGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 10, 375, 25, 0, 100, <font color="#924B72">#PB_TrackBar_Ticks</font>)
+      *ThisData\TrackBar2 =<font color="#006666"> TrackBarGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 40, 375, 25, 0, 100, <font color="#924B72">#PB_TrackBar_Ticks</font>)
+      *ThisData\Label =<font color="#006666"> TextGadget</font>(<font color="#924B72">#PB_Any</font>, 10, 75, 80, 25, &quot;Difference:&quot;)
+      *ThisData\Difference =<font color="#006666"> StringGadget</font>(<font color="#924B72">#PB_Any</font>, 90, 75, 290, 25, &quot;0&quot;, <font color="#924B72">#PB_String_ReadOnly</font>)
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Memory allocation failed.</font>
+<font color="#006666">      CloseWindow</font>(ThisWindow)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the return value.</font>
+    <b><font color="#006666">If</font></b> ThisWindow &gt; 0 <b><font color="#006666">And</font></b> *ThisData &gt; 0
+      <font color="#006666">; Return the reference to the new window.</font>
+      <b><font color="#006666">ProcedureReturn</font></b> ThisWindow
+    <b><font color="#006666">Else</font></b>
+      <font color="#006666">; Return 0</font>
+      <b><font color="#006666">ProcedureReturn</font></b> 0
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">DestroyTrackWindow</font>(Window.i)
+    <font color="#006666">; Remove Window from the ActiveWindows map, release the allocated memory,</font>
+    <font color="#006666">; close the window and set the quit flag, if appropriate.</font>
+    <b><font color="#006666">Shared</font></b> EventQuit,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.DATEWINDOW
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop as this procedure can't destroy this window.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassTrack</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Release the memory allocation.</font>
+<font color="#006666">    FreeMemory</font>(*ThisData)
+    
+    <font color="#006666">; Delete the map entry.</font>
+<font color="#006666">    DeleteMapElement</font>(<font color="#006666">ActiveWindows</font>(), ThisKey)
+    
+    <font color="#006666">; Close the window.</font>
+<font color="#006666">    CloseWindow</font>(Window)
+    
+    <font color="#006666">; Check if there are still open windows.</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">MapSize</font>(<font color="#006666">ActiveWindows</font>()) = 0
+      EventQuit = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Set the successful return value.</font>
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">ResizeTrackWindow</font>(Window.i)
+    <font color="#006666">; Resize the child gadgets on Window.</font>
+    <b><font color="#006666">Shared</font></b> <font color="#006666">ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.TRACKWINDOW
+    <b><font color="#006666">Protected</font></b>.i X, Y, W, H
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassTrack</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Resize track bars.</font>
+    W =<font color="#006666"> WindowWidth</font>(Window) - 20
+<font color="#006666">    ResizeGadget</font>(*ThisData\TrackBar1, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, <font color="#924B72">#PB_Ignore</font>)
+<font color="#006666">    ResizeGadget</font>(*ThisData\TrackBar2, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, <font color="#924B72">#PB_Ignore</font>)
+    
+    <font color="#006666">; Resize string.</font>
+    W =<font color="#006666"> WindowWidth</font>(Window) - 110
+<font color="#006666">    ResizeGadget</font>(*ThisData\Difference, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, <font color="#924B72">#PB_Ignore</font>)
+    
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b>.i <font color="#006666">EventsTrackWindow</font>(Window, Gadget, Type)
+    <font color="#006666">; Handle events for a Track window.</font>
+    <b><font color="#006666">Shared</font></b> Buttons,<font color="#006666"> ActiveWindows</font>()
+    <b><font color="#006666">Protected</font></b> *ThisData.TRACKWINDOW
+    <b><font color="#006666">Protected</font></b>.i NewValue
+    <b><font color="#006666">Protected</font></b>.s ThisKey
+    
+    <font color="#006666">; Convert the integer Window to a string.</font>
+    ThisKey =<font color="#006666"> StrU</font>(Window)
+    
+    <font color="#006666">; Obtain the reference structure pointer.</font>
+    *ThisData =<font color="#006666"> ActiveWindows</font>(ThisKey)
+    
+    <font color="#006666">; Check that a valid pointer was obtained, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData = 0
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Check that it is the correct window type, if not stop.</font>
+    <b><font color="#006666">If</font></b> *ThisData\WindowClass &lt;&gt; <font color="#924B72">#WindowClassTrack</font>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#False</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Select</font></b> Gadget
+      <b><font color="#006666">Case</font></b> *ThisData\TrackBar1, *ThisData\TrackBar2
+        NewValue =<font color="#006666"> GetGadgetState</font>(*ThisData\TrackBar1) -<font color="#006666"> GetGadgetState</font>(*ThisData\TrackBar2)
+<font color="#006666">        SetGadgetText</font>(*ThisData\Difference,<font color="#006666"> Str</font>(NewValue))
+        
+      <b><font color="#006666">Case</font></b> *ThisData\Label, *ThisData\Difference
+        <font color="#006666">; Do nothing.</font>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Main</font>
+  
+  <font color="#006666">; Create the first window.</font>
+  EventWindow =<font color="#006666"> CreateButtonWindow</font>()
+<font color="#006666">  ResizeButtonWindow</font>(EventWindow)
+  
+  <font color="#006666">;- Event loop</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    EventWindow =<font color="#006666"> EventWindow</font>()
+    EventWindowKey =<font color="#006666"> StrU</font>(EventWindow)
+    EventGadget =<font color="#006666"> EventGadget</font>()
+    EventType =<font color="#006666"> EventType</font>()
+    EventMenu =<font color="#006666"> EventMenu</font>()
+    *EventGadgets =<font color="#006666"> ActiveWindows</font>(EventWindowKey)
+    
+    <b><font color="#006666">Select</font></b> Event
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <font color="#006666">; Check that a valid pointer was obtained.</font>
+        <b><font color="#006666">If</font></b> *EventGadgets &gt; 0
+          <font color="#006666">; Use *EventGadgets\WindowClass to dispatch events to the correct event procedure.</font>
+          <b><font color="#006666">Select</font></b> *EventGadgets\WindowClass
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassButton</font>
+<font color="#006666">              EventsButtonWindow</font>(EventWindow, EventGadget, EventType)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassDate</font>
+<font color="#006666">              EventsDateWindow</font>(EventWindow, EventGadget, EventType)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassTrack</font>
+<font color="#006666">              EventsTrackWindow</font>(EventWindow, EventGadget, EventType)
+              
+            <b><font color="#006666">Default</font></b>
+              <font color="#006666">; Do nothing</font>
+          <b><font color="#006666">EndSelect</font></b>
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+        <b><font color="#006666">Select</font></b> EventMenu
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MenuNewButton</font>
+            EventWindow =<font color="#006666"> CreateButtonWindow</font>()
+            <b><font color="#006666">If</font></b> EventWindow &gt; 0
+<font color="#006666">              ResizeButtonWindow</font>(EventWindow)
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MenuNewDate</font>
+            EventWindow =<font color="#006666"> CreateDateWindow</font>()
+            <b><font color="#006666">If</font></b> EventWindow &gt; 0
+<font color="#006666">              ResizeDateWindow</font>(EventWindow)
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MenuNewTrack</font>
+            EventWindow =<font color="#006666"> CreateTrackWindow</font>()
+            <b><font color="#006666">If</font></b> EventWindow &gt; 0
+<font color="#006666">              ResizeTrackWindow</font>(EventWindow)
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#MenuClose</font>
+            <font color="#006666">; Check that a valid pointer was obtained.</font>
+            <b><font color="#006666">If</font></b> *EventGadgets &gt; 0
+              <font color="#006666">; Use *EventGadgets\WindowClass to call the correct destroy window procedure.    </font>
+              <b><font color="#006666">Select</font></b> *EventGadgets\WindowClass
+                <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassButton</font>
+<font color="#006666">                  DestroyButtonWindow</font>(EventWindow)
+                  
+                <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassDate</font>
+<font color="#006666">                  DestroyDateWindow</font>(EventWindow)
+                  
+                <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassTrack</font>
+<font color="#006666">                  DestroyTrackWindow</font>(EventWindow)
+                  
+                <b><font color="#006666">Default</font></b>
+                  <font color="#006666">; Do nothing</font>
+              <b><font color="#006666">EndSelect</font></b>
+            <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndSelect</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <font color="#006666">; Check that a valid pointer was obtained.</font>
+        <b><font color="#006666">If</font></b> *EventGadgets &gt; 0
+          <font color="#006666">; Use *EventGadgets\WindowClass to call the correct destroy window procedure.</font>
+          <b><font color="#006666">Select</font></b> *EventGadgets\WindowClass
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassButton</font>
+<font color="#006666">              DestroyButtonWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassDate</font>
+<font color="#006666">              DestroyDateWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassTrack</font>
+<font color="#006666">              DestroyTrackWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Default</font></b>
+              <font color="#006666">; Do nothing</font>
+          <b><font color="#006666">EndSelect</font></b>
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_SizeWindow</font>     
+        <b><font color="#006666">If</font></b> *EventGadgets &gt; 0
+          <font color="#006666">; Use *EventGadgets\WindowClass to call the correct resize window procedure.</font>
+          <b><font color="#006666">Select</font></b> *EventGadgets\WindowClass
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassButton</font>
+<font color="#006666">              ResizeButtonWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassDate</font>
+<font color="#006666">              ResizeDateWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Case</font></b> <font color="#924B72">#WindowClassTrack</font>
+<font color="#006666">              ResizeTrackWindow</font>(EventWindow)
+              
+            <b><font color="#006666">Default</font></b>
+              <font color="#006666">; Do nothing</font>
+          <b><font color="#006666">EndSelect</font></b>
+        <b><font color="#006666">EndIf</font></b>
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> EventQuit = <font color="#924B72">#True</font>
+</font></pre>
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_pb_any1.html">< Previous: Dynamic numbering of windows and gadgets</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_keywords.html">Next: Other Compiler keywords ></a> 
+</blockquote>
+</font></body></html>

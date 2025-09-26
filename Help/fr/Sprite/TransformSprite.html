@@ -1,0 +1,126 @@
+<html><head><title>TransformSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TransformSprite()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>TransformSprite</b></font>(#Sprite, X1, Y1, [z1], X2, Y2, [Z2], X3, Y3, [Z3], X4, Y4, [Z4])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Déforme un Sprite. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le sprite à déformer. 
+
+</td></tr>
+<tr><td><i>X1, Y1</i></td>
+<td> 
+Coordonnées du premier point, en pixel. 
+
+</td></tr>
+<tr><td><i>X2, Y2</i></td>
+<td> 
+Coordonnées du deuxième point, en pixel. 
+
+</td></tr>
+<tr><td><i>X3, Y3</i></td>
+<td> 
+Coordonnées du troisième point, en pixel. 
+
+</td></tr>
+<tr><td><i>X4, Y4</i></td>
+<td> 
+Coordonnées du quatrième point, en pixel. 
+
+</td></tr>
+<tr><td><i>Z1, Z2, Z3, Z4 (optionnel)</i></td>
+<td> 
+La coordonnée profondeur (en 'Z'), 
+en pixel. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Généralement utilisé pour effectuer des 
+transformations en temps réel. 
+Attention, comme un Sprite est composé 
+de 2 vertex (2 triangles), la 
+transformation peut donner un résultat 
+très étrange... 
+<br>
+<br>
+Si l'un des paramètres optionnels 'Z' 
+est spécifié, tous doivent être précisés. 
+
+<pre><font face="Courier New, Courier, mono" size="2">
+  ;
+  ; X1         X2
+  ;   ---------
+  ;   |      /|
+  ;   |    /  |
+  ;   |  /    |
+  ;   |/      |
+  ;   ---------
+  ; x4         x3
+  ;
+
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+
+ <font color="#006666">;Sprite Cible0</font>
+<font color="#006666">CreateSprite</font>(0,100,100)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">Circle</font>(50,50,49,<font color="#006666">RGB</font>(255,255,0))
+<font color="#006666">Circle</font>(50,50,40,<font color="#006666">RGB</font>(0,255,0))
+<font color="#006666">Circle</font>(50,50,30,<font color="#006666">RGB</font>(0,255,255))
+<font color="#006666">Circle</font>(50,50,20,<font color="#006666">RGB</font>(0,0,255))
+<font color="#006666">Circle</font>(50,50,10,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Sprite Cible1</font>
+<font color="#006666">CopySprite</font>(0, 1)
+
+ <font color="#006666">;Boucle</font>
+<b><font color="#006666">For</font></b> i=-100 <b><font color="#006666">To</font></b> 100
+  <font color="#006666">;Afficher Cible0 et Cible1</font>
+<font color="#006666">  DisplaySprite</font>(0, 200, 160)
+<font color="#006666">  DisplaySprite</font>(1, 500, 160)
+  
+  <font color="#006666">;Déformation de Cible0 et Cible1</font>
+<font color="#006666">  TransformSprite</font>(0,i,i,100,0,100-i,100-i,0,100)
+<font color="#006666">  TransformSprite</font>(1,0,0,100-i,0+i,100-i,100-i,0,100)
+  
+  <font color="#006666">;Affichage à l'écran  </font>
+<font color="#006666">  FlipBuffers</font>()
+  
+  <font color="#006666">;Effacer le buffer</font>
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+  
+  <font color="#006666">;Attendre 100 msecondes</font>
+<font color="#006666">  Delay</font>(100)
+  
+<b><font color="#006666">Next</font></b> i   
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="zoomsprite.html">ZoomSprite()</a>, <a href="rotatesprite.html">RotateSprite()</a> 
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=spritewidth.html>SpriteWidth()</a> - <a href=index.html>Sprite Index</a> - <a href=transparentspritecolor.html>TransparentSpriteColor()</a> -><br><br>
+
+</body></html>

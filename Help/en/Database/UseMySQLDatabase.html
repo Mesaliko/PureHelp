@@ -1,0 +1,71 @@
+<html><head><title>UseMySQLDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseMySQLDatabase()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>UseMySQLDatabase</b></font>([LibraryName$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialize the MySQL and MariaDB database environment for future use. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>LibraryName$ (optional)</i></td>
+<td width="90%"> 
+Filename (and path if needed) of the dynamic library to use. As most Linux distribution ship with packaged libmysql.so, 
+it can be set to the correct name, so the libmaria.so doesn't have to be package with the executable. If this parameter is not specified, 
+'libmariadb.dll' (Windows), 'libmariadb.so' (Linux) or 'libmariadb.dylib' (OSX) will be used. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns <font color="#924B72">#True</font> if the MySQL environment is successfully initialized, otherwise returns <font color="#924B72">#False</font>. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+MySQL and MariaDB (an opensource fork of MySQL) are powerful, server based database 
+managers which support very large database and high concurrency. PureBasic uses opensource 
+MariaDB library to connect MySQL and MariaDB databases seamlessly, which can be used in commercial 
+application without additional licenses. When shipping your PureBasic program, you will need to add 
+'libmariadb.dll' (Windows), 'libmariadb.so' (Linux) or 'libmariadb.dylib' (OSX) found in the 
+'PureBasic/Compilers' directory to your package. 
+<br>
+<br>
+There is no additional driver to install, all is ready to connect a MySQL or MariaDB server. For more information 
+about MariaDB: <a href="https://mariadb.org/">https://mariadb.org/</a>. 
+<br>
+<br>
+A MySQL or MariaDB database has to be connected using <a href="opendatabase.html">OpenDatabase()</a> before using any other database functions. 
+MySQL specific parameters have to be passed in the 'DatabaseName$' parameter of <a href="opendatabase.html">OpenDatabase()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  - host: Name of host or IP address to connect to.
+  - port: Port number to connect to at the server host.
+  - dbname: The database name. The name can be surrounded with single quotes if it contains spaces: dbname='movies and musics'.
+
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMySQLDatabase</font>()
+
+  <font color="#006666">; You should have a server running on localhost</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, &quot;host=localhost port=3306 dbname='test'&quot;, &quot;user&quot;, &quot;password&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Connected to MySQL&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Connection failed: &quot;+<font color="#006666">DatabaseError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, <a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setdatabasestring.html>SetDatabaseString()</a> - <a href=index.html>Database Index</a> - <a href=useodbcdatabase.html>UseODBCDatabase()</a> -><br><br>
+
+</body></html>

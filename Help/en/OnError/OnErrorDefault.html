@@ -1,0 +1,46 @@
+<html><head><title>OnErrorDefault</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorDefault()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorDefault</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the action taken when an error occurs back to the system default. This usually means displaying 
+an error dialog and exiting the program, but it may also mean to just ignore certain errors. To exit 
+the program on every error, use <a href="onerrorexit.html">OnErrorExit()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+When using the OnError library inside a <a href="../reference/dll.html">DLL</a> the best practice is to set the error handler 
+at the beginning of every public DLL function and resetting it back to the default with this command 
+before returning to the caller to make sure there is no interference between the OnError library and 
+any exception handling done by the calling program. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+<font color="#006666">    MessageRequester</font>(&quot;OnError test&quot;, &quot;The following error happened: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;Test start&quot;)
+
+<font color="#006666">  OnErrorCall</font>(@ErrorHandler())
+<font color="#006666">  OnErrorDefault</font>()         <font color="#006666">; Comment this to get the handler call instead of the system error handling</font>
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; Cause a #PB_OnError_InvalidMemory error</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;This should never be displayed&quot;)
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=onerrorcall.html>OnErrorCall()</a> - <a href=index.html>OnError Index</a> - <a href=onerrorexit.html>OnErrorExit()</a> -><br><br>
+
+</body></html>

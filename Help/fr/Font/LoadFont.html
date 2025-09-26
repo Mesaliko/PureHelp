@@ -1,0 +1,96 @@
+<html><head><title>LoadFont</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadFont()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>LoadFont</b></font>(#Police, NomPolice$, Taille [, Options]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Charge une police de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Police</i></td>
+<td width="90%"> 
+Le numéro de la police. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisés pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>NomPolice$</i></td>
+<td> 
+Le nom de la police. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+Taille de la police. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Font_Bold</font>       : La police de caractères sera en gras
+  <font color="#924B72">#PB_Font_Italic</font>     : La police de caractères sera en italique
+  <font color="#924B72">#PB_Font_Underline</font>  : La police de caractères sera soulignée (Windows seulement)
+  <font color="#924B72">#PB_Font_StrikeOut</font>  : La police de caractères sera barrée (Windows seulement)
+  <font color="#924B72">#PB_Font_HighQuality</font>: La police de caractères sera en qualité supérieure (plus lent)(Windows seulement)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si une autre police de caractères était 
+déjà chargé avec le même numéro #Police, 
+elle sera  automatiquement fermée lors du 
+chargement de la nouvelle. 
+<br>
+<br>
+Sous Windows et MacOS, le gestionnaire de police de 
+caractères essaiera toujours de trouver une 
+police équivalente à celle demandée, si 
+cette dernière n'est pas disponible. Par 
+exemple, si vous essayez de charger la 
+police &quot;Tim Now Ronin&quot; et qu'elle n'existe 
+pas, une autre police sera chargée 
+automatiquement, en fonction de sa taille, 
+du style etc. Il est donc peu probable que 
+cette commande échoue. 
+<br>
+<br>
+Sous Windows et MacOS, vous pouvez changer la taille et le style de la police système de l'application sans 
+indiquer son nom: LoadFont(1, &quot;&quot;, 24) 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 160, &quot;Chargement police...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)  
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadFont</font>(1, &quot;Arial&quot;, 24) 
+<font color="#006666">      SetGadgetFont</font>(<font color="#924B72">#PB_Default</font>,<font color="#006666"> FontID</font>(1)) 
+<font color="#006666">      TextGadget</font>(0, 10, 10, 250, 40, &quot;Arial 24&quot;) 
+    <b><font color="#006666">EndIf</font></b> 
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b> 
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freefont.html">FreeFont()</a>, <a href="fontid.html">FontID()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isfont.html>IsFont()</a> - <a href=index.html>Font Index</a> - <a href=registerfontfile.html>RegisterFontFile()</a> -><br><br>
+
+</body></html>

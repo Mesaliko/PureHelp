@@ -1,0 +1,63 @@
+<html><head><title>RenameFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RenameFile()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>RenameFile</b></font>(AncienNom$, NouveauNom$) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renomme ou déplace un fichier.<br>
+Renomme un dossier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>AncienNom$</i></td>
+<td width="90%"> 
+L'ancien nom du fichier. 
+
+</td></tr>
+<tr><td><i>NouveauNom$</i></td>
+<td> 
+Le nouveau nom du fichier. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, 
+zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Comme il n'est pas nécessaire que l'ancien et 
+le nouveau nom de fichier soient dans le même 
+répertoire, cette fonction peut donc être 
+utilisée pour déplacer un fichier d'un 
+répertoire vers un autre ou même d'un lecteur 
+vers un autre. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  RenameFile</font>(&quot;C:\Temp\Test.txt&quot;, &quot;C:\Temp\TestNew.txt&quot;)    <font color="#006666">; Renomme le fichier Test.txt du répertoire Temp</font>
+<font color="#006666">  RenameFile</font>(&quot;C:\Temp\&quot;, &quot;C:\TempNew\&quot;)                    <font color="#006666">; Renomme le répertoire Temp en TempNew</font>
+
+  <b><font color="#006666">If</font></b> <font color="#006666">RenameFile</font>(&quot;C:\test.txt&quot;, &quot;D:\temp\test_backup.txt&quot;)   
+    <b><font color="#006666">Debug</font></b> &quot;Fichier déplacé et renommé avec succès.&quot;     
+  <b><font color="#006666">Else</font></b> 
+    <b><font color="#006666">Debug</font></b> &quot;Echec, le fichier ne peut pas être renommé et déplacé.&quot; <font color="#006666">; Echec si par exemple le fichier (ou le disque) n'existe pas.</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="copyfile.html">CopyFile()</a>, <a href="deletefile.html">DeleteFile()</a>, <a href="../file/createfile.html">CreateFile()</a>, 
+<a href="copydirectory.html">CopyDirectory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextdirectoryentry.html>NextDirectoryEntry()</a> - <a href=index.html>FileSystem Index</a> - <a href=setcurrentdirectory.html>SetCurrentDirectory()</a> -><br><br>
+
+</body></html>

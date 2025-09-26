@@ -1,0 +1,42 @@
+<html><head><title>ReadCGI</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadCGI()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReadCGI</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Liest die CGI-Anforderungseingabe (englisch &quot;CGI request input&quot;). <a href="initcgi.html">InitCGI()</a> muss erfolgreich 
+aufgerufen werden, bevor versucht wird, die CGI-Eingabe zu lesen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die CGI-Anforderung erfolgreich gelesen wurde. 
+Wenn die Anforderung (&quot;request&quot;) zu groß war oder ein anderer Fehler auftrat, wird Null 
+zurückgegeben und das CGI-Programm sollte beendet werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Schreibt die Header, um den Browser über das Inhaltsformat zu informieren</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - variables&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;Hello from PureBasic CGI !&quot; +
+                 &quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="initcgi.html">InitCGI()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=initfastcgi.html>InitFastCGI()</a> - <a href=index.html>CGI Inhaltsverzeichnis</a> - <a href=waitfastcgirequest.html>WaitFastCGIRequest()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html><head><title>Chr</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Chr()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>Chr</b></font>(ZeichenWert)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt einen String zurück, der aus dem angegebenen Zeichenwert erstellt wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ZeichenWert</i></td>
+<td width="90%"> 
+Der Unicode-Zeichenwert. Dies muss ein Wert zwischen 0 und $D7FF oder zwischen $E000 und $FFFF 
+sein. Der Bereich zwischen $D800 und $DFFF ist für Ersatzzeichen reserviert. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen String zurück, der aus dem angegebenen Zeichenwert erstellt wurde. 
+Ist der Wert ungültig, wird ein leerer String zurückgegeben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>(33) <font color="#006666">; wird &quot;!&quot; ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Eine Tabelle mit allen ASCII-Werten und ihren zugehörigen Zeichen finden Sie <a href="../reference/ascii.html">hier</a>. 
+<br>
+<br>
+Dieser Befehl arbeitet mit <a href="../reference/unicode.html">Unicode</a> und gibt dann 
+die zum angegebenen Wert gehörenden Zeichen zurück. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>(8364) <font color="#006666">; wird &quot;€&quot; ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>($BC)  <font color="#006666">; wird &quot;¼&quot; ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>($BD)  <font color="#006666">; wird &quot;½&quot; ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Spezielle Symbole (Icons) und eine Schleife mit Ausgabe lateinischer Buchstaben</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>($2630) <font color="#006666">; ☰</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>($25BC) <font color="#006666">; ▼</font>
+  <b><font color="#006666">For</font></b> i = 65 <b><font color="#006666">To</font></b> 90
+      <b><font color="#006666">Debug</font></b> <font color="#006666">Chr</font>(i)
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="asc.html">Asc()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=bin.html>Bin()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=countstring.html>CountString()</a> -><br><br>
+
+</body></html>

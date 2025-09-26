@@ -1,0 +1,67 @@
+<html><head><title>HTTPInfo</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPInfo()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>HTTPInfo</b></font>(RequeteHttp, Type [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie des informations sur une requête HTTP créée avec <a href="httprequest.html">HTTPRequest()</a> ou 
+<a href="httprequestmemory.html">HTTPRequestMemory()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>RequeteHttp</i></td>
+<td width="90%"> 
+La requête HTTP. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+L'information spécifique à obtenir. Cela peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Http_StatusCode</font>  : Le code de l'état du serveur (200: OK, 404: Page non trouvée, etc).
+  <font color="#924B72">#PB_Http_Response</font>    : La réponse du serveur, sous forme de texte. Pour obtenir la réponse brute (raw) , utilisez <a href="httpmemory.html">HTTPMemory()</a>.
+  <font color="#924B72">#PB_Http_Headers</font>     : Les en-têtes de requête.
+  <font color="#924B72">#PB_Http_ErrorMessage</font>: Le message d'erreur (principalement à des fins de débogage).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Format de la réponse HTTP ou de l'encodage d'en-tête. 
+Il peut s'agir de l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>  (par défaut)
+  <font color="#924B72">#PB_Ascii</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Une chaîne de caractères dépendant du paramètre 'Type'. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;Réponse: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Status : &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;La requête a échoué&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="httprequest.html">HTTPRequest()</a>, <a href="httprequestmemory.html">HTTPRequestMemory()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=geturlpart.html>GetURLPart()</a> - <a href=index.html>Http Index</a> - <a href=httpmemory.html>HTTPMemory()</a> -><br><br>
+
+</body></html>

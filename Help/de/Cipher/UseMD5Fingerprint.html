@@ -1,0 +1,51 @@
+<html><head><title>UseMD5Fingerprint</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseMD5Fingerprint()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>UseMD5Fingerprint</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Registriert das MD5 (Message Digest 5) Fingerprint Plugin für die weitere Nutzung. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Hier eine kurze Erläuterung von RFC 1321 über MD5: 
+<br>
+<br>
+'Der Algorithmus verwendet als Eingabe eine Mitteilung beliebiger Länge und 
+produziert als Ausgabe einen 128-Bit &quot;Fingerprint&quot; (Fingerabdruck) oder &quot;Message Digest&quot; 
+(deutsch in etwa &quot;Nachrichten-Übersicht&quot;) 
+der Eingabe. Es wird allgemein angenommen, dass es unmöglich ist: zwei Mitteilungen 
+zu produzieren, die im selben &quot;Message Digest&quot; resultieren oder eine Mitteilung 
+zu erstellen, wo vorher der daraus resultierende &quot;Message Digest&quot; bekannt ist. 
+Der MD5 Algorithmus ist geeignet für Applikationen mit digitaler Unterschrift.' 
+<br>
+<br>
+MD5 Hash-Codes werden häufig für Passwort-Verschlüsselung benutzt, aber es sollte 
+gemieden werden, da sich eine Verletzbarkeit durch verschiedentliche Attaken erwiesen hat. 
+Weitere Informationen finden Sie im RFC 1321: 
+<a href="http://www.ietf.org/rfc/rfc1321.txt">http://www.ietf.org/rfc/rfc1321.txt</a>. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMD5Fingerprint</font>()
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">StringFingerprint</font>(&quot;yourpassword&quot;, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="usesha1fingerprint.html">UseSHA1Fingerprint()</a>(), <a href="usesha2fingerprint.html">UseSHA2Fingerprint()</a>(), <a href="usesha3fingerprint.html">UseSHA3Fingerprint()</a>(), <a href="usecrc32fingerprint.html">UseCRC32Fingerprint()</a>() 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=usecrc32fingerprint.html>UseCRC32Fingerprint()</a> - <a href=index.html>Cipher Inhaltsverzeichnis</a> - <a href=usesha1fingerprint.html>UseSHA1Fingerprint()</a> -><br><br>
+
+</body></html>

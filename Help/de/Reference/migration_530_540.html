@@ -1,0 +1,141 @@
+<html><head><title>Migration von PureBasic 5.30 nach 5.40</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Migration von PureBasic 5.30 nach 5.40</font></b></p>
+
+<p><b>Cipher Bibliothek</b></p><blockquote>
+
+
+<br>
+ExamineMD5Fingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+<font color="#006666">  ExamineMD5Fingerprint</font>(<font color="#924B72">#FingerPrint</font>)
+
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseMD5FingerPrint</font>()  
+<font color="#006666">  StartFingerprint</font>(<font color="#924B72">#FingerPrint</font>, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+<br>
+ExamineSHA1Fingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+<font color="#006666">  ExamineSHA1Fingerprint</font>(<font color="#924B72">#FingerPrint</font>)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseSHA1FingerPrint</font>()
+<font color="#006666">  StartFingerprint</font>(<font color="#924B72">#FingerPrint</font>, <font color="#924B72">#PB_Cipher_SHA1</font>)
+</font></pre>
+
+<br>
+MD5FileFingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis$ =<font color="#006666"> MD5FileFingerprint</font>(Dateiname$)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseMD5FingerPrint</font>()
+  Ergebnis$ =<font color="#006666"> FileFingerprint</font>(Dateiname$, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+<br>
+MD5Fingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis$ =<font color="#006666"> MD5Fingerprint</font>(*Puffer, Gr����e)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseMD5FingerPrint</font>()
+  Ergebnis$ =<font color="#006666"> Fingerprint</font>(*Puffer, Gr����e, <font color="#924B72">#PB_Cipher_MD5</font>)
+</font></pre>
+
+<br>
+SHA1FileFingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis$ =<font color="#006666"> SHA1FileFingerprint</font>(Dateiname$)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseSHA1FingerPrint</font>()
+  Ergebnis$ =<font color="#006666"> FileFingerprint</font>(Dateiname$, <font color="#924B72">#PB_Cipher_SHA1</font>)
+</font></pre>
+
+<br>
+SHA1Fingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis$ =<font color="#006666"> SHA1Fingerprint</font>(*Puffer, Gr����e)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseSHA1FingerPrint</font>()
+  Ergebnis$ =<font color="#006666"> Fingerprint</font>(*Puffer, Gr����e, <font color="#924B72">#PB_Cipher_SHA1</font>)
+</font></pre>
+
+<br>
+CRC32FileFingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis =<font color="#006666"> CRC32FileFingerprint</font>(Dateiname$)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseCRC32FingerPrint</font>()
+  Ergebnis.l =<font color="#006666"> Val</font>(&quot;$&quot;+<font color="#006666">FileFingerprint</font>(Dateiname$, <font color="#924B72">#PB_Cipher_CRC32</font>))
+</font></pre>
+
+<br>
+CRC32Fingerprint(): Code-Änderung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+  Ergebnis =<font color="#006666"> CRC32Fingerprint</font>(*Puffer, Gr����e)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  UseCRC32FingerPrint</font>()
+  Ergebnis.l =<font color="#006666"> Val</font>(&quot;$&quot;+<font color="#006666">Fingerprint</font>(*Puffer, Gr����e, <font color="#924B72">#PB_Cipher_CRC32</font>))
+</font></pre>
+
+<br>
+NextFingerprint(): nur Umbenennung 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+<font color="#006666">  NextFingerprint</font>(<font color="#924B72">#FingerPrint</font>, *Puffer, Gr����e)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  AddFingerprintBuffer</font>(<font color="#924B72">#FingerPrint</font>, *Puffer, Gr����e)
+</font></pre>
+
+<br>
+</blockquote>
+<p><b>Mail Bibliothek</b></p><blockquote>
+
+
+<br>
+SendMail(): Code-Änderung, wenn der 'Asynchron' Parameter verwendet wurde 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Alt</font>
+<font color="#006666">  SendMail</font>(<font color="#924B72">#Mail</font>, Smtp$, Port, 1)
+  
+  <font color="#006666">; Neu</font>
+<font color="#006666">  SendMail</font>(<font color="#924B72">#Mail</font>, Smtp$, Port, <font color="#924B72">#PB_Mail_Asynchronous</font>)
+</font></pre>
+
+<br>
+</blockquote>
+<p><b>Packer Bibliothek</b></p><blockquote>
+
+
+<br>
+RemovePackFile(): entfernt <br>
+PackerEntrySize(): <font color="#924B72">#PB_Packer_CompressedSize</font> Unterstützung für ZIP- und 7z-Archive entfernt <br>
+
+
+<br>
+</blockquote>
+<p><b>Screen Bibliothek</b></p><blockquote>
+
+
+<br>
+AvailableScreenMemory() entfernt, da die neue API diese Information nicht mehr unterstützt. Es wurde ohnehin zumeist '0' zurückgegeben. 
+
+<br>
+</blockquote>
+<p><b>Engine3D Bibliothek</b></p><blockquote>
+
+
+<br>
+WorldCollisionAppliedImpulse() gibt jetzt einen Fließkomma-Wert über den angewandten Impuls zurück. GetX/Y/Z() werden nicht mehr unterstützt. 
+
+<br>
+<br>
+<br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,72 @@
+<html><head><title>CreateBone</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateBone()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CreateBone</b></font>(#Mesh, Os$, ParentOs$, X, Y, Z, RotationX, RotationY, RotationZ, RotationW, Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouvel os pour le #Mesh spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le mesh à utiliser. 
+
+</td></tr>
+<tr><td><i>Os$</i></td>
+<td> 
+Le nouveau nom de l'os. 
+
+</td></tr>
+<tr><td><i>ParentOs$</i></td>
+<td> 
+Le nom de l'os parent. 
+<br>
+Si cette valeur de chaîne est vide, l'os est créé à la racine du squelette. 
+
+</td></tr>
+<tr><td><i>X, Y, Z</i></td>
+<td> 
+La nouvelle coordonnée de l'os, en unité monde. 
+
+</td></tr>
+<tr><td><i>RotationX, RotationY, RotationZ, RotationW</i></td>
+<td> 
+La nouvelle rotation de l'os. 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+Le mode à utiliser pour la rotation de l'os. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Orientation_PitchYawRoll</font>   : 'RotationX' (tangage), 'RotationY' (lacet), 'RotationZ' (roulis), appliqués dans cet ordre (par défaut).
+  <font color="#924B72">#PB_Orientation_Quaternion</font>     : 'RotationX', 'RotationY', 'RotationZ', 'RotationW' pour les valeurs de quaternion
+  <font color="#924B72">#PB_Orientation_AngleAxis</font>      : 'RotationX', 'RotationY', 'RotationZ' pour l'axe de rotation et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_Direction</font>      :  Alias pour <font color="#924B72">#PB_Orientation_DirectionLDVZN</font>
+  <font color="#924B72">#PB_Orientation_DirectionLDVX</font>  : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local X) et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_DirectionLDVY</font>  : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local Y) et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_DirectionLDVZ</font>  : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local Z) et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_DirectionLDVXN</font> : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local -X) et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_DirectionLDVYN</font> : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local -Y) et 'RotationW' pour l'angle (en degrés).
+  <font color="#924B72">#PB_Orientation_DirectionLDVZN</font> : 'RotationX', 'RotationY', 'RotationZ' pour le vecteur de direction (vecteur de direction local -Z) et 'RotationW' pour l'angle (en degrés).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le mesh n'a pas de squelette, il faut le créer avec <a href="createskeleton.html">CreateSkeleton()</a> avant d'utiliser cette commande. 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addskeletonanimationkeyframe.html>AddSkeletonAnimationKeyFrame()</a> - <a href=index.html>Skeleton Index</a> - <a href=createskeleton.html>CreateSkeleton()</a> -><br><br>
+
+</body></html>

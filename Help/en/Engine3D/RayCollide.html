@@ -1,0 +1,49 @@
+<html><head><title>RayCollide</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RayCollide()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RayCollide</b></font>(x, y, z, DestinationX, DestinationY, DestinationZ [, CollisionGroup , CollisionMask]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Casts a ray between the first point and the second point, and checks if an <a href="../entity/index.html">entity</a> is 
+colliding the ray. This function relies on the physic engine, which needs to be activated with <a href="enableworldphysics.html">EnableWorldPhysics()</a> before using this command. 
+Only entities with bodies will react to the ray. 
+To get the position about the collide point, use <a href="pickx.html">PickX()</a>, <a href="picky.html">PickY()</a> and <a href="pickz.html">PickZ()</a>. 
+The normals values at the collide point are available with <a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a> and <a href="normalz.html">NormalZ()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y, z</i></td>
+<td width="90%"> 
+The first point coordinates, in world unit. 
+
+</td></tr>
+<tr><td><i>DestinationX, DestinationY, DestinationZ</i></td>
+<td> 
+The second point coordinates, in world unit. 
+
+</td></tr>
+<tr><td><i>CollisionGroup, CollisionMask (optional)</i></td>
+<td> 
+The collision group and collision mask to use. Can be useful to filter which entity should collide to the ray. Collision 
+group and mask can be changed with <a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the <a href="../entity/index.html">entity</a> number if the ray has collided with one, or -1 if no collision has occurred. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a>, <a href="normalz.html">NormalZ()</a>, <a href="../entity/setentitycollisionfilter.html">SetEntityCollisionFilter()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=raycast.html>RayCast()</a> - <a href=index.html>Engine3D Index</a> - <a href=raypick.html>RayPick()</a> -><br><br>
+
+</body></html>

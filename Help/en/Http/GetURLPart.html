@@ -1,0 +1,67 @@
+<html><head><title>GetURLPart</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetURLPart()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>GetURLPart</b></font>(URL$, Parameter$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Get a specific part of the given URL$. This can be a named parameter in the URL string or another part of the URL. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+The URL$ to get the part from. 
+The URL$ may contain parameters, which are useful when a scripting language 
+such as: (PHP) is being used on that server. The syntax is as follows: (http://www.purebasic.com/index.php3?test=1) 
+Here, the parameter is named &quot;test&quot; and its associated value is &quot;1&quot;. 
+
+</td></tr>
+<tr><td><i>Parameter$</i></td>
+<td> 
+The parameter to return from the URL$. The parameters are not case-sensitive. 
+This parameter can also specify one of the following constants to access other parts of the URL: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_URL_Protocol</font>: returns the protocol from the URL$
+  <font color="#924B72">#PB_URL_Site</font>: returns the site from the URL$
+  <font color="#924B72">#PB_URL_Port</font>: returns the port from the URL$ (if specified)
+  <font color="#924B72">#PB_URL_Parameters</font>: returns all the parameters from the URL$
+  <font color="#924B72">#PB_URL_Path</font>: returns the path from the URL$
+  <font color="#924B72">#PB_URL_User</font>: returns the username from the URL$ (if specified)
+  <font color="#924B72">#PB_URL_Password</font>: returns the password from the URL$ (if specified)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the parameter value or other part of the URL. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  URL$ = &quot;http://user:pass@www.purebasic.com:80/index.php3?test=1&amp;ok=2&quot;
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Protocol</font>) <font color="#006666">; Will print &quot;http&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Site</font>)     <font color="#006666">; Will print &quot;www.purebasic.com&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Port</font>)     <font color="#006666">; Will print &quot;80&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Parameters</font>) <font color="#006666">; Will print &quot;test=1&amp;ok=2&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Path</font>)     <font color="#006666">; Will print &quot;index.php3&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_User</font>)     <font color="#006666">; Will print &quot;user&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Password</font>) <font color="#006666">; Will print &quot;pass&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;test&quot;)           <font color="#006666">; Will print &quot;1&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetURLPart</font>(URL$, &quot;ok&quot;)             <font color="#006666">; Will print &quot;2&quot;</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="seturlpart.html">SetURLPart()</a>, <a href="urldecoder.html">URLDecoder()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=finishhttp.html>FinishHTTP()</a> - <a href=index.html>Http Index</a> - <a href=httpinfo.html>HTTPInfo()</a> -><br><br>
+
+</body></html>

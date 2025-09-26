@@ -1,0 +1,71 @@
+<html><head><title>ExtractXMLArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractXMLArray()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ExtractXMLArray</b></font>(Node, Array() [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extract elements from the given XML node into the specified Array(). 
+The array will be resized to the number of elements contained in the node. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Node</i></td>
+<td width="90%"> 
+The XML node containing the array data. 
+
+</td></tr>
+<tr><td><i>Array()</i></td>
+<td> 
+The array to fill with the XML elements. The array will be resized to have the same size 
+as the number of element nodes. Any previous content of the array will be lost. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If this parameter is set to <font color="#924B72">#PB_XML_NoCase</font> then the comparison of XML node and attribute 
+names is performed case insensitive. The default is to be case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The extraction is performed recursively if the array has a structure type. 
+The XML nodes must have the form described in the <a href="insertxmlarray.html">InsertXMLArray()</a> function. Nodes 
+with different names are ignored by the extraction. If the array has more than 
+one dimension, each element is expected to have attributes indicating the coordinates 
+of the element named &quot;a&quot;, &quot;b&quot; and so forth. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Xml$ = &quot;&lt;array&gt;&lt;element&gt;1&lt;/element&gt;&lt;element&gt;10&lt;/element&gt;&lt;element&gt;100&lt;/element&gt;&lt;/array&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(0, Xml$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(0) = <font color="#924B72">#PB_XML_Success</font>
+    <b><font color="#006666">Dim</font></b> <font color="#006666">MyArray</font>(0) <font color="#006666">; will be resized by the next call</font>
+<font color="#006666">    ExtractXMLArray</font>(<font color="#006666">MainXMLNode</font>(0),<font color="#006666"> MyArray</font>())
+    
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> <font color="#006666">ArraySize</font>(<font color="#006666">MyArray</font>())
+      <b><font color="#006666">Debug</font></b> <font color="#006666">MyArray</font>(i)
+    <b><font color="#006666">Next</font></b> i
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">XMLError</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="insertxmlarray.html">InsertXMLArray()</a>, <a href="extractxmllist.html">ExtractXMLList()</a>, <a href="extractxmlmap.html">ExtractXMLMap()</a>, <a href="extractxmlstructure.html">ExtractXMLStructure()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=exportxmlsize.html>ExportXMLSize()</a> - <a href=index.html>XML Index</a> - <a href=extractxmllist.html>ExtractXMLList()</a> -><br><br>
+
+</body></html>

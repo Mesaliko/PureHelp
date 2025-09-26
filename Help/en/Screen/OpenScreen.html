@@ -1,0 +1,86 @@
+<html><head><title>OpenScreen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenScreen()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>OpenScreen</b></font>(Width, Height, Depth, Title$ [, FlipMode [, RefreshRate]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Opens a new screen according to the specified 'Width', 'Height' and 'Depth'. 
+<a href="../sprite/initsprite.html">InitSprite()</a> has to be called successfully before using this command. The 
+opened screen is created with 2 video buffers to allow double 
+buffering, especially useful for games. The buffers can be manipulated with 
+the <a href="flipbuffers.html">FlipBuffers()</a> function. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Width, Height</i></td>
+<td width="90%"> 
+The screen resolution, in pixels. The specified resolution has to be supported 
+or the screen won't be created. <a href="examinescreenmodes.html">ExamineScreenModes()</a> can be used to get a full list of supported resolution. 
+
+</td></tr>
+<tr><td><i>Depth</i></td>
+<td> 
+It can be one the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  16: 65000 colors, fixed palette
+  24: 16 Mo colors, fixed palette
+  32: 16 Mo colors, faster than 24-bit mode, allows alpha blending
+</font></pre>
+
+</td></tr>
+<tr><td><i>Title$</i></td>
+<td> 
+The title for the application which will be displayed when switching back to the desktop. 
+(Windows only). It will be displayed in the taskbar, so it's recommended to use a title 
+related to the application name. 
+
+</td></tr>
+<tr><td><i>FlipMode (optional)</i></td>
+<td> 
+Sets the screen synchronization methods used when flipping buffers (also known as 'Vertical blank synchronization'). 
+It can have one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Screen_NoSynchronization</font>   : disable synchronization 
+   <font color="#924B72">#PB_Screen_WaitSynchronization</font> : enable synchronization (default value)
+   <font color="#924B72">#PB_Screen_SmartSynchronization</font>: enable synchronization, with a CPU saver routine when the program doesn't consume
+                                    all the CPU time (full screen mode only)
+</font></pre>
+Waiting for the screen synchronization allows the flip to be perfect (no 'tearing' 
+or other visible artifacts) because the flip is performed when the screen has been fully drawn (and when the 
+screen spot is outside of visible screen area). This also link the flip frequency to the actual screen refresh, ie: for 60Hz screen it 
+could have at most 60 flip per seconds, etc. 
+
+</td></tr>
+<tr><td><i>RefreshRate (optional)</i></td>
+<td> 
+Set the refresh rate (in Hz) for the new screen. If it can't be handled, then OpenScreen() will fail. 
+<a href="examinescreenmodes.html">ExamineScreenModes()</a> can be used to get a full list of supported refresh rates. 
+<br>
+Note: on Windows, the refresh rate could be locked or forced by the video card drivers, so it could be inaccurate. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the screen has been successfully opened, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The <a href="../requester/index.html">Requester</a> functions cannot be used on screens 
+created with OpenScreen. 
+<br>
+<br>
+To open a screen area on a regular window, see <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="openwindowedscreen.html">OpenWindowedScreen()</a>, <a href="flipbuffers.html">FlipBuffers()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextscreenmode.html>NextScreenMode()</a> - <a href=index.html>Screen Index</a> - <a href=openwindowedscreen.html>OpenWindowedScreen()</a> -><br><br>
+
+</body></html>

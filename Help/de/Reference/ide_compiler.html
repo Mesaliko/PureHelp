@@ -1,0 +1,694 @@
+<html><head><title>Kompilieren Ihrer Programme</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Kompilieren Ihrer Programme</font></b></p>
+
+Das Kompilieren ist einfach. Wählen Sie einfach &quot;Kompilieren/Starten&quot; (standardmäßig auch 
+mittels der F5-Taste möglich) und Ihr Programm wird kompiliert und für einen Testlauf 
+gestartet. 
+<br>
+<br>
+Um den Kompilierungsprozess anzupassen, können Sie das Dialog-Fenster &quot;Compiler-Optionen&quot; 
+öffnen. Die dort gemachten Einstellungen werden mit der aktuellen Quellcode-Datei oder dem aktuellen Projekt verknüpft 
+und auch nach deren Schließen beibehalten. Der Platz, wo diese Informationen 
+gespeichert werden, kann selbst konfiguriert werden. Standardmäßig werden sie an das Ende 
+des Quellcodes als Kommentar (unsichtbar in der IDE) gespeichert. 
+<br>
+<br>
+Im Falle eines Fehlers, welches den Compiler von einer Fertigstellung der Kompilierung 
+abhält, wird eine Fehlernachricht angezeigt. Diese Nachricht wird auch in einem 
+Fehlerprotokoll aufgezeichnet, und die für den Fehler verantwortliche Zeile wird markiert. 
+<br>
+<br>
+Eine Reihe von Funktionen aus älteren Versionen von PureBasic, welche aus dem Paket entfernt 
+wurden, existieren noch für eine Weile als &quot;Kompatibilitäts-Wrapper&quot;, um das Testen / 
+Portieren älterer Quellcodes zu erleichtern. Wenn eine solche Funktion im Code verwendet 
+wird, gibt der Compiler eine Warnung aus. 
+Ein Fenster wird geöffnet, welches alle während dem Kompilieren ausgegebenen Warnungen anzeigt. 
+Das Doppelklicken auf eine Warnung stellt die Datei/Codezeile dar, welche die Warnung verursachte. 
+Beachten Sie, dass solche &quot;Kompatibilitäts-Wrapper&quot; nicht endlos bestehen bleiben und in einem 
+künftigen Update entfernt werden können. Daher ist es empfehlenswert, entsprechende Dinge zu 
+bereinigen, die eine Compiler-Warnung verursachen, anstatt sich auf solche veralteten Funktionen 
+zu verlassen. 
+
+
+<p><b>Das Compiler-Menü</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_compile.png"></p>
+
+<b>Kompilieren/Starten</b> 
+<br>
+Dies kompiliert den aktuellen Quellcode mit den eingestellten Compiler-Optionen und führt 
+ihn aus. Das Executable (die ausführbare Datei) wird an einem temporären Platz gespeichert, 
+der aktuelle Pfad wird jedoch auf das Verzeichnis des Quellcodes gesetzt. (Das Laden einer 
+Datei aus dem gleichen Verzeichnis wie der Quellcode funktioniert somit.) 
+<br>
+<br>
+Der Quellcode muss dafür nicht gespeichert werden. (Jedoch müssen <a href="../reference/includes.html">Include-Dateien</a> gespeichert 
+werden.) 
+<br>
+<br>
+Die &quot;Kompilieren/Starten&quot;-Option berücksichtigt die Debugger-Einstellungen (ein oder aus) 
+in den Compiler-Optionen sowie dem Debugger-Menü. (Beides sind die gleichen.) 
+
+<br>
+<br>
+
+<b>Starten</b> 
+<br>
+Dies führt den zuletzt kompilierten Quellcode ein weiteres Mal aus. Ob der Debugger eingeschalten 
+ist oder nicht, hängt von den Einstellungen bei der letzten Kompilierung ab. 
+
+<br>
+<br>
+
+<b>Mit Debugger kompilieren</b> 
+<br>
+Dies ist das gleiche wie &quot;Kompilieren/Starten&quot;, außer dass dabei die Debugger-Einstellungen 
+ignoriert werden und der Debugger für diese Kompilierung immer aktiv ist. Dies ist nützlich, 
+wenn Sie gewöhnlich den Debugger ausgeschalten haben, ihn aber für diese eine Kompilierung 
+eingeschalten haben möchten. 
+
+<br>
+<br>
+
+<b>Ohne Debugger kompilieren</b> 
+<br>
+Das gleiche wie &quot;Mit Debugger kompilieren&quot;, nur dass für diese Kompilierung der Debugger 
+abgeschalten bleibt. 
+
+<br>
+<br>
+
+<b>Compiler neustarten</b> (nicht auf allen OS verfügbar) 
+<br>
+Dies zwingt den Compiler zu einem Neustart. Es veranlasst den Compiler auch zu einem Neuladen 
+aller Libraries und Resident-Dateien - damit wird auch die Liste bekannter PureBasic-Funktionen, 
+Strukturen, Interfaces und Konstanten aktualisiert. 
+<br>
+<br>
+Diese Funktion ist nützlich, wenn Sie eine neue User-Library zum PureBasic-Verzeichnis 
+hinzugefügt haben, aber nicht die gesamte IDE neustarten wollen. 
+Das ist besonders nützlich für Library-Entwickler zum Testen ihrer Library. 
+
+<br>
+<br>
+
+<b>Compiler-Optionen</b> 
+<br>
+Dies öffnet das Compiler-Optionen Dialogfenster, welches Sie die Einstellungen für die 
+Kompilierung dieser Quellcode-Datei vornehmen lässt. 
+
+<br>
+<br>
+
+<b>Executable erstellen</b> 
+<br>
+Dies öffnet einen Speichern-Dialog, und bittet um den Namen des zu erstellenden Executable. 
+Wenn das Executable-Format auf DLL eingestellt ist, wird eine 'DLL' auf Windows, ein 'Shared Object' 
+auf Linux und eine 'dylib' auf OS X erstellt. 
+<br>
+Beim Erstellen eines Executable auf OS X wird durch das Anfügen von '.app' am Executable-Namen 
+ein &quot;bundled&quot; (gebündeltes) Executable mit der notwendigen Verzeichnisstruktur einschließlich des 
+Icons erstellt. Wenn kein '.app' angegeben wird, dann wird ein reguläres Konsolen-artiges Executable 
+erstellt. 
+
+<br>
+<br>
+
+<b>Standard-Ziel setzen</b> 
+<br>
+Wenn ein Projekt geöffnet ist, zeigt dieses Untermenü alle Kompilier-Ziele und ermöglicht 
+das schnelle Umschalten des aktuellen Standard-Ziels. Das Standard-Ziel ist dasjenige, 
+welches mit dem &quot;Kompilieren/Starten&quot;-Menüeintrag kompiliert/ausgeführt wird. 
+
+<br>
+<br>
+
+<b>Ziel erstellen</b> 
+<br>
+Wenn ein Projekt geöffnet ist, zeigt dieses Untermenü alle Kompilier-Ziele und erlaubt 
+das direkte Kompilieren eines davon. 
+
+<br>
+<br>
+
+<b>Alle Ziele erstellen</b> 
+<br>
+Wenn ein Projekt geöffnet ist, kompiliert dieser Menüeintrag alle Ziele, bei denen diese Option 
+in den Compiler-Optionen aktiviert ist. Ein Fenster wird geöffnet, um den Erstellungsprozess 
+anzuzeigen. 
+<br>
+<br>
+
+</blockquote>
+<p><b>Compiler-Optionen für Nicht-Projektdateien</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_options.png"></p>
+
+<b>Haupt-Quellcode:</b> 
+<br>
+Mit dem Aktivieren dieser Option können Sie eine andere Datei definieren, welche anstelle 
+der aktuellen Datei an den Compiler geschickt wird. Der Sinn dieser Einstellung besteht darin, 
+dass Sie eine Datei - welche nicht selbständig läuft, aber in einer anderen Datei eingebunden 
+wird (<a href="../reference/includes.html">Include-Datei</a>) - bearbeiten können, und dem Compiler stattdessen 
+mitteilen können, die andere Quellcode-Datei zum Starten der Kompilierung zu nutzen. 
+<br>
+<br>
+Hinweis: Bei der Verwendung dieser Option MÜSSEN Sie Ihren Quellcode vor dem Kompilieren 
+speichern, da nur auf Disk gespeicherte Dateien in dieser Einstellung verwendet werden. 
+Die meisten der Compiler-Einstellungen werden vom Haupt-Quellcode benutzt - darum werden 
+auch die meisten Einstellungen zu den Compiler-Optionen des aktuellen Quellcodes deaktiviert. 
+Nur einige Einstellungen wie die Debugger-Einstellungen werden vom aktuellen Quellcode 
+verwendet. 
+
+<br>
+<br>
+
+<b>Verwende Compiler</b> 
+<br>
+Mit dieser Option kann die Verwendung eines anderen Compilers ausgewählt werden, als den Compiler der 
+aktuellen PureBasic-Version. Dies macht es einfach, verschiedene Versionen des gleichen Programms 
+(x86, und x64) zu kompilieren, ohne die IDE des anderen Compilers extra nur für das Kompilieren 
+starten zu müssen. Zusätzliche Compiler für diese Option müssen in den <a href="../reference/ide_preferences.html">Einstellungen</a> 
+konfiguriert werden. 
+<br>
+<br>
+Wenn die Compiler-Version mit dem Standard-Compiler übereinstimmt, aber der Ziel-Prozessor ein anderer ist, 
+dann kann der eingebaute Debugger der IDE trotzdem verwendet werden, um das kompilierte Executable zu debuggen. 
+Dies bedeutet, dass ein mit dem x86-Compiler kompiliertes Executable mittels der x64-IDE debuggt werden kann, 
+und umgekehrt. 
+Wenn die Version nicht übereinstimmt, dann wird der - mit dem ausgewählten Compiler 
+mitgelieferte - eigenständige Debugger zum Debuggen verwendet, um Versions-Konflikte zu vermeiden. 
+
+<br>
+<br>
+
+<b>Benutze Icon</b> (nur auf Windows und MacOS X) 
+<br>
+Hier können Sie ein Icon einstellen, welches beim Anzeigen des erstellten Executable im 
+Explorer dargestellt wird. Es wird auch in der Titelzeile Ihres Programms und in der 
+Taskleiste angezeigt. 
+<br>
+<br>
+Windows: Das Icon muss im ICO-Format (Windows-Icon) vorliegen. 
+<br>
+<br>
+MacOS X: 
+Das Icon muss im ICNS-Format (Macintosh-Icon) vorliegen. Um solch ein Icon zu erstellen, sollten Sie 
+PNG-Dateien mit den Dimensionen 128x128, 48x48, 32x32 und 16x16 Ihres Bildes erstellen. 
+Dann können sie das Programm &quot;Icon Composer&quot; aus den OSX Developer Tools verwenden, um die 
+ICNS-Datei zu erstellen. Diese sollte sich im Ordner &quot;/Developer/Applications/Utilities/&quot; befinden. 
+Um angezeigt zu werden, wenn die Anwendung gerade erstellt wurde, muss der Finder ggf. neu 
+gestartet werden. 
+
+<br>
+<br>
+
+<b>Generierten Code optimieren</b> 
+<br>
+Dies aktiviert den C-Code Optimierer. Es setzt die Optimierungsflags von gcc einfach auf -O2, wenn 
+aktiviert, andernfalls auf -O0. <a href="https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html">Siehe hier.</a> 
+<br>
+<br>
+
+<b>InlineASM Syntax-Einfärbung einschalten</b> 
+<br>
+Schaltet die InlineASM Syntax-Einfärbung ein. Sehen Sie in den <a href="../reference/inlinedasm.html">Inline x86 ASM</a> 
+Abschnitt der Hilfedatei für weitere Informationen zu dieser Option. 
+
+<br>
+<br>
+
+<b>Threadsicheres Executable erstellen</b> 
+<br>
+Diese Option teilt dem Compiler mit, dass er eine spezielle Version von bestimmten Befehlen verwenden soll, 
+um diese sicher zur Verwendung in Threads zu machen. 
+Siehe die <a href="../thread/index.html">Thread</a> Bibliothek für weitere Informationen. 
+<br>
+<br>
+Dies aktiviert auch den <a href="../reference/ide_debugger.html">Debugger</a>, damit dieser korrekte Informationen anzeigt, 
+wenn Threads verwendet werden. Ohne diese Option gibt der Debugger zum Beispiel möglicherweise falsche 
+Zeilennummern aus, wenn Threads im Spiel sind. 
+
+<br>
+<br>
+
+<b>Moderne Themen-Unterstützung aktivieren</b> (nur bei Windows) 
+<br>
+Fügt &quot;Skin-Unterstützung&quot; (verschiedene Designs) für Fenster auf Windows Vista, Windows 7 oder 
+Windows 8 hinzu. 
+
+<br>
+<br>
+
+<b>Administrator-Modus für Windows Vista anfordern</b> (nur bei Windows) 
+<br>
+Das erstellte Executable wird auf Windows Vista immer mit Administrator-Rechten gestartet 
+(es wird nicht starten, wenn das Administrator-Passwort nicht eingegeben wurde). Diese 
+Option sollte für Programme aktiviert werden, welche Zugriff auf eingeschränkte Verzeichnisse 
+oder eingeschränkte Bereiche der Registry benötigen, um vollen Zugriff zu erhalten. 
+<br>
+Wenn diese Option eingeschaltet wird, wird für das Debuggen automatisch der 
+<a href="../reference/ide_debugger.html">eigenständige Debugger</a> ausgewählt, damit das Programm 
+im Administrator-Modus getestet werden kann. 
+<br>
+<br>
+Hinweis: Diese Option hat keinen Effekt, wenn das Programm auf anderen Windows-Versionen läuft. 
+
+<br>
+<br>
+
+<b>User-Modus für Windows Vista anfordern</b> (nur bei Windows) 
+<br>
+Diese Option deaktiviert für dieses Executable das &quot;Virtualisierungs&quot;-Feature auf Windows Vista. 
+Virtualisierung veranlasst die Umleitung von Datei- und Registry-Zugriffen auf einen speziellen 
+Anwender-Ordner, wenn der Anwender nicht die benötigten Rechten für das Ausführen der Operation 
+hat. (Dies erfolgt zwecks Kompatibilität mit älteren Programmen.) 
+<br>
+Bitte beachten Sie, dass diese Umleitung erfolgt, ohne den Anwender darüber zu informieren. 
+Dies kann zu einiger Verwirrung führen, wenn er versucht die gespeicherten Daten im Dateisystem 
+zu finden. Daher ist es empfehlenswert dieses Feature zu deaktivieren, wenn das Programm den 
+Windows Vista Datei-/Registry-Zugriffsregeln entspricht. 
+<br>
+<br>
+Hinweis: Diese Option hat keinen Effekt, wenn das Programm auf anderen Windows-Versionen läuft. 
+Sie kann nicht mit der vorgenannten &quot;Administrator-Modus&quot; Option kombiniert werden. 
+
+<br>
+<br>
+
+<b>DPI-kompatibles Executable (Windows) erstellen</b> (nur auf Windows) 
+<br>
+Diese Option aktiviert die DPI-Erkennung beim Erstellen eines Executable. Dies bedeutet, dass 
+die in PureBasic erstellte GUI automatisch skaliert wird, wenn die DPI des Bildschirms über 
+100% liegt. Der Großteil des Prozesses läuft automatisch, aber in einigen Fällen, wie z.B. bei 
+pixelbasierten Gadgets (<a href="../gadget/imagegadget.html">ImageGadget()</a>, <a href="../gadget/canvasgadget.html">CanvasGadget()</a> usw.), ist eine Anpassung erforderlich. 
+
+<br>
+<br>
+
+<b>DLL-Preloading-Schutz einschalten</b> (nur auf Windows) 
+<br>
+Aktiviert den 'DLL-Preloading'-Schutz für das Executable. Er verhindert, dass System-DLLs 
+zuerst im Programmverzeichnis statt im System32-Verzeichnis des Windows-Betriebssystems gesucht 
+werden. 
+
+<br>
+<br>
+
+<b>OnError-Unterstützung einschalten</b> (nur bei Windows) 
+<br>
+Bindet Informationen zu den Zeilennummern zur Verwendung mit der <a href="../onerror/index.html">OnError</a> Bibliothek in 
+das Executable ein. 
+
+<br>
+<br>
+
+<b>Library Subsystem</b> 
+<br>
+Hier können Sie verschiedene PB-Subsysteme für die Kompilierung auswählen. Es kann mehr als ein Subsystem 
+angegeben werden, getrennt durch Leerzeichen. 
+Für weitere Informationen siehe das Kapitel <a href="../reference/subsystems.html">Subsysteme</a>. 
+<br>
+<br>
+
+<b>Executable-Format</b> 
+<br>
+
+
+Ermöglicht Ihnen das zu erstellende Executable-Format einzustellen: 
+<br>
+<u>Windows</u> : ein normales Windows-Executable. 
+<br>
+<u>Console</u> : ein Executable mit der Standard-Konsole. Dieses kann trotzdem Fenster usw. öffnen, 
+hat jedoch stets ein Konsolenfenster geöffnet. Bei der Ausführung über die Eingabeaufforderung 
+verwendet dieser Executable-Typ die Eingabeaufforderung als seine Konsole und schreibt dort hinein, 
+während das &quot;Windows&quot;-Executable bei der Verwendung von <a href="../console/openconsole.html">OpenConsole()</a> 
+ein separates Konsolenfenster erstellt. 
+Diese Einstellung muss zum Erstellen von <a href="../console/index.html">Konsolen-Anwendungen</a> verwendet werden, 
+deren Eingabe/Ausgabe mittels Pipes umgeleitet werden kann. 
+<br>
+<u>Shared DLL</u> : erstellt eine Windows DLL. Siehe <a href="../reference/dll.html">Erstellung einer DLL</a> für weitere Informationen. 
+<br>
+Hinweis: Wenn Sie &quot;Kompilieren/Starten&quot; mit einem DLL-Quellcode ausführen, wird dieser als normales 
+Executable ausgeführt. Eine DLL wird nur dann erstellt, wenn Sie &quot;Executable erstellen&quot; verwenden. 
+
+
+
+<br>
+<br>
+
+<b>CPU-Optimierung</b> (rechts neben Executable-Format) 
+<br>
+Diese Einstellung ermöglicht Ihnen das Einbinden CPU-optimierter PB-Funktionen in 
+Ihrem Executable: 
+<br>
+<u>Alle CPU</u> : Die generischen Funktionen, welche auf allen CPUs laufen, werden eingebunden. 
+<br>
+<u>Dynamische CPU</u> : Die generischen Funktionen wie auch alle CPU-spezifischen Funktionen 
+werden eingebunden. Die auszuführende Funktion wird zur Laufzeit ausgewählt. Dies erstellt ein 
+größeres Executable, läuft jedoch auf allen CPUs so schnell wie möglich. 
+<br>
+<u>Alle anderen Optionen</u> : Es werden nur die Funktionen für eine spezifische CPU eingebunden. 
+Das Executable wird auf keiner CPU laufen, die dieses Feature nicht unterstützt. 
+<br>
+<br>
+Hinweis: Derzeit unterstützen keine PB-Funktionen dieses Feature (es wird bei ihnen ignoriert). 
+Jedoch besitzen einige User-Libraries solche Optimierungen. 
+
+<br>
+<br>
+
+<b>Linker-Optionen Datei</b> 
+<br>
+Hier kann eine Text-Datei definiert werden mit weiteren Kommandozeilen-Optionen, welche beim 
+Erstellen des Executable an den Linker übergeben werden sollen. Die Datei sollte eine Option 
+pro Zeile enthalten. 
+
+
+</blockquote>
+<p><b>Kompilieren/Starten</b></p><blockquote>
+
+
+Dieser Bereich beinhaltet Optionen, welche beeinflussen, wie das Executable zum Testen von der 
+IDE aus gestartet wird. Mit Ausnahme der Werkzeuge-Option haben diese keinen Effekt, wenn der 
+Menüpunkt &quot;Executable erstellen&quot; verwendet wird. 
+
+<p><img src="images/ide_compiler_compile.png"></p>
+
+<b>Debugger einschalten</b> 
+<br>
+Dies legt den Debugger-Status (ein/aus) für diesen Quellcode fest, oder - wenn die 
+Haupt-Quellcode Option verwendet wird - auch für diese Datei. Diese Einstellung kann auch 
+über das Debugger-Menü gesetzt werden. 
+
+<br>
+<br>
+
+<b>Purifier einschalten</b> 
+<br>
+Dies aktiviert die Purifier-Unterstützung für den Debugger. Der Purifier kann bestimmte 
+Arten von Programmierfehlern erkennen, wie z.B. das Schreiben über das Ende eines 
+reservierten Speicherbereichs hinaus. Siehe <a href="../reference/ide_debugtools.html">Eingebaute Debugger-Werkzeuge</a> 
+für weitere Details. 
+
+<br>
+<br>
+
+<b>Verwende ausgewählten Debugger</b> 
+<br>
+Dies ermöglicht, einen anderen <a href="../reference/ide_debugger.html">Debugger-Typen</a> nur für diese 
+Datei zu wählen. Wenn diese Option deaktiviert ist, wird der Standard-Debugger verwendet, 
+welcher in den <a href="../reference/ide_preferences.html">Einstellungen</a> festgelegt werden kann. 
+
+<br>
+<br>
+
+<b>Verwende Warnungs-Modus</b> 
+<br>
+Dies ermöglicht es, nur für diese Datei einen anderen <a href="../reference/ide_debugger.html">Warnungs-Modus</a> zu wählen. 
+Wenn diese Option deaktiviert ist, wird die Standardeinstellung verwendet, welche in den 
+<a href="../reference/ide_preferences.html">Einstellungen</a> definiert werden kann. Die möglichen Optionen 
+sind: 
+<br>
+<u>Warnungen ignorieren:</u> Warnungen werden ignoriert, ohne dass etwas angezeigt wird. 
+<br>
+<u>Warnungen anzeigen:</u> Warnungen werden im Fehlerprotokoll angezeigt und die Quellcode-Zeile 
+wird markiert, aber das Programm läuft weiter. 
+<br>
+<u>Warnungen als Fehler behandeln:</u> Eine Warnung wird wie ein Fehler behandelt. 
+
+<br>
+<br>
+
+<b>Executable-Kommandozeile</b> 
+<br>
+Die hier eingegebene Zeichenfolge wird als Kommandozeile an das Programm übergeben, wenn dieses 
+von der IDE gestartet wird. Der Inhalt dieses Strings kann mit <a href="../process/programparameter.html">ProgramParameter()</a> ermittelt werden. 
+
+<br>
+<br>
+
+<b>Aktuelles Verzeichnis</b> 
+<br>
+Das hier angegebene Verzeichnis wird als das gültige Verzeichnis für das Programm vorgemerkt, wenn 
+dieses von der IDE aus gestartet wird. 
+
+<br>
+<br>
+
+<b>Temporäres Executable im Quellcode-Verzeichnis erstellen</b> 
+<br>
+Mit dieser Option eingeschalten, wird das temporäre Executable - für das Starten des Programms von 
+der IDE aus - innerhalb des Quellcode-Verzeichnisses platziert. Dies kann nützlich sein, wenn das 
+Programm zum Testen von Dateien im Quellcode-Verzeichnis abhängt. Mit dieser Option ausgeschalten, 
+wird das Executable im Temporären Verzeichnis des Systems erstellt. 
+
+<br>
+<br>
+
+<b>Werkzeuge ausführen</b> 
+<br>
+Hier können <a href="../reference/ide_externaltools.html">Externe Werkzeuge</a> auf einer pro-Quellcode Basis aktiviert 
+werden. Die Spalte &quot;Globale Einstellungen&quot; zeigt, ob das Werkzeug in der 
+<a href="../reference/ide_externaltools.html">Werkzeuge Konfiguration</a> aktiviert oder deaktiviert ist. Ein 
+Werkzeug wird auf den Quellcode nur dann ausgeführt, wenn beides - sowohl die globale Einstellung als 
+auch die Einstellung für diesen Quellcode - aktiviert ist. 
+
+<br>
+<br>
+Hinweis. Für ein hier aufgelistetes Werkzeug muss es die &quot;Werkzeug auf einer pro-Quellcode Basic aktivieren&quot; 
+Option in <a href="../reference/ide_externaltools.html">Werkzeuge konfigurieren</a> aktiviert haben und muss durch 
+einen mit der Quellcode-Datei verbundenen Auslöser ausgelöst werden (d.h. nicht durch das Menü oder 
+eine Editor-Startdatei zum Beispiel). 
+
+
+</blockquote>
+<p><b>Konstanten</b></p><blockquote>
+
+
+In diesem Abschnitt können eine Reihe spezieller Editor-Konstanten wie auch selbst definierte Konstanten 
+eingestellt werden, welche beim Kompilieren dieses Quellcodes vor-definiert werden. 
+
+<p><img src="images/ide_compiler_constants.png"></p>
+
+<b>#PB_Editor_CompileCount</b> 
+<br>
+Wenn aktiviert enthält dieses Konstante die Anzahl, wie oft der Code von der IDE aus kompiliert wurde 
+(sowohl mit &quot;Kompilieren/Starten&quot; als auch &quot;Executable erstellen&quot;). 
+Der Zähler kann im Eingabefeld manuell geändert werden. 
+
+<br>
+<br>
+
+<b>#PB_Editor_BuildCount</b> 
+<br>
+Wenn aktiviert enthält diese Konstante die Anzahl, wie oft der Code nur mit &quot;Executable erstellen&quot; 
+kompiliert wurde. Der Zähler kann im Eingabefeld manuell geändert werden. 
+
+<br>
+<br>
+
+<b>#PB_Editor_CreateExecutable</b> 
+<br>
+Wenn aktiviert enthält diese Konstante einen Wert von 1, wenn der Code mit dem Menüpunkt 
+&quot;Executable erstellen&quot; kompiliert wurde - bzw. 0, wenn &quot;Kompilieren/Starten&quot; verwendet wurde. 
+
+<br>
+<br>
+
+<b>Eigene Konstanten</b> 
+<br>
+Hier können eigene Konstanten definiert werden und dann einfach mittels Häkchen ein- und 
+ausgeschaltet werden. Konstanten-Definitionen können so hinzugefügt werden, wie sie sonst 
+auch innerhalb des Quellcodes geschrieben werden. 
+Dies bietet eine Möglichkeit, bestimmte Features in einem Programm zu aktivieren oder 
+deaktivieren, indem hier eine Konstante definiert wird und diese anschließend im Quellcode 
+überprüft wird, um einzelne Features mit <a href="../reference/compilerdirectives.html">CompilerIf/CompilerEndIf</a> 
+zu aktivieren bzw. deaktivieren. 
+<br>
+<br>
+Innerhalb der Definition dieser Konstanten können Umgebungsvariablen verwendet werden, 
+indem diese in einem &quot;bash&quot;-ähnlichen Stil mit einem vorangestellten &quot;$&quot; definiert werden. 
+Die Umgebungsvariable wird in der Konstanten-Definition vor dem Kompilieren ersetzt. 
+Dies ermöglicht die Übergabe bestimmter Optionen des Betriebssystems, auf dem der Code 
+kompiliert wird, an das Programm in Form von Konstanten. 
+<br>
+<br>
+Beispiel: #Creator=$USERNAME 
+<br>
+Hier wird $USERNAME durch den Benutzernamen des Anwenders ersetzt, welcher auf dem aktuellen 
+Windows System angemeldet ist. Wenn eine Umgebungsvariable nicht existiert, wird diese durch 
+einen leeren String ersetzt. 
+
+<br>
+<br>
+Hinweis: Um innerhalb des Quellcodes zu testen, ob eine Konstante definiert ist oder nicht, 
+kann die <a href="../reference/compilerfunctions.html">Compiler-Funktion</a> <font color="#006666">Defined</font>() 
+verwendet werden. 
+
+
+
+
+</blockquote>
+<p><b>Versions-Informationen</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_version.png"></p>
+
+Durch Aktivieren dieses Felds wird eine Ressource mit Informationen über Ihr Programm in das 
+Executable eingebunden. Diese können im Windows-Explorer durch einen Rechtsklick auf das Executable 
+und Auswahl von &quot;Eigenschaften&quot; angesehen werden. Sie können auch von anderen Programmen, wie z.B. 
+Setup-Tools, ausgelesen werden. 
+<br>
+<br>
+Mit einem * markierte Felder werden benötigt, wenn Sie die Versions-Info einbinden möchten. (Wenn 
+nicht alle benötigten Felder ausgefüllt wurden, werden die Informationen auf einigen Windows-Versionen 
+möglicherweise nicht korrekt dargestellt.) 
+<br>
+<br>
+Die ersten beiden Felder MÜSSEN aus 4 durch Komma getrennte Zahlen bestehen. Alle anderen Felder 
+können eine beliebige Zeichenfolge (Strings) enthalten. In den 3 leeren Eingabefeldern können Sie 
+Ihre eigenen Felder zum Einbinden in den Versions-Info-Block definieren. 
+<br>
+<br>
+In allen String-Feldern können Sie spezielle Zeichen (Token) einbinden, welche beim Kompilieren 
+ersetzt werden: 
+<br>
+%OS : wird ersetzt durch die beim Kompilieren des Programms verwendete Windows-Version 
+<br>
+%SOURCE : wird ersetzt mit dem Dateinamen (ohne Pfad) der Quellcode-Datei. 
+<br>
+%EXECUTABLE : wird ersetzt mit dem Namen des erstellten Executable (dies funktioniert nur, wenn &quot;Executable erstellen&quot; verwendet wird, nicht mit &quot;Kompilieren/Starten&quot;. 
+<br>
+%COMPILECOUNT : wird ersetzt mit dem Wert der <font color="#924B72">#PB_Editor_CompileCount</font> Konstante. 
+<br>
+%BUILDCOUNT : wird ersetzt mit dem Wert der <font color="#924B72">#PB_Editor_BuildCount</font> Konstante. 
+<br>
+<br>
+Weiterhin können Sie alle beim Befehl <a href="../date/formatdate.html">FormatDate()</a> aufgelisteten Tokens 
+verwenden. Diese Tokens werden ersetzt durch ihre entsprechende Bedeutung beim 
+<a href="../date/formatdate.html">FormatDate()</a> Befehl unter Einbeziehung des Zeitpunkts der 
+Kompilierung (z.B. ergibt %yy das Jahr der Kompilierung). 
+
+<br>
+<br>
+Bedeutung der 3 unteren Felder: 
+<br>
+<br>
+
+<b>Datei-OS</b> 
+<br>
+Gibt das OS an, für welches dieses Programm kompiliert wurde. 
+<br>
+(Die Benutzung von VOS_DOS oder VOS_WINDOWS16 machen nicht viel Sinn. Sie sind nur enthalten, 
+um eine vollständige Liste zu haben.) 
+
+<br>
+<br>
+
+<b>Datei-Typ</b> 
+<br>
+Typ des Executable. (Hier machen nur VFT_UNKNOWN, VFT_APP oder VFT_DLL wirklich Sinn für PB-Programme.) 
+
+<br>
+<br>
+
+<b>Sprache</b> 
+<br>
+Gibt die Sprache an, in welcher diese Versions-Info geschrieben wurde. 
+<br>
+<br>
+Auf die Werte der Felder kann bei der Kompilierung des Programms aus der IDE mit den folgenden Konstanten 
+(gleiche Reihenfolge) zugegriffen werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Editor_FileVersionNumeric</font>
+  <font color="#924B72">#PB_Editor_ProductVersionNumeric</font>
+  <font color="#924B72">#PB_Editor_CompanyName</font>
+  <font color="#924B72">#PB_Editor_ProductName</font>
+  <font color="#924B72">#PB_Editor_ProductVersion</font>
+  <font color="#924B72">#PB_Editor_FileVersion</font>
+  <font color="#924B72">#PB_Editor_FileDescription</font>
+  <font color="#924B72">#PB_Editor_InternalName</font>
+  <font color="#924B72">#PB_Editor_OriginalFilename</font>
+  <font color="#924B72">#PB_Editor_LegalCopyright</font>
+  <font color="#924B72">#PB_Editor_LegalTrademarks</font>
+  <font color="#924B72">#PB_Editor_PrivateBuild</font>
+  <font color="#924B72">#PB_Editor_SpecialBuild</font>
+  <font color="#924B72">#PB_Editor_Email</font>
+  <font color="#924B72">#PB_Editor_Website</font>
+</font></pre>
+
+
+</blockquote>
+<p><b>Ressourcen</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_ressources.png"></p>
+
+Hier können Sie so viele Ressource-Skripte (*.rc Dateien) einbinden, wie Sie möchten. 
+Sie werden kompiliert und in das Executable eingebunden. Sie können jeden Ressourcen-Editor 
+(zum Beispiel die <a href="http://www.christian-heffner.de/index.php?page=start&lang=de">PellesC</a> IDE) verwenden, um solche Skripte zu erstellen. 
+
+<br>
+<br>
+
+Hinweis: Da Ressourcen spezifisch für die Windows-Plattform sind, wird von PB keine Library 
+zu deren Verwaltung eingebunden. Daher sind diese hier auch nicht weiter dokumentiert. Sehen 
+Sie in die Dokumentation der <a href="https://learn.microsoft.com/de-de/windows/win32/apiindex/windows-api-list">Windows API</a> 
+über Ressourcen für weitere Informationen. 
+
+
+
+
+
+</blockquote>
+<p><b>Compiler-Optionen für Projekte</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_targets.png"></p>
+
+Die Compiler-Optionen für Projekte ermöglichen die Definition mehrerer Kompilier-Ziele. Jedes Ziel 
+ist im Grunde ein Set von Compiler-Optionen mit einer bestimmten Quelldatei und Ausgabe-Executable. 
+Die linke Seite des Compiler-Optionen Fensters ist erweitert um die Liste von definierten 
+Kompilier-Zielen. Die Werkzeugleiste darüber ermöglicht das Erstellen, Löschen, Kopieren, 
+Bearbeiten und Verschieben von Zielen in der Liste. 
+<br>
+<br>
+Das Standard-Ziel ist dasjenige, welches beim Auswählen des Menüeintrags &quot;Kompilieren/Starten&quot; 
+kompiliert wird. Dies kann schnell umgeschalten werden mittels dem &quot;Als Standard-Ziel festlegen&quot; 
+Häkchen-Schalter oder über das Compiler-Menü. 
+Die Option &quot;In 'Alle Ziele erstellen' einschalten&quot; gibt an, ob beim Verwenden des 'Alle Ziele 
+erstellen' Menüeintrags das ausgewählte Ziel erstellt wird oder nicht. 
+<br>
+<br>
+Die rechte Seite der Compiler-Optionen ist nahezu identisch wie im Nicht-Projekt-Modus und 
+reflektiert die Einstellungen für das Kompilier-Ziel, welches aktuell im linken Bereich 
+ausgewählt ist. 
+Die einzigen Unterschiede sind die Felder &quot;Eingabe-Quellcode&quot; und &quot;Ausgabe-Executable&quot; in der 
+ersten Registerkarte. Diese Felder müssen für alle Kompilier-Ziele angegeben werden. 
+Davon abgesehen sind die Compiler-Optionen identisch zu den weiter oben beschriebenen. 
+<br>
+<br>
+Im Projekt-Modes werden die Informationen über das Kompilier-Ziel in der Projekt-Datei gespeichert 
+und nicht in den individuellen Quellcode-Dateien. Informationen, welche zur Datei gehören (wie z.B. 
+der Status der Faltung), werden trotzdem für die individuellen Quellcode-Dateien an dem Platz 
+gespeichert, wie dies in den <a href="../reference/ide_preferences.html">Einstellungen</a> angegeben wurde. 
+
+
+</blockquote>
+<p><b>Das Erstellungs-Fortschritts-Fenster</b></p><blockquote>
+
+
+<p><img src="images/ide_compiler_build.png"></p>
+
+Wenn der Menüeintrag 'Alle Ziele erstellen' bei einem geöffneten Projekt ausgewählt wird, werden 
+alle Ziele (die die korrespondierende Option in den Compiler-Optionen gesetzt haben) in der 
+Reihenfolge kompiliert, wie sie in den Compiler-Optionen definiert wurden. 
+Das Fortschritts-Fenster zeigt den aktuellen Kompilier-Fortschritt wie auch den Status jedes 
+einzelnen Ziels. Sobald der Prozess abgeschlossen ist, kann das Erstellungs-Protokoll (&quot;Build-Log&quot;) 
+in die Zwischenablage oder auf Disk gespeichert werden. 
+
+</blockquote>
+</font></body></html>

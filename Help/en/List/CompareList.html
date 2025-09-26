@@ -1,0 +1,69 @@
+<html><head><title>CompareList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompareList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CompareList</b></font>(List1(), List2() [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Compare each elements of the two lists for equality. Recursively compares 
+also contents of structured lists with dynamic elements (such as embedded arrays, lists or maps). 
+The two lists are considered the equal if they have the same type and size and if each 
+pair of elements is equal. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List1(), List2()</i></td>
+<td width="90%"> 
+The lists to compare. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : String comparison is case sensitive (a=a). (default)
+  <font color="#924B72">#PB_String_NoCase</font>        : String comparison is case insensitive(a=A).
+  <font color="#924B72">#PB_Memory_FollowPointers</font>: If a structure element is a pointer that is not 0, recursively compare the pointer target. 
+                              The default is to compare only the pointer value itself. See remarks below for details.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if both lists are the same or zero if they differ. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The <font color="#924B72">#PB_Memory_FollowPointers</font> option is for advanced users and requires special care to avoid crashes. 
+If this option is used then all pointer values must point to valid and initialized memory or have the value 0. 
+It is also not allowed to have loops in the pointed elements (a chain of pointers that refers back to itself). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">A$</font>()
+<font color="#006666">  AddElement</font>(<font color="#006666">A$</font>()) :<font color="#006666"> A$</font>() = &quot;Jim&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">A$</font>()) :<font color="#006666"> A$</font>() = &quot;John&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">A$</font>()) :<font color="#006666"> A$</font>() = &quot;Jack&quot;
+  
+  <b><font color="#006666">NewList</font></b> <font color="#006666">B$</font>()
+<font color="#006666">  AddElement</font>(<font color="#006666">B$</font>()) :<font color="#006666"> B$</font>() = &quot;JIM&quot;  <font color="#006666">; Case differs</font>
+<font color="#006666">  AddElement</font>(<font color="#006666">B$</font>()) :<font color="#006666"> B$</font>() = &quot;John&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">B$</font>()) :<font color="#006666"> B$</font>() = &quot;Jack&quot;
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareList</font>(<font color="#006666">A$</font>(),<font color="#006666"> B$</font>())                     <font color="#006666">; Not equal</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">CompareList</font>(<font color="#006666">A$</font>(),<font color="#006666"> B$</font>(), <font color="#924B72">#PB_String_NoCase</font>)  <font color="#006666">; Equal</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../array/comparearray.html">CompareArray()</a>, <a href="../map/comparemap.html">CompareMap()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=clearlist.html>ClearList()</a> - <a href=index.html>List Index</a> - <a href=copylist.html>CopyList()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html><head><title>UnescapeString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UnescapeString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>UnescapeString</b></font>(Chaine$ [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Transforme une chaîne  avec des séquences 
+d'échappement en chaîne standard. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne à transformer. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_EscapeInternal</font>: Deséchappe la chaîne en utilisant le format de PureBasic (Par défaut).
+                             (voir <a href="../reference/general_rules.html">Règles de syntaxe générales</a>.
+  <font color="#924B72">#PB_String_EscapeXML</font>     : Deséchappe la chaîne en utilisant le format XML. 
+                             Utile pour lire une chaîne provenant d'un arbre XML.
+  <font color="#924B72">#PB_String_EscapeJSON</font>    : Deséchappe la chaîne en utilisant le format JSON. 
+                             Utile pour lire une chaîne provenant d'une valeur JSON.   
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la version non échappée 
+de la chaîne. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La fonction <a href="escapestring.html">EscapeString()</a> peut être 
+utilisée pour faire l'opération inverse. 
+<br>
+<br>
+Attention: Sous Windows, \t ne fonctionne pas avec les fonctions graphiques 
+des bibliothèques 2DDrawing et VectorDrawing. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">UnescapeString</font>(~&quot;Test=\&quot;Hello\&quot;.&quot;) <font color="#006666">; Affichera &quot;Test=&quot;Hello&quot;.&quot;</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">UnescapeString</font>(&quot;&amp;lt;item&amp;gt;Hello&amp;lt;/item&amp;gt;&quot;, <font color="#924B72">#PB_String_EscapeXML</font>) <font color="#006666">; Affichera &quot;&lt;item&gt;Hello&lt;/item&gt;&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="escapestring.html">EscapeString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=utf8.html>UTF8()</a> - <a href=index.html>String Index</a> - <a href=val.html>Val()</a> -><br><br>
+
+</body></html>

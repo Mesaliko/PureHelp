@@ -1,0 +1,64 @@
+<html><head><title>CreateDataMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateDataMesh()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateDataMesh</b></font>(#Mesh, Array.MeshVertex() [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new #Mesh from the specified 2 dimensional array of MeshVertex type. This command allows 
+faster mesh creation than using <a href="createmesh.html">CreateMesh()</a> by preparing an array and submitting in one batch to the command. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+The number to identify the new mesh. <a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to 
+auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Array</i></td>
+<td> 
+A 2 dimensional array of type MeshVertex, which will be used to create the new mesh. The MeshVertex structure is 
+defined as the following: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f
+    NormalY.f
+    NormalZ.f
+    TangentX.f
+    TangentY.f
+    TangentZ.f
+    u.f
+    v.f
+    Color.l
+  <b><font color="#006666">EndStructure</font></b>
+</font></pre>
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The way to link vertices. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_DiagonalRegular1</font>      : diagonals are aligned in the same way
+  <font color="#924B72">#PB_Mesh_DiagonalRegular2</font>      : diagonals are aligned in the other way
+  <font color="#924B72">#PB_Mesh_DiagonalAlternate</font>     : diagonals are once in a way and once in the other way (alternate)
+  <font color="#924B72">#PB_Mesh_DiagonalShortestLength</font>: diagonals are between the two closest vertices
+  <font color="#924B72">#PB_Mesh_DiagonalClosestNormal</font> : diagonals are between the two closest normals (scalar product). Best mode but requires normals.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If the #Mesh was already created, then it is freed and replaced by a new one. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createcylinder.html>CreateCylinder()</a> - <a href=index.html>Mesh Index</a> - <a href=createicosphere.html>CreateIcoSphere()</a> -><br><br>
+
+</body></html>

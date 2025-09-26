@@ -1,0 +1,65 @@
+<html><head><title>SetNodeAnimationKeyFrameRotation</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetNodeAnimationKeyFrameRotation()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetNodeAnimationKeyFrameRotation</b></font>(#NodeAnimation, KeyFrame, x, y, z [, w, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die Keyframe-Rotation für die #NodeAnimation. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#NodeAnimation</i></td>
+<td width="90%"> 
+Die zu verwendende Node-Animation. 
+
+</td></tr>
+<tr><td><i>#Keyframe</i></td>
+<td> 
+Der Node-Animation Keyframe-Index. Der erste Keyframe-Index ist null. 
+Wenn das Keyframe nicht existiert, dann hat diese Funktion keinen Effekt. 
+
+</td></tr>
+<tr><td><i>x, y, z</i></td>
+<td> 
+Die neue Keyframe 'x, y, z'-Rotation in der Welt. Die Werte sind vom ausgewählten 'Modus' abhängig. 
+
+</td></tr>
+<tr><td><i>w (optional)</i></td>
+<td> 
+Die neue Keyframe 'w'-Rotation in der Welt (wird nur bei <font color="#924B72">#PB_Orientation_Quaternion</font> und 
+<font color="#924B72">#PB_Orientation_Direction</font> verwendet). 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Rotations-Modus. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Orientation_PitchYawRoll</font>: 'x' (&quot;pitch&quot; oder auch &quot;Nick&quot;), 'y' (&quot;yaw&quot; oder auch &quot;Gier&quot;), 'z' (&quot;roll&quot; oder auch &quot;Roll&quot;),
+                                zugewiesen in dieser Reihenfolge (Standard).
+  <font color="#924B72">#PB_Orientation_Quaternion</font>  : 'x', 'y', 'z', 'w' für Quaternion-Werte
+  <font color="#924B72">#PB_Orientation_Direction</font>   : 'x', 'y', 'z' für den Richtungsvektor und 'w' für die Rotation (Roll).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Siehe auch den Wikipedia-Artikel zum <a href="http://de.wikipedia.org/wiki/Roll-Nick-Gier-Winkel">Roll-Nick-Gier-Winkel</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createnodeanimationkeyframe.html">CreateNodeAnimationKeyFrame()</a>, <a href="getnodeanimationkeyframepitch.html">GetNodeAnimationKeyFramePitch()</a>, <a href="getnodeanimationkeyframeyaw.html">GetNodeAnimationKeyFrameYaw()</a>, <a href="getnodeanimationkeyframeroll.html">GetNodeAnimationKeyFrameRoll()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setnodeanimationkeyframeposition.html>SetNodeAnimationKeyFramePosition()</a> - <a href=index.html>NodeAnimation Inhaltsverzeichnis</a> - <a href=setnodeanimationkeyframescale.html>SetNodeAnimationKeyFrameScale()</a> -><br><br>
+
+</body></html>

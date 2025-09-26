@@ -1,0 +1,246 @@
+<html><head><title>ListIconGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ListIconGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ListIconGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, TitrePremiereColonne$, LargeurTitrePremiereColonne [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget de listes avec icônes dans 
+la GadgetList en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>TitrePremiereColonne$</i></td>
+<td> 
+Le titre de la première colonne dans le 
+gadget. 
+<br>
+<br>
+Le gadget est créé avec une colonne 
+initiale. 
+
+</td></tr>
+<tr><td><i>LargeurTitrePremiereColonne</i></td>
+<td> 
+La largeur de la première colonne dans le 
+gadget. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ListIcon_CheckBoxes</font>         : Affiche une case à cocher dans la première colonne.
+  <font color="#924B72">#PB_ListIcon_ThreeState</font>         : La case à cocher peut avoir un état 'indéterminé'.
+  <font color="#924B72">#PB_ListIcon_MultiSelect</font>        : Active le mode 'sélection multiple'.
+  <font color="#924B72">#PB_ListIcon_GridLines</font>          : Affiche des lignes de séparation.
+  <font color="#924B72">#PB_ListIcon_FullRowSelect</font>      : La sélection s'étend à toute la ligne au lieu de la première colonne (Windows seulement).
+  <font color="#924B72">#PB_ListIcon_HeaderDragDrop</font>     : L'ordre des colonnes peut être changé avec un glisser/déposer (drag'n'drop).
+  <font color="#924B72">#PB_ListIcon_AlwaysShowSelection</font>: Affiche la selection même quand le gadget n'est plus actif (Windows seulement).
+</font></pre>
+<blockquote>
+
+L'option <font color="#924B72">#PB_ListIcon_ThreeState</font> peut 
+être utilisée en combinaison avec l'option 
+<font color="#924B72">#PB_ListIcon_CheckBoxes</font> pour obtenir une 
+case à cocher qui peut avoir un état &quot;on&quot;, 
+&quot;off&quot; et &quot;indéterminé&quot;. 
+L'utilisateur ne peut sélectionner que 
+l'état &quot;on&quot; ou &quot;off&quot;. L'état &quot;indéterminé&quot; 
+peut être défini en utilisant la fonction 
+<a href="setgadgetitemstate.html">SetGadgetItemState()</a>. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget.
+
+  Les fonctions suivantes peuvent être utilisées pour agir sur le contenu de cette liste :
+  - <a href="addgadgetcolumn.html">AddGadgetColumn()</a>   : Ajoute une colonne au gadget.
+  - <a href="removegadgetcolumn.html">RemoveGadgetColumn()</a>: Supprime une colonne (ainsi que ses données).
+  - <a href="addgadgetitem.html">AddGadgetItem()</a>     : Ajoute un élément et éventuellement une image.
+  - <a href="removegadgetitem.html">RemoveGadgetItem()</a>  : Supprime un élément.
+  - <a href="cleargadgetitems.html">ClearGadgetItems()</a>  : Supprime tous les éléments.
+  - <a href="countgadgetitems.html">CountGadgetItems()</a>  : Renvoie le nombre d'éléments actuellement contenus dans le gadget.
+  - <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a>: Renvoie la couleur du texte ou du fond de l'élément.
+  - <a href="setgadgetitemcolor.html">SetGadgetItemColor()</a>: Change la couleur du texte ou du fond de l'élément.
+                         (Couleur de fond pas pris en charge sur MacOS X)
+  - <a href="getgadgetitemdata.html">GetGadgetItemData()</a> : Renvoie la valeur personnalisée associée à cet élément.
+  - <a href="setgadgetitemdata.html">SetGadgetItemData()</a> : Associe une valeur personnalisée à cet élément.
+  - <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Renvoie l'état de l'élément spécifié. 
+                          Ce peut être une combinaison de <font color="#924B72">#PB_ListIcon_Selected</font> 
+                          et <font color="#924B72">#PB_ListIcon_Checked</font> si les 'cases à cocher' sont affichées
+  - <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Change l'état de l'élément spécifié. 
+                          Ce peut être une combinaison de <font color="#924B72">#PB_ListIcon_Selected</font>
+                          et <font color="#924B72">#PB_ListIcon_Checked</font> si les 'cases à cocher' sont affichées
+  - <a href="getgadgetitemtext.html">GetGadgetItemText()</a> : Renvoie le texte de l'élément spécifié. 
+                          Si 'Element' = -1, alors le titre de la colonne est renvoyé.
+  - <a href="setgadgetitemtext.html">SetGadgetItemText()</a> : Change le texte de l'élément spécifié. 
+                          Si 'Element' = -1, alors le titre de la colonne est modifié.
+                          Comme avec <a href="addgadgetitem.html">AddGadgetItem()</a>, il est possible de définir le texte de 
+                          plusieurs colonnes à la fois, avec le séparateur <a href="../string/chr.html">Chr(10)</a>.
+  - <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>: Modifie l'image actuelle de l'élément spécifié.
+  - <a href="getgadgetstate.html">GetGadgetState()</a>    : Renvoie le premier élément selectionné ou -1 s'il n'y a pas d'élément sélectionné.
+  - <a href="setgadgetstate.html">SetGadgetState()</a>    : Change l'élément sélectionné (tous les autres éléments sont alors désélectionnés). 
+                          Si -1 est utilisé, tous les éléments seront désélectionnés.
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec l'attribut suivant :
+      <font color="#924B72">#PB_ListIcon_ColumnCount</font>   : Renvoie le nombre de colonnes 
+      <font color="#924B72">#PB_ListIcon_DisplayMode</font>   : Renvoie le mode d'affichage du gadget (Windows uniquement)
+      <font color="#924B72">#PB_ListIcon_ClickedColumn</font> : Renvoie le dernier index de colonne cliquée. La première colonne a l'index 0.
+
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a> avec l'attribut suivant (seulement sous Windows):
+      <font color="#924B72">#PB_ListIcon_DisplayMode</font> : Change le mode d'affichage du gadget. 
+           Le mode peut être l'une des constantes suivantes:
+           <font color="#924B72">#PB_ListIcon_LargeIcon</font>   : Mode grandes icônes
+           <font color="#924B72">#PB_ListIcon_SmallIcon</font>   : Mode petites icônes
+           <font color="#924B72">#PB_ListIcon_List</font>        : Mode Liste
+           <font color="#924B72">#PB_ListIcon_Report</font>      : Mode Détails (colonnes, mode par défaut)
+
+  - <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a> : Avec l'attribut suivant:
+      <font color="#924B72">#PB_ListIcon_ColumnWidth</font> : Renvoie la largeur de la 'Colonne' spécifiée. Le paramètre 'Element' est ignoré.
+
+  - <a href="setgadgetitemattribute.html">SetGadgetItemAttribute()</a> : Avec les attributs suivants:
+      <font color="#924B72">#PB_ListIcon_ColumnWidth</font>    : Modifie la largeur de la colonne. Le paramètre 'Element' est ignoré.
+      <font color="#924B72">#PB_ListIcon_ColumnAlignment</font>: Modifie l'alignement du texte de la colonne. 
+           Le paramètre 'Element' peut avoir l'une des valeurs suivantes:
+           - <font color="#924B72">#PB_ListIcon_Left</font>  : Le texte est aligné à gauche (par défaut).
+           - <font color="#924B72">#PB_ListIcon_Right</font> : Le texte est aligné à droite.
+           - <font color="#924B72">#PB_ListIcon_Center</font>: Le texte est centré.
+
+  Si vous voulez ajouter du contenu à un gadget ListIcon contenant plusieurs colonnes en utilisant
+  <a href="addgadgetitem.html">AddGadgetItem()</a>, utilisez le format &quot;première colonne&quot;+chr(10)+&quot;deuxième colonne&quot; comme paramètre Texte$. 
+
+  - <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les valeurs 'TypeCouleur' suivantes:
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Couleur du texte
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Couleur du fond
+    <font color="#924B72">#PB_Gadget_LineColor</font> : Couleur de la grille si l'option <font color="#924B72">#PB_ListIcon_GridLines</font> est utilisée.
+
+  -  <a href="setgadgetitemcolor.html">SetGadgetItemColor()</a> et <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a> avec les  valeurs 'TypeCouleur' suivantes:
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Texte de l'élément.
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Fond de l'élément.
+
+  Note: <a href="setgadgetcolor.html">SetGadgetColor()</a> n'est pas pris en charge sur la plate-forme MacOS X.
+</font></pre>
+
+Les évènements suivants sont supportés par <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font>        : Clic avec le bouton gauche de la souris, ou une case à cocher a été utilisée.
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>  : Double-clic avec le bouton gauche de la souris
+  <font color="#924B72">#PB_EventType_RightClick</font>       : Clic avec le bouton droit de la souris
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font> : Double-clic avec le bouton droit de la souris
+  <font color="#924B72">#PB_EventType_Change</font>           : L'élément sélectionné a été changé
+  <font color="#924B72">#PB_EventType_DragStart</font>        : L'utilisateur a essayé de lancer une opération de 'Glisser &amp; Déposer'.
+                                   <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> peut être utilisé pour obtenir les informations sur les éléments déplacés.
+  <font color="#924B72">#PB_EventType_ColumnClick</font>      : Un en-tête de colonne a été cliqué. Pour le connaître, utilisez <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec <font color="#924B72">#PB_ListIcon_ClickedColumn</font>.
+</font></pre>
+Après un évènement <font color="#924B72">#PB_EventType_DragStart</font>, la bibliothèque <a href="../dragdrop/index.html">Drag & Drop</a> 
+peut être utilisée pour commencer une opération de 'Glisser &amp; Déposer'. Sous MacOS X, l'événement 
+<font color="#924B72">#PB_EventType_DragStart</font> doit être géré à l'aide de <a href="../window/bindevent.html">BindEvent()</a> ou de <a href="bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 100, 400, 100, &quot;ListIconGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">   ListIconGadget</font>(0, 5, 5, 390, 90, &quot;Nom&quot;, 100, <font color="#924B72">#PB_ListIcon_FullRowSelect</font> | <font color="#924B72">#PB_ListIcon_AlwaysShowSelection</font>)
+<font color="#006666">   AddGadgetColumn</font>(0, 1, &quot;Adresse&quot;, 250)
+<font color="#006666">   AddGadgetItem</font>(0, -1, &quot;Harry Rannit&quot;+<font color="#006666">Chr</font>(10)+&quot;12 Parliament Way, Battle Street, By the Bay&quot;)
+<font color="#006666">   AddGadgetItem</font>(0, -1, &quot;Ginger Brokeit&quot;+<font color="#006666">Chr</font>(10)+&quot;130 PureBasic Road, BigTown, CodeCity&quot;)
+
+   <b><font color="#006666">Repeat</font></b>
+     Evenement =<font color="#006666"> WaitWindowEvent</font>()
+   <b><font color="#006666">Until</font></b> Evenement = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Démonstration des options possibles pour le gadget liste avec icônes...</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 700, 300, &quot;ListIconGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+    <font color="#006666">; colonne de gauche</font>
+<font color="#006666">    TextGadget    </font>(6,  10,  10, 330, 20, &quot;Liste avec icônes standard&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(0,  10,  25, 330, 70, &quot;Colonne 1&quot;, 100)
+<font color="#006666">    TextGadget    </font>(7,  10, 105, 330, 20, &quot;Liste avec icônes + cases à cocher&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(1,  10, 120, 330, 75, &quot;Colonne 1&quot;, 100, <font color="#924B72">#PB_ListIcon_CheckBoxes</font>)  <font color="#006666">; Liste avec icônes et cases à cocher</font>
+<font color="#006666">    TextGadget    </font>(8,  10, 205, 330, 20, &quot;Liste avec icônes + sélection multiple&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(2,  10, 220, 330, 70, &quot;Colonne 1&quot;, 100, <font color="#924B72">#PB_ListIcon_MultiSelect</font>) <font color="#006666">; Liste avec icônes et sélection multiple</font>
+    <font color="#006666">; colonne de droite</font>
+<font color="#006666">    TextGadget    </font>(9, 360,  10, 330, 20, &quot;Liste avec icônes + lignes de séparation&quot;,<font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(3, 360,  25, 330, 70, &quot;Colonne 1&quot;, 100, <font color="#924B72">#PB_ListIcon_GridLines</font>)
+<font color="#006666">    TextGadget   </font>(10, 360, 105, 330, 20, &quot;Liste avec icônes + sélection de ligne entière + sélection toujours affichée&quot;,<font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(4, 360, 120, 330, 75, &quot;Colonne 1&quot;, 100, <font color="#924B72">#PB_ListIcon_FullRowSelect</font> | <font color="#924B72">#PB_ListIcon_AlwaysShowSelection</font>)
+<font color="#006666">    TextGadget   </font>(11, 360, 205, 330, 20, &quot;Liste avec icônes standard + mode grandes icônes&quot;,<font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ListIconGadget</font>(5, 360, 225, 330, 65, &quot;&quot;, 200,<font color="#924B72">#PB_ListIcon_GridLines</font>)
+    <b><font color="#006666">For</font></b> a = 0 <b><font color="#006666">To</font></b> 4            <font color="#006666">; pour chacune des 5 premières listes avec icônes</font>
+      <b><font color="#006666">For</font></b> b = 2 <b><font color="#006666">To</font></b> 4          <font color="#006666">; ajouter 3 colonnes supplémentaires</font>
+<font color="#006666">        AddGadgetColumn</font>(a, b, &quot;Colonne &quot; +<font color="#006666"> Str</font>(b), 65)
+      <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">For</font></b> b = 0 <b><font color="#006666">To</font></b> 2          <font color="#006666">; ajouter 4 éléments à chaque ligne des listes avec icônes</font>
+<font color="#006666">        AddGadgetItem</font>(a, b, &quot;Elément 1&quot;+<font color="#006666">Chr</font>(10)+&quot;Elément 2&quot;+<font color="#006666">Chr</font>(10)+&quot;Elément 3&quot;+<font color="#006666">Chr</font>(10)+&quot;Elément 4&quot;)
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+    <font color="#006666">; Ici nous changeons l'affichage de la liste avec icônes en mode grandes icônes et nous affichons une image</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font>+&quot;examples\sources\Data\File.bmp&quot;)     <font color="#006666">; changez le chemin/fichier contenant votre image 32x32 pixel</font>
+<font color="#006666">      SetGadgetAttribute</font>(5, <font color="#924B72">#PB_ListIcon_DisplayMode</font>, <font color="#924B72">#PB_ListIcon_LargeIcon</font>)
+<font color="#006666">      AddGadgetItem</font>(5, 0, &quot;Image 1&quot;,<font color="#006666"> ImageID</font>(0))
+<font color="#006666">      AddGadgetItem</font>(5, 1, &quot;Image 2&quot;,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>  
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+
+<p><img src="../HelpPictures/listicongadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addgadgetcolumn.html">AddGadgetColumn()</a>, <a href="removegadgetcolumn.html">RemoveGadgetColumn()</a>, 
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, 
+<a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, 
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, 
+<a href="setgadgetitemimage.html">SetGadgetItemImage()</a>, <a href="getgadgetitemdata.html">GetGadgetItemData()</a>, 
+<a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>, 
+<a href="setgadgetitemattribute.html">SetGadgetItemAttribute()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, 
+<a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a>, 
+<a href="setgadgetitemcolor.html">SetGadgetItemColor()</a>, <a href="explorerlistgadget.html">ExplorerListGadget()</a>, 
+<a href="listviewgadget.html">ListViewGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isgadget.html>IsGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=listviewgadget.html>ListViewGadget()</a> -><br><br>
+
+</body></html>

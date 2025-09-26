@@ -1,0 +1,72 @@
+<html><head><title>FileSeek</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FileSeek()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FileSeek</b></font>(#Fichier, Position.q [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la position du pointeur de 
+lecture/écriture. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fichier</i></td>
+<td width="90%"> 
+Le fichier à utiliser. 
+
+</td></tr>
+<tr><td><i>Position.q</i></td>
+<td> 
+La nouvelle position en octet par rapport 
+au début du fichier. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Le mode de recherche. Peut être l'une des 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Absolute</font>: Position absolue (par défaut).
+  <font color="#924B72">#PB_Relative</font>: Position relative, un décalage (offset) positif ou négatif 
+                par rapport à la position courante du pointeur dans le fichier.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  File$ =<font color="#006666"> OpenFileRequester</font>(&quot;Sélectionner un fichier&quot;, &quot;&quot;, &quot;Tous (*.*)|*.*&quot;, 0)
+  <b><font color="#006666">If</font></b> File$
+    <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, File$)
+      
+      <font color="#006666">; Lit la taille en octets du fichier</font>
+      Length =<font color="#006666"> Lof</font>(0)                       
+      <b><font color="#006666">Debug</font></b> &quot;Taille du fichier : &quot; +<font color="#006666"> FormatNumber</font>(Length, 0) + &quot; octets&quot;
+          
+      <font color="#006666">; Place le pointeur 10 caractères avant la fin du fichier</font>
+<font color="#006666">      FileSeek</font>(0, Length - 10)                                
+      <b><font color="#006666">Debug</font></b> &quot;Position : &quot; +<font color="#006666"> FormatNumber</font>(<font color="#006666">Loc</font>(0), 0)
+      
+<font color="#006666">      CloseFile</font>(0)
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Erreur de lecture : &quot; + File$
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loc.html">Loc()</a>, <a href="lof.html">Lof()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=fileid.html>FileID()</a> - <a href=index.html>File Index</a> - <a href=flushfilebuffers.html>FlushFileBuffers()</a> -><br><br>
+
+</body></html>

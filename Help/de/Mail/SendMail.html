@@ -1,0 +1,98 @@
+<html><head><title>SendMail</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SendMail()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SendMail</b></font>(#Mail, Smtp$ [, Port [, Flags [, User$, Passwort$]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Sendet die angegebene Email. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mail</i></td>
+<td width="90%"> 
+Die zu sendende Email. 
+
+</td></tr>
+<tr><td><i>Smtp$</i></td>
+<td> 
+Die Adresse des Mail-Servers, welcher zum Versenden der Email verwendet werden soll. 
+
+</td></tr>
+<tr><td><i>Port (optional)</i></td>
+<td> 
+Der Port des Mail-Servers. Der Standard ist Port 25. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mail_Asynchronous</font>: sendet die Email im Hintergrund (asynchron). <a href="mailprogress.html">MailProgress()</a> kann verwendet werden,
+                         um den Fortschritt zu verfolgen.
+  <font color="#924B72">#PB_Mail_UseSSL</font>      : verwendet TLS/SSL zum Senden der Email (der Server muss dieses Protokoll unterstützen).
+  <font color="#924B72">#PB_Mail_UseSMTPS</font>    : verwendet SMTPS zum Senden der Email (der Server muss dieses Protokoll unterstützen).
+  <font color="#924B72">#PB_Mail_Debug</font>       : um Debug-Informationen in der Konsole auszugeben.
+</font></pre>
+
+</td></tr>
+<tr><td><i>User$, Passwort$ (optional)</i></td>
+<td> 
+Der User (Anwender) und das Passwort, welche für die SMTP Authentifizierung verwendet werden, sofern 
+der Server dies erfordert. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Email korrekt gesendet wurde, und andernfalls Null. 
+
+</blockquote><p><b>Beispiel:</b> Einfaches SMTP</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Hinweis: ändere die Adresse und Smtp, um ein lauffähiges Beispiel zu erhalten</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@youraddress.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, &quot;youraddress@youraddress.com&quot;, <font color="#924B72">#PB_Mail_To</font>)
+
+    <b><font color="#006666">Debug</font></b> <font color="#006666">SendMail</font>(0, &quot;smtp.yourfavoritesmtp.com&quot;)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Verwendung von Hotmail (TLS)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Login$ = &quot;you@hotmail.com&quot;
+  Password$ = &quot;password&quot;
+  Receiver$ = &quot;test@gmail.com&quot;
+
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, Login$, &quot;Hello&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, Receiver$, <font color="#924B72">#PB_Mail_To</font>)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">SendMail</font>(0, &quot;smtp-mail.outlook.com&quot;, 587, <font color="#924B72">#PB_Mail_UseSSL</font>, Login$, Password$)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Verwendung von GMail (TLS+SMTPS)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Seien Sie sicher, das richtige Login und Passwort zu verwenden.</font>
+  <font color="#006666">;</font>
+  Login$ = &quot;yourlogin&quot;
+  Password$ = &quot;password&quot;
+  Receiver$ = &quot;test@gmail.com&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, Login$ + &quot;@gmail.com&quot;, &quot;Hello&quot;)
+<font color="#006666">    AddMailRecipient</font>(0, Receiver$, <font color="#924B72">#PB_Mail_To</font>)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">SendMail</font>(0, &quot;smtp.gmail.com&quot;, 465, <font color="#924B72">#PB_Mail_UseSSL</font> | <font color="#924B72">#PB_Mail_UseSMTPS</font>, Login$, Password$)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createmail.html">CreateMail()</a>, <a href="mailprogress.html">MailProgress()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=removemailrecipient.html>RemoveMailRecipient()</a> - <a href=index.html>Mail Inhaltsverzeichnis</a> - <a href=setmailattribute.html>SetMailAttribute()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,72 @@
+<html><head><title>SwapElements</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SwapElements()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SwapElements</b></font>(List(), *FirstElement, *SecondElement)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Swaps the position of two elements in the specified list. This command is a fast 
+way to reorganize a list, because it does not actually move the element data itself. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+<tr><td><i>*FirstElement</i></td>
+<td> 
+Address of the first element to swap. You can get this address by using the @ operator on the list name. 
+
+</td></tr>
+<tr><td><i>*SecondElement</i></td>
+<td> 
+Address of the second element to swap. You can get this address by using the @ operator on the list name. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>()
+  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">Numbers</font>())
+<font color="#006666">    Numbers</font>() = k
+  <b><font color="#006666">Next</font></b>
+    
+<font color="#006666">  SelectElement</font>(<font color="#006666">Numbers</font>(), 3) <font color="#006666">; Get the 4th element (first element is 0)</font>
+  *FirstElement = @Numbers()
+  
+<font color="#006666">  SelectElement</font>(<font color="#006666">Numbers</font>(), 9) <font color="#006666">; Get the 10th element</font>
+  *SecondElement = @Numbers()
+  
+  <font color="#006666">; Swap the 3 with the 9</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SwapElements</font>(<font color="#006666">Numbers</font>(), *FirstElement, *SecondElement)
+    
+  <font color="#006666">; Prove it</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Numbers</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Numbers</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="moveelement.html">MoveElement()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=splitlist.html>SplitList()</a> - <a href=index.html>List Index</a><br><br>
+
+</body></html>

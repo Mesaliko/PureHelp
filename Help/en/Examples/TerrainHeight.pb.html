@@ -1,0 +1,272 @@
+<html><head><title>TerrainHeight.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Terrain : Terrain Height change
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#006666">; Use left button to select an area, then use PageUp or PageDown to change terrain's height
+</font><font color="#006666">; Use [F5] to init BlendMaps
+
+</font>
+
+<font color="#924B72">#CameraSpeed</font> = 1
+<font color="#924B72">#TerrainMiniX</font> = 0
+<font color="#924B72">#TerrainMiniY</font> = 0
+<font color="#924B72">#TerrainMaxiX</font> = 0
+<font color="#924B72">#TerrainMaxiY</font> = 0
+
+<font color="#924B72">#NbSommet</font> = 36
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, TimeSinceLastFrame
+<b><font color="#006666">Define</font></b> Selected
+
+<b><font color="#006666">Declare</font></b> <font color="#006666">InitBlendMaps</font>()
+<b><font color="#006666">Declare</font></b> <font color="#006666">Clamp</font>(*var.float, min.f, max.f)
+<b><font color="#006666">Declare</font></b> <font color="#006666">DisplayPolygon</font>(Px.f, Py.f, Pz.f, Rayon.f)
+<b><font color="#006666">Declare</font></b> <font color="#006666">DoTerrainModify</font>(tx, ty, wx.f, wy.f, wz.f, mBrushSizeTerrainSpace.f, height.f)
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;RealTime Terrain Change - [MouseClick] [F5] [PageUp]/[PageDown] [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/nvidia&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/GUI&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Terrain&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+
+</font>light =<font color="#006666"> CreateLight</font>(<font color="#924B72">#PB_Any</font> ,<font color="#006666">RGB</font>(185, 185, 185), 4000, 1200, 1000, <font color="#924B72">#PB_Light_Directional</font>)
+<font color="#006666">SetLightColor</font>(light, <font color="#924B72">#PB_Light_SpecularColor</font>,<font color="#006666"> RGB</font>(255*0.4, 255*0.4,255*0.4))
+<font color="#006666">LightDirection</font>(light ,0.55, -0.3, -0.75)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(5, 5,5))
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0,  0, 500, -50, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraRange</font>(0, 1, 0)
+
+<font color="#006666">;----------------------------------
+</font><font color="#006666">; terrain definition
+</font><font color="#006666">SetupTerrains</font>(<font color="#006666">LightID</font>(Light), 3000, <font color="#924B72">#PB_Terrain_NormalMapping</font>)
+<font color="#006666">; initialize terrain
+</font><font color="#006666">CreateTerrain</font>(0, 513, 12000, 600, 3, &quot;TerrainHeight&quot;, &quot;dat&quot;)
+<font color="#006666">; set all texture will be use when terrrain will be constructed
+</font><font color="#006666">AddTerrainTexture</font>(0,  0, 100, &quot;dirt_grayrocky_diffusespecular.jpg&quot;,  &quot;dirt_grayrocky_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  1,  30, &quot;grass_green-01_diffusespecular.jpg&quot;, &quot;grass_green-01_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  2, 200, &quot;growth_weirdfungus-03_diffusespecular.jpg&quot;, &quot;growth_weirdfungus-03_normalheight.jpg&quot;)
+
+<font color="#006666">;- define terrains
+</font><b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+  <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+    Imported =<font color="#006666"> DefineTerrainTile</font>(0, tx, ty, &quot;terrain513.png&quot;, ty % 2, tx % 2)
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+<font color="#006666">BuildTerrain</font>(0)
+
+<b><font color="#006666">If</font></b> Imported = <font color="#924B72">#True</font>
+<font color="#006666">  InitBlendMaps</font>()
+<font color="#006666">  UpdateTerrain</font>(0)
+  
+  <font color="#006666">; If enabled, it will save the terrain as a (big) cache for a faster load next time the program is executed
+</font>  <font color="#006666">; SaveTerrain(0, #False)
+</font><b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">ShowGUI</font>(128, 1)
+
+<b><font color="#006666">Repeat</font></b>
+  
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -(<font color="#006666">MouseDeltaX</font>()/10)
+    MouseY = -(<font color="#006666">MouseDeltaY</font>()/10)
+<font color="#006666">    InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>), &quot;F&quot;, 0)
+    
+<font color="#006666">    TerrainMousePick</font>(0,<font color="#006666"> CameraID</font>(0),<font color="#006666"> MouseX</font>(),<font color="#006666">  MouseY</font>())
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>)
+<font color="#006666">      ShowGUI</font>(128, 1)
+<font color="#006666">      DisplayPolygon</font>(<font color="#006666">PickX</font>(),<font color="#006666"> PickY</font>(),<font color="#006666"> PickZ</font>(), 50)
+      Selected = <font color="#924B72">#True</font>
+    <b><font color="#006666">Else</font></b>
+<font color="#006666">      ShowGUI</font>(128, 0)
+<font color="#006666">      MoveCamera  </font>(0, KeyX, 0, KeyY)
+<font color="#006666">      DisplayPolygon</font>(<font color="#006666">PickX</font>(),<font color="#006666"> PickY</font>(),<font color="#006666"> PickZ</font>(), 0)
+      Selected = <font color="#924B72">#False</font>
+      <b><font color="#006666">If</font></b> <font color="#006666">CameraY</font>(0) &lt;<font color="#006666"> TerrainHeight</font>(0,<font color="#006666"> CameraX</font>(0),<font color="#006666"> CameraZ</font>(0)) + 10
+<font color="#006666">        MoveCamera</font>(0,<font color="#006666"> CameraX</font>(0),<font color="#006666"> TerrainHeight</font>(0,<font color="#006666"> CameraX</font>(0),<font color="#006666"> CameraZ</font>(0)) + 10,<font color="#006666"> CameraZ</font>(0), <font color="#924B72">#PB_Absolute</font>)
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      RotateCamera</font>(0,  MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F5</font>)
+<font color="#006666">      InitBlendMaps</font>()
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+      KeyX = -<font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+      KeyX = <font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">Else</font></b>
+      KeyX = 0
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+      KeyY = -<font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+      KeyY = <font color="#924B72">#CameraSpeed</font>
+    <b><font color="#006666">Else</font></b>
+      KeyY = 0
+    <b><font color="#006666">EndIf</font></b>
+    
+    Modify = 0
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageUp</font>)
+      Modify = 1
+    <b><font color="#006666">ElseIf</font></b>  <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageDown</font>)
+      Modify = -1
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> Modify <b><font color="#006666">And</font></b> Selected
+      
+    <b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+      <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+<font color="#006666">        DoTerrainModify</font>(tx, ty,<font color="#006666"> PickX</font>(),<font color="#006666"> PickY</font>(),<font color="#006666"> PickZ</font>(), 0.02, TimeSinceLastFrame * Modify)
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+<font color="#006666">    UpdateTerrain</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>() * 0.2 / 1000
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+<b><font color="#006666">End</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">InitBlendMaps</font>()
+  minHeight1.f = 70
+  fadeDist1.f = 40
+  minHeight2.f = 70
+  fadeDist2.f = 15
+  <b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+    <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+      Size =<font color="#006666"> TerrainTileLayerMapSize</font>(0, tx, ty)
+      <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> Size-1
+        <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> Size-1
+          Height.f =<font color="#006666"> TerrainTileHeightAtPosition</font>(0, tx, ty, 1, x, y)
+          
+          val.f = (Height - minHeight1) / fadeDist1
+<font color="#006666">          Clamp</font>(@val, 0, 1)
+<font color="#006666">          SetTerrainTileLayerBlend</font>(0, tx, ty, 1, x, y, val)
+          
+          val.f = (Height - minHeight2) / fadeDist2
+<font color="#006666">          Clamp</font>(@val, 0, 1)
+<font color="#006666">          SetTerrainTileLayerBlend</font>(0, tx, ty, 2, x, y, val)
+        <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">Next</font></b>
+<font color="#006666">      UpdateTerrainTileLayerBlend</font>(0, tx, ty, 1)
+<font color="#006666">      UpdateTerrainTileLayerBlend</font>(0, tx, ty, 2)
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Clamp</font>(*var.float, min.f, max.f)
+  <b><font color="#006666">If</font></b> *var\f &lt; min
+    *var\f = min
+  <b><font color="#006666">ElseIf</font></b> *var\f &gt; max
+    *var\f = max
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.f <font color="#006666">Min</font>(a.f, b.f)
+  <b><font color="#006666">If</font></b> a &lt; b
+    <b><font color="#006666">ProcedureReturn</font></b> a
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">ProcedureReturn</font></b> b
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b>.f <font color="#006666">Max</font>(a.f, b.f)
+  <b><font color="#006666">If</font></b> a &gt; b
+    <b><font color="#006666">ProcedureReturn</font></b> a
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">ProcedureReturn</font></b> b
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">DoTerrainModify</font>(tx, ty, wx.f, wy.f, wz.f, mBrushSizeTerrainSpace.f, TimeElapsed.f)
+  terrainSize.f =<font color="#006666"> TerrainTileSize</font>(0, tx, ty) - 1
+  Pointx.f =<font color="#006666"> TerrainTilePointX</font>(0, tx, ty, wx, wy, wz)
+  Pointy.f =<font color="#006666"> TerrainTilePointY</font>(0, tx, ty, wx, wy, wz)
+  
+  startx = (Pointx - mBrushSizeTerrainSpace) * terrainSize
+  starty = (Pointy - mBrushSizeTerrainSpace) * terrainSize
+  endx   = (Pointx + mBrushSizeTerrainSpace) * terrainSize
+  endy   = (Pointy + mBrushSizeTerrainSpace) * terrainSize
+  startx =<font color="#006666"> Max</font>(startx, 0)
+  starty =<font color="#006666"> Max</font>(starty, 0)
+  endx   =<font color="#006666"> Min</font>(endx, terrainSize)
+  endy   =<font color="#006666"> Min</font>(endy, terrainSize)
+  
+  <b><font color="#006666">For</font></b> y = starty <b><font color="#006666">To</font></b> endy
+    <b><font color="#006666">For</font></b> x = startx <b><font color="#006666">To</font></b> endx
+      
+      tsXdist.f = (x / terrainSize) - Pointx
+      tsYdist.f = (y / terrainSize) - Pointy
+      
+      weight.f =<font color="#006666"> Min</font>(1.0,<font color="#006666">	Sqr</font>(tsYdist * tsYdist + tsXdist * tsXdist) / (0.5 * mBrushSizeTerrainSpace))
+      weight = 1.0 - (weight * weight)
+      addedHeight.f = weight * 250.0 * TimeElapsed
+      
+      newheight.f =<font color="#006666"> GetTerrainTileHeightAtPoint</font>(0, tx, ty, x, y) + addedHeight
+<font color="#006666">      SetTerrainTileHeightAtPoint</font>(0, tx, ty, x, y, newheight)
+      
+    <b><font color="#006666">Next</font></b> x
+  <b><font color="#006666">Next</font></b> y
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">DisplayPolygon</font>(Px.f, Py.f, Pz.f, Rayon.f)
+  <b><font color="#006666">Define</font></b>.l i, Color =<font color="#006666"> RGB</font>(255, 255, 0)
+  <b><font color="#006666">Define</font></b>.f Angle, Sx, Sy, Sz, Sx1, Sy1, Sz1, Py1, Delta = 2
+  
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> <font color="#924B72">#NbSommet</font>-2
+    Sx =<font color="#006666"> Cos</font>(Angle) * Rayon
+    Sz =<font color="#006666"> Sin</font>(Angle) * Rayon
+    Angle + 2.0 * <font color="#924B72">#PI</font> / <font color="#924B72">#NbSommet</font>
+    Sx1 =<font color="#006666"> Cos</font>(Angle) * Rayon
+    Sz1 =<font color="#006666"> Sin</font>(Angle) * Rayon
+    Py =<font color="#006666"> TerrainHeight</font>(0, Px + Sx, Pz + Sz) + Delta
+    Py1 =<font color="#006666"> TerrainHeight</font>(0, Px + Sx1, Pz + Sz1) + Delta
+<font color="#006666">    CreateLine3D</font>(i, Px + Sx, Py, Pz + Sz, Color, Px + Sx1, Py1, Pz + Sz1, Color)
+  <b><font color="#006666">Next</font></b> i
+  Py =<font color="#006666"> TerrainHeight</font>(0, Px +<font color="#006666"> Cos</font>(0) * Rayon, Pz +<font color="#006666"> Sin</font>(0) * Rayon) + Delta
+<font color="#006666">  CreateLine3D</font>(i, Px + Sx1, Py1, Pz + Sz1, Color, Px +<font color="#006666"> Cos</font>(0) * Rayon, Py, Pz +<font color="#006666"> Sin</font>(0) * Rayon, Color)
+<b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+</body></html>

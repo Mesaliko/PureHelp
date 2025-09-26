@@ -1,0 +1,63 @@
+<html><head><title>CopyArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CopyArray()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CopyArray</b></font>(QuellArray(), ZielArray())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Kopiert jedes Element vom 'QuellArray()' in das 'ZielArray()'. 
+Nach erfolgreichem Kopieren sind beide Arrays identisch. 
+Die Arrays müssen die gleiche Anzahl an Dimensionen haben. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>QuellArray()</i></td>
+<td width="90%"> 
+Das Array, von dem kopiert werden soll. 
+
+</td></tr>
+<tr><td><i>ZielArray()</i></td>
+<td> 
+Das Array, in welches kopiert werden soll. Alle zuvor in diesem Array 
+zu findenden Elemente werden gelöscht. 
+Dieses Array muss vom gleichen Typ (nativ oder strukturiert) sein und die gleiche 
+Anzahl an Dimensionen wie das Quell-Array haben. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Kopieren erfolgreich war, oder Null, 
+wenn es fehlschlug. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">Numbers</font>(5)
+  <b><font color="#006666">Dim</font></b> <font color="#006666">NumbersCopy</font>(10)
+  
+<font color="#006666">  Numbers</font>(0) = 128
+<font color="#006666">  Numbers</font>(5) = 256
+  
+  <b><font color="#006666">Debug</font></b> &quot;Array-Größe vor dem Kopieren: &quot;+<font color="#006666">Str</font>(<font color="#006666">ArraySize</font>(<font color="#006666">NumbersCopy</font>())) <font color="#006666">; wird 10 ausgeben</font>
+  
+<font color="#006666">  CopyArray</font>(<font color="#006666">Numbers</font>(),<font color="#006666"> NumbersCopy</font>())
+  
+  <b><font color="#006666">Debug</font></b> &quot;Array-Größe nach dem Kopieren: &quot;+<font color="#006666">Str</font>(<font color="#006666">ArraySize</font>(<font color="#006666">NumbersCopy</font>())) <font color="#006666">; wird 5 ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">NumbersCopy</font>(0)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">NumbersCopy</font>(5)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../list/copylist.html">CopyList()</a>, <a href="../map/copymap.html">CopyMap()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=comparearray.html>CompareArray()</a> - <a href=index.html>Array Inhaltsverzeichnis</a> - <a href=freearray.html>FreeArray()</a> -><br><br>
+
+</body></html>

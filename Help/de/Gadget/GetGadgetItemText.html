@@ -1,0 +1,77 @@
+<html><head><title>GetGadgetItemText</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetGadgetItemText()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>GetGadgetItemText</b></font>(#Gadget, Eintrag [, Spalte])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Textinhalt des angegebenen Eintrags vom angegebenen Gadget zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Eintrag</i></td>
+<td> 
+Der Eintrag, von dem der Text ermittelt werden soll. Der erste Eintrag im Gadget hat den Index 0. 
+
+</td></tr>
+<tr><td><i>Spalte (optional)</i></td>
+<td> 
+Die zu verwendende Spalte (bei Gadgets, die mehrere Spalten unterstützen). 
+Die erste Spalte hat den Index 0. Der Standard ist Spalte 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Text des Gadget-Eintrags zurück - oder einen leeren String, wenn dabei 
+ein Fehler auftrat. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dies ist eine universelle Funktion, welche zusammen mit den meisten Gadgets 
+arbeitet, die mehrere Einträge verwalten: 
+<br>
+<br>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a> - 'Eintrag' ist die Index-Nummer des Eintrags in der ComboBox-Liste. 
+'Spalte' wird ignoriert. 
+<br>
+- <a href="editorgadget.html">EditorGadget()</a> - 'Eintrag' ist die Textzeile im EditorGadget. 'Spalte' wird ignoriert. 
+<br>
+- <a href="explorerlistgadget.html">ExplorerListGadget()</a> - gibt den Namen des 'Eintrag's zurück, ohne den Dateipfad. 
+Wenn 'Eintrag' = -1, wird der 'Spalten'-Titel zurückgegeben. 
+<br>
+- <a href="explorertreegadget.html">ExplorerTreeGadget()</a> - gibt den vollständigen Pfad des 'Eintrag's zurück. 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> - gibt den Inhalt des angegebenen 'Eintrag's und der 'Spalte' zurück. 
+Wenn 'Eintrag' = -1, wird der 'Spalten'-Titel zurückgegeben. 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a> - 'Eintrag' ist die Nummer des Eintrags, dessen Inhalt Sie ermitteln wollen. 
+'Spalte' wird ignoriert. 
+<br>
+- <a href="mdigadget.html">MDIGadget()</a> - 'Eintrag' ist der Index des ChildWindow's, von welchem Sie den Titel ermitteln möchten. 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a> - 'Eintrag' ist das Panel (Schalttafel), dessen Überschrift Sie ermitteln wollen. 
+<br>
+- <a href="treegadget.html">TreeGadget()</a> - 'Eintrag' ist die Nummer des Eintrags, dessen Inhalt Sie ermitteln wollen. 
+'Spalte' wird ignoriert. 
+<br>
+- <a href="webgadget.html">WebGadget()</a> - Ermittelt den Html-Code, den Seitentitel, die Status-Nachricht oder die aktuelle Auswahl. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setgadgetitemtext.html">SetGadgetItemText()</a>, <a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getgadgetitemstate.html>GetGadgetItemState()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=getgadgetstate.html>GetGadgetState()</a> -><br><br>
+
+</body></html>

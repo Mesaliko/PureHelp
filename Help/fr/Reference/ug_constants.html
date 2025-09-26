@@ -1,0 +1,49 @@
+<html><head><title>UserGuide - Constants</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Constants</font></b></p>
+
+In addition to <a href="../reference/variables.html">variables</a> PureBasic provides a method to 
+define <a href="../reference/general_rules.html">constants</a> too. In fact it provides several. 
+We’ll have a quick look at them now. 
+
+Predefined constants - provided either by PureBasic itself (all begin with #PB_), or 
+from the API for the operating system. The IDE’s <a href="../reference/ide_tools.html">Structure Viewer</a> 
+tool has a panel which shows all the predefined constants. 
+
+User defined constants - by defining a constant name with the prefix # you can provide 
+your own constants to make code more readable. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#MyConstant1</font> = 10
+  <font color="#924B72">#MyConstant2</font> = &quot;Hello, World!&quot;
+</font></pre>
+
+<a href="../reference/enumerations.html">Enumerations</a> – PureBasic will automatically number a 
+series of constants sequentially in an Enumeration, by default enumerations will 
+begin from zero – but this can be altered, if desired. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Enumeration</font></b>
+  �� <font color="#924B72">#MyConstantA</font>
+  �� <font color="#924B72">#MyConstantB</font>
+  �� <font color="#924B72">#MyConstantC</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Enumeration</font></b> 10 <b><font color="#006666">Step</font></b> 5
+  �� <font color="#924B72">#MyConstantD</font>
+  �� <font color="#924B72">#MyConstantE</font>
+  �� <font color="#924B72">#MyConstantF</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantA</font>   <font color="#006666">; will be 0</font>
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantB</font>   <font color="#006666">; will be 1</font>
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantC</font>   <font color="#006666">; will be 2</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantD</font>   <font color="#006666">; will be 10</font>
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantE</font>   <font color="#006666">; will be 15</font>
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#MyConstantF</font>   <font color="#006666">; will be 20</font>
+</font></pre>
+
+
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_variables.html">< Previous: Variables</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_decisions.html">Next: Decisions & Conditions ></a> 
+</blockquote>
+</font></body></html>

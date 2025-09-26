@@ -1,0 +1,51 @@
+<html><head><title>FileBuffersSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FileBuffersSize()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FileBuffersSize</b></font>(#Datei, Größe)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die Größe des für Datei-Operationen verwendeten Speicherpuffers. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datei</i></td>
+<td width="90%"> 
+Die Datei, für die der Puffer geändert werden soll. 
+Wenn <font color="#924B72">#PB_Default</font> für diesen Parameter verwendet wird, dann gilt die neue 
+Puffergröße für alle neu mittels <a href="openfile.html">OpenFile()</a>, <a href="createfile.html">CreateFile()</a> 
+oder <a href="readfile.html">ReadFile()</a> geöffneten Dateien. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die neue Größe (in Bytes) für den Speicherpuffer. Eine Größe von 0 deaktiviert das 
+&quot;Cachen&quot; (Zwischenspeichern) für die Datei. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Aus Performance-Gründen sollte die Puffergröße groß genug gehalten werden (1028 erscheint ok 
+als Minimum). Wenn Puffer verwendet werden, dann werden die Informationen tatsächlich auf Disk geschrieben, 
+sobald der Cache-Puffer voll ist oder die Datei geschlossen wird. Mit dem Befehl <a href="flushfilebuffers.html">FlushFileBuffers()</a> 
+kann das Schreiben des Zwischenspeichers (Cache) zu dem Zeitpunkt veranlasst werden, an dem der Befehl aufgerufen wird. 
+Die Standard-Puffergröße beträgt 4096 Bytes pro Datei. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="flushfilebuffers.html">FlushFileBuffers()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=eof.html>Eof()</a> - <a href=index.html>File Inhaltsverzeichnis</a> - <a href=fileid.html>FileID()</a> -><br><br>
+
+</body></html>

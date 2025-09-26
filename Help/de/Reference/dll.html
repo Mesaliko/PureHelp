@@ -1,0 +1,106 @@
+<html><head><title>Erstellung einer DLL</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Erstellung einer DLL</font></b></p>
+
+PureBasic ermöglicht das Erstellen einer Standard Microsoft Windows DLL (&quot;Dynamic Linked Library&quot;), 
+&quot;shared objects&quot; (.so) auf Linux, und &quot;dynamic libraries&quot; (.dylib) auf MacOS X. 
+Der DLL Code entspricht &quot;normalem&quot; PureBasic Code, mit der Ausnahme, dass außerhalb von Prozeduren 
+kein eigentlicher Programmcode geschrieben werden sollte. 
+<br>
+<br>
+Beim Schreiben einer DLL wird sämtlicher Code innerhalb von Prozeduren ausgeführt. Wenn eine Prozedur 
+'public' (öffentlich) sein soll (d.h. darauf durch dritte Programme zugegriffen werden kann, die die 
+DLL benutzen), dann wird das Schlüsselwort <b><font color="#006666">ProcedureDLL</font></b> (oder <b><font color="#006666">ProcedureCDLL</font></b> wenn die Prozedur im 'CDecl' 
+Format vorliegen muss, was bei regulären Windows DLL nicht der Fall ist) anstelle von <b><font color="#006666">Procedure</font></b> 
+(und <b><font color="#006666">DeclareDLL</font></b> oder <b><font color="#006666">DeclareCDLL</font></b> anstelle von <b><font color="#006666">Declare</font></b>) benutzt. Dies ist die einzige notwendige Änderung 
+am Programm. 
+<br>
+<br>
+Nachdem dies erfolgte, wählen Sie 'Shared DLL' als Ausgabeformat (Fenster <a href="../reference/ide_compiler.html">'Compiler-Optionen'</a> in der 
+PureBasic-IDE) oder den Zusatz '/DLL' bei Verwendung des Compilers im <a href="../reference/cli_compiler.html">Kommandozeilenmodus</a>. 
+Im &quot;Executable erstellen&quot; Speichern-Dialog (bei Verwendung der PureBasic-IDE) wird nun eine DLL mit dem von Ihnen 
+eingegebenen Namen im ausgewählten Verzeichnis erstellt. 
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyFunction</font>()
+<font color="#006666">    MessageRequester</font>(&quot;Hallo&quot;, &quot;Dies ist eine PureBasic DLL !&quot;, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+    
+  <font color="#006666">; Hier das Client Programm, welches die DLL benutzt</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenLibrary</font>(0, &quot;PureBasic.dll&quot;)
+<font color="#006666">    CallFunction</font>(0, &quot;MyFunction&quot;)
+<font color="#006666">    CloseLibrary</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<b>Nur für fortgeschrittene Programmierer:</b> Es gibt 4 spezielle Prozeduren, die vom OS automatisch aufgerufen 
+werden, wenn eines der folgenden Ereignisse auftritt: 
+<blockquote>
+<p><b></b></p><blockquote>
+
+- DLL wurde zu einem neuen Prozess hinzugefügt <br>
+- DLL wurde von einem Prozess entfernt <br>
+- DLL wurde zu einem neuen Thread hinzugefügt <br>
+- DLL wurde von einem Thread entfernt 
+</blockquote>
+</blockquote>
+
+
+Um diese Ereignisse zu verwalten, ist es möglich, 4 spezielle Prozeduren zu deklarieren: <font color="#006666">AttachProcess</font>(Instanz), 
+<font color="#006666">DetachProcess</font>(Instanz), <font color="#006666">AttachThread</font>(Instanz) und <font color="#006666">DetachThread</font>(Instanz). 
+Dies bedeutet, dass diese 4 Prozedur-Namen reserviert sind und vom Programmierer nicht für andere Zwecke verwendet werden können. 
+<br>
+<br>
+<b>Hinweise zur Erstellung von DLL's:</b> 
+<blockquote>
+<p><b></b></p><blockquote>
+
+- Die Deklaration von Arrays, Listen bzw. Maps mittels <a href="../reference/dim.html">Dim</a>, <a href="../reference/newlist.html">NewList</a> bzw. <a href="../reference/newmap.html">NewMap</a> muss stets innerhalb 
+der Prozedur AttachProcess erfolgen. <br>
+- Schreiben Sie keinen Programmcode außerhalb von Prozeduren. Als Ausnahmen erlaubt sind lediglich 
+Variablen- oder Strukturen-Deklarationen. <br>
+- Standard-Werte in Prozedur-Parametern haben keinen Effekt. <br>
+- DirectX Initialisierungsroutinen dürfen nicht innerhalb der AttachProcess Prozedur geschrieben werden. 
+</blockquote>
+</blockquote>
+
+<b>Hinweise zur Rückgabe von Strings aus DLL's:</b> 
+<br>
+<br>
+Bei der Rückgabe von Strings aus einer DLL-Funktion muss der String als <a href="../reference/global.html">Global</a> deklariert sein. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> ReturnString$
+  
+  <b><font color="#006666">ProcedureDLL</font></b>.s <font color="#006666">MyFunction</font>(var.s)
+    ReturnString$ = var + &quot; test&quot;
+    <b><font color="#006666">ProcedureReturn</font></b> ReturnString$
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Ohne die Deklaration als <a href="../reference/global.html">Global</a> ist der String nur Lokal in der ProcedureDLL 
+verfügbar und kann somit nicht außerhalb verwendet werden. 
+<br>
+<br>
+Bei der Verwendung von <a href="../library/callfunction.html">CallFunction()</a> (oder einer ihrer verwandten CallXXX-Funktionen) auf 
+eine DLL-Funktion wird bei der Rückgabe eines Strings immer ein Zeiger auf diesen zurückgegeben, welcher mit 
+<a href="../memory/peeks.html">PeekS()</a> ausgelesen werden muss. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  String.s =<font color="#006666"> PeekS</font>(<font color="#006666">CallFunction</font>(0, &quot;FunctionName&quot;, Parameter1, Parameter2))
+</font></pre>
+
+<b>Nachfolgend noch ein komplettes Code-Beispiel:</b> 
+<br>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/DLLSample.pb.html">DLLSample.pb</a>
+
+</font></body></html>

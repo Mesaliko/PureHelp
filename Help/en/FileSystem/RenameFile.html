@@ -1,0 +1,53 @@
+<html><head><title>RenameFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RenameFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RenameFile</b></font>(OldFilename$, NewFilename$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Rename the old file to the new file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>OldFilename$</i></td>
+<td width="90%"> 
+The old name of the file. 
+
+</td></tr>
+<tr><td><i>NewFilename$</i></td>
+<td> 
+The new name of the file. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation succeeded and zero if it failed. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The old and new filename do not have to be in the same directory, so this function can be used 
+to move a file to a different directory. This function can also be used to rename/move directories. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">RenameFile</font>(&quot;C:\test.txt&quot;, &quot;D:\temp\test_backup.txt&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Moving and renaming successful.&quot;    <font color="#006666">; Moving and renaming of the file was successful</font>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Moving and renaming failed.&quot;        <font color="#006666">; Moving and renaming failed, e.g. because of a not found source file</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="copyfile.html">CopyFile()</a>, <a href="deletefile.html">DeleteFile()</a>, <a href="../file/createfile.html">CreateFile()</a>, <a href="copydirectory.html">CopyDirectory()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextdirectoryentry.html>NextDirectoryEntry()</a> - <a href=index.html>FileSystem Index</a> - <a href=setcurrentdirectory.html>SetCurrentDirectory()</a> -><br><br>
+
+</body></html>

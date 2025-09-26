@@ -1,0 +1,62 @@
+<html><head><title>CatchPack</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchPack()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CatchPack</b></font>(#Pack, *SpeicherAdresse, Größe [, Plugin])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet eine zuvor vorhandene Paketdatei aus dem Speicher. Vor dem Öffnen einer Paketdatei muss mindestens 
+ein Packer mit einem der folgenden Befehle registriert werden: <a href="usezippacker.html">UseZipPacker()</a>, <a href="uselzmapacker.html">UseLzmaPacker()</a>, 
+<a href="usetarpacker.html">UseTarPacker()</a>, <a href="usebrieflzpacker.html">UseBriefLZPacker()</a>. 
+<br>
+Nach dem Öffnen kann der Inhalt des Pakets mit <a href="examinepack.html">ExaminePack()</a> aufgelistet werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizeren der zu öffnenden Paket-Datei. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann als Parameter verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>*SpeicherAdresse</i></td>
+<td> 
+Die Speicheradresse, an der sich die Paketdatei befindet. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe der Paketdatei in Bytes. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+Das zu verwendende Plugin, wenn mehr als ein Packer-Plugin registriert wurde. Dies kann einer der 
+folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: verwendet den BriefLZ Packer, um die Paket-Datei zu öffnen. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : verwendet den Zip Packer, um die Paket-Datei zu öffnen. <a href="usezippacker.html">UseZipPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : verwendet den Lzma Packer, um die Paket-Datei zu öffnen. <a href="uselzmapacker.html">UseLzmaPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Tar</font>    : verwendet den Tar Packer, um die Paket-Datei zu öffnen. <a href="usetarpacker.html">UseTarPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Paket-Datei erfolgreich geöffnet wurde, andernfalls 
+Null. Wenn <font color="#924B72">#PB_Any</font> als #Pack Parameter verwendet wurde, dann wird die generierte Paket-Nummer 
+zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="closepack.html">ClosePack()</a>, <a href="examinepack.html">ExaminePack()</a>, <a href="openpack.html">OpenPack()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addpackmemory.html>AddPackMemory()</a> - <a href=index.html>Packer Inhaltsverzeichnis</a> - <a href=closepack.html>ClosePack()</a> -><br><br>
+
+</body></html>

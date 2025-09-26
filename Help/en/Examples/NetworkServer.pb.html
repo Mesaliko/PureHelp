@@ -1,0 +1,60 @@
+<html><head><title>NetworkServer.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Network (Server) example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; Note: run the NetworkClient.pb file to send some data to this server
+</font><font color="#006666">;
+</font>
+Port = 6832
+*Buffer =<font color="#006666"> AllocateMemory</font>(1000)
+
+<b><font color="#006666">If</font></b> <font color="#006666">CreateNetworkServer</font>(0, Port, <font color="#924B72">#PB_Network_IPv4</font> | <font color="#924B72">#PB_Network_TCP</font>, &quot;127.0.0.1&quot;)
+
+<font color="#006666">  MessageRequester</font>(&quot;PureBasic - Server&quot;, &quot;Server created (Port &quot;+Port+&quot;).&quot;, 0)
+  
+  <b><font color="#006666">Repeat</font></b>
+      
+    ServerEvent =<font color="#006666"> NetworkServerEvent</font>()
+  
+    <b><font color="#006666">If</font></b> ServerEvent
+    
+      ClientID =<font color="#006666"> EventClient</font>()
+  
+      <b><font color="#006666">Select</font></b> ServerEvent
+      
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_Connect</font>
+<font color="#006666">          MessageRequester</font>(&quot;PureBasic - Server&quot;, &quot;A new client has connected !&quot;, 0)
+  
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_Data</font>
+<font color="#006666">          MessageRequester</font>(&quot;PureBasic - Server&quot;, &quot;Client &quot;+ClientID+&quot; has send a packet !&quot;, 0)
+<font color="#006666">          ReceiveNetworkData</font>(ClientID, *Buffer, 1000)
+<font color="#006666">          MessageRequester</font>(&quot;Info&quot;, &quot;String: &quot;+<font color="#006666">PeekS</font>(*Buffer, -1, <font color="#924B72">#PB_UTF8</font>), 0)
+  
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_Disconnect</font>
+<font color="#006666">          MessageRequester</font>(&quot;PureBasic - Server&quot;, &quot;Client &quot;+ClientID+&quot; has closed the connection...&quot;, 0)
+          Quit = 1
+    
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> Quit = 1
+  
+<font color="#006666">  MessageRequester</font>(&quot;PureBasic - Server&quot;, &quot;Click to quit the server.&quot;, 0)
+  
+<font color="#006666">  CloseNetworkServer</font>(0)
+<b><font color="#006666">Else</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;Can't create the server (port in use ?).&quot;, 0)
+<b><font color="#006666">EndIf</font></b>
+
+  
+<b><font color="#006666">End</font></b>
+
+</font></pre>
+</body></html>

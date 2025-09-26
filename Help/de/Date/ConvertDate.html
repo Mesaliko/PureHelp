@@ -1,0 +1,48 @@
+<html><head><title>ConvertDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConvertDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Datum.q = <font color="#006666"><b>ConvertDate</b></font>(Datum.q, Format)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Konvertiert ein Datum zwischen Ortszeit (englisch &quot;local time&quot;) und UTC-Zeit (&quot;koordinierte Weltzeit&quot;). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Datum.q</i></td>
+<td width="90%"> 
+Das zu konvertierende Datum. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+Das neue Datumsformat. Es kann eine der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_LocalTime</font>: Konvertiert ein UTC-Datum in ein Ortszeitdatum.
+  <font color="#924B72">#PB_Date_UTC</font>      : Konvertiert ein Ortszeitdatum in ein UTC-Datum.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt das konvertierte Datum zurück, oder -1, wenn die Konvertierung fehlgeschlagen ist. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;Local time: %hh:%ii:%ss&quot;,<font color="#006666"> ConvertDate</font>(<font color="#006666">DateUTC</font>(), <font color="#924B72">#PB_Date_LocalTime</font>))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">FormatDate</font>(&quot;  UTC time: %hh:%ii:%ss&quot;,<font color="#006666"> ConvertDate</font>(<font color="#006666">Date</font>(), <font color="#924B72">#PB_Date_UTC</font>))
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="formatdate.html">FormatDate()</a>, <a href="date.html">Date()</a>, <a href="dateutc.html">DateUTC()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=adddate.html>AddDate()</a> - <a href=index.html>Date Inhaltsverzeichnis</a> - <a href=date.html>Date()</a> -><br><br>
+
+</body></html>

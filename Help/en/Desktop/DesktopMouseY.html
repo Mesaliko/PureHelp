@@ -1,0 +1,44 @@
+<html><head><title>DesktopMouseY</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DesktopMouseY()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DesktopMouseY</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the absolute y position of the mouse on the desktop. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the y coordinate (in pixel) of the mouse relative to the top left corner of the primary monitor. 
+The coordinate is negative if the mouse is on a monitor above the primary monitor. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 30, &quot;Desktop mouse monitor&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget</font>(0, 10, 6, 200, 20, &quot;&quot;)
+
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WindowEvent</font>()
+
+      <b><font color="#006666">If</font></b> Event = 0 <font color="#006666">; No events are in queue anymore, so halt the process for a few milliseconds for multitasking</font>
+<font color="#006666">        SetGadgetText</font>(0, &quot;Desktop mouse position: &quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopMouseX</font>())+&quot;,&quot;+<font color="#006666">Str</font>(<font color="#006666">DesktopMouseY</font>()))
+<font color="#006666">        Delay</font>(20)
+      <b><font color="#006666">EndIf</font></b>
+
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="desktopmousex.html">DesktopMouseX()</a>, <a href="desktopy.html">DesktopY()</a>, <a href="desktopheight.html">DesktopHeight()</a>, <a href="../window/windowmousey.html">WindowMouseY()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=desktopmousex.html>DesktopMouseX()</a> - <a href=index.html>Desktop Index</a> - <a href=desktopname.html>DesktopName()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,84 @@
+<html><head><title>TryLockMutex</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TryLockMutex()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>TryLockMutex</b></font>(Mutex)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Essaie de verrouiller un Mutex. 
+<br>
+<br>
+Contrairement à <a href="lockmutex.html">LockMutex()</a>, cette 
+commande ne stoppe pas l'exécution du 
+thread jusqu'à ce que le mutex soit 
+libre. Ceci peut être pratique dans 
+une situation ou le thread peut continuer 
+à faire autre chose en attendant que 
+le mutex soit libéré. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mutex</i></td>
+<td width="90%"> 
+Le mutex à verrouiller. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le mutex a été 
+verrouillé, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le mutex a été verrouillé, 
+la commande <a href="unlockmutex.html">UnlockMutex()</a> doit être 
+appelée pour libérer le mutex une 
+fois que les accès aux ressources 
+partagées sont terminés. Ne pas 
+le faire peut engendrer facilement 
+des situations de blocage. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">Procedure</font></b> <font color="#006666">ThreadProcedure</font>(*Valeur)
+    <b><font color="#006666">Shared</font></b> Mutex
+   
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">TryLockMutex</font>(Mutex)
+<font color="#006666">        PrintN</font>(&quot;Mutex verrouille avec succes.&quot;)
+        
+<font color="#006666">        UnlockMutex</font>(Mutex)
+        <b><font color="#006666">Break</font></b> <font color="#006666">; quitte la boucle et le thread</font>
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        PrintN</font>(&quot;Toujours en train d'attendre d'avoir accès au mutex...&quot;)
+<font color="#006666">        Delay</font>(200)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">ForEver</font></b>  
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenConsole</font>()
+  
+  Mutex =<font color="#006666"> CreateMutex</font>()
+<font color="#006666">  LockMutex</font>(Mutex) <font color="#006666">; le programme principal verrouille en premier le mutex</font>
+  Thread =<font color="#006666"> CreateThread</font>(@ThreadProcedure(), 0)
+  
+<font color="#006666">  Delay</font>(4000)
+<font color="#006666">  UnlockMutex</font>(Mutex) <font color="#006666">; maintenant déverrouille le mutex, pour que le thread puisse y accéder</font>
+  
+<font color="#006666">  Input</font>()
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="unlockmutex.html">UnlockMutex()</a>, <a href="lockmutex.html">LockMutex()</a>, <a href="createmutex.html">CreateMutex()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=threadpriority.html>ThreadPriority()</a> - <a href=index.html>Thread Index</a> - <a href=trysemaphore.html>TrySemaphore()</a> -><br><br>
+
+</body></html>

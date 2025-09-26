@@ -1,0 +1,44 @@
+<html><head><title>CloseNetworkConnection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CloseNetworkConnection()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CloseNetworkConnection</b></font>(Connection)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Close the specified connection. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connection</i></td>
+<td width="90%"> 
+The connection to close. This is the result of either a call to 
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a> or <a href="eventclient.html">EventClient()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If a client calls this function the server will receive a <font color="#924B72">#PB_NetworkEvent_Disconnect</font> event. 
+If this function is called from a server the connection will be closed without further notice to the client. 
+When a server receives a <font color="#924B72">#PB_NetworkEvent_Disconnect</font> event its associated client connection is automatically 
+closed and CloseNetworkConnection() must not be called in this case. 
+<br>
+<br>
+All remaining opened connections are automatically closed when the program ends. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="opennetworkconnection.html">OpenNetworkConnection()</a>, <a href="eventclient.html">EventClient()</a>, <a href="closenetworkserver.html">CloseNetworkServer()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Network Index</a> - <a href=closenetworkserver.html>CloseNetworkServer()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,82 @@
+<html><head><title>SetMaterialAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetMaterialAttribute()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetMaterialAttribute</b></font>(#Matiere, Attribut, Valeur [, Couche])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Définit la valeur de l'attribut spécifié au 
+matériau. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Matiere</i></td>
+<td width="90%"> 
+La matière à utiliser. 
+
+</td></tr>
+<tr><td><i>Attribut</i></td>
+<td> 
+L'attribut à définir. Il peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_DepthCheck</font>    : Active ou désactive le contrôle de la profondeur de la matière. 
+                               La valeur peut être <font color="#924B72">#True</font> (contrôle de profondeur activé) ou 
+                               <font color="#924B72">#False</font> (contrôle de profondeur désactivé).
+  <font color="#924B72">#PB_Material_DepthWrite</font>    : Active ou désactive l'écriture de profondeur pour le matériau. 
+                               La valeur peut être <font color="#924B72">#True</font> (profondeur écriture activée) ou 
+                               <font color="#924B72">#False</font> (profondeur écriture désactivée).
+  <font color="#924B72">#PB_Material_AlphaReject</font>   : Active le rejet alpha sur la texture (utile pour les textures 
+                               semi-transparentes comme les arbres, les fenêtres, etc.).
+  <font color="#924B72">#PB_Material_TAM</font>           : Change le 'Mode d'adressage de texture' (TAM). 
+                               Il peut s'agir de l'une des valeurs suivantes
+                               <font color="#924B72">#PB_Material_WrapTAM</font>  : Mode enveloppement
+                               <font color="#924B72">#PB_Material_MirrorTAM</font>: Mode miroir
+                               <font color="#924B72">#PB_Material_ClampTAM</font> : Mode serrage
+                               <font color="#924B72">#PB_Material_BorderTAM</font>: Mode frontière
+  <font color="#924B72">#PB_Material_EnvironmentMap</font>: Active la Map (carte) de l'environnement. 
+                              Il peut s'agir de l'une des valeurs suivantes
+                               <font color="#924B72">#PB_Material_NoMap</font>        : Désactive l'environnement 
+                               <font color="#924B72">#PB_Material_PlanarMap</font>    : Map de l'environnement planaire
+                               <font color="#924B72">#PB_Material_CurvedMap</font>    : Map de l'environnement courbe
+                               <font color="#924B72">#PB_Material_ReflectionMap</font>: Map de l'environnement de réflexion
+                               <font color="#924B72">#PB_Material_NormalMap</font>    : Map de l'environnement normal
+   <font color="#924B72">#PB_Material_ProjectiveTexturing</font>: Active la texturation projective pour ce matériau. La valeur est un numéro de #Camera à utiliser.          
+   <font color="#924B72">#PB_Material_PointSprite</font>  : Active ou désactive le point sprite pour le matériau.
+                              Si supérieur à zéro, la valeur est la taille en points/1000. Si zéro, la taille en points est désactivée
+   <font color="#924B72">#PB_Material_DepthBias</font>    :Active ou désactive le bias de profondeur pour le matériau.
+                              Si supérieur à zéro, la valeur est le bias de profondeur/1000. Si zéro, le bias de profondeur est désactivé
+
+</font></pre>
+
+</td></tr>
+<tr><td><i>Valeur</i></td>
+<td> 
+Valeur de l'attribut à définir. 
+
+</td></tr>
+<tr><td><i>Couche (optionnel)</i></td>
+<td> 
+La couche à utiliser. 
+<br>
+<br>
+La première couche commence à l'index zéro (si ce paramètre est omis, la couche zéro 
+est utilisée). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getmaterialattribute.html">GetMaterialAttribute()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=scrollmaterial.html>ScrollMaterial()</a> - <a href=index.html>Material Index</a> - <a href=setmaterialcolor.html>SetMaterialColor()</a> -><br><br>
+
+</body></html>

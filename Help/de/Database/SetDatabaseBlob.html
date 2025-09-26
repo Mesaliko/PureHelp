@@ -1,0 +1,81 @@
+<html><head><title>SetDatabaseBlob</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDatabaseBlob()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDatabaseBlob</b></font>(#Datenbank, StatementIndex, *Puffer, PufferLänge)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Richtet den Blob für die weitere Verwendung mit <a href="databaseupdate.html">DatabaseUpdate()</a> ein. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datenbank</i></td>
+<td width="90%"> 
+Die zu verwendende Datenbank. 
+
+</td></tr>
+<tr><td><i>StatementIndex</i></td>
+<td> 
+Unbestimmter Abfrage-Parameter-Index (englisch: &quot;undefined query parameter index&quot;), für welchen 
+der Blob eingefügt werden soll. Der erste unbestimmte Abfrage-Parameter-Index beginnt bei Null. 
+Der SQL-Syntax zum Angeben unbestimmter Parameter ist abhängig vom Datenbank-Manager. 
+Siehe die folgenden Beispiele, um zu sehen wie dies gemacht wird. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Die Adresse der Blob-Daten. 
+
+</td></tr>
+<tr><td><i>PufferLänge</i></td>
+<td> 
+Die Größe der Blob-Daten in Bytes. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel:</b> SQLite, MySQL und ODBC</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; SQLite, MySQL und ODBC verwenden den gleichen Syntax, um Blobs einzufügen. Diese werden mit dem '?' Zeichen angegeben.</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; Die Datenbank sollte geöffnet sein und eine Tabelle PHOTOS mit 3 Feldern (BLOB, VARCHAR(255), BLOB) haben.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseBlob</font>(0, 0, ?Picture, PictureLength)
+<font color="#006666">  SetDatabaseBlob</font>(0, 1, ?SmallPicture, SmallPictureLength)
+<font color="#006666">  DatabaseUpdate</font>(0, &quot;INSERT INTO PHOTOS (picture, name, small_picture) values (?, 'my description', ?);&quot;)
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> PostgreSQL</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; PostgreSQL verwendet einen anderen Syntax: $1, $2.. im Statement, um die unbestimmten Parameter anzugeben.</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; Die Datenbank sollte geöffnet sein und eine Tabelle PHOTOS mit 3 Feldern (BYTEA, VARCHAR(255), BYTEA) haben.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseBlob</font>(0, 0, ?Picture, PictureLength)
+<font color="#006666">  SetDatabaseBlob</font>(0, 1, ?SmallPicture, SmallPictureLength)
+<font color="#006666">  DatabaseUpdate</font>(0, &quot;INSERT INTO PHOTOS (picture, name, small_picture) values ($1, 'my description', $2);&quot;)
+</font></pre>
+<b>Hinweis:</b> PostgreSQL verwendet BYTEA zum Speichern großer Objekte. Das &quot;Escaping&quot; (Sperren), was 
+zum Speichern binärer Daten in einem solchen Feld benötigt wird, macht es oft größer als nötig. 
+Eine gute Möglichkeit zum Speichern binärer Daten ist es, diese mit <a href="../cipher/base64encoder.html">Base64Encoder()</a> 
+zu verschlüsseln, bevor sie an den Datenbank-Manager übergeben werden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="databaseupdate.html">DatabaseUpdate()</a>, <a href="getdatabaseblob.html">GetDatabaseBlob()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=previousdatabaserow.html>PreviousDatabaseRow()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=setdatabasedouble.html>SetDatabaseDouble()</a> -><br><br>
+
+</body></html>

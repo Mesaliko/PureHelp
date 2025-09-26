@@ -1,0 +1,49 @@
+<html><head><title>EntityRoll</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EntityRoll()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>EntityRoll</b></font>(#Entity [, Modus])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt den Roll-Winkel (englisch &quot;roll&quot;) des #Entity. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+Das zu verwendende Entity. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Modus zum Ermitteln des Roll-Wertes. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Absolute</font>: ermittelt den absoluten Roll-Wert, ignoriert dabei den aktuellen Roll-Wert des übergeordneten (Standard).
+  <font color="#924B72">#PB_Relative</font>: ermittelt den Roll-Wert relativ zum aktuellen Roll-Wert des übergeordneten.
+</font></pre>
+kombiniert mit einem der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Engine3D_Raw</font>     : Der Roll-Wert ist der ursprüngliche (Roh-) Wert, aber er kann nicht mit <a href="rotateentity.html">RotateEntity()</a> 
+                         verwendet werden, um die gleiche Ausrichtung zu erhalten (Standard).
+  <font color="#924B72">#PB_Engine3D_Adjusted</font>: Der Roll-Wert wird bereinigt/justiert, womit er erneut mit <a href="rotateentity.html">RotateEntity()</a> verwendet
+                         werden kann, um die gleiche Ausrichtung zurückzuerhalten.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der aktuelle Roll-Wert des angegebenen Entity. Dieser Wert liegt immer zwischen 
+-180.0 und 180.0 Grad. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="entityyaw.html">EntityYaw()</a>, <a href="entitypitch.html">EntityPitch()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=entityrendermode.html>EntityRenderMode()</a> - <a href=index.html>Entity Inhaltsverzeichnis</a> - <a href=entityvelocity.html>EntityVelocity()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,68 @@
+<html><head><title>Unicode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Unicode</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+'Unicode' est un terme utilisé pour désigner un jeu de caractères étendu destiné à afficher du texte 
+dans de nombreux langages différents (y compris les langages non latins, avec beaucoup de symboles 
+différents tel que le Japonais, le Coréen etc.). En unicode, chaque symbole a sa place propre, et il n'est 
+pas nécessaire d'avoir une table de caractères par langue. 
+<br>
+<br>
+Pour simplifier, l'unicode peut être vu comme une très grande table ascii, qui n'a pas 256 caractères mais 65536. 
+Donc, pour stocker un caractère, 2 octets seront nécessaires en mémoire (c'est important de noter cette 
+différence, notamment lors de l'utilisation de <a href="../reference/memory.html">pointeurs</a> vers des chaînes de caractères). 
+<br>
+<br>
+Voici quelques liens pour se faire une meilleure idée de l'unicode (lecture vivement conseillée): 
+<br>
+<br>
+<a href="http://fr.wikipedia.org/wiki/Unicode">Information générale sur l'unicode (Français)</a> <br>
+<a href="http://en.wikipedia.org/wiki/Unicode">Information générale sur l'unicode (Anglais)</a> <br>
+<a href="http://www.unicode.org/faq/utf_bom.html">L'unicode et les BOM</a> 
+
+</blockquote>
+<p><b>Unicode et Windows</b></p><blockquote>
+
+
+PureBasic utilise l'encodage UCS2 qui est aussi le format utilisé de manière 
+interne par l'API unicode MS Windows, donc aucune conversion n'est nécessaire 
+lorsqu'un fonction est appelée. Si le programme utilise des fonctions API, 
+PureBasic utilisera automatiquement la version unicode de la fonction si elle est 
+disponible (par exemple MessageBox_() pointera vers MessageBoxW()). Il en va de 
+même pour toutes les structures et les constantes API supportées par PureBasic. 
+
+</blockquote>
+<p><b>UTF-8</b></p><blockquote>
+
+
+L'UTF-8 est une autre façon d'encoder une chaîne de caractères unicode. 
+Contrairement à UCS2 qui prend toujours 2 octets par caractère, UTF-8 utilise un 
+encodage variable pour chaque caractère (jusqu'à 4 octets pour représenter un 
+caractère). Le point fort de l'UTF-8 est qu'il ne contient pas de caractère nul 
+lors de son encodage, donc le texte peut être édité facilement. De plus, les 
+caractères ASCII de 1 à 127 sont conservés (ils ne sont pas modifiés lors 
+de l'encodage) ce qui rend le texte à peu près lisible pour les langues latines. 
+Son point faible est le côté variable de ses caractères, ce qui nécessite des 
+routines de gestion de texte plus lentes. 
+<br>
+<br>
+PureBasic utilise l'UTF-8 comme encodage par défaut pour l'écriture et la lecture 
+des chaînes de caractères dans les fichiers (bibliothèques 
+<a href="../file/index.html">Fichier</a> et <a href="../preference/index.html">Préférence</a>), 
+pour que les fichiers soient complètement indépendants de la plateforme. 
+<br>
+<br>
+Le compilateur du PureBasic gère aussi les fichiers sources ascii et UTF-8 (les 
+fichiers UTF-8 doivent avoir une entête BOM). Les deux types de fichiers peuvent 
+être combinés dans un programme sans problème: un fichier source ASCII peut 
+inclure un fichier source UTF-8 et vice-versa, tant que les variable .c et .s créées 
+par l'utilisateur (c'est-à-dire &quot;x&quot; ou 'x') ne contiennent que des caractères 
+avec un code &lt;= 127 dans les fichiers ASCII. Lors du développement d'un programme, 
+il est recommandé de  mettre l'IDE en mode UTF-8, pour que tous les fichiers 
+sources soient enregistrés en unicode. 
+
+</blockquote>
+</font></body></html>

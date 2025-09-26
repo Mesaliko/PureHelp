@@ -1,0 +1,100 @@
+<html><head><title>Einsteiger-Kapitel - Entscheidungen & Bedingungen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Entscheidungen & Bedingungen</font></b></p>
+
+Es gibt verschiedene Möglichkeiten zum Verarbeiten von Daten aus Benutzereingaben oder 
+auf andere Weise erhaltenen Daten (Laden aus einer Datei, ...). Die gebräuchlichen 
+<a href="../reference/variables.html">arithmetischen</a> Funktionen&quot; (+, -, *, /, ...) können mit 
+Bedingungen kombiniert werden. Sie können das Set an <a href="../reference/if_endif.html">If : Else/ElseIf : EndIf</a> 
+Schlüsselwörtern oder die <a href="../reference/select_endselect.html">Select : Case/Default : EndSelect</a> 
+Schlüsselworte verwenden, verwenden Sie einfach die am besten für Ihre Situation geeigneten! 
+<br>
+<br>
+Dieses Beispiel zeigt die Verwendung von <b><font color="#006666">If : ElseIf : Else : EndIf</font></b> für das 
+Erzeugen einer Nachricht, gegebenenfalls für die Ansicht in der Statusleiste einer 
+Eingabemaske (<a href="../gadget/index.html">GUI</a>) oder etwas ähnlichem, basierend auf der Anzahl 
+an Elementen und gefilterten Elementen in einer, imaginären, Liste. Beachten Sie bitte, 
+dass im Gegensatz zu einigen anderen BASIC-Sprachen, PureBasic kein &quot;Then&quot; Schlüsselwort 
+verwendet und dass in den ElseIf und EndIf Schlüsselwörtern kein Leerzeichen enthalten ist. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.l Items = 10, Filter = 6
+  <b><font color="#006666">Define</font></b>.s Message
+  
+  <b><font color="#006666">If</font></b> Items = 0 
+    Message = &quot;Liste ist leer.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items = 1 <b><font color="#006666">And</font></b> Filter = 0
+    Message = &quot;Ein Eintrag. Vom Filter nicht angezeigt.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items &gt; 1 <b><font color="#006666">And</font></b> Filter = 0
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; Einträge. Alle gefiltert.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items &gt; 1 <b><font color="#006666">And</font></b> Filter = 1
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; Einträge. Einer vom Filter angezeigt.&quot;
+    
+  <b><font color="#006666">ElseIf</font></b> Items = Filter
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; Einträge. Keine gefiltert.&quot;
+    
+  <b><font color="#006666">Else</font></b>
+    <font color="#006666">; Keine der anderen Bedingungen traf zu.</font>
+    Message =<font color="#006666"> StrU</font>(Items) + &quot; Einträge. &quot; +<font color="#006666"> StrU</font>(Filter) +&quot; angezeigt vom Filter.&quot;
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">Debug</font></b> Message
+</font></pre>
+
+<br>
+Dieses Beispiel zeigt die Verwendung von <b><font color="#006666">Select : Case : Default : EndSelect</font></b>, 
+um die ersten 127 <a href="../reference/ascii.html">ASCII</a>-Zeichen in Gruppen zu kategorisieren. 
+Die &quot;For : Next&quot; Schleife zählt bis 130, um das <a href="../reference/select_endselect.html">Default</a> 
+Schlüsselwort zu demonstrieren. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.c Char
+  <b><font color="#006666">Define</font></b>.s Message
+  
+  <b><font color="#006666">For</font></b> Char = 0 <b><font color="#006666">To</font></b> 130
+    
+    <b><font color="#006666">Select</font></b> Char
+
+      <b><font color="#006666">Case</font></b> 0 <b><font color="#006666">To</font></b> 8, 10 <b><font color="#006666">To</font></b> 31, 127
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein nicht druckbarer Kontroll-Code.&quot;
+        
+      <b><font color="#006666">Case</font></b> 9
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Tab.&quot;
+        
+      <b><font color="#006666">Case</font></b> 32
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Leerzeichen.&quot;
+        
+      <b><font color="#006666">Case</font></b> 36, 128   
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Währungssymbol. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 33 <b><font color="#006666">To</font></b> 35, 37 <b><font color="#006666">To</font></b> 47, 58 <b><font color="#006666">To</font></b> 64, 91 <b><font color="#006666">To</font></b> 96
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Satzzeichen oder mathematisches Symbol. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 48 <b><font color="#006666">To</font></b> 57
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist eine Zahl. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 65 <b><font color="#006666">To</font></b> 90
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Großbuchstabe. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Case</font></b> 97 <b><font color="#006666">To</font></b> 122
+        Message =<font color="#006666"> StrU</font>(Char) + &quot; ist ein Kleinbuchstabe. (&quot; +<font color="#006666"> Chr</font>(Char) + &quot;)&quot;
+        
+      <b><font color="#006666">Default</font></b>
+        <font color="#006666">; Wenn keine der vorangegangenen Case Bedingungen zutraf.</font>
+        Message = &quot;Sorry, ich weiß nicht, was &quot; +<font color="#006666"> StrU</font>(Char) + &quot; ist!&quot;
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+    <b><font color="#006666">Debug</font></b> Message
+    
+  <b><font color="#006666">Next</font></b> Char
+</font></pre>
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_constants.html">< Vorheriges: Konstanten</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_loops.html">Nächstes: Schleifen ></a> 
+</blockquote>
+</font></body></html>

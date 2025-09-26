@@ -1,0 +1,73 @@
+<html><head><title>XMLNodeFromPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeFromPath()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Ergebnis = <font color="#006666"><b>XMLNodeFromPath</b></font>(*ElternKnoten, Pfad$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den XML-Knoten innerhalb des '*ElternKnoten' (übergeordneter Knoten, in englisch &quot;ParentNode&quot;) zurück, 
+dessen Verbindung zum '*ElternKnoten' mittels des 'Pfad$' beschrieben wird. 
+<a href="xmlnodepath.html">XMLNodePath()</a> kann verwendet werden, um einen solchen Pfad zu einem Knoten 
+zu erhalten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*ElternKnoten</i></td>
+<td width="90%"> 
+Der übergeordnete XML-Knoten. 
+
+</td></tr>
+<tr><td><i>Pfad$</i></td>
+<td> 
+Beinhaltet eine Liste von durch '/' getrennten Knoten-Namen, um den Weg vom Elternknoten 
+zum Zielknoten aufzuzeigen. Zum Beispiel definiert &quot;childtag/subchildtag&quot; den ersten Knoten mit dem 
+Namen &quot;subchildtag&quot; innerhalb des ersten Knoten mit Namen &quot;childtag&quot; innerhalb des '*ElternKnoten'. 
+<br>
+<br>
+Ein Knotenname kann einen Index (beginnend bei eins) haben, um genau zu spezifieren, welchen von 
+mehreren 'Child-Tags' (untergeordnete &quot;Kinderknoten&quot;) mit dem gleichen Namen ausgewählt werden sollen. 
+&quot;childtag/subchildtag[3]&quot; definiert den dritten &quot;subchildtag&quot; innerhalb des ersten &quot;childtag&quot; vom 
+'*ElternKnoten'. 
+<br>
+<br>
+Andere Regeln: <br>
+- Wenn ein Pfad mit '/' beginnt, ist dieser relativ zur Wurzel des Baums - ganz gleich, welchen Knoten '*ElternKnoten' spezifiziert. <br>
+- Ein Platzhalter &quot;*&quot; kann anstelle eines Tag-Namens verwendet werden, um damit anzugeben, dass jeder Tag ausgewählt werden soll. <br>
+- Ein Kommentar-Knoten hat den Tag-Namen &quot;#comment&quot;. <br>
+- Ein CData-Knoten hat den Tag-Namen &quot;#cdata&quot;. <br>
+- Ein DTD-Knoten hat den Tag-Namen &quot;#dtd&quot;. <br>
+- Eine Verarbeitungsanweisung hat den Tag-Namen &quot;#instruction&quot;. <br>
+
+<br>
+Einige Beispiele für gültige Pfade: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;/mainnode/#comment[4]&quot; - der vierte Kommentar innerhalb des &quot;mainnode&quot; Knotens ausgehend von der Wurzel des Baums
+  &quot;*[10]&quot;                 - der zehnte Knoten (jeden Typs) innerhalb vom '*ElternKnoten'
+  &quot;*/*/*&quot;                 - der ersten Knoten 3 Ebenen (Level) unterhalb vom '*ElternKnoten' unabhängig von seinem Typ
+  &quot;node[3]/*[3]/#cdata&quot;   - die erste CData Sektion innerhalb des dritten Knotens (beliebiger Art) innerhalb des dritten Knotens &quot;node&quot; innerhalb vom '*ElternKnoten'
+</font></pre>
+
+<b>Hinweis: </b> Dieser Befehl ist keine Implementation der XPath Spezifikation. Der verwendete und von diesem 
+Befehl verstandene Syntax ist nur eine kleine Untermenge von XPath. Dies bedeutet, ein von <a href="xmlnodepath.html">XMLNodePath()</a> 
+zurückgegebener Pfad ist eine gültige XPath Abfrage, aber dieser Befehl versteht nur den hier beschriebenen Syntax, 
+nicht generell jede XPath Abfrage. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den <a href="../reference/memory.html">Zeiger</a> des Zielknotens zurück - oder Null, wenn der Pfad nicht zu einem 
+gültigen Knoten führte. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="xmlnodepath.html">XMLNodePath()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=xmlnodefromid.html>XMLNodeFromID()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=xmlnodepath.html>XMLNodePath()</a> -><br><br>
+
+</body></html>

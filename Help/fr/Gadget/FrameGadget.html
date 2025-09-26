@@ -1,0 +1,113 @@
+<html><head><title>FrameGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FrameGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>FrameGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Texte$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée dans la GadgetList un cadre en 
+relief qui permet de regrouper un 
+ensemble de gadgets. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Titre qui s'affiche près du bord supérieur 
+gauche du cadre (ce texte est ignoré si le 
+gadget a l'option <font color="#924B72">#PB_Frame_Single</font>, 
+<font color="#924B72">#PB_Frame_Double</font> ou <font color="#924B72">#PB_Frame_Flat</font>). 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Frame_Container</font> : Active la prise en charge des conteneurs 
+                        afin que des gadgets puissent y être ajoutés 
+                        (fortement recommandé pour éviter divers problèmes).
+                        <a href="closegadgetlist.html">CloseGadgetList()</a> doit être appelé pour revenir à 
+                        la liste de gadgets précédente comme tout autre gadget conteneur.
+ Avec
+  <font color="#924B72">#PB_Frame_Single</font>: Cadre enfoncé (Windows seulement)
+  <font color="#924B72">#PB_Frame_Double</font>: Cadre doublement enfoncé (Windows seulement)
+  <font color="#924B72">#PB_Frame_Flat</font>  : Cadre simple (Windows seulement)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Comme ce gadget est seulement décoratif, 
+<a href="gadgettooltip.html">GadgetToolTip()</a> ne peut pas être utilisé 
+(ce gadget ne reçoit aucun évènement). 
+
+</blockquote><p><b>Exemple:</b> Avec Container</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 320, 250, &quot;FrameGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    FrameGadget</font>(0, 10,  10, 300, 200, &quot;Options&quot;, <font color="#924B72">#PB_Frame_Container</font>)
+<font color="#006666">      CheckBoxGadget</font>(1, 10, 40, 200, 30, &quot;Activer l'optimiseur&quot;)
+<font color="#006666">      CheckBoxGadget</font>(2, 10, 75, 200, 30, &quot;Valider la sortie&quot;)
+<font color="#006666">    CloseGadgetList</font>()
+
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 320, 250, &quot;FrameGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    FrameGadget</font>(0, 10,  10, 300, 50, &quot;Cadre en relief standard&quot;)
+<font color="#006666">    FrameGadget</font>(1, 10,  70, 300, 50, &quot;&quot;, <font color="#924B72">#PB_Frame_Single</font>)
+<font color="#006666">    FrameGadget</font>(2, 10, 130, 300, 50, &quot;&quot;, <font color="#924B72">#PB_Frame_Double</font>)
+<font color="#006666">    FrameGadget</font>(3, 10, 190, 300, 50, &quot;&quot;, <font color="#924B72">#PB_Frame_Flat</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/framegadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="containergadget.html">ContainerGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=explorertreegadget.html>ExplorerTreeGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=freegadget.html>FreeGadget()</a> -><br><br>
+
+</body></html>

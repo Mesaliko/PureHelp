@@ -1,0 +1,121 @@
+<html><head><title>ProgressBarGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ProgressBarGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ProgressBarGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur, Minimum, Maximum [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget Barre de progression dans 
+la GadgetList. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+L'intervalle qui sera utilisé par la barre 
+de progression. 
+<br>
+<br>
+La valeur doit être comprise entre 0 et 65536 
+pour être compatible avec tous les systèmes 
+d'exploitation. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ProgressBar_Smooth</font>  : La progression est précise, au lieu d'utiliser des blocs (Note: sous Windows avec
+                            le support des skins activé et sous OS X, cette option n'a aucun effet).
+  <font color="#924B72">#PB_ProgressBar_Vertical</font>: La barre de progression sera verticale.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les fonctions suivantes peuvent être appelées pour agir sur la barre de progression :
+  - <a href="setgadgetstate.html">SetGadgetState()</a>: Change la valeur de la barre de progression. 
+    <font color="#924B72">#PB_ProgressBar_Unknown</font> peut être utilisée pour indiquer que la progression est inconnue.
+
+  - <a href="getgadgetstate.html">GetGadgetState()</a>: Renvoie la valeur courante de la barre de progression.
+  
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a> avec les attributs suivants:
+    <font color="#924B72">#PB_ProgressBar_Minimum</font>: Change la valeur minimale.
+    <font color="#924B72">#PB_ProgressBar_Maximum</font>: Change la valeur maximale. 
+
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec les attributs suivants:
+    <font color="#924B72">#PB_ProgressBar_Minimum</font>: Renvoie la valeur minimale.
+    <font color="#924B72">#PB_ProgressBar_Maximum</font>: Renvoie la valeur maximale. 
+
+  -<a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les valeurs suivantes comme 'TypeCouleur' 
+  (Note: Sous Windows avec le support des skins activé, la couleur n'a aucun effet):
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Couleur de la barre de progression
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Couleur du fond
+
+  Note: <a href="setgadgetcolor.html">SetGadgetColor()</a> n'est pas pris en charge sur la plate-forme MacOS X.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 320, 160, &quot;ProgressBarGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    TextGadget       </font>(3,  10, 10, 250,  20, &quot;Barre de progression standard  (50/100)&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ProgressBarGadget</font>(0,  10, 30, 250,  30, 0, 100)
+<font color="#006666">    SetGadgetState   </font>(0, 50)   <font color="#006666">;  change la valeur de la 1ère barre de progression (ID = 0) à 50 sur 100</font>
+<font color="#006666">    TextGadget       </font>(4,  10, 70, 250,  20, &quot;Barre de progression précise  (50/200)&quot;, <font color="#924B72">#PB_Text_Center</font>)
+<font color="#006666">    ProgressBarGadget</font>(1,  10, 90, 250,  30, 0, 200, <font color="#924B72">#PB_ProgressBar_Smooth</font>)
+<font color="#006666">    SetGadgetState   </font>(1, 50)   <font color="#006666">;  change la valeur de la 2ème barre de progression (ID = 1) à 50 sur 200</font>
+<font color="#006666">    TextGadget       </font>(5, 100,135, 200,  20, &quot;Barre de progression verticale  (100/300)&quot;, <font color="#924B72">#PB_Text_Right</font>)
+<font color="#006666">    ProgressBarGadget</font>(2, 270, 10,  30, 120, 0, 300, <font color="#924B72">#PB_ProgressBar_Vertical</font>)
+<font color="#006666">    SetGadgetState   </font>(2, 100)   <font color="#006666">; change la valeur de la 3ème barre de progression (ID = 2) à 100 sur 300</font>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>()=<font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/progressbargadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="setgadgetitemimage.html">SetGadgetItemImage()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=panelgadget.html>PanelGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=removegadgetcolumn.html>RemoveGadgetColumn()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,53 @@
+<html><head><title>CheckDatabaseNull</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CheckDatabaseNull()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CheckDatabaseNull</b></font>(#Database, Column)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Checks if the content of the specified database column is null. This command 
+is only valid after a successful <a href="firstdatabaserow.html">FirstDatabaseRow()</a>, <a href="previousdatabaserow.html">PreviousDatabaseRow()</a> or <a href="nextdatabaserow.html">NextDatabaseRow()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Database</i></td>
+<td width="90%"> 
+The database to use. 
+
+</td></tr>
+<tr><td><i>Column</i></td>
+<td> 
+The column to use. <a href="databasecolumnindex.html">DatabaseColumnIndex()</a> is available to get the index of a named column. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns <font color="#924B72">#True</font> is the data is null, <font color="#924B72">#False</font> otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To determine the type of a column, <a href="databasecolumntype.html">DatabaseColumnType()</a> can be used. 
+<br>
+<br>
+Note: This function can be called only once for each column. Therefore if this value needs 
+to be used more than once, the data has to be stored in a variable, since all subsequent 
+calls will return the wrong value. This is an ODBC limitation. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getdatabaseblob.html">GetDatabaseBlob()</a>, 
+<a href="getdatabasedouble.html">GetDatabaseDouble()</a>, 
+<a href="getdatabasefloat.html">GetDatabaseFloat()</a>, 
+<a href="getdatabaselong.html">GetDatabaseLong()</a>, 
+<a href="getdatabasequad.html">GetDatabaseQuad()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=affecteddatabaserows.html>AffectedDatabaseRows()</a> - <a href=index.html>Database Index</a> - <a href=closedatabase.html>CloseDatabase()</a> -><br><br>
+
+</body></html>

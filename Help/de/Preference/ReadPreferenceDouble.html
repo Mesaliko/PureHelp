@@ -1,0 +1,70 @@
+<html><head><title>ReadPreferenceDouble</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadPreferenceDouble()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.d = <font color="#006666"><b>ReadPreferenceDouble</b></font>(Schlüssel$, StandardWert)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Versucht den zum Schlüssel 'Schlüssel$' gehörenden Wert zu lesen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Schlüssel$</i></td>
+<td width="90%"> 
+Der Schlüssel, dessen Wert gelesen werden soll. Wenn sich der Schlüssel innerhalb einer Gruppe 
+befindet, muss <a href="preferencegroup.html">PreferenceGroup()</a> verwendet werden, um die aktuelle Gruppe zu ändern. 
+
+</td></tr>
+<tr><td><i>StandardWert</i></td>
+<td> 
+Der zurückzugebende Standardwert, wenn der Schlüssel nicht gefunden oder die 
+Preference-Datei nicht korrekt geöffnet wurde (z.B. Datei nicht gefunden). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der dem angegebenen Schlüssel zugewiesene Wert, als eine Double-Zahl (.d). 
+Wenn der Schlüssel nicht gefunden wurde, dann wird der Standardwert zurückgegeben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Öffnet eine Preference-Datei</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Öffnen der Gruppe 'Window'</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+  
+  <font color="#006666">; Untersuchen der Schlüssel bis w = 800</font>
+<font color="#006666">  NextPreferenceKey</font>() <font color="#006666">; x = 0</font>
+<font color="#006666">  NextPreferenceKey</font>() <font color="#006666">; y = 0</font>
+<font color="#006666">  NextPreferenceKey</font>() <font color="#006666">; w = 800</font>
+  
+  <font color="#006666">; Lesen des Schlüssels</font>
+  key$ =<font color="#006666"> PreferenceKeyName</font>()
+  
+  <font color="#006666">; Anzeigen des Schlüssels und seiner Daten in verschiedenen Formaten</font>
+<font color="#006666">  MessageRequester</font>(&quot;Integer-Key&quot;,<font color="#006666"> Str</font>(<font color="#006666">ReadPreferenceInteger</font>(key$, 0)))
+<font color="#006666">  MessageRequester</font>(&quot;Float-Key&quot;,<font color="#006666"> StrF</font>(<font color="#006666">ReadPreferenceFloat</font>(key$, 0), 6))
+<font color="#006666">  MessageRequester</font>(&quot;Double-Key&quot;,<font color="#006666"> StrD</font>(<font color="#006666">ReadPreferenceDouble</font>(key$, 0), 15))
+<font color="#006666">  MessageRequester</font>(&quot;Long-Key&quot;,<font color="#006666"> Str</font>(<font color="#006666">ReadPreferenceLong</font>(key$, 0)))
+<font color="#006666">  MessageRequester</font>(&quot;Quad-Key&quot;,<font color="#006666"> Str</font>(<font color="#006666">ReadPreferenceQuad</font>(key$, 0)))
+<font color="#006666">  MessageRequester</font>(&quot;String-Key&quot;,<font color="#006666"> ReadPreferenceString</font>(key$, &quot;0&quot;))
+    
+  <font color="#006666">; Schließt die Preference-Datei</font>
+<font color="#006666">  ClosePreferences</font>() 
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="readpreferencefloat.html">ReadPreferenceFloat()</a>, <a href="readpreferenceinteger.html">ReadPreferenceInteger()</a>, <a href="readpreferencelong.html">ReadPreferenceLong()</a>, <a href="readpreferencequad.html">ReadPreferenceQuad()</a>, <a href="readpreferencestring.html">ReadPreferenceString()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=preferencekeyvalue.html>PreferenceKeyValue()</a> - <a href=index.html>Preference Inhaltsverzeichnis</a> - <a href=readpreferencefloat.html>ReadPreferenceFloat()</a> -><br><br>
+
+</body></html>

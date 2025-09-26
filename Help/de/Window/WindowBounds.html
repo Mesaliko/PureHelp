@@ -1,0 +1,79 @@
+<html><head><title>WindowBounds</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowBounds()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>WindowBounds</b></font>(#Window, MinimaleBreite, MinimaleHöhe, MaximaleBreite, MaximaleHöhe)  </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die minimalen und maximalen Fenster-Dimensionen (in Pixel). 
+Dies ist nützlich, um zu vermeiden, dass ein Fenster zu klein oder zu groß wird, wenn 
+der Anwender es in der Größe verändert. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+Das zu verwendende Fenster. 
+
+</td></tr>
+<tr><td><i>MinimaleBreite</i></td>
+<td> 
+Die minimale Breite des Fensters. Wird diese auf <font color="#924B72">#PB_Ignore</font> gesetzt, 
+dann wird der Wert für die derzeitige minimale Breite nicht verändert. 
+Wird diese auf <font color="#924B72">#PB_Default</font> gesetzt, dann wird der Wert für die minimale Breite 
+auf den Systemstandard (wie vor dem Aufruf dieses Befehls) zurückgesetzt. 
+
+</td></tr>
+<tr><td><i>MinimaleHöhe</i></td>
+<td> 
+Die minimale Höhe des Fensters. Wird diese auf <font color="#924B72">#PB_Ignore</font> gesetzt, 
+dann wird der Wert für die derzeitige minimale Höhe nicht verändert. 
+Wird diese auf <font color="#924B72">#PB_Default</font> gesetzt, dann wird der Wert für die minimale Höhe 
+auf den Systemstandard (wie vor dem Aufruf dieses Befehls) zurückgesetzt. 
+
+</td></tr>
+<tr><td><i>MaximaleBreite</i></td>
+<td> 
+Die maximale Breite des Fensters. Wird diese auf <font color="#924B72">#PB_Ignore</font> gesetzt, 
+dann wird der Wert für die derzeitige maximale Breite nicht verändert. 
+Wird diese auf <font color="#924B72">#PB_Default</font> gesetzt, dann wird der Wert für die maximale Breite 
+auf den Systemstandard (wie vor dem Aufruf dieses Befehls) zurückgesetzt. 
+
+</td></tr>
+<tr><td><i>MaximaleHöhe</i></td>
+<td> 
+Die maximale Höhe des Fensters. Wird diese auf <font color="#924B72">#PB_Ignore</font> gesetzt, 
+dann wird der Wert für die derzeitige maximale Höhe nicht verändert. 
+Wird diese auf <font color="#924B72">#PB_Default</font> gesetzt, dann wird der Wert für die maximale Höhe 
+auf den Systemstandard (wie vor dem Aufruf dieses Befehls) zurückgesetzt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Funktioniert nicht bei einem rahmenlosen Fenster. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 300, &quot;Ändere meine Größe !&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+<font color="#006666">    WindowBounds</font>(0, 200, 200, 400, 400)
+
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=waitwindowevent.html>WaitWindowEvent()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=windowevent.html>WindowEvent()</a> -><br><br>
+
+</body></html>

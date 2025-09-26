@@ -1,0 +1,184 @@
+<html><head><title>Module</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Module</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DeclareModule</font></b> &lt;nom&gt;
+  ...
+<b><font color="#006666">EndDeclareModule</font></b>
+
+<b><font color="#006666">Module</font></b> &lt;nom&gt;
+  ...
+<b><font color="#006666">EndModule</font></b>
+
+<b><font color="#006666">UseModule</font></b> &lt;nom&gt;
+<b><font color="#006666">UnuseModule</font></b> &lt;nom&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Les modules sont un moyen facile d'isoler une morceau de code à partir d'un code principal, 
+permettant ainsi la réutilisation d'un code et son partage sans risque de conflit de nom. 
+Dans d'autres langages de programmation, les modules sont connus sous le nom : &quot;espaces de noms&quot;. 
+Un module doit avoir une section <b><font color="#006666">DeclareModule</font></b> (qui est l'interface publique) et 
+une section <b><font color="#006666">Module</font></b> associée (qui est son implémentation). 
+Seuls les éléments déclarés dans la section <b><font color="#006666">DeclareModule</font></b> seront accessibles depuis 
+l'extérieur du module. Tout le code de la section <b><font color="#006666">Module</font></b> sera maintenu privé à 
+ce module. Les éléments du code principal, comme les procédures, les variables, etc, ne 
+seront pas accessibles à l'intérieur du module, même s'ils sont déclarés en <a href="../reference/global.html">global</a>. 
+Un module peut être considéré comme une boîte noire, une feuille de code vide où les noms 
+des éléments ne peuvent pas entrer en conflit avec les éléments de même nom du code principal. 
+Il est plus facile d'écrire du code, comme par exemple, on peut utiliser des noms simples 
+qui peuvent être réutilisées au sein de chaque module sans risque de conflit. 
+<br>
+<br>
+Les éléments acceptés dans la section <b><font color="#006666">DeclareModule</font></b> peuvent être les suivants: 
+procédures (seule la déclaration des procédures est autorisée), structures, macros, variables, constantes, 
+énumérations, tableaux, listes, maps et les étiquettes (labels). 
+<br>
+<br>
+Pour accéder à un élément d'un module depuis l'extérieur, le nom du module doit 
+être précisé suivie du séparateur <b>'::'</b>. En spécifiant explicitement le nom du module, 
+l'élément est disponible partout dans le code source, même dans un autre module. 
+Tous les éléments de la section <b><font color="#006666">DeclareModule</font></b> peuvent être automatiquement 
+importés dans un autre module ou dans le code principal à l'aide de <b><font color="#006666">UseModule</font></b>. 
+Dans ce cas, si un nom de module est en conflit, les éléments du module ne seront pas 
+importés et une erreur du compilateur sera levée. 
+<b><font color="#006666">UnuseModule</font></b> retire les éléments du module. <b><font color="#006666">UseModule</font></b> n'est pas 
+obligatoire pour accéder à un élément d'un module, mais le nom du module doit être spécifié. 
+<br>
+<br>
+Pour partager des informations entre les modules, un module commun peut être créé et 
+utilisé par tous les modules qui en ont besoin. C'est la façon normale pour disposer de 
+données globales disponibles pour tous les modules. 
+<br>
+<br>
+Toutes les commandes PureBasic, les structures et les constantes sont des éléments par 
+défaut disponibles dans les modules. Par conséquent les éléments de modules ne peuvent pas 
+avoir le même nom que les commandes internes de PureBasic, les structures ou les constantes. 
+<br>
+<br>
+Tout les codes à l'intérieur des sections <b><font color="#006666">DeclareModule</font></b> et des sections <b><font color="#006666">Module</font></b> sont 
+exécutés comme n'importe quel autres codes lorsque le flux du programme atteint le module. 
+<br>
+<br>
+Si les mots clés <b><font color="#006666">Define</font></b>, <b><font color="#006666">EnableExplicit</font></b>, <b><font color="#006666">EnableASM</font></b> sont utilisés dans un module, 
+ils n'ont pas d'effet en dehors de ce module. 
+<br>
+<br>
+Quand les états <b><font color="#006666">Define</font></b>, <b><font color="#006666">EnableExplicit</font></b>, <b><font color="#006666">EnableASM</font></b> sont utilisés à l'intérieur d'un module, 
+ils n'ont pas d'effet en dehors du module, ni depuis l'extérieur du module. 
+<br>
+<br>
+Note: Les modules ne sont pas obligatoires dans PureBasic mais sont recommandés lors de la 
+réalisation de grands projets. Ils aident à la maintenance du code, même si c'est 
+légèrement plus verbeux. Avoir une section <b><font color="#006666">DeclareModule</font></b> rend le module plus ou 
+moins auto-documenté pour une réutilisation ou un partage. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  
+  <font color="#006666">; Tous les éléments de cette section seront disponibles de l'extérieur</font>
+  <font color="#006666">; --------------------------------------------------------------------------------------------------</font>
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+    
+    <font color="#924B72">#FerrariName$</font> = &quot;458 Italia&quot; <font color="#006666">; Constante publique (accessible depuis l'extérieur du module)</font>
+    <b><font color="#006666">Declare</font></b> <font color="#006666">CreateFerrari</font>()      <font color="#006666">; La Procédure sera publique (accessible depuis l'extérieur du module)</font>
+
+  <b><font color="#006666">EndDeclareModule</font></b>
+  
+  
+  <font color="#006666">; Tous les éléments de cette section seront privés. Tous les noms peuvent être utilisés sans conflit</font>
+  <font color="#006666">; --------------------------------------------------------------------------------------------------</font>
+  <b><font color="#006666">Module</font></b> Ferrari
+    
+    <b><font color="#006666">Global</font></b> Initialized = <font color="#924B72">#False</font>
+    
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()             <font color="#006666">; Procedure privée Init() (inaccessible depuis l'extérieur du module)</font>
+      <b><font color="#006666">If</font></b> Initialized = <font color="#924B72">#False</font>
+        Initialized = <font color="#924B72">#True</font>
+        <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndProcedure</font></b>  
+      
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">CreateFerrari</font>()    <font color="#006666">; Procédure publique (car déclarée dans la section 'DeclareModule')</font>
+<font color="#006666">      Init</font>()
+      <b><font color="#006666">Debug</font></b> &quot;CreateFerrari()&quot;
+    <b><font color="#006666">EndProcedure</font></b>
+    
+  <b><font color="#006666">EndModule</font></b>
+  
+  
+  <font color="#006666">; Code principal</font>
+  <font color="#006666">; -------------------------------------------------------------------------------------------------- </font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()               <font color="#006666">; Procédure d'initialisation principale, n'entre pas en conflit avec la procédure </font>
+                                 <font color="#006666">; Init() du Module Ferrari</font>
+
+    <b><font color="#006666">Debug</font></b> &quot;Procédure init() du code principal.&quot;
+
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  Init</font>()
+  
+  Ferrari::<font color="#006666">CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> Ferrari::<font color="#924B72">#FerrariName$</font>
+  
+  <b><font color="#006666">Debug</font></b> &quot;------------------------------&quot;
+  
+  <b><font color="#006666">UseModule</font></b> Ferrari              <font color="#006666">; Maintenant, importer tous les éléments publics directement dans le programme principal</font>
+  
+<font color="#006666">  CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font>
+
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Avec un module commun</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  
+  <font color="#006666">; Le module commun, qui sera utilisé par d'autres modules afin de partager des données</font>
+  <font color="#006666">; ------------------------------------------------------------------------------------</font>
+  <b><font color="#006666">DeclareModule</font></b> Voitures
+    <b><font color="#006666">Global</font></b> NbVoitures = 0
+  <b><font color="#006666">EndDeclareModule</font></b>
+  
+  <b><font color="#006666">Module</font></b> Voitures 
+  <b><font color="#006666">EndModule</font></b>
+  
+  
+  <font color="#006666">; Premier module de voiture</font>
+  <font color="#006666">;--------------------------</font>
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+  <b><font color="#006666">EndDeclareModule</font></b>
+  
+  <b><font color="#006666">Module</font></b> Ferrari
+    
+    <b><font color="#006666">UseModule</font></b> Voitures
+    NbVoitures+1
+ 
+  <b><font color="#006666">EndModule</font></b>
+  
+  
+  <font color="#006666">; Second module de voiture</font>
+  <font color="#006666">; ------------------------</font>
+  <b><font color="#006666">DeclareModule</font></b> Porsche
+  <b><font color="#006666">EndDeclareModule</font></b>
+  
+  <b><font color="#006666">Module</font></b> Porsche
+    
+    <b><font color="#006666">UseModule</font></b> Voitures
+    NbVoitures+1
+
+  <b><font color="#006666">EndModule</font></b>
+  
+  
+  <font color="#006666">; Code principal</font>
+  <font color="#006666">; --------------------------------------------------------------------------------------------------</font>
+  
+  <b><font color="#006666">Debug</font></b> Voitures::NbVoitures
+
+</font></pre>
+
+</blockquote>
+</font></body></html>

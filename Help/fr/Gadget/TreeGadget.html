@@ -1,0 +1,171 @@
+<html><head><title>TreeGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TreeGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>TreeGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget liste arborescente dans la 
+GadgetList en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_AlwaysShowSelection</font>: Montre toujours la sélection, même si le gadget n'est plus actif.
+  <font color="#924B72">#PB_Tree_NoLines</font>            : Cache les lignes reliant les noeuds.
+  <font color="#924B72">#PB_Tree_NoButtons</font>          : Cache les boutons des noeuds.
+  <font color="#924B72">#PB_Tree_CheckBoxes</font>         : Ajoute une case à cocher devant chaque élément.
+  <font color="#924B72">#PB_Tree_ThreeState</font>         : Les cases à cocher peuvent avoir un état &quot;indéterminé&quot;.
+</font></pre>
+<blockquote>
+
+L'option <font color="#924B72">#PB_Tree_ThreeState</font> peut être 
+utilisée en combinaison avec l'option 
+<font color="#924B72">#PB_Tree_CheckBoxes</font> pour obtenir des 
+cases à cocher qui peuvent avoir un état 
+&quot;on&quot;, &quot;off&quot; et &quot;indéterminé&quot;. 
+L'utilisateur ne peut sélectionner que 
+les états &quot;on&quot; ou &quot;off&quot;. L'état 
+&quot;indéterminé&quot; peut être défini en 
+utilisant la fonction <a href="setgadgetitemstate.html">SetGadgetItemState()</a>. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Chaque branche de l'arbre a un niveau 
+assigné qui détermine la relation qu'il 
+a avec l'élément du dessus et du dessous. 
+Les éléments avec le même niveau 
+appartiennent à la même branche, les 
+éléments avec un niveau supérieur sont les 
+fils etc. 
+Le paramètre 'Options' de la commande 
+<a href="addgadgetitem.html">AddGadgetItem()</a> est toujours requis pour 
+les éléments du TreeGadget() et sert à 
+spécifier le niveau de l'élément ajouté. 
+A noter que si un élément est ajouté avec 
+un niveau invalide alors il sera quand 
+même ajouté, au niveau le plus proche. 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les fonctions suivantes peuvent alors être utilisées pour agir sur le contenu de cette liste :
+  - <a href="addgadgetitem.html">AddGadgetItem()</a>     : Ajoute un élément, et éventuellement une icône
+  - <a href="removegadgetitem.html">RemoveGadgetItem()</a>  : Efface un élément (et ses sous-éléments)
+  - <a href="cleargadgetitems.html">ClearGadgetItems()</a>  : Supprime tous les éléments
+  - <a href="countgadgetitems.html">CountGadgetItems()</a>  : Renvoie le nombre d'éléments actuellement contenus dans le gadget.
+  - <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Renvoie l'état de l'élément spécifié.
+  - <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Change l'état de l'élément spécifié.
+  - <a href="getgadgetitemtext.html">GetGadgetItemText()</a> : Renvoie le texte de l'élément spécifié.
+  - <a href="setgadgetitemtext.html">SetGadgetItemText()</a> : Change le texte de l'élément spécifié.
+  - <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>: Change l'image actuelle de l'élément spécifié.
+  - <a href="getgadgetitemdata.html">GetGadgetItemData()</a> : Renvoie la valeur personnalisée associée à cet élément.
+  - <a href="setgadgetitemdata.html">SetGadgetItemData()</a> : Associe une valeur personnalisée à cet élément.
+  - <a href="getgadgetstate.html">GetGadgetState()</a>    : Renvoie l'élément selectionné.
+  - <a href="setgadgetstate.html">SetGadgetState()</a>    : Change l'élément selectionné.
+  - <a href="getgadgettext.html">GetGadgetText()</a>     : Renvoie le texte de l'élément sélectionné.
+  - <a href="setgadgettext.html">SetGadgetText()</a>     : Change le texte de l'élément sélectionné.
+  - <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a> avec l'attribut suivant:
+    <font color="#924B72">#PB_Tree_SubLevel</font>: Renvoie le niveau actuel de l'élément dans l'arbre.
+  
+  - <a href="gadgetitemid.html">GadgetItemID()</a>: Renvoie le 'handle' système de l'élément spécifié (utile pour les fonctions API)
+
+  - <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les  valeurs 'TypeCouleur' suivantes:
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Couleur du texte
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Couleur du fond
+    <font color="#924B72">#PB_Gadget_LineColor</font> : Couleur des lignes reliant les noeuds
+
+  - <a href="setgadgetitemcolor.html">SetGadgetItemColor()</a> et <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a> avec les valeurs 'TypeCouleur' suivantes:
+    <font color="#924B72">#PB_Gadget_FrontColor</font>: Texte de l'élément.
+    <font color="#924B72">#PB_Gadget_BackColor</font> : Fond de l'élément.
+
+  Les évènements suivants sont supportés par <a href="../window/eventtype.html">EventType()</a>:
+    <font color="#924B72">#PB_EventType_LeftClick</font>        : Clic gauche sur un élément, ou une case à cocher a été cochée/décochée.
+    <font color="#924B72">#PB_EventType_LeftDoubleClick</font>  : Double-clic gauche sur un élément.
+    <font color="#924B72">#PB_EventType_RightClick</font>       : Clic droit sur un élément.
+    <font color="#924B72">#PB_EventType_RightDoubleClick</font> : Double-Clic droit sur un élément.
+    <font color="#924B72">#PB_EventType_Change</font>           : L'élément courant a changé
+    <font color="#924B72">#PB_EventType_DragStart</font>        : L'utilisateur a essayé de lancer une opération 'Glisser &amp; Déposer'.
+                                     <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> peut être utilisé pour obtenir les informations sur les éléments déplacés.
+
+  Après un évènement <font color="#924B72">#PB_EventType_DragStart</font>, la bibliothèque <a href="../dragdrop/index.html">Drag & Drop</a> 
+  peut être utilisée pour commencer une opération de 'Glisser &amp; Déposer'. Sous MacOS X, l'événement 
+  <font color="#924B72">#PB_EventType_DragStart</font> doit être géré à l'aide de <a href="../window/bindevent.html">BindEvent()</a> ou de <a href="bindgadgetevent.html">BindGadgetEvent()</a>.</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 355, 180, &quot;TreeGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    TreeGadget</font>(0, 10, 10, 160, 160)                                           <font color="#006666">; liste arborescente standard</font>
+<font color="#006666">    TreeGadget</font>(1, 180, 10, 160, 160, <font color="#924B72">#PB_Tree_CheckBoxes</font> | <font color="#924B72">#PB_Tree_NoLines</font>)  <font color="#006666">; liste arborescente avec cases à cocher + sans lignes reliant les noeuds</font>
+    <b><font color="#006666">For</font></b> ID = 0 <b><font color="#006666">To</font></b> 1
+      <b><font color="#006666">For</font></b> a = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Elément normal &quot;+<font color="#006666">Str</font>(a), 0, 0) <font color="#006666">; si vous souhaitez ajouter une image, utilisez </font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Noeud &quot;+<font color="#006666">Str</font>(a), 0, 0)          <font color="#006666">; ImageID(x) comme 4ème paramètre</font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sous-élément 1&quot;, 0, 1)         <font color="#006666">; Ceux-là sont au premier sous-niveau </font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sous-élément 2&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sous-élément 3&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sous-élément 4&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Fichier &quot;+<font color="#006666">Str</font>(a), 0, 0) <font color="#006666">; sous-niveau 0 à nouveau</font>
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/treegadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, 
+<a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, 
+<a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="setgadgetitemimage.html">SetGadgetItemImage()</a>, <a href="getgadgetitemdata.html">GetGadgetItemData()</a>, 
+<a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, 
+<a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgettext.html">GetGadgetText()</a>, 
+<a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>, 
+<a href="setgadgetitemimage.html">SetGadgetItemImage()</a>, <a href="gadgetitemid.html">GadgetItemID()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="explorertreegadget.html">ExplorerTreeGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=trackbargadget.html>TrackBarGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=unbindgadgetevent.html>UnbindGadgetEvent()</a> -><br><br>
+
+</body></html>

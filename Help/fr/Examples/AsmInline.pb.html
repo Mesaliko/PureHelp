@@ -1,0 +1,30 @@
+<html><head><title>AsmInline.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Inlined asm example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Backend</font> = <font color="#924B72">#PB_Backend_Asm</font> <b><font color="#006666">And</font></b> (<font color="#924B72">#PB_Compiler_Processor</font> = <font color="#924B72">#PB_Processor_x86</font> <b><font color="#006666">Or</font></b> <font color="#924B72">#PB_Compiler_Processor</font> = <font color="#924B72">#PB_Processor_x64</font>)
+
+  Value.l = 10  <font color="#006666">; Declare our own variable
+</font>
+  <b><font color="#006666">EnableASM</font></b>
+    MOV Value, 20 <font color="#006666">; Directly use the ASM keywords with PureBasic variable !
+</font>    INC Value
+<b><font color="#006666">  DisableASM
+</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;ASM Example&quot;, &quot;Should be 21: &quot; + Value)
+
+<b><font color="#006666">CompilerElse</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;ASM Example&quot;, &quot;No supported ASM backend detected.&quot;)
+
+<b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+</body></html>

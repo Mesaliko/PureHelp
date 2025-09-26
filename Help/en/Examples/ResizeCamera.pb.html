@@ -1,0 +1,78 @@
+<html><head><title>ResizeCamera.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - ResizeCamera
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> = 1
+
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+<b><font color="#006666">Define</font></b>.f x=25,y=0,s=1,ps=0.2,px=0.2,py=0.2
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; ResizeCamera - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(200, 200, 200))
+
+<font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;r2skin.jpg&quot;))
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> LoadMesh</font>(0, &quot;robot.mesh&quot;),<font color="#006666"> MaterialID</font>(0))
+<font color="#006666">StartEntityAnimation</font>(0, &quot;Walk&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)  <font color="#006666">; Front camera
+</font><font color="#006666">MoveCamera</font>(0, 0, 20, 250, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(55, 0, 0))
+
+<font color="#006666">CreateCamera</font>(1, x, y, s, s) <font color="#006666">; Back camera
+</font><font color="#006666">MoveCamera</font>(1, 0, 50, 200, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraBackColor</font>(1,<font color="#006666"> RGB</font>(0, 0, 50))
+
+
+<font color="#006666">CameraRenderMode</font>(1, <font color="#924B72">#PB_Camera_Wireframe</font>)  <font color="#006666">; Wireframe for this camera
+
+</font><b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">  ExamineKeyboard</font>()
+  
+<font color="#006666">  RotateEntity</font>(0, 0, 0.3, 0, <font color="#924B72">#PB_Relative</font>)
+  
+  x + px
+  <b><font color="#006666">If</font></b> x&lt;=0  <b><font color="#006666">Or</font></b> x&gt;=(100-s)
+    ps=-ps
+    px = -px
+  <b><font color="#006666">EndIf</font></b>
+  
+  y + py
+  <b><font color="#006666">If</font></b> y&lt;=0  <b><font color="#006666">Or</font></b> y&gt;=(100-s)
+    ps=-ps
+    py = -py
+  <b><font color="#006666">EndIf</font></b>
+  
+  s	+ ps
+  <b><font color="#006666">If</font></b> s&lt;=1 <b><font color="#006666">Or</font></b> s&gt;=100
+    ps = -ps
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  ResizeCamera</font>(1,x,y,s,s)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

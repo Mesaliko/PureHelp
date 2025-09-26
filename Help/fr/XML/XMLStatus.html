@@ -1,0 +1,90 @@
+<html><head><title>XMLStatus</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLStatus()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>XMLStatus</b></font>(#XML)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le statut de la dernière 
+interprétation faite sur un arbre 
+XML avec <a href="loadxml.html">LoadXML()</a> ou <a href="catchxml.html">CatchXML()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+L'arbre XML à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Une valeur nulle (<font color="#924B72">#PB_XML_Success</font>) indique 
+une interprétation réussie, toutes les 
+autres valeurs indiquent un type d'erreurs. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_Success</font>                   : Aucune erreur
+  <font color="#924B72">#PB_XML_NoMemory</font>                  : Plus assez de mémoire
+  <font color="#924B72">#PB_XML_Syntax</font>                    : Erreur de syntaxe
+  <font color="#924B72">#PB_XML_NoElements</font>                : Aucun élément trouvé
+  <font color="#924B72">#PB_XML_InvalidToken</font>              : Document malformé (balise invalide)
+  <font color="#924B72">#PB_XML_UnclosedToken</font>             : Balise fermante manquante
+  <font color="#924B72">#PB_XML_PartialCharacter</font>          : Caractère partiel
+  <font color="#924B72">#PB_XML_TagMismatch</font>               : Balise qui ne correspond pas 
+  <font color="#924B72">#PB_XML_DublicateAttribute</font>        : Attribut en double
+  <font color="#924B72">#PB_XML_JunkAfterDocElement</font>       : Erreur après un élément du document
+  <font color="#924B72">#PB_XML_ParamEntityRef</font>            : Paramètre illégal dans la référence de l'entité
+  <font color="#924B72">#PB_XML_UndefinedEntity</font>           : Entité indéfinie
+  <font color="#924B72">#PB_XML_RecursiveEntityRef</font>        : Référence récursive d'entités 
+  <font color="#924B72">#PB_XML_AsyncEntity</font>               : Entité asynchrone
+  <font color="#924B72">#PB_XML_BadCharacterRef</font>           : Référence à un numéro de caractère invalide
+  <font color="#924B72">#PB_XML_BinaryEntityRef</font>           : Référence à une entité binaire
+  <font color="#924B72">#PB_XML_AttributeExternalEntityRef</font>: Référence à une entité externe dans un attribut
+  <font color="#924B72">#PB_XML_MisplacedXML</font>              : XML ou texte de déclaration mal placé
+  <font color="#924B72">#PB_XML_UnknownEncoding</font>           : Encodage inconnu
+  <font color="#924B72">#PB_XML_IncorrectEncoding</font>         : L'encodage de la déclaration XML est incorrect
+  <font color="#924B72">#PB_XML_UnclosedCDataSection</font>      : Section CDATA non fermée
+  <font color="#924B72">#PB_XML_ExternalEntityHandling</font>    : Erreur dans l'interprétation d'une entité externe
+  <font color="#924B72">#PB_XML_NotStandalone</font>             : Le document n'est pas autonome
+  <font color="#924B72">#PB_XML_UnexpectedState</font>           : Erreur d'interprétation inattendue
+  <font color="#924B72">#PB_XML_EntityDeclaredInPE</font>        : Entité déclarée dans le paramètre entité
+  <font color="#924B72">#PB_XML_FeatureRequiresDTD</font>        : La fonctionnalité requise nécessite le support XML_DTD d'Expat
+  <font color="#924B72">#PB_XML_CantChangeFeatures</font>        : Impossible de changer de paramètre pendant l'interprétation
+  <font color="#924B72">#PB_XML_UnboundPrefix</font>             : Préfixe non lié
+  <font color="#924B72">#PB_XML_UndeclaringPrefix</font>         : Ne pas enlever la déclaration du préfix
+  <font color="#924B72">#PB_XML_IncompletePE</font>              : Balise incomplète dans le paramètre entité
+  <font color="#924B72">#PB_XML_XMLDeclaration</font>            : XML déclaration malformée
+  <font color="#924B72">#PB_XML_TextDeclaration</font>           : Texte de déclaration malformé
+  <font color="#924B72">#PB_XML_PublicID</font>                  : Caractère illégal dans un identifiant public
+  <font color="#924B72">#PB_XML_Suspended</font>                 : Interpréteur suspendu
+  <font color="#924B72">#PB_XML_NotSuspended</font>              : Interpréteur non suspendu
+  <font color="#924B72">#PB_XML_Aborted</font>                   : Interprétation annulée
+  <font color="#924B72">#PB_XML_Finished</font>                  : Interprétation finie
+  <font color="#924B72">#PB_XML_SuspendedPE</font>               : Suspension impossible dans un paramètre entité externe
+  <font color="#924B72">#PB_XML_ReservedPrefixXML</font>         : Le préfixe réservé (xml) ne doit pas être délié ou lié à un autre espace de noms
+  <font color="#924B72">#PB_XML_ReservedPrefixXMLNS</font>       : Le préfixe réservé (xmlns) ne doit pas être déclaré ou enlevé
+  <font color="#924B72">#PB_XML_ReservedNamespaceURI</font>      : Un prefixe ne doit pas empiéter sur un espace de noms réservé
+</font></pre>
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande devrait être utilisée 
+après chaque appel de <a href="loadxml.html">LoadXML()</a> ou 
+<a href="catchxml.html">CatchXML()</a> pour s'assurer que tout 
+s'est correctement déroulé. 
+Le message de l'erreur sous forme 
+textuelle (en anglais) est disponible 
+grâce à la commande <a href="xmlerror.html">XMLError()</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=xmlnodetype.html>XMLNodeType()</a> - <a href=index.html>XML Index</a><br><br>
+
+</body></html>

@@ -1,0 +1,48 @@
+<html><head><title>Shared</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Shared</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Shared</font></b> &lt;Variable&gt; [, ...] 
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Shared</font></b> erlaubt den Zugriff auf eine <a href="../reference/variables.html">Variable</a>, ein <a href="../reference/dim.html">Array</a> 
+eine <a href="../reference/newlist.html">Linked List</a> oder eine <a href="../reference/newmap.html">Map</a> innerhalb der <a href="../reference/procedures.html">Prozedur</a>. 
+Wenn <b><font color="#006666">Shared</font></b> zusammen mit einem Array, einer verknüpften Liste oder einer Map verwendet wird, muss nur 
+der Name gefolgt von '()' angegeben werden. 
+
+</blockquote><p><b>Beispiel:</b> Mit Variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Shared</font></b> a
+    a = 20 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> a   <font color="#006666">; wird 20 ausgeben, da die Variable &quot;geteilt&quot; (shared) wurde.</font>
+</font></pre>
+
+<br>
+</blockquote><p><b>Beispiel:</b> Mit Array und verknüpfter Liste</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>(2)
+  <b><font color="#006666">NewList</font></b> <b><font color="#006666">List</font></b>()
+<font color="#006666">  AddElement</font>(<b><font color="#006666">List</font></b>())
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Shared</font></b> <b><font color="#006666">Array</font></b>(), <b><font color="#006666">List</font></b>()
+    <b><font color="#006666">Array</font></b>(0) = 1
+    <b><font color="#006666">List</font></b>() = 2
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(0)  <font color="#006666">; wird 1 ausgeben, da das Array &quot;geteilt&quot; (shared) wurde.</font>
+  <b><font color="#006666">Debug</font></b> <b><font color="#006666">List</font></b>()    <font color="#006666">; wird 2 ausgeben, da die Liste &quot;geteilt&quot; (shared) wurde.</font>
+</font></pre>
+</blockquote>
+</font></body></html>

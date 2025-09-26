@@ -1,0 +1,139 @@
+<html><head><title>Global</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Global</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Global</font></b>[.&lt;Typ&gt;] &lt;Variable[.&lt;Typ&gt;]&gt; [= &lt;Ausdruck&gt;] [, ...]
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+
+<b><font color="#006666">Global</font></b> bietet die Möglichkeit, <a href="../reference/variables.html">Variablen</a> als global zu definieren, z.B. 
+kann auf solche Variablen dann auch innerhalb einer <a href="../reference/procedures.html">Prozedur</a> zugegriffen werden. 
+In diesem Fall muss jedoch die Anweisung <b><font color="#006666">Global</font></b> für die entsprechenden Variablen aufgerufen werden, 
+<b>bevor</b> die Deklaration der Prozedur erfolgt. 
+<br>
+Diese Regel ist überall gültig - außer in einem Fall: Die <a href="../reference/module.html">Module</a> 
+haben keinen Zugriff auf die als global deklarierten Variablen außerhalb dieses Moduls. 
+<br>
+Jeder Variable kann auch sofort ein Standard-Wert zugewiesen werden. Wenn für die Variable nach <b><font color="#006666">Global</font></b> 
+ein Typ angegeben wird, dann wird der Standard-Typ durch diese Deklaration geändert. 
+<b><font color="#006666">Global</font></b> kann auch zusammen mit <a href="../reference/dim.html">Arrays</a>, <a href="../reference/newlist.html">verknüpften Listen</a> 
+und <a href="../reference/newmap.html">Maps</a> verwendet werden. 
+<br>
+<br>
+Für den Fall, dass Sie in einer Prozedur 'lokale' Variablen, die den gleichen Namen wie globale Variablen haben, 
+verwenden möchten, schauen Sie sich die Schlüsselworte <a href="../reference/protected.html">Protected</a> und <a href="../reference/static.html">Static</a> an. 
+
+</blockquote><p><b>Beispiel:</b> Mit Variablen</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> a.l, b.b, c, d = 20
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Debug</font></b> a  <font color="#006666">; wird 10 sein, da die Variable global ist</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  a = 10
+<font color="#006666">  Change</font>()
+</font></pre>
+
+<br>
+</blockquote><p><b>Beispiel:</b> Mit Array</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>(2)
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(0)  <font color="#006666">; wird 10 sein, da das Array global ist</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Array</font></b>(0) = 10
+<font color="#006666">  Change</font>()
+</font></pre>
+
+<br>
+</blockquote><p><b>Beispiel:</b> Mit Standard-Typ</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; 'Angle' und 'Position' werden Fließkomma-Variablen sein, da bei ihnen kein Typ angegeben wurde</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Global</font></b>.f Angle, Length.b, Position
+
+</font></pre>
+
+
+<br>
+</blockquote><p><b>Beispiel:</b> Komplex - mit einem Modul</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b> Var_GlobalOutsideModule = 12
+  <b><font color="#006666">Debug</font></b>  Var_GlobalOutsideModule <font color="#006666">; Zeigt 12 an</font>
+
+  <b><font color="#006666">DeclareModule</font></b> Ferrari
+    <b><font color="#006666">Global</font></b> Var_GlobalModule = 308
+    <font color="#924B72">#FerrariName$</font> = &quot;458 Italia&quot;
+    <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font> <font color="#006666">; Zeigt &quot;458 Italia&quot; an</font>
+  
+    <font color="#006666">; Debug Var_GlobalOutsideModule ; Fehler, diese Variable existiert bereits</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobalModule       <font color="#006666">; Zeigt 308 an</font>
+  
+    <b><font color="#006666">Declare</font></b> <font color="#006666">CreateFerrari</font>() 
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+
+  <font color="#006666">; Privat</font>
+  <font color="#006666">; ---------------------------------------------------------------------------------------</font>
+  <b><font color="#006666">Module</font></b> Ferrari
+    <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule  <font color="#006666">; Zeigt 0 an &lt;== Schau her !</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobalModule      <font color="#006666">; Zeigt 308 an</font>
+  
+    <b><font color="#006666">Global</font></b> Initialized = 205
+    <b><font color="#006666">Debug</font></b> Initialized <font color="#006666">; Zeigt 205 an</font>
+  
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()
+      <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule <font color="#006666">; Zeigt 0 an</font>
+      <b><font color="#006666">Debug</font></b> Var_GlobalModule     <font color="#006666">; Zeigt 308 an</font>
+      <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;  
+    <b><font color="#006666">EndProcedure</font></b>  
+  
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">CreateFerrari</font>()    <font color="#006666">; Öffentlich</font>
+<font color="#006666">      Init</font>()
+      <b><font color="#006666">Debug</font></b> &quot;CreateFerrari()&quot;
+      <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule <font color="#006666">; Zeigt 0 an</font>
+      <b><font color="#006666">Debug</font></b> Var_GlobalModule     <font color="#006666">; Zeigt 308 an</font>
+    <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">EndModule</font></b>
+
+
+  <font color="#006666">; Haupt-Code</font>
+  <font color="#006666">; --------------------------------------------------------------------------------------------- </font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>()               
+  
+    <b><font color="#006666">Debug</font></b> &quot; init() vom Haupt-Code.&quot;
+    <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule <font color="#006666">; Zeigt 12 an</font>
+    <b><font color="#006666">Debug</font></b> Var_GlobalModule     <font color="#006666">; Zeigt 0 an</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  Init</font>()
+
+  Ferrari::<font color="#006666">CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> Ferrari::<font color="#924B72">#FerrariName$</font> <font color="#006666">; Zeigt 458 Italia an</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule  <font color="#006666">; Zeigt 12 an</font>
+  <font color="#006666">; Debug Var_GlobalModule    ;  Fehler, die Variable existiert bereits</font>
+
+
+  <b><font color="#006666">UseModule</font></b> Ferrari           
+
+<font color="#006666">  CreateFerrari</font>()
+  <b><font color="#006666">Debug</font></b> <font color="#924B72">#FerrariName$</font>         <font color="#006666">; Display 458 Italia</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule <font color="#006666">; Zeigt 12 an</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobalModule     <font color="#006666">; Zeigt 308 an &lt;== Schau her !</font>
+
+  <b><font color="#006666">UnuseModule</font></b> Ferrari
+  <font color="#006666">; Debug #FerrariName$       ; Fehler, existiert nicht</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobalOutsideModule <font color="#006666">; Zeigt 12 an</font>
+  <b><font color="#006666">Debug</font></b> Var_GlobalModule     <font color="#006666">; Zeigt 0 an &lt;== Schau her !</font>
+</font></pre>
+</blockquote>
+</font></body></html>

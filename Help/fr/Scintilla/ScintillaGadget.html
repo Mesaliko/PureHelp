@@ -1,0 +1,86 @@
+<html><head><title>ScintillaGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScintillaGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ScintillaGadget</b></font>(#Scintilla, X, Y, Largeur, Hauteur, @Callback())</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Crée un nouveau contrôle d'édition scintilla. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Scintilla</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau gadget scintilla. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé pour générer automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau gadget. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+L'adresse de la procédure qui recevra les évènements émis par le gadget. <br>
+Elle doit être définie de la façon suivante, avec 'Gadget' qui est le numéro du contrôle 
+et *scinotify qui pointe vers une structure comportant les informations sur l'évènement: 
+<pre><font face="Courier New, Courier, mono" size="2">
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">ScintillaCallBack</font>(Gadget, *scinotify.SCNotification)
+    <font color="#006666">;</font>
+    <font color="#006666">; Votre code ici.</font>
+    <font color="#006666">;</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les événements suivants sont pris en charge par <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_RightClick</font>
+</font></pre>
+
+Les commandes spécifiques de Scintilla peuvent être envoyées au gadget avec la commande <a href="scintillasendmessage.html">ScintillaSendMessage()</a> .<br>
+En outre les commandes de gadgets communes comme <a href="../gadget/resizegadget.html">ResizeGadget()</a> ou <a href="../gadget/hidegadget.html">HideGadget()</a> peuvent aussi bien être utilisées par le contrôle. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 90, &quot;ScintillaGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+ 
+<font color="#006666">          ScintillaGadget</font>(0, 10, 10, 390, 70, 0)
+       
+          <font color="#006666">; Texte en rouge</font>
+<font color="#006666">          ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_STYLESETFORE</font>, 0,<font color="#006666"> RGB</font>(255, 0, 0))
+       
+          <font color="#006666">; Définit le texte initial du ScintillaGadget</font>
+          *Texte=<font color="#006666">UTF8</font>(&quot;Hé, voici un simple ScintillaGadget avec du texte...&quot;)
+<font color="#006666">          ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_SETTEXT</font>, 0, *Texte)
+<font color="#006666">          FreeMemory</font>(*Texte) <font color="#006666">; Le tampon créé par UTF8() doit être libéré pour éviter les fuites de mémoire.</font>
+                 
+          <font color="#006666">; Ajout d'une deuxième ligne de texte précédée d'un saut de ligne</font>
+          Texte$ =<font color="#006666"> Chr</font>(10) + &quot;Seconde ligne.&quot;
+          *Texte=<font color="#006666">UTF8</font>(Texte$)
+<font color="#006666">          ScintillaSendMessage</font>(0, <font color="#924B72">#SCI_APPENDTEXT</font>,<font color="#006666"> StringByteLength</font>(Texte$, <font color="#924B72">#PB_UTF8</font>), *Texte)
+<font color="#006666">          FreeMemory</font>(*Texte)
+     
+       <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+    <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/scintillagadget.png"></p>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=initscintilla.html>InitScintilla()</a> - <a href=index.html>Scintilla Index</a> - <a href=scintillasendmessage.html>ScintillaSendMessage()</a> -><br><br>
+
+</body></html>

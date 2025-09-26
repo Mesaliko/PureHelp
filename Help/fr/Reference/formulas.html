@@ -1,0 +1,350 @@
+<html><head><title>Formules mathématiques (géométrie 2D)</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Formules mathématiques (géométrie 2D)</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+Ci-dessous vous trouverez un ensemble de diverses formules mathématiques. Données pour référence, 
+elles seront également utiles, pour combler vos éventuelles lacunes. 
+Car sans une bonne connaissance des mathématiques, 
+les jeux et les applications avancées ne peuvent pas être réalisés. . <br>
+<br>
+Note: A la place du symbole '^' Utilisez plutôt la commande PureBasic Pow() de la bibliothèque 'Math'. 
+'PI' réfère à la valeur constante &quot;PI = 3.1415...&quot;. 
+Un exemple pour réaliser une telle formule en langage PureBasic : A = PI*r^2 devient A = PI*Pow(r,2) 
+
+</blockquote>
+<p><b>Carré</b></p><blockquote>
+
+
+<p><img src="images/formula01.gif"></p>
+
+l = Longueur du côté  <br>
+e = Diagonale (mesure)  <br>
+A = Surface  <br>
+U = Périmètre  <br>
+<br>
+<b>Surface</b> : A = l^2  <br>
+<br>
+<b>Périmètre</b> : U = 4*l  <br>
+<br>
+<b>Diagonale (mesure)</b> : e = SQR(2)*l  <br>
+
+<p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Longueur d'un côté du carré</font>
+  Longueur = 35 
+
+  <font color="#006666">; Racine de 2</font>
+  <font color="#924B72">#RacineDeDeux</font> = 1.414213538
+
+  <font color="#006666">; Surface</font>
+  Surface =<font color="#006666"> Pow</font>(Longueur, 2) <font color="#006666">; ou encore Longueur * Longueur (c'est plus rapide)</font>
+
+  <font color="#006666">; Périmètre</font>
+  Perimetre = 4 * Longueur 
+
+  <font color="#006666">; Longueur de la Diagonale </font>
+  Diagonale =<font color="#006666"> Sqr</font>(2) * Longueur <font color="#006666">; Pour accélérer le calcul il est possible de remplacer Sqr(2) par #RacineDeDeux </font>
+  
+  <font color="#006666">;Affiche le résultat</font>
+  <b><font color="#006666">Debug</font></b> &quot;Longueur d'un côté du carré = &quot; +<font color="#006666"> Str</font>(Longueur) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Diagonale du carré = &quot; +<font color="#006666"> Str</font>(Diagonale) + &quot; m&quot;  
+  <b><font color="#006666">Debug</font></b> &quot;Surface du carré = &quot; +<font color="#006666"> Str</font>(Surface) + &quot; m²&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Périmètre du carré = &quot; +<font color="#006666"> Str</font>(Perimetre) + &quot; m&quot;
+</font></pre>
+
+</blockquote>
+<p><b>Rhombe/Losange</b></p><blockquote>
+
+
+<p><img src="images/formula02.gif"></p>
+
+l = Longueur du côté <br>
+b = Largeur <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Surface</b> : A = l*b <br>
+<br>
+<b>Périmètre</b> : U = 4*l <br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Longueur </font>
+  Longueur = 35 
+
+  <font color="#006666">; largeur</font>
+  Largeur = 23
+
+  <font color="#006666">; Surface</font>
+  Surface = Longueur * Largeur 
+
+  <font color="#006666">; Périmètre</font>
+  Perimetre = 4 * Longueur
+  
+  <font color="#006666">;Affiche le résultat</font>
+  <b><font color="#006666">Debug</font></b> &quot;Longueur = &quot; +<font color="#006666"> Str</font>(Longueur) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Largueur = &quot; +<font color="#006666"> Str</font>(Largeur) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Surface du losange = &quot; +<font color="#006666"> Str</font>(Surface) + &quot; m²&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Périmètre du losange = &quot; +<font color="#006666"> Str</font>(Perimetre) + &quot; m&quot;
+</font></pre>
+
+</blockquote>
+<p><b>Rectangle</b></p><blockquote>
+
+
+<p><img src="images/formula03.gif"></p>
+
+l = Longueur <br>
+b = Largeur <br>
+e = Diagonale (mesure) <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Surface</b> : A = l*b <br>
+<br>
+<b>Périmètre</b> : U = 2*l+2*b <br>
+<br>
+<b>Diagonale (mesure)</b> : e = SQR(l^2+b^2)) <br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Longueur </font>
+  Longueur = 35 
+
+  <font color="#006666">; largeur</font>
+  Largeur = 23
+  
+  <font color="#006666">; Diagonale</font>
+  Diagonale =<font color="#006666"> Sqr</font>(Longueur * Longueur + Largeur * Largeur)
+  <font color="#006666">; Surface</font>
+  Surface = Longueur * Largeur 
+
+  <font color="#006666">; Périmètre</font>
+  Perimetre = 2 * Longueur + 2 * Largeur
+  
+  <font color="#006666">;Affiche le résultat</font>
+  <b><font color="#006666">Debug</font></b> &quot;Longueur = &quot; +<font color="#006666"> Str</font>(Longueur) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Largueur = &quot; +<font color="#006666"> Str</font>(Largeur) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Diagonale du rectangle = &quot; +<font color="#006666"> Str</font>(Diagonale) + &quot; m&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Surface du rectangle = &quot; +<font color="#006666"> Str</font>(Surface) + &quot; m²&quot;
+  <b><font color="#006666">Debug</font></b> &quot;Périmètre du rectangle = &quot; +<font color="#006666"> Str</font>(Perimetre) + &quot; m&quot;
+</font></pre>
+
+</blockquote>
+<p><b>Rhomboïde/Parallélogramme</b></p><blockquote>
+
+
+<p><img src="images/formula04.gif"></p>
+
+l = Longueur <br>
+h = Hauteur <br>
+b = Largeur <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Surface</b> : A = l*h <br>
+<br>
+<b>Périmètre</b> : U = 2*l+2*b <br>
+
+</blockquote>
+<p><b>Trapèze</b></p><blockquote>
+
+
+<p><img src="images/formula05.gif"></p>
+
+a = Côté 1 <br>
+b = Côté 2 <br>
+c = Côté 3 <br>
+d = Côté 4 <br>
+lm = Longueur médiane <br>
+h = Hauteur <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Surface</b> : A = (a+c)/2*h <br>
+<br>
+<b>Périmètre</b> : U = a+b+c+d <br>
+<br>
+<b>Longueur</b> médiane : lm = (a+c)/2 <br>
+
+
+</blockquote>
+<p><b>Triangle</b></p><blockquote>
+
+
+<p><img src="images/formula06.gif"></p>
+
+a = Côté 1 <br>
+b = Côté 2 <br>
+c = Côté 3 <br>
+l = Longueur de la base <br>
+h = Hauteur <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Surface</b> : <br>
+A = (l*h)/2 <br>
+A = 1/4*SQR(U*(U-2*a)*(U-2*b)*(U-2*c)) <br>
+<br>
+<b>Périmètre</b> : U = a+b+c <br>
+
+</blockquote>
+<p><b>Polygone</b></p><blockquote>
+
+
+<p><img src="images/formula07.gif"></p>
+
+l = Longueur du côté <br>
+d = Diamètre du cercle inscrit <br>
+D = Diamètre du cercle circonscrit <br>
+n = Nombre de côtés <br>
+alpha = Angle au centre <br>
+beta = Angle au sommet <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Diamètre du cercle inscrit</b> : d = SQR(D*D-l*l) <br>
+<br>
+<b>Diamètre du cercle circonscrit</b> : D = SQR(d*d+l*l) <br>
+<br>
+<b>Longueur du côté</b> : l = D*SIN(180/n) <br>
+<br>
+<b>Angle au centre</b> : alpha = 360/n <br>
+<br>
+<b>Angle au sommet</b> : beta = 180-alpha <br>
+<br>
+<b>Surface</b> : A = n*l*d/4 <br>
+<br>
+<b>Périmètre</b> : U = l*n <br>
+
+</blockquote>
+<p><b>Cercle</b></p><blockquote>
+
+
+<p><img src="images/formula08.gif"></p>
+
+r = Rayon <br>
+D = Diamètre <br>
+A = Surface <br>
+U = Périmètre <br>
+
+<b>Surface</b> : <br>
+A = PI*r^2 <br>
+A = PI/4*d^2 <br>
+<br>
+<b>Périmètre</b> : <br>
+U = 2*PI*r <br>
+U = PI*d <br>
+
+</blockquote>
+<p><b>Arc de cercle</b></p><blockquote>
+
+
+<p><img src="images/formula09.gif"></p>
+
+r = Rayon <br>
+D = Diamètre <br>
+l = Longueur de la corde <br>
+lb = Longueur de l'arc <br>
+alpha = Angle au centre <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Longueur de la corde</b> : l = 2*r*SIN(alpha/2) <br>
+<br>
+<b>Longueur de l'arc</b> : lb = PI*r*alpha/180 <br>
+<br>
+<b>Surface</b> : <br>
+A = PI*D^2*alpha/1440 <br>
+A = lb*r/2 <br>
+<br>
+<b>Périmètre</b> : U = lb+D <br>
+
+</blockquote>
+<p><b>Section de cercle</b></p><blockquote>
+
+
+<p><img src="images/formula10.gif"></p>
+
+r = Rayon <br>
+D = Diamètre <br>
+l = Longueur de la corde <br>
+lb = Longueur de l'arc <br>
+alpha = Angle au centre <br>
+b = Largeur <br>
+A = Surface <br>
+U = Périmètre <br>
+<br>
+<b>Longueur de la corde</b> : <br>
+l = 2*r*SIN(alpha/2) <br>
+l = 2*SQR(b*(2*r-b)) <br>
+<br>
+<b>Longeur de l'arc</b> : lb = PI*r*alpha/180 <br>
+<br>
+<b>Largeur</b> : <br>
+b = l/2*TAN(alpha/4) <br>
+b = r-SQR(r^2-l^2/4) <br>
+<br>
+<b>Rayon</b> : r = b/2+l^2/(8*b) <br>
+<br>
+<b>Surface</b> : <br>
+A = PI*d^2*alpha/1440-(l*(r-b))/2 <br>
+A = (lb*r-l*(r-b))/2 <br>
+<br>
+<b>Périmètre</b> : U = lb+l <br>
+
+</blockquote>
+<p><b>Anneau</b></p><blockquote>
+
+
+<p><img src="images/formula11.gif"></p>
+
+d = Diamètre interne <br>
+D = Diamètre externe <br>
+dm = Diamètre intermédiaire <br>
+b = Largeur <br>
+A = Surface <br>
+<br>
+<b>Diamètre intermédiaire</b> : dm = (D+d)/2 <br>
+<br>
+<b>Surface</b> : <br>
+A = PI*dm*b <br>
+A = PI/4*(D^2-d^2) <br>
+
+</blockquote>
+<p><b>Consommation mémoire d'une image</b></p><blockquote>
+
+
+a = Largeur de l'image (en Pixel) <br>
+b = Hauteur de l'image (en Pixel) <br>
+bits = Profondeur de couleurs de l'image (en Bits) <br>
+<br>
+taille = a * b * (bits / 8) <br>
+
+
+</blockquote>
+<p><b>Distance entre deux points</b></p><blockquote>
+
+
+(x1|y1) = coordonnées XY du point n°1 <br>
+(x2|y2) = coordonnées XY du point n°2 <br>
+a = Distance entre les points <br>
+<br>
+a = SQR((x1-x2)^2 + (y1-y2)^2) <br>
+
+
+</blockquote>
+<p><b>"Mélange" de deux valeurs</b></p><blockquote>
+
+
+a = 1er Nombre <br>
+b = 2ème Nombre <br>
+v = Rapport (0% - 100%) <br>
+e = Résultat <br>
+<br>
+e = ((a*v)/100) + ((b*(100-v)) / 100) <br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,118 @@
+<html><head><title>VectorTextHeight</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">VectorTextHeight()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.d = <font color="#006666"><b>VectorTextHeight</b></font>(Text$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Measures the height of the given text in the current vector drawing font. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+The text (single-line) to measure. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_VectorText_Default</font> : Return the logical bounding box of the text
+  <font color="#924B72">#PB_VectorText_Visible</font> : Return the visible bounding box of the text
+  <font color="#924B72">#PB_VectorText_Offset</font>  : Return the offset of the bounding box from the current position rather than the height
+  <font color="#924B72">#PB_VectorText_Baseline</font>: Return the offset of the text baseline from the current position
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the text height in units of the vector drawing output. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The dimensions of drawn text can be defined in terms of two bounding boxes: 
+<br>
+<br>
+The &quot;logical bounding box&quot; of a character or text defines the space that the cursor must move to 
+properly draw text next to each other. However, the actual drawn characters may extend beyond that 
+box (for example in case of cursive or serif fonts). When determining where to draw text, the 
+logical bounding box is the interesting one. 
+<br>
+<br>
+The &quot;visible bounding box&quot; of a character or text defines the area in which the text is actually drawn. 
+This area is usually larger than the logical bounding box. The visible dimensions of the text can 
+be retrieved by specifying the <font color="#924B72">#PB_VectorText_Visible</font> flag. The visible dimensions of the text can 
+be at an offset to the logical ones. This offset can be calculated by specifying the 
+<font color="#924B72">#PB_VectorText_Offset</font> flag. 
+<br>
+<br>
+The &quot;baseline&quot; defines the vertical distance from the origin of the drawn text to the line where 
+the letters &quot;sit&quot;. It is useful to draw text of different heights on a single line. The baseline 
+value for the text can be retrieved by specifying the <font color="#924B72">#PB_VectorText_Baseline</font> flag. 
+<br>
+<br>
+The following example shows a sample text with the logical bounding box in blue, the visible bounding 
+box in red and the location of the baseline in green. The origin at which the text is drawn is 
+the upper left corner of the logical bounding box (blue). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 500, 250, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 500, 250)
+<font color="#006666">    LoadFont</font>(0, &quot;Monotype Corsiva&quot;, 20, <font color="#924B72">#PB_Font_Italic</font>)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 125)
+      Text$ = &quot;Sample&quot;
+      
+      <font color="#006666">; draw text</font>
+<font color="#006666">      MovePathCursor</font>(25, 25)
+<font color="#006666">      DrawVectorText</font>(Text$)
+      
+      <font color="#006666">; draw logical bounding box</font>
+<font color="#006666">      AddPathBox</font>(25, 25,<font color="#006666"> VectorTextWidth</font>(Text$),<font color="#006666"> VectorTextHeight</font>(Text$))
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+<font color="#006666">      DashPath</font>(2, 10)
+
+      <font color="#006666">; draw visible bounding box</font>
+<font color="#006666">      AddPathBox</font>(25 +<font color="#006666"> VectorTextWidth</font>(Text$, <font color="#924B72">#PB_VectorText_Visible</font>|<font color="#924B72">#PB_VectorText_Offset</font>), 
+                 25 +<font color="#006666"> VectorTextHeight</font>(Text$, <font color="#924B72">#PB_VectorText_Visible</font>|<font color="#924B72">#PB_VectorText_Offset</font>), 
+<font color="#006666">                 VectorTextWidth</font>(Text$, <font color="#924B72">#PB_VectorText_Visible</font>), 
+<font color="#006666">                 VectorTextHeight</font>(Text$, <font color="#924B72">#PB_VectorText_Visible</font>))
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">      DashPath</font>(2, 10)        
+      
+      <font color="#006666">; draw baseline</font>
+<font color="#006666">      MovePathCursor</font>(25, 25 +<font color="#006666"> VectorTextHeight</font>(Text$, <font color="#924B72">#PB_VectorText_Baseline</font>))
+<font color="#006666">      AddPathLine</font>(<font color="#006666">VectorTextWidth</font>(Text$), 0, <font color="#924B72">#PB_Path_Relative</font>)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 255, 0, 255))
+<font color="#006666">      DashPath</font>(2, 10)                    
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/vectortextwidth.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="vectortextwidth.html">VectorTextWidth()</a>, <a href="drawvectortext.html">DrawVectorText()</a>, <a href="drawvectorparagraph.html">DrawVectorParagraph()</a>, <a href="vectorparagraphheight.html">VectorParagraphHeight()</a>, <a href="vectorfont.html">VectorFont()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=vectorsourcelineargradient.html>VectorSourceLinearGradient()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=vectortextwidth.html>VectorTextWidth()</a> -><br><br>
+
+
+</body></html>

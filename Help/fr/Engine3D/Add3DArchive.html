@@ -1,0 +1,72 @@
+<html><head><title>Add3DArchive</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Add3DArchive()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>Add3DArchive</b></font>(Chemin$, Type)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un nouveau chemin absolu ou relatif 
+dans la liste actuelle des répertoires 
+disponibles pour les fonctions 3D telles que 
+<a href="../texture/index.html">texture</a>, 
+<a href="../mesh/index.html">mesh</a>, 
+<a href="skybox.html">sky</a>, etc... 
+<a href="renderworld.html">world</a>) 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chemin$</i></td>
+<td width="90%"> 
+Le chemin d'accès à ajouter à la liste des 
+chemins vers les ressources 3D. <br>
+Cela peut être un chemin sur le système réel, 
+ou une archive ZIP. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_3DArchive_FileSystem</font>  : Répertoire classique, situé sur une unité disque
+  <font color="#924B72">#PB_3DArchive_Zip</font>         : Fichier .zip (archive compressée)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Ce mode spécial de gestion des accès aux 
+données est dû au fait que ces données 
+peuvent se trouver indifféremment sur le 
+disque (répertoire classique) ou dans une 
+archive (fichier .zip). C'est un moyen très 
+flexible d'abstraire cet accès aux données 
+et permet une flexibilité importante. Par 
+exemple il est possible de créer un .zip de 
+tout le répertoire 'Data' où sont stockées 
+les données relatives à l'application 3D et 
+d'y accéder comme si c'était un répertoire 
+classique. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  Add3DArchive</font>(&quot;MyData.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>) <font color="#006666">; Ajoute le .zip comme un répertoire possible</font>
+<font color="#006666">  LoadTexture</font>(0, &quot;MyTexture.jpg&quot;)               <font color="#006666">; Charge MyTexture.jpg à partir du zip</font>
+<font color="#006666">  LoadTexture</font>(1, &quot;World/Grass.jpg&quot;)             <font color="#006666">; Charge Grass.jpg à partir du zip, situé dans le sous répertoire World/</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="initengine3d.html">InitEngine3D()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Engine3D Index</a> - <a href=ambientcolor.html>AmbientColor()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,104 @@
+<html><head><title>GetGadgetItemState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetGadgetItemState()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetGadgetItemState</b></font>(#Gadget, Element)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'état de l'élément d'un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser 
+
+</td></tr>
+<tr><td><i>Element</i></td>
+<td> 
+L'élément à tester. 
+<br>
+<br>
+Le premier élément dans le gadget 
+commence à 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'état de l'élément du gadget 
+ou 0  en cas d'erreur.<br>
+Voir ci-dessous pour connaître la 
+signification de cette valeur en 
+fonction du type du gadget. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il s'agit d'une fonction universelle 
+qui fonctionne avec presque tous les 
+gadgets comportant des éléments: 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="explorerlistgadget.html">ExplorerListGadget()</a>: Renvoie une combinaison des valeurs suivantes:
+    <font color="#924B72">#PB_Explorer_File</font>     : L'élément est un fichier.
+    <font color="#924B72">#PB_Explorer_Directory</font>: L'élément est un répertoire (ou un disque).
+    <font color="#924B72">#PB_Explorer_Selected</font> : L'élément est sélectionné.
+
+  - <a href="listviewgadget.html">ListViewGadget()</a>   : Renvoie 1 si l'élément est sélectionné, 0 sinon.
+
+  - <a href="listicongadget.html">ListIconGadget()</a>   : Renvoie une combinaison des valeurs suivantes:
+    <font color="#924B72">#PB_ListIcon_Selected</font> : L'élément est sélectionné
+    <font color="#924B72">#PB_ListIcon_Checked</font>  : L'élément a sa case à cocher associée cochée (créé avec l'option <font color="#924B72">#PB_ListIcon_CheckBoxes</font>)
+    <font color="#924B72">#PB_ListIcon_Inbetween</font>: L'élément a sa case à cocher associée &quot;indéterminée&quot; (Option <font color="#924B72">#PB_ListIcon_ThreeState</font>).
+
+  - <a href="treegadget.html">TreeGadget()</a>       : Renvoie une combinaison des valeurs suivantes:
+    <font color="#924B72">#PB_Tree_Selected</font> : L'élément est sélectionné.
+    <font color="#924B72">#PB_Tree_Expanded</font> : L'élément est déployé (la branche de l'arbre est ouverte).
+    <font color="#924B72">#PB_Tree_Collapsed</font>: L'élément est fermé.
+    <font color="#924B72">#PB_Tree_Checked</font>  : La case à cocher de l'élément est cochée. (Si l'option <font color="#924B72">#PB_Tree_CheckBoxes</font> est utilisée)
+    <font color="#924B72">#PB_Tree_Inbetween</font>: L'élément a sa case à cocher associée &quot;indéterminée&quot; (Option <font color="#924B72">#PB_ListIcon_ThreeState</font>)
+</font></pre>
+
+Pour vérifier si un état est actif, 
+utiliser l'opérateur '&amp;': 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> Resultat &amp; <font color="#924B72">#PB_Tree_Checked</font>
+    <font color="#006666">; La 'case à cocher' de l'élément est cochée</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+L'exemple ci-dessous montre comment 
+tester différentes combinaisons pour 
+le gadget <a href="listicongadget.html">ListIconGadget()</a> : 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; ... Ce code est à placer dans une boucle avec WaitWindowEvent() :</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">GetGadgetItemState</font>(<font color="#924B72">#Listicon</font>, n) &amp; <font color="#924B72">#PB_ListIcon_Checked</font>
+    <font color="#006666">; L'élément 'n' est coché (indépendamment qu'il soit sélectionné ou non)</font>
+  <b><font color="#006666">EndIf</font></b> 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">GetGadgetItemState</font>(<font color="#924B72">#Listicon</font>, n) &amp; <font color="#924B72">#PB_ListIcon_Selected</font>
+    <font color="#006666">; L'élément 'n' est sélectionné (indépendamment qu'il soit coché ou non)</font>
+  <b><font color="#006666">EndIf</font></b> 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">GetGadgetItemState</font>(<font color="#924B72">#Listicon</font>, n) = <font color="#924B72">#PB_ListIcon_Checked</font> | <font color="#924B72">#PB_ListIcon_Selected</font> 
+    <font color="#006666">; L'élément 'n' est coché et sélectionné</font>
+  <b><font color="#006666">EndIf</font></b> 
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">GetGadgetItemState</font>(<font color="#924B72">#Listicon</font>, n) &amp; (<font color="#924B72">#PB_ListIcon_Checked</font> | <font color="#924B72">#PB_ListIcon_Selected</font>)
+    <font color="#006666">; L'élément 'n' est coché ou sélectionné ou les deux</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setgadgetitemstate.html">SetGadgetItemState()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, 
+<a href="setgadgetstate.html">SetGadgetState()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getgadgetitemdata.html>GetGadgetItemData()</a> - <a href=index.html>Gadget Index</a> - <a href=getgadgetitemtext.html>GetGadgetItemText()</a> -><br><br>
+
+</body></html>

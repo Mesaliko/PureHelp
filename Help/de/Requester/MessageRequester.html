@@ -1,0 +1,99 @@
+<html><head><title>MessageRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MessageRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>MessageRequester</b></font>(Titel$, Text$, [, Flags] [, ParentID]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet einen ('blocking') Requester zum Anzeigen einiger Informationen. Die 
+Programmausführung wird vollständig angehalten, bis der Benutzer den Requester 
+schließt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titel$</i></td>
+<td width="90%"> 
+Der Titel des Requester-Fensters. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der im Requester-Fenster angezeigte Text. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Ok</font>          : Um nur einen 'Ok' Schalter zu erhalten (Standard)
+  <font color="#924B72">#PB_MessageRequester_YesNo</font>       : Um die 'Yes' (Ja) oder 'No' (Nein) Schalter zu erhalten
+  <font color="#924B72">#PB_MessageRequester_YesNoCancel</font> : Um die 'Yes' (Ja), 'No' (Nein) und 'Cancel' (Abbruch) Schalter zu erhalten
+</font></pre>
+kombiniert mit einer der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Info</font>   : zeigt ein Info-Icon an
+  <font color="#924B72">#PB_MessageRequester_Warning</font>: zeigt ein Warnungs-Icon an
+  <font color="#924B72">#PB_MessageRequester_Error</font>  : zeigt ein Fehler-Icon an
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+Die Kennung des übergeordneten Fensters. Eine gültige Fensterkennung kann mit 
+<a href="../window/windowid.html">WindowID()</a> abgerufen werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Dies kann eine der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MessageRequester_Yes</font>    : es wurde der 'Yes' (Ja) Schalter gedrückt
+  <font color="#924B72">#PB_MessageRequester_No</font>     : es wurde der 'No' (Nein) Schalter gedrückt
+  <font color="#924B72">#PB_MessageRequester_Cancel</font> : es wurde der 'Cancel' (Abbruch) Schalter gedrückt
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Einfacher MessageRequester  (normalerweise nur zur Informationsausgabe benutzt)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Nur ein kurzer Informationstext.&quot;, <font color="#924B72">#PB_MessageRequester_Ok</font> | <font color="#924B72">#PB_MessageRequester_Info</font>)
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> MessageRequester mit Ja / Nein Schaltern  (normalerweise für Fragen benutzt)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Result =<font color="#006666"> MessageRequester</font>(&quot;Titel&quot;, &quot;Bitte machen Sie Ihre Eingabe:&quot;, <font color="#924B72">#PB_MessageRequester_YesNo</font>)
+  a$ = &quot;Ergebnis des Requesters war: &quot;
+  <b><font color="#006666">If</font></b> Result = <font color="#924B72">#PB_MessageRequester_Yes</font>       <font color="#006666">; Ja-Schalter wurde gedrückt</font>
+    a$ + &quot;Ja&quot;
+  <b><font color="#006666">Else</font></b>                                       <font color="#006666">; Nein-Schalter wurde gedrückt</font>
+    a$ + &quot;Nein&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> MessageRequester mit Ja / Nein / Abbrechen Schaltern (normalerweise für Fragen benutzt)</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Result =<font color="#006666"> MessageRequester</font>(&quot;Titel&quot;, &quot;Bitte machen Sie Ihre Eingabe:&quot;, <font color="#924B72">#PB_MessageRequester_YesNoCancel</font>) 
+  a$ = &quot;Das Ergebnis des vorherigen Requesters war: &quot;
+  <b><font color="#006666">If</font></b> Result = <font color="#924B72">#PB_MessageRequester_Yes</font>       <font color="#006666">; Ja-Schalter wurde gedrückt</font>
+    a$ + &quot;Ja&quot;
+  <b><font color="#006666">ElseIf</font></b> Result = <font color="#924B72">#PB_MessageRequester_No</font>    <font color="#006666">; Nein-Schalter wurde gedrückt</font>
+    a$ + &quot;Nein&quot;
+  <b><font color="#006666">Else</font></b>                                       <font color="#006666">; Abbrechen-Schalter oder Esc wurde gedrückt</font>
+    a$ + &quot;Abbrechen&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/messagerequester.png"></p>
+
+<br>
+Hinweis: In PureBasic werden auch viele weitere Konstanten der Windows API unterstützt. Diese sind 
+dann allerdings nicht plattformübergreifend kompatibel! Einen Überblick finden Sie in der MSDN Library zur Funktion 
+<a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms645505%28v=vs.85%29.aspx">MessageBox</a>. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=inputrequester.html>InputRequester()</a> - <a href=index.html>Requester Inhaltsverzeichnis</a> - <a href=nextselectedfilename.html>NextSelectedFileName()</a> -><br><br>
+
+</body></html>

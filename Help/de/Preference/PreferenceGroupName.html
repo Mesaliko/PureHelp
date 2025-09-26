@@ -1,0 +1,43 @@
+<html><head><title>PreferenceGroupName</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PreferenceGroupName()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Gruppe$ = <font color="#006666"><b>PreferenceGroupName</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Name der aktuellen Gruppe, welche mittels <a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a> 
+aufgezählt wird oder zuvor mit <a href="preferencegroup.html">PreferenceGroup()</a> ausgewählt wurde, zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der Name der aktuellen Gruppe, welche mittels <a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a> aufgezählt wird oder 
+zuvor mit <a href="preferencegroup.html">PreferenceGroup()</a> ausgewählt wurde. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Öffnet eine Preference-Datei</font>
+<font color="#006666">  OpenPreferences</font>(<font color="#924B72">#PB_Compiler_Home</font> +&quot;examples/sources/Data/test.pref&quot;)
+  
+  <font color="#006666">; Gruppen untersuchen</font>
+<font color="#006666">  ExaminePreferenceGroups</font>()
+  <b><font color="#006666">While</font></b> <font color="#006666">NextPreferenceGroup</font>() <font color="#006666">; Solange eine Gruppe existiert...</font>
+<font color="#006666">    MessageRequester</font>(&quot;Gruppen&quot;,<font color="#006666"> PreferenceGroupName</font>())  <font color="#006666">; ...diese Gruppe anzeigen</font>
+  <b><font color="#006666">Wend</font></b>
+  
+  <font color="#006666">; Schließt die Preference-Datei</font>
+<font color="#006666">  ClosePreferences</font>() 
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="examinepreferencegroups.html">ExaminePreferenceGroups()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=preferencegroup.html>PreferenceGroup()</a> - <a href=index.html>Preference Inhaltsverzeichnis</a> - <a href=preferencekeyname.html>PreferenceKeyName()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,62 @@
+<html><head><title>InitEngine3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InitEngine3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>InitEngine3D</b></font>([Flags [, LibraryName$]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Initialisiert die 3D-Umgebung zur späteren Benutzung. Sie müssen diesen Befehl 
+zu Beginn Ihres Sourcecodes aufrufen, wenn Sie irgendeinen der 3D-Befehle verwenden möchten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Flags (optional)</i></td>
+<td width="90%"> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Engine3D_NoLog</font>      : Es wird kein Protokoll (Log) auf Disk oder in die Konsolenausgabe geschrieben (Standard).
+  <font color="#924B72">#PB_Engine3D_DebugLog</font>   : Eine Debug-Protokolldatei names 'Ogre.log' wird im aktuellen Verzeichnis erstellt, um
+                            beim Debuggen oder bei Anwender-Reports zu helfen. Eine Menge an Aktionen werden in dieser
+                            Datei festgehalten, was aber die Performance nicht beeinträchtigen sollte, weshalb es
+                            sogar bei einem fertigen (Release-) Produkt aktiviert bleiben kann.
+  <font color="#924B72">#PB_Engine3D_DebugOutput</font>: Die Aktionen werden in der Konsole ausgegeben. Sie müssen hier daran denken, das
+                            Executable-Format auf 'Console' zu setzen, wenn Sie Ihr Excecutable kompilieren.
+</font></pre>
+
+</td></tr>
+<tr><td><i>LibraryName$ (optional)</i></td>
+<td> 
+Name der Engine3D-Datei, welche geladen werden soll. Wenn diese an einer anderen Stelle als 
+im aktuellen Verzeichnis gespeichert wurde, kann dies hier angegeben werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null, wenn die Bibliothek erfolgreich geladen wurde, andernfalls Null. 
+Wenn die Initialisierung fehlgeschlagen ist, sollte das Programm beendet oder der Aufruf aller 
+3D-Funktionen deaktiviert werden. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+InitEngine3D() versucht, die Engine3D-Bibliothek (namens 'Engine3D.dll' auf Windows, 'engine3d.so' auf Linux 
+und 'engine3d.dylib' auf OS X, zu finden im PureBasic/Compilers/ Verzeichnis) zu laden. Wenn dies fehlschlägt, dann 
+liegt dies möglicherweise daran, dass die Bibliothek nicht gefunden wurde oder nicht mit aktuellen 
+PureBasic-Version zusammenpasst. 
+<br>
+Auf Windows muss eine aktuelle Version der OpenGL-Treiber installiert sein. 
+<br>
+Nach dem Aufruf dieser Funktion können Sie die Funktion <a href="../screen/screenoutput.html">ScreenOutput()</a> nicht mehr verwenden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../screen/openscreen.html">OpenScreen()</a>, <a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a>, <a href="add3darchive.html">Add3DArchive()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getz.html>GetZ()</a> - <a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=inputevent3d.html>InputEvent3D()</a> -><br><br>
+
+</body></html>

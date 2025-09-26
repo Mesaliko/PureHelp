@@ -1,0 +1,48 @@
+<html><head><title>MapSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MapSize()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>MapSize</b></font>(Map())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the number of elements in the specified map. It does not change the 
+current element. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+The map to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of elements in the map. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function is very fast (it doesn't iterate all the map but 
+uses a cached result) and can be safely used to determine if a map is empty or not. 
+If the map is not initialized, it returns -1 (for example after <a href="freemap.html">FreeMap()</a>). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Country</font>.s()
+
+<font color="#006666">  Country</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Country</font>(&quot;US&quot;) = &quot;United States&quot;
+
+  <font color="#006666">; Will print '2'</font>
+  <b><font color="#006666">Debug</font></b> &quot;Size of the map: &quot; +<font color="#006666"> Str</font>(<font color="#006666">MapSize</font>(<font color="#006666">Country</font>()))
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=mapkey.html>MapKey()</a> - <a href=index.html>Map Index</a> - <a href=nextmapelement.html>NextMapElement()</a> -><br><br>
+
+</body></html>

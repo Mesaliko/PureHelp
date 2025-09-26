@@ -1,0 +1,121 @@
+<html><head><title>ListViewGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ListViewGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ListViewGadget</b></font>(#Gadget, x, y, Breite, Höhe [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein ListView-Gadget (Auswahlliste) innerhalb der aktuellen Gadgetliste. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags zum Verändern des Gadget-Verhaltens. Dies kann eine Kombination 
+(verknüpft mit dem bitweisen '|' OR-Operator) der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ListView_Multiselect</font>: ermöglicht die Auswähl mehrerer Einträge.
+  <font color="#924B72">#PB_ListView_ClickSelect</font>: ermöglicht die Auswähl mehrerer Einträge. Das Anklicken eines Eintrags markiert diesen
+                                     bzw. entfernt die Auswahl. (auf OS X das gleiche Verhalten wie <font color="#924B72">#PB_ListView_Multiselect</font>)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, oder Null bei einem Fehler. Wenn 
+<font color="#924B72">#PB_Any</font> als #Gadget Parameter verwendet wurde, dann beinhaltet der Rückgabewert 
+bei Erfolg die automatisch generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Sobald ein ListView-Gadget erstellt wurde, ist dessen Listeninhalt leer. 
+<br>
+Die folgenden Befehle können benutzt werden, um auf den Listeninhalt zuzugreifen: 
+<br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: fügt einen Eintrag hinzu. Ein ListViewGadget() ist auf 65536 Einträge begrenzt. 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: entfernt einen Eintrag. 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: entfernt alle Einträge. 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: ermittelt die Anzahl der aktuell im Gadget enthaltenen Einträge. 
+<br>
+<br>
+- <a href="getgadgetitemdata.html">GetGadgetItemData()</a>: ermittelt den Wert, der mit dem Gadget-Eintrag gespeichert wurde. 
+<br>
+- <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: gibt einen Wert ungleich Null zurück, wenn der Eintrag ausgewählt ist, andernfalls Null. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: ermittelt den Inhalt des angegebenen Eintrags. 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: ermittelt den Index vom ausgewählten Eintrag oder -1, wenn kein Eintrag selektiert ist. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a> ermittelt den Textinhalt vom ausgewählten Eintrag. 
+<br>
+- <a href="setgadgetitemdata.html">SetGadgetItemData()</a>: speichert einen Wert mit dem angegebenen Eintrag. 
+<br>
+- <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: selektiert den angegebenen Eintrag oder entfernt die Auswahl. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: ändert den Text des angegebenen Eintrags. 
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: ändert den ausgewählten Eintrag. Wird -1 angegeben, dann wird die gesamte Auswahl entfernt (nichts ist mehr selektiert). 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: wählt den Eintrag mit dem angegebenen Text aus (der Text muss exakt übereinstimmen). 
+
+<br>
+<br>
+Dieses Gadget unterstützt die <a href="setgadgetcolor.html">SetGadgetColor()</a> und <a href="getgadgetcolor.html">GetGadgetColor()</a> 
+Befehle mit den folgenden Werten als 'FarbTyp': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textfarbe
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Hintergrundfarbe
+</font></pre>
+
+Das Auftreten der folgenden Ereignisse kann mittels <a href="../window/eventtype.html">EventType()</a> abgefragt werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font> (wird auch ausgelöst, wenn sich die Auswahl ändert)
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>
+  <font color="#924B72">#PB_EventType_RightClick</font>
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 140, &quot;ListViewGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ListViewGadget</font>(0, 10, 10, 250, 120)
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 12
+<font color="#006666">      AddGadgetItem </font>(0, -1, &quot;Item &quot; +<font color="#006666"> Str</font>(a) + &quot; of the Listview&quot;)   <font color="#006666">; definieren des Listview-Inhalts</font>
+    <b><font color="#006666">Next</font></b>
+<font color="#006666">    SetGadgetState</font>(0, 9)    <font color="#006666">; wir setzen (beginnend bei 0) den zehnten Eintrag als aktiven</font>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/listviewgadget.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, <a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, 
+<a href="getgadgetitemdata.html">GetGadgetItemData()</a>, <a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="listicongadget.html">ListIconGadget()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=listicongadget.html>ListIconGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=mdigadget.html>MDIGadget()</a> -><br><br>
+
+</body></html>

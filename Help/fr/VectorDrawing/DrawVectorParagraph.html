@@ -1,0 +1,110 @@
+<html><head><title>DrawVectorParagraph</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawVectorParagraph()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>DrawVectorParagraph</b></font>(Texte$, Largeur.d, Hauteur.d [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Dessine un paragraphe de texte (plusieurs 
+lignes) dans une boîte de sélection 
+avec des sauts de lignes automatiques. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Texte$</i></td>
+<td width="90%"> 
+Le texte à dessiner. 
+
+</td></tr>
+<tr><td><i>Largeur.d</i></td>
+<td> 
+La largeur du paragraphe. 
+<br>
+<br>
+Les sauts de ligne seront ajoutés si 
+le texte est plus long que la largeur 
+spécifiée. 
+
+</td></tr>
+<tr><td><i>Hauteur.d</i></td>
+<td> 
+La hauteur maximale du paragraphe. 
+<br>
+<br>
+Si le texte ne correspond pas à cette 
+hauteur il sera tronqué. 
+La hauteur requise pour un paragraphe 
+peut être calculée avec <a href="vectorparagraphheight.html">VectorParagraphHeight()</a>. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut-être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_VectorParagraph_Left</font>  : Le paragraphe est aligné à gauche (Par défaut)
+   <font color="#924B72">#PB_VectorParagraph_Right</font> : Le paragraphe est aligné à droite
+   <font color="#924B72">#PB_VectorParagraph_Center</font>: Le paragraphe est centré
+   <font color="#924B72">#PB_VectorParagraph_Block</font> : Le paragraphe est justifié (sauf Windows)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Seules les polices vectorielles sont autorisées, comme TrueType, les polices bitmap ne sont 
+donc pas autorisées. 
+<br>
+La police à utiliser peut être réglée avec <a href="vectorfont.html">VectorFont()</a>. 
+<br>
+<br>
+Si le texte ne rentre pas en entier dans la boîte, il sera tronqué. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 250, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 250)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      Texte$ = &quot;Chaque sortie de dessin a une unité de mesure par défaut. L'unité par défaut est le pixel &quot; +
+              &quot;pour les écrans ou les images et les points pour les imprimantes et les images vectorielles. &quot; +
+              &quot;Il est cependant possible de sélectionner une unité de mesure différente avec ImageVectorOutput(), &quot; +
+              &quot;PrinterVectorOutput() ou une fonction similaire.&quot;
+              
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 18)
+      
+<font color="#006666">      MovePathCursor</font>(25, 25)
+<font color="#006666">      DrawVectorParagraph</font>(Texte$, 350, 200)
+              
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/drawvectorparagraph.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="vectorparagraphheight.html">VectorParagraphHeight()</a>, <a href="drawvectortext.html">DrawVectorText()</a>, 
+<a href="addpathtext.html">AddPathText()</a>, <a href="vectorfont.html">VectorFont()</a> 
+
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=drawvectorimage.html>DrawVectorImage()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=drawvectortext.html>DrawVectorText()</a> -><br><br>
+
+
+</body></html>

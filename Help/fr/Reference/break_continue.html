@@ -1,0 +1,111 @@
+<html><head><title>Break : Continue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Break : Continue</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Break"><u>Break</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Continue"><u>Continue</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Break"></a>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Break</font></b> [Niveau]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Break</font></b> permet de quitter à n'importe 
+quel moment une ou plusieurs des boucles 
+suivantes: 
+<a href="../reference/repeat_until.html">Repeat</a>, 
+<a href="../reference/for_next.html">For</a>, 
+<a href="../reference/foreach_next.html">ForEach</a> 
+et <a href="../reference/while_wend.html">While</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Niveau (optionnel)</i></td>
+<td width="90%"> 
+Indique le nombre de boucles qui doivent être 
+abrégées. <br>
+Sans paramètre, <b><font color="#006666">Break</font></b> quitte 
+la boucle en cours. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple:</b> Boucle simple</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    <b><font color="#006666">If</font></b> k=5
+      <b><font color="#006666">Break</font></b>  <font color="#006666">; Quitte immédiatement la boucle For/Next</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Boucles imbriquées</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    Counter = 0
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">If</font></b> k=5
+        <b><font color="#006666">Break</font></b> 2 <font color="#006666">; Quitte immédiatement les boucles Repeat/Until et For/Next</font>
+      <b><font color="#006666">EndIf</font></b>
+      Counter+1
+    <b><font color="#006666">Until</font></b> Counter &gt; 1
+    <b><font color="#006666">Debug</font></b> k 
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="Continue"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Continue</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+<b><font color="#006666">Continue</font></b> permet de passer directement 
+à la prochaine itération dans l'une des boucles 
+suivantes: 
+<a href="../reference/repeat_until.html">Repeat</a>, 
+<a href="../reference/for_next.html">For</a>, 
+<a href="../reference/foreach_next.html">ForEach</a> et 
+<a href="../reference/while_wend.html">While</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+    <b><font color="#006666">If</font></b> k=5
+      <b><font color="#006666">Continue</font></b>  <font color="#006666">; N'affichera pas 'Debug 5' car la fin de cette itération sera ignorée</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+
+</blockquote>
+</font></body></html>

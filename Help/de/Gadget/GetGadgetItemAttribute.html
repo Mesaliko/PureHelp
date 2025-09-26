@@ -1,0 +1,72 @@
+<html><head><title>GetGadgetItemAttribute</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetGadgetItemAttribute()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Wert = <font color="#006666"><b>GetGadgetItemAttribute</b></font>(#Gadget, Eintrag, Attribut [, Spalte])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt den Attribut-Wert des angegebenen Gadget-Eintrags. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Eintrag</i></td>
+<td> 
+Der Eintrag, von welchem das Attribut ermittelt werden soll. Der erste 
+Eintrag im Gadget hat den Index 0. 
+
+</td></tr>
+<tr><td><i>Attribut</i></td>
+<td> 
+Das zu ermittelnde Attribut. 
+
+</td></tr>
+<tr><td><i>Spalte (optional)</i></td>
+<td> 
+Die Spalte (bei Gadgets, die mehrere Spalten unterstützen), von welcher 
+das Attribut ermittelt werden soll. Die erste Spalte hat den Index 0. Der 
+Standard ist Spalte 0. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Attribut-Wert zurück, oder Null, wenn der Eintrag oder das Attribut nicht existiert. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion ist für alle Gadgets verfügbar, welche Eintrag-Attribute unterstützen: 
+<br>
+<br>
+- <a href="explorerlistgadget.html">ExplorerListGadget()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_ColumnWidth</font> : Gibt die Breite der angegebenen 'Spalte' zurück. Der Parameter 'Eintrag' wird ignoriert.
+</font></pre>
+
+- <a href="listicongadget.html">ListIconGadget()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ListIcon_ColumnWidth</font> : Gibt die Breite der angegebenen 'Spalte' zurück. Der Parameter 'Eintrag' wird ignoriert.
+</font></pre>
+
+- <a href="treegadget.html">TreeGadget()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_SubLevel</font> : Gibt die Unterebene (&quot;sublevel&quot;) des angegebenen 'Eintrag' zurück.
+</font></pre>
+Der &quot;Sublevel&quot;-Wert des Tree-Eintrags kann verwendet werden, um Verbindungen zwischen den Einträgen im Tree (Baum) festzustellen. 
+Zum Beispiel ist der erste Eintrag mit einem &quot;Sublevel&quot; kleiner als der aktuelle Eintrag der &quot;Parent&quot; (übergeordnete &quot;Eltern&quot;-Eintrag) 
+des aktuellen Eintrags, wenn die Liste rückwärts überprüft wird. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setgadgetitemattribute.html">SetGadgetItemAttribute()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getgadgetfont.html>GetGadgetFont()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=getgadgetitemcolor.html>GetGadgetItemColor()</a> -><br><br>
+
+</body></html>

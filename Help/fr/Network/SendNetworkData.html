@@ -1,0 +1,70 @@
+<html><head><title>SendNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SendNetworkData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SendNetworkData</b></font>(Connexion, *MemoireTampon, LongueurMemoireTampon)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Envoie des données brutes au client 
+spécifié. Cette fonction peut être 
+utilisée par une application Serveur 
+ou Client. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connexion</i></td>
+<td width="90%"> 
+La connexion. 
+<br>
+<br>
+Du côté serveur, 'Connexion' est le 
+client qui a reçu les données.<br>
+Du côté client, 'Connexion' est renvoyé 
+par <a href="opennetworkconnection.html">OpenNetworkConnection()</a>. 
+
+</td></tr>
+<tr><td><i>*MemoireTampon</i></td>
+<td> 
+L'adresse de la mémoire tampon d'envoi 
+des données. 
+
+</td></tr>
+<tr><td><i>LongueurMemoireTampon</i></td>
+<td> 
+La taille de la mémoire tampon d'envoi 
+des données. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre d'octets qui ont été 
+effectivement envoyés. <br>
+S'il n'est pas égal à 
+'LongueurMemoireTampon', la mémoire 
+tampon de réception de l'utilisateur 
+est probablement pleine. <br>
+Si rien n'a pu être envoyé alors 
+'Resultat' sera égal à -1. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Avec les connexions UDP, le maximum pour 
+'LongueurMemoireTampon' est 2048. 
+<br>
+Avec les connexions TCP, le maximum pour 
+'LongueurMemoireTampon' est 65536. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="sendnetworkstring.html">SendNetworkString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=receivenetworkdata.html>ReceiveNetworkData()</a> - <a href=index.html>Network Index</a> - <a href=sendnetworkstring.html>SendNetworkString()</a> -><br><br>
+
+</body></html>

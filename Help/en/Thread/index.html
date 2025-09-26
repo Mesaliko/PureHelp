@@ -1,0 +1,75 @@
+<html><head><title>Thread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - Thread</font></b></p>
+
+<p><b>Overview</b></p><blockquote>
+
+
+A thread is a part of a program which runs asynchronously, in the background 
+of this program. This means it's possible to perform long operations 
+(compression, image processing, etc) without halting the whole program and let the user 
+continue to do other things. A thread runs within your program, it's not 
+another process. When the main program exits, all the threads are destroyed. 
+Under PureBasic, threads are simply a procedure which is called asynchronously. 
+The thread runs until the procedure exits. 
+<br>
+<br>
+Examples of places of programs where threads are useful are when you need to be able to handle 
+multiple situations with different response times or which occur at different 
+intervals. In the above paragraph, the response times of image processing and the 
+user interface are quite different (you would want to wait for the image to be processed 
+but always have the user interface to respond). 
+<br>
+<br>
+PureBasic has a special compiler setting to create thread-safe executables. (/THREAD command-line 
+switch or &quot;create thread-safe executable&quot; in the IDE compiler options). Without this mode, 
+certain functions (and also the string access) are faster, but not safe to use in threads. 
+It is still possible to create threads without this mode but it is not recommended, as even something simple 
+like a local string access can be dangerous and needs to be protected. 
+Enabling this option makes these things save inside threads, but comes at the price of 
+some speed. The decision on whether or not to use threads should therefore done with care, 
+and the threadmode should only be used when there is a real need for it. 
+<br>
+<br>
+Note: Threads need to be used carefully because it is possible that you can have 
+multiple access to shared resources (memory, variables, files, etc) and you need 
+to manually ensure that you do run into trouble because of this. The Mutex functions in 
+this library can be used to synchronize access to such shared resources. 
+<br>
+<br>
+Using the <a href="../reference/threaded.html">Threaded</a> keyword it's possible to create thread-based 
+persistent objects (variables, arrays, lists, maps). 
+
+<br>
+<br>
+Note: Don't use DirectX inside threads (MS Windows limitation)! If you need to display 
+graphics in threads use <a href="../image/index.html">Images</a> and 
+<a href="../2ddrawing/index.html">2DDrawing</a> instead. 
+
+</blockquote><p><b>Command Index</b><blockquote>
+<a href="createmutex.html">CreateMutex</a><br>
+<a href="createsemaphore.html">CreateSemaphore</a><br>
+<a href="createthread.html">CreateThread</a><br>
+<a href="freemutex.html">FreeMutex</a><br>
+<a href="freesemaphore.html">FreeSemaphore</a><br>
+<a href="isthread.html">IsThread</a><br>
+<a href="killthread.html">KillThread</a><br>
+<a href="lockmutex.html">LockMutex</a><br>
+<a href="pausethread.html">PauseThread</a><br>
+<a href="resumethread.html">ResumeThread</a><br>
+<a href="signalsemaphore.html">SignalSemaphore</a><br>
+<a href="threadid.html">ThreadID</a><br>
+<a href="threadpriority.html">ThreadPriority</a><br>
+<a href="trylockmutex.html">TryLockMutex</a><br>
+<a href="trysemaphore.html">TrySemaphore</a><br>
+<a href="unlockmutex.html">UnlockMutex</a><br>
+<a href="waitsemaphore.html">WaitSemaphore</a><br>
+<a href="waitthread.html">WaitThread</a><br>
+</blockquote></p>
+
+<p><b>Example</b></p><blockquote>
+<a href="../Examples/Thread.pb.html">Thread.pb</a>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=../reference/reference.html>Reference Manual - Index</a></center><br><br>
+
+</body></html>

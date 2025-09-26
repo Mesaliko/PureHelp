@@ -1,0 +1,61 @@
+<html><head><title>Bin</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Bin()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>Bin</b></font>(Wert.q [, Typ])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Konvertiert einen numerischen Quad-Wert in einen String im Binärformat. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Wert.q</i></td>
+<td width="90%"> 
+Der zu konvertierende Wert. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Wenn der Wert als ein anderer Typ behandelt werden soll, kann einer der folgenden 
+Werte angegeben werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Quad</font>   : Der Wert wird als eine Quad-Zahl behandelt, reichend von 0 bis 18446744073709551615 (Standard)
+  <font color="#924B72">#PB_Byte</font>   : Der Wert wird als eine Byte-Zahl behandelt, reichend von 0 bis 255
+  <font color="#924B72">#PB_Ascii</font>  : Der Wert wird als ein ASCII-Zeichen behandelt, reichend von 0 bis 255
+  <font color="#924B72">#PB_Word</font>   : Der Wert wird als eine word-Zahl behandelt, reichend von 0 bis 65535
+  <font color="#924B72">#PB_Unicode</font>: Der Wert wird als ein Unicode-Character behandelt, reichend von 0 bis 65535
+  <font color="#924B72">#PB_Long</font>   : Der Wert wird als eine Long-Zahl behandelt, reichend von 0 bis 4294967296
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein String, der die binäre Darstellung des angegebenen Wertes beinhaltet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Bin</font>(32) <font color="#006666">; wird &quot;100000&quot; anzeigen</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">BinQ</font>(1024*1024*1024*1024) <font color="#006666">; wird &quot;10000000000000000000000000000000000000000&quot; anzeigen</font>
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn im Ausgabestring führende Nullen benötigt werden, benutzen Sie den 
+<a href="rset.html">RSet()</a> Befehl wie folgt: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Bin</font>(32), 16, &quot;0&quot;) <font color="#006666">; wird &quot;0000000000100000&quot; anzeigen</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="str.html">Str()</a>, <a href="val.html">Val()</a>, <a href="hex.html">Hex()</a>. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=ascii.html>Ascii()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=chr.html>Chr()</a> -><br><br>
+
+</body></html>

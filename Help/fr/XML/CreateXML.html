@@ -1,0 +1,79 @@
+<html><head><title>CreateXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateXML()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateXML</b></font>(#XML [, Encodage])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouvel arbre XML vide. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+L'arbre XML à utiliser. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Encodage (optionnel)</i></td>
+<td> 
+L'encodage de l'arbre XML. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font> (valeur par défaut)
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'arbre 
+a été créé correctement, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le nouvel arbre ne contient qu'un noeud 
+racine, accessible avec <a href="rootxmlnode.html">RootXMLNode()</a>. 
+Pour ajouter de nouveaux noeuds, utiliser 
+<a href="createxmlnode.html">CreateXMLNode()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Création d'un arbre xml </font>
+  xml =<font color="#006666"> CreateXML</font>(<font color="#924B72">#PB_Any</font>) 
+  mainNode =<font color="#006666"> CreateXMLNode</font>(<font color="#006666">RootXMLNode</font>(xml), &quot;Zoo&quot;) 
+<font color="#006666">  SetXMLNodeName</font>(mainNode, &quot;Zoo&quot;) 
+  
+  <font color="#006666">; Création du premier noeud </font>
+  item =<font color="#006666"> CreateXMLNode</font>(mainNode, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLNodeName</font>(item, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLAttribute</font>(item, &quot;id&quot;, &quot;1&quot;) 
+<font color="#006666">  SetXMLNodeText</font>(item, &quot;Elephant&quot;) 
+  
+  <font color="#006666">; Création du second noeud</font>
+  item =<font color="#006666"> CreateXMLNode</font>(mainNode, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLNodeName</font>(item, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLAttribute</font>(item, &quot;id&quot;, &quot;2&quot;) 
+<font color="#006666">  SetXMLNodeText</font>(item, &quot;Tigre&quot;) 
+  
+  <font color="#006666">; Enregistre l'arbre XML dans le fichier spécifié. </font>
+<font color="#006666">  SaveXML</font>(xml, &quot;demo.xml&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freexml.html">FreeXML()</a>, <a href="createxmlnode.html">CreateXMLNode()</a>, <a href="rootxmlnode.html">RootXMLNode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copyxmlnode.html>CopyXMLNode()</a> - <a href=index.html>XML Index</a> - <a href=createxmlnode.html>CreateXMLNode()</a> -><br><br>
+
+</body></html>

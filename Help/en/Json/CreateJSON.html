@@ -1,0 +1,63 @@
+<html><head><title>CreateJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateJSON()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateJSON</b></font>(#JSON [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create new, empty JSON data. Initially, the data will contain a JSON value 
+of <a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Null</font>. The <a href="jsonvalue.html">JSONValue()</a> function can be used 
+to access this value to change it. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+A number to identify the new JSON. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If set to <font color="#924B72">#PB_JSON_NoCase</font>, the JSON data will be treated as case insensitive. 
+The default is to be case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the JSON data was created correctly, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #JSON parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+JSON is a case sensitive data format. However, in some situations, such as deserializing 
+structures with <a href="extractjsonstructure.html">ExtractJSONStructure()</a> or similar commands it may be useful to treat 
+JSON objects as case insensitive. The <font color="#924B72">#PB_JSON_NoCase</font> flag causes all 
+member related functions to treat keys in this object as case insensitive. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+    Person =<font color="#006666"> SetJSONObject</font>(<font color="#006666">JSONValue</font>(0))
+<font color="#006666">    SetJSONString</font>(<font color="#006666">AddJSONMember</font>(Person, &quot;FirstName&quot;), &quot;John&quot;)
+<font color="#006666">    SetJSONString</font>(<font color="#006666">AddJSONMember</font>(Person, &quot;LastName&quot;), &quot;Smith&quot;)
+<font color="#006666">    SetJSONInteger</font>(<font color="#006666">AddJSONMember</font>(Person, &quot;Age&quot;), 42)
+    
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0, <font color="#924B72">#PB_JSON_PrettyPrint</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="catchjson.html">CatchJSON()</a>, <a href="loadjson.html">LoadJSON()</a>, <a href="parsejson.html">ParseJSON()</a>, <a href="jsonvalue.html">JSONValue()</a>, <a href="freejson.html">FreeJSON()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=composejson.html>ComposeJSON()</a> - <a href=index.html>Json Index</a> - <a href=examinejsonmembers.html>ExamineJSONMembers()</a> -><br><br>
+
+</body></html>

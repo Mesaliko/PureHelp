@@ -1,0 +1,66 @@
+<html><head><title>SvgVectorOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SvgVectorOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SvgVectorOutput</b></font>(Filename$, Width.d, Height.d [, Unit])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates an SVG (scalable vector graphics) file and returns the OutputID to perform vector drawing operations. 
+The actual drawing operations must be enclosed in a <a href="startvectordrawing.html">StartVectorDrawing()</a> / <a href="stopvectordrawing.html">StopVectorDrawing()</a> block. 
+The SVG file can have multiple pages using the <a href="newvectorpage.html">NewVectorPage()</a> command. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>FileName$</i></td>
+<td width="90%"> 
+Specifies the filename of the SVG file to create. If the file exists, it will be overwritten. 
+
+</td></tr>
+<tr><td><i>Width.d, Height.d</i></td>
+<td> 
+Specifies the dimensions of a page in the SVG file in units of the vector drawing output. 
+
+</td></tr>
+<tr><td><i>Unit (optional)</i></td>
+<td> 
+Specifies the units for the vector drawing output. 
+The default unit for SVG files is <font color="#924B72">#PB_Unit_Point</font>. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Unit_Pixel</font>     : Values are measured in pixels (or dots in case of a printer)
+  <font color="#924B72">#PB_Unit_Point</font>     : Values are measured in points (1/72 inch)
+  <font color="#924B72">#PB_Unit_Inch</font>      : Values are measured in inches
+  <font color="#924B72">#PB_Unit_Millimeter</font>: Values are measured in millimeters
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The OutputID of the given file to perform 2D rendering operation on it using <a href="startvectordrawing.html">StartVectorDrawing()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">SvgVectorOutput</font>(&quot;test.svg&quot;, 400, 200))
+
+<font color="#006666">    AddPathBox</font>(50, 50, 200, 50)
+<font color="#006666">    AddPathBox</font>(150, 75, 200, 50)
+<font color="#006666">    VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">    StrokePath</font>(10)
+  
+<font color="#006666">    StopVectorDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="pdfvectoroutput.html">PdfVectorOutput()</a>, <a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>, <a href="../printer/printervectoroutput.html">PrinterVectorOutput()</a>, <a href="../window/windowvectoroutput.html">WindowVectorOutput()</a>, <a href="../gadget/canvasvectoroutput.html">CanvasVectorOutput()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=strokepath.html>StrokePath()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=translatecoordinates.html>TranslateCoordinates()</a> -><br><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,82 @@
+<html><head><title>ReadConsoleData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadConsoleData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReadConsoleData</b></font>(*Buffer, Size)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Reads raw input from the console. This function is only supported in non-graphical mode. It can be used 
+to read not line-based data, or text like files redirected to the program through a pipe. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Buffer</i></td>
+<td width="90%"> 
+The memory buffer to which the data should be read. 
+
+</td></tr>
+<tr><td><i>Size</i></td>
+<td> 
+The maximum amount of data (in bytes) to be read. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of bytes actually read from the input. If zero is returned, this means that 
+there is no more input to read. (an end of file was received) 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function waits until there is some input to read. It will only return without reading data 
+if there was an error or an EOF (End Of File) condition. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; This reads a passed image from the console and displays it in a window</font>
+  <font color="#006666">; Compile this to an exe and run it like &quot;myexe &lt; image.bmp&quot;</font>
+  <font color="#006666">;</font>
+  <font color="#006666">; (set &quot;Executable format&quot; To &quot;Console&quot; in the compiler options!)</font>
+  <font color="#006666">; (works only with Bitmaps and icons unless you use an Image Decoder)</font>
+  <font color="#006666">;</font>
+<font color="#006666">  OpenConsole</font>()
+  TotalSize = 0
+  BufferFree = 10000
+  *Buffer =<font color="#006666"> AllocateMemory</font>(BufferFree)
+  
+  <b><font color="#006666">Repeat</font></b>
+    ReadSize =<font color="#006666"> ReadConsoleData</font>(*Buffer+TotalSize, BufferFree) <font color="#006666">; read a block of data</font>
+    TotalSize + ReadSize
+    BufferFree - ReadSize
+    <b><font color="#006666">If</font></b> BufferFree &lt; 100  <font color="#006666">; resize the buffer if it is not large enough</font>
+      BufferFree = 10000
+      *Buffer =<font color="#006666"> ReAllocateMemory</font>(*Buffer, TotalSize+10000)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> ReadSize = 0 <font color="#006666">; once 0 is returned, there is nothing else to read</font>
+  
+  <b><font color="#006666">If</font></b> TotalSize &gt; 0 <font color="#006666">; display the image if successful</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, *Buffer, TotalSize)
+      <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0), &quot;Image&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">        ImageGadget</font>(0, 0, 0,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0),<font color="#006666"> ImageID</font>(0))
+        <b><font color="#006666">Repeat</font></b>
+        <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Error&quot;, &quot;Not a valid image.&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="writeconsoledata.html">WriteConsoleData()</a>, <a href="../memory/allocatememory.html">AllocateMemory()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=rawkey.html>RawKey()</a> - <a href=index.html>Console Index</a> - <a href=writeconsoledata.html>WriteConsoleData()</a> -><br><br>
+
+</body></html>

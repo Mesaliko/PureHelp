@@ -1,0 +1,74 @@
+<html><head><title>SetGadgetItemState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetItemState()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetGadgetItemState</b></font>(#Gadget, Eintrag, Status)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den Status des angegebenen Gadget-Eintrags. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Eintrag</i></td>
+<td> 
+Der zu verwendende Eintrag. Der erste Eintrag im Gadget hat den Index 0. 
+
+</td></tr>
+<tr><td><i>Status</i></td>
+<td> 
+Der neue Status des Eintrags. Siehe unten für die Bedeutung dieses Parameters. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dies ist eine universelle Funktion, welche zusammen mit den meisten Gadgettypen, 
+die mehrere Einträge verwalten, arbeitet. 
+<br>
+<br>
+'Status' kann die folgenden Werte annehmen: 
+<br>
+- <a href="explorerlistgadget.html">ExplorerListGadget()</a>: mit dem folgenden Wert: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Explorer_Selected</font> : der Eintrag soll ausgewählt sein.
+</font></pre>
+- <a href="listviewgadget.html">ListViewGadget()</a>: 1, wenn der Eintrag ausgewählt sein soll, sonst 0. 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a>: eine Kombination der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ListIcon_Selected</font> : der Eintrag soll ausgewählt sein.
+  <font color="#924B72">#PB_ListIcon_Checked</font>  : der Eintrag soll mit einem Häkchen versehen werden (nur mit <font color="#924B72">#PB_ListIcon_CheckBoxes</font> Flag).
+  <font color="#924B72">#PB_ListIcon_Inbetween</font>: die Checkbox (Häkchen) des Eintrags soll den &quot;Dazwischen&quot;-Status annehmen (nur mit <font color="#924B72">#PB_ListIcon_ThreeState</font> Flag).
+</font></pre>
+- <a href="treegadget.html">TreeGadget()</a>: eine Kombination der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_Selected</font>  : der Eintrag soll ausgewählt sein.
+  <font color="#924B72">#PB_Tree_Expanded</font>  : der Eintrag soll ausgeklappt (ein Baum-Knoten geöffnet) sein. 
+  <font color="#924B72">#PB_Tree_Collapsed</font> : der Eintrag soll eingeklappt werden. Wenn weder <font color="#924B72">#PB_Tree_Expanded</font> noch <font color="#924B72">#PB_Tree_Collapsed</font> 
+                      angegeben wird, wird dieser Status nicht verändert.
+  <font color="#924B72">#PB_Tree_Checked</font>   : die Häkchen-Box des Eintrags soll ein Häkchen erhalten.
+  <font color="#924B72">#PB_Tree_Inbetween</font> : die Häkchen-Box des Eintrags soll im &quot;Dazwischen&quot;-Status sein.
+</font></pre>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  SetGadgetItemState</font>(0, 1, <font color="#924B72">#PB_Tree_Expanded</font> | <font color="#924B72">#PB_Tree_Selected</font>) <font color="#006666">; Der zweite Eintrag ist ausgewählt und aufgeklappt.</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setgadgetitemimage.html>SetGadgetItemImage()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=setgadgetitemtext.html>SetGadgetItemText()</a> -><br><br>
+
+</body></html>

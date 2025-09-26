@@ -1,0 +1,71 @@
+<html><head><title>ReceiveHTTPMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveHTTPMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Puffer = <font color="#006666"><b>ReceiveHTTPMemory</b></font>(URL$ [, Flags [, UserAgent$]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Lädt eine Datei von der angegebenen URL in einen neuen Speicherpuffer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+Die URL, von der der Download erfolgen soll. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: startet den Download asynchron. Um die Adresse des Speicherpuffers
+                         zu erhalten, verwenden Sie <a href="finishhttp.html">FinishHTTP()</a>.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : folgt keinen automatischen Weiterleitungen.
+</font></pre>
+
+</td></tr>
+<tr><td><i>UserAgent$ (optional)</i></td>
+<td> 
+Ändert den  Benutzeragenten (englisch &quot;User agent&quot;) für die HTTP-Anforderung. Der 
+Standardbenutzer-Agent ist gesetzt auf &quot;Mozilla/5.0 Gecko/41.0 Firefox/41.0&quot; für maximale Kompatibilität. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Adresse des neuen Speicherpuffers zurück, wenn der Download erfolgreich war, 
+andernfalls Null. <a href="../memory/memorysize.html">MemorySize()</a> kann verwendet werden, um die Größe des Downloads zu 
+ermitteln. Der Speicherpuffer muss mittels <a href="../memory/freememory.html">FreeMemory()</a> freigegeben werden, sobald 
+dessen Nutzung abgeschlossen ist. Wenn <font color="#924B72">#PB_HTTP_Asynchronous</font> angegeben wurde, dann 
+wird der für <a href="httpprogress.html">HTTPProgress()</a>, <a href="aborthttp.html">AbortHTTP()</a> und <a href="finishhttp.html">FinishHTTP()</a> benötigte 'HttpVerbindung'-Wert 
+zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Auf Linux muss 'libcurl' installiert sein, damit dieser Befehl funktioniert (die meisten 
+Linux-Distributionen haben es bereits standardmäßig installiert). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Buffer =<font color="#006666"> ReceiveHTTPMemory</font>(&quot;http://www.purebasic.com/index.php&quot;)
+  <b><font color="#006666">If</font></b> *Buffer
+    Size =<font color="#006666"> MemorySize</font>(*Buffer)
+    <b><font color="#006666">Debug</font></b> &quot;Content: &quot; +<font color="#006666"> PeekS</font>(*Buffer, Size, <font color="#924B72">#PB_UTF8</font>|<font color="#924B72">#PB_ByteLength</font>)
+<font color="#006666">    FreeMemory</font>(*Buffer)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=receivehttpfile.html>ReceiveHTTPFile()</a> - <a href=index.html>Http Inhaltsverzeichnis</a> - <a href=seturlpart.html>SetURLPart()</a> -><br><br>
+
+</body></html>

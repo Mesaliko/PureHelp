@@ -1,0 +1,69 @@
+<html><head><title>CreateXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateXML()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateXML</b></font>(#XML [, Encoding])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new empty XML tree identified by the #XML number. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+A number to identify the new XML. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Encoding (optional)</i></td>
+<td> 
+The encoding to use for the XML tree. Valid values are: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font> (default)
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the XML tree was created successfully, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #XML parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The new XML tree will only have a root node which can be accessed with <a href="rootxmlnode.html">RootXMLNode()</a>. 
+To add new nodes, <a href="createxmlnode.html">CreateXMLNode()</a> can be used. 
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Create xml tree</font>
+  xml =<font color="#006666"> CreateXML</font>(<font color="#924B72">#PB_Any</font>) 
+  mainNode =<font color="#006666"> CreateXMLNode</font>(<font color="#006666">RootXMLNode</font>(xml), &quot;Zoo&quot;) 
+  
+  <font color="#006666">; Create first xml node (in main node)</font>
+  item =<font color="#006666"> CreateXMLNode</font>(mainNode, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLAttribute</font>(item, &quot;id&quot;, &quot;1&quot;) 
+<font color="#006666">  SetXMLNodeText</font>(item, &quot;Elephant&quot;) 
+  
+  <font color="#006666">; Create second xml node (in main node)</font>
+  item =<font color="#006666"> CreateXMLNode</font>(mainNode, &quot;Animal&quot;) 
+<font color="#006666">  SetXMLAttribute</font>(item, &quot;id&quot;, &quot;2&quot;) 
+<font color="#006666">  SetXMLNodeText</font>(item, &quot;Tiger&quot;) 
+  
+  <font color="#006666">; Save the xml tree into a xml file</font>
+<font color="#006666">  SaveXML</font>(xml, &quot;demo.xml&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freexml.html">FreeXML()</a>, <a href="createxmlnode.html">CreateXMLNode()</a>, <a href="rootxmlnode.html">RootXMLNode()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copyxmlnode.html>CopyXMLNode()</a> - <a href=index.html>XML Index</a> - <a href=createxmlnode.html>CreateXMLNode()</a> -><br><br>
+
+</body></html>

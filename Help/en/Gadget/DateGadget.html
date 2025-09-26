@@ -1,0 +1,128 @@
+<html><head><title>DateGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DateGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DateGadget</b></font>(#Gadget, x, y, Width, Height [, Mask$ [, Date [, Flags]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a String gadget in the current GadgetList, in which a date and/or time can be entered. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Mask$ (optional)</i></td>
+<td> 
+The format in which the date can be entered. See <a href="../date/formatdate.html">FormatDate()</a> for the format of 
+this mask. Important note: The gadget does not support the display of seconds, so if you specify &quot;%ss&quot; in the Mask$ parameter, it will simply be ignored! 
+If you don't specify the mask or specify an empty string, a default mask will be chosen. The mask can be modified with the <a href="setgadgettext.html">SetGadgetText()</a> function. 
+
+</td></tr>
+<tr><td><i>Date (optional)</i></td>
+<td> 
+The initial date for the gadget. Not specifying this parameter or specifying a 0 value will display 
+the current date. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior: 
+<br>
+<br>
+By default, the gadget has a button to display a calendar in which the user can choose a date (see image below). You can change this by specifying 
+<font color="#924B72">#PB_Date_UpDown</font> in the Flags parameter. This will make the gadget display an up/down button that lets the user change the current selected part of the 
+gadget. This option is only available on Windows. 
+<br>
+<br>
+If you specify <font color="#924B72">#PB_Date_Checkbox</font> in the Flags parameter, the Gadget will have a checkbox with which the user can set the 
+Gadget to 'no date' (if the checkbox is unchecked). While the checkbox is unchecked, <a href="getgadgetstate.html">GetGadgetState()</a> will return 0. 
+To change the state of the checkbox, use <a href="setgadgetstate.html">SetGadgetState()</a> with either 0 (=checkbox unchecked) or any valid date (=checkbox checked). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This gadget uses the same date format for its functions as used by the <a href="../date/index.html">Date library</a>. So you can use for example <a href="../date/formatdate.html">FormatDate()</a> to 
+display the results you get from <a href="getgadgetstate.html">GetGadgetState()</a> in a proper format. 
+<br>
+<br>
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+The following functions can be used for this gadget: 
+<br>
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: Set the currently displayed date. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Change the input mask of the gadget. 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Get the currently displayed date. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Get the current displayed date as a string, as it is displayed in the gadget. 
+<br>
+- <a href="getgadgetattribute.html">GetGadgetAttribute()</a>: With the following attributes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Minimum</font>: Get the minimum date that can be entered
+  <font color="#924B72">#PB_Date_Maximum</font>: Get the maximum date that can be entered
+                    (Note: Limitation of the selectable date isn't supported on Linux.)
+</font></pre>
+
+- <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: With the following attributes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Minimum</font>: Set the minimum date that can be entered
+  <font color="#924B72">#PB_Date_Maximum</font>: Set the maximum date that can be entered
+                    (Note: Limitation of the selectable date isn't supported on Linux.)
+</font></pre>
+
+The following events are supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>: The date has been modified by the user.
+</font></pre>
+
+
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType' to color the dropdown calendar (the edit area cannot be colored): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_BackColor</font>      : backgroundcolor
+  <font color="#924B72">#PB_Gadget_FrontColor</font>     : textcolor for displayed days
+  <font color="#924B72">#PB_Gadget_TitleBackColor</font> : backgroundcolor of the month title
+  <font color="#924B72">#PB_Gadget_TitleFrontColor</font>: textcolor of the month title
+  <font color="#924B72">#PB_Gadget_GrayTextColor</font>  : textcolor for days not of the current month
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 235, 250, &quot;DateGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    DateGadget</font>(0, 10, 10, 210, 25, &quot;Date: %mm/%dd/%yyyy Time: %hh:%ii&quot;)
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/dategadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="calendargadget.html">CalendarGadget()</a>, <a href="../date/date.html">Date()</a>, <a href="../date/formatdate.html">FormatDate()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=countgadgetitems.html>CountGadgetItems()</a> - <a href=index.html>Gadget Index</a> - <a href=disablegadget.html>DisableGadget()</a> -><br><br>
+
+</body></html>

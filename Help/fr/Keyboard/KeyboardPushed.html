@@ -1,0 +1,184 @@
+<html><head><title>KeyboardPushed</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">KeyboardPushed()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>KeyboardPushed</b></font>(ToucheID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Teste l'état enfoncé ou non d'une touche du 
+clavier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ToucheID</i></td>
+<td width="90%"> 
+L'identifiant PureBasic de la touche à tester. 
+<br>
+<br>
+Valeurs possibles: 
+<pre><font face="Courier New, Courier, mono" size="2">    <font color="#924B72">#PB_Key_All</font>   ; Toutes les touches sont testées.
+                  ; Utile pour coder un &quot;Appuyer sur une touche...&quot;
+    <font color="#924B72">#PB_Key_1</font>
+    <font color="#924B72">#PB_Key_2</font>
+    <font color="#924B72">#PB_Key_3</font>
+    <font color="#924B72">#PB_Key_4</font>
+    <font color="#924B72">#PB_Key_5</font>
+    <font color="#924B72">#PB_Key_6</font>
+    <font color="#924B72">#PB_Key_7</font>
+    <font color="#924B72">#PB_Key_8</font>
+    <font color="#924B72">#PB_Key_9</font>
+    <font color="#924B72">#PB_Key_0</font>
+
+    <font color="#924B72">#PB_Key_A</font>
+    <font color="#924B72">#PB_Key_B</font>
+    <font color="#924B72">#PB_Key_C</font>
+    <font color="#924B72">#PB_Key_D</font>
+    <font color="#924B72">#PB_Key_E</font>
+    <font color="#924B72">#PB_Key_F</font>
+    <font color="#924B72">#PB_Key_G</font>
+    <font color="#924B72">#PB_Key_H</font>
+    <font color="#924B72">#PB_Key_I</font>
+    <font color="#924B72">#PB_Key_J</font>
+    <font color="#924B72">#PB_Key_K</font>
+    <font color="#924B72">#PB_Key_L</font>
+    <font color="#924B72">#PB_Key_M</font>
+    <font color="#924B72">#PB_Key_N</font>
+    <font color="#924B72">#PB_Key_O</font>
+    <font color="#924B72">#PB_Key_P</font>
+    <font color="#924B72">#PB_Key_Q</font>
+    <font color="#924B72">#PB_Key_R</font>
+    <font color="#924B72">#PB_Key_S</font>
+    <font color="#924B72">#PB_Key_T</font>
+    <font color="#924B72">#PB_Key_U</font>
+    <font color="#924B72">#PB_Key_V</font>
+    <font color="#924B72">#PB_Key_W</font>
+    <font color="#924B72">#PB_Key_X</font>
+    <font color="#924B72">#PB_Key_Y</font>
+    <font color="#924B72">#PB_Key_Z</font>
+
+    <font color="#924B72">#PB_Key_Escape</font>
+    <font color="#924B72">#PB_Key_Minus</font>
+    <font color="#924B72">#PB_Key_Equals</font>
+    <font color="#924B72">#PB_Key_Back</font>
+    <font color="#924B72">#PB_Key_Tab</font>
+    <font color="#924B72">#PB_Key_LeftBracket</font>
+    <font color="#924B72">#PB_Key_RightBracket</font>
+    <font color="#924B72">#PB_Key_Return</font>
+    <font color="#924B72">#PB_Key_LeftControl</font>
+    <font color="#924B72">#PB_Key_SemiColon</font>
+    <font color="#924B72">#PB_Key_Apostrophe</font>
+    <font color="#924B72">#PB_Key_Grave</font>
+    <font color="#924B72">#PB_Key_LeftShift</font>
+    <font color="#924B72">#PB_Key_BackSlash</font>
+    <font color="#924B72">#PB_Key_Comma</font>
+    <font color="#924B72">#PB_Key_Period</font>
+    <font color="#924B72">#PB_Key_Slash</font>
+    <font color="#924B72">#PB_Key_RightShift</font>
+    <font color="#924B72">#PB_Key_Multiply</font>
+    <font color="#924B72">#PB_Key_LeftAlt</font>
+    <font color="#924B72">#PB_Key_Space</font>
+    <font color="#924B72">#PB_Key_Capital</font>
+    <font color="#924B72">#PB_Key_F1</font>
+    <font color="#924B72">#PB_Key_F2</font>
+    <font color="#924B72">#PB_Key_F3</font>
+    <font color="#924B72">#PB_Key_F4</font>
+    <font color="#924B72">#PB_Key_F5</font>
+    <font color="#924B72">#PB_Key_F6</font>
+    <font color="#924B72">#PB_Key_F7</font>
+    <font color="#924B72">#PB_Key_F8</font>
+    <font color="#924B72">#PB_Key_F9</font>
+    <font color="#924B72">#PB_Key_F10</font>
+    <font color="#924B72">#PB_Key_F11</font>
+    <font color="#924B72">#PB_Key_F12</font>
+    <font color="#924B72">#PB_Key_NumLock</font>
+    <font color="#924B72">#PB_Key_Scroll</font>
+    <font color="#924B72">#PB_Key_Pad0</font>
+    <font color="#924B72">#PB_Key_Pad1</font>
+    <font color="#924B72">#PB_Key_Pad2</font>
+    <font color="#924B72">#PB_Key_Pad3</font>
+    <font color="#924B72">#PB_Key_Pad4</font>
+    <font color="#924B72">#PB_Key_Pad5</font>
+    <font color="#924B72">#PB_Key_Pad6</font>
+    <font color="#924B72">#PB_Key_Pad7</font>
+    <font color="#924B72">#PB_Key_Pad8</font>
+    <font color="#924B72">#PB_Key_Pad9</font>
+    <font color="#924B72">#PB_Key_Add</font>
+    <font color="#924B72">#PB_Key_Subtract</font>
+    <font color="#924B72">#PB_Key_Decimal</font>
+    <font color="#924B72">#PB_Key_PadEnter</font>
+    <font color="#924B72">#PB_Key_RightControl</font>
+    <font color="#924B72">#PB_Key_PadComma</font>
+    <font color="#924B72">#PB_Key_Divide</font>
+    <font color="#924B72">#PB_Key_RightAlt</font>
+    <font color="#924B72">#PB_Key_Pause</font>
+    <font color="#924B72">#PB_Key_Home</font>
+    <font color="#924B72">#PB_Key_Up</font>
+    <font color="#924B72">#PB_Key_Down</font>
+    <font color="#924B72">#PB_Key_Left</font>
+    <font color="#924B72">#PB_Key_Right</font>
+    <font color="#924B72">#PB_Key_End</font>
+    <font color="#924B72">#PB_Key_PageUp</font>
+    <font color="#924B72">#PB_Key_PageDown</font>
+    <font color="#924B72">#PB_Key_Insert</font>
+    <font color="#924B72">#PB_Key_Delete</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la touche est 
+pressée, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+- Un nombre quelconque de touches peut être 
+pressé simultanément. 
+<br>
+<br>
+- Si vous voulez tester si une touche spécifique 
+a été appuyée puis relâchée, utiliser la 
+commande <a href="keyboardreleased.html">KeyboardReleased()</a>. 
+<br>
+<br>
+- La fonction <a href="examinekeyboard.html">ExamineKeyboard()</a> doit être 
+appelée avant pour mettre à jour l'état du 
+clavier. 
+<br>
+<br>
+- Le comportement du clavier peut être changé 
+avec la commande <a href="keyboardmode.html">KeyboardMode()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() <b><font color="#006666">And</font></b> <font color="#006666">InitKeyboard</font>() <b><font color="#006666">And</font></b> <font color="#006666">OpenScreen</font>(800,600,16,&quot;&quot;)
+    <b><font color="#006666">Repeat</font></b>
+<font color="#006666">      FlipBuffers</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">        DrawText</font>(0, 0, &quot;Appuyez sur la touche [Echap] pour quitter&quot;)
+<font color="#006666">        StopDrawing</font>()
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      ExamineKeyboard</font>()
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)   <font color="#006666">; Appuyez sur la touche [Echap] pour quitter</font>
+        <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinekeyboard.html">ExamineKeyboard()</a>, <a href="keyboardinkey.html">KeyboardInkey()</a>, 
+<a href="keyboardreleased.html">KeyboardReleased()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=keyboardmode.html>KeyboardMode()</a> - <a href=index.html>Keyboard Index</a> - <a href=keyboardreleased.html>KeyboardReleased()</a> -><br><br>
+
+</body></html>

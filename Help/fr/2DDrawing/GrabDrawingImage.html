@@ -1,0 +1,85 @@
+<html><head><title>GrabDrawingImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GrabDrawingImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GrabDrawingImage</b></font>(#Image, X, Y, Largeur, Hauteur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle image en copiant 
+une zone de la surface dessin en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Le numéro de la nouvelle image. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+Position et simensions de la zone à copier. 
+<br>
+<br>
+La nouvelle image aura les même dimensions. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé comme paramètre 
+&quot;#Image&quot; alors le numéro de la nouvelle 
+image est renvoyé dans 'Resultat'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande ne fonctionne pas avec 
+<a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+<br>
+<br>
+Toute partie de la zone spécifiée qui se 
+trouve en dehors de la surface de dessin 
+sera indéfinie dans l'image créée. De même, 
+si la sortie est <a href="../window/windowoutput.html">WindowOutput()</a>, toute 
+partie de la fenêtre qui n'est pas visible 
+à l'écran peut être indéfinie dans l'image 
+créée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 410, 100, &quot;GrabDrawingImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 100) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawText</font>(50,30,&quot;PUREBASIC&quot;,<font color="#006666"> RGB</font>(255, 255, 0))
+<font color="#006666">      GrabDrawingImage</font>(1,0,0,100,100)
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 100,<font color="#006666"> ImageID</font>(0))
+<font color="#006666">      ImageGadget</font>(1, 210, 0, 200, 100,<font color="#006666"> ImageID</font>(1))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../image/grabimage.html">GrabImage()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getoriginy.html>GetOriginY()</a> - <a href=index.html>2DDrawing Index</a> - <a href=gradientcolor.html>GradientColor()</a> -><br><br>
+
+</body></html>

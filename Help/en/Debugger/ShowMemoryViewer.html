@@ -1,0 +1,48 @@
+<html><head><title>ShowMemoryViewer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ShowMemoryViewer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ShowMemoryViewer</b></font>([*Buffer, Length])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Open the <a href="../reference/ide_debugtools.html">memory viewer</a> window or bring it to the front if it is already open. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Buffer, Length (optional)</i></td>
+<td width="90%"> 
+The memory area to be displayed in the memory viewer. If these parameters 
+are not specified, then the memory viewer will just be opened without displaying 
+a specific memory area. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Memory =<font color="#006666"> AllocateMemory</font>(1000)
+  <b><font color="#006666">If</font></b> *Memory
+<font color="#006666">    RandomData</font>(*Memory, 1000)       <font color="#006666">; Fill memory with some data</font>
+  
+<font color="#006666">    ShowMemoryViewer</font>(*Memory, 1000) <font color="#006666">; Open memory viewer</font>
+    <b><font color="#006666">CallDebugger</font></b>                <font color="#006666">; Halt the program, so it does not end right away</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../reference/ide_debugtools.html">Included debugging tools</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=showlibraryviewer.html>ShowLibraryViewer()</a> - <a href=index.html>Debugger Index</a> - <a href=showprofiler.html>ShowProfiler()</a> -><br><br>
+
+</body></html>

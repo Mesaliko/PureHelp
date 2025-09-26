@@ -1,0 +1,93 @@
+<html><head><title>EntityAnimation.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - EntityAnimation
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#006666">;Speed animation = PageUp and PageDown
+
+</font>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, Speed = 0.3
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; EntityAnimation -  [PageUp]   [PageDown]  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, -1,<font color="#006666"> RGB</font>(175, 175, 175))
+
+<font color="#006666">;Ground
+</font><font color="#006666">;
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 1500, 1500, 40, 40, 15, 15)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0))
+<font color="#006666">EntityRenderMode</font>(0, 0)
+
+<font color="#006666">;Mesh
+</font><font color="#006666">;
+</font><font color="#006666">LoadMesh</font>(1, &quot;robot.mesh&quot;)
+
+<font color="#006666">; Entity
+</font><font color="#006666">;
+</font><font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">; Animation
+</font><font color="#006666">;
+</font><font color="#006666">StartEntityAnimation</font>(1, &quot;Walk&quot;, <font color="#924B72">#PB_EntityAnimation_Manual</font>)
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 50, 100, 80, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1) + 40,<font color="#006666"> EntityZ</font>(1))
+
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), -40, 100, 80)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(80, 80, 80))
+<font color="#006666">KeyboardMode</font>(<font color="#924B72">#PB_Keyboard_International</font>)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineMouse</font>()
+  MouseX = -<font color="#006666">MouseDeltaX</font>()/10
+  MouseY = -<font color="#006666">MouseDeltaY</font>()/10
+  
+<font color="#006666">  ExamineKeyboard</font>()    
+  KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*1
+  Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*1    
+  
+  Speed+ (<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageUp</font>) <b><font color="#006666">And</font></b> Speed &lt; 2.0)-<font color="#006666">Bool</font>(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageDown</font>) <b><font color="#006666">And</font></b> Speed &gt; 0.1))*0.01
+  
+<font color="#006666">  AddEntityAnimationTime</font>(1, &quot;Walk&quot;, TimeSinceLastFrame * Speed)
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>()
+  
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+</font></pre>
+</body></html>

@@ -1,0 +1,104 @@
+<html><head><title>SetGadgetState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetState()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetGadgetState</b></font>(#Gadget, Status)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den aktuellen Status des angegebenen Gadgets. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Status</i></td>
+<td> 
+Der neue Status für den Eintrag. Siehe unten für die Bedeutung dieses Wertes, abhängig 
+vom Gadget-Typ. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dies ist eine universelle Funktion, welche mit den meisten der Gadgets arbeitet: 
+<br>
+<br>
+- <a href="buttonimagegadget.html">ButtonImageGadget()</a>: ändert den aktuellen Status eines #PB_Button_Toggle Schalters (1 = gedrückt, 0 = normal). 
+<br>
+- <a href="buttongadget.html">ButtonGadget()</a>: ändert den aktuellen Status eines #PB_Button_Toggle Schalters (1 = gedrückt, 0 = normal). 
+<br>
+- <a href="calendargadget.html">CalendarGadget()</a>: ändert das aktuell ausgewählte Datum. 
+<br>
+- <a href="checkboxgadget.html">CheckBoxGadget()</a>: ändert den Status der Checkbox. Die folgenden Werte sind möglich: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_CheckBox_Checked</font>  : Setzt das Häkchen.
+  <font color="#924B72">#PB_CheckBox_Unchecked</font>: Entfernt das Häkchen.
+  <font color="#924B72">#PB_CheckBox_Inbetween</font>: Setzt den &quot;Dazwischen&quot;-Status. (Nur für <font color="#924B72">#PB_CheckBox_ThreeState</font> Checkboxen)
+</font></pre>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a>: ändert den aktuell selektierten Eintrag. 
+<br>
+- <a href="dategadget.html">DateGadget()</a>: ändert das bzw. die aktuell angezeigte Datum/Zeit. Wenn <font color="#924B72">#PB_Date_CheckBox</font> verwendet wurde, setzen Sie 'Status' auf 0, um das Häkchen zu entfernen. 
+<br>
+- <a href="imagegadget.html">ImageGadget()</a>: ändert das aktuelle Bild des Gadgets. 
+<br>
+- <a href="ipaddressgadget.html">IPAddressGadget()</a>: ändert die aktuelle IP-Adresse. 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a>: ändert den aktuell selektierten Eintrag. Wird -1 angegeben, verlieren alle Einträge ihre Selektierung. 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a>: ändert den aktuell selektierten Eintrag. Wird -1 angegeben, wird die Selektierung entfernt. 
+<br>
+- <a href="mdigadget.html">MDIGadget()</a>: ändert das aktuell fokussierte ChildWindow (durch Angabe der entsprechenden #Window Nummer), 
+oder benutzen Sie einen der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_MDI_Cascade</font>         : ChildWindows überlappend anordnen (&quot;Cascade&quot;).
+  <font color="#924B72">#PB_MDI_TileVertically</font>  : ChildWindows nebeneinander anordnen (&quot;Tile vertically&quot;).
+  <font color="#924B72">#PB_MDI_TileHorizontally</font>: ChildWindows nebeneinander anordnen (&quot;Tile horizontally&quot;) .
+  <font color="#924B72">#PB_MDI_Next</font>            : Fokus dem nächsten ChildWindow geben.
+  <font color="#924B72">#PB_MDI_Previous</font>        : Fokus dem vorhergehenden ChildWindow geben.
+  <font color="#924B72">#PB_MDI_Arrange</font>         : Die symbolisierten (minimierten) Fenster anordnen.
+</font></pre>
+- <a href="optiongadget.html">OptionGadget()</a>: 1 um es zu aktivieren, andernfalls 0. 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a>: ändert das aktuelle Panel. 
+<br>
+- <a href="progressbargadget.html">ProgressBarGadget()</a>: ändert den Wert der Fortschrittsanzeige. Ein Wert von <font color="#924B72">#PB_ProgressBar_Unknown</font> 
+kann verwendet werden, um anzuzeigen, dass der Fortschritt nicht bekannt ist. 
+<br>
+- <a href="scrollbargadget.html">ScrollBarGadget()</a>: ändert die aktuelle Position des Schiebebalkens. 
+<br>
+- <a href="shortcutgadget.html">ShortcutGadget()</a>: ändert das aktuelle Tastenkürzel. 
+<br>
+- <a href="spingadget.html">SpinGadget()</a>: ändert den aktuellen Wert des SpinGadgets. 
+<br>
+- <a href="splittergadget.html">SplitterGadget()</a>: ändert die aktuelle Splitter-Position, in Pixel. 
+<br>
+- <a href="trackbargadget.html">TrackBarGadget()</a>: ändert die aktuelle Regler-Position. 
+<br>
+- <a href="treegadget.html">TreeGadget()</a>: ändert den aktuell ausgewählten Eintrag, -1 wählt keinen Eintrag aus. 
+<br>
+- <a href="webgadget.html">WebGadget()</a>: führt einige Aktionen im Browser-Fenster aus, siehe das WebGadget() für weitere Erklärungen. 
+
+<br>
+<br>
+Hinweis: Beachten Sie bitte auch die Hinweise im Kapitel 
+<a href="../reference/winmessages.html">Windows Message Handling</a> zur 
+Nachrichtenverarbeitung unter Windows. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setgadgetitemtext.html>SetGadgetItemText()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=setgadgettext.html>SetGadgetText()</a> -><br><br>
+
+</body></html>

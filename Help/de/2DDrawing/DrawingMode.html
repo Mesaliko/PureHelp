@@ -1,0 +1,173 @@
+<html><head><title>DrawingMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingMode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawingMode</b></font>(Modus)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den Zeichenmodus für die Text- und Grafikausgabe. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Modus</i></td>
+<td width="90%"> 
+Das Verhalten der weiteren Zeichen-Operationen. 
+Dies kann eine Kombination der folgenden Flags sein: 
+<br>
+<br>
+
+<font color="#924B72">#PB_2DDrawing_Default</font> 
+<blockquote>
+
+Dies ist der Standard-Zeichenmodus, wenn das Zeichnen beginnt. 
+Text wird mit festem Hintergrund dargestellt und Grafikflächen werden ausgefüllt. 
+Wenn die aktuelle Ausgabe einen Alpha-Kanal hat, verändern die Zeichen-Operationen nur 
+die Farb-Bestandteile und lassen den Alpha-Kanal unverändert. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Default.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Transparent</font> 
+<blockquote>
+
+Wenn dieses Flag gesetzt ist, dann wird der Hintergrund beim <a href="drawtext.html">DrawText()</a> Befehl transparent sein. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Transparent.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_NativeText</font> 
+<blockquote>
+
+Wenn dieses Flag gesetzt ist, verwenden die Befehle <a href="drawtext.html">DrawText()</a> und <a href="drawrotatedtext.html">DrawRotatedText()</a> die native 
+Textausgabe, um eine Gadget-ähnliche Textwiedergabe zu ermöglichen. 
+Alle Spezialeffekte wie XOR, AlphaBlend, CustomFilters usw. sind in diesem Modus nicht verfügbar. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_XOr</font> 
+<blockquote>
+
+Aktiviert den XOR-Modus. Alle Grafiken werden nach dem XOR-Modus mit dem aktuellen Hintergrund verschmolzen. 
+Dieser Modus kann nicht mit den nachfolgenden Alpha-Kanal Modi kombiniert werden. 
+<br>
+<br>
+Hinweis: Dieser Modus arbeitet nicht mit <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_XOr.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Outlined</font> 
+<blockquote>
+
+Wenn dieser Flag gesetzt ist, dann werden Flächen nur mit ihren Umrissen gezeichnet und nicht ausgefüllt. 
+Dies trifft auf Befehle wie <a href="circle.html">Circle</a>, <a href="box.html">Box</a>, etc. zu. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Outlined.png"></p>
+</blockquote>
+
+
+<b>Hinweis:</b> Die folgenden Modi arbeiten nur mit <a href="../image/imageoutput.html">ImageOutput()</a>, <a href="../gadget/canvasoutput.html">CanvasOutput()</a> und <a href="../sprite/spriteoutput.html">SpriteOutput()</a>. 
+Sie werden bei allen anderen Ausgabekanälen ignoriert: 
+<br>
+<br>
+
+<font color="#924B72">#PB_2DDrawing_AlphaBlend</font> 
+<blockquote>
+
+Die Zeichenoperationen werden &quot;alpha-blended&quot; (gemischt) mit dem Hintergrund. Der <a href="rgba.html">RGBA()</a> Befehl 
+kann verwendet werden, um Farben mit Alpha-Transparenz bei Befehlen wie <a href="frontcolor.html">FrontColor()</a>, <a href="box.html">Box()</a>, 
+<a href="drawtext.html">DrawText()</a> etc. festzulegen. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_AlphaBlend.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AlphaClip</font> 
+<blockquote>
+
+Die Zeichenoperationen werden &quot;alpha-blended&quot; (gemischt) mit dem Hintergrund wie beim <font color="#924B72">#PB_2DDrawing_AlphaBlend</font> 
+Modus - mit dem Zusatz, dass der Alpha-Kanal der Zeichenausgabe als eine Maske fungiert. Dies bedeutet, dass vorher 
+transparente Bereiche der Ausgabe auch nach dem Vermischen transparent bleiben. Wenn die Zeichenausgabe keinen Alpha-Kanal 
+hat, dann agiert dieser Modus einfach wie der <font color="#924B72">#PB_2DDrawing_AlphaBlend</font> Modus. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AlphaChannel</font> 
+<blockquote>
+
+Die Zeichenoperationen werden nur den Alpha-Kanal der Zeichenausgabe verändern. Alle Farbinformationen werden ignoriert. 
+Zum Beispiel wird das Zeichnen eines <a href="circle.html">Kreises</a> mit einem Farbwert von <a href="../2ddrawing/rgba.html">RGBA</a>(0, 0, 0, 0) 
+ein Loch in die Zeichenausgabe &quot;schneiden&quot;, indem der Kreis-Bereich vollständig transparent gemacht wird. Wenn die 
+Zeichenausgabe keinen Alpha-Kanal hat, wie beim <a href="../gadget/canvasgadget.html">CanvasGadget()</a>, dann wird in diesem Modus kein Zeichnen einen Effekt haben. 
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_AllChannels</font> 
+<blockquote>
+
+Die Zeichenoperationen werden die Farb-Kanäle und den Alpha-Kanal der Zeichenausgabe verändern. Der Inhalt der Kanäle 
+wird ohne jegliches Vermischen (&quot;Blending&quot;) durch die Zeichenoperation ersetzt. Das Zeichnen in diesem Modus hat den 
+gleichen Effekt, wie zuerst mittels dem <font color="#924B72">#PB_2DDrawing_Default</font> Modus zu zeichnen, und dann nochmals 
+die gleiche Zeichenoperation mittels dem <font color="#924B72">#PB_2DDrawing_AlphaChannel</font> Modus. 
+Wenn die Zeichenausgabe keinen Alpha-Kanal besitzt, wie beim <a href="../gadget/canvasgadget.html">CanvasGadget()</a>, dann entspricht dieser Modus dem 
+<font color="#924B72">#PB_2DDrawing_Default</font> Modus. 
+<br>
+<p><img src="../HelpPictures/AlphaBlending.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_Gradient</font> 
+<blockquote>
+
+Dieser Modus ermöglicht das Zeichnen mit einem Farbverlauf (englisch &quot;Gradient&quot;) anstelle einer festen Farbe. 
+Die Farbverlaufs-Form kann mit Befehlen wie <a href="lineargradient.html">LinearGradient()</a>, <a href="circulargradient.html">CircularGradient()</a> 
+etc. definiert werden, und die im Farbverlauf verwendeten Farben können mittels <a href="gradientcolor.html">GradientColor()</a> 
+festgelegt werden. Die an die einzelnen Zeichen-Befehle übergebenen Farb-Parameter werden in diesem Modus ignoriert. 
+Dieser Modus kann mit den obigen Alpha-Kanal Modi kombiniert werden, um Farbverläufe mit halb-transparenten Farben 
+zu erhalten. 
+<br>
+<p><img src="../HelpPictures/PB_2DDrawing_Gradient.png"></p>
+</blockquote>
+
+
+<font color="#924B72">#PB_2DDrawing_CustomFilter</font> 
+<blockquote>
+
+In diesem Modus kann das Zeichnen der Pixel durch eine benutzerdefinierte (&quot;custom&quot;) Prozedur mittels 
+<a href="customfiltercallback.html">CustomFilterCallback()</a> definiert werden. Dies ermöglicht die 
+Implementierung von benutzerdefinierten Zeicheneffekten, während trotzdem noch die Standard-Funktionen 
+für das aktuelle Zeichnen verwendet werden. 
+<br>
+<p><img src="../HelpPictures/customfilter.png"></p>
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um mehrere Modi auf einmal zu nutzen, müssen Sie den '|' (OR) Operator verwenden. Das folgende ist ein 
+Beispiel für umrissene Flächen, die im XOR-Modus verschmolzen werden: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font> | <font color="#924B72">#PB_2DDrawing_XOr</font>)
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="frontcolor.html">FrontColor()</a>, <a href="backcolor.html">BackColor()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=drawingfont.html>DrawingFont()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=ellipse.html>Ellipse()</a> -><br><br>
+
+</body></html>

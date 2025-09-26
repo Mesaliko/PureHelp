@@ -1,0 +1,141 @@
+<html><head><title>AddGadgetItem</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddGadgetItem()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddGadgetItem</b></font>(#Gadget, Position, Texte$ [, ImageID [, Options]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un élément à un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+
+</td></tr>
+<tr><td><i>Position</i></td>
+<td> 
+La position ou l'index du nouvel élément. 
+<br>
+<br>
+Pour ajouter un élément au début, utilisez 
+la valeur 0. <br>
+Pour ajouter un élément à la fin de la 
+liste des éléments en cours, utilisez la 
+valeur -1. 
+<blockquote>
+
+N'oubliez pas que lorsque vous insérez un 
+nouvel élément entre deux éléments existants, 
+la position de chaque élément de droite est 
+augmentée de 1. 
+<br>
+<br>
+Pour le <a href="mdigadget.html">MDIGadget()</a> ce paramètre spécifie 
+le numéro de la nouvelle fenêtre fille. 
+<a href="../reference/purebasic_objects.html">PB_Any #</a> 
+peut être utilisé, dans ce cas, la valeur de 
+retour sera le nouveau numéro attribué par PB. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+Le texte du nouvel élément. 
+<blockquote>
+
+Lorsque vous ajoutez un élément à un 
+<a href="listicongadget.html">ListIconGadget()</a>, ce paramètre peut contenir 
+le texte de plusieurs colonnes séparées par 
+un caractère <a href="../string/chr.html">Chr (10)</a>. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>ImageID (optionnel)</i></td>
+<td> 
+Le numéro d'une image (icône) à afficher à 
+côté de l'élément inséré. <br>
+La taille de l'image doit être standard, 
+c'est à dire de 16x16 pixels. 
+<br>
+<br>
+'ImageID' peut être récupéré facilement 
+grâce à la commande <a href="../image/imageid.html">ImageID()</a>. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Ce paramètre n'est utilisable qu'avec les 
+gadgets suivants: 
+<br>
+<br>
+<a href="treegadget.html">TreeGadget()</a> 
+<blockquote>
+
+Ce paramètre spécifie le sous-niveau du 
+nouvel item.<br>
+Si le sous-niveau est supérieur à celui de 
+l'item précédent, le nouvel item devient 
+l'enfant de celui-ci. <br>
+S'il est inférieur, il sera ajouté après le 
+parent de l'élément précédent. 
+</blockquote>
+
+
+<a href="mdigadget.html">MDIGadget()</a> 
+<blockquote>
+
+Ce paramètre peut être utilisé pour spécifier 
+les options de la nouvelle fenêtre (voir 
+<a href="../window/openwindow.html">OpenWindow()</a>). <br>
+Les options <font color="#924B72">#PB_Window_Borderless</font>, 
+<font color="#924B72">#PB_Window_Screencentered</font> et 
+<font color="#924B72">#PB_Window_WindowCentered</font> 
+ne sont pas prises en charge pour les 
+fenêtres MDI. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La valeur de retour est uniquement valable 
+qu'avec le <a href="mdigadget.html">MDIGadget()</a>. Si <font color="#924B72">#PB_Any</font> a été 
+utilisé à la place de 'Position' lors de 
+l'ajout d'un élément à la <a href="mdigadget.html">MDIGadget()</a>, la 
+valeur de retour est le numéro 
+d'identification de la nouvelle fenêtre MDI. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les gadgets supportant cette commande sont: 
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="comboboxgadget.html">ComboBoxGadget()</a>: Support de l'ImageID si l'option <font color="#924B72">#PB_ComboBox_Image</font> est spécifiée.
+  - <a href="editorgadget.html">EditorGadget()</a>
+  - <a href="listviewgadget.html">ListViewGadget()</a>
+  - <a href="listicongadget.html">ListIconGadget()</a>: Support de l'ImageID.
+  - <a href="mdigadget.html">MDIGadget()</a>     : ImageID ajoute une icône dans la barre de titre de la fenêtre fille et 'Options', les paramètres de la fenêtre.
+  - <a href="panelgadget.html">PanelGadget()</a>   : Support de l'ImageID.
+  - <a href="treegadget.html">TreeGadget()</a>    : Support de l'ImageID. Le paramètre 'Options' spécifie le nouveau sous-niveau. 
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, 
+<a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="comboboxgadget.html">ComboBoxGadget()</a>, 
+<a href="listicongadget.html">ListIconGadget()</a>, <a href="listviewgadget.html">ListViewGadget()</a>, 
+<a href="mdigadget.html">MDIGadget()</a>, <a href="panelgadget.html">PanelGadget()</a>, <a href="treegadget.html">TreeGadget()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addgadgetcolumn.html>AddGadgetColumn()</a> - <a href=index.html>Gadget Index</a> - <a href=bindgadgetevent.html>BindGadgetEvent()</a> -><br><br>
+
+</body></html>

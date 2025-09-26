@@ -1,0 +1,116 @@
+<html><head><title>FontRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FontRequester()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>FontRequester</b></font>(Police$, TaillePolice, Options [, Couleur [, Style [, ParentID]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une boîte de dialogue standard 
+pour choisir une police de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Police$</i></td>
+<td width="90%"> 
+Le nom de la police affichée par défaut 
+lors de l'ouverture de la boîte de dialogue. 
+
+</td></tr>
+<tr><td><i>TaillePolice</i></td>
+<td> 
+La taille de la police affichée par défaut 
+lors de l'ouverture de la boîte de dialogue. 
+
+</td></tr>
+<tr><td><i>Options</i></td>
+<td> 
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FontRequester_Effects</font> : Affiche les options effets (Barré, Souligné, Couleur, etc) (Windows uniquement).
+</font></pre>
+
+</td></tr>
+<tr><td><i>Couleur (optionnel)</i></td>
+<td> 
+La couleur de la police affichée par défaut 
+lors de l'ouverture de la boîte de dialogue. 
+<br>
+<br>
+Utiliser <a href="../2ddrawing/rgb.html">RGB()</a> pour obtenir une valeur de 
+couleur valide. 
+
+</td></tr>
+<tr><td><i>Style (optionnel)</i></td>
+<td> 
+Le style de la police affichée par défaut 
+lors de l'ouverture de la boîte de dialogue. 
+<br>
+<br>
+Voir <a href="selectedfontstyle.html">SelectedFontStyle()</a> pour obtenir les 
+styles disponibles. 
+
+</td></tr>
+<tr><td><i>ParentID (optionnel)</i></td>
+<td> 
+L'identifiant de la fenêtre parent. 
+<br>
+<br>
+Un identifiant de fenêtre valide peut être récupéré avec <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si une police a été choisie, zéro si l'utilisateur a annulé 
+la boîte de dialogue. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les fonctions <a href="selectedfontcolor.html">SelectedFontColor()</a>, 
+<a href="selectedfontname.html">SelectedFontName()</a>, <a href="selectedfontsize.html">SelectedFontSize()</a> et 
+<a href="selectedfontstyle.html">SelectedFontStyle()</a> peuvent être utilisées 
+après un appel réussi à cette fonction pour 
+obtenir les informations sur la police 
+sélectionnée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Police$ = &quot;Arial&quot;   <font color="#006666">; Police initiale (peut aussi être nulle)</font>
+  TaillePolice  = 14  <font color="#006666">; Taille initiale (peut aussi être nulle)</font>
+  Resultat =<font color="#006666"> FontRequester</font>(Police$, TaillePolice, <font color="#924B72">#PB_FontRequester_Effects</font>)
+  <b><font color="#006666">If</font></b> Resultat
+    Message$ = &quot;Vous avez sélectionné la police suivante :&quot;  + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Nom :  &quot; +<font color="#006666"> SelectedFontName</font>()       + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Taille :  &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontSize</font>())  + <font color="#924B72">#LF$</font>
+    Message$ + &quot;Couleur : &quot; +<font color="#006666"> Str</font>(<font color="#006666">SelectedFontColor</font>()) + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Bold</font>
+      Message$ + &quot;Gras&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_StrikeOut</font>
+      Message$ + &quot;Barré&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">If</font></b> <font color="#006666">SelectedFontStyle</font>() &amp; <font color="#924B72">#PB_Font_Underline</font>
+      Message$ + &quot;Souligné&quot; + <font color="#924B72">#LF$</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    Message$ = &quot;La sélection a été annulée.&quot;
+  <b><font color="#006666">EndIf</font></b>
+ 
+<font color="#006666">  MessageRequester</font>(&quot;FontRequester&quot;, Message$, <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/fontrequester.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="selectedfontcolor.html">SelectedFontColor()</a>, <a href="selectedfontname.html">SelectedFontName()</a>, 
+<a href="selectedfontsize.html">SelectedFontSize()</a>, <a href="selectedfontstyle.html">SelectedFontStyle()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=colorrequester.html>ColorRequester()</a> - <a href=index.html>Requester Index</a> - <a href=inputrequester.html>InputRequester()</a> -><br><br>
+
+</body></html>

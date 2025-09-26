@@ -1,0 +1,131 @@
+<html><head><title>CustomSortList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CustomSortList()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CustomSortList</b></font>(Liste(), @ProcedureCompare() [, Options [, Debut, Fin]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Trie la  <a href="../list/index.html">liste</a> selon les options données à l'aide d'une procédure personnalisée 
+pour comparer les éléments du tableau. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à trier. 
+
+</td></tr>
+<tr><td><i>@ProcedureCompare()</i></td>
+<td> 
+L'adresse de la procédure pour comparer les éléments de la liste. 
+La procédure doit avoir deux paramètres qui recevront l'adresse mémoire des deux éléments à comparer 
+et renvoyer l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Sort_Greater</font> : Le premier élément est supérieur au second.
+   <font color="#924B72">#PB_Sort_Equal</font>   : Les deux éléments sont égaux.
+   <font color="#924B72">#PB_Sort_Lesser</font>  : Le premier élément est inférieur au second.
+</font></pre>
+La procédure de comparaison est appelée très souvent pendant le processus de tri, elle doit donc 
+effectuer le moins de travail possible et être rapide à exécuter. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Il peut s'agir d'une combinaison des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Sort_Ascending</font>  : Trie la liste par ordre croissant (les valeurs les plus basses en premier). C'est la valeur par défaut.
+   <font color="#924B72">#PB_Sort_Descending</font> : Trie la liste par ordre décroissant (les valeurs les plus élevées en premier)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Debut, Fin (optionnel)</i></td>
+<td> 
+L'index du premier et du dernier élément de la liste qui doit être trié. 
+Si ces paramètres ne sont pas spécifiés, alors toute la liste est triée. 
+<br>
+Le premier élément de la liste est à la position 0, le suivant à 1 et ainsi de suite. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La liste peut avoir une <a href="../reference/structures.html">structure</a> 
+ou l'un des <a href="../reference/variables.html">types de base</a> : Octet, mot, long, entier, chaîne ou flottant 
+(byte, word, long, integer, string ou float).<br>
+
+</blockquote><p><b>Exemple:</b> Trier la liste structurée</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Structure</font></b> CustomStruct
+     Valeur$
+   <b><font color="#006666">EndStructure</font></b>
+  
+   <font color="#006666">; Trier par valeur numérique dans l'élément chaîne de la structure</font>
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">CustomCompare</font>(*a.CustomStruct, *b.CustomStruct)
+    <b><font color="#006666">If</font></b> <font color="#006666">Val</font>(*a\Valeur$) &lt;<font color="#006666"> Val</font>(*b\Valeur$)
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Lesser</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">Val</font>(*a\Valeur$) &gt;<font color="#006666"> Val</font>(*b\Valeur$)
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Greater</font>
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Equal</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Test</font>.CustomStruct()
+  
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;0005&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;2&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;42&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;7&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;23&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;100&quot;
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()) :<font color="#006666"> Test</font>()\Valeur$ = &quot;101&quot;
+  
+<font color="#006666">   CustomSortList</font>(<font color="#006666">Test</font>(), @CustomCompare(), <font color="#924B72">#PB_Sort_Ascending</font>)
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Test</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Test</font>()\Valeur$
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Trier la liste avec un type de base</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#006666">; Trier les éléments flottants par valeur absolue (en ignorant le signe)</font>
+   <b><font color="#006666">Procedure</font></b> <font color="#006666">AbsCompare</font>(*a.Float, *b.Float)
+    <b><font color="#006666">If</font></b> <font color="#006666">Abs</font>(*a\f) &lt;<font color="#006666"> Abs</font>(*b\f)
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Lesser</font>
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">Abs</font>(*a\f) &gt;<font color="#006666"> Abs</font>(*b\f)
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Greater</font>
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_Sort_Equal</font>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Test</font>.f()
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()):<font color="#006666">Test</font>() = 2.5
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()):<font color="#006666">Test</font>() = -3.0
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()):<font color="#006666">Test</font>() = 0
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()):<font color="#006666">Test</font>() = 12
+<font color="#006666">   AddElement</font>(<font color="#006666">Test</font>()):<font color="#006666">Test</font>() = -100
+  
+<font color="#006666">  CustomSortList</font>(<font color="#006666">Test</font>(), @AbsCompare())
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Test</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Test</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="sortlist.html">SortList()</a>, <a href="sortstructuredlist.html">SortStructuredList()</a>, <a href="randomizelist.html">RandomizeList()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=customsortarray.html>CustomSortArray()</a> - <a href=index.html>Sort Index</a> - <a href=randomizearray.html>RandomizeArray()</a> -><br><br>
+
+</body></html>

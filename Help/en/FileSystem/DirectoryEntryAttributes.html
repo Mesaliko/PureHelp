@@ -1,0 +1,76 @@
+<html><head><title>DirectoryEntryAttributes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DirectoryEntryAttributes()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Attributes = <font color="#006666"><b>DirectoryEntryAttributes</b></font>(#Directory)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the attributes of the current entry in the directory being listed with <a href="examinedirectory.html">ExamineDirectory()</a> and 
+<a href="nextdirectoryentry.html">NextDirectoryEntry()</a> functions. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Directory</i></td>
+<td width="90%"> 
+The directory examined with <a href="examinedirectory.html">ExamineDirectory()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the attributes of the current file. 
+<br>
+<br>
+On Windows, Attributes is a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Hidden</font>    : File is hidden
+  <font color="#924B72">#PB_FileSystem_Archive</font>   : File has been changed and not archived since the last time
+  <font color="#924B72">#PB_FileSystem_Compressed</font>: File is compressed
+  <font color="#924B72">#PB_FileSystem_Normal</font>    : Normal attributes
+  <font color="#924B72">#PB_FileSystem_ReadOnly</font>  : File is in read-only mode
+  <font color="#924B72">#PB_FileSystem_System</font>    : File is a system file
+</font></pre>
+
+On Linux or MacOSX, Attributes is a combination of these values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Link</font>      : The file is a symbolic link
+  <font color="#924B72">#PB_FileSystem_ReadUser</font>  : Access flags for the owning user
+  <font color="#924B72">#PB_FileSystem_WriteUser</font>
+  <font color="#924B72">#PB_FileSystem_ExecUser</font>
+  <font color="#924B72">#PB_FileSystem_ReadGroup</font> : Access flags for the owning user's group
+  <font color="#924B72">#PB_FileSystem_WriteGroup</font>
+  <font color="#924B72">#PB_FileSystem_ExecGroup</font>
+  <font color="#924B72">#PB_FileSystem_ReadAll</font>   : Access flags for all other users
+  <font color="#924B72">#PB_FileSystem_WriteAll</font>
+  <font color="#924B72">#PB_FileSystem_ExecAll</font>
+</font></pre>
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To check if one attribute is actually set, just use the '&amp;' (binary AND) and the attribute constant value: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  [...]
+
+  FileAttributes =<font color="#006666"> DirectoryEntryAttributes</font>(<font color="#924B72">#Directory</font>)
+  <b><font color="#006666">If</font></b> FileAttributes &amp; <font color="#924B72">#PB_FileSystem_Hidden</font>
+    <b><font color="#006666">Debug</font></b> &quot;This file is hidden !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examinedirectory.html">ExamineDirectory()</a>, 
+<a href="nextdirectoryentry.html">NextDirectoryEntry()</a>, 
+<a href="directoryentrytype.html">DirectoryEntryType()</a>, 
+<a href="directoryentryname.html">DirectoryEntryName()</a>, 
+<a href="directoryentrysize.html">DirectoryEntrySize()</a>, 
+<a href="directoryentrydate.html">DirectoryEntryDate()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=deletefile.html>DeleteFile()</a> - <a href=index.html>FileSystem Index</a> - <a href=directoryentrydate.html>DirectoryEntryDate()</a> -><br><br>
+
+</body></html>

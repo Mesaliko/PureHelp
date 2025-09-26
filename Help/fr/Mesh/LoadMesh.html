@@ -1,0 +1,79 @@
+<html><head><title>LoadMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadMesh()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>LoadMesh</b></font>(#Mesh, NomFichier$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Charge un mesh à partir d'unu fichier au 
+format '.mesh'. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau mesh. 
+<br>
+<br>
+Si <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+est utilisé alors le numéro du nouveau mesh 
+sera renvoyé dans 'Resultat'. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Nom du fichier contenant le mesh. 
+<br>
+<br>
+Avant de charger un mesh, une archive doit être 
+spécifiée avec <a href="../engine3d/add3darchive.html">Add3DArchive()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. <br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Mesh, alors la valeur de retour est le 
+numéro d'identification généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le mesh doit nécessairement être au format 
+OGRE '.mesh'. 
+<br>
+<br>
+Un outil en ligne de commande 
+est disponible à cette adresse 
+<a href="http://assimp.sourceforge.net/main_features_formats.html">assimp</a> 
+pour convertir de nombreux formats 3D dans 
+le format OGRE, y compris les matériaux et 
+les animations. Il peut être téléchargé ici: 
+<a href="http://www.purebasic.com/download/OgreAssimpConverter.zip">OgreAssimpConverter.zip</a> 
+(Windows uniquement). Certains problèmes ont 
+été signalés avec l'ombre de meshes 
+convertis, si cela arrive, utiliser 
+OgreMeshUpdater.exe sur le mesh nouvellement 
+converti et ça devrait le réparer. 
+<br>
+<br>
+Il est possible d'utiliser des &quot;exporters&quot; pour: 
+Milkshape, Lightwave, Blender or 3DS Max.<br>
+Plus d'informations sur le site d' 
+<a href="http://www.ogre3d.org/">OGRE</a>. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createmesh.html">CreateMesh()</a>, <a href="freemesh.html">FreeMesh()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=ismesh.html>IsMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=meshdirectadd.html>MeshDirectAdd()</a> -><br><br>
+
+</body></html>

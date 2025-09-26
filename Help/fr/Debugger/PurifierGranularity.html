@@ -1,0 +1,91 @@
+<html><head><title>PurifierGranularity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PurifierGranularity()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>PurifierGranularity</b></font>(GranularitéGlobale, GranularitéLocale, GranularitéChainesDeCaratere, GranularitéBlocsDynamique)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Modifie l'intervalle de vérification d'intégrité des données par le <a href="../reference/ide_debugtools.html">purificateur</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>GranularitéGlobale</i></td>
+<td width="90%"> 
+Le nombre de lignes de code source à exécuter entre 
+les contrôles d'intégrité des données sur les 
+variables globales. 
+<br>
+<br>
+<font color="#924B72">#PB_Ignore</font> gardera la valeur de l'intervalle 
+existant. 
+<br>
+<br>
+Une valeur de 0 désactive la vérification. 
+
+</td></tr>
+<tr><td><i>GranularitéLocale</i></td>
+<td> 
+Le nombre de lignes de code source à exécuter entre 
+les contrôles d'intégrité des données sur les 
+variables locales. 
+<br>
+<br>
+<font color="#924B72">#PB_Ignore</font> gardera la valeur de l'intervalle 
+existant. 
+<br>
+<br>
+Une valeur de 0 désactive la vérification. 
+
+</td></tr>
+<tr><td><i>GranularitéChainesDeCaratere</i></td>
+<td> 
+Le nombre de lignes de code source à exécuter entre 
+les contrôles d'intégrité des données sur les 
+chaînes de caractères en mémoire. 
+<br>
+<br>
+<font color="#924B72">#PB_Ignore</font> gardera la valeur de l'intervalle 
+existant. 
+<br>
+<br>
+Une valeur de 0 désactive la vérification. 
+
+</td></tr>
+<tr><td><i>GranularitéBlocsDynamique</i></td>
+<td> 
+Le nombre de lignes de code source à exécuter entre 
+les contrôles d'intégrité des données sur les 
+blocs de mémoire alloués dynamiquement. 
+<br>
+<br>
+<font color="#924B72">#PB_Ignore</font> gardera la valeur de l'intervalle 
+existant. 
+<br>
+<br>
+Une valeur de 0 désactive la vérification. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Désactive la vérification des chaînes de caractères en mémoire ainsi que l'allocation mémoire toutes les 10 lignes</font>
+<font color="#006666">  PurifierGranularity</font>(<font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, 0, 10)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../reference/ide_debugtools.html">Débogueur interne</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=debuggerwarning.html>DebuggerWarning()</a> - <a href=index.html>Debugger Index</a> - <a href=resetprofiler.html>ResetProfiler()</a> -><br><br>
+</blockquote>
+</font></body></html>

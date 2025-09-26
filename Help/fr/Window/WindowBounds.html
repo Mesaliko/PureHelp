@@ -1,0 +1,118 @@
+<html><head><title>WindowBounds</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowBounds()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>WindowBounds</b></font>(#Fenetre, LargeurMinimale, HauteurMinimale, LargeurMaximale, HauteurMaximale)  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change les dimensions minimale et 
+maximale par défaut d'une fenêtre 
+(en pixels). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fenetre</i></td>
+<td width="90%"> 
+La fenêtre à utiliser. 
+
+</td></tr>
+<tr><td><i>LargeurMinimale</i></td>
+<td> 
+La nouvelle largeur minimale de la 
+fenêtre. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Ignore</font> est utilisé en guise de 
+paramètre alors la largeur minimale 
+restera inchangée. 
+<br>
+Si <font color="#924B72">#PB_Default</font> est utilisé en guise de 
+paramètre, la valeur de largeur minimale 
+est remis à la valeur par défaut du 
+système. 
+
+</td></tr>
+<tr><td><i>HauteurMinimale</i></td>
+<td> 
+La nouvelle hauteur minimale de la 
+fenêtre. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Ignore</font> est utilisé en guise de 
+paramètre alors la hauteur minimale 
+restera inchangée. 
+<br>
+Si <font color="#924B72">#PB_Default</font> est utilisé en guise de 
+paramètre, la valeur de hauteur minimale 
+est remis à la valeur par défaut du 
+système. 
+
+</td></tr>
+<tr><td><i>LargeurMaximale</i></td>
+<td> 
+La nouvelle largeur maximale de la 
+fenêtre. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Ignore</font> est utilisé en guise de 
+paramètre alors la largeur maximale 
+restera inchangée. 
+<br>
+Si <font color="#924B72">#PB_Default</font> est utilisé en guise 
+de paramètre, la valeur de largeur 
+maximale est remis à la valeur par 
+défaut du système. 
+
+</td></tr>
+<tr><td><i>HauteurMaximale</i></td>
+<td> 
+La nouvelle hauteur maximale de la 
+fenêtre. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Ignore</font> est utilisé en guise 
+de paramètre alors la hauteur maximale 
+restera inchangée. 
+<br>
+Si <font color="#924B72">#PB_Default</font> est utilisé en guise 
+de paramètre, la valeur de hauteur 
+maximale est remis à la valeur par 
+défaut du système. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est utile pour éviter qu'une fenêtre 
+ne devienne trop petite ou trop grande 
+quand un utilisateur la redimensionne. 
+Il est possible d'utiliser <font color="#924B72">#PB_Ignore</font> 
+en guise de paramètre pour conserver 
+une des valeurs. 
+<br>
+Ne fonctionne pas avec les fenêtres sans bordures. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 300, &quot;Redimensionne moi !&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+<font color="#006666">    WindowBounds</font>(0, 200, 200, 400, 400)
+
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=waitwindowevent.html>WaitWindowEvent()</a> - <a href=index.html>Window Index</a> - <a href=windowevent.html>WindowEvent()</a> -><br><br>
+
+</body></html>

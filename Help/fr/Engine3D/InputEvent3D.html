@@ -1,0 +1,72 @@
+<html><head><title>InputEvent3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputEvent3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>InputEvent3D</b></font>(MausX, MausY, LinkeMausTaste [, Text$, SonderTaste]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Speist Ereignisse (englisch &quot;Events&quot;) in das 3D-GUI-System ein. Um vielseitig genug zu sein, werden 
+die Ereignisse nicht automatisch von der (Haupt-) Maus und der Tastatur empfangen, sondern bei Bedarf 
+eingespeist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>MausX</i></td>
+<td width="90%"> 
+Die 'x'-Position der Maus (in Pixel), welche in das GUI-System eingespeist werden soll. 
+
+</td></tr>
+<tr><td><i>MausY</i></td>
+<td> 
+Die 'y'-Position der Maus (in Pixel), welche in das GUI-System eingespeist werden soll. 
+
+</td></tr>
+<tr><td><i>LinkeMausTaste</i></td>
+<td> 
+Der Status der linken Maustaste (entweder null, wenn nicht gedrückt - oder eins, wenn gedrückt), 
+welcher in das GUI-System eingespeist werden soll. 
+
+</td></tr>
+<tr><td><i>Text$ (optional)</i></td>
+<td> 
+Der in das GUI-System einzuspeisende Text, zum Beispiel zum Befüllen eines <a href="../gadget3d/stringgadget3d.html">StringGadget3D()</a>, 
+wenn dies den Fokus hat. 
+
+</td></tr>
+<tr><td><i>SonderTaste (optional)</i></td>
+<td> 
+Nicht darstellbare Zeichen, welche in das GUI-System eingespeist werden sollen. 
+Zum Beispiel zur Nutzung von Backspace, Return, Cursor-Tasten usw. 
+<br>
+Die verfügbaren Sondertasten sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Key_Back</font>
+  <font color="#924B72">#PB_Key_Delete</font>
+  <font color="#924B72">#PB_Key_Return</font>
+  <font color="#924B72">#PB_Key_Up</font>
+  <font color="#924B72">#PB_Key_Down</font>
+  <font color="#924B72">#PB_Key_Left</font>
+  <font color="#924B72">#PB_Key_Right</font>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Hier ist der klassische Fall, um Ereignisse von der Maus und Tastatur zu erhalten</font>
+  <font color="#006666">;</font>
+<font color="#006666">  InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>))
+</font></pre>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=initengine3d.html>InitEngine3D()</a> - <a href=index.html>Engine3D Inhaltsverzeichnis</a> - <a href=loadworld.html>LoadWorld()</a> -><br><br>
+
+</body></html>

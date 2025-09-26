@@ -1,0 +1,100 @@
+<html><head><title>TrySemaphore</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TrySemaphore()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>TrySemaphore</b></font>(Semaphore)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Diminue la valeur du compteur interne 
+du sémaphore de un seulement si le 
+compteur est supérieur à zéro. 
+Cette commande a le même comportement 
+que <a href="waitsemaphore.html">WaitSemaphore()</a>, sauf qu'elle ne 
+bloquera pas si le compteur devait 
+tomber en dessous de zéro. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Semaphore</i></td>
+<td width="90%"> 
+Le sémaphore à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle 
+si le compteur du sémaphore a été 
+diminué, ou zéro si le compteur n'a 
+pas pu être diminué (il était déjà à 
+zéro). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Global</font></b> ThreadSemaphore =<font color="#006666"> CreateSemaphore</font>()
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">MyThread</font>(val)
+  
+  <b><font color="#006666">Debug</font></b> &quot;Thread ok&quot;
+  <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Thread En cours&quot;
+    <b><font color="#006666">Debug</font></b> &quot;Pour quitter, revenir sur la console et appuyer sur 'Echap'&quot;
+<font color="#006666">    ShowDebugOutput</font>()
+<font color="#006666">    ClearDebugOutput</font>()
+<font color="#006666">    Delay</font>(2000)
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 5
+      <b><font color="#006666">Debug</font></b> x
+      x + 1
+    <b><font color="#006666">Next</font></b> i
+<font color="#006666">    Delay</font>(1000)
+  <b><font color="#006666">Until</font></b> <font color="#006666">TrySemaphore</font>(ThreadSemaphore)
+  <b><font color="#006666">Debug</font></b> &quot;Thread Fermé&quot;
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+Thread =<font color="#006666"> CreateThread</font>(@MyThread(), 0)
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">  PrintN</font>(&quot;Appuyez sur une touche SVP.&quot;)
+<font color="#006666">  PrintN</font>(&quot;Appuyez sur [Echap] pour quitter&quot;)
+  
+  <b><font color="#006666">Repeat</font></b>
+    KeyPressed$ =<font color="#006666"> Inkey</font>()
+    
+    <b><font color="#006666">If</font></b> KeyPressed$ &lt;&gt; &quot;&quot;
+      
+<font color="#006666">      PrintN</font>(&quot;Vous avez appuye sur : &quot; + KeyPressed$)
+<font color="#006666">      PrintN</font>(&quot;Son identifiant numerique est : &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+      
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">RawKey</font>()
+      
+<font color="#006666">      PrintN</font>(&quot;Vous avez appuye sur une touche qui n'est pas alpha-numerique.&quot;)
+<font color="#006666">      PrintN</font>(&quot;Son identifiant numerique est : &quot;+<font color="#006666">Str</font>(<font color="#006666">RawKey</font>()))
+      
+    <b><font color="#006666">Else</font></b>
+<font color="#006666">      Delay</font>(20) <font color="#006666">; Evite de monopoliser tout le temps processeur. Utile pour un OS multi-tâches.</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> KeyPressed$ =<font color="#006666"> Chr</font>(27) <font color="#006666">; Attends jusqu'à ce que la touche [Echap] soit appuyée</font>
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">If</font></b> <font color="#006666">IsThread</font>(Thread)
+<font color="#006666">  SignalSemaphore</font>(ThreadSemaphore)
+<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">End</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="waitsemaphore.html">WaitSemaphore()</a>, <a href="signalsemaphore.html">SignalSemaphore()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=trylockmutex.html>TryLockMutex()</a> - <a href=index.html>Thread Index</a> - <a href=unlockmutex.html>UnlockMutex()</a> -><br><br>
+</blockquote>
+</font></body></html>

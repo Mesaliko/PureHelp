@@ -1,0 +1,55 @@
+<html><head><title>CGIParameterName</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CGIParameterName()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CGIParameterName</b></font>(Index)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the name of the specified parameter. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Index</i></td>
+<td width="90%"> 
+The index of the parameter to get the name. The first index value starts from 0. 
+To get the number of available parameters, use <a href="countcgiparameters.html">CountCGIParameters()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the name of the specified parameter. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Write the headers to inform the browser of the content format</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - parameters&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;NbParameters: &quot; +<font color="#006666"> CountCGIParameters</font>() + &quot;&lt;br&gt;&lt;br&gt;&quot;)
+  
+  <font color="#006666">; List the all parameters and display their name</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> <font color="#006666">CountCGIParameters</font>()-1 
+<font color="#006666">    WriteCGIString</font>(<font color="#006666">CGIParameterName</font>(k)+&quot;&lt;br&gt;&quot;)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="countcgiparameters.html">CountCGIParameters()</a>, <a href="cgiparametervalue.html">CGIParameterValue()</a>, <a href="cgiparametertype.html">CGIParameterType()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=cgiparameterdatasize.html>CGIParameterDataSize()</a> - <a href=index.html>CGI Index</a> - <a href=cgiparametertype.html>CGIParameterType()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,74 @@
+<html><head><title>Camera.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Camera
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> = 1
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot;Camera - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+
+
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(0, 200, 0))  <font color="#006666">; Green 'HUD' like color
+
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;r2skin.jpg&quot;))
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> LoadMesh</font>(0, &quot;robot.mesh&quot;),<font color="#006666"> MaterialID</font>(0))
+<font color="#006666">StartEntityAnimation</font>(0, &quot;Walk&quot;)
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 50)  <font color="#006666">; Front camera
+</font><font color="#006666">MoveCamera</font>(0, 0, 20, 250, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(55, 0, 0))
+
+<font color="#006666">CreateCamera</font>(1, 0, 50, 100, 50) <font color="#006666">; Back camera
+</font><font color="#006666">MoveCamera</font>(1, 0, 20, -250, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraBackColor</font>(1,<font color="#006666"> RGB</font>(25, 25, 25))
+<font color="#006666">RotateCamera</font>(1, 180, 0, 0)
+
+<font color="#006666">CameraRenderMode</font>(1, <font color="#924B72">#PB_Camera_Wireframe</font>)  <font color="#006666">; Wireframe for this camera
+
+</font><b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>   
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+    MouseY = -<font color="#006666">MouseDeltaY</font>() * <font color="#924B72">#CameraSpeed</font> * 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()   
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>
+  <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">  RotateEntity</font>(0, 0, 0.1, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+<font color="#006666">  RotateCamera</font>(1, -MouseY, -MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(1, KeyX, 0, KeyY)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

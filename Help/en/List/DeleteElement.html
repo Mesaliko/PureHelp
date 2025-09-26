@@ -1,0 +1,65 @@
+<html><head><title>DeleteElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeleteElement()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Result = <font color="#006666"><b>DeleteElement</b></font>(List() [, Flags])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Remove the current element from the list. After this call, the new current 
+element is the previous element (the one before the deleted element). If that 
+element does not exist (in other words, you deleted the first element in the list) 
+then there is no more current element, as it will be before the first element, like 
+after a <a href="resetlist.html">ResetList()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+List() - The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+If this parameter is set to 1 and the first element is deleted, the new current element will be the second one. This flag 
+ensures there will be always a valid current element after a delete as long as there are still elements in the list. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the memory address of the new current element of the list. If the list has no 
+current element after the deletion, the result is 0. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">people</font>.s()
+
+<font color="#006666">  AddElement</font>(<font color="#006666">people</font>()) :<font color="#006666"> people</font>() = &quot;Tom&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">people</font>()) :<font color="#006666"> people</font>() = &quot;Dick&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">people</font>()) :<font color="#006666"> people</font>() = &quot;Harry&quot;
+<font color="#006666">  AddElement</font>(<font color="#006666">people</font>()) :<font color="#006666"> people</font>() = &quot;Bob&quot;
+
+<font color="#006666">  FirstElement</font>(<font color="#006666">people</font>())
+<font color="#006666">  DeleteElement</font>(<font color="#006666">people</font>(), 1)
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;First person in list is &quot;+<font color="#006666">people</font>(), <font color="#924B72">#PB_MessageRequester_Ok</font>)
+
+<font color="#006666">  LastElement</font>(<font color="#006666">people</font>())      <font color="#006666">; Moves to &quot;Bob&quot;</font>
+<font color="#006666">  PreviousElement</font>(<font color="#006666">people</font>())  <font color="#006666">; Moves to &quot;Harry&quot;</font>
+<font color="#006666">  DeleteElement</font>(<font color="#006666">people</font>())    <font color="#006666">; And deletes him. there is an element before Harry, so it becomes the current</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Current person in list is &quot;+<font color="#006666">people</font>(), <font color="#924B72">#PB_MessageRequester_Ok</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addelement.html">AddElement()</a>, <a href="insertelement.html">InsertElement()</a>, <a href="clearlist.html">ClearList()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copylist.html>CopyList()</a> - <a href=index.html>List Index</a> - <a href=firstelement.html>FirstElement()</a> -><br><br>
+
+</body></html>

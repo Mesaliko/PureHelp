@@ -1,0 +1,105 @@
+<html><head><title>IsInsideStroke</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">IsInsideStroke()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>IsInsideStroke</b></font>(x.d, y.d, Breite.d [, Flags [, KoordinatenSystem]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Überprüft, ob sich die angegebenen Koordinaten innerhalb einer Fläche befinden, 
+in die durch einen Aufruf von <a href="strokepath.html">StrokePath()</a> gezeichnet wird. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.d, y.d</i></td>
+<td width="90%"> 
+Geben die Koordinaten des zu testenden Punktes an. 
+
+</td></tr>
+<tr><td><i>Breite.d</i></td>
+<td> 
+Gibt die für den Test zu verwendende Linienbreite an. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Mögliche Flags für die Linieneigenschaften, wie bei der <a href="strokepath.html">StrokePath()</a> Funktion beschrieben. 
+
+</td></tr>
+<tr><td><i>KoordinatenSystem (optional)</i></td>
+<td> 
+Gibt das Koordinatensystem für den zu testenden Punkt an. Dies kann einer der folgenden 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Coordinate_Device</font>: Das Koordinatensystem der Ausgabe-Einheit
+  <font color="#924B72">#PB_Coordinate_Output</font>: Das Koordinatensystem, wie es mit der Zeichenausgabe-Funktion erstellt wurde
+  <font color="#924B72">#PB_Coordinate_User</font>  : Das Koordinatensystem für Punkte im Zeichenpfad  (Standard)
+  <font color="#924B72">#PB_Coordinate_Source</font>: Das Koordinatensystem für die Vektorzeichnen-Quelle
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Siehe den <a href="../vectordrawing/index.html">Vektorzeichnen Überblick</a> für eine Einführung in die 
+verschiedenen Koordinatensysteme. 
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn der Punkt innerhalb der Linie liegt, 
+und Null wenn nicht. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieses Beispiel verwendet die IsInsideStroke() Funktion, um die Figur in grüner Farbe</font>
+  <font color="#006666">; auszufüllen, während sich die Maus auf ihrem Umriss befindet, und andernfalls in blau</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Draw</font>()    
+    x =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseX</font>)
+    y =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseY</font>)
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 255, 255, 255))         <font color="#006666">; Löschen des vorherigen Inhalts</font>
+<font color="#006666">      FillVectorOutput</font>()
+      
+<font color="#006666">      AddPathEllipse</font>(200, 100, 150, 75)                   <font color="#006666">; Vorbereiten des Pfades</font>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">IsInsideStroke</font>(x, y, 20, <font color="#924B72">#PB_Path_Default</font>, <font color="#924B72">#PB_Coordinate_Device</font>)  <font color="#006666">; Überprüfen, ob die Maus sich innerhalb befindet</font>
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 255, 0, 255))
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+      <b><font color="#006666">EndIf</font></b>
+      
+<font color="#006666">      StrokePath</font>(20)                                      <font color="#006666">; Ziehen/zeichnen des Pfades</font>
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>      
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)
+<font color="#006666">    Draw</font>()
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventGadget</font>() = 0 <b><font color="#006666">And</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_MouseMove</font>
+<font color="#006666">        Draw</font>()
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="isinsidepath.html">IsInsidePath()</a>, <a href="strokepath.html">StrokePath()</a>, <a href="resetpath.html">ResetPath()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=isinsidepath.html>IsInsidePath()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=ispathempty.html>IsPathEmpty()</a> -><br><br>
+
+</body></html>

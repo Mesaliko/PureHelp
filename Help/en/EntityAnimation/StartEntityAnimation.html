@@ -1,0 +1,52 @@
+<html><head><title>StartEntityAnimation</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartEntityAnimation()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>StartEntityAnimation</b></font>(#Entity, Animation$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Start the specified #Entity animation. The animation is always started from the beginning. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The entity to use. 
+
+</td></tr>
+<tr><td><i>Animation$</i></td>
+<td> 
+The animation name. The animations are stored in the mesh object in a case-sensitive manner 
+(ie: &quot;Walk&quot; will be a different animation than &quot;walk&quot;). If the animation isn't 
+found or the mesh doesn't have a skeleton, this function will have no effect. 
+
+</td></tr>
+<tr><td><i>Flag</i></td>
+<td> 
+Flags can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EntityAnimation_Once</font>:   Play the animation only once. By default the animation loops automatically when its end is reached.
+                              <a href="entityanimationstatus.html">EntityAnimationStatus()</a> can be used to detect the animation end.
+  <font color="#924B72">#PB_EntityAnimation_Manual</font>: Start the animation in manual mode, the time won't be automatically added after each <a href="../engine3d/renderworld.html">RenderWorld()</a>.
+                              <a href="addentityanimationtime.html">AddEntityAnimationTime()</a> needs to be called to update the animation time manually.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="stopentityanimation.html">StopEntityAnimation()</a>, <a href="entityanimationstatus.html">EntityAnimationStatus()</a>, <a href="addentityanimationtime.html">AddEntityAnimationTime()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setentityanimationweight.html>SetEntityAnimationWeight()</a> - <a href=index.html>EntityAnimation Index</a> - <a href=stopentityanimation.html>StopEntityAnimation()</a> -><br><br>
+
+</body></html>

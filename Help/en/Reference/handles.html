@@ -1,0 +1,63 @@
+<html><head><title>Handles and Numbers</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Handles and Numbers</font></b></p>
+
+<p><b>Numbers</b></p><blockquote>
+
+
+All created objects are identified by an arbitrary number (which is not the object's handle, as seen below). 
+In this manual, these numbers are marked as #Number (for example, each gadget created have a #Gadget number). 
+<br>
+<br>
+The numbers you assign to them do not need to be constants, but they need to be unique for each object in 
+your program (an image can get the same number as a gadget, because these are different types of objects). 
+These numbers are used to later access these objects in your program. 
+<br>
+<br>
+For example, the event handling functions return these numbers: 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  EventGadget</font>()
+<font color="#006666">  EventMenu</font>()
+<font color="#006666">  EventWindow</font>()
+</font></pre>
+
+
+</blockquote>
+<p><b>Handles</b></p><blockquote>
+
+
+All objects also get a unique number assigned to them by the system. 
+These identifiers are called handles. 
+
+Sometimes, a PureBasic function doesn't need the number as argument, but the handle. 
+In this manual, such things are mentioned, as an ID. 
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ImageGadget</font>(<font color="#924B72">#Gadget</font>, x, y, Width, Height, ImageID [, Flags])
+  <font color="#006666">; #Gadget needs to be the number you want to assign to the Gadget</font>
+  <font color="#006666">; ImageID needs to a handle to the image.</font>
+</font></pre>
+
+To get the handle to an object, there are special functions like: 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  FontID</font>()
+<font color="#006666">  GadgetID</font>()
+<font color="#006666">  ImageID</font>()
+<font color="#006666">  ThreadID</font>()
+<font color="#006666">  WindowID</font>()
+</font></pre>
+
+Also, most of the functions that create these objects also return this handle as a result, if they were successful. 
+This is only the case if <font color="#924B72">#PB_Any</font> was not used to create the object. If <font color="#924B72">#PB_Any</font> is 
+used, these commands return the object number that was assigned by PB for them, not the handle. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  GadgetHandle =<font color="#006666"> ImageGadget</font>(...)
+</font></pre>
+
+</blockquote>
+</font></body></html>

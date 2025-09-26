@@ -1,0 +1,98 @@
+<html><head><title>ExtractXMLStructure</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExtractXMLStructure()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ExtractXMLStructure</b></font>(Noeud, *Memoire, Structure [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait les éléments d'un noeud dans 
+une <a href="../reference/structures.html">structure</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Noeud</i></td>
+<td width="90%"> 
+Le noeud XML contenant les données à 
+extraire. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+L'adresse de la mémoire de la structure. 
+
+</td></tr>
+<tr><td><i>Structure</i></td>
+<td> 
+La structure à remplir avec les éléments 
+XML.<br>
+La structure sera effacée avant d'extraire 
+les éléments. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Si ce paramètre est réglé sur 
+<font color="#924B72">#PB_XML_NoCase</font> alors 
+la comparaison des noms de noeuds et 
+d'attribut XML est insensible à la casse. 
+<br>
+La valeur par défaut est d'être sensible 
+à la casse. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si un élément de structure ne dispose pas 
+d'un noeud correspondant dans le fichier 
+XML, il est laissé vide. 
+<br>
+<br>
+Les noeuds XML doivent avoir la forme 
+décrite avec la fonction 
+<a href="insertxmlstructure.html">InsertXMLStructure()</a>. A savoir, chaque 
+noeud doit être nommé d'après un membre 
+de la structure sans les caractères '*' 
+ou '$'. Si un noeud pour le même élément 
+de structure existe en plusieurs 
+exemplaires, le premier noeud sera utilisé. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.l
+  <b><font color="#006666">EndStructure</font></b>
+  
+  Xml$ = &quot;&lt;Personne&gt;&lt;Nom&gt;John Smith&lt;/Nom&gt;&lt;Age&gt;42&lt;/Age&gt;&lt;/Personne&gt;&quot;
+
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(0, Xml$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(0) = <font color="#924B72">#PB_XML_Success</font>
+    <b><font color="#006666">Define</font></b> P.Personne
+<font color="#006666">    ExtractXMLStructure</font>(<font color="#006666">MainXMLNode</font>(0), @P, Personne)
+    
+    <b><font color="#006666">Debug</font></b> P\Nom$
+    <b><font color="#006666">Debug</font></b> P\Age
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">XMLError</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="insertxmlstructure.html">InsertXMLStructure()</a>, <a href="extractxmlarray.html">ExtractXMLArray()</a>, 
+<a href="extractxmllist.html">ExtractXMLList()</a>, <a href="extractxmlmap.html">ExtractXMLMap()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=extractxmlmap.html>ExtractXMLMap()</a> - <a href=index.html>XML Index</a> - <a href=formatxml.html>FormatXML()</a> -><br><br>
+
+</blockquote>
+</font></body></html>

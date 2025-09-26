@@ -1,0 +1,53 @@
+<html><head><title>MaterialFilteringMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MaterialFilteringMode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>MaterialFilteringMode</b></font>(#Material, Modus [, MaxAnisotropWert])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den Filterungsmodus des Materials. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Material</i></td>
+<td width="90%"> 
+Das zu verwendende Material. Wenn dieser Parameter auf <font color="#924B72">#PB_Default</font> gesetzt wird, 
+dann wird der Filtermodus-Wert für künftig erstellte Materiale geändert. 
+
+</td></tr>
+<tr><td><i>Modus</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_None</font>      : Das Material wird nicht gefiltert, beim Näherkommen der Kamera
+                           wird dieses dadurch sehr pixelig.
+  <font color="#924B72">#PB_Material_Bilinear</font>  : Führt eine bilineare Filterung durch, resultiert beim Näherkommen
+                           der Kamera in einem glatten, leicht unscharfen Bild.
+  <font color="#924B72">#PB_Material_Trilinear</font> : Führt ein trilineares Filtern durch, resultiert beim Näherkommen
+                           der Kamera in einer bestmöglichen Bildqualität.
+  <font color="#924B72">#PB_Material_Anisotropic</font>: Legt den maximalen anisotropen Wert fest.
+</font></pre>
+Wenn ein Material erstellt wird, wird standardmäßig das bilineare Filtern verwendet. Die Benutzung 
+eines Filters hat keine großartige Auswirkung auf die Performanz der Grafikausgabe, da viele 
+Grafikkarten dies per Hardware unterstützen. 
+
+</td></tr>
+<tr><td><i>MaxAnisotropWert (optional)</i></td>
+<td> 
+Der maximale anisotrope Wert, wenn der Modus <font color="#924B72">#PB_Material_Anisotropic</font> verwendet wird. 
+Dieser Wert liegt üblicherweise zwischen 1 und 8. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=materialcullingmode.html>MaterialCullingMode()</a> - <a href=index.html>Material Inhaltsverzeichnis</a> - <a href=materialfog.html>MaterialFog()</a> -><br><br>
+
+</body></html>

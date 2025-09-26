@@ -1,0 +1,53 @@
+<html><head><title>ReceiveNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveNetworkData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ReceiveNetworkData</b></font>(Connection, *DataBuffer, DataBufferLength)  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Receives raw data from the specified client. This function can be used by both client and server applications 
+and should be called only after having received a <font color="#924B72">#PB_NetworkEvent_Data</font> event. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connection</i></td>
+<td width="90%"> 
+The connection to receive data from. 
+On the server side 'Connection' is the client which has send the data (can be easily obtained with 
+<a href="eventclient.html">EventClient()</a>). 
+On client side, 'Connection' is returned by <a href="opennetworkconnection.html">OpenNetworkConnection()</a>. 
+
+</td></tr>
+<tr><td><i>*DataBuffer</i></td>
+<td> 
+The memory address to receive the data to. 
+
+</td></tr>
+<tr><td><i>DataBufferLength</i></td>
+<td> 
+The length of the buffer to receive data to. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of bytes received. If 'Result' is equal to DataBufferLength then more data is available to be read. 
+If an error occurred on the connection (link broken, connection close by the server etc...) 'Result' will be -1. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On UDP connections, the maximum 'DataBufferLength' is 2048. On TCP connections, the maximum 'DataBufferLength' is 65536. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="networkclientevent.html">NetworkClientEvent()</a>, <a href="networkserverevent.html">NetworkServerEvent()</a>, <a href="sendnetworkdata.html">SendNetworkData()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=opennetworkconnection.html>OpenNetworkConnection()</a> - <a href=index.html>Network Index</a> - <a href=sendnetworkdata.html>SendNetworkData()</a> -><br><br>
+
+</body></html>

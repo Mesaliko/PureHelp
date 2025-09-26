@@ -1,0 +1,116 @@
+<html><head><title>StaticGeometry.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Static Geometry
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+<b><font color="#006666">Define</font></b> nx.f, nz.f, Boost.f = 10, Yaw.f, Pitch.f
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Static Geometry - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Additive</font>)
+
+<font color="#006666">AmbientColor</font>(0)
+
+<font color="#006666">; node for Light and Billboard (Sun)
+</font><font color="#006666">CreateNode</font>(0, 0, 3000, 0)
+
+<font color="#006666">;Create light
+</font><font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(90, 105, 132), 0, 3000, 0)
+<font color="#006666">AttachNodeObject</font>(0,<font color="#006666"> LightID</font>(0))
+
+<font color="#006666">; Create flare
+</font><font color="#006666">GetScriptMaterial</font>(0, &quot;Scene/burst&quot;)
+<font color="#006666">CreateBillboardGroup</font>(0,<font color="#006666"> MaterialID</font>(0), 2048, 2048)
+<font color="#006666">AddBillboard</font>(0, 0, 3000, 0)
+<font color="#006666">AttachNodeObject</font>(0,<font color="#006666"> BillboardGroupID</font>(0))
+
+<font color="#006666">; Static geometry
+</font><font color="#006666">;
+
+</font><font color="#006666">; Create Entity
+</font><font color="#006666">CreateCube</font>(0, 1)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">; Create Static geometry
+</font><font color="#006666">CreateStaticGeometry</font>(0, 1000, 1000, 1000, <font color="#924B72">#True</font>)
+
+<b><font color="#006666">For</font></b> z = -10 <b><font color="#006666">To</font></b> 10
+  <b><font color="#006666">For</font></b> x = -10 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddStaticGeometryEntity</font>(0,<font color="#006666"> EntityID</font>(0), x * 1000, 0, z * 1000, 1000,  10, 1000, 0, 0, 0)
+    Height.f = 200 +<font color="#006666"> Random</font>(800)
+<font color="#006666">    AddStaticGeometryEntity</font>(0,<font color="#006666"> EntityID</font>(0), x * 1000, Height/2, z * 1000,  200, Height, 200, 0,<font color="#006666"> Random</font>(360), 0)
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">; Build the static geometry
+</font><font color="#006666">BuildStaticGeometry</font>(0)
+
+<font color="#006666">FreeEntity</font>(0)
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 2000, 2000, 2000, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, 0, 0, 0)
+<font color="#006666">CameraFOV   </font>(0, 90)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(90, 105, 132))
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    Yaw   = -<font color="#006666">MouseDeltaX</font>() * 0.05
+    Pitch = -<font color="#006666">MouseDeltaY</font>() * 0.05
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+<font color="#006666">      MoveCamera</font>(0,  0, 0, -2 * Boost)
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+<font color="#006666">      MoveCamera</font>(0,  0, 0,  2 * Boost)
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+<font color="#006666">      MoveCamera</font>(0, -2 * Boost, 0, 0)
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+<font color="#006666">      MoveCamera</font>(0,  2 * Boost, 0, 0)
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Sun
+</font>  nx = 10000 *<font color="#006666"> Cos</font>(<font color="#006666">ElapsedMilliseconds</font>() / 2500)
+  nz = 10000 *<font color="#006666"> Sin</font>(<font color="#006666">ElapsedMilliseconds</font>() / 2500)
+<font color="#006666">  MoveNode</font>(0, nx, 3000, nz, <font color="#924B72">#PB_Absolute</font>)
+  
+<font color="#006666">  RotateCamera</font>(0, Pitch, Yaw, 0, <font color="#924B72">#PB_Relative</font>)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

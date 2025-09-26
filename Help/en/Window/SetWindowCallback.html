@@ -1,0 +1,104 @@
+<html><head><title>SetWindowCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetWindowCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetWindowCallback</b></font>(@ProcedureName() [, #Window [, Mode]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+For experienced programmers only. It's only supported on Microsoft Windows. 
+<br>
+<br>
+Normal events should be handled with the regular <a href="waitwindowevent.html">WaitWindowEvent()</a> or 
+<a href="windowevent.html">WindowEvent()</a>. 
+<br>
+<br>
+This function associates a callback to handle the events of the all open windows. 
+All the events are caught by this callback and can be processed here. To set a callback for a specific window 
+only, the optional parameter can be used to pass the PB window number. 
+<br>
+<br>
+To remove/disable a previous set callback just call SetWindowCallback(0 [, #Window]). 
+<br>
+<br>
+<b>Warning: </b> this way is lowlevel. Incorrect handling of the messages in the callback can 
+interfere with PB's own message processing. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@ProcedureName()</i></td>
+<td width="90%"> 
+The callback <a href="../reference/procedures.html">procedure</a> to use. If a previous callback was set it will be replaced. 
+The callback must have 4 parameters. If the event isn't processed, the result must be set to <font color="#924B72">#PB_ProcessPureBasicEvents</font> 
+so the event will be properly handled by PureBasic. Here is a sample code to use a callback correctly: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">MyWindowCallback</font>(WindowID, Message, WParam, LParam)
+    Result = <font color="#924B72">#PB_ProcessPureBasicEvents</font>
+    <font color="#006666">;</font>
+    <font color="#006666">; your code here</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">ProcedureReturn</font></b> Result
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</td></tr>
+<tr><td><i>#Window (optional)</i></td>
+<td> 
+A specific window to associate the callback to. If omitted the callback will be called for any window. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The callback mode, can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_ProcessChildEvents</font>: the child gadgets events (mostly #WM_NOTIFY) will be sent to the main window.
+                                 Doesn't work for all gadgets (default).
+  <font color="#924B72">#PB_Window_NoChildEvents</font>     : the child gadgets events won't be sent to the main window (WinAPI default behavior).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WinCallback</font>(hWnd, uMsg, WParam, LParam) 
+    <font color="#006666">; Windows fills the parameter automatically, which we will use in the callback...</font>
+    
+    <b><font color="#006666">If</font></b> uMsg = <font color="#924B72">#WM_SIZE</font> 
+      <b><font color="#006666">Select</font></b> WParam 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_MINIMIZED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Window was minimized&quot; 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_RESTORED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Window was restored&quot; 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#SIZE_MAXIMIZED</font> 
+          <b><font color="#006666">Debug</font></b> &quot;Window was maximized&quot; 
+      <b><font color="#006666">EndSelect</font></b> 
+    <b><font color="#006666">EndIf</font></b> 
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#PB_ProcessPureBasicEvents</font> 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 100, &quot;Messages&quot;, <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_MaximizeGadget</font>) 
+    
+<font color="#006666">    SetWindowCallback</font>(@WinCallback(), 0) <font color="#006666">; set the callback</font>
+    
+    <b><font color="#006666">Repeat</font></b> 
+      <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>() 
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font> 
+          <b><font color="#006666">End</font></b> 
+      <b><font color="#006666">EndSelect</font></b> 
+    <b><font color="#006666">ForEver</font></b> 
+    
+  <b><font color="#006666">EndIf</font></b> 
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=setactivewindow.html>SetActiveWindow()</a> - <a href=index.html>Window Index</a> - <a href=setwindowcolor.html>SetWindowColor()</a> -><br><br>
+
+</body></html>

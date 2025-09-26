@@ -1,0 +1,56 @@
+<html><head><title>ListSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ListSize()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ListSize</b></font>(Liste()) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le nombre d'éléments contenus dans la liste. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nombre total d'éléments dans la liste.<br>
+Si la liste n'est pas initialisée, renvoie -1 (par exemple après <a href="freelist.html">FreeList()</a>). 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction ne modifie pas l'élément courant. <br>
+Elle est très rapide (pas d'itération) et peut être utilisée sereinement pour savoir 
+si une liste est vide ou non. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Compter</font>.w()
+
+  <font color="#006666">; Petite boucle pour ajouter quelques éléments à la liste.</font>
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">Compter</font>())
+<font color="#006666">    Compter</font>() = i * 23
+  <b><font color="#006666">Next</font></b>
+
+  <font color="#006666">; Affiche le nombre d'éléments qu'il y a dans la liste. J'espère que vous avez pensé</font>
+  <font color="#006666">; à la même valeur que celle affichée par l'ordinateur ;)</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Il y a &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">Compter</font>()))+&quot; éléments dans la liste&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="listindex.html">ListIndex()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=listindex.html>ListIndex()</a> - <a href=index.html>List Index</a> - <a href=mergelists.html>MergeLists()</a> -><br><br>
+
+</body></html>

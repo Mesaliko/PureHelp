@@ -1,0 +1,76 @@
+<html><head><title>Line</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Line()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>Line</b></font>(x, y, Breite, Höhe [, Farbe])) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Zeichnet eine Linie mit den angegebenen Dimensionen in den aktuellen Ausgabekanal. 
+Der aktuelle Ausgabekanal wird mittels <a href="startdrawing.html">StartDrawing()</a> festgelegt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+Der Startpunkt der zu zeichnenden Linie. 
+
+</td></tr>
+<tr><td><i>Breite, Höhe</i></td>
+<td> 
+Die Dimension der zu zeichnenden Linie. Diese Werte beinhalten den Startpunkt der 
+Linie, daher wird bei einer Höhe von 1 eine horizontale Linie gezeichnet, während bei einer 
+Höhe von 0 gar nichts gezeichnet wird. 
+
+</td></tr>
+<tr><td><i>Farbe (optional)</i></td>
+<td> 
+Die für die Linie zu verwendende Farbe. Wenn dieser Parameter nicht angegeben wird, 
+dann wird die mittels <a href="frontcolor.html">FrontColor()</a> festgelegte Standard-Zeichenfarbe verwendet. 
+Diese Farbe kann im <a href="../2ddrawing/rgb.html">RGB</a>- oder <a href="../2ddrawing/rgba.html">RGBA</a>-Format vorliegen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um eine Linie mit den Koordinaten ihres Start- und Endpunkts zu zeichnen, kann die 
+<a href="linexy.html">LineXY()</a> Funktion verwendet werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 200, &quot;2DDrawing Beispiel&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 200) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 200, 200,<font color="#006666"> RGB</font>(255, 255, 255))
+      <b><font color="#006666">For</font></b> Width = 1 <b><font color="#006666">To</font></b> 180 <b><font color="#006666">Step</font></b> 5
+<font color="#006666">        Line</font>(10, 10, Width, 180,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+      <b><font color="#006666">Next</font></b> Width
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 200,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/line.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="linexy.html">LineXY()</a>, <a href="box.html">Box()</a>, <a href="roundbox.html">RoundBox()</a>, <a href="ellipse.html">Ellipse()</a>, <a href="circle.html">Circle()</a> 
+<a href="frontcolor.html">FrontColor()</a>, <a href="rgb.html">RGB()</a>, <a href="rgba.html">RGBA()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=green.html>Green()</a> - <a href=index.html>2DDrawing Inhaltsverzeichnis</a> - <a href=linexy.html>LineXY()</a> -><br><br>
+
+</body></html>

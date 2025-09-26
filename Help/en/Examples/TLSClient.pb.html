@@ -1,0 +1,66 @@
+<html><head><title>TLSClient.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - TLS Client
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">Define</font></b>.i Con, Timeout, Length
+<b><font color="#006666">Define</font></b> Receive$
+<b><font color="#006666">Define</font></b> *Buffer
+  
+  
+<font color="#006666">UseNetworkTLS</font>()
+
+Con =<font color="#006666"> OpenNetworkConnection</font>(&quot;127.0.0.1&quot;, 20252, <font color="#924B72">#PB_Network_TCP</font> | <font color="#924B72">#PB_Network_IPv4</font> | <font color="#924B72">#PB_Network_TLSv1_3</font>)
+<b><font color="#006666">If</font></b> Con
+  *Buffer =<font color="#006666"> AllocateMemory</font>($FFFF, <font color="#924B72">#PB_Memory_NoClear</font>)
+  <b><font color="#006666">If</font></b> *Buffer
+    <b><font color="#006666">Debug</font></b> &quot;Sending string&quot;
+<font color="#006666">    SendNetworkString</font>(Con, &quot;GET / HTTP/1.1&quot; + <font color="#924B72">#CRLF$</font> + &quot;Host: www.purebasic.fr&quot; + <font color="#924B72">#CRLF$</font> + <font color="#924B72">#CRLF$</font>)
+    <b><font color="#006666">Debug</font></b> &quot;String Sent&quot;
+    Timeout = 100
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Select</font></b> <font color="#006666">NetworkServerEvent</font>()
+          
+      <b><font color="#006666">EndSelect</font></b>
+      
+      <b><font color="#006666">Select</font></b> <font color="#006666">NetworkClientEvent</font>(Con)
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_Data</font>
+          <b><font color="#006666">Repeat</font></b>
+            Length =<font color="#006666"> ReceiveNetworkData</font>(Con, *Buffer,<font color="#006666"> MemorySize</font>(*Buffer))
+            <b><font color="#006666">If</font></b> Length &gt; 0
+              Receive$ +<font color="#006666"> PeekS</font>(*Buffer, Length, <font color="#924B72">#PB_UTF8</font> | <font color="#924B72">#PB_ByteLength</font>)
+            <b><font color="#006666">EndIf</font></b>
+          <b><font color="#006666">Until</font></b> Length = 0 <b><font color="#006666">Or</font></b> (Length &gt; 0 <b><font color="#006666">And</font></b> Length &lt;&gt;<font color="#006666"> MemorySize</font>(*Buffer))
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_Disconnect</font>
+          <b><font color="#006666">Debug</font></b> &quot;Disconnect&quot;
+          <b><font color="#006666">Break</font></b>
+          
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_NetworkEvent_None</font>
+<font color="#006666">          Delay</font>(10)
+          Timeout - 1
+          
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">Until</font></b> Timeout = 0
+    <b><font color="#006666">Debug</font></b> Timeout
+    
+    <b><font color="#006666">If</font></b> Receive$ &lt;&gt; &quot;&quot;
+      <b><font color="#006666">Debug</font></b> Receive$
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    FreeMemory</font>(*Buffer)
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  CloseNetworkConnection</font>(Con)
+<b><font color="#006666">Else</font></b>
+  <b><font color="#006666">Debug</font></b> &quot;can't create the client&quot;
+<b><font color="#006666">EndIf</font></b></font></pre>
+</body></html>

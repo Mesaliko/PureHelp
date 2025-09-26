@@ -1,0 +1,90 @@
+<html><head><title>Runtime</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Runtime</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Runtime</font></b> Variable
+<b><font color="#006666">Runtime</font></b> #Constant
+<b><font color="#006666">Runtime</font></b> Procedure() declaration
+<b><font color="#006666">Runtime</font></b> Enumeration declaration
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+For advanced programmers. <b><font color="#006666">Runtime</font></b> is used to create runtime accessible list of programming objects like variables, 
+constants and procedures. Once compiled a program doesn't have variable, constant or procedure label anymore as everything is 
+converted into binary code. <b><font color="#006666">Runtime</font></b> enforces the compiler to add an extra reference for a specific object to 
+have it available through the <a href="../runtime/index.html">Runtime</a> library. The objects can be manipulated using their string 
+reference, even when the program is compiled. 
+<br>
+<br>
+To illustrate the use of <b><font color="#006666">Runtime:</font></b> the <a href="../dialog/index.html">Dialog</a> library use it to access the event procedure 
+associated to a <a href="../gadget/index.html">gadget</a>. The name of the procedure to use for the event handler is specified in 
+the XML file (which is text format), and then the dialog library use <a href="../runtime/getruntimeinteger.html">GetRuntimeInteger()</a> to resolve the procedure address 
+at runtime. It's not needed to recompile the program to change it. 
+<br>
+<br>
+Another use would be adding a small realtime scripting language to the program, allowing easy modification of exposed 
+variables, using runtime constants values. While it could be done manually by building a map of objects, the <b><font color="#006666">Runtime</font></b> 
+keyword allows to do it in a standard and unified way. 
+
+</blockquote><p><b>Example:</b> Procedure</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">OnEvent</font>()
+    <b><font color="#006666">Debug</font></b> &quot;OnEvent&quot;
+  <b><font color="#006666">EndProcedure</font></b> 
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;OnEvent()&quot;) <font color="#006666">; Will display the procedure address</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Enumeration</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#Constant1</font> = 10
+    <font color="#924B72">#Constant2</font>
+    <font color="#924B72">#Constant3</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constant1&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constant2&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;#Constant3&quot;)
+</font></pre>
+
+</blockquote><p><b>Example:</b> Variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> a = 20
+  <b><font color="#006666">Runtime</font></b> a
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetRuntimeInteger</font>(&quot;a&quot;)
+<font color="#006666">  SetRuntimeInteger</font>(&quot;a&quot;, 30)
+  
+  <b><font color="#006666">Debug</font></b> a <font color="#006666">; the variable has been modified</font>
+</font></pre>
+
+
+</blockquote><p><b>Example:</b> Call a function by its name</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">   <b><font color="#006666">Prototype</font></b> <font color="#006666">Function</font>()
+
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">Function1</font>()
+      <b><font color="#006666">Debug</font></b> &quot;I call Function1 by its name&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">Function2</font>()
+      <b><font color="#006666">Debug</font></b> &quot;I call Function2 by its name&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">LaunchProcedure</font>(Name.s)
+      <b><font color="#006666">Protected</font></b> ProcedureName.Function =<font color="#006666"> GetRuntimeInteger</font>(Name + &quot;()&quot;)
+<font color="#006666">      ProcedureName</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  LaunchProcedure</font>(&quot;Function1&quot;) <font color="#006666">; Display &quot;I call Function1 by its name&quot;</font>
+<font color="#006666">  LaunchProcedure</font>(&quot;Function2&quot;) <font color="#006666">; Display &quot;I call Function2 by its name&quot;</font>
+  
+</font></pre>
+</blockquote>
+</font></body></html>

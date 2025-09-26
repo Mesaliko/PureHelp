@@ -1,0 +1,265 @@
+<html><head><title>CreateShaderMaterial</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateShaderMaterial()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateShaderMaterial</b></font>(#Matiere, ShaderID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle matière basée sur le shader. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Matiere</i></td>
+<td width="90%"> 
+La nouvelle matière. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> peut être utilisé pour générer automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>ShaderID</i></td>
+<td> 
+L'identifiant du shader. <br>
+<a href="createshader.html">CreateShader()</a> peut être utilisée pour créer un nouveau shader.<br>
+ShaderID doit contenir soit<br>
+- l'ID d'un shader préalablement créé avec <a href="createshader.html">CreateShader()</a><br>
+- l'ID d'un shader prédéfini :<br>
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_ColorShader</font>
+  <font color="#924B72">#PB_Material_PerpixelShader</font>
+  <font color="#924B72">#PB_Material_BumpShader</font>
+  <font color="#924B72">#PB_Material_SkyShader</font>
+  <font color="#924B72">#PB_Material_WaterShader</font>
+  <font color="#924B72">#PB_Material_WaterShaderRTT</font>
+  <font color="#924B72">#PB_Material_OceanShader</font>
+  <font color="#924B72">#PB_Material_PointSpriteSphereShader</font>
+  <font color="#924B72">#PB_MaterialShader_CubicEnvShader</font>
+  <font color="#924B72">#PB_MaterialShader_CubicEnvBumpShader</font>
+</font></pre>
+
+
+Description des shaders prédéfinis: 
+<pre><font face="Courier New, Courier, mono" size="2">  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_ColorShader</font>
+  
+  Effet : Couleur uniforme en 'perpixel'.
+  
+  texture : Aucune
+  
+  MaterialShaderParameter : Aucun
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - MaterialShininess(<font color="#924B72">#Matiere</font>, Brillance , CouleurSpeculaire)
+  - Couleur Ambiante
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_PerpixelShader</font>
+  
+  Effet : Matière en 'perpixel'
+  
+  texture :
+  - 0: Couleur sampler2D
+  
+  MaterialShaderParameter : Aucun
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - MaterialShininess(<font color="#924B72">#Matiere</font>, Brillance , CouleurSpeculaire)
+  - Atténuation de la lumière
+  - Couleur Ambiante
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_BumpShader</font>
+  
+  Effet : Matière avec relief
+  
+  textures :
+  - 0: Couleur sampler2D
+  - 1: Sampler2D normal
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - float bumpy - valeur par défaut: 1 (amplitude du relief)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - MaterialShininess(<font color="#924B72">#Matiere</font>, Brillance , CouleurSpeculaire)
+  - Atténuation de la lumière
+  - Couleur Ambiante
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  Remarque:
+  - Les tangentes doivent être définies (utiliser 'BuildMeshTangent')
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_SkyShader</font>
+  
+  Effet : Affiche un ciel avec des nuages etun soleil
+  
+  texture :
+  - 0: Couleur uniforme sampler2D (nuages)
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - vec3 speed   - Valeur par défaut : 10 0 0 (vitesse des nuages (X Z))
+  - float height - Valeur par défaut : 200 (hauteur de la 1ère couche nuageuse)
+  - int layer    - Valeur par défaut : 2 (nombre de couches nuageuses supplémentaires)
+  - float scale  - Valeur par défaut : 4000 (échelle de texture)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>, Couleur) : Couleur du ciel ensoleillé au zénith
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur) : Couleur du ciel ensoleillé à l'horizon
+  - Brouillard
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_WaterShader</font>
+  
+  Effet : Permet d'afficher une surface d'eau
+  
+  texture :
+  - 0: Sampler2D normal
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - float scale - Valeur par défaut : 0.1 (échelle de texture)
+  - float height - Valeur par défaut : 1 (hauteur des vagues)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)  : Couleur de l'eau (Alpha : opacité)
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_SpecularColor</font>, color) : Couleur de réflexion du ciel
+  - Brouillard
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_WaterShaderRTT</font>
+  
+  Effet : Permet d'afficher une surface d'eau avec réflexion (via RTT)
+  
+  textures :
+  - 0 : Sampler2D normal
+  - 1 : Sampler2D RTT (rendu sur texture)
+  
+  MaterialShaderParameter : Aucun
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur) : Couleur de l'eau (Alpha : opacité)
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_OceanShader</font>
+  
+  Effet : Permet d'afficher une surface d'eau avec des vagues
+  textures :
+  - 0: Sampler2D normal
+  - 1: Couleur sampler2D (écume)
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Vertex</font>
+  - float wavebig - Valeur par défaut : 0.5 (amplitude des vagues)
+  - float swell - Valeur par défaut : 0.5 (amplitude de la houle)
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - float wavelittle - Valeur par défaut : 0.5 (amplitude des &quot;petites&quot; vagues)
+  - float foam - Valeur par défaut : 0.5 (écume)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>, Couleur) : Couleur de l'eau
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur) : Couleur du reflet du ciel
+  - Brouillard
+  
+  Remarque:
+  - La valeur alpha de la texture 'normale' contient la hauteur de la vague
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_Material_PointSpriteSphereShader</font>
+  
+  Effet : Affiche les sphères aux sommets du maillage (mesh)
+  
+  texture(s) : Aucune
+  
+  MaterialShaderParameter : Aucun
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - MaterialShininess(<font color="#924B72">#Matiere</font>, Brillance , CouleurSpeculaire)
+  - AmbientColor
+  - Brouillard
+  
+  Remarques :
+  - La matière doit être de type PointSprite : SetMaterialAttribute(0,<font color="#924B72">#PB_Material_PointSprite</font>,1)
+  - Le maillage (mesh) doit être de type PointList : CreateMesh(<font color="#924B72">#Mesh</font>,<font color="#924B72">#PB_Mesh_PointList</font>)
+  - Le rayon de la sphère est défini par la coordonnée U de la texture
+  - La couleur de la sphère est définie par la couleur du sommet (vertex)
+  Exemple: MeshVertex(posX, posY, posZ, 10, 0,RGB(255,0,0))
+  
+  _______________________________________________________________________________________
+  <font color="#924B72">#PB_MaterialShader_CubicEnv</font>
+  
+  Effet : Réflexion via une texture cubique
+  
+  textures :
+  - 0: SamplerCube cubemap
+  - 1: Couleur uniforme sampler2D
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - float glossy - Valeur par défaut  : 0.5 (intensité du reflet)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - Couleur Ambiante
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  Remarque :
+  - Les textures cubiques doivent être &quot;clampées&quot;: SetMaterialAttribute(<font color="#924B72">#texture</font>, <font color="#924B72">#PB_Material_TAM</font>, <font color="#924B72">#PB_Material_ClampTAM</font>)
+  
+  ___________________________________________________________________________________________
+  <font color="#924B72">#PB_MaterialShader_CubicEnvBump</font>
+  
+  Effet : Réflexion avec texture cubique en relief
+  
+  textures :
+  - 0: samplerCube cubemap
+  - 1: Couleur sampler2D
+  - 2: Sampler2D normal
+  
+  MaterialShaderParameter :
+  <font color="#924B72">#PB_Shader_Fragment</font>
+  - float glossy - Valeur par défaut  : 0.5 (intensité du reflet)
+  - float bumpy  - Valeur par défaut  : 1 (amplitude du reflet)
+  
+ Prise en compte de :
+  - SetMaterialColor(<font color="#924B72">#Matiere</font>, <font color="#924B72">#PB_Material_AmbientColor</font>|<font color="#924B72">#PB_Material_DiffuseColor</font>, Couleur)
+  - MaterialShininess(<font color="#924B72">#Material</font>, Shininess, SpecularColor)
+  - Couleur Ambiante
+  - Brouillard
+  - ScaleMaterial / ScrollMaterial / RotateMaterial
+  
+  Remarques :
+  - Les textures cubiques doivent être &quot;clampées&quot; : SetMaterialAttribute(<font color="#924B72">#texture</font>, <font color="#924B72">#PB_Material_TAM</font>, <font color="#924B72">#PB_Material_ClampTAM</font>)
+  - Les tangentes doivent être définies (utiliser 'BuildMeshTangent')
+
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la matière basée sur le shader a été créé avec succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre #Matiere, le nombre généré est renvoyé en cas de succès. 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createshader.html>CreateShader()</a> - <a href=index.html>Material Index</a> - <a href=disablemateriallighting.html>DisableMaterialLighting()</a> -><br><br>
+
+</body></html>

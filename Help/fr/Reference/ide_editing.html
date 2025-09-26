@@ -1,0 +1,471 @@
+<html><head><title>Edition du code</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Edition du code</font></b></p>
+
+L'IDE du PureBasic se comporte comme un éditeur de texte classique en ce qui concerne 
+la saisie de texte. Les touches de curseur, Page précédente, Page suivante, Début et Fin 
+permettent de se déplacer dans le code. Ctrl+Début se rend au début du code et Ctrl+Fin se 
+déplace à la fin. 
+<br>
+<br>
+Les raccourcis par défaut Ctrl+C (copier), Ctrl+X (couper) et Ctrl+V (coller) servent 
+à l'édition. La touche Insérer change le mode d'édition pour déterminer si 
+le texte doit etre remplacé ou ajouté (le mode par défaut est l'ajout). La touche Supprimer 
+supprime une lettre à droite du curseur. Maintenir la touche Shift appuyée et utiliser les 
+flèches permet de sélectionner du texte. 
+<br>
+<br>
+Les raccourcis Ctrl+Maj+Haut et Ctrl+Maj+Bas permettent de déplacer une ligne vers 
+le haut ou vers le bas. 
+<br>
+Le raccourci Ctrl+D permet de dupliquer une sélection. 
+<br>
+<br>
+Sous Windows, les raccourcis Ctrl+Plus et Ctrl+Moins permettent de zoomer et de dézoomer 
+l'affichage de tous les onglets et Ctrl+0 rétablit le zoom par défaut. Les utilisateurs 
+de Linux et OSX peuvent les créer eux-mêmes. Le raccourci Ctrl+molette de la souris 
+ne zoom que l'onglet en cours. 
+<br>
+<br>
+Les raccourcis Ctrl+Tab et Ctrl+Maj+Tab permettent de se déplacer dans 
+les onglets ouverts. 
+<br>
+<br>
+De nombreux raccourcis sont à votre disposition, comme Ctrl+Maj+U/L/X pour changer la casse, etc. 
+Rendez-vous dans les <a href="../reference/ide_preferences.html">préférences</a>, dans le menu 
+Fichiers/Préférences/Général/Raccourcis. 
+<br>
+<br>
+
+
+Au delà des fonctions de base, l'IDE a de nombreuses fonctionnalités dédiées à la programmation 
+PureBasic. 
+<br>
+<br>
+
+
+<p><b>Indentation</b></p><blockquote>
+
+
+Quand un retour à ligne est effectué, l'indentation (nombre d'espaces/tabulations en début de ligne) 
+de la ligne courante et de la ligne suivante sera calculée automatiquement en fonction 
+du <a href="../reference/general_rules.html">mot-clé</a> qui est présent sur la ligne. 
+Un mode &quot;block&quot; est aussi disponible. Dans ce cas, la nouvelle ligne aura la même indentation que 
+la ligne courante. Tout ceci est paramètrable dans les <a href="../reference/ide_preferences.html">preférences</a>. 
+
+
+</blockquote>
+<p><b>Caractères de tabulation</b></p><blockquote>
+
+
+Par défaut, l'IDE n'insère pas une vraie tabulation quand la touche Tab est utilisée. 
+En cas d'échange de source, ceci permet d'éviter les problèmes d'affichage inhérents aux normes de tabulation 
+utilisées. 
+<br>
+<br>
+A la place, deux caractères espaces sont insérés. Ce comportement peut être modifié dans les préférences de 
+l'IDE (voir <a href="../reference/ide_preferences.html">Configurer l'IDE</a>). 
+
+
+</blockquote>
+<p><b>Comportement particulier de la touche Tab</b></p><blockquote>
+
+
+Quand la touche Tab est utilisée alors que la sélection est vide ou ne contient que quelques 
+caractères, elle agit comme décrit ci-dessus (insertion d'un nombre d'espaces, ou d'une vraie 
+tabulation selon le réglage défini dans les préférences de l'IDE). 
+<br>
+<br>
+Quand la touche Tab est utilisée alors qu'une ou plusieurs lignes complètes 
+sont sélectionnées, des espaces (ou des tabulations, en fonction de la configuration) 
+sont insérés au début de chaque ligne. Cela permet d'indenter rapidement des 
+blocs complets de code. 
+<br>
+<br>
+Quand la combinaison de touches Shift+Tab est utilisée alors que plusieurs lignes sont 
+sélectionnées, les espaces/tabulations au début de chaque ligne sont supprimés afin de 
+réduire l'indentation du bloc complet. 
+
+
+</blockquote>
+<p><b>Retrait (Indentation) / Alignement des commentaires:</b></p><blockquote>
+
+
+Similaire au comportement de l'onglet spécial ci-dessus, les raccourcis clavier Ctrl+E et Ctrl+Maj+E 
+(CMD+E et CMD+Maj+E sur OSX) peuvent être utilisés pour modifier le retrait des commentaires sélectionnés. 
+Cela aide à aligner les commentaires à la fin du code, pour le rendre encore plus lisible. Les raccourcis 
+utilisés peuvent être configurés dans les <a href="../reference/ide_preferences.html">préférences</a>. 
+
+
+</blockquote>
+<p><b>Sélection des blocs de code:</b></p><blockquote>
+
+
+Le raccourci Ctrl+M (CMD+M sur OSX) peut être utilisé pour sélectionner le bloc de code qui 
+contient la position du curseur (par exemple un bloc 'If', une boucle ou une procédure). 
+Une utilisation répétée du raccourci sélectionne d'autres blocs de code environnant. 
+<br>
+<br>
+Le raccourci Ctrl+Maj+M (CMD+Maj+M sur OSX) a la fonction inverse et rétablit la sélection 
+du bloc précédemment sélectionné avec Ctrl+M. 
+<br>
+<br>
+Les raccourcis utilisés peuvent être configurés dans les <a href="../reference/ide_preferences.html">préférences</a>. 
+
+</blockquote>
+<p><b>Double-cliquer sur un mot</b></p><blockquote>
+
+
+En principe, double-cliquer sur un mot le sélectionne. Néanmoins, dans quelques 
+cas, le comportement est différent: 
+<br>
+<br>
+Maintenir la touche Ctrl appuyée et double-cliquer sur le nom d'une <a href="../reference/procedures.html">procédure</a> 
+, définie dans le même fichier, permet de se rendre directement à sa déclaration. Si la procédure 
+se trouve dans un autre fichier, celui-ci doit déjà être ouvert dans l'IDE. 
+<br>
+<br>
+Double-cliquer sur un mot-clé <a href="../reference/includes.html">IncludeFile</a> 
+ou <a href="../reference/includes.html">XincludeFile</a> ouvrira le fichier dans l'IDE 
+(le nom du fichier doit être spécifié en entier, sans utiliser de constante par exemple). 
+<br>
+<br>
+De la même manière, double-cliquer sur le mot-clé <a href="../reference/includes.html">IncludeBinary</a> aura pour effet 
+d'ouvrir le fichier dans le <a href="../reference/ide_tools.html">visualisateur de fichier</a> intégré à l'IDE. 
+
+
+</blockquote>
+<p><b>Marqueur de parenthèse et de mots-clés:</b></p><blockquote>
+
+
+<p><img src="images/ide_main_match.png"></p>
+
+Quand le curseur est sur une parenthèse ouvrante ou fermante, l'IDE mettra en surbrillance l'autre 
+parenthèse qui lui correspond. Si aucune parenthèse ne correspond (ce qui est une erreur de syntaxe 
+en PureBasic), l'IDE affichera la parenthèse en rouge. Le même concept est appliqué aux mots-clés. 
+Si le curseur est sur un mot-clé comme &quot;If&quot;, l'IDE soulignera ce mot-clé et tous les autres mots-clés 
+qui lui correspond, comme &quot;Else&quot;, &quot;ElseIf&quot; ou &quot;EndIf&quot;. Si il manque des mots-clés, il sera souligné en rouge. 
+Le menu &quot;Aller au mot-clé correspondant&quot; décrit ci-dessous peut être utilisé pour aller rapidement 
+d'un mot-clé à l'autre. 
+<br>
+<br>
+Le marqueur de parenthèse et de mots-clés est configurable dans les <a href="../reference/ide_preferences.html">préférences</a>. 
+
+
+</blockquote>
+<p><b>Aide syntaxique dans la barre d'état</b></p><blockquote>
+
+
+<p><img src="images/ide_main_commandhelp.png"></p>
+L'IDE affichera les paramètres nécessaires pour chaque fonction PureBasic qui est en cours de frappe. 
+Cela rend plus facile la saisie, en montrant les paramètres qui sont indispensables. 
+Cela fonctionne aussi pour les <a href="../reference/procedures.html">procédures</a>, <a href="../reference/prototypes.html">prototypes</a>, 
+<a href="../reference/interfaces.html">interfaces</a> ou <a href="../reference/import_endimport.html">fonctions importées</a>, s'ils sont 
+déclarés dans le même fichier source ou dans le même <a href="../reference/ide_projects.html">projet</a>. 
+
+
+</blockquote>
+<p><b>Options de pliage</b></p><blockquote>
+
+
+
+<p><img src="images/ide_main_folding.png"></p>
+Quand un mot-clé de pliage est rencontré (<b><font color="#006666">Procedure</font></b> / <b><font color="#006666">EndProcedure</font></b> par 
+défaut, d'autres peuvent être ajoutés) l'IDE marque la région délimitée par ces deux mots-clés 
+par un [-] sur la ligne du premier mot et une ligne verticale jusqu'à la fin du 
+bloc. 
+<br>
+<br>
+En cliquant sur le [-], il est possible de cacher (replier) le contenu du bloc pour garder 
+une meilleure vue d'ensemble sur les codes sources conséquents. Le [-] se transformera alors 
+en [+]. En cliquant de nouveau dessus, le code sera de nouveau affiché (déplié). 
+<br>
+<br>
+Note: Même si l'état des blocs est préservé lors de l'enregistrement du fichier, le fichier lui-même 
+contient bien sûr toutes les lignes de codes. Cette option affecte seulement l'affichage du code source, 
+pas son contenu. 
+<br>
+<br>
+Deux autres délimiteurs de replis sont activés par défaut: &quot;;{&quot; et &quot;;}&quot;. Comme &quot;;&quot; marque le 
+début d'un commentaire en PureBasic, ils seront ignorés par le compilateur. Néanmoins, ils permettent 
+de placer des délimiteurs à des endroits arbitraires qui ne correspondent pas forcément à un 
+mot-clé PureBasic. 
+
+
+</blockquote>
+<p><b>Auto-complétion</b></p><blockquote>
+
+
+<p><img src="images/ide_main_autocomplete.png"></p>
+Pour ne pas avoir à se souvenir de tous les noms des commandes PureBasic, il y a l'auto-complétion 
+qui peut rendre bien des services. 
+<br>
+<br>
+Après avoir tapé le début du nom de la commande, une liste des commandes possibles qui débute par ce mot 
+s'affichera. Une liste de choix est aussi affichée après avoir tapé &quot;\&quot; sur une variable liée à une structure ou une interface. 
+<br>
+<br>
+Une fois le mot sélectionné à l'aide des flèches il peut être inséré dans le code source 
+en appuyant sur la touche Tab. Il est aussi possible de continuer à taper les lettres pendant que la liste est affichée, 
+pour réduire le choix. Si plus aucune proposition n'est disponible, alors la boîte se fermera automatiquement. 
+<br>
+<br>
+La touche Echappement permet de fermer la liste à tout moment. La liste se ferme aussi automatiquement si un 
+bouton souris est utilisé dans l'IDE. 
+<br>
+<br>
+Note: Pour configurer le contenu qui sera affiché dans la liste d'auto-complétion, ainsi que ses 
+nombreuses fonctionnalités, voir <a href="../reference/ide_preferences.html">Configurer l'IDE</a>. Par exemple, 
+il est possible de désactiver l'apparition automatique de la liste (Ctrl+Espace sera alors necessaire 
+pour l'afficher). 
+
+
+</blockquote>
+<p><b>Panneau d'outils</b></p><blockquote>
+
+
+<p><img src="images/ide_main_toolspanel.png"></p>
+La plupart des outils qui rendent la navigation et l'édition de code sources plus aisés 
+peuvent être ajoutés au panneau d'outils situé sur le côté de la zone d'édition. 
+Pour avoir un aperçu des outils disponibles et pour les configurer, voir <a href="../reference/ide_tools.html">Les outils intégrés</a>. 
+
+
+</blockquote>
+<p><b>Le menu édition</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_edit.png"></p>
+Les rubriques suivantes expliquent les commandes disponibles dans le menu édition. A noter 
+que bon nombre de ces commandes sont aussi présentes dans le menu contextuel de la zone d'édition. 
+<br>
+<br>
+<b>Annuler</b> 
+<br>
+Annule la dernière action effectuée dans la zone d'édition. Il est possible d'annuler 
+plusieurs actions à la suite. 
+
+<br>
+<br>
+
+<b>Rétablir</b> 
+<br>
+Refait la dernière action annulée par la commande &quot;Annuler&quot;. 
+
+<br>
+<br>
+
+<b>Couper</b> 
+<br>
+Copie le texte sélectionné dans le presse-papier et le supprime du code. 
+
+<br>
+<br>
+
+<b>Copier</b> 
+<br>
+Copie le texte sélectionné dans le presse-papier. 
+
+<br>
+<br>
+
+<b>Coller</b> 
+<br>
+Insère le contenu du presse-papier dans le code, à la position du curseur. Si une partie 
+du code était sélectionnée, elle sera alors remplacée par le contenu du presse-papier. 
+
+<br>
+<br>
+
+<b>Insérer commentaires</b> 
+<br>
+Insère un commentaire (&quot;;&quot;) au début de chaque ligne sélectionnée. Cela permet de 
+commenter rapidement un nombre conséquent de lignes. 
+
+<br>
+<br>
+
+<b>Supprimer commentaires</b> 
+<br>
+Enlève le commentaire (&quot;;&quot;) du début de chaque ligne sélectionnée. Cela permet de 
+dé-commenter rapidement un nombre conséquent de lignes. C'est la fonction inverse de 
+&quot;Insérer commentaire&quot;, mais elle fonctionne aussi sur des commentaires entrés manuellement. 
+
+<br>
+<br>
+
+<b>Format et indentation</b> 
+<br>
+Reformate le code source sélectionné pour aligner le code en fonction des règles 
+définies dans les <a href="../reference/ide_preferences.html">préférences</a>. 
+
+<br>
+<br>
+
+<b>Sélectionner tout</b> 
+<br>
+Sélectionne le code source en entier. 
+
+<br>
+<br>
+
+<b>Aller à</b> 
+<br>
+Permet de se rendre directement à une ligne donnée. 
+
+<br>
+<br>
+
+<b>Aller au mot-clé correspondant</b> 
+<br>
+Si le curseur est actuellement sur un mot-clé comme &quot;If&quot;, le curseur ira directement sur le mot-clé 
+correspondant (dans ce cas &quot;EndIf&quot;). 
+
+<br>
+<br>
+
+<b>Ligne récente</b> 
+<br>
+L'IDE garde une trace des lignes qui sont visualisées. Par exemple, si la position du curseur 
+est changée par la commande &quot;Aller à&quot; ou en cliquant sur l'outil <a href="../reference/ide_tools.html">Navigateur de procédures</a>, 
+cette fonction permet de revenir rapidement à la ligne précédente. L'IDE retient 
+20 positions différentes. 
+<br>
+<br>
+A noter que l'enregistrement ne se fait que si le déplacement est conséquent (ex: pas si 
+les touches haut/bas sont utilisées). 
+
+<br>
+<br>
+
+<b>Changer le pliage courant</b> 
+<br>
+Change l'état du point de repli associé à la ligne courante (le déplier ou le replier 
+le cas échéant). 
+
+<br>
+<br>
+
+<b>Plier/Déplier tout</b> 
+<br>
+Change l'état de tous les points de replis dans le code source, très utile pour cacher toutes 
+les procédures d'un code source (ou pour ré-afficher le code complet en une seule fois). 
+<br>
+<br>
+
+<b>Ajouter/Supprimer un marqueur</b> 
+<br>
+Cette commande permet d'ajouter un marqueur sur la ligne courante (ou de le retirer si il y en avait 
+déjà un). Un marqueur permet de retrouver rapidement une ligne de code. Il est identifié par une 
+petite flèche horizontale (verte, par défaut) à côté de la ligne concernée. Il est possible de passer de 
+marqueur en marqueur en utilisant la commande &quot;Marqueur suivant&quot;. 
+<br>
+<br>
+
+Note: Pour ajouter/retirer un marqueur à l'aide de la souris, il faut maintenir la touche Ctrl 
+appuyée pendant le clic sur la bordure qui affiche les marqueurs (la colonne de numérotation 
+des lignes n'est pas prise en compte). 
+
+
+<br>
+<br>
+
+<b>Aller au marqueur</b> 
+<br>
+Se rend au premier marqueur disponible, situé en dessous de la ligne en cours d'édition. 
+Si il n'y a plus de marqueur en dessous de cette ligne, la recherche reprend au début du code 
+source. En utilisant le raccourci &quot;Marqueur suivant&quot; (F2, par défaut) plusieurs fois, il est 
+possible de parcourir tous les marqueurs du code très rapidement. 
+
+<br>
+<br>
+
+<b>Effacer les marqueurs</b> 
+<br>
+Retire tous les marqueurs du code source en cours d'édition. 
+
+<br>
+<br>
+
+<b>Rechercher/Remplacer</b> 
+
+<p><img src="images/ide_edit_search.png"></p>
+
+<br>
+Cette fenêtre permet de rechercher un mot (ou une suite de mots) dans le code source 
+et de les remplacer par d'autres mots si nécessaire. 
+<br>
+<br>
+Le bouton &quot;Chercher suivant&quot; démarre la recherche. La recherche peut continuer une fois un terme trouvé 
+en utilisant la commande du menu &quot;Rechercher à nouveau&quot; (raccourci F3 par défaut). 
+<br>
+<br>
+Pour rendre la recherche plus pointue, les options suivantes sont disponibles: 
+<br>
+<u>Respecter la casse</u> : Seul le texte qui est strictement identique au mot recherché sera retenu (les minuscules ne sont pas identiques aux majuscules). 
+<br>
+<u>Mots entiers seulement</u> : Recherche seulement les termes qui forment un mot. Les termes qui contiennent le mot recherché ne seront pas retenus. 
+<br>
+<u>Ignorer les commentaires</u> : Tous les commentaires PureBasic sont exclus de la recherche. 
+<br>
+<u>Ignorer les chaînes</u> : Tous les contenus des strings (entre &quot; &quot;) sont ignorés. 
+<br>
+<u>Rechercher seulement dans la sélection</u>: recherche seulement dans le texte sélectionné. C'est une option très utile quand 
+elle est utilisée en conjonction avec la fonction &quot;Remplacer tout&quot;. Dans ce cas, le remplacement ne s'opèrera uniquement que dans 
+la sélection. 
+<br>
+<br>
+En activant la case à cocher &quot;Remplacer par&quot;, la fonction remplacer devient disponible. 
+&quot;Chercher suivant&quot; cherchera toujours l'occurrence suivante, et chaque clic sur le bouton &quot;Remplacer&quot; 
+remplacera le texte trouvé par le contenu du champ &quot;Remplacer par&quot;. 
+<br>
+<br>
+En cliquant sur &quot;Remplacer tout&quot;, tous les termes correspondants à la recherche situés en dessous 
+du curseur seront remplacés (sauf si l'option &quot;Rechercher seulement dans la sélection&quot; est activée). 
+
+<br>
+<br>
+
+<b>Rechercher suivant</b> 
+<br>
+Continue la recherche correspondant à la dernière recherche entamée dans la fenêtre &quot;Chercher/Remplacer&quot;. 
+
+<br>
+<br>
+
+<b>Rechercher précédent</b> 
+<br>
+Continue la recherche en remontant à la recherche précédente entamée dans la fenêtre &quot;Chercher/Remplacer&quot;. 
+
+<br>
+<br>
+
+<b>Rechercher dans les fichiers</b> 
+
+<p><img src="images/ide_edit_searchfiles.png"></p>
+
+<br>
+Cette fonction permet de rechercher parmi tous les fichiers d'un répertoire donné (et 
+optionnellement dans ses sous-répertoires). 
+<br>
+<br>
+Il suffit de spécifier le mot (ou la séquence de mots) à rechercher ainsi que le répertoire de 
+base (champ &quot;Répertoire&quot;). Il est possible d'indiquer des filtres pour inclure uniquement les fichiers 
+voulus (ex: *.pb). Plusieurs filtres peuvent être spécifiés, en les séparant par une virgule &quot;,&quot; 
+(un filtre vide ou *.* recherche dans tous les fichiers). 
+Des options similaires à la fenêtre &quot;Rechercher/Remplacer&quot; sont disponibles pour rendre la recherche plus pointue. 
+<br>
+<br>
+La case à cocher &quot;Inclure les sous-répertoires&quot; permet de rechercher dans tous les sous-répertoires (d'une manière 
+récursive) du répertoire de base. 
+<br>
+<br>
+Quand la recherche débute, une fenêtre indépendante sera ouverte pour afficher les résultats de la recherche 
+en indiquant le fichier, le numéro de la ligne ainsi que le contenu de la ligne. 
+<br>
+<br>
+En double-cliquant sur une des lignes, 
+le fichier sera automatiquement ouvert dans l'IDE à la ligne concernée. 
+
+
+</blockquote>
+</font></body></html>

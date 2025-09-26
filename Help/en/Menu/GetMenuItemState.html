@@ -1,0 +1,66 @@
+<html><head><title>GetMenuItemState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMenuItemState()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GetMenuItemState</b></font>(#Menu, MenuItem)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the checkbox state of a menu item. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+The menu to use. 
+
+</td></tr>
+<tr><td><i>MenuItem</i></td>
+<td> 
+The menu item number to get the state of. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the menu item is checked and zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Use <a href="setmenuitemstate.html">SetMenuItemState()</a> to change the state of a menu item. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;GetMenuItemState Example&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      MenuTitle</font>(&quot;Project&quot;)
+<font color="#006666">        MenuItem</font>(1, &quot;Changed&quot;)
+<font color="#006666">        SetMenuItemState</font>(0, 1, 1)        <font color="#006666">; set check mark for the previously created menu item</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()          <font color="#006666">; wait for an event</font>
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Menu</font>          <font color="#006666">; a menu event appeared</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventMenu</font>() = 1               <font color="#006666">; first menu item was clicked</font>
+          <b><font color="#006666">If</font></b> <font color="#006666">GetMenuItemState</font>(0, 1) = 1  <font color="#006666">; actual item state = check marked</font>
+<font color="#006666">            SetMenuItemState</font>(0, 1, 0)    <font color="#006666">; now remove the check mark</font>
+          <b><font color="#006666">Else</font></b>                           <font color="#006666">; actual item state = no check mark</font>
+<font color="#006666">            SetMenuItemState</font>(0, 1, 1)    <font color="#006666">; now set the check mark</font>
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setmenuitemstate.html">SetMenuItemState()</a>, <a href="getmenuitemtext.html">GetMenuItemText()</a>, <a href="menuitem.html">MenuItem()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=freemenu.html>FreeMenu()</a> - <a href=index.html>Menu Index</a> - <a href=getmenuitemtext.html>GetMenuItemText()</a> -><br><br>
+
+</body></html>

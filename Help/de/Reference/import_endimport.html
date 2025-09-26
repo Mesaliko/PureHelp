@@ -1,0 +1,91 @@
+<html><head><title>Import : EndImport</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Import : EndImport</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Import</font></b> &quot;Dateiname&quot;
+  FunktionsName.&lt;Typ&gt;(&lt;Parameter&gt;, [, &lt;Parameter&gt; [= StandardWert]...]) [As &quot;SymbolName&quot;]
+  ...
+  VariablenName.&lt;Typ&gt; [As &quot;SymbolName&quot;]
+<b><font color="#006666">EndImport</font></b>
+</font></pre></blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Für fortgeschrittene Programmierer. <b><font color="#006666">Import</font></b> : <b><font color="#006666">EndImport</font></b> ermöglicht das 
+einfache Deklarieren externer Funktionen und Variablen aus einer Library (.lib) oder 
+Objekt (.obj) Datei. 
+<br>
+<br>
+Sobald diese deklariert wurden, sind die importierten Funktionen wie jeder andere Befehl 
+direkt zur Verwendung im Programm verfügbar. Der Compiler überprüft nicht, ob die 
+Funktion tatsächlich in der importierten Datei existiert; wenn also ein Fehler auftritt, 
+wird dieser direkt vom Linker mitgeteilt. 
+<br>
+<br>
+Dieses Feature kann die <a href="../library/openlibrary.html">OpenLibrary()</a>/<a href="../library/callfunction.html">CallFunction()</a> 
+Sequenz ersetzen, da sie einige Vorteile bietet: es erfolgt eine Typen-Überprüfung, die 
+Anzahl an Parametern wird geprüft. Nicht wie bei CallFunction() können ohne Probleme 
+Doubles, Fließkomma und Quad <a href="../reference/variables.html">Variablen</a> verarbeitet werden. 
+<br>
+<br>
+Die letzten Parameter können einen Standard-Wert (muss ein konstanter Ausdruck sein) haben. 
+Wenn also diese Parameter beim Funktionsaufruf weggelassen werden, wird der Standardwert verwendet. 
+<br>
+<br>
+Standardmäßig wird der importierte Funktionsname (Funktionssymbol) auf folgende Art und Weise 'dekoriert': 
+_FunctionName@callsize(Funktionsname und Aufrufgröße). Dies sollte bei den meisten Funktionen 
+funktionieren, welche die Standardaufruf Konvention (stdcall) verwenden. Wenn es sich bei der 
+Library um eine C Library handelt und die Funktionen nicht stdcall entsprechen, sollte stattdessen 
+die <b><font color="#006666">ImportC</font></b> Variante verwendet werden. In diesem Fall wird das standardmäßige Funktionssymbol 
+wie folgt 'dekoriert': _FunctionName (nur Funktionsname). 
+<br>
+<br>
+Die <a href="../reference/pseudotypes.html">Pseudotypes</a> können für die Parameter verwendet werden, jedoch 
+nicht für den Rückgabewert. 
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Auf x64 gibt es nur eine Aufruf-Konvention, somit werden sich <b><font color="#006666">ImportC</font></b> und 
+<b><font color="#006666">Import</font></b> auf die selbe Weise verhalten. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Dieses Beispiel funktioniert nur auf Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+
+  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Keine Notwendigkeit für die Verwendung von 'As' da PureBasic die Funktion</font>
+    <font color="#006666">; korrekt dekoriert.</font>
+    <font color="#006666">; Wir definieren die 'Flags' auch als optional, mit einem Standardwert </font>
+    <font color="#006666">; von 0 (wenn sie weggelassen werden).</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxW</font>(Window.i, Body$, Title$, Flags.i = 0)
+    
+  <b><font color="#006666">EndImport</font></b>
+  
+<font color="#006666">  MessageBoxW</font>(0, &quot;Hello&quot;, &quot;World&quot;) <font color="#006666">; Wir geben keine Flags an    </font>
+</font></pre>
+
+
+</blockquote><p><b>Beispiel:</b> Mit Pseudotypes</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Dieses Beispiel funktioniert nur auf Windows&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+
+  <b><font color="#006666">Import</font></b> &quot;User32.lib&quot;
+   
+    <font color="#006666">; Wir verwenden den 'p-unicode' Pseudotype für die String Parameter, da</font>
+    <font color="#006666">; MessageBoxW() eine nur unter Unicode verwendbare Funktion ist. Der Compiler</font>
+    <font color="#006666">; wird - sofern notwendig - die Strings automatisch nach Unicode konvertieren.</font>
+    <font color="#006666">;</font>
+<font color="#006666">    MessageBoxA</font>(Window.i, Body.p-ascii, Title.p-ascii, Flags.i = 0)
+                                                  
+  <b><font color="#006666">EndImport</font></b>
+  
+<font color="#006666">  MessageBoxA</font>(0, &quot;Hello&quot;, &quot;World&quot;)
+</font></pre>
+</blockquote>
+</font></body></html>

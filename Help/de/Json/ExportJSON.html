@@ -1,0 +1,57 @@
+<html><head><title>ExportJSON</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExportJSON()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ExportJSON</b></font>(#JSON, *Puffer, Größe [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Exportiert die angegebenen JSON-Daten in einen Speicherbereich. Die JSON-Daten werden 
+im UTF-8 Format kodiert. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#JSON</i></td>
+<td width="90%"> 
+Die zu exportierenden JSON-Daten. 
+
+</td></tr>
+<tr><td><i>*Puffer</i></td>
+<td> 
+Ein beschreibbarer <a href="../memory/index.html">Speicherplatz</a>. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe des Speicherplatzes. Ist die Größe nicht groß genug, um die gesamten JSON-Daten 
+aufzunehmen, dann wird die Funktion den Speicherbereich mit Daten füllen, aber dann einen 
+Fehler zurückgeben. Die <a href="exportjsonsize.html">ExportJSONSize()</a> Funktion kann verwendet werden, um die benötigte 
+Größe zu ermitteln. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Wenn dieses auf <font color="#924B72">#PB_JSON_PrettyPrint</font> gesetzt wird, wird der umgewandelte String 
+zusätzliche Zeilenumbrüche und Leerzeichen für eine bessere Lesbarkeit beinhalten. 
+Die zusätzlichen Leerzeichen sind nicht typisch für das JSON-Format. Die Ausgabe 
+hat für einen JSON-Leser die gleiche Bedeutung, egal ob mit oder ohne dieses Flag. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall die Anzahl der in den Speicherbereich geschriebenen Bytes zurück. 
+Wenn die Funktion fehlschlägt, ist das Ergebnis gleich 0. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="exportjsonsize.html">ExportJSONSize()</a>, <a href="composejson.html">ComposeJSON()</a>, <a href="savejson.html">SaveJSON()</a>, <a href="catchjson.html">CatchJSON()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=examinejsonmembers.html>ExamineJSONMembers()</a> - <a href=index.html>Json Inhaltsverzeichnis</a> - <a href=exportjsonsize.html>ExportJSONSize()</a> -><br><br>
+
+</body></html>

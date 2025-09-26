@@ -1,0 +1,69 @@
+<html><head><title>CompressMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CompressMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CompressMemory</b></font>(*Puffer, Größe, *Ausgabe, AusgabeGröße [, Plugin [, Level]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Komprimiert den Puffer-Inhalt in den Ausgabepuffer. Die Länge des Ausgabepuffers muss 
+mindestens so lang wie der zu komprimierende Puffer sein. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Puffer</i></td>
+<td width="90%"> 
+Der zu komprimierende Speicherpuffer. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe des zu komprimierenden Speichers. 
+
+</td></tr>
+<tr><td><i>*Ausgabe</i></td>
+<td> 
+Der Speicherpuffer zum Speichern der komprimierten Daten. 
+
+</td></tr>
+<tr><td><i>AusgabeGröße</i></td>
+<td> 
+Die Größe der Speicherpuffers, um die komprimierten Daten zu speichern. 
+
+</td></tr>
+<tr><td><i>Plugin (optional)</i></td>
+<td> 
+Das zu verwendende Plugin, wenn mehr als ein Packer-Plugin registriert wurde. Dies kann 
+einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: verwendet den BriefLZ Packer, um den Speicher zu komprimieren. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> muss aufgerufen werden, um das entsprechende Plugin zu registrieren.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : verwendet den Zip Packer, um den Speicher zu komprimieren. <a href="usezippacker.html">UseZipPacker()</a> muss aufgerufen werden, um das entsprechende Plugin zu registrieren.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : verwendet den Lzma Packer, um den Speicher zu komprimieren. <a href="uselzmapacker.html">UseLzmaPacker()</a> muss aufgerufen werden, um das entsprechende Plugin zu registrieren.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Level (optional)</i></td>
+<td> 
+Der zu verwendende Komprimierungsgrad. Dies ist ein ganzzahliger Wert, der von 0 (niedrigeres 
+Kompressionsverhältnis, schnellere Kompression) bis 9 (höheres Kompressionsverhältnis, 
+langsameres Komprimieren) reicht. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die komprimierte Größe zurück, wenn der Puffer erfolgreich komprimiert wurde, andernfalls Null. 
+Wenn die Puffer-Daten nicht komprimiert werden können (bereits komprimierte Daten lassen sich generell 
+nicht noch mehr komprimieren), dann wird Null zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="uncompressmemory.html">UncompressMemory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=closepack.html>ClosePack()</a> - <a href=index.html>Packer Inhaltsverzeichnis</a> - <a href=createpack.html>CreatePack()</a> -><br><br>
+
+</body></html>

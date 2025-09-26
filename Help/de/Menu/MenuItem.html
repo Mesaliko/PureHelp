@@ -1,0 +1,103 @@
+<html><head><title>MenuItem</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MenuItem()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>MenuItem</b></font>(MenuItemID, Text$ [, ImageID]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt einen neuen Menü-Eintrag im aktuellen Menü. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>MenuItemID</i></td>
+<td width="90%"> 
+Die Nummer, mit der dieser Menü-Eintrag bei Ereignissen und bei 
+Befehlen wie <a href="setmenuitemstate.html">SetMenuItemState()</a> identifiziert wird. Dieser Wert sollte 
+zwischen 0 und 65535 liegen. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+Der Text des Menü-Eintrags. 
+Auf Windows können Sie im Text$ das Sonderzeichen '&amp;' benutzen, um einen bestimmten 
+Buchstaben zu unterstreichen: 
+<br>
+<br>
+&quot;&amp;Datei&quot; wird im Menü dann wie folgt angezeigt: <u>D</u>atei 
+<br>
+<br>
+
+</td></tr>
+<tr><td><i>ImageID (optional)</i></td>
+<td> 
+Das Bild (Image), welches nahe des Menü-Eintrags angezeigt werden soll. 
+Das Menü muss mit <a href="createimagemenu.html">CreateImageMenu()</a> oder <a href="createpopupimagemenu.html">CreatePopupImageMenu()</a> erstellt worden sein. 
+Dieser Wert kann mit der <a href="../image/imageid.html">ImageID()</a> Funktion ermittelt werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Abmessungen der Bilder sind 16x16 Pixel. 
+<br>
+<br>
+Um ein Tastenkürzel (wird mit dem Befehl <a href="../window/addkeyboardshortcut.html">AddKeyboardShortcut()</a> aktiviert, außer auf OS X) 
+auf der rechten Seite des Menüeintrags (z.B. &quot;Speichern    Strg+S&quot;) darzustellen, verwenden 
+Sie das TAB(ulator)-Zeichen für den richtigen Abstand. Das TAB-Zeichen hat den 
+ASCII-Code 9, verwenden Sie daher den Befehl <a href="../string/chr.html">Chr()</a> mit dem Wert 9 
+zum Einfügen eines TAB-Zeichens. Ihr Code sollte z.B. so aussehen: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MenuItem</font>(1, &quot;&amp;Open&quot; +<font color="#006666"> Chr</font>(9) + &quot;Strg+O&quot;)
+</font></pre>
+Die unterstützten Zusatztasten sind: 
+<pre><font face="Courier New, Courier, mono" size="2">  - &quot;Ctrl&quot;  : Ctrl-/Strg-Taste
+  - &quot;Shift&quot; : Shift-/Umschalt-Taste
+  - &quot;Alt&quot;   : Alt-Taste
+  - &quot;Cmd&quot;   : Command/Apple-<font color="#006666">Taste </font>(nur auf macOS)
+</font></pre>
+Sie können mit Hilfe des &quot;+&quot; Zeichens miteinander gemixt werden: &quot;Speichern als&quot; + Chr(9) + &quot;Ctrl+Shift+S&quot;. 
+Auf macOS ist es - wenn ein Tastenkürzel im Menü erstellt wird - nicht erforderlich, die <a href="../window/addkeyboardshortcut.html">AddKeyboardShortcut()</a> 
+Funktion mit diesem Kürzel aufzurufen. 
+<br>
+<br>
+<b>macOS</b>: die Einträge 'Quit' (Ende), 'Preferences' (Einstellungen) und 'About' (Über) werden als 
+spezielle Menü-Einträge behandelt und müssen im 'Application' (Anwendung) Menü platziert werden, um das Look &amp; Feel 
+von macOS Anwendungen zu erhalten. PureBasic unterstützt die <font color="#924B72">#PB_Menu_Quit</font>, <font color="#924B72">#PB_Menu_Preferences</font> und 
+<font color="#924B72">#PB_Menu_About</font> Konstanten (müssen als 'MenuItemID' angegeben werden) für diese Art von Menü-Einträgen. 
+Wenn eine dieser Konstanten festgestellt wird, dann wird der Eintrag nicht am aktuellen Platz, sondern 
+im 'Application'-Menü eingefügt. Wenn ein Tastenkürzel angegeben wurde, wird dies einfach ignoriert 
+und durch ein standardmäßiges ersetzt. Diese drei Konstanten sind nicht auf anderen OS definiert, um 
+ein flexibles Nummerieren auf diesen OS zu ermöglichen. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;MenuItem Example&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      MenuTitle</font>(&quot;Project&quot;)
+<font color="#006666">        MenuItem</font>(1, &quot;Open&quot;)    <font color="#006666">; normaler Eintrag</font>
+<font color="#006666">        MenuItem</font>(2, &quot;&amp;Save&quot;)   <font color="#006666">; Eintrag mit unterstrichenem Zeichen, die Unterstreichung wird jedoch</font>
+                               <font color="#006666">; nur angezeigt, wenn das Menü mit F10 + den Cursor-Tasten aufgerufen wird</font>
+<font color="#006666">        MenuItem</font>(3, &quot;Quit&quot;+<font color="#006666">Chr</font>(9)+&quot;Esc&quot;)   <font color="#006666">; Eintrag mit separatem Text als Tastenkürzel</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/menuitem.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="menutitle.html">MenuTitle()</a>, <a href="menubar.html">MenuBar()</a>, <a href="opensubmenu.html">OpenSubMenu()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=menuid.html>MenuID()</a> - <a href=index.html>Menu Inhaltsverzeichnis</a> - <a href=menutitle.html>MenuTitle()</a> -><br><br>
+
+</body></html>

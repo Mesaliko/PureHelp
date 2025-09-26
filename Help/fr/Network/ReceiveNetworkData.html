@@ -1,0 +1,77 @@
+<html><head><title>ReceiveNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveNetworkData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ReceiveNetworkData</b></font>(Connexion, *MemoireTampon, LongueurMemoireTampon)  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Reçoit une donnée brute du client spécifié. 
+Cette fonction peut être utilisée par 
+une application Serveur ou Client. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Connexion</i></td>
+<td width="90%"> 
+La connexion. 
+<br>
+<br>
+Du côté serveur, 'Connexion' est le 
+client qui a envoyé les données 
+(peut être facilement obtenue avec 
+<a href="eventclient.html">EventClient()</a>).<br>
+Du côté client, 'Connexion' est renvoyé 
+par <a href="opennetworkconnection.html">OpenNetworkConnection()</a>. 
+
+</td></tr>
+<tr><td><i>*MemoireTampon</i></td>
+<td> 
+L'adresse de la mémoire tampon qui 
+réceptionne les données. 
+
+</td></tr>
+<tr><td><i>LongueurMemoireTampon</i></td>
+<td> 
+La taille de la mémoire tampon qui 
+réceptionne les données. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre d'octets reçus. 
+<br>
+Si 'Resultat' est égal à 
+'LongueurMemoireTampon', alors il reste 
+des données en attente à lire. <br>
+Si une erreur s'est produite pendant la 
+connexion (lien mort, connexion fermée 
+par le serveur, etc), 'Resultat' sera 
+égal à -1. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Elle doit être appelée uniquement après 
+avoir reçu un événement 
+<font color="#924B72">#PB_NetworkEvent_Data</font>.<br>
+Avec les connexions UDP, le maximum pour 
+'LongueurMemoireTampon' est 2048. 
+<br>
+Avec les connexions TCP, le maximum pour 
+'LongueurMemoireTampon' est 65536. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="networkclientevent.html">NetworkClientEvent()</a>, 
+<a href="networkserverevent.html">NetworkServerEvent()</a>, 
+<a href="sendnetworkdata.html">SendNetworkData()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=opennetworkconnection.html>OpenNetworkConnection()</a> - <a href=index.html>Network Index</a> - <a href=sendnetworkdata.html>SendNetworkData()</a> -><br><br>
+
+</body></html>

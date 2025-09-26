@@ -1,0 +1,112 @@
+<html><head><title>GadgetAdvanced.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Gadget example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#WindowWidth</font>  = 450
+<font color="#924B72">#WindowHeight</font> = 305
+
+<font color="#006666">; Load our images..
+</font><font color="#006666">;
+</font><font color="#006666">LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/Drive.bmp&quot;)
+<font color="#006666">LoadImage</font>(1, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/File.bmp&quot;)
+<font color="#006666">LoadImage</font>(2, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/PureBasic.bmp&quot;)
+
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+  <font color="#006666">; Only Windows supports .ico file format
+</font><font color="#006666">  LoadImage</font>(3, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/CdPlayer.ico&quot;)
+<b><font color="#006666">CompilerElse</font></b>
+<font color="#006666">  LoadImage</font>(3, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/Drive.bmp&quot;)
+<b><font color="#006666">CompilerEndIf</font></b>
+
+<font color="#006666">CreatePopupMenu</font>(0)
+<font color="#006666">  MenuItem</font>(0, &quot;Popup !&quot;)
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 200, <font color="#924B72">#WindowWidth</font>, <font color="#924B72">#WindowHeight</font>, &quot;PureBasic - Advanced Gadget Demonstration&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font>)
+
+<font color="#006666">  ListIconGadget</font>(5, 170, 50, 265, 200, &quot;Column 1&quot;, 131)
+<font color="#006666">  AddGadgetColumn</font>(5, 1, &quot;Column 2&quot;, 300)
+<font color="#006666">  AddGadgetColumn</font>(5, 2, &quot;Column 3&quot;, 80)
+  
+<font color="#006666">  TextGadget</font>(4, 10, 16, 180, 24, &quot;Please wait while initializing...&quot;)
+  
+<font color="#006666">  ProgressBarGadget</font>(3, 10, 260, <font color="#924B72">#WindowWidth</font>-25, 20, 0, 100)
+  
+  <font color="#006666">; Update the ProgressBar, just for fun !
+</font>  <font color="#006666">;
+</font>  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 100
+<font color="#006666">    SetGadgetState</font>(3, k)
+<font color="#006666">    Delay</font>(10)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  ImageGadget      </font>(0, 200, 5, 0, 0,<font color="#006666"> ImageID</font>(2))
+<font color="#006666">  ButtonImageGadget</font>(1, 384, 5, 50, 36,<font color="#006666"> ImageID</font>(3))
+  
+<font color="#006666">  TreeGadget    </font>(2,  10, 50, 150, 200)
+    
+<font color="#006666">  SetGadgetText</font>(4, &quot;Initialize Ok... Welcome !&quot;)
+  
+  <font color="#006666">; Fill Up the Tree gadget with lot of entries (including the image)
+</font>  <font color="#006666">;
+</font>  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddGadgetItem</font>(2, -1, &quot;General &quot;+<font color="#006666">Str</font>(k),<font color="#006666"> ImageID</font>(1))
+<font color="#006666">    AddGadgetItem</font>(2, -1, &quot;ScreenMode&quot;,<font color="#006666"> ImageID</font>(1))
+<font color="#006666">      AddGadgetItem</font>(2, -1, &quot;640*480&quot;,<font color="#006666"> ImageID</font>(1), 1)
+<font color="#006666">      AddGadgetItem</font>(2, -1, &quot;800*600&quot;,<font color="#006666"> ImageID</font>(3), 1)
+<font color="#006666">      AddGadgetItem</font>(2, -1, &quot;1024*768&quot;,<font color="#006666"> ImageID</font>(1), 1)
+<font color="#006666">      AddGadgetItem</font>(2, -1, &quot;1600*1200&quot;,<font color="#006666"> ImageID</font>(1), 1)
+<font color="#006666">    AddGadgetItem</font>(2, -1, &quot;Joystick&quot;,<font color="#006666"> ImageID</font>(1))
+  <b><font color="#006666">Next</font></b>
+    
+  <font color="#006666">; Fill Up the ListIcon gadget. Notice than the column are separated by Chr(10) (NewLine) character
+</font>  <font color="#006666">;
+</font>  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 100
+<font color="#006666">    AddGadgetItem</font>(5, -1, &quot;Element &quot;+<font color="#006666">Str</font>(k)+<font color="#006666">Chr</font>(10)+&quot;C 2&quot;+<font color="#006666">Chr</font>(10)+&quot;Comment 3&quot;,<font color="#006666"> ImageID</font>(3))
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  SetGadgetState</font>(5, 8)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+      
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+        <b><font color="#006666">Case</font></b> 1
+<font color="#006666">          MessageRequester</font>(&quot;Information&quot;, &quot;You did it !&quot;, 0)
+      
+        <b><font color="#006666">Case</font></b> 2
+<font color="#006666">          SetGadgetText</font>(4, &quot;Tree Gadget. Item selected: &quot;+<font color="#006666">Str</font>(<font color="#006666">GetGadgetState</font>(2)))
+          
+          <b><font color="#006666">If</font></b> <font color="#006666">EventType</font>() = 2
+<font color="#006666">            MessageRequester</font>(&quot;Information&quot;, &quot;Doubleclick: item&quot;+<font color="#006666">Str</font>(<font color="#006666">GetGadgetState</font>(2))+&quot;, Text: &quot;+<font color="#006666">GetGadgetText</font>(2), 0)
+          <b><font color="#006666">ElseIf</font></b> <font color="#006666">EventType</font>() = 1
+<font color="#006666">            DisplayPopupMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+          <b><font color="#006666">EndIf</font></b>
+          
+        <b><font color="#006666">Case</font></b> 5
+<font color="#006666">          SetGadgetText</font>(4, &quot;ListIcon Gadget. Item selected: &quot;+<font color="#006666">Str</font>(<font color="#006666">GetGadgetState</font>(5)))
+          
+          <b><font color="#006666">If</font></b> <font color="#006666">EventType</font>() = 2
+<font color="#006666">            MessageRequester</font>(&quot;Information&quot;, &quot;Doubleclick: item&quot;+<font color="#006666">Str</font>(<font color="#006666">GetGadgetState</font>(5))+&quot;, Text: &quot;+<font color="#006666">GetGadgetText</font>(5), 0)
+          <b><font color="#006666">ElseIf</font></b> <font color="#006666">EventType</font>() = 1
+<font color="#006666">            DisplayPopupMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+          <b><font color="#006666">EndIf</font></b>
+          
+     <b><font color="#006666">EndSelect</font></b>
+
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b></font></pre>
+</body></html>

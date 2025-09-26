@@ -1,0 +1,64 @@
+<html><head><title>MeshDirectAdd</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MeshDirectAdd()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MeshDirectAdd</b></font>(#Mesh, TableauVertex(),TableauFace(), Type, MateriauID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un nouveau sous-maillage (submesh) au #Mesh spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>MeshTableauVertex()</i></td>
+<td width="90%"> 
+Le tableau contenant les données des sommets du sous-maillage.<br>
+Il doit être de type &quot;MeshVertex&quot;. 
+
+</td></tr>
+<tr><td><i>MeshTableauFace()</i></td>
+<td> 
+Le tableau contenant les données des faces du sous-maillage.<br>
+Il doit être de type &quot;MeshFace&quot;. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+Le type du nouveau sous-maillage. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_TriangleList</font> : Le sous-maillage sera composé d'une liste de triangles (par défaut).
+  <font color="#924B72">#PB_Mesh_TriangleStrip</font>: Le sous-maillage sera composé d'une liste de triangles connectés (les sommets sont partagés).
+  <font color="#924B72">#PB_Mesh_TriangleFan</font>  : Le sous-maillage sera composé d'une liste de triangles partageant le même point de sommet central.
+  <font color="#924B72">#PB_Mesh_PointList</font>    : Le sous-maillage sera composé d'une liste de points.
+  <font color="#924B72">#PB_Mesh_LineList</font>     : Le sous-maillage sera composé d'une liste de lignes.
+  <font color="#924B72">#PB_Mesh_LineStrip</font>    : Le sous-maillage sera composé d'une liste de lignes connectées (les sommets sont partagés).
+</font></pre>
+
+</td></tr>
+<tr><td><i>MateriauID</i></td>
+<td> 
+Matériau par défaut à utiliser pour le sous-maillage.<br>
+Pour obtenir un &quot;MaterialID&quot; valide, utilisez <a href="../material/materialid.html">MaterialID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un maillage peut comporter autant de sous-maillages que vous le souhaitez.<br>
+La position d'un sous-maillage est relative à celle du maillage. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freemesh.html">FreeMesh()</a>, <a href="createmesh.html">CreateMesh()</a>, <a href="loadmesh.html">LoadMesh()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=loadmesh.html>LoadMesh()</a> - <a href=index.html>Mesh Index</a> - <a href=meshface.html>MeshFace()</a> -><br><br>
+
+</body></html>

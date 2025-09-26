@@ -1,0 +1,62 @@
+<html><head><title>ReplaceRegularExpression</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReplaceRegularExpression()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>ReplaceRegularExpression</b></font>(#RegularExpression, String$, ReplaceString$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Replaces all strings matching the #RegularExpression with 'ReplaceString$'. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#RegularExpression</i></td>
+<td width="90%"> 
+The regular expression to use. 
+
+</td></tr>
+<tr><td><i>String$</i></td>
+<td> 
+The string to apply the regular expression on. 
+
+</td></tr>
+<tr><td><i>ReplaceString$</i></td>
+<td> 
+The string to use to replace the matched expression. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns a new string with all matched expressions replaced with 'ReplaceString$'. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Back references (usually described as \1, \2, etc.) are not supported. <a href="extractregularexpression.html">ExtractRegularExpression()</a> 
+combined with <a href="../string/replacestring.html">ReplaceString()</a> should achieve the requested behaviour. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; This expression will match every word of 3 letter which begin by a lower case letter,</font>
+  <font color="#006666">; followed with the character 'b' and which ends with an uppercase letter. ex: abC</font>
+  <font color="#006666">;    </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;[a-z]b[A-Z]&quot;)
+    Result$ =<font color="#006666"> ReplaceRegularExpression</font>(0, &quot;abC ABc zbA abc&quot;, &quot;---&quot;)
+    <b><font color="#006666">Debug</font></b> Result$ <font color="#006666">; Will print &quot;--- ABc --- abc&quot;</font>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createregularexpression.html">CreateRegularExpression()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=regularexpressionnamedgroupposition.html>RegularExpressionNamedGroupPosition()</a> - <a href=index.html>RegularExpression Index</a><br><br>
+
+</body></html>

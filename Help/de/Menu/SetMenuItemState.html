@@ -1,0 +1,64 @@
+<html><head><title>SetMenuItemState</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetMenuItemState()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetMenuItemState</b></font>(#Menü, MenueEintrag, Status)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert den Status des angegebenen Menü-Eintrags. Diese Funktion ermöglicht die 
+Darstellung eines Häkchens (&quot;Checkbox&quot;) nahe dem Text des Menü-Eintrags. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menü</i></td>
+<td width="90%"> 
+Das zu verwendende Menü. 
+
+</td></tr>
+<tr><td><i>MenueEintrag</i></td>
+<td> 
+Der Menü-Eintrag, von dem der Status geändert werden soll. 
+
+</td></tr>
+<tr><td><i>Status</i></td>
+<td> 
+Der zu setzende Status. Das Häkchen wird nicht angezeigt, wenn Status gleich 0 
+ist; hat Status einen anderen Wert, wird das Häkchen angezeigt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+<a href="getmenuitemstate.html">GetMenuItemState()</a> kann benutzt werden, um den aktuellen Status des Menü-Eintrags 
+zu ermitteln. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;SetMenuItemState Example&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      MenuTitle</font>(&quot;Project&quot;)
+<font color="#006666">        MenuItem</font>(1, &quot;Changed&quot;)
+<font color="#006666">        SetMenuItemState</font>(0, 1, 1)    <font color="#006666">; setze Häkchen vor den zuvor erstellten Menüeintrag</font>
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/setmenuitemstate.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getmenuitemstate.html">GetMenuItemState()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=opensubmenu.html>OpenSubMenu()</a> - <a href=index.html>Menu Inhaltsverzeichnis</a> - <a href=setmenuitemtext.html>SetMenuItemText()</a> -><br><br>
+
+</body></html>

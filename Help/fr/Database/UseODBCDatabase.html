@@ -1,0 +1,59 @@
+<html><head><title>UseODBCDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseODBCDatabase()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>UseODBCDatabase</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Initialise l'environnement de base de 
+données ODBC pour un usage ultérieur. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Si le résultat est 0, ODBC n'est pas 
+disponible ou dans une version non 
+compatible (ODBC 3.0 ou supérieur est requis) 
+et tous les appels de fonctions de base de 
+données doivent être inhibés. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une fois l'environnement initialisé, une 
+base de données doit être ouverte en utilisant 
+<a href="opendatabase.html">OpenDatabase()</a> avec un nom de base de 
+données ODBC enregistré comme base de données 
+ou <a href="opendatabaserequester.html">OpenDatabaseRequester()</a> avant d'utiliser 
+toutes les autres fonctions des bases de 
+données. 
+<br>
+<br>
+Il peut être utile de lister les pilotes 
+(drivers) disponibles sur la machine à 
+l'aide de la commande 
+<a href="examinedatabasedrivers.html">ExamineDatabaseDrivers()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseODBCDatabase</font>()
+
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, &quot;MySQL-ODBC&quot;, &quot;utilisateur&quot;, &quot;motdepasse&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Connecté à MySQL&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Pas de Connexion : &quot; +<font color="#006666"> DatabaseError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, 
+<a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a>, <a href="usemysqldatabase.html">UseMySQLDatabase()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=usemysqldatabase.html>UseMySQLDatabase()</a> - <a href=index.html>Database Index</a> - <a href=usepostgresqldatabase.html>UsePostgreSQLDatabase()</a> -><br><br>
+
+</body></html>

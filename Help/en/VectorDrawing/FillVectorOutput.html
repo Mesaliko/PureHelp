@@ -1,0 +1,48 @@
+<html><head><title>FillVectorOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FillVectorOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FillVectorOutput</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Fills the entire drawing area (except areas outside the clipping path) with the 
+current drawing source. This operation is equivalent to constructing a path that 
+covers the entire drawing area and calling <a href="fillpath.html">FillPath()</a> on it. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+      <font color="#006666">; make the entire output red</font>
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">      FillVectorOutput</font>()
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="fillpath.html">FillPath()</a>, <a href="clippath.html">ClipPath()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=fillpath.html>FillPath()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=flipcoordinatesx.html>FlipCoordinatesX()</a> -><br><br>
+
+</body></html>

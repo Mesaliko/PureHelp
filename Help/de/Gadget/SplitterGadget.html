@@ -1,0 +1,115 @@
+<html><head><title>SplitterGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SplitterGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SplitterGadget</b></font>(#Gadget, x, y, Breite, Höhe, #Gadget1, #Gadget2 [, Flags]) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein Splitter-Gadget innerhalb der aktuellen Gadgetliste. Dieses Gadget ermöglicht 
+zwei (Child-) Gadgets, welche durch den Anwender mit Hilfe eines Trennbalkens in der Größe 
+verändert (&quot;resized&quot;) werden können. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets. 
+
+</td></tr>
+<tr><td><i>#Gadget1, #Gadget2</i></td>
+<td> 
+Die Gadgets, welche im Splitter platziert werden sollen. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags zum Verändern des Gadget-Verhaltens. Dies kann eine Kombination 
+(verknüpft mit dem bitweisen '|' OR-Operator) der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Splitter_Vertical</font>    : Das Gadget wird vertikal gesplittet (anstelle von horizontal, was der Standard ist).
+  <font color="#924B72">#PB_Splitter_Separator</font>   : Ein Abgrenzungsbalken im 3D-Look wird in den Splitter gezeichnet.
+  <font color="#924B72">#PB_Splitter_FirstFixed</font>  : Wenn das SplitterGadget in der Größe verändert wird, behält das erste Gadget seine Größe.
+  <font color="#924B72">#PB_Splitter_SecondFixed</font> : Wenn das SplitterGadget in der Größe verändert wird, behält das zweite Gadget seine Größe.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, oder Null bei einem Fehler. Wenn 
+<font color="#924B72">#PB_Any</font> als #Gadget Parameter verwendet wurde, dann beinhaltet der Rückgabewert 
+bei Erfolg die automatisch generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Befehle können verwendet werden, um auf das SplitterGadget zuzugreifen: 
+<br>
+<br>
+<a href="getgadgetstate.html">GetGadgetState()</a>: Ermittelt die aktuelle Splitter-Position, in Pixel. 
+<br>
+<a href="setgadgetstate.html">SetGadgetState()</a>: Ändert die aktuelle Splitter-Position, in Pixel. 
+<br>
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Splitter_FirstMinimumSize</font> : Ermittelt die minimale Größe (in Pixel), welche das erste Gadget haben kann.
+  <font color="#924B72">#PB_Splitter_SecondMinimumSize</font>: Ermittelt die minimale Größe (in Pixel), welche das zweite Gadget haben kann.
+  <font color="#924B72">#PB_Splitter_FirstGadget</font>      : Ermittelt die Gadget-Nummer des ersten Gadgets.
+  <font color="#924B72">#PB_Splitter_SecondGadget</font>     : Ermittelt die Gadget-Nummer des zweiten Gadgets.
+</font></pre>
+
+<a href="setgadgetattribute.html">SetGadgetAttribute()</a>: Mit einem der folgenden Attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Splitter_FirstMinimumSize</font> : Legt die minimale Größe (in Pixel) fest, welche das erste Gadget haben kann. 
+  <font color="#924B72">#PB_Splitter_SecondMinimumSize</font>: Legt die minimale Größe (in Pixel) fest, welche das zweite Gadget haben kann.
+  <font color="#924B72">#PB_Splitter_FirstGadget</font>      : Ersetzt das erste Gadget durch ein Neues.
+  <font color="#924B72">#PB_Splitter_SecondGadget</font>     : Ersetzt das zweite Gadget durch ein Neues.
+</font></pre>
+
+<b>Hinweis:</b> Beim Ersetzen eines Gadgets mittels <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, wird das alte Gadget nicht 
+automatisch freigegeben. Es wird stattdessen zurück auf das übergeordnete Fenster des Splitters gesetzt. Dies ermöglicht das 
+Umschalten von Gadgets zwischen Splittern ohne die Notwendigkeit, diese jedes Mal neu zu erstellen. Wenn das alte Gadget 
+freigegeben werden soll, kann zuerst seine Nummer mittels <a href="getgadgetattribute.html">GetGadgetAttribute()</a> ermittelt und das 
+Gadget anschließend mittels <a href="freegadget.html">FreeGadget()</a> freigegeben werden, nachdem es zuvor ersetzt wurde. 
+Beachten Sie bitte, dass ein Gadget nicht gleichzeitig in zwei Splittern vorhanden sein kann. Um daher ein Gadget von einem 
+Splitter in den anderen zu verschieben, muss es zuerst im ersten Splitter ersetzt werden (damit es sich im Hauptfenster 
+befindet) und kann anschließend in den zweiten Splitter verschoben werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 230, 195, &quot;SplitterGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <font color="#924B72">#Button1</font>  = 0 
+    <font color="#924B72">#Button2</font>  = 1
+    <font color="#924B72">#Splitter</font> = 2
+    
+<font color="#006666">    ButtonGadget</font>(<font color="#924B72">#Button1</font>, 0, 0, 0, 0, &quot;Button 1&quot;) <font color="#006666">; es besteht keine Notwendigkeit, die Größe oder Position</font>
+<font color="#006666">    ButtonGadget</font>(<font color="#924B72">#Button2</font>, 0, 0, 0, 0, &quot;Button 2&quot;) <font color="#006666">; festzulegen, da sie automatisch in der Größe angepasst werden</font>
+<font color="#006666">    SplitterGadget</font>(<font color="#924B72">#Splitter</font>, 5, 5, 220, 120, <font color="#924B72">#Button1</font>, <font color="#924B72">#Button2</font>, <font color="#924B72">#PB_Splitter_Separator</font>)
+    
+<font color="#006666">    TextGadget</font>(3, 10, 135, 210, 55, &quot;Obiger GUI-Abschnitt zeigt zwei sich - innerhalb des 220x120 SplitterGadget Bereichs - automatisch in der Größe anpassende Schalter.&quot;, <font color="#924B72">#PB_Text_Center</font>)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/splittergadget.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=spingadget.html>SpinGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=stringgadget.html>StringGadget()</a> -><br><br>
+
+</body></html>

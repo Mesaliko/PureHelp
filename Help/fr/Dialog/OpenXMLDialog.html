@@ -1,0 +1,536 @@
+<html><head><title>OpenXMLDialog</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenXMLDialog()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenXMLDialog</b></font>(#Dialog, #XML, Nom$ [, X, Y [, Largeur, Hauteur [, ParentID]]]))</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre l'interface utilisateur spécifiée (fenêtre, boîte de dialogue, etc) et l'affiche à l'écran. 
+<br>
+<br>
+Pour accéder aux gadgets, voir <a href="dialoggadget.html">DialogGadget()</a>. <br>
+Pour obtenir le numéro de la fenêtre, voir <a href="dialogwindow.html">DialogWindow()</a>. <br>
+<br>
+<a href="usedialogscintillagadget.html">UseDialogScintillaGadget()</a>, <a href="usedialogopenglgadget.html">UseDialogOpenGLGadget()</a>, <a href="usedialogwebgadget.html">UseDialogWebGadget()</a> et <a href="usedialogwebviewgadget.html">UseDialogWebViewGadget()</a> 
+peuvent être utilisés pour activer la prise en charge de ces gadgets dans la bibliothèque de dialogue. 
+Ils ne sont pas activés par défaut pour réduire l'encombrement de la bibliothèque de boîtes de dialogue. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Dialog</i></td>
+<td width="90%"> 
+L'interface utilisateur à utiliser. 
+<br>
+<br>
+Elle doit être créée au préalable avec 
+<a href="createdialog.html">CreateDialog()</a>. 
+
+</td></tr>
+<tr><td><i>#XML</i></td>
+<td> 
+Le code <a href="../xml/index.html">xml</a> à utiliser. 
+<br>
+<br>
+Il doit être créé au préalable avec 
+<a href="../xml/loadxml.html">LoadXML()</a>, <a href="../xml/createxml.html">CreateXML()</a>, <a href="../xml/catchxml.html">CatchXML()</a> ou <a href="../xml/parsexml.html">ParseXML()</a>.<br>
+Cela signifie qu'il est possible de créer 
+des interfaces utilisateur à la volée 
+avec <a href="../xml/createxml.html">CreateXML()</a>, <a href="../xml/catchxml.html">CatchXML()</a> ou <a href="../xml/parsexml.html">ParseXML()</a>. <br>
+Voir les remarques ci-dessous pour prendre 
+connaissance des attributs XML supportés. <br>
+Lorsque le script XML est compris dans le 
+code, il est peut être plus aisé d'utiliser 
+la quote (guillemet simple) pour les 
+attributs XML (c'est une syntaxe XML 
+parfaitement admise). 
+
+</td></tr>
+<tr><td><i>Nom$</i></td>
+<td> 
+Le nom de l'interface utilisateur à ouvrir. 
+<br>
+<br>
+En effet, un fichier XML peut contenir le 
+code de plusieurs interfaces utilisateur. 
+
+</td></tr>
+<tr><td><i>X, Y (optionnel)</i></td>
+<td> 
+Les coordonnées x, y (en pixels) de 
+l'interface utilisateur. 
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur (optionnel)</i></td>
+<td> 
+La taille (en pixels) de l'interface 
+utilisateur. 
+<br>
+<br>
+Si la taille est plus petite que la taille 
+calculée d'après le code du fichier XML et 
+d'après l'agencement automatique des gadgets 
+ou &quot;layout&quot;, alors ces paramètres optionnels 
+ne seront pas pris en compte et la taille 
+calculée sera bien utilisée.<br>
+Sans ces paramètres optionnels, la taille de 
+la boîte de dialogue aura la plus petite 
+taille possible. 
+
+</td></tr>
+<tr><td><i>ParentID (optionnel)</i></td>
+<td> 
+L'identifiant de la fenêtre parent. 
+<br>
+<br>
+Un identifiant de fenêtre valide peut être 
+récupéré avec <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'interface 
+utilisateur a été ouverte avec succès ou zéro 
+sinon. <br>
+Pour obtenir plus d'informations sur l'erreur 
+qui a eu lieu, voir <a href="dialogerror.html">DialogError()</a>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">----------------------------------------------------------------
+   .: Format XML d'une interface utilisateur :.
+----------------------------------------------------------------
+
+  I. Attributs communs 
+  --------------------
+
+  width     - Largeur minimale. Valeur positive ou nulle (par défaut=&quot;0&quot;)
+  height    - Hauteur minimale. Valeur positive ou nulle (par défaut=&quot;0&quot;)
+
+  id        - Numéro d'identification d'un gadget ou d'une fenêtre (par défaut c'est #PB_Any). Il peut être une constante runtime
+  name      - Une chaîne de caractères qui identifie l'objet (principalement pour <a href="dialoggadget.html">DialogGadget()</a>, insensible à la casse) (par défaut=&quot;&quot;)
+  text      - Texte associé à l'objet (par défaut=&quot;&quot;)
+
+  flags     - Options du gadget/fenêtre, comme &quot;<font color="#924B72">#PB_Window_Borderless</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>&quot;  (par défaut=&quot;&quot;)
+
+  min        - Valeur minimum 
+  max        - Valeur maximum
+  value      - Valeur courante
+
+  invisible - Egal à &quot;yes&quot;, l'objet créé est invisible (par défaut=&quot;no&quot;)
+  disabled  - Egal à &quot;yes&quot;, l'objet créé est désactivé (seulement pour les gadgets) (par défaut=&quot;no&quot;)
+
+  colspan   - Seulement à l'intérieur de l'attribut &lt;gridbox&gt;, permet à un élément de couvrir plusieurs lignes / colonnes
+  rowspan     (par défaut=&quot;1&quot;)
+
+  Remarque : Tous ces attributs sont facultatifs.
+
+
+  II. L'élément racine
+  --------------------
+
+  &lt;window&gt;  : Une fenêtre unique
+  &lt;/window&gt;
+  
+  ou 
+    
+  &lt;dialogs&gt; : Plusieurs fenêtres dans un même fichier XML
+    &lt;window name=&quot;PremiereFenetre&quot;&gt;
+    &lt;/window&gt;
+    &lt;window name=&quot;SecondeFenetre&quot;&gt;
+    &lt;/window&gt;
+    ...
+  &lt;/dialogs&gt;
+
+
+  III. L'élément fenêtre 
+  ----------------------
+
+  &lt;window&gt;
+  &lt;/window&gt;
+  
+  Clés reconnues dans le code XML:
+  ................................
+
+  Tous les attributs communs ainsi que les clés suivantes:
+  
+  minwidth  = 'auto' ou une valeur numérique 
+  maxwidth  = 'auto' ou une valeur numérique
+  minheight = 'auto' ou une valeur numérique
+  maxheight = 'auto' ou une valeur numérique
+  
+  Permet de définir les tailles minimum et maximum d'une fenêtre. 
+  Si la valeur est 'auto' alors la taille est calculée en fonction de la taille 
+  (calculée ou prédéfinie) des éléments contenus dans la fenêtre.
+                
+
+   - Crée la fenêtre
+   - Peut avoir tous les attributs communs.
+   - Est un conteneur à un seul élément.
+   - Si plus d'un élément &lt;window&gt; est présent, l'attribut 'name' est utilisé pour les identifier.
+   - Tous les éléments d'interface graphique ne peuvent être placés qu'ici.
+  
+  
+  IV. Les élements Boîtes, agencement et réorganisation automatique des gadgets (Layout)
+  --------------------------------------------------------------------------------------
+  
+  **************************************************************************************
+  hbox et vbox
+  **************************************************************************************
+
+    Boîtes qui disposent les éléments horizontalement ou verticalement. 
+    Peut contenir n'importe quel nombre d'éléments.
+
+    Clés reconnues dans le code XML:
+    ................................
+
+    Tous les attributs communs ainsi que les clés suivantes:
+  
+    spacing   = Espace à ajouter entre les éléments (par défaut=5)
+  
+    expand    = yes           - Les éléments deviennent plus grands pour remplir tout l'espace (par défaut)
+                no            - Les éléments ne s'étendent pas pour remplir tout l'espace
+                equal         - Force les éléments à avoir une taille égale
+                item:&lt;numéro&gt; - Elargit un seul élément, si l'espace est disponible
+  
+    align     = top/center/bottom      - Ne s'applique que lorsque l'attribut expand=&quot;no&quot; pour les vbox et top est l'attribut par défaut
+              = left/center/right      - Ne s'applique que lorsque l'attribut expand=&quot;no&quot; pour les hbox et left est l'attribut par défaut
+                                       - Un assemblage de vbox et de hbox permet un alignement complexe top/left/center/bottom/right
+
+  **************************************************************************************
+  gridbox 
+  **************************************************************************************
+  
+    Aligne les éléments dans un tableau. 
+    Peut contenir n'importe quel nombre d'éléments.
+    
+    Clés reconnues dans le code XML:
+    ................................
+
+    Tous les attributs communs ainsi que les clés suivantes:
+  
+    columns    = Nombre de colonnes (par défaut = 2)
+  
+    colspacing = Espace entre les colonnes / lignes (par défaut = 5)
+    rowspacing
+  
+    colexpand = yes           - Les éléments deviennent plus grands pour remplir tout l'espace (par défaut)
+    rowexpand   no            - Les éléments ne s'étendent pas pour remplir tout l'espace
+                equal         - Force les éléments à avoir une taille égale
+                item:&lt;numéro&gt; - Elargit un seul élément, si l'espace est disponible
+                
+                Pour colexpand, par défaut=yes
+                Pour rowexpand, par défaut=no
+  
+    Tous les éléments d'un gridbox peuvent utiliser les clés suivantes:
+    colspan = nombre de colonnes à fusionner (par défaut = 1)
+    rowspan = nombre de lignes à fusionner
+  
+  **************************************************************************************
+  multibox
+  **************************************************************************************
+   
+    Une boîte avec de multiples éléments dans la même position. 
+    Permet d'utiliser plusieurs conteneurs et de n'en montrer qu'un seul à la fois.
+    Peut contenir n'importe quel nombre d'éléments.
+   
+    Clés reconnues dans le code XML:
+    ................................
+
+    Tous les attributs communs.
+    
+  **************************************************************************************
+  singlebox
+  **************************************************************************************
+   
+    Une boîte avec un seul élément.
+    Utilisée uniquement pour ajouter une marge supplémentaire ou 
+    des propriétés d'alignement supplémentaires à un élément.
+   
+     Clés reconnues dans le code XML:
+    ................................
+
+     Tous les attributs communs ainsi que les clés suivantes:
+  
+    margin = Marge autour du contenu (par défaut = 10)
+             Peut être un nombre unique (= pour toutes les marges), ou une combinaison de
+             top:&lt;num&gt;,left:&lt;num&gt;,right:&lt;num&gt;,bottom:&lt;num&gt;,vertical:&lt;num&gt;,horizontal:&lt;num&gt;
+             Exemple: &quot;vertical:5,left:10,right:0&quot;
+  
+    expand = yes        - Les éléments deviennent plus grands pour remplir tout l'espace (par défaut)
+             no         - Les éléments ne s'étendent pas pour remplir tout l'espace
+             vertical   - Elargissement verticalement seulement
+             horizontal - Elargissement horizontalement seulement
+  
+    expandwidth  = Taille maximale d'élargissement des éléments. Si la taille demandée est supérieure à
+    expandheight   ce paramètre alors la taille de la requête est utilisée (le contenu ne peut pas devenir plus petit)
+                   par défaut=0
+  
+    align  = C'est une combinaison de top, left, bottom, right et center. (n'est efficace que lorsque expand &lt;&gt; yes)
+             Exemple: &quot;top,center&quot; ou &quot;top,left&quot; (par défaut) 
+             
+             
+             
+  V. Les éléments Gadget 
+  ----------------------
+
+  Clés reconnues dans le code XML:
+  ................................
+
+  Tous les attributs XML communs sont pris en charge.
+  
+  De plus, pour lier une procédure d'événement directement dans le fichier XML, 
+  les attributs suivants sont disponibles pour les gadgets:
+  
+    onevent            = EventProcedure() - Liaison d'événements génériques, pour tous les types d'événements.
+    onchange           = EventProcedure() - Liaison de type #PB_EventType_Change           (uniquement pour les gadgets qui supportent ce type d'événement).
+    onfocus            = EventProcedure() - Liaison de type #PB_EventType_Focus            (uniquement pour les gadgets qui supportent ce type d'événement).
+    onlostfocus        = EventProcedure() - Liaison de type #PB_EventType_LostFocus        (uniquement pour les gadgets qui supportent ce type d'événement).
+    ondragstart        = EventProcedure() - Liaison de type #PB_EventType_DragStart        (uniquement pour les gadgets qui supportent ce type d'événement).
+    onrightclick       = EventProcedure() - Liaison de type #PB_EventType_RightClick       (uniquement pour les gadgets qui supportent ce type d'événement).
+    onleftclick        = EventProcedure() - Liaison de type #PB_EventType_LeftClick        (uniquement pour les gadgets qui supportent ce type d'événement).
+    onrightdoubleclick = EventProcedure() - Liaison de type #PB_EventType_RightDoubleClick (uniquement pour les gadgets qui supportent ce type d'événement).
+    onleftdoubleclick  = EventProcedure() - Liaison de type #PB_EventType_LeftDoubleClick  (uniquement pour les gadgets qui supportent ce type d'événement).
+    
+  'EventProcedure()' doit être déclarée comme 'Runtime' dans le code principal, et doit respecter le format 
+  de la procedure BindEvent() de la bibliothèque PureBasic 'Window'.
+  En fait c'est BindGadgetEvent() qui est appelée ;)
+  
+  Les gadgets supportés sont :
+  &lt;button&gt;
+  &lt;buttonimage&gt;
+  &lt;calendar&gt;
+  &lt;canvas&gt;
+  &lt;checkbox&gt;
+  &lt;combobox&gt; 
+  &lt;container&gt;    - Conteneur à un seul élément
+  &lt;date&gt;
+  &lt;editor&gt;
+  &lt;explorercombo&gt;
+  &lt;explorerlist&gt; 
+  &lt;explorertree&gt; 
+  &lt;frame&gt;        - Conteneur à un seul élément (Avec bordures standards seulement)
+  &lt;hyperlink&gt;
+  &lt;ipaddress&gt;
+  &lt;image&gt;
+  &lt;listicon&gt; 
+  &lt;listview&gt; 
+  &lt;opengl&gt;       - UseDialogOpenGLGadget() doit être appelé pour activer le support &lt;opengl&gt;.
+  &lt;option group&gt; - Utilise le même numéro de 'group' pour créer des <a href="../gadget/optiongadget.html">OptionGadget()</a> liés entre eux.
+  &lt;panel&gt;        - Peut contenir &lt;tab&gt; seulement
+  &lt;progressbar min max valeur&gt;
+  &lt;scintilla&gt;    - Le callback reste vide. UseDialogScintillaGadget() doit être appelé pour activer la prise en charge de &lt;scintilla&gt;.  
+  &lt;scrollarea scrolling=&quot;=&quot;vertical, horizontal ou les deux (par défaut)&quot; innerheight=&quot;valeur ou auto (par défaut)&quot; innerwidth=&quot;valeur ou auto (par défaut)&quot; pas&gt; 
+                 - Conteneur à un seul élément
+  &lt;scrollbar min max page value&gt; 
+                 - page = Longueur de la page
+  &lt;spin min max value&gt;
+  &lt;splitter firstmin=&quot;valeur ou auto&quot; secondmin&gt; 
+                 - Doit contenir 2 éléments, (c'est un container a 2 &quot;éléments-enfants&quot;), 
+                   la taille minimum est déterminée par les gadgets contenus par ces 2 éléments. 
+                   Si 'auto' est spécifié, la valeur min sera la taille minimale de l'enfant.
+  &lt;string&gt;
+  &lt;text&gt;
+  &lt;trackbar min max valeur&gt;
+  &lt;tree&gt; 
+  &lt;web&gt;       - UseDialogWebGadget() doit être appelé pour activer la prise en charge &lt;web&gt;.
+  &lt;webview&gt;   - UseDialogWebViewGadget() doit être appelé pour activer la prise en charge de &lt;webview&gt;.
+
+  Éléments liés à Gadget:
+  &lt;tab&gt;          - Onglet, conteneur à un seul élément (l'attribut 'text' est supporté).
+  
+  Element Spécial :
+  &lt;empty&gt;        - Un élément vide, utile quand il est nécessaire d'avoir un espace entre l'élément, 
+                   afin de les aligner aux bordures par exemple.
+
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Simple fenêtre redimensionnable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Dialog</font> = 0
+  <font color="#924B72">#Xml</font> = 0
+  
+  XML$ = &quot;&lt;window id='#PB_Any' name='test' text='test' minwidth='auto' minheight='auto' flags='#PB_Window_ScreenCentered | #PB_Window_SystemMenu | #PB_Window_SizeGadget'&gt;&quot; +
+         &quot;  &lt;panel&gt;&quot; +
+         &quot;    &lt;tab text='Premier Onglet'&gt;&quot; +
+         &quot;      &lt;vbox expand='item:2'&gt;&quot; +
+         &quot;        &lt;hbox&gt;&quot; +
+         &quot;          &lt;button text='Bouton 1'/&gt;&quot; +
+         &quot;          &lt;checkbox text='Case à cocher 1'/&gt;&quot; +
+         &quot;          &lt;button text='Bouton 2'/&gt;&quot; +
+         &quot;        &lt;/hbox&gt;&quot; +
+         &quot;        &lt;editor text='Contenu...' height='150'/&gt;&quot; +
+         &quot;      &lt;/vbox&gt;&quot; +
+         &quot;    &lt;/tab&gt;&quot; +
+         &quot;    &lt;tab text='Second Onglet'&gt;&quot; +
+         &quot;    &lt;/tab&gt;&quot; +
+         &quot;  &lt;/panel&gt;&quot; +
+         &quot;&lt;/window&gt;&quot;
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(<font color="#924B72">#Xml</font>, XML$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(<font color="#924B72">#Xml</font>) = <font color="#924B72">#PB_XML_Success</font>
+        
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateDialog</font>(<font color="#924B72">#Dialog</font>) <b><font color="#006666">And</font></b> <font color="#006666">OpenXMLDialog</font>(<font color="#924B72">#Dialog</font>, <font color="#924B72">#Xml</font>, &quot;test&quot;)
+      
+      <b><font color="#006666">Repeat</font></b>
+        Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> 
+      
+    <b><font color="#006666">Else</font></b>  
+      <b><font color="#006666">Debug</font></b> &quot;Erreur de la bibliothèque -Dialog- : &quot; +<font color="#006666"> DialogError</font>(<font color="#924B72">#Dialog</font>)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Erreur XML : &quot; +<font color="#006666"> XMLError</font>(<font color="#924B72">#Xml</font>) + &quot; (Ligne: &quot; +<font color="#006666"> XMLErrorLine</font>(<font color="#924B72">#Xml</font>) + &quot;)&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> Boîte 'Multibox'</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Dialog</font> = 0
+  <font color="#924B72">#Xml</font> = 0
+  
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Enumeration</font></b> Gadget
+    <font color="#924B72">#ListView</font>
+    <font color="#924B72">#GeneralContainer</font>
+    <font color="#924B72">#EditorContainer</font>
+    <font color="#924B72">#BackupContainer</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">ShowPanels</font>()
+    
+<font color="#006666">    HideGadget</font>(<font color="#924B72">#GeneralContainer</font>, <font color="#924B72">#True</font>)
+<font color="#006666">    HideGadget</font>(<font color="#924B72">#EditorContainer</font>, <font color="#924B72">#True</font>) 
+<font color="#006666">    HideGadget</font>(<font color="#924B72">#BackupContainer</font>, <font color="#924B72">#True</font>)
+    
+    <b><font color="#006666">Select</font></b> <font color="#006666">GetGadgetState</font>(<font color="#924B72">#ListView</font>)
+      <b><font color="#006666">Case</font></b> 0
+<font color="#006666">        HideGadget</font>(<font color="#924B72">#GeneralContainer</font>, <font color="#924B72">#False</font>)
+        
+      <b><font color="#006666">Case</font></b> 1
+<font color="#006666">        HideGadget</font>(<font color="#924B72">#EditorContainer</font>, <font color="#924B72">#False</font>)
+        
+      <b><font color="#006666">Case</font></b> 2
+<font color="#006666">        HideGadget</font>(<font color="#924B72">#BackupContainer</font>, <font color="#924B72">#False</font>)
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">OnListViewEvent</font>()
+<font color="#006666">    ShowPanels</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  XML$ = &quot;&lt;window id='#PB_Any' name='test' text='Préférences' minwidth='auto' minheight='auto' flags='#PB_Window_ScreenCentered | #PB_Window_SystemMenu | #PB_Window_SizeGadget'&gt;&quot; +
+         &quot;  &lt;hbox expand='item:2'&gt;&quot; +
+         &quot;    &lt;listview id='#ListView' width='100' onEvent='OnListViewEvent()'/&gt;&quot; +
+         &quot;    &lt;multibox&gt;&quot; +
+         &quot;&quot; +
+         &quot;      &lt;container id='#GeneralContainer' invisible='yes'&gt;&quot; +
+         &quot;        &lt;frame text='Général'&gt;&quot; +
+         &quot;          &lt;vbox expand='no'&gt;&quot; +
+         &quot;            &lt;checkbox text='Activer la LED rouge'/&gt;&quot; +
+         &quot;            &lt;checkbox text='Activer la LED verte'/&gt;&quot; +
+         &quot;          &lt;/vbox&gt;&quot; +
+         &quot;        &lt;/frame&gt;&quot; +
+         &quot;      &lt;/container&gt;&quot; +
+         &quot;&quot; +
+         &quot;      &lt;container id='#EditorContainer' invisible='yes'&gt;&quot; +
+         &quot;        &lt;frame text='Editeur'&gt;&quot; +
+         &quot;          &lt;vbox expand='no'&gt;&quot; +
+         &quot;            &lt;checkbox text='Mode lecture seule'/&gt;&quot; +
+         &quot;            &lt;checkbox text='Dupliquer la ligne automatiquement'/&gt;&quot; +
+         &quot;            &lt;checkbox text='Activer les polices monospaces'/&gt;&quot; +
+         &quot;          &lt;/vbox&gt;&quot; +
+         &quot;        &lt;/frame&gt;&quot; +
+         &quot;      &lt;/container&gt;&quot; +
+         &quot;&quot; +
+         &quot;      &lt;container  id='#BackupContainer' invisible='yes'&gt;&quot; +
+         &quot;      &lt;frame text='Backup'&gt;&quot; +
+         &quot;        &lt;vbox expand='no'&gt;&quot; +
+         &quot;          &lt;checkbox text='Activer le backup'/&gt;&quot; +
+         &quot;        &lt;/vbox&gt;&quot; +
+         &quot;      &lt;/frame&gt;&quot; +
+         &quot;      &lt;/container&gt;&quot; +
+         &quot;&quot; +
+         &quot;    &lt;/multibox&gt;&quot; +
+         &quot;  &lt;/hbox&gt;&quot; +
+         &quot;&lt;/window&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(<font color="#924B72">#Xml</font>, XML$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(<font color="#924B72">#Xml</font>) = <font color="#924B72">#PB_XML_Success</font>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateDialog</font>(<font color="#924B72">#Dialog</font>) <b><font color="#006666">And</font></b> <font color="#006666">OpenXMLDialog</font>(<font color="#924B72">#Dialog</font>, <font color="#924B72">#Xml</font>, &quot;test&quot;)
+      
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#ListView</font>, -1, &quot;Général&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#ListView</font>, -1, &quot;Editeur&quot;)
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#ListView</font>, -1, &quot;Backup&quot;)
+      
+<font color="#006666">      SetGadgetState</font>(<font color="#924B72">#ListView</font>, 0)
+      
+<font color="#006666">      ShowPanels</font>()
+      
+      <b><font color="#006666">Repeat</font></b>
+        Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> 
+      
+    <b><font color="#006666">Else</font></b>  
+      <b><font color="#006666">Debug</font></b> &quot;Erreur de la bibliothèque -Dialog- : &quot; +<font color="#006666"> DialogError</font>(<font color="#924B72">#Dialog</font>)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Erreur XML : &quot; +<font color="#006666"> XMLError</font>(<font color="#924B72">#Xml</font>) + &quot; (Ligne: &quot; +<font color="#006666"> XMLErrorLine</font>(<font color="#924B72">#Xml</font>) + &quot;)&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Boîte Gridbox</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#Dialog</font> = 0
+  <font color="#924B72">#Xml</font> = 0
+  
+  XML$ = &quot;&lt;window id='#PB_Any' name='test' text='Gridbox' minwidth='auto' minheight='auto' flags='#PB_Window_ScreenCentered | #PB_Window_SystemMenu | #PB_Window_SizeGadget'&gt;&quot; +
+         &quot;    &lt;gridbox columns='6'&gt;&quot; +
+         &quot;          &lt;button text='Bouton 1' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 2' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 3' colspan='3' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 4' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 5' rowspan='2' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 6' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 7' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 8' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 9' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 10' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 11' /&gt;&quot; +
+         &quot;          &lt;button text='Bouton 12' /&gt;&quot; +
+         &quot;    &lt;/gridbox&gt;&quot; +
+         &quot;  &lt;/window&gt;&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ParseXML</font>(<font color="#924B72">#Xml</font>, XML$) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(<font color="#924B72">#Xml</font>) = <font color="#924B72">#PB_XML_Success</font>
+      
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateDialog</font>(<font color="#924B72">#Dialog</font>) <b><font color="#006666">And</font></b> <font color="#006666">OpenXMLDialog</font>(<font color="#924B72">#Dialog</font>, <font color="#924B72">#Xml</font>, &quot;test&quot;)
+      
+      <b><font color="#006666">Repeat</font></b>
+        Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> 
+      
+    <b><font color="#006666">Else</font></b>  
+      <b><font color="#006666">Debug</font></b> &quot;Erreur de la bibliothèque -Dialog- : &quot; +<font color="#006666"> DialogError</font>(<font color="#924B72">#Dialog</font>)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Erreur XML : &quot; +<font color="#006666"> XMLError</font>(<font color="#924B72">#Xml</font>) + &quot; (Ligne: &quot; +<font color="#006666"> XMLErrorLine</font>(<font color="#924B72">#Xml</font>) + &quot;)&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createdialog.html">CreateDialog()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isdialog.html>IsDialog()</a> - <a href=index.html>Dialog Index</a> - <a href=refreshdialog.html>RefreshDialog()</a> -><br><br>
+
+</body></html>

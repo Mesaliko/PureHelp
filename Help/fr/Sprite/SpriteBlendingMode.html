@@ -1,0 +1,189 @@
+<html><head><title>SpriteBlendingMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpriteBlendingMode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SpriteBlendingMode</b></font>(ModeSource, ModeDestination)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la façon dont les couleurs des 
+sprites sont mélangées avec le fond 
+lors de l'utilisation de 
+<a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ModeSource, ModeDestination</i></td>
+<td width="90%"> 
+Les modes source et destination peuvent 
+prendre une valeur quelconque parmi les 
+valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_BlendZero</font>
+  <font color="#924B72">#PB_Sprite_BlendOne</font>
+  <font color="#924B72">#PB_Sprite_BlendSourceColor</font>
+  <font color="#924B72">#PB_Sprite_BlendInvertSourceColor</font>
+  <font color="#924B72">#PB_Sprite_BlendDestinationColor</font>
+  <font color="#924B72">#PB_Sprite_BlendInvertDestinationColor</font>
+  <font color="#924B72">#PB_Sprite_BlendSourceAlpha</font>
+  <font color="#924B72">#PB_Sprite_BlendInvertSourceAlpha</font>
+  <font color="#924B72">#PB_Sprite_BlendDestinationAlpha</font>
+  <font color="#924B72">#PB_Sprite_BlendInvertDestinationAlpha</font>
+</font></pre>
+Les valeurs par défaut sont 
+SpriteBlendingMode(#PB_Sprite_BlendSourceAlpha, #PB_Sprite_BlendInvertSourceAlpha). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <font color="#006666">;Structure contenant le nom et le mode de transparence</font>
+<b><font color="#006666">Structure</font></b> ModeTransparence
+  Nom$
+  Numero.l
+<b><font color="#006666">EndStructure</font></b>
+
+ <font color="#006666">;Liste qui contient tous les &quot;ModeSource&quot;</font>
+<b><font color="#006666">NewList</font></b> <font color="#006666">ModeSource</font>.ModeTransparence()
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendZero&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendZero</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendOne&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendOne</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendSourceColor&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendSourceColor</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendInvertSourceColor&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendInvertSourceColor</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendDestinationColor&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendDestinationColor</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendInvertDestinationColor&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendInvertDestinationColor</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendSourceAlpha&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendSourceAlpha</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendInvertSourceAlpha&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendInvertSourceAlpha</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;#PB_Sprite_BlendDestinationAlpha&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendDestinationAlpha</font>
+<font color="#006666">AddElement</font>(<font color="#006666">ModeSource</font>())   
+<font color="#006666">ModeSource</font>()\Nom$ = &quot;PB_Sprite_BlendInvertDestinationAlpha&quot;
+<font color="#006666">ModeSource</font>()\Numero =<font color="#924B72">#PB_Sprite_BlendInvertDestinationAlpha</font>
+
+ <font color="#006666">;Liste qui contient tous les &quot;ModeDestination&quot;</font>
+<b><font color="#006666">NewList</font></b> <font color="#006666">ModeDestination</font>.ModeTransparence()
+<font color="#006666">CopyList</font>(<font color="#006666">ModeSource</font>(),<font color="#006666"> ModeDestination</font>())
+
+ <font color="#006666">;Initialisation des sprites et du clavier</font>
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+
+ <font color="#006666">;Création de l'image de fond qui permettra de voir la transparence des sprites</font>
+<font color="#006666">CreateImage</font>(1,800,600,32)
+<font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(1))
+<font color="#006666">Box</font>(0,0,800,600,<font color="#006666">RGBA</font>(255,255,255,255))
+<b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 1000
+<font color="#006666">  Ellipse</font>(<font color="#006666">Random</font>(800,1),<font color="#006666"> Random</font>(600,1),<font color="#006666"> Random</font>(8,1),<font color="#006666"> Random</font>(8,1) ,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666">Random</font>(255),<font color="#006666">Random</font>(255))) 
+<b><font color="#006666">Next</font></b> i
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Ouverture d'un écran</font>
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+
+ <font color="#006666">;Sprite Cible.</font>
+<font color="#006666">CreateSprite</font>(0,100,100,<font color="#924B72">#PB_Sprite_AlphaBlending</font>)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">Circle</font>(50,50,49,<font color="#006666">RGBA</font>(255,255,0,255))
+<font color="#006666">Circle</font>(50,50,40,<font color="#006666">RGBA</font>(0,255,0,128))
+<font color="#006666">Circle</font>(50,50,30,<font color="#006666">RGBA</font>(0,255,255,128))
+<font color="#006666">Circle</font>(50,50,20,<font color="#006666">RGBA</font>(0,0,255,128))
+<font color="#006666">Circle</font>(50,50,10,<font color="#006666">RGBA</font>(255,0,0,64))
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Pour toutes les combinaisons entre le ModeSource et le ModeDestination</font>
+<b><font color="#006666">ForEach</font></b> <font color="#006666">ModeSource</font>()
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">ModeDestination</font>()
+    
+    <font color="#006666">;Le programme se termine si on appuie longtemps sur la touche Echap (ESC)</font>
+<font color="#006666">    ExamineKeyboard</font>() 
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+      <b><font color="#006666">End</font></b>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">;Affichage du fond et de quelques informations</font>
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">    DrawImage</font>(<font color="#006666">ImageID</font>(1),1,1)
+<font color="#006666">    DrawText</font>(0, 0, &quot;Appuyer 5 secondes sur Echap pour quitter&quot;)
+<font color="#006666">    DrawText</font>(50, 100,<font color="#006666"> ModeSource</font>()\Nom$+&quot; / &quot;+<font color="#006666">ModeDestination</font>()\Nom$,<font color="#006666"> RGB</font>(255,255,255),<font color="#006666"> RGB</font>(255,0,0))
+<font color="#006666">    DrawText</font>(50, 270, &quot;Couleur transparente = Noire&quot;,<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">    DrawText</font>(50, 470, &quot;Couleur transparente = Rouge&quot;,<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">    StopDrawing</font>()
+    
+    <font color="#006666">;TRANSPARENCE du sprite : Couleur noire par défaut</font>
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplaySprite</font>(0, 50, 160)
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    TransparentSpriteColor</font>(0,<font color="#006666"> RGBA</font>(0,0,0,128))
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 200, 160,180)
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 350, 160,128,<font color="#006666">RGBA</font>(255,0,0,180))
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 500, 160,0,<font color="#006666">RGBA</font>(255,0,0,180))
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 500, 160,255,<font color="#006666">RGBA</font>(255,0,0,180))
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplaySprite</font>(0, 50, 360)
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+    
+    <font color="#006666">;TRANSPARENCE du sprite : Couleur rouge</font>
+<font color="#006666">    TransparentSpriteColor</font>(0,<font color="#006666"> RGBA</font>(255,0,0,180))
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 200, 360,180)
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 350, 360,180)
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 500, 360,0)
+    
+<font color="#006666">    SpriteBlendingMode</font>(<font color="#006666">ModeSource</font>()\Numero,<font color="#006666"> ModeDestination</font>()\Numero)
+<font color="#006666">    DisplayTransparentSprite</font>(0, 500, 360,255)
+    
+    <font color="#006666">;Affichage à l'écran  </font>
+<font color="#006666">    FlipBuffers</font>()
+    
+    <font color="#006666">;Effacer le buffer</font>
+<font color="#006666">    ClearScreen</font>(<font color="#006666">RGBA</font>(255,255,255,255))
+    
+    <font color="#006666">;Attendre 3 secondes</font>
+<font color="#006666">    Delay</font>(3000)
+    
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=savesprite.html>SaveSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=spritecollision.html>SpriteCollision()</a> -><br><br>
+
+</body></html>

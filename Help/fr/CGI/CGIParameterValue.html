@@ -1,0 +1,83 @@
+<html><head><title>CGIParameterValue</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CGIParameterValue()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CGIParameterValue</b></font>(Nom$ [, Index])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la valeur du paramètre spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Nom$</i></td>
+<td width="90%"> 
+Le nom du paramètre. 
+<br>
+<br>
+Le nom du paramètre est sensible à la 
+casse.  <br>
+Ce paramètre sera ignoré si un 
+&quot;Index&quot; est spécifié. 
+
+</td></tr>
+<tr><td><i>Index (optionnel)</i></td>
+<td> 
+L'index du paramètre à chercher. 
+<br>
+<br>
+La première valeur de l'indice commence 
+à 0. 
+<br>
+Si spécifié, la valeur du paramètre 'Nom$' 
+est ignorée (sauf si <font color="#924B72">#PB_Ignore</font> est utilisé). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la valeur du paramètre spécifié. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="cgiparametername.html">CGIParameterName()</a> peut être utilisé pour 
+obtenir le nom d'un paramètre spécifié. 
+<br>
+Pour obtenir le nombre de paramètres 
+disponibles, utiliser <a href="countcgiparameters.html">CountCGIParameters()</a>. 
+<br>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>() <b><font color="#006666">Or</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">ReadCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Ecrit les en-têtes pour informer le navigateur du format du contenu</font>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - parametres&lt;/title&gt;&lt;body&gt;&quot; +
+                 &quot;NbParametres: &quot; +<font color="#006666"> CountCGIParameters</font>() + &quot;&lt;br&gt;&lt;br&gt;&quot;)
+  
+  <font color="#006666">; La liste des tous les paramètres et affiche leur nom et leur valeur</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> <font color="#006666">CountCGIParameters</font>()-1 
+<font color="#006666">    WriteCGIString</font>(<font color="#006666">CGIParameterName</font>(k) + &quot;: &quot; +<font color="#006666"> CGIParameterValue</font>(&quot;&quot;, k) + &quot;&lt;br&gt;&quot;)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  WriteCGIString</font>(&quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="countcgiparameters.html">CountCGIParameters()</a>, <a href="cgiparametername.html">CGIParameterName()</a>, 
+<a href="cgiparametertype.html">CGIParameterType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=cgiparametertype.html>CGIParameterType()</a> - <a href=index.html>CGI Index</a> - <a href=cgivariable.html>CGIVariable()</a> -><br><br>
+
+</body></html>

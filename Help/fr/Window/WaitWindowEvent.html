@@ -1,0 +1,179 @@
+<html><head><title>WaitWindowEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WaitWindowEvent()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>WaitWindowEvent</b></font>([Minuteur])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Attend qu'un nouvel évènement se 
+produise. 
+<br>
+<br>
+Cette fonction est identique à 
+<a href="windowevent.html">WindowEvent()</a>, mais en plus, elle 
+bloque l'exécution du programme, 
+ce qui est très important dans un 
+environnement multi-tâches. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Minuteur (optionnel)</i></td>
+<td width="90%"> 
+Permet de spécifier le temps maximal 
+(en millisecondes) durant lequel la 
+fonction sera bloquante si aucun 
+évènement ne survient. 
+<br>
+<br>
+Si aucun délai n'est spécifié, il 
+attend indéfiniment jusqu'à ce qu'un 
+évènement se produise. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'évènement qui s'est produit. 
+<br>
+<br>
+<a href="event.html">Event()</a> peut être utilisé pour récupérer cette valeur. 
+<br>
+<br>
+Comme avec la fonction <a href="windowevent.html">WindowEvent()</a>, 
+les évènements possibles sont : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Event_Menu</font>            : Un <a href="../menu/index.html">menu</a> a été sélectionné
+  <font color="#924B72">#PB_Event_Gadget</font>          : Un <a href="../gadget/index.html">gadget</a> a été cliqué
+  <font color="#924B72">#PB_Event_SysTray</font>         : Une icône dans la zone <a href="../systray/index.html">SysTray</a> a été cliquée 
+  <font color="#924B72">#PB_Event_Timer</font>           : Le temps d'un <a href="addwindowtimer.html">minuteur</a> s'est écoulé
+  <font color="#924B72">#PB_Event_CloseWindow</font>     : L'icône de fermeture de fenêtre a été cliquée
+  <font color="#924B72">#PB_Event_Repaint</font>         : Tout ou partie du contenu de la fenêtre a été détruit et doit être reconstitué 
+                              (Utile pour les applications <a href="../2ddrawing/index.html">graphiques 2D</a>)
+  <font color="#924B72">#PB_Event_SizeWindow</font>      : La fenêtre a été redimensionnée  
+  <font color="#924B72">#PB_Event_MoveWindow</font>      : La fenêtre a été déplacée
+  <font color="#924B72">#PB_Event_MinimizeWindow</font>  : La fenêtre a été minimisée
+  <font color="#924B72">#PB_Event_MaximizeWindow</font>  : La fenêtre a été maximisée
+  <font color="#924B72">#PB_Event_RestoreWindow</font>   : La fenêtre a été restaurée à sa taille normale
+  <font color="#924B72">#PB_Event_ActivateWindow</font>  : La fenêtre a été activée (gain du focus)
+  <font color="#924B72">#PB_Event_DeactivateWindow</font>: La fenêtre a été désactivée (perte du focus)
+  <font color="#924B72">#PB_Event_WindowDrop</font>      : Une opération <a href="../dragdrop/index.html">Glisser & Déposer</a> s'est terminée sur une fenêtre
+  <font color="#924B72">#PB_Event_GadgetDrop</font>      : Une opération <a href="../dragdrop/index.html">Glisser & Déposer</a> s'est terminée sur un <a href="../gadget/index.html">gadget</a>
+  <font color="#924B72">#PB_Event_RightClick</font>      : Un clic droit de la souris s'est produit sur la fenêtre. Cela peut être utile pour afficher un menu contextuel
+  <font color="#924B72">#PB_Event_LeftClick</font>       : Un clic gauche de la souris s'est produit sur la fenêtre
+  <font color="#924B72">#PB_Event_LeftDoubleClick</font> : Un double clic gauche de la souris s'est produit sur la fenêtre
+
+</font></pre>
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une application devrait, si possible, 
+toujours utiliser cette fonction en 
+préférence à <a href="windowevent.html">WindowEvent()</a> car elle ne 
+prend pas de temps CPU en attente d'un 
+évènement. 
+<br>
+<br>
+La boucle d'évènements de la fenêtre 
+ne doit pas être traitée dans un 
+<a href="../thread/index.html">thread</a>, car il 
+y a une limitation sur OS X et Linux. 
+Une erreur du débogueur sera levée. 
+<br>
+<br>
+WaitWindowEvent() ne peut être appelé 
+qu'une seule fois par boucle d'évènements, 
+sinon les évènements seront &quot;perdus&quot; 
+(chaque évènement ne peut être traité 
+qu'une seule fois et n'est plus 
+disponible pour un deuxième traitement). 
+<br>
+<br>
+Pour obtenir le numéro de la fenêtre 
+où s'est produit l'évènement, utiliser 
+la fonction <a href="eventwindow.html">EventWindow()</a>. 
+
+</blockquote><p><b>Exemple:</b> Cas général</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 230, 90, &quot;Exemple de gestion des évènements...&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+<font color="#006666">   ButtonGadget  </font>(1, 10, 10, 200, 20, &quot;Cliquez moi&quot;)
+<font color="#006666">   CheckBoxGadget</font>(2, 10, 40, 200, 20, &quot;Cochez  moi&quot;)
+
+   <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">     MenuTitle</font>(&quot;Menu&quot;)
+<font color="#006666">     MenuItem</font>(1, &quot;Item 1&quot;)
+<font color="#006666">     MenuItem</font>(2, &quot;Item 2&quot;)
+<font color="#006666">     MenuItem</font>(3, &quot;Item 3&quot;)
+   <b><font color="#006666">EndIf</font></b>
+
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+     
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1 : <b><font color="#006666">Debug</font></b> &quot;Bouton cliqué !&quot;
+           <b><font color="#006666">Case</font></b> 2 : <b><font color="#006666">Debug</font></b> &quot;Case à cocher cliquée !&quot;
+         <b><font color="#006666">EndSelect</font></b>
+       
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+           <b><font color="#006666">Case</font></b> 1 : <b><font color="#006666">Debug</font></b> &quot;Menu item 1 cliqué !&quot;
+           <b><font color="#006666">Case</font></b> 2 : <b><font color="#006666">Debug</font></b> &quot;Menu item 2 cliqué !&quot;
+           <b><font color="#006666">Case</font></b> 3 : <b><font color="#006666">Debug</font></b> &quot;Menu item 3 cliqué !&quot;
+         <b><font color="#006666">EndSelect</font></b>
+     
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Avec minuteur dans WaitWindowEvent</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 30, &quot;Position de la souris sur le bureau&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget</font>(0, 10, 6, 200, 20, &quot;&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>(20)
+      
+      <b><font color="#006666">If</font></b> Event = 0 <font color="#006666">; Il n'y a plus d'évènement dans la file d'attente, libère le processeur quelques millisecondes pour le multi-tâches</font>
+<font color="#006666">        SetGadgetText</font>(0, &quot;Coordonnées : &quot; +<font color="#006666"> Str</font>(<font color="#006666">DesktopMouseX</font>()) + &quot;,&quot; +<font color="#006666"> Str</font>(<font color="#006666">DesktopMouseY</font>()))  
+      <b><font color="#006666">EndIf</font></b>
+       
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Avec une minuterie de fenêtre</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 30, &quot;Position de la souris sur le bureau&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TextGadget</font>(0, 10, 6, 200, 20, &quot;&quot;)
+<font color="#006666">    AddWindowTimer</font>(0, 0, 10) <font color="#006666">; Minuterie de 10 ms</font>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Timer</font> <font color="#006666">; Toutes les 10 ms =&gt; Affichage des coordonnées</font>
+<font color="#006666">        SetGadgetText</font>(0, &quot;Coordonnées : &quot; +<font color="#006666"> Str</font>(<font color="#006666">DesktopMouseX</font>()) + &quot;,&quot; +<font color="#006666"> Str</font>(<font color="#006666">DesktopMouseY</font>()))  
+      <b><font color="#006666">EndIf</font></b>
+       
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="windowevent.html">WindowEvent()</a>, <a href="eventwindow.html">EventWindow()</a>, <a href="event.html">Event()</a>, 
+<a href="eventgadget.html">EventGadget()</a>, <a href="eventmenu.html">EventMenu()</a>, 
+<a href="eventtimer.html">EventTimer()</a>, <a href="eventdata.html">EventData()</a>, 
+<a href="eventtype.html">EventType()</a>, <a href="postevent.html">PostEvent()</a>, 
+<a href="bindevent.html">BindEvent()</a>, <a href="unbindevent.html">UnbindEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=unbindevent.html>UnbindEvent()</a> - <a href=index.html>Window Index</a> - <a href=windowbounds.html>WindowBounds()</a> -><br><br>
+
+</body></html>

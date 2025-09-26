@@ -1,0 +1,87 @@
+<html><head><title>MouseLocate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MouseLocate()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MouseLocate</b></font>(X, Y)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la position absolue (en pixels) 
+de la souris dans l'écran courant. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>X, Y</i></td>
+<td width="90%"> 
+La nouvelle position du curseur. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Principalement utilisé avec les commandes 
+<a href="mousex.html">MouseX()</a> et <a href="mousey.html">MouseY()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Initialisation du monde 2D</font>
+<font color="#006666">  InitSprite</font>()
+<font color="#006666">  InitKeyboard</font>()
+<font color="#006666">  InitMouse</font>()
+ 
+  <font color="#006666">; Curseur de la souris</font>
+<font color="#006666">  CreateImage</font>(0,20,20)
+<font color="#006666">  StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">  Circle</font>(10, 10, 10,<font color="#006666"> RGB</font>(255, 255, 0))
+<font color="#006666">  StopDrawing</font>()
+  
+  <font color="#006666">; Ouverture de la fenêtre</font>
+<font color="#006666">  OpenWindow</font>(0,0,0,800,600,&quot;Souris - MouseLocate&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>|<font color="#924B72">#PB_Window_SystemMenu</font>)
+<font color="#006666">  OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0),0,0,800,600,1,0,0)
+
+  <font color="#006666">; Gestion de la fenêtre et de l'écran</font>
+  <b><font color="#006666">Repeat</font></b>
+   <b><font color="#006666">Repeat</font></b>         <font color="#006666">; Gestion de la fenêtre</font>
+     Event  =<font color="#006666"> WindowEvent</font>() 
+   <b><font color="#006666">Until</font></b> Event = 0
+  
+<font color="#006666">   ExamineMouse</font>() <font color="#006666">; Etat de la souris</font>
+   
+   <font color="#006666">; Affichage de l'état des boutons de la souris</font>
+<font color="#006666">   StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">   DrawText</font>(10,10, &quot;Appuyer sur une touche du clavier pour quitter.&quot;,<font color="#006666"> RGB</font>(255,255,0))
+<font color="#006666">   DrawText</font>(100,180, &quot;Bougez la souris puis cliquez pour remettre le curseur au centre de l'écran.&quot;,<font color="#006666"> RGB</font>(255,0,0),<font color="#006666">RGB</font>(255,255,0))
+   
+<font color="#006666">   DrawText</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(), &quot;[&quot;+<font color="#006666">Chr</font>(164)+&quot;]&quot;,<font color="#006666"> RGB</font>(255,255,0))
+   
+   <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>)
+<font color="#006666">     MouseLocate</font>(400, 300)
+<font color="#006666">     DrawText</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(), &quot;[&quot;+<font color="#006666">Chr</font>(164)+&quot;]&quot;,<font color="#006666"> RGB</font>(255,255,0))
+   <b><font color="#006666">EndIf</font></b>
+   
+<font color="#006666">   StopDrawing</font>()
+   
+<font color="#006666">   FlipBuffers</font>()
+<font color="#006666">   ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0)) 
+  
+<font color="#006666">   ExamineKeyboard</font>()
+  <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_All</font>)
+  <b><font color="#006666">End</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examinemouse.html">ExamineMouse()</a>, <a href="mousex.html">MouseX()</a>, <a href="mousey.html">MouseY()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=mousedeltay.html>MouseDeltaY()</a> - <a href=index.html>Mouse Index</a> - <a href=mousewheel.html>MouseWheel()</a> -><br><br>
+
+</body></html>

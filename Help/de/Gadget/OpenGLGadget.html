@@ -1,0 +1,280 @@
+<html><head><title>OpenGLGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenGLGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenGLGadget</b></font>(#Gadget, x, y, Breite, Höhe [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein OpenGL Gadget in der aktuellen Gadgetliste. Dieses Gadget bietet einen 
+OpenGL-Zeichenkontext (&quot;drawing context&quot;) und Ereignisse (&quot;events&quot;) für die Maus- und 
+Tastatur-Interaktion, um einfach eine 3D-OpenGL-Ansicht zu erstellen. 
+<br>
+<br>
+Die meisten der OpenGL-Befehle sind direkt in PureBasic verfügbar - unter Verwendung 
+der Unterstrich-API-Schreibweise (Befehle enden mit einem Unterstrich, wie 'glBegin_()'). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Eine Nummer, um das neue Gadget zu identifizieren. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Nummer automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und die Abmessungen des neuen Gadgets (in Pixel). 
+Die maximale Breite und Höhe beträgt 16000 Pixel. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags zum Ändern des Gadget-Verhaltens. Dies kann eine Kombination der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OpenGL_Keyboard</font>               : Ermöglicht dem Gadget, den Tastaturfokus und Tastaturereignisse zu empfangen.
+  <font color="#924B72">#PB_OpenGL_NoFlipSynchronization</font>  : deaktiviert die vsync-Synchronisation.
+  <font color="#924B72">#PB_OpenGL_FlipSynchronization</font>    : aktiviert die vsync-Synchronisation (Standard).
+  <font color="#924B72">#PB_OpenGL_NoDepthBuffer</font>          : deaktiviert den Tiefenpuffer.
+  <font color="#924B72">#PB_OpenGL_16BitDepthBuffer</font>       : erstellt einen 16-Bit Tiefenpuffer (Standard).
+  <font color="#924B72">#PB_OpenGL_24BitDepthBuffer</font>       : erstellt einen 24-Bit Tiefenpuffer.
+  <font color="#924B72">#PB_OpenGL_NoStencilBuffer</font>        : deaktiviert den Stencil-Puffer (Standard).
+  <font color="#924B72">#PB_OpenGL_8BitStencilBuffer</font>      : erstellt einen 8-Bit Stencil-Puffer.
+  <font color="#924B72">#PB_OpenGL_NoAccumulationBuffer</font>   : deaktiviert den Akkumulationspuffer (Standard).
+  <font color="#924B72">#PB_OpenGL_32BitAccumulationBuffer</font>: erstellt einen 32-Bit Akkumulationspuffer.
+  <font color="#924B72">#PB_OpenGL_64BitAccumulationBuffer</font>: erstellt einen 64-Bit Akkumulationspuffer.
+</font></pre>
+Das <font color="#924B72">#PB_OpenGL_Keyboard</font> Flag wird benötigt, um jegliche Tastatur-Ereignisse in diesem Gadget zu 
+empfangen. Wenn Sie dieses Flag verwenden, sollten Sie auf <font color="#924B72">#PB_EventType_Focus</font> und 
+<font color="#924B72">#PB_EventType_LostFocus</font> Ereignisse prüfen und einen visuellen Hinweis auf dem Gadget zeichnen, 
+wenn es den Fokus hat, damit dem Anwender klar ist, welches Gadget aktuell den Fokus hat. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall einen Wert ungleich Null zurück, und Null bei einem Fehler. Wenn <font color="#924B72">#PB_Any</font> 
+als #Gadget Parameter verwendet wurde, dann ist bei Erfolg der Rückgabewert die automatisch 
+generierte Gadget-Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das erstellte Gadget beginnt nur mit einem schwarzen Hintergrund. Der aktuelle OpenGL-Kontext 
+wird auf dieses neu erstellte Gadget gesetzt. Um den aktuellen OpenGL-Kontext zu ändern, 
+verwenden Sie das <font color="#924B72">#PB_OpenGL_SetContext</font> Attribut. Einmal erstellt, kann mit Hilfe des 
+<font color="#924B72">#PB_OpenGL_FlipBuffers</font> Attributs ein Rahmen angezeigt werden. 
+
+<br>
+<br>
+Da das OpenGL-Gadget als Echtzeit-Rendering-Gadget konzipiert ist, speichert es sein aktuelles 
+Rendering (aktuellen Inhalt) nicht in einem separaten Puffer: 
+Es muss erneut gerendert werden, wenn die Größe des Fensters geändert, minimiert oder maximiert 
+wird oder wenn das Gadget selbst in der Größe verändert oder verschoben wird. 
+
+<br>
+<br>
+
+Die folgenden Ereignisse werden vom Gadget gemeldet. Die <a href="../window/eventtype.html">EventType()</a> Funktion meldet den Typ 
+des aktuellen Gadget-Ereignisses: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_MouseEnter</font>      : Der Maus-Cursor &quot;betrat&quot; das Gadget
+  <font color="#924B72">#PB_EventType_MouseLeave</font>      : Der Maus-Cursor verließ das Gadget
+  <font color="#924B72">#PB_EventType_MouseMove</font>       : Der Maus-Cursor bewegte sich
+  <font color="#924B72">#PB_EventType_MouseWheel</font>      : Das Maus-Rad wurde bewegt
+  <font color="#924B72">#PB_EventType_LeftButtonDown</font>  : Der linke Maus-Knopf wurde gedrückt
+  <font color="#924B72">#PB_EventType_LeftButtonUp</font>    : Der linke Maus-Knopf wurde los gelassen
+  <font color="#924B72">#PB_EventType_LeftClick</font>       : Ein Klick mit der linken Maus-Taste
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font> : Ein Doppelklick mit der linken Maus-Taste
+  <font color="#924B72">#PB_EventType_RightButtonDown</font> : Der rechte Maus-Knopf wurde gedrückt
+  <font color="#924B72">#PB_EventType_RightButtonUp</font>   : Der rechte Maus-Knopf wurde los gelassen
+  <font color="#924B72">#PB_EventType_RightClick</font>      : Ein Klick mit der rechten Maus-Taste
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>: Ein Doppelklick mit der rechten Maus-Taste
+  <font color="#924B72">#PB_EventType_MiddleButtonDown</font>: Der mittlere Maus-Knopf wurde gedrückt
+  <font color="#924B72">#PB_EventType_MiddleButtonUp</font>  : Der mittlere Maus-Knopf wurde los gelassen
+  <font color="#924B72">#PB_EventType_Focus</font>           : Das Gadget erhielt den Tastatur-Fokus
+  <font color="#924B72">#PB_EventType_LostFocus</font>       : Das Gadget verlor den Tastatur-Fokus
+  <font color="#924B72">#PB_EventType_KeyDown</font>         : Eine Taste wurde gedrückt
+  <font color="#924B72">#PB_EventType_KeyUp</font>           : Eine Taste wurde los gelassen
+  <font color="#924B72">#PB_EventType_Input</font>           : Text-Eingabe wurde generiert
+</font></pre>
+Beachten Sie bitte, dass die Ereignisse <font color="#924B72">#PB_EventType_KeyDown</font>, <font color="#924B72">#PB_EventType_KeyUp</font> und <font color="#924B72">#PB_EventType_Input</font> 
+nur gemeldet werden, wenn das Gadget den Tastatur-Fokus hat. Dies bedeutet, dass das <font color="#924B72">#PB_OpenGL_Keyboard</font> Flag 
+bei der Erstellung des Gadgets gesetzt werden muss, um Tastatur-Ereignisse zu erlauben. 
+Auf Windows wird das <font color="#924B72">#PB_EventType_MouseWheel</font> Ereignis auch nur gemeldet, wenn das Gadget den Tastatur-Fokus 
+hat. Auf den anderen OS wird dieses Ereignis dem Gadget unter dem Maus-Pfeil gemeldet, unabhängig vom Tastatur-Fokus. 
+
+<br>
+<br>
+
+Weitere Informationen über das aktuelle Ereignis können mit der Funktion <a href="getgadgetattribute.html">GetGadgetAttribute()</a> empfangen werden. Diese 
+Information ist nur verfügbar, wenn das aktuelle Ereignis (empfangen von <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> bzw. <a href="../window/windowevent.html">WindowEvent()</a>) ein 
+Ereignis für dieses Gadget ist. Die folgenden Attribute können verwendet werden: 
+<br>
+<br>
+<font color="#924B72">#PB_OpenGL_MouseX</font>, <font color="#924B72">#PB_OpenGL_MouseY</font> 
+<blockquote>
+
+Gibt die angegebenen Maus-Koordinaten relativ zum Zeichen-Bereich des Gadgets zurück. Die Maus-Position wird zu dem 
+Zeitpunkt zurückgegeben, zu dem das Ereignis generiert wurde. Dadurch kann das Ergebnis von den durch <a href="../window/windowmousex.html">WindowMouseX()</a> und 
+<a href="../window/windowmousey.html">WindowMouseY()</a> gemeldeten Koordinaten abweichen, welche die aktuelle Maus-Position unabhängig vom Status der 
+verarbeiteten Ereignisse zurückmelden. Die mit Hilfe dieser Attribute zurückgegebenen Koordinaten sollten für dieses 
+Gadget verwendet werden, um sicher zu gehen, dass die Maus-Koordinaten mit dem aktuellen Ereignis zusammenpassen. 
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_Buttons</font> 
+<blockquote>
+
+Gibt den Status der Maus-Knöpfe für das Ereignis zurück, Das Ergebnis ist eine Kombination 
+(verknüpft mit dem bitweisen '|' OR-Operator) der folgenden Konstanten: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OpenGL_LeftButton</font>  : Der linke Maus-Knopf ist aktuell gedrückt.
+  <font color="#924B72">#PB_OpenGL_RightButton</font> : Der rechte Maus-Knopf ist aktuell gedrückt.
+  <font color="#924B72">#PB_OpenGL_MiddleButton</font>: Der mittlere Maus-Knopf ist aktuell gedrückt.
+</font></pre>
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_Modifiers</font> 
+<blockquote>
+
+Gibt den Status der Tastatur-&quot;Modifier&quot; für das Ereignis zurück. Das Ergebnis ist eine Kombination 
+(verknüpft mit dem bitweisen '|' OR-Operator) der folgenden Konstanten: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_OpenGL_Shift</font>  : Die 'Shift' (Umschalt-) Taste ist aktuell gedrückt.
+  <font color="#924B72">#PB_OpenGL_Alt</font>    : Die 'Alt' Taste ist aktuell gedrückt.
+  <font color="#924B72">#PB_OpenGL_Control</font>: Die 'Control' Taste ist aktuell gedrückt.
+  <font color="#924B72">#PB_OpenGL_Command</font>: Die 'Command' (oder &quot;Apple&quot;) Taste ist aktuell gedrückt. (nur auf Mac OSX)
+</font></pre>
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_WheelDelta</font> 
+<blockquote>
+
+Gibt die Bewegung des Maus-Rades für das aktuelle Ereignis in Mehrfachen von 1 bzw. -1 zurück. Ein positiver Wert sagt aus, 
+dass das Rad nach oben (weg vom Anwender) bewegt wurde, und ein negativer Wert sagt aus, dass das Rad nach unten (hin zum 
+Anwender) bewegt wurde. Dieses Attribut ist 0, wenn das aktuelle Ereignis kein <font color="#924B72">#PB_EventType_MouseWheel</font> 
+Ereignis ist. 
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_Key</font> 
+<blockquote>
+
+Gibt die Taste zurück, die bei einem <font color="#924B72">#PB_EventType_KeyDown</font> oder <font color="#924B72">#PB_EventType_KeyUp</font> Ereignis 
+gedrückt oder los gelassen wurde. Der zurückgegebene Wert ist einer der <font color="#924B72">#PB_Shortcut_</font>... Werte, welche von 
+der Funktion <a href="../window/addkeyboardshortcut.html">AddKeyboardShortcut()</a> verwendet werden. Dieses Attribut gibt &quot;rohe&quot; (raw) Tastendrücke zurück. Um eine Texteingabe 
+für das Gadget zu erhalten, ist es besser nach dem <font color="#924B72">#PB_EventType_Input</font> Ereignis zu schauen und das 
+<font color="#924B72">#PB_OpenGL_Input</font> Attribut zu verwenden, weil dieses die Texteingabe von mehreren Tastendrücken wie 
+Shift- und ähnlichen Tasten kombiniert beinhaltet. 
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_Input</font> 
+<blockquote>
+
+Gibt das eingegebene Zeichen (Character) zurück, welches durch ein oder mehrere Tastendrücke generiert wurde. Dieses Attribut ist nur 
+verfügbar nach einem <font color="#924B72">#PB_EventType_Input</font> Ereignis. Der zurückgebene Zeichen-Wert kann mit Hilfe der 
+<a href="../string/chr.html">Chr()</a> Funktion in einen String konvertiert werden. 
+</blockquote>
+
+
+Ergänzend zu dieser Ereignis-Information kann <a href="getgadgetattribute.html">GetGadgetAttribute()</a> auch verwendet werden, um die folgenden Attribute zu lesen: 
+<br>
+<br>
+
+<font color="#924B72">#PB_OpenGL_Cursor</font> 
+<blockquote>
+
+Gibt den Maus-Pfeil (Cursor) zurück, welcher aktuell im Gadget verwendet wird. Schauen Sie weiter unten für eine Liste der möglichen Werte. 
+Wenn das Gadget ein benutzerdefiniertes (&quot;custom&quot;) Cursor-Handle verwendet, ist der Rückgabewert gleich -1. 
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_CustomCursor</font> 
+<blockquote>
+
+Gibt das benutzerdefinierte (&quot;custom&quot;) Cursor-Handle zurück, welches mittels <a href="setgadgetattribute.html">SetGadgetAttribute()</a> gesetzt wurde. Verwendet das 
+Gadget einen Standard-Mauspfeil (Cursor), ist der Rückgabewert gleich 0. 
+</blockquote>
+
+
+Die Funktion <a href="setgadgetattribute.html">SetGadgetAttribute()</a> kann verwendet werden, um die folgenden Gadget-Attribute zu verändern: 
+<br>
+<br>
+
+<font color="#924B72">#PB_OpenGL_SetContext</font> 
+<blockquote>
+
+Ändert den aktuellen OpenGL-Kontext auf diesen Gadget-Kontext. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>  : verwendet den OpenGL-Kontext dieses Gadgets.
+  <font color="#924B72">#False</font> : entfernt den aktuellen OpenGL-Kontext. Es ist kein Kontext mehr verfügbar.
+</font></pre>
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_FlipBuffers</font> 
+<blockquote>
+
+Wechselt (&quot;flip&quot;) den hinteren und vorderen Puffer. Alle Zeichnungen werden im hinteren Puffer 
+durchgeführt. Um sichtbar zu werden, müssen die Puffer gedreht (&quot;flipped&quot;) werden, damit der 
+hintere der vordere (derjenige welcher angezeigt wird) wird. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>  : wechselt die Puffer
+  <font color="#924B72">#False</font> : wechselt nicht die Puffer (derzeit keine Verwendung hierfür).
+</font></pre>
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_Cursor</font> 
+<blockquote>
+
+Ändert den Maus-Pfeil (Cursor), welcher angezeigt wird, wenn sich die Maus über dem Gadget befindet. Die 
+folgenden Werte sind möglich: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Cursor_Default</font>        : Standard Pfeil-Cursor
+  <font color="#924B72">#PB_Cursor_Cross</font>          : Kreuz-Cursor
+  <font color="#924B72">#PB_Cursor_IBeam</font>          : I-Cursor, verwendet für die Textauswahl
+  <font color="#924B72">#PB_Cursor_Hand</font>           : Hand-Cursor
+  <font color="#924B72">#PB_Cursor_Busy</font>           : Stundenglass oder Uhren-Cursor
+  <font color="#924B72">#PB_Cursor_Denied</font>         : durchgestrichener Kreis oder X-Cursor (&quot;Stop&quot; oder &quot;Verboten&quot;-Hinweis)
+  <font color="#924B72">#PB_Cursor_Arrows</font>         : Pfeile in alle Richtungen (nicht verfügbar auf Mac OSX)
+  <font color="#924B72">#PB_Cursor_LeftRight</font>      : links und rechts Pfeile
+  <font color="#924B72">#PB_Cursor_UpDown</font>         : hoch und runter Pfeile
+  <font color="#924B72">#PB_Cursor_LeftUpRightDown</font>: diagonale Pfeile (nur auf Windows)
+  <font color="#924B72">#PB_Cursor_LeftDownRightUp</font>: diagonale Pfeile (nur auf Windows)
+  <font color="#924B72">#PB_Cursor_Invisible</font>      : versteckt den Cursor
+</font></pre>
+</blockquote>
+
+
+<font color="#924B72">#PB_OpenGL_CustomCursor</font> 
+<blockquote>
+
+Ändert den Mauspfeil (Cursor), welcher dargestellt wird, wenn sich die Maus über dem Gadget befindet, in ein 
+benutzerdefiniertes (custom) Cursor-Handle, welches mit der entsprechenden OS API erstellt wurde. 
+Dieses Attribut erwartet die folgende Art an Eingaben: 
+<blockquote>
+
+Windows: ein HCURSOR Handle 
+<br>
+Linux: ein GtkCursor Pointer (Zeiger) 
+<br>
+Mac OSX: ein Pointer (Zeiger) auf eine Cursor Structure 
+</blockquote>
+
+</blockquote>
+
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip.html">GadgetToolTip()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/OpenGLGadget.pb.html">OpenGLGadget.pb</a>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, <a href="../window/eventtype.html">EventType()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=mdigadget.html>MDIGadget()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=opengadgetlist.html>OpenGadgetList()</a> -><br><br>
+
+</body></html>

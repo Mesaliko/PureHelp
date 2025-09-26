@@ -1,0 +1,64 @@
+<html><head><title>CreateLight</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateLight()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateLight</b></font>(#Light, Color [, x, y, z [, Flags]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Creates a new #Light of the given color in the current world. If <a href="../engine3d/worldshadows.html">WorldShadows()</a> is required, it must be 
+called before creating lights. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Light</i></td>
+<td width="90%"> 
+A number to identify the light. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>Color</i></td>
+<td> 
+The color of the new light. Valid colors may be easily created using the <a href="../2ddrawing/rgb.html">RGB()</a> function. 
+
+</td></tr>
+<tr><td><i>x, y, z (optional)</i></td>
+<td> 
+The initial light absolute position. If omitted the light is created at position &quot;0,0,0&quot;. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Light_Point</font>       : Creates a point light (the light is emitted in all directions) (default).
+  <font color="#924B72">#PB_Light_Directional</font> : Creates a directional light.
+  <font color="#924B72">#PB_Light_Spot</font>        : Creates a spot type light. <a href="spotlightrange.html">SpotLightRange()</a> can be used to change the light behavior.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the light was successfully created, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Light parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateLight</font>(0,<font color="#006666"> RGB</font>(255,0,0)) <font color="#006666">; Creates a red light</font>
+  
+<font color="#006666">  CreateLight</font>(1,<font color="#006666"> RGB</font>(0,255,0),  0, 100.7, 50) <font color="#006666">; Creates a green light, at the position (0, 100.7, 50)</font>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freelight.html">FreeLight()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copylight.html>CopyLight()</a> - <a href=index.html>Light Index</a> - <a href=disablelightshadows.html>DisableLightShadows()</a> -><br><br>
+
+</body></html>

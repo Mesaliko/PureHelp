@@ -1,0 +1,237 @@
+<html><head><title>Pointers and memory access</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Pointers and memory access</font></b></p>
+
+<p><b>Pointers</b></p><blockquote>
+
+
+<!-- There is a bug somewhere, and i had to do this work around. Mesa -->
+<blockquote>
+Using pointers is possible by placing one '*' (asterix) in front of the name of a <a href="../reference/variables.html">variable</a>, <a href="../reference/dim.html">array</a>, 
+<a href="../reference/newlist.html">list</a> or <a href="../reference/newmap.html">map</a>. 
+A pointer is a placeholder for a memory address which is usually associated to a <a href="../reference/structures.html">structure</a>. 
+</blockquote>
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MyScreen.Screen =<font color="#006666"> OpenScreen</font>(0, 320, 200, 8, 0)
+  mouseX = *MyScreen\MouseX  <font color="#006666">; Assuming the Screen structure contains a MouseX field</font>
+</font></pre>
+
+There are only three valid methods to set the value of a pointer: <br>
+- Get the result from a function (as shown in the above example) <br>
+- Copy the value from another pointer <br>
+- Find the address of a variable, procedure or label (as shown below) <br>
+<br>
+Note: unlike C/C++, in PureBasic the '*' is <b>always</b> part of the item name. 
+Therefore '*ptr' and 'ptr' are two different variables. 
+'ptr' is a variable (regular one) storing a value, '*ptr' is another variable of pointer type storing an address. 
+
+<br>
+<br>
+<u>Pointers and memory size</u> 
+<br>
+<br>
+Because pointers receive only addresses as values, the memory size of a pointer is the 
+space allowing to store an absolute address of the processor: 
+<br>
+- On 32-bit processors the address space is limited to 32-bit, so a 
+pointer takes 32-bit (4 bytes, like a 'long') in memory 
+<br>
+- On 64-bit processors it takes 64-bit (8 bytes, like a 'quad') in memory, because 
+the absolute address is on a 64-bit range. 
+<br>
+<br>
+As a consequence the type of a pointer depends of the CPU address mode, ('long' on 32-bit CPU 
+and 'quad' on 64-bit one for example), so a pointer is a variable of type pointer. 
+<br>
+It results from this that assigning a native type to a pointer (*Pointer.l, *Pointer.b ...) makes no sense. 
+<br>
+<br>
+Note: 
+<br>
+- Every time a memory address needs to be stored in a variable, it should be done through 
+a pointer. This guarantees address integrity at the compilation time whatever the CPU address mode is. 
+<br>
+- PureBasic x86 does <u>not</u> generate 64-bit executables. For PureBasic programs compiled 
+with this, the system grants them only an addressing with 32-bit pointers. 
+<br>
+<br>
+<u>Pointers and structures</u> 
+<br>
+<br>
+By assigning a structure to a pointer (for example *MyPointer.Point) it allows to access any memory 
+address in a structured way (with the operator '\'). 
+<br>
+</blockquote><p><b>Example:</b> Pointers and variables</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> Point1.Point, Point2.Point
+  *CurrentPoint.Point = @Point1  <font color="#006666">; Pointer declaration, associated to a structure and initialized with Point1's address</font>
+  *CurrentPoint \x = 10          <font color="#006666">; Assign value 10 to Point1\x</font>
+  *CurrentPoint.Point = @Point2  <font color="#006666">; move to Point2's address</font>
+  *CurrentPoint \x = 20          <font color="#006666">; Assign value 20 to Point2\x</font>
+  <b><font color="#006666">Debug</font></b> Point1\x
+  <b><font color="#006666">Debug</font></b> Point2\x
+</font></pre>
+
+</blockquote><p><b>Example:</b> Pointers and array</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> Point1.Point, Point2.Point
+  <b><font color="#006666">Dim</font></b> *Points.Point(1) <font color="#006666">; 2 slots array</font>
+  *Points(0) = @Point1 <font color="#006666">; Assign the first point variable to the first array slot</font>
+  *Points(1) = @Point2 <font color="#006666">; Same for second</font>
+
+  *Points(0)\x = 10 <font color="#006666">; Modify the variables through the pointers</font>
+  *Points(1)\x = 20 <font color="#006666">;</font>
+  
+  <b><font color="#006666">Debug</font></b> Point1\x
+  <b><font color="#006666">Debug</font></b> Point2\x
+</font></pre>
+
+Pointers allow to move, to read and to write easily in memory. Furthermore they allow programmers 
+to reach big quantities of data without supplementary cost further to data duplication. Copying a 
+pointer is much faster. 
+<br>
+<br>
+Pointers are also available in structures, for more information see the <a href="../reference/structures.html">structures chapter</a>. 
+<br>
+<br>
+<u>Pointers and character strings</u> 
+<br>
+<br>
+All variables have a permanent size in memory (2 bytes for Word, 4 bytes for a Long, etc.) except 
+for strings variables with lengths that can change. So string variables are managed by a different 
+way of other variables. 
+<br>
+Thus a structure field, that makes reference to a string, store only the memory address of the 
+string instead of the string itself: a such structure field is a pointer towards a string. 
+<br>
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Text$ = &quot;Hello&quot;
+  *Text = @Text$            <font color="#006666">; *Text store the address of the string in memory</font>
+  *Pointer.String = @*Text  <font color="#006666">; *Pointer points on *Text</font>
+  <b><font color="#006666">Debug</font></b> *Pointer\s          <font color="#006666">; Display the string living at the address stored in *Pointer (i.e. @Text$)</font>
+</font></pre>
+
+<u>Pointers Arithmetic</u> 
+<br>
+<br>
+Arithmetic operations on the pointers are possible and practical by using <a href="../reference/compilerfunctions.html">SizeOf()</a>. 
+<br>
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>.Point(1)         <font color="#006666">; Array of points </font>
+ 
+  *Pointer.Point = @Array()  <font color="#006666">; Store the array address</font>
+  *Pointer\x = 10            <font color="#006666">; Change the first array element values</font>
+  *Pointer\y = 15   
+
+  *Pointer +<font color="#006666"> SizeOf</font>(Point)   <font color="#006666">; Move to the next array element </font>
+
+  *Pointer\x = 7             <font color="#006666">; Change the second array element values</font>
+  *Pointer\y = 9
+ 
+  <font color="#006666">; Display results</font>
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(i)\x
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(i)\y
+  <b><font color="#006666">Next</font></b> i
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Addresses of variables</b></p><blockquote>
+
+
+To get the address of a <a href="../reference/variables.html">variable</a> in your code, you use the at symbol (@). 
+A common reason for using this is when you want to pass a structured type variable 
+to a <a href="../reference/procedures.html">procedure</a>. You must pass a pointer to this variable as you cannot pass structured 
+variables directly. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> astruct
+    a.w
+    b.l
+    c.w
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">SetB</font>(*myptr.astruct)
+    *myptr\b = 69
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Define</font></b>.astruct myvar
+  
+<font color="#006666">  SetB</font>(@myvar)
+  
+  <b><font color="#006666">Debug</font></b> myvar\b
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Addresses of literal strings</b></p><blockquote>
+
+
+To get the address of literal string, you can use the at symbol (@) in front of it. String constants are also supported. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  *String = @&quot;Test&quot;
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekC</font>(*String) <font color="#006666">; Will display 84, which is the value of 'T'</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Addresses of procedures</b></p><blockquote>
+
+
+For advanced programmers. The most common reason to get the address of a procedure is when dealing 
+with the OS at a low-level. Some OSes allow you to specify callback or hook functions 
+(for some operations) which get called by the OS and allows the programmer to extend 
+the ability of the OS routine. The address of a <a href="../reference/procedures.html">procedure</a> is found in a similar way 
+to <a href="../reference/variables.html">variables</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowCB</font>(WindowID.i, Message.i, wParam.i, lParam.i)
+    <font color="#006666">; This is where the processing of your callback procedure would be performed</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; A special callback for the Windows OS allowing you to process window events</font>
+<font color="#006666">  SetWindowCallback</font>( @WindowCB() )
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Addresses of labels</b></p><blockquote>
+
+
+It can also be useful to find the address of <a href="../reference/general_rules.html">labels</a> in your code. This can be 
+because you want to access the code or data stored at that label, or any other 
+good reason you can think of. To find the address of a label, you put a 
+question mark (?) in front of the label name. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> &quot;Size of data file = &quot; +<font color="#006666"> Str</font>(?endofmydata - ?mydata)
+  
+  <b><font color="#006666">DataSection</font></b>
+    mydata:
+      <b><font color="#006666">IncludeBinary</font></b> &quot;somefile.bin&quot;
+    endofmydata:
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

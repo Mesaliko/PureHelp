@@ -1,0 +1,224 @@
+<html><head><title>EntityBonePosition2.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - EntityBoneX/Y/Z
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;Use keys Q,S,D,Z (Robot shoot)
+</font>
+<b><font color="#006666">Structure</font></b> Bullet
+  Bullet.i
+  timer.f
+  Speed.f
+  Life.l
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, Speed = 0.1
+<b><font color="#006666">Define</font></b>.i RobotMove,Time
+<b><font color="#006666">Global</font></b> <b><font color="#006666">NewList</font></b> <font color="#006666">Bullets</font>.Bullet()
+
+<font color="#924B72">#CameraSpeed</font> = 2
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">GetBonePosition</font>(Position, Entity, Bone, x1, y1, z1)
+  Position\x =<font color="#006666"> EntityBoneX</font>(Entity, Bone, x1, y1, z1)
+  Position\y =<font color="#006666"> EntityBoneY</font>(Entity, Bone, x1, y1, z1)
+  Position\z =<font color="#006666"> EntityBoneZ</font>(Entity, Bone, x1, y1, z1)
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">SubVector3</font>(V, V1, V2)
+  V\x = V1\x - V2\x
+  V\y = V1\y - V2\y
+  V\z = V1\z - V2\z
+<b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">;-Declare
+</font><b><font color="#006666">Declare</font></b> <font color="#006666">Normalize</font>(*V.Vector3)
+<b><font color="#006666">Declare</font></b> <font color="#006666">AddShoot</font>()
+<b><font color="#006666">Declare</font></b> <font color="#006666">Shootbullet</font>()
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; EntityBoneX/Y/Z -  [D]   [PageUp]   [PageDown]  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">KeyboardMode</font>(<font color="#924B72">#PB_Keyboard_International</font>)
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, 3000,<font color="#006666"> RGB</font>(175, 175, 175))
+
+<font color="#006666">GetScriptMaterial</font>(1, &quot;Color/Red&quot;)
+<font color="#006666">GetScriptMaterial</font>(2, &quot;Color/Green&quot;)
+
+<font color="#006666">;Ground
+</font><font color="#006666">;
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 1500, 1500, 40, 40, 15, 15)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666">MeshID</font>(0),<font color="#006666">MaterialID</font>(0))
+<font color="#006666">EntityRenderMode</font>(0, 0)
+
+<font color="#006666">;Mesh
+</font><font color="#006666">;
+</font><font color="#006666">LoadMesh</font>(1, &quot;robot.mesh&quot;)
+<font color="#006666">CreateSphere</font>(2, 1)
+
+<font color="#006666">; Entity
+</font><font color="#006666">;
+</font><font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1), <font color="#924B72">#PB_Material_None</font>)
+
+<font color="#006666">; SkyBox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 50, 100, 180, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1) + 40,<font color="#006666"> EntityZ</font>(1))
+
+
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), -40, 100, 80)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(80, 80, 80))
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineMouse</font>()
+    MouseX = -<font color="#006666">MouseDeltaX</font>()/10
+    MouseY = -<font color="#006666">MouseDeltaY</font>()/10
+  <b><font color="#006666">EndIf</font></b>
+  
+  RobotMove = <font color="#924B72">#False</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+    
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Q</font>)
+<font color="#006666">      RotateEntity</font>(1, 0, 180, 0)
+      RobotMove = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_D</font>)
+<font color="#006666">      RotateEntity</font>(1, 0, 0, 0)
+      RobotMove = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Z</font>)
+<font color="#006666">      RotateEntity</font>(1, 0, 90, 0)
+      RobotMove = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_S</font>)
+<font color="#006666">      RotateEntity</font>(1, 0, -90, 0)
+      RobotMove = <font color="#924B72">#True</font>
+    <b><font color="#006666">EndIf</font></b>
+    
+    KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+    Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>))*<font color="#924B72">#CameraSpeed</font>    
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageUp</font>) <b><font color="#006666">And</font></b> Speed &lt; 1.0
+      Speed + 0.05
+    <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageDown</font>) <b><font color="#006666">And</font></b> Speed &gt; 0.1
+      Speed - 0.05
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> RobotMove
+    <b><font color="#006666">If</font></b> <font color="#006666">EntityAnimationStatus</font>(1, &quot;Shoot&quot;) = <font color="#924B72">#PB_EntityAnimation_Stopped</font> <font color="#006666">; Loop
+</font><font color="#006666">      StartEntityAnimation</font>(1, &quot;Shoot&quot;, <font color="#924B72">#PB_EntityAnimation_Manual</font>)     <font color="#006666">; Start the animation from the beginning
+</font>    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    StopEntityAnimation</font>(1, &quot;Shoot&quot;)
+<font color="#006666">    SetEntityAnimationTime</font>(1, &quot;Shoot&quot;, 0)
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  AddEntityAnimationTime</font>(1, &quot;Shoot&quot;, TimeSinceLastFrame)
+  
+  <font color="#006666">;Add Shoot
+</font>  <b><font color="#006666">If</font></b> <font color="#006666">GetEntityAnimationTime</font>(1, &quot;Shoot&quot;) &gt; 280 <b><font color="#006666">And</font></b> <font color="#006666">GetEntityAnimationTime</font>(1, &quot;Shoot&quot;) &lt; 310 <b><font color="#006666">And</font></b> <font color="#006666">ElapsedMilliseconds</font>()-Time&gt;500
+    Time =<font color="#006666"> ElapsedMilliseconds</font>()
+<font color="#006666">    AddShoot</font>()
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  Shootbullet</font>()
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>() * Speed
+  
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Normalize</font>(*V.Vector3)
+  <b><font color="#006666">Define</font></b>.f magSq, oneOverMag
+  
+  magSq = *V\x * *V\x + *V\y * *V\y + *V\z * *V\z
+  <b><font color="#006666">If</font></b> magsq &gt; 0
+    oneOverMag = 1.0 /<font color="#006666"> Sqr</font>(magSq)
+    *V\x * oneOverMag
+    *V\y * oneOverMag
+    *V\z * oneOverMag
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">AddShoot</font>()
+  <b><font color="#006666">Protected</font></b>.i Bullet
+  <b><font color="#006666">Protected</font></b>.Vector3 Bone1, Bone2, Direction
+  <b><font color="#006666">Protected</font></b>.f Angle
+  
+<font color="#006666">  GetBonePosition</font>(Bone1, 1, &quot;Joint17&quot;, 0, 0, 0)
+<font color="#006666">  GetBonePosition</font>(Bone2, 1, &quot;Joint18&quot;, 0, 0, -5)
+<font color="#006666">  SubVector3</font>(Direction, Bone2, Bone1)
+<font color="#006666">  Normalize</font>(@Direction)
+  
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 315 <b><font color="#006666">Step</font></b> 45
+<font color="#006666">    AddElement</font>(<font color="#006666">Bullets</font>())
+    
+    <b><font color="#006666">With</font></b> <font color="#006666">Bullets</font>()
+      \Speed = 180
+      \Life =<font color="#006666"> ElapsedMilliseconds</font>()
+      <font color="#006666">;\Bullet = CreateEntity(#PB_Any, MeshID(2), MaterialID(1), Bone2\x-2, Bone2\y+0.5, Bone2\z)
+</font>      <b><font color="#006666">If</font></b> <font color="#006666">Int</font>(<font color="#006666">EntityYaw</font>(1))=90 <b><font color="#006666">Or</font></b> <font color="#006666">Int</font>(<font color="#006666">EntityYaw</font>(1))=-90
+        \Bullet =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(1), 2.4*<font color="#006666">Cos</font>(<font color="#006666">Radian</font>(Angle))+Bone2\x+1.2, 2.4*<font color="#006666">Sin</font>(<font color="#006666">Radian</font>(Angle))+Bone2\y+0.7, Bone2\z)
+      <b><font color="#006666">Else</font></b>
+        \Bullet =<font color="#006666"> CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(2),<font color="#006666"> MaterialID</font>(1), Bone2\x, 2.4*<font color="#006666">Sin</font>(<font color="#006666">Radian</font>(Angle))+Bone2\y+0.7, 2.4*<font color="#006666">Cos</font>(<font color="#006666">Radian</font>(Angle))+Bone2\z+1.2)
+      <b><font color="#006666">EndIf</font></b>
+      Angle + 45
+<font color="#006666">      CreateEntityBody</font>(\Bullet, <font color="#924B72">#PB_Entity_SphereBody</font>, 1)
+<font color="#006666">      ApplyEntityImpulse</font>(\Bullet, Direction\x * \Speed, Direction\y * \Speed, Direction\z * \Speed)
+    <b><font color="#006666">EndWith</font></b>
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Shootbullet</font>()
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Bullets</font>()
+    <b><font color="#006666">With</font></b> <font color="#006666">Bullets</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">ElapsedMilliseconds</font>()-<font color="#006666">Bullets</font>()\Life&gt;3000
+        <b><font color="#006666">If</font></b> <font color="#006666">IsEntity</font>(\Bullet)
+<font color="#006666">          FreeEntity</font>(\Bullet)
+        <b><font color="#006666">EndIf</font></b>
+<font color="#006666">        DeleteElement</font>(<font color="#006666">Bullets</font>(), 1)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndWith</font></b>
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">EndProcedure</font></b></font></pre>
+</body></html>

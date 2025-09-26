@@ -1,0 +1,50 @@
+<html><head><title>GetFileDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetFileDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>GetFileDate</b></font>(Dateiname$, DatumsTyp)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt das Datum der angegebenen Datei zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Dateiname$</i></td>
+<td width="90%"> 
+Der Dateiname, von dem das Datum ermittelt werden soll. 
+
+</td></tr>
+<tr><td><i>DatumsTyp</i></td>
+<td> 
+Die Art des zurückzugebenden Datums. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Created</font> : gibt das Erstellungsdatum der Datei zurück
+  <font color="#924B72">#PB_Date_Accessed</font>: gibt das Datum des letzten Zugriffs auf die Datei zurück
+  <font color="#924B72">#PB_Date_Modified</font>: gibt das Datum der letzten Veränderung an der Datei zurück
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt das gewünschte Datum im Format der PureBasic <a href="../date/index.html">Date</a> 
+Bibliothek zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Auf Linux und Mac OSX ist das für <font color="#924B72">#PB_Date_Created</font> zurückgegebene Datum das gleiche 
+wie bei <font color="#924B72">#PB_Date_Modified</font>, da die meisten Datei-Systeme kein Erstellungsdatum 
+für Dateien speichern. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setfiledate.html">SetFileDate()</a>, <a href="directoryentrydate.html">DirectoryEntryDate()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getfileattributes.html>GetFileAttributes()</a> - <a href=index.html>FileSystem Inhaltsverzeichnis</a> - <a href=getfilepart.html>GetFilePart()</a> -><br><br>
+
+</body></html>

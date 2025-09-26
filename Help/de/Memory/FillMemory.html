@@ -1,0 +1,68 @@
+<html><head><title>FillMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FillMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FillMemory</b></font>(*Memory, Größe [, Wert [, Typ]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Füllt den Speicherbereich mit dem angegebenen Wert, indem dieser Wert wiederholt 
+dorthin geschrieben wird. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memory</i></td>
+<td width="90%"> 
+Die Adresse des zu füllenden Speicherbereichs. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe (in Bytes) des zu füllenden Speichers. 
+
+</td></tr>
+<tr><td><i>Wert (optional)</i></td>
+<td> 
+Der Wert, welcher in den Speicherbereich geschrieben werden soll. Der Standard ist der 
+Wert 0. 
+
+</td></tr>
+<tr><td><i>Typ (optional)</i></td>
+<td> 
+Der Typ für den Wert. Dies kann eine der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Byte</font>     : Füllt den Speicher mittels eines Byte (1 Byte) Wertes (= Standard).
+  <font color="#924B72">#PB_Ascii</font>    : Füllt den Speicher mittels eines Byte (1 byte) Wertes.
+  <font color="#924B72">#PB_Word</font>     : Füllt den Speicher mittels eines Word (2 Byte) Wertes.
+  <font color="#924B72">#PB_Unicode</font>  : Füllt den Speicher mittels eines Word (2 Byte) Wertes.
+  <font color="#924B72">#PB_Character</font>: Füllt den Speicher mittels eines Character (2 Bytes in <a href="../reference/unicode.html">Unicode</a>).
+  <font color="#924B72">#PB_Long</font>     : Füllt den Speicher mittels eines Long (4 Byte) Wertes.
+  <font color="#924B72">#PB_Integer</font>  : Füllt den Speicher mittels eines Integer Wertes (4 Bytes in einem 32-Bit Executable, 8 Bytes in einem 64-Bit Executable).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Puffer =<font color="#006666"> AllocateMemory</font>(500)
+  
+<font color="#006666">  FillMemory</font>(*Puffer, 500) <font color="#006666">; Füllt 500 Byte mit dem Wert 0 (löscht den Speicherbereich)</font>
+<font color="#006666">  FillMemory</font>(*Puffer, 500, $FF) <font color="#006666">; Füllt 500 Byte mit dem Wert $FF</font>
+<font color="#006666">  FillMemory</font>(*Puffer, 500, $BADF00D, <font color="#924B72">#PB_Long</font>) <font color="#006666">; Füllt 500 Byte mit dem Wert $BADF00D</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="allocatememory.html">AllocateMemory()</a>, <a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=copymemorystring.html>CopyMemoryString()</a> - <a href=index.html>Memory Inhaltsverzeichnis</a> - <a href=freememory.html>FreeMemory()</a> -><br><br>
+
+</body></html>

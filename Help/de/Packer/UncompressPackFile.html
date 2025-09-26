@@ -1,0 +1,90 @@
+<html><head><title>UncompressPackFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UncompressPackFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>UncompressPackFile</b></font>(#Pack, Dateiname$ [, GepackterDateiname$])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Entpackt aus dem aktuell mit <a href="examinepack.html">ExaminePack()</a> und <a href="nextpackentry.html">NextPackEntry()</a> untersuchten Paket-Eintrag 
+in den angegebenen Dateinamen. Wenn der Dateiname bereits existiert, wird er gelöscht 
+und mit den neuen entpackten Daten ersetzt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Pack</i></td>
+<td width="90%"> 
+Das zu verwendende Paket. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Dateiname, in den der aktuelle Paket-Eintrag entpackt wird. 
+
+</td></tr>
+<tr><td><i>GepackterDateiname$ (optional)</i></td>
+<td> 
+Der Dateiname der komprimierten und jetzt zu entpackenden Datei. Wenn dieser Parameter nicht 
+angegeben wird, dann wird der aktuell mit <a href="examinepack.html">ExaminePack()</a> und <a href="nextpackentry.html">NextPackEntry()</a> untersuchte Eintrag 
+entpackt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die unkomprimierte Größe zurück, wenn der Paket-Eintrag erfolgreich in den Dateinamen 
+entpackt wurde, andernfalls -1. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseZipPacker</font>()
+  
+  Path$ = <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/&quot;       <font color="#006666">; Pfad zu den PureBasic Examples Daten/Media-Dateien</font>
+  PackFile$ =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;PureBasicTest.zip&quot;  <font color="#006666">; Pfad zur Paket-Datei, die erstellt und später geöffnet werden soll</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreatePack</font>(0, PackFile$)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;world.png&quot;, &quot;world.png&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;test.pref&quot;, &quot;test.pref&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;CdPlayer.ico&quot;, &quot;CdPlayer.ico&quot;)
+<font color="#006666">    AddPackFile</font>(0, Path$ + &quot;Background.bmp&quot;, &quot;Background.bmp&quot;)
+<font color="#006666">    ClosePack</font>(0)
+    <b><font color="#006666">Debug</font></b> &quot;Paket-Datei erfolgreich erstellt: &quot; + PackFile$
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Fehler beim Erstellen der Paket-Datei!&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+  Path$ =<font color="#006666"> GetTemporaryDirectory</font>() + &quot;PureBasicTest/&quot;  <font color="#006666">; Pfad zu einem Verzeichnis, in das die Paket-Dateien entpackt werden sollen</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenPack</font>(0, PackFile$)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateDirectory</font>(Path$) <b><font color="#006666">Or</font></b> <font color="#006666">FileSize</font>(Path$) = -2
+      <b><font color="#006666">If</font></b> <font color="#006666">ExaminePack</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;Entpacken des Archivs nach: &quot; + Path$
+        <b><font color="#006666">While</font></b> <font color="#006666">NextPackEntry</font>(0)
+          <b><font color="#006666">Debug</font></b> &quot; - Name: &quot; +<font color="#006666"> PackEntryName</font>(0) + &quot;, Größe: &quot; +<font color="#006666"> PackEntrySize</font>(0)
+          <b><font color="#006666">If</font></b> <font color="#006666">UncompressPackFile</font>(0, Path$ +<font color="#006666"> PackEntryName</font>(0),<font color="#006666"> PackEntryName</font>(0)) = -1
+            <b><font color="#006666">Debug</font></b> &quot;Fehler beim Entpacken der Datei: &quot; +<font color="#006666"> PackEntryName</font>(0)
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">Wend</font></b>
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      ClosePack</font>(0)
+<font color="#006666">      RunProgram</font>(Path$)  <font color="#006666">; Öffnet das Verzeichnis mit den entpackten Dateien</font>
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Fehler beim Erstellen des Ordners '&quot; + Path$ + &quot;' zum Entpacken des Archiv-Inhalts!&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Fehler beim Öffnen der Paket-Datei!&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+Für ein weiteres Beispiel siehe <a href="addpackfile.html">AddPackFile()</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="openpack.html">OpenPack()</a>, <a href="catchpack.html">CatchPack()</a>, <a href="examinepack.html">ExaminePack()</a>, <a href="nextpackentry.html">NextPackEntry()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=uncompressmemory.html>UncompressMemory()</a> - <a href=index.html>Packer Inhaltsverzeichnis</a> - <a href=uncompresspackmemory.html>UncompressPackMemory()</a> -><br><br>
+
+</body></html>

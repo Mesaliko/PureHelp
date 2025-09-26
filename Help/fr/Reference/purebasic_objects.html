@@ -1,0 +1,196 @@
+<html><head><title>Les objets PureBasic</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les objets PureBasic</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#objets indexés"><u>objets indexés</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#objets dynamiques"><u>objets dynamiques</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#objets PureBasic"><u>objets PureBasic</u></a></td>
+  </tr>
+  </table>
+  </center>
+  <p>&nbsp;</p>
+
+<p><b>Introduction</b></p><blockquote>
+
+L'objectif de ce chapitre est d'assimiler 
+la création et la manipulation des objets 
+en PureBasic. 
+Pour cette présentation nous allons utiliser 
+l'objet <a href="../image/index.html">Image</a>, mais la 
+même logique s'applique à tous les autres 
+objets PureBasic. Quand nous voulons créer 
+une image, nous avons deux possibilités: 
+la méthode indexée et la méthode dynamique. 
+
+<a name="objets indexés"></a>
+</blockquote>
+<p><b>I. Les objets indexés</b></p><blockquote>
+
+La manière indexée (statique) permet de 
+référencer un objet à l'aide d'une valeur 
+numérique que nous déterminons. Elle doit 
+être comprise entre 0 et un nombre maximum 
+qui va dépendre du type de l'objet (en 
+principe entre 5000 et 64000). Ainsi, si 
+vous utilisez la valeur 0 pour votre premier 
+objet et la valeur 1000 pour votre deuxième 
+objet, il y aura 1001 index de disponibles 
+et 999 seront inutilisés, ce qui n'est pas 
+très efficace (gâchis de mémoire vive). 
+C'est pour cette raison qu'il faut autant 
+que possible utiliser une indexation 
+sequentielle, qui commence à 0. Si vous 
+avez besoin d'une méthode plus flexible, 
+il vous faudra probablement utiliser la 
+méthode dynamique, décrite dans la section II. 
+La méthode indexée offre plusieurs avantages: 
+<blockquote>
+<p><b></b></p><blockquote>
+
+- Manipulation plus facile, pas besoin de 
+<a href="../reference/variables.html">variables</a> ni de 
+<a href="../reference/dim.html">tableaux</a>. <br>
+- Manipulation 'Groupée' sans avoir à utiliser 
+de tableaux supplémentaires. <br>
+- Utilisation des objets dans les 
+<a href="../reference/procedures.html">procédures</a> 
+sans avoir à déclarer de 
+<a href="../reference/global.html">globales</a> (si on 
+utilise une <a href="../reference/general_rules.html">constante</a> 
+ou un nombre). <br>
+- Destruction automatique des objets 
+précédents quand un index est réutilisé. 
+<br>
+</blockquote>
+</blockquote>
+
+Les <a href="../reference/enumerations.html">Enumérations</a> 
+sont fortement recommandées si vous 
+souhaitez utiliser des constantes 
+séquentielles pour identifier vos objets. 
+
+<p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(0, 640, 480) <font color="#006666">; Crée une image à l'index n°0 dans l'indexation des images</font>
+<font color="#006666">  ResizeImage</font>(0, 320, 240) <font color="#006666">; Redimensionne l'image n°0 et modifie le handle de l'image</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateImage</font>(2, 640, 480) <font color="#006666">; Crée une image à l'index n°2 dans l'indexation des images</font>
+<font color="#006666">  ResizeImage</font>(2, 320, 240) <font color="#006666">; Redimensionne l'image n°2 et modifie son @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+<font color="#006666">  CreateImage</font>(2, 800, 800) <font color="#006666">; Crée une nouvelle image à l'emplacement n°2. L'ancienne image n°2 est désallouée automatiquement</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 9
+<font color="#006666">    CreateImage</font>(k, 640, 480) <font color="#006666">; Crée 10 images, aux emplacements 0 à 9</font>
+<font color="#006666">    ResizeImage</font>(k, 320, 240) <font color="#006666">; Redimensionne les images de moitié et modifie son @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#ImageBackground</font> = 0
+  <font color="#924B72">#ImageButton</font>     = 1
+
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageBackground</font>, 640, 480) <font color="#006666">; Crée une image à l'emplacement #ImageBackground (0)</font>
+<font color="#006666">  ResizeImage</font>(<font color="#924B72">#ImageBackground</font>, 320, 240) <font color="#006666">; Redimensionne l'image 0 (ImageBackground)  et modifie son @ReferenceLink &quot;handles&quot; &quot;handle&quot;</font>
+<font color="#006666">  CreateImage</font>(<font color="#924B72">#ImageButton</font>    , 800, 800) <font color="#006666">; Crée une image (n°1)</font>
+</font></pre>
+
+<a name="objets dynamiques"></a>
+</blockquote>
+<p><b>II. Les objets dynamiques</b></p><blockquote>
+
+Quelquefois, les objets indexés ne sont 
+pas pratiques pour gérer des situations 
+où l'on ne connaît pas à l'avance le nombre 
+d'objets nécessaire à un instant donné. 
+Pour cela PureBasic permet de créer très 
+facilement des objets dynamiques. 
+Les deux méthodes (indexée et dynamique) 
+peuvent être utilisées en même temps sans 
+risque de conflit. Pour créer un objet 
+dynamique, il suffit de spécifier la 
+constante <font color="#924B72">#PB_Any</font> à la place du numéro 
+et un numéro dynamique sera retourné comme 
+résultat de la fonction. 
+Cette manière de gérer les objets se marie 
+bien avec les <a href="../list/index.html">listes</a>, 
+qui sont aussi un moyen dynamique de gérer 
+des données. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  DynamicImage1 =<font color="#006666"> CreateImage</font>(<font color="#924B72">#PB_Any</font>, 640, 480) <font color="#006666">; Crée une image dynamiquement</font>
+<font color="#006666">  ResizeImage</font>(DynamicImage1, 320, 240) <font color="#006666">; Redimensionne l'image </font>
+</font></pre>
+
+<br>
+<br>
+
+Code complet d'exemple de gestion 
+dynamique d'objets avec une liste 
+chainée: 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/MDI_ImageViewer.pb.html">MDI_ImageViewer.pb</a>
+
+<br>
+<br>
+
+<a name="objets PureBasic"></a>
+</blockquote>
+<p><b>Présentation des différents objets PureBasic</b></p><blockquote>
+
+
+Différents objets PureBasic (Windows, 
+gadgets, sprites, etc) peuvent utiliser 
+la même énumération de numéros d'objet 
+et pas d'autres. Ainsi, chacun des objets 
+suivants peuvent être énumérés en commençant 
+à 0 (ou autre valeur) car PureBasic les 
+gère par leur type: 
+<blockquote>
+
+- <a href="../database/index.html">Database</a> <br>
+- <a href="../dialog/index.html">Dialog</a> <br>
+- <a href="../entity/index.html">Entity</a> <br>
+- <a href="../file/index.html">File</a> <br>
+- <a href="../ftp/index.html">FTP</a> <br>
+- <a href="../gadget/index.html">Gadget</a> (<a href="../scintilla/scintillagadget.html">ScintillaGadget()</a> inclus) <br>
+- <a href="../gadget3d/index.html">Gadget3D</a> <br>
+- <a href="../image/index.html">Image</a> <br>
+- <a href="../library/index.html">Library</a> <br>
+- <a href="../light/index.html">Light</a> <br>
+- <a href="../mail/index.html">Mail</a> <br>
+- <a href="../material/index.html">Material</a> <br>
+- <a href="../menu/index.html">Menu</a> (sauf les <a href="../menu/menuitem.html">MenuItem()</a> qui ne sont pas des objets) <br>
+- <a href="../mesh/index.html">Mesh</a> <br>
+- <a href="../movie/index.html">Movie</a> <br>
+- <a href="../music/index.html">Music</a> <br>
+- <a href="../network/index.html">Network</a> <br>
+- <a href="../node/index.html">Node</a> <br>
+- <a href="../particle/index.html">Particle</a> <br>
+- <a href="../regularexpression/index.html">RegularExpression</a> <br>
+- <a href="../serialport/index.html">SerialPort</a> <br>
+- <a href="../sound/index.html">Sound</a> <br>
+- <a href="../sound3d/index.html">Sound3D</a> <br>
+- <a href="../sprite/index.html">Sprite</a> <br>
+- <a href="../statusbar/index.html">StatusBar</a> <br>
+- <a href="../texture/index.html">Texture</a> <br>
+- <a href="../toolbar/index.html">ToolBar</a> <br>
+- <a href="../window/index.html">Window</a> <br>
+- <a href="../window3d/index.html">Window3D</a> <br>
+- <a href="../xml/index.html">XML</a> <br>
+</blockquote>
+
+</blockquote>
+</font></body></html>

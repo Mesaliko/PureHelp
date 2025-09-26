@@ -1,0 +1,62 @@
+<html><head><title>Windows Message Handling</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Windows Message Handling</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+The messages for your program will be sent by Windows into a queue, which is worked 
+off only if you want this. Windows sends thousand messages to your program without 
+noticing this directly. <br>
+<br>
+For example if you change the status of a gadget (identical whether you add a new entry 
+or change the image of an ImageGadget), a message is sent to the queue of your program. <br>
+<br>
+There are two possibilities to receive and to process the Windows messages in PureBasic: 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a> and <a href="../window/windowevent.html">WindowEvent()</a>. 
+The difference is, that WaitWindowEvent() waits till 
+a message arrives and WindowEvent() continues to work also so. The messages in the queue 
+will be processed however only, after you have called WindowEvent() or WaitWindowEvent(). 
+
+</blockquote>
+<p><b>Specials of WindowEvent()</b></p><blockquote>
+
+
+The command WindowEvent() don't wait, until a message arrives, but checks only whether one is in the queue. 
+If yes, the message is processed and WindowEvent() gives back the number of the message. If no message 
+lines up, then zero (0) is given back. 
+
+<p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>() : <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+cause, that WindowEvent() becomes called as long till it gives back 0, i.e. until all 
+messages of the queue are processed. <br>
+<br>
+It doesn't reach, if you insert a simple 'WindowEvent()' after a <a href="../gadget/setgadgetstate.html">SetGadgetState()</a> to process 
+this 1 message. Firstly there still can be other messages in the queue, which have arrived 
+before, and secondly Windows also sends quite a number of other messages, we don't have to 
+take care of... which nevertheless are in the queue. <br>
+<br>
+A simple call of 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  WindowEvent</font>()
+</font></pre>
+doesn't reach, the code then runs correct under circumstances on one Windows version, but on 
+another version not. The different Windows versions are internally very different, so that 
+one version only sends 1 message but another Windows version sends 5 messages for the same circumstance. <br>
+<br>
+Because of this one always uses for updating: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>() : <b><font color="#006666">Wend</font></b>
+</font></pre>
+Of course there is also the alternative 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WindowEvent</font>() = 0
+</font></pre>
+possible, what isn't rather usual however. <br>
+<br>
+The described method While : WindowEvent() : Wend is frequently useful in connection with 
+the command <a href="../system/delay.html">Delay()</a>, where the loop is inserted BEFORE the Delay(), e.g. to firstly wait 
+for the update of an ImageGadget after changing an image with SetGadgetState(). 
+</blockquote>
+</font></body></html>

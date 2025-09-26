@@ -1,0 +1,50 @@
+<html><head><title>ReadCharacter</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadCharacter()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result.c = <font color="#006666"><b>ReadCharacter</b></font>(#File [, Format])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Read a character from a file, starting at the current file position. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#File</i></td>
+<td width="90%"> 
+The file to read from. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+The format of the character to read. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : 1 byte character.
+  <font color="#924B72">#PB_Unicode</font>: 2 bytes character (default in <a href="../reference/unicode.html">unicode</a> mode).
+  <font color="#924B72">#PB_UTF8</font>   : multi-bytes character (from 1 to 4 bytes).
+</font></pre>
+If this flag isn't set, then the format for reading the character depends on the related setting at 
+the previously used <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> or <a href="readfile.html">ReadFile()</a> command. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the read character or zero if there was an error. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+For an example of how to read from a file, see the <a href="readfile.html">ReadFile()</a> function - with 
+ReadCharacter() only a character is read, instead of a complete line (string). 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="writecharacter.html">WriteCharacter()</a>, <a href="readasciicharacter.html">ReadAsciiCharacter()</a>, <a href="readunicodecharacter.html">ReadUnicodeCharacter()</a>, <a href="openfile.html">OpenFile()</a>, <a href="readfile.html">ReadFile()</a>, <a href="loc.html">Loc()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=readbyte.html>ReadByte()</a> - <a href=index.html>File Index</a> - <a href=readdata.html>ReadData()</a> -><br><br>
+
+</body></html>

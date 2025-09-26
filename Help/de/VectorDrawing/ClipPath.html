@@ -1,0 +1,96 @@
+<html><head><title>ClipPath</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClipPath()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ClipPath</b></font>([Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Beschneidet (englisch &quot;clip&quot;) die Vektorzeichnen-Ausgabe auf den vom aktuellen 
+Vektorzeichnen-Pfad definierten Bereich. Spätere Zeichenoperationen werden 
+sich nur auf Bereiche innerhalb des aktuellen Pfades auswirken. Das &quot;Clipping&quot; 
+wird mit jedem Clipping kombiniert, das vorher bereits auf der Zeichenausgabe 
+existierte. 
+<br>
+<br>
+Standardmäßig wird der Pfad nach dem Aufruf dieser Funktion zurückgesetzt. 
+Dies kann durch entsprechende Flags verhindert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Flags (optional)</i></td>
+<td width="90%"> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Path_Default</font>     : Kein spezielles Verhalten  (Standardwert)
+  <font color="#924B72">#PB_Path_Preserve</font>    : Den Pfad nach dieser Funktion nicht zurücksetzen
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es gibt keine &quot;UnclipPath()&quot; Funktion, also zum &quot;Rückgängig machen&quot;: Der 
+Clipping-Bereich der Zeichenausgabe kann durch das Hinzufügen weiterer 
+Beschneidung (Clipping-Bereiche) nur kleiner, aber nicht wieder größer 
+gemacht werden. 
+<br>
+<br>
+Der Clipping-Bereich kann jedoch durch die Verwendung der <a href="savevectorstate.html">SaveVectorState()</a> 
+und <a href="restorevectorstate.html">RestoreVectorState()</a> Funktionen gespeichert und wiederhergestellt werden. 
+Um also temporäres Clipping auf die Zeichenausgabe anzuwenden, speichern 
+Sie zuerst den Zeichenstatus und stellen diesen später wieder her, um auf 
+die ursprünglichen Clipping-Bereiche zurück zu wechseln. 
+<br>
+<br>
+Unter Windows ist das Ergebnis an den Rändern pixelig, ohne Anti-Aliasing, 
+was eine Einschränkung von GDI+ darstellt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      <font color="#006666">; Einstellen eines komplexen Clipping-Pfades mit verschachtelten Ellipsen</font>
+      <font color="#006666">; (jede Sekunde wird eine beschnitten / &quot;clipped&quot;)</font>
+      <b><font color="#006666">For</font></b> i = 10 <b><font color="#006666">To</font></b> 150 <b><font color="#006666">Step</font></b> 5
+<font color="#006666">        AddPathEllipse</font>(200, 100, 2*i, i)
+      <b><font color="#006666">Next</font></b> i
+<font color="#006666">      ClipPath</font>()
+    
+      <font color="#006666">; Einigen Text mit diesem Clipping zeichnen</font>
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 150)      
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+      
+<font color="#006666">      MovePathCursor</font>(50, 25)
+<font color="#006666">      DrawVectorText</font>(&quot;Text&quot;)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/clippath.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=beginvectorlayer.html>BeginVectorLayer()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=closepath.html>ClosePath()</a> -><br><br>
+
+</body></html>

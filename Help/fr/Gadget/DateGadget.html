@@ -1,0 +1,172 @@
+<html><head><title>DateGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DateGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DateGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur [, Masque$ [, Date [, Options]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un champ de saisie (identique à un 
+<a href="stringgadget.html">StringGadget()</a>) dans la GadgetList en 
+cours, dans lequel il sera possible 
+d'entrer une date et/ou une heure. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Masque$ (optionnel)</i></td>
+<td> 
+Le format de la date. Voir <a href="../date/formatdate.html">FormatDate()</a> 
+pour le format de ce masque. 
+<blockquote>
+
+Note importante: Le gadget ne supporte pas 
+l'affichage des secondes, donc si vous 
+spécifiez &quot;%ss&quot; dans le paramètre 'Masque$, 
+il sera tout simplement ignoré ! 
+Si vous ne spécifiez pas de masque ou si 
+vous spécifiez une chaîne vide, un masque 
+par défaut sera utilisé. Le masque peut 
+être modifié avec la fonction 
+<a href="setgadgettext.html">SetGadgetText()</a>. 
+</blockquote>
+
+
+</td></tr>
+<tr><td><i>Date (optionnel)</i></td>
+<td> 
+La date initialement prévue pour le gadget. 
+<br>
+Ne pas spécifier ce paramètre ou utiliser 
+une valeur 0 permet d'afficher la date et 
+l'heure du jour. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<br>
+<br>
+<font color="#924B72">#PB_Date_UpDown</font><br>
+Par défaut le gadget a un bouton pour 
+afficher un calendrier à partir duquel 
+l'utilisateur peut choisir une date 
+facilement (voir l'image ci-dessous). 
+Avec cette option, deux boutons  (un pour 
+monter, un pour descendre) seront présents 
+pour permettre de modifier la date 
+directement, sans passer par un calendrier. 
+<br>
+Cette option est seulement disponible 
+sous Windows. 
+<br>
+<br>
+<font color="#924B72">#PB_Date_CheckBox</font>, le gadget aura une 
+case à cocher à partir de laquelle 
+l'utilisateur pourra mettre le gadget 
+sur 'Aucune date' (si la case à cocher 
+est décochée).<br>
+Tant que la case à cocher est décochée, 
+<a href="getgadgetstate.html">GetGadgetState()</a> renverra 0.<br>
+Pour changer l'état de la case à cocher, 
+utiliser <a href="setgadgetstate.html">SetGadgetState()</a> avec soit 0 
+(aucune date), soit avec une date valide. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Ce gadget utilise le même format de date 
+que celui utilisé par les fonctions de la 
+bibliothèque <a href="../date/index.html">Date</a>. 
+Ainsi, vous pouvez, par exemple, utiliser 
+<a href="../date/formatdate.html">FormatDate()</a> pour afficher le résultat 
+renvoyé par <a href="getgadgetstate.html">GetGadgetState()</a>, avec un 
+format personnalisé. 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les commandes suivantes peuvent être utilisées pour agir sur ce gadget :
+  - <a href="setgadgetstate.html">SetGadgetState()</a>: Change la date du gadget.
+  - <a href="getgadgetstate.html">GetGadgetState()</a>: Renvoie la valeur numérique de la date actuellement affichée.
+  
+  - <a href="setgadgettext.html">SetGadgetText()</a> : Change le masque du gadget.
+  - <a href="getgadgettext.html">GetGadgetText()</a> : Renvoie la date actuellement affichée sous forme de texte (exactement comme elle est affichée).
+
+  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec les attributs suivants:
+    <font color="#924B72">#PB_Date_Minimum</font>: Renvoie la date minimale que l'utilisateur peut choisir
+    <font color="#924B72">#PB_Date_Maximum</font>: Renvoie la date maximale que l'utilisateur peut choisir avec ce gadget
+                      (Remarque: la date sélectionnable n'est pas prise en charge sous Linux.)
+                      
+  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a>: avec les attributs suivants: 
+    <font color="#924B72">#PB_Date_Minimum</font>: Change la date minimale que l'utilisateur peut choisir
+    <font color="#924B72">#PB_Date_Maximum</font>: Change la date maximale que l'utilisateur peut choisir avec ce gadget
+                      (Remarque: la date sélectionnable n'est pas prise en charge sous Linux.)
+                      
+  - <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec les constantes suivantes comme 'TypeCouleur':
+    <font color="#924B72">#PB_Gadget_BackColor</font>      : Couleur de fond
+    <font color="#924B72">#PB_Gadget_FrontColor</font>     : Couleur du texte pour les jours affichés
+    <font color="#924B72">#PB_Gadget_TitleBackColor</font> : Couleur du fond du titre du mois
+    <font color="#924B72">#PB_Gadget_TitleFrontColor</font>: Couleur du texte du titre du mois
+    <font color="#924B72">#PB_Gadget_GrayTextColor</font>  : Couleur du texte pour les jours n'appartenant pas au mois courant.
+</font></pre>
+
+L'évènement suivant est pris en charge 
+par <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>: La date a été modifiée par l'utilisateur.
+</font></pre>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 250, 250,&quot;DateGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    DateGadget</font>(0, 10, 10, 190, 25, &quot;Date : %dd/%mm/%yyyy Heure : %hh:%ii&quot;)
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/dategadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, 
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="calendargadget.html">CalendarGadget()</a>, <a href="../date/date.html">Date()</a>, <a href="../date/formatdate.html">FormatDate()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=countgadgetitems.html>CountGadgetItems()</a> - <a href=index.html>Gadget Index</a> - <a href=disablegadget.html>DisableGadget()</a> -><br><br>
+
+</body></html>

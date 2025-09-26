@@ -1,0 +1,90 @@
+<html><head><title>PdfVectorOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PdfVectorOutput()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>PdfVectorOutput</b></font>(Fichier$, Largeur.d, Hauteur.d [, Unite])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un fichier PDF. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichier$</i></td>
+<td width="90%"> 
+Le nom du fichier PDF à créer. <br>
+Si le fichier existe, il sera écrasé. 
+
+</td></tr>
+<tr><td><i>Largeur.d, Hauteur.d</i></td>
+<td> 
+Les dimensions de la page dans le fichier 
+PDF en unité de mesure utilisée par la 
+sortie de dessin vectoriel. 
+
+</td></tr>
+<tr><td><i>Unite (optionnel)</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes: 
+<br>
+L'unité par défaut pour les fichiers PDF 
+est <font color="#924B72">#PB_Unit_Point</font>. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Unit_Pixel</font>     : Les valeurs sont mesurées en pixels (ou point (dots) pour les imprimantes)
+  <font color="#924B72">#PB_Unit_Point</font>     : Les valeurs sont mesurées en points (1/72 pouce = 25.4/72 mm = 0,352 778 mm)
+  <font color="#924B72">#PB_Unit_Inch</font>      : Les valeurs sont mesurées en pouces (25,4 millimètres)
+  <font color="#924B72">#PB_Unit_Millimeter</font>: Les valeurs sont mesurées en millimètres (0,039 370 pouce)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le OutputID du fichier donné afin 
+d'effectuer le rendu 2D à l'aide de 
+<a href="startvectordrawing.html">StartVectorDrawing()</a>. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les opérations de dessin doivent se faire 
+à l'intérieur d'un bloc <a href="startvectordrawing.html">StartVectorDrawing()</a> 
+/<a href="stopvectordrawing.html">StopVectorDrawing()</a>. 
+<br>
+<br>
+Le fichier PDF peut contenir plusieurs pages 
+en utilisant  fonction <a href="newvectorpage.html">NewVectorPage()</a>. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  LoadFont</font>(0, &quot;Times New Roman&quot;, 20)
+    
+  <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">PdfVectorOutput</font>(&quot;test.pdf&quot;, 595, 842))  
+<font color="#006666">    VectorFont</font>(<font color="#006666">FontID</font>(0), 25)
+    
+<font color="#006666">    MovePathCursor</font>(20, 20)
+<font color="#006666">    DrawVectorText</font>(&quot;Voici la page 1...&quot;)
+    
+<font color="#006666">    NewVectorPage</font>()
+    
+<font color="#006666">    MovePathCursor</font>(20, 20)
+<font color="#006666">    DrawVectorText</font>(&quot;Voici la page 2...&quot;)      
+
+<font color="#006666">    StopVectorDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="svgvectoroutput.html">SvgVectorOutput()</a>, <a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>, 
+<a href="../printer/printervectoroutput.html">PrinterVectorOutput()</a>, <a href="../window/windowvectoroutput.html">WindowVectorOutput()</a>, 
+<a href="../gadget/canvasvectoroutput.html">CanvasVectorOutput()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=pathsegments.html>PathSegments()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=resetcoordinates.html>ResetCoordinates()</a> -><br><br>
+
+
+</body></html>

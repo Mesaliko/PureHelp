@@ -1,0 +1,136 @@
+<html><head><title>XML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - XML</font></b></p>
+
+<p><b>Einleitung</b></p><blockquote>
+
+Die Extensible Markup Language (englisch für &quot;erweiterbare Auszeichnungssprache&quot;), abgekürzt XML, ist eine 
+Auszeichnungssprache zur Darstellung hierarchisch strukturierter Daten in Form von Textdateien. 
+<br>
+<br>
+Die XML Bibliothek bietet eine Reihe an Funktionen, um zu Anwendungen leicht das Parsen (syntaktische Analyse) und 
+die Fähigkeit zum Erstellen von XML hinzuzufügen. Sie basiert auf dem <a href="http://expat.sourceforge.net/">expat XML Parser</a>, 
+welcher unter der MIT Lizenz (kann <a href="../mainguide/license_expat.html">hier</a> eingesehen werden) lizenziert ist. 
+expat wird in vielen Projekten (wie Mozilla oder Perl) verwendet. Er ist sehr stabil und sehr schnell. 
+<br>
+<br>
+<b>Wichtig:</b> Die expat Lizenz erfordert, dass eine Copyright-Notiz und der Lizenz-Text selbst in jede 
+Software integriert werden, welche den Parser beinhalten. Wenn also die Bibliothek (oder der API-Import) in 
+einer Software verwendet werden, welche öffentlich zugänglich gemacht wird, dann muss die oben verlinkte 
+Lizenz in die Software integriert werden. 
+<br>
+<br>
+Die expat-Funktionen können wie andere API-Funktionen auch direkt von PureBasic aufgerufen werden. 
+Allerdings müssen Sie - zusätzlich zum abschließenden Unterstrich - am Anfang des Funktionsnamens ein &quot;pb_&quot; hinzufügen. 
+Dies ermöglicht die Nutzung von expat-Funktionen, die nicht direkt von dieser Bibliothek bereitgestellt werden. 
+<br>
+Die in expat.h definierten Konstanten und Strukturen sind direkt in PureBasic verfügbar. 
+Für detaillierte Informationen über die expat Funktionen schauen Sie in die Dokumentation, welche im 
+Download-Paket auf <a href="http://expat.sourceforge.net/">http://expat.sourceforge.net/</a> angeboten wird. 
+<br>
+<br>
+Diese Bibliothek bietet teilweise Unterstützung von &quot;Document Type Definitions&quot; (DTD) und &quot;Namespaces&quot; (Namensräume). 
+Das Ziel besteht darin, den Befehlssatz sehr einfach zu halten, während diese Bibliothek dennoch mit allen 
+XML-fähigen Dokumenten umgehen kann. 
+<br>
+<br>
+Der expat Parser (syntaktischer Analysierer) ist ein &quot;non-validating&quot; Parser. Dies bedeutet, er überprüft die 
+geparsten Dokumente auf Fehler im &quot;Markup&quot; (ein Dokument muss entsprechend der XML-Spezifikation aufgebaut sein), 
+aber er überprüft das Dokument nicht gegenüber einer DTD. Beim Parsen eines Dokuments platziert diese Bibliothek 
+DTDs innerhalb eines speziellen Knotens (Node) im XML-Baum mit dem <a href="xmlnodetype.html">Typ</a> <font color="#924B72">#PB_XML_DTD</font>. 
+Der Inhalt dieses Knotens ist der volle DOCTYPE Tag. Auf diesem Weg kann einfach auf diesen zugegriffen und er 
+auch manipuliert werden, aber es ist auch in Ordnung ihn zu ignorieren, wenn diese Information nicht benötigt wird. 
+Der Tag wird beim Exportieren/Speichern des Dokuments einfach wieder zurückgeschrieben. 
+<br>
+<br>
+&quot;Namespaces&quot; (Namensräume) werden beim Parsen eines Dokuments nicht aufgelöst. Dies bedeutet, dass in 
+einem Dokument, welches Namespaces verwendet, auf die Namespace Deklarationen wie normale Knoten-Attribute 
+zugegriffen werden kann, und Knoten-/Attribut-Namen - welche Namespaces verwenden - als &quot;namespace:tagname&quot;# 
+sichtbar werden. Dies ermöglicht das Lesen und auch das Zurückschreiben eines Dokuments (welches Namespaces verwendet) 
+wie jedes andere Dokument, ohne dessen Struktur zu zerstören. 
+Um das Arbeiten mit Namespaces leichter zu machen, werden die Funktionen <a href="resolvexmlnodename.html">ResolveXMLNodeName()</a> 
+und <a href="resolvexmlattributename.html">ResolveXMLAttributeName()</a> bereitgestellt, um Namen innerhalb von Dokumenten mit 
+Namespaces aufzulösen. 
+<br>
+<br>
+Der <a href="../reference/ide_debugger.html">PureBasic Debugger</a> bietet die Möglichkeit, #XML Objekte während der 
+Laufzeit mit dem <a href="../reference/ide_debugtools.html">Library Anzeiger</a> zu untersuchen. 
+<br>
+<br>
+Die offizielle Spezifikation von XML und XML Namespaces des W3C finden Sie hier: 
+<br>
+<a href="http://www.w3.org/TR/REC-xml/">XML Spezifikation</a> <br>
+<a href="http://www.w3.org/TR/REC-xml-names/">XML Namespaces</a> <br>
+<a href="http://www.w3.org/XML/Core/Translations">Verschiedene Übersetzungen von XML relevanten Dokumenten</a> <br>
+<br>
+Auch der <a href="http://de.wikipedia.org/wiki/Xml">Wikipedia Artikel über XML</a> bietet einen guten Ausgangspunkt, 
+für alle Leute, welche neu bei XML sind. 
+
+
+</blockquote><p><b>Befehlsübersicht</b><blockquote>
+<a href="catchxml.html">CatchXML</a><br>
+<a href="childxmlnode.html">ChildXMLNode</a><br>
+<a href="composexml.html">ComposeXML</a><br>
+<a href="copyxmlnode.html">CopyXMLNode</a><br>
+<a href="createxml.html">CreateXML</a><br>
+<a href="createxmlnode.html">CreateXMLNode</a><br>
+<a href="deletexmlnode.html">DeleteXMLNode</a><br>
+<a href="examinexmlattributes.html">ExamineXMLAttributes</a><br>
+<a href="exportxml.html">ExportXML</a><br>
+<a href="exportxmlsize.html">ExportXMLSize</a><br>
+<a href="extractxmlarray.html">ExtractXMLArray</a><br>
+<a href="extractxmllist.html">ExtractXMLList</a><br>
+<a href="extractxmlmap.html">ExtractXMLMap</a><br>
+<a href="extractxmlstructure.html">ExtractXMLStructure</a><br>
+<a href="formatxml.html">FormatXML</a><br>
+<a href="freexml.html">FreeXML</a><br>
+<a href="getxmlattribute.html">GetXMLAttribute</a><br>
+<a href="getxmlencoding.html">GetXMLEncoding</a><br>
+<a href="getxmlnodename.html">GetXMLNodeName</a><br>
+<a href="getxmlnodeoffset.html">GetXMLNodeOffset</a><br>
+<a href="getxmlnodetext.html">GetXMLNodeText</a><br>
+<a href="getxmlstandalone.html">GetXMLStandalone</a><br>
+<a href="insertxmlarray.html">InsertXMLArray</a><br>
+<a href="insertxmllist.html">InsertXMLList</a><br>
+<a href="insertxmlmap.html">InsertXMLMap</a><br>
+<a href="insertxmlstructure.html">InsertXMLStructure</a><br>
+<a href="isxml.html">IsXML</a><br>
+<a href="loadxml.html">LoadXML</a><br>
+<a href="mainxmlnode.html">MainXMLNode</a><br>
+<a href="movexmlnode.html">MoveXMLNode</a><br>
+<a href="nextxmlattribute.html">NextXMLAttribute</a><br>
+<a href="nextxmlnode.html">NextXMLNode</a><br>
+<a href="parentxmlnode.html">ParentXMLNode</a><br>
+<a href="parsexml.html">ParseXML</a><br>
+<a href="previousxmlnode.html">PreviousXMLNode</a><br>
+<a href="removexmlattribute.html">RemoveXMLAttribute</a><br>
+<a href="resolvexmlattributename.html">ResolveXMLAttributeName</a><br>
+<a href="resolvexmlnodename.html">ResolveXMLNodeName</a><br>
+<a href="rootxmlnode.html">RootXMLNode</a><br>
+<a href="savexml.html">SaveXML</a><br>
+<a href="setxmlattribute.html">SetXMLAttribute</a><br>
+<a href="setxmlencoding.html">SetXMLEncoding</a><br>
+<a href="setxmlnodename.html">SetXMLNodeName</a><br>
+<a href="setxmlnodeoffset.html">SetXMLNodeOffset</a><br>
+<a href="setxmlnodetext.html">SetXMLNodeText</a><br>
+<a href="setxmlstandalone.html">SetXMLStandalone</a><br>
+<a href="xmlattributename.html">XMLAttributeName</a><br>
+<a href="xmlattributevalue.html">XMLAttributeValue</a><br>
+<a href="xmlchildcount.html">XMLChildCount</a><br>
+<a href="xmlerror.html">XMLError</a><br>
+<a href="xmlerrorline.html">XMLErrorLine</a><br>
+<a href="xmlerrorposition.html">XMLErrorPosition</a><br>
+<a href="xmlnodefromid.html">XMLNodeFromID</a><br>
+<a href="xmlnodefrompath.html">XMLNodeFromPath</a><br>
+<a href="xmlnodepath.html">XMLNodePath</a><br>
+<a href="xmlnodetype.html">XMLNodeType</a><br>
+<a href="xmlstatus.html">XMLStatus</a><br>
+</blockquote></p>
+
+<p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/Xml.pb.html">Xml.pb</a>
+<br><a href="../Examples/Xml_Expat_API.pb.html">Xml_Expat_API.pb</a>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=../reference/reference.html>Referenz-Handbuch - Inhaltsverzeichnis</a></center><br><br>
+
+</body></html>

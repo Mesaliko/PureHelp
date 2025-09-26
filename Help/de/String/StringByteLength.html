@@ -1,0 +1,56 @@
+<html><head><title>StringByteLength</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StringByteLength()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>StringByteLength</b></font>(String$ [, Format])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die Anzahl an Bytes zurück, welche zum Speichern des Strings im Speicher 
+im angegebenen Format benötigt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+Der zu verwendende String. 
+
+</td></tr>
+<tr><td><i>Format (optional)</i></td>
+<td> 
+Das zu verwendende Zielformat. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Ascii-Format
+  <font color="#924B72">#PB_UTF8</font>   : UTF8-Format
+  <font color="#924B72">#PB_Unicode</font>: Unicode-Format
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die Anzahl an benötigten Bytes, um den String im angegebenen Format im Speicher 
+zu speichern. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die zurückgegebene Anzahl an Bytes beinhaltet nicht das abschließende 
+Null-Zeichen des Strings. Die Größe des Null-Zeichens ist 1 Byte bei ASCII und 
+UTF8 sowie 2 Bytes bei Unicode. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">StringByteLength</font>(&quot;ä&quot;, <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; wird 2 ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="len.html">Len()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=stru.html>StrU()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=stringfield.html>StringField()</a> -><br><br>
+
+</body></html>

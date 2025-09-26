@@ -1,0 +1,96 @@
+<html><head><title>DrawVectorParagraph</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawVectorParagraph()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>DrawVectorParagraph</b></font>(Text$, Breite.d, Höhe.d [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Zeichnet einen Textabsatz (mehrere Zeilen) in einer vorgegebenen Zeichen-Box 
+mit automatischem Layout für Zeilenumbrüche. Wenn der Text nicht in das definierte 
+Feld passt, wird er am Ende abgeschnitten. Die zu verwendende Schriftart kann 
+mittels <a href="vectorfont.html">VectorFont()</a> eingestellt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Text$</i></td>
+<td width="90%"> 
+Gibt den zu zeichnenden Text an. 
+
+</td></tr>
+<tr><td><i>Breite.d</i></td>
+<td> 
+Gibt die Breite des Absatzes an. Zeilenumbrüche werden automatisch hinzufügt, wenn der 
+Text länger als die angegebene Breite ist. 
+
+</td></tr>
+<tr><td><i>Höhe.d</i></td>
+<td> 
+Gibt die maximale Höhe des Absatzes an. Wenn der Text nicht in diese Höhe passt, wird 
+er abgeschnitten. Die benötigte Höhe für den Absatz kann mittels <a href="vectorparagraphheight.html">VectorParagraphHeight()</a> 
+berechnet werden. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_VectorParagraph_Left</font>  : Der Absatz wird linksbündig ausgerichtet (Standard)
+  <font color="#924B72">#PB_VectorParagraph_Right</font> : Der Absatz wird rechtsbündig ausgerichtet
+  <font color="#924B72">#PB_VectorParagraph_Center</font>: Der Absatz wird zentriert
+  <font color="#924B72">#PB_VectorParagraph_Block</font> : Der Absatz wird im Blocksatz ausgerichtet (nicht unterstützt auf Windows)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Es sind nur Vektorschriftarten wie TrueType erlaubt, Bitmap-Schriftarten sind nicht erlaubt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 250, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 250)
+<font color="#006666">    LoadFont</font>(0, &quot;Times New Roman&quot;, 20)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      Text$ = &quot;Every drawing output has a default unit of measurement. The default unit is pixels &quot; +
+              &quot;for screen or raster image outputs and points for printer or vector image outputs. &quot; +
+              &quot;It is however possible to select a different unit of measurement for the output when &quot; +
+              &quot;creating it with the ImageVectorOutput(), PrinterVectorOutput() or similar function.&quot;
+              
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 18)
+      
+<font color="#006666">      MovePathCursor</font>(25, 25)
+<font color="#006666">      DrawVectorParagraph</font>(Text$, 350, 200)
+              
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/drawvectorparagraph.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="vectorparagraphheight.html">VectorParagraphHeight()</a>, <a href="drawvectortext.html">DrawVectorText()</a>, <a href="addpathtext.html">AddPathText()</a>, <a href="vectorfont.html">VectorFont()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=drawvectorimage.html>DrawVectorImage()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=drawvectortext.html>DrawVectorText()</a> -><br><br>
+
+
+</body></html>

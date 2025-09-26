@@ -1,0 +1,80 @@
+<html><head><title>HideWindow</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HideWindow()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>HideWindow</b></font>(#Window, State [, Flags]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Hides or shows the specified window. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+The window to use. 
+
+</td></tr>
+<tr><td><i>State</i></td>
+<td> 
+It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font> : the window is hidden.
+  <font color="#924B72">#False</font>: the window is shown. The window is automatically activated (gets the focus), 
+          unless the <font color="#924B72">#PB_Window_NoActivate</font> flag is set.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Window_NoActivate</font>    : the window will be shown but not activated (only valid when un-hiding the window).
+  <font color="#924B72">#PB_Window_ScreenCentered</font>: the window will be screen centered (only valid when un-hiding the window).
+  <font color="#924B72">#PB_Window_WindowCentered</font>: the window will be window centered (only valid when un-hiding the window).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 220, 100, &quot;HideWindow()&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+   
+<font color="#006666">   ButtonGadget  </font>(1, 10, 60, 200, 30, &quot;Hide the window&quot;)
+   
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+     <b><font color="#006666">Select</font></b> Event
+     
+       <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+         <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+           <b><font color="#006666">Case</font></b> 1
+             
+<font color="#006666">             HideWindow</font>(0, <font color="#924B72">#True</font>)  
+             <b><font color="#006666">Debug</font></b> &quot;Window hidden.&quot;
+<font color="#006666">             MessageRequester</font>(&quot;Info&quot;, &quot;Press OK to show the window&quot;)
+<font color="#006666">             HideWindow</font>(0, <font color="#924B72">#False</font>)  
+             <b><font color="#006666">Debug</font></b> &quot;Window is visible.&quot;
+                              
+           <b><font color="#006666">EndSelect</font></b>
+            
+     <b><font color="#006666">EndSelect</font></b>
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="openwindow.html">OpenWindow()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=getwindowtitle.html>GetWindowTitle()</a> - <a href=index.html>Window Index</a> - <a href=iswindow.html>IsWindow()</a> -><br><br>
+
+</body></html>

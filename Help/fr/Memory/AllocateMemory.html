@@ -1,0 +1,92 @@
+<html><head><title>AllocateMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AllocateMemory()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>AllocateMemory</b></font>(Taille [, Options])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Alloue une zone mémoire contiguë remplie 
+de zéros (caractère <font color="#924B72">#Null</font>). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Taille</i></td>
+<td width="90%"> 
+La taille en octets de la nouvelle zone 
+mémoire. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Memory_NoClear</font>: Ne pas remplir la zone de mémoire avec des zéros. Cela peut aider à l'avoir plus rapidement si la mémoire allouée est utilisée immédiatement.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie l'adresse de la mémoire allouée 
+(<a href="../reference/memory.html">pointeur</a>), 
+zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La commande <a href="freememory.html">FreeMemory()</a> peut être utilisée 
+pour renvoyer la mémoire allouée au système. 
+<br>
+La commande <a href="reallocatememory.html">ReAllocateMemory()</a> peut être 
+utilisée pour changer la taille de la zone 
+allouée.<br>
+Toutes les zones de mémoire allouées sont 
+automatiquement libérées lorsque les 
+programmes se terminent. 
+<br>
+<br>
+<b>Note:</b> Si le programme se bloque à 
+cette commande, c'est généralement dû à 
+une corruption de la mémoire plus tôt dans 
+le programme, après écriture, dans une 
+zone en dehors de la zone de mémoire 
+allouée. 
+La cause de ce genre d'erreur peut être 
+trouvée en utilisant le 
+<a href="../reference/ide_debugtools.html">purificateur </a>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MemoireID =<font color="#006666"> AllocateMemory</font>(5000)
+  <b><font color="#006666">If</font></b> *MemoireID
+    <b><font color="#006666">Debug</font></b> &quot;Adresse de début de la zone mémoire de 5000 octets :&quot;
+    <b><font color="#006666">Debug</font></b> *MemoireID
+<font color="#006666">    PokeS</font>(*MemoireID, &quot;Stocke cette chaîne dans la zone mémoire&quot;)
+<font color="#006666">    FreeMemory</font>(*MemoireID)  <font color="#006666">; sera également effectué automatiquement à la fin du programme</font>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible d'allouer la mémoire demandée !&quot;
+  <b><font color="#006666">EndIf</font></b> 
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte.s = &quot;Salut !!!&quot;
+
+  *mem =<font color="#006666"> AllocateMemory</font>(<font color="#006666">StringByteLength</font>(Texte) +<font color="#006666"> SizeOf</font>(CHARACTER))
+<font color="#006666">  CopyMemory</font>(@Texte, *mem,<font color="#006666"> StringByteLength</font>(Texte) +<font color="#006666"> SizeOf</font>(CHARACTER))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MemorySize</font>(*mem)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*mem)
+<font color="#006666">  FreeMemory</font>(*mem)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="reallocatememory.html">ReAllocateMemory()</a>, <a href="freememory.html">FreeMemory()</a>, 
+<a href="memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Memory Index</a> - <a href=allocatestructure.html>AllocateStructure()</a> -><br><br>
+
+</body></html>

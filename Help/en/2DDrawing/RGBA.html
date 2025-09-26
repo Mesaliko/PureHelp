@@ -1,0 +1,79 @@
+<html><head><title>RGBA</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RGBA()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Color.q = <font color="#006666"><b>RGBA</b></font>(Red, Green, Blue, Alpha)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the 32-bit color value corresponding to the Red, Green, Blue and Alpha values. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Red, Green, Blue</i></td>
+<td width="90%"> 
+The value of the red, green and blue components for the color. Each value 
+must be between 0 and 255. 
+
+</td></tr>
+<tr><td><i>Alpha</i></td>
+<td> 
+The alpha component of the color. The value must be between 0 and 255. 
+A value of 0 means fully transparent and a value of 255 means fully opaque. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the combined color value. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To extract the red, green, blue or alpha values from a 32-bit color value, use 
+the <a href="red.html">Red()</a>, <a href="green.html">Green()</a>, <a href="blue.html">Blue()</a> and <a href="alpha.html">Alpha()</a> functions. 
+These functions are useful to perform <a href="../2ddrawing/index.html">Drawing operations</a>. 
+<br>
+<br>
+Result varies from 0 to 4 294 967 295 shades. 
+It is therefore advisable to use a 'quad', (Result.q) and set unused bytes to zero. 
+Indeed, on a 32-Bit operating system, Result is a Long integer (by default) with a 
+range of use from - 2 147 483 648 to + 2 147 483 647,  so comparing two colors is 
+hazardous with a Long integer. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(0, 0, 0, 0)         <font color="#006666">; Completely transparent black  </font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RGBA</font>(255, 255, 255, 255) <font color="#006666">; White totally opaque</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Color 24-bits to Color 32-bits</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">   Alpha = 255
+  
+  <font color="#006666">; Use a Quad (see remarks)</font>
+  Color24.q  =<font color="#006666"> ColorRequester</font>()
+  
+  Color32.q =<font color="#006666"> RGBA</font>(<font color="#006666">Red</font>(Color24),<font color="#006666"> Green</font>(Color24),<font color="#006666"> Blue</font>(Color24), alpha) 
+  Color32 = Color32 &amp; $FFFFFFFF <font color="#006666">; Zeroing unused bytes</font>
+
+  <font color="#006666">; It's also possible to replace the two lines above with:</font>
+  <font color="#006666">; Color32 = Color24 | Alpha &lt;&lt; 24</font>
+  
+  <b><font color="#006666">Debug</font></b> &quot;Red &quot; +<font color="#006666"> Red</font>(Color32)
+  <b><font color="#006666">Debug</font></b> &quot;Green  &quot; +<font color="#006666"> Green</font>(Color32)
+  <b><font color="#006666">Debug</font></b> &quot;Blue  &quot; +<font color="#006666"> Blue</font>(Color32)
+  <b><font color="#006666">Debug</font></b> &quot;Alpha &quot; +<font color="#006666"> Alpha</font>(Color32)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="red.html">Red()</a>, <a href="green.html">Green()</a>, <a href="blue.html">Blue()</a>, <a href="alpha.html">Alpha()</a>, <a href="rgb.html">RGB()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=rgb.html>RGB()</a> - <a href=index.html>2DDrawing Index</a> - <a href=red.html>Red()</a> -><br><br>
+
+</body></html>

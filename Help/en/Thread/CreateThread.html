@@ -1,0 +1,94 @@
+<html><head><title>CreateThread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateThread()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Thread = <font color="#006666"><b>CreateThread</b></font>(@ProcedureName(), *Value)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new thread running in the application background. If the thread is 
+correctly created, it returns the Thread number which is used with the 
+other thread functions, such as <a href="killthread.html">KillThread()</a>, <a href="pausethread.html">PauseThread()</a>, etc. The procedure 
+which you use as a thread must take one parameter and cannot return anything. 
+The '*Value' argument of CreateThread() is passed as the parameter to the procedure. 
+If you do try to return a value from your thread it will simply be lost. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@ProcedureName()</i></td>
+<td width="90%"> 
+The address of the procedure you want to use as the code for the 
+new thread. Remember to put the @ in front to get the name and the () afterwards so 
+it gets the address of the procedure. 
+
+</td></tr>
+<tr><td><i>*Value</i></td>
+<td> 
+The value passed to the thread procedure as parameter. It is up to 
+you to decide what this is used for. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The number for the newly created thread, or zero if a new thread could not be created. 
+This number is required if you want to control the thread using the other functions in this library. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+The example below shows the basic way to create a thread, although in this case it 
+does not do anything. 
+<br>
+<br>
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">YourProcedure</font>(*Value)
+    <font color="#006666">; The variable '*Value' will contain 23</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  CreateThread</font>(@YourProcedure(), 23)
+</font></pre>
+
+</blockquote><p><b>Example:</b> Passing multiple parameters to a thread</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    Name$
+    Age.b
+    Phone.l
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(*Parameters.Person)
+    
+    <font color="#006666">; Display the parameters</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">Debug</font></b> *Parameters\Name$
+    <b><font color="#006666">Debug</font></b> *Parameters\Age
+    <b><font color="#006666">Debug</font></b> *Parameters\Phone
+    
+    <font color="#006666">; Once we don't need them anymore, use ClearStructure() to ensure dynamic </font>
+    <font color="#006666">; objects (if any) are correctly cleared, and release the dynamic memory block</font>
+<font color="#006666">    ClearStructure</font>(*Parameters, Person)
+<font color="#006666">    FreeMemory</font>(*Parameters)
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; We use a dynamically allocated block, so even if we call it from a procedure, it will</font>
+  <font color="#006666">; still work. The memory block will be freed by the thread, when the thread ends.</font>
+  <font color="#006666">;</font>
+  *Parameters.Person =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(Person))
+  *Parameters\Name$ = &quot;John&quot;
+  *Parameters\Age   = 30
+  *Parameters\Phone = 10203040
+  
+<font color="#006666">  CreateThread</font>(@Thread(), *Parameters) <font color="#006666">; Send the thread a pointer to our structure</font>
+
+<font color="#006666">  Delay</font>(2000)
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createsemaphore.html>CreateSemaphore()</a> - <a href=index.html>Thread Index</a> - <a href=freemutex.html>FreeMutex()</a> -><br><br>
+
+</body></html>

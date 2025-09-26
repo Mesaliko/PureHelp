@@ -1,0 +1,228 @@
+<html><head><title>Zeiger und Speicherzugriff</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Zeiger und Speicherzugriff</font></b></p>
+
+<p><b>Pointer (Zeiger)</b></p><blockquote>
+
+
+<!-- There is a bug somewhere, and i had to do this work around. Mesa -->
+<blockquote>
+Das Verwenden von Pointern (Zeigern) ist möglich, indem Sie ein '*' (Sternchen) vor den Namen einer <a href="../reference/variables.html">Variable</a>,
+eines <a href="../reference/dim.html">Array</a>, einer
+<a href="../reference/newlist.html">Liste</a> oder einer <a href="../reference/newmap.html">Map</a> schreiben. 
+Ein Zeiger ist ein Platzhalter für eine Speicheradresse, die normalerweise einer <a href="../reference/structures.html">Struktur</a> zugeordnet ist.
+</blockquote>
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MyScreen.Screen =<font color="#006666"> OpenScreen</font>(0, 320, 200, 8, 0)
+  mouseX = *MyScreen\MouseX  <font color="#006666">; setzt voraus, dass die Screen Struktur ein MouseX Feld beinhaltet</font>
+</font></pre>
+
+Es gibt nur drei gültige Methoden, den Wert eines Zeigers zu setzen: <br>
+- als Ergebnis einer Funktion erhalten (wie im obigen Beispiel gezeigt) <br>
+- den Wert von einem anderen Zeiger kopieren <br>
+- Adresse einer Variable, einer Prozedur oder einer Sprungmarke (siehe weiter unten) ermitteln <br>
+<br>
+Hinweis: Anders als in C/C++ ist in PureBasic der * <b>immer</b> Teil des Variablennamens. Damit sind '*ptr' und 'ptr' zwei 
+verschiedene Variablen. 'ptr' ist eine (reguläre) Variable zum Speichern eines Werts, '*ptr' ist eine andere Variable 
+vom Typ Zeiger zum Speichern einer Adresse. 
+
+<br>
+<br>
+<u>Zeiger und Speichergröße</u> 
+<br>
+<br>
+Da Zeiger als Werte nur Adressen empfangen, ist die Speichergröße eines Zeigers der Platz, 
+der das Speichern einer absoluten Adresse des Prozessors ermöglicht: 
+<br>
+- Auf 32 Bit Prozessoren ist der Adressraum auf 32 Bit begrenzt, weshalb ein Zeiger 32 Bit 
+(4 Bytes, wie ein 'Long') im Speicher verbraucht 
+<br>
+- Auf 64 Bit Prozessoren benötigt er 64 Bit (8 Bytes, wie ein 'Quad') im Speicher, 
+weil die absolute Adresse in einem 64 Bit Bereich liegt. 
+<br>
+<br>
+Als eine Konsequenz daraus hängt der Typ des Zeigers vom CPU-Adressmodus ab ('Long' auf 32 Bit 
+CPU und 'Quad' auf 64 Bit zum Beispiel), so ist ein Zeiger eine Variable vom Typ Zeiger. 
+<br>
+Daraus resultiert, dass das Zuweisen eines nativen Typs zu einem Zeiger (*Pointer.l , *Pointer.b ...) 
+nicht erlaubt ist. 
+<br>
+<br>
+Hinweis: 
+<br>
+- Jedes Mal, wenn eine Speicheradresse in einer Variable gespeichert werden muss, sollte dies 
+mit einem Zeiger erfolgen. Dies garantiert Adressintegrität zur Kompilationszeit, unabhängig 
+davon wie gerade der CPU-Adressmodus ist. 
+<br>
+- PureBasic x86 erstellt <u>keine</u> 64 Bit Executables. Für damit kompilierte Programme 
+gewährt das Betriebssystem nur eine Adressierung mit 32 Bit Pointern. 
+<br>
+<br>
+<u>Zeiger und Strukturen</u> 
+<br>
+<br>
+Durch das Zuweisen einer Struktur zu einem Zeiger (zum Beispiel *MyPointer.Point) wird der 
+Zugriff auf jede Speicheradresse auf strukturiertem Weg (mit dem Operator '\') ermöglicht. 
+<br>
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> Point1.Point, Point2. Point
+  *CurrentPoint.Point = @Point1  <font color="#006666">; Zeiger-Deklaration, verknüpft mit einer Struktur und initialisiert mit der Adresse von Point1</font>
+  *CurrentPoint \x = 10          <font color="#006666">; Point1\x erhält den Wert 10 zugewiesen</font>
+  *CurrentPoint.Point = @Point2  <font color="#006666">; Springen zur Adresse von Point2</font>
+  *CurrentPoint \x = 20          <font color="#006666">; Point2\x erhält den Wert 20 zugewiesen</font>
+  <b><font color="#006666">Debug</font></b> Point1\x
+  <b><font color="#006666">Debug</font></b> Point2\x
+</font></pre>
+
+Zeiger erlauben das einfache Bewegen, Lesen und Schreiben im Speicher. Weiterhin ermöglichen sie 
+dem Programmierer den Zugriff auf große Datenmengen ohne den zusätzlichen Aufwand der 
+Datenvervielfältigung. Das Kopieren eines Zeigers ist viel schneller. 
+<br>
+<br>
+Zeiger sind auch in Strukturen verfügbar, für weitere Informationen siehe das <a href="../reference/structures.html">Kapitel Strukturen</a>. 
+<br>
+<br>
+<u>Zeiger und Zeichenketten (Strings)</u> 
+<br>
+<br>
+Alle Variablen haben eine permanente Größe im Speicher (2 Byte für Word, 4 Bytes für Long, etc.) - 
+außer für Strings, da sich deren Länge verändern kann. Aus diesem Grund werden String-Variablen auch 
+auf eine andere Weise gehandhabt wie sonstige Variablen. 
+<br>
+Daher speichert ein Struktur-Feld, welches auf einen String verweist, nur die Speicheradresse 
+des Strings anstelle des Strings selbst: ein solches Struktur-Feld ist ein Zeiger auf einen String. 
+<br>
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Text$ = &quot;Hello&quot;
+  *Text = @Text$            <font color="#006666">; *Text speichert die Adresse des Strings im Speicher</font>
+  *Pointer.String = @*Text  <font color="#006666">; *Pointer verweist auf *Text</font>
+  <b><font color="#006666">Debug</font></b> *Pointer\s          <font color="#006666">; Darstellen des Strings, welcher sich an der in *Pointer gespeicherten Adresse befindet (z.B. @Text$)</font>
+</font></pre>
+
+<u>Zeiger Arithmetik</u> 
+<br>
+<br>
+Arithmetische Operationen mit Zeigern sind möglich und praktisch durch Verwendung von <a href="../reference/compilerfunctions.html">SizeOf()</a>. 
+<br>
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>.Point(1)         <font color="#006666">; Array von Punkten</font>
+ 
+  *Pointer.Point = @Array()  <font color="#006666">; Speichern der Array-Adresse</font>
+  *Pointer\x = 10            <font color="#006666">; Ändern des Werts vom ersten Array-Element</font>
+  *Pointer\y = 15   
+
+  *Pointer +<font color="#006666"> SizeOf</font>(Point)   <font color="#006666">; Springen zum nächsten Array-Element</font>
+
+  *Pointer\x = 7             <font color="#006666">; Ändern des Werts vom zweiten Array-Element</font>
+  *Pointer\y = 9
+ 
+  <font color="#006666">; Anzeigen der Ergebnisse</font>
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(i)\x
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(i)\y
+  <b><font color="#006666">Next</font></b> i
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Adressen von Variablen</b></p><blockquote>
+
+
+Um die Adresse einer <a href="../reference/variables.html">Variable</a> in Ihrem Programmcode zu ermitteln, benutzen Sie das 'at' Symbol (@). 
+Ein üblicher Grund für die Benutzung dieser Methode ist, wenn Sie die Variable eines Struktur-Typs 
+an eine <a href="../reference/procedures.html">Prozedur</a> übergeben wollen. Sie müssen einen Zeiger auf diese Variable übergeben, da Sie 
+strukturierte Variablen nicht direkt übergeben können. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> astruct
+    a.w
+    b.l
+    c.w
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">SetB</font>(*myptr.astruct)
+    *myptr\b = 69
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Define</font></b>.astruct myvar
+  
+<font color="#006666">  SetB</font>( @myvar )
+  <b><font color="#006666">Debug</font></b> myvar\b
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Adressen von literalen Strings (Buchstabenketten)</b></p><blockquote>
+
+
+Um die Adresse eines literalen Strings zu ermitteln, können Sie das 'at' symbol (@) davor verwenden. String-Konstanten werden 
+ebenfalls unterstützt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  *String = @&quot;Test&quot;
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekC</font>(*String) <font color="#006666">; Wird 84 ausgeben, was der Wert von 'T' ist</font>
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Adressen von Prozeduren</b></p><blockquote>
+
+
+Für fortgeschrittene Programmierer. 
+Die häufigste Ursache für die Notwendigkeit zum Ermitteln einer Adresse besteht darin, wenn auf &quot;low-level&quot; Ebene mit dem OS 
+gearbeitet werden soll. Einige OS erlauben &quot;Callback&quot;- oder &quot;Hook&quot;-Funktionen (für einige Operationen) zu definieren, 
+welche durch das OS aufgerufen werden und dem Programmierer den Ausbau der Fähigkeiten der betreffenden OS-Routine 
+ermöglichen. Die Adresse einer <a href="../reference/procedures.html">Prozedur</a> wird auf ähnliche Art und Weise wie bei 
+<a href="../reference/variables.html">Variablen</a> ermittelt. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowCB</font>(WindowID.i, Message.i, wParam.i, lParam.i)
+    <font color="#006666">; Hier wird Ihre Callback Prozedur abgearbeitet.</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; Ein spezielles Callback für Windows OS ermöglicht die Verarbeitung von Window-Ereignissen.</font>
+<font color="#006666">  SetWindowCallback</font>( @WindowCB() )
+</font></pre>
+
+<br><hr><br>
+
+</blockquote>
+<p><b>Adressen von Sprungmarken (Labels)</b></p><blockquote>
+
+
+Es kann auch nützlich sein, die Adresse einer <a href="../reference/general_rules.html">Sprungmarke</a> innerhalb Ihres Programmcodes zu ermitteln. Dies ist möglich, 
+wenn Sie Zugriff auf an dieser Sprungmarke gespeicherten Code oder Daten erhalten möchten. Oder jede andere gute 
+Möglichkeit, die Sie sich vorstellen können. Um die Adresse einer Sprungmarke zu ermitteln, schreiben Sie ein 
+Fragezeichen (?) vor den Namen der Sprungmarke. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> &quot;Größe der Daten = &quot; +<font color="#006666"> Str</font>(?EndOfMyData - ?MyData)
+  <b><font color="#006666">End</font></b>
+  
+  <b><font color="#006666">DataSection</font></b>
+    MyData:
+      <b><font color="#006666">IncludeBinary</font></b> &quot;somefile.bin&quot;
+    EndOfMyData:
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,57 @@
+<html><head><title>CopyMemoryString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CopyMemoryString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CopyMemoryString</b></font>(*String [, @*DestinationMemoryID])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Copy the string from the specified address to the destination memory address if specified, 
+or at the end of the previous buffer if omitted. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*String</i></td>
+<td width="90%"> 
+The address of the string to copy. The string must be terminated with a null-character. 
+The string is expected to be in the PB string format. 
+
+</td></tr>
+<tr><td><i>@*DestinationMemoryID (optional)</i></td>
+<td> 
+The pointer to a variable holding the address with the destination buffer. After the string 
+has been copied, the variable *DestinationMemoryID will point to the null-character at the end of the 
+copied string, so a further call to this function will append the new string to the previous one. 
+<br>
+<br>
+If this parameter is omitted, the address from the previous call is used. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the value of *DestinationMemoryID after the string was copied. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Buffer =<font color="#006666"> AllocateMemory</font>(1000)
+  *Pointer = *Buffer
+<font color="#006666">  CopyMemoryString</font>(&quot;Hello&quot;, @*Pointer)
+<font color="#006666">  CopyMemoryString</font>(&quot; World&quot;)  <font color="#006666">; This one will be put just after &quot;Hello&quot;</font>
+  *Pointer-4                  <font color="#006666">; Come back from 2 characters unicode (on the 'l' of 'World')</font>
+<font color="#006666">  CopyMemoryString</font>(&quot;LD&quot;)      <font color="#006666">; Finally the last two letters will be uppercase</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*Buffer)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="copymemory.html">CopyMemory()</a>, <a href="peeks.html">PeekS()</a>, <a href="pokes.html">PokeS()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copymemory.html>CopyMemory()</a> - <a href=index.html>Memory Index</a> - <a href=fillmemory.html>FillMemory()</a> -><br><br>
+
+</body></html>

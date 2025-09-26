@@ -1,0 +1,137 @@
+<html><head><title>XMLNodeType</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLNodeType()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>XMLNodeType</b></font>(Noeud)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le type d'un noeud. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Noeud</i></td>
+<td width="90%"> 
+Le noeud à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Les différentes valeurs possibles sont: 
+<br>
+<br>
+
+<font color="#924B72">#PB_XML_Root</font> 
+<blockquote>
+
+C'est le noeud racine de l'arbre. Il 
+représente le document lui-même. 
+Ce noeud ne peut pas être ajouté ou 
+supprimé. 
+A l'intérieur de ce noeud racine, il ne 
+peut seulement y avoir qu'un seul noeud 
+du type <font color="#924B72">#PB_XML_Normal</font> et, de plus, 
+aucun texte. 
+(Ceci est indispensable pour obtenir un 
+document XML bien formé). 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Normal</font> 
+<blockquote>
+
+C'est un noeud normal dans 
+l'arborescence. 
+Il peut avoir des attributs et contenir 
+du texte ou / et des fils. 
+<br>
+<b>Exemple: </b>&lt;attribut noeud=&quot;bonjour&quot;&gt; 
+texte contenu &lt;/node&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Comment</font> 
+<blockquote>
+
+Ce noeud contient un commentaire. 
+Il ne peut avoir ni fils ni attribut, 
+seulement du texte. 
+<br>
+<b>Exemple: </b>&lt;!-- texte du commentaire --&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_CData</font> 
+<blockquote>
+
+C'est une section CData. 
+Une section CData contient seulement du 
+texte. 
+Son contenu n'est pas interprété par 
+l'analyseur lexical elle peut donc 
+contenir des caractères spéciaux non 
+décorés comme &quot;&lt;&quot; ou &quot;&gt;&quot; par exemple. 
+Les sections CData peuvent être utilisées 
+pour inclure d'autres balises ou codes à 
+l'intérieur d'un document sans avoir à 
+décorer tous les caractères spéciaux 
+qui pourraient être interprétés comme 
+étant du XML. 
+<br>
+<b>Exemple: </b>&lt;![CDATA[ contenu de cdata ]]&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_DTD</font> 
+<blockquote>
+
+C'est une déclaration de type de 
+document (DTD). 
+Cette bibliothèque n'utilise pas un 
+analyseur lexical validant, ainsi ces 
+déclarations sont en réalité ignorées 
+quand le document est analysé. Afin de 
+pouvoir les sauvegarder correctement 
+elles sont insérées à l'intérieur de 
+ce type de noeud DTD. 
+Elles peuvent être lues et modifiées 
+grâce à des commandes telles que 
+<a href="setxmlnodetext.html">SetXMLNodeText()</a> et seront sauvegardées 
+en l'état dans le document lors de 
+l'export / enregistrement. 
+La commande <a href="setxmlstandalone.html">SetXMLStandalone()</a> peut 
+également être très utile pour travailler 
+avec les DTDs. 
+<br>
+<b>Exemple: </b>&lt;!DOCTYPE name SYSTEM &quot;external dtd uri&quot;&gt; 
+</blockquote>
+
+
+<font color="#924B72">#PB_XML_Instruction</font> 
+<blockquote>
+
+Ce noeud représente une instruction (un 
+ordre). Les instructions contiennent des 
+informations destinées à être interprétées 
+/ exécutées par l'application cible. Elles 
+ont un <a href="getxmlnodename.html">nom</a> pour 
+préciser le contenu de l'instruction et 
+les données de l'instruction auxquelles 
+<a href="getxmlnodetext.html">GetXMLNodeText()</a> doit pouvoir accéder. 
+<br>
+<b>Exemple: </b>&lt;?php if (...) ... ?&gt; 
+<br>
+(Ici &quot;php&quot; est le nom du noeud, et ce qui 
+suit le &quot;?&gt;&quot; est le texte du noeud.) 
+</blockquote>
+
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=xmlnodepath.html>XMLNodePath()</a> - <a href=index.html>XML Index</a> - <a href=xmlstatus.html>XMLStatus()</a> -><br><br>
+
+</body></html>

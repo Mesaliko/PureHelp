@@ -1,0 +1,50 @@
+<html><head><title>Point</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Point()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Color = <font color="#006666"><b>Point</b></font>(x, y)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Return the color of a pixel in the current output. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+The location of the pixel in the output. 
+<br>
+<br>
+For performance reasons there are no bounds checks performed on these coordinates, the specified 
+coordinates must be inside the current drawing area. <a href="outputwidth.html">OutputWidth()</a> and 
+<a href="outputheight.html">OutputHeight()</a> can be used to verify that. This command is also not affected by calls to 
+<a href="clipoutput.html">ClipOutput()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the color of the specified pixel. 
+<br>
+<br>
+This color will only contain alpha information if the output has a 32-bit color depth and the 
+current <a href="drawingmode.html">DrawingMode()</a> is set to one of the alpha channel modes. Otherwise the alpha component 
+of the color is set to 0. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command does not work with <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="plot.html">Plot()</a>, <a href="red.html">Red()</a>, <a href="green.html">Green()</a>, 
+<a href="blue.html">Blue()</a>, <a href="alpha.html">Alpha()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=plot.html>Plot()</a> - <a href=index.html>2DDrawing Index</a> - <a href=rgb.html>RGB()</a> -><br><br>
+
+</body></html>

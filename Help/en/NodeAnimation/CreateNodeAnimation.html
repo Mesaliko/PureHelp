@@ -1,0 +1,62 @@
+<html><head><title>CreateNodeAnimation</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateNodeAnimation()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateNodeAnimation</b></font>(#NodeAnimation, NodeID, Length, Interpolation, RotationInterpolation)</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Creates a new node animation of the specified length. A node animation doesn't exist physically in the 
+3D world, it is an virtual track to move a node (and its attached object) easily around the world. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#NodeAnimation</i></td>
+<td width="90%"> 
+The number to identify the new node animation. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>NodeID</i></td>
+<td> 
+The node to move automatically. <a href="../node/nodeid.html">NodeID()</a> can be use to get a valid node identifier. 
+
+</td></tr>
+<tr><td><i>Length</i></td>
+<td> 
+The length of the new animation (in milliseconds). 
+
+</td></tr>
+<tr><td><i>Interpolation</i></td>
+<td> 
+The type of interpolation to apply between points. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_NodeAnimation_Linear</font>: each points will be linked together using a straight line, which can result to abrupt direction change
+  <font color="#924B72">#PB_NodeAnimation_Spline</font>: each points will be linked together using a spline, which results in smooth direction change, but is also slower.
+</font></pre>
+
+</td></tr>
+<tr><td><i>RotationInterpolation</i></td>
+<td> 
+The type of interpolation for the rotation to apply between points. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_NodeAnimation_LinearRotation</font>:    each points will be linked together using a straight line, which can result to abrupt rotation
+  <font color="#924B72">#PB_NodeAnimation_SphericalRotation</font>: each points will be linked together using a curve, which results in smoother rotation, but is also slower.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns zero if the #NodeAnimation can't be created. If <a href="../reference/purebasic_objects.html">#PB_Any</a> is used 
+as '#NodeAnimation' parameter, the new node animation number is returned. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freenodeanimation.html">FreeNodeAnimation()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addnodeanimationtime.html>AddNodeAnimationTime()</a> - <a href=index.html>NodeAnimation Index</a> - <a href=createnodeanimationkeyframe.html>CreateNodeAnimationKeyFrame()</a> -><br><br>
+
+</body></html>

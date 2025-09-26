@@ -1,0 +1,152 @@
+<html><head><title>VectorSourceImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">VectorSourceImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>VectorSourceImage</b></font>(ImageID [, Transparence [, Largeur.d, Hauteur.d [, Options]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sélectionne une image en tant que source 
+pour les opérations de dessin vectoriel 
+telles que <a href="fillpath.html">FillPath()</a> ou <a href="strokepath.html">StrokePath()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ImageID</i></td>
+<td width="90%"> 
+L'image à utiliser comme source. 
+<br>
+<br>
+Utiliser la fonction <a href="../image/imageid.html">ImageID()</a> pour 
+obtenir l'identifiant de l'image. 
+
+</td></tr>
+<tr><td><i>Transparence (optionnel)</i></td>
+<td> 
+La transparence (alpha) à appliquer à 
+l'image source. 
+<br>
+<br>
+Cette transparence est appliquée en plus de 
+tous les pixels transparents déjà présents 
+dans l'image source. 
+La valeur par défaut est 255 (pas de 
+transparence supplémentaire). 
+
+</td></tr>
+<tr><td><i>Largeur.d, Hauteur.d (optionnel)</i></td>
+<td> 
+Spécifie une largeur et une hauteur de 
+l'image. 
+<br>
+<br>
+Les valeurs sont interprétées en termes de 
+coordonnées système <font color="#924B72">#PB_Coordinate_Source</font>. 
+Si non spécifiées alors les dimensions de 
+l'image source (en pixels) sont converties 
+dans l'unité de la sortie de dessin vectoriel 
+(taille d'origine). 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut-être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_VectorImage_Default</font>: Les zones en dehors de l'image source sont transparentes (Par défaut)
+  <font color="#924B72">#PB_VectorImage_Repeat</font> : L'image source est répétée pour couvrir toute la zone de dessin
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Ces fonctions utiliseront chaque pixel 
+de l'image sur la sortie de dessin 
+où il y a quelque chose à dessiner. 
+<br>
+<br>
+Voir l'aperçu de 
+<a href="../vectordrawing/index.html">VectorDrawing</a> 
+pour une introduction aux différents systèmes 
+de coordonnées. 
+<br>
+<br>
+En transformant le système de coordonnées 
+<font color="#924B72">#PB_Coordinate_Source</font>, l'image de la source 
+peut être transformée (déplacée, tournée, étirées, 
+inclinée). <br>
+Voir le deuxième exemple ci-dessous pour une démonstration. 
+
+</blockquote><p><b>Exemple:</b> Image source répétée</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+    
+<font color="#006666">    LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/PureBasicLogo.bmp&quot;)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+<font color="#006666">      AddPathBox</font>(50, 50, 200, 50)
+<font color="#006666">      AddPathBox</font>(150, 75, 200, 50)
+      
+<font color="#006666">      VectorSourceImage</font>(<font color="#006666">ImageID</font>(0), 255,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0), <font color="#924B72">#PB_VectorImage_Repeat</font>)
+<font color="#006666">      StrokePath</font>(20)
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/vectorsourceimage.png"></p>
+
+</blockquote><p><b>Exemple:</b> Image source tournée et renversée</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+    
+<font color="#006666">    LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/PureBasicLogo.bmp&quot;)
+<font color="#006666">    LoadFont</font>(0, &quot;Impact&quot;, 20, <font color="#924B72">#PB_Font_Bold</font>)    
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+<font color="#006666">      FlipCoordinatesY</font>(50, <font color="#924B72">#PB_Coordinate_Source</font>)
+<font color="#006666">      RotateCoordinates</font>(50, 50, -45, <font color="#924B72">#PB_Coordinate_Source</font>)      
+<font color="#006666">      VectorSourceImage</font>(<font color="#006666">ImageID</font>(0), 255,<font color="#006666"> ImageWidth</font>(0),<font color="#006666"> ImageHeight</font>(0), <font color="#924B72">#PB_VectorImage_Repeat</font>)
+      
+<font color="#006666">      VectorFont</font>(<font color="#006666">FontID</font>(0), 150)
+<font color="#006666">      MovePathCursor</font>(20, 20)      
+<font color="#006666">      DrawVectorText</font>(&quot;TEXT&quot;)
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/vectorsourceimage2.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="vectorsourcecolor.html">VectorSourceColor()</a>, 
+<a href="vectorsourcelineargradient.html">VectorSourceLinearGradient()</a>, 
+<a href="vectorsourcecirculargradient.html">VectorSourceCircularGradient()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=vectorsourcegradientcolor.html>VectorSourceGradientColor()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=vectorsourcelineargradient.html>VectorSourceLinearGradient()</a> -><br><br>
+
+
+</body></html>

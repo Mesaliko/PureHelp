@@ -1,0 +1,62 @@
+<html><head><title>ComposeXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ComposeXML()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis$ = <font color="#006666"><b>ComposeXML</b></font>(#XML [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die XML-Struktur als Markup in einem einzelnen String zurück. Das XML wird im 
+Stringformat des Executables (ASCII oder <a href="../reference/unicode.html"></a>Unicode&quot;) 
+zurückgegeben, unabhängig von der durch <a href="getxmlencoding.html">GetXMLEncoding()</a> zurückgegebenen Einstellung. 
+Die <a href="exportxml.html">ExportXML()</a> Funktion kann verwendet werden, um das Markup in einer anderen 
+Kodierung zu erstellen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+Das zu exportierende XML. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Dies kann eine Kombination (mit Hilfe des '|' Operators) der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_StringFormat</font> : Schließt einen Byte-Order-Mark ein. Siehe <a href="../file/writestringformat.html">WriteStringFormat()</a> für weitere Informationen.
+  <font color="#924B72">#PB_XML_NoDeclaration</font>: Schließt die XML-Deklaration nicht mit ein.
+</font></pre>
+Hinweis: Entsprechend der XML-Spezifikation kann die XML-Deklaration nur weggelassen werden, 
+wenn das Dokument in UTF-8 oder UTF-16 kodiert wird, oder wenn die Kodierungs-Information 
+extern - z.B. durch ein Transfer-Protokoll - bereitgestellt wird. Aber auch dann ist es 
+ratsam, die Deklaration im Dokument zu belassen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt das Markup als einen String zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das erstellte XML-&quot;Markup&quot; (Formatierung) wird nicht neu formatiert. Es wird so zurückgegeben, 
+wie es anfänglich geparst/erstellt wurde. Die Anzahl der zwischen den Tags geschriebenen 
+Zeilenumbrüche/Leerzeichen wird im 'Text' jedes XML-Knotens gespeichert (siehe 
+<a href="getxmlnodetext.html">GetXMLNodeText()</a> für weitere Informationen). 
+<br>
+<br>
+Um das XML-Markup vor dem Speichern neu zu formatieren, kann der 'Text' jedes XML-Knotens 
+verändert werden oder <a href="formatxml.html">FormatXML()</a> kann benutzt werden, um einige 
+gebräuchliche Neuformatierungs-Optionen auf den Baum anzuwenden. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="formatxml.html">FormatXML()</a>, <a href="exportxml.html">ExportXML()</a>, <a href="savexml.html">SaveXML()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=childxmlnode.html>ChildXMLNode()</a> - <a href=index.html>XML Inhaltsverzeichnis</a> - <a href=copyxmlnode.html>CopyXMLNode()</a> -><br><br>
+
+</body></html>

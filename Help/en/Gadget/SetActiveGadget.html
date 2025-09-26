@@ -1,0 +1,56 @@
+<html><head><title>SetActiveGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetActiveGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetActiveGadget</b></font>(#Gadget)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Activates (sets the keyboard focus on) the gadget specified by the given gadget number. Activating a gadget allows 
+it to become the current object to receive messages and handle keystrokes. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to activate. Can be set to '-1' to remove the keyboard focus from the current active window. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 140, &quot;SetActiveGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    StringGadget  </font>(0, 10, 10, 250, 20, &quot;bla bla...&quot;)
+<font color="#006666">    ComboBoxGadget</font>(1, 10, 40, 250, 21)
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 5 :<font color="#006666"> AddGadgetItem</font>(1, -1, &quot;ComboBox item &quot; +<font color="#006666"> Str</font>(a)) : <b><font color="#006666">Next</font></b>
+<font color="#006666">    SetGadgetState</font>(1, 2)                <font color="#006666">; set (beginning with 0) the third item as active one</font>
+<font color="#006666">    ButtonGadget  </font>(2, 10,  90, 250, 20, &quot;Activate StringGadget&quot;)
+<font color="#006666">    ButtonGadget  </font>(3, 10, 115, 250, 20, &quot;Activate ComboBox&quot;)
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+          <b><font color="#006666">Case</font></b> 2 :<font color="#006666"> SetActiveGadget</font>(0)   <font color="#006666">; Activate StringGadget</font>
+          <b><font color="#006666">Case</font></b> 3 :<font color="#006666"> SetActiveGadget</font>(1)   <font color="#006666">; Activate ComboBoxGadget</font>
+        <b><font color="#006666">EndSelect</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getactivegadget.html">GetActiveGadget()</a>, <a href="../window/setactivewindow.html">SetActiveWindow()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=scrollbargadget.html>ScrollBarGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=setgadgetattribute.html>SetGadgetAttribute()</a> -><br><br>
+
+</body></html>

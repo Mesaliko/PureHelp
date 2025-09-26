@@ -1,0 +1,178 @@
+<html><head><title>LoadSound3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadSound3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>LoadSound3D</b></font>(#Son3D, NomFichier$ [, Option])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Charge un fichier son 3D en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Son3D</i></td>
+<td width="90%"> 
+Le numéro d'identification du son 3D 
+chargé. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Le nom du fichier sonore, de type WAV ou 
+OGG. 
+
+</td></tr>
+<tr><td><i>Option (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sound_Streaming</font>: Active le support du streaming. 
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le son 3D doit être en mono.<br>
+Un son 3D n'a pas de position. <br>
+Il peut être attaché à un 
+<a href="../node/index.html">noeud</a> 
+pour avoir sa propre position. 
+Un son 3D est joué par rapport à 
+l'emplacement d'écoute. 
+Pour modifier l'emplacement d'écoute, 
+utilisez <a href="soundlistenerlocate.html">SoundListenerLocate()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">    <font color="#006666">; Initialisation du monde 3D</font>
+<font color="#006666">    InitEngine3D</font>()
+<font color="#006666">    InitSprite</font>()
+<font color="#006666">    InitKeyboard</font>()
+<font color="#006666">    InitMouse</font>()
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples/3D/Data&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples/3D/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">    Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples/3D/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>) 
+
+    <font color="#006666">; Ouverture de la fenêtre</font>
+<font color="#006666">    OpenWindow</font>(0,0,0,1000,1000,&quot;Le Son varie en fonction de la position de la planète&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>|<font color="#924B72">#PB_Window_SystemMenu</font>)
+<font color="#006666">    OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0),0,0,1000,1000,1,0,0)
+
+    <font color="#006666">;Création du monde 3D</font>
+<font color="#006666">    SkyBox</font>(&quot;stevecube.jpg&quot;)<font color="#006666">;</font>
+    cam=<font color="#006666">CreateCamera</font>(<font color="#924B72">#PB_Any</font>, 0, 0, 100, 100)
+    planete=<font color="#006666">CreateSphere</font>(<font color="#924B72">#PB_Any</font>, 10)
+    tex_planete=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>, &quot;clouds.jpg&quot;)
+    material=<font color="#006666">CreateMaterial</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666">TextureID</font>(tex_planete))
+    planeteE=<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666">MeshID</font>(planete),<font color="#006666">MaterialID</font>(material))
+
+    <font color="#006666">; Chargement du fichier Son3d Wav ou Ogg, qui doit être mono</font>
+    son3D=<font color="#006666"> LoadSound3D</font>(<font color="#924B72">#PB_Any</font>,&quot;Roar.ogg&quot;,<font color="#924B72">#PB_Sound3D_Loop</font>) 
+
+<font color="#006666">    SoundVolume3D</font>(son3D, 20)         <font color="#006666">; Volume sonore à 20%</font>
+<font color="#006666">    SoundRange3D</font>(son3D, 1, 100)      <font color="#006666">; Zone d'émission du son</font>
+<font color="#006666">    SoundCone3D</font>(son3D, 90, 360, 20)  <font color="#006666">; Facultatif, Cône sonore</font>
+
+    <font color="#006666">; Le Son est joué en boucle</font>
+<font color="#006666">    PlaySound3D</font>(son3D, <font color="#924B72">#PB_Sound3D_Loop</font>)
+
+    <font color="#006666">; L'auditeur se déplace avec la caméra</font>
+<font color="#006666">    SoundListenerLocate</font>(<font color="#006666">CameraX</font>(cam),<font color="#006666">CameraY</font>(cam),<font color="#006666">CameraZ</font>(cam))
+
+    <font color="#006666">; Le Son et la planète sont liés, </font>
+    <font color="#006666">; ainsi si l'utilisateur déplace la planète, le son se déplace avec elle</font>
+    noeud=<font color="#006666">CreateNode</font>(<font color="#924B72">#PB_Any</font>, 0, 0, -75)
+<font color="#006666">    AttachNodeObject</font>(noeud,<font color="#006666"> SoundID3D</font>(son3D))
+<font color="#006666">    AttachNodeObject</font>(noeud,<font color="#006666"> EntityID</font>(planeteE))
+
+    <font color="#006666">; Gestion de la fenêtre, du clavier et de la souris</font>
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Repeat</font></b> 
+        Event  =<font color="#006666"> WindowEvent</font>() 
+        <b><font color="#006666">Select</font></b> Event 
+          <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font> 
+        <b><font color="#006666">End</font></b> 
+            
+        <b><font color="#006666">EndSelect</font></b> 
+      <b><font color="#006666">Until</font></b> Event = 0
+      
+<font color="#006666">      ExamineKeyboard</font>()
+<font color="#006666">      ExamineMouse</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">MouseDeltaX</font>()&gt;0
+<font color="#006666">        MoveNode</font>(noeud,0.5,0,0)
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">MouseDeltaX</font>()&lt;0
+<font color="#006666">        MoveNode</font>(noeud,-0.5,0,0)
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">MouseDeltaY</font>()&gt;0
+<font color="#006666">        MoveNode</font>(noeud,0,-0.5,0)
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">MouseDeltaY</font>()&lt;0
+<font color="#006666">        MoveNode</font>(noeud,0,0.5,0)
+      <b><font color="#006666">EndIf</font></b> 
+      <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>) &lt;&gt;0
+        <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">MouseButton</font>( <font color="#924B72">#PB_MouseButton_Right</font>) &lt;&gt;0
+<font color="#006666">        MoveNode</font>(noeud,0,0,-75,<font color="#924B72">#PB_Absolute</font>)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+        quitter + 1
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      RotateNode</font>(noeud,0.3,0.4,0.5,<font color="#924B72">#PB_Relative</font>) 
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)
+<font color="#006666">        MoveNode</font>(noeud,0.5,0,0)
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)
+<font color="#006666">        MoveNode</font>(noeud,-0.5,0,0)
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)
+<font color="#006666">        MoveNode</font>(noeud,0,0.5,0)
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)
+<font color="#006666">        MoveNode</font>(noeud,0,-0.5,0)
+      <b><font color="#006666">EndIf</font></b>
+      tiks =<font color="#006666"> MouseWheel</font>()
+      <b><font color="#006666">If</font></b> tiks &gt; 0
+<font color="#006666">        MoveNode</font>(noeud,0,0,5)
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> tiks &lt; 0
+<font color="#006666">        MoveNode</font>(noeud,0,0,-5)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <font color="#006666">; Affichage de la scène</font>
+<font color="#006666">      StartDrawing</font>(<font color="#006666">WindowOutput</font>(0))
+<font color="#006666">      DrawText</font>(0,5,&quot;X=&quot; +<font color="#006666"> Str</font>(<font color="#006666">NodeX</font>(noeud)) + &quot; Y=&quot; +<font color="#006666"> Str</font>(<font color="#006666">NodeY</font>(noeud)) + &quot; Z=&quot;+<font color="#006666">Str</font>(<font color="#006666">NodeZ</font>(noeud))) 
+<font color="#006666">      DrawText</font>(0,30,&quot;Souris ou Clavier: Haut, Bas, Droite, Gauche et Molette souris&quot;)  
+<font color="#006666">      DrawText</font>(0,60,&quot;.: Echap ou clic gauche pour quitter :.&quot;)
+<font color="#006666">      StopDrawing</font>()
+      
+<font color="#006666">      RenderWorld</font>()
+      
+<font color="#006666">      FlipBuffers</font>()
+      
+    <b><font color="#006666">Until</font></b> quitter
+
+    <b><font color="#006666">End</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freesound3d.html">FreeSound3D()</a>, <a href="issound3d.html">IsSound3D()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=issound3d.html>IsSound3D()</a> - <a href=index.html>Sound3D Index</a> - <a href=playsound3d.html>PlaySound3D()</a> -><br><br>
+
+</body></html>

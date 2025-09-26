@@ -1,0 +1,86 @@
+<html><head><title>Building a PureLibrary</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Building a PureLibrary</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+PureBasic allows to easily create custom libraries to extend the core PureBasic commandset with more commands. 
+The generated library will be located in the PureBasic/PureLibraries/UserLibraries/ folder, so be sure to have 
+the proper access rights when trying to generate one.<br>
+<br>
+For now, the purelibrary creation is only available from commandline, using the C backend 
+compiler using the '--purelibrary' option. It's also possible to use the great library creation tool from the IDE by 'Pf Shadoko' found <a href="https://www.purebasic.fr/english/viewtopic.php?t=85882">here</a> which 
+also come with some more features.<br>
+<br>
+As a PureLibary adds new command to the standard commandset, the new command name must be different than the internal commands. A PureLibrary should always been compiled with the PureBasic compiler 
+it will be used on. If a PureLibrary doesn't come with it's associated code source, it will be very likely to break in a future version of PureBasic and should be avoided. <br>
+<br>
+A PureLibrary can also be created using C/C++ or ASM, please look in the PureLibrary/SDK/ folder. <br>
+
+</blockquote>
+<p><b>Exporting functions</b></p><blockquote>
+
+
+No code should be written outside procedures, except for object declaration. <br>
+<br>
+To export a function when creating a PureLibrary, it needs to be declared as <b><font color="#006666">ProcedureDLL</font></b>. If optional parameters are needed another function with the same name but with an incremented number can be used. 
+A 'QuickHelp' comment can also be added to have the quick help displayed in the IDE when using the command. <br>
+<br>
+<b>Example:</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;  QuickHelp  MyMax(Min [, Max [, Flags, Mode]]) - A standard min/max function</font>
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax3</font>(a, b, c, d)
+    <font color="#006666">; Your code here</font>
+    <b><font color="#006666">ProcedureReturn</font></b> a
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax2</font>(a, b)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">MyMax3</font>(a, b, 0, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">ProcedureDLL</font></b> <font color="#006666">MyMax</font>(a)
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">MyMax2</font>(a, 0)
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</blockquote>
+<p><b>Automatic functions</b></p><blockquote>
+
+
+There are two special functions for automatic initialization and to free the library: InitPureLibrary() and FreePureLibrary(). Unlike other library functions, 
+these are not declared with <b><font color="#006666">ProcedureDLL</font></b> but with <b><font color="#006666">Procedure</font></b>. These two functions are automatically called when the program is launched and 
+when the program is terminated. <br>
+<br>
+<b>Example:</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">InitPureLibrary</font>()
+    <font color="#006666">; Your init routine here</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FreePureLibrary</font>()
+    <font color="#006666">; Your free routine here</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</blockquote>
+<p><b>Disabling a PureLibrary</b></p><blockquote>
+
+
+When coding the PureLibrary, it might be useful to ignore the current library with the <b><font color="#006666">DisablePureLibrary</font></b> so the function name can be used again. <br>
+<br>
+<b>Example:</b> <br>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DisablePureLibrary</font></b> MyCoolLib
+
+  <font color="#006666">; All functions found in 'MyCoolLib' will be ignored, so their name can be used again with ProcedureDLL</font>
+</font></pre>
+
+</blockquote>
+<p><b>Removing a PureLibrary</b></p><blockquote>
+
+
+To remove a custom PureLibrary, just delete the according file in the PureBasic/PureLibraries/UserLibraries/ folder. 
+
+</blockquote>
+</font></body></html>

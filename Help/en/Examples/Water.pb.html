@@ -1,0 +1,84 @@
+<html><head><title>Water.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Water
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+
+</font><font color="#006666">;#################################################################################################################
+
+</font><font color="#924B72">#end_distance</font>=1024*4
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ColorBlend</font>(color1.l, color2.l, blend.f)
+  <b><font color="#006666">Protected</font></b> r.w,g.w,b.w,a.w
+  r=<font color="#006666">  Red</font>(color1) + (<font color="#006666">Red</font>(color2)     -<font color="#006666"> Red</font>(color1)) * blend
+  g=<font color="#006666">Green</font>(color1) + (<font color="#006666">Green</font>(color2) -<font color="#006666"> Green</font>(color1)) * blend
+  b=<font color="#006666"> Blue</font>(color1) + (<font color="#006666">Blue</font>(color2) -<font color="#006666">   Blue</font>(color1)) * blend
+  a=<font color="#006666">Alpha</font>(color1) + (<font color="#006666">Alpha</font>(color2) -<font color="#006666"> Alpha</font>(color1)) * blend
+  <b><font color="#006666">ProcedureReturn</font></b>  <font color="#006666">RGBA</font>(r,g,b,a)
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">InitEngine3D</font>():<font color="#006666">InitSprite</font>():<font color="#006666">InitKeyboard</font>():<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.9:dy=<font color="#006666">DesktopHeight</font>(0)*0.9
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Water - [PageUp][PageDown] Sun height  [F12] Wireframe  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100):<font color="#006666">MoveCamera</font>(0,0,5,0):<font color="#006666">CameraLookAt</font>(0,2,5,10)
+
+<font color="#006666">;sky
+</font>tx_sky=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;sky.png&quot;)
+<font color="#006666">SkyDome</font>(<font color="#006666">TextureID</font>(tx_sky),$cc6600,$0088ff,3,400,-0.5,0)
+
+<font color="#006666">;ocean
+</font>tx_water=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;waternormal.png&quot;)
+tx_foam=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;foam.png&quot;)
+<font color="#006666">CreateWater</font>(<font color="#006666">TextureID</font>(tx_water),<font color="#006666">TextureID</font>(tx_foam),    $cc888800,$886666,  <font color="#924B72">#end_distance</font>,    1.5,1.5,0.0,0.7)
+
+<font color="#006666">;ground
+</font>tx_ground=<font color="#006666">LoadTexture</font>(<font color="#924B72">#PB_Any</font>,&quot;Dirt.jpg&quot;)
+<font color="#006666">CreateMaterial</font>(2,<font color="#006666">TextureID</font>(tx_ground))
+<font color="#006666">CreatePlane</font>(2,<font color="#924B72">#end_distance</font>*2,<font color="#924B72">#end_distance</font>*2,16,16,<font color="#924B72">#end_distance</font>/64,<font color="#924B72">#end_distance</font>/64)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666">MeshID</font>(2),<font color="#006666">MaterialID</font>(2),0,-5,0)
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraUserControl</font>(camera,speed.f=0.2,smooth.f=0.1,yfixed.f=1e10)
+  <b><font color="#006666">Static</font></b>.f MouseX,Mousey,depx,depz,sdepx,sdepz
+  
+  depx=-speed*(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>))
+  depz=-speed*(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)-<font color="#006666">MouseWheel</font>()*20)
+  MouseX = -<font color="#006666">MouseDeltaX</font>() *  0.05
+  MouseY = -<font color="#006666">MouseDeltaY</font>() *  0.05
+<font color="#006666">  RotateCamera</font>(camera, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+  sdepx+(depx-sdepx)*smooth
+  sdepz+(depz-sdepz)*smooth
+<font color="#006666">  MoveCamera  </font>(camera, sdepX, 0, -sdepz)
+  <b><font color="#006666">If</font></b> yfixed&lt;&gt;1e10:<font color="#006666">MoveCamera</font>(camera,<font color="#006666">CameraX</font>(camera),yfixed,<font color="#006666">CameraZ</font>(camera),<font color="#924B72">#PB_Absolute</font>):<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Define</font></b>.f r=1,rr
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">  ExamineKeyboard</font>()
+<font color="#006666">  ExamineMouse</font>()
+  <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F12</font>):fdf=1-fdf:<b><font color="#006666">If</font></b> fdf:<font color="#006666">CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Wireframe</font>):<b><font color="#006666">Else</font></b>:<font color="#006666">CameraRenderMode</font>(0,<font color="#924B72">#PB_Camera_Textured</font>):<b><font color="#006666">EndIf</font></b>:<b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  CameraUserControl</font>(0,0.2,0.1)
+  
+  <font color="#006666">; sun height
+</font>  r+(<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageUp</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_PageDown</font>))*0.004:<b><font color="#006666">If</font></b> r&lt;0:r=0:<b><font color="#006666">ElseIf</font></b> r&gt;1:r=1:<b><font color="#006666">EndIf</font></b>:rr=<font color="#006666">Pow</font>(r,0.25)
+<font color="#006666">  CreateLight</font>(0,<font color="#006666">ColorBlend</font>($0088ff,$ffffff,rr),20000, r*40000,20000)
+<font color="#006666">  AmbientColor</font>($010101*<font color="#006666">Int</font>(r*48+64))
+<font color="#006666">  Fog</font>(<font color="#006666">ColorBlend</font>($004488,$ffccaa,r),1,0,<font color="#924B72">#end_distance</font>)
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()    
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(3)
+</font></pre>
+</body></html>

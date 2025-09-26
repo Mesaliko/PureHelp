@@ -1,0 +1,99 @@
+<html><head><title>CreateThread</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateThread()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateThread</b></font>(@NomdeProcedure(), *Valeur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau Thread. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@NomdeProcedure()</i></td>
+<td width="90%"> 
+L'adresse de la procédure que vous souhaitez 
+utiliser comme code du nouveau thread.<br>
+N'oubliez pas de mettre le '@' devant 
+pour obtenir le nom, et les '()'. 
+
+</td></tr>
+<tr><td><i>*Valeur</i></td>
+<td> 
+La valeur transmise à la procédure de thread en 
+tant que paramètre. C'est à vous de décider de 
+son utilisation. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le numéro du Thread s'il a été 
+créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si le thread est créé correctement, la 
+fonction renvoie le numéro du thread 
+qui pourra être utilisé avec les 
+autres commandes de la bibliothèque, 
+telles que <a href="killthread.html">KillThread()</a>, <a href="pausethread.html">PauseThread()</a>, 
+etc. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">MaProcedureThread</font>(*Valeur)
+    <font color="#006666">; La variable '*Valeur' contiendra 23</font>
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  CreateThread</font>(@MaProcedureThread(), 23)
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Passer plusieurs paramètres à un thread</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Personne
+    Nom$
+    Age.b
+    Telephone.l
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Thread</font>(*Parametres.Personne)
+    
+    <font color="#006666">; Affiche les parametres</font>
+    <font color="#006666">;</font>
+    <b><font color="#006666">Debug</font></b> *Parametres\Nom$
+    <b><font color="#006666">Debug</font></b> *Parametres\Age
+    <b><font color="#006666">Debug</font></b> *Parametres\Telephone
+    
+    <font color="#006666">; Une fois qu'on n'en a plus besoin, ClearStructure() est nécessaire pour s'assurer</font>
+    <font color="#006666">; que les objets dynamiques (s'il y en a) sont correctement libérés.</font>
+<font color="#006666">    ClearStructure</font>(*Parametres, Personne)
+<font color="#006666">    FreeMemory</font>(*Parametres)
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; On utilise de la mémoire dynamique, donc cela continuera de fonctionner même si l'appel</font>
+  <font color="#006666">; est fait à l'interieur d'une procédure.</font>
+  <font color="#006666">;</font>
+  *Parametres.Personne =<font color="#006666"> AllocateMemory</font>(<font color="#006666">SizeOf</font>(Personne))
+  *Parametres\Nom$ = &quot;Jean&quot;
+  *Parametres\Age   = 30
+  *Parametres\Telephone = 10203040
+  
+<font color="#006666">  CreateThread</font>(@Thread(), *Parametres) <font color="#006666">; Crée le thread</font>
+
+<font color="#006666">  Delay</font>(2000)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="killthread.html">KillThread()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createsemaphore.html>CreateSemaphore()</a> - <a href=index.html>Thread Index</a> - <a href=freemutex.html>FreeMutex()</a> -><br><br>
+
+</body></html>

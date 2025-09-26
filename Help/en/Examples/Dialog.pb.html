@@ -1,0 +1,43 @@
+<html><head><title>Dialog.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Dialog example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#Xml</font> = 0
+<font color="#924B72">#Dialog</font> = 0
+
+<font color="#006666">; This callback is directly set in the xml
+</font><font color="#006666">;
+</font><b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">EnableAlphaBlendingEvent</font>()
+  <b><font color="#006666">Debug</font></b> &quot;Enable alpha blending checkbox modified !&quot;
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">LoadXML</font>(<font color="#924B72">#Xml</font>, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ui.xml&quot;) <b><font color="#006666">And</font></b> <font color="#006666">XMLStatus</font>(<font color="#924B72">#Xml</font>) = <font color="#924B72">#PB_XML_Success</font>
+<font color="#006666">  CreateDialog</font>(<font color="#924B72">#Dialog</font>)
+ 
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenXMLDialog</font>(<font color="#924B72">#Dialog</font>, <font color="#924B72">#Xml</font>, &quot;hello&quot;, 200, 200)
+    
+    OneInstanceCheckbox =<font color="#006666"> DialogGadget</font>(<font color="#924B72">#Dialog</font>, &quot;OneInstanceCheckbox&quot;)
+<font color="#006666">    SetGadgetText</font>(OneInstanceCheckbox, &quot;Instance text changed&quot;)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+    
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Dialog creation error: &quot; +<font color="#006666"> DialogError</font>(<font color="#924B72">#Dialog</font>)
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">Else</font></b>
+  <b><font color="#006666">Debug</font></b> &quot;XML error on line &quot; +<font color="#006666"> XMLErrorLine</font>(<font color="#924B72">#Xml</font>) + &quot;: &quot; +<font color="#006666"> XMLError</font>(<font color="#924B72">#Xml</font>)
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

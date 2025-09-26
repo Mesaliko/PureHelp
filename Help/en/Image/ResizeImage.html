@@ -1,0 +1,61 @@
+<html><head><title>ResizeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResizeImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ResizeImage</b></font>(#Image, Width, Height [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Resize the #Image to the given dimension. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The image to resize. 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The new dimensions of the image. Both width and height must be greater than zero. 
+<font color="#924B72">#PB_Ignore</font> can be specified for width or height, so this value won't be changed. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The resize method. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_Smooth</font>: Resize the image with smoothing (default).
+  <font color="#924B72">#PB_Image_Raw</font>   : Resize the image without any interpolation.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation succeeded and zero if it failed. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function changes the <a href="../reference/handles.html">handle</a> of the 
+used image. Therefore it must be newly assigned e.g. to an <a href="../gadget/imagegadget.html">ImageGadget()</a> with 
+<a href="../gadget/setgadgetstate.html">SetGadgetState()</a>. 
+<br>
+<br>
+This function does not work with icon images (.ico) and with a multi-frame image. 
+<br>
+<br>
+The limit for the image size that can be handled depends on the operating system and the available amount of memory. 
+If enough memory is available, then images up to at least 8192x8192 pixels can be handled by all operating systems supported by PureBasic. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="imagewidth.html">ImageWidth()</a>, <a href="imageheight.html">ImageHeight()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=removeimageframe.html>RemoveImageFrame()</a> - <a href=index.html>Image Index</a> - <a href=saveimage.html>SaveImage()</a> -><br><br>
+
+</body></html>

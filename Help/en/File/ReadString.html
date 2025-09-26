@@ -1,0 +1,64 @@
+<html><head><title>ReadString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>ReadString</b></font>(#File [, Flags [, Length]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Read a string from a file until an 'End Of Line' or a 'Null' character is found (Unix, DOS and Macintosh 
+file formats are supported). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#File</i></td>
+<td width="90%"> 
+The file to read from. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The flags to apply while reading the string. It may be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : reads the string as ASCII
+  <font color="#924B72">#PB_UTF8</font>   : reads the string as UTF8
+  <font color="#924B72">#PB_Unicode</font>: reads the string as UTF16
+</font></pre>
+combined with: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_File_IgnoreEOL</font>: ignores the end of line (but the resulting string will still contain them) until the specified
+                      length or the end of file.
+</font></pre>
+If this flag isn't set, then the format for reading the string depends on the related setting at 
+the previously used <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> or <a href="readfile.html">ReadFile()</a> command. 
+
+</td></tr>
+<tr><td><i>Length (optional)</i></td>
+<td> 
+Read the file until the length (in characters) have been reached. If an end of line is encountered 
+before the length is reached, the read will stop (unless the flag <font color="#924B72">#PB_File_IgnoreEOL</font> has been set). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the read string, or an empty string if the read has failed. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+For detecting the string encoding format (byte order mark) used in a file there is the 
+<a href="readstringformat.html">ReadStringFormat()</a> function available. 
+<br>
+<br>
+For an example see the <a href="readfile.html">ReadFile()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="writestring.html">WriteString()</a>, <a href="readstringformat.html">ReadStringFormat()</a>, <a href="openfile.html">OpenFile()</a>, <a href="readfile.html">ReadFile()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=readquad.html>ReadQuad()</a> - <a href=index.html>File Index</a> - <a href=readstringformat.html>ReadStringFormat()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,132 @@
+<html><head><title>CreateImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateImage</b></font>(#Image, Largeur, Hauteur [, Profondeur [, CouleurDeFond]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une nouvelle image vierge (fond noir). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Le numéro d'identification de l'image. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Largeur, Hauteur</i></td>
+<td> 
+Les dimensions de la nouvelle image. 
+<br>
+<br>
+À la fois la largeur et la hauteur doivent 
+être supérieures à zéro. 
+
+</td></tr>
+<tr><td><i>Profondeur (optionnel)</i></td>
+<td> 
+La profondeur de couleur de la nouvelle image. 
+<br>
+<br>
+Les valeurs valides sont: 24 et 32. <br>
+La valeur par défaut est 24 bits, si la 
+profondeur n'est pas spécifiée. 
+
+</td></tr>
+<tr><td><i>CouleurDeFond (optionnel)</i></td>
+<td> 
+La couleur de fond <a href="../2ddrawing/rgb.html">RGB()</a> utilisée. 
+<br>
+<br>
+Cette couleur peut être réglée sur 
+<font color="#924B72">#PB_Image_Transparent</font> pour créer une image 
+avec le canal alpha fixé pour 
+une transparence totale. <br>
+Cela n'a d'effet que sur les images 32 bits. 
+<br>
+<br>
+Si non spécifié alors la couleur par défaut 
+est le noir. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'image a été 
+créée avec succès et zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Image alors le numéro généré automatiquement 
+est renvoyé dans 'Resultat' en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La taille maximale de l'image est fonction du 
+système d'exploitation et de la quantité de 
+mémoire disponible. 
+Si la mémoire disponible est suffisante alors 
+une image de 8192x8192 peut être traitée par 
+tous les systèmes d'exploitation pris en 
+charge par PureBasic. 
+<br>
+<br>
+Avec l'image créée , vous pouvez notamment 
+utiliser les commandes suivantes : 
+<br>
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> avec <a href="imageoutput.html">ImageOutput()</a> pour 
+dessiner dans l'image. <br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> avec <a href="imagevectoroutput.html">ImageVectorOutput()</a> 
+pour faire du dessin vectoriel. 
+<br>
+<a href="copyimage.html">CopyImage()</a> pour créer une copie de l'image. 
+<br>
+<a href="grabimage.html">GrabImage()</a> pour créer une autre image en 
+copiant une zone définie dans l'image. 
+<br>
+<a href="../2ddrawing/drawimage.html">DrawImage()</a> avec <a href="imageid.html">ImageID()</a> pour dessiner 
+l'image sur la surface de dessin en cours. 
+<br>
+<a href="../gadget/imagegadget.html">ImageGadget()</a> pour afficher l'image dans 
+une application fenêtrée. <br>
+<a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> pour créer un bouton 
+avec image dans une application fenêtrée. 
+<br>
+<br>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 256, 256, &quot;CreateImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ImageGadget</font>(0, 0, 0, 256, 256, 0)
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 256, 256, 32,<font color="#006666"> RGB</font>(255,255,255))
+<font color="#006666">      StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Ellipse</font>(70, 50, 30, 10,<font color="#006666"> RGB</font>(0,0,255))
+<font color="#006666">      Ellipse</font>(186, 50, 30, 10,<font color="#006666"> RGB</font>(0,0,255))
+<font color="#006666">      LineXY</font>(128, 80, 128, 150,<font color="#006666"> RGB</font>(255, 0, 255))
+<font color="#006666">      RoundBox</font>(70, 200, 110, 30, 20, 20,<font color="#006666"> RGB</font>(255, 0, 0))
+<font color="#006666">      StopDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    SetGadgetState</font>(0,<font color="#006666"> ImageID</font>(0)) <font color="#006666">; Affichage</font>
+    
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+   <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="freeimage.html">FreeImage()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=copyimage.html>CopyImage()</a> - <a href=index.html>Image Index</a> - <a href=encodeimage.html>EncodeImage()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,418 @@
+<html><head><title>TerrainPhysic.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Terrain : Physic
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#TerrainMiniX</font> = 0
+<font color="#924B72">#TerrainMiniY</font> = 0
+<font color="#924B72">#TerrainMaxiX</font> = 0
+<font color="#924B72">#TerrainMaxiY</font> = 0
+<font color="#924B72">#PlayerSpeed</font> = 60
+<font color="#924B72">#CameraSpeed</font> = 10
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY, TimeSinceLastFrame
+<b><font color="#006666">Declare</font></b> <font color="#006666">InitBlendMaps</font>()
+
+<b><font color="#006666">Structure</font></b> s_Key
+  Up.i
+  Down.i
+  Left.i
+  Right.i
+  StrafeLeft.i
+  StrafeRight.i
+  Jump.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Entity
+  Entity.i
+  EntityBody.i
+  BodyOffsetY.f
+  elapsedTime.f
+  Key.s_Key
+  MainNode.i
+  SightNode.i
+  CameraNode.i
+  ForwardNode.i
+  StrafeNode.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Structure</font></b> s_Camera
+  Camera.i
+  Tightness.f
+  CameraNode.i
+  TargetNode.i
+<b><font color="#006666">EndStructure</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">GetNodePosition</font>(Position, Node)
+  Position\x =<font color="#006666"> NodeX</font>(Node)
+  Position\y =<font color="#006666"> NodeY</font>(Node)
+  Position\z =<font color="#006666"> NodeZ</font>(Node)
+<b><font color="#006666">EndMacro</font></b>
+
+<b><font color="#006666">Macro</font></b> <font color="#006666">SubVector3</font>(V, V1, V2)
+  V\x = V1\x - V2\x
+  V\y = V1\y - V2\y
+  V\z = V1\z - V2\z
+<b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">;-Declare
+</font><b><font color="#006666">Declare</font></b> <font color="#006666">HandleEntity</font>(*Entity.s_Entity)
+<b><font color="#006666">Declare</font></b> <font color="#006666">CameraTrack</font>(*Camera.s_Camera, *Entity.s_Entity)
+<b><font color="#006666">Declare</font></b> <font color="#006666">OnGround</font>(*Entity.s_Entity)
+
+
+<b><font color="#006666">Define</font></b> Robot.s_Entity
+<b><font color="#006666">Define</font></b> Camera.s_Camera
+
+<font color="#006666">InitEngine3D</font>()
+  
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Terrain : Physic -  [X]   [Space]   [F5]   [F6]   [F7]  [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/&quot;       , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;          , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;         , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures/nvidia&quot; , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Terrain&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, <font color="#924B72">#PB_Default</font>,<font color="#006666"> RGB</font>(120, 120, 120))
+
+<font color="#006666">MaterialFilteringMode</font>(<font color="#924B72">#PB_Default</font>, <font color="#924B72">#PB_Material_Anisotropic</font>, 8)
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font>light =<font color="#006666"> CreateLight</font>(<font color="#924B72">#PB_Any</font> ,<font color="#006666">RGB</font>(185, 185, 185), 4000, 1200, 1000, <font color="#924B72">#PB_Light_Directional</font>)
+<font color="#006666">SetLightColor</font>(light, <font color="#924B72">#PB_Light_SpecularColor</font>,<font color="#006666"> RGB</font>(255*0.4, 255*0.4,255*0.4))
+<font color="#006666">LightDirection</font>(light ,0.55, -0.3, -0.75)
+<font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(5, 5,5))
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(5, 5, 10))
+
+<font color="#006666">;----------------------------------
+</font><font color="#006666">;-terrain definition
+</font><font color="#006666">SetupTerrains</font>(<font color="#006666">LightID</font>(Light), 3000, <font color="#924B72">#PB_Terrain_NormalMapping</font>)
+<font color="#006666">;-initialize terrain
+</font><font color="#006666">CreateTerrain</font>(0, 513, 12000, 600, 3, &quot;TerrainPhysic&quot;, &quot;dat&quot;)
+<font color="#006666">;-set all texture will be use when terrrain will be constructed
+</font><font color="#006666">AddTerrainTexture</font>(0,  0, 100, &quot;dirt_grayrocky_diffusespecular.jpg&quot;,  &quot;dirt_grayrocky_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  1,  30, &quot;grass_green-01_diffusespecular.jpg&quot;, &quot;grass_green-01_normalheight.jpg&quot;)
+<font color="#006666">AddTerrainTexture</font>(0,  2, 200, &quot;growth_weirdfungus-03_diffusespecular.jpg&quot;, &quot;growth_weirdfungus-03_normalheight.jpg&quot;)
+
+<font color="#006666">;-Construct terrains
+</font><b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+  <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+    Imported =<font color="#006666"> DefineTerrainTile</font>(0, tx, ty, &quot;terrain513.png&quot;, ty % 2, tx % 2)
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">Next</font></b>
+<font color="#006666">BuildTerrain</font>(0)
+
+<b><font color="#006666">If</font></b> Imported = <font color="#924B72">#True</font>
+<font color="#006666">  InitBlendMaps</font>()
+<font color="#006666">  UpdateTerrain</font>(0)
+  
+  <font color="#006666">; If enabled, it will save the terrain as a (big) cache for a faster load next time the program is executed
+</font>  <font color="#006666">; SaveTerrain(0, #False)
+</font><b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">; enable shadow terrain
+</font><font color="#006666">TerrainRenderMode</font>(0, 0)
+
+<font color="#006666">;Add Physic Body
+</font><font color="#006666">CreateTerrainBody</font>(0, 0.1, 1)
+
+<font color="#006666">;Texture
+</font><font color="#006666">CreateTexture</font>(1, 256, 256)
+<font color="#006666">StartDrawing</font>(<font color="#006666">TextureOutput</font>(1))
+<font color="#006666">Box</font>(0, 0, 256, 256, $002255)
+<font color="#006666">DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Outlined</font>)
+<font color="#006666">Box</font>(0, 0, 256, 256, $FFFFFF)
+<font color="#006666">Box</font>(10, 10, 236, 236, $FFFF)
+<font color="#006666">StopDrawing</font>()
+
+<font color="#006666">;Material
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;r2skin.jpg&quot;))
+<font color="#006666">CreateMaterial</font>(1,<font color="#006666"> TextureID</font>(1))
+<font color="#006666">CreateMaterial</font>(2,<font color="#006666"> LoadTexture</font>(2, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreateMaterial</font>(3,<font color="#006666"> LoadTexture</font>(3, &quot;Wood.jpg&quot;))
+<font color="#006666">GetScriptMaterial</font>(4, &quot;Scene/GroundBlend&quot;)
+
+<font color="#006666">;Robot
+</font><font color="#006666">LoadMesh   </font>(0, &quot;robot.mesh&quot;)
+<font color="#006666">CreateEntity </font>(0,<font color="#006666"> MeshID</font>(0), <font color="#924B72">#PB_Material_None</font>)<font color="#006666">;
+</font><font color="#006666">StartEntityAnimation</font>(0, &quot;Walk&quot;)
+
+<font color="#006666">;Robot Body
+</font><font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(0), <font color="#924B72">#PB_Material_None</font>, 0, 426, 0)
+<font color="#006666">HideEntity</font>(1, 1)
+
+<font color="#006666">;Body
+</font><font color="#006666">CreateEntityBody</font>(1, <font color="#924B72">#PB_Entity_CapsuleBody</font>, 1, 0, 0)
+
+<font color="#006666">; Skybox
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<font color="#006666">;
+</font><b><font color="#006666">With</font></b> Robot
+  \Entity = 0
+  \EntityBody = 1
+  \BodyOffsetY = 43
+  
+  \Key\Down        = <font color="#924B72">#PB_Key_Down</font>
+  \Key\Left        = <font color="#924B72">#PB_Key_Left</font>
+  \Key\Right       = <font color="#924B72">#PB_Key_Right</font>
+  \Key\Up          = <font color="#924B72">#PB_Key_Up</font>
+  \Key\StrafeLeft  = <font color="#924B72">#PB_Key_X</font>
+  \Key\StrafeRight = <font color="#924B72">#PB_Key_C</font>
+  \Key\Jump        = <font color="#924B72">#PB_Key_Space</font>
+  
+  \MainNode    =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>) <font color="#006666">; Entity position
+</font>  \SightNode   =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>,  120,  20,  0) <font color="#006666">; For cameraLookAt
+</font>  \CameraNode  =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>, -140, 100,  0) <font color="#006666">; Camera position
+</font>  \ForwardNode =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>,    1,   0,  0) <font color="#006666">; Direction normalized
+</font>  \StrafeNode  =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>,    0,   0, -1) <font color="#006666">; Direction normalized
+</font>  
+<font color="#006666">  AttachNodeObject</font>(\MainNode,<font color="#006666"> NodeID</font>(\SightNode))
+<font color="#006666">  AttachNodeObject</font>(\MainNode,<font color="#006666"> NodeID</font>(\CameraNode))
+<font color="#006666">  AttachNodeObject</font>(\MainNode,<font color="#006666"> NodeID</font>(\ForwardNode))
+<font color="#006666">  AttachNodeObject</font>(\MainNode,<font color="#006666"> NodeID</font>(\StrafeNode))
+<font color="#006666">  AttachNodeObject</font>(\MainNode,<font color="#006666"> EntityID</font>(\Entity))
+<b><font color="#006666">EndWith</font></b>
+
+<font color="#006666">;-Camera
+</font><b><font color="#006666">With</font></b> Camera
+  \Camera = 0
+  \Tightness = 0.035
+  <font color="#006666">; Camera use 2 nodes
+</font>  \CameraNode =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>, -3000, 700, 0) <font color="#006666">; Camera position
+</font>  \TargetNode =<font color="#006666"> CreateNode</font>(<font color="#924B72">#PB_Any</font>) <font color="#006666">; For cameraLookAt
+</font><font color="#006666">  AttachNodeObject</font>(\CameraNode,<font color="#006666"> CameraID</font>(\Camera))
+<b><font color="#006666">EndWith</font></b>
+
+<font color="#006666">;==================================
+</font><font color="#006666">; create material
+</font>Red =<font color="#006666"> GetScriptMaterial</font>(<font color="#924B72">#PB_Any</font>, &quot;Color/Red&quot;)
+Blue =<font color="#006666"> GetScriptMaterial</font>(<font color="#924B72">#PB_Any</font>, &quot;Color/Blue&quot;)
+Yellow =<font color="#006666"> GetScriptMaterial</font>(<font color="#924B72">#PB_Any</font>, &quot;Color/Yellow&quot;)
+Green =<font color="#006666"> GetScriptMaterial</font>(<font color="#924B72">#PB_Any</font>, &quot;Color/Green&quot;)
+
+<font color="#006666">;==================================
+</font><font color="#006666">; create Sphere
+</font>MeshSphere =<font color="#006666"> CreateSphere</font>(<font color="#924B72">#PB_Any</font>, 10.0)
+<b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 5
+  Entity=<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshSphere),<font color="#006666"> MaterialID</font>(Green))
+<font color="#006666">  MoveEntity</font>(Entity,<font color="#006666"> Random</font>(2000)-1000, 800,<font color="#006666"> Random</font>(4000)-2000, <font color="#924B72">#PB_Absolute</font>)
+  <font color="#006666">; create bodies
+</font><font color="#006666">  CreateEntityBody</font>(Entity, <font color="#924B72">#PB_Entity_SphereBody</font>, 5.0)
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">;==================================
+</font><font color="#006666">; create Cylinder
+</font>MeshCylinder =<font color="#006666"> CreateCylinder</font>(<font color="#924B72">#PB_Any</font>, 10.0, 60)
+<b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 5
+  Entity=<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshCylinder),<font color="#006666"> MaterialID</font>(Red))
+<font color="#006666">  MoveEntity</font>(Entity,<font color="#006666"> Random</font>(2000)-1000, 800,<font color="#006666"> Random</font>(4000)-2000, <font color="#924B72">#PB_Absolute</font>)
+  <font color="#006666">; create bodies
+</font><font color="#006666">  CreateEntityBody</font>(Entity, <font color="#924B72">#PB_Entity_CylinderBody</font>, 10.0, 0, 1)
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">;==================================
+</font><font color="#006666">; create Cube
+</font>MeshCube =<font color="#006666"> CreateCube</font>(<font color="#924B72">#PB_Any</font>, 25.0)
+<b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 5
+  Entity=<font color="#006666">CreateEntity</font>(<font color="#924B72">#PB_Any</font>,<font color="#006666"> MeshID</font>(MeshCube),<font color="#006666"> MaterialID</font>(Yellow))
+<font color="#006666">  MoveEntity</font>(Entity,<font color="#006666"> Random</font>(2000)-1000, 800,<font color="#006666"> Random</font>(4000)-2000, <font color="#924B72">#PB_Absolute</font>)
+  <font color="#006666">; create bodies
+</font><font color="#006666">  CreateEntityBody</font>(Entity, <font color="#924B72">#PB_Entity_BoxBody</font>, 5.0)
+<b><font color="#006666">Next</font></b>
+
+<b><font color="#006666">Repeat</font></b>
+  
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  Robot\elapsedTime = TimeSinceLastFrame
+  
+<font color="#006666">  HandleEntity</font>(@Robot)
+  
+<font color="#006666">  CameraTrack</font>(@Camera, @Robot)
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>(60) * 40 / 1000
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+<b><font color="#006666">End</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">Clamp</font>(*var.float, min.f, max.f)
+  <b><font color="#006666">If</font></b> *var\f &lt; min
+    *var\f = min
+  <b><font color="#006666">ElseIf</font></b> *var\f &gt; max
+    *var\f = max
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">InitBlendMaps</font>()
+  minHeight1.f = 70
+  fadeDist1.f = 40
+  minHeight2.f = 70
+  fadeDist2.f = 15
+  <b><font color="#006666">For</font></b> ty = <font color="#924B72">#TerrainMiniY</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiY</font>
+    <b><font color="#006666">For</font></b> tx = <font color="#924B72">#TerrainMiniX</font> <b><font color="#006666">To</font></b> <font color="#924B72">#TerrainMaxiX</font>
+      Size =<font color="#006666"> TerrainTileLayerMapSize</font>(0, tx, ty)
+      <b><font color="#006666">For</font></b> y = 0 <b><font color="#006666">To</font></b> Size-1
+        <b><font color="#006666">For</font></b> x = 0 <b><font color="#006666">To</font></b> Size-1
+          Height.f =<font color="#006666"> TerrainTileHeightAtPosition</font>(0, tx, ty, 1, x, y)
+          
+          val.f = (Height - minHeight1) / fadeDist1
+<font color="#006666">          Clamp</font>(@val, 0, 1)
+<font color="#006666">          SetTerrainTileLayerBlend</font>(0, tx, ty, 1, x, y, val)
+          
+          val.f = (Height - minHeight2) / fadeDist2
+<font color="#006666">          Clamp</font>(@val, 0, 1)
+<font color="#006666">          SetTerrainTileLayerBlend</font>(0, tx, ty, 2, x, y, val)
+        <b><font color="#006666">Next</font></b>
+      <b><font color="#006666">Next</font></b>
+<font color="#006666">      UpdateTerrainTileLayerBlend</font>(0, tx, ty, 1)
+<font color="#006666">      UpdateTerrainTileLayerBlend</font>(0, tx, ty, 2)
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">Next</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">OnGround</font>(*Entity.s_Entity)
+  <b><font color="#006666">With</font></b> *Entity
+    Result =<font color="#006666"> RayCollide</font>(<font color="#006666">EntityX</font>(\EntityBody),<font color="#006666"> EntityY</font>(\EntityBody),<font color="#006666"> EntityZ</font>(\EntityBody),<font color="#006666"> EntityX</font>(\EntityBody),<font color="#006666"> EntityY</font>(\EntityBody)-70,<font color="#006666">  EntityZ</font>(\EntityBody))
+    <font color="#006666">;CreateLine3D(20,EntityX(\EntityBody), EntityY(\EntityBody), EntityZ(\EntityBody), $FFFF, EntityX(\EntityBody), EntityY(\EntityBody)-70,  EntityZ(\EntityBody), $FFFF)
+</font>    Delta.f =<font color="#006666"> EntityY</font>(\EntityBody) -<font color="#006666"> PickY</font>() - \BodyOffsetY
+
+    <b><font color="#006666">If</font></b> Result=-1 <b><font color="#006666">Or</font></b> (Result&gt;-1 <b><font color="#006666">And</font></b> (delta &gt;= 1))
+      <b><font color="#006666">ProcedureReturn</font></b> 0
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">ProcedureReturn</font></b> 1
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndWith</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">HandleEntity</font>(*Entity.s_Entity)
+  <b><font color="#006666">Protected</font></b>.Vector3 Forward, Strafe, PosMain, PosDir, PosStrafe
+  <b><font color="#006666">Protected</font></b>.f Speed, Speed2, x, y, MouseX, MouseY
+  <b><font color="#006666">Static</font></b> Jump.f, MemJump.i, Rot.Vector3, Trans.Vector3, Clic
+  
+  <b><font color="#006666">With</font></b> *Entity
+<font color="#006666">    GetNodePosition</font>(PosMain, \MainNode)
+<font color="#006666">    GetNodePosition</font>(PosDir, \ForwardNode)
+<font color="#006666">    GetNodePosition</font>(PosStrafe, \StrafeNode)
+<font color="#006666">    SubVector3</font>(Forward, PosDir, PosMain)
+<font color="#006666">    SubVector3</font>(Strafe, PosStrafe, PosMain)
+    
+    Speed = <font color="#924B72">#PlayerSpeed</font> * \elapsedTime
+    Speed2 = Speed / 2
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineKeyboard</font>()
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F5</font>)
+<font color="#006666">        WorldDebug</font>(<font color="#924B72">#PB_World_DebugBody</font>)
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F6</font>)
+<font color="#006666">        WorldDebug</font>(<font color="#924B72">#PB_World_DebugEntity</font>)
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_F7</font>)
+<font color="#006666">        WorldDebug</font>(<font color="#924B72">#PB_World_DebugNone</font>)
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Jump) <b><font color="#006666">And</font></b> <font color="#006666">OnGround</font>(*Entity)
+        Jump = 18
+        MemJump = 1
+      <b><font color="#006666">EndIf</font></b>
+      
+      Rot\x * 0.30
+      Rot\y * 0.30
+      Rot\z * 0.30
+      Trans\x * 0.20
+      Trans\y = Jump
+      Trans\z * 0.20
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Up)
+        Trans\x + Forward\x * Speed
+        Trans\z + Forward\z * Speed
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Down)
+        Trans\x + Forward\x * -Speed2
+        Trans\z + Forward\z * -Speed2
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Left)
+        Rot\y + 2 * \elapsedTime
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(\Key\Right)
+        Rot\y - 2 * \elapsedTime
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardPushed</font>(\Key\StrafeLeft)
+        Trans\x + Strafe\x * Speed2
+        Trans\z + Strafe\z * Speed2
+      <b><font color="#006666">ElseIf</font></b> <font color="#006666">KeyboardPushed</font>(\Key\StrafeRight)
+        Trans\x + Strafe\x * -Speed2
+        Trans\z + Strafe\z * -Speed2
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">If</font></b> <font color="#006666">OnGround</font>(*Entity)
+        Jump = 0
+      <b><font color="#006666">ElseIf</font></b> MemJump
+        Jump + 20 * \elapsedTime
+        <b><font color="#006666">If</font></b> Jump &gt; 100
+          MemJump = 0
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">Else</font></b>
+        Jump - 9
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    MoveEntity  </font>(\EntityBody, Trans\x, Trans\y, Trans\z, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">    RotateEntity</font>(\EntityBody, 0, Rot\y, 0, <font color="#924B72">#PB_Relative</font>)
+    
+<font color="#006666">    MoveNode</font>(\MainNode,<font color="#006666"> EntityX</font>(\EntityBody),<font color="#006666"> EntityY</font>(\EntityBody)-\BodyOffsetY,<font color="#006666"> EntityZ</font>(\EntityBody), <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">    RotateNode</font>(\MainNode, 0,<font color="#006666"> EntityYaw</font>(\EntityBody), 0)
+    
+  <b><font color="#006666">EndWith</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">CameraTrack</font>(*Camera.s_Camera, *Entity.s_Entity)
+  <b><font color="#006666">Protected</font></b>.Vector3 CameraPosition, TargetPosition
+  <b><font color="#006666">Protected</font></b>.f x, y, z
+  
+<font color="#006666">  GetNodePosition</font>(CameraPosition, *Entity\CameraNode)
+<font color="#006666">  GetNodePosition</font>(TargetPosition, *Entity\SightNode)
+  x =<font color="#006666"> NodeX</font>(*Camera\CameraNode)
+  y =<font color="#006666"> NodeY</font>(*Camera\CameraNode)
+  z =<font color="#006666"> NodeZ</font>(*Camera\CameraNode)
+  x = (CameraPosition\x - x) *  *Camera\Tightness
+  y = (CameraPosition\y - y) *  *Camera\Tightness
+  z = (CameraPosition\z - z) *  *Camera\Tightness
+<font color="#006666">  MoveNode</font>(*Camera\CameraNode, x, y, z)
+  
+  x =<font color="#006666"> NodeX</font>(*Camera\TargetNode)
+  y =<font color="#006666"> NodeY</font>(*Camera\TargetNode)
+  z =<font color="#006666"> NodeZ</font>(*Camera\TargetNode)
+  x = (TargetPosition\x - x) *  *Camera\Tightness
+  y = (TargetPosition\y - y) *  *Camera\Tightness
+  z = (TargetPosition\z - z) *  *Camera\Tightness
+<font color="#006666">  MoveNode</font>(*Camera\TargetNode, x, y, z)
+  
+<font color="#006666">  CameraLookAt</font>(*Camera\Camera,<font color="#006666"> NodeX</font>(*Camera\TargetNode),<font color="#006666"> NodeY</font>(*Camera\TargetNode),<font color="#006666"> NodeZ</font>(*Camera\TargetNode))
+  
+<b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+</body></html>

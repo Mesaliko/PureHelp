@@ -1,0 +1,76 @@
+<html><head><title>SetURLPart</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetURLPart()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>SetURLPart</b></font>(URL$, Parameter$, Value$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Set a specific part of the given URL$. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+The URL to modify. 
+A URL$ may contain parameters, which are useful when a scripting language 
+such as: (PHP) is being used on that server. The syntax is as follows: (http://www.purebasic.com/index.php3?test=1) 
+Here, the parameter is named &quot;test&quot; and its associated value is &quot;1&quot;. 
+<br>
+<br>
+In order to set a specific part of a URL, the information provided within &quot;URL$&quot; must (at the minimum), 
+be of the following format: (&quot;http://www.purebasic.com&quot;) 
+
+</td></tr>
+<tr><td><i>Parameter$</i></td>
+<td> 
+The parameter to modify. 
+The parameters are not case-sensitive. Moreover, Parameter$ may be one of the following constants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_URL_Protocol</font>: change the protocol of the URL$
+  <font color="#924B72">#PB_URL_Site</font>: change the site of the URL$
+  <font color="#924B72">#PB_URL_Port</font>: change the port of the URL$ (or adds it if not specified)
+  <font color="#924B72">#PB_URL_Parameters</font>: changes all the parameters of the URL$ (or adds it if not specified)
+  <font color="#924B72">#PB_URL_Path</font>: changes the path of the URL$ (or adds it if not specified)
+  <font color="#924B72">#PB_URL_User</font>: changes the username of the URL$ (or adds it if not specified)
+  <font color="#924B72">#PB_URL_Password</font>: changes the password of the URL$  (or adds it if not specified - the &quot;user&quot; needs to exist)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Value$</i></td>
+<td> 
+The value to assign to the given parameter or URL part. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the modified URL. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  URL$ = &quot;http://www.test.com/hello.php3&quot;
+
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Protocol</font>, &quot;ftp&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Site</font>, &quot;www.purebasic.com&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Port</font>, &quot;80&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Path</font>, &quot;english/index.php3&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_User</font>, &quot;user&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, <font color="#924B72">#PB_URL_Password</font>, &quot;pass&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, &quot;test&quot;, &quot;1&quot;)
+  URL$ =<font color="#006666"> SetURLPart</font>(URL$, &quot;ok&quot;, &quot;2&quot;)
+
+  <b><font color="#006666">Debug</font></b> URL$ <font color="#006666">; Will print &quot;ftp://user:pass@www.purebasic.com:80/english/index.php3?test=1&amp;ok=2&quot;</font>
+
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="geturlpart.html">GetURLPart()</a>, <a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=receivehttpmemory.html>ReceiveHTTPMemory()</a> - <a href=index.html>Http Index</a> - <a href=urldecoder.html>URLDecoder()</a> -><br><br></blockquote>
+</font></body></html>

@@ -1,0 +1,56 @@
+<html><head><title>Unicode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Unicode</font></b></p>
+
+<p><b>Introduction</b></p><blockquote>
+
+
+Unicode is the term used for extended character sets which allows displaying text in many languages 
+(including those with a lot of different characters like Japanese, Korean etc.). It solves the 
+ASCII problem of having a lot of table dedicated for each language by having a unified table where 
+each character has its own place. 
+<br>
+<br>
+To simplify, unicode can be seen as a big ascii table, which doesn't have 256 characters but up to 65536. Thus, 
+each character in unicode will need 2 bytes in memory (this is important when dealing with <a href="../reference/memory.html">pointers</a> for example). 
+<br>
+<br>
+Here are some links to have a better understanding about unicode (must have reading): 
+<br>
+<br>
+<a href="http://en.wikipedia.org/wiki/Unicode">General unicode information</a> <br>
+<a href="http://www.unicode.org/faq/utf_bom.html">Unicode and BOM</a> 
+
+</blockquote>
+<p><b>Unicode and Windows</b></p><blockquote>
+
+
+PureBasic internally uses the UCS2 encoding which is also the format used by the Windows unicode API, 
+so no conversions are needed at runtime when calling an OS function. When dealing with an API function, PureBasic 
+will automatically use the unicode one if available (for example MessageBox_() will map to MessageBoxW()). 
+All the API structures and constants supported by PureBasic are using unicode version. 
+
+</blockquote>
+<p><b>UTF-8</b></p><blockquote>
+
+
+UTF-8 is another unicode encoding, which is byte based. Unlike UCS2 which always takes 2 bytes per characters, 
+UTF-8 uses a variable length encoding for each character (up to 4 bytes can represent one character). 
+The biggest advantage of UTF-8 is the fact it doesn't includes null characters in its coding, so it can be 
+edited like a regular text file. Also the ASCII characters from 1 to 127 are always preserved, so the text 
+is kind of readable as only special characters will be encoded. One drawback is its variable length, so it 
+all string operations will be slower due to needed pre-processing to locate a character is in the text. 
+<br>
+<br>
+PureBasic uses UTF-8 by default when writing string to files (<a href="../file/index.html">File</a> and <a href="../preference/index.html">Preference</a> libraries), 
+so all texts are fully cross-platform. 
+<br>
+<br>
+The PureBasic compiler also handles both Ascii and UTF-8 files (the UTF-8 files need to have the correct BOM header 
+to be handled correctly). Both can be mixed in a single program without problem: an ascii file can include 
+an UTF-8 file and vice-versa, as long as all string-literals (i.e. &quot;x&quot;) and character-literals (i.e. 'x') in the ASCII 
+files contain only characters with a code &lt;= 127.. When developing, it's recommended to set the IDE in UTF-8 mode, 
+so all the source files will be unicode ready. 
+
+</blockquote>
+</font></body></html>

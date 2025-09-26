@@ -1,0 +1,66 @@
+<html><head><title>ResizeGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResizeGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ResizeGadget</b></font>(#Gadget, x, y, Width, Height)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Resize the specified gadget to the given position and dimensions. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to resize. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The new position and dimensions of the gadget. To ease the building of real-time resizable 
+Graphical User Interfaces (GUIs), <font color="#924B72">#PB_Ignore</font> can be passed as any parameter (x, y, Width or Height) and this 
+parameter will not be changed. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example:</b> Resize gadgets according to new window size</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">SizeHandler</font>()
+<font color="#006666">    ResizeGadget</font>(0, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> WindowWidth</font>(0) - 20,<font color="#006666"> WindowHeight</font>(0) - 60) 
+<font color="#006666">    ResizeGadget</font>(1, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> WindowHeight</font>(0) - 40,<font color="#006666"> WindowWidth</font>(0) - 20, <font color="#924B72">#PB_Ignore</font>) 
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Resize the window&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+<font color="#006666">    WindowBounds</font>(0,<font color="#006666"> WindowWidth</font>(0),<font color="#006666"> WindowHeight</font>(0), <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+  
+<font color="#006666">    EditorGadget</font>(0, 10, 10,<font color="#006666"> WindowWidth</font>(0) - 20,<font color="#006666"> WindowHeight</font>(0) - 60)
+<font color="#006666">    ButtonGadget</font>(1, 10,<font color="#006666"> WindowHeight</font>(0) - 40,<font color="#006666"> WindowWidth</font>(0) - 20, 30, &quot;Button&quot;)
+    
+    <font color="#006666">; Use BindEvent() to have a realtime gadget resize</font>
+<font color="#006666">    BindEvent</font>(<font color="#924B72">#PB_Event_SizeWindow</font>, @SizeHandler())
+    
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>()
+        <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+          <b><font color="#006666">End</font></b>
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">ForEver</font></b>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="gadgetx.html">GadgetX()</a>, <a href="gadgety.html">GadgetY()</a>, <a href="gadgetwidth.html">GadgetWidth()</a>, <a href="gadgetheight.html">GadgetHeight()</a>, <a href="../window/resizewindow.html">ResizeWindow()</a>, <a href="../window/bindevent.html">BindEvent()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=removegadgetitem.html>RemoveGadgetItem()</a> - <a href=index.html>Gadget Index</a> - <a href=scrollareagadget.html>ScrollAreaGadget()</a> -><br><br>
+
+</body></html>

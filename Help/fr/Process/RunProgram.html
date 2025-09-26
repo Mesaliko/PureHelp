@@ -1,0 +1,159 @@
+<html><head><title>RunProgram</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RunProgram()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>RunProgram</b></font>(Fichier$ [, Parametres$, RepertoireCourant$ [, Options [, programmeEmetteur]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lance un programme externe. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichier$</i></td>
+<td width="90%"> 
+Le nom de l'exécutable, y compris son chemin. 
+
+</td></tr>
+<tr><td><i>Parametres$ (optionnel)</i></td>
+<td> 
+Les paramètres de ligne de commande qui 
+seront transmis au programme. 
+
+</td></tr>
+<tr><td><i>RepertoireCourant$ (optionnel)</i></td>
+<td> 
+Le répertoire qui sera alors le répertoire 
+courant pour le programme lancé. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être l'une des combinaisons suivantes 
+(en utilisant l'opérateur OR '|'): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Program_Wait</font>   : Attend jusqu'à ce que le programme lancé se termine.
+  <font color="#924B72">#PB_Program_Hide</font>   : Lance le programme en mode invisible.
+  <font color="#924B72">#PB_Program_Open</font>   : Ouvre des canaux de communication entre le programme lancé et le programme PureBasic.
+  <font color="#924B72">#PB_Program_Read</font>   : Lecture possible sur la sortie standard (stdout).
+  <font color="#924B72">#PB_Program_Write</font>  : Ecriture possible sur l'entrée standard (stdin).
+  <font color="#924B72">#PB_Program_Error</font>  : Lecture possible sur la sortie d'erreur(stderr).
+  <font color="#924B72">#PB_Program_Connect</font>: Connecte la sortie d'un autre programme à l'entrée du programme PureBasic.
+  <font color="#924B72">#PB_Program_Ascii</font>  : Les opérations de lecture/écriture se font en ASCII. 
+  <font color="#924B72">#PB_Program_Unicode</font>: Les opérations de lecture/écriture se font en Unicode.
+  <font color="#924B72">#PB_Program_UTF8</font>   : Les opérations de lecture/écriture se font en UTF8. (Par défaut)
+</font></pre>
+
+Un programme exécuté avec l'option <font color="#924B72">#PB_Program_Open</font> doit toujours être 
+fermé avec la commande <a href="closeprogram.html">CloseProgram()</a>. 
+<br>
+Les options 'Read', 'Write', 'Error' et 'Connect' nécessitent aussi l'option 
+<font color="#924B72">#PB_Program_Open</font>. 
+<br>
+<br>
+Quand l'option <font color="#924B72">#PB_Program_Connect</font> est utilisée, un autre programme doit avoir 
+été préalablement lancé avec les options <font color="#924B72">#PB_Program_Open</font> et <font color="#924B72">#PB_Program_Read</font>. 
+Le numéro renvoyé par <a href="runprogram.html">RunProgram()</a> doit être passé dans le paramètre 
+'ProgrammeEmetteur'. 
+
+</td></tr>
+<tr><td><i>ProgrammeEmetteur (optionnel)</i></td>
+<td> 
+L'option <font color="#924B72">#PB_Program_Connect</font> est nécessaire, doit contenir le numéro renvoyé d'un 
+autre programme démarré auparavant avec RunProgram() avec les options 
+<font color="#924B72">#PB_Program_Open</font> et <font color="#924B72">#PB_Program_Read</font>.<br>
+La sortie du programme émetteur sera envoyée directement à l'entrée du programme 
+maintenant exécuté. Plusieurs programmes peuvent être connectés de cette manière, 
+pour &quot;canaliser&quot; (pipe) les données via ce groupe de programmes connectés. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les commandes suivantes peuvent être utilisées lorsque l'option <font color="#924B72">#PB_Program_Open</font> est spécifiée: 
+<br>
+<br>
+- <a href="isprogram.html">IsProgram()</a>: teste si le numéro représente un programme lancé avec RunProgram(). 
+<br>
+- <a href="programid.html">ProgramID()</a>: renvoie l'identifiant système du programme. 
+<br>
+- <a href="programrunning.html">ProgramRunning()</a>: teste si le programme est toujours en cours d'exécution. 
+<br>
+- <a href="waitprogram.html">WaitProgram()</a>: attend la fin du programme. 
+<br>
+- <a href="killprogram.html">KillProgram()</a>: force le programme à quitter. 
+<br>
+- <a href="programexitcode.html">ProgramExitCode()</a>: renvoie le code de retour du programme. 
+<br>
+- <a href="closeprogram.html">CloseProgram()</a>: ferme les connexions du programme et libère les ressources. 
+<br>
+<br>
+Les commandes suivantes peuvent être utilisées par les programmes lancés 
+avec les options <font color="#924B72">#PB_Program_Read</font>, <font color="#924B72">#PB_Program_Write</font> ou <font color="#924B72">#PB_Program_Error</font>: 
+<br>
+<br>
+- <a href="availableprogramoutput.html">AvailableProgramOutput()</a>: teste si des données sont disponibles. 
+<br>
+- <a href="readprogramstring.html">ReadProgramString()</a>: lit une ligne à partir de la sortie standard du 
+programme exécuté. 
+<br>
+- <a href="readprogramdata.html">ReadProgramData()</a>: lit des données binaires à partir de la sortie standard 
+du programme exécuté. 
+<br>
+- <a href="readprogramerror.html">ReadProgramError()</a>: lit une ligne à partir de la sortie erreur du programme exécuté. 
+<br>
+- <a href="writeprogramstring.html">WriteProgramString()</a>: écrit une ligne sur l'entrée standard du programme exécuté. 
+<br>
+- <a href="writeprogramdata.html">WriteProgramData()</a>: écrit des données binaires sur l'entrée standard du programme 
+exécuté. 
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le programme 
+a été lancé avec succès, zéro sinon. 
+<br>
+<br>
+Si l'option <font color="#924B72">#PB_Program_Open</font> est utilisée, 
+'Resultat' contient le numéro qui identifie 
+le nouveau programme lancé. 
+<a href="readprogramstring.html">ReadProgramString()</a> ou <a href="programexitcode.html">ProgramExitCode()</a> 
+ou d'autres fonctions déjà mentionnées 
+peuvent alors être utilisé pour obtenir 
+des informations sur ce nouveau programme. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Exécute le compilateur PureBasic avec l'option -h et affiche la sortie</font>
+  <font color="#006666">;</font>
+  Compilateur =<font color="#006666"> RunProgram</font>(<font color="#924B72">#PB_Compiler_Home</font>+&quot;compilers/pbcompiler&quot;, &quot;-h&quot;, &quot;&quot;, <font color="#924B72">#PB_Program_Open</font> | <font color="#924B72">#PB_Program_Read</font>)
+  Sortie$ = &quot;&quot;
+  <b><font color="#006666">If</font></b> Compilateur 
+    <b><font color="#006666">While</font></b> <font color="#006666">ProgramRunning</font>(Compilateur)
+      <b><font color="#006666">If</font></b> <font color="#006666">AvailableProgramOutput</font>(Compilateur)
+        Sortie$ +<font color="#006666"> ReadProgramString</font>(Compilateur) +<font color="#006666"> Chr</font>(13)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Wend</font></b>
+    Sortie$ +<font color="#006666"> Chr</font>(13) +<font color="#006666"> Chr</font>(13)
+    Sortie$ + &quot;Code de retour : &quot; +<font color="#006666"> Str</font>(<font color="#006666">ProgramExitCode</font>(Compilateur))
+    
+<font color="#006666">    CloseProgram</font>(Compilateur) <font color="#006666">; Ferme la connexion vers le programme</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  MessageRequester</font>(&quot;Sortie&quot;, Sortie$)
+</font></pre>
+
+Sous Windows RunProgram() utilise 
+l'application par défaut associée à un 
+type de fichier. 
+Par exemple: RunProgram(&quot;Test.html&quot;) 
+ouvrira le navigateur par défaut 
+configuré sur votre système. 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=removeenvironmentvariable.html>RemoveEnvironmentVariable()</a> - <a href=index.html>Process Index</a> - <a href=setenvironmentvariable.html>SetEnvironmentVariable()</a> -><br><br>
+
+
+</body></html>

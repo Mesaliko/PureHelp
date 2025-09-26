@@ -1,0 +1,62 @@
+<html><head><title>ClearList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ClearList</b></font>(Liste()) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Löscht alle Elemente in dieser Liste und gibt deren Speicherplatz frei. Nach diesem Aufruf ist 
+die Liste noch benutzbar, sie ist jedoch leer (d.h. es befinden sich keine Elemente mehr in ihr). 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+Der Variablenname der verknüpften Liste, welche mit dem <a href="../reference/newlist.html">NewList</a> Befehl erstellt 
+wurde. Sie müssen die Klammern nach dem Listennamen immer angeben. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+PureBasic gibt lediglich den Speicher der Elemente frei. Wenn Sie die verknüpfte Liste z.B. dafür 
+benutzt haben, die &quot;Handles&quot; von Objekten - die Sie direkt mit dem OS erstellt haben - zu speichern, 
+dann gibt es keine Möglichkeit, dass PureBasic (oder auch jede andere Programmiersprache) wissen 
+kann, was diese darstellen. In einem solchen Fall, sollten Sie die Elemente der Liste durchgehen und 
+die Objekte selbst freigeben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Numbers</font>.w() 
+
+  <font color="#006666">; Eine kleine Schleife, um viele Einträge zur Liste hinzufügen</font>
+  <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 100 
+<font color="#006666">    AddElement</font>(<font color="#006666">Numbers</font>()) 
+<font color="#006666">    Numbers</font>() = i 
+  <b><font color="#006666">Next</font></b> 
+    
+  <font color="#006666">; Prüfen, dass auch Einträge zur Liste hinzugefügt wurden</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Es sind &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">Numbers</font>()))+&quot; Elemente in der Liste&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>) 
+     
+  <font color="#006666">; Löschen des Listeninhalts und Anzeigen, dass die Liste wirklich leer ist</font>
+<font color="#006666">  ClearList</font>(<font color="#006666">Numbers</font>()) 
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;Es sind &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">Numbers</font>()))+&quot; Elemente in der Liste&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>) 
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="deleteelement.html">DeleteElement()</a>, <a href="freelist.html">FreeList()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=changecurrentelement.html>ChangeCurrentElement()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=comparelist.html>CompareList()</a> -><br><br>
+
+</body></html>

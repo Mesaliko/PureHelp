@@ -1,0 +1,93 @@
+<html><head><title>MoveElement</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MoveElement()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MoveElement</b></font>(Liste(), Location [, *ElementRelatif])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Déplace l'élément courant vers une autre 
+position dans la liste. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+La liste à utiliser. 
+
+</td></tr>
+<tr><td><i>Location</i></td>
+<td> 
+L'emplacement de l'élément courant. 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_List_First</font> : Déplacer l'élément vers le début de la liste
+  <font color="#924B72">#PB_List_Last</font>  : Déplacer l'élément vers la fin de la liste
+  <font color="#924B72">#PB_List_Before</font>: Déplacer l'élément avant le *ElementRelatif
+  <font color="#924B72">#PB_List_After</font> : Déplacer l'élément après le *ElementRelatif
+</font></pre>
+
+</td></tr>
+<tr><td><i>*ElementRelatif (optionnel)</i></td>
+<td> 
+<blockquote>
+
+Indique l'adresse d'un autre élément auprès 
+duquel l'élément actuel doit être déplacé. 
+Ce paramètre est requis lorsque le paramètre 
+&quot;Localisation&quot; est <font color="#924B72">#PB_List_Before</font> ou 
+<font color="#924B72">#PB_List_After</font>. 
+Vous pouvez obtenir cette adresse en 
+utilisant l'opérateur @ avec le nom de la 
+liste. 
+</blockquote>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'élément déplacé reste l'élément courant 
+de la liste. Cette opération est rapide 
+car la donnée elle-même n'est pas déplacée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Nombres</font>()
+  
+  <b><font color="#006666">For</font></b> k=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">Nombres</font>())
+<font color="#006666">    Nombres</font>() = k
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  SelectElement</font>(<font color="#006666">Nombres</font>(), 5) 
+  *Relatif = @Nombres()                             <font color="#006666">; l'adresse de l'élément 5</font>
+  
+<font color="#006666">  SelectElement</font>(<font color="#006666">Nombres</font>(), 0)
+<font color="#006666">  MoveElement</font>(<font color="#006666">Nombres</font>(), <font color="#924B72">#PB_List_After</font>, *Relatif)  <font color="#006666">; déplacement après l'élément 5</font>
+    
+<font color="#006666">  SelectElement</font>(<font color="#006666">Nombres</font>(), 10)
+<font color="#006666">  MoveElement</font>(<font color="#006666">Nombres</font>(), <font color="#924B72">#PB_List_First</font>)            <font color="#006666">; déplacement au début</font>
+    
+  <font color="#006666">; Resultat</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="swapelements.html">SwapElements()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=mergelists.html>MergeLists()</a> - <a href=index.html>List Index</a> - <a href=nextelement.html>NextElement()</a> -><br><br>
+
+</body></html>

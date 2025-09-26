@@ -1,0 +1,98 @@
+<html><head><title>OpenNetworkConnection</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenNetworkConnection()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenNetworkConnection</b></font>(NomServeur$, Port [, Option [, TempsMax [, IPLocal$ [, PortLocal]]]]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une connexion réseau sur le serveur spécifié. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NomServeur$</i></td>
+<td width="90%"> 
+Le serveur. <br>
+Cela peut être une adresse IP ou un nom 
+complet (ex: &quot;127.0.0.1&quot; ou &quot;ftp.home.net&quot;). 
+
+</td></tr>
+<tr><td><i>Port</i></td>
+<td> 
+Le port du serveur. 
+
+</td></tr>
+<tr><td><i>Option (optionnel)</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_TCP</font>: La connexion utilisera le protocole réseau <a href="http://fr.wikipedia.org/wiki/Transmission_Control_Protocol">TCP</a> (default)
+  <font color="#924B72">#PB_Network_UDP</font>: La connexion utilisera le protocole réseau <a href="http://fr.wikipedia.org/wiki/User_Datagram_Protocol">UDP</a>. 
+                   La connexion ne sera pas explicitement créée, car UDP est un protocole sans connexion, mais il faudra ajouter 
+                   une entrée dans la pile de gestion PureBasic pour lui permettre d'envoyer des données via UDP en utilisant 
+                   les fonctions régulières <a href="sendnetworkdata.html">SendNetworkData()</a> (et connexes) .
+</font></pre>
+Combinée à l'une des valeurs suivantes 
+(en utilisant le symbole | ): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_IPv4</font>: Ouvre la connexion en utilisant IPv4 (par défaut).
+  <font color="#924B72">#PB_Network_IPv6</font>: Ouvre la connexion en utilisant IPv6.
+</font></pre>
+combiné avec l'une des valeurs suivantes (en utilisant l'opérande '|') : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Network_NoTLS</font> : aucun chiffrement ne sera pris en charge pour cette connexion (par défaut)
+  <font color="#924B72">#PB_Network_TLSv1</font> : tous les protocoles TLS non obsolètes seront pris en charge (actuellement v1.2 et v1.3)
+  <font color="#924B72">#PB_Network_TLSv1_0</font> : le protocole TLS v1.0 sera pris en charge (attention, ce protocole est obsolète pour des raisons de sécurité)
+  <font color="#924B72">#PB_Network_TLSv1_1</font> : le protocole TLS v1.1 sera pris en charge (attention, ce protocole est obsolète pour des raisons de sécurité)
+  <font color="#924B72">#PB_Network_TLSv1_2</font> : le protocole TLS v1.2 sera pris en charge
+  <font color="#924B72">#PB_Network_TLSv1_3</font> : le protocole TLS v1.3 sera pris en charge
+</font></pre>
+
+</td></tr>
+<tr><td><i>TempsMax (optionnel)</i></td>
+<td> 
+Le temps maximal (en millisecondes) avant 
+d'abandonner la tentative de connexion. 
+Il ne devrait pas être réglé sur une 
+valeur trop faible (inférieur à 5000 
+millisecondes), car l'initialisation 
+d'une connexion sur le réseau peut prendre 
+un certain temps. 
+
+</td></tr>
+<tr><td><i>IPLocal$ (optionnel)</i></td>
+<td> 
+L'adresse IP locale liée à la connexion. 
+
+</td></tr>
+<tr><td><i>PortLocal (optionnel)</i></td>
+<td> 
+Le port local lié à la connexion. 
+<br>
+Par défaut, un port local aléatoire est 
+automatiquement choisi pour la nouvelle 
+connexion, mais il peut être remplacé par 
+ce paramètre. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie un identifiant de connexion pour 
+la connexion ouverte si la connexion a 
+été établie correctement, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour prendre en charge le chiffrement TLS, <a href="usenetworktls.html">UseNetworkTLS()</a> doit être appelé avant cette commande et un indicateur TLS doit être spécifié. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="networkclientevent.html">NetworkClientEvent()</a>, <a href="sendnetworkdata.html">SendNetworkData()</a>, <a href="receivenetworkdata.html">ReceiveNetworkData()</a>, 
+<a href="closenetworkconnection.html">CloseNetworkConnection()</a>, <a href="usenetworktls.html">UseNetworkTLS()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextipaddress.html>NextIPAddress()</a> - <a href=index.html>Network Index</a> - <a href=receivenetworkdata.html>ReceiveNetworkData()</a> -><br><br>
+
+</body></html>

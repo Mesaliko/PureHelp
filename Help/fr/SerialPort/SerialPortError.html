@@ -1,0 +1,56 @@
+<html><head><title>SerialPortError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SerialPortError()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SerialPortError</b></font>(#PortSerie)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie l'erreur qui est survenue après 
+<a href="readserialportdata.html">ReadSerialPortData()</a>, 
+<a href="writeserialportdata.html">WriteSerialPortData()</a> ou 
+<a href="writeserialportstring.html">WriteSerialPortString()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#PortSerie</i></td>
+<td width="90%"> 
+Le port série à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Peut être une combinaison des valeurs 
+suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_SerialPort_RxOver</font>   : Un dépassement est survenu dans le tampon d'entrée (Il n'y a plus de
+                            place dans le tampon d'entrée ou un caractère a été reçu apres un 'fin-de-fichier' (EOF)).
+  <font color="#924B72">#PB_SerialPort_OverRun</font>  : Un dépassement est survenu dans le tampon des caractères. Le prochain caractère est perdu.
+  <font color="#924B72">#PB_SerialPort_RxParity</font> : Le système a détecté une erreur de parité.
+  <font color="#924B72">#PB_SerialPort_Frame</font>    : Le système a détecté une erreur d'encapsulation des données.
+  <font color="#924B72">#PB_SerialPort_Break</font>    : Le système a détecté une condition d'arrêt.
+  <font color="#924B72">#PB_SerialPort_TxFull</font>   : L'application a essayé d'envoyer un caractère mais le tampon de sortie est plein.
+  <font color="#924B72">#PB_SerialPort_IOE</font>      :  Une erreur d'Entrée/Sortie est survenue.
+  <font color="#924B72">#PB_SerialPort_WaitingCTS</font>  : Indique que le système attend le signal CTS (clear-to-send) avant d'émettre.
+  <font color="#924B72">#PB_SerialPort_WaitingDSR</font>  : Indique que le système attend le signal DSR (data-set-ready) avant d'émettre.
+  <font color="#924B72">#PB_SerialPort_WaitingRLSD</font> : Indique que le système attend le signal RLSD (receive-line-signal-detect) avant d'émettre.
+  <font color="#924B72">#PB_SerialPort_XoffReceived</font>: Indique que le système est en attente car le caractère XOFF a été reçu.
+  <font color="#924B72">#PB_SerialPort_XoffSent</font>    : Indique que le système est en attente car le caractère XOFF a été transmis.
+                               La transmission s'arrête quand le caractère XOFF est émis à un système qui attend le caractère XON.
+  <font color="#924B72">#PB_SerialPort_EOFSent</font>  : Indique que le caractère 'fin-de-fichier' (EOF) a été reçu.
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="readserialportdata.html">ReadSerialPortData()</a>, 
+<a href="writeserialportdata.html">WriteSerialPortData()</a>, 
+<a href="writeserialportstring.html">WriteSerialPortString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=readserialportdata.html>ReadSerialPortData()</a> - <a href=index.html>SerialPort Index</a> - <a href=serialportid.html>SerialPortID()</a> -><br><br>
+
+</body></html>

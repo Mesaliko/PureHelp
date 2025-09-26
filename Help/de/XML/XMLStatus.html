@@ -1,0 +1,85 @@
+<html><head><title>XMLStatus</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">XMLStatus()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>XMLStatus</b></font>(#XML)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Status der letzten auf diesen XML-Baum (mittels <a href="loadxml.html">LoadXML()</a> oder 
+<a href="catchxml.html">CatchXML()</a>) ausgeführten &quot;Parsing&quot;-Operation zurück. 
+Diese Funktion sollte nach jedem <a href="loadxml.html">LoadXML()</a> oder <a href="catchxml.html">CatchXML()</a> 
+aufgerufen werden, um sicherzustellen, dass das Parsing erfolgreich war. 
+Eine String-Darstellung des Parsing-Status (d.h. eine lesbare Fehler-Nachricht) wird von der 
+<a href="xmlerror.html">XMLError()</a> Funktion zurückgegeben. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+Die zu verwendende XML-Struktur (Baum). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert von 0 (<font color="#924B72">#PB_XML_Success</font>) zeigt ein erfolgreiches Parsing an, alle 
+anderen Werte übermitteln verschiedene Fehler-Bedingungen. 
+<br>
+<br>
+Die folgenden Rückgabewerte sind möglich: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_Success</font>             : kein Fehler
+  <font color="#924B72">#PB_XML_NoMemory</font>            : Speicher voll
+  <font color="#924B72">#PB_XML_Syntax</font>              : Syntax-Fehler
+  <font color="#924B72">#PB_XML_NoElements</font>          : kein Element gefunden
+  <font color="#924B72">#PB_XML_InvalidToken</font>        : nicht wohlgeformt (ungültiger Token)
+  <font color="#924B72">#PB_XML_UnclosedToken</font>       : nicht abgeschlossener Token
+  <font color="#924B72">#PB_XML_PartialCharacter</font>    : teilweises Zeichen
+  <font color="#924B72">#PB_XML_TagMismatch</font>         : falscher Tag
+  <font color="#924B72">#PB_XML_DublicateAttribute</font>  : doppeltes Attribut
+  <font color="#924B72">#PB_XML_JunkAfterDocElement</font> : &quot;Junk&quot; (Müll) nach dem Dokumenten-Element
+  <font color="#924B72">#PB_XML_ParamEntityRef</font>      : illegaler Parameter Subjekt (Entity) Verweis
+  <font color="#924B72">#PB_XML_UndefinedEntity</font>     : undefiniertes Subjekt (Entity)
+  <font color="#924B72">#PB_XML_RecursiveEntityRef</font>  : rekursiver Subjekt (Entity) Verweis
+  <font color="#924B72">#PB_XML_AsyncEntity</font>         : asynchrones Subjekt (Entity)
+  <font color="#924B72">#PB_XML_BadCharacterRef</font>     : Verweis auf eine ungültige Zeichen-Zahl
+  <font color="#924B72">#PB_XML_BinaryEntityRef</font>     : Verweis auf ein binäres Subjekt (Entity)
+  <font color="#924B72">#PB_XML_AttributeExternalEntityRef</font>: Verweis auf ein externes Subjekt (Entity) im Attribut
+  <font color="#924B72">#PB_XML_MisplacedXML</font>        : XML- oder Text-Deklaration nicht zu Beginn des Subjekts (Entity)
+  <font color="#924B72">#PB_XML_UnknownEncoding</font>     : unbekannte Codierung
+  <font color="#924B72">#PB_XML_IncorrectEncoding</font>   : die in der XML-Deklaration spezifizierte Codierung ist falsch
+  <font color="#924B72">#PB_XML_UnclosedCDataSection</font>: nicht abgeschlossene CDATA Sektion
+  <font color="#924B72">#PB_XML_ExternalEntityHandling</font>: Fehler beim Verarbeiten eines externen Subjekt (Entity) Verweises
+  <font color="#924B72">#PB_XML_NotStandalone</font>       : Dokument ist nicht eigenständig
+  <font color="#924B72">#PB_XML_UnexpectedState</font>     : unerwarteter Parser-Status
+  <font color="#924B72">#PB_XML_EntityDeclaredInPE</font>  : Subjekt (Entity) im Parameter-Subjekt deklariert
+  <font color="#924B72">#PB_XML_FeatureRequiresDTD</font>  : angefordertes Feature erfordert XML_DTD Support in Expat
+  <font color="#924B72">#PB_XML_CantChangeFeatures</font>  : Einstellungen können nicht verändert werden, da das Parsen begonnen hat
+  <font color="#924B72">#PB_XML_UnboundPrefix</font>       : ungebundenes Präfix
+  <font color="#924B72">#PB_XML_UndeclaringPrefix</font>   : Präfix darf undeklariert sein
+  <font color="#924B72">#PB_XML_IncompletePE</font>        : unkomplettes Markup (Formatierung) im Parameter-Subjekt (Entity)
+  <font color="#924B72">#PB_XML_XMLDeclaration</font>      : XML-Deklaration ist nicht wohlgeformt
+  <font color="#924B72">#PB_XML_TextDeclaration</font>     : Text-Deklaration ist nicht wohlgeformt
+  <font color="#924B72">#PB_XML_PublicID</font>            : Ungültige(s) Zeichen in der öffentlichen (public) ID
+  <font color="#924B72">#PB_XML_Suspended</font>           : Parser unterbrochen
+  <font color="#924B72">#PB_XML_NotSuspended</font>        : Parser nicht unterbrochen
+  <font color="#924B72">#PB_XML_Aborted</font>             : Parsing abgebrochen
+  <font color="#924B72">#PB_XML_Finished</font>            : Parsing abgeschlossen
+  <font color="#924B72">#PB_XML_SuspendedPE</font>         : kann nicht in externem Parameter-Subjekt (Entity) unterbrechen
+  <font color="#924B72">#PB_XML_ReservedPrefixXML</font>   : reserviertes Präfix (xml) darf nicht undeklariert sein oder an einen anderen Namespace-Namen grenzen
+  <font color="#924B72">#PB_XML_ReservedPrefixXMLNS</font> : reserviertes Präfix (xmlns) darf nicht deklariert oder undeklariert werden
+  <font color="#924B72">#PB_XML_ReservedNamespaceURI</font>: Präfix darf nicht an einen der reservierten Namespace-Namen grenzen
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=xmlnodetype.html>XMLNodeType()</a> - <a href=index.html>XML Inhaltsverzeichnis</a><br><br>
+
+</body></html>

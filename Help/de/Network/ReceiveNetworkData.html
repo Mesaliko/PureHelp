@@ -1,0 +1,58 @@
+<html><head><title>ReceiveNetworkData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveNetworkData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ReceiveNetworkData</b></font>(Verbindung, *DatenPuffer, DatenPufferLänge)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Empfängt Roh-Daten vom angegebenen Client. Diese Funktion kann sowohl von 
+Client- als auch Server-Applikationen genutzt werden und sollte nur aufgerufen werden, 
+nachdem ein <font color="#924B72">#PB_NetworkEvent_Data</font> Ereignis empfangen wurde. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Verbindung</i></td>
+<td width="90%"> 
+Die Verbindung, von der Daten empfangen werden sollen. 
+Auf der Server-Seite ist 'Verbindung' der Client, welcher die Daten gesendet hat 
+(kann einfach mittels <a href="eventclient.html">EventClient()</a> ermittelt werden). 
+Auf der Client-Seite wird 'Verbindung' von <a href="opennetworkconnection.html">OpenNetworkConnection()</a> zurückgegeben. 
+
+</td></tr>
+<tr><td><i>*DatenPuffer</i></td>
+<td> 
+Die Speicheradresse, wohin die empfangenen Daten gespeichert werden sollen. 
+Ein Speicherbereich kann mittels <a href="../memory/allocatememory.html">AllocateMemory()</a> erstellt werden. 
+
+</td></tr>
+<tr><td><i>DatenPufferLänge</i></td>
+<td> 
+Die Länge des Puffers, in den die empfangenen Daten gespeichert werden sollen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Anzahl an empfangenen Bytes zurück. 
+Ist das 'Ergebnis' gleich der 'DatenPufferLänge', dann sind weitere Daten zum Einlesen verfügbar. 
+Wenn ein Fehler bei der Verbindung auftrat (Verbindung unterbrochen, Verbindung durch den Server 
+beendet, etc.), wird 'Ergebnis' gleich -1 sein. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Bei UDP-Verbindungen beträgt die maximale 'DatenPufferLänge' 2048. Bei TCP-Verbindungen 
+beträgt die maximale 'DatenPufferLänge' 65536. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="networkclientevent.html">NetworkClientEvent()</a>, <a href="networkserverevent.html">NetworkServerEvent()</a>, <a href="sendnetworkdata.html">SendNetworkData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=opennetworkconnection.html>OpenNetworkConnection()</a> - <a href=index.html>Network Inhaltsverzeichnis</a> - <a href=sendnetworkdata.html>SendNetworkData()</a> -><br><br>
+
+</body></html>

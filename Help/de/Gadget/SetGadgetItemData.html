@@ -1,0 +1,115 @@
+<html><head><title>SetGadgetItemData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetItemData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetGadgetItemData</b></font>(#Gadget, Eintrag, Wert)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Speichert den angegebenen Wert mit dem angegebenen Gadget-Eintrag. 
+Dieser Wert kann später mit dem <a href="getgadgetitemdata.html">GetGadgetItemData()</a> Befehl ausgelesen werden. 
+Dies ermöglicht das Verknüpfen eines individuellen Werts mit den Einträgen eines Gadgets. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Eintrag</i></td>
+<td> 
+Der zu verwendende Eintrag. Der erste Eintrag im Gadget hat den Index 0. 
+
+</td></tr>
+<tr><td><i>Wert</i></td>
+<td> 
+Der zu setzende Wert. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der gesetzte Wert bleibt zusammen mit dem Eintrag bestehen, auch wenn sich der Index des 
+Eintrags ändert (z.B. weil andere Einträge gelöscht wurden). 
+<br>
+<br>
+Dieser Befehl arbeitet mit den folgenden Gadgets: 
+<br>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a> 
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> 
+<br>
+- <a href="listviewgadget.html">ListViewGadget()</a> 
+<br>
+- <a href="panelgadget.html">PanelGadget()</a> 
+<br>
+- <a href="treegadget.html">TreeGadget()</a> 
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieser Code verwendet SetGadgetItemData zum Speichern der Original-Position jedes</font>
+  <font color="#006666">; Eintrags, um diesen auch noch später zu wissen, wenn sich der Index des Eintrags ändert.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 280, 250, &quot;SetGadgetItemData&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0,  10, 10, 80, 20, &quot;Add&quot;)
+<font color="#006666">    ButtonGadget</font>(1, 100, 10, 80, 20, &quot;Remove&quot;)  
+<font color="#006666">    ButtonGadget</font>(2, 190, 10, 80, 20, &quot;Test&quot;) 
+<font color="#006666">    ListViewGadget</font>(3, 10, 40, 260, 200)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">      AddGadgetItem</font>(3, i, &quot;Old Item &quot;+<font color="#006666">Str</font>(i))
+<font color="#006666">      SetGadgetItemData</font>(3, i, i)
+    <b><font color="#006666">Next</font></b> i
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+        item =<font color="#006666"> GetGadgetState</font>(3)
+        
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()        
+          <b><font color="#006666">Case</font></b> 0 <font color="#006666">; Add          </font>
+<font color="#006666">            AddGadgetItem</font>(3, item, &quot;New Item&quot;)
+            <b><font color="#006666">If</font></b> item &lt;&gt; -1
+<font color="#006666">              SetGadgetItemData</font>(3, item, -1)
+            <b><font color="#006666">Else</font></b>
+<font color="#006666">              SetGadgetItemData</font>(3,<font color="#006666"> CountGadgetItems</font>(3)-1, -1)
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> 1 <font color="#006666">; Remove</font>
+            <b><font color="#006666">If</font></b> item &lt;&gt; -1
+<font color="#006666">              RemoveGadgetItem</font>(3, item)
+            <b><font color="#006666">EndIf</font></b>
+            
+          <b><font color="#006666">Case</font></b> 2 <font color="#006666">; Test</font>
+            <b><font color="#006666">If</font></b> item &lt;&gt; -1
+              value =<font color="#006666"> GetGadgetItemData</font>(3, item)
+              <b><font color="#006666">If</font></b> value = -1
+<font color="#006666">                MessageRequester</font>(&quot;&quot;, &quot;Its a new item.&quot;)
+              <b><font color="#006666">Else</font></b>
+<font color="#006666">                MessageRequester</font>(&quot;&quot;, &quot;It was item number &quot;+<font color="#006666">Str</font>(value))
+              <b><font color="#006666">EndIf</font></b>
+            <b><font color="#006666">EndIf</font></b>
+                     
+        <b><font color="#006666">EndSelect</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetitemdata.html">GetGadgetItemData()</a>, <a href="getgadgetdata.html">GetGadgetData()</a>, <a href="setgadgetdata.html">SetGadgetData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setgadgetitemcolor.html>SetGadgetItemColor()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=setgadgetitemimage.html>SetGadgetItemImage()</a> -><br><br>
+
+</body></html>

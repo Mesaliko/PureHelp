@@ -1,0 +1,425 @@
+<html><head><title>Les outils externes</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les outils externes</font></b></p>
+
+
+L'IDE du PureBasic vous permet de configurer des programmes externes pour qu'ils soient appelés 
+directement à partir d'un menu, de raccourcis, de la barre d'outils ou d'évènements &quot;déclencheurs&quot; 
+spéciaux (ex: ouverture de fichier, fermeture etc..). Ceci permet un accès aisé à ces outils 
+tout en programmant. 
+<br>
+<br>
+Vous pouvez également écrire vos propres petits outils en PureBasic pour effectuer des actions 
+spéciales sur le code source que vous êtes en train d'éditer, afin d'automatiser les tâches 
+récurrentes (ex : réorganisation du code, statistiques, etc..). De plus, vous pouvez configurer 
+des visualisateurs de fichiers externes pour remplacer le <a href="../reference/ide_tools.html">visualisateur de fichier</a> 
+intégré à l'IDE pour des types particuliers de fichier ou pour tous les fichiers. 
+
+<br>
+<br>
+
+<p><img src="images/ide_exttools_menu.png"></p>
+
+La commande &quot;Outils personnalisés&quot; du menu &quot;Outils&quot; ouvre la fenêtre de gestion des outils externes. 
+La liste affiche tous les outils déjà configurés par ordre d'apparition dans le menu &quot;Outils&quot; (les 
+outils ayant l'option 'caché' figurent aussi). Vous pouvez ajouter (bouton Nouveau) et supprimer 
+(bouton Effacer) des outils, ou modifier leur ordre de priorité en cliquant sur les boutons 
+&quot;Vers le haut&quot; / &quot;Vers le bas&quot; après avoir sélectionné un élément. 
+
+<p><img src="images/ide_exttools_toolswindow.png"></p>
+
+Chaque outil peut être rapidement activé ou désactivé à partir de la fenêtre &quot;Outils personnalisés&quot; du menu &quot;Outils&quot;, 
+en cochant ou décochant la case à gauche du nom de l'outil. 
+
+
+<p><b>Configurer un outil</b></p><blockquote>
+
+
+Les seuls éléments obligatoires dans la configuration sont la ligne de commande du programme 
+à exécuter et son nom dans la liste du menu &quot;Outils&quot;. Tout le reste est optionnel. 
+
+<p><img src="images/ide_exttools_toolsedit.png"></p>
+
+<b>Ligne de commande</b> 
+<br>
+Contient le chemin et le nom du programme à exécuter. 
+
+<br>
+<br>
+
+<b>Arguments</b> 
+<br>
+Contient les arguments qui seront passés au programme. Vous pouvez écrire des options fixes, tout comme 
+des mots-clefs spéciaux qui seront remplacés lors de l'exécution du programme) : 
+
+<br>
+<br>
+%PATH : sera remplacé par le chemin du fichier source en cours d'édition. Il sera vide si le code source 
+n'a pas encore été enregistré.<br>
+Vous ne devez jamais modifier le contenu du fichier %FILE. Ce fichier contient l'état du code source tel que l'utilisateur l'a enregistré 
+pour la dernière fois.<br>
+Cela pourrait être très différent de ce qui est actuellement visible dans l'éditeur. Si vous écrasez ce fichier, l'utilisateur risque 
+de perdre des données. 
+<br>
+<br>
+%FILE : sera remplacé par le nom du fichier source en cours d'édition. Il sera vide si le code 
+source n'a pas encore été enregistré. Si l'outil est destiné à remplacer le visualisateur de 
+fichier intégré, ce mot-clef représentera le fichier à ouvrir. 
+<br>
+<br>
+%TEMPFILE : quand cette option est spécifiée, le fichier source en cours d'édition est enregistré dans un fichier 
+temporaire dont le nom est inséré ici. Ce fichier est créé uniquement pour l'outil et peut être 
+librement modifié ou effacé. 
+<br>
+<br>
+%COMPILEFILE : ce mot-clef est uniquement valide pour les déclencheurs de compilation (voir ci-dessous). 
+Il sera remplacé par le nom du fichier temporaire qui est envoyé au compilateur pour effectuer la 
+compilation. En modifiant ce fichier, il est possible de changer ce qui sera effectivement compilé. 
+<br>
+<br>
+%EXECUTABLE : sera remplacé par le nom de l'exécutable créé par la dernière commande &quot;Créer un exécutable&quot;. 
+Pour le déclencheur &quot;Après Compiler/Exécuter&quot;, il sera remplacé par le nom du fichier exécutable 
+temporaire créé par le compilateur. 
+<br>
+<br>
+%CURSOR : sera remplacé par la position actuelle du curseur dans le code en cours d'édition, sous la forme : 
+LIGNExCOLONNE. 
+<br>
+<br>
+%SELECTION : sera remplacé par la sélection actuelle sous la forme : LIGNEDEBUTxCOLONNEDEBUTxLIGNEFINxCOLONNEFIN. 
+Il peut être utilisé en conjonction avec %TEMPFILE, si vous voulez que votre outil effectue des actions 
+basées sur le texte sélectionné. 
+<br>
+<br>
+%WORD : sera remplacé par le mot actuellement situé sous le curseur. 
+
+<br>
+<br>
+
+%PROJECT : le chemin complet vers le répertoire contenant le fichier du projet si un projet est ouvert. 
+
+<br>
+<br>
+%HOME : le chemin complet vers le répertoire PureBasic. 
+
+Note : pour chaque mot-clef désignant un fichier ou un chemin, il est généralement conseillé de les placer 
+entre &quot;&quot; (ex: &quot;%TEMPFILE&quot;) pour s'assurer que les chemins contenant des espaces seront correctement 
+transmis à l'outil. Ces mots-clefs ainsi qu'une brève description peuvent aussi être consultés en 
+cliquant sur le bouton &quot;Info&quot; à droite du champ Arguments. 
+
+<br>
+<br>
+
+<b>Dossier de travail</b> 
+<br>
+Permet de choisir un répertoire que l'outil utilisera lors de son lancement. Si aucun 
+répertoire n'est indiqué, l'outil utilisera le répertoire du code source en cours d'édition. 
+
+<br>
+<br>
+
+<b>Nom</b> 
+<br>
+Permet d'attribuer un nom à l'outil. Ce nom s'affichera dans la liste des outils, et si l' 
+outil n'est pas caché, dans le menu &quot;Outils&quot;. 
+
+
+</blockquote>
+<p><b>Evènement pour déclencher l'outil</b></p><blockquote>
+
+
+Ici vous pouvez choisir quand l'outil devra être lancé. Plusieurs outils peuvent avoir le même 
+déclencheur, ils seront tous exécutés quand cet évènement déclencheur se produira. L'ordre de leur exécution dépend 
+de l'ordre dans lequel ils apparaissent dans la liste des outils. 
+
+<p><img src="images/ide_exttools_toolstrigger.png"></p>
+
+<b>Menu ou raccourci</b> 
+<br>
+L'outil ne sera pas lancé automatiquement. Il sera exécuté à partir d'un raccourci clavier ou d'un menu. 
+Note : pour exécuter un programme à partir de la barre d'outils, il faut lui ajouter un bouton dans 
+Fichier/Préférences/Général/Barre d'outils (voir <a href="../reference/ide_preferences.html">Configurer l'IDE</a> pour 
+plus d'informations). 
+<br>
+<br>
+Si ce déclencheur est choisi, l'option &quot;Raccourci&quot; devient active et permet d'entrer 
+un raccourci qui lancera cet outil. 
+<br>
+<br>
+<b>Démarrage de l'éditeur</b> 
+<br>
+L'outil sera exécuté immédiatement après le démarrage complet de l'IDE. 
+
+<br>
+<br>
+
+<b>A la fermeture de l'éditeur</b> 
+<br>
+L'outil sera exécuté juste avant que l'IDE ne quitte. 
+Notez que tous les fichiers sources auront déjà été fermés. 
+
+<br>
+<br>
+<b>Avant Compiler/Exécuter</b> 
+<br>
+L'outil sera exécuté juste avant la compilation du fichier source. En utilisant 
+le mot-clef %COMPILEFILE, il est possible de modifier le code à compiler. 
+Ceci permet par exemple de créer un petit pré-processeur pour le code source. 
+Notez que vous devriez activer l'option &quot;Attendre la fin du programme&quot; si vous voulez 
+que les modifications soient prises en compte par le compilateur. 
+
+<br>
+<br>
+<b>Après Compiler/Exécuter</b> 
+<br>
+L'outil sera exécuté juste après la compilation, mais avant que le programme ne soit 
+executé. En utilisant le mot-clef %EXECUTABLE, il est possible de récupérer 
+le nom du fichier qui vient d'être généré. Les modifications sont autorisées, mais si 
+le fichier est effacé, alors une erreur surviendra lorsque l'IDE essaiera d'exécuter le 
+fichier. 
+
+<br>
+<br>
+<b>Démarrage d'un programme compilé</b> 
+<br>
+L'outil sera lancé lorsque la commande &quot;Exécuter&quot; du menu &quot;Compilateur&quot; est activée. 
+L'outil est lancé avant que le programme ne soit exécuté. Le mot-clef %EXECUTABLE est 
+valide ici aussi. 
+
+<br>
+<br>
+<b>Avant de créer un exécutable</b> 
+<br>
+Cet évènement est identique à &quot;Avant Compiler/Exécuter&quot;, mais il est déclenché juste avant la 
+création de l'exécutable final. 
+
+<br>
+<br>
+<b>Après avoir créé un exécutable</b> 
+<br>
+L'outil sera lancé une fois que l'exécutable final aura été créé. Le mot-clef %EXECUTABLE 
+peut servir à récupérer le nom de l'exécutable créé et ainsi effectuer des actions 
+dessus (ex: pour le compresser). 
+
+<br>
+<br>
+<b>Code source chargé</b> 
+<br>
+L'outil se lancera à chaque fois qu'un code source sera chargé dans l'IDE. Les mots-clefs 
+%FILE et %PATH sont toujours valides, car le fichier est forcément chargé à partir d'un média (disque, 
+réseau etc..). 
+
+<br>
+<br>
+<b>Code source enregistré</b> 
+<br>
+L'outil se lancera à chaque fois qu'un code source sera enregistré par l'IDE. Les mots-clefs 
+%FILE et %PATH sont toujours valides, car le fichier vient d'être enregistré sur un média (disque, 
+réseau etc.). 
+
+<br>
+<br>
+<b>Code source fermé</b> 
+<br>
+L'outil se lancera à chaque fois qu'un code source sera sur le point d'être fermé. A ce stade 
+le fichier est toujours là, donc vous pouvez obtenir son contenu avec le mot-clef %TEMPFILE. 
+Le mot-clef %FILE sera vide si le fichier n'a jamais été enregistré. 
+
+<br>
+<br>
+<b>Remplace le visualisateur - Tous les fichiers</b> 
+<br>
+L'outil remplacera complètement le visualisateur de fichier intégré. Si on essaie d'ouvrir un 
+fichier qui ne peut être édité dans l'IDE, l'IDE va d'abord essayer les outils externes ayant 
+comme déclencheur ce type de fichier particulier, et si aucun ne correspond, alors 
+le fichier sera géré par cet outil. Utilisez le mot-clef %FILE pour récupérer le nom du fichier 
+qui doit être ouvert. 
+<br>
+<br>
+Note : un seul outil peut être associé à ce déclencheur. Tous les autres outils associés à ce 
+déclencheur seront ignorés. 
+
+<br>
+<br>
+<b>Remplace le visualisateur - Fichiers inconnus</b> 
+<br>
+Cet outil remplacera le visualisateur hexadécimal intégré, qui est normalement utilisé pour 
+ouvrir les fichiers de types inconnus. Il sera exécuté, lorsque l'extension du fichier est inconnue 
+pour l'IDE, et si aucun autre outil externe n'a été configuré pour gérer ce fichier (si un outil 
+est configuré avec le déclencheur &quot;Remplace le visualisateur - Tous les fichiers&quot;, alors 
+cet outil ne sera jamais appelé). 
+<br>
+<br>
+Note : un seul outil peut être associé à ce déclencheur. 
+
+<br>
+<br>
+<b>Remplace le visualisateur – Fichier spécial</b> 
+<br>
+Ce déclencheur permet à l'outil de gérer des extensions de fichiers spécifiques. Il a une plus haute 
+priorité que les évènements &quot;Remplace le visualisateur - Tous les fichiers&quot;, &quot;Remplace le visualisateur – 
+Fichiers inconnus&quot; et plus haute également que le visualisateur de fichier intégré. Indiquez les 
+extensions que l'outil doit gérer dans le champ prévu à cet effet, sur la droite. Plusieurs extensions 
+peuvent être attribuées. 
+<br>
+<br>
+Une utilisation courante de ce déclencheur est, par exemple, la configuration d'un programme comme 
+Acrobat Reader pour gérer les fichiers ayant l'extension &quot;pdf&quot;. Ce qui permet d'ouvrir facilement 
+ces fichiers à partir de l'Explorateur, du visualisateur de fichier intégré ou en double-cliquant sur le 
+mot-clef &quot;IncludeBinary&quot; dans le source. 
+
+<br>
+<br>
+
+<b>Ouvrir un fichier avec une extension spéciale</b> 
+<br>
+Cela sera déclenché pour des extensions de fichiers spécifiques. Il a une priorité plus élevée que 
+les déclencheurs &quot;Ouvrir un fichier binaire non PureBasic&quot; ou &quot;Ouvrir un fichier texte non PureBasic&quot;. 
+Spécifie les extensions que l'outil doit gérer dans la zone d'édition à droite. 
+Plusieurs extensions peuvent être données. 
+<br>
+<br>
+Note: 
+Les déclencheurs d'ouverture de fichier sont actifs lorsque vous ouvrez un fichier via le menu 
+Fichier/Ouvrir et également lorsque vous glisser-déposer un fichier dans l'IDE. 
+Ils ont une priorité plus élevée pour les tâches Fichier/Ouvrir. 
+Ce n'est que s'il n'y a pas d'outil actif que les déclencheurs de la visionneuse de fichiers seront gérés. 
+
+<br>
+<br>
+
+<b>Ouvrir un fichier binaire non PureBasic</b> 
+<br>
+Celui-ci sera déclenché pour les fichiers binaires qui ne font pas partie de PureBasic (plus ou moins) 
+<br>
+<br>
+Note: Un seul outil à la fois peut avoir ce déclencheur. Tous les autres outils avec ce déclencheur seront ignorés. 
+
+<br>
+<br>
+
+<b>Ouvrir un fichier texte non PureBasic</b> 
+<br>
+Celui-ci sera déclenché pour les fichiers texte qui ne font pas partie de PureBasic 
+<br>
+<br>
+Note: Un seul outil à la fois peut utiliser ce déclencheur. 
+
+</blockquote>
+<p><b>Autres options sur le côté droit</b></p><blockquote>
+
+
+<b>Attendre la fin du programme</b> 
+<br>
+L'IDE sera complètement bloqué jusqu'à ce que l'outil termine son exécution. Cette option 
+est requise si l'outil doit modifier un fichier source qui doit être rechargé par la suite, 
+ou passé au compilateur par les déclencheurs de compilation. 
+
+<br>
+<br>
+<b>Démarrer caché</b> 
+<br>
+L'outil sera lancé en mode invisible. Ne pas utiliser cette option si le programme 
+nécessite une interaction avec l'utilisateur, car il ne pourra plus être fermé. 
+
+<br>
+<br>
+<b>Cacher l'éditeur</b> 
+<br>
+Uniquement disponible si l'option &quot;Attendre la fin du programme&quot; est activée. 
+Cache l'éditeur pendant l'exécution de l'outil. 
+
+<br>
+<br>
+<b>Recharger la source à la fin du programme</b> 
+<br>
+Uniquement disponible si l'option &quot;Attendre la fin du programme&quot; est activée, et quand le mot-clef 
+%FILE ou %TEMPFILE est utilisé dans le champ &quot;Arguments&quot;. 
+<br>
+<br>
+Une fois que l'outil a terminé son exécution, l'IDE rechargera le fichier source dans 
+l'éditeur. Il est possible de choisir si le fichier doit être rechargé dans l'onglet actuel ou dans 
+un nouvel onglet. 
+
+<br>
+<br>
+<b>Cacher l'outil du menu principal</b> 
+<br>
+N'affiche pas l'outil dans la liste du menu &quot;Outils&quot; de l'IDE. C'est utile pour les outils qui doivent 
+uniquement être exécutés à partir de déclencheurs spéciaux, mais pas à partir du menu. 
+
+<br>
+<br>
+
+
+<b>Activer l'outil en fonction d'un fichier source</b> 
+<br>
+Les outils avec cet option seront inscrits dans la liste &quot;Exécuter des outils&quot; dans les 
+<a href="../reference/ide_compiler.html">options du compilateur</a>, et exécutés uniquement pour les 
+sources où il est permis. Notez que lors de la désactivation de l'outil dans la fenêtre 
+&quot;outils de configuration&quot;, il sera désactivé au niveau global et ne pourra être lancé 
+depuis une source, même s'il est activé ici. 
+<br>
+<br>
+Cette option n'est valable qu'avec : 
+<br>
+- Avant Compiler/Exécuter 
+- Après Compiler/Exécuter 
+- Exécuter Programme compilé 
+- Avant créer Exécutable 
+- Après créer Exécutable 
+- Code source chargé 
+- Code source enregistré 
+- Code source fermé 
+<br>
+<br>
+
+<b>Extensions des fichiers supportées (ext1,ext2,...)</b> 
+<br>
+Uniquement disponible pour le déclencheur &quot;Remplace le visualisateur - Fichier spécial&quot;. 
+Permet de saisir la liste des extensions gérées. 
+
+</blockquote>
+<p><b>Astuces pour l'écriture de vos propres outils de traitement</b></p><blockquote>
+
+
+L'IDE fournit des informations supplémentaires pour les outils sous la forme de variables 
+d'environnement. Elles peuvent être facilement lues par l'outil à l'aide des commandes de 
+la <a href="../process/index.html">bibliothèque Process</a>. 
+<br>
+<br>
+Voici une liste des variables fournies. Notez que celles qui donnent des informations sur le fichier en 
+cours d'édition ne sont pas accessibles pour les outils exécutés au démarrage ou à la fermeture de l'IDE. 
+<pre><font face="Courier New, Courier, mono" size="2">  PB_TOOL_IDE         - Chemin complet et nom de l'exécutable de l'IDE
+  PB_TOOL_Compiler    - Chemin complet et nom de l'exécutable du compilateur
+  PB_TOOL_Preferences - Chemin complet et nom du fichier des préférences de l'IDE
+  PB_TOOL_Project     - Chemin complet et le nom du projet actuellement ouvert (le cas échéant)
+  PB_TOOL_Language    - Langue actuellement utilisée dans l'IDE
+  PB_TOOL_FileList    - Liste de tous les fichiers ouverts dans l'IDE, séparés par un Chr(10)
+
+  PB_TOOL_Debugger    - Ces variables fournissent les paramètres correspondant à ceux de la fenêtre d'<a href="../reference/ide_compiler.html">options de compilation</a> 
+  PB_TOOL_InlineASM     pour le source en cours. Elles sont à 1 si l'option
+  PB_TOOL_Unicode       est activée, à 0 sinon.
+  PB_TOOL_Thread     
+  PB_TOOL_XPSkin     
+  PB_TOOL_OnError    
+
+  PB_TOOL_SubSystem   - Contenu du champ <a href="../reference/ide_compiler.html">Bibliothèque Sous-système</a> dans les options de compilation
+  PB_TOOL_Executable  - Identique au mot-clef %COMPILEFILE pour la ligne de commande
+  PB_TOOL_Cursor      - Identique au mot-clef %CURSOR      pour la ligne de commande
+  PB_TOOL_Selection   - Identique au mot-clef %SELECTION   pour la ligne de commande
+  PB_TOOL_Word        - Identique au mot-clef %WORD        pour la ligne de commande
+
+  PB_TOOL_MainWindow  - Identifiant système (Handle) de la fenêtre principale de l'IDE
+  PB_TOOL_Scintilla   - Identifiant système (Handle) du composant d'édition de code Scintilla pour le source en cours
+</font></pre>
+
+Quand les mots-clefs %TEMPFILE ou %COMPILEFILE sont utilisés, l'IDE ajoute les options de compilation 
+à la fin du fichier temporaire (sous forme de commentaires), même si l'utilisateur a choisi de ne pas 
+sauver ces options en enregistrant un code source. 
+<br>
+<br>
+Ceci permet à l'outil de lire les options de compilation spécifiques à ce fichier, et de les prendre 
+en compte dans les actions qu'il va effectuer. 
+</blockquote>
+</font></body></html>

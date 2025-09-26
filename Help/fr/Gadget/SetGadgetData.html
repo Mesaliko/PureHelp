@@ -1,0 +1,76 @@
+<html><head><title>SetGadgetData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetGadgetData</b></font>(#Gadget, Valeur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Associe une valeur à un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser 
+
+</td></tr>
+<tr><td><i>Value</i></td>
+<td> 
+La valeur à donner. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette valeur peut être récupérée avec 
+<a href="getgadgetdata.html">GetGadgetData()</a>. 
+<br>
+<br>
+Tous les gadgets sont supportés par cette 
+commande. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Ce programme utilise SetGadgetData pour associer un indice du tableau Messages()</font>
+  <font color="#006666">; à chaque bouton. Cela rend la boucle d'évènements plus simple car les gadgets</font>
+  <font color="#006666">; n'ont plus besoin d'être traités séparément un par un</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Dim</font></b> <font color="#006666">Messages</font>.s(2)
+<font color="#006666">  Messages</font>(0) = &quot;Bonjour&quot;
+<font color="#006666">  Messages</font>(1) = &quot;Salut le Monde&quot;
+<font color="#006666">  Messages</font>(2) = &quot;Rien à dire&quot;
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 230, 100, &quot;SetGadgetData&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0,  10, 10, 80, 20, &quot;Bouton 0&quot;):<font color="#006666"> SetGadgetData</font>(0, 1)
+<font color="#006666">    ButtonGadget</font>(1,  10, 40, 80, 20, &quot;Bouton 1&quot;):<font color="#006666"> SetGadgetData</font>(1, 2)
+<font color="#006666">    ButtonGadget</font>(2,  10, 70, 80, 20, &quot;Bouton 2&quot;):<font color="#006666"> SetGadgetData</font>(2, 1)
+<font color="#006666">    ButtonGadget</font>(3, 100, 10, 80, 20, &quot;Bouton 3&quot;):<font color="#006666"> SetGadgetData</font>(3, 2)
+<font color="#006666">    ButtonGadget</font>(4, 100, 40, 80, 20, &quot;Bouton 4&quot;) <font color="#006666">; aura la valeur 0 car aucune valeur n'a été attribuée</font>
+<font color="#006666">    ButtonGadget</font>(5, 100, 70, 80, 20, &quot;Bouton 5&quot;)  
+    <b><font color="#006666">Repeat</font></b>
+      Evenement =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Evenement = <font color="#924B72">#PB_Event_Gadget</font>
+        Valeur =<font color="#006666"> GetGadgetData</font>(<font color="#006666">EventGadget</font>())
+<font color="#006666">        MessageRequester</font>(&quot;Message&quot;,<font color="#006666"> Messages</font>(Valeur))
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Evenement = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getgadgetdata.html">GetGadgetData()</a>, <a href="getgadgetitemdata.html">GetGadgetItemData()</a>, 
+<a href="setgadgetitemdata.html">SetGadgetItemData()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setgadgetcolor.html>SetGadgetColor()</a> - <a href=index.html>Gadget Index</a> - <a href=setgadgetfont.html>SetGadgetFont()</a> -><br><br>
+
+</body></html>

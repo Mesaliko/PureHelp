@@ -1,0 +1,298 @@
+<html><head><title>Einsteiger-Kapitel - Speicher-Zugriff</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Speicher-Zugriff</font></b></p>
+
+Einige PureBasic-Anweisungen, zum Beispiel die aus der <a href="../cipher/index.html">Cipher</a> 
+Bibliothek, und viele Betriebssystem-API-Aufrufe benötigen einen <a href="../reference/memory.html">Zeiger</a> 
+(Pointer) auf einen <a href="../memory/index.html">Speicherpuffer</a> als ein Argument, anstatt die 
+Daten direkt selbst. PureBasic bietet eine Reihe von Anweisungen zum Manipulieren des 
+Speicherpuffers, um dies zu erleichtern. 
+<br>
+<br>
+Dieses Beispiel verwendet einen Puffer, um eine <a href="../file/index.html">Datei</a> von Disk in 
+den Speicher zu lesen. Es konvertiert dann den Pufferinhalt in Hexadezimal und Textausgabe 
+um, und stellt ihn in einem <a href="../gadget/listicongadget.html">ListIconGadget()</a> als eine simple Hex-Viewer-Applikation dar. 
+<br>
+<br>
+Ein <a href="../gadget/explorerlistgadget.html">ExplorerListGadget()</a> wird verwendet, um zu Beginn den Inhalt des Benutzer-Verzeichnisses 
+anzuzeigen, und die Auswahl einer Datei zu ermöglichen. Zwei <a href="../gadget/buttongadget.html">Schalter</a> 
+werden angeboten, einer zum Anzeigen einer Datei und ein weiterer um die Anzeige zu löschen. 
+<br>
+<br>
+Das ListIcon Gadget ist unterteilt in neun <a href="../gadget/addgadgetcolumn.html">Spalten</a>, 
+die erste zeigt den Basis-Offset jeder Zeile in der Liste, die nächsten zeigen acht 
+Byte-Werte ausgehend vom Basis-Wert und die neunte zeigt die entsprechende Zeichenfolge 
+dieser acht Werte. 
+<br>
+<br>
+Es werden zwei Zeiger verwendet - der erste (*Buffer) beinhaltet die Speicheradresse der 
+kompletten Datei. Der zweite (*Byte), in der <a href="../reference/procedures.html">Prozedur</a> 
+&quot;FileDisplay&quot;, demonstriert die Verwendung von Zeiger-Arithmetik und der 
+<a href="../memory/index.html">Peek</a> Anweisung, um einzelne Werte von innerhalb der Puffers 
+zu erhalten. 
+<br>
+<br>
+Schließlich zeigt die &quot;FileClose&quot; Prozedur die Verwendung der <a href="../memory/fillmemory.html">FillMemory()</a> Anweisung für 
+das Überschreiben des Pufferinhalts und von <a href="../memory/freememory.html">FreeMemory()</a>, um den Speicherpuffer freizugeben. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;- Compiler-Direktiven</font>
+  <b><font color="#006666">EnableExplicit</font></b>
+  
+  <font color="#006666">;- Konstanten</font>
+  <font color="#006666">; Fenster</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#WindowHex</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">; Gadgets</font>
+  <b><font color="#006666">Enumeration</font></b>
+    <font color="#924B72">#GadgetFiles</font>
+    <font color="#924B72">#GadgetOpen</font>
+    <font color="#924B72">#GadgetClose</font>
+    <font color="#924B72">#GadgetHex</font>
+  <b><font color="#006666">EndEnumeration</font></b>
+  
+  <font color="#006666">;- Variablen</font>
+  <b><font color="#006666">Define</font></b>.l Event, EventWindow, EventGadget, EventType, EventMenu
+  <b><font color="#006666">Define</font></b>.l Length
+  <b><font color="#006666">Define</font></b>.s File
+  <b><font color="#006666">Define</font></b> *Buffer
+  
+  <font color="#006666">;- Deklarationen</font>
+  <b><font color="#006666">Declare</font></b> <font color="#006666">WindowCreate</font>()
+  <b><font color="#006666">Declare</font></b> <font color="#006666">WindowResize</font>()
+  <b><font color="#006666">Declare</font></b> <font color="#006666">FileClose</font>()
+  <b><font color="#006666">Declare</font></b> <font color="#006666">FileDisplay</font>()
+  <b><font color="#006666">Declare</font></b> <font color="#006666">FileRead</font>()
+  
+  <font color="#006666">;- Implementierung</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowCreate</font>()  
+    <font color="#006666">; Erstellen des Fensters.</font>
+    
+    <b><font color="#006666">Protected</font></b>.l Col
+    <b><font color="#006666">Protected</font></b>.s Label
+    
+    <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(<font color="#924B72">#WindowHex</font>, 50, 50, 500, 400, &quot;Hex View&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_SizeGadget</font> | <font color="#924B72">#PB_Window_MinimizeGadget</font> | <font color="#924B72">#PB_Window_TitleBar</font>)
+      
+      <font color="#006666">; Festlegen des Mindest-Fenstergröße.</font>
+<font color="#006666">      WindowBounds</font>(<font color="#924B72">#WindowHex</font>, 175, 175, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+      
+      <font color="#006666">; Erstellen der Explorer Liste und Einstellen auf das Benutzer-Verzeichnis.</font>
+<font color="#006666">      ExplorerListGadget</font>(<font color="#924B72">#GadgetFiles</font>, 5, 5, 490, 175,<font color="#006666"> GetHomeDirectory</font>())
+      
+      <font color="#006666">; Schalter.</font>
+<font color="#006666">      ButtonGadget</font>(<font color="#924B72">#GadgetOpen</font>, 5, 185, 80, 25, &quot;Open&quot;)
+<font color="#006666">      ButtonGadget</font>(<font color="#924B72">#GadgetClose</font>, 100, 185, 80, 25, &quot;Close&quot;)
+      
+      <font color="#006666">; ListIcon Gadget.</font>
+<font color="#006666">      ListIconGadget</font>(<font color="#924B72">#GadgetHex</font>, 5, 215, 490, 180, &quot;Offset&quot;, 80, <font color="#924B72">#PB_ListIcon_AlwaysShowSelection</font> | <font color="#924B72">#PB_ListIcon_GridLines</font> | <font color="#924B72">#PB_ListIcon_FullRowSelect</font>)
+      
+      <font color="#006666">; Spalten-Überschriften.</font>
+      <b><font color="#006666">For</font></b> Col = 0 <b><font color="#006666">To</font></b> 7
+        Label =<font color="#006666"> RSet</font>(<font color="#006666">Hex</font>(Col, <font color="#924B72">#PB_Byte</font>), 2, &quot;0&quot;)
+<font color="#006666">        AddGadgetColumn</font>(<font color="#924B72">#GadgetHex</font>, Col + 1, Label, 38)
+      <b><font color="#006666">Next</font></b> Col
+<font color="#006666">      AddGadgetColumn</font>(<font color="#924B72">#GadgetHex</font>, 9, &quot;Text&quot;, 80)
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowResize</font>()
+    <font color="#006666">; Verändern der Gadgetgröße auf die neue Fenstergröße.</font>
+    
+    <b><font color="#006666">Protected</font></b>.l X, Y, W, H
+    
+    <font color="#006666">; Explorer Liste</font>
+    W =<font color="#006666"> WindowWidth</font>(<font color="#924B72">#WindowHex</font>) - 10
+    H = (<font color="#006666">WindowHeight</font>(<font color="#924B72">#WindowHex</font>) - 35) / 2
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#GadgetFiles</font>, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>, W, H)
+    
+    <font color="#006666">; Schalter</font>
+    Y =<font color="#006666"> GadgetHeight</font>(<font color="#924B72">#GadgetFiles</font>) + 10
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#GadgetOpen</font>, <font color="#924B72">#PB_Ignore</font>, Y, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#GadgetClose</font>, <font color="#924B72">#PB_Ignore</font>, Y, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>)
+    
+    <font color="#006666">; ListIcon Anzeige</font>
+    Y = (<font color="#006666">WindowHeight</font>(<font color="#924B72">#WindowHex</font>) / 2) + 23
+    W =<font color="#006666"> WindowWidth</font>(<font color="#924B72">#WindowHex</font>) - 10
+    H =<font color="#006666"> WindowHeight</font>(<font color="#924B72">#WindowHex</font>) - (Y + 5)
+<font color="#006666">    ResizeGadget</font>(<font color="#924B72">#GadgetHex</font>, <font color="#924B72">#PB_Ignore</font>, Y, W, H)
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FileClose</font>()
+    <font color="#006666">; Löscht die Listen-Anzeige und gibt den Speicherpuffer frei.</font>
+    
+    <b><font color="#006666">Shared</font></b> Length, *Buffer
+    
+<font color="#006666">    ClearGadgetItems</font>(<font color="#924B72">#GadgetHex</font>)
+<font color="#006666">    FillMemory</font>(*Buffer, Length)
+<font color="#006666">    FreeMemory</font>(*Buffer)
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FileDisplay</font>()
+    <font color="#006666">; Anzeigen des Datei-Puffers in der Listen-Anzeige.</font>
+    
+    <b><font color="#006666">Shared</font></b> Length, *Buffer
+    
+    <b><font color="#006666">Protected</font></b> *Byte
+    <b><font color="#006666">Protected</font></b> Peek
+    <b><font color="#006666">Protected</font></b>.l Rows, Cols, Offset
+    <b><font color="#006666">Protected</font></b>.s OffsetString, Row, String
+    
+    <font color="#006666">; Löschen der aktuellen Inhalte.</font>
+<font color="#006666">    ClearGadgetItems</font>(<font color="#924B72">#GadgetHex</font>)
+    
+    <font color="#006666">; Die Zeilen durchlaufen.</font>
+    <b><font color="#006666">For</font></b> Rows = 0 <b><font color="#006666">To</font></b> Length - 1 <b><font color="#006666">Step</font></b> 8
+      
+      <font color="#006666">; Löschen des Text-Wertes jeder Zeile.</font>
+      String = &quot;&quot;
+      
+      <font color="#006666">; Konvertieren des Offset-Wertes in einen String fester Länge.</font>
+      Row =<font color="#006666"> RSet</font>(<font color="#006666">Hex</font>(Rows, <font color="#924B72">#PB_Long</font>), 6, &quot;0&quot;) +<font color="#006666"> Chr</font>(10)
+      
+      <font color="#006666">; Die Spalten durchlaufen.</font>
+      <b><font color="#006666">For</font></b> Cols = 0 <b><font color="#006666">To</font></b> 7
+        
+        <font color="#006666">; Offset für die aktuelle Spalte berechnen.</font>
+        Offset = Rows + Cols
+        
+        <font color="#006666">; Den Offset mit der Datei-Größe vergleichen.</font>
+        <b><font color="#006666">If</font></b> Offset &lt; Length
+          <font color="#006666">; Der Offset ist kleiner als die Länge der Datei.</font>
+          
+          <font color="#006666">; Das Byte vom Puffer ermitteln.</font>
+          *Byte = *Buffer + Offset
+          Peek =<font color="#006666"> PeekB</font>(*Byte)
+          
+          <font color="#006666">; Das Byte in Text konvertieren.</font>
+          Row +<font color="#006666"> RSet</font>(<font color="#006666">Hex</font>(Peek, <font color="#924B72">#PB_Byte</font>), 2, &quot;0&quot;) +<font color="#006666"> Chr</font>(10)
+          
+          <font color="#006666">; Das Zeichen zur Text-Version hinzufügen.</font>
+          <b><font color="#006666">Select</font></b> Peek
+              
+            <b><font color="#006666">Case</font></b> 0 <b><font color="#006666">To</font></b> 31, 127
+              <font color="#006666">; Nicht druckbare/darstellbare Zeichen.</font>
+              String +<font color="#006666"> Chr</font>(129)   
+              
+            <b><font color="#006666">Default</font></b>
+              <font color="#006666">; Darstellbare Zeichen.</font>
+              String +<font color="#006666"> Chr</font>(Peek)
+              
+          <b><font color="#006666">EndSelect</font></b>
+          
+        <b><font color="#006666">Else</font></b>
+          <font color="#006666">; Der Offset ist größer als die Länge der Datei.</font>
+          
+          <font color="#006666">; Eine leere Spalte hinzufügen.</font>
+          Row +<font color="#006666"> Chr</font>(10)
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Next</font></b> Cols
+      
+      <font color="#006666">; Die Text-Version am Ende der Hex-Spalten hinzufügen.</font>
+      Row + String
+      
+      <font color="#006666">; Hinzufügen der komplettierten Zeile zur Listen-Anzeige.</font>
+<font color="#006666">      AddGadgetItem</font>(<font color="#924B72">#GadgetHex</font>, -1, Row)
+      
+    <b><font color="#006666">Next</font></b> Rows
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">FileRead</font>()
+    <font color="#006666">; Lesen der Datei in den Speicherpuffer.</font>
+    
+    <b><font color="#006666">Shared</font></b> Length, File, *Buffer
+    
+    <b><font color="#006666">Protected</font></b>.b ReadByte
+    <b><font color="#006666">Protected</font></b>.l FileNumber, ReadLong, Size
+    
+    <font color="#006666">; Stoppen wenn die Datei leer ist.</font>
+    <b><font color="#006666">If</font></b> File = &quot;&quot;
+      <b><font color="#006666">ProcedureReturn</font></b>
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Stoppen wenn die Dateigröße ungültig ist.</font>
+    Size =<font color="#006666"> FileSize</font>(File)
+    <b><font color="#006666">If</font></b> Size &lt; 1
+      <b><font color="#006666">ProcedureReturn</font></b> 
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Öffnen der Datei.</font>
+    FileNumber =<font color="#006666"> OpenFile</font>(<font color="#924B72">#PB_Any</font>, File)
+    Length =<font color="#006666"> Lof</font>(FileNumber)
+    
+    <b><font color="#006666">If</font></b> File <b><font color="#006666">And</font></b> Length
+      
+      <font color="#006666">; Einen Speicherpuffer reservieren, um darin die Datei aufzunehmen.</font>
+      *Buffer =<font color="#006666"> AllocateMemory</font>(Length)
+      
+      <font color="#006666">; Lesen der Datei in den Puffer.</font>
+      Length =<font color="#006666"> ReadData</font>(FileNumber, *Buffer, Length)
+      
+    <b><font color="#006666">EndIf</font></b>
+    
+    <font color="#006666">; Schließen der Datei.</font>
+<font color="#006666">    CloseFile</font>(FileNumber)
+    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">;- Hauptteil</font>
+<font color="#006666">  WindowCreate</font>()
+  
+  <font color="#006666">;- Ereignis-Schleife</font>
+  <b><font color="#006666">Repeat</font></b>
+    
+    <font color="#006666">; Ermitteln der Ereignis-Parameter.</font>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    EventGadget =<font color="#006666"> EventGadget</font>()
+    EventType =<font color="#006666"> EventType</font>()
+    EventWindow =<font color="#006666"> EventWindow</font>()
+    
+    <font color="#006666">; Verarbeiten der Ereignisse.</font>
+    <b><font color="#006666">Select</font></b> Event
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">If</font></b> EventGadget = <font color="#924B72">#GadgetFiles</font>
+          <font color="#006666">; Tue nichts.</font>
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#GadgetOpen</font>
+          File =<font color="#006666"> GetGadgetText</font>(<font color="#924B72">#GadgetFiles</font>) +<font color="#006666"> GetGadgetItemText</font>(<font color="#924B72">#GadgetFiles</font>,<font color="#006666"> GetGadgetState</font>(<font color="#924B72">#GadgetFiles</font>))
+          <b><font color="#006666">If</font></b> <font color="#006666">FileSize</font>(File) &gt; 0
+<font color="#006666">            FileRead</font>()  
+<font color="#006666">            FileDisplay</font>()
+          <b><font color="#006666">EndIf</font></b>
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#GadgetClose</font>
+<font color="#006666">          FileClose</font>()
+          
+        <b><font color="#006666">ElseIf</font></b> EventGadget = <font color="#924B72">#GadgetHex</font>
+          <font color="#006666">; Tue nichts.</font>
+          
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        <b><font color="#006666">If</font></b> EventWindow = <font color="#924B72">#WindowHex</font>
+<font color="#006666">          CloseWindow</font>(<font color="#924B72">#WindowHex</font>)
+          <b><font color="#006666">Break</font></b>
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_SizeWindow</font>
+<font color="#006666">        WindowResize</font>()
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_files.html">< Vorheriges: Lesen und Schreiben von Dateien</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_pb_any1.html">Nächstes: Dynamische Nummerierung mittels #PB_Any ></a> 
+</blockquote>
+</font></body></html>

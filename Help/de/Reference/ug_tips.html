@@ -1,0 +1,123 @@
+<html><head><title>Einsteiger-Kapitel - Einige Tipps & Tricks</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Einige Tipps & Tricks</font></b></p>
+
+<p><b>"Verwendung einer Map zur Indexierung einer verketteten Liste"</b></p><blockquote>
+
+
+<a href="../reference/newlist.html">Verkettete Listen</a> (englisch &quot;Linked list&quot;) bieten eine 
+leistungsfähige Möglichkeit, ein strukturiertes Ablagesystem zu bauen - aber sie 
+haben einen Nachteil. Wenn Sie nicht sicher sind, wo genau in der Liste ein 
+bestimmtes Element ist, müssen Sie jeden Eintrag in der Liste prüfen, um den 
+richtigen zu finden. 
+<br>
+<br>
+<a href="../reference/newmap.html">Maps</a> bieten auch eine ähnliche Funktion, werden aber 
+stattdessen durch einen Schlüssel-Wert (englisch &quot;Key value&quot;) indiziert. Aber auch 
+sie haben einen Nachteil: sie verwalten nicht die Reihenfolge, in der Elemente in 
+die Liste eingefügt werden. 
+<br>
+<br>
+Doch durch Verwendung einer Kombination von beiden können Sie geschickt beide dieser 
+Probleme vermeiden... 
+<br>
+<br>
+Dieses Beispiel lädt eine <a href="../reference/structures.html">strukturierte</a> 
+<a href="../reference/newlist.html">verkettete Liste</a> von Buch-Daten und erstellt einen 
+Index von ISBN-Nummern mittels einer <a href="../reference/newmap.html">Map</a>. 
+Dann demonstriert es, wie auf die verkettete Liste mittels des Index in der 
+Map zugegriffen wird. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnableExplicit</font></b>
+  
+  <font color="#006666">; Eine Buch-Katalog Struktur.</font>
+  <b><font color="#006666">Structure</font></b> BOOK
+    Title.s
+    Author.s
+    ISBN13.s
+    Price.d
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <font color="#006666">; Erstellen einer Liste zum Speichern der Katalogeinträge.</font>
+  <b><font color="#006666">NewList</font></b> <font color="#006666">Catalog</font>.BOOK()
+  <font color="#006666">; Erstellen einer Map zum Speichern des ISBN Index.</font>
+  <b><font color="#006666">NewMap</font></b> <font color="#006666">ISBN13</font>.l()
+  <font color="#006666">; Weitere Variablen.</font>
+  <b><font color="#006666">Define</font></b>.l Count, Index
+  <b><font color="#006666">Define</font></b>.s ISBN
+  
+  <font color="#006666">; Fügt ein leeres Element am Anfang der Liste hinzu.</font>
+  <font color="#006666">; Das erste Element in einer verketteten Liste wird mit Null nummeriert, und die Map wird</font>
+  <font color="#006666">; Null zurückgeben, wenn ein angeforderter Eintrag nicht vorhanden ist.</font>
+  <font color="#006666">; Dieses leere Element vermeidet ein potentielles Problem mit der Rückgabe eines falschen</font>
+  <font color="#006666">; Verweises auf den ersten Katalogeintrag.</font>
+<font color="#006666">  AddElement</font>(<font color="#006666">Catalog</font>())
+  
+  <b><font color="#006666">For</font></b> Count = 1 <b><font color="#006666">To</font></b> 5
+    
+    <font color="#006666">; Lesen der Daten aus der Tabelle in die Liste.</font>
+<font color="#006666">    AddElement</font>(<font color="#006666">Catalog</font>())
+    <b><font color="#006666">Read</font></b>.s <font color="#006666">Catalog</font>()\Title
+    <b><font color="#006666">Read</font></b>.s <font color="#006666">Catalog</font>()\Author
+    <b><font color="#006666">Read</font></b>.s <font color="#006666">Catalog</font>()\ISBN13
+    <b><font color="#006666">Read</font></b>.d <font color="#006666">Catalog</font>()\Price
+    
+    <font color="#006666">; Indexieren der ISBN in der Map.</font>
+<font color="#006666">    ISBN13</font>(<font color="#006666">Catalog</font>()\ISBN13) =<font color="#006666"> ListIndex</font>(<font color="#006666">Catalog</font>())
+    
+  <b><font color="#006666">Next</font></b> Count
+  
+  <font color="#006666">; Finden eines Eintrags.</font>
+  ISBN = &quot;978-0340896983&quot;
+  Index =<font color="#006666"> ISBN13</font>(ISBN)
+  
+  <b><font color="#006666">If</font></b> Index &gt; 0
+    <b><font color="#006666">Debug</font></b> &quot;Book with ISBN13 &quot; + ISBN + &quot; is at list index &quot; +<font color="#006666"> StrU</font>(Index) + &quot;.&quot;
+    <b><font color="#006666">Debug</font></b> &quot;&quot;
+    
+    <font color="#006666">; Wir können nun direkt das richtige Listenelement auswählen, ohne eine Suche durchführen zu müssen.</font>
+<font color="#006666">    SelectElement</font>(<font color="#006666">Catalog</font>(), Index)
+    <b><font color="#006666">Debug</font></b> &quot;'&quot; +<font color="#006666"> Catalog</font>()\Title + &quot;' by &quot; +<font color="#006666"> Catalog</font>()\Author
+    <b><font color="#006666">Debug</font></b> &quot;ISBN: &quot; +<font color="#006666"> Catalog</font>()\ISBN13
+    <b><font color="#006666">Debug</font></b> &quot;Price: &quot; +<font color="#006666"> StrD</font>(<font color="#006666">Catalog</font>()\Price, 2)
+    
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;No book with that ISBN in the catalog.&quot;
+    
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">End</font></b>
+  
+  <font color="#006666">; Einige Test-Daten.</font>
+  <b><font color="#006666">DataSection</font></b>
+    
+    BookData:
+    
+    <b><font color="#006666">Data</font></b>.s &quot;Carte Blanche&quot;, &quot;Jeffery Deaver&quot;, &quot;978-1444716474&quot;
+    <b><font color="#006666">Data</font></b>.d 19.99
+    
+    <b><font color="#006666">Data</font></b>.s &quot;One Day&quot;, &quot;David Nicholls&quot;, &quot;978-0340896983&quot;
+    <b><font color="#006666">Data</font></b>.d 7.99
+    
+    <b><font color="#006666">Data</font></b>.s &quot;Madeleine&quot;, &quot;Kate McCann&quot;, &quot;978-0593067918&quot;
+    <b><font color="#006666">Data</font></b>.d 20.00
+    
+    <b><font color="#006666">Data</font></b>.s &quot;The Dukan Diet&quot;, &quot;Dr Pierre Dukan&quot;, &quot;978-1444710335&quot;
+    <b><font color="#006666">Data</font></b>.d 8.99
+    
+    <b><font color="#006666">Data</font></b>.s &quot;A Game of Thrones&quot;, &quot;George R. R. Martin&quot;, &quot;978-0006479888&quot;
+    <b><font color="#006666">Data</font></b>.d 9.99
+    
+    <b><font color="#006666">Data</font></b>.s &quot;The Help&quot;, &quot;Kathryn Stockett&quot;, &quot;978-0141039282&quot;
+    <b><font color="#006666">Data</font></b>.d 8.99
+    
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+
+</blockquote>
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_advanced.html">< Vorheriges: Fortgeschrittene Funktionen</a> | <a href="../reference/ug_overview.html">Überblick</a> 
+</blockquote>
+</font></body></html>

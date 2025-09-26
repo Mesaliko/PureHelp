@@ -1,0 +1,94 @@
+<html><head><title>Subsysteme</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Subsysteme</font></b></p>
+
+<p><b>Einführung</b></p><blockquote>
+
+Der in PureBasic integrierte Befehlssatz basiert auf den verfügbaren OS-Bibliotheken. Manchmal gibt es verschiedene Wege, 
+um das gleiche Ziel zu erreichen. Und wenn es Sinn macht, bietet PureBasic die Möglichkeit, die manchen Befehlen 
+zugrundeliegenden Bibliotheken zu ändern, ohne auch nur eine Zeile des Quellcodes zu verändern. 
+<br>
+Zum Beispiel gibt es unter Windows das 'DirectX11' Subsystem, welches DirectX-Funktionen zum Rendern von Sprites verwendet, 
+anstelle von OpenGL (was das Standard-Subsystem ist). Es kann sinnvoll sein, DirectX anstelle von OpenGL zu verwenden, 
+wenn ein etwas schnelleres Rendern auf Windows gewünscht wird. 
+<br>
+<br>
+Um ein Subsystem zu aktivieren, muss sein Name in den IDE <a href="../reference/ide_compiler.html">Compiler-Optionen</a> eingetragen 
+werden, oder durch Verwendung der /SUBSYSTEM <a href="../reference/cli_compiler.html">Kommandozeilen</a>-Option. 
+Beim Namen des Subsystems wird die Groß-/Kleinschreibung nicht beachtet. Dies ist eine Option zum Zeitpunkt des 
+Kompilierens, was bedeutet, dass ein Executable nicht mehr als ein Subsystem gleichzeitig für eine bestimmte 
+Bibliothek einbetten kann. Wenn die Unterstützung mehrerer Subsysteme benötigt wird (zum Beispiel für das Anbieten 
+einer OpenGL und einer DirectX version eines Spiels), müssen zwei Executables erstellt werden. 
+<br>
+<br>
+Die verfügbaren Subsysteme befinden sich im PureBasic 'subsystems' Ordner. Alle in diesem Ordner gefundenen Residents 
+bzw. Befehlsbibliotheken haben Vorrang gegenüber den Standard-Bibliotheken und Residents, wenn ein Subsystem angegeben 
+wird. Eine beliebige Anzahl verschiedener Subsysteme kann angegeben werden (solange sie nicht die gleichen Bibliotheken 
+betreffen). 
+<br>
+<br>
+Die <b><font color="#006666">Subsystem</font></b> <a href="../reference/compilerfunctions.html">Compiler-Funktion</a> kann verwendet werden, um festzustellen, 
+ob ein angegebenes Subsystem für die Kompilierung verwendet wird. 
+
+</blockquote>
+<p><b>Verfügbare Subsysteme</b></p><blockquote>
+
+Hier folgt eine Liste der verfügbaren Subsysteme, und der betroffenen Bibliotheken: 
+<br>
+<br>
+<b>Windows</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  DirectX9: verwendet DirectX 9 anstelle von OpenGL. Betroffene Bibliotheken:
+          - Sprite
+          - Screen
+          - Hinweis: Die 3D-Engine ist dann nicht mehr verfügbar, da sie OpenGL verwendet.
+  DirectX11: verwendet DirectX 11 anstelle von OpenGL. Betroffene Bibliotheken:
+          - Sprite
+          - Screen
+          - Hinweis: Die 3D-Engine ist dann nicht mehr verfügbar, da sie OpenGL verwendet.
+</font></pre>
+<br>
+<b>Linux</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  Gtk2: Verwendet GTK2 anstelle von GTK3 für das GUI-Toolkit. Betroffene Bibliotheken:
+          - 2D Drawing
+          - AudioCD
+          - Clipboard
+          - Desktop
+          - Drag &amp; Drop
+          - Font
+          - Gadget
+          - Image
+          - Menu
+          - Movie
+          - Printer
+          - Requester
+          - Scintilla
+          - StatusBar
+          - SysTray
+          - Toolbar
+          - Window
+          
+  Qt: Verwendet QT anstelle von GTK3 für das GUI-Toolkit. Betroffene Bibliotheken:
+          - 2D Drawing
+          - AudioCD
+          - Clipboard
+          - Desktop
+          - Drag &amp; Drop
+          - Font
+          - Gadget
+          - Image
+          - Menu
+          - Movie
+          - Printer
+          - Requester
+          - Scintilla
+          - StatusBar
+          - SysTray
+          - Toolbar
+          - Window          
+</font></pre>
+<br>
+<b>MacOS X</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  Keine
+</font></pre>
+</blockquote>
+</font></body></html>

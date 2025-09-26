@@ -1,0 +1,112 @@
+<html><head><title>BindGadgetEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BindGadgetEvent()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>BindGadgetEvent</b></font>(#Gadget, @Callback() [, TypeEvenement])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute un évènement d'un gadget à la 
+liste des évènements de la fenêtre. 
+<br>
+Cet évènement est lié à la callback de 
+la fenêtre. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à utiliser. 
+
+</td></tr>
+<tr><td><i>@Callback()</i></td>
+<td> 
+La procédure à appeler lorsque 
+l'évènement se produit. 
+<br>
+<br>
+Elle doit être déclarée comme ceci: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">EventHandler</font>()
+    <font color="#006666">; Code ici...</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+<a href="../window/eventgadget.html">EventGadget()</a>, <a href="../window/eventwindow.html">EventWindow()</a>, 
+<a href="../window/eventmenu.html">EventMenu()</a>, <a href="../window/eventtype.html">EventType()</a> et <a href="../window/eventdata.html">EventData()</a> 
+sont disponibles pour obtenir plus 
+d'informations sur l'évènement. 
+<br>
+<br>
+Note: <a href="../window/windowevent.html">WindowEvent()</a> et <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> ne 
+devraient jamais être appelées à l'intérieur 
+du Callback(), car ça peut verrouiller  un 
+programme ou occasionner un comportement erroné. 
+
+</td></tr>
+<tr><td><i>TypeEvenement (optionnel)</i></td>
+<td> 
+Le type d'évènement à ajouter. 
+<br>
+<br>
+<font color="#924B72">#PB_All</font> peut être utilisé pour lier 
+tous les types d'évènements. 
+<br>
+<br>
+- Pour une liste complète des types pris 
+en charge, voir <a href="../window/eventtype.html">EventType()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+D'ordinaire, les évènements sont gérés 
+avec les fonctions <a href="../window/windowevent.html">WindowEvent()</a> et 
+<a href="../window/waitwindowevent.html">WaitWindowEvent()</a>. Cette fonction ajoute 
+un moyen supplémentaire de gestion des 
+évènements avec PureBasic. Avec cependant 
+un petit plus qu'est la possibilité de 
+gérer les évènements en temps réel car 
+la callback peut être invoquée dès que 
+l'évènement se produit (utile pour 
+<a href="scrollbargadget.html">ScrollBarGadget()</a>, <a href="scrollareagadget.html">ScrollAreaGadget()</a> 
+etc.). 
+<br>
+<br>
+L'évènement ajouté peut être retiré 
+avec <a href="unbindgadgetevent.html">UnbindGadgetEvent()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ButtonHandler</font>()
+    <b><font color="#006666">Debug</font></b> &quot;Clic sur le ButtonGadget #&quot; +<font color="#006666"> EventGadget</font>()
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenWindow</font>(0, 100, 100, 200, 90, &quot;Test Clic&quot;, <font color="#924B72">#PB_Window_SystemMenu</font>)
+  
+<font color="#006666">  ButtonGadget</font>(0, 10, 10, 180, 30, &quot;Cliquez moi !&quot;) 
+<font color="#006666">  BindGadgetEvent</font>(0, @ButtonHandler())
+  
+<font color="#006666">  ButtonGadget</font>(1, 10, 50, 180, 30, &quot;Cliquez moi !&quot;)
+<font color="#006666">  BindGadgetEvent</font>(1, @ButtonHandler())
+
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="../window/bindevent.html">BindEvent()</a>, <a href="../menu/bindmenuevent.html">BindMenuEvent()</a>, <a href="unbindgadgetevent.html">UnbindGadgetEvent()</a>, 
+<a href="../window/windowevent.html">WindowEvent()</a>, <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addgadgetitem.html>AddGadgetItem()</a> - <a href=index.html>Gadget Index</a> - <a href=buttongadget.html>ButtonGadget()</a> -><br><br>
+
+</body></html>

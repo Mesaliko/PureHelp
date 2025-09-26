@@ -1,0 +1,94 @@
+<html><head><title>SetDropCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDropCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDropCallback</b></font>(@DropCallback())</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Definiert eine Callback-Funktion, welche aufgerufen werden soll, wenn Daten über ein Gadget oder Fenster 
+(was das Ablegen von Daten erlaubt) fallen gelassen werden (siehe <a href="enablegadgetdrop.html">EnableGadgetDrop()</a> / 
+<a href="enablewindowdrop.html">EnableWindowDrop()</a>). 
+Der Callback ermöglicht die Modifikation des von PureBasic angebotenen Drag &amp; Drop Prozesses, z.B. durch 
+einen gesonderten visuellen Hinweis auf dem Ziel-Gadget oder Ziel-Fenster. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@DropCallback()</i></td>
+<td width="90%"> 
+Die Adresse einer Funktion, welche während einer Drop-Operation (das Objekt wird &quot;fallen gelassen&quot;) 
+aufgerufen wird. 
+<br>
+<br>
+Der Callback wird aufgerufen, sobald die Maus das Ziel-Gadget oder Ziel-Fenster berührt, bewegt wird 
+und verlässt. Er ermöglicht es, dem Anwender ein zusätzliches Feedback zu geben, z.B. durch 
+Hervorheben des Ziel-Eintrags oder Ziel-Bereichs. 
+<br>
+<br>
+Weiterhin kann der Callback die gegenwärtig beabsichtigte Aktion unterbinden und damit genauer 
+definieren, wo innerhalb eines Gadgets oder Fensters die Daten abgelegt werden können. 
+Der Mauscursor sollte hier nicht verändert werden, da die Quelle für die Drag &amp; Drop Operation 
+dafür verantwortlich ist. 
+<br>
+<br>
+Die Form des Callbacks wird nachfolgend beschrieben: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DropCallback</font>(ZielHandle, Status, Format, Aktion, x, y)
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Der erste Parameter spezifiziert das <a href="../reference/handles.html">OS-spezifische Handle</a> für das Ziel-Gadget oder 
+das Ziel-Fenster. Auf Windows ist dies ein HWND-Wert, auf Linux ein GtkWidget-Pointer, und auf MacOSX ist es ein 
+ControlRef- bzw. WindowRef-Wert. Dies sind die 
+gleichen Werte wie sie von <a href="../gadget/gadgetid.html">GadgetID()</a> bzw. <a href="../window/windowid.html">WindowID()</a> 
+für das Ziel-Gadget bzw. Ziel-Fenster zurückgegeben werden. 
+<br>
+<br>
+'Status' definiert den aktuellen Status der Drag &amp; Drop Operation und ist einer der folgenden Werte: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_Enter</font> : Die Maus erreichte das Gadget oder Fenster
+  <font color="#924B72">#PB_Drag_Update</font>: Die Maus wurde innerhalb des Gadgets oder Fensters bewegt, oder die beabsichtigte Aktion hat sich verändert
+  <font color="#924B72">#PB_Drag_Leave</font> : Die Maus hat das Gadget oder Fenster verlassen (Format, Aktion, x, y sind in diesem Fall 0)
+  <font color="#924B72">#PB_Drag_Finish</font>: Das Drag &amp; Drop ist abgeschlossen
+</font></pre>
+
+'Format' gibt das Datenformat an und kann einer der folgenden Werte sein, oder eine OS-spezifische ID 
+für ein besonderes Format (siehe <a href="dragosformats.html">DragOSFormats()</a> für weitere Informationen). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drop_Text</font>   : Akzeptiere Text auf diesem Gadget oder Fenster
+  <font color="#924B72">#PB_Drop_Image</font>  : Akzeptiere Bilder auf diesem Gadget oder Fenster
+  <font color="#924B72">#PB_Drop_Files</font>  : Akzeptiere Dateinamen auf diesem Gadget oder Fenster
+  <font color="#924B72">#PB_Drop_Private</font>: Akzeptiere ein &quot;privates&quot; Drag &amp; Drop auf diesem Gadget oder Fenster
+</font></pre>
+
+'Aktion' definiert die Aktion, welche  stattfinden soll, wenn der Anwender an dieser Stelle die Maus los lässt. 
+Sie kann einer dieser Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: Die Daten werden nicht akzeptiert, wenn sie hier abgelegt werden
+  <font color="#924B72">#PB_Drag_Copy</font>: Die Daten werden kopiert
+  <font color="#924B72">#PB_Drag_Move</font>: Die Daten werden verschoben
+  <font color="#924B72">#PB_Drag_Link</font>: Die Daten werden verlinkt
+</font></pre>
+
+Durch die Rückgabe von <font color="#924B72">#True</font> erlaubt der Callback, dass die Aktion an diesem Punkt stattfindet. 
+Durch die Rückgabe von <font color="#924B72">#False</font> unterbindet der Callback die Aktion (der Mauscursor wird 
+durch die &quot;Drag&quot;-Quelle in einen &quot;Verboten&quot;-Cursor geändert, außer auf Linux GTK). 
+Insbesondere wenn 'Status' gleich <font color="#924B72">#PB_Drag_Finish</font> ist, wird das Zurückgeben von 
+<font color="#924B72">#False</font> die gesamte Drag &amp; Drop Operation fehlschlagen lassen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setdragcallback.html">SetDragCallback()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setdragcallback.html>SetDragCallback()</a> - <a href=index.html>DragDrop Inhaltsverzeichnis</a><br><br>
+
+</body></html>

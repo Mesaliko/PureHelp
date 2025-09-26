@@ -1,0 +1,32 @@
+<html><head><title>MemoryBank.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Memory example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+*Buffer =<font color="#006666"> AllocateMemory</font>(1000)
+
+*Pointer = *Buffer
+<font color="#006666">CopyMemoryString</font>(&quot;Hello &quot;, @*Pointer)
+<font color="#006666">CopyMemoryString</font>(&quot;World&quot;)
+
+*LargerBuffer =<font color="#006666"> ReAllocateMemory</font>(*Buffer, 2000) <font color="#006666">; need more memory
+</font><b><font color="#006666">If</font></b> *LargerBuffer
+  <font color="#006666">; work with *LargerBuffer now with size 2000
+</font>  <font color="#006666">;
+</font>  <b><font color="#006666">Debug</font></b> &quot;The old content is still here:&quot;
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*LargerBuffer)
+<font color="#006666">  FreeMemory</font>(*LargerBuffer)
+<b><font color="#006666">Else</font></b>
+  <font color="#006666">; resizing failed, keep working with *Buffer (size 1000)
+</font>  <font color="#006666">;
+</font><font color="#006666">  FreeMemory</font>(*Buffer)
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+</body></html>

@@ -1,0 +1,76 @@
+<html><head><title>CreateEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateEntity()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateEntity</b></font>(#Entity, MeshID, MaterialID, [x, y, z [, PickMask [, VisibilityMask]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new #Entity using the specified Mesh and Material. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The number to identify the new entity. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>MeshID</i></td>
+<td> 
+The mesh to use to create the entity. To get a valid mesh id, use <a href="../mesh/meshid.html">MeshID()</a>. 
+Dynamic meshes are not supported (meshes created with the <font color="#924B72">#PB_Mesh_Dynamic</font> flag). 
+
+</td></tr>
+<tr><td><i>MaterialID</i></td>
+<td> 
+The material to use to create the entity. To get a valid material id, use <a href="../material/materialid.html">MaterialID()</a>. 
+<font color="#924B72">#PB_Material_None</font> can be used as parameter value, to use the .material script associated 
+to the mesh. <a href="../engine3d/parse3dscripts.html">Parse3DScripts()</a> should be called before using <font color="#924B72">#PB_Material_None</font>. 
+
+</td></tr>
+<tr><td><i>x, y, z (optional)</i></td>
+<td> 
+The position of the new entity in the world. 
+
+</td></tr>
+<tr><td><i>PickMask (optional)</i></td>
+<td> 
+A special value used by <a href="../engine3d/raypick.html">RayPick()</a> and <a href="../engine3d/mousepick.html">MousePick()</a> to select which entity group will be handled. 
+As it's a mask, each value should be a power of two. 31 different masks are available. 
+To create a mask value easily, the '&lt;&lt;' operator can be used: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1 &lt;&lt; 1  : First valid mask value
+  - 1 &lt;&lt; 2  : Second valid mask value
+  - 1 &lt;&lt; 3  : Third valid mask value
+  - ...
+  - 1 &lt;&lt; 31 : Last valid mask value
+</font></pre>
+To ease the use, constants should be used to store the mask value and used later. When calling the pick functions, masks can be combined with the '|' operator 
+to select more than one type of entity. 
+
+</td></tr>
+<tr><td><i>VisibilityMask (optional)</i></td>
+<td> 
+A mask to select on which camera the entity should be displayed. If this mask match the mask specified in 
+<a href="../camera/createcamera.html">CreateCamera()</a>, the entity will be displayed on the camera. See 'PickMask' to build correct masks. 
+If this parameter is omitted, then the entity will be visible on all cameras. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns zero if the entity can't be created. If <a href="../reference/purebasic_objects.html">#PB_Any</a> is used 
+as '#Entity' parameter, the new entity number is returned. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freeentity.html">FreeEntity()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=copyentity.html>CopyEntity()</a> - <a href=index.html>Entity Index</a> - <a href=createentitybody.html>CreateEntityBody()</a> -><br><br>
+
+</body></html>

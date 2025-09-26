@@ -1,0 +1,618 @@
+<html><head><title>Utiliser les outils de débogage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Utiliser les outils de débogage</font></b></p>
+
+Ces outils proposent de nombreuses fonctionnalités pour inspecter le programme en 
+cours de déboguage. Ils ne peuvent pas être utilisés lorsque que le code source est en train 
+d'être édité. Ils sont tous disponibles à partir du débogueur intégré ou du débogueur indépendant. 
+Le débogueur en ligne de commande propose aussi bon nombre de ces 
+fonctionnalités mais uniquement à l'aide de commandes, rendant leurs utilisations moins facile. 
+
+<br>
+<br>
+
+
+Certains de ces outils permettent d'afficher le contenu des variables. Voici comment 
+est présenté l'affichage pour ces données: 
+
+<br>
+<br>
+
+<b>Scope</b> 
+<br>
+Le scope d'une variable est la zone dans laquelle elle est valide. Un variable 
+peut être <a href="../reference/global.html">globale</a>, <a href="../reference/procedures.html">locale</a>, 
+<a href="../reference/shared.html">partagée</a>, <a href="../reference/static.html">statique</a> ou <a href="../reference/threaded.html">threadé</a>, en fonction de sa déclaration 
+dans le code source. Le terme 'byref' (&quot;par référence&quot;, c'est à dire en utilisant l'adresse) est utilisé pour indiquer 
+un <a href="../reference/dim.html">tableau</a> ou une <a href="../reference/newlist.html">liste</a> qui a été passé 
+en paramètre d'une procédure. 
+
+<br>
+<br>
+
+
+<b>Type des variables</b> 
+<br>
+Le type des variables est indiqué à l'aide d'une icône colorée, pour faciliter 
+leur reconnaissance: 
+<br>
+
+
+<table border=0>
+<tr>
+  <td><img src="../HelpPictures/debugger_byte.png"></td>
+  <td><font size=2>Byte</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_ascii.png"></td>
+  <td><font size=2>Ascii</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_char.png"></td>
+  <td><font size=2>Character</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_word.png"></td>
+  <td><font size=2>Word</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_unicode.png"></td>
+  <td><font size=2>Unicode</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_long.png"></td>
+  <td><font size=2>Long</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_integer.png"></td>
+  <td><font size=2>Integer</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_quad.png"></td>
+  <td><font size=2>Quad</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_float.png"></td>
+  <td><font size=2>Float</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_double.png"></td>
+  <td><font size=2>Double</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_string.png"></td>
+  <td><font size=2>String (Texte)</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_fixed.png"></td>
+  <td><font size=2>Fixed String (Texte)</font></td>
+</tr>
+</table>
+<br>
+Une structure est soit indiquée à l'aide d'un point <img src="../HelpPictures/debugger_struct.png">, 
+ou d'une flèche <img src="../HelpPictures/debugger_struct1.png">. 
+
+
+Si c'est une flèche, alors le contenu de la structure peut être affiché en double-cliquant sur 
+la ligne. L'icône est alors remplacée par une flèche vers le bas. Une structure 
+représentée par un point ne peut pas être consultée (souvent car il s'agit d'un pointeur 
+vers une structure). 
+
+<br>
+<br>
+Les tableaux dynamiques à l'intérieur de structures sont représentés avec leurs dimensions. Les listes et les 
+maps à l'intérieur de structures sont représentées avec leur taille et de leur élément courant (s'il existe). 
+
+<p><b>La fenêtre de débug</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_output.png"></p>
+
+C'est dans cette fenêtre qu'apparaîtront les résultats de la commande &quot;Debug&quot;. Cette commande 
+est un moyen rapide et simple pour afficher des messages destinés au débuggage du 
+programme. 
+
+<br>
+<br>
+
+Cette fenêtre sera affichée automatiquement la première fois qu'un message sera 
+émis par le programme. Si elle est fermée, elle ne sera plus affichée automatiquement 
+pour les messages suivants, mais ils seront tout de même enregistrés. Il est possible 
+de copier le contenu de cette fenêtre dans le presse-papier ou de l'enregistrer dans un 
+fichier. Un bouton est aussi présent pour effacer tous les messages précédents. 
+
+<br>
+<br>
+Le champ en bas de la fenêtre vous permet de saisir une expression qui sera évaluée, et le résultat 
+sera affiché dans la fenêtre du débogueur. Ceci permet de contrôler rapidement la valeur d'une variable 
+ou le champ d'un tableau sans avoir à lancer un des outils de débogage. 
+Pour afficher le résultat de l'expression , appuyez sur la touche [entrée] ou cliquez sur le bouton &quot;Afficher&quot;. 
+Si l'expression ne peut pas être évaluée, un message d'erreur est affiché dans la barre d'état. 
+
+<br>
+<br>
+L'expression peut être n'importe quelle  <a href="../reference/general_rules.html">expression PB</a> valide, 
+à l'exception des expressions logiques ou contenant des <a href="../reference/reference.html">mots clefs</a>. 
+Elle admet les <a href="../reference/variables.html">variables</a>, <a href="../reference/dim.html">tableaux</a>, 
+<a href="../list/index.html">listes</a>, <a href="../reference/general_rules.html">constantes</a> et aussi quelques commandes des 
+bibliothèques <a href="../math/index.html">Math</a>, <a href="../memory/index.html">Memory</a> et <a href="../string/index.html">String</a>. 
+
+
+</blockquote>
+<p><b>La fenêtre de surveillance</b></p><blockquote>
+
+
+
+<p><img src="images/ide_debugger_observer.png"></p>
+
+Elle est utilisée pour surveiller en temps réel les valeurs des variables. 
+Il n'est possible d'afficher que des variables de type basique (pas 
+de structures complètes), cependant ces variables peuvent faire partie d'une structure. 
+Les champs de type tableau, liste ou map faisant partie d'une structure ne peuvent 
+pas être affichés dans la liste de surveillance. 
+
+<br>
+<br>
+
+Pour ajouter une variable, il faut choisir sa procédure (si c'est une variable 
+locale) ou &quot;--- Principal ---&quot; si c'est une variable globale, une composante 
+d'un tableau ou d'une liste. Il suffit d'entrer ensuite le nom de la 
+variable dans le champ correspondant et d'appuyer sur &quot;Ajouter&quot;. 
+
+<br>
+<br>
+Exemples: 
+<pre><font face="Courier New, Courier, mono" size="2">  MaVariable$                         - ajoute une variable de type string
+  Tableau(1, 5)                       – ajoute une case d'un tableau
+  Structure\SousChamp[5]\Valeur       – ajoute un champ d'une structure
+  MaListeChainee()\SousChampStructure – ajoute un champ d'une liste
+</font></pre>
+
+Il est aussi possible d'ajouter une nouvelle variable à la liste de surveillance 
+à partir du &quot;Visualisateur de variables&quot;, en cliquant avec le bouton droit de 
+la souris sur une variable et en sélectionnant &quot;Surveiller&quot;. 
+
+<br>
+<br>
+
+Dans la liste, les valeurs des variables surveillées seront affichées. Si la 
+valeur est affichée avec &quot;---&quot;, cela veut dire qu'elle n'est pas valide à cet 
+endroit du programme (par exemple une variable locale en dehors de la procédure 
+concernée ou une liste sans élément). 
+
+<br>
+<br>
+
+Les variables surveillées sont persistantes entre les sessions de débuggage, et même 
+sauvegardées avec les options de compilation, il n'est donc pas nécessaire de les 
+saisir à chaque fois. 
+
+</blockquote>
+<p><b>Le visualisateur de variables</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_variablelist.png"></p>
+
+Il permet d'examiner les variables, <a href="../reference/dim.html">tableaux</a>, 
+<a href="../reference/newlist.html">listes</a> et <a href="../reference/newmap.html">maps</a> présents dans le programme. Des les onglets, la partie 
+supérieure montre les éléments <a href="../reference/global.html">globaux</a> and <a href="../reference/threaded.html">threadés</a> 
+et la partie inférieure les éléments <a href="../reference/procedures.html">locaux</a>, <a href="../reference/shared.html">partagés</a> et 
+<a href="../reference/static.html">statiques</a>. 
+<br>
+<br>
+Le bouton &quot;Actualiser&quot; permet de visualiser les données actuelles du programme en cours d'exécution. 
+Si le programme est stoppé ou en mode pas à pas,  les données sont actualisées automatiquement. 
+
+<br>
+<br>
+Sous Windows, le contenu du visualisateur de variable peut-être trié par nom, scope ou valeur en cliquant 
+sur l'entête de la colonne appropriée. 
+
+<br>
+<br>
+<b>L'onglet 'Variables'</b> 
+<br>
+Cet onglet affiche toutes les variables du programme. 
+En faisant un click-droit sur la variable, il est possible de l'ajouter à la liste de surveillance. 
+
+<br>
+<br>
+
+<b>L'onglet 'Tableaux'</b> 
+<br>
+Cet onglet affiche tous les tableaux du programme ainsi 
+que leurs dimensions (-1 indique que <a href="../reference/dim.html">Dim</a> n'a pas encore été appelé pour ce tableau). 
+En faisant un click-droit sur le tableau, son contenu peut être visualisé dans l'onglet &quot;Voir Tableau/Liste/Map&quot;. 
+
+<br>
+<br>
+
+<b>L'onglet 'Listes'</b> 
+<br>
+Cet onglet affiche toutes les listes du programme, 
+le nombre d'éléments (&quot;-&quot; indique que <a href="../reference/newlist.html">NewList</a> n'a pas encore été appelé), ainsi 
+que l'index actuel de l'élément courant pour chaque liste (&quot;-&quot; indique qu'il n'y a pas d'élément courant). 
+En faisant un click-droit sur la liste, son contenu peut être visualisé dans l'onglet &quot;Voir Tableau/Liste/Map&quot;. 
+
+<br>
+<br>
+
+<b>L'onglet 'Maps'</b> 
+<br>
+Cet onglet affiche toutes les map du programme, 
+le nombre d'éléments (&quot;-&quot; indique que <a href="../reference/newmap.html">NewMap</a> n'a pas encore été appelé), ainsi 
+que la clef de l'élément courant pour chaque map (&quot;-&quot; indique qu'il n'y a pas d'élément courant). 
+En faisant un click-droit sur la map, son contenu peut être visualisé dans l'onglet &quot;Voir Tableau/Liste/Map&quot;. 
+
+<b>L'onglet 'Voir Tableau/Liste/Map'</b> 
+<br>
+Cet onglet permet d'afficher les éléments d'un tableau, d'une liste ou d'une map, y compris ceux 
+déclarés dans une structure. Pour ce faire, il faut spécifier le nom du tableau, de la liste 
+chaînée ou de la map en incluant les parenthèses &quot;()&quot; à la fin, choisir le type d'éléments à afficher 
+et appuyer sur &quot;Afficher&quot;. A noter que les valeurs ne sont pas automatiquement actualisées quand le programme 
+est en mode pas à pas. 
+
+<br>
+<br>
+&quot;Afficher tout&quot; montre tous les éléments. &quot;Afficher éléments non-nuls&quot; affiche seulement les éléments qui ne sont pas 
+égaux à 0. Cela permet d'afficher des gros tableaux/listes plus facilement si seulement quelques éléments sont utilisés. 
+Une <a href="../reference/structures.html">structure</a> est considérée comme &quot;nulle&quot; si tous ses champs sont à 0. 
+<br>
+<br>
+&quot;Afficher partiellement&quot; permet d'afficher seulement une partie du tableau, de la liste ou de la map. Pour les tableaux, l'intervalle 
+peut être spécifié séparément pour chaque dimension en utilisant une virgule. Si une dimension n'est pas du tout spécifiée, 
+tous ses éléments seront affichés. 
+<br>
+Voici quelques exemples d'intervalles: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;1-2, 2-5, 2&quot; : la première dimension entre 1 et 2, la deuxième entre 2 et 5, la troisième à 2.
+  &quot;1, 2-5&quot;      : la première dimension à 1, la deuxième entre 2 et 5
+  &quot;1, , 5&quot;      : la première dimension à 1, tous les éléments de la deuxième dimension, la troisième à 5.
+</font></pre>
+
+Pour les listes, &quot;Afficher partiellement&quot; accepte une valeur simple ou un intervalle d'éléments (le premier élément a l'index 0). 
+
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;0&quot;     : le premier élément
+  &quot;1-3&quot;   : du 2e au 4e élément
+</font></pre>
+
+<br>
+L'affichage des maps, &quot;Afficher partiellement&quot; est utilisable pour filtrer les clefs des éléments à afficher. Il doit 
+contenir le masque de la clef qui servira de filtre (sans les trémas). Un &quot;?&quot; représente n'importe quel caractère, un &quot;*&quot; 
+représente n'importe quel nombre de caractères. Voici quelques exemples de masque: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;hat&quot; : affichera seulement l'élément avec la clef &quot;hat&quot;.
+  &quot;?at&quot; : affichera tous les éléments de 3 lettres se finissant pas &quot;at&quot;, comme &quot;bat&quot;, &quot;hat&quot; etc.
+  &quot;h*t&quot; : affichera tous les élémentes qui commencent pas &quot;h&quot; et se terminent par &quot;t&quot;.
+</font></pre>
+
+
+</blockquote>
+<p><b>Le Profileur</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_profiler.png"></p>
+
+Le profileur est un outil qui permet de compter le nombre d'exécutions de chaque ligne de code. 
+Cela permet d'identifier quelles sont les parties les plus utilisées et donc où les optimisations auront le plus d'effet. 
+Le profileur aide aussi à identifier un problème où une portion du code est exécutée trop souvent à cause d'une erreur. 
+
+<br>
+<br>
+
+<b>Enregistrement des données</b> 
+<br>
+L'enregistrement est contrôlé par les boutons placés dans la fenêtre du profileur : 'Démarrer', 'Arrêter' et 'Mettre à zéro' (pour tout initialiser). 
+Le bouton 'Rafraîchir' permet de mettre à jour le graphe pendant l'exécution du programme. 
+Les données sont automatiquement mises à jour lorsque le programme est stoppé ou en mode pas à pas. 
+Par défaut le profiler enregistre les données dès le début du programme mais cette option peut-être changée dans 
+les  <a href="../reference/ide_preferences.html">Préférences</a>. 
+
+<br>
+<br>
+
+<b>Affichage des données </b> 
+<br>
+L'enregistrement est affiché sous forme de graphe, avec comme ordonnées les numéros de lignes et en abscisses le nombre d'exécutions. 
+Si le programme est réparti sur plusieurs fichiers source, la liste des fichiers est présentée en dessous du graphe. 
+Pour afficher un fichier il suffit de le sélectionner ou de cocher la case à cocher, vous pourrez ainsi afficher 
+les résultats de plusieurs fichiers pour mieux les comparer. 
+Un clic droit sur un des fichiers vous permet de changer sa couleur d'affichage dans le graphe. 
+
+<br>
+<br>
+
+<b>Utilisation de la souris dans le graphe</b> 
+<br>
+Un clic droit dans le graphe affiche un menu flottant qui autorise à zoomer, 
+montrer la ligne de code sélectionnée dans l'IDE ou le code dans le débogueur. 
+Vous pouvez aussi utiliser les boutons à gauche : 
+
+<br>
+<br>
+
+
+<table border=0 cellspacing=2>
+<tr>
+  <td><img src="../HelpPictures/debugger_arrow.png"></td>
+  <td><font size=2>Un clic gauche maintenu permet de faire défiler le graphe.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_select.png"></td>
+  <td><font size=2>Un clic gauche maintenu permet de sélectionner une zone où faire un zoom.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_cross.png"></td>
+  <td><font size=2>Tant que ce bouton est actif, une croix est affichée et vous aide à lire les numéros de ligne et leur nombre d'appels.</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomin.png"></td>
+  <td><font size=2>Zoom in</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomout.png"></td>
+  <td><font size=2>Zoom out</font></td>
+</tr>
+<tr>
+  <td><img src="../HelpPictures/debugger_zoomall.png"></td>
+  <td><font size=2>Toutes les lignes peuvent être affichées. </font></td>
+</tr>
+</table>
+
+
+
+</blockquote>
+<p><b>L'historique des procédures</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_callstats.png"></p>
+
+Cet outil montre les procédures qui ont été appelées pour en arriver à la position 
+actuelle du programme. Chaque élément de la liste représente une procédure, la ligne 
+et le fichier où elle est déclarée ainsi que ses arguments qui ont été utilisés lors 
+de son appel. En cliquant sur le bouton &quot;Variables&quot;, il est possible de voir les variables 
+de cette procédure. 
+
+<br>
+<br>
+
+Cela permet de tracer facilement, à partir de quelle partie du code une procédure 
+a été appelée. L'historique des procédures ne se met à jour automatiquement que 
+lorsque le programme est arrêté, ou en mode pas à pas. Quand le programme est en cours 
+d'exécution, il est nécessaire d'appuyer sur le bouton &quot;Actualiser&quot; pour mettre à jour 
+la liste. 
+
+<br>
+<br>
+
+L'onglet &quot;Statistiques&quot; montre le nombre de fois qu'une procédure a été appelée. 
+Il est possible de réinitialiser un compteur en sélectionnant la procédure puis en 
+appuyant sur &quot;Réinitialiser&quot;. De même, en cliquant sur &quot;Réinitialiser tout&quot;, tous les 
+compteurs seront remis à 0. Comme pour l'historique des procédures, la mise à jour des 
+compteurs n'est pas automatique quand le programme n'est pas arrété ou en mode pas à pas, 
+il convient d'utiliser le bouton &quot;Actualiser&quot;. 
+
+
+</blockquote>
+<p><b>Le visualisateur de mémoire</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_memoryviewer.png"></p>
+
+Il permet d'afficher le contenu d'une zone de mémoire arbitraire de votre programme. 
+Une fois les limites inférieures et supérieures renseignées, cliquez sur &quot;Afficher&quot;. 
+(vous pouvez utiliser une valeur décimale, un nombre hexadécimal précédé par le caractère '$' 
+ou n'importe quelle autre expression valide, incluant une variable ou un pointeur provenant du code). 
+Si le contenu du second champ commence par le signe '+', alors il est considéré comme relatif au premier champ. 
+
+Si la zone de mémoire est valide, elle sera affichée. Si la zone complète ou seulement 
+une portion est invalide, alors un message d'erreur sera affiché. 
+
+<br>
+<br>
+Exemple: &quot;*Buffer + 10&quot; to &quot;+30&quot; affichera les 30 octets dans la mémoire en commençant 
+10 octets après l'adresse pointée par *Buffer. 
+
+<br>
+<br>
+
+La façon de présenter le contenu de la mémoire peut être défini grâce à la liste 
+déroulante située en bas à gauche. Les modes suivants sont disponibles: 
+
+<br>
+<br>
+
+<b>Aperçu Hex</b> 
+<br>
+La mémoire sera affichée en hexadécimal à la manière des visualisateurs hexadécimaux 
+classiques, avec l'adresse de la mémoire à gauche, suivie par le contenu en hexadécimal 
+et la représentation sous forme de caractères dans la colonne de droite. 
+
+<br>
+<br>
+
+<b>Tableau d'octets/de caractères/ de mots/ de long/ de quad/ de float/ de double</b> 
+<br>
+La mémoire sera montrée sous forme de tableau en fonction du 
+type choisi. Il est possible de configurer ce tableau en mode colonne simple 
+ou multi-colonne dans les préférences (voir <a href="../reference/ide_preferences.html">Configurer l'IDE</a>) 
+Les données seront affichées en décimal, octal ou hexadécimal via le bouton d'à côté. 
+
+<br>
+<br>
+
+<b>Texte ascii, unicode ou utf-8</b> 
+<br>
+Affiche la zone mémoire sous forme de texte, avec tous les caractères de contrôles 
+affichés entre [] (par exemple: &quot;[NULL]&quot; pour le caractère 0). 
+
+Un retour à la ligne est ajouté après les caractères 'nouvelle ligne' ([LF],[CR]) et [NULL] 
+pour améliorer la lisibilité de la sortie. La zone mémoire peut être interprétée 
+comme une chaîne Ascii, Unicode ou Utf8. 
+
+<br>
+<br>
+
+<b>Data</b> 
+<br>
+La case à cocher <b>Data</b>, vous permet d'exporter le tableau en 
+<a href="../reference/data.html">Data Section</a> lors de la copie ou de l'enregistrement. 
+
+<br>
+<br>
+Il est aussi possible d'exporter la zone de mémoire affichée: 
+
+<br>
+<br>
+
+<b>Copier (Texte)</b>: Copie la zone de mémoire affichée dans le presse-papier. 
+<br>
+<b>Enregistrer (Texte)</b>: Enregistre la zone de mémoire affichée dans un fichier. 
+<br>
+<b>Enregistrer (Raw-Binaire)</b>: Enregistre la zone de mémoire affichée dans un fichier sous forme binaire. 
+
+
+
+
+</blockquote>
+<p><b>Le visualisateur de bibliothèque</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_librarycalls.png"></p>
+
+Le visualisateur de bibliothèque donne des informations à propos des objets PureBasic qui ont été créés avec les 
+bibliothèques qui supportent cette fonctionnalité. Par exemple, elle permet de vérifier rapidement les images 
+actuellement chargées dans le programme, ou quels gadgets ont été créés. 
+
+<br>
+<br>
+
+Une fois que le programme est démarré, la liste déroulante en haut de la fenêtre peut être utilisée pour sélectionner 
+la bibliothèque à examiner. La liste de tous les objets de cette bibliothèque apparaîtra et en cliquant sur un 
+objet, des informations relatives à cet objet seront affichées. Certaines bibliothèques affichent même un aperçu 
+de l'objet (sprite, image par exemple). 
+
+<br>
+<br>
+
+Si la liste déroulante affiche &quot;Aucune information&quot;, cela veut dire que l'exécutable n'a utilisé aucune bibliothèque 
+qui utilise cette fonctionnalité. 
+
+<br>
+<br>
+
+Pour l'instant, les bibliothèques suivantes sont supportées: 
+<br>
+<a href="../thread/index.html">Thread</a> 
+<br>
+<a href="../gadget/index.html">Gadget</a> 
+<br>
+<a href="../window/index.html">Window</a> 
+<br>
+<a href="../file/index.html">File</a> 
+<br>
+<a href="../image/index.html">Image</a> 
+<br>
+<a href="../sprite/index.html">Sprite</a> 
+<br>
+<a href="../xml/index.html">XML</a> 
+<br>
+
+
+</blockquote>
+<p><b>Le débogueur assembleur</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_asm.png"></p>
+
+Le débogueur assembleur est utile pour les développeurs expérimentés qui veulent pouvoir 
+examiner le contenu des registres CPU ou de la pile (surtout quand de l'assembleur en ligne 
+est utilisé). 
+
+<br>
+<br>
+
+La fenêtre des registres est uniquement disponible quand le programme est stoppé, ou 
+en pas à pas. Il est possible de changer le contenu des registres en modifiant 
+les valeurs des champs puis en cliquant sur &quot;Changer&quot;. 
+
+<br>
+<br>
+
+L'analyse de la pile affiche le contenu de la pile du programme par rapport au 
+registre ESP. Si la position actuelle de la pile n'est pas alignée sur une valeur 
+multiple de 4, il n'est pas possible de la décoder correctement, donc elle sera 
+affichée sous forme hexadécimale. 
+<br>
+Si le pointeur est correctement aligné, le contenu de la pile est affiché avec des 
+commentaires par rapport aux valeurs rencontrées (détails des valeurs passées en paramètres 
+des fonctions PureBasic etc.) 
+
+<br>
+<br>
+
+L'affichage du contenu de la pile est actualisé automatiquement quand le programme est 
+stoppé ou en mode pas à pas. Il est possible de désactiver cette mise à jour automatisée 
+dans les préférences de l'IDE, dans ce cas un bouton &quot;Actualiser&quot; sera disponible. 
+
+<br>
+<br>
+
+Note: Le débogueur assembleur n'est pas pour l'instant disponible sur MacOS X. 
+
+</blockquote>
+<p><b>Le Purificateur</b></p><blockquote>
+
+
+<p><img src="images/ide_debugger_purifier.png"></p>
+
+Le purificateur permet de détecter des erreurs d'écriture dans des zones de mémoire interdites 
+(dépassement de tampon). La plupart de ces erreurs entrainent des 
+crashs ou des comportements inattendus, souvent très difficiles et laborieux à localiser, car ils 
+sont aléatoires. 
+
+<br>
+<br>
+
+Pour fonctionner, le purificateur a besoin de données particulières générées par le compilateur, c'est pourquoi il 
+est nécessaire de cocher la case &quot;Activer le purificateur&quot; dans les <a href="../reference/ide_compiler.html">options de compilation</a>. 
+
+<br>
+<br>
+
+Le purificateur détecte les erreurs d'écriture grâce à des valeurs uniques autour des 
+variables locales et globales, des chaînes de caractères et des blocs de mémoire alloués 
+dynamiquement. Ces valeurs uniques sont vérifiées régulièrement, et si une de ces valeurs 
+a changé, alors il y a eu une écriture interdite et une erreur est affichée. Ces vérifications 
+ralentissent considérablement l'exécution du programme, particulièrement pour les gros programmes, 
+c'est pourquoi il est possible de régler l'intervalle des vérifications dans la fenêtre 
+du purificateur: 
+
+<br>
+<br>
+
+<b>Variables globales</b> 
+<br>
+Définit l'intervalle (en nombre de lignes exécutées) pour la vérification de l'intégrité des variables globales. 
+
+<br>
+<br>
+
+<b>Variables locales</b> 
+<br>
+Définit l'intervalle (en nombre de lignes exécutées) pour la vérification de l'intégrité des variables locales. 
+
+<br>
+<br>
+
+<b>Chaînes de caractères</b> 
+<br>
+Définit l'intervalle (en nombre de lignes exécutées) pour la vérification de l'intégrité des chaînes de caractères. 
+
+<br>
+<br>
+
+<b>Blocs de données dynamiques</b> 
+<br>
+Définit l'intervalle (en nombre de lignes exécutées) pour la vérification de l'intégrité des blocs 
+de données alloués dynamiquement avec <a href="../memory/allocatememory.html">AllocateMemory()</a>. 
+</blockquote>
+</font></body></html>

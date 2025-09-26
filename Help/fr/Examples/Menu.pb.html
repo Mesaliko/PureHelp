@@ -1,0 +1,93 @@
+<html><head><title>Menu.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Menu example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">;
+</font><font color="#006666">; We just have to open a window and see when an event happen on the menu
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 150, 195, 260, &quot;PureBasic - Menu&quot;)
+
+  <font color="#006666">;
+</font>  <font color="#006666">; Create the menu. The indent is very important here for a good lisibility
+</font>  <font color="#006666">;
+</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;File&quot;)
+<font color="#006666">      MenuItem</font>( 1, &quot;&amp;Load...&quot;)
+<font color="#006666">      MenuItem</font>( 2, &quot;Save&quot;)
+<font color="#006666">      MenuItem</font>( 3, &quot;Save As...&quot;)
+<font color="#006666">      MenuBar</font>()
+<font color="#006666">      OpenSubMenu</font>(&quot;Recents&quot;)
+<font color="#006666">        MenuItem</font>( 5, &quot;Pure.png&quot;)
+<font color="#006666">        MenuItem</font>( 6, &quot;Basic.jpg&quot;)
+<font color="#006666">        OpenSubMenu</font>(&quot;Even more !&quot;)
+<font color="#006666">          MenuItem</font>( 12, &quot;Yeah&quot;)
+<font color="#006666">        CloseSubMenu</font>()
+<font color="#006666">        MenuItem</font>( 13, &quot;Rocks.tga&quot;)
+<font color="#006666">      CloseSubMenu</font>()
+<font color="#006666">      MenuBar</font>()
+<font color="#006666">      MenuItem</font>( 7, &quot;&amp;Quit&quot;)
+
+<font color="#006666">    MenuTitle</font>(&quot;Edition&quot;)
+<font color="#006666">      MenuItem</font>( 8, &quot;Cut&quot;)
+<font color="#006666">      MenuItem</font>( 9, &quot;Copy&quot;)
+<font color="#006666">      MenuItem</font>(10, &quot;Paste&quot;)
+      
+<font color="#006666">    MenuTitle</font>(&quot;?&quot;)
+<font color="#006666">      MenuItem</font>(11, &quot;About&quot;)
+<font color="#006666">      MenuItem</font>(14, &quot;Check/Uncheck Me&quot;)
+
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  DisableMenuItem</font>(0, 3, 1)
+<font color="#006666">  DisableMenuItem</font>(0, 13, 1)
+  
+  <font color="#006666">;
+</font>  <font color="#006666">; This is the 'event loop'. All the user actions are processed here.
+</font>  <font color="#006666">; It's very easy to understand: when an action occurs, the Event
+</font>  <font color="#006666">; isn't 0 and we just have to see what have happened...
+</font>  <font color="#006666">;
+</font>  
+  <b><font color="#006666">Repeat</font></b>
+
+    <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>()
+
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()  <font color="#006666">; To see which menu has been selected
+</font>
+          <b><font color="#006666">Case</font></b> 11 <font color="#006666">; About
+</font><font color="#006666">            MessageRequester</font>(&quot;About&quot;, &quot;Cool Menu example&quot;, 0)
+
+          <b><font color="#006666">Case</font></b> 14 <font color="#006666">; Check/Uncheck Me
+</font>          <b><font color="#006666">If</font></b> <font color="#006666">GetMenuItemState</font>(0,14) = 1   <font color="#006666">; Checked
+</font><font color="#006666">            SetMenuItemState</font>(0,14,0)      <font color="#006666">; So uncheck Me
+</font>          <b><font color="#006666">Else</font></b>                            <font color="#006666">; Else
+</font><font color="#006666">            SetMenuItemState</font>(0,14,1)      <font color="#006666">; Check Me
+</font>          <b><font color="#006666">EndIf</font></b>
+ 
+          <b><font color="#006666">Default</font></b>
+<font color="#006666">            MessageRequester</font>(&quot;Info&quot;, &quot;MenuItem: &quot;+<font color="#006666">Str</font>(<font color="#006666">EventMenu</font>()), 0)
+
+        <b><font color="#006666">EndSelect</font></b>
+
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_CloseWindow</font>
+        Quit = 1
+
+    <b><font color="#006666">EndSelect</font></b>
+
+  <b><font color="#006666">Until</font></b> Quit = 1
+
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b></font></pre>
+</body></html>

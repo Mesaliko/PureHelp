@@ -1,0 +1,89 @@
+<html><head><title>FindString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FindString()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>FindString</b></font>(Chaine$, ChaineCherchee$ [, PositionDepart] [, Mode]])  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Cherche une sous-chaîne dans une chaîne de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne de caractères à utiliser. 
+
+</td></tr>
+<tr><td><i>ChaineCherchee$ </i></td>
+<td> 
+La chaîne de caractères à trouver. 
+
+</td></tr>
+<tr><td><i>PositionDepart (optionnel)</i></td>
+<td> 
+Position du caractère à partir de laquelle la recherche commence. 
+<br>
+<br>
+L'indice du premier caractère valide est 1. 
+<br>
+<br>
+Si ce paramètre n'est pas spécifié, la chaîne entière est recherchée. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font>: Recherche sensible à la casse (A &lt;&gt; a) (par défaut).
+  <font color="#924B72">#PB_String_NoCase</font>       : Recherche insensible à la casse (A = a).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la position (en caractères) de la chaîne à rechercher, ou zéro si la chaîne n'est pas trouvée. 
+L'index du premier caractère est 1. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Position =<font color="#006666"> FindString</font>(&quot;PureBasic&quot;, &quot;Bas&quot;) <font color="#006666">; 'Position' recevra la valeur 5</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="countstring.html">CountString()</a>, 
+<a href="insertstring.html">InsertString()</a>, 
+<a href="removestring.html">RemoveString()</a>, 
+<a href="replacestring.html">ReplaceString()</a>, 
+<a href="reversestring.html">ReverseString()</a>, 
+<a href="stringbytelength.html">StringByteLength()</a>, 
+<a href="stringfield.html">StringField()</a> 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte$ = &quot;Ceci est une simple ligne de texte....&quot;
+  
+  <b><font color="#006666">Repeat</font></b>
+    Dernier = Position
+    Position =<font color="#006666"> FindString</font>(Texte$ , &quot;i&quot;, Position + 1)
+    <b><font color="#006666">If</font></b> Position &gt; 0
+      <b><font color="#006666">Debug</font></b> &quot;'i' trouvée à l'emplacement: &quot; + Position
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> <b><font color="#006666">Not</font></b> Position
+  
+  <b><font color="#006666">Debug</font></b> &quot;La dernière position de 'i' a été trouvée à la position : &quot; + Dernier
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="replacestring.html">ReplaceString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=escapestring.html>EscapeString()</a> - <a href=index.html>String Index</a> - <a href=formatnumber.html>FormatNumber()</a> -><br><br>
+
+</body></html>

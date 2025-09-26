@@ -1,0 +1,140 @@
+<html><head><title>LoadImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LoadImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>LoadImage</b></font>(#Image, Fichier$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Charge une image contenue dans fichier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Le numéro d'identification de l'image à 
+charger. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Fichier$</i></td>
+<td> 
+Le chemin et le nom du fichier à charger. 
+<br>
+<br>
+Si le nom de fichier ne contient pas de 
+chemin complet, le chemin est relatif. 
+Voir <a href="../filesystem/getcurrentdirectory.html">répertoire courant</a>. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Ce paramètre n'a pour l'instant pas d'utilité. 
+S'il est spécifié, 0 doit être utilisé pour 
+assurer une future compatibilité. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'image a été 
+chargée avec succès et zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Image alors le numéro généré automatiquement 
+est renvoyé dans 'Resultat' en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+La taille maximale de l'image est fonction du 
+système d'exploitation et de la quantité de 
+mémoire disponible. 
+Si la mémoire disponible est suffisante alors 
+une image de 8192x8192 peut être traitée par 
+tous les systèmes d'exploitation pris en 
+charge par PureBasic. 
+<br>
+<br>
+Quand une image est chargée, elle est convertie 
+soit en 24 bits (si la profondeur de l'image 
+est inférieure ou égale à 24 bits) soit en 
+32 bits (si l'image a un canal alpha). 
+<br>
+<br>
+Une image chargée peut être libérée en 
+utilisant la fonction <a href="freeimage.html">FreeImage()</a>. 
+<br>
+<br>
+L'image peut être au format BMP, icône (.ico, 
+seulement supporté sous Windows) ou dans un des 
+formats supportés par la bibliothèque 
+<a href="../imageplugin/index.html">ImagePlugin</a>. 
+Le canal alpha est pris en charge pour les images BMP 32 bits. 
+<br>
+<br>
+Les commandes suivantes peuvent être utilisées 
+pour activer automatiquement davantage de 
+formats d'images: 
+<br>
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+<a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+<br>
+Avec l'image chargée, vous pouvez notamment 
+utiliser les commandes suivantes : 
+<br>
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> avec <a href="imageoutput.html">ImageOutput()</a> pour 
+dessiner dans l'image. 
+<br>
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> avec <a href="imagevectoroutput.html">ImageVectorOutput()</a> 
+pour faire du dessin vectoriel dans l'image. 
+<br>
+<a href="copyimage.html">CopyImage()</a> pour créer une copie de l'image. 
+<br>
+<a href="grabimage.html">GrabImage()</a> pour créer une autre image en 
+copiant une zone définie dans l'image. 
+<br>
+<a href="../2ddrawing/drawimage.html">DrawImage()</a> avec <a href="imageid.html">ImageID()</a> pour dessiner 
+l'image sur la surface de dessin en cours. 
+<br>
+<a href="../2ddrawing/drawalphaimage.html">DrawAlphaImage()</a> avec <a href="imageid.html">ImageID()</a> pour dessiner 
+l'image. 
+(avec ses composantes alpha) sur la surface 
+de dessin en cours. <br>
+<a href="../gadget/imagegadget.html">ImageGadget()</a> pour afficher l'image dans une 
+application fenêtrée. <br>
+<a href="../gadget/buttonimagegadget.html">ButtonImageGadget()</a> pour créer un bouton avec 
+image dans une application fenêtrée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 128, 128, &quot;FreeImage&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    
+<font color="#006666">    LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;Examples\Sources\Data\GeeBee2.bmp&quot;) <font color="#006666">; Charge l'image depuis un fichier</font>
+<font color="#006666">    ImageGadget</font>(0, 0, 0, 128, 128,<font color="#006666"> ImageID</font>(0)) <font color="#006666">; Affichage</font>
+    
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="catchimage.html">CatchImage()</a>, <a href="copyimage.html">CopyImage()</a>, 
+<a href="grabimage.html">GrabImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isimage.html>IsImage()</a> - <a href=index.html>Image Index</a> - <a href=removeimageframe.html>RemoveImageFrame()</a> -><br><br>
+
+</body></html>

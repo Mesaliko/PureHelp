@@ -1,0 +1,118 @@
+<html><head><title>HideMenu</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HideMenu()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>HideMenu</b></font>(#Menu, Etat)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Cache ou affiche un menu. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Menu</i></td>
+<td width="90%"> 
+Le menu à utiliser. 
+
+</td></tr>
+<tr><td><i>Etat</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#True</font>   : Le menu est caché
+  <font color="#924B72">#False</font>  : Le menu est affiché
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple:</b> Cache un Menu</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 300, 100, &quot;Exemple HideMenu&quot;)
+<font color="#006666">  ButtonGadget</font>(10,70,10,150,30,&quot;Cacher le menu&quot;)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;Projet&quot;)
+<font color="#006666">    MenuItem</font>(1, &quot;Nouveau&quot;)
+<font color="#006666">    MenuItem</font>(2, &quot;Ouvrir&quot;) 
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()          
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+        <b><font color="#006666">Case</font></b> 10 
+<font color="#006666">          HideMenu</font>(0,<font color="#924B72">#True</font>) <font color="#006666">; cache le menu</font>
+      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Affiche un Menu</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 300, 100, &quot;Exemple HideMenu&quot;)
+<font color="#006666">  ButtonGadget</font>(0,70,10,150,30,&quot;Affiche le menu&quot;)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;Projet&quot;)
+<font color="#006666">    MenuItem</font>(1, &quot;Nouveau&quot;)
+<font color="#006666">    MenuItem</font>(2, &quot;Ouvrir&quot;) 
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  HideMenu</font>(0,<font color="#924B72">#True</font>) <font color="#006666">; Cache le menu</font>
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()          
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+        <b><font color="#006666">Case</font></b> 0 
+<font color="#006666">        HideMenu</font>(0,<font color="#924B72">#False</font>) <font color="#006666">; Affiche le menu  </font>
+      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Change de Menu</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 300, 100, &quot;Exemple HideMenu&quot;)
+<font color="#006666">  ButtonGadget</font>(0,70,10,150,30,&quot;Change de menu&quot;)
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;Projet&quot;)
+<font color="#006666">    MenuItem</font>(1, &quot;Nouveau&quot;)
+<font color="#006666">    MenuItem</font>(2, &quot;Ouvrir&quot;) 
+  <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(1,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    MenuTitle</font>(&quot;Menu&quot;)
+<font color="#006666">    MenuItem</font>(1, &quot;Enregistrer&quot;)
+<font color="#006666">    MenuItem</font>(2, &quot;Quitter&quot;) 
+  <b><font color="#006666">EndIf</font></b>
+  
+<font color="#006666">  HideMenu</font>(0,<font color="#924B72">#False</font>) <font color="#006666">; Affiche le menu &quot;Projet&quot; </font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()          
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>  
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+        <b><font color="#006666">Case</font></b> 0 
+<font color="#006666">          HideMenu</font>(1,<font color="#924B72">#False</font>) <font color="#006666">; Affiche le menu &quot;Menu&quot; </font>
+      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createmenu.html">CreateMenu()</a>, <a href="createimagemenu.html">CreateImageMenu()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows, Linux</Blockquote></p><center><- <a href=getmenutitletext.html>GetMenuTitleText()</a> - <a href=index.html>Menu Index</a> - <a href=ismenu.html>IsMenu()</a> -><br><br>
+
+</body></html>

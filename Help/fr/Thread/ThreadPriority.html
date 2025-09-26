@@ -1,0 +1,115 @@
+<html><head><title>ThreadPriority</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ThreadPriority()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ThreadPriority</b></font>(Thread, Priorite)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la priorité du thread spécifié 
+et renvoie l'ancienne priorité. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Thread</i></td>
+<td width="90%"> 
+Le thread à utiliser. <br>
+(Cette valeur provient de <a href="createthread.html">CreateThread()</a>.) 
+
+</td></tr>
+<tr><td><i>Priorite</i></td>
+<td> 
+Peut prendre une valeur entre 1 et 32.<br>
+0, aucun changement n'est effectué 
+(utile pour seulement trouver le niveau 
+de priorité du thread sans le modifier).<br>
+1 est la priorité la plus basse, 16 
+est une priorité normale et 32 correspond 
+à un niveau de priorité en temps réel 
+(la plus haute, à n'utiliser que si vous 
+êtes sûr de ce que vous faites). 
+<br>
+<br>
+Windows ne supporte pas les 32 niveaux de 
+priorité, voici le tableau correspondant: 
+<pre><font face="Courier New, Courier, mono" size="2">  - 1 : Le plus bas
+  - Entre 2 et 15 : En dessous de la normale 
+  - 16: Normal
+  - Entre 17 et 30: Au dessus de la normale
+  - 31: Le plus haut
+  - 32: Temps critique
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la priorité du thread avant l'appel 
+de cette commande. Ce qui peut être utile si 
+vous voulez seulement augmenter la priorité 
+du thread pour un court moment et ensuite 
+revenir à l'ancienne valeur. 
+La valeur renvoyée n'est pas nécessairement 
+la même que celle donnée en paramètre de 
+ThreadPriority(), car elle dépend de la 
+granularité du réglage de la priorité 
+offerte par le système. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Un thread avec une haute priorité et qui utilise 
+beaucoup de temps, comme le traitement d'image 
+par exemple, monopolisera le processeur et les 
+autres threads auront peu de chance de s'exécuter. 
+Réservez donc les hautes priorités aux threads 
+qui demande peu de temps d'exécution. 
+
+<br>
+<br>
+Windows planifie les threads, il choisit celui 
+qui tournera pendant un court laps de temps, en 
+utilisant une stratégie préemptive de même 
+niveau de priorité. Cela signifie que s'il est 
+temps d'exécuter un autre thread (comme un 
+changement de contexte), alors le thread avec 
+la plus haute priorité disponible sera le 
+prochain à être exécuté. S'il y a plus d'un thread 
+avec la plus haute priorité alors ils seront 
+alternés en fonction du contexte. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Une procedure toujours en cours d'exécution </font>
+  <font color="#006666">; (aucune commande Delay n'est employée</font>
+  <font color="#006666">; car cela obligerait le thread à s'arrêter </font>
+  <font color="#006666">; pendant qu'il serait en attente)</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">ImprimeUnTruc</font>(*Intervalle)
+    <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1000000000
+      <font color="#006666">; occupé par une méchante attente</font>
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+    thread =<font color="#006666"> CreateThread</font>(@ImprimeUnTruc(), 500)
+    <b><font color="#006666">If</font></b> thread
+      <font color="#006666">; Augmente la priorité au-dessus du thread principal</font>
+      <font color="#006666">; Vous devriez remarquer un délai avant que la commande d'impression</font>
+      <font color="#006666">; ne soit exécutée. Maintenant changez le 17 en 15 (plus bas que la priorité normale)</font>
+      <font color="#006666">; et observez que la commande d'impression s'exécute instantanément</font>
+<font color="#006666">      ThreadPriority</font>(thread, 17)
+<font color="#006666">      PrintN</font>(&quot;Attend que le thread de plus haute priorite se termine&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    
+<font color="#006666">    PrintN</font>(&quot;Appuyer sur Entree pour quitter&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows</Blockquote></p><center><- <a href=threadid.html>ThreadID()</a> - <a href=index.html>Thread Index</a> - <a href=trylockmutex.html>TryLockMutex()</a> -><br><br>
+
+</body></html>

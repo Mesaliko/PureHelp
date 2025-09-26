@@ -1,0 +1,57 @@
+<html><head><title>ImageOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>ImageOutput</b></font>(#Image)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt die 'OutputID' des Bildes, um darauf <a href="../2ddrawing/index.html">2D-Zeichen-Operationen</a> 
+ausführen zu können. 
+Alternativ kann der Befehl <a href="imagevectoroutput.html">ImageVectorOutput()</a> verwendet werden, um Vektorzeichnen auf dem Bild 
+durchzuführen. 
+Wenn das Bild &quot;Multi-Frame&quot; ist (aus mehreren Einzelbildern besteht), dann wird das 
+aktuelle Frame verwendet. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Das Bild, auf dem gezeichnet werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die OutputID zurück, oder Null wenn Zeichnen nicht möglich ist. Dieser Wert sollte 
+direkt an die <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> Funktion übergeben werden, 
+um die Zeichen-Operation zu starten. Der Rückgabewert ist nur gültig für eine Zeichen-Operation 
+und kann nicht wiederverwendet werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  StartDrawing</font>(<font color="#006666">ImageOutput</font>(<font color="#924B72">#Image</font>))
+    <font color="#006666">; hier folgen die Zeichenoperationen...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Diese Funktion kann nicht mit geladenen Icon-Dateien (*.ico) verwendet werden. 
+<br>
+<br>
+Das Bild muss zuvor geladen (mittels <a href="loadimage.html">LoadImage()</a> bzw. <a href="catchimage.html">CatchImage()</a>) 
+oder neu erstellt (mittels <a href="createimage.html">CreateImage()</a>) worden sein. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="imagevectoroutput.html">ImageVectorOutput()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=imageid.html>ImageID()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=imagevectoroutput.html>ImageVectorOutput()</a> -><br><br>
+
+</body></html>

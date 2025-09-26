@@ -1,0 +1,96 @@
+<html><head><title>SerialPortTimeouts</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SerialPortTimeouts()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SerialPortTimeouts</b></font>(#PortSerie, RIT, RTTC, RTTM, WTTC, WTTM)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change les temps d'attentes par défaut. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#PortSerie</i></td>
+<td width="90%"> 
+Le port série à utiliser. 
+
+</td></tr>
+<tr><td><i>RIT</i></td>
+<td> 
+'RIT' (Read Interval Timeout): Indique le 
+temps d'attente maximum, en millisecondes, 
+entre l'arrivée de deux caractères sur 
+la ligne de communication.<br>
+La valeur par défaut est 100. 
+
+</td></tr>
+<tr><td><i>RTTC</i></td>
+<td> 
+'RTTC' (Read Total Timeout Constant): 
+Indique la constante, en millisecondes, 
+utilisée pour calculer le temps d'attente 
+maximum pour les opérations de lecture. 
+Pour chaque opération de lecture, cette 
+valeur est ajoutée au produit de 'RTTM' 
+(Read Total Timeout Multiplier) et le 
+nombre d'octets demandés.<br>
+La valeur par défaut est 100. 
+
+</td></tr>
+<tr><td><i>RTTM</i></td>
+<td> 
+'RTTM' (Read Total Timeout Multiplier): 
+Détermine le multiplicateur, en 
+millisecondes, utilisé pour calculer le 
+temps d'attente total pour les opérations 
+de lecture. Pour chaque opération 
+de lecture, cette valeur est multipliée 
+par le nombre d'octets demandés. 
+<br>
+La valeur par défaut est 10. 
+
+</td></tr>
+<tr><td><i>WTTC</i></td>
+<td> 
+'WTTC' (WriteTotalTimeoutConstant): 
+Indique la constante, en millisecondes, 
+utilisée pour calculer le temps d'attente 
+maximum pour les opérations d'écriture. 
+Pour chaque opération d'écriture, cette 
+valeur est ajoutée au produit de 'WTTM' 
+(Write Total Timeout Multiplier) et le 
+nombre d'octets devant être écrits. 
+<br>
+La valeur par défaut est 10. 
+
+</td></tr>
+<tr><td><i>WTTM</i></td>
+<td> 
+'WTTM' (Write Total Timeout Multiplier): 
+Détermine le multiplicateur, en 
+millisecondes, utilisé pour calculer le 
+temps d'attente total pour les opérations 
+d'écriture. Pour chaque opération 
+d'écriture, cette valeur est multipliée 
+par le nombre d'octets devant être écrits. 
+<br>
+La valeur par défaut est 100. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="openserialport.html">OpenSerialPort()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=serialportid.html>SerialPortID()</a> - <a href=index.html>SerialPort Index</a> - <a href=setserialportstatus.html>SetSerialPortStatus()</a> -><br><br>
+
+</body></html>

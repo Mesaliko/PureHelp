@@ -1,0 +1,65 @@
+<html><head><title>HTTPProxy</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPProxy()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>HTTPProxy</b></font>(URL$ [, User$, Password$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Specify a proxy to use for the following HTTP commands: <a href="receivehttpfile.html">ReceiveHTTPFile()</a>, 
+<a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a> and <a href="httprequestmemory.html">HTTPRequestMemory()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+The URL to use for the proxy. Default is HTTP proxy if no prefix is specified. Available 
+prefixes to specify proxy type: 
+<pre><font face="Courier New, Courier, mono" size="2">  http://    - HTTP proxy (default)
+  socks4://  - SOCKS4 proxy
+  socks4a:// - SOCKS4 proxy with domain name support rather than IP address
+  socks5://  - SOCKS5 proxy
+  socks5h:// - SOCKS5 proxy and ask the proxy to do the hostname resolving
+</font></pre>
+
+</td></tr>
+<tr><td><i>User$, Password$ (optional)</i></td>
+<td> 
+The user and password to use to connect to the proxy (if any). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux, 'libcurl' needs to be installed to have this command working (most of Linux 
+distributions comes with it already installed). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  HTTPProxy</font>(&quot;socks4://127.0.0.1&quot;)
+
+  Filename$ =<font color="#006666"> SaveFileRequester</font>(&quot;Where to save index.php ?&quot;, &quot;&quot;, &quot;&quot;, 0)
+
+  <b><font color="#006666">If</font></b> <font color="#006666">ReceiveHTTPFile</font>(&quot;http://www.purebasic.com/index.php&quot;, Filename$)
+    <b><font color="#006666">Debug</font></b> &quot;Success&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>, <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a>, <a href="httprequestmemory.html">HTTPRequestMemory()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=httpprogress.html>HTTPProgress()</a> - <a href=index.html>Http Index</a> - <a href=httprequest.html>HTTPRequest()</a> -><br><br>
+
+</body></html>

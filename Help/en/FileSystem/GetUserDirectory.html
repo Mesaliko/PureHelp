@@ -1,0 +1,59 @@
+<html><head><title>GetUserDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetUserDirectory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result$ = <font color="#006666"><b>GetUserDirectory</b></font>(Type)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the directory path of the specified directory type. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+The type of directory to get the path. It can be one of the following value: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Directory_Desktop</font>    : desktop directory of the current logged user
+  <font color="#924B72">#PB_Directory_Downloads</font>  : downloads directory of the current logged user
+  <font color="#924B72">#PB_Directory_Documents</font>  : documents directory path of the current logged user
+  <font color="#924B72">#PB_Directory_Videos</font>     : videos directory path of the current logged user
+  <font color="#924B72">#PB_Directory_Musics</font>     : musics directory path of the current logged user
+  <font color="#924B72">#PB_Directory_Pictures</font>   : pictures directory path of the current logged user
+  <font color="#924B72">#PB_Directory_Public</font>     : public directory of the current logged user
+  <font color="#924B72">#PB_Directory_ProgramData</font>: program data directory of the current logged user.
+                             On Linux and OSX, it is the home directory followed by '/.' to be able to create
+                             hidden config directory in the home user.
+  <font color="#924B72">#PB_Directory_AllUserData</font>: common program data directory (accessible to all users)
+  <font color="#924B72">#PB_Directory_Programs</font>   : global program files path (can be read only)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the full path of the specified directory.   It will end with a path separator <font color="#924B72">#PS</font>, <font color="#924B72">#PS$</font> 
+('\' for Windows or '/' otherwise). 
+If the type is not found it will return an empty string. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; List some of the user directories:</font>
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Downloads = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Downloads</font>)
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Documents = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Documents</font>)
+  <b><font color="#006666">Debug</font></b> &quot;#PB_Directory_Programs  = &quot; +<font color="#006666"> GetUserDirectory</font>(<font color="#924B72">#PB_Directory_Programs</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getcurrentdirectory.html">GetCurrentDirectory()</a>, 
+<a href="gethomedirectory.html">GetHomeDirectory()</a>, 
+<a href="gettemporarydirectory.html">GetTemporaryDirectory()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=gettemporarydirectory.html>GetTemporaryDirectory()</a> - <a href=index.html>FileSystem Index</a> - <a href=isdirectory.html>IsDirectory()</a> -><br><br>
+
+</body></html>

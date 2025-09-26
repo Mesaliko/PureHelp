@@ -1,0 +1,49 @@
+<html><head><title>RayPick</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RayPick()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RayPick</b></font>(x, y, z, DestinationX, DestinationY, DestinationZ [, PickMask])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Casts a ray between the first point and the second point, and checks if an object is 
+crossing the ray. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y, z</i></td>
+<td width="90%"> 
+The first point coordinates, in world unit. 
+
+</td></tr>
+<tr><td><i>DestinationX, DestinationY, DestinationZ</i></td>
+<td> 
+The second point coordinates, in world unit. 
+
+</td></tr>
+<tr><td><i>PickMask (optional)</i></td>
+<td> 
+The entity mask used while performing the ray pick. Only the entities with a mask matching 
+the PickMask value will be reported. If this parameter is omitted, all the entities are valid 
+for the ray detection. The mask can be a combination, to select more than one entity group. 
+To have more information about pick mask, see <a href="../entity/createentity.html">CreateEntity()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The returned value can be: 
+<pre><font face="Courier New, Courier, mono" size="2">  -1 : Nothing has been crossed.
+  <font color="#924B72">#PB_World_WaterPick</font>: the ray crossed the water.
+  0 and above: the ray crossed an #Entity. The entity detection is based on its bounding box, not on its mesh.
+</font></pre>
+To get more information about the picked object position, use <a href="pickx.html">PickX()</a>, <a href="picky.html">PickY()</a> and <a href="pickz.html">PickZ()</a>. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=raycollide.html>RayCollide()</a> - <a href=index.html>Engine3D Index</a> - <a href=renderworld.html>RenderWorld()</a> -><br><br>
+
+</body></html>

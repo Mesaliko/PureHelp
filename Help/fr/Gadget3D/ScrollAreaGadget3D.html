@@ -1,0 +1,107 @@
+<html><head><title>ScrollAreaGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ScrollAreaGadget3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ScrollAreaGadget3D</b></font>(#Gadget3D, X, Y, Largeur, Hauteur, LargeurZoneInterne, HauteurZoneInterne, ValeurDeplacement) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un gadget zone d'affichage 3D. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Le numéro d'identification du gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+Les valeurs minimales et maximales possibles. 
+<br>
+<br>
+Il est préférable de se limiter à un minimum 
+de 0 et un maximum de 10 000 pour garder une 
+compatibilité entre les systèmes 
+d'exploitation. 
+
+</td></tr>
+<tr><td><i>LargeurZoneInterne, HauteurZoneInterne</i></td>
+<td> 
+Dimensions de la zone interne, affichable.<br>
+Si elle est inférieure aux dimensions du 
+gadget, les ascenseurs ne s'afficheront pas. 
+
+
+</td></tr>
+<tr><td><i>ValeurDeplacement</i></td>
+<td> 
+Le déplacement par défaut de l'ascenseur, 
+en pixels. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le gadget a 
+été créé avec succès, zéro sinon. 
+Si <font color="#924B72">#PB_Any</font> a été spécifié comme paramètre 
+#Gadget3D alors le numéro généré 
+automatiquement  est renvoyé dans 'Resultat' 
+en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il est très utile pour afficher un gadget 
+trop grand pour être afficher en entier, 
+comme une image par exemple. Cette zone 
+peut contenir n'importe quel type de gadgets. 
+Quand ce gadget est créé la 'GadgetList' 
+courante est automatiquement changée et les 
+nouveaux gadgets qui sont créés après cette 
+commande seront placés dans ce gadget. 
+<a href="closegadgetlist3d.html">CloseGadgetList3D()</a> permet de revenir à la 
+'GadgetList' précédente. 
+<a href="opengadgetlist3d.html">OpenGadgetList3D()</a> pourra être utiliser 
+pour ajouter des gadgets dynamiquement dans 
+ce gadget. 
+<br>
+<br>
+Les commandes suivantes peuvent être 
+utilisées : 
+<br>
+<br>
+<a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a>: Avec une des 
+constantes suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollArea3D_InnerWidth</font> : Renvoie la largeur (en pixels) de la zone interne du gadget. 
+  <font color="#924B72">#PB_ScrollArea3D_InnerHeight</font>: Renvoie la hauteur (en pixels) de la zone interne du gadget.  
+  <font color="#924B72">#PB_ScrollArea3D_X</font>          : Renvoie la position horizontale actuelle de l'ascenseur (en pixels).
+  <font color="#924B72">#PB_ScrollArea3D_Y</font>          : Renvoie la position verticale actuelle de l'ascenseur (en pixels).
+</font></pre>
+<a href="setgadgetattribute3d.html">SetGadgetAttribute3D()</a>: Avec une des 
+constantes suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ScrollArea3D_InnerWidth</font> : Modifie la largeur (en pixels) de la zone interne du gadget. 
+  <font color="#924B72">#PB_ScrollArea3D_InnerHeight</font>: Modifie la hauteur (en pixels) de la zone interne du gadget.  
+  <font color="#924B72">#PB_ScrollArea3D_X</font>          : Modifie la position horizontale actuelle de l'ascenseur (en pixels).
+  <font color="#924B72">#PB_ScrollArea3D_Y</font>          : Modifie la position verticale actuelle de l'ascenseur (en pixels).
+</font></pre>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=resizegadget3d.html>ResizeGadget3D()</a> - <a href=index.html>Gadget3D Index</a> - <a href=scrollbargadget3d.html>ScrollBarGadget3D()</a> -><br><br>
+
+</body></html>

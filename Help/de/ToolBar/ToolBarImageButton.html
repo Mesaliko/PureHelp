@@ -1,0 +1,84 @@
+<html><head><title>ToolBarImageButton</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ToolBarImageButton()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ToolBarImageButton</b></font>(#Button, ImageID [, Modus [, Text$]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Fügt einen Image-Schalter (Bild-Schalter) zur konstruierten Werkzeugleiste hinzu. 
+<a href="createtoolbar.html">CreateToolBar()</a> muss vor Benutzung dieses Befehls aufgerufen werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Button</i></td>
+<td width="90%"> 
+Der Bezeichner des neuen Werkzeugleisten-Schalters. 
+
+</td></tr>
+<tr><td><i>ImageID</i></td>
+<td> 
+Das für den Schalter zu verwendende Bild. Dies kann einfach mittels <a href="../image/imageid.html">ImageID()</a> aus der Image 
+Library ermittelt werden. Dabei handelt es sich entweder um ein mittels <a href="../image/loadimage.html">LoadImage()</a> geladenes 
+oder mittels <a href="../image/createimage.html">CreateImage()</a> im Speicher erstelltes Bild (&quot;Image&quot;). Um einen tatsächlich 
+transparenten Hintergrund zu haben, verwenden Sie das 'Icon' (.ico) Dateiformat auf Windows 
+bzw. das PNG-Dateiformat auf Linux/MacOS X. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Der Modus-Wert kann eine der folgenden Konstanten sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ToolBar_Normal</font> : der Schalter verhält sich als Standard-Schalter (Standard-Einstellung)
+  <font color="#924B72">#PB_ToolBar_Toggle</font> : der Schalter verhält sich als Toggle-Schalter, d.h. bleibt nach dem Anklicken gedrückt/nicht gedrückt
+</font></pre>
+<a href="gettoolbarbuttonstate.html">GetToolBarButtonState()</a> und <a href="settoolbarbuttonstate.html">SetToolBarButtonState()</a> können verwendet werden, um den Status 
+eines Toggle-Schalters zu ermitteln bzw. zu ändern. 
+
+</td></tr>
+<tr><td><i>Text$ (optional)</i></td>
+<td> 
+Der Text, der mit diesem Schalter angezeigt werden soll. Die Werkzeugleiste muss mit dem 
+<font color="#924B72">#PB_ToolBar_Text</font> Flag erstellt werden, oder der Text wird nicht angezeigt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 150, 25, &quot;ToolBar&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CreateImage</font>(0,16,16)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0,0,16,16,<font color="#006666">RGB</font>(255,255,255))
+<font color="#006666">      Box</font>(4,4,8,8,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">    StopDrawing</font>()
+<font color="#006666">    CreateImage</font>(1,16,16)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(1))
+<font color="#006666">      Box</font>(0,0,16,16,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">      Box</font>(4,4,8,8,<font color="#006666">RGB</font>(255,255,255))
+<font color="#006666">    StopDrawing</font>()
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateToolBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      ToolBarImageButton</font>(0,<font color="#006666">ImageID</font>(0))
+<font color="#006666">      ToolBarImageButton</font>(1,<font color="#006666">ImageID</font>(1))
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/toolbarimagebutton.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createtoolbar.html">CreateToolBar()</a>, <a href="toolbarseparator.html">ToolBarSeparator()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=toolbarid.html>ToolBarID()</a> - <a href=index.html>ToolBar Inhaltsverzeichnis</a> - <a href=toolbarseparator.html>ToolBarSeparator()</a> -><br><br>
+
+</body></html>

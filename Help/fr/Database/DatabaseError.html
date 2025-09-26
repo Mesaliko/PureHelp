@@ -1,0 +1,46 @@
+<html><head><title>DatabaseError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DatabaseError()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>DatabaseError</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la dernière erreur survenue. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la dernière erreur survenue 
+lors de l'exécution d'une commande 
+sur la base de données. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est particulièrement utile avec les 
+commandes suivantes: <a href="opendatabase.html">OpenDatabase()</a>, 
+<a href="databasequery.html">DatabaseQuery()</a> et <a href="databaseupdate.html">DatabaseUpdate()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; D'abord, il faudra se connecter à une base de données qui contient une table 'employee'</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#BaseDeDonnees</font>, &quot;SELECT * FROM employee&quot;) <font color="#006666">; Récupère tous les enregistrements de la table 'employee'</font>
+    <font color="#006666">; ...</font>
+<font color="#006666">    FinishDatabaseQuery</font>(<font color="#924B72">#BaseDeDonnees</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Erreur&quot;, &quot;Impossible d'exécuter la requête: &quot;+<font color="#006666">DatabaseError</font>())
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="databasequery.html">DatabaseQuery()</a>, <a href="databaseupdate.html">DatabaseUpdate()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=databasedrivername.html>DatabaseDriverName()</a> - <a href=index.html>Database Index</a> - <a href=databaseid.html>DatabaseID()</a> -><br><br>
+
+</body></html>

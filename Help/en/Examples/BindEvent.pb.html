@@ -1,0 +1,125 @@
+<html><head><title>BindEvent.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - BindEvent and  BindGadgetEvent example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; Let's create a speedButton which produce event as long as it's pressed.
+</font>
+<b><font color="#006666">Global</font></b> Gadget, Pressed.b, n
+<b><font color="#006666">Global</font></b> Min=-50, Max=50
+
+<font color="#006666">; Change the speed here !
+</font><b><font color="#006666">Global</font></b> Delay=50 <font color="#006666">; 50 ms
+</font>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">paint</font>(canvas, state, text$)
+  <font color="#006666">; Paint canvas as fake button &quot;+&quot; and fake button &quot;-&quot;
+</font>  <b><font color="#006666">Protected</font></b> w, h
+  <font color="#006666">;State: 0     = Pushed
+</font>  <font color="#006666">;State: Not 0 = Released
+</font>  <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">CanvasOutput</font>(canvas))
+    Width =<font color="#006666"> OutputWidth</font>()
+    Height =<font color="#006666"> OutputHeight</font>()
+<font color="#006666">    Box</font>(0,0,Width,Height,$CFFFFC) <font color="#006666">; Yellow background
+</font>    <b><font color="#006666">If</font></b> state=0 <font color="#006666">; UP
+</font><font color="#006666">      LineXY</font>(0,Height,Width,Height,$000000)
+<font color="#006666">      LineXY</font>(Width,0,Width,Height,$000000)
+<font color="#006666">      LineXY</font>(0,0,Width,0,$FFFFFF)
+<font color="#006666">      LineXY</font>(0,0,0,Height,$FFFFFF)
+    <b><font color="#006666">Else</font></b>       <font color="#006666">;DOWN
+</font><font color="#006666">      LineXY</font>(0,Height,Width,Height,$FFFFFF)
+<font color="#006666">      LineXY</font>(Width,0,Width,Height,$FFFFFF)
+<font color="#006666">      LineXY</font>(0,0,Width,0,$000000)
+<font color="#006666">      LineXY</font>(0,0,0,Height,$000000)
+    <b><font color="#006666">EndIf</font></b>
+    w=<font color="#006666">TextWidth</font>(text$)
+    h=<font color="#006666">TextHeight</font>(text$)
+<font color="#006666">    DrawText</font>(Height/2-w/2, Height/2-h/2, Text$, $000000, $CFFFFC)
+    
+<font color="#006666">    StopDrawing</font>()
+  <b><font color="#006666">EndIf</font></b>
+  
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">OnSpeedButtonEvent</font>()
+  <font color="#006666">; Bind all button &quot;-&quot; events and all button &quot;+&quot; events
+</font>  Gadget =<font color="#006666"> EventGadget</font>()
+  
+  <b><font color="#006666">Select</font></b> <font color="#006666">EventType</font>() <font color="#006666">; Which event ?
+</font>    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_MouseEnter</font>
+      <b><font color="#006666">If</font></b> Gadget=0
+        <b><font color="#006666">Debug</font></b> &quot;Enter button -&quot;
+      <b><font color="#006666">ElseIf</font></b> Gadget=1
+        <b><font color="#006666">Debug</font></b> &quot;Enter button +&quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_MouseLeave</font>
+      <b><font color="#006666">If</font></b> Gadget=0
+        <b><font color="#006666">Debug</font></b> &quot;Leave button -&quot;
+      <b><font color="#006666">ElseIf</font></b> Gadget=1
+        <b><font color="#006666">Debug</font></b> &quot;Leave button +&quot;
+      <b><font color="#006666">EndIf</font></b>
+      
+    <font color="#006666">; Each time a button is left clicked
+</font>    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_LeftButtonDown</font>
+      Pressed = <font color="#924B72">#True</font>
+      
+      <b><font color="#006666">Select</font></b> Gadget
+        <b><font color="#006666">Case</font></b> 0 <font color="#006666">; Button &quot;-&quot;
+</font><font color="#006666">          paint</font>(0,1,&quot;-&quot;) <font color="#006666">; Paint the button &quot;-&quot; pushed
+</font>        <b><font color="#006666">Case</font></b> 1 <font color="#006666">; Button &quot;+&quot;
+</font><font color="#006666">          paint</font>(1,1,&quot;+&quot;) <font color="#006666">; Paint the button &quot;+&quot; pushed
+</font>      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_EventType_LeftButtonUp</font>
+      Pressed = <font color="#924B72">#False</font>
+<font color="#006666">      paint</font>(0,0,&quot;-&quot;)     <font color="#006666">; Paint the button &quot;-&quot; released
+</font><font color="#006666">      paint</font>(1,0,&quot;+&quot;)     <font color="#006666">; Paint the button &quot;+&quot; released
+</font>      
+  <b><font color="#006666">EndSelect</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">OnTimer</font>()
+  <b><font color="#006666">If</font></b> Pressed <font color="#006666">; Each time a button is left clicked and as long as it's clicked
+</font>    <b><font color="#006666">Select</font></b> Gadget
+      <b><font color="#006666">Case</font></b> 0 <font color="#006666">; Button &quot;-&quot;
+</font>        <b><font color="#006666">If</font></b> n&gt;Min
+         n-1
+<font color="#006666">         SetGadgetState</font>(2,<font color="#006666"> GetGadgetState</font>(2)-1) <font color="#006666">; ProgressBar down
+</font>        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">Case</font></b> 1 <font color="#006666">; Button &quot;+&quot;
+</font>        <b><font color="#006666">If</font></b> n&lt;Max
+         n+1
+<font color="#006666">         SetGadgetState</font>(2,<font color="#006666"> GetGadgetState</font>(2)+1) <font color="#006666">; ProgressBar up
+</font>        <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+    
+    <b><font color="#006666">Debug</font></b> n
+  <b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">; Open a window with some gadgets
+</font><font color="#006666">OpenWindow</font>(0, 0, 0, 400, 100, &quot;Please clic a looooong time please on +/-&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">CanvasGadget</font>(0, 10, 30, 32, 32)        <font color="#006666">; Fake button -
+</font><font color="#006666">CanvasGadget</font>(1, 400-32-10, 30, 32, 32) <font color="#006666">; Fake button +
+</font><font color="#006666">paint</font>(0,0,&quot;-&quot;)
+<font color="#006666">paint</font>(1,0,&quot;+&quot;)
+<font color="#006666">ProgressBarGadget</font>(2,52,30,296,32,Min,Max,<font color="#924B72">#PB_ProgressBar_Smooth</font>)
+
+<font color="#006666">AddWindowTimer</font>(0, 100, Delay) <font color="#006666">; Timer 100 ms
+</font>
+<font color="#006666">BindGadgetEvent</font>(0, @OnSpeedButtonEvent()) <font color="#006666">; Bind all button &quot;-&quot; events
+</font><font color="#006666">BindGadgetEvent</font>(1, @OnSpeedButtonEvent()) <font color="#006666">; Bind all button &quot;+&quot; events
+</font><font color="#006666">BindEvent</font>(<font color="#924B72">#PB_Event_Timer</font>, @OnTimer())    <font color="#006666">; Bind the timer event
+</font>
+<b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>(10) = <font color="#924B72">#PB_Event_CloseWindow</font>
+</font></pre>
+</body></html>

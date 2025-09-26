@@ -1,0 +1,267 @@
+<html><head><title>Les directives du compilateur</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les directives du compilateur</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#CompilerIf"><u>CompilerIf</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#CompilerSelect"><u>CompilerSelect</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#CompilerError"><u>CompilerError/CompilatorWarning</u></a></td>
+  </tr>
+    <tr>
+    <td align="center" vAlign="center" nowrap><a href="#EnableExplicit"><u>EnableExplicit<br>DisableExplicit</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#EnableASM"><u>EnableASM<br>DisableASM</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#DisablePureLibrary"><u>DisablePureLibrary</u></a></td>
+  </tr>
+    <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Constantes"><u>Constantes prédéfinies</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="CompilerIf"></a>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CompilerIf</font></b>  &lt;expression constante&gt;
+  ...
+[<b><font color="#006666">CompilerElseIf</font></b>]
+  ...
+[<b><font color="#006666">CompilerElse</font></b>]
+  ...
+<b><font color="#006666">CompilerEndIf</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Si &lt;expression constante&gt; est vrai alors le code 
+inclus dans la structure 'If' sera compilé, 
+sinon il sera totalement ignoré. <br>
+Cette directive permet de construire des 
+programmes multi-plateformes en personnalisant 
+des parties du code source en fonctions de 
+chaque système d'exploitation. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Linux</font>
+    <font color="#006666">; code spécifique Linux..</font>
+  <b><font color="#006666">CompilerElseIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Windows</font>
+    <font color="#006666">; code spécifique pour Windows</font>
+  <b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="CompilerSelect"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CompilerSelect</font></b> &lt;constante numérique&gt;
+  <b><font color="#006666">CompilerCase</font></b> &lt;constante numérique&gt;
+    ...
+  [<b><font color="#006666">CompilerElse</font></b>]
+    ...
+  [<b><font color="#006666">CompilerDefault</font></b>]
+    ...
+<b><font color="#006666">CompilerEndSelect</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Fonctionne comme un 
+<a href="../reference/select_endselect.html">Select : EndSelect</a> 
+classique en opérant une compilation conditionnelle. 
+<br>
+Cette directive permet de construire des 
+programmes multi-plateformes en personnalisant 
+des parties du code source en fonctions de 
+chaque système d'exploitation. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerSelect</font></b> <font color="#924B72">#PB_Compiler_OS</font>
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_OS_MacOS</font>
+      <font color="#006666">; du code spécifique à Mac OS X</font>
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_OS_Linux</font>
+      <font color="#006666">; du code spécifique à Linux</font>
+  <b><font color="#006666">CompilerEndSelect</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="CompilerError"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">CompilerError</font></b> &lt;message&gt;
+<b><font color="#006666">CompilerWarning</font></b> &lt;message&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Génère une erreur ou un avertissement du compilateur, comme si c'était une 
+erreur de syntaxe et affiche le message spécifié. Ceci peut être utile pour faire 
+des routines spécifiques et indiquer qu'elles ne sont pas disponibles pour un OS 
+particulier. 
+<br>
+Note: <b><font color="#006666">CompilerWarning</font></b> affiche des avertissements&quot; et le processus de compilation se poursuit, 
+alors que la commande <b><font color="#006666">CompilerError</font></b> arrête le processus de compilation. 
+
+</blockquote><p><b>Exemple:</b> Génère une erreur</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Linux</font>
+    <b><font color="#006666">CompilerError</font></b> &quot;Linux n'est pas supporté, désolé.&quot;
+  <b><font color="#006666">CompilerElse</font></b>
+    <b><font color="#006666">CompilerError</font></b> &quot;OS Supporté, vous pouvez me mettre en commentaire.&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Génère un avertissement</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> = <font color="#924B72">#PB_OS_Linux</font>
+    <b><font color="#006666">CompilerWarning</font></b> &quot;Linux n'est pas supporté, désolé.&quot;
+  <b><font color="#006666">CompilerElse</font></b>
+    <b><font color="#006666">CompilerWarning</font></b> &quot;OS Supporté, vous pouvez me mettre en commentaire.&quot;
+  <b><font color="#006666">CompilerEndIf</font></b>
+</font></pre>
+
+<br><hr><br>
+<a name="EnableExplicit"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">EnableExplicit</font></b>
+<b><font color="#006666">DisableExplicit</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Active ou désactive le mode explicite. 
+Quand il est actif, toutes les 
+<a href="../reference/variables.html">variables</a> qui ne 
+sont pas explicitement déclarées avec 
+<a href="../reference/define.html">Define</a>, 
+<a href="../reference/global.html">Global</a>, 
+<a href="../reference/protected.html">Protected</a> ou 
+<a href="../reference/static.html">Static</a> ne seront 
+pas acceptées par le compilateur et 
+génèreront une erreur. Cela peut aider à 
+éviter les erreurs de frappe. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">EnableExplicit</font></b>
+  
+  <b><font color="#006666">Define</font></b> a
+  
+  a = 20 <font color="#006666">; Ok, car déclaré avec 'Define'</font>
+  b = 10 <font color="#006666">; Erreur</font>
+</font></pre>
+
+<br><hr><br>
+<a name="EnableASM"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">EnableASM</font></b>
+<b><font color="#006666">DisableASM</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Active ou désactive l'assembleur en ligne. 
+Quand il est actif, toutes les commandes 
+assembleur sont incluses directement 
+dans le code source, pour plus d'informations 
+référez vous à la page 
+<a href="../reference/inlinedasm.html">L'assembleur en ligne</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Exemple assembleur x86</font>
+  <font color="#006666">;</font>
+  Test = 10
+  
+  <b><font color="#006666">EnableASM</font></b>
+    MOV dword [v_Test],20
+  <b><font color="#006666">DisableASM</font></b>
+  
+  <b><font color="#006666">Debug</font></b> Test <font color="#006666">; Affichera 20</font>
+</font></pre>
+
+<br><hr><br>
+<a name="DisablePureLibrary"></a>
+
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DisablePureLibrary</font></b> &lt;NomBibliotheque&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Désactive la PureLibrary spécifiée. Toutes ses commandes associées ne seront pas 
+disponibles lors de la compilation de ce programme. 
+Ceci est particulièrement utile lors de la création d'un 
+<a href="../reference/purelibrary.html">PureLibrary</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DisablePureLibrary</font></b> Engine3D
+
+<font color="#006666">  InitEngine3D</font>() <font color="#006666">; Erreur, commande non trouvée</font>
+</font></pre>
+
+<br><hr><br><br>
+<a name="Constantes"></a>
+
+</blockquote>
+<p><b>Constantes prédéfinies</b></p><blockquote>
+
+Le compilateur PureBasic déclare automatiquement 
+plusieurs constantes avant chaque compilation 
+pour donner plus d'informations sur l'environnement 
+de développement: 
+
+<pre><font face="Courier New, Courier, mono" size="2">    <font color="#924B72">#PB_Compiler_OS</font>: Permet de savoir sur quelle plateforme est exécuté le compilateur
+    <font color="#924B72">#PB_OS_Windows</font> : Le compilateur est exécuté sur Windows
+    <font color="#924B72">#PB_OS_Linux</font>   : Le compilateur est exécuté sur Linux
+    <font color="#924B72">#PB_OS_MacOS</font>   : Le compilateur est exécuté sur Mac OS X
+
+  <font color="#924B72">#PB_Compiler_Processor</font> : Détermine le type de processeur pour lequel le programme est créé. Il peut s'agir de l'un des éléments suivants:
+    <font color="#924B72">#PB_Processor_x86</font>     : Architecture de processeur x86 (aussi appelé IA-32 ou x86-32)
+    <font color="#924B72">#PB_Processor_x64</font>     : Architecture de processeur x86-64 (aussi appelé x64, AMD64 ou Intel64)
+    <font color="#924B72">#PB_Processor_arm32</font>   : Architecture de processeur  arm32
+    <font color="#924B72">#PB_Processor_arm64</font>   : Architecture de processeur arm64 (appelé M1 sur les ordinateurs Apple)
+
+  <font color="#924B72">#PB_Compiler_Backend</font> : Détermine quel type de compilateur est actuellement utilisé. Il peut s'agir de l'un des éléments suivants :
+    <font color="#924B72">#PB_Backend_Asm</font>    : Le compilateur assembleur génére le code.
+    <font color="#924B72">#PB_Backend_C</font>      : Le compilateur C génére le code.
+   
+  <font color="#924B72">#PB_Compiler_ExecutableFormat</font> : Détermine le format de l'exécutable. Il peut être l'un des suivants:
+    <font color="#924B72">#PB_Compiler_Executable</font> : Exécutable standard
+    <font color="#924B72">#PB_Compiler_Console</font>    : Exécutable console (Uniquement sur Windows, les autres OS utiliseront le format exécutable standard)
+    <font color="#924B72">#PB_Compiler_DLL</font>        : DLL (dynlib sur MacOS X et objet partagé sur Linux)
+
+    
+  <font color="#924B72">#PB_Compiler_Date</font>     : La date actuelle, au moment de la compilation, au format <a href="../date/index.html">date</a> PureBasic (heure locale).
+  <font color="#924B72">#PB_Compiler_File</font>     : Chemin complet et nom du fichier en cours de compilation, utile pour <a href="../reference/ide_debugger.html">debogguer</a>.
+  <font color="#924B72">#PB_Compiler_FilePath</font> : Chemin complet du fichier en cours de compilation, utile pour <a href="../reference/ide_debugger.html">debogguer</a>.
+  <font color="#924B72">#PB_Compiler_Line</font>     : Numéro de la ligne du fichier en cours de compilation, utile pour <a href="../reference/ide_debugger.html">debogguer</a>.
+  <font color="#924B72">#PB_Compiler_Procedure</font>: Nom de la procédure actuelle, si la ligne est à l'intérieur d'une <a href="../reference/procedures.html">procédure</a>.  
+  <font color="#924B72">#PB_Compiler_Module</font>   : Nom du module courant, si la ligne est à l'intérieur d'un <a href="../reference/module.html">module</a>.
+  <font color="#924B72">#PB_Compiler_Version</font>  : Version du compilateur, nombre entier sous la forme '420' pour la version 4.20.
+  <font color="#924B72">#PB_Compiler_Home</font>     : Chemin complet du répertoire PureBasic, utile pour localiser des <a href="../reference/includes.html">fichiers inclus</a>
+  <font color="#924B72">#PB_Compiler_Debugger</font> : Egal à 1 si <a href="../reference/ide_debugger.html">le débogueur</a> est activé, égal 0 sinon. Quand un exécutable est
+                          créé, le débogueur est toujours désactivé (cette constante sera égale à 0).
+  <font color="#924B72">#PB_Compiler_Thread</font>   : Egal à 1 si l'exécutable est compilé en mode 'multi-threadé', égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_Unicode</font>  : Egal à 1 si l'exécutable est compilé en mode <a href="../reference/unicode.html">unicode</a>, égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_LineNumbering</font> : Egal à 1 si l'exécutable est compilé avec l'option 'Activer le numéro de ligne pour <a href="../onerror/index.html">OnError</a>', égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_InlineAssembly</font>: Egal à 1 si l'exécutable est compilé avec l'option 'Activer <a href="../reference/inlinedasm.html">l'assembleur en ligne</a>', égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_EnableExplicit</font>: Egal à 1 si l'exécutable est compilé en mode 'explicit', égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_IsMainFile</font>    : Egal à 1 si l'exécutable en cours de compilation est le fichier principal, égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_IsIncludeFile</font> : Egal à 1 si l'exécutable en cours de compilation a été inclus par un autre fichier, égal à 0 sinon.
+  <font color="#924B72">#PB_Compiler_32Bit</font>    : Mis à 1 si le compilateur génère du code 32 bits, mis à 0 sinon.
+  <font color="#924B72">#PB_Compiler_64Bit</font>    : Mis à 1 si le compilateur génère du code 64 bits, mis à 0 sinon.
+  <font color="#924B72">#PB_Compiler_Optimizer</font>: Mis à 1 si le compilateur génère du code optimisé, mis à 0 sinon.
+  <font color="#924B72">#PB_Compiler_DPIAware</font> : Mis à 1 si le compilateur génère un exécutable compatible DPI, mis à 0 sinon.
+  
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/CompilerSystemData.pb.html">CompilerSystemData.pb</a>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

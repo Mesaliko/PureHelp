@@ -1,0 +1,78 @@
+<html><head><title>StrD</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StrD()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>StrD</b></font>(Valeur.d [, NombreDeDecimales])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Convertit un nombre à virgule en 
+double précision en une chaîne de 
+caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Valeur.d </i></td>
+<td width="90%"> 
+Le nombre à virgule à convertir. 
+
+</td></tr>
+<tr><td><i>NombreDeDecimales (optionnel)</i></td>
+<td> 
+Le nombre maximum de décimales, 
+avec la suppression des zéros à 
+droite, sinon le nombre sera 
+arrondi à 10 décimales. 
+<br>
+<br>
+Le nombre sera arrondi si 
+'NombreDeDecimales' est plus petit 
+que le nombre de décimales existantes 
+dans 'Valeur.d'. L'arrondi se fait au plus proche comme avec la fonction 
+<a href="../math/round.html">Round()</a> et l'option <font color="#924B72">#PB_Round_Nearest</font>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une chaîne de caractères 
+représentant la 'Valeur'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les nombres entiers signés doivent 
+être convertis avec <a href="str.html">Str()</a> et les 
+nombres entiers non signés avec 
+<a href="stru.html">StrU()</a>.<br>
+Il est possible d'omettre cette 
+commande lors de la concaténation 
+d'une chaîne et d'un 'double', cela 
+utilisera alors le comportement par 
+défaut de <a href="strd.html">StrD()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  valeur.d = 10.54
+  <b><font color="#006666">Debug</font></b> &quot;Résultat: &quot; +<font color="#006666"> StrD</font>(valeur)    <font color="#006666">; Sans le 2ème paramètre, le nombre flottant est arrondi à 10 décimales.</font>
+  <b><font color="#006666">Debug</font></b> &quot;Résultat: &quot; +<font color="#006666"> StrD</font>(valeur,2)  <font color="#006666">; Résultat avec deux décimales, la valeur est arrondie.</font>
+  <b><font color="#006666">Debug</font></b> &quot;Résultat: &quot; +<font color="#006666"> StrD</font>(valeur,0)  <font color="#006666">; Résultat sans décimales, la valeur est arrondie.</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="str.html">Str()</a>, 
+<a href="strf.html">StrF()</a>, 
+<a href="stru.html">StrU()</a>, 
+<a href="val.html">Val()</a>, 
+<a href="vald.html">ValD()</a>, 
+<a href="valf.html">ValF()</a>, 
+<a href="formatnumber.html">FormatNumber()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=str.html>Str()</a> - <a href=index.html>String Index</a> - <a href=strf.html>StrF()</a> -><br><br>
+
+</body></html>

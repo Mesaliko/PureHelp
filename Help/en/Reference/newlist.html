@@ -1,0 +1,71 @@
+<html><head><title>NewList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">NewList</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">NewList</font></b> name.&lt;type&gt;()      
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">NewList</font></b> allows to declare a new dynamic list. Each element of the list is allocated dynamically. 
+There are no element limits, so there can be as many as needed. A list can have any <a href="../reference/variables.html">Variables</a> standard or <a href="../reference/structures.html">structured</a> type. 
+To view all commands used to manage lists, see the <a href="../list/index.html">List</a> library. <br>
+<br>
+The new list are always locals, which means <a href="../reference/global.html">Global</a> or <a href="../reference/shared.html">Shared</a> commands 
+have to be used if a list declared in the main source need to be used in procedures. 
+It is also possible to pass a list as parameter to a <a href="../reference/procedures.html">procedure</a> by using the 
+keyword <b><font color="#006666">List</font></b>. 
+<br>
+<br>
+For fast swapping of list contents the <a href="../reference/others.html">Swap</a> keyword is available. 
+
+</blockquote><p><b>Example:</b> Simple list</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">MyList</font>()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 10
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 20
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">MyList</font>())
+<font color="#006666">  MyList</font>() = 30
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">MyList</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">MyList</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Example:</b> List as procedure parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Test</font>()
+  
+  <font color="#006666">; Adding the first 2 items to the list:</font>
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>() = 1
+<font color="#006666">  AddElement</font>(<font color="#006666">Test</font>())
+<font color="#006666">  Test</font>() = 2
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">DebugList</font>(count, <b><font color="#006666">List</font></b> <font color="#006666">ParameterList</font>())
+    <font color="#006666">; Adding further items to the list:</font>
+    <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> count
+<font color="#006666">      AddElement</font>(<font color="#006666">ParameterList</font>())
+<font color="#006666">      ParameterList</font>() = i
+    <b><font color="#006666">Next</font></b> 
+    
+    <font color="#006666">; Display all items in the list:</font>
+    i = 1
+    <b><font color="#006666">ForEach</font></b> <font color="#006666">ParameterList</font>() 
+<font color="#006666">      MessageRequester</font>(&quot;List&quot;, &quot;Entry&quot; +<font color="#006666"> Str</font>(i) + &quot; = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ParameterList</font>()))
+      i + 1
+    <b><font color="#006666">Next</font></b>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; Add another 3 items to the list and display the list contents:</font>
+<font color="#006666">  DebugList</font>(3,<font color="#006666"> Test</font>())
+</font></pre>
+</blockquote>
+</font></body></html>

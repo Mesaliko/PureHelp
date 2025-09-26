@@ -1,0 +1,85 @@
+<html><head><title>BeginVectorLayer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BeginVectorLayer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>BeginVectorLayer</b></font>([Alpha])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Beginnt einen neuen leeren Layer (Schicht) oberhalb der aktuellen Vektorzeichnen-Ausgabe. 
+Alle nachfolgenden Zeichenoperationen werden auf diesem Layer ausgeführt, bis 
+<a href="endvectorlayer.html">EndVectorLayer()</a> aufgerufen wird. Dieser Befehl speichert auf die gleiche Weise wie 
+<a href="savevectorstate.html">SaveVectorState()</a> auch den aktuelen Zeichenstatus. 
+Es können mehrere Layer erstellt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Alpha (optional)</i></td>
+<td width="90%"> 
+Definiert die Alpha-Transparenz des neuen Vektor-Layers. 
+Erlaubte Werte reichen von 0 (vollständig transparent) bis 255 (völlig undurchsichtig). 
+Der Standard ist 255 (völlig undurchsichtig). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die zum Erstellen des temporären Layers benötigten Ressourcen hängen von der Größe des 
+aktuellen <a href="clippath.html">Clipping-Pfads</a> ab. Um Ressourcen zu sparen und die 
+Zeichen-Performance zu erhöhen, ist es daher empfehlenswert, einen Clipping-Pfad 
+festzulegen, der nur den Bereich abdeckt, in welchem der temporäre Layer auch 
+Zeichnungen beinhaltet. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+
+      <font color="#006666">; Halb-transparentes Zeichnen auf dem Basis-Layer</font>
+<font color="#006666">      AddPathCircle</font>(75, 100, 60)      
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 127))
+<font color="#006666">      FillPath</font>()      
+<font color="#006666">      AddPathCircle</font>(125, 100, 60)
+<font color="#006666">      VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 127))
+<font color="#006666">      FillPath</font>()    
+      
+      <font color="#006666">; Undurchsichtiges Zeichnen auf einem halb-transparenten Layer</font>
+<font color="#006666">      BeginVectorLayer</font>(127)
+<font color="#006666">        AddPathCircle</font>(275, 100, 60)    
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(255, 0, 0, 255))
+<font color="#006666">        FillPath</font>()        
+<font color="#006666">        AddPathCircle</font>(325, 100, 60)
+<font color="#006666">        VectorSourceColor</font>(<font color="#006666">RGBA</font>(0, 0, 255, 255))
+<font color="#006666">        FillPath</font>()    
+<font color="#006666">      EndVectorLayer</font>()
+    
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/beginvectorlayer.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="endvectorlayer.html">EndVectorLayer()</a>, <a href="savevectorstate.html">SaveVectorState()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addpathtext.html>AddPathText()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=clippath.html>ClipPath()</a> -><br><br>
+
+</body></html>

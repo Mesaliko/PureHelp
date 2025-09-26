@@ -1,0 +1,52 @@
+<html><head><title>GetFunction</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetFunction()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GetFunction</b></font>(#Library, FunctionName$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Checks if the library, previously opened using the <a href="openlibrary.html">OpenLibrary()</a> function, 
+contains the given function and returns the function pointer. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Library</i></td>
+<td width="90%"> 
+The number of the library which contains the functions to find. This number 
+must be identical to that used previously with <a href="openlibrary.html">OpenLibrary()</a>. 
+
+</td></tr>
+<tr><td><i>FunctionName$</i></td>
+<td> 
+The name of the function from which to get the pointer. 
+The function name is case sensitive. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the address to the function in the library on success and zero 
+if the library does not contain a function with that name. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The function can be called by its address using <a href="../reference/prototypes.html">prototypes</a>. The functions 
+<a href="callfunctionfast.html">CallFunctionFast()</a> and <a href="callcfunctionfast.html">CallCFunctionFast()</a> can also be used for that, but prototypes are the recommended method 
+as they are more flexible. 
+<br>
+<br>
+See the <a href="../reference/prototypes.html">prototype</a> section for an example. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getfunctionentry.html">GetFunctionEntry()</a>, <a href="callfunctionfast.html">CallFunctionFast()</a>, <a href="callcfunctionfast.html">CallCFunctionFast()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=examinelibraryfunctions.html>ExamineLibraryFunctions()</a> - <a href=index.html>Library Index</a> - <a href=getfunctionentry.html>GetFunctionEntry()</a> -><br><br>
+
+</body></html>

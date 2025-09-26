@@ -1,0 +1,230 @@
+<html><head><title>Inline x86 ASM</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Inline x86 ASM</font></b></p>
+
+<p><b>Einführung</b></p><blockquote>
+
+Die Verwendung von Inline-Assemblercode ist nicht dieselbe, je nachdem, ob das ASM-Backend oder das C-Backend verwendet wird. 
+Mit dem Compiler, der das ASM-Backend verwendet, erlaubt PureBasic das direkte Einfügen von allen x86 Assembler Befehlen 
+(einschließlich MMX- und FPU-Befehlen) in den Sourcecode, so als wäre es ein echter Assembler. Und es bietet 
+noch mehr: Sie können direkt alle <a href="../reference/variables.html">Variablen</a> oder <a href="../reference/memory.html">Zeiger</a> in den 
+Assembler Schlüsselwörtern benutzen, Sie können beliebige Assembler Befehle auf derselben Zeile verwenden, ... 
+
+Auf Windows und Linux verwendet PureBasic <b>fasm</b> (<a href="http://flatassembler.net/">http://flatassembler.net</a>), wenn Sie also weitere Informationen über den Syntax wünschen, lesen Sie einfach die <b>fasm</b> Anleitung. <br>
+Auf OS X verwendet PureBasic <b>yasm</b> (<a href="http://yasm.tortall.net/">http://yasm.tortall.net/</a>), wenn Sie also weitere Informationen über den Syntax wünschen, lesen Sie einfach die <b>yasm</b> Anleitung. <br>
+<br>
+Zum Aktivieren des Inline-Assemblers verwenden Sie die Compiler-Direktiven <a href="../reference/compilerdirectives.html">EnableASM</a> 
+und <a href="../reference/compilerdirectives.html">DisableASM</a>. <br>
+Es ist möglich, in der IDE mit der <a href="../reference/ide_compiler.html">Compiler-Option</a> &quot;InlineASM Syntax-Einfärbung einschalten&quot; 
+die ASM-Syntaxeinfärbung zu aktivieren. <br>
+
+</blockquote>
+<p><b>Regeln</b></p><blockquote>
+
+
+Sie müssen einige Regeln genau beachten, wenn Sie ASM im Basic Code einbinden möchten: <br>
+<br>
+- Die benutzten <a href="../reference/variables.html">Variablen</a> oder <a href="../reference/memory.html">Zeiger</a> müssen <b>vor</b> ihrer Benutzung in einem Assembler Schlüsselwort deklariert werden. 
+Ihre Namen in Assembler sind 'v_variablename' und 'p_pointername', und in einer <a href="../reference/procedures.html">Prozedur</a> lauten ihre Namen 
+'p.v_variablename' und 'p.p_pointername'. 
+<br>
+- Sprungmarken (Labels): Die Sprungmarken müssen in Kleinbuchstaben referenziert werden, wenn der Inline-ASM verwendet wird. 
+Wenn Sie auf eine <a href="../reference/general_rules.html">Sprungmarke</a> verweisen, müssen Sie das Präfix 'l_' vor dem Namen einfügen. 
+<br>
+Wenn die Sprungmarke in einer <a href="../reference/procedures.html">Prozedur</a> definiert wird, dann lautet ihr Präfix 'll_procedurename_', in Kleinbuchstaben. 
+<br>
+- Wenn Sie auf einen <a href="../reference/module.html">Module</a>-Eintrag verweisen, dann müssen Sie das Präfix 'module_name.l_' (alles in 
+Kleinbuchstaben) vor dem Eintrag einfügen. 
+<br>
+Wenn die Sprungmarke in einer <a href="../reference/procedures.html">Prozedur</a> innerhalb eines <a href="../reference/module.html">Moduls</a> definiert wird, dann lautet ihr Präfix 'module_name.ll_procedurename_', in Kleinbuchstaben. 
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DeclareModule</font></b> MyModule
+    LabelDeclareModule:  <font color="#006666">; sein Name ist mymodule.l_labeldeclaremodule:</font>
+    <b><font color="#006666">Declare</font></b> <font color="#006666">Init</font>()
+  <b><font color="#006666">EndDeclareModule</font></b>
+
+  <b><font color="#006666">Module</font></b> MyModule
+    <b><font color="#006666">Procedure</font></b> <font color="#006666">Init</font>() 
+      LabelModuleProcedure:  <font color="#006666">; sein Name ist mymodule.ll_init_labelmoduleprocedure: </font>
+      <b><font color="#006666">Debug</font></b> &quot;InitFerrari()&quot;  
+    <b><font color="#006666">EndProcedure</font></b>
+  
+    LabelModule1:  <font color="#006666">; sein Name ist mymodule.l_labelmodule1:</font>
+  <b><font color="#006666">EndModule</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Test </font>(*Pointer, Variable)
+    TokiSTART:  <font color="#006666">; sein Name ist ll_test_tokistart:</font>
+  
+    ! MOV dword [p.p_Pointer], 20
+    ! MOV dword [p.v_Variable], 30
+    <b><font color="#006666">Debug</font></b> *Pointer  <font color="#006666">; sein Name ist p.p_Pointer</font>
+    <b><font color="#006666">Debug</font></b> Variable  <font color="#006666">; sein Name ist p.v_Variable</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  VAR=1                       <font color="#006666">; sein Name ist v_VAR</font>
+  *Pointt=<font color="#006666">AllocateMemory</font>(10)  <font color="#006666">; sein Name ist p_Pointt</font>
+  
+  MyModule::<font color="#006666">Init</font>()
+<font color="#006666">  Test</font>(0,0)
+
+  Label1:  <font color="#006666">; sein Name ist l_label1:</font>
+  
+  !jmp l_labelend  ; Eine Anweisung in Assembler muss die o.g. Regeln beachten. Hier ist es l_namelabel
+  <font color="#006666">;...</font>
+  LabelEnd:  <font color="#006666">; sein Name ist l_labelend:</font>
+</font></pre>
+
+- Die Fehler in einem ASM Programmteil werden nicht von PureBasic gemeldet, jedoch von FAsm. Überprüfen Sie einfach 
+Ihren Programmcode, wenn ein solcher Fehler auftritt. <br>
+- Bei eingeschaltetem InlineASM können Sie keine ASM Schlüsselwörter als Namen für Sprungmarken benutzen. <br>
+- Auf x86-Prozessoren, die zur Verfügung stehenden flüchtigen Register sind: eax, edx und ecx, xmm0, xmm1, xmm2 und xmm3. Alle anderen müssen immer reserviert bleiben. <br>
+- Auf x64-Prozessoren, die zur Verfügung stehenden flüchtigen Register sind: rax, rcx, rdx, r8, r9, xmm0, xmm1, xmm2 und xmm3. Alle anderen müssen immer reserviert bleiben. <br>
+- Nur auf Windows: Eine ASM Hilfe-Datei kann <a href="http://www.purebasic.com/download/AsmHelp.zip">hier</a> geladen werden. Wenn Sie die 'ASM.HLP' ins 'Help/' Verzeichnis von PureBasic 
+verschieben, können Sie nach Drücken von F1 auch Hilfe zu ASM Schlüsselwörtern erhalten. (Hinweis: Dieses Feature 
+ist nur bei aktiviertem InlineASM eingeschalten.) <br>
+<br>
+Bei Benutzung des Assemblers in einer Prozedur müssen Sie auf verschiedene wichtige Dinge achten: <br>
+<br>
+- Um den Inhalt des 'eax' Registers (oder 'rax' auf x64) direkt zurückzugeben, benutzen Sie einfach <b><font color="#006666">ProcedureReturn</font></b> ohne einen weiteren Ausdruck. 
+Dies lässt den Inhalt des 'eax' Registers unangetastet und benutzt ihn als Rückgabewert. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b>.l <font color="#006666">MyTest</font>()
+    MOV eax, 45
+    <b><font color="#006666">ProcedureReturn</font></b>  <font color="#006666">; Der zurückgegebene Wert wird 45 sein</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+- Lokale <a href="../reference/variables.html">Variablen</a> in PureBasic werden direkt durch den Stack-Pointer indexiert, was bedeutet: 
+Wenn der Stack-Pointer durch eine ASM Anweisung (wie PUSH, POP etc.) verändert wird, dann wird 
+der Variablen-Index fehlerhaft sein und ein direkter Verweis auf Variablen funktioniert nicht mehr. 
+<br>
+<br>
+- Durch die Verwendung des '!' Zeichens am Zeilenbeginn ist es möglich, dem Assembler eine Zeile 
+Assembler-Code direkt zu übergeben, ohne dass diese erst durch den Compiler verarbeitet wird. 
+Dies ermöglicht vollen Zugriff auf die Assembler-Direktiven. Bei der Nutzung dieses Features 
+kann auf lokale Variablen durch die Verwendung der Schreibweise 'p.v_Variablenname' für eine 
+reguläre <a href="../reference/variables.html">Variable</a> oder 'p.p_Variablenname' für einen <a href="../reference/memory.html">Zeiger</a> 
+verwiesen werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Test</font>(*Pointer, Variable)
+    ! MOV dword [p.p_Pointer], 20
+    ! MOV dword [p.v_Variable], 30
+    <b><font color="#006666">Debug</font></b> *Pointer
+    <b><font color="#006666">Debug</font></b> Variable
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  Test</font>(0, 0)
+</font></pre>
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+<a href="../Examples/AsmInline.pb.html">AsmInline.pb</a>
+
+
+</blockquote>
+<p><b>"Funktionen des Inline-Assemblers mit dem Compiler unter Verwendung des C-Backends"</b></p><blockquote>
+
+
+Sie können den gcc Syntax verwenden: <a href="https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html">https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html</a>. 
+
+</blockquote><p><b>Beispiel:</b> Pi</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">pi   <b><font color="#006666">Procedure</font></b>.d <font color="#006666">get_pi</font>()
+    
+    <b><font color="#006666">Define</font></b>.d pi
+    
+    !asm (
+    !    &quot;fldpi\n&quot;
+    !    &quot;fstpl   %[v_pi]\n&quot;
+    !    :[v_pi]&quot;=m&quot;(v_pi)::
+    !);
+  
+    <b><font color="#006666">ProcedureReturn</font></b> pi
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Define</font></b>.d n
+  n=<font color="#006666">get_pi</font>()
+  <b><font color="#006666">Debug</font></b> n
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> bswap</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">bswap</font>(v.l) 
+    <b><font color="#006666">Protected</font></b> ret.l 
+    <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Backend</font> = <font color="#924B72">#PB_Backend_C</font> 
+      !&quot;.intel_syntax noprefix&quot;;
+      !&quot;mov eax, v_v&quot;;
+      !&quot;bswap eax&quot;; 
+      !&quot;mov v_ret, eax&quot;;
+    <b><font color="#006666">CompilerElse</font></b> 
+      !mov eax, [p.v_v]
+      !bswap eax 
+      !mov [p.v_ret],eax 
+    <b><font color="#006666">CompilerEndIf</font></b> 
+    <b><font color="#006666">ProcedureReturn</font></b> ret 
+  <b><font color="#006666">EndProcedure</font></b> 
+
+  x.i = $FF000000 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Hex</font>(x),8,&quot;0&quot;)
+  x =<font color="#006666"> bswap</font>(x) 
+  <b><font color="#006666">Debug</font></b> <font color="#006666">RSet</font>(<font color="#006666">Hex</font>(x),8,&quot;0&quot;)
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Fibonacci</p><blockquote>
+
+
+Procedure.q fib(ub.l, *f) 
+If (ub&lt;3) 
+ProcedureReturn 1 
+EndIf 
+;  !set_dpfpu(); 
+!asm ( 
+!    &quot;mov %[p_f], %%rax;&quot; 
+!    &quot;fldz;&quot; 
+!    &quot;fistl (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;fld1;&quot; 
+!    &quot;fistl (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;mov %[v_ub], %%ecx;&quot; 
+!    &quot;sub $2, %%ecx;&quot; 
+!    &quot;fib2:&quot; 
+!    &quot;fxch %%st(1);&quot; 
+!    &quot;fadd %%st(1),%%st(0);&quot; 
+!    &quot;fld %%st(0);&quot; 
+!    &quot;fistpq (%%rax);&quot; 
+!    &quot;add $8, %%rax;&quot; 
+!    &quot;dec %%ecx;&quot; 
+!    &quot;jg fib2;&quot; 
+!    &quot;fstp %%st(0);&quot; 
+!    &quot;fstp %%st(0);&quot; 
+!     :[p_f]&quot;=m&quot;(p_f) 
+!     :[v_ub]&quot;m&quot;(v_ub) 
+!     :&quot;rax&quot;,&quot;ecx&quot; 
+!); 
+ProcedureReturn 
+EndProcedure 
+
+Dim fibonacci.q(20) 
+n=20 
+fib(n+1, @fibonacci(0)) 
+For i.l=0 To n 
+Debug fibonacci(i) 
+Next 
+<pre><font face="Courier New, Courier, mono" size="2">
+</font></pre>
+
+<br><a href="../Examples/AsmInlineBackendC.pb.html">AsmInlineBackendC.pb</a>
+</blockquote>
+</font></body></html>

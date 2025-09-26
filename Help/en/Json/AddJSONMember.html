@@ -1,0 +1,59 @@
+<html><head><title>AddJSONMember</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddJSONMember()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>AddJSONMember</b></font>(JSONValue, Key$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Add a new member to a JSON value of <a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Object</font>. 
+If a member with the specified key already exists, it will be replaced. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValue</i></td>
+<td width="90%"> 
+The JSON value. The value must be of type <font color="#924B72">#PB_JSON_Object</font>. 
+
+</td></tr>
+<tr><td><i>Key$</i></td>
+<td> 
+The key for the new member. If a member with the same key exists in the object, 
+it will be replaced. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the address of the added JSON member value. 
+The newly added value initially has type <font color="#924B72">#PB_JSON_Null</font>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+    ObjectValue =<font color="#006666"> SetJSONObject</font>(<font color="#006666">JSONValue</font>(0))
+    
+    FirstName =<font color="#006666"> AddJSONMember</font>(ObjectValue, &quot;FirstName&quot;)
+<font color="#006666">    SetJSONString</font>(FirstName, &quot;John&quot;)
+    
+    LastName =<font color="#006666"> AddJSONMember</font>(ObjectValue, &quot;LastName&quot;)
+<font color="#006666">    SetJSONString</font>(LastName, &quot;Smith&quot;)    
+    
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="removejsonmember.html">RemoveJSONMember()</a>, 
+<a href="clearjsonmembers.html">ClearJSONMembers()</a>, <a href="getjsonmember.html">GetJSONMember()</a>, <a href="examinejsonmembers.html">ExamineJSONMembers()</a>, <a href="jsonobjectsize.html">JSONObjectSize()</a>, 
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addjsonelement.html>AddJSONElement()</a> - <a href=index.html>Json Index</a> - <a href=catchjson.html>CatchJSON()</a> -><br><br>
+
+</body></html>

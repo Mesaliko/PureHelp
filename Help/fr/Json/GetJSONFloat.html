@@ -1,0 +1,65 @@
+<html><head><title>GetJSONFloat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetJSONFloat()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.f = <font color="#006666"><b>GetJSONFloat</b></font>(JSONValeur)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie un nombre décimal simple 
+précision ('Float') d'une valeur JSON de 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Number</font>. 
+<br>
+<br>
+Une valeur JSON peut être égale à un 
+nombre en utilisant <a href="setjsondouble.html">SetJSONDouble()</a>, 
+<a href="setjsonfloat.html">SetJSONFloat()</a>, <a href="setjsoninteger.html">SetJSONInteger()</a> ou 
+<a href="setjsonquad.html">SetJSONQuad()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+<br>
+<br>
+La valeur doit être de type 
+<font color="#924B72">#PB_JSON_Number</font>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le nombre décimal simple précision 
+('Float') 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ParseJSON</font>(0, &quot;[1, 1.23, 1.23e-3]&quot;)
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONFloat</font>(<font color="#006666">GetJSONElement</font>(<font color="#006666">JSONValue</font>(0), 0))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONFloat</font>(<font color="#006666">GetJSONElement</font>(<font color="#006666">JSONValue</font>(0), 1))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONFloat</font>(<font color="#006666">GetJSONElement</font>(<font color="#006666">JSONValue</font>(0), 2))
+  
+  <font color="#006666">; Resultat : 1.0</font>
+  <font color="#006666">;            1.23000001907349</font>
+  <font color="#006666">;            0.0012300000526</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setjsondouble.html">SetJSONDouble()</a>, <a href="setjsonfloat.html">SetJSONFloat()</a>, 
+<a href="setjsoninteger.html">SetJSONInteger()</a>, <a href="setjsonquad.html">SetJSONQuad()</a>, 
+<a href="getjsonboolean.html">GetJSONBoolean()</a>, <a href="getjsondouble.html">GetJSONDouble()</a>, 
+<a href="getjsonelement.html">GetJSONElement()</a>, <a href="getjsoninteger.html">GetJSONInteger()</a>, 
+<a href="getjsonmember.html">GetJSONMember()</a>, <a href="getjsonstring.html">GetJSONString()</a>, 
+<a href="getjsonquad.html">GetJSONQuad()</a>, <a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getjsonelement.html>GetJSONElement()</a> - <a href=index.html>Json Index</a> - <a href=getjsoninteger.html>GetJSONInteger()</a> -><br><br>
+
+</body></html>

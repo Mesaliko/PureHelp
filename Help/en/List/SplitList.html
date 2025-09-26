@@ -1,0 +1,83 @@
+<html><head><title>SplitList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SplitList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SplitList</b></font>(SourceList(), DestinationList() [, KeepCurrent])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Moves the elements in SourceList() from the current element onwards to the DestinationList(). 
+This is a fast operation because the element data itself is not moved to split the list. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>SourceList()</i></td>
+<td width="90%"> 
+The list from which the elements will be split. The current element of this list specifies 
+the point at which to split the list. If there is no current element, then all elements remain in SourceList(). 
+
+</td></tr>
+<tr><td><i>DestinationList()</i></td>
+<td> 
+The list to move the elements to. Any existing elements in this list are deleted before 
+the new elements are added. 
+
+</td></tr>
+<tr><td><i>KeepCurrent (optional)</i></td>
+<td> 
+Whether the current item in SourceList() remains in SourceList() or is moved to DestinationList(). 
+If this parameter is <font color="#924B72">#True</font>, then the current element remains in SourceList(). 
+If it is <font color="#924B72">#False</font> (default), then the current element is moved to DestinationList(). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If 'KeepCurrent' is set to <font color="#924B72">#True</font> then the new current element in SourceList() will be the previous element of 
+the list. If there is no previous element then the list will no longer have a current element after this function returns. 
+The DestinationList() will have no current element. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">NewList</font></b> <font color="#006666">B</font>()
+  
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">A</font>())
+<font color="#006666">    A</font>() = i
+  <b><font color="#006666">Next</font></b> i
+  
+  <font color="#006666">; split A() at element 5 and move the remaining elements to B()</font>
+<font color="#006666">  SelectElement</font>(<font color="#006666">A</font>(), 5)
+<font color="#006666">  SplitList</font>(<font color="#006666">A</font>(),<font color="#006666"> B</font>())
+  
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- A() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">A</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">A</font>()
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">Debug</font></b> &quot; -- B() -- &quot;
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">B</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">B</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="mergelists.html">MergeLists()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=selectelement.html>SelectElement()</a> - <a href=index.html>List Index</a> - <a href=swapelements.html>SwapElements()</a> -><br><br>
+
+
+</blockquote>
+</font></body></html>

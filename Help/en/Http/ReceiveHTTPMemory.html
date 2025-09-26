@@ -1,0 +1,70 @@
+<html><head><title>ReceiveHTTPMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReceiveHTTPMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Buffer = <font color="#006666"><b>ReceiveHTTPMemory</b></font>(URL$ [, Flags [, UserAgent$]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Download a file to a new memory buffer from the given URL$. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>URL$</i></td>
+<td width="90%"> 
+The URL to download from. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_HTTP_Asynchronous</font>: starts the download asynchronously. To get the memory buffer address use <a href="finishhttp.html">FinishHTTP()</a>.
+  <font color="#924B72">#PB_HTTP_NoRedirect</font>  : don't follow automatic redirections.
+</font></pre>
+
+</td></tr>
+<tr><td><i>UserAgent$ (optional)</i></td>
+<td> 
+Change the user agent for the HTTP request. Default user agent is set to 
+&quot;Mozilla/5.0 Gecko/41.0 Firefox/41.0&quot; for maximum compatibility. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the new memory buffer address if the download was successful, zero otherwise. <a href="../memory/memorysize.html">MemorySize()</a> can be 
+used to get the size of the downloaded item. The memory buffer needs 
+to be freed with <a href="../memory/freememory.html">FreeMemory()</a> once finished using it. If <font color="#924B72">#PB_HTTP_Asynchronous</font> 
+was specified, it returns the 'HttpConnection' value needed for <a href="httpprogress.html">HTTPProgress()</a>, 
+<a href="aborthttp.html">AbortHTTP()</a> and <a href="finishhttp.html">FinishHTTP()</a>. When using <font color="#924B72">#PB_HTTP_Asynchronous</font>, <a href="finishhttp.html">FinishHTTP()</a> needs to be called 
+when the download is finished (successfully or not). 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux, 'libcurl' needs to be installed to have this command working (most of Linux 
+distributions comes with it already installed). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Buffer =<font color="#006666"> ReceiveHTTPMemory</font>(&quot;http://www.purebasic.com/index.php&quot;)
+  <b><font color="#006666">If</font></b> *Buffer
+    Size =<font color="#006666"> MemorySize</font>(*Buffer)
+    <b><font color="#006666">Debug</font></b> &quot;Content: &quot; +<font color="#006666"> PeekS</font>(*Buffer, Size, <font color="#924B72">#PB_UTF8</font>|<font color="#924B72">#PB_ByteLength</font>)
+<font color="#006666">    FreeMemory</font>(*Buffer)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="urlencoder.html">URLEncoder()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=receivehttpfile.html>ReceiveHTTPFile()</a> - <a href=index.html>Http Index</a> - <a href=seturlpart.html>SetURLPart()</a> -><br><br>
+
+</body></html>

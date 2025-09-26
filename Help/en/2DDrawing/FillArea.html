@@ -1,0 +1,82 @@
+<html><head><title>FillArea</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FillArea()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>FillArea</b></font>(x, y, OutlineColor [, FillColor])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Fill an arbitrary area starting from x,y position until the 
+OutlineColor is encountered. This is useful for filling any kind of shape. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x, y</i></td>
+<td width="90%"> 
+The location at which the filling should start. 
+
+</td></tr>
+<tr><td><i>OutlineColor</i></td>
+<td> 
+The color which should be considered the border to stop the filling. 
+If this parameter is set to -1 then the area defined by the color 
+found at the (x,y) coordinates will be filled, and filling stops at any color that 
+differs from the starting point. 
+<br>
+<br>
+On 32-bit images, the alpha channel is ignored when 
+determining whether a pixel counts as a border pixel or not. 
+
+</td></tr>
+<tr><td><i>FillColor (optional)</i></td>
+<td> 
+The color to be used for filling the pixels. If this parameter is not specified, the default color 
+set with <a href="frontcolor.html">FrontColor()</a> will be used. 
+This color can be in <a href="../2ddrawing/rgb.html">RGB</a> or <a href="../2ddrawing/rgba.html">RGBA</a> format. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command does not work with <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 300, &quot;2DDrawing Example&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 300, 300) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0, 0, 300, 300,<font color="#006666"> RGB</font>(255, 255, 255))
+
+<font color="#006666">      Circle</font>(150, 150, 125 ,$00FF00)
+<font color="#006666">      Circle</font>(150, 150, 120 ,$FF0000)
+<font color="#006666">      LineXY</font>(30, 150, 270, 150, $FFFFFF)
+<font color="#006666">      FillArea</font>(150, 155, -1, $0000FF) <font color="#006666">; Replace -1 by $00FF00, and compare the result</font>
+
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 300, 300,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/fillarea.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="frontcolor.html">FrontColor()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=ellipticalgradient.html>EllipticalGradient()</a> - <a href=index.html>2DDrawing Index</a> - <a href=frontcolor.html>FrontColor()</a> -><br><br>
+
+</body></html>

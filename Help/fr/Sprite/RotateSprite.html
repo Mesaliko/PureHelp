@@ -1,0 +1,84 @@
+<html><head><title>RotateSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RotateSprite()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>RotateSprite</b></font>(#Sprite, Angle.f, Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Rotation d'un Sprite. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le sprite à utiliser. 
+
+</td></tr>
+<tr><td><i>Angle.f</i></td>
+<td> 
+Angle de rotation, en degrés, dans 
+le sens des aiguilles d'une montre, 
+de 0 à 360. <br>
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+'Mode' peut prendre les valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Absolute</font>: L'angle prend la valeur de 'Angle'.
+  <font color="#924B72">#PB_Relative</font>: L'angle est ajouté à la valeur précédente.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+
+<font color="#006666">LoadSprite</font>(0,<font color="#924B72">#PB_Compiler_Home</font> +&quot;Examples/Sources/Data/PureBasicLogo.bmp&quot;)  
+
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 2*360 <b><font color="#006666">Step</font></b> 10
+<font color="#006666">  RotateSprite</font>(0, i,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  DisplaySprite</font>(0, 250, 260)
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  Delay</font>(100)
+<b><font color="#006666">Next</font></b> i
+
+<b><font color="#006666">For</font></b> i=2*360 <b><font color="#006666">To</font></b> 0 <b><font color="#006666">Step</font></b> -10
+<font color="#006666">  RotateSprite</font>(0, i,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  DisplaySprite</font>(0, 250, 260)
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  Delay</font>(100)
+<b><font color="#006666">Next</font></b> i
+
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 360 <b><font color="#006666">Step</font></b> 10
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+<font color="#006666">  RotateSprite</font>(0, i,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  DisplaySprite</font>(0, 250, 260)
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  Delay</font>(100)
+<b><font color="#006666">Next</font></b> i
+
+<b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 360 <b><font color="#006666">Step</font></b> 30
+<font color="#006666">  ClearScreen</font>(<font color="#006666">RGB</font>(0,0,0))
+<font color="#006666">  RotateSprite</font>(0, i,<font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  DisplaySprite</font>(0, 250, 260)
+<font color="#006666">  FlipBuffers</font>()
+<font color="#006666">  Delay</font>(100)
+<b><font color="#006666">Next</font></b> i
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="transformsprite.html">TransformSprite()</a>, <a href="zoomsprite.html">ZoomSprite()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=loadsprite.html>LoadSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=savesprite.html>SaveSprite()</a> -><br><br>
+
+</body></html>

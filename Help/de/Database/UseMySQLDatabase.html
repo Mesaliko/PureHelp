@@ -1,0 +1,73 @@
+<html><head><title>UseMySQLDatabase</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UseMySQLDatabase()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>UseMySQLDatabase</b></font>([BibliothekName$])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Initialisiert die MySQL und MariaDB Datenbank-Programmumgebung zur weiteren Benutzung. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>BibliothekName$ (optional)</i></td>
+<td width="90%"> 
+Dateiname (und ggf. Pfad) der zu verwendenden dynamischen Bibliothek. Da die meisten Linux-Distributionen mit 
+paketierter libmysql.so ausgeliefert werden, kann sie auf den richtigen Namen gesetzt werden, sodass die 
+libmaria.so nicht mit der ausführbaren Datei gepackt werden muss. Wenn dieser Parameter nicht angegeben wird, 
+werden 'libmariadb.dll' (Windows), 'libmariadb.so' (Linux) oder 'libmariadb.dylib' (OS X) verwendet. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt <font color="#924B72">#True</font> zurück, wenn die MySQL-Umgebung erfolgreich initialisiert wurde, andernfalls wird <font color="#924B72">#False</font> zurückgegeben. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+MySQL und MariaDB (ein OpenSource-Zweig von MySQL) sind leistungsfähige, servergestützte Datenbankmanager, 
+die sehr große Datenbanken und hohe Parallelität unterstützen. PureBasic nutzt die OpenSource-Bibliothek 
+MariaDB zur nahtlosen Verbindung von MySQL- und MariaDB-Datenbanken. Diese können ohne zusätzliche Lizenzen 
+in kommerziellen Anwendungen eingesetzt werden. Bei der Weitergabe Ihres PureBasic-Programms müssen Sie 
+'libmariadb.dll' (Windows), 'libmariadb.so' (Linux) bzw. 'libmariadb.dylib' (OS X) aus dem Verzeichnis 
+'PureBasic/Compilers' zu Ihrem Paket hinzufügen. 
+<br>
+<br>
+Es gibt keine zusätzlichen Treiber zu installieren - alles ist bereit, um einen MySQL oder MariaDB-Server 
+zu verbinden. Weitere Informationen zu MariaDB finden Sie unter: <a href="https://mariadb.org/">https://mariadb.org/</a>. 
+<br>
+<br>
+Eine MySQL- oder MariaDB-Datenbank muss mittels <a href="opendatabase.html">OpenDatabase()</a> verbunden sein, bevor andere Datenbankfunktionen 
+verwendet werden können. 
+MySQL-spezifische Argumente können im Parameter 'DatenbankName$' von <a href="opendatabase.html">OpenDatabase()</a> übergeben werden: 
+<pre><font face="Courier New, Courier, mono" size="2">  - host: Name des Hosts oder IP-Adresse, zu dem/der verbunden werden soll.
+  - port: Port-Nummer, zu der auf dem Server-Host verbunden werden soll.
+  - dbname: Der Datenbank-Name. Der Name kann in einfache Anführungszeichen gesetzt werden,
+            sofern er Leerzeichen enthält: dbname='movies and musics'.
+</font></pre>
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  UseMySQLDatabase</font>()
+
+  <font color="#006666">; Sie sollten einen Server als 'Localhost' laufen haben</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenDatabase</font>(0, &quot;host=localhost port=3306 dbname='test'&quot;, &quot;user&quot;, &quot;password&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Verbunden zu MySQL&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Verbindung fehlgeschlagen: &quot;+<font color="#006666">DatabaseError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="usesqlitedatabase.html">UseSQLiteDatabase()</a>, <a href="useodbcdatabase.html">UseODBCDatabase()</a>, <a href="usepostgresqldatabase.html">UsePostgreSQLDatabase()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setdatabasestring.html>SetDatabaseString()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=useodbcdatabase.html>UseODBCDatabase()</a> -><br><br>
+
+</body></html>

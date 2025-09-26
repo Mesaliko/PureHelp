@@ -1,0 +1,68 @@
+<html><head><title>MaterialFilteringMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MaterialFilteringMode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>MaterialFilteringMode</b></font>(#Matiere, Mode [, ValeurAnisotropicMax])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change le mode filtrage d'une matière. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Matiere</i></td>
+<td width="90%"> 
+La matière à utiliser. 
+<br>
+<br>
+Si #Matière est réglé sur <font color="#924B72">#PB_Default</font> alors 
+le mode de filtrage utilisé pour la future 
+matière est modifié. 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Material_None</font>        : Aucun filtrage n'est effectué, ce qui donne un résultat très pixelisé quand la matière est zoomée.
+  <font color="#924B72">#PB_Material_Bilinear</font>    : Effectue un filtre bi-linéaire quand la texture zoome, ce qui donne une texture plus agréable, mais un peu floue.
+  <font color="#924B72">#PB_Material_Trilinear</font>   : Effectue un filtre tri-linéaire quand la texture zoome, ce qui donne le meilleur rendu possible.
+  <font color="#924B72">#PB_Material_Anisotropic</font> : Règle la valeur maximale anisotropique. 'ValeurAnisotropicMax' est généralement comprise entre 1 et 8.
+</font></pre>
+
+</td></tr>
+<tr><td><i>ValeurAnisotropicMax (optionnel)</i></td>
+<td> 
+Valeur maximale du filtrage anisotropique 
+avec l'option <font color="#924B72">#PB_Material_Anisotropic</font>. 
+<br>
+<br>
+Valeur généralement comprise entre 1 et 8. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Quand une matière est créée, le filtre 
+bi-lineaire est activé par défaut. 
+<br>
+<br>
+Utiliser un filtrage n'a plus un grand impact 
+sur les performances  vidéos car toutes les 
+cartes graphiques modernes le font au niveau 
+matériel. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="materialblendingmode.html">MaterialBlendingMode()</a>, <a href="materialshadingmode.html">MaterialShadingMode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=materialcullingmode.html>MaterialCullingMode()</a> - <a href=index.html>Material Index</a> - <a href=materialfog.html>MaterialFog()</a> -><br><br>
+
+</body></html>

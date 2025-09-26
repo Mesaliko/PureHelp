@@ -1,0 +1,95 @@
+<html><head><title>CatchImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CatchImage</b></font>(#Image, *MemoryAddress [, Size])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Load the specified image from the given memory area. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+A number to identify the loaded image. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be specified to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>*MemoryAddress</i></td>
+<td> 
+The memory address from which to load the image. 
+
+</td></tr>
+<tr><td><i>Size (optional)</i></td>
+<td> 
+The size of the image in bytes. The size is optional as the loader can determine from the image when to 
+stop reading. It is however advisable to provide a size when loading unknown images, as the loader can then handle 
+corrupted images correctly (without specifying the image size, a corrupt image can crash the program). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the image was loaded successfully and zero if the image could not be loaded. 
+If <font color="#924B72">#PB_Any</font> was specified as the #Image parameter then the auto-generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The limit for the image size that can be handled depends on the operating system and the available amount of memory. 
+If enough memory is available, then images up to at least 8192x8192 pixels can be handled by all operating systems supported by PureBasic. 
+<br>
+<br>
+When an image is loaded, it is converted either in 24-bit (if the image depth 
+is less or equal to 24-bit) or in 32-bit (if the image has an alpha channel). 
+A loaded image can be freed by using the <a href="freeimage.html">FreeImage()</a> function. 
+<br>
+<br>
+This function is useful when using the <a href="../reference/includes.html">'IncludeBinary'</a> PureBasic keyword. Then images can be packed inside 
+the executable. Nevertheless, use this option with care, as it will take 
+more memory than storing the file in an external file (the file are both in 
+executable memory and load in physical memory). 
+<br>
+<br>
+The image can be in BMP, icon (.ico, only on Windows) or any other format supported by the ImagePlugin library. 
+Transparency of BMP images is not supported. 
+The following functions can be used to enable additional image formats: 
+<br>
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> <br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> <br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> <br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> <br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> <br>
+<a href="../imageplugin/usegifimagedecoder.html">UseGIFImageDecoder()</a> <br>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 148, 148, &quot;ImageGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CatchImage</font>(0, ?Geebee)
+<font color="#006666">      ImageGadget</font>(0, 10, 10, 0, 0,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">DataSection</font></b>
+    GeeBee:
+    <b><font color="#006666">IncludeBinary</font></b> <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/Geebee2.bmp&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+Note: The &quot;?&quot; is a pointer to a label. More information about pointers and memory access can be found 
+in the relating chapter <a href="../reference/memory.html">here</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createimage.html">CreateImage()</a>, <a href="loadimage.html">LoadImage()</a>, <a href="freeimage.html">FreeImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addimageframe.html>AddImageFrame()</a> - <a href=index.html>Image Index</a> - <a href=copyimage.html>CopyImage()</a> -><br><br>
+
+</body></html>

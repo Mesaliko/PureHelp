@@ -1,0 +1,39 @@
+<html><head><title>DatabaseError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DatabaseError()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Fehler$ = <font color="#006666"><b>DatabaseError</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt eine Beschreibung des letzten Fehlers im Textformat zurück. Dies ist insbesondere nützlich 
+bei den folgenden Befehlen: <a href="opendatabase.html">OpenDatabase()</a>, <a href="databasequery.html">DatabaseQuery()</a> und <a href="databaseupdate.html">DatabaseUpdate()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die Fehlerbeschreibung zurück. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Zuerst stellen wir eine Verbindung zu der 'employee' (Angestellten) Tabelle her</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#Datenbank</font>, &quot;SELECT * FROM employee&quot;) <font color="#006666">; Ermittelt alle Einträge in der 'employee' Tabelle</font>
+    <font color="#006666">; ...</font>
+<font color="#006666">    FinishDatabaseQuery</font>(<font color="#924B72">#Datenbank</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Fehler&quot;, &quot;Kann die folgende Abfrage nicht ausführen: &quot;+<font color="#006666">DatabaseError</font>())
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="databasequery.html">DatabaseQuery()</a>, <a href="databaseupdate.html">DatabaseUpdate()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=databasedrivername.html>DatabaseDriverName()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=databaseid.html>DatabaseID()</a> -><br><br>
+
+</body></html>

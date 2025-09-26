@@ -1,0 +1,73 @@
+<html><head><title>SetEntityAnimationWeight</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetEntityAnimationWeight()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetEntityAnimationWeight</b></font>(#Entité, Animation$, Poids.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Modifie le poids de l'animation d'une entité. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entité</i></td>
+<td width="90%"> 
+L'entité à utiliser. 
+
+</td></tr>
+<tr><td><i>Animation$</i></td>
+<td> 
+Le nom de l'animation. 
+<br>
+<br>
+Les animations sont stockées dans l'objet 
+mesh de manière sensible à la casse 
+(ex: &quot;Marche&quot; sera une animation différente 
+de &quot;marche&quot;). 
+<br>
+<br>
+Si l'animation n'est pas trouvée ou le mesh 
+n'a pas de squelette alors cette fonction 
+n'aura aucun effet. 
+
+</td></tr>
+<tr><td><i>Poids</i></td>
+<td> 
+Le nouveau poids de l'animation (valeur 
+comprise entre 0.0 et 1.0). 
+Si le poids est égal à 0 alors l'animation 
+est sans effet. 
+Si le poids est égal à 1 alors l'animation 
+joue pleinement. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le poids est utile lorsque vous jouez 
+plusieurs animations à la fois. <br>
+Par exemple, pour faire une transition en 
+douceur d'une animation à une autre, il est 
+possible de réduire progressivement le poids 
+de la première et d'augmenter le poids de la 
+deuxième animation. <br>
+L'<a href="entityanimationblendmode.html">EntityAnimationBlendMode()</a> affecte également 
+la façon dont les animations sont mélangées. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="startentityanimation.html">StartEntityAnimation()</a>, 
+<a href="entityanimationblendmode.html">EntityAnimationBlendMode()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setentityanimationtime.html>SetEntityAnimationTime()</a> - <a href=index.html>EntityAnimation Index</a> - <a href=startentityanimation.html>StartEntityAnimation()</a> -><br><br>
+
+</body></html>

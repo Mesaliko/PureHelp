@@ -1,0 +1,56 @@
+<html><head><title>RegisterFontFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegisterFontFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>RegisterFontFile</b></font>(FileName$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Register a font file for use with the <a href="loadfont.html">LoadFont()</a> command. All fonts contained in the 
+file are then available. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>FileName$</i></td>
+<td width="90%"> 
+The file containing the font. The file must be in TrueType format. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the file was successfully registered, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The font file is registered for the current program only. This means that the font(s) are not 
+accessible by other programs and will be unregistered when the program ends. 
+No system-wide changes are made by this command. 
+<br>
+<br>
+You cannot use a registered font with the VectorDrawing library. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Now let's use a new font, which was downloaded from the internet to the temporary directory...</font>
+  <font color="#006666">; The font name is &quot;ascii&quot; and the font file is &quot;ascii.ttf&quot;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">RegisterFontFile</font>(<font color="#006666">GetTemporaryDirectory</font>() + &quot;ascii.ttf&quot;) <font color="#006666">; We have to register it before to use it</font>
+<font color="#006666">    LoadFont</font>(0, &quot;ascii&quot;, 12) <font color="#006666">; Now we can load the font, the operating system knows it</font>
+<font color="#006666">    SetGadgetFont</font>(0,<font color="#006666"> FontID</font>(0))
+  ...
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+<a href="../Examples/FontRegister.pb.html">FontRegister.pb</a>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="loadfont.html">LoadFont()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=loadfont.html>LoadFont()</a> - <a href=index.html>Font Index</a><br><br></blockquote>
+</font></body></html>

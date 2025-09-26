@@ -1,0 +1,50 @@
+<html><head><title>GrabDrawingImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GrabDrawingImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GrabDrawingImage</b></font>(#Image, x, y, Width, Height)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Create a new image with the content of the given area in the current output. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The number of the new image to create. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to select a number automatically. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The location and size of the area to copy into the new image. 
+The new image will be created with the specified width and height. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. 
+If <font color="#924B72">#PB_Any</font> was used as the '#Image' parameter then the number of the new image is returned. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command does not work with <a href="../printer/printeroutput.html">PrinterOutput()</a>. 
+<br>
+<br>
+Any parts of the specified area that are outside of the drawing output will be undefined in the created image. Also if the current 
+output is <a href="../window/windowoutput.html">WindowOutput()</a>, any part of the window that is currently not visible may be undefined in the resulting image. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../image/grabimage.html">GrabImage()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=getoriginy.html>GetOriginY()</a> - <a href=index.html>2DDrawing Index</a> - <a href=gradientcolor.html>GradientColor()</a> -><br><br>
+
+</body></html>

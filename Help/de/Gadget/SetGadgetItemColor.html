@@ -1,0 +1,102 @@
+<html><head><title>SetGadgetItemColor</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetGadgetItemColor()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetGadgetItemColor</b></font>(#Gadget, Eintrag, FarbTyp, Farbe [, Spalte])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert ein Farb-Attribut des angegebenen Gadget-Eintrags. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Das zu verwendende Gadget. 
+
+</td></tr>
+<tr><td><i>Eintrag</i></td>
+<td> 
+Der zu verwendende Eintrag. Der erste Eintrag im Gadget hat den Index 0. 
+Wenn dieser Parameter auf <font color="#924B72">#PB_All</font> gesetzt wird, dann wird die Farbe allen Gadget-Einträgen in der 
+angegebenen 'Spalte' zugewiesen. 
+
+</td></tr>
+<tr><td><i>FarbTyp</i></td>
+<td> 
+Die Art des zu ändernden Farb-Attributs. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>     : Textfarbe
+  <font color="#924B72">#PB_Gadget_BackColor</font>      : Hintergrundfarbe
+</font></pre>
+
+</td></tr>
+<tr><td><i>Farbe</i></td>
+<td> 
+Die neue Farbe für das Attribut. 
+<a href="../2ddrawing/rgb.html">RGB()</a> kann verwendet werden, um einen gültigen Farbwert zu erhalten. 
+Wenn für einen bestimmten FarbTyp des Gadget-Eintrags keine Farbe festgelegt wurde, 
+dann wird dieser Eintrag in der für das gesamte Gadget festgelegten Farbe dargestellt. 
+Zum Entfernen der eingestellten Farbe und Zurücksetzen auf die standardmäßige Systemfarbe 
+setzen Sie den Parameter 'Farbe' auf <font color="#924B72">#PB_Default</font>. 
+
+</td></tr>
+<tr><td><i>Spalte (optional)</i></td>
+<td> 
+Die zu verwendende Spalte (bei Gadgets, welche mehrere Spalten unterstützen). 
+Die erste Spalte hat den Index 0. Der Standard ist Spalte 0. 
+Wenn dieser Parameter auf <font color="#924B72">#PB_All</font> gesetzt wird, dann wird die Farbe allen Spalten des angegebenen 
+Eintrags zugewiesen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Dieser Befehl wird von den folgenden Gadgets unterstützt: 
+<br>
+<br>
+- <a href="listicongadget.html">ListIconGadget()</a> 
+<br>
+- <a href="treegadget.html">TreeGadget()</a> 
+
+
+<br>
+<br>
+<b>Hinweis:</b> Mit aktiviertem Windows XP Style werden die Farbeinstellungen möglicherweise ignoriert 
+oder vom Style überschrieben. 
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 300, 300, &quot;SetGadgetItemColor&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ListIconGadget</font>(0, 10, 10, 280, 280, &quot;Column 0&quot;, 100)
+<font color="#006666">    AddGadgetColumn</font>(0, 1, &quot;Column 1&quot;, 100)
+    <b><font color="#006666">For</font></b> i = 1 <b><font color="#006666">To</font></b> 10
+<font color="#006666">      AddGadgetItem</font>(0, -1, &quot;Text 1&quot;+<font color="#006666">Chr</font>(10)+&quot;Text 2&quot;)
+    <b><font color="#006666">Next</font></b>
+
+<font color="#006666">    SetGadgetItemColor</font>(0, <font color="#924B72">#PB_All</font>, <font color="#924B72">#PB_Gadget_FrontColor</font>, $0000FF,  1)
+<font color="#006666">    SetGadgetItemColor</font>(0,  3, <font color="#924B72">#PB_Gadget_BackColor</font>,  $00FFFF, <font color="#924B72">#PB_All</font>)
+<font color="#006666">    SetGadgetItemColor</font>(0,  9, <font color="#924B72">#PB_Gadget_BackColor</font>,  $FFFF00,  1)
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/setgadgetitemcolor.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getgadgetitemcolor.html">GetGadgetItemColor()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=setgadgetitemattribute.html>SetGadgetItemAttribute()</a> - <a href=index.html>Gadget Inhaltsverzeichnis</a> - <a href=setgadgetitemdata.html>SetGadgetItemData()</a> -><br><br>
+
+</body></html>

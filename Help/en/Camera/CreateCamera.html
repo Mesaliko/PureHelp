@@ -1,0 +1,112 @@
+<html><head><title>CreateCamera</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateCamera()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateCamera</b></font>(#Camera, x, y, Width, Height [, VisibilityMask [, Lod]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new camera in the current world, at the position x,y with the specified dimensions. 
+Note that these positions and sizes are the position and sizes of the display on the screen, 
+not the position and size of the camera in the world. 
+<br>
+<br>
+Unlike other graphics related functions, these coordinates and dimensions are in percents, 
+from 0 to 100 (float numbers can be used for more precise placement). This could seems odd, 
+but 3D applications should be resolution independent and this is a good way of achieving that. 
+If a camera is created with a height of 50% then it will always fill 50% of the height of the 
+screen, irrespective of whether you use a screen which is 640*480 or 1600*1200. If a camera 
+has already been created with the same number, the previous camera is automatically 
+freed and replaced by the new one. 
+<br>
+<br>
+Cameras can be overlapped. This means that it is possible to display a camera which fills the whole 
+screen and put a little camera inside which shows another place in the world. To achieve this, 
+the order of creation is very important: the camera which will be on top should be created last. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Camera</i></td>
+<td width="90%"> 
+The number to identify the new camera. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+The position (in percentages) of the left edge of the start of the display for this camera. 
+0 means at the left of the screen, 100 means at the right of the screen. See the picture below 
+for a better overview. 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The size (in percentages) the display for this camera should take up. 
+See the picture below for a better overview. 
+
+</td></tr>
+<tr><td><i>VisibilityMask (optional)</i></td>
+<td> 
+A mask to select which <a href="../entity/index.html">entities</a> and <a href="../billboard/index.html">billboards</a> 
+to display on this camera. The camera defines 
+its own mask, and if the entity or billboard mask match, then it will be displayed. By default 
+the entities and billboards have no mask, meaning they will be always displayed on all cameras. 
+
+</td></tr>
+<tr><td><i>Lod (optional)</i></td>
+<td> 
+A Lod bias (Level Of Details) to apply to the entities which supports it. If Lod bias is &lt; 1, 
+a more detailed object will be display. If Lod bias is &gt; 1, a less detailed entity will be displayed. 
+The entity distance is divided by the Lod bias (ie: a Lod bias of 0.5 double the distance). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns zero if the camera can't be created. If <a href="../reference/purebasic_objects.html">#PB_Any</a> is used 
+as '#Camera' parameter, the new camera number will be returned as 'Result'. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+
+</blockquote><p><b>Example:</b> Camera creation position and dimension:</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Creates a camera which fill the whole screen</font>
+  
+<font color="#006666">  CreateCamera</font>(0, 0,  0, 100, 50) <font color="#006666">; Creates an horizontal split screen effect, for 2 players</font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) <font color="#006666">; mode on the same screen</font>
+
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 100) <font color="#006666">; Create a full screen camera</font>
+<font color="#006666">  CreateCamera</font>(1, 25, 0, 50, 10)  <font color="#006666">; And a rearview mirror effect.</font>
+                                  <font color="#006666">; Note the rearview is last so that it is displayed on top of the full screen camera</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Two cameras separating screen into two halves:</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; upper camera</font>
+<font color="#006666">  CreateCamera</font>(0, 0, 0, 100, 50)  
+<font color="#006666">  MoveCamera</font>(0, 0, 50, 150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(0,<font color="#006666"> RGB</font>(215, 225, 255))
+  
+  <font color="#006666">; camera below</font>
+<font color="#006666">  CreateCamera</font>(1, 0, 50, 100, 50) 
+<font color="#006666">  MoveCamera</font>(1, 0, 50, -150, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  CameraBackColor</font>(1,<font color="#006666"> RGB</font>(255, 225, 215))
+<font color="#006666">  RotateCamera</font>(1, 180, 0, 0)
+</font></pre>
+<p><img src="../HelpPictures/createcamera.png"></p>
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="freecamera.html">FreeCamera()</a>, <a href="resizecamera.html">ResizeCamera()</a> 
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=checkobjectvisibility.html>CheckObjectVisibility()</a> - <a href=index.html>Camera Index</a> - <a href=freecamera.html>FreeCamera()</a> -><br><br>
+
+</body></html>

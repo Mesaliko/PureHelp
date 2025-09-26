@@ -1,0 +1,70 @@
+<html><head><title>InputRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>InputRequester</b></font>(Titel$, Mitteilung$, StandardText$ [, Flags] [, ParendID]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet einen (das Programm) &quot;blockierenden&quot; Eingabe-Requester, um eine 
+Texteingabe zu ermöglichen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titel$</i></td>
+<td width="90%"> 
+Titel des Requesters. 
+
+</td></tr>
+<tr><td><i>Mitteilung$</i></td>
+<td> 
+Die vor dem Eingabefeld angezeigte Mitteilung. 
+
+</td></tr>
+<tr><td><i>StandardText$</i></td>
+<td> 
+Standard-Text im Eingabefeld. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Kann der folgende Wert sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_InputRequester_Password</font>: setzt den Feld-Typ auf 'Passwort'. Der angezeigte Text wird versteckt.
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+Die Kennung des übergeordneten Fensters. Eine gültige Fensterkennung kann mit 
+<a href="../window/windowid.html">WindowID()</a> abgerufen werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Text im Eingabefeld zurück, oder einen leeren String, wenn der Requester ohne Anklicken 
+des &quot;OK&quot;-Schalters geschlossen wurde. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Input$ =<font color="#006666"> InputRequester</font>(&quot;Titel&quot;, &quot;Bitte machen Sie Ihre Eingabe:&quot;, &quot;Ich bin die Standardeingabe.&quot;)
+
+  <b><font color="#006666">If</font></b> Input$ &gt; &quot;&quot;
+    a$ = &quot;Sie haben folgendes in den Requester geschrieben:&quot; +<font color="#006666"> Chr</font>(10)  <font color="#006666">; Chr(10) wird nur für</font>
+    a$ + Input$                                                   <font color="#006666">; den Zeilenumbruch benötigt</font>
+  <b><font color="#006666">Else</font></b>  
+    a$ = &quot;Der Requester wurde abgebrochen oder es wurde nichts eingegeben.&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, 0)
+</font></pre>
+<br>
+<p><img src="../HelpPictures/inputrequester.png"></p>
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=fontrequester.html>FontRequester()</a> - <a href=index.html>Requester Inhaltsverzeichnis</a> - <a href=messagerequester.html>MessageRequester()</a> -><br><br>
+
+</body></html>

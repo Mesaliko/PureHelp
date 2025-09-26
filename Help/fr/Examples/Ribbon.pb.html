@@ -1,0 +1,96 @@
+<html><head><title>Ribbon.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Ribbon
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+
+<b><font color="#006666">Define</font></b> yaw.f, X.f, Y.f, Z.f, FOV.f, Timer.i
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Ribbon - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/desert.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">; Ground
+</font><font color="#006666">;
+</font><font color="#006666">GetScriptMaterial</font>(0, &quot;Scene/GroundBlend&quot;)
+<font color="#006666">CreatePlane</font>(0, 10000, 10000, 100, 100, 50, 50)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+
+<font color="#006666">; Node for Ribbon and Billboard
+</font><font color="#006666">;
+</font><font color="#006666">CreateNode</font>(0, 0, 500, 0)
+
+<font color="#006666">;Ribbon
+</font><font color="#006666">;
+</font><font color="#006666">GetScriptMaterial</font>(1, &quot;Scene/RibbonTrail&quot;)
+<font color="#006666">CreateRibbonEffect</font>(0,<font color="#006666"> MaterialID</font>(1), 1, 80, 1750)
+<font color="#006666">RibbonEffectColor</font>(0, 0,<font color="#006666"> RGBA</font>(255, 255, 255, 255),<font color="#006666"> RGBA</font>(0, 0, 255, 255))
+<font color="#006666">RibbonEffectWidth</font>(0, 0, 50, 3)
+<font color="#006666">AttachRibbonEffect</font>(0,<font color="#006666"> NodeID</font>(0))
+
+<font color="#006666">; Billboard
+</font><font color="#006666">;
+</font><font color="#006666">GetScriptMaterial</font>(2, &quot;Scene/burst&quot;)
+<font color="#006666">CreateBillboardGroup</font>(0,<font color="#006666"> MaterialID</font>(2), 512, 512)
+<font color="#006666">AddBillboard</font>(0, 0, 0, 0)
+
+<font color="#006666">AttachNodeObject</font>(0,<font color="#006666"> BillboardGroupID</font>(bGrp))
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 2000, 100, 2000, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, 0, 1500, 0)
+<font color="#006666">CameraFOV</font>(0, 60)
+
+<font color="#006666">; Skybox
+</font><font color="#006666">;
+</font><font color="#006666">SkyBox</font>(&quot;desert07.jpg&quot;)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  <b><font color="#006666">If</font></b> Timer &lt;<font color="#006666"> ElapsedMilliseconds</font>()
+    Timer =<font color="#006666"> ElapsedMilliseconds</font>() + 5
+    yaw + 0.1
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">;Ribbon
+</font>  X = 1000 + 500 *<font color="#006666"> Cos</font>(<font color="#006666">ElapsedMilliseconds</font>() / 250)
+  Y = 1500 + 750 *<font color="#006666"> Cos</font>(<font color="#006666">ElapsedMilliseconds</font>() / 350)
+  Z = 500  + 250 *<font color="#006666"> Cos</font>(<font color="#006666">ElapsedMilliseconds</font>() / 750)
+<font color="#006666">  MoveNode</font>(0, X, Y, Z, <font color="#924B72">#PB_Absolute</font>)
+  
+  <font color="#006666">;Camera
+</font>  FOV = 60 - 30 *<font color="#006666"> Cos</font>(<font color="#006666">ElapsedMilliseconds</font>() / 2500)
+<font color="#006666">  RotateCamera</font>(0, 0, yaw, 0)
+<font color="#006666">  CameraFOV</font>(0, FOV)
+<font color="#006666">  CameraLookAt</font>(0, X, Y, Z)
+  
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+  
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

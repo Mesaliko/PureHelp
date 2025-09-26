@@ -1,0 +1,79 @@
+<html><head><title>For : Next</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">For : Next</font></b></p>
+
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">For</font></b> &lt;variable&gt; = &lt;expression1&gt; <b><font color="#006666">To</font></b> &lt;expression2&gt; [<b><font color="#006666">Step</font></b> &lt;constante&gt;]
+  ...
+<b><font color="#006666">Next</font></b> [&lt;variable&gt;]
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+La fonction <b><font color="#006666">For</font></b> : <b><font color="#006666">Next</font></b> est utilisée pour produire une boucle dans le programme, avec 
+les paramètres définis. A chaque cycle, &lt;variable&gt; est incrémentée de 1 (ou d'une valeur 
+correspondant au pas indiqué dans <b><font color="#006666">Step</font></b> &lt;constante&gt;). Le première valeur de &lt;variable&gt; 
+est &lt;expression1&gt;. La boucle est interrompue dès que la valeur de &lt;variable&gt; est supérieure 
+la valeur de &lt;expression2&gt;. 
+<br>
+<br>
+La commande <a href="../reference/break_continue.html">Break</a> permet de quitter à n'importe quel moment une ou plusieurs boucles. 
+la commande <a href="../reference/break_continue.html">Continue</a> permet de passer directement à la prochaine itération de la boucle. 
+<br>
+<br>
+La boucle <b><font color="#006666">For : Next</font></b> fonctionne uniquement avec des valeurs entières, aussi bien pour les expressions que pour 
+la constante <b><font color="#006666">Step</font></b>. La constante <b><font color="#006666">Step</font></b> peut aussi être négative. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 10 
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+Dans cet exemple, le programme bouclera 11 fois (de 0 à 10) et sortira. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> k = 10 <b><font color="#006666">To</font></b> 1 <b><font color="#006666">Step</font></b> -1
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+Dans cet exemple, le programme bouclera 10 fois (de 10 à 1) et sortira. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 2
+  b = 3 
+  <b><font color="#006666">For</font></b> k = a+2 <b><font color="#006666">To</font></b> b+7 <b><font color="#006666">Step</font></b> 2
+    <b><font color="#006666">Debug</font></b> k
+  <b><font color="#006666">Next</font></b> k  
+</font></pre>
+
+Ici, le programme bouclera 4 fois avant de sortir (k est augmentée de 2 à chaque cycle 
+et prend donc successivement les valeurs 4, 6, 8 et 10=. La lettre k après le mot clef <b><font color="#006666">Next</font></b> 
+indique que ce <b><font color="#006666">Next</font></b> ferme la boucle &quot;<b><font color="#006666">For</font></b> k&quot;. Si un autre nom de variable est utilisé, 
+le compilateur génèrera une erreur. Cela est utile pour la lisibilité d'un code comprenant des 
+boucles imbriquées. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">For</font></b> x=0 <b><font color="#006666">To</font></b> 319 
+    <b><font color="#006666">For</font></b> y=0 <b><font color="#006666">To</font></b> 199 
+<font color="#006666">      Plot</font>(x,y)
+    <b><font color="#006666">Next</font></b> y
+  <b><font color="#006666">Next</font></b> x
+</font></pre>
+
+<b>Note:</b> Gardez à l'esprit que la valeur de &lt;expression2&gt; peut également être changée dans la boucle 
+For : Next, ce qui peut engendrer une boucle sans fin si la valeur n'est pas correcte. 
+
+
+
+
+</blockquote>
+</font></body></html>

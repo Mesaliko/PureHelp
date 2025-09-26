@@ -1,0 +1,67 @@
+<html><head><title>HTTPTimeout</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">HTTPTimeout()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>HTTPTimeout</b></font>(ConnectTimeout [, GlobalTimeout])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt das Zeitlimit (&quot;Timeout&quot;) an, das für die folgenden HTTP-Befehle verwendet werden soll: 
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>, <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a> und <a href="httprequestmemory.html">HTTPRequestMemory()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ConnectTimeout</i></td>
+<td width="90%"> 
+Das Zeitlimit in Millisekunden, um die HTTP-Anfrage abzubrechen, wenn der Remote-Host keine 
+Verbindung herstellt. Das Standard-Timeout ist auf 30 Sekunden eingestellt. <font color="#924B72">#PB_Default</font> kann 
+verwendet werden, um zum Standard-Timeout-Wert (30 Sekunden) zurückzukehren. 
+
+</td></tr>
+<tr><td><i>GlobalTimeout (optional)</i></td>
+<td> 
+Das globale Timeout in Millisekunden, um die HTTP-Anfrage abzubrechen, wenn sie noch nicht 
+abgeschlossen ist. Standardmäßig gibt es keine Zeitüberschreitung. 
+<font color="#924B72">#PB_Default</font> kann verwendet werden, um zum Standardverhalten zurückzukehren (kein Timeout). 
+Hinweis: Wenn eine Verbindung langsam ist, kann es sein, dass eine gültige, nicht abgeschlossene 
+Anfrage abgebrochen wird. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn &quot;Thread-sicheres Executable erstellen&quot; in den <a href="../reference/ide_compiler.html">Compiler-Optionen</a> 
+aktiviert ist, dann hat jeder Thread seine eigenen Timeouts, was bedeutet, dass zwei Threads 
+gleichzeitig unterschiedliche Timeouts haben können. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  HTTPTimeout</font>(5000) <font color="#006666">; Ermöglicht 5 Sekunden, um eine Verbindung zum Server herzustellen</font>
+
+  HttpRequest =<font color="#006666"> HTTPRequest</font>(<font color="#924B72">#PB_HTTP_Get</font>, &quot;https://www.google.com&quot;)
+  <b><font color="#006666">If</font></b> HttpRequest
+    <b><font color="#006666">Debug</font></b> &quot;StatusCode: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_StatusCode</font>)
+    <b><font color="#006666">Debug</font></b> &quot;Response: &quot; +<font color="#006666"> HTTPInfo</font>(HTTPRequest, <font color="#924B72">#PB_HTTP_Response</font>)
+    
+<font color="#006666">    FinishHTTP</font>(HTTPRequest)
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Request creation failed&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="receivehttpfile.html">ReceiveHTTPFile()</a>, <a href="receivehttpmemory.html">ReceiveHTTPMemory()</a>, <a href="httprequest.html">HTTPRequest()</a>, <a href="httprequestmemory.html">HTTPRequestMemory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=httprequestmemory.html>HTTPRequestMemory()</a> - <a href=index.html>Http Inhaltsverzeichnis</a> - <a href=receivehttpfile.html>ReceiveHTTPFile()</a> -><br><br>
+
+</body></html>

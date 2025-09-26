@@ -1,0 +1,104 @@
+<html><head><title>ContainerGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ContainerGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ContainerGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur [, Options]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau gadget container qui est 
+un simple panneau destiné à contenir 
+d'autres gadgets. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau 
+gadget. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+La position et les dimensions du nouveau 
+gadget. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison de: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Container_BorderLess</font>: Sans bordure (Defaut)
+  <font color="#924B72">#PB_Container_Flat</font>      : Cadre simple
+  <font color="#924B72">#PB_Container_Raised</font>    : Cadre élevé
+  <font color="#924B72">#PB_Container_Single</font>    : Cadre enfoncé
+  <font color="#924B72">#PB_Container_Double</font>    : Cadre doublement enfoncé
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le paramètre 
+#Gadget, alors la valeur de retour est le 
+numéro d'identification du gadget, généré 
+automatiquement. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une fois le gadget créé, les gadgets créés 
+utérieurement feront partie du container. 
+<br>
+Pour ne plus ajouter de gadgets au 
+container, utilisez la fonction 
+<a href="closegadgetlist.html">CloseGadgetList()</a> pour fermer la 
+'GadgetList' du container et retourner à 
+la 'GadgetList' précédente.<br>
+<a href="opengadgetlist.html">OpenGadgetList()</a> pourra être utilisé 
+pour ajouter des gadgets dynamiquement 
+dans ce #Gadget. 
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+
+  Les fonctions suivantes peuvent être appelées pour agir sur le container
+  - <a href="setgadgetcolor.html">SetGadgetColor()</a> et <a href="getgadgetcolor.html">GetGadgetColor()</a> avec la constante
+    <font color="#924B72">#PB_Gadget_BackColor</font> comme 'TypeCouleur' pour changer la couleur de fond du gadget.
+
+ L'évènement suivant est pris en charge par <a href="../window/eventtype.html">EventType()</a>:
+  <font color="#924B72">#PB_EventType_Resize</font>: Le gadget a été redimensionné.
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 322, 150, &quot;ContainerGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)  
+<font color="#006666">    ContainerGadget</font>(0, 8, 8, 306, 133, <font color="#924B72">#PB_Container_Raised</font>) 
+<font color="#006666">      ButtonGadget</font>(1, 10, 15, 80, 24, &quot;Bouton 1&quot;) 
+<font color="#006666">      ButtonGadget</font>(2, 95, 15, 80, 24, &quot;Bouton 2&quot;) 
+<font color="#006666">    CloseGadgetList</font>() 
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b>  
+</font></pre>
+<br>
+<p><img src="../HelpPictures/containergadget.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opengadgetlist.html">OpenGadgetList()</a>, <a href="closegadgetlist.html">CloseGadgetList()</a>, 
+<a href="setgadgetcolor.html">SetGadgetColor()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=comboboxgadget.html>ComboBoxGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=countgadgetitems.html>CountGadgetItems()</a> -><br><br>
+
+</body></html>

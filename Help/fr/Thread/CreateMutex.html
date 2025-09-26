@@ -1,0 +1,86 @@
+<html><head><title>CreateMutex</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateMutex()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateMutex</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau mutex. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le numéro du mutex s'il a été 
+créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'objectif principal des mutex est de 
+faire de la synchronisation entre les 
+threads. 
+Ils ne consomment pas beaucoup de temps 
+processeur, mais ils ne fonctionnent qu'au 
+sein du programme (il n'est pas possible 
+de synchroniser plusieurs programmes 
+différents). 
+Un mutex est un objet qui ne peut être 
+verrouillé que par un seul thread à la fois, 
+donc il est utilisé pour protéger l'accès 
+aux ressources partagées (pour éviter 
+que plusieurs threads n'accèdent en même 
+temps aux mêmes données). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Exécutez ce programme une fois comme il se présente. </font>
+  <font color="#006666">; Vous verrez que les lignes imprimées seront</font>
+  <font color="#006666">; mélangées entre les threads. Puis supprimez </font>
+  <font color="#006666">; les commentaires devant les commandes de Mutex</font>
+  <font color="#006666">; et les chaînes seront imprimées dans l'ordre, </font>
+  <font color="#006666">; car un seul thread à la fois sera autorisé </font>
+  <font color="#006666">; à exécuter les commandes d'impression.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">SansMutex</font>(*Numero)     
+    <b><font color="#006666">Shared</font></b> Mutex
+    
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 5      
+      <font color="#006666">;LockMutex(Mutex)    ; supprimez le commentaire pour voir la différence</font>
+    
+<font color="#006666">      PrintN</font>(&quot;Thread &quot;+<font color="#006666">Str</font>(*Numero)+&quot; essaie d'imprimer 5 fois a la suite :&quot;)
+      <b><font color="#006666">For</font></b> b = 1 <b><font color="#006666">To</font></b> 5
+<font color="#006666">        Delay</font>(50)
+<font color="#006666">        PrintN</font>(&quot;Thread &quot;+<font color="#006666">Str</font>(*Numero)+&quot; Ligne &quot;+<font color="#006666">Str</font>(b))
+      <b><font color="#006666">Next</font></b> b          
+      
+      <font color="#006666">;UnlockMutex(Mutex)  ; supprimez le commentaire pour voir la différence</font>
+    <b><font color="#006666">Next</font></b> a    
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenConsole</font>()
+  Mutex =<font color="#006666"> CreateMutex</font>()
+  
+  thread1 =<font color="#006666"> CreateThread</font>(@SansMutex(), 1)
+<font color="#006666">  Delay</font>(25)
+  thread2 =<font color="#006666"> CreateThread</font>(@SansMutex(), 2)
+<font color="#006666">  Delay</font>(25)
+  thread3 =<font color="#006666"> CreateThread</font>(@SansMutex(), 3)
+  
+<font color="#006666">  WaitThread</font>(thread1)
+<font color="#006666">  WaitThread</font>(thread2)
+<font color="#006666">  WaitThread</font>(thread3)
+  
+<font color="#006666">  Input</font>()
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freemutex.html">FreeMutex()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Thread Index</a> - <a href=createsemaphore.html>CreateSemaphore()</a> -><br><br>
+
+</body></html>

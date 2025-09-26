@@ -1,0 +1,79 @@
+<html><head><title>CreateTerrain</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateTerrain()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CreateTerrain</b></font>(#Terrain, Größe, WeltGröße, Skalierung, AnzLayer, Dateiname$, Endung$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein neues Terrain (Gelände). <a href="setupterrains.html">SetupTerrains()</a> muss vorher aufgerufen werden, um 
+die Standard-Parameter für das neue Terrain festzulegen. 
+<br>
+<br>
+Nach der Terrain-Erstellung können neue Kacheln (Tiles) mittels <a href="defineterraintile.html">DefineTerrainTile()</a> 
+definiert und Texturen mit <a href="addterraintexture.html">AddTerrainTexture()</a> hinzugefügt werden. Sobald die 
+Terrain-Definition abgeschlossen ist, muss <a href="buildterrain.html">BuildTerrain()</a> zum Aufbau des endgültigen 
+Terrains aufgerufen werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Terrain</i></td>
+<td width="90%"> 
+Die Nummer zum Identifizieren des neuen Terrains. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe des neuen Terrains in Eck-/Scheitelpunkten (englisch &quot;vertices&quot;) 
+vermindert um einen Rand / Kante (englisch &quot;down one edge&quot;). 
+
+</td></tr>
+<tr><td><i>WeltGröße</i></td>
+<td> 
+Die Welt-Größe des neuen Terrains. 
+
+</td></tr>
+<tr><td><i>Skalierung</i></td>
+<td> 
+Der Skalierungsfaktor, welcher auf das neue Terrain angewandt werden soll. 
+
+</td></tr>
+<tr><td><i>AnzLayer</i></td>
+<td> 
+Die Anzahl an Textur-Layern (Ebenen), die das neue Terrain haben soll. Um einen 
+Textur-Layer hinzuzufügen, verwenden Sie <a href="addterraintexture.html">AddTerrainTexture()</a>. 
+
+</td></tr>
+<tr><td><i>Dateiname$</i></td>
+<td> 
+Der Dateiname (ohne seine Endung), um die vorberechneten Terrain-Daten zu speichern. 
+Da das Terrain sehr komplex sein und eine Menge an Zeit zur Erstellung benötigen kann, 
+wird ein Cache auf Festplatte geschrieben und automatisch nachgeladen, wenn vorhanden 
+(und nicht veraltet). 
+
+</td></tr>
+<tr><td><i>Endung$</i></td>
+<td> 
+Die von den Daten-Dateien verwendete Endung. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt null zurück, wenn das #Terrain nicht erstellt werden konnte. Wenn 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> als '#Terrain' Parameter verwendet wird, 
+dann wird die neue Terrain-Nummer zurückgegeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="freeterrain.html">FreeTerrain()</a>, <a href="setupterrains.html">SetupTerrains()</a>, <a href="buildterrain.html">BuildTerrain()</a>, <a href="defineterraintile.html">DefineTerrainTile()</a>, <a href="addterraintexture.html">AddTerrainTexture()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=buildterrain.html>BuildTerrain()</a> - <a href=index.html>Terrain Inhaltsverzeichnis</a> - <a href=createterrainbody.html>CreateTerrainBody()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,72 @@
+<html><head><title>WriteStringFormat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteStringFormat()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>WriteStringFormat</b></font>(#File, Format)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Writes a BOM (Byte Order Mark) at the current position in the file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#File</i></td>
+<td width="90%"> 
+The file to write to. 
+
+</td></tr>
+<tr><td><i>Format</i></td>
+<td> 
+The format for which the mark should be written. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Writes no BOM at all (this is usually interpreted as a plain ASCII file.)
+  <font color="#924B72">#PB_UTF8</font>   : UTF-8 BOM
+  <font color="#924B72">#PB_Unicode</font>: UTF-16 (little endian) BOM
+
+  <font color="#924B72">#PB_UTF16BE</font>: UTF-16 (big endian) BOM
+  <font color="#924B72">#PB_UTF32</font>  : UTF-32 (little endian) BOM
+  <font color="#924B72">#PB_UTF32BE</font>: UTF-32 (big endian) BOM
+</font></pre>
+The <font color="#924B72">#PB_Ascii</font>, <font color="#924B72">#PB_UTF8</font> and <font color="#924B72">#PB_Unicode</font> correspond to the flags supported 
+by <a href="writestring.html">WriteString()</a> and <a href="writestringn.html">WriteStringN()</a>. After placing such a BOM, 
+the strings which follow should all be written with this flag. The other formats represent string 
+formats that can not be written directly with the PureBasic string functions. They are included only for completeness. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation was successful and zero if it failed. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Because of <a href="filebufferssize.html">file buffering</a>, this function may return successful even if there is not enough 
+space left on the output device for the write operation. 
+The file must be opened using a write-capable function (i.e. not with <a href="readfile.html">ReadFile()</a>). 
+
+<br>
+<br>
+The Byte Order Mark is a commonly used method with which to indicate the encoding of a textfile. It is usually placed 
+at the beginning of the file. It is however not a standard, just a commonly used practice. So if no BOM is 
+detected at the start of a file, it does not necessarily mean that it is a plain text file. It could also 
+just mean that the program that created the file did not use this practice. 
+<a href="readstringformat.html">ReadStringFormat()</a> may be used detect a BOM within a file. 
+
+<br>
+<br>
+For more information, see this <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Wikipedia Article.</a> 
+
+<br>
+More information about using unicode in PureBasic program can also be found <a href="../reference/unicode.html">here</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="readstringformat.html">ReadStringFormat()</a>, <a href="writestring.html">WriteString()</a>, <a href="writestringn.html">WriteStringN()</a>, <a href="createfile.html">CreateFile()</a>, <a href="openfile.html">OpenFile()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=writestring.html>WriteString()</a> - <a href=index.html>File Index</a> - <a href=writestringn.html>WriteStringN()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,90 @@
+<html><head><title>CreateVehicleBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateVehicleBody()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>CreateVehicleBody</b></font>(#Entity, Mass.f, Restitution.f, Friction.f [, SuspensionStiffness.f, SuspensionCompression.f, SuspensionDamping.f, MaxSuspensionCompression.f, Friction.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a physic body associated with the vehicle #Entity. 
+<br>
+<br>
+To have its collisions managed by the physic engine, an entity has to set a body. 
+In fact, only the body is known by the physic engine, which will 
+do all the calculation about the entity, check the mass, friction and if it collides will move back 
+the real entity. 
+<br>
+<br>
+To have any effect, the physic engine needs to be activated with the <a href="../engine3d/enableworldphysics.html">EnableWorldPhysics()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+The vehicle entity to use. 
+
+</td></tr>
+<tr><td><i>Mass</i></td>
+<td> 
+Mass of the vehicle. Don't use too big value or it could produce physic incoherencies (1 is the preferred value). 
+
+</td></tr>
+<tr><td><i>Restitution</i></td>
+<td> 
+Restitution of the vehicle. This value can also be get or set via <a href="../entity/getentityattribute.html">GetEntityAttribute()</a> and <a href="../entity/setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Friction</i></td>
+<td> 
+Friction of the vehicle. This value can also be get or set via <a href="../entity/getentityattribute.html">GetEntityAttribute()</a> and <a href="../entity/setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>SuspensionStiffness (optional)</i></td>
+<td> 
+The stiffness value for the suspension (10: Offroad buggy, 50: Sports car, 200: F1 Car) 
+
+</td></tr>
+<tr><td><i>SuspensionCompression (optional)</i></td>
+<td> 
+The damping coefficient to use when the suspension is compressed. Sets to value * 2 * SquareRoot(SuspensionStiffness), so it is proportional to critical damping. 
+Value examples: 
+<pre><font face="Courier New, Courier, mono" size="2">  value = 0: undamped &amp; bouncy
+  value = 1: critical damping
+</font></pre>
+Recommended values are from 0.1 to 0.3. 
+
+</td></tr>
+<tr><td><i>SuspensionDamping (optional)</i></td>
+<td> 
+The damping when the suspension is expanding. See the SuspensionCompression to know how to set this value. 
+SuspensionDamping should be slightly larger than SuspensionCompression. Recommended values are from 0.2 to 0.5. 
+
+</td></tr>
+<tr><td><i>MaxSuspensionCompression (optional)</i></td>
+<td> 
+The length the suspension can be compressed (in centimeters). 
+
+</td></tr>
+<tr><td><i>Friction (optional)</i></td>
+<td> 
+The friction between the tyre and the ground. Should be about 0.8 for realistic cars, but can increased for better handling. 
+A large value (10000.0) can be used for kart racers like handling. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../entity/freeentitybody.html">FreeEntityBody()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createvehicle.html>CreateVehicle()</a> - <a href=index.html>Vehicle Index</a> - <a href=getvehicleattribute.html>GetVehicleAttribute()</a> -><br><br>
+
+</body></html>

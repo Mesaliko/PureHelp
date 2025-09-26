@@ -1,0 +1,72 @@
+<html><head><title>GadgetSplitterAdvanced.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Gadget example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#924B72">#WindowWidth</font>  = 640
+<font color="#924B72">#WindowHeight</font> = 480
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">OnSizeWindow</font>()
+<font color="#006666">  ResizeGadget</font>(5, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> WindowWidth</font>(0),<font color="#006666"> WindowHeight</font>(0)-25) <font color="#006666">; Our 'master' splitter gadget
+</font><b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, <font color="#924B72">#WindowWidth</font>, <font color="#924B72">#WindowHeight</font>, &quot;PureBasic - Gadget Demonstration&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+
+<font color="#006666">  TextGadget</font>(7, 10, 5, 700, 15, &quot;PureBasic splitter demonstation with Editor, ScrollArea, ExplorerTree and Web gadgets. Feel the power...&quot;)
+
+<font color="#006666">  WebGadget</font>(0, 10, 10, 300, 20, &quot;http://www.google.com&quot;)
+  
+<font color="#006666">  EditorGadget</font>(1, 115, 10, 100, 190)
+  <b><font color="#006666">For</font></b> k=1 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddGadgetItem</font>(1, k-1, &quot;Line &quot;+<font color="#006666">Str</font>(k))
+  <b><font color="#006666">Next</font></b>
+
+<font color="#006666">  ExplorerTreeGadget</font>(3, 115, 10, 100, 190,<font color="#006666"> GetHomeDirectory</font>(), <font color="#924B72">#PB_Explorer_AlwaysShowSelection</font>|<font color="#924B72">#PB_Explorer_FullRowSelect</font>|<font color="#924B72">#PB_Explorer_MultiSelect</font>)
+
+<font color="#006666">  ScrollAreaGadget</font>(6, 0, 0, 400, 400, 1000, 1000, 1)
+<font color="#006666">    ButtonGadget</font>(20, 20, 20, 200, 200, &quot;Scroll Area !&quot;)
+<font color="#006666">  CloseGadgetList</font>()
+  
+<font color="#006666">  SplitterGadget</font>(2, 0, 0, <font color="#924B72">#WindowWidth</font>/2, <font color="#924B72">#WindowHeight</font>/2, 1, 0)
+<font color="#006666">  SplitterGadget</font>(4, 0, 0, <font color="#924B72">#WindowWidth</font>, <font color="#924B72">#WindowHeight</font>, 3, 2, <font color="#924B72">#PB_Splitter_Vertical</font>)
+<font color="#006666">  SplitterGadget</font>(5, 0, 25, <font color="#924B72">#WindowWidth</font>, <font color="#924B72">#WindowHeight</font>-25, 4, 6, <font color="#924B72">#PB_Splitter_Vertical</font>)
+  
+<font color="#006666">  SetGadgetState</font>(5, 500)
+  
+  <font color="#006666">; Use BindEvent() to have a realtime window sizing
+</font><font color="#006666">  BindEvent</font>(<font color="#924B72">#PB_Event_SizeWindow</font>, @OnSizeWindow())
+
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+      
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>()
+
+        <b><font color="#006666">Case</font></b> 8
+<font color="#006666">          SetGadgetState</font>(5, 333)
+<font color="#006666">          SetGadgetState</font>(2, 333)
+<font color="#006666">          SetGadgetState</font>(11, 5)
+          
+        <b><font color="#006666">Case</font></b> 20
+          <b><font color="#006666">Debug</font></b> &quot;OK&quot;
+          
+      <b><font color="#006666">EndSelect</font></b>
+      
+    <b><font color="#006666">EndIf</font></b>
+
+  
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b></font></pre>
+</body></html>

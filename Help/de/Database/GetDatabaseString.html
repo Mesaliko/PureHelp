@@ -1,0 +1,50 @@
+<html><head><title>GetDatabaseString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetDatabaseString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Text$ = <font color="#006666"><b>GetDatabaseString</b></font>(#Datenbank, Spalte)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt den Inhalt des angegebenen Datenbank-Feldes 'Spalte' als String zurück. 
+Dieser Befehl ist nur gültig nach einem erfolgreichen <a href="firstdatabaserow.html">FirstDatabaseRow()</a>, <a href="previousdatabaserow.html">PreviousDatabaseRow()</a> oder <a href="nextdatabaserow.html">NextDatabaseRow()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datenbank</i></td>
+<td width="90%"> 
+Die zu verwendende Datenbank. 
+
+</td></tr>
+<tr><td><i>Spalte</i></td>
+<td> 
+Die zu verwendende Spalte (beginnend bei 0). <a href="databasecolumnindex.html">DatabaseColumnIndex()</a> ist verfügbar, um den Index einer 
+namentlich bekannten Spalte zu ermitteln. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt den Inhalt des Datenbankfeldes als String zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Um den Typ eines Feldes zu ermitteln, kann <a href="databasecolumntype.html">DatabaseColumnType()</a> benutzt werden. 
+<br>
+<br>
+Hinweis: Dieser Befehl kann nur einmalig für jede Spalte aufgerufen werden (die erhaltenen Daten 
+müssen in einer Variable gespeichert werden, wenn sie mehr als einmal benötigt werden), da alle 
+nachfolgenden Aufrufe einen falschen Wert liefern werden. Dies ist eine ODBC-Einschränkung. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getdatabaseblob.html">GetDatabaseBlob()</a>, <a href="getdatabasedouble.html">GetDatabaseDouble()</a>, <a href="getdatabasefloat.html">GetDatabaseFloat()</a>, <a href="getdatabaselong.html">GetDatabaseLong()</a>, <a href="getdatabasequad.html">GetDatabaseQuad()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=getdatabasequad.html>GetDatabaseQuad()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=isdatabase.html>IsDatabase()</a> -><br><br>
+
+</body></html>

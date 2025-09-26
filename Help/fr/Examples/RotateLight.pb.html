@@ -1,0 +1,72 @@
+<html><head><title>RotateLight.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - RotateLight
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+
+<b><font color="#006666">Define</font></b>.f x, y, z, Distance = 1500
+
+<font color="#006666">InitEngine3D</font>()
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; RotateLight - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot; , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">KeyboardMode</font>(<font color="#924B72">#PB_Keyboard_International</font>)
+
+<font color="#006666">; Ground
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 1000, 1000, 50, 50, 1, 1)
+<font color="#006666">CreateEntity </font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+
+<font color="#006666">; Light
+</font><font color="#006666">AmbientColor</font>(0)
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), 0, 400, 0, <font color="#924B72">#PB_Light_Spot</font>)
+<font color="#006666">SpotLightRange</font>(0, 1, 30, 3)
+<font color="#006666">LightDirection</font>(0, 0.2, -1, 0.5)
+<font color="#006666">AmbientColor</font>($444444)
+
+<font color="#006666">; spot
+</font><font color="#006666">CreateSphere</font>(1, 20, 50, 50)
+<font color="#006666">GetScriptMaterial</font>(1, &quot;Color/Yellow&quot;)
+<font color="#006666">SetMaterialColor</font>(1, <font color="#924B72">#PB_Material_SelfIlluminationColor</font>,<font color="#006666"> RGB</font>(185, 155, 65))
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1),<font color="#006666"> LightX</font>(0),<font color="#006666"> LightY</font>(0),<font color="#006666"> LightZ</font>(0))
+
+<font color="#006666">; Camera
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 900, 1000, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, 0, 0, 0)
+<font color="#006666">CameraBackColor</font>(0,<font color="#006666"> RGB</font>(0, 0, 30))
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineKeyboard</font>()
+<font color="#006666">  RotateLight</font>(0, 0, 1, 0, <font color="#924B72">#PB_Relative</font>|<font color="#924B72">#PB_World</font>)
+  
+  x =<font color="#006666"> LightX</font>(0) +<font color="#006666"> LightDirectionX</font>(0) * Distance
+  y =<font color="#006666"> LightY</font>(0) +<font color="#006666"> LightDirectionY</font>(0) * Distance
+  z =<font color="#006666"> LightZ</font>(0) +<font color="#006666"> LightDirectionZ</font>(0) * Distance
+<font color="#006666">  CreateLine3D</font>(10,<font color="#006666"> LightX</font>(0),<font color="#006666"> LightY</font>(0),<font color="#006666"> LightZ</font>(0),<font color="#006666"> RGB</font>(0, 255, 0), x, y, z,<font color="#006666"> RGB</font>(0, 255, 0))
+
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1
+
+</font></pre>
+</body></html>

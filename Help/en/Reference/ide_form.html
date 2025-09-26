@@ -1,0 +1,116 @@
+<html><head><title>Integrated form designer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Integrated form designer</font></b></p>
+
+The PureBasic IDE has a very powerful integrated form designer, which allows to design 
+easily windows and arrange gadgets on them. It supports almost all native PureBasic <a href="../gadget/index.html">gadgets</a>, 
+<a href="../menu/index.html">menu</a> and even <a href="../statusbar/index.html">status bar</a>. A form file is a regular PureBasic file, so it can be easily 
+modified without even open the form designer. The code parser isn't the same used by the 
+compiler and therefore doesn't support all features, so when doing manual changes to 
+a form file, it has to remain basic. 
+
+<p><b>Contents of the "Form" menu:</b></p><blockquote>
+
+
+<p><img src="images/ide_menu_form.png"></p>
+
+<b>New Form</b> 
+<br>
+Create a new empty form. It will bring automatically the form panel tool on top. 
+<br>
+<br>
+
+<b>Switch Code/Design View</b> 
+<br>
+Change the form view, switch from design mode to code view. A form is built from code, 
+so if a change is made directly in code view, it will be reflected visually. 
+<br>
+<br>
+
+<b>Duplicate Object</b> 
+<br>
+Duplicate the currently selected object. 
+<br>
+<br>
+
+<b>Image manager</b> 
+<br>
+<p><img src="images/ide_form_imagemanager.png"></p>
+<br>
+<br>
+Display all the images currently used by the form. The image and its path can be changed easily here. 
+
+</blockquote>
+<p><b>Form design panel</b></p><blockquote>
+
+
+<p><img src="images/ide_form_designpanel.png"></p>
+
+This panel list all available gadgets. Select one, and draw directly on the form the size needed. When 
+a gadget is selected on the form, its properties are display on this panel and can be modified here. 
+
+</blockquote>
+<p><b>Using the form designer in real world projects</b></p><blockquote>
+
+
+The form designer has been created to allow modular forms and easy maintenance. Each form has to be 
+in its own file. It can not have two form in the file (in other words, it should never have two 
+<a href="../window/openwindow.html">OpenWindow()</a> in the same file). An event procedure can be assigned to every gadget, and will be handled 
+automatically in the event loop. The event procedures needs to be defined somewhere in the source code. 
+Every form file should be named with the '.pbf' extension, so it will be correctly opened by the IDE. 
+Form files can also be added to a <a href="../reference/ide_projects.html">project</a>. 
+<br>
+<br>
+For example, to build a program which handle two windows, we will have to create two form files and 
+one main file. The directory structure could look like that: 
+<pre><font face="Courier New, Courier, mono" size="2">  Main.pb        ; The main PureBasic file, which will includes the two forms file, and defines the events
+  MainWindow.pbf ; The main window
+  DateWindow.pbf ; Another window
+</font></pre>
+If we assume MainWindow.pbf has two buttons ('OK' and 'Cancel') and DateWindow.pbf has one 
+calendar gadget, here is how the main file would look like (the main file is not handled by 
+the form designer, it has to be written manually): 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">XIncludeFile</font></b> &quot;MainWindow.pbf&quot; <font color="#006666">; Include the first window definition</font>
+  <b><font color="#006666">XIncludeFile</font></b> &quot;DateWindow.pbf&quot; <font color="#006666">; Include the second window definition</font>
+  
+<font color="#006666">  OpenMainWindow</font>() <font color="#006666">; Open the first window. This procedure name is always 'Open' followed by the window name</font>
+<font color="#006666">  OpenDateWindow</font>() <font color="#006666">; Open the second window</font>
+  
+  <font color="#006666">; The event procedures, as specified in the 'event procedure' property of each gadget</font>
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">OkButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;OkButton event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">CancelButtonEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;CancelButton event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">TrainCalendarEvent</font>(EventType)
+    <b><font color="#006666">Debug</font></b> &quot;TrainCalendar event&quot;
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; The main event loop as usual, the only change is to call the automatically</font>
+  <font color="#006666">; generated event procedure for each window.</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">Select</font></b> <font color="#006666">EventWindow</font>()
+      <b><font color="#006666">Case</font></b> MainWindow
+<font color="#006666">        MainWindow_Events</font>(Event) <font color="#006666">; This procedure name is always window name followed by '_Events'</font>
+        
+      <b><font color="#006666">Case</font></b> DateWindow
+<font color="#006666">        DateWindow_Events</font>(Event)
+        
+    <b><font color="#006666">EndSelect</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> <font color="#006666">; Quit on any window close</font>
+</font></pre>
+
+As seen, it's easy to integrate visually designed forms in a program. Indeed it's also possible to continue to 
+create window manually, or mix the two. To have all the control over the generated code, just switch to code 
+mode and inspect it. 
+<br>
+<br>
+</blockquote>
+</font></body></html>

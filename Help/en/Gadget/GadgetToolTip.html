@@ -1,0 +1,80 @@
+<html><head><title>GadgetToolTip</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GadgetToolTip()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>GadgetToolTip</b></font>(#Gadget, Text$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Associate the specified Text$ with the #Gadget. A tooltip text is text which is displayed 
+when the mouse cursor is over the gadget for a small amount of time (typically a yellow floating box). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+The gadget to use. 
+
+</td></tr>
+<tr><td><i>Text$</i></td>
+<td> 
+The tooltip text. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The following gadgets are supported: 
+<br>
+<br>
+- <a href="buttongadget.html">ButtonGadget()</a> <br>
+- <a href="buttonimagegadget.html">ButtonImageGadget()</a> <br>
+- <a href="calendargadget.html">CalendarGadget()</a> <br>
+- <a href="canvasgadget.html">CanvasGadget()</a> <br>
+- <a href="checkboxgadget.html">CheckBoxGadget()</a> <br>
+- <a href="comboboxgadget.html">ComboBoxGadget()</a> <br>
+- <a href="containergadget.html">ContainerGadget()</a> <br>
+- <a href="dategadget.html">DateGadget()</a><br>
+- <a href="editorgadget.html">EditorGadget()</a> <br>
+- <a href="explorerlistgadget.html">ExplorerListGadget()</a> <br>
+- <a href="explorertreegadget.html">ExplorerTreeGadget()</a> <br>
+- <a href="hyperlinkgadget.html">HyperLinkGadget()</a> <br>
+- <a href="imagegadget.html">ImageGadget()</a><br>
+- <a href="ipaddressgadget.html">IPAddressGadget()</a> <br>
+- <a href="listicongadget.html">ListIconGadget()</a><br>
+- <a href="listviewgadget.html">ListViewGadget()</a> <br>
+- <a href="mdigadget.html">MDIGadget()</a> <br>
+- <a href="openglgadget.html">OpenGLGadget()</a> <br>
+- <a href="optiongadget.html">OptionGadget()</a> <br>
+- <a href="panelgadget.html">PanelGadget()</a> <br>
+- <a href="progressbargadget.html">ProgressBarGadget()</a> <br>
+- <a href="scrollbargadget.html">ScrollBarGadget()</a> <br>
+- <a href="spingadget.html">SpinGadget()</a> <br>
+- <a href="splittergadget.html">SplitterGadget()</a> <br>
+- <a href="stringgadget.html">StringGadget()</a> <br>
+- <a href="trackbargadget.html">TrackBarGadget()</a> <br>
+- <a href="treegadget.html">TreeGadget()</a> 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 270, 100, &quot;GadgetTooltip&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    ButtonGadget</font>(0, 10, 30, 250, 30, &quot;Button with tooltip&quot;)
+<font color="#006666">    GadgetToolTip</font>(0, &quot;Tooltip for Button&quot;)
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/gadgettooltip.png"></p>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=gadgetitemid.html>GadgetItemID()</a> - <a href=index.html>Gadget Index</a> - <a href=gadgettype.html>GadgetType()</a> -><br><br>
+
+</body></html>

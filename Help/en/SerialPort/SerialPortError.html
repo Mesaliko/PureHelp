@@ -1,0 +1,53 @@
+<html><head><title>SerialPortError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SerialPortError()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SerialPortError</b></font>(#SerialPort)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the error on the serial port when <a href="readserialportdata.html">ReadSerialPortData()</a>, <a href="writeserialportdata.html">WriteSerialPortData()</a> or <a href="writeserialportstring.html">WriteSerialPortString()</a> failed. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#SerialPort</i></td>
+<td width="90%"> 
+The serial port to use. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_SerialPort_RxOver</font>: An input buffer overflow has occurred.
+                         There is either no room in the input buffer
+                         or a character was received after the end-of-file (EOF)
+  <font color="#924B72">#PB_SerialPort_OverRun</font>: A character-buffer overrun has occurred.
+                          The next character is lost.
+  <font color="#924B72">#PB_SerialPort_RxParity</font> : The hardware detected a parity error.
+  <font color="#924B72">#PB_SerialPort_Frame</font>    : The hardware detected a framing error.
+  <font color="#924B72">#PB_SerialPort_Break</font>    : The hardware detected a break condition.
+  <font color="#924B72">#PB_SerialPort_TxFull</font>   : The application tried to transmit a character but the output buffer was full.
+  <font color="#924B72">#PB_SerialPort_IOE</font>      :  An I/O error occurred during communications with the device.
+  <font color="#924B72">#PB_SerialPort_WaitingCTS</font>  : Specifies whether transmission is waiting for the CTS (clear-to-send) signal to be sent.
+  <font color="#924B72">#PB_SerialPort_WaitingDSR</font>  : Specifies whether transmission is waiting for the DSR (data-set-ready) signal to be sent.
+  <font color="#924B72">#PB_SerialPort_WaitingRLSD</font> : Specifies whether transmission is waiting for the RLSD (receive-line-signal-detect) signal to be sent.
+  <font color="#924B72">#PB_SerialPort_XoffReceived</font>: Specifies whether transmission is waiting because the XOFF character was received.
+  <font color="#924B72">#PB_SerialPort_XoffSent</font>    : Specifies whether transmission is waiting because the XOFF character was transmitted.
+                               Transmission halts when the XOFF character is transmitted to a system that takes the next
+                               character as XON, regardless of the actual character.
+  <font color="#924B72">#PB_SerialPort_EOFSent</font>: Specifies whether the end-of-file (EOF) character has been received.
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="readserialportdata.html">ReadSerialPortData()</a>, <a href="writeserialportdata.html">WriteSerialPortData()</a>, <a href="writeserialportstring.html">WriteSerialPortString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=readserialportdata.html>ReadSerialPortData()</a> - <a href=index.html>SerialPort Index</a> - <a href=serialportid.html>SerialPortID()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,58 @@
+<html><head><title>ClearMap</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearMap()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ClearMap</b></font>(Map())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Clears all the elements in the specified map and releases their memory. After this call 
+the map is still usable, but is empty (i.e. there are no more elements in it). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+The map to clear. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+PureBasic will only free the memory for the elements. If you have been using the 
+map for something such as storing handles of objects that you create 
+directly with the OS, there is no way PureBasic (or any other language) can know 
+what they are. Therefore, in cases such as that, you should go through the 
+elements in the map and free the objects yourself. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Country</font>.s()
+
+<font color="#006666">  Country</font>(&quot;FR&quot;) = &quot;France&quot;
+<font color="#006666">  Country</font>(&quot;US&quot;) = &quot;United States&quot;
+
+  <font color="#006666">; Proof that items have been added to the map</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;There are &quot; +<font color="#006666"> Str</font>(<font color="#006666">MapSize</font>(<font color="#006666">Country</font>())) + &quot; elements in the map&quot;)
+
+  <font color="#006666">; Clear the map and show that the map really is empty</font>
+<font color="#006666">  ClearMap</font>(<font color="#006666">Country</font>())
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;There are &quot; +<font color="#006666"> Str</font>(<font color="#006666">MapSize</font>(<font color="#006666">Country</font>())) + &quot; element in the map&quot;)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addmapelement.html">AddMapElement()</a>, <a href="deletemapelement.html">DeleteMapElement()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=addmapelement.html>AddMapElement()</a> - <a href=index.html>Map Index</a> - <a href=comparemap.html>CompareMap()</a> -><br><br>
+
+</body></html>

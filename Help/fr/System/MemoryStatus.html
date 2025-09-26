@@ -1,0 +1,58 @@
+<html><head><title>MemoryStatus</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MemoryStatus()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.q = <font color="#006666"><b>MemoryStatus</b></font>(Type)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie les informations sur un type de 
+mémoire demandé. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Le type de mémoire à tester. <br>
+Peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_System_TotalPhysical</font>: La quantité totale de mémoire installée, en octets.
+  <font color="#924B72">#PB_System_FreePhysical</font> : La mémoire disponible, en octets.
+  <font color="#924B72">#PB_System_TotalVirtual</font> : La taille de la mémoire virtuelle totale, en octets (Windows uniquement).
+  <font color="#924B72">#PB_System_FreeVirtual</font>  : La taille de la mémoire virtuelle disponible, en octets (Windows uniquement).
+  <font color="#924B72">#PB_System_TotalSwap</font>    : La taille de la mémoire de swap total, en octets (Windows et Linux uniquement).
+  <font color="#924B72">#PB_System_FreeSwap</font>     : La taille de la mémoire de swap disponible, en octets (Windows et Linux uniquement).
+  <font color="#924B72">#PB_System_PageSize</font>     : La taille de la page mémoire, en octets (généralement 4 Ko).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie les informations sur le type de 
+mémoire spécifiée. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> &quot;La quantité totale de mémoire installée, en octets: &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_TotalPhysical</font>)
+  <b><font color="#006666">Debug</font></b> &quot;La mémoire disponible, en octets: &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_FreePhysical</font>)
+  <b><font color="#006666">Debug</font></b> &quot;La taille de page mémoire, en octets (généralement 4 Ko): &quot; +<font color="#006666"> MemoryStatus</font>(<font color="#924B72">#PB_System_PageSize</font>)
+  <font color="#006666">;(Windows et Linux uniquement)</font>
+  <font color="#006666">;Debug &quot;La taille de la mémoire de swap total, en octets (Windows et Linux uniquement): &quot; + MemoryStatus(#PB_System_TotalSwap)</font>
+  <font color="#006666">;Debug &quot;La taille de la mémoire de swap disponible, en octets (Windows et Linux uniquement): &quot; + MemoryStatus(#PB_System_FreeSwap)</font>
+  <font color="#006666">;(Windows uniquement)</font>
+  <font color="#006666">;Debug &quot;La taille de la mémoire virtuelle totale, en octets (Windows uniquement): &quot; + MemoryStatus(#PB_System_TotalVirtual)</font>
+  <font color="#006666">;Debug &quot;La taille de la mémoire virtuelle disponible, en octets (Windows uniquement): &quot; + MemoryStatus(#PB_System_FreeVirtual)</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="countcpus.html">CountCPUs()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=elapsedmilliseconds.html>ElapsedMilliseconds()</a> - <a href=index.html>System Index</a> - <a href=osversion.html>OSVersion()</a> -><br><br>
+
+</body></html>

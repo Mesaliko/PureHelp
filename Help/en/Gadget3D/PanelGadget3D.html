@@ -1,0 +1,65 @@
+<html><head><title>PanelGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PanelGadget3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>PanelGadget3D</b></font>(#Gadget3D, x, y, Width, Height)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a panel gadget in the current GadgetList. Once a panel is created, its list of panels is empty. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+A number to identify the new 3D gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero on success, zero otherwise. If <font color="#924B72">#PB_Any</font> was used as the #Gadget3D parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To add a 'mini help' to this gadget, use <a href="gadgettooltip3d.html">GadgetToolTip3D()</a>. 
+<br>
+<br>
+The following functions can be used to act on the gadget: <br>
+<br>
+- <a href="addgadgetitem3d.html">AddGadgetItem3D()</a>: Add a panel. <br>
+- <a href="removegadgetitem3d.html">RemoveGadgetItem3D()</a>: Remove a panel. <br>
+- <a href="countgadgetitems3d.html">CountGadgetItems3D()</a>: Count the number of panels. <br>
+- <a href="cleargadgetitems3d.html">ClearGadgetItems3D()</a>: Remove all panels. <br>
+- <a href="getgadgetitemtext3d.html">GetGadgetItemText3D()</a>: Retrieve the text of the specified item. <br>
+- <a href="setgadgetitemtext3d.html">SetGadgetItemText3D()</a>: Change the text of the specified item. <br>
+<br>
+- <a href="setgadgetstate3d.html">SetGadgetState3D()</a>: Change the active panel. <br>
+- <a href="getgadgetstate3d.html">GetGadgetState3D()</a>: Get the index of the current panel. <br>
+- <a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a>: With one of the following attributes: (there must be at least 1 item for this to work) 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Panel3D_ItemWidth</font> : Returns the width of the inner area where the gadgets are displayed.
+  <font color="#924B72">#PB_Panel3D_ItemHeight</font>: Returns the height of the inner area where the gadgets are displayed.
+  <font color="#924B72">#PB_Panel3D_TabHeight</font> : Returns height of the panel tabs on top of the gadget.
+</font></pre>
+
+You must call <a href="addgadgetitem3d.html">AddGadgetItem3D()</a> to add a panel before you can create other 
+gadgets inside the panel gadget. The next gadgets will then be created automatically in the new panel. 
+This is very convenient. When the PanelGadget item has been filled with all the 
+needed gadgets, <a href="closegadgetlist3d.html">CloseGadgetList3D()</a> must be called to return to the previous GadgetList. 
+This means that a PanelGadget can be created inside another PanelGadget. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=optiongadget3d.html>OptionGadget3D()</a> - <a href=index.html>Gadget3D Index</a> - <a href=progressbargadget3d.html>ProgressBarGadget3D()</a> -><br><br>
+
+</body></html>

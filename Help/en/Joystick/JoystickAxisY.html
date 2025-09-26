@@ -1,0 +1,52 @@
+<html><head><title>JoystickAxisY</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">JoystickAxisY()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>JoystickAxisY</b></font>(#Joystick [, Pad [, Mode]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the joystick Y axis state. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Joystick</i></td>
+<td width="90%"> 
+The joystick to use. The first joystick index is 0. The number of available joysticks is returned by <a href="initjoystick.html">InitJoystick()</a>. 
+
+</td></tr>
+<tr><td><i>Pad (optional)</i></td>
+<td> 
+The pad to use, if the joystick has multiple pads. The first pad index is 0. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+The mode can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Absolute</font>: Returned value is either -1 (up), 0 (no movement) or 1 (down) (default)
+  <font color="#924B72">#PB_Relative</font>: Returned value is between the range -1000 (up) and 1000 (down). If the gamepad doesn't
+                support relative movement, the result will be -1000, 0 or 1000.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the joystick Y axis value, depending of the specified mode. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="examinejoystick.html">ExamineJoystick()</a> has to be called before this function is used, to update the current joystick state. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="examinejoystick.html">ExamineJoystick()</a>, <a href="joystickaxisx.html">JoystickAxisX()</a>, <a href="joystickaxisz.html">JoystickAxisZ()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=joystickaxisx.html>JoystickAxisX()</a> - <a href=index.html>Joystick Index</a> - <a href=joystickaxisz.html>JoystickAxisZ()</a> -><br><br>
+
+</body></html>

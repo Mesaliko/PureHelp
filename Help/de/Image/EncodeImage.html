@@ -1,0 +1,68 @@
+<html><head><title>EncodeImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EncodeImage()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Puffer = <font color="#006666"><b>EncodeImage</b></font>(#Image [, ImagePlugin [, Flags [, Tiefe]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Kodiert das angegebene Bild in einen Speicherpuffer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Das zu kodierende Bild. 
+
+</td></tr>
+<tr><td><i>ImagePlugin (optional)</i></td>
+<td> 
+Das Format, in welchem das Bild kodiert werden soll. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ImagePlugin_BMP</font>      : Speichert das Bild als BMP (Standard)
+  <font color="#924B72">#PB_ImagePlugin_JPEG</font>     : kodiert das Bild in JPEG (es muss <a href="../imageplugin/usejpegimageencoder.html">UseJPEGImageEncoder()</a> verwendet werden)
+  <font color="#924B72">#PB_ImagePlugin_JPEG2000</font> : kodiert das Bild in JPEG2000 (es muss <a href="../imageplugin/usejpeg2000imageencoder.html">UseJPEG2000ImageEncoder()</a> verwendet werden)
+  <font color="#924B72">#PB_ImagePlugin_PNG</font>      : kodiert das Bild in PNG (es muss <a href="../imageplugin/usepngimageencoder.html">UsePNGImageEncoder()</a> verwendet werden)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Parameter für das Image-Plugin. Derzeit wird nur die Qualitäts-Einstellung unterstützt: 
+ein Wert von 0 (schlechte Qualität) bis 10 (maximale Qualität). Nur die JPEG- und JPEG 2000 Plugins 
+unterstützen dies derzeit (die Standard-Qualität wird auf '7' gesetzt, wenn keine Flags angegeben werden). 
+<br>
+<br>
+Wenn ein Bild mit einer &quot;palettized&quot; Tiefe (feste Farbpalette mit 1, 4 oder 8 Bit) kodiert wird, 
+ist das folgende Flag in Kombination verfügbar: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_FloydSteinberg</font>: Anwenden eines Floyd-Steinberg-Dithering.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Tiefe (optional)</i></td>
+<td> 
+Die Tiefe, in welchem das Bild gespeichert werden soll. Gültige Werte sind 1, 4, 8, 24 und 32. 
+Der Standard-Wert ist die originale Bild-Tiefe. 
+Derzeit unterstützt nur der PNG-Encoder das &quot;palettized&quot; Bild-Format (1, 4 oder 8 Bit). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen <a href="../reference/memory.html">Zeiger</a> auf einen neu reservierten Speicherpuffer zurück, welcher das 
+kodierte Bild enthält, oder Null, wenn das Kodieren fehlgeschlagen ist. 
+<a href="../memory/memorysize.html">MemorySize()</a> kann verwendet werden, um die Größe des kodierten Bildes zu ermitteln. 
+<a href="../memory/freememory.html">FreeMemory()</a> muss verwendet werden, um den Puffer nach dessen Verwendung freizugeben. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin Bibliothek</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createimage.html>CreateImage()</a> - <a href=index.html>Image Inhaltsverzeichnis</a> - <a href=freeimage.html>FreeImage()</a> -><br><br>
+
+</body></html>

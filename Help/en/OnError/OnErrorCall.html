@@ -1,0 +1,50 @@
+<html><head><title>OnErrorCall</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorCall()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorCall</b></font>(@ErrorHandler())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the action taken if an error occurs to call the specified handler procedure. The handler 
+can display information about the error to the user using the commands of this library and do any 
+needed cleanup to shutdown the application. The program will end as soon as the handler returns. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@ErrorHandler()</i></td>
+<td width="90%"> 
+The address of a procedure of the following form: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+    <font color="#006666">; Your code here</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+<font color="#006666">    MessageRequester</font>(&quot;OnError test&quot;, &quot;The following error happened: &quot; +<font color="#006666"> ErrorMessage</font>())
+  <b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;Test start&quot;)
+
+<font color="#006666">  OnErrorCall</font>(@ErrorHandler())
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; Cause a #PB_OnError_InvalidMemory error</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;This should never be displayed&quot;)
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=nextinstruction.html>NextInstruction()</a> - <a href=index.html>OnError Index</a> - <a href=onerrordefault.html>OnErrorDefault()</a> -><br><br>
+
+</body></html>

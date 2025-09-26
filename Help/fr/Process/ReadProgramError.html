@@ -1,0 +1,62 @@
+<html><head><title>ReadProgramError</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReadProgramError()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>ReadProgramError</b></font>(Programme [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Lit une ligne de texte provenant de 
+la sortie erreur (stderr) d'un programme. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Programme</i></td>
+<td width="90%"> 
+Le programme à utiliser. 
+<br>
+<br>
+Il doit être lancé avant en utilisant 
+<a href="runprogram.html">RunProgram()</a> avec l'option <font color="#924B72">#PB_Program_Error</font>. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Le format de chaîne de caractères à utiliser 
+pour lire les erreurs en sortie. <br>
+Le format par défaut peut être affecté avec 
+les options <font color="#924B72">#PB_Program_Ascii</font>, 
+<font color="#924B72">#PB_Program_Unicode</font> et <font color="#924B72">#PB_Program_UTF8</font> 
+de la fonction <a href="runprogram.html">RunProgram()</a>. <br>
+Peut être l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Lecture de la sortie d'erreur en ascii
+  <font color="#924B72">#PB_UTF8</font>   : Lecture de la sortie d'erreur en UTF8 (Par défaut)
+  <font color="#924B72">#PB_Unicode</font>: Lecture de la sortie d'erreur en <a href="../reference/unicode.html">unicode</a>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Le texte d'erreur, ou une chaîne vide 
+s'il n'y a pas de sortie d'erreur. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Contrairement à <a href="readprogramdata.html">ReadProgramData()</a>, cette 
+commande n'est pas bloquante, si aucune 
+donnée n'est disponible (une chaîne de 
+caractères vide sera renvoyée). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="readprogramdata.html">ReadProgramData()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=readprogramdata.html>ReadProgramData()</a> - <a href=index.html>Process Index</a> - <a href=readprogramstring.html>ReadProgramString()</a> -><br><br>
+
+</body></html>

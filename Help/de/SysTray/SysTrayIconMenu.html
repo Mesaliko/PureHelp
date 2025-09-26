@@ -1,0 +1,72 @@
+<html><head><title>SysTrayIconMenu</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SysTrayIconMenu()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SysTrayIconMenu</b></font>(#SysTrayIcon, MenuID)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ordnet das angegebene Popup-Menü dem SysTray-Icon zu. Das Menü sollte mit <a href="../menu/createpopupimagemenu.html">CreatePopupImageMenu()</a> 
+unter Verwendung des Flags <font color="#924B72">#PB_Menu_SysTrayLook</font> erstellt werden. Dies ist die beste Möglichkeit, 
+ein Popup-Menü mit einem SysTray-Icon zu verknüpfen, da das Popup-Menü auf allen Betriebssystemen 
+an der richtigen Position angezeigt wird, wenn der Benutzer auf das Icon klickt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#SysTrayIcon</i></td>
+<td width="90%"> 
+Das zu verwendende SysTray-Icon. 
+
+</td></tr>
+<tr><td><i>MenuID</i></td>
+<td> 
+Das Popup-Menü, das mit dem SysTray verknüpft werden soll. 
+<a href="../menu/menuid.html">MenuID()</a> kann verwendet werden, um diesen Wert abzurufen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Unsichtbares Fenster, um nur den SysTray anzuzeigen</font>
+<font color="#006666">  OpenWindow</font>(0, 0, 0, 10, 10, &quot;&quot;, <font color="#924B72">#PB_Window_Invisible</font>)
+
+<font color="#006666">  UsePNGImageDecoder</font>()
+<font color="#006666">  AddSysTrayIcon</font>(0,<font color="#006666"> WindowID</font>(0),<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/world.png&quot;))
+
+  <font color="#006666">; Erstellt ein Pop-up Menü, welches im SysTray mit SysTray-Look angezeigt werden soll</font>
+<font color="#006666">  CreatePopupImageMenu</font>(0, <font color="#924B72">#PB_Menu_SysTrayLook</font>)
+<font color="#006666">    MenuItem</font>(0, &quot;About PureBasic...&quot;)
+<font color="#006666">    MenuBar</font>()
+<font color="#006666">    MenuItem</font>(1, &quot;Exit&quot;)
+
+  <font color="#006666">; Verknüpft das Menü mit dem SysTray</font>
+<font color="#006666">  SysTrayIconMenu</font>(0,<font color="#006666"> MenuID</font>(0))
+
+  <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Select</font></b> <font color="#006666">WaitWindowEvent</font>()
+      <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_Event_Menu</font>
+        <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+          <b><font color="#006666">Case</font></b> 1 <font color="#006666">; Exit </font>
+<font color="#006666">            RemoveSysTrayIcon</font>(0)
+            <b><font color="#006666">End</font></b>
+        <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">EndSelect</font></b>
+  <b><font color="#006666">ForEver</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../menu/createpopupimagemenu.html">CreatePopupImageMenu()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=removesystrayicon.html>RemoveSysTrayIcon()</a> - <a href=index.html>SysTray Inhaltsverzeichnis</a> - <a href=systrayicontooltip.html>SysTrayIconToolTip()</a> -><br><br>
+
+</body></html>

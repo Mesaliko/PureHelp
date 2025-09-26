@@ -1,0 +1,48 @@
+<html><head><title>Val</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Val()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.q = <font color="#006666"><b>Val</b></font>(String$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Wandelt einen String in einen numerischen Wert (Quad) um. Der String kann ein Ganzzahl-Wert 
+im Dezimalformat, Hexadezimal-Format (mit '$' Präfix) oder Binär-Format (mit '%' Präfix) sein. 
+Das Parsen (Suchen) nach Zahlen stoppt beim ersten nicht numerischen Zeichen. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+Der zu konvertierende String. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Der numerische Wert des Strings. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Strings mit einer enthaltenen 32-Bit Fließkommazahl können mit <a href="valf.html">ValF()</a> und 
+64-Bit Fließkommazahlen mit <a href="vald.html">ValD()</a> konvertiert werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">Val</font>(&quot;1024102410241024&quot;) <font color="#006666">; wird '1024102410241024' ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Val</font>(&quot;$10FFFFFFFF&quot;)      <font color="#006666">; wird '73014444031' ausgeben</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">Val</font>(&quot;%1000&quot;)            <font color="#006666">; wird '8' ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="vald.html">ValD()</a>, <a href="valf.html">ValF()</a>, <a href="str.html">Str()</a>, <a href="strf.html">StrF()</a>, <a href="strd.html">StrD()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=unescapestring.html>UnescapeString()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=vald.html>ValD()</a> -><br><br>
+
+</body></html>

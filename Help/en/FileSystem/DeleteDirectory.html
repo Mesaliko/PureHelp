@@ -1,0 +1,49 @@
+<html><head><title>DeleteDirectory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DeleteDirectory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DeleteDirectory</b></font>(Directory$, Pattern$ [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Deletes the specified Directory$ or files in that Directory$ matching the provided pattern. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Directory$</i></td>
+<td width="90%"> 
+The directory to delete. 
+
+</td></tr>
+<tr><td><i>Pattern$</i></td>
+<td> 
+A pattern for deleting files within the directory. For example: &quot;*.*&quot; will delete any files in the directory. 
+&quot;*.exe&quot; will delete only the .exe files. By default, a null Pattern$ (&quot;&quot;) will delete all the files. 
+
+</td></tr>
+<tr><td><i>Mode (optional)</i></td>
+<td> 
+Options for the delete operation. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_FileSystem_Recursive</font>: Deletes the directory with all subdirectories.
+  <font color="#924B72">#PB_FileSystem_Force</font>    : Deletes even the files which are protected (read-only).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation was successful or zero if it failed. 
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="createdirectory.html">CreateDirectory()</a>, <a href="examinedirectory.html">ExamineDirectory()</a>, <a href="copydirectory.html">CopyDirectory()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createdirectory.html>CreateDirectory()</a> - <a href=index.html>FileSystem Index</a> - <a href=deletefile.html>DeleteFile()</a> -><br><br>
+
+</body></html>

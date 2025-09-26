@@ -1,0 +1,61 @@
+<html><head><title>BuildMeshLOD</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">BuildMeshLOD()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>BuildMeshLOD</b></font>(#Mesh [, AnzLOD, Distanz.f, ReduktionsWert.f])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt automatisch ein oder mehrere Detailebenen (&quot;level of detail&quot;, abgekürzt LOD) für das Mesh. 
+Das #Mesh wird automatisch durch ein weniger komplexes Mesh ersetzt, wenn es außerhalb der angegebenen 
+Entfernung von der Kamera angezeigt wird. Wenn genauere &quot;LOD-Meshes&quot; benötigt werden, 
+kann <a href="addmeshmanuallod.html">AddMeshManualLOD()</a> verwendet werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mesh</i></td>
+<td width="90%"> 
+Das zu verwendende Mesh-Objekt. 
+
+</td></tr>
+<tr><td><i>AnzLOD (optional)</i></td>
+<td> 
+Anzahl benötigter LOD für dieses Mesh. Wenn dieser Parameter nicht verwendet wird, dann werden die 
+LODs automatisch berechnet. 
+
+</td></tr>
+<tr><td><i>Distanz (optional)</i></td>
+<td> 
+Die minimale Entfernung von der Kamera, ab der das erste LOD-Mesh anstelle vom #Mesh verwendet wird. 
+Für die nächsten LOD-Meshes wird die Entfernung mittels dieser Formel berechnet: 'Distanz / SqrF(1-ReduktionsWert)'. 
+
+</td></tr>
+<tr><td><i>ReduktionsWert (optional)</i></td>
+<td> 
+Die anzuwendende Reduktion (Verkleinerung), zwischen 0 (keine Reduktion) und 1 (100% Reduktion). 
+<br>
+
+<br>
+Beispiel: CreateMeshLodLevels(<font color="#924B72">#Mesh</font>, 3, 100, 0.75) <br>
+- Die erste Reduktion des originalen Meshes bei 100 Einheiten von der Kamera, die Scheitelzahl geteilt durch 4 (75% Reduktion). 
+- Die zweite Verkleinerung des originalen Meshes beginnt bei 200 Einheiten von der Kamera, die Anzahl der Scheitelpunkte geteilt durch 16. 
+- Die dritte Verkleinerung des originalen Meshes beginnt bei 400 Einheiten von der Kamera, die Anzahl der Scheitelpunkte geteilt durch 64. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createmesh.html">CreateMesh()</a>, <a href="addmeshmanuallod.html">AddMeshManualLOD()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=addsubmesh.html>AddSubMesh()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=buildmeshshadowvolume.html>BuildMeshShadowVolume()</a> -><br><br>
+
+</body></html>

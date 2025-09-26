@@ -1,0 +1,119 @@
+<html><head><title>DatabaseUpdate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DatabaseUpdate()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>DatabaseUpdate</b></font>(#BaseDeDonnees, Requete$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Exécute une requête SQL de modification 
+de la base de données. Elle ne renvoie 
+aucun enregistrement. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BaseDeDonnees</i></td>
+<td width="90%"> 
+La base de données à utiliser. 
+
+</td></tr>
+<tr><td><i>Requete$</i></td>
+<td> 
+La requête à exécuter. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la 
+requête a réussi, zéro sinon (en raison 
+d'une erreur SQL ou une requête mal 
+formatée). 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction est similaire à 
+<a href="databasequery.html">DatabaseQuery()</a> mais sans affecter la 
+fonction <a href="nextdatabaserow.html">NextDatabaseRow()</a>, il est donc 
+possible d'utiliser cette commande tout 
+en conservant les enregistrements 
+obtenus par <a href="databasequery.html">DatabaseQuery()</a>. Par contre, 
+il n'est pas possible d'effectuer des 
+sélections ('SELECT' en SQL) ou d'autres 
+types de requêtes qui renvoient des 
+enregistrements, pour cela, utiliser 
+<a href="databasequery.html">DatabaseQuery()</a>.<br>
+Cette fonction est utile pour mettre à 
+jour des enregistrements dans la base 
+de données. <br>
+En cas d'erreur, le texte d'erreur peut 
+être récupéré par <a href="databaseerror.html">DatabaseError()</a>. 
+<br>
+<br>
+La requête peut contenir des espaces 
+réservés pour les variables de liaison. 
+Ces variables doivent être définies avant 
+d'appeler <a href="setdatabasestring.html">SetDatabaseString()</a>, 
+<a href="setdatabaselong.html">SetDatabaseLong()</a> etc. Après l'exécution 
+de la requête, les variables liées sont 
+effacées et doivent être définies à nouveau 
+pour de futurs appels. La syntaxe de 
+spécification des variables liées à SQL 
+dépend de la base de données. 
+Voir le deuxième exemple ci-dessous. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; D'abord, il faudra se connecter à une base de données qui contient une table 'employee'</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#BaseDeDonnees</font>, &quot;SELECT * FROM employee&quot;) <font color="#006666">; Recupère tous les enregistrements de la table 'employee'</font>
+  
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDatabaseRow</font>(<font color="#924B72">#BaseDeDonnees</font>) <font color="#006666">; Enumération des enregistrements</font>
+    
+      <font color="#006666">; Mise à jour du champ 'checked'  pour chaque enregistrement, en assumant  que le champ 'id'</font>
+      <font color="#006666">; est le premier de la table 'employee'</font>
+      <font color="#006666">;</font>
+<font color="#006666">      DatabaseUpdate</font>(&quot;UPDATE employee SET checked=1 WHERE id=&quot;+<font color="#006666">GetDatabaseString</font>(<font color="#924B72">#BaseDeDonnees</font>, 0))
+    <b><font color="#006666">Wend</font></b>
+
+<font color="#006666">    FinishDatabaseQuery</font>(<font color="#924B72">#BaseDeDonnees</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Variables liées avec SQLite, MySQL et ODBC</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; SQLite, MySQL et ODBC partagent la même syntaxe pour les variables de liaison, indiquées par le caractère &quot;?&quot; </font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseString</font>(<font color="#924B72">#Database</font>, 0, &quot;test&quot;)  
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#Database</font>, &quot;SELECT * FROM employee WHERE id=?&quot;)    
+    <font color="#006666">; ...</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Exemple:</b> PostgreSQL</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; PostgreSQL utilise une autre syntaxe dans la déclaration: $1, $2 ..  pour indiquer le paramètre indéfini</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseString</font>(<font color="#924B72">#Database</font>, 0, &quot;test&quot;)  
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#Database</font>, &quot;SELECT * FROM employee WHERE id=$1&quot;)    
+    <font color="#006666">; ...</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="databasequery.html">DatabaseQuery()</a> 
+<a href="setdatabasestring.html">SetDatabaseString()</a>, <a href="setdatabaselong.html">SetDatabaseLong()</a>, 
+<a href="setdatabasequad.html">SetDatabaseQuad()</a>, <a href="setdatabasefloat.html">SetDatabaseFloat()</a>, 
+<a href="setdatabasedouble.html">SetDatabaseDouble()</a>, 
+<a href="setdatabaseblob.html">SetDatabaseBlob()</a>, <a href="setdatabasenull.html">SetDatabaseNull()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=databasequery.html>DatabaseQuery()</a> - <a href=index.html>Database Index</a> - <a href=examinedatabasedrivers.html>ExamineDatabaseDrivers()</a> -><br><br>
+
+</body></html>

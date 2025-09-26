@@ -1,0 +1,73 @@
+<html><head><title>PanelGadget3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PanelGadget3D()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>PanelGadget3D</b></font>(#Gadget3D, x, y, Breite, Hoehe)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Erstellt ein Panel-Gadget innerhalb der aktuellen Gadgetliste. 
+<br>
+<br>
+Sobald ein Panel (Schalttafel) erstellt wurde, ist seine Liste mit Schaltflächen leer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget3D</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen 3D-Gadgets. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> kann verwendet werden, um diese Zahl 
+automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>x, y, Breite, Höhe</i></td>
+<td> 
+Die Position und Abmessungen des neuen Gadgets. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt im Erfolgsfall einen Wert ungleich Null zurück, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Gadget3D Parameter verwendet wurde, dann enthält bei Erfolg der Rückgabewert 
+die automatisch generierte Nummer. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Zu diesem Gadget kann mittels <a href="gadgettooltip3d.html">GadgetToolTip3D()</a> eine 'Mini-Hilfe' hinzugefügt werden. 
+<br>
+<br>
+Die folgenden Funktionen können verwendet werden, um auf das Gadget zuzugreifen: 
+<br>
+<br>
+- <a href="addgadgetitem3d.html">AddGadgetItem3D()</a>: fügt eine Schaltfläche hinzu. <br>
+- <a href="removegadgetitem3d.html">RemoveGadgetItem3D()</a>: entfernt eine Schaltfläche. <br>
+- <a href="countgadgetitems3d.html">CountGadgetItems3D()</a>: ermittelt die Anzahl der Schaltflächen. <br>
+- <a href="cleargadgetitems3d.html">ClearGadgetItems3D()</a>: entfernt alle Schaltflächen. <br>
+- <a href="getgadgetitemtext3d.html">GetGadgetItemText3D()</a>: ermittelt den Text der angegebenen Schaltfläche. <br>
+- <a href="setgadgetitemtext3d.html">SetGadgetItemText3D()</a>: ändert den Text der angegebenen Schaltfläche. <br>
+<br>
+- <a href="setgadgetstate3d.html">SetGadgetState3D()</a>: ändert den aktiven Panel (Schalttafel). <br>
+- <a href="getgadgetstate3d.html">GetGadgetState3D()</a>: ermittelt den Index des aktuellen Panels. <br>
+- <a href="getgadgetattribute3d.html">GetGadgetAttribute3D()</a>: mit einem der folgenden Attribute: (es muss mindestens ein Eintrag vorhanden sein, damit dies funktioniert) 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Panel3D_ItemWidth</font> : Gibt die Breite des inneren Bereichs zurück, worin die Gadgets angezeigt werden.
+  <font color="#924B72">#PB_Panel3D_ItemHeight</font>: Gibt die Höhe des inneren Bereichs zurück, worin die Gadgets angezeigt werden.
+  <font color="#924B72">#PB_Panel3D_TabHeight</font> : Gibt die Höhe der &quot;Reiter&quot; (&quot;Panel-Tabs&quot;) am oberen Rand des Gadgets zurück.
+</font></pre>
+
+Sie müssen erst <a href="addgadgetitem3d.html">AddGadgetItem3D()</a> aufrufen, um eine Schalttafel hinzufügen, bevor Sie 
+andere Gadgets innerhalb des PanelGadget erstellen können. Die nächsten Gadgets werden dann 
+automatisch auf dem neuen Panel-Gadget Eintrag erstellt. 
+Dies ist sehr bequem. Wenn das Panel-Gadget mit allen benötigten Gadgets gefüllt wurde, 
+muss <a href="closegadgetlist3d.html">CloseGadgetList3D()</a> aufgerufen werden, um zur vorhergehenden Gadgetliste 
+zurückzukehren. Dies bedeutet, dass ein Panel-Gadget auch auf einem anderen 
+Panel-Gadget erstellt werden kann. 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=optiongadget3d.html>OptionGadget3D()</a> - <a href=index.html>Gadget3D Inhaltsverzeichnis</a> - <a href=progressbargadget3d.html>ProgressBarGadget3D()</a> -><br><br>
+
+</body></html>

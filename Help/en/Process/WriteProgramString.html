@@ -1,0 +1,54 @@
+<html><head><title>WriteProgramString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WriteProgramString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>WriteProgramString</b></font>(Program, String$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Writes the given string to the specified programs input (stdin). 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Program</i></td>
+<td width="90%"> 
+The program to use. It must have been started before with <a href="runprogram.html">RunProgram()</a> and the <font color="#924B72">#PB_Program_Write</font> flag. 
+
+</td></tr>
+<tr><td><i>String$</i></td>
+<td> 
+The string to write. There is no newline written to the program after the string. To include the newline, 
+<a href="writeprogramstringn.html">WriteProgramStringN()</a> may be used. To write raw data to the program, 
+<a href="writeprogramdata.html">WriteProgramData()</a> may be used. This function may also be used to send 
+an EOF (end of file) to the program which tells the program that there will be no more input. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+The string format to use when writing the string to the program input. 
+The default format can be affected with the <font color="#924B72">#PB_Program_Ascii</font>, <font color="#924B72">#PB_Program_Unicode</font> and 
+<font color="#924B72">#PB_Program_UTF8</font> flags for <a href="runprogram.html">RunProgram()</a>. 
+This can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Writes the string as ascii
+  <font color="#924B72">#PB_UTF8</font>   : Writes the string as UTF8  (default)
+  <font color="#924B72">#PB_Unicode</font>: Writes the string as <a href="../reference/unicode.html">unicode</a>
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="writeprogramstringn.html">WriteProgramStringN()</a>, <a href="readprogramstring.html">ReadProgramString()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=writeprogramdata.html>WriteProgramData()</a> - <a href=index.html>Process Index</a> - <a href=writeprogramstringn.html>WriteProgramStringN()</a> -><br><br>
+
+</body></html>

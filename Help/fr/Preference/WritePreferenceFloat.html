@@ -1,0 +1,75 @@
+<html><head><title>WritePreferenceFloat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WritePreferenceFloat()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>WritePreferenceFloat</b></font>(Clé$, Valeur.f)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée ou change la paire Clé-Valeur sous la 
+forme : 'Clé$ = Valeur'.<br>
+La valeur est de type nombre à virgule en 
+simple précision 
+<a href="../reference/variables.html">Float</a> 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Clé$</i></td>
+<td width="90%"> 
+Le nom de la clé à écrire. 
+<br>
+<br>
+Si la clé existe, la valeur associée est 
+remplacée par la nouvelle valeur. 
+<br>
+<br>
+Si <a href="preferencegroup.html">PreferenceGroup()</a> a été utilisé alors 
+l'écriture est limitée au groupe courant. 
+
+</td></tr>
+<tr><td><i>Valeur</i></td>
+<td> 
+Le nombre à virgule en simple précision à 
+associer à la clé. 
+Voir <a href="../reference/variables.html">Float</a> 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Création du fichier prefs.txt</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreatePreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;, <font color="#924B72">#PB_Preference_GroupSeparator</font>)
+<font color="#006666">    PreferenceGroup</font>(&quot;Window&quot;)
+<font color="#006666">      WritePreferenceString</font>(&quot;Titre&quot;, &quot;PureNote&quot;) 
+<font color="#006666">      WritePreferenceLong </font>(&quot;X&quot;, 100)
+<font color="#006666">      WritePreferenceLong </font>(&quot;Y&quot;, 125)
+<font color="#006666">      WritePreferenceInteger</font>(&quot;I&quot;, 1024) 
+<font color="#006666">      WritePreferenceQuad</font>(&quot;Q&quot;, 9223372036854775807)
+<font color="#006666">      WritePreferenceFloat</font>(&quot;%&quot;, 20.10)
+<font color="#006666">      WritePreferenceDouble</font>(&quot;D&quot;, 0.0123456789 )
+<font color="#006666">    ClosePreferences</font>()   
+<font color="#006666">    RunProgram</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Prefs.txt&quot;)
+    <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="writepreferencedouble.html">WritePreferenceDouble()</a>, 
+<a href="writepreferenceinteger.html">WritePreferenceInteger()</a>, 
+<a href="writepreferencelong.html">WritePreferenceLong()</a>, 
+<a href="writepreferencequad.html">WritePreferenceQuad()</a>, 
+<a href="writepreferencestring.html">WritePreferenceString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=writepreferencedouble.html>WritePreferenceDouble()</a> - <a href=index.html>Preference Index</a> - <a href=writepreferenceinteger.html>WritePreferenceInteger()</a> -><br><br>
+
+
+</body></html>

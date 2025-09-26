@@ -1,0 +1,42 @@
+<html><head><title>Preference.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Preference example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">If</font></b> <font color="#006666">CreatePreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Preferences.prefs&quot;)
+<font color="#006666">  PreferenceGroup</font>(&quot;Global&quot;)
+<font color="#006666">    WritePreferenceString</font>(&quot;ApplicationName&quot;, &quot;MP3 Player&quot;)
+<font color="#006666">    WritePreferenceString</font>(&quot;Version&quot;, &quot;1.1b&quot;)
+
+<font color="#006666">  PreferenceComment</font>(&quot; This is the Window dimension&quot;)
+<font color="#006666">  PreferenceComment</font>(&quot;&quot;)
+
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+<font color="#006666">    WritePreferenceLong </font>(&quot;WindowX&quot;, 123)
+<font color="#006666">    WritePreferenceLong </font>(&quot;WindowY&quot;, 124)
+<font color="#006666">    WritePreferenceFloat</font>(&quot;WindowZ&quot;, -125.5)
+
+<font color="#006666">  ClosePreferences</font>()
+<b><font color="#006666">EndIf</font></b>
+
+
+<font color="#006666">OpenPreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Preferences.prefs&quot;)
+
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ReadPreferenceLong </font>(&quot;WindowX&quot;, 0)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ReadPreferenceLong </font>(&quot;WindowY&quot;, 0)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ReadPreferenceFloat</font>(&quot;WindowZ&quot;, 0)
+    
+<font color="#006666">  PreferenceGroup</font>(&quot;Global&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ReadPreferenceString</font>(&quot;ApplicationName&quot;, &quot;&quot;)
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ReadPreferenceString</font>(&quot;Version&quot;, &quot;&quot;)
+    
+<font color="#006666">ClosePreferences</font>()</font></pre>
+</body></html>

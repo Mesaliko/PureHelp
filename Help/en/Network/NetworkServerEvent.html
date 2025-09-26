@@ -1,0 +1,47 @@
+<html><head><title>NetworkServerEvent</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">NetworkServerEvent()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>NetworkServerEvent</b></font>([#Server]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Checks if an event happened on one of the open network servers. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Server (optional)</i></td>
+<td width="90%"> 
+The server to use to check the events. When used, only the events which belongs to this 
+server are handled, all other events are left untouched. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_NetworkEvent_None</font>      : Nothing has happened
+  <font color="#924B72">#PB_NetworkEvent_Connect</font>   : A new client has been connected to the server (not available with <font color="#924B72">#PB_Network_UDP</font> connections)
+  <font color="#924B72">#PB_NetworkEvent_Data</font>      : Raw data has been received (to be read with <a href="receivenetworkdata.html">ReceiveNetworkData()</a>)
+  <font color="#924B72">#PB_NetworkEvent_Disconnect</font>: A client has quit the server (disconnection). Its associated connection is 
+                               automatically closed, <a href="closenetworkconnection.html">CloseNetworkConnection()</a> must not be called for this client.
+                               (Not available with <font color="#924B72">#PB_Network_UDP</font> connections.)
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The server that received the event can be determined with <a href="eventserver.html">EventServer()</a>. The client that caused the event 
+can be determined with <a href="eventclient.html">EventClient()</a>. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="receivenetworkdata.html">ReceiveNetworkData()</a>, <a href="eventserver.html">EventServer()</a>, <a href="eventclient.html">EventClient()</a>, <a href="createnetworkserver.html">CreateNetworkServer()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=networkclientevent.html>NetworkClientEvent()</a> - <a href=index.html>Network Index</a> - <a href=nextipaddress.html>NextIPAddress()</a> -><br><br>
+
+</body></html>

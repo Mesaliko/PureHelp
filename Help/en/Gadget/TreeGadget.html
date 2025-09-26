@@ -1,0 +1,153 @@
+<html><head><title>TreeGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TreeGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>TreeGadget</b></font>(#Gadget, x, y, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a Tree gadget in the current GadgetList. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_AlwaysShowSelection</font> : Even if the gadget isn't activated, the selection is still visible.
+  <font color="#924B72">#PB_Tree_NoLines</font>             : Hide the little lines between each nodes.
+  <font color="#924B72">#PB_Tree_NoButtons</font>           : Hide the '+' node buttons.
+  <font color="#924B72">#PB_Tree_CheckBoxes</font>          : Add a checkbox before each item.
+  <font color="#924B72">#PB_Tree_ThreeState</font>          : The checkboxes can have an &quot;in between&quot; state.
+</font></pre>
+The <font color="#924B72">#PB_Tree_ThreeState</font> flag can be used in combination with the 
+<font color="#924B72">#PB_Tree_CheckBoxes</font> flag to get checkboxes that can have an &quot;on&quot;, &quot;off&quot; and &quot;in between&quot; state. 
+The user can only select the &quot;on&quot; or &quot;off&quot; states. The &quot;in between&quot; state can be set programmatically using the <a href="setgadgetitemstate.html">SetGadgetItemState()</a> function. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+Each item in the tree has a sublevel value assigned to it, that determines its relation with the item above and below it. 
+Items with the same sublevel belong to the same node, items with a higher sublevel are child-items and so on. This sublevel 
+value can be used to determine the relation between two items by comparing their sublevel values. The 'Flags' parameter of 
+<a href="addgadgetitem.html">AddGadgetItem()</a> is always required for TreeGadget items and is used to set the sublevel at which the 
+new item should be added. Note that if the function is called with a sublevel at which the item cannot be added, the 
+item will be added at the sublevel where it is possible to add it. 
+<br>
+<br>
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. <br>
+<br>
+<br>
+
+The following functions can be used to act on the tree content: <br>
+<br>
+- <a href="addgadgetitem.html">AddGadgetItem()</a>: Add an item (with an optional picture in the standard 16x16 icon size). 
+<br>
+- <a href="removegadgetitem.html">RemoveGadgetItem()</a>: Remove an item (and all its child-items). 
+<br>
+- <a href="cleargadgetitems.html">ClearGadgetItems()</a>: Remove all the items. 
+<br>
+- <a href="countgadgetitems.html">CountGadgetItems()</a>: Return the number of items currently in the #Gadget. 
+<br>
+- <a href="getgadgetitemstate.html">GetGadgetItemState()</a>: Return the current state of the specified item. 
+<br>
+- <a href="setgadgetitemstate.html">SetGadgetItemState()</a>: Change the current state of the specified item. 
+<br>
+- <a href="getgadgetitemtext.html">GetGadgetItemText()</a>: Return the current text of the specified item. 
+<br>
+- <a href="setgadgetitemtext.html">SetGadgetItemText()</a>: Change the current text of the specified item. 
+<br>
+- <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>: Change the current image of the specified item. 
+<br>
+- <a href="getgadgetitemdata.html">GetGadgetItemData()</a>: Returns the value that was stored with item. 
+<br>
+- <a href="setgadgetitemdata.html">SetGadgetItemData()</a>: Stores a value with the item. 
+<br>
+- <a href="getgadgetitemcolor.html">GetGadgetItemColor()</a>: Returns front or backcolor of the item. 
+<br>
+- <a href="setgadgetitemcolor.html">SetGadgetItemColor()</a>: Changes front or backcolor of the item. (not supported on MacOS X) 
+<br>
+- <a href="getgadgetstate.html">GetGadgetState()</a>: Return the current selected item. 
+<br>
+- <a href="setgadgetstate.html">SetGadgetState()</a>: Change the currently selected item. 
+<br>
+- <a href="getgadgettext.html">GetGadgetText()</a>: Return the text of the currently selected item. 
+<br>
+- <a href="setgadgettext.html">SetGadgetText()</a>: Change the text of the currently selected item. 
+<br>
+- <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>: With the following attribute: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Tree_SubLevel</font>: Returns the sublevel value of the given item.
+</font></pre>
+- <a href="gadgetitemid.html">GadgetItemID()</a>: Return the OS handle of the specified item (useful for API functions). 
+<br>
+<br>
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textcolor
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Backgroundcolor
+</font></pre>
+
+The following events are supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_LeftClick</font>: left click on an item, or a checkbox was checked/unchecked
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font>
+  <font color="#924B72">#PB_EventType_RightClick</font>
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>
+  <font color="#924B72">#PB_EventType_Change</font>: the current item changed
+  <font color="#924B72">#PB_EventType_DragStart</font>: the user tried to start a Drag &amp; Drop operation. <a href="../dragdrop/examinedraggeditems.html">ExamineDraggedItems()</a> can be used to get the dragged items information.
+</font></pre>
+After a <font color="#924B72">#PB_EventType_DragStart</font> event, the <a href="../dragdrop/index.html">Drag & Drop library</a> can be used to start 
+a Drag &amp; Drop operation. On MacOS X the <font color="#924B72">#PB_EventType_DragStart</font> event has to be handled using <a href="../window/bindevent.html">BindEvent()</a> or <a href="bindgadgetevent.html">BindGadgetEvent()</a>. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 355, 180, &quot;TreeGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    TreeGadget</font>(0, 10, 10, 160, 160)                                         <font color="#006666">; TreeGadget standard</font>
+<font color="#006666">    TreeGadget</font>(1, 180, 10, 160, 160, <font color="#924B72">#PB_Tree_CheckBoxes</font> | <font color="#924B72">#PB_Tree_NoLines</font>)  <font color="#006666">; TreeGadget with Checkboxes + NoLines</font>
+    <b><font color="#006666">For</font></b> ID = 0 <b><font color="#006666">To</font></b> 1
+      <b><font color="#006666">For</font></b> a = 0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;Normal Item &quot;+<font color="#006666">Str</font>(a), 0, 0) <font color="#006666">; if you want to add an image, use</font>
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;Node &quot;+<font color="#006666">Str</font>(a), 0, 0)        <font color="#006666">; ImageID(x) as 4th parameter</font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 1&quot;, 0, 1)    <font color="#006666">; These are on the 1st sublevel</font>
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 2&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 3&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem</font>(ID, -1, &quot;Sub-Item 4&quot;, 0, 1)
+<font color="#006666">        AddGadgetItem </font>(ID, -1, &quot;File &quot;+<font color="#006666">Str</font>(a), 0, 0) <font color="#006666">; sublevel 0 again</font>
+      <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Next</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/treegadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, <a href="cleargadgetitems.html">ClearGadgetItems()</a>, <a href="countgadgetitems.html">CountGadgetItems()</a>, <a href="getgadgetitemstate.html">GetGadgetItemState()</a>, <a href="setgadgetitemstate.html">SetGadgetItemState()</a>, 
+<a href="getgadgetitemtext.html">GetGadgetItemText()</a>, <a href="setgadgetitemtext.html">SetGadgetItemText()</a>, <a href="setgadgetitemimage.html">SetGadgetItemImage()</a>, <a href="getgadgetitemdata.html">GetGadgetItemData()</a>, <a href="setgadgetitemdata.html">SetGadgetItemData()</a>, <a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, 
+<a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetitemattribute.html">GetGadgetItemAttribute()</a>, <a href="gadgetitemid.html">GadgetItemID()</a>, <a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a>, 
+<a href="explorertreegadget.html">ExplorerTreeGadget()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=trackbargadget.html>TrackBarGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=unbindgadgetevent.html>UnbindGadgetEvent()</a> -><br><br>
+
+</body></html>

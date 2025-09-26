@@ -1,0 +1,38 @@
+<html><head><title>OnErrorExit</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OnErrorExit()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>OnErrorExit</b></font>()</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Changes the action taken if an error occurs to directly exit the program, even if the default action 
+on the system is not to exit the program on this kind of error. The system may display an error dialog 
+or print an error-message on the console on exit. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+To exit the program silently and suppress any system message, use <a href="onerrorcall.html">OnErrorCall()</a> and 
+end the program from the error handler. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;Test start&quot;)
+
+<font color="#006666">  OnErrorExit</font>()
+<font color="#006666">  Pokes</font>(10, &quot;Hello World&quot;) <font color="#006666">; Cause a #PB_OnError_InvalidMemory error</font>
+  
+<font color="#006666">  MessageRequester</font>(&quot;OnError test&quot;, &quot;This should never be displayed&quot;)
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=onerrordefault.html>OnErrorDefault()</a> - <a href=index.html>OnError Index</a> - <a href=onerrorgoto.html>OnErrorGoto()</a> -><br><br>
+
+</body></html>

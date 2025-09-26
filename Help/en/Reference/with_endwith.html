@@ -1,0 +1,69 @@
+<html><head><title>With : EndWith</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">With : EndWith</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">With</font></b> &lt;expression&gt;
+  ...
+<b><font color="#006666">EndWith</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">With</font></b> : <b><font color="#006666">EndWith</font></b> blocks may be used with <a href="../reference/structures.html">structure</a> fields in order to reduce 
+the quantity of code and to improve its' readability. This is a compiler directive, and works similarly to a <a href="../reference/macros.html">macro</a>, i.e., 
+the specified expression is automatically inserted before any backslash '\' character which have a space or an operator preceding it. 
+The code behaves identically to its' expanded version. <b><font color="#006666">With</font></b> : <b><font color="#006666">EndWith</font></b> blocks may not be nested, as this could introduce bugs 
+which are difficult to track under conditions where several statements have been replaced implicitly. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Person
+    Name$
+    Age.l
+    Size.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  Friend.Person
+  
+  <b><font color="#006666">With</font></b> Friend
+    \Name$ = &quot;Yann&quot;
+    \Age   = 30
+    \Size  = 196
+    
+    <b><font color="#006666">Debug</font></b> \Size+\Size
+  <b><font color="#006666">EndWith</font></b>
+    
+</font></pre>
+
+</blockquote><p><b>Example:</b> Complex example</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> Body
+    Weight.l
+    Color.l
+    Texture.l
+  <b><font color="#006666">EndStructure</font></b>
+
+  <b><font color="#006666">Structure</font></b> Person
+    Name$
+    Age.l
+    Body.Body[10]
+  <b><font color="#006666">EndStructure</font></b>
+
+  Friend.Person
+  
+  <b><font color="#006666">For</font></b> k = 0 <b><font color="#006666">To</font></b> 9
+    <b><font color="#006666">With</font></b> Friend\Body[k]
+      \Weight = 50
+      \Color  = 30
+      \Texture = \Color*k
+      
+      <b><font color="#006666">Debug</font></b> \Texture
+    <b><font color="#006666">EndWith</font></b>
+  <b><font color="#006666">Next</font></b>
+    
+</font></pre>
+
+</blockquote>
+</font></body></html>

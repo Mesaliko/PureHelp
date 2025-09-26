@@ -1,0 +1,68 @@
+<html><head><title>SetClipboardImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetClipboardImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>SetClipboardImage</b></font>(#Image)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Met une copie d'une image dans le presse-papier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+Numéro de l'image à mettre dans le presse-papier. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si une image est déjà présente  dans le 
+presse-papier, elle sera remplacée par la 
+nouvelle. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0,26,20)
+<font color="#006666">    StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      Box</font>(0,0,26,20,<font color="#006666">RGB</font>(255,255,255))
+<font color="#006666">      Circle</font>(13,10,5,<font color="#006666">RGB</font>(255,0,0))
+<font color="#006666">    StopDrawing</font>()
+<font color="#006666">    SetClipboardImage</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 100, &quot;Presse-papier&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+   <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">WindowOutput</font>(0))
+<font color="#006666">     DrawImage</font>(<font color="#006666">GetClipboardImage</font>(0), 10,10) 
+<font color="#006666">     DrawImage</font>(<font color="#006666">GetClipboardImage</font>(0), 100, 30, 65, 50) 
+<font color="#006666">      StopDrawing</font>()
+   <b><font color="#006666">EndIf</font></b>
+
+   <b><font color="#006666">Repeat</font></b>
+     Event =<font color="#006666"> WaitWindowEvent</font>()
+   <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+ <b><font color="#006666">EndIf</font></b>
+ 
+  <font color="#006666">; Vous pouvez aussi ouvrir un logiciel de dessin (par exemple 'Paint') </font>
+  <font color="#006666">; et collez le contenu du presse-papier (Edition puis Coller), </font>
+  <font color="#006666">; et vous verrez le drapeau japonais ;-)</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getclipboardimage.html">GetClipboardImage()</a>, <a href="setclipboardtext.html">SetClipboardText()</a>, 
+<a href="clearclipboard.html">ClearClipboard()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getclipboardtext.html>GetClipboardText()</a> - <a href=index.html>Clipboard Index</a> - <a href=setclipboardtext.html>SetClipboardText()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,75 @@
+<html><head><title>DisplaySprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DisplaySprite()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>DisplaySprite</b></font>(#Sprite, X, Y)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Affiche un Sprite sur l'écran courant. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Le sprite à afficher. 
+
+</td></tr>
+<tr><td><i>X, Y</i></td>
+<td> 
+Les coordonnées du sprite, en pixels, 
+dans l' <a href="../screen/index.html">écran</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Comme il n'y a pas de couleur transparente, 
+cette fonction est plus rapide que 
+<a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>.<br>
+Il est parfaitement autorisé d'afficher 
+le sprite partiellement ou complètement 
+hors de l'écran. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">InitSprite</font>()
+
+<font color="#006666">OpenScreen</font>(800,600,32,&quot;Sprite&quot;)
+
+ <font color="#006666">;Création du sprite</font>
+<font color="#006666">CreateSprite</font>(0,200,200)
+<font color="#006666">StartDrawing</font>(<font color="#006666">SpriteOutput</font>(0))
+<font color="#006666">DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Gradient</font>)      
+<font color="#006666">BackColor</font>(<font color="#006666">RGB</font>(255,255,255))
+<font color="#006666">FrontColor</font>(<font color="#006666">RGB</font>(255,255,0))     
+<font color="#006666">CircularGradient</font>(100, 100, 100)     
+<font color="#006666">Circle</font>(100, 100, 100)
+<font color="#006666">CircularGradient</font>(350, 100, 75)
+<font color="#006666">Circle</font>(300, 100, 100)
+<font color="#006666">StopDrawing</font>()
+
+ <font color="#006666">;Affichage du sprite</font>
+<font color="#006666">DisplaySprite</font>(0, 210, 160)
+
+<font color="#006666">FlipBuffers</font>()
+<font color="#006666">Delay</font>(3000)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createsprite.html">CreateSprite()</a>, 
+<a href="displaytransparentsprite.html">DisplayTransparentSprite()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createsprite.html>CreateSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=displaytransparentsprite.html>DisplayTransparentSprite()</a> -><br><br>
+
+</body></html>

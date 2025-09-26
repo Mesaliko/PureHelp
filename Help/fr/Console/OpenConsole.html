@@ -1,0 +1,98 @@
+<html><head><title>OpenConsole</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenConsole()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenConsole</b></font>([Titre$] [, Mode]]))</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une fenêtre console. <br>
+Cette fonction doit être appelée avant 
+toute autre opération sur la console. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titre$ (optionnel)</i></td>
+<td width="90%"> 
+Le titre de la nouvelle fenêtre console. 
+<br>
+Sous Windows, la présence d'un titre 
+permet la sauvegarde des paramètres 
+de la console, comme la police, 
+la couleur, etc. Il n'a aucun effet 
+sur les autres OS. 
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+Le mode à utiliser pour la sortie de la console. Il peut avoir l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font>   : Le texte est au format UTF-8 (Par défaut).
+  <font color="#924B72">#PB_Ascii</font>  : Le texte est au format ASCII.
+  <font color="#924B72">#PB_Unicode</font>: Le texte est au format UTF-16. 
+                Peut être utile sous Windows lorsque vous utilisez la redirection de la sortie 
+                et que le programme cible attend une entrée UTF-16. N'a aucun effet sur Linux 
+                ou OS X (qui utiliseront UTF-8).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon et la console ne peut 
+pas être utilisée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une seule console peut être ouverte 
+au même moment sous PureBasic. 
+<br>
+<br>
+La console peut être fermée en 
+utilisant la commande <a href="closeconsole.html">CloseConsole()</a>. 
+<br>
+<br>
+La commande <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> 
+permet de permuter entre le mode 
+texte et le mode graphique. 
+<br>
+<br>
+Sous Microsoft Windows, deux formats 
+d'exécution sont disponibles: Win32 
+et Console. Si vous souhaitez créer 
+une application standard sur console, 
+telle que 'dir', 'del', etc vous devez 
+compiler l'exécutable en utilisant 
+le format Console du 
+(<a href="../reference/ide_compiler.html">menu Compilateur</a>: 
+Compilateur\Options du compilateur\ 
+Options de compilation\Format de 
+l'exécutable de l'éditeur de PureBasic). 
+Sous Linux ou OS X, cette commande 
+n'a pas d'effet, car il n'y a pas de 
+format spécial 'console' pour les 
+exécutables. Cependant, l'option de 
+compilation pour 'Console' lancera une 
+fenêtre de terminal automatiquement 
+lorsque vous exécutez votre programme 
+à partir de l'IDE. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  OpenConsole</font>()
+<font color="#006666">  PrintN</font>(&quot;Ce programme quittera dans 5 secondes...&quot;)
+<font color="#006666">  Delay</font>(5000)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closeconsole.html">CloseConsole()</a>, <a href="enablegraphicalconsole.html">EnableGraphicalConsole()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=input.html>Input()</a> - <a href=index.html>Console Index</a> - <a href=print.html>Print()</a> -><br><br>
+
+</body></html>

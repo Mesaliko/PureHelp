@@ -1,0 +1,104 @@
+<html><head><title>CatchXML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchXML()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CatchXML</b></font>(#XML, *Adresse, Taille [, Options [, Encodage]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un arbre XML à partir d'un code XML déjà 
+chargé en mémoire. 
+<br>
+<br>
+La création de l'arbre XML peut se faire 
+en une seule fois, ou de manière progressive 
+par exemple lors de la réception d'un flux 
+XML par le <a href="../network/index.html">réseau</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#XML</i></td>
+<td width="90%"> 
+L'arbre XML à utiliser. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>*Adresse</i></td>
+<td> 
+L'adresse d'une zone mémoire valide. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille en octets de la zone mémoire. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Si ce paramètre est omis, la zone mémoire 
+doit être suffisamment grande pour contenir 
+toutes les données XML.<br>
+Pour interpréter un flux XML en plusieurs 
+fois, les options suivantes sont disponibles: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_XML_StreamStart</font>: Démarre l'interprétation du premier bloc
+  <font color="#924B72">#PB_XML_StreamNext</font> : Continue l'interprétation avec un nouveau bloc
+  <font color="#924B72">#PB_XML_StreamEnd</font>  : Termine l'interprétation après ce bloc
+</font></pre>
+Lors de l'appel de cette fonction avec 
+l'option <font color="#924B72">#PB_XML_StreamStart</font> ou 
+<font color="#924B72">#PB_XML_StreamEnd</font>, le paramètre 'Taille' 
+peut être égal à 0. 
+<br>
+<br>
+A noter que lors de l'interprétation par blocs, 
+toute donnée fournie est immédiatement 
+accessible dans l'arbre XML avant même que 
+l'appel avec <font color="#924B72">#PB_XML_StreamEnd</font> n'ait eu lieu. 
+
+</td></tr>
+<tr><td><i>Encodage (optionnel)</i></td>
+<td> 
+Force l'encodage de l'arbre XML quelque soit 
+celui trouvé dans la déclaration XML. 
+(la déclaration XML est modifiée selon 
+l'encodage choisi). 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_UTF8</font> (Par défaut) 
+  <font color="#924B72">#PB_Ascii</font>
+  <font color="#924B72">#PB_Unicode</font> 
+</font></pre>
+Ce paramètre devra être utilisé lorsque le 
+document n'a pas de déclaration XML, ou si 
+l'information d'encodage est fournie en 
+dehors du document XML, par exemple à travers 
+un en-tête de type &quot;mime&quot; d'un protocole de 
+communication. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Cette commande renvoie 0 seulement lors 
+d'options invalides ou si une zone de mémoire 
+est corrompue.<br>
+Pour vérifier les erreurs d'interprétation, 
+utiliser <a href="xmlstatus.html">XMLStatus()</a>. Dans le cas d'une erreur 
+d'interprétation, toutes les données 
+correctement lues avant l'erreur sont quand 
+même disponibles dans l'arbre XML. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freexml.html">FreeXML()</a>, <a href="createxml.html">CreateXML()</a>, <a href="loadxml.html">LoadXML()</a>, <a href="parsexml.html">ParseXML()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>XML Index</a> - <a href=childxmlnode.html>ChildXMLNode()</a> -><br><br>
+
+</body></html>

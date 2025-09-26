@@ -1,0 +1,106 @@
+<html><head><title>AddMailAttachmentData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddMailAttachmentData()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddMailAttachmentData</b></font>(#Courrier, Description$, *Memoire, Taille [, TypeMime$])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute le contenu d'une zone de mémoire 
+comme pièce jointe. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Courrier</i></td>
+<td width="90%"> 
+Le courrier à utiliser. 
+
+</td></tr>
+<tr><td><i>Description$</i></td>
+<td> 
+Le texte d'information qui apparait 
+sur la pièce jointe. 
+
+</td></tr>
+<tr><td><i>*Memoire</i></td>
+<td> 
+La <a href="../memory/index.html">zone de </a>
+mémoire&quot; qui contient la pièce jointe. 
+<br>
+<br>
+Une fois que la pièce jointe a été 
+ajoutée, son contenu est entièrement 
+copié dans le courrier et ne prend 
+pas en compte les modifications ou 
+même la suppression de la zone mémoire 
+originale. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille de la pièce jointe en octets. 
+
+</td></tr>
+<tr><td><i>TypeMime$ (optionnel)</i></td>
+<td> 
+Le type du fichier joint. 
+<br>
+<br>
+Si ce paramètre est omis, l'extension 
+de fichier sera utilisée pour 
+déterminer le type MIME.<br>
+Ci-dessous, une liste des types MIME 
+disponibles.<br>
+Si l'extension du fichier ne correspond 
+à aucun des types MIME disponibles, 
+alors le type &quot;application/octet-stream&quot; 
+sera utilisé par défaut. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si la 
+pièce jointe a été créée avec succès, 
+zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il est possible d'ajouter autant de 
+pièces jointes que désiré, mais la 
+taille d'une pièce jointe ne pourra 
+pas dépasser 100 Mo. 
+La plupart des serveurs et des clients 
+mails ne pourront de toutes façons pas 
+les gérer, donc il est conseillé de garder 
+une taille raisonnable pour les pièces 
+jointes. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Salut&quot;)
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">AddMailAttachmentData</font>(0, &quot;Attachment 1&quot;, ?Salut, 5)
+      <b><font color="#006666">Debug</font></b> &quot;Pièce jointe ajoutée&quot;
+    <b><font color="#006666">Else</font></b>
+      <b><font color="#006666">Debug</font></b> &quot;Impossible d'ajouter la pièce jointe&quot;
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">DataSection</font></b>
+    Salut:
+    <b><font color="#006666">Data</font></b>.b <font color="#924B72">'S'</font>, <font color="#924B72">'a'</font>, <font color="#924B72">'l'</font>, <font color="#924B72">'u'</font>, <font color="#924B72">'t'</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addmailattachment.html">AddMailAttachment()</a>, <a href="createmail.html">CreateMail()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addmailattachment.html>AddMailAttachment()</a> - <a href=index.html>Mail Index</a> - <a href=addmailrecipient.html>AddMailRecipient()</a> -><br><br>
+
+</body></html>

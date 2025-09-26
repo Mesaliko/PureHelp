@@ -1,0 +1,131 @@
+<html><head><title>Einsteiger-Kapitel - Variablen und das Verarbeiten von Variablen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Einsteiger-Kapitel - Variablen und das Verarbeiten von Variablen</font></b></p>
+
+<b>A</b> ist ein Integer - aber beachten Sie bitte, dass Sie keine <a href="../reference/variables.html">Variablen</a> 
+auf diesem Weg deklarieren können, wenn Sie die <a href="../reference/compilerdirectives.html">EnableExplicit</a> 
+Direktive verwenden. 
+Außerhalb einer <a href="../reference/procedures.html">Prozedur</a> wird A im Geltungsbereich des Hauptcodes 
+(&quot;Main scope&quot;) existieren, innerhalb einer Prozedur wird sie lokal werden. 
+<pre><font face="Courier New, Courier, mono" size="2">  A = 0
+</font></pre>
+
+<br>
+<b>B</b> ist eine Long Integer, <b>C</b> ist eine Fließkommazahl, sie werden mit Null initialisiert. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> B.l, C.f
+</font></pre>
+
+<br>
+<b>D</b> und <b>E</b> sind ebenfalls Long Integer. Sie werden jedoch mit den angegebenen Werten 
+initialisiert. Beachten Sie auch den verwendeten alternativen Syntax von <a href="../reference/define.html">Define</a>. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.l D = 10, E = 20
+</font></pre>
+
+<br>
+<b>F</b> ist ein String. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.s F
+</font></pre>
+
+<br>
+Dies ist auch <b>G$</b>. Wenn Sie Strings allerdings auf diese Weise deklarieren, müssen Sie 
+immer die $ Notation verwenden. 
+<pre><font face="Courier New, Courier, mono" size="2">  G$ = &quot;Hello, &quot;
+</font></pre>
+
+Dies wird nicht funktionieren (G wird eine neue Integer Variable und ein Compiler-Fehler tritt auf). 
+<pre><font face="Courier New, Courier, mono" size="2">  G = &quot;Goodbye, World!&quot;
+</font></pre>
+
+<br>
+<b>H</b> ist ein <a href="../reference/dim.html">Array</a> von 20 Strings, die Indizierung von Arrays beginnt bei Null. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">H</font>.s(19)
+</font></pre>
+
+Jetzt ist H ein Array von 25 Strings. Wenn das Array vergrößert wird, bleiben seine originalen 
+Inhalte erhalten. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">ReDim</font></b> <font color="#006666">H</font>.s(24)
+</font></pre>
+
+<br>
+<b>J</b> wird als <a href="../reference/global.html">Global</a> erscheinen, und nicht (nur) im Geltungsbereich 
+des Hauptcodes (&quot;Main scope&quot;). Es wird in allen Prozeduren gültig sein, aber es ist möglicherweise 
+der bessere Weg, innerhalb einer Prozedur das <a href="../reference/shared.html">Shared</a> Schlüsselwort auf 
+eine Variable des Hauptbereichs anzuwenden, damit die Möglichkeit unbeabsichtigter Änderungen 
+minimiert wird. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b>.i J
+</font></pre>
+
+<br>
+<b>K</b> wird eine neue, leere, <a href="../reference/newlist.html">Liste</a> von Strings im Hauptgeltungsbereich 
+(&quot;Main scope&quot;). 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">K</font>.s()
+</font></pre>
+
+<br>
+<b>M</b> wird eine neue, leere, <a href="../reference/newmap.html">Map</a> von Strings im Hauptgeltungsbereich 
+(&quot;Main scope&quot;). 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">M</font>.s()
+</font></pre>
+
+<br>
+Beachten Sie bitte, dass Sie jedoch nicht die alternative Syntax des <a href="../reference/define.html">Define</a> 
+Schlüsselworts mit <a href="../reference/newlist.html">NewList</a> bzw. <a href="../reference/newmap.html">NewMap</a> 
+verwenden können. Sonst wird ein Compiler-Fehler daraus resultieren. 
+<br>
+<br>
+Innerhalb einer Prozedur: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">TestVariables</font>()
+  �� 
+  �� <font color="#006666">; N und P werden lokal sein.</font>
+  �� <b><font color="#006666">Define</font></b>.l N
+  �� <b><font color="#006666">Protected</font></b>.l P
+  �� 
+  �� <font color="#006666">; Q wird eine statische lokale Variable sein.</font>
+  �� <b><font color="#006666">Static</font></b>.l Q
+  �� 
+  �� <font color="#006666">; Die Variable F und die String-Liste K aus dem Geltungsbereich des Hauptcodes werden in dieser Prozedur verfügbar sein.</font>
+  �� <b><font color="#006666">Shared</font></b> F,<font color="#006666"> K</font>()
+  �� 
+  �� <font color="#006666">; Die globale Variable J des Hauptgeltungsbereich wird hier ebenfalls verfügbar sein.</font>
+  �� 
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+<br>
+Das Verwenden von <a href="../reference/variables.html">Operatoren</a> auf Variablen: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Addiert zwei zu A.</font>
+  A + 2
+  
+  <font color="#006666">; Bitweises Or mit 21 (aus A wird 23)</font>
+  A | 21
+  
+  <font color="#006666">; Bitweises And mit 1 (aus A wird 1)</font>
+  A &amp; 1
+  
+  <font color="#006666">; Arithmetische Verschiebung nach links (aus A wird 2, d.h. 10 in binär).</font>
+  A &lt;&lt; 1
+</font></pre>
+
+<br>
+String-Verkettung 
+<pre><font face="Courier New, Courier, mono" size="2">  G$ + &quot;World!&quot;
+</font></pre>
+
+<br>
+Ein Element zur K Liste hinzufügen: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  AddElement</font>(<font color="#006666">K</font>())
+<font color="#006666">  K</font>() = &quot;List element one&quot;
+</font></pre>
+
+<br>
+Ein Element zur M Map hinzufügen: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  M</font>(&quot;one&quot;) = &quot;Map element one&quot;
+</font></pre>
+
+
+<br>
+<p><b>Einsteiger-Kapitel Navigation</b></p><blockquote>
+
+<a href="../reference/ug_firststeps.html">< Vorheriges: Erste Schritte</a> | <a href="../reference/ug_overview.html">Überblick</a> | <a href="../reference/ug_constants.html">Nächstes: Konstanten ></a> 
+</blockquote>
+</font></body></html>

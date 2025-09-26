@@ -1,0 +1,105 @@
+<html><head><title>CreateTerrain</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateTerrain()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateTerrain</b></font>(#Terrain, Taille, TailleMonde, Echelle, NbCouches, NomFichier$, Extension$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau terrain. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Terrain</i></td>
+<td width="90%"> 
+Le numéro d'identification du 
+nouveau terrain. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Taille</i></td>
+<td> 
+La taille du nouveau terrain 
+(moins une arête). 
+
+</td></tr>
+<tr><td><i>TailleMonde</i></td>
+<td> 
+La taille du monde du nouveau 
+terrain. 
+
+</td></tr>
+<tr><td><i>Echelle</i></td>
+<td> 
+Le facteur d'échelle à appliquer 
+au nouveau terrain. 
+
+</td></tr>
+<tr><td><i>NbCouches</i></td>
+<td> 
+Le nombre de couches de texture du 
+nouveau terrain. 
+<br>
+<br>
+Pour ajouter une couche de texture, 
+utilisez <a href="addterraintexture.html">AddTerrainTexture()</a>. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Le nom du fichier (sans l'extension) 
+pour stocker les données de terrain 
+précalculées. 
+<br>
+<br>
+Comme le terrain peut être complexe 
+et prendre beaucoup de temps pour sa 
+création, un cache sera écrit sur le 
+disque et rechargé automatiquement 
+s'il est présent (et non périmé). 
+
+</td></tr>
+<tr><td><i>Extension$</i></td>
+<td> 
+L'extension utilisée par les fichiers 
+de données. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas 
+de succès et zéro en cas d'échec. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="setupterrains.html">SetupTerrains()</a> doit être appelé 
+auparavant pour régler les paramètres 
+par défaut du nouveau terrain. Après 
+la création du terrain, de nouvelles 
+parcelles (tiles) peuvent être définies 
+par <a href="defineterraintile.html">DefineTerrainTile()</a> et les textures 
+peuvent être appliquées avec 
+<a href="addterraintexture.html">AddTerrainTexture()</a>. 
+Une fois la définition du terrain 
+terminée, <a href="buildterrain.html">BuildTerrain()</a> doit être 
+appelé pour le construire. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="freeterrain.html">FreeTerrain()</a>, <a href="setupterrains.html">SetupTerrains()</a>, 
+<a href="buildterrain.html">BuildTerrain()</a>, <a href="defineterraintile.html">DefineTerrainTile()</a>, 
+<a href="addterraintexture.html">AddTerrainTexture()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=buildterrain.html>BuildTerrain()</a> - <a href=index.html>Terrain Index</a> - <a href=createterrainbody.html>CreateTerrainBody()</a> -><br><br>
+
+</body></html>

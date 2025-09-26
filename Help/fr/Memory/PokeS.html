@@ -1,0 +1,79 @@
+<html><head><title>PokeS</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PokeS()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>PokeS</b></font>(*Memoire, Texte$ [, Longueur [, Options]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ecrit une chaîne de caractères, suivi d'un 
+caractère <font color="#924B72">#NULL</font> de fin de chaîne en mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse mémoire où écrire. 
+
+</td></tr>
+<tr><td><i>Texte$</i></td>
+<td> 
+La chaîne de caractères à écrire. 
+
+</td></tr>
+<tr><td><i>Longueur (optionnel)</i></td>
+<td> 
+Longueur maximale (en caractères). 
+<br>
+<br>
+Si ce paramètre n'est pas spécifié ou égal 
+à -1 alors toute la chaîne est écrite.<br>
+Le caractère <font color="#924B72">#NULL</font> de fin de chaîne qui est 
+toujours écrit (sauf si <font color="#924B72">#PB_String_NoZero</font> 
+est défini) n'est pas inclus dans ce décompte. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut prendre l'une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font>  : Format ASCII
+  <font color="#924B72">#PB_UTF8</font>   : Format UTF-8
+  <font color="#924B72">#PB_Unicode</font>: Format Unicode (Par défaut)
+  Combiné avec
+  <font color="#924B72">#PB_String_NoZero</font>: N'écrit pas le caractère <font color="#924B72">#NULL</font> de fin de chaîne.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le nombre d'octets écrits, non compris 
+le caractère <font color="#924B72">#NULL</font> de fin de chaîne.<br>
+Le nombre d'octets écrit diffère de la 
+longueur de la chaîne en caractères si le 
+format est <font color="#924B72">#PB_UTF8</font> ou <font color="#924B72">#PB_Unicode</font>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MemoireID =<font color="#006666"> AllocateMemory</font>(5000)
+  <b><font color="#006666">If</font></b> *MemoireID
+<font color="#006666">    PokeS</font>(*MemoireID, &quot;PureBasic hé&quot;)   <font color="#006666">; Stocke cette valeur dans la zone mémoire&quot;)</font>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MemoireID)             <font color="#006666">; Lit cette valeur depuis la zone mémoire&quot;)</font>
+<font color="#006666">    FreeMemory</font>(*MemoireID)  
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible d'allouer la mémoire demandée !&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="peeks.html">PeekS()</a>, <a href="copymemorystring.html">CopyMemoryString()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=pokeq.html>PokeQ()</a> - <a href=index.html>Memory Index</a> - <a href=pokeu.html>PokeU()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,74 @@
+<html><head><title>ImageFormat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageFormat()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>ImageFormat</b></font>(#Image)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le format d'une image. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le format d'origine de l'image. 
+Il peut être une des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ImagePlugin_JPEG</font>
+  <font color="#924B72">#PB_ImagePlugin_JPEG2000</font>
+  <font color="#924B72">#PB_ImagePlugin_PNG</font>
+  <font color="#924B72">#PB_ImagePlugin_TGA</font>
+  <font color="#924B72">#PB_ImagePlugin_TIFF</font>
+  <font color="#924B72">#PB_ImagePlugin_BMP</font>
+  <font color="#924B72">#PB_ImagePlugin_ICON</font>
+  <font color="#924B72">#PB_ImagePlugin_GIF</font>
+</font></pre>
+Si l'image n'a pas été chargée avec l'un de 
+ces formats, la fonction renverra zéro. 
+C'est le cas pour les images créées avec 
+<a href="createimage.html">CreateImage()</a> ou <a href="grabimage.html">GrabImage()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;Examples\Sources\Data\GeeBee2.bmp&quot;)
+
+  <b><font color="#006666">Select</font></b> <font color="#006666">ImageFormat</font>(0)
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_JPEG</font>
+       <b><font color="#006666">Debug</font></b> &quot;JPEG&quot;
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_JPEG2000</font>
+       <b><font color="#006666">Debug</font></b> &quot;JPEG2000&quot;
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_PNG</font>
+       <b><font color="#006666">Debug</font></b> &quot;PNG&quot; 
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_TGA</font>
+       <b><font color="#006666">Debug</font></b> &quot;TGA&quot;
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_TIFF</font>
+       <b><font color="#006666">Debug</font></b> &quot;TIFF&quot; 
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_BMP</font>
+       <b><font color="#006666">Debug</font></b> &quot;BMP&quot; 
+    <b><font color="#006666">Case</font></b> <font color="#924B72">#PB_ImagePlugin_ICON</font>
+       <b><font color="#006666">Debug</font></b> &quot;ICON &quot;
+    <b><font color="#006666">Default</font></b> 
+       <b><font color="#006666">Debug</font></b> &quot;Inconnu&quot;
+  <b><font color="#006666">EndSelect</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="loadimage.html">LoadImage()</a>, <a href="createimage.html">CreateImage()</a>, <a href="catchimage.html">CatchImage()</a>, 
+<a href="grabimage.html">GrabImage()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=imagedepth.html>ImageDepth()</a> - <a href=index.html>Image Index</a> - <a href=imageframecount.html>ImageFrameCount()</a> -><br><br>
+
+</body></html>

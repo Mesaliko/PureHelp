@@ -1,0 +1,61 @@
+<html><head><title>WindowVectorOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WindowVectorOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+VektorAusgabeID = <font color="#006666"><b>WindowVectorOutput</b></font>(#Window [, Einheit])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die AusgabeID des gegebenen Fensters zurück, um darauf Vektor-Zeichenoperationen auszuführen. 
+Es verwendet die PureBasic <a href="../vectordrawing/index.html">VectorDrawing</a> Bibliothek und kann nur 
+innerhalb des <a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> / <a href="../vectordrawing/stopvectordrawing.html">StopVectorDrawing()</a> Blocks verwendet werden. Der in 
+<a href="windowvectoroutput.html">WindowVectorOutput()</a> zugeteilte Speicher wird mit <a href="../vectordrawing/stopvectordrawing.html">StopVectorDrawing()</a> wieder freigegeben. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Window</i></td>
+<td width="90%"> 
+Das zu verwendende Fenster. 
+
+</td></tr>
+<tr><td><i>Einheit (optional)</i></td>
+<td> 
+Bestimmt die Maßeinheit zur Abstandsmessung auf der Zeichenausgabe. Die Standard-Einheit für Fenster ist <font color="#924B72">#PB_Unit_Pixel</font>. 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Unit_Pixel</font>     : Werte werden in Pixel gemessen (oder Dots/Punkte im Fall eines Druckers)
+  <font color="#924B72">#PB_Unit_Point</font>     : Werte werden in Punkten (1/72 Zoll bzw. Inch) gemessen
+  <font color="#924B72">#PB_Unit_Inch</font>      : Werte werden in Zoll (Inch) gemessen
+  <font color="#924B72">#PB_Unit_Millimeter</font>: Werte werden in Millimeter gemessen
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die AusgabeID des gegebenen Fensters, um darin 2D Rendering-Operationen mittels <a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a> auszuführen. 
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die Zeichnung auf dem Fenster wird ausgelöscht, sobald das Fenster (oder Teile davon) von anderen 
+Fenstern überlagert, es aus dem Desktopbereich verschoben, oder es versteckt bzw. minimiert wird. 
+Um die Zeichnung sichbar zu erhalten, muß sie nach jedem <font color="#924B72">#PB_Event_Repaint</font> Ereignis neu gezeichnet 
+werden. Eine mehr handlichere Alternative wäre es, die Zeichnung via <a href="../image/imagevectoroutput.html">ImageVectorOutput()</a>  auf ein 
+Bild zu zeichnen und es als <a href="../gadget/imagegadget.html">ImageGadget()</a> im Anwendungsfenster darzustellen und wenn nötig, es 
+mittels <a href="../gadget/setgadgetstate.html">SetGadgetState()</a> zu aktualisieren. Auf diesem Weg werden alle benötigten Auffrischungen 
+vom ImageGadget gehandhabt. 
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="../vectordrawing/startvectordrawing.html">StartVectorDrawing()</a>, <a href="windowoutput.html">WindowOutput()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=windowoutput.html>WindowOutput()</a> - <a href=index.html>Window Inhaltsverzeichnis</a> - <a href=windowwidth.html>WindowWidth()</a> -><br><br>
+
+
+
+</body></html>

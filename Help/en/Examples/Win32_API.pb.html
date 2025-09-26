@@ -1,0 +1,53 @@
+<html><head><title>Win32_API.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Win32 API example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">; NOTE: This file doesn't compile with the demo version ! (API Calls)
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_OS</font> &lt;&gt; <font color="#924B72">#PB_OS_Windows</font>
+  <b><font color="#006666">CompilerError</font></b> &quot;This example is Windows only&quot;
+<b><font color="#006666">CompilerEndIf</font></b>
+
+<font color="#006666">;
+</font><font color="#006666">; Now, open a window, and do some stuff with it...
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 100, 100, 195, 260, &quot;PureBasic Window&quot;)
+
+  <font color="#006666">;
+</font>  <font color="#006666">; This is the 'event loop'. All the user actions are processed here.
+</font>  <font color="#006666">; It's very easy to understand: when an action occurs, the Event
+</font>  <font color="#006666">; isn't 0 and we just have to see what have happened...
+</font>  <font color="#006666">;
+</font>
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+
+    <font color="#006666">;
+</font>    <font color="#006666">; Here we use directly the Windows API to draw an ellipse.
+</font>    <font color="#006666">; All the Windows® functions are supported !
+</font>    <font color="#006666">;
+</font>  
+    *DC =<font color="#006666"> GetDC_</font>(<font color="#006666">WindowID</font>(0))          <font color="#006666">; Get the output pointer
+</font><font color="#006666">    Ellipse_</font>(*DC, 10, 10, 100, 100)   <font color="#006666">; Draw a filled ellipse
+</font><font color="#006666">    ReleaseDC_</font>(<font color="#006666">WindowID</font>(0), *DC)       <font color="#006666">; Release the drawing output
+</font>
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>  <font color="#006666">; If the user has pressed on the close button
+</font>      Quit = 1
+    <b><font color="#006666">EndIf</font></b>
+
+  <b><font color="#006666">Until</font></b> Quit = 1
+  
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>   <font color="#006666">; All the opened windows are closed automatically by PureBasic
+</font></font></pre>
+</body></html>

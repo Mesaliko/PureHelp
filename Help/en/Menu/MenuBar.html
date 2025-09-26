@@ -1,0 +1,39 @@
+<html><head><title>MenuBar</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MenuBar()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>MenuBar</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a separator bar in the current menu. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 200, 200, 200, 100, &quot;MenuBar Example&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateMenu</font>(0,<font color="#006666"> WindowID</font>(0))  <font color="#006666">; here the menu creating starts....</font>
+<font color="#006666">      MenuTitle</font>(&quot;Project&quot;)
+<font color="#006666">        MenuItem</font>(1, &quot;Open&quot;)
+<font color="#006666">        MenuBar</font>()                  <font color="#006666">; here the separator bar will be inserted</font>
+<font color="#006666">        MenuItem</font>(4, &quot;Close&quot;)
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b> : <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<p><img src="../HelpPictures/menubar.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="menutitle.html">MenuTitle()</a>, <a href="menuitem.html">MenuItem()</a>, <a href="opensubmenu.html">OpenSubMenu()</a>, <a href="createmenu.html">CreateMenu()</a>, <a href="createpopupmenu.html">CreatePopupMenu()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=ismenu.html>IsMenu()</a> - <a href=index.html>Menu Index</a> - <a href=menuheight.html>MenuHeight()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,72 @@
+<html><head><title>TryLockMutex</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">TryLockMutex()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>TryLockMutex</b></font>(Mutex)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Tries to lock the specified mutex. Unlike <a href="lockmutex.html">LockMutex()</a>, this function does not 
+stop execution until the mutex is available. It returns immediately and the return-value indicates 
+if the lock was successful or not. This is useful in situations were the thread should not wait 
+for the mutex to be available but rather do other things in the meantime. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mutex</i></td>
+<td width="90%"> 
+The mutex to lock. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the mutex was successfully locked, zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+If the lock was successful, the <a href="unlockmutex.html">UnlockMutex()</a> function must be called 
+to make the mutex available to other threads again. If this is not done, this could easily lead to a lockup situation. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">ThreadProcedure</font>(*Value)
+    <b><font color="#006666">Shared</font></b> Mutex
+    
+    <b><font color="#006666">Repeat</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">TryLockMutex</font>(Mutex)
+<font color="#006666">        PrintN</font>(&quot;Mutex successfully locked.&quot;)
+        
+<font color="#006666">        UnlockMutex</font>(Mutex)
+        <b><font color="#006666">Break</font></b> <font color="#006666">; quit the loop and thread</font>
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        PrintN</font>(&quot;Still waiting for mutex access...&quot;)
+<font color="#006666">        Delay</font>(200)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">ForEver</font></b>  
+  <b><font color="#006666">EndProcedure</font></b>
+  
+<font color="#006666">  OpenConsole</font>()
+  
+  Mutex =<font color="#006666"> CreateMutex</font>()
+<font color="#006666">  LockMutex</font>(Mutex) <font color="#006666">; main program has the mutex locked at first</font>
+  Thread =<font color="#006666"> CreateThread</font>(@ThreadProcedure(), 0)
+  
+<font color="#006666">  Delay</font>(4000)
+<font color="#006666">  UnlockMutex</font>(Mutex) <font color="#006666">; now release the mutex, so the thread can get it</font>
+  
+<font color="#006666">  Input</font>()
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="unlockmutex.html">UnlockMutex()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=threadpriority.html>ThreadPriority()</a> - <a href=index.html>Thread Index</a> - <a href=trysemaphore.html>TrySemaphore()</a> -><br><br>
+
+</body></html>

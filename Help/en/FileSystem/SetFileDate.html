@@ -1,0 +1,53 @@
+<html><head><title>SetFileDate</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetFileDate()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SetFileDate</b></font>(Filename$, DateType, Date)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Changes the date of the specified file. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Filename$</i></td>
+<td width="90%"> 
+The name of the file to modify. 
+
+</td></tr>
+<tr><td><i>DateType</i></td>
+<td> 
+The kind of date to modify. It can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Date_Created</font> : change the file creation date.
+  <font color="#924B72">#PB_Date_Accessed</font>: change the last file access date.
+  <font color="#924B72">#PB_Date_Modified</font>: change the last file modification date.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Date</i></td>
+<td> 
+The date to set. This has to be a value from the <a href="../date/index.html">Date</a> library. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the operation was successful and zero otherwise. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+On Linux and Mac OSX, the date used for <font color="#924B72">#PB_Date_Created</font> is the same as the date for 
+<font color="#924B72">#PB_Date_Modified</font>, because most file systems do not store a file creation date. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getfiledate.html">GetFileDate()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=setfileattributes.html>SetFileAttributes()</a> - <a href=index.html>FileSystem Index</a><br><br>
+
+</body></html>

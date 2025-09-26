@@ -1,0 +1,75 @@
+<html><head><title>InputRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputRequester()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>InputRequester</b></font>(Titre$, Message$, TexteParDefaut$ [, Option [, ParentID]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre une boîte de dialogue permettant 
+la saisie de texte. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Titre$</i></td>
+<td width="90%"> 
+Titre de la boîte de dialogue. 
+
+</td></tr>
+<tr><td><i>Message$</i></td>
+<td> 
+Message affiché avant le champ de saisie. 
+
+</td></tr>
+<tr><td><i>TexteParDefaut$</i></td>
+<td> 
+Texte par défaut du champ de saisie. 
+
+</td></tr>
+<tr><td><i>Option (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_InputRequester_Password</font>: Définir le champ en type 'mot de passe'. 
+                               Le texte affiché sera caché.
+</font></pre>
+
+</td></tr>
+<tr><td><i>ParentID (optionnel)</i></td>
+<td> 
+L'identifiant de la fenêtre parent. 
+<br>
+<br>
+Un identifiant de fenêtre valide peut être récupéré avec <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le texte du champ de saisie, 
+ou une chaîne de caractères vide si 
+l'utilisateur a annulé la boîte. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Saisie$ =<font color="#006666"> InputRequester</font>(&quot;InputRequester&quot;,&quot;Saisissez un texte :&quot;,&quot;Texte par défaut.&quot;)
+
+  <b><font color="#006666">If</font></b> Saisie$ &gt; &quot;&quot;
+    a$ = &quot;Vous avez écrit le texte suivant :&quot; +<font color="#006666"> Chr</font>(10)  <font color="#006666">; Chr(10) nécessaire seulement</font>
+    a$ + Saisie$                                         <font color="#006666">; pour faire un saut de ligne</font>
+  <b><font color="#006666">Else</font></b> 
+    a$ = &quot;La saisie a été annulée ou il n'y a pas de texte saisi.&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;,a$,0)
+  <b><font color="#006666">End</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/inputrequester.png"></p>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=fontrequester.html>FontRequester()</a> - <a href=index.html>Requester Index</a> - <a href=messagerequester.html>MessageRequester()</a> -><br><br>
+
+
+</body></html>

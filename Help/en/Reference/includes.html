@@ -1,0 +1,90 @@
+<html><head><title>Includes Functions</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Includes Functions</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">IncludeFile</font></b>  &quot;Filename&quot; 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">IncludeFile</font></b> will always include the specified source file, at the current place in the code 
+(even if <b><font color="#006666">XIncludeFile</font></b> has been called for this file before). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">IncludeFile</font></b> &quot;Sources\myfile.pb&quot; <font color="#006666">; This file will be inserted in the current code.</font>
+</font></pre>
+
+This command is useful, if you want to split your source code into several files, to be able 
+to reuse parts e.g. in different projects. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">XIncludeFile</font></b> &quot;Filename&quot;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">XIncludeFile</font></b> is similar to <b><font color="#006666">IncludeFile</font></b> excepts it avoids to include the same file twice. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">XIncludeFile</font></b> &quot;Sources\myfile.pb&quot; <font color="#006666">; This file will be inserted.</font>
+  <b><font color="#006666">XIncludeFile</font></b> &quot;Sources\myfile.pb&quot; <font color="#006666">; This file will be ignored along with all subsequent calls. </font>
+</font></pre>
+
+This command is useful, if you want to split your source code into several files, to be able 
+to reuse parts e.g. in different projects. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">IncludeBinary</font></b> &quot;filename&quot; 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">IncludeBinary</font></b> will include the named file at the current place in the code. 
+Including should be done inside a <a href="../reference/data.html">Data</a> block. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    MapLabel:
+    <b><font color="#006666">IncludeBinary</font></b> &quot;Data\map.data&quot;
+  <b><font color="#006666">EndDataSection</font></b> 
+</font></pre>
+
+This command is especially useful in combination with the Catch-commands (currently there 
+are <a href="../image/catchimage.html">CatchImage()</a>, <a href="../sound/catchsound.html">CatchSound()</a>, <a href="../sprite/catchsprite.html">CatchSprite()</a>) to include images, sounds, sprites etc. 
+into the executable. 
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">IncludePath</font></b> &quot;path&quot; 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">IncludePath</font></b> will specify a default path for all files included after the call of 
+this command. This can be very handy when you include many files which are in the same directory. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">IncludePath</font></b>  &quot;Sources\Data&quot;
+  <b><font color="#006666">IncludeFile</font></b>  &quot;Sprite.pb&quot;
+  <b><font color="#006666">XIncludeFile</font></b> &quot;Music.pb&quot;
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

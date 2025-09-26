@@ -1,0 +1,52 @@
+<html><head><title>ListSize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ListSize()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>ListSize</b></font>(List()) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the number of elements in the list. It does not change the 
+current element. This function is very fast (it doesn't iterates all the list but 
+uses a cached result) and can be safely used to determine if a list is empty or not. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>List()</i></td>
+<td width="90%"> 
+The name of your list variable, created with the <a href="../reference/newlist.html">NewList</a> function. 
+You must include the parentheses after the list name. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The total number of elements in the list. If the list is not initialized, it returns -1 (for example after <a href="freelist.html">FreeList()</a>). 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">countme</font>.w()
+
+  <font color="#006666">; Small loop to add some elements to the list.</font>
+  <b><font color="#006666">For</font></b> i=0 <b><font color="#006666">To</font></b> 10
+<font color="#006666">    AddElement</font>(<font color="#006666">countme</font>())
+<font color="#006666">    countme</font>() = i * 23
+  <b><font color="#006666">Next</font></b>
+
+  <font color="#006666">; Show how many elements there are in the list. I hope you thought</font>
+  <font color="#006666">; of the same value as this example ;)</font>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, &quot;There are &quot;+<font color="#006666">Str</font>(<font color="#006666">ListSize</font>(<font color="#006666">countme</font>()))+&quot; elements in the list&quot;, <font color="#924B72">#PB_MessageRequester_OK</font>)
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="listindex.html">ListIndex()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=listindex.html>ListIndex()</a> - <a href=index.html>List Index</a> - <a href=mergelists.html>MergeLists()</a> -><br><br>
+
+</body></html>

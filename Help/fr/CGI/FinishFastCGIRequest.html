@@ -1,0 +1,73 @@
+<html><head><title>FinishFastCGIRequest</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">FinishFastCGIRequest()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>FinishFastCGIRequest</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Termine la requête FastCGI en cours 
+et libère toutes les ressources 
+associées. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si une 
+nouvelle requête a été traitée. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il n'est pas obligatoire d'utiliser cette 
+commande, car la demande sera automatiquement 
+terminée lorsque <a href="waitfastcgirequest.html">WaitFastCGIRequest()</a>() 
+est appelée de nouveau, ou quand le thread 
+se termine. <br>
+Cela peut être utile dans certains cas 
+particuliers où les ressources sont 
+faibles avant de faire un autre 
+traitement. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitCGI</font>()
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <b><font color="#006666">Not</font></b> <font color="#006666">InitFastCGI</font>(5600) <font color="#006666">; Crée le programme FastCGI sur le port 5600</font>
+    <b><font color="#006666">End</font></b>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">While</font></b> <font color="#006666">WaitFastCGIRequest</font>()
+  
+    <b><font color="#006666">If</font></b> <font color="#006666">ReadCGI</font>()
+<font color="#006666">      WriteCGIHeader</font>(<font color="#924B72">#PB_CGI_HeaderContentType</font>, &quot;text/html&quot;, <font color="#924B72">#PB_CGI_LastHeader</font>) <font color="#006666">; Ecrit les en-têtes pour informer le navigateur du format du contenu</font>
+  
+<font color="#006666">      WriteCGIString</font>(&quot;&lt;html&gt;&lt;title&gt;PureBasic - FastCGI&lt;/title&gt;&lt;body&gt;&quot; +
+                     &quot;Hello depuis PureBasic FastCGI !&lt;br&gt;&quot; +
+                     &quot;Heure actuelle: &lt;b&gt;&quot;+<font color="#006666">FormatDate</font>(&quot;%hh:%ii&quot;,<font color="#006666"> Date</font>()) + &quot;&lt;/b&gt;&quot; +
+                     &quot;&lt;/body&gt;&lt;/html&gt;&quot;)
+                     
+<font color="#006666">      FinishFastCGIRequest</font>()
+      
+      <font color="#006666">; Traiter des choses ici...</font>
+      <font color="#006666">;</font>
+<font color="#006666">      Delay</font>(1000) <font color="#006666">; Simuler un grand traitement</font>
+      
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="initcgi.html">InitCGI()</a>, <a href="initfastcgi.html">InitFastCGI()</a>, 
+<a href="waitfastcgirequest.html">WaitFastCGIRequest()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=countcgiparameters.html>CountCGIParameters()</a> - <a href=index.html>CGI Index</a> - <a href=initcgi.html>InitCGI()</a> -><br><br>
+
+
+</body></html>

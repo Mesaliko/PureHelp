@@ -1,0 +1,114 @@
+<html><head><title>DatabaseQuery</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DatabaseQuery()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>DatabaseQuery</b></font>(#Datenbank, Abfrage$ [, Flags])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Führt eine SQL-Abfrage (englisch &quot;SQL query&quot;) in der angegebenen Datenbank aus. 
+Es werden nur Abfragen akzeptiert, die nicht die Datenbank-Einträge verändern ('SELECT'-ähnliche 
+Abfragen). Um Veränderungen an der Datenbank durchzuführen, verwenden Sie <a href="databaseupdate.html">DatabaseUpdate()</a>. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Datenbank</i></td>
+<td width="90%"> 
+Die zu verwendende Datenbank. 
+
+</td></tr>
+<tr><td><i>Abfrage$</i></td>
+<td> 
+Die auszuführende SQL-Abfrage. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Die zu verwendenden Flags. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Database_StaticCursor</font> : führt die Abfrage aus, um auf das Ergebnis in einer sequentiellen Weise zuzugreifen.
+                              Es ist auf manchen Treibern nicht möglich, mittels <a href="previousdatabaserow.html">PreviousDatabaseRow()</a> oder
+                              <a href="firstdatabaserow.html">FirstDatabaseRow()</a> zurückzuspringen, aber es ist der schnellere Weg zum Zugriff
+                              auf die Daten (Standard).
+  <font color="#924B72">#PB_Database_DynamicCursor</font>: führt die Abfrage aus, um auf das Ergebnis in einer zufälligen Weise mittels
+                              <a href="previousdatabaserow.html">PreviousDatabaseRow()</a> oder <a href="firstdatabaserow.html">FirstDatabaseRow()</a> zuzugreifen. Dies kann langsamer sein,
+                              oder auf manchen Treibern auch nicht unterstützt.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Abfrage erfolgreich war, oder Null wenn sie 
+fehlgeschlagen ist (wegen eines SQL-Fehlers oder einer falsch formatierten Abfrage). 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wenn die Abfrage erfolgreich war, dann kann <a href="nextdatabaserow.html">NextDatabaseRow()</a> zum Auflisten der 
+Einträge (englisch &quot;Records&quot;) verwendet werden (siehe Beispiel unten). Im Falle eines Fehlers 
+kann der Fehlertext mittels <a href="databaseerror.html">DatabaseError()</a> ermittelt werden. Es ist sicher 
+<a href="nextdatabaserow.html">NextDatabaseRow()</a> zu verwenden, auch wenn die Abfrage keine Einträge zurückgibt. 
+Um die Anzahl der von der Abfrage zurückgegebenen Spalten (Felder) zu ermitteln, 
+verwenden Sie <a href="databasecolumns.html">DatabaseColumns()</a>. 
+<br>
+<br>
+Sobald die Abfrage-Resultate nicht mehr benötigt werden, muss <a href="finishdatabasequery.html">FinishDatabaseQuery()</a> 
+aufgerufen werden, um alle Abfrage-Ressourcen freizugeben. 
+<br>
+<br>
+Die Abfrage kann Platzhalter für Bindungsvariablen (englisch &quot;bind variables&quot;) enthalten. 
+Solche Variablen müssen vor dem Aufruf der Funktion mittels <a href="setdatabasestring.html">SetDatabaseString()</a>, 
+<a href="setdatabaselong.html">SetDatabaseLong()</a> etc. gesetzt werden. Nach dem Ausführen der Abfrage werden die 
+gebundenen Variablen (englisch &quot;bound variables&quot;) gelöscht und müssen für zukünftige 
+Aufrufe erneut festgelegt werden. Die Syntax für das Angeben der Bindungsvariablen in 
+SQL ist abhängig von der Datenbank. Das Beispiel unten zeigt die Syntax. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Zuerst stellen wir eine Verbindung zu der 'employee' (Angestellten) Tabelle her</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#DatenBank</font>, &quot;SELECT * FROM employee&quot;)  <font color="#006666">; Ermittelt alle Einträge in der 'employee' Tabelle</font>
+
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDatabaseRow</font>(<font color="#924B72">#Datenbank</font>)   <font color="#006666">; alle Einträge durchlaufen</font>
+      <b><font color="#006666">Debug</font></b> <font color="#006666">GetDatabaseString</font>(<font color="#924B72">#Datenbank</font>, 0)  <font color="#006666">; Inhalt vom ersten Feld anzeigen</font>
+    <b><font color="#006666">Wend</font></b>
+
+<font color="#006666">    FinishDatabaseQuery</font>(<font color="#924B72">#Datenbank</font>)
+  <b><font color="#006666">Else</font></b>
+<font color="#006666">    MessageRequester</font>(&quot;Fehler&quot;, &quot;Kann die folgende Abfrage nicht ausführen: &quot;+<font color="#006666">DatabaseError</font>())
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> Bindungsvariablen mit SQLite, MySQL und ODBC</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; SQLite, MySQL und ODBC haben die gleiche Syntax für Bindungsvariablen. Diese werden durch das '?' Zeichen angegeben.</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseString</font>(<font color="#924B72">#Database</font>, 0, &quot;test&quot;)  
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#Database</font>, &quot;SELECT * FROM employee WHERE id=?&quot;)    
+    <font color="#006666">; ...</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Beispiel:</b> PostgreSQL</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; PostgreSQL verwendet eine andere Syntax: $1, $2.. innerhalb der Anweisung, um die undefinierten Parameter anzugeben</font>
+  <font color="#006666">;</font>
+<font color="#006666">  SetDatabaseString</font>(<font color="#924B72">#Database</font>, 0, &quot;test&quot;)  
+  <b><font color="#006666">If</font></b> <font color="#006666">DatabaseQuery</font>(<font color="#924B72">#Database</font>, &quot;SELECT * FROM employee WHERE id=$1&quot;)    
+    <font color="#006666">; ...</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="databaseupdate.html">DatabaseUpdate()</a>, <a href="nextdatabaserow.html">NextDatabaseRow()</a> 
+<a href="setdatabasestring.html">SetDatabaseString()</a>, <a href="setdatabaselong.html">SetDatabaseLong()</a>, <a href="setdatabasequad.html">SetDatabaseQuad()</a>, <a href="setdatabasefloat.html">SetDatabaseFloat()</a>, <a href="setdatabasedouble.html">SetDatabaseDouble()</a> 
+<a href="setdatabaseblob.html">SetDatabaseBlob()</a>, <a href="setdatabasenull.html">SetDatabaseNull()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=databaseid.html>DatabaseID()</a> - <a href=index.html>Database Inhaltsverzeichnis</a> - <a href=databaseupdate.html>DatabaseUpdate()</a> -><br><br>
+
+</body></html>

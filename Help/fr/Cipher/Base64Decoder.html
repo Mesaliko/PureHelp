@@ -1,0 +1,68 @@
+<html><head><title>Base64Decoder</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Base64Decoder()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>Base64Decoder</b></font>(Source$, *TamponDestination, LongueurDestination)  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Décode une chaîne de caractères encodée en <a href="base64encoder.html">Base64</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Source$</i></td>
+<td width="90%"> 
+La chaîne de caractères à encoder. 
+
+</td></tr>
+<tr><td><i>*TamponDestination</i></td>
+<td> 
+Le tampon où les données brutes de sortie seront copiées. 
+
+</td></tr>
+<tr><td><i>LongueurDestination</i></td>
+<td> 
+La taille du tampon de sortie. 
+<br>
+<br>
+Le tampon de sortie peut être jusqu'à 33% plus petit que le tampon d'entrée, 
+avec une taille minimale de 64 octets.<br>
+Il est toutefois recommandé d'obtenir un tampon légèrement plus grand que 33%, comme 30% 
+plus petit pour éviter les débordements. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la longueur des données décodées en octets. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  String$ = &quot;Voici un texte !&quot;
+  
+  <font color="#006666">; Encodage d'une chaîne Ascii</font>
+  *Texte =<font color="#006666"> ASCII</font>(String$)
+    
+  Encoder$ =<font color="#006666"> Base64Encoder</font>(*Texte,<font color="#006666"> StringByteLength</font>(String$, <font color="#924B72">#PB_Ascii</font>))
+  <b><font color="#006666">Debug</font></b> &quot;Texte encodé: &quot; + Encoder$
+  
+  *TamponDecoder =<font color="#006666"> AllocateMemory</font>(1024)
+<font color="#006666">  Base64Decoder</font>(Encoder$, *TamponDecoder, 1024)
+  <b><font color="#006666">Debug</font></b> &quot;Texte décodé: &quot; +<font color="#006666"> PeekS</font>(*TamponDecoder, -1, <font color="#924B72">#PB_Ascii</font>) + &quot;'&quot;
+  
+<font color="#006666">  FreeMemory</font>(*Texte)
+<font color="#006666">  FreeMemory</font>(*TamponDecoder)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="base64encoder.html">Base64Encoder()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addfingerprintbuffer.html>AddFingerprintBuffer()</a> - <a href=index.html>Cipher Index</a> - <a href=base64decoderbuffer.html>Base64DecoderBuffer()</a> -><br><br>
+
+</body></html>

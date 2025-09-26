@@ -1,0 +1,56 @@
+<html><head><title>GrabSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GrabSprite()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>GrabSprite</b></font>(#Sprite, x, y, Width, Height [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Grabs the screen content from the area x, y, Width, Height and creates a new sprite. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+A number to identify the new grabbed sprite. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+The position in the screen used to start the grab (in pixels). 
+
+</td></tr>
+<tr><td><i>Width, Height</i></td>
+<td> 
+The size of the grab (in pixels). 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values (with the '|' operator): 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Add special information to handle pixel collision through <a href="spritepixelcollision.html">SpritePixelCollision()</a>.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Sprite is created with per pixel alpha-channel support, needed for <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>. The default transparent color
+                             set with <a href="transparentspritecolor.html">TransparentSpriteColor()</a> is automatically applied.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Nonzero if the sprite has been grabbed, zero otherwise. If <font color="#924B72">#PB_Any</font> was used 
+for the #Sprite parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+GrabSprite() should be always called outside a <a href="../2ddrawing/startdrawing.html">StartDrawing()</a> : <a href="../2ddrawing/stopdrawing.html">StopDrawing()</a> block.<br>
+The transparent sprite color is automatically applied when using AlphaBlending flag. 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=freesprite.html>FreeSprite()</a> - <a href=index.html>Sprite Index</a> - <a href=initsprite.html>InitSprite()</a> -><br><br>
+
+</body></html>

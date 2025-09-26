@@ -1,0 +1,77 @@
+<html><head><title>RegularExpressionNamedGroup</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RegularExpressionNamedGroup()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>RegularExpressionNamedGroup</b></font>(#ExpressionReguliere, GroupeNom$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait la chaîne trouvée par un groupe 
+nommé après un appel à 
+<a href="examineregularexpression.html">ExamineRegularExpression()</a> et à 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#ExpressionReguliere</i></td>
+<td width="90%"> 
+L'identifiant de l'expression régulière. 
+
+</td></tr>
+<tr><td><i>GroupeNom$</i></td>
+<td> 
+Le nom du groupe à extraire. <br>
+Le nom du groupe est sensible à la casse. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la chaîne trouvée par le groupe 
+d'expression régulière. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les groupes dans une expression régulière 
+sont définis en entourant une 
+sous-expression avec  des parenthèses &quot;(&quot; 
+et &quot;)&quot;. 
+Les groupes sont accessibles soit par leur 
+index en utilisant <a href="regularexpressiongroup.html">RegularExpressionGroup()</a> 
+soit par leur nom en utilisant la syntaxe 
+&quot;(? &lt;Nom&gt;)&quot; comme le montre l'exemple 
+ci-dessous. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Cette expression correspond à une couleur (avec la valeur rouge, vert et bleu)</font>
+  <font color="#006666">; Les couleurs sont regroupées avec des () et un nom &quot;col&quot; puis la valeur de la </font>
+  <font color="#006666">; couleur est extraite  dans le cas d'une correspondance.</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;color=(?&lt;col&gt;red|green|blue)&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineRegularExpression</font>(0, &quot;stype=bold, color=blue, margin=50&quot;)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextRegularExpressionMatch</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;La couleur est &quot; +<font color="#006666"> RegularExpressionNamedGroup</font>(0, &quot;col&quot;)
+      <b><font color="#006666">Wend</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="examineregularexpression.html">ExamineRegularExpression()</a>, 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>, 
+<a href="regularexpressionnamedgroupposition.html">RegularExpressionNamedGroupPosition()</a>, 
+<a href="regularexpressionnamedgrouplength.html">RegularExpressionNamedGroupLength()</a>, 
+<a href="regularexpressiongroup.html">RegularExpressionGroup()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=regularexpressionmatchstring.html>RegularExpressionMatchString()</a> - <a href=index.html>RegularExpression Index</a> - <a href=regularexpressionnamedgrouplength.html>RegularExpressionNamedGroupLength()</a> -><br><br>
+
+</body></html>

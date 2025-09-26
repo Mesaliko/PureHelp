@@ -1,0 +1,86 @@
+<html><head><title>ReplaceString</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ReplaceString()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+String$ = <font color="#006666"><b>ReplaceString</b></font>(String$, SuchString$, ErsatzString$ [, Modus [, StartPosition [, AnzVorkommen]]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Versucht alle Vorkommen des 'SuchString$' im angegebenen 'String$' zu finden und ersetzt 
+diese mit dem 'ErsatzString$'. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>String$</i></td>
+<td width="90%"> 
+Der zu verwendende String. 
+
+</td></tr>
+<tr><td><i>SuchString$</i></td>
+<td> 
+Der zu suchende String. 
+
+</td></tr>
+<tr><td><i>ErsatzString$</i></td>
+<td> 
+Der als Ersatz zu verwendende String. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_String_CaseSensitive</font> : Suchen/Ersetzen berücksichtigt Groß-/Kleinschreibung (a=a). (Standard)
+  <font color="#924B72">#PB_String_NoCase</font>        : Suchen/Ersetzen unabhängig von Groß-/Kleinschreibung (A=a).
+  <font color="#924B72">#PB_String_InPlace</font>       : &quot;In place&quot; (an Ort und Stelle) ersetzen. Dies bedeutet, dass der String direkt
+                             im Speicher ersetzt wird. Der 'SuchString$' und der 'ErsatzString$' müssen die
+                             gleiche Länge haben! Dies ist eine gefährliche Option, nur für fortgeschrittene
+                             Anwender. Der Vorteil ist die sehr hohe Geschwindigkeit beim Ersetzen. Wenn diese
+                             Option verwendet wird, muss das Ergebnis von ReplaceString() ignoriert werden. Nur
+                             der als Parameter übergebene 'String$' wird verändert und stellt das Ergebnis dar.
+                             <a href="../reference/variables.html">Fixed (feste) Strings</a> werden in diesem Modus nicht unterstützt.
+</font></pre>
+
+</td></tr>
+<tr><td><i>StartPosition (optional)</i></td>
+<td> 
+Gibt die Zeichenposition an, bei der das Ersetzen starten soll. Die Position des ersten Zeichens 
+lautet 1. Wird diese weggelassen, dann wird der gesamte String verwendet. 
+
+</td></tr>
+<tr><td><i>AnzVorkommen (optional)</i></td>
+<td> 
+Gibt an, wieviele Strings bis zum Anhalten der Operation ersetzt werden sollen. 
+Wird dieser weggelassen, werden alle Strings ersetzt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein neuer String mit den ersetzten Strings (siehe den <font color="#924B72">#PB_String_InPlace</font> Modus für ein 
+abweichendes Verhalten). 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> <font color="#006666">ReplaceString</font>(&quot;This is Art&quot;, &quot; is&quot;, &quot; was&quot;) <font color="#006666">; wird &quot;This was Art&quot; anzeigen</font>
+  
+  test$ = &quot;Hello again, hello again&quot;
+  Result$ =<font color="#006666"> ReplaceString</font>(test$, &quot;HELLO&quot;, &quot;oh no...&quot;, <font color="#924B72">#PB_String_NoCase</font>, 10) <font color="#006666">; wird &quot;Hello again, oh no... again&quot; anzeigen</font>
+  <b><font color="#006666">Debug</font></b> Result$
+  
+  test$ = &quot;Bundy, Barbie, Buddy&quot;
+<font color="#006666">  ReplaceString</font>(test$, &quot;B&quot;, &quot;Z&quot;, <font color="#924B72">#PB_String_InPlace</font>, 1)  <font color="#006666">; alle B werden in Z geändert (direkt im Speicher, es gibt hier keinen gültigen Rückgabewert)</font>
+  <b><font color="#006666">Debug</font></b> test$   <font color="#006666">; Ausgabe des geänderten Strings, wird &quot;Zundy, Zarbie, Zuddy&quot; ausgeben</font>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="removestring.html">RemoveString()</a>, <a href="insertstring.html">InsertString()</a>, <a href="findstring.html">FindString()</a>, <a href="../regularexpression/replaceregularexpression.html">ReplaceRegularExpression()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=removestring.html>RemoveString()</a> - <a href=index.html>String Inhaltsverzeichnis</a> - <a href=reversestring.html>ReverseString()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,64 @@
+<html><head><title>Handles und Nummern</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Handles und Nummern</font></b></p>
+
+<p><b>Nummern</b></p><blockquote>
+
+
+Alle erstellten Objekte werden durch eine beliebige Nummer (welche nicht das &quot;Handle&quot; des Objekts ist, siehe 
+hierzu weiter unten) angesprochen. In dieser Anleitung werden diese Bezeichner (Nummern) durch die Notation #Nummer 
+gekennzeichnet. (So hat zum Beispiel jedes erstellte Gadget eine #Gadget Nummer.) 
+<br>
+<br>
+Die Zahlen, die man Objekten zuweist, müssen keine Konstanten sein, sie müssen aber für jedes Objekt 
+einmalig sein. (Ein Bild kann z.B. aber die gleiche Zahl wie ein Gadget haben, weil dies ja 
+unterschiedliche Dinge sind.) Diese Nummern werden benötigt, um die Objekte später im Programm anzusprechen. 
+<br>
+<br>
+Zum Beispiel geben folgende Event-Funktionen diese Nummern zurück: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  EventGadget</font>()
+<font color="#006666">  EventMenu</font>()
+<font color="#006666">  EventWindow</font>()
+</font></pre>
+
+
+</blockquote>
+<p><b>Handles</b></p><blockquote>
+
+
+Alle Objekte bekommen auch vom System eine einmalige Nummer zugewiesen. Diese Nummern nennt man Handles. 
+<br>
+<br>
+Einige PureBasic Funktionen benötigen eben dieses Handle, und nicht die Nummer von PureBasic. In dieser 
+Anleitung wird dies als eine ID bezeichnet. 
+
+<p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  ImageGadget</font>(<font color="#924B72">#Gadget</font>, x, y, Breite, H��he, ImageID [, Flags])
+  <font color="#006666">; #Gadget ist hier die Nummer, die Sie dem Gadget zuweisen möchten.</font>
+  <font color="#006666">; ImageID muss hier der Handle zu einem Bild sein.</font>
+</font></pre>
+
+Um das Handle von einem Objekt zu ermitteln, gibt es spezielle Funktionen wie z.B.: 
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  FontID</font>()
+<font color="#006666">  GadgetID</font>()
+<font color="#006666">  ImageID</font>()
+<font color="#006666">  ThreadID</font>()
+<font color="#006666">  WindowID</font>()
+</font></pre>
+
+Meistens geben die Funktionen, die solche Objekte erstellen, auch dieses Handle als Ergebnis zurück, 
+wenn das Objekt erfolgreich erstellt wurde. Dies ist nur dann der Fall, wenn <font color="#924B72">#PB_Any</font> 
+beim Erstellen des Objekts nicht verwendet wurde. Wenn <font color="#924B72">#PB_Any</font> verwendet wird, dann 
+geben diese Befehle die von PB zugewiesenen Objekt-Nummern zurück, und nicht das Handle. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  GadgetHandle =<font color="#006666"> ImageGadget</font>(...)
+</font></pre>
+
+</blockquote>
+</font></body></html>

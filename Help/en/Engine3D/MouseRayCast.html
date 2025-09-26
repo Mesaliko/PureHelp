@@ -1,0 +1,49 @@
+<html><head><title>MouseRayCast</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MouseRayCast()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>MouseRayCast</b></font>(#Camera, x, y, PickMask)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Casts a ray from the 2D point through the scene, and checks if an object is 
+crossing the ray. This function doesn't rely on the physic engine. The normals 
+value at the impact point are available with <a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a> and <a href="normalz.html">NormalZ()</a>. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Camera</i></td>
+<td width="90%"> 
+The camera to use. 
+
+</td></tr>
+<tr><td><i>x, y</i></td>
+<td> 
+The coordinates, in pixels, of the point. 
+
+</td></tr>
+<tr><td><i>PickMask</i></td>
+<td> 
+The entity mask used while performing the ray cast. Only the entities with a mask matching 
+the PickMask value will be reported. If this parameter is omitted, all the entities are valid 
+for the ray detection. The mask can be a combination, to select more than one entity group. 
+To have more information about pick mask, see <a href="../entity/createentity.html">CreateEntity()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the number of the object in contact with the ray, -1 otherwise. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="normalx.html">NormalX()</a>, <a href="normaly.html">NormalY()</a>, <a href="normalz.html">NormalZ()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=mousepick.html>MousePick()</a> - <a href=index.html>Engine3D Index</a> - <a href=nextworldcollision.html>NextWorldCollision()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,53 @@
+<html><head><title>ResetList</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ResetList()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>ResetList</b></font>(Liste()) </blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Setzt das aktuelle Listenelement vor das erste Element zurück. 
+Das bedeutet, dass kein Element mehr gültig ist. Dies ist sehr nützlich, 
+um anschließend alle Elemente mittels <a href="nextelement.html">NextElement()</a> abzuarbeiten. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Liste()</i></td>
+<td width="90%"> 
+Der Variablenname der verknüpften Liste, welche mit dem <a href="../reference/newlist.html">NewList</a> Befehl erstellt 
+wurde. Sie müssen die Klammern nach dem Listennamen immer angeben. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">Friends</font>.s()
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Friends</font>())
+<font color="#006666">  Friends</font>() = &quot;Arnaud&quot;
+  
+<font color="#006666">  AddElement</font>(<font color="#006666">Friends</font>())
+<font color="#006666">  Friends</font>() = &quot;Seb&quot;
+
+<font color="#006666">  ResetList</font>(<font color="#006666">Friends</font>())
+  <b><font color="#006666">While</font></b> <font color="#006666">NextElement</font>(<font color="#006666">Friends</font>())
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Friends</font>()  <font color="#006666">; Alle Listenelemente ausgeben</font>
+  <b><font color="#006666">Wend</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="nextelement.html">NextElement()</a>, <a href="listindex.html">ListIndex()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=pushlistposition.html>PushListPosition()</a> - <a href=index.html>List Inhaltsverzeichnis</a> - <a href=selectelement.html>SelectElement()</a> -><br><br>
+
+</body></html>

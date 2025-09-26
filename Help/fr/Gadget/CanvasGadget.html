@@ -1,0 +1,338 @@
+<html><head><title>CanvasGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CanvasGadget()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CanvasGadget</b></font>(#Gadget, X, Y, Largeur, Hauteur [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un canvas dans la GadgetList en cours. 
+<br>
+<br>
+Ce gadget offre une surface de dessin sans canal alpha et 
+d'évènements pour la souris et le clavier 
+dans le but de créer facilement des 
+affichages personnalisées. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Numéro d'identification du canvas. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer 
+automatiquement ce numéro. 
+
+</td></tr>
+<tr><td><i>X, Y, Largeur, Hauteur</i></td>
+<td> 
+Position et dimensions du canvas en pixels. 
+<br>
+Les valeurs maximales pour la largeur et la 
+hauteur sont de 16 000 pixels. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Combinaison des constantes suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Canvas_Border</font>   : Trace une bordure autour du gadget.
+  
+  <font color="#924B72">#PB_Canvas_ClipMouse</font>: Capture automatiquement la souris dans la zone 
+                        du gadget tant qu'un bouton de la souris est appuyé.
+                        (Non supporté par OS X et Linux gtk3).
+  
+  <font color="#924B72">#PB_Canvas_Keyboard</font> : Reçoit le focus du clavier ainsi que les évènements clavier.
+                        Avec cette option, utilisez les évènements <font color="#924B72">#PB_EventType_Focus</font> 
+                        et <font color="#924B72">#PB_EventType_LostFocus</font> pour identifier le gadget qui a le focus. 
+                        Une autre façon de savoir si le canvas a le focus, est l'utilisation de <font color="#924B72">#PB_Canvas_DrawFocus</font> 
+                        qui dessine un rectangle de focus chaque fois qu'il a le focus.
+
+  <font color="#924B72">#PB_Canvas_DrawFocus</font>: Dessine un rectangle de focus sur le gadget s'il a le focus clavier.
+  
+  <font color="#924B72">#PB_Canvas_Container</font>: Permet le support du mode conteneur afin d'y ajouter des gadgets. <a href="closegadgetlist.html">CloseGadgetList()</a> 
+                        doit être appelé pour revenir à la liste de gadgets précédente comme tout autre conteneur.
+                        Sous Windows, la transparence des gadgets n'est pas prise en compte ainsi le texte des gadgets 
+                        suivants sera affiché sur un fond opaque: CheckBoxGadget, FrameGadget, HyperlinkGadget, 
+                        OptionGadget, TextGadget et TrackBarGadget.
+
+</font></pre>
+
+<br>
+<br>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès ou une valeur nulle en cas d'échec. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé 
+alors la valeur retournée est son numéro 
+d'dentification en cas de succès. 
+<br>
+<br>
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+-  Le <a href="canvasgadget.html">CanvasGadget()</a> n'ayant pas de canal alpha (transparence), 
+les modes #PB_2DDrawing_AlphaChannel de la fonction <a href="../2ddrawing/drawingmode.html">DrawingMode()</a> n'aura 
+aucun effet et le mode #PB_2DDrawing_AllChannels sera équivalent à #PB_2DDrawing_Default 
+<br>
+<br>
+- Le gadget apparaît comme un simple fond 
+blanc. 
+<br>
+<br>
+- Utiliser la commande <a href="canvasoutput.html">CanvasOutput()</a> ou 
+la commande <a href="canvasvectoroutput.html">CanvasVectorOutput()</a> pour 
+dessiner sur le canvas. 
+<br>
+<br>
+- Le contenu reste persistant jusqu'à ce 
+qu'il soit effacé par une opération de 
+dessin. 
+<br>
+<br>
+- Il n'est pas nécessaire de redessiner le 
+contenu à chaque fois qu'un évènement 
+<font color="#924B72">#PB_Event_Repaint</font> est reçu. 
+<br>
+<br>
+<br>
+<br>
+</blockquote>
+<p><b>.:Evènements:.</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">Le canvas renvoie les types d'évènements <a href="../window/eventtype.html">EventType()</a> suivant: 
+Connaitre l'état du canvas: <a href="getgadgetattribute.html">GetGadgetAttribute()</a> avec les options suivantes:
+<blockquote>
+
+  <font color="#924B72">#PB_EventType_MouseEnter</font>      : Le curseur de la souris est entré dans le gadget 
+  <font color="#924B72">#PB_EventType_MouseLeave</font>      : Le curseur de la souris est sorti du gadget
+  <font color="#924B72">#PB_EventType_MouseMove</font>       : Le curseur de la souris a bougé
+  <font color="#924B72">#PB_EventType_MouseWheel</font>(*)   : La molette de la souris a bougé
+  
+  <font color="#924B72">#PB_EventType_LeftButtonDown</font>  : Le bouton gauche de la souris a été pressé
+  <font color="#924B72">#PB_EventType_LeftButtonUp</font>    : Le bouton gauche de la souris a été relâché
+  <font color="#924B72">#PB_EventType_LeftClick</font>       : Un clic avec le bouton gauche de la souris
+  <font color="#924B72">#PB_EventType_LeftDoubleClick</font> : Un double-clic avec le bouton gauche de la souris
+  <font color="#924B72">#PB_EventType_RightButtonDown</font> : Le bouton droit de la souris a été pressé
+  <font color="#924B72">#PB_EventType_RightButtonUp</font>   : Le bouton droit de la souris a été relâché
+  <font color="#924B72">#PB_EventType_RightClick</font>      : Un clic avec le bouton droit de la souris
+  <font color="#924B72">#PB_EventType_RightDoubleClick</font>: Un double-clic avec le bouton droit de la souris
+  <font color="#924B72">#PB_EventType_MiddleButtonDown</font>: Le bouton central de la souris a été pressé
+  <font color="#924B72">#PB_EventType_MiddleButtonUp</font>  : Le bouton central de la souris a été relâché
+  
+  <font color="#924B72">#PB_EventType_Focus</font>           : Le gadget a obtenu le focus clavier
+  <font color="#924B72">#PB_EventType_LostFocus</font>       : Le gadget a perdu le focus clavier
+  <font color="#924B72">#PB_EventType_KeyDown</font>(*)      : Une touche clavier a été pressée 
+  <font color="#924B72">#PB_EventType_KeyUp</font>(*)        : Une touche clavier a été relâchée 
+  <font color="#924B72">#PB_EventType_Input</font>(*)        : Du texte a été entré dans le gadget 
+ 
+   <font color="#924B72">#PB_EventType_Resize</font>         : Le gadget a été redimensionné
+   
+  (*)    Les évènements <font color="#924B72">#PB_EventType_KeyDown</font>, <font color="#924B72">#PB_EventType_KeyUp</font> 
+         et <font color="#924B72">#PB_EventType_Input</font> sont renvoyés seulement si le gadget 
+         a le focus clavier (Voir l'option <font color="#924B72">#PB_Canvas_Keyboard</font>). <br>
+         Avec Windows, l'évènement <font color="#924B72">#PB_EventType_MouseWheel</font> est renvoyé seulement 
+         si le gadget a le focus clavier. Avec les autres OS, cet évènement est renvoyé au gadget 
+         sous le curseur, qu'il ait le focus clavier ou non. 
+</blockquote>
+
+</font></pre>
+<br>
+
+</blockquote>
+<p><b>.:Attributs:. Les connaître.</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="getgadgetattribute.html">GetGadgetAttribute()</a> permet de connaître les attributs du canvas avec les options suivantes:
+</font></pre>
+<b>Souris:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">- #PB_Canvas_MouseX</font>    : Renvoie les coordonnées de la souris dans la zone de dessin du canvas 
+  <font color="#924B72">- #PB_Canvas_MouseY</font>    : au moment où l'évènement a été généré.
+                           Note: Le résultat peut être différent des coordonnées envoyées par <a href="../window/windowmousex.html">WindowMouseX()</a> et par 
+                                 <a href="../window/windowmousey.html">WindowMouseY()</a> qui elles, renvoient l'emplacement actuel de la souris indépendamment des 
+                                 évènements.
+
+  <font color="#924B72">- #PB_Canvas_Buttons</font>   : Renvoie l'état des boutons de la souris.
+                           Peut être une combinaison de: 
+                             <font color="#924B72">#PB_Canvas_LeftButton</font>  : Le bouton de gauche est actuellement enfoncé.  
+                             <font color="#924B72">#PB_Canvas_RightButton</font> : Le bouton de droite est actuellement enfoncé.  
+                             <font color="#924B72">#PB_Canvas_MiddleButton</font>: Le bouton du milieu est actuellement enfoncé.
+
+  <font color="#924B72">- #PB_Canvas_WheelDelta</font>: Renvoie le mouvement de la molette de la souris par multiple de 1 ou -1.
+                           Une valeur positive indique que la roue a été tournée vers le haut (en l'éloignant de 
+                           l'utilisateur) et une valeur négative indique que la roue a été déplacée vers le bas 
+                           (vers l'utilisateur). 
+                           Cet attribut est à 0 si l'évènement en cours n'est pas un évènement <font color="#924B72">#PB_EventType_MouseWheel</font>.
+  
+  <font color="#924B72">- #PB_Canvas_Clip</font>      : Renvoie une valeur non nulle si la souris est confinée dans le canvas, zéro sinon.
+  
+  <font color="#924B72">- #PB_Canvas_Cursor</font>    : Renvoie le curseur qui est actuellement utilisé dans le gadget.
+                           Voir ci-dessous pour obtenir une liste des valeurs possibles. 
+                           Si le gadget utilise un handle de curseur personnalisé, la valeur retournée est -1.
+  
+  <font color="#924B72">- #PB_Canvas_CustomCursor</font>: Renvoie le handle personnalisé du curseur qui a été défini à l'aide de <a href="setgadgetattribute.html">SetGadgetAttribute()</a>. 
+                             Si le gadget utilise un curseur standard, la valeur retournée est zéro. 
+</font></pre>
+<b>Clavier:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">- #PB_Canvas_Modifiers</font>: Renvoie l'état des touches de contrôle du clavier. 
+                           Peut être une combinaison de:
+                             <font color="#924B72">#PB_Canvas_Shift</font>  : La touche 'Shift' est actuellement pressée. 
+                             <font color="#924B72">#PB_Canvas_Alt</font>    : La touche 'Alt' est actuellement pressée. 
+                             <font color="#924B72">#PB_Canvas_Control</font>: La touche 'Control' est actuellement pressée. 
+                             <font color="#924B72">#PB_Canvas_Command</font>: La touche 'Command' (ou 'Pomme') est actuellement pressée. (OS X seulement)
+
+  <font color="#924B72">- #PB_Canvas_Key</font>  : Renvoie la touche du clavier qui a été enfoncée ou relâchée après un évènement <font color="#924B72">#PB_EventType_KeyDown</font> ou un évènement <font color="#924B72">#PB_EventType_KeyUp</font> et 
+                      la valeur retournée est l'une des constantes <font color="#924B72">#PB_Shortcut_</font> ... qui sont utilisées par la fonction <a href="../window/addkeyboardshortcut.html">AddKeyboardShortcut()</a>. 
+                      Note: Cet attribut renvoie la première touche pressée. 
+                      Note: Pour obtenir un texte saisi au clavier dans le Canvasgadget, il est préférable d'utiliser l'évènement <font color="#924B72">#PB_EventType_Input</font> 
+                            avec l'attribut <font color="#924B72">#PB_Canvas_Input</font>, car il permet la saisie de texte à partir d'une combinaison de plusieurs touches telles 
+                            que la touche 'Shift' et autres touches muettes.
+
+  <font color="#924B72">- #PB_Canvas_Input</font>: Renvoie le caractère qui a été généré par une ou plusieurs touches. Cet attribut n'est présent qu'après un évènement <font color="#924B72">#PB_EventType_Input</font>. 
+                      La valeur du caractère retourné peut être convertie en une chaîne de caractères en utilisant la fonction <a href="../string/chr.html">Chr()</a>.   
+</font></pre>
+<b>Image:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">- #PB_Canvas_Image</font>: Renvoie un ImageID, valeur qui représente le numéro d'une image avec le contenu actuel du CanvasGadget. 
+                      Cette valeur peut être utilisée pour dessiner le contenu du gadget vers une autre surface de dessin en utilisant la fonction <a href="../2ddrawing/drawimage.html">DrawImage()</a>. 
+                      Note: La valeur retournée est valable uniquement jusqu'à l'apparition d'une modification apportée au gadget comme le 
+                            redimensionnement ou un changement dans le dessin, donc elle ne devrait être utilisée directement que dans une commande de 
+                            type <a href="../2ddrawing/drawimage.html">DrawImage()</a> et ne pas être stockée pour une utilisation future.
+</font></pre>
+
+<u>Attention:</u> Ces informations ne sont disponibles que si l'évènement courant reçu par <a href="../window/waitwindowevent.html">WaitWindowEvent()</a> 
+ou <a href="../window/windowevent.html">WindowEvent()</a> provient d'un canvas. 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</blockquote>
+<p><b>.:Attributs:.   Les modifier.</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="setgadgetattribute.html">SetGadgetAttribute()</a> permet de changer les attributs du canvas avec les options suivantes:
+</font></pre>
+<b>Souris:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">- #PB_Canvas_Clip</font>: Une valeur non nulle et le mouvement du curseur de la souris sera confiné à la zone du canvas gadget. 
+                     Avec une valeur nulle, cela supprime le confinement. 
+                     Note: Le confinement de la souris doit être uniquement le résultat direct de l'action de l'utilisateur sur le canvas, comme un clic de souris par exemple, 
+                           et il faut prendre soin de bien enlever le confinement à nouveau, sinon l'utilisateur sera emprisonné à l'intérieur du gadget. 
+                     L'option <font color="#924B72">#PB_Canvas_ClipMouse</font> peut être utilisée pour automatiquement capturer/relâcher la souris lorsque l'utilisateur appuie ou relâche le bouton 
+                     de la souris dans le canvas. 
+
+  <font color="#924B72">- #PB_Canvas_Cursor</font>: Change le curseur lorsque la souris survole le gadget. 
+                       Les valeurs suivantes sont possibles: 
+                         <font color="#924B72">#PB_Cursor_Default</font>   : Flèche du curseur par défaut 
+                         <font color="#924B72">#PB_Cursor_Cross</font>     : Curseur en forme de croix 
+                         <font color="#924B72">#PB_Cursor_IBeam</font>     : Barre d'insertion 'I' utilisée pour la sélection de texte  
+                         <font color="#924B72">#PB_Cursor_Hand</font>      : Curseur main 
+                         <font color="#924B72">#PB_Cursor_Busy</font>      : Curseur sablier ou une montre 
+                         <font color="#924B72">#PB_Cursor_Denied</font>    : Curseur cercle barré ou curseur X 
+                         <font color="#924B72">#PB_Cursor_Arrows</font>    : Flèches dans toutes les directions (non disponible sur OS X) 
+                         <font color="#924B72">#PB_Cursor_LeftRight</font> : Flèches gauche et droite 
+                         <font color="#924B72">#PB_Cursor_UpDown</font>    : Flèches haut et bas 
+                         <font color="#924B72">#PB_Cursor_LeftUpRightDown</font>: Flèches diagonales (Windows uniquement) 
+                         <font color="#924B72">#PB_Cursor_LeftDownRightUp</font>: Flèches diagonales (Windows uniquement)  
+                         <font color="#924B72">#PB_Cursor_Invisible</font>      : Cache le curseur 
+
+  <font color="#924B72">- #PB_Canvas_CustomCursor</font>: Change le curseur lorsque la souris survole le gadget en un curseur personnalisé créé en utilisant l'API de l'OS correspondant.
+
+                             Le type attendu est: 
+                               Avec Windows: Un handle HCURSOR 
+                               Avec Linux  : Un pointeur GtkCursor 
+                               Avec OS X: Un pointeur vers une structure Curseur 
+
+</font></pre>
+
+<b>Image:</b> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">- #PB_Canvas_Image</font>: Applique l'ImageID au CanvasGadget. 
+                      Le gadget fait une copie de l'image d'entrée afin qu'elle puisse être libérée ou réutilisée après cet appel. 
+                      Utiliser cet attribut revient à utiliser <a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="canvasoutput.html">CanvasOutput()</a> et <a href="../2ddrawing/drawimage.html">DrawImage()</a> pour dessiner l'image sur le CanvasGadget.  
+</font></pre>
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="gadgettooltip.html">GadgetToolTip()</a> permet d'ajouter une 'mini aide' à ce gadget. 
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 220, &quot;CanvasGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 10, 10, 200, 200)
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+          
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventGadget</font>() = 0 
+        <b><font color="#006666">If</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_LeftButtonDown</font> <b><font color="#006666">Or</font></b> (<font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_MouseMove</font> <b><font color="#006666">And</font></b> <font color="#006666">GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_Buttons</font>) &amp; <font color="#924B72">#PB_Canvas_LeftButton</font>)
+          <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">CanvasOutput</font>(0))
+            x =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseX</font>)
+            y =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseY</font>)
+<font color="#006666">            Circle</font>(X, Y, 10,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+<font color="#006666">            StopDrawing</font>()
+          <b><font color="#006666">EndIf</font></b>
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>    
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Exemple:</b> Canvas container</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 220, 220, &quot;Canvas container&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+  
+<font color="#006666">  CanvasGadget</font>(0, 10, 10, 200, 200, <font color="#924B72">#PB_Canvas_Container</font>)
+<font color="#006666">  ButtonGadget</font>(1, 10, 10, 80, 30, &quot;Effacer&quot;)
+<font color="#006666">  CloseGadgetList</font>()
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventGadget</font>() 
+        <b><font color="#006666">Case</font></b> 0
+          <b><font color="#006666">If</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_LeftButtonDown</font> <b><font color="#006666">Or</font></b> (<font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_MouseMove</font> <b><font color="#006666">And</font></b> <font color="#006666">GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_Buttons</font>) &amp; <font color="#924B72">#PB_Canvas_LeftButton</font>)
+            <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">CanvasOutput</font>(0))
+              x =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseX</font>)
+              y =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseY</font>)
+<font color="#006666">              Circle</font>(x, y, 10,<font color="#006666"> RGB</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255)))
+<font color="#006666">              StopDrawing</font>()
+            <b><font color="#006666">EndIf</font></b>
+          <b><font color="#006666">EndIf</font></b>
+          
+        <b><font color="#006666">Case</font></b> 1
+          <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">CanvasOutput</font>(0))
+<font color="#006666">            Box</font>(0, 0, 200, 200, <font color="#924B72">#White</font>)
+<font color="#006666">            StopDrawing</font>()
+          <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndSelect</font></b>
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+<b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/canvasgadget.png"></p>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+<a href="../Examples/CanvasGadget.pb.html">CanvasGadget.pb</a>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="canvasoutput.html">CanvasOutput()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, 
+<a href="setgadgetattribute.html">SetGadgetAttribute()</a>, <a href="../window/eventtype.html">EventType()</a>, 
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=calendargadget.html>CalendarGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=canvasoutput.html>CanvasOutput()</a> -><br><br>
+
+</body></html>

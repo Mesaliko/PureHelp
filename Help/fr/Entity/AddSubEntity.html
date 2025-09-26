@@ -1,0 +1,98 @@
+<html><head><title>AddSubEntity</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">AddSubEntity()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>AddSubEntity</b></font>(#Entity, #SubEntity, Type, [DecalageX, DecalageY, DecalageZ [, TailleX, TailleY, TailleZ [, AxeX, AxeY, AxeZ]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ajoute une entité en tant que sous-entité à une entité existante. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+L'entité à utiliser. 
+
+</td></tr>
+<tr><td><i>#SubEntity</i></td>
+<td> 
+L'entité à ajouter. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+Définit comment le moteur physique gère la sous-entité: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_StaticBody</font> : Le body est statique, c'est à dire que le mesh ne peut pas être animé.
+                          Ce mode permet des collisions très précises, car elles sont faites par rapport aux triangles
+                          qui composent le mesh (connu comme la tri-mesh collision). Les collisions entre body static et les autres types de body
+                          (sphere, box etc.) sont très rapides, mais entre deux body static, cela devient très lent.
+                          C'est le type de body parfait pour utiliser une mesh comme un sol ou pour un monde statique.
+  <font color="#924B72">#PB_Entity_PlaneBody</font>  : Un plan 'virtuel' sur l'entity (avec les mêmes dimensions)
+                          est utilisé pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_ConeBody</font>   : Un cône 'virtuel' englobant totalement l'entity (avec les mêmes dimensions)
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_BoxBody</font>    : Une boîte 'virtuelle' englobant totalement l'entity (avec les mêmes dimensions)
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_SphereBody</font> : Une sphère 'virtuelle' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_CylinderBody</font> : Un cylindre 'virtuel' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : Une capsule 'virtuelle' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_ConvexHullBody</font> : Une forme arbitraire 'virtuelle' englobant totalement l'entity 
+                          définie par un nuage de vertices et la forme sera la plus petite 
+                          forme convexe qui entoure les vertices.
+
+</font></pre>
+
+</td></tr>
+<tr><td><i>DecalageX, DecalageY, DecalageZ (optionnel)</i></td>
+<td> 
+Le décalage ou translation (Offset) du body en X, Y et Z. 
+
+</td></tr>
+<tr><td><i>TailleX, TailleY, TailleZ (optionnel)</i></td>
+<td> 
+Les dimensions de la boîte englobante autour du corps. Ne concerne que le type de corps suivant: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_BoxBody</font>     : TailleX, TailleY, TailleZ sont disponibles.
+  <font color="#924B72">#PB_Entity_SphereBody</font>  : TailleX est disponible.
+  <font color="#924B72">#PB_Entity_ConeBody</font>    : TailleX, TailleY sont disponibles.
+  <font color="#924B72">#PB_Entity_CylinderBody</font>: TailleX, TailleY sont disponibles.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : TailleX, TailleY, TailleZ sont disponibles.
+</font></pre>
+Si TailleX = -1 alors le système utilise la boîte englobante. 
+
+</td></tr>
+<tr><td><i>AxeX, AxeY, AxeZ (optionnel)</i></td>
+<td> 
+Les axes du corps. Ne concerne que le type de corps suivant: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_PlaneBody</font>
+  <font color="#924B72">#PB_Entity_CylinderBody</font>
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> 
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Il est nécessaire d'utiliser la fonction <a href="createentitybody.html">CreateEntityBody()</a>() 
+avec l'option #PB_Entity_CompoundBody après l'ajout de toutes 
+les sous-entités. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="createentity.html">CreateEntity()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=index.html>Entity Index</a> - <a href=applyentityforce.html>ApplyEntityForce()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,76 @@
+<html><head><title>UTF8</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UTF8()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+*Resultat = <font color="#006666"><b>UTF8</b></font>(Chaine$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un tampon en mémoire contenant la version au format UTF8 d'une chaîne de caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Chaine$</i></td>
+<td width="90%"> 
+La chaîne à convertir au format UTF8. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La représentation UTF8 de la chaîne. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lorsque le tampon n'est plus nécessaire, il doit être libéré avec <a href="../memory/freememory.html">FreeMemory()</a>. 
+<br>
+<br>
+Cette fonction est surtout utile lors de l'utilisation de bibliothèques tiers 
+qui requièrent des chaînes de caractères au format UTF8 en entrée.<br>
+Le <a href="../reference/pseudotypes.html">pseudotype</a> 'p-utf8' peuvent également être utilisé 
+pour automatiser le processus de conversion lors de l'importation des fonctions externes. 
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *UTF8 =<font color="#006666"> UTF8</font>(&quot;Hélé&quot;)
+<font color="#006666">  ShowMemoryViewer</font>(*UTF8,<font color="#006666"> MemorySize</font>(*UTF8)) <font color="#006666">; Affiche l'adresse du tampon suivi de 48 C3 A9 6C C3 A9 00</font>
+  <font color="#006666">;ShowMemoryViewer(*UTF8, MemoryStringLength(*UTF8, #PB_UTF8|#PB_ByteLength));</font>
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*UTF8, -1, <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; Affiche &quot;Hélé&quot;</font>
+   
+  <font color="#006666">; Format UTF8: certains caractères sont codés sur 1 octet, d'autres sur 2, 3 ou 4 octets</font>
+  <font color="#006666">; H = 48</font>
+  <font color="#006666">; é = C3 A9</font>
+  <font color="#006666">; l = 6C</font>
+  <font color="#006666">; é =  C3 A9</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">Unicode</font>(Mem, Type = <font color="#924B72">#PB_Ascii</font>)
+<font color="#006666">    PeekS</font>(Mem, -1, Type)
+  <b><font color="#006666">EndMacro</font></b>
+
+  *Mem1 =<font color="#006666"> Ascii</font>(&quot;Test - éàîöÊÜ&quot;)
+  *Mem2 =<font color="#006666"> UTF8</font>(&quot;Test - éàîöÊÜ&quot;)
+
+  Texte.s =<font color="#006666"> Unicode</font>(*Mem1)
+  <b><font color="#006666">Debug</font></b> Texte <font color="#006666">; Affiche &quot;Test - éàîöÊÜ&quot;</font>
+
+  Texte.s =<font color="#006666"> Unicode</font>(*Mem2, <font color="#924B72">#PB_UTF8</font>)
+  <b><font color="#006666">Debug</font></b> Texte <font color="#006666">; Affiche &quot;Test - éàîöÊÜ&quot;</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="ascii.html">Ascii()</a>, <a href="../memory/freememory.html">FreeMemory()</a>, <a href="../memory/memorysize.html">MemorySize()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=ucase.html>UCase()</a> - <a href=index.html>String Index</a> - <a href=unescapestring.html>UnescapeString()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,56 @@
+<html><head><title>MemorySize</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MemorySize()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>MemorySize</b></font>(*Memoire)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la taille d'une zone mémoire. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Memoire</i></td>
+<td width="90%"> 
+L'adresse de la zone mémoire à utiliser. 
+<br>
+<br>
+Ce doit être la valeur renvoyée par <a href="allocatememory.html">AllocateMemory()</a>, <a href="reallocatememory.html">ReAllocateMemory()</a>, <a href="../string/ascii.html">Ascii()</a> ou <a href="../string/utf8.html">UTF8()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la taille de la zone mémoire, en octets. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte1$=&quot;OK&quot;
+  *Mem=<font color="#006666">AllocateMemory</font>(100)
+  <font color="#006666">;Debug MemorySize(@Texte1$) ; Erreur</font>
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MemorySize</font>(*Mem) <font color="#006666">; Affiche 100</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte.s = &quot;Salut !!!&quot;
+
+  *mem =<font color="#006666"> AllocateMemory</font>(<font color="#006666">StringByteLength</font>(Texte) +<font color="#006666"> SizeOf</font>(CHARACTER))
+<font color="#006666">  CopyMemory</font>(@Texte, *mem,<font color="#006666"> StringByteLength</font>(Texte) +<font color="#006666"> SizeOf</font>(CHARACTER))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">MemorySize</font>(*mem)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*mem)
+<font color="#006666">  FreeMemory</font>(*mem)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="allocatememory.html">AllocateMemory()</a>, <a href="reallocatememory.html">ReAllocateMemory()</a>, <a href="freememory.html">FreeMemory()</a>, <a href="../string/ascii.html">Ascii()</a>, <a href="../string/utf8.html">UTF8()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=freestructure.html>FreeStructure()</a> - <a href=index.html>Memory Index</a> - <a href=memorystringlength.html>MemoryStringLength()</a> -><br><br>
+
+</body></html>

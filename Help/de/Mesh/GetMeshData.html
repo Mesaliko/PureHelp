@@ -1,0 +1,87 @@
+<html><head><title>GetMeshData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetMeshData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>GetMeshData</b></font>(#Mesh, SubMesh, DataArray(), Flags, ErsterIndex, LetzterIndex)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ermittelt interne Mesh-Daten, wie Eckpunkte (Vertices), Fläche (face), etc. 
+Dynamische Meshes (die mit dem <font color="#924B72">#PB_Mesh_Dynamic</font> Flag erstellt wurden), werden nicht unterstützt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Das zu verwendende Mesh. 
+
+</td></tr>
+<tr><td><i>SubMesh</i></td>
+<td> 
+Das SubMesh, von dem die Daten ermittelt werden sollen. Der Index des ersten Sub-Meshes 
+ist 0 (Haupt-Mesh). 
+
+</td></tr>
+<tr><td><i>DataArray()</i></td>
+<td> 
+Das Array, um die Daten zu empfangen. Es muss ein Array vom Typ &quot;MeshVertex&quot; oder &quot;MeshFace&quot; 
+sein - abhängig von den angegebenen Flags. 
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+Gibt an, welche Art von Daten abgerufen werden sollen. Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_Vertex</font>: DataArray() ist ein Array vom Typ &quot;MeshVertex&quot;.
+  <font color="#924B72">#PB_Mesh_Face</font>  : DataArray() ist ein Array vom Typ &quot;MeshFace&quot;.
+</font></pre>
+kombiniert mit: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_UVCoordinate</font> : Ermittelt die UV-Koordinaten-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+  <font color="#924B72">#PB_Mesh_Normal</font>       : Ermittelt die Normalen-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+  <font color="#924B72">#PB_Mesh_Color</font>        : Ermittelt die Farb-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+</font></pre>
+
+Die &quot;MeshVertex&quot; und &quot;MeshFace&quot; Strukturen sind wie folgt definiert: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_Normal</font> Flag gesetzt ist
+    NormalY.f ;
+    NormalZ.f ;
+    TangentX.f
+    TangentY.f
+    TangentZ.f
+    u.f       ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_UVCoordinate</font> Flag gesetzt ist
+    v.f       ;
+    Color.l   ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_Color</font> Flag gesetzt ist
+  <b><font color="#006666">EndStructure</font></b>    
+  
+  <b><font color="#006666">Structure</font></b> MeshFace
+    Index.l
+  <b><font color="#006666">EndStructure</font></b>   
+</font></pre>
+
+</td></tr>
+<tr><td><i>ErsterIndex, LetzterIndex</i></td>
+<td> 
+Erster und letzter Index, von dem die Daten ermittelt werden sollen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, und Null bei einem Fehler. 
+Im Erfolgsfall wurde DataArray() in der Größe angepasst und enthält die Mesh-Information. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setmeshdata.html">SetMeshData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=freemesh.html>FreeMesh()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=ismesh.html>IsMesh()</a> -><br><br>
+
+</body></html>

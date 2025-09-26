@@ -1,0 +1,73 @@
+<html><head><title>PopMapPosition</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PopMapPosition()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>PopMapPosition</b></font>(Map())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Restaure l'élément courant précédemment mis 
+en mémoire avec <a href="pushmapposition.html">PushMapPosition()</a>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Map()</i></td>
+<td width="90%"> 
+La map à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+L'état de la map sera le même que celui de 
+l'appel correspondant à <a href="pushmapposition.html">PushMapPosition()</a>. 
+S'il n'y avait pas d'élément courant après 
+un <a href="pushmapposition.html">PushMapPosition()</a> alors il n'y a pas 
+d'élément courant après cet appel aussi. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">Nombres</font>()
+<font color="#006666">  Nombres</font>(&quot;A&quot;) = 1
+<font color="#006666">  Nombres</font>(&quot;B&quot;) = 2
+<font color="#006666">  Nombres</font>(&quot;C&quot;) = 5
+<font color="#006666">  Nombres</font>(&quot;D&quot;) = 3
+<font color="#006666">  Nombres</font>(&quot;E&quot;) = 2
+<font color="#006666">  Nombres</font>(&quot;F&quot;) = 5
+  
+  <font color="#006666">; Une simple élimination de doublon</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    Value =<font color="#006666"> Nombres</font>()
+<font color="#006666">    PushMapPosition</font>(<font color="#006666">Nombres</font>())
+    <b><font color="#006666">While</font></b> <font color="#006666">NextMapElement</font>(<font color="#006666">Nombres</font>())
+      <b><font color="#006666">If</font></b> <font color="#006666">Nombres</font>() = Value 
+<font color="#006666">        DeleteMapElement</font>(<font color="#006666">Nombres</font>())
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    PopMapPosition</font>(<font color="#006666">Nombres</font>())
+  <b><font color="#006666">Next</font></b>
+  
+  <b><font color="#006666">ForEach</font></b> <font color="#006666">Nombres</font>()
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Nombres</font>()
+  <b><font color="#006666">Next</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pushmapposition.html">PushMapPosition()</a>, <a href="findmapelement.html">FindMapElement()</a>, 
+<a href="nextmapelement.html">NextMapElement()</a>, <a href="resetmap.html">ResetMap()</a>, 
+<a href="../reference/foreach_next.html">ForEach</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=nextmapelement.html>NextMapElement()</a> - <a href=index.html>Map Index</a> - <a href=pushmapposition.html>PushMapPosition()</a> -><br><br>
+</blockquote>
+</font></body></html>

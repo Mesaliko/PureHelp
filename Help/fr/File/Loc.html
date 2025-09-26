@@ -1,0 +1,56 @@
+<html><head><title>Loc</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Loc()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.q = <font color="#006666"><b>Loc</b></font>(#Fichier)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la position du pointeur de 
+lecture/écriture dans un fichier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Fichier</i></td>
+<td width="90%"> 
+Le fichier à utiliser. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la position du pointeur en octet 
+par rapport au début du fichier. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Fichier$ =<font color="#006666"> OpenFileRequester</font>(&quot;Sélectionner un fichier&quot;,&quot;&quot;,&quot;Texte (.txt)|*.txt|Tous (*.*)|*.*&quot;,0)
+  <b><font color="#006666">If</font></b> Fichier$
+    <b><font color="#006666">If</font></b> <font color="#006666">ReadFile</font>(0, Fichier$) 
+      length =<font color="#006666"> Lof</font>(0)                       <font color="#006666">; Lit la taille en octets du fichier</font>
+<font color="#006666">      FileSeek</font>(0, length - 10)              <font color="#006666">; place le pointeur 10 caractères avant la fin du fichier</font>
+      <b><font color="#006666">Debug</font></b> &quot;Position: &quot; +<font color="#006666"> Str</font>(<font color="#006666">Loc</font>(0))      <font color="#006666">; Affiche la position du pointeur</font>
+      *MemoryID =<font color="#006666"> AllocateMemory</font>(10)        <font color="#006666">; alloue un bloc mémoire pour 10 octets</font>
+      <b><font color="#006666">If</font></b> *MemoryID
+        bytes =<font color="#006666"> ReadData</font>(0, *MemoryID, 10)  <font color="#006666">; Lit les 10 derniers caractères du fichier</font>
+        <b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MemoryID)
+      <b><font color="#006666">EndIf</font></b>
+<font color="#006666">      CloseFile</font>(0)
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">EndIf</font></b>  
+</font></pre>
+
+
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="fileseek.html">FileSeek()</a>, <a href="lof.html">Lof()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=isfile.html>IsFile()</a> - <a href=index.html>File Index</a> - <a href=lof.html>Lof()</a> -><br><br>
+
+</body></html>

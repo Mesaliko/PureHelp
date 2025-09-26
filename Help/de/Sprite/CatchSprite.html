@@ -1,0 +1,96 @@
+<html><head><title>CatchSprite</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CatchSprite()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CatchSprite</b></font>(#Sprite, *SpeicherAdresse [, Modus])</blockquote>
+
+<b>Beschreibung</b><br><blockquote>
+
+Lädt das angegebene Sprite aus dem angegebenen Speicherbereich 'SpeicherAdresse'. 
+<br>
+<br>
+Vor dem Laden eines Sprites sollte ein Bildschirm mit <a href="../screen/openscreen.html">OpenScreen()</a> oder 
+<a href="../screen/openwindowedscreen.html">OpenWindowedScreen()</a> geöffnet werden. 
+<br>
+<br>
+Sprites können im BMP-Format oder in jedem anderen von der 
+<a href="../imageplugin/index.html">ImagePlugin Bibliothek</a> unterstützten Format 
+vorliegen. 
+Ein geladenes Sprite kann mittels dem <a href="freesprite.html">FreeSprite()</a> Befehl freigegeben werden. 
+<br>
+<br>
+Der <a href="catchsprite.html">CatchSprite()</a> Befehl ist nützlich im Zusammenhang mit dem 
+'<a href="../reference/includes.html">IncludeBinary</a>' PureBasic Schlüsselwort. 
+Damit können Bilder mit in das Executable gepackt werden. Verwenden Sie diese Option 
+trotzdem mit Bedacht, da mehr Speicher als beim Speichern des Sprites in einer externen Datei 
+benötigt wird (das Sprite befindet sich sowohl im Speicher des Executable und wird auch 
+in den physikalischen Speicher geladen). 
+<br>
+<br>
+Die folgenden Befehle können zum automatischen Aktivieren weiterer Bildformate verwendet werden: 
+<br>
+<a href="../imageplugin/usejpegimagedecoder.html">UseJPEGImageDecoder()</a> 
+<br>
+<a href="../imageplugin/usejpeg2000imagedecoder.html">UseJPEG2000ImageDecoder()</a> 
+<br>
+<a href="../imageplugin/usepngimagedecoder.html">UsePNGImageDecoder()</a> 
+<br>
+<a href="../imageplugin/usetiffimagedecoder.html">UseTIFFImageDecoder()</a> 
+<br>
+<a href="../imageplugin/usetgaimagedecoder.html">UseTGAImageDecoder()</a> 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Sprite</i></td>
+<td width="90%"> 
+Eine Nummer zum Identifizieren des neuen Sprites. <a href="../reference/purebasic_objects.html">#PB_Any</a> 
+kann verwendet werden, um diese Zahl automatisch zu generieren. 
+
+</td></tr>
+<tr><td><i>*SpeicherAdresse</i></td>
+<td> 
+Die Speicheradresse, welche das zum Erstellen des Sprites benutzte Bild beinhaltet. 
+
+</td></tr>
+<tr><td><i>Modus (optional)</i></td>
+<td> 
+Dies kann eine Kombination der folgenden Werte (verknüpft mit dem '|' Operator) sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Sprite_PixelCollision</font>: Fügt spezielle Informationen zum Handling der Pixel-Kollision mittels <a href="spritepixelcollision.html">SpritePixelCollision()</a> hinzu.
+  <font color="#924B72">#PB_Sprite_AlphaBlending</font> : Das Sprite wird mit per Pixel Alpha-Kanal Unterstützung erstellt, benötigt
+                             für <a href="displaytransparentsprite.html">DisplayTransparentSprite()</a>. Das Bildformat muss dies unterstützen
+                             (derzeit nur PNG und TIFF). 
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn das Sprite erstellt wurde, andernfalls Null. Wenn <font color="#924B72">#PB_Any</font> 
+als #Sprite Parameter verwendet wurde, dann wird im Erfolgsfall die generierte Nummer 
+zurückgegeben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  CatchSprite</font>(0, ?Pic)
+  <b><font color="#006666">End</font></b>
+
+  <b><font color="#006666">DataSection</font></b>
+    Pic: <b><font color="#006666">IncludeBinary</font></b> &quot;Sprite.bmp&quot;
+</font></pre>
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Das &quot;?&quot; ist ein Zeiger auf eine Sprungmarke. Weitere Informationen über Zeiger und 
+Speicherzugriff finden Sie im zugehörigen Kapitel <a href="../reference/memory.html">hier</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="createsprite.html">CreateSprite()</a>, <a href="loadsprite.html">LoadSprite()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Sprite Inhaltsverzeichnis</a> - <a href=clipsprite.html>ClipSprite()</a> -><br><br>
+
+</body></html>

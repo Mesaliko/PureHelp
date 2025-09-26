@@ -1,0 +1,55 @@
+<html><head><title>LockMutex</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">LockMutex()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>LockMutex</b></font>(Mutex)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Wartet, bis das Mutex-Objekt verfügbar ist (nicht von einem anderen Thread gesperrt) und 
+sperrt (&quot;lock&quot;) dann das Objekt, damit kein anderer Thread einen Zugriff auf dieses Objekt 
+bekommt. 
+<br>
+<br>
+Nachdem dieser Befehl zurückkehrt, ist sichergestellt, dass dieser Thread der einzige mit 
+einem gesperrten Status auf den Mutex ist. 
+Der Thread kann nun frei auf die von diesem Mutex geschützten Ressourcen zugreifen, da es 
+der einzige mit exklusivem Zugriff auf den Mutex ist. 
+<br>
+<br>
+Wenn ein weiterer Thread LockMutex() aufruft, während dieser den Zugriff hat, wird innerhalb 
+des LockMutex() Befehls gewartet, bis dieser Thread <a href="unlockmutex.html">UnlockMutex()</a> aufruft, 
+um seinen Zugriff auf den Mutex freizugeben. 
+<br>
+<br>
+<b>Hinweis:</b> Da der LockMutex() Befehl wartet, bis der Mutex verfügbar ist, kann dies 
+leicht zu &quot;Lockup&quot;-Situationen (Sperrung innerhalb des Programms) führen, wenn ein 
+<a href="unlockmutex.html">UnlockMutex()</a> Aufruf vergessen wurde. 
+<br>
+<br>
+Siehe <a href="createmutex.html">CreateMutex()</a> für einen Beispiel-Code. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mutex</i></td>
+<td width="90%"> 
+Der zu sperrende Mutex. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="unlockmutex.html">UnlockMutex()</a>, <a href="createmutex.html">CreateMutex()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=killthread.html>KillThread()</a> - <a href=index.html>Thread Inhaltsverzeichnis</a> - <a href=pausethread.html>PauseThread()</a> -><br><br>
+
+</body></html>

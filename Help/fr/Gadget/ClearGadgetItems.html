@@ -1,0 +1,65 @@
+<html><head><title>ClearGadgetItems</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ClearGadgetItems()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>ClearGadgetItems</b></font>(#Gadget)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Supprime tous les éléments d'un gadget. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+Le gadget à nettoyer. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le gadget doit être de l'un des types 
+suivants : 
+<pre><font face="Courier New, Courier, mono" size="2">  - <a href="comboboxgadget.html">ComboBoxGadget()</a>
+  - <a href="editorgadget.html">EditorGadget()</a> 
+  - <a href="listviewgadget.html">ListViewGadget()</a> 
+  - <a href="listicongadget.html">ListIconGadget()</a>   
+  - <a href="mdigadget.html">MDIGadget()</a> 
+  - <a href="panelgadget.html">PanelGadget()</a> 
+  - <a href="treegadget.html">TreeGadget()</a> 
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 260, 150, &quot;ClearGadgetItems&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>) 
+<font color="#006666">    ListViewGadget</font>(0,10,10,240,100)
+    <b><font color="#006666">For</font></b> a = 1 <b><font color="#006666">To</font></b> 10 :<font color="#006666"> AddGadgetItem </font>(0, -1, &quot;Elément &quot;+<font color="#006666">Str</font>(a)) : <b><font color="#006666">Next</font></b>    <font color="#006666">; ajoute 10 éléments</font>
+<font color="#006666">    ButtonGadget</font>(1, 10, 120, 200, 20, &quot;Supprimer le contenu de la boîte de liste&quot;)
+    <b><font color="#006666">Repeat</font></b>
+      Evenement =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Evenement = <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 1
+<font color="#006666">          ClearGadgetItems</font>(0)
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Evenement = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="addgadgetitem.html">AddGadgetItem()</a>, <a href="removegadgetitem.html">RemoveGadgetItem()</a>, 
+<a href="countgadgetitems.html">CountGadgetItems()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=checkboxgadget.html>CheckBoxGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=closegadgetlist.html>CloseGadgetList()</a> -><br><br>
+
+</body></html>

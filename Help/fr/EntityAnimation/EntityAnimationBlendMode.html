@@ -1,0 +1,59 @@
+<html><head><title>EntityAnimationBlendMode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EntityAnimationBlendMode()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>EntityAnimationBlendMode</b></font>(#Entité, Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change le blendmode (mélange des couleurs) 
+de l'animation d'une entité. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entité</i></td>
+<td width="90%"> 
+L'entité à utiliser. 
+
+</td></tr>
+<tr><td><i>Mode</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EntityAnimation_Average</font>   : Le mélange est le résultat de la moyenne des deux animations (par défaut). 
+                                  Par exemple, si la première animation tourne un bras à 40 degrés et la 
+                                  deuxième animation fait tourner le bras à 90 degrés, le bras va tourner 
+                                  de (40+90)/2 = 65 degrés (si les deux animations tournent en même temps 
+                                  en mode full weight).
+  <font color="#924B72">#PB_EntityAnimation_Cumulative</font>: Le mélange est la somme des deux animations. 
+                                  Par exemple, si la première animation tourne un bras à 40 degrés 
+                                  et la deuxième animation fait tourner le bras à 90 degrés, alors 
+                                  le bras tourne à 40+90 = 130 degrés (si les deux animations tournent 
+                                  en même temps en mode full weight).
+
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lors du passage d'une animation à l'autre 
+avec <a href="setentityanimationweight.html">SetEntityAnimationWeight()</a>, un mélange 
+est appliqué pour une transition en douceur 
+entre les animations. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="startentityanimation.html">StartEntityAnimation()</a>, 
+<a href="setentityanimationweight.html">SetEntityAnimationWeight()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addentityanimationtime.html>AddEntityAnimationTime()</a> - <a href=index.html>EntityAnimation Index</a> - <a href=entityanimationstatus.html>EntityAnimationStatus()</a> -><br><br>
+
+</body></html>

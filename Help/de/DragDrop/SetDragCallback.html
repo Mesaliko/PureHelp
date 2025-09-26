@@ -1,0 +1,91 @@
+<html><head><title>SetDragCallback</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetDragCallback()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>SetDragCallback</b></font>(@DragCallback())</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt eine Callback-Funktion an, welche während einer von dieser Applikation ausgelösten Drag &amp; Drop 
+Operation aufgerufen werden soll. Der Callback ermöglicht die Modifikation des von PureBasic angebotenen 
+Drag &amp; Drop Prozesses, z.B. durch die Aktivierung eines besonderen Mauscursors durch die API des 
+Betriebssystems. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>@DragCallback()</i></td>
+<td width="90%"> 
+Die Adresse einer Funktion, die während einer Drag-Operation (das Objekt wird &quot;gezogen&quot;) 
+aufgerufen werden soll. 
+<br>
+<br>
+Die Form und Funktion des Callbacks hängt vom Betriebssystem ab. 
+Dieser muss folgende Form haben: 
+<br>
+<br>
+
+<b>Windows:</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragCallback</font>(Aktion.l)
+  
+    <b><font color="#006666">ProcedureReturn</font></b> <font color="#924B72">#True</font>
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Der Callback wird während der Drag &amp; Drop Operation aufgerufen. 'Aktion' definiert die Aktion, welche 
+stattfinden soll, wenn der Anwender an dieser Stelle den Mauscursor loslässt. Sie kann einer dieser 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Drag_None</font>: Die Daten werden nicht akzeptiert, wenn sie hier abgelegt werden
+  <font color="#924B72">#PB_Drag_Copy</font>: Die Daten werden kopiert
+  <font color="#924B72">#PB_Drag_Move</font>: Die Daten werden verschoben
+  <font color="#924B72">#PB_Drag_Link</font>: Die Daten werden verlinkt
+</font></pre>
+
+Der Callback kann einen besonderen Mauscursor oder ein Verschiebebild (&quot;drag image&quot;) anbieten. Wenn er dies tut, 
+sollte er <font color="#924B72">#False</font> zurückgeben. Die Rückgabe von <font color="#924B72">#True</font> bewirkt, 
+dass der standardmäßige Mauscursor verwendet wird. 
+</blockquote>
+
+
+<b>Linux:</b> 
+<blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">DragCallback</font>(*Context.GdkDragContext, isStart.l)
+  
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+Der Callback wird nur zum Start und zum Ende einer Drag &amp; Drop Operation aufgerufen. Der '*Context' 
+Parameter gibt den &quot;gdk drag context&quot; dieser Operation an und 'isStart' spezifiziert, ob dies der 
+Start oder das Ende der Operation ist. Der Rückgabewert des Callbacks wird ignoriert. 
+<br>
+<br>
+Gtk Funktionen wie gtk_drag_set_icon_pixbuf_() können im Callback verwendet werden, um ein anderes 
+Verschiebebild (&quot;drag image&quot;) für die Operation zu definieren. 
+</blockquote>
+
+
+<b>MacOSX:</b> 
+<blockquote>
+
+Nicht unterstützt. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="setdropcallback.html">SetDropCallback()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextdraggeditem.html>NextDraggedItem()</a> - <a href=index.html>DragDrop Inhaltsverzeichnis</a> - <a href=setdropcallback.html>SetDropCallback()</a> -><br><br>
+
+</body></html>

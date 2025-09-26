@@ -1,0 +1,104 @@
+<html><head><title>CreateMail</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateMail()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateMail</b></font>(#Courrier, De$, Objet$ [, Encodage])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau courrier. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Courrier</i></td>
+<td width="90%"> 
+Le numéro d'identification du 
+nouveau courrier. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>De$</i></td>
+<td> 
+L'adresse de l'expéditeur. 
+<br>
+<br>
+L'adresse doit avoir l'un des formats suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  &quot;louis.dupond@domain.com&quot;
+  &quot;&lt;louis.dupond@domain.com&gt;&quot;
+  &quot;Louis Dupond &lt;louis.dupond@domain.com&gt;&quot;
+</font></pre>
+
+</td></tr>
+<tr><td><i>Objet$</i></td>
+<td> 
+L'objet du courrier. 
+
+</td></tr>
+<tr><td><i>Encodage (optionnel)</i></td>
+<td> 
+L'encodage du courrier. Peut prendre une 
+des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Ascii</font> : Le contenu du courrier est encodé en ascii 
+  <font color="#924B72">#PB_UTF8</font>  : Le contenu du courrier est encodé en <a href="../reference/unicode.html">UTF-8</a> (unicode)(valeur par défaut)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas 
+de succès, zéro sinon. 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé alors le 
+numéro auto-généré est 
+renvoyé en cas de succès. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, <a href="setmailattribute.html">SetMailAttribute()</a>, 
+<a href="addmailattachment.html">AddMailAttachment()</a> et 
+<a href="addmailattachmentdata.html">AddMailAttachmentData()</a> permettent 
+d'agir sur le contenu du 
+courrier. 
+<br>
+<br>
+D'après le standard 
+<a href="http://www.ietf.org/rfc/rfc2822.txt">RFC 2822</a> 
+les caractères <font color="#924B72">#CRLF</font>$ permettent 
+de créer les sauts de ligne. 
+<br>
+<br>
+Sous Linux, 'libcurl' doit être installé pour 
+que cette commande fonctionnent (déjà installé 
+dans la plupart des distributions Linux). 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">CreateMail</font>(0, &quot;test@purebasic.com&quot;, &quot;Salut&quot;)
+<font color="#006666">    SetMailBody</font>(0, &quot;Ceci est un essai !&quot; + <font color="#924B72">#CRLF$</font> + &quot;2ème ligne&quot;)
+    <b><font color="#006666">Debug</font></b> &quot;Mail créé&quot;
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> &quot;Impossible de créer le mail&quot;
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setmailbody.html">SetMailBody()</a>, 
+<a href="setmailattribute.html">SetMailAttribute()</a>, <a href="addmailattachment.html">AddMailAttachment()</a>, 
+<a href="addmailattachmentdata.html">AddMailAttachmentData()</a>, 
+<a href="sendmail.html">SendMail()</a>, <a href="freemail.html">FreeMail()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=addmailrecipient.html>AddMailRecipient()</a> - <a href=index.html>Mail Index</a> - <a href=freemail.html>FreeMail()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,173 @@
+<html><head><title>Macros</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Macros</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Macro</font></b> &lt;name&gt; [(Parameter [, ...])]
+  ...
+<b><font color="#006666">EndMacro</font></b> 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+Macros are a very powerful feature, mainly useful for advanced programmers. A macro is a placeholder 
+for some code (one keyword, one line or even many lines), which will be directly inserted in the 
+source code at the place where a macro is used. In this, it differs from <a href="../reference/procedures.html">procedures</a>, as the procedures 
+doesn't duplicate the code when they are called. 
+<br>
+<br>
+The <b><font color="#006666">Macro</font></b> : <b><font color="#006666">EndMacro</font></b> declaration must be done before the macro will be called for the first time. 
+Because macros will be completely replaced by their related code at compile time, they are not local to a procedure. 
+<br>
+<br>
+A macro can not have a return type nor typed parameters. When a macro has some parameters, they are replaced 
+in the macro code by the literal expression which is passed to the called macro. No evaluation is 
+done as this stage, which is very important to understand: the evaluation of a line is started once 
+all the macros found on this line are expanded. 
+<br>
+<br>
+Macros are divided into two categories: simple (without parameters) and complex 
+(with parameters, needs the parentheses when calling it). When using no parameters, it's possible 
+to replace any word with another word (or any expression). Macros can't be called recursively. 
+Macro declaration can't be nested (it's not possible to define a macro inside another one). 
+
+</blockquote><p><b>Example:</b> Simple macro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> MyNot
+    <b><font color="#006666">Not</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+  a = 0
+  <b><font color="#006666">If</font></b> MyNot a   <font color="#006666">; Here the line will be expanded to : 'If Not a'</font>
+    <b><font color="#006666">Debug</font></b> &quot;Ok&quot;
+  <b><font color="#006666">EndIf</font></b>
+  
+</font></pre>
+
+When using parameters, it's possible to do very flexible macros. The special concatenation character 
+'#' can be used to create new labels or keyword by mixing the macro code and the parameter expression 
+(spaces are not accepted between each words by the concatenation character). 
+It's also possible to define default values for parameters, so they can be omitted when calling the 
+macro. 
+
+</blockquote><p><b>Example:</b> Macro with parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">UMsgBox</font>(Title, Body)
+<font color="#006666">    MessageRequester</font>(Title,<font color="#006666"> UCase</font>(Body), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+  Text$ = &quot;World&quot;
+<font color="#006666">  UMsgBox</font>(&quot;Hello&quot;, &quot;-&quot;+Text$+&quot;-&quot;) <font color="#006666">; Here the line will be expanded like that:</font>
+                                  <font color="#006666">; 'MessageRequester(&quot;Hello&quot;, UCase(&quot;-&quot;+Text$+&quot;-&quot;), 0)'</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Macro with default parameter</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">UMsgBox</font>(Title, Body = &quot;Ha, no body specified&quot;)
+<font color="#006666">    MessageRequester</font>(Title,<font color="#006666"> UCase</font>(Body), 0)
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  UMsgBox</font>(&quot;Hello&quot;) <font color="#006666">; Here the line will be expanded like that:</font>
+                   <font color="#006666">; 'MessageRequester(&quot;Hello&quot;, UCase(&quot;Ha, no body specified&quot;), 0)'</font>
+</font></pre>
+
+</blockquote><p><b>Example:</b> Macro parameter concatenation</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> <font color="#006666">XCase</font>(Type, Text)
+    Type<font color="#924B72">#Case</font>(Text)
+  <b><font color="#006666">EndMacro</font></b>
+
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(U, &quot;Hello&quot;)
+  <b><font color="#006666">Debug</font></b> <font color="#006666">XCase</font>(L, &quot;Hello&quot;)
+  
+</font></pre>
+
+</blockquote><p><b>Example:</b> Advanced multi-line macro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> DoubleQuote
+    &quot;
+  <b><font color="#006666">EndMacro</font></b>
+
+  <b><font color="#006666">Macro</font></b> <font color="#006666">Assert</font>(Expression)
+    <b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Debugger</font>  <font color="#006666">; Only enable assert in debug mode</font>
+      <b><font color="#006666">If</font></b> Expression
+        <b><font color="#006666">Debug</font></b> &quot;Assert (Line &quot; + <font color="#924B72">#PB_Compiler_Line</font> + &quot;): &quot; + DoubleQuote<font color="#924B72">#Expression</font><font color="#924B72">#DoubleQuote</font>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">CompilerEndIf</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+
+<font color="#006666">  Assert</font>(10 &lt;&gt; 10) <font color="#006666">; Will display nothing</font>
+<font color="#006666">  Assert</font>(10 &lt;&gt; 15) <font color="#006666">; Should display the assert</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">UndefineMacro</font></b> &lt;name&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">UndefineMacro</font></b> allows to undefine a previously defined macro, and redefine it in a different manner. 
+Once the macro has been undefined, it is no more available for use. 
+
+</blockquote><p><b>Example:</b> Undefine macro</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> &quot;1&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Call the macro</font>
+  
+  <b><font color="#006666">UndefineMacro</font></b> Test <font color="#006666">; Undefine the macro, it no more exists</font>
+  
+  <b><font color="#006666">Macro</font></b> Test <font color="#006666">; Now we can redefine the macro</font>
+    <b><font color="#006666">Debug</font></b> &quot;2&quot;
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Call the macro</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+
+</blockquote>
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">MacroExpandedCount</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">MacroExpandedCount</font></b> allows to get the expanded count (number of time the macro has been expanded/called). It can 
+be useful to generate unique identifiers in the same macro for every expansion (like label, procedure name etc.). 
+
+</blockquote><p><b>Example:</b> Expanded count</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Macro</font></b> Test
+    <b><font color="#006666">Debug</font></b> <b><font color="#006666">MacroExpandedCount</font></b>
+  <b><font color="#006666">EndMacro</font></b>
+  
+  Test <font color="#006666">; Call the macro</font>
+  Test <font color="#006666">; Call the macro</font>
+  Test <font color="#006666">; Call the macro</font>
+  
+</font></pre>
+
+<br>
+<br>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

@@ -1,0 +1,71 @@
+<html><head><title>CreateDataMesh</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateDataMesh()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreateDataMesh</b></font>(#Mesh, Array.MeshVertex() [, Mode])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau #Mesh à partir d'un tableau à 2 dimensions du type MeshVertex. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Le numéro d'identification du nouveau mesh. 
+<br>
+<br>
+<a href="../reference/purebasic_objects.html">#PB_Any</a> 
+peut être utilisé pour générer automatiquement 
+ce numéro. 
+
+</td></tr>
+<tr><td><i>Array.MeshVertex()</i></td>
+<td> 
+Le tableau à 2 dimensions de type MeshVertex.<br>
+La structure MeshVertex est définie comme suit: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f
+    NormalY.f
+    NormalZ.f
+    TangentX.f
+    TangentY.f
+    TangentZ.f 
+    u.f
+    v.f
+    Couleur.l
+  <b><font color="#006666">EndStructure</font></b>   
+</font></pre>
+
+</td></tr>
+<tr><td><i>Mode (optionnel)</i></td>
+<td> 
+La façon de lier les sommets. Il peut s'agir de l'une des valeurs suivantes : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_DiagonalRegular1</font>      : Les diagonales sont alignées de le même sens
+  <font color="#924B72">#PB_Mesh_DiagonalRegular2</font>      : Les diagonales sont alignées dans l'autre sens
+  <font color="#924B72">#PB_Mesh_DiagonalAlternate</font>     : Les diagonales sont une fois dans un sens et une fois dans l'autre sens (alterné)
+  <font color="#924B72">#PB_Mesh_DiagonalShortestLength</font>: Les diagonales sont liées entre les deux sommets les plus proches
+  <font color="#924B72">#PB_Mesh_DiagonalClosestNormal</font> : Les diagonales sont liées entre les deux normales les plus proches (produit scalaire). Meilleur mode mais nécessite des normales.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si #Mesh a déjà été créé, il est libéré et remplacé par le nouveau. 
+<br>
+<br>
+Cette commande permet de créer un Mesh plus rapidement que d'utiliser <a href="createmesh.html">CreateMesh()</a> 
+avec un tableau ad-hoc. 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createcylinder.html>CreateCylinder()</a> - <a href=index.html>Mesh Index</a> - <a href=createicosphere.html>CreateIcoSphere()</a> -><br><br>
+
+</body></html>

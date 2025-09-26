@@ -1,0 +1,62 @@
+<html><head><title>GetPathPart</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetPathPart()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>GetPathPart</b></font>(CheminComplet$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Extrait le chemin d'un fichier d'un chemin complet. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>CheminComplet$</i></td>
+<td width="90%"> 
+Le chemin d'accès complet au fichier. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie le chemin. <br>
+Si, par exemple, la chaîne CheminComplet$ est 
+&quot;C:\PureBasic\PB.exe&quot;, la chaîne 
+renvoyée dans Chemin$ sera &quot;C:\PureBasic\&quot;. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour récupérer l'extension ou le nom du fichier, 
+voir les fonctions <a href="getextensionpart.html">GetExtensionPart()</a> et <a href="getfilepart.html">GetFilePart()</a>. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Repertoire$ =<font color="#006666"> GetHomeDirectory</font>()  <font color="#006666">; Liste tous les fichiers et les dossiers du répertoire racine de l'utilisateur qui est actuellement logué (Home)</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">ExamineDirectory</font>(0, Repertoire$, &quot;*.*&quot;)  
+    <b><font color="#006666">While</font></b> <font color="#006666">NextDirectoryEntry</font>(0)
+      <b><font color="#006666">If</font></b> <font color="#006666">DirectoryEntryType</font>(0) = <font color="#924B72">#PB_DirectoryEntry_File</font>
+        Type$ = &quot; [Fichier] &quot;
+        Taille$ = &quot; (Taille : &quot; +<font color="#006666"> DirectoryEntrySize</font>(0) + &quot;)&quot;
+      <b><font color="#006666">Else</font></b>
+        Type$ = &quot; [Dossier] &quot;
+        Taille$ = &quot;&quot; <font color="#006666">; Un Dossier n'a pas de taille      </font>
+      <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">Debug</font></b> Type$ +<font color="#006666"> DirectoryEntryName</font>(0) + Taille$
+      <b><font color="#006666">Debug</font></b> &quot;Chemin : &quot; +<font color="#006666"> GetPathPart</font>(<font color="#006666">DirectoryEntryName</font>(0))
+      <b><font color="#006666">Debug</font></b> &quot;&quot;
+    <b><font color="#006666">Wend</font></b>
+<font color="#006666">    FinishDirectory</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="getextensionpart.html">GetExtensionPart()</a>,  <a href="getfilepart.html">GetFilePart()</a>, <a href="../process/programfilename.html">ProgramFilename()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=gethomedirectory.html>GetHomeDirectory()</a> - <a href=index.html>FileSystem Index</a> - <a href=gettemporarydirectory.html>GetTemporaryDirectory()</a> -><br><br>
+</body></html>

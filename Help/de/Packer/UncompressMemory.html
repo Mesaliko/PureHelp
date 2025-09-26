@@ -1,0 +1,62 @@
+<html><head><title>UncompressMemory</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">UncompressMemory()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>UncompressMemory</b></font>(*Puffer, Größe, *Ausgabe, AusgabeGröße [, PluginID])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Entpackt den Puffer-Inhalt in den Ausgabepuffer. Die Länge des Ausgabepuffers muss mindestens 
+so lang sein, wie der zu entpackende Puffer. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>*Puffer</i></td>
+<td width="90%"> 
+Der zu entpackende Speicherpuffer. 
+
+</td></tr>
+<tr><td><i>Größe</i></td>
+<td> 
+Die Größe des zu entpackenden Speichers. 
+
+</td></tr>
+<tr><td><i>*Ausgabe</i></td>
+<td> 
+Der Speicherpuffer, um die entpackten Daten zu speichern. 
+
+</td></tr>
+<tr><td><i>AusgabeGröße</i></td>
+<td> 
+Die Größe des Speicherpuffers, um die entpackten Daten zu speichern. Dieser muss mindestens 
+die Größe der entpackten Daten haben. 
+
+</td></tr>
+<tr><td><i>PluginID (optional)</i></td>
+<td> 
+Das zu verwendende Plugin, wenn mehr als ein Packer-Plugin registriert wurde. Dies kann einer der 
+folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PackerPlugin_BriefLZ</font>: verwendet den BriefLZ Packer, um den Speicher zu entpacken. <a href="usebrieflzpacker.html">UseBriefLZPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Zip</font>    : verwendet den Zip Packer, um den Speicher zu entpacken. <a href="usezippacker.html">UseZipPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Lzma</font>   : verwendet den Lzma Packer, um den Speicher zu entpacken. <a href="uselzmapacker.html">UseLzmaPacker()</a> muss verwendet werden, damit dies einen Effekt hat.
+  <font color="#924B72">#PB_PackerPlugin_Jcalg1</font> : verwendet den Jcalg1 Packer, um den Speicher zu entpacken. <a href="usejcalg1packer.html">UseJcalg1Packer()</a> muss verwendet werden, damit dies einen Effekt hat.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die unkomprimierte Größe zurück, wenn der Puffer erfolgreich entpackt wurde, andernfalls -1. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="compressmemory.html">CompressMemory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=packentrytype.html>PackEntryType()</a> - <a href=index.html>Packer Inhaltsverzeichnis</a> - <a href=uncompresspackfile.html>UncompressPackFile()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,273 @@
+<html><head><title>Les outils intégrés</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Les outils intégrés</font></b></p>
+
+L'IDE PureBasic intègre un grand nombre d'outils intégrés, pour rendre la 
+programmation aisée et productive. La plupart d'entre eux peuvent être 
+affichés dans une fenêtre séparée (accessibles alors par le menu) ou dans 
+la palette d'outils située sur le côté de la zone d'édition. 
+
+<br>
+<br>
+
+Pour plus d'informations quant à la configuration de ces outils et comment 
+ils sont affichés, voir <a href="../reference/ide_preferences.html">Configurer l'IDE</a>. 
+
+
+<p><b>Outils disponibles pour la palette.</b></p><blockquote>
+
+
+<b>Navigateur de procédures</b> 
+
+<p><img src="images/ide_tools_procedurelist.png"></p>
+
+Cet outil affiche la liste de toutes les procédures déclarées dans le fichier 
+source en cours d'édition. En cliquant sur un élément de cette liste, le curseur 
+changera immédiatement pour aller à la déclaration de cette procédure. 
+<br>
+<br>
+Les macros seront identifiées avec un signe &quot;+&quot; avant le nom. 
+<br>
+<br>
+Il est aussi possible de mettre des commentaires particuliers dans le code qui sera alors 
+aussi affiché dans le navigateur de procédures. Ils ont la forme suivante: &quot;;- &lt;description&gt;&quot;. 
+Le ';' démarre le commentaire et le '-' qui le suit immédiatement définit ce type de commentaire. 
+La 'description' sera alors affichée dans la liste et un clic sur cet élément 
+changera la position du curseur pour cette ligne. Ce type de commentaire se 
+distingue dans la liste par l'ajout du caractère '&gt;' devant la description. 
+<br>
+<br>
+La liste des procédures peut être triée, et peut aussi afficher les paramètres de la procédure/macro. 
+Pour ces options, voir <a href="../reference/ide_preferences.html">Configuration de l'IDE</a>. 
+
+<br>
+<br>
+
+<b>Projet</b> 
+
+<p><img src="images/ide_tools_project.png"></p>
+
+L'outil projet affiche un arbre de tous les fichiers du <a href="../reference/ide_projects.html">projet</a> actuellement chargés. 
+Un double-clic sur un fichier l'ouvrira dans l'IDE. Cela permet un accès rapide à tous les fichiers du projet. Un 
+clic-droit sur un fichier ouvre un menu contextuel qui propose davantage d'options: 
+
+<blockquote>
+
+<p><img src="images/ide_popupmenu_project.png"></p>
+
+<u>Ouvrir</u> - Ouvre le fichier dans l'IDE. 
+<br>
+<u>Ouvrir avec le visualisateur de fichiers</u> - Ouvre le fichier dans le visualisateur intégré de l'IDE. 
+<br>
+<u>Ouvrir avec l'explorateur</u> - Ouvre le fichier dans l'explorateur du système d'exploitation. 
+<br>
+<u>Ajouter un nouveau fichier</u> - Ajoute un nouveau fichier au projet. 
+<br>
+<u>Retirer du projet</u> - Retire le(s) fichier(s) sélectionné(s) du projet. 
+<br>
+<u>Rafraîchir les données de l'auto-complétion</u> - Rescanne tous les fichiers du projet pour actualiser les données de l'auto-complétion. 
+
+</blockquote>
+
+
+
+<b>Explorer</b> 
+
+<p><img src="images/ide_tools_fileexplorer.png"></p>
+
+L'outil Explorer affiche une liste de fichiers et de répertoires à partir de laquelle il est possible 
+d'ouvrir rapidement n'importe quel type de fichier, en double-cliquant dessus. 
+Les fichiers  PureBasic (*.pb, *.pbi, *.pbp, *.pbf) seront chargés directement dans la zone d'édition 
+et les fichiers reconnus par l'éditeur (textes et binaires) seront ouverts par le visualisateur interne 
+de fichiers. 
+
+<br>
+<br>
+
+<b>Visualisateur de variables</b> 
+
+<p><img src="images/ide_tools_variablelist.png"></p>
+
+Le visualisateur de variables peut en fait afficher les variables, tableaux, listes, 
+constantes, structures et interfaces définis dans le source en cours d'édition, ou dans tous 
+les fichiers ouverts. La configuration de ce qui doit être affiché se fait 
+dans <a href="../reference/ide_preferences.html">les préférences</a>. 
+<br>
+Note: l'affichage des variables est un peu limité pour l'instant. Seules les variables qui 
+sont déclarées par <a href="../reference/define.html">Define</a>, 
+<a href="../reference/global.html">Global</a>, <a href="../reference/shared.html">Shared</a>, 
+<a href="../reference/protected.html">Protected</a> ou <a href="../reference/static.html">Static</a> seront reconnues. 
+
+<br>
+<br>
+
+<b>Modèles de codes</b> 
+
+<p><img src="images/ide_tools_templates.png"></p>
+
+Cet outil permet d'organiser de manière hiérarchisée une liste de petits bouts de code qui sont souvent 
+utilisés. Ils peuvent être insérés rapidement à n'importe quel endroit du fichier en cours 
+d'édition en double-cliquant sur le code voulu. 
+
+<br>
+<br>
+
+<b>Explorateur de Notes</b> 
+
+<p><img src="images/ide_tools_issues.png"></p>
+
+L'outil Explorateur de Notes recueille les commentaires du code source qui correspondent 
+au format défini et les répertorie par ordre de priorité. Il peut être utilisé pour suivre 
+les zones du code source qui doivent encore être travaillées. 
+<br>
+<br>
+Chaque problème affiché correspond à un commentaire dans le code. Un double-clic sur la Note 
+affiche la ligne de code. Les Notes peuvent être affichées pour le fichier en cours, ou pour 
+plusieurs fichiers (tous les fichiers ouverts, ou tous les fichiers qui appartiennent aux 
+<a href="../reference/ide_projects.html">projet</a> courant). La liste peut également être exportée au format CSV. 
+<br>
+<br>
+Pour configurer la liste des Notes recueillies, consultez la section &quot;Notes&quot; dans les 
+<a href="../reference/ide_preferences.html">Préférences</a>. 
+
+<br>
+<br>
+
+<b>Choix de couleur</b> 
+
+<p><img src="images/ide_tools_colorrequester.png"></p>
+
+Le sélecteur de couleur vous aide à trouver la valeur de la couleur parfaite pour n'importe quelle tâche. 
+Les méthodes suivantes de choix de couleur sont : 
+<br>
+<br>
+RGB: Sélectionnez une couleur en choisissant les intensités de rouge, de vert et de bleu. 
+<br>
+HSV: Sélectionnez une couleur en choisissant la teinte, la saturation et la valeur. 
+<br>
+HSL: Sélectionnez une couleur en choisissant la teinte, la saturation et la luminosité. 
+<br>
+Roue: Sélectionnez une couleur en utilisant le modèle HSV dans la roue de couleur. 
+<br>
+Palette: Sélectionnez une couleur dans une palette prédéfinie. 
+<br>
+Nom: Sélectionnez une couleur dans une palette par son nom. 
+<br>
+<br>
+La sélection des couleurs comprend une composante alpha, si l'option &quot;Inclure le canal 
+alpha&quot; est activée. Les composantes individuelles (intensités rouge / vert / bleu ou teinte 
+/ saturation / luminosité), ainsi que la représentation hexadécimale de la couleur actuelle 
+peuvent être vues et modifiées dans les champs de texte. 
+<br>
+<br>
+Le bouton &quot;Insérer Couleur&quot; insère la valeur hexadécimale de la couleur courante dans le 
+code source. Le bouton &quot;Insérer RGB&quot; insère la couleur comme le ferait un appel à la 
+fonction <a href="../2ddrawing/rgb.html">RGB()</a> ou <a href="../2ddrawing/rgba.html">RGBA()</a>dans le code. 
+Le bouton &quot;Ajouter couleur&quot; permet d'ajouter la couleur actuelle dans la zone d'historique. 
+En cliquant sur une couleur dans cette zone, permet à cette couleur de devenir la couleur 
+courante. 
+
+<br>
+<br>
+
+<b>Table des caractères</b> 
+
+<p><img src="images/ide_tools_ascii-table.png"></p>
+
+La table affiche une liste des 256 premiers caractères unicode avec leurs 
+correspondances en décimal, hexadécimal et HTML. En double-cliquant sur une ligne, ce caractère 
+sera inséré dans le code source. Les boutons en dessous de la liste permettent de choisir 
+le format dans lequel le caractère sera inséré. 
+
+<br>
+<br>
+
+<b>Outil Aide</b> 
+
+<p><img src="images/ide_tools_help.png"></p>
+
+L'outil d'aide est une visionneuse alternative pour le <a href="../reference/ide_help.html">guide de référence</a> . 
+Il peut être utilisé pour afficher le manuel de PureBasic à côté du code, que ce soit avec 
+le raccourci F1 ou non. Voir <a href="../reference/ide_preferences.html">préférences</a>. 
+
+
+</blockquote>
+<p><b>Les autres outils intégrés</b></p><blockquote>
+
+
+<b>Visualisateur de structures</b> 
+
+<p><img src="images/ide_tools_structureviewer.png"></p>
+
+Cet outil permet de voir toutes les structures, interfaces et constantes qui sont prédéfinies 
+dans PureBasic. Double-cliquer sur une structure ou une interface affichera la déclaration 
+(le contenu) de l'élément. Il est possible de filtrer l'affichage en choisissant une lettre 
+dans les boutons affichés au dessus de la liste. 
+<br>
+Le bouton &quot;Retour&quot; revient à l'affichage précédant le double-clic. 
+<br>
+Le bouton &quot;Insérer nom&quot; insère uniquement le nom de l'élément sélectionné. 
+<br>
+Le bouton &quot;Insérer copie&quot; insère une copie de la déclaration de l'élément sélectionné. 
+<br>
+Le bouton &quot;Insérer&quot; permet d'entrer le nom d'une variable et d'insérer tous 
+les champs de la structure ou interface sélectionnée (en utilisant cette variable comme base). 
+
+<br>
+<br>
+
+
+<b>Visualisateur de fichiers</b> 
+
+<p><img src="images/ide_tools_fileviewer.png"></p>
+
+Le visualisateur de fichiers permet d'afficher plusieurs types de fichiers: textes, 
+images et pages web (Windows seulement). Si un type de fichiers n'est pas reconnu, 
+il sera affiché sous forme hexadécimale. Le bouton &quot;Ouvrir&quot; ouvre un nouveau fichier 
+et le bouton &quot;X&quot; ferme le fichier courant. Les flèches permettent de naviguer parmi les 
+fichiers ouverts. 
+<br>
+A noter qu'il est aussi possible d'ouvrir des fichiers dans le visualisateur interne 
+en double-cliquant sur des fichiers binaires dans l'outil 'Explorer' ou sur le mot clef 
+<a href="../reference/includes.html">IncludeBinary</a> dans la zone d'édition. 
+
+<br>
+<br>
+
+<b>Comparer Fichiers/Dossiers</b> 
+
+<p><img src="images/ide_tools_diff_options.png"></p>
+
+Cet outil permet de comparer deux fichiers (texte) ou des répertoires et de mettre en 
+évidence leurs différences. L'onglet &quot;Options&quot; peut être utilisé pour ignorer des 
+différences telles que les espaces ou les changements majuscules/minuscules. 
+
+<p><img src="images/ide_tools_diff_files.png"></p>
+
+Les fichiers sont affichés côte à côte avec les différences marquées de la manière suivante: 
+Les lignes affichées en rouge ont été enlevées dans le fichier, les lignes indiquées en vert 
+ont été ajoutées dans le fichier et les lignes indiquées en jaune ont été modifiées. 
+
+<p><img src="images/ide_tools_diff_directories.png"></p>
+
+Dans la comparaison de répertoires, le contenu des deux répertoires est examiné 
+(avec la possibilité de filtrer la recherche par extension de fichier et d'inclure 
+les sous-répertoires) et les fichiers sont marqués d'une manière similaire: Dossiers en 
+rouge n'existent pas dans le deuxième répertoire, les fichiers en vert sont nouveaux dans 
+le deuxième répertoire et fichiers en jaune ont été modifiés. Un double-clic sur un fichier 
+modifié montre les modifications qui ont été apportées. 
+
+
+</blockquote>
+<p><b>Autes outils du menu Outils</b></p><blockquote>
+
+
+<b>Concepteur de fenêtre</b> 
+
+<p><img src="images/ide_tools_vdesigner.png"></p>
+
+Le concepteur de fenêtre (ou de formulaire) peut être utilisé pour concevoir 
+l'interface utilisateur de votre application. Pour plus d'informations, reportez-vous au 
+chapitre <a href="../reference/ide_form.html">concepteur de fenêtre</a>. 
+</blockquote>
+</font></body></html>

@@ -1,0 +1,134 @@
+<html><head><title>Spline.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Spline
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;An example of using SimpleSpline To make an Entity smoothly
+</font><font color="#006666">;follow a predefined path With spline interpolation.
+</font>
+
+
+<b><font color="#006666">Define</font></b>.f Time, TimeN, pas = 1, x, y, z, TimeSinceLastFrame
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Spline - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;            , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;        , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Models&quot;          , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Scripts&quot;         , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_Modulative</font>, 0,<font color="#006666"> RGB</font>(175, 175, 175))
+
+
+<font color="#006666">;- Ground
+</font><font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;Dirt.jpg&quot;))
+<font color="#006666">CreatePlane</font>(0, 1200, 1200, 1, 1, 5, 5)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0), 500, 0, -500)
+
+<font color="#006666">;- Cylinder - check point
+</font><font color="#006666">CreateCylinder</font>(3, 10, 100)
+<font color="#006666">CreateEntity</font>(4,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 50,  0,   50)
+<font color="#006666">CreateEntity</font>(5,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 50,  0, -950)
+<font color="#006666">CreateEntity</font>(6,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 950, 0, -950)
+<font color="#006666">CreateEntity</font>(7,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 950, 0,   50)
+<font color="#006666">CreateEntity</font>(8,<font color="#006666"> MeshID</font>(3), <font color="#924B72">#PB_Material_None</font>, 450, 0, -450)
+
+<font color="#006666">;- Robot
+</font><font color="#006666">;
+</font><font color="#006666">LoadMesh</font>(1, &quot;robot.mesh&quot;)
+<font color="#006666">CreateEntity</font>(1,<font color="#006666"> MeshID</font>(1), <font color="#924B72">#PB_Material_None</font>, 0, 0, 0)
+<font color="#006666">ScaleEntity</font>(1, 3, 3, 3)
+<font color="#006666">StartEntityAnimation</font>(1, &quot;Walk&quot;)
+
+<font color="#006666">;- Ninja
+</font><font color="#006666">;
+</font><font color="#006666">LoadMesh</font>(2, &quot;ninja.mesh&quot;)
+<font color="#006666">CreateEntity</font>(2,<font color="#006666"> MeshID</font>(2), <font color="#924B72">#PB_Material_None</font>, 500, 0, 400)
+<font color="#006666">ScaleEntity</font>(2, 1.4, 1.4, 1.4)
+<font color="#006666">StartEntityAnimation</font>(2, &quot;Walk&quot;, <font color="#924B72">#PB_EntityAnimation_Manual</font>)
+
+<font color="#006666">;- Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 500, 1500, 1450, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraFOV</font>(0, 28)
+<font color="#006666">CameraBackColor</font>(0,$846748)
+<font color="#006666">CameraLookAt</font>(0, 500, 0, -500)
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font><font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(25, 25, 25))
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255,255,255), 750, 750, 750)
+
+<font color="#006666">;- Spline Robot
+</font><font color="#006666">;
+</font>spline =<font color="#006666"> CreateSpline</font>(<font color="#924B72">#PB_Any</font>)
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(4), 0,<font color="#006666"> EntityZ</font>(4))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(8), 0,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(5), 0,<font color="#006666"> EntityZ</font>(5))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(6), 0,<font color="#006666"> EntityZ</font>(6))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(8), 0,<font color="#006666"> EntityZ</font>(8))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(7), 0,<font color="#006666"> EntityZ</font>(7))
+<font color="#006666">AddSplinePoint</font>(spline,<font color="#006666"> EntityX</font>(4), 0,<font color="#006666"> EntityZ</font>(4))
+
+<font color="#006666">;- Spline Ninja
+</font><font color="#006666">;
+</font>splineN =<font color="#006666"> CreateSpline</font>(<font color="#924B72">#PB_Any</font>)
+<font color="#006666">AddSplinePoint</font>(splineN,<font color="#006666"> EntityX</font>(2),<font color="#006666"> EntityY</font>(2),<font color="#006666"> EntityZ</font>(2))
+<font color="#006666">AddSplinePoint</font>(splineN,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1),<font color="#006666"> EntityZ</font>(1))
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  <font color="#006666">; Robot
+</font><font color="#006666">  ComputeSpline</font>(spline, time) <font color="#006666">; Should be called before using SplineX(); SplineY() and SplineZ()
+</font>  x =<font color="#006666"> SplineX</font>(spline)
+  y =<font color="#006666"> SplineY</font>(spline)
+  z =<font color="#006666"> SplineZ</font>(spline)
+  
+<font color="#006666">  EntityLookAt</font>(1, x,<font color="#006666"> EntityY</font>(1), z, 1, 0, 0)
+<font color="#006666">  MoveEntity</font>(1, x, y, z, <font color="#924B72">#PB_Absolute</font>)
+  
+  time + pas * TimeSinceLastFrame / 35
+  
+  <b><font color="#006666">If</font></b> time &gt; 1
+    Time = 0
+  <b><font color="#006666">EndIf</font></b>
+  
+  <font color="#006666">; Ninja
+</font><font color="#006666">  ComputeSpline</font>(splineN, TimeSinceLastFrame/2) <font color="#006666">; Should be called before using SplineX(); SplineY() and SplineZ()
+</font>  x =<font color="#006666"> SplineX</font>(splineN)
+  y =<font color="#006666"> SplineY</font>(splineN)
+  z =<font color="#006666"> SplineZ</font>(splineN)
+  
+<font color="#006666">  EntityLookAt</font>(2, x,<font color="#006666"> EntityY</font>(2), z)
+<font color="#006666">  MoveEntity</font>(2, x, y, z, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">  AddEntityAnimationTime</font>(2, &quot;Walk&quot;, TimeSinceLastFrame*1000 / 2)
+  
+<font color="#006666">  UpdateSplinePoint</font>(splineN, 0,<font color="#006666"> EntityX</font>(2),<font color="#006666"> EntityY</font>(2),<font color="#006666"> EntityZ</font>(2))
+<font color="#006666">  UpdateSplinePoint</font>(splineN, 1,<font color="#006666"> EntityX</font>(1),<font color="#006666"> EntityY</font>(1),<font color="#006666"> EntityZ</font>(1))
+  
+  TimeSinceLastFrame =<font color="#006666"> RenderWorld</font>() / 1000
+  
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+</font></pre>
+</body></html>

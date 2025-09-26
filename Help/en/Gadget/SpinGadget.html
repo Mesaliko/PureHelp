@@ -1,0 +1,112 @@
+<html><head><title>SpinGadget</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SpinGadget()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SpinGadget</b></font>(#Gadget, x, y, Width, Height, Minimum, Maximum [, Flags])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a spin gadget in the current GadgetList. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Gadget</i></td>
+<td width="90%"> 
+A number to identify the new gadget. <a href="../reference/purebasic_objects.html">#PB_Any</a> can 
+be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>x, y, Width, Height</i></td>
+<td> 
+The position and dimensions of the new gadget. 
+
+</td></tr>
+<tr><td><i>Minimum, Maximum</i></td>
+<td> 
+The minimum and maximum values for the gadget. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+Flags to modify the gadget behavior. It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Spin_ReadOnly</font> : The StringGadget is not editable, the number is only changeable by the arrows
+  <font color="#924B72">#PB_Spin_Numeric</font>  : The SpinGadget will automatically update the text with value of the state, so <a href="setgadgettext.html">SetGadgetText()</a> is not needed.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero on success and zero on failure. If <font color="#924B72">#PB_Any</font> was used as the #Gadget parameter 
+then the return-value is the auto-generated gadget number on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+A 'mini help' can be added to this gadget using <a href="gadgettooltip.html">GadgetToolTip()</a>. 
+<br>
+<br>
+The following functions can be used to act on a SpinGadget: 
+<br>
+<br>
+<a href="getgadgetstate.html">GetGadgetState()</a>: Get the current gadget value. 
+<br>
+<a href="setgadgetstate.html">SetGadgetState()</a>: Change the gadget value. For displaying the new value you still must use <a href="setgadgettext.html">SetGadgetText()</a>! 
+<br>
+<a href="getgadgettext.html">GetGadgetText()</a>: Get the text contained in the gadget. 
+<br>
+<a href="setgadgettext.html">SetGadgetText()</a>: Change the text contained in the gadget. 
+<br>
+<a href="getgadgetattribute.html">GetGadgetAttribute()</a>: With one of the following attributes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Spin_Minimum</font>   : Returns the minimum value.
+  <font color="#924B72">#PB_Spin_Maximum</font>   : Returns the maximum value.
+</font></pre>
+
+<a href="setgadgetattribute.html">SetGadgetAttribute()</a>: With one of the following attributes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Spin_Minimum</font>   : Changes the minimum value.
+  <font color="#924B72">#PB_Spin_Maximum</font>   : Changes the maximum value.
+</font></pre>
+
+The following events are supported through <a href="../window/eventtype.html">EventType()</a>: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_EventType_Change</font>: The text in the edit area has been modified by the user.
+  <font color="#924B72">#PB_EventType_Up</font>    : The 'Up' button was pressed.
+  <font color="#924B72">#PB_EventType_Down</font>  : The 'Down' button was pressed.
+</font></pre>
+
+This gadget supports the <a href="setgadgetcolor.html">SetGadgetColor()</a> and <a href="getgadgetcolor.html">GetGadgetColor()</a> functions with 
+the following values as 'ColorType': 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Gadget_FrontColor</font>: Textcolor
+  <font color="#924B72">#PB_Gadget_BackColor</font> : Backgroundcolor
+</font></pre>
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 140, 70, &quot;SpinGadget&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    SpinGadget     </font>(0, 20, 20, 100, 25, 0, 1000)
+<font color="#006666">    SetGadgetState </font>(0, 5) :<font color="#006666"> SetGadgetText</font>(0, &quot;5&quot;)   <font color="#006666">; set initial value</font>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font>
+        <b><font color="#006666">If</font></b> <font color="#006666">EventGadget</font>() = 0
+<font color="#006666">          SetGadgetText</font>(0,<font color="#006666"> Str</font>(<font color="#006666">GetGadgetState</font>(0)))
+        <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<br>
+<p><img src="../HelpPictures/spingadget.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="getgadgetstate.html">GetGadgetState()</a>, <a href="setgadgetstate.html">SetGadgetState()</a>, <a href="getgadgettext.html">GetGadgetText()</a>, <a href="setgadgettext.html">SetGadgetText()</a>, <a href="getgadgetattribute.html">GetGadgetAttribute()</a>, <a href="setgadgetattribute.html">SetGadgetAttribute()</a>, 
+<a href="getgadgetcolor.html">GetGadgetColor()</a>, <a href="setgadgetcolor.html">SetGadgetColor()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=shortcutgadget.html>ShortcutGadget()</a> - <a href=index.html>Gadget Index</a> - <a href=splittergadget.html>SplitterGadget()</a> -><br><br>
+
+</body></html>

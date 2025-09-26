@@ -1,0 +1,78 @@
+<html><head><title>PathPointX</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PathPointX()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.d = <font color="#006666"><b>PathPointX</b></font>(Distanz.d)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt die X-Koordinate des Punktes an der angegebenen Distanz vom Beginn des aktuellen 
+Vektorzeichnen-Pfades zurück. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Distanz.d</i></td>
+<td width="90%"> 
+Gibt die Distanz vom Beginn des Pfades an. Wenn dieser Parameter negativ oder größer 
+als die Gesamtpfadlänge ist, dann wird der Start/Endpunkt des Pfades zurückgegeben. 
+Die vollständige Länge des Pfades kann mit <a href="pathlength.html">PathLength()</a> ermittelt werden. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Die X-Koordinate des Punktes im Pfad. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      <font color="#006666">; Pfad konstruieren</font>
+<font color="#006666">      MovePathCursor</font>(150, 125)
+<font color="#006666">      AddPathCurve</font>(0, 270, 0, -150, 350, 180)
+      
+      <font color="#006666">; Position &amp; Winkel des Punktes im Pfad ermitteln</font>
+      x =<font color="#006666"> PathPointX</font>(200)
+      y =<font color="#006666"> PathPointY</font>(200)
+      a =<font color="#006666"> PathPointAngle</font>(200)
+      
+      <font color="#006666">; Zeichnet den Pfad</font>
+<font color="#006666">      VectorSourceColor</font>($FF0000FF)
+<font color="#006666">      StrokePath</font>(5)
+      
+      <font color="#006666">; Zeichnet eine Markierung am Pfad-Punkt</font>
+<font color="#006666">      AddPathCircle</font>(x, y, 10)
+<font color="#006666">      VectorSourceColor</font>($FFFF0000)
+<font color="#006666">      FillPath</font>()
+      
+<font color="#006666">      MovePathCursor</font>(x, y)
+<font color="#006666">      AddPathLine</font>(30*<font color="#006666">Cos</font>(<font color="#006666">Radian</font>(a)), 30*<font color="#006666">Sin</font>(<font color="#006666">Radian</font>(a)), <font color="#924B72">#PB_Path_Relative</font>)
+<font color="#006666">      StrokePath</font>(5)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/pathpointx.png"></p>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="pathpointy.html">PathPointY()</a>, <a href="pathpointangle.html">PathPointAngle()</a>, <a href="pathlength.html">PathLength()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=pathpointangle.html>PathPointAngle()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=pathpointy.html>PathPointY()</a> -><br><br>
+
+</body></html>

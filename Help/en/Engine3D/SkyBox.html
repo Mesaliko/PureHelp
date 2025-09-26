@@ -1,0 +1,67 @@
+<html><head><title>SkyBox</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SkyBox()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>SkyBox</b></font>(TextureName$ [, FogColor, FogIntensity, FogStartDistance, FogEndDistance])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+
+Loads a 6 face cube and creates an artificial box which is far away from the camera but close to the world. 
+This is a very useful function to easily make a closed world. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>TextureName$</i></td>
+<td width="90%"> 
+The <a href="../texture/index.html">textures</a> must be in a path previously declared with the <a href="add3darchive.html">Add3DArchive()</a> function. 
+The base name of the textures, which should be named using the following rule: 
+<pre><font face="Courier New, Courier, mono" size="2">  TextureName_BK ; BacK face
+  TextureName_FR ; FRont face
+  TextureName_DN ; DowN face
+  TextureName_UP ; UP face
+  TextureName_LF ; LeFt face
+  TextureName_RT ; RighT face
+</font></pre>
+
+</td></tr>
+<tr><td><i>FogColor (optional)</i></td>
+<td> 
+The fog color. <a href="../2ddrawing/rgb.html">RGB()</a> can be used to get a valid color value. If not specified, the fog settings are inherited from 
+the <a href="fog.html">Fog()</a> command. 
+
+</td></tr>
+<tr><td><i>FogIntensity (optional)</i></td>
+<td> 
+The fog intensity. If sets to zero, the fog effect is disable. 
+
+</td></tr>
+<tr><td><i>FogStartDistance (optional)</i></td>
+<td> 
+The distance from the camera (in world units) where the fog should start. 
+
+</td></tr>
+<tr><td><i>FogEndDistance (optional)</i></td>
+<td> 
+The distance from the camera where the fog is fully opaque. 
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns non-zero if the SkyBox has been successfully created. If the textures can't be loaded, the skybox is created with 
+blank textures. 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="skydome.html">SkyDome()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=showgui.html>ShowGUI()</a> - <a href=index.html>Engine3D Index</a> - <a href=skydome.html>SkyDome()</a> -><br><br>
+
+</body></html>

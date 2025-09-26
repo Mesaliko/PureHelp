@@ -1,0 +1,137 @@
+<html><head><title>Unicode_Utf8_Ascii.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Conversion Unicode/Utf8/Ascii strings
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) 2018 - Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+
+<font color="#006666">; By default, strings are coded in unicode (since PureBasic 5.50)
+</font>
+MyString_U.s = &quot;Hélé&quot; <font color="#006666">; unicode by default
+</font>
+<font color="#006666">; Let's display an unicode-string
+</font><b><font color="#006666">Debug</font></b> &quot;UNICODE&quot;
+Size =<font color="#006666"> StringByteLength</font>(MyString_U)           <font color="#006666">; Size = 8 bytes
+</font><b><font color="#006666">Debug</font></b> MyString_U                              <font color="#006666">; Hélé
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(@MyString_U, Size)                <font color="#006666">; Hélé
+</font><font color="#006666">ShowMemoryViewer</font>(@MyString_U, Size)           <font color="#006666">; 48 00 E9 00 6C 00 E9 00     H.é.l.é.
+</font>
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+
+<font color="#006666">; Conversion Unicode -&gt; ascii
+</font><font color="#006666">; ===========================
+</font><b><font color="#006666">Debug</font></b> &quot;Unicode -&gt; ascii&quot;
+*MyString_ASCII =<font color="#006666"> Ascii</font>(MyString_U)           <font color="#006666">; A buffer filled with the string coded in ascii
+</font>Size =<font color="#006666"> MemorySize</font>(*MyString_ASCII)            <font color="#006666">; Size = 5 bytes
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MyString_ASCII, -1, <font color="#924B72">#PB_Ascii</font>)   <font color="#006666">; Hélé
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MyString_ASCII, -1)              <font color="#006666">; ..
+</font><font color="#006666">ShowMemoryViewer</font>(*MyString_ASCII, Size)       <font color="#006666">; 48 E9 6C E9 00         Hélé.
+</font>
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+
+<font color="#006666">; Conversion Unicode -&gt; utf8
+</font><font color="#006666">; ==========================
+</font><b><font color="#006666">Debug</font></b> &quot;Unicode -&gt; utf8&quot;
+*MyString_UTF8 =<font color="#006666"> UTF8</font>(MyString_U)              <font color="#006666">; A buffer filled with the string coded in utf8
+</font>Size =<font color="#006666"> SizeOf</font>(*MyString_UTF8)                  <font color="#006666">; Size = 8 bytes
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MyString_UTF8, -1 , <font color="#924B72">#PB_UTF8</font>)     <font color="#006666">; Hélé
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(*MyString_UTF8, -1)                <font color="#006666">; ?? (some weird characters)
+</font><font color="#006666">ShowMemoryViewer</font>(*MyString_UTF8, Size)         <font color="#006666">; 48 C3 A9 6C C3 A9 00 00         HÃ©lÃ©..
+</font>
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+
+<font color="#006666">; Conversion Ascii -&gt; unicode      (Sometimes, functions from some api (dll, so, ...) or some datas from a COM transaction send ascii strings)
+</font><font color="#006666">; ============================
+</font><b><font color="#006666">Debug</font></b> &quot;Ascii -&gt; unicode&quot;
+MyString_U =<font color="#006666"> PeekS</font>(*MyString_ASCII,<font color="#006666"> SizeOf</font>(*MyString_ASCII), <font color="#924B72">#PB_Ascii</font>) <font color="#006666">; Translate ascii to unicode
+</font>Size =<font color="#006666"> StringByteLength</font>(MyString_U)
+<b><font color="#006666">Debug</font></b> MyString_U                               <font color="#006666">; Hélé
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(@MyString_U, Size, <font color="#924B72">#PB_Unicode</font>)    <font color="#006666">; Hélé
+</font><font color="#006666">ShowMemoryViewer</font>(@MyString_U, Size)            <font color="#006666">; 48 00 E9 00 6C 00 E9 00           H.é.l.é.
+</font>
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+<font color="#006666">; Conversion Utf8 -&gt; unicode
+</font><font color="#006666">; ============================
+</font><b><font color="#006666">Debug</font></b> &quot;Utf8 -&gt; unicode&quot;
+MyString_U =<font color="#006666"> PeekS</font>(*MyString_UTF8,<font color="#006666"> SizeOf</font>(*MyString_UTF8), <font color="#924B72">#PB_UTF8</font>) <font color="#006666">; Translate utf8 to unicode
+</font>Size =<font color="#006666"> StringByteLength</font>(MyString_U)
+<b><font color="#006666">Debug</font></b> MyString_U                                <font color="#006666">; Hélé
+</font><b><font color="#006666">Debug</font></b> <font color="#006666">PeekS</font>(@MyString_U, Size, <font color="#924B72">#PB_Unicode</font>)     <font color="#006666">; Hélé
+</font><font color="#006666">ShowMemoryViewer</font>(@MyString_U, Size)             <font color="#006666">; 48 00 E9 00 6C 00 E9 00           H.é.l.é.
+</font>
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+<font color="#006666">; Not very usefull but if you want converting:
+</font><font color="#006666">; Ascii -&gt;  utf8   ; Do  a double conversion: Ascii -&gt; unicode -&gt; utf8
+</font><font color="#006666">; Utf8  -&gt;  ascii  ; Do  a double conversion: Utf8  -&gt; unicode -&gt; ascii
+</font>
+
+
+
+
+<font color="#006666">; If you need an ascii-string, the buffer provided by the function ascii() or the pseudotype p-ascii
+</font><font color="#006666">; are usually sufficient.
+</font><font color="#006666">; However, if you need a variable (unicode) nested with an ascii-string so do that:
+</font>
+<b><font color="#006666">Procedure$</font></b> <font color="#006666">ToAscii </font>(MyString_U.s)
+  <font color="#006666">;      Debug  Len(MyString_U)
+</font>  <b><font color="#006666">Protected</font></b> out$ =<font color="#006666"> Space</font>(<font color="#006666">Len</font>(MyString_U))
+<font color="#006666">  PokeS</font>(@out$, MyString_U, -1, <font color="#924B72">#PB_Ascii</font>)
+  <b><font color="#006666">ProcedureReturn</font></b> out$
+<b><font color="#006666">EndProcedure</font></b>
+
+<font color="#006666">; Back to unicode
+</font><b><font color="#006666">Procedure$</font></b> <font color="#006666">FromAscii </font>(MyString_U.s)
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">PeekS</font>(@MyString_U, -1, <font color="#924B72">#PB_Ascii</font>)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Debug</font></b> &quot;ToAscii&quot;
+UnicodeASCII$=<font color="#006666">ToAscii</font>(&quot;Hélé&quot;)         <font color="#006666">; A variable (unicode) filled with an ascii-string
+</font><b><font color="#006666">Debug</font></b> UnicodeASCII$                   <font color="#006666">; ..
+</font>size =<font color="#006666"> StringByteLength</font>(UnicodeASCII$)
+<b><font color="#006666">Debug</font></b> size                            <font color="#006666">; 4
+</font>
+<font color="#006666">ShowMemoryViewer</font>(@UnicodeASCII$,size)
+
+
+<b><font color="#006666">Debug</font></b> &quot;----- Hit F7 To Continue -----&quot;
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+
+<b><font color="#006666">CallDebugger</font></b>
+
+<b><font color="#006666">Debug</font></b> &quot;FromAscii&quot;
+Text.s =<font color="#006666">  FromAscii</font>(UnicodeASCII$)   <font color="#006666">; A variable (unicode) filled with an unicode string came from an ascii string
+</font><b><font color="#006666">Debug</font></b> text                           <font color="#006666">; Hélé
+</font>size =<font color="#006666"> StringByteLength</font>(text)
+<b><font color="#006666">Debug</font></b> size                           <font color="#006666">;8
+</font>
+<font color="#006666">ShowMemoryViewer</font>(@text,size)
+
+<b><font color="#006666">Debug</font></b> &quot;&quot;
+<b><font color="#006666">Debug</font></b> &quot;END&quot;</font></pre>
+</body></html>

@@ -1,0 +1,50 @@
+<html><head><title>DrawingBuffer</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingBuffer()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+*Buffer = <font color="#006666"><b>DrawingBuffer</b></font>()  </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the drawing buffer for direct pixel manipulation. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the pixel data pointer if direct access is possible or zero if the pixel 
+data cannot be accessed directly. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function has to be called again if other drawing commands of this library where used since the last pixel manipulation. 
+Once <a href="stopdrawing.html">StopDrawing()</a> has been called, the buffer is invalidated and can no more be used. 
+<br>
+<br>
+This function is for advanced programmers only. To get more information about the buffer, 
+the following functions are available: <a href="drawingbufferpixelformat.html">DrawingBufferPixelFormat()</a> and 
+<a href="drawingbufferpitch.html">DrawingBufferPitch()</a>. 
+<br>
+<br>
+The returned address can be directly in video memory if the output is 
+<a href="../screen/screenoutput.html">ScreenOutput()</a> or <a href="../sprite/spriteoutput.html">SpriteOutput()</a> 
+and allows very fast pixel manipulation. With <a href="../image/imageoutput.html">ImageOutput()</a> this command allows 
+direct access to the pixels of the target image. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+
+For an example of how the drawing buffer can be used to create a nice visual effect, take a look here: 
+</blockquote><p><b>Example</b></p><blockquote>
+<a href="../Examples/DirectScreenDrawing.pb.html">DirectScreenDrawing.pb</a>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="drawingbufferpixelformat.html">DrawingBufferPixelFormat()</a>, <a href="drawingbufferpitch.html">DrawingBufferPitch()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawtext.html>DrawText()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawingbufferpitch.html>DrawingBufferPitch()</a> -><br><br>
+
+</body></html>

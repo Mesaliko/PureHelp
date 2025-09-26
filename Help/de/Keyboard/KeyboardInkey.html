@@ -1,0 +1,65 @@
+<html><head><title>KeyboardInkey</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">KeyboardInkey()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+String$ = <font color="#006666"><b>KeyboardInkey</b></font>()</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Gibt das zuletzt eingegebene Zeichen zurück - sehr nützlich, wenn effiziente Tastatureingabe 
+für ein Spiel (z.B. Name in einem HighScore, in einer Game-Konsole, etc.) erforderlich ist. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+Diese Funktion hat keine Parameter.
+
+
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Das letzte eingegebene Zeichen. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Befehl <a href="examinekeyboard.html">ExamineKeyboard()</a> muss vor dieser 
+Funktion aufgerufen werden, um den Tastatur-Status zu aktualisieren. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">InitSprite</font>() <b><font color="#006666">And</font></b> <font color="#006666">InitKeyboard</font>() <b><font color="#006666">And</font></b> <font color="#006666">OpenScreen</font>(800, 600, 32, &quot;&quot;)
+    <b><font color="#006666">Repeat</font></b>
+<font color="#006666">      FlipBuffers</font>()
+<font color="#006666">      ClearScreen</font>(<font color="#006666">RGB</font>(0, 0, 0))
+      
+<font color="#006666">      ExamineKeyboard</font>()
+      
+      <font color="#006666">; Wenn wir die 'Backspace'-Taste drücken, löschen wir das letzte Zeichen</font>
+      <font color="#006666">;</font>
+      <b><font color="#006666">If</font></b> <font color="#006666">KeyboardReleased</font>(<font color="#924B72">#PB_Key_Back</font>)  
+        FullText$ =<font color="#006666"> Left</font>(FullText$,<font color="#006666"> Len</font>(FullText$)-1)
+      <b><font color="#006666">Else</font></b>
+        result$=<font color="#006666">KeyboardInkey</font>()
+        <b><font color="#006666">If</font></b> <font color="#006666">FindString</font>(&quot;1234567890 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&quot;, result$) <font color="#006666">; oder die von Ihnen ausgewählten gültigen Zeichen</font>
+          FullText$ + result$
+        <b><font color="#006666">EndIf</font></b> <font color="#006666">; den neuen Text zum aktuellen (wenn vorhanden) hinzufügen</font>
+      <b><font color="#006666">EndIf</font></b>
+
+      <font color="#006666">; Ergebnis darstellen</font>
+      <font color="#006666">;</font>
+      <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ScreenOutput</font>())
+<font color="#006666">          DrawingMode</font>(1)
+<font color="#006666">          FrontColor</font>(<font color="#006666">RGB</font>(128, 255, 0))
+<font color="#006666">          DrawText</font>(20, 20, &quot;Gib einfach etwas Text ein...:&quot;)
+<font color="#006666">          DrawText</font>(20, 40, FullText$)
+<font color="#006666">        StopDrawing</font>()
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="examinekeyboard.html">ExamineKeyboard()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=initkeyboard.html>InitKeyboard()</a> - <a href=index.html>Keyboard Inhaltsverzeichnis</a> - <a href=keyboardmode.html>KeyboardMode()</a> -><br><br>
+
+</body></html>

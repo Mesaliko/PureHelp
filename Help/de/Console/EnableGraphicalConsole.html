@@ -1,0 +1,62 @@
+<html><head><title>EnableGraphicalConsole</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableGraphicalConsole()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>EnableGraphicalConsole</b></font>(Status)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ändert die Art und Weise, wie die Zeichen auf der Konsole dargestellt werden, zwischen einem Grafik- 
+und einem reinen Text-Modus. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Status</i></td>
+<td width="90%"> 
+Ist 'Status' gleich 1, dann wird die Konsole in den Grafikmodus umgeschalten. Wird für 
+'Status' dagegen 0 angegeben, dann wird die Konsole zurück in den Textmodus umgeschalten. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+Diese Funktion gibt keinen Wert zurück.
+
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der Standardmodus der Konsole ist der Textmodus. Dies bedeutet, dass der Text nirgends in 
+der Konsole positioniert werden kann, aber Umleitungen (&quot;Redirection&quot; über Pipes) korrekt 
+arbeiten. 
+<br>
+<br>
+Wenn der Grafikmodus aktiv ist, dann sind Befehle wie <a href="clearconsole.html">ClearConsole()</a> oder 
+<a href="consolelocate.html">ConsoleLocate()</a> verfügbar und der Text kann überall im Konsolenfenster 
+positioniert werden. Dies ermöglicht Konsolenspiele oder &quot;text-only&quot; (nur Text) Anwendungen, 
+was für Remote-Anwendungen (aus der Ferne gesteuert) über Telnet oder SSH nützlich sein kann. 
+<br>
+<br>
+Die Umleitung (&quot;Redirection&quot; über Pipes) arbeitet nicht korrekt, wenn der Grafikmodus aktiv 
+ist. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    EnableGraphicalConsole</font>(1)
+<font color="#006666">    ConsoleLocate</font>(7, 8)
+<font color="#006666">    PrintN</font>(&quot;Druecken Sie Return zum Beenden.&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="consolelocate.html">ConsoleLocate()</a>, <a href="consolecolor.html">ConsoleColor()</a>, <a href="clearconsole.html">ClearConsole()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Windows</Blockquote></p><center><- <a href=consoletitle.html>ConsoleTitle()</a> - <a href=index.html>Console Inhaltsverzeichnis</a> - <a href=inkey.html>Inkey()</a> -><br><br>
+
+</body></html>

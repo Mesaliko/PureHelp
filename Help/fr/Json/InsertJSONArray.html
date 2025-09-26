@@ -1,0 +1,91 @@
+<html><head><title>InsertJSONArray</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InsertJSONArray()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>InsertJSONArray</b></font>(JSONValeur, Tableau())</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Insère un tableau dans la valeur JSON 
+donné. 
+<br>
+<br>
+La valeur JSON sera modifiée en 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Array</font>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+<br>
+<br>
+Le contenu de la valeur sera remplacée 
+par le contenu de Tableau(). 
+
+</td></tr>
+<tr><td><i>Tableau()</i></td>
+<td> 
+Le tableau à insérer dans la valeur JSON. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Si Tableau() a plus d'une dimension, la 
+valeur JSON sera remplie avec un tableau 
+de tableaux pour représenter les données 
+multidimensionnelles. 
+Voir l'exemple ci-dessous pour plus de 
+détails. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">Couleurs</font>.s(3)
+<font color="#006666">  Couleurs</font>(0) = &quot;rouge&quot;
+<font color="#006666">  Couleurs</font>(1) = &quot;jaune&quot;
+<font color="#006666">  Couleurs</font>(2) = &quot;vert&quot;
+<font color="#006666">  Couleurs</font>(3) = &quot;bleu&quot;
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+<font color="#006666">    InsertJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> Couleurs</font>())
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b> 
+  
+  <font color="#006666">; Resultat : [&quot;rouge&quot;, &quot;jaune&quot;, &quot;vert&quot;, &quot;bleu&quot;]</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">matrice</font>(2, 2)
+<font color="#006666">  matrice</font>(0, 0) = 1
+<font color="#006666">  matrice</font>(1, 1) = 1
+<font color="#006666">  matrice</font>(2, 2) = 1
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateJSON</font>(0)
+<font color="#006666">    InsertJSONArray</font>(<font color="#006666">JSONValue</font>(0),<font color="#006666"> matrice</font>())
+    <b><font color="#006666">Debug</font></b> <font color="#006666">ComposeJSON</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+  
+    <font color="#006666">; Resultat : [[1, 0, 0], [0, 1, 0], [0, 0, 1]]</font>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="insertjsonlist.html">InsertJSONList()</a>, <a href="insertjsonmap.html">InsertJSONMap()</a>, 
+<a href="insertjsonstructure.html">InsertJSONStructure()</a>, <a href="extractjsonarray.html">ExtractJSONArray()</a>, 
+<a href="extractjsonlist.html">ExtractJSONList()</a>, <a href="extractjsonmap.html">ExtractJSONMap()</a>, 
+<a href="extractjsonstructure.html">ExtractJSONStructure()</a>, 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getjsonstring.html>GetJSONString()</a> - <a href=index.html>Json Index</a> - <a href=insertjsonlist.html>InsertJSONList()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,89 @@
+<html><head><title>CreatePreferences</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreatePreferences()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>CreatePreferences</b></font>(Fichier$ [, Options])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée un nouveau fichier de préférences vide. 
+<br>
+Si le fichier existe déjà, il est écrasé. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Fichier$</i></td>
+<td width="90%"> 
+Le nom du nouveau fichier de préférences. 
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+Peut être une combinaison des valeurs suivantes: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Preference_NoSpace</font>       : Pas d'espaces autour du signe égal.
+                                 Utile quand il s'agit d'un fichier de préférences externes qui 
+                                 n'accepte pas les espaces autour du signe égal.
+  <font color="#924B72">#PB_Preference_GroupSeparator</font>: Ajoute une ligne vide entre les groupes pour faciliter la lisibilité.
+  <font color="#924B72">#PB_Preference_NoBOM</font>         : N'ajoute pas la nomenclature UTF-8 (BOM) lors de l'écriture du fichier. 
+                                 Le fichier sera toujours écrit en utilisant le codage UTF-8.
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le fichier a 
+été créé avec succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Une fois le fichier créé, les commandes telles 
+que <a href="writepreferencestring.html">WritePreferenceString()</a> par exemple 
+permettent d'écrire des informations dedans. 
+Une fois les valeurs écrites, il est possible 
+de les relire avec <a href="readpreferencestring.html">ReadPreferenceString()</a> ou 
+une commande ad hoc. 
+<br>
+<br>
+Pour effacer une clé ou un groupe, utiliser 
+<a href="removepreferencekey.html">RemovePreferenceKey()</a> ou 
+<a href="removepreferencegroup.html">RemovePreferenceGroup()</a>.<br>
+<a href="preferencegroup.html">PreferenceGroup()</a> permet de créer ou changer 
+le groupe courant. 
+<br>
+<br>
+Une fois les opérations sur le fichier terminées, 
+il faut utiliser <a href="closepreferences.html">ClosePreferences()</a> pour mettre à 
+jour, écrire et fermer le fichier préférences sur 
+le disque. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Créer un fichier preference nommé Setup.ini</font>
+<font color="#006666">  CreatePreferences</font>(<font color="#006666">GetTemporaryDirectory</font>()+&quot;Setup.ini&quot;)
+  
+  <font color="#006666">; Créer un groupe nommé &quot;Window&quot;</font>
+<font color="#006666">  PreferenceGroup</font>(&quot;Window&quot;)
+<font color="#006666">    WritePreferenceLong</font>(&quot;X&quot;, 10)      <font color="#006666">; X = 10</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;Y&quot;, 10)      <font color="#006666">; Y = 10</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;W&quot;, 800)     <font color="#006666">; W = 800</font>
+<font color="#006666">    WritePreferenceLong</font>(&quot;H&quot;, 600)     <font color="#006666">; H = 600</font>
+<font color="#006666">    WritePreferenceFloat</font>(&quot;%&quot;, 20)     <font color="#006666">; % = 20.000000</font>
+<font color="#006666">    WritePreferenceString</font>(&quot;Titre&quot;, &quot;PureNote&quot;) <font color="#006666">; Titre = &quot;PureNote&quot;</font>
+  
+  <font color="#006666">; Fermer le fichier préférence</font>
+<font color="#006666">  ClosePreferences</font>()
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="closepreferences.html">ClosePreferences()</a>, <a href="../process/programparameter.html">ProgramParameter()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=closepreferences.html>ClosePreferences()</a> - <a href=index.html>Preference Index</a> - <a href=examinepreferencegroups.html>ExaminePreferenceGroups()</a> -><br><br>
+
+</body></html>

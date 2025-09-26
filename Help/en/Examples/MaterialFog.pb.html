@@ -1,0 +1,65 @@
+<html><head><title>MaterialFog.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - MaterialFog
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font>
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; MaterialFog - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data&quot;                , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;        , <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+
+<font color="#006666">CreateCube</font>(0,100)
+<font color="#006666">CreateMaterial</font>(0,<font color="#006666"> LoadTexture</font>(0, &quot;MRAMOR6X6.jpg&quot;))
+<font color="#006666">MaterialCullingMode</font>(0,<font color="#924B72">#PB_Material_AntiClockWiseCull</font>)
+<font color="#006666">CreateEntity</font>(0,<font color="#006666"> MeshID</font>(0),<font color="#006666"> MaterialID</font>(0))
+
+<font color="#006666">CreateCube</font>(1,10)
+<font color="#006666">CreateMaterial</font>(1,<font color="#006666"> LoadTexture</font>(0, &quot;Caisse.png&quot;))
+<font color="#006666">MaterialFog</font>(1,<font color="#006666"> RGBA</font>(255, 255,0,0), 1, 0, 100)
+<b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 16
+<font color="#006666">  CreateEntity</font>(i,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(1))
+<b><font color="#006666">Next</font></b>
+
+<font color="#006666">; Camera
+</font><font color="#006666">;
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 20, -50, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0, 0, 0, 0)
+
+<font color="#006666">;- Light
+</font><font color="#006666">;
+</font><font color="#006666">AmbientColor</font>(<font color="#006666">RGB</font>(75, 75, 75))
+<font color="#006666">CreateLight</font>(0,<font color="#006666"> RGB</font>(255, 255, 255), 0, 500, 0)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>
+  
+  a.f+0.5
+  <b><font color="#006666">For</font></b> i=1 <b><font color="#006666">To</font></b> 16
+    ai.f=<font color="#006666">Radian</font>(a+360*i/16)
+<font color="#006666">    MoveEntity</font>(i,<font color="#006666">Cos</font>(ai)*30,0,<font color="#006666">Sin</font>(ai)*30,<font color="#924B72">#PB_Absolute</font>)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  ExamineKeyboard</font>()
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>)
+
+</font></pre>
+</body></html>

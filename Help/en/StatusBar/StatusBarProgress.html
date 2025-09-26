@@ -1,0 +1,72 @@
+<html><head><title>StatusBarProgress</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StatusBarProgress()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>StatusBarProgress</b></font>(#StatusBar, Field, Value [, Appearance [, Min, Max]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Display a progress bar in the specified 'Field' in the given '#StatusBar'. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#StatusBar</i></td>
+<td width="90%"> 
+The status bar to use. 
+
+</td></tr>
+<tr><td><i>Field</i></td>
+<td> 
+The field index to set the progress bar. The first field index starts from zero. 
+
+</td></tr>
+<tr><td><i>Value</i></td>
+<td> 
+This specifies the current progress (relative to the current minimum and maximum). 
+To update this value simply call this command again with a different value. 
+
+</td></tr>
+<tr><td><i>Appearance (optional)</i></td>
+<td> 
+It can be used to alter the look of the field with the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_StatusBar_Raised</font>    : raised borders (has no effect on OS X and Windows with theme enabled)
+  <font color="#924B72">#PB_StatusBar_BorderLess</font>: without border 
+</font></pre>
+
+</td></tr>
+<tr><td><i>Min, Max (optional)</i></td>
+<td> 
+Specifies the boundaries of the progress bar. If they are not specified 
+or have the value <font color="#924B72">#PB_Ignore</font> then current boundaries will be used. 
+The default 'Min' and 'Max' values for newly created status bar fields are 0 and 100. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 340, 50, &quot;StatusBarProgress&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font> | <font color="#924B72">#PB_Window_SizeGadget</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateStatusBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      AddStatusBarField</font>(120)
+<font color="#006666">      AddStatusBarField</font>(170)
+    <b><font color="#006666">EndIf</font></b>
+
+<font color="#006666">    StatusBarText</font>(0, 0, &quot;ProgressBar !&quot;)
+<font color="#006666">    StatusBarProgress</font>(0, 1, 25)
+    
+    <b><font color="#006666">Repeat</font></b>
+    <b><font color="#006666">Until</font></b> <font color="#006666">WaitWindowEvent</font>() = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=statusbarimage.html>StatusBarImage()</a> - <a href=index.html>StatusBar Index</a> - <a href=statusbartext.html>StatusBarText()</a> -><br><br>
+
+</body></html>

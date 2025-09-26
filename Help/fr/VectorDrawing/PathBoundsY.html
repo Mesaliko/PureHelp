@@ -1,0 +1,68 @@
+<html><head><title>PathBoundsY</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PathBoundsY()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat.d = <font color="#006666"><b>PathBoundsY</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie la coordonnée Y (du coin en haut et gauche) de la zone de délimitation du 
+chemin de dessin vectoriel en cours. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+La coordonnée Y de la zone de délimitation. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le résultat est la coordonnée Y la plus petite du chemin en cours. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;PathBoundsY&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)
+
+    <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0))
+    
+      <font color="#006666">; construction du chemin</font>
+<font color="#006666">      MovePathCursor</font>(150, 125)
+<font color="#006666">      AddPathCurve</font>(0, 270, 0, -150, 350, 180)
+      
+      <font color="#006666">; coordonnées et dimensions de la zone de délimitation du chemin</font>
+      x =<font color="#006666"> PathBoundsX</font>()
+      y =<font color="#006666"> PathBoundsY</font>()
+      w =<font color="#006666"> PathBoundsWidth</font>()
+      h =<font color="#006666"> PathBoundsHeight</font>()
+      
+      <font color="#006666">; dessin du chemin</font>
+<font color="#006666">      VectorSourceColor</font>($FF0000FF)
+<font color="#006666">      StrokePath</font>(5)
+      
+      <font color="#006666">; dessin de la zone de délimitation du chemin</font>
+<font color="#006666">      AddPathBox</font>(x, y, w, h)
+<font color="#006666">      VectorSourceColor</font>($FF000000)
+<font color="#006666">      DashPath</font>(2, 5)
+
+<font color="#006666">      StopVectorDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+<p><img src="../HelpPictures/pathboundsx.png"></p>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="pathboundsx.html">PathBoundsX()</a>, <a href="pathboundswidth.html">PathBoundsWidth()</a>, <a href="pathboundsheight.html">PathBoundsHeight()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=pathboundsx.html>PathBoundsX()</a> - <a href=index.html>VectorDrawing Index</a> - <a href=pathcursorx.html>PathCursorX()</a> -><br><br>
+
+</body></html>

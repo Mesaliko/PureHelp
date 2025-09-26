@@ -1,0 +1,54 @@
+<html><head><title>RenameFile</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">RenameFile()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>RenameFile</b></font>(AlterDateiname$, NeuerDateiname$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Benennt die alte Datei in die neue Datei um. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>AlterDateiname$</i></td>
+<td width="90%"> 
+Der alte Name der Datei. 
+
+</td></tr>
+<tr><td><i>NeuerDateiname$</i></td>
+<td> 
+Der neue Name der Datei. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn die Operation erfolgreich war, und Null bei einem Fehler. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Der alte und der neue Dateiname müssen sich nicht im gleichen Verzeichnis befinden. Damit kann 
+diese Funktion auch für das Verschieben einer Datei in ein anderes Verzeichnis verwendet werden. 
+Diese Funktion kann auch verwendet werden, um Verzeichnisse umzubenennen/zu verschieben. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">RenameFile</font>(&quot;C:\test.txt&quot;, &quot;D:\temp\test_backup.txt&quot;)   
+    <b><font color="#006666">Debug</font></b> &quot;Verschieben und Umbenennen erfolgreich.&quot;      <font color="#006666">; Verschieben der Datei in ein anderes Verzeichnis und Umbenennen erfolgreich</font>
+  <b><font color="#006666">Else</font></b> 
+    <b><font color="#006666">Debug</font></b> &quot;Verschieben und Umbenennen fehlgeschlagen.&quot;   <font color="#006666">; Verschieben und Umbenennen fehlgeschlagen, z.B. wegen nicht gefundener Quelldatei</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="copyfile.html">CopyFile()</a>, <a href="deletefile.html">DeleteFile()</a>, <a href="../file/createfile.html">CreateFile()</a>, <a href="copydirectory.html">CopyDirectory()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextdirectoryentry.html>NextDirectoryEntry()</a> - <a href=index.html>FileSystem Inhaltsverzeichnis</a> - <a href=setcurrentdirectory.html>SetCurrentDirectory()</a> -><br><br>
+
+</body></html>

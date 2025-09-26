@@ -1,0 +1,259 @@
+<html><head><title>Data</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Data</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#DataSection"><u>DataSection</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#EndDataSection"><u>EndDataSection</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Data"><u>Data</u></a></td>
+  </tr>
+    <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Restore"><u>Restore</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Read"><u>Read</u></a></td>
+    <td align="center" vAlign="center" nowrap><u>...</u></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<p><b>Introduction</b></p><blockquote>
+
+PureBasic autorise l'utilisation de données pour stocker des blocs d'informations 
+prédéfinies dans votre programme. Ceci est utile pour disposer de valeurs par 
+défaut (messages textuels par exemple) ou dans un jeu pour définir le cheminement 
+prédéfini d'un sprite. 
+<br>
+<br>
+<b><font color="#006666">DataSection</font></b> doit être placé en tête du bloc de données. Tous les labels 
+et composants data sont stockés dans cette partie data dont l'accès est plus rapide 
+que la zone de code. <b><font color="#006666">Data</font></b> est utilisé pour entrer des données. 
+<b><font color="#006666">EndDataSection</font></b> doit être spécifié si du code à exécuter est situé après. 
+Il est intéressant de pouvoir placer plusieurs zones de données à différents 
+endroits du code source. Les données peuvent être chargées à l'aide des commandes 
+<b><font color="#006666">Restore</font></b> et <b><font color="#006666">Read</font></b>. 
+<br>
+<br>
+Ces fonctions ne doivent pas être utilisées dans un thread. 
+
+<br>
+<br>
+<hr>
+<a name="DataSection"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">DataSection</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Début d'une zone de données. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    DonneesNumeriques:    
+      <b><font color="#006666">Data</font></b>.i 100, 200, -250, -452, 145
+      
+    DonneesTexte:
+      <b><font color="#006666">Data</font></b>.s &quot;Bonjour&quot;, &quot;Qu'est-ce&quot;, &quot;que &quot;, &quot;c'est ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="EndDataSection"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">EndDataSection</font></b>
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Fin d'une zone de données. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b>
+    DonneesNumeriques:    
+      <b><font color="#006666">Data</font></b>.l 100, 200, -250, -452, 145
+      
+    DonneesTexte:
+      <b><font color="#006666">Data</font></b>.s &quot;Bonjour&quot;, &quot;Qu'est-ce&quot;, &quot;que &quot;, &quot;c'est ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+<br>
+<br>
+<hr>
+<a name="Data"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Data</font></b>.NomType
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Définit les données. Le type peut être choisi 
+parmi les <a href="../reference/variables.html">types natifs</a> 
+(integer, long, word, byte, ascii, unicode, 
+float, double, quad, character, string). 
+Un nombre quelconque de données peut être 
+placé sur une même ligne, chacune étant 
+séparée par une virgule. Une chaîne littérale ne peut pas exéder 8192 caractères. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">DataSection</font></b> 
+    Divers:
+  <b><font color="#006666">Data</font></b>.l 100, 200, -250, -452, 145
+  <b><font color="#006666">Data</font></b>.s &quot;Bonjour&quot;, &quot;Qu'est&quot;, &quot;ce que &quot;, &quot;c'est ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+Pour les programmeurs chevronnés: il est aussi 
+possible de mettre l'<a href="../reference/memory.html">adresse</a> 
+d'une <a href="../reference/procedures.html">procédure</a> 
+ou d'un <a href="../reference/memory.html">label</a> avec 
+<b><font color="#006666">Data</font></b> si le type 'entier' (integer .i) 
+est utilisé. 
+Sur un système 32 bits les adresses seront stockées 
+sur 4 octets et sur 8 octets sur un système 64 bits. 
+<br>
+Par exemple, des tables de fonctions virtuelles 
+peuvent être créées facilement. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">Max</font>(Nombre, Nombre2)
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  Etiquette:
+    
+  <b><font color="#006666">DataSection</font></b>
+    Divers:
+    <b><font color="#006666">Data</font></b>.i ?Etiquette, @Max()
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Interface</font></b> MonObjet
+<font color="#006666">     FaireCeci</font>()
+<font color="#006666">     FaireCela</font>()
+  <b><font color="#006666">EndInterface</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Ceci</font>(*Self)
+<font color="#006666">     MessageRequester</font>(&quot;MonObjet&quot;, &quot;Ceci&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Cela</font>(*Self)
+<font color="#006666">     MessageRequester</font>(&quot;MonObjet&quot;, &quot;Cela&quot;)
+  <b><font color="#006666">EndProcedure</font></b>
+
+  m.MonObjet = ?VTable
+
+  m\<font color="#006666">FaireCeci</font>()
+  m\<font color="#006666">FaireCela</font>()
+
+
+  <b><font color="#006666">DataSection</font></b>
+     VTable:
+        <b><font color="#006666">Data</font></b>.i ?Procedures
+     Procedures:
+        <b><font color="#006666">Data</font></b>.i @Ceci(), @Cela()
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="Restore"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Restore</font></b> label
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Ce mot clef permet de placer un indicateur 
+de début de zone pour la commande 
+<b><font color="#006666">Read</font></b>. Le label utilisé 
+par cette commande doit être déclaré dans 
+le bloc <b><font color="#006666">DataSection</font></b>, car il sera 
+déplacé lors de la création de l'exécutable. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Restore</font></b> DonneesTexte
+  <b><font color="#006666">Read</font></b>.s MonPremierTexte$
+  <b><font color="#006666">Read</font></b>.s MonSecondTexte$
+  
+  <b><font color="#006666">Restore</font></b> DonneesNumeriques
+  <b><font color="#006666">Read</font></b>.l a
+  <b><font color="#006666">Read</font></b>.l b
+  
+  <b><font color="#006666">Debug</font></b> MonPremierTexte$
+  <b><font color="#006666">Debug</font></b> a
+  
+  <b><font color="#006666">End</font></b>  
+
+  <b><font color="#006666">DataSection</font></b>
+  
+    DonneesNumeriques:    
+      <b><font color="#006666">Data</font></b>.l 100, 200, -250, -452, 145
+      
+    DonneesTexte:
+      <b><font color="#006666">Data</font></b>.s &quot;Bonjour&quot;, &quot;Qu'est-ce&quot;, &quot;que &quot;, &quot;c'est ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br>
+<br>
+<hr>
+<a name="Read"></a>
+</blockquote>
+<br><b>Syntaxe</b><blockquote><pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Read</font></b>[.&lt;type&gt;] &lt;variable&gt;
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+Lit la donnée suivante et par défaut, la donnée suivante est la première donnée 
+déclarée. <br>
+Le pointeur peut être modifié en utilisant la commande <b><font color="#006666">Restore</font></b>. <br>
+&lt;type&gt; est le type de données à lire et s'il n'est pas spécifié 
+le <a href="../reference/define.html">type par défaut</a> qui est 'Integer' sera utilisé. 
+Il est toutefois conseillé d'utiliser le type ad-hoc afin d'éviter le message 
+d'erreur qui apparaîtra quand vous lirez des datas de type 'String' et pour éviter 
+une confusion de type 'Integer' qui est un type 'Long' pour les compilateurs 
+32 bits et qui est un type 'Quad' pour les compilateurs 64 bits. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Restore</font></b> DonneesTexte
+  <b><font color="#006666">Read</font></b>.s MonPremierTexte$
+  
+  <b><font color="#006666">Restore</font></b> DonneesNumeriques
+  <b><font color="#006666">Read</font></b> a   <font color="#006666">; Attention, le compilateur lira un 'Integer' (Un 'Long' en 32 bits ou un 'Quad' en 64 bits)</font>
+  <b><font color="#006666">Read</font></b>.q b
+  <b><font color="#006666">Read</font></b> c   <font color="#006666">; Attention, le compilateur lira un 'Quad' si c'est un compilateur 64 bits même si les données sont 'Long' !</font>
+  <b><font color="#006666">Read</font></b>.l d
+  
+  <b><font color="#006666">Debug</font></b> MonPremierTexte$<font color="#006666">; Affiche Hello</font>
+  <b><font color="#006666">Debug</font></b> a  <font color="#006666">; Affiche 100</font>
+  <b><font color="#006666">Debug</font></b> b  <font color="#006666">; Affiche 111111111111111111</font>
+  <b><font color="#006666">Debug</font></b> c  <font color="#006666">; Attention, l'affichage dépend du compilateur !  : 200 en 32 bits ou 1288490189000 en 64 bits</font>
+  <b><font color="#006666">Debug</font></b> d  <font color="#006666">; Idem : 300  en 32 bits ou 400 en 64 bits</font>
+  
+  <b><font color="#006666">End</font></b>  
+
+  <b><font color="#006666">DataSection</font></b>
+  
+    DonneesNumeriques:    
+      <b><font color="#006666">Data</font></b>.i 100
+      <b><font color="#006666">Data</font></b>.q 111111111111111111
+      <b><font color="#006666">Data</font></b>.l 200, 300, 400
+
+    DonneesTexte:
+      <b><font color="#006666">Data</font></b>.s &quot;Bonjour&quot;, &quot;Qu'est-ce&quot;, &quot;que &quot;, &quot;c'est ?&quot;
+  <b><font color="#006666">EndDataSection</font></b>
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

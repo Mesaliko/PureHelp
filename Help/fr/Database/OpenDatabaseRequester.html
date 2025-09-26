@@ -1,0 +1,68 @@
+<html><head><title>OpenDatabaseRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenDatabaseRequester()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>OpenDatabaseRequester</b></font>(#BaseDeDonnees [, Plugin]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Ouvre la boite de dialogue standard 
+Windows ODBC pour sélectionner une base de 
+données. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#BaseDeDonnees</i></td>
+<td width="90%"> 
+La base de données à utiliser. 
+
+</td></tr>
+<tr><td><i>Plugin (optionnel)</i></td>
+<td> 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Database_ODBC</font>      : La base de données utilisera ODBC (<a href="useodbcdatabase.html">UseODBCDatabase()</a> doit avoir été appelé).
+
+</font></pre>
+Si 'Plugin' n'est pas spécifié, le premier 
+plugin (ODBC, SQLite ou PostgreSQL) 
+enregistré sera utilisé. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+connexion, zéro sinon. 
+Dans ce cas, la base n'a pas pu être 
+trouvée ou le compte utilisateur n'est pas 
+valable et la description exacte de 
+l'erreur peut être récupérée grâce à 
+<a href="databaseerror.html">DatabaseError()</a>). 
+<br>
+<br>
+Si <font color="#924B72">#PB_Any</font> a été utilisé pour le 
+paramètre #BaseDeDonnees, le nombre généré 
+est renvoyé. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+C'est une commande spécifique aux 
+<a href="useodbcdatabase.html">bases de données ODBC</a>. 
+Les <a href="usesqlitedatabase.html">bases de données SQLite</a> 
+ne supportent pas cette commande. 
+<br>
+<br>
+Note: cette commande n'est pas supportée 
+sur Linux et MacOS X, elle renverra zéro. 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="opendatabase.html">OpenDatabase()</a>, <a href="closedatabase.html">CloseDatabase()</a>, 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=opendatabase.html>OpenDatabase()</a> - <a href=index.html>Database Index</a> - <a href=previousdatabaserow.html>PreviousDatabaseRow()</a> -><br><br>
+
+</body></html>

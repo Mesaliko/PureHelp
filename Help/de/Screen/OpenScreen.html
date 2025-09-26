@@ -1,0 +1,96 @@
+<html><head><title>OpenScreen</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">OpenScreen()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>OpenScreen</b></font>(Breite, Höhe, Tiefe, Titel$ [, FlipModus [, RefreshRate]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Öffnet einen neuen Bildschirm entsprechend der angegebenen 'Breite', 'Höhe' und 
+'Tiefe'. Vor der Verwendung dieses Befehls muss <a href="../sprite/initsprite.html">InitSprite()</a> erfolgreich aufgerufen 
+worden sein. 
+<br>
+<br>
+Der geöffnete Bildschirm wird mit 2 Videopuffern erstellt, um das 
+'Double-Buffering' zu ermöglichen, welches speziell für Spiele nützlich ist. 
+Die Puffer können mittels dem <a href="flipbuffers.html">FlipBuffers()</a> Befehl manipuliert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Breite, Höhe</i></td>
+<td width="90%"> 
+Die Bildschirm-Auflösung, in Pixel. Die angegebene Auflösung muss unterstützt werden, 
+oder der Bildschirm wird nicht geöffnet. <a href="examinescreenmodes.html">ExamineScreenModes()</a> kann verwendet werden, 
+um eine vollständige List aller unterstützten Auflösungen zu erhalten. 
+
+</td></tr>
+<tr><td><i>Tiefe</i></td>
+<td> 
+Dies kann einer der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  16: 65.000 Farben, feste Palette
+  24: 16 Mio. Farben, feste Palette
+  32: 16 Mio. Farben, schneller als der 24 Bit Modus, ermöglicht Alpha-Blending
+</font></pre>
+
+</td></tr>
+<tr><td><i>Titel$</i></td>
+<td> 
+Der Titel der Applikation, der nach beim Wechsel zurück auf den Desktop angezeigt wird 
+(nur auf Windows). Er wird in der Taskleiste angezeigt. 
+Es ist daher empfehlenswert, einen Titel entsprechend dem Programmnamen zu verwenden. 
+
+</td></tr>
+<tr><td><i>FlipModus (optional)</i></td>
+<td> 
+Legt die beim Vertauschen (&quot;Flippen&quot;) der Puffer verwendeten Methoden zur Synchronisation 
+des Bildschirms fest (auch bekannt als 'Vertikal-Blank-Synchronisation'). 
+Dieser kann einen der folgenden Werte annehmen: 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Screen_NoSynchronization</font>    : Synchronisation ausschalten
+   <font color="#924B72">#PB_Screen_WaitSynchronization</font>  : Synchronisation einschalten   (Standard-Wert)
+   <font color="#924B72">#PB_Screen_SmartSynchronization</font> : Synchronisation einschalten, mit einer CPU-schonenderen Routine, wenn das Programm
+                                     nicht die gesamte CPU-Rechenzeit benötigt (nur bei Vollbildschirm)
+</font></pre>
+Das Warten auf die Bildschirm-Synchronisation ermöglicht einen perfekten Puffer-&quot;Tausch&quot; (Flip ohne 
+&quot;Ausreißer&quot; oder andere sichtbare Artefakte), da der Flip erst nach dem vollständigen Zeichnen 
+des Bildschirms (und wenn sich der &quot;Screen-Spot&quot; außerhalb des sichtbaren Bildschirmbereichs befindet) 
+ausgeführt wird. Dies verknüpft auch die Flip-Frequenz (Häufigkeit des Puffer-Tauschs) mit dem aktuellen 
+Bildschirm-Refresh (&quot;Auffrischung&quot;), z.B. bei einem 60 Hz Bildschirm sind maximal 60 Flips pro Sekunde 
+möglich. 
+
+</td></tr>
+<tr><td><i>RefreshRate (optional)</i></td>
+<td> 
+Legt die Refresh-Rate (in Hz) für den neuen Bildschirm fest. Wenn diese 
+nicht verarbeitet werden kann, dann wird OpenScreen() fehlschlagen. 
+<a href="examinescreenmodes.html">ExamineScreenModes()</a> kann verwendet werden, um eine vollständige Liste aller 
+unterstützten Refresh-Raten zu erhalten. 
+<br>
+Hinweis: Auf Windows kann die Refresh-Rate von den Grafikkarten-Treibern gesperrt oder 
+erzwungen werden, so dass diese Funktion ungenau sein kann. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Ein Wert ungleich Null, wenn der Bildschirm erfolgreich geöffnet wurde, andernfalls Null. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Die <a href="../requester/index.html">Requester</a>-Befehle können nicht auf Bildschirmen verwendet 
+werden, die mittels OpenScreen() geöffneten wurden. 
+<br>
+<br>
+Zum Öffnen eines Bildschirm-Bereichs auf einem regulären Fenster siehe <a href="openwindowedscreen.html">OpenWindowedScreen()</a>. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="openwindowedscreen.html">OpenWindowedScreen()</a>, <a href="flipbuffers.html">FlipBuffers()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=nextscreenmode.html>NextScreenMode()</a> - <a href=index.html>Screen Inhaltsverzeichnis</a> - <a href=openwindowedscreen.html>OpenWindowedScreen()</a> -><br><br>
+
+</body></html>

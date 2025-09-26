@@ -1,0 +1,81 @@
+<html><head><title>CreateToolBar</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateToolBar()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateToolBar</b></font>(#ToolBar, WindowID [, Flags])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Creates a new empty toolbar on the given window. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#ToolBar</i></td>
+<td width="90%"> 
+A number to identify the new toolbar. 
+<a href="../reference/purebasic_objects.html">#PB_Any</a> can be used to auto-generate this number. 
+
+</td></tr>
+<tr><td><i>WindowID</i></td>
+<td> 
+The window for the new toolbar. It can be obtained using the <a href="../window/windowid.html">WindowID()</a> function. 
+
+</td></tr>
+<tr><td><i>Flags (optional)</i></td>
+<td> 
+It can be a combination of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ToolBar_Small</font>     : Small icon (16x16 pixels) toolbar (default) 
+  <font color="#924B72">#PB_ToolBar_Large</font>     : Large icon (24x24 pixels) toolbar
+  <font color="#924B72">#PB_ToolBar_Text</font>      : Text will be displayed below the button
+  <font color="#924B72">#PB_ToolBar_InlineText</font>: Text will be displayed at the right of the button (Windows only)
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns nonzero if the toolbar was created successfully and zero if not. If <font color="#924B72">#PB_Any</font> was used 
+for the #ToolBar parameter then the generated number is returned on success. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This toolbar become the default toolbar for creation and it's possible to use 
+<a href="toolbarimagebutton.html">ToolBarImageButton()</a> and <a href="toolbarseparator.html">ToolBarSeparator()</a> to add some items to this toolbar. 
+<br>
+<br>
+The events are handled the same way than menu events, using the function <a href="../window/eventmenu.html">EventMenu()</a>. ToolBars are 
+often used as shortcut for menu items, so when assigning the same menu item number to a toolbar 
+button, both events are handled using the same code. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"> <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 150, 25, &quot;ToolBar&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateToolBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">      UsePNGImageDecoder</font>()
+      Path$ = <font color="#924B72">#PB_Compiler_Home</font>  + &quot;Examples&quot; + <font color="#924B72">#PS$</font> + &quot;Sources&quot; + <font color="#924B72">#PS$</font> + &quot;Data&quot; + <font color="#924B72">#PS$</font> + &quot;ToolBar&quot; + <font color="#924B72">#PS$</font> + &quot;&quot;
+<font color="#006666">      ToolBarImageButton</font>(0,<font color="#006666"> LoadImage</font>(0, Path$ + &quot;New.png&quot;))
+<font color="#006666">      ToolBarImageButton</font>(1,<font color="#006666"> LoadImage</font>(1, Path$ + &quot;Open.png&quot;))
+<font color="#006666">      ToolBarImageButton</font>(2,<font color="#006666"> LoadImage</font>(2, Path$ + &quot;Save.png&quot;))
+    <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Menu</font>
+        <b><font color="#006666">Debug</font></b> &quot;ToolBar ID: &quot;+<font color="#006666">Str</font>(<font color="#006666">EventMenu</font>())
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font> 
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/createtoolbar.png"></p>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="toolbarimagebutton.html">ToolBarImageButton()</a>, <a href="toolbarseparator.html">ToolBarSeparator()</a>, <a href="freetoolbar.html">FreeToolBar()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>ToolBar Index</a> - <a href=disabletoolbarbutton.html>DisableToolBarButton()</a> -><br><br>
+
+</body></html>

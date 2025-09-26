@@ -1,0 +1,50 @@
+<html><head><title>ImageOutput</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ImageOutput()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+OutputID = <font color="#006666"><b>ImageOutput</b></font>(#Image)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the OutputID of the image to perform <a href="../2ddrawing/index.html">2D rendering operation</a> on it. 
+Alternatively, the <a href="imagevectoroutput.html">ImageVectorOutput()</a> command can be used to perform vector drawing on the image. 
+If the image is multi-frame, the current frame will be used. 
+
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+The image to draw on. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the output ID or zero if drawing is not possible. This value should be passed directly to the 
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a> function to start the drawing operation. The return-value 
+is valid only for one drawing operation and cannot be reused. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  StartDrawing</font>(<font color="#006666">ImageOutput</font>(<font color="#924B72">#Image</font>))
+    <font color="#006666">; do some drawing stuff here...</font>
+<font color="#006666">  StopDrawing</font>()
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This command cannot be used with loaded icon files (*.ico). 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="../2ddrawing/startdrawing.html">StartDrawing()</a>, <a href="imagevectoroutput.html">ImageVectorOutput()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=imageid.html>ImageID()</a> - <a href=index.html>Image Index</a> - <a href=imagevectoroutput.html>ImageVectorOutput()</a> -><br><br>
+
+</body></html>

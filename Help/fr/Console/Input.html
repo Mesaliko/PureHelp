@@ -1,0 +1,79 @@
+<html><head><title>Input</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">Input()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat$ = <font color="#006666"><b>Input</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Saisie une ligne complète de 
+caractères. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+Aucun.
+
+
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie la chaîne saisie par 
+l'utilisateur avant d'appuyer 
+sur la touche 'Entrée'. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette commande bloque le programme 
+et attend jusqu'à ce que l'utilisateur 
+appuie sur la touche entrée. Si la 
+console est en 
+<a href="enablegraphicalconsole.html">mode graphique</a> 
+la ligne saisie ne peut pas dépasser 
+la largeur de la console. 
+<br>
+<br>
+Si la console n'est pas en 
+<a href="enablegraphicalconsole.html">mode graphique</a>, 
+une valeur 
+de retour spéciale <font color="#924B72">#PB_Input_Eof</font> 
+(égale à Chr(4)) sera reçue si 
+l'utilisateur tape Ctrl+D dans 
+la console, ou si la redirection 
+d'un fichier vers la console est terminée. 
+<br>
+<br>
+Pour des raisons de compatibilité avec 
+les autres applications console sous Windows, 
+<font color="#924B72">#PB_Input_Eof</font> est aussi reçu quand 
+l'utilisateur tape Ctrl+Z dans la 
+console. 
+<br>
+<br>
+Si une entrée binaire est nécessaire, 
+<a href="readconsoledata.html">ReadConsoleData()</a> peut être utilisé 
+en mode non graphique. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    Print</font>(&quot;Entrez votre nom et appuyez sur [Entree]: &quot;)
+    name$=<font color="#006666">Input</font>()
+
+    <font color="#006666">; L'appui sur la touche [Entree] n'est pas pris en compte par la console</font>
+    <font color="#006666">; donc nous devons utiliser PrintN(&quot;&quot;) pour aller à la ligne</font>
+<font color="#006666">    PrintN</font>(&quot;&quot;)
+    
+<font color="#006666">    PrintN</font>(&quot;Bonjour, &quot;+name$+&quot;, enchante.&quot;)
+<font color="#006666">    PrintN</font>(&quot;Appuyez sur [Entree] pour quitter&quot;)
+<font color="#006666">    Input</font>()
+<font color="#006666">    CloseConsole</font>()
+<b><font color="#006666">EndIf</font></b>
+<b><font color="#006666">End</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="inkey.html">Inkey()</a>, <a href="rawkey.html">RawKey()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=inkey.html>Inkey()</a> - <a href=index.html>Console Index</a> - <a href=openconsole.html>OpenConsole()</a> -><br><br>
+
+</body></html>

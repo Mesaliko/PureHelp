@@ -1,0 +1,63 @@
+<html><head><title>CreateXMLNode</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateXMLNode()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>CreateXMLNode</b></font>(ParentNode, Name$ [, PreviousNode [, Type]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Creates a new XML node and inserts it into the given parent node. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>ParentNode</i></td>
+<td width="90%"> 
+The node into which to insert the new node. To insert the new node 
+at the root of the tree, <a href="rootxmlnode.html">RootXMLNode()</a> can be used here. 
+
+</td></tr>
+<tr><td><i>Name$</i></td>
+<td> 
+The node name$. Can be an empty string if the node name isn't required. 
+
+</td></tr>
+<tr><td><i>PreviousNode (optional)</i></td>
+<td> 
+A childnode of 'ParentNode' after which the new node should 
+be inserted. If this value is 0 or not specified, the new node is inserted as the first child of 
+its parent. If this value is -1, the node is inserted as the last child of its parent. 
+
+</td></tr>
+<tr><td><i>Type (optional)</i></td>
+<td> 
+The <a href="xmlnodetype.html">type</a> for the new node. The default is <font color="#924B72">#PB_XML_Normal</font>. 
+Note that the node type cannot be changed after the node was created. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The new XML node if it was created successfully or zero if no node could 
+be inserted at this point. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+The following rules must be followed for a successful insertion: <br>
+- ParentNode may not be of type <font color="#924B72">#PB_XML_Comment</font> or <font color="#924B72">#PB_XML_CData</font> <br>
+- PreviousNode must be a direct child of ParentNode (if it is specified) <br>
+- A node of type <font color="#924B72">#PB_XML_Root</font> cannot be created manually <br>
+- If the XML tree already has a <a href="mainxmlnode.html">main node</a>, only nodes other than <font color="#924B72">#PB_XML_Normal</font> 
+and <font color="#924B72">#PB_XML_CData</font> can be inserted at the root level 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="deletexmlnode.html">DeleteXMLNode()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=createxml.html>CreateXML()</a> - <a href=index.html>XML Index</a> - <a href=deletexmlnode.html>DeleteXMLNode()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,75 @@
+<html><head><title>GetJSONMember</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">GetJSONMember()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>GetJSONMember</b></font>(JSONValeur, Cle$)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Renvoie le membre de l'objet JSON en 
+fonction de la clé donnée de 
+<a href="jsontype.html">type</a> <font color="#924B72">#PB_JSON_Object</font>. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>JSONValeur</i></td>
+<td width="90%"> 
+La valeur JSON. 
+<br>
+<br>
+La valeur doit être de type 
+<font color="#924B72">#PB_JSON_Object</font>. 
+
+</td></tr>
+<tr><td><i>Cle$</i></td>
+<td> 
+La clé de l'élément à renvoyer. 
+<br>
+<br>
+La clé est sensible à la casse à moins 
+que l'option <font color="#924B72">#PB_JSON_NoCase</font> n'ait été 
+spécifiée lors de la création ou de 
+l'analyse des données JSON. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+L'adresse de la valeur JSON en fonction 
+de la clé spécifiée.<br>
+Si la clé n'existe pas dans l'objet 
+alors le résultat est zéro. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Input$ = &quot;{ &quot; +<font color="#006666"> Chr</font>(34) + &quot;x&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 10, &quot; + 
+<font color="#006666">                  Chr</font>(34) + &quot;y&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 20, &quot; + 
+<font color="#006666">                  Chr</font>(34) + &quot;z&quot; +<font color="#006666"> Chr</font>(34) + &quot;: 30 }&quot;
+  
+<font color="#006666">  ParseJSON</font>(0, Input$)
+  
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONInteger</font>(<font color="#006666">GetJSONMember</font>(<font color="#006666">JSONValue</font>(0), &quot;x&quot;))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONInteger</font>(<font color="#006666">GetJSONMember</font>(<font color="#006666">JSONValue</font>(0), &quot;y&quot;))
+  <b><font color="#006666">Debug</font></b> <font color="#006666">GetJSONInteger</font>(<font color="#006666">GetJSONMember</font>(<font color="#006666">JSONValue</font>(0), &quot;z&quot;))
+    
+  <font color="#006666">; Resultat : 10</font>
+  <font color="#006666">;            20</font>
+  <font color="#006666">;            30</font>
+
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="setjsonobject.html">SetJSONObject()</a>, <a href="addjsonmember.html">AddJSONMember()</a>, 
+<a href="removejsonmember.html">RemoveJSONMember()</a>, <a href="clearjsonmembers.html">ClearJSONMembers()</a>, 
+<a href="examinejsonmembers.html">ExamineJSONMembers()</a>, <a href="jsonobjectsize.html">JSONObjectSize()</a>, 
+<a href="jsontype.html">JSONType()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=getjsoninteger.html>GetJSONInteger()</a> - <a href=index.html>Json Index</a> - <a href=getjsonquad.html>GetJSONQuad()</a> -><br><br>
+
+</body></html>

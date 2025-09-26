@@ -1,0 +1,101 @@
+<html><head><title>ImagePlugin.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - ImagePlugin example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; Enable all the decoders than PureBasic actually supports
+</font><font color="#006666">;
+</font><font color="#006666">UseJPEGImageDecoder</font>()
+<font color="#006666">UseTGAImageDecoder</font>()
+<font color="#006666">UsePNGImageDecoder</font>()
+<font color="#006666">UseTIFFImageDecoder</font>()
+<font color="#006666">UseGIFImageDecoder</font>()
+
+<font color="#006666">; Enable all the encoders than PureBasic actually supports
+</font><font color="#006666">;
+</font><font color="#006666">UseJPEGImageEncoder</font>()
+<font color="#006666">UsePNGImageEncoder</font>()
+
+
+<b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 250, 130, &quot;PureBasic - Image Converter&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+
+<font color="#006666">  CreateToolBar</font>(0,<font color="#006666"> WindowID</font>(0))
+<font color="#006666">    ToolBarImageButton</font>(0,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Open.png&quot;))
+<font color="#006666">    ToolBarImageButton</font>(1,<font color="#006666"> LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/sources/Data/ToolBar/Save.png&quot;))
+<font color="#006666">    DisableToolBarButton</font>(0, 1, 1)    <font color="#006666">; disable the save button
+</font>    
+<font color="#006666">  ImageGadget</font>(0, 0, 28,<font color="#006666"> WindowWidth</font>(0),<font color="#006666"> WindowHeight</font>(0), 0, <font color="#924B72">#PB_Image_Border</font>)
+  
+  <b><font color="#006666">Repeat</font></b>
+    Event =<font color="#006666"> WaitWindowEvent</font>()
+    
+    <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Menu</font>  <font color="#006666">; ToolBar are acting as menu
+</font>    
+      <b><font color="#006666">Select</font></b> <font color="#006666">EventMenu</font>()
+      
+        <b><font color="#006666">Case</font></b> 0  <font color="#006666">; Open
+</font>        
+          Filename$ =<font color="#006666"> OpenFileRequester</font>(&quot;Choose a picture&quot;, &quot;&quot;, &quot;All Images Formats|*.bmp;*.jpg;*.png;*.tif;*.tga;*.gif&quot;, 0)
+          <b><font color="#006666">If</font></b> Filename$
+            
+            <b><font color="#006666">If</font></b> <font color="#006666">UCase</font>(<font color="#006666">GetExtensionPart</font>(Filename$)) = &quot;GIF&quot;
+<font color="#006666">              MessageRequester</font>(&quot;About GIF files&quot;, &quot;Please, take a look at the example 'ImagePlugin_GIF.pb' to see  animated GIF&quot;)
+            <b><font color="#006666">EndIf</font></b>
+            
+            <b><font color="#006666">If</font></b> <font color="#006666">LoadImage</font>(0, Filename$)
+<font color="#006666">              SetGadgetState</font>(0,<font color="#006666"> ImageID</font>(0))  <font color="#006666">; change the picture in the gadget
+</font><font color="#006666">              DisableToolBarButton</font>(0, 1, 0)    <font color="#006666">; enable the save button
+</font><font color="#006666">              ResizeWindow</font>(0, <font color="#924B72">#PB_Ignore</font>, <font color="#924B72">#PB_Ignore</font>,<font color="#006666"> DesktopUnscaledX</font>(<font color="#006666">ImageWidth</font>(0)+4),<font color="#006666"> DesktopUnscaledY</font>(<font color="#006666">ImageHeight</font>(0)+34))
+            <b><font color="#006666">EndIf</font></b>
+          
+          <b><font color="#006666">EndIf</font></b>
+        
+        <b><font color="#006666">Case</font></b> 1  <font color="#006666">; Save
+</font>          
+          Filename$ =<font color="#006666"> SaveFileRequester</font>(&quot;Save a picture&quot;,<font color="#006666"> Left</font>(Filename$,<font color="#006666"> Len</font>(Filename$)-<font color="#006666">Len</font>(<font color="#006666">GetExtensionPart</font>(Filename$))-1), &quot;BMP Format|*.bmp|JPEG Format|*.jpg|PNG Format|*.png&quot;, 0)
+          <b><font color="#006666">If</font></b> Filename$
+          
+            <b><font color="#006666">Select</font></b> <font color="#006666">SelectedFilePattern</font>()
+            
+              <b><font color="#006666">Case</font></b> 0  <font color="#006666">; BMP
+</font>                ImageFormat = <font color="#924B72">#PB_ImagePlugin_BMP</font>
+                Extension$  = &quot;bmp&quot;
+
+              <b><font color="#006666">Case</font></b> 1  <font color="#006666">; JPEG
+</font>                ImageFormat = <font color="#924B72">#PB_ImagePlugin_JPEG</font>
+                Extension$  = &quot;jpg&quot;
+                
+              <b><font color="#006666">Case</font></b> 2  <font color="#006666">; PNG
+</font>                ImageFormat = <font color="#924B72">#PB_ImagePlugin_PNG</font>
+                Extension$  = &quot;png&quot;
+
+            <b><font color="#006666">EndSelect</font></b>
+            
+            <b><font color="#006666">If</font></b> <font color="#006666">LCase</font>(<font color="#006666">GetExtensionPart</font>(Filename$)) &lt;&gt; Extension$
+              Filename$ + &quot;.&quot; + Extension$
+            <b><font color="#006666">EndIf</font></b>
+            
+            <b><font color="#006666">If</font></b> <font color="#006666">SaveImage</font>(0, Filename$, ImageFormat)
+<font color="#006666">              MessageRequester</font>(&quot;Information&quot;, &quot;Image saved successfully&quot;, 0)
+            <b><font color="#006666">EndIf</font></b>
+          
+          <b><font color="#006666">EndIf</font></b>
+      
+      <b><font color="#006666">EndSelect</font></b>
+    
+    <b><font color="#006666">EndIf</font></b>
+    
+  <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>  <font color="#006666">; If the user has pressed on the close button
+</font>  
+<b><font color="#006666">EndIf</font></b>
+
+<b><font color="#006666">End</font></b>   <font color="#006666">; All is automatically freed by PureBasic
+</font></font></pre>
+</body></html>

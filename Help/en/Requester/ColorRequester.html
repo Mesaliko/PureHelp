@@ -1,0 +1,54 @@
+<html><head><title>ColorRequester</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ColorRequester()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Color = <font color="#006666"><b>ColorRequester</b></font>([CurrentColor [, ParentID])</blockquote>
+
+<b>Description</b><br><blockquote>
+
+Opens the standard requester to choose a color. The chosen color is returned 
+under a 24-bit number containing the red, green and blue value, as usual. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>CurrentColor (optional)</i></td>
+<td width="90%"> 
+Sets the default color when the requester is opened. <a href="../2ddrawing/rgb.html">RGB()</a> can be used to get a valid color. 
+
+</td></tr>
+<tr><td><i>ParentID (optional)</i></td>
+<td> 
+The parent window identifier. A valid window identifier can be retrieved with <a href="../window/windowid.html">WindowID()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The selected color, or -1 if the user canceled the requester. To easily get each RGB component value, <a href="../2ddrawing/red.html">Red()</a>, <a href="../2ddrawing/green.html">Green()</a> 
+and <a href="../2ddrawing/blue.html">Blue()</a> can be used. 
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Color =<font color="#006666"> ColorRequester</font>()
+  <b><font color="#006666">If</font></b> Color &gt; -1
+    a$ = &quot;You have selected following color value:&quot; +<font color="#006666"> Chr</font>(10)  <font color="#006666">; Chr(10) only needed</font>
+    a$ + &quot;24 Bit value: &quot; +<font color="#006666"> Str</font>(Color)              +<font color="#006666"> Chr</font>(10)  <font color="#006666">; for line-feed</font>
+    a$ + &quot;Red value:    &quot; +<font color="#006666"> Str</font>(<font color="#006666">Red</font>(Color))         +<font color="#006666"> Chr</font>(10)
+    a$ + &quot;Green value:  &quot; +<font color="#006666"> Str</font>(<font color="#006666">Green</font>(Color))       +<font color="#006666"> Chr</font>(10)
+    a$ + &quot;Blue value:   &quot; +<font color="#006666"> Str</font>(<font color="#006666">Blue</font>(Color))
+  <b><font color="#006666">Else</font></b>  
+    a$ = &quot;The requester was canceled.&quot;
+  <b><font color="#006666">EndIf</font></b>
+<font color="#006666">  MessageRequester</font>(&quot;Information&quot;, a$, 0)
+  <b><font color="#006666">End</font></b>
+</font></pre>
+<br>
+<p><img src="../HelpPictures/colorrequester.png"></p>
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><a href=index.html>Requester Index</a> - <a href=fontrequester.html>FontRequester()</a> -><br><br>
+
+</body></html>

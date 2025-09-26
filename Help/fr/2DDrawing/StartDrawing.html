@@ -1,0 +1,81 @@
+<html><head><title>StartDrawing</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">StartDrawing()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>StartDrawing</b></font>(OutputID)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la surface de dessin par celle 
+mentionnée par 'OutputID'. Après avoir 
+utilisé cette fonction, toutes les 
+commandes de dessin seront exécutées 
+sur la nouvelle surface. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>OutputID</i></td>
+<td width="90%"> 
+Les dessins seront rendus directement sur: 
+<pre><font face="Courier New, Courier, mono" size="2">  <a href="../window/windowoutput.html">WindowOutput()</a>  : La fenêtre.
+  <a href="../screen/screenoutput.html">ScreenOutput()</a>  : L'écran (utile pour les jeux).
+  <a href="../sprite/spriteoutput.html">SpriteOutput()</a>  : Le sprite (utile pour les jeux).
+  <a href="../image/imageoutput.html">ImageOutput()</a>   : L'image (voir aussi <a href="../image/createimage.html">CreateImage()</a>)
+  <a href="../printer/printeroutput.html">PrinterOutput()</a> : L'imprimante.
+  <a href="../gadget/canvasoutput.html">CanvasOutput()</a>  : Le <a href="../gadget/canvasgadget.html">CanvasGadget()</a>.
+  <a href="../texture/textureoutput.html">TextureOutput()</a> : La texture (pour les jeux 3D).
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si le dessin 
+est possible, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Lorsque tous les dessins sont terminés, 
+la fonction <a href="stopdrawing.html">StopDrawing()</a> doit être appelée. 
+<br>
+<br>
+La couleur d'arrière plan est le noir 
+(RGB(0,0,0)) et la couleur d'avant plan 
+est le blanc (RGB(255,255,255)). 
+<br>
+<br>
+Si &quot;Activer la gestion des Threads&quot; est 
+coché dans les 
+<a href="../reference/ide_compiler.html">options du compilateur</a> 
+alors chaque thread a sa propre surface de 
+dessin, ce qui signifie que deux threads 
+peuvent dessiner sur des surfaces de dessin 
+différentes en même temps. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 200, 100, &quot;StartDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+    <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 200, 100) <b><font color="#006666">And</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawText</font>(50,30,&quot;PUREBASIC&quot;,<font color="#006666"> RGB</font>(255, 255, 0))
+<font color="#006666">      StopDrawing</font>() 
+<font color="#006666">      ImageGadget</font>(0, 0, 0, 200, 100,<font color="#006666"> ImageID</font>(0))
+    <b><font color="#006666">EndIf</font></b>
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="stopdrawing.html">StopDrawing()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=setorigin.html>SetOrigin()</a> - <a href=index.html>2DDrawing Index</a> - <a href=stopdrawing.html>StopDrawing()</a> -><br><br>
+
+</body></html>

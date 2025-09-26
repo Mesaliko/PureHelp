@@ -1,0 +1,63 @@
+<html><head><title>WorldShadows</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">WorldShadows()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+<font color="#006666"><b>WorldShadows</b></font>(Type [, Distance.f [, Color [, TextureSize]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Sets how shadows will be rendered in the world. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Type</i></td>
+<td width="90%"> 
+Type can be one of the following values: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Shadow_None</font>      : No shadows will be displayed in the world. This can save a lot of CPU
+                         power if shadows aren't needed (default)
+  <font color="#924B72">#PB_Shadow_Modulative</font>: shadows will be displayed for <a href="../entity/index.html">entities</a> that have the cast
+                         shadow set with <a href="../entity/entityrendermode.html">EntityRenderMode()</a> and <font color="#924B72">#PB_Entity_CastShadow</font>.
+                         This shadow mode is the fastest available, but is not very good-looking as the shadows are not translucent.
+  <font color="#924B72">#PB_Shadow_Additive</font>  : shadows will be displayed for the <a href="../entity/index.html">entities</a> which have the cast
+                         shadow set with <a href="../entity/entityrendermode.html">EntityRenderMode()</a> and <font color="#924B72">#PB_Entity_CastShadow</font>.
+                         This mode is slower than the modulative mode, but it looks much better as the shadows are translucent. 
+                         Also if some shadows overlap, the shadows will be added resulting in a more realistic darker result.
+  <font color="#924B72">#PB_Shadow_TextureAdditive</font>: shadows will be displayed for the <a href="../entity/index.html">entities</a> which have the cast
+                         shadow set with <a href="../entity/entityrendermode.html">EntityRenderMode()</a> and <font color="#924B72">#PB_Entity_CastShadow</font>. This mode
+                         is average in speed and quality between modulative and additive shadow, and will work even with water.
+  <font color="#924B72">#PB_Shadow_TextureModulative</font>: shadows will be displayed for the <a href="../entity/index.html">entities</a> which have the cast
+                         shadow set with <a href="../entity/entityrendermode.html">EntityRenderMode()</a> and <font color="#924B72">#PB_Entity_CastShadow</font>. 
+                         This shadow mode is the faster than <font color="#924B72">#PB_Shadow_TextureAdditive</font> but is not very good-looking as the shadows are not translucent.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Distance (optional)</i></td>
+<td> 
+Maximum distance from the camera, in world unit, above which the shadows won't be calculated anymore. 
+
+</td></tr>
+<tr><td><i>Color (optional)</i></td>
+<td> 
+Color of the shadows. <a href="../2ddrawing/rgb.html">RGB()</a> can be used to get a valid Color value. 
+
+</td></tr>
+<tr><td><i>TextureSize (optional)</i></td>
+<td> 
+Pixel size of the texture used to render the shadow. The bigger it is it, the better the shadow 
+will be looking, but the slower it will be. The default value is 512, and this value shouldn't be 
+bigger than 4096. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+None.
+
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=worldgravity.html>WorldGravity()</a> - <a href=index.html>Engine3D Index</a> - <a href=yaw.html>Yaw()</a> -><br><br>
+
+</body></html>

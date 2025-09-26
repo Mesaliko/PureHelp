@@ -1,0 +1,91 @@
+<html><head><title>OnError.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - OnError example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<b><font color="#006666">CompilerIf</font></b> <font color="#924B72">#PB_Compiler_Debugger</font>
+  <b><font color="#006666">CompilerError</font></b> &quot;The debugger must be turned OFF for this example&quot;
+<b><font color="#006666">CompilerEndIf</font></b>
+
+<b><font color="#006666">Procedure</font></b> <font color="#006666">ErrorHandler</font>()
+ 
+  ErrorMessage$ = &quot;A program error was detected:&quot; +<font color="#006666"> Chr</font>(13)
+  ErrorMessage$ +<font color="#006666"> Chr</font>(13)
+  ErrorMessage$ + &quot;Error Message:   &quot; +<font color="#006666"> ErrorMessage</font>()      +<font color="#006666"> Chr</font>(13)
+  ErrorMessage$ + &quot;Error Code:      &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorCode</font>())    +<font color="#006666"> Chr</font>(13)
+  ErrorMessage$ + &quot;Code Address:    &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorAddress</font>()) +<font color="#006666"> Chr</font>(13)
+ 
+  <b><font color="#006666">If</font></b> <font color="#006666">ErrorCode</font>() = <font color="#924B72">#PB_OnError_InvalidMemory</font>
+    ErrorMessage$ + &quot;Target Address:  &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorTargetAddress</font>()) +<font color="#006666"> Chr</font>(13)
+  <b><font color="#006666">EndIf</font></b>
+ 
+  <b><font color="#006666">If</font></b> <font color="#006666">ErrorLine</font>() = -1
+    ErrorMessage$ + &quot;Sourcecode line: Enable OnError lines support to get code line information.&quot; +<font color="#006666"> Chr</font>(13)
+  <b><font color="#006666">Else</font></b>
+    ErrorMessage$ + &quot;Sourcecode line: &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorLine</font>()) +<font color="#006666"> Chr</font>(13)
+    ErrorMessage$ + &quot;Sourcecode file: &quot; +<font color="#006666"> ErrorFile</font>() +<font color="#006666"> Chr</font>(13)
+  <b><font color="#006666">EndIf</font></b>
+ 
+  ErrorMessage$ +<font color="#006666"> Chr</font>(13)
+  ErrorMessage$ + &quot;Register content:&quot; +<font color="#006666"> Chr</font>(13)
+ 
+  <b><font color="#006666">CompilerSelect</font></b> <font color="#924B72">#PB_Compiler_Processor</font>
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_Processor_x86</font>
+      ErrorMessage$ + &quot;EAX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_EAX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;EBX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_EBX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;ECX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_ECX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;EDX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_EDX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;EBP = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_EBP</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;ESI = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_ESI</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;EDI = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_EDI</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;ESP = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_ESP</font>)) +<font color="#006666"> Chr</font>(13)
+ 
+    <b><font color="#006666">CompilerCase</font></b> <font color="#924B72">#PB_Processor_x64</font>
+      ErrorMessage$ + &quot;RAX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RAX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RBX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RBX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RCX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RCX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RDX = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RDX</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RBP = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RBP</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RSI = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RSI</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RDI = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RDI</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;RSP = &quot; +<font color="#006666"> Str</font>(<font color="#006666">ErrorRegister</font>(<font color="#924B72">#PB_OnError_RSP</font>)) +<font color="#006666"> Chr</font>(13)
+      ErrorMessage$ + &quot;Display of registers R8-R15 skipped.&quot;         +<font color="#006666"> Chr</font>(13)
+ 
+  <b><font color="#006666">CompilerEndSelect</font></b>
+ 
+<font color="#006666">  MessageRequester</font>(&quot;OnError example&quot;, ErrorMessage$)
+  <b><font color="#006666">End</font></b>
+ 
+<b><font color="#006666">EndProcedure</font></b>
+ 
+<font color="#006666">; Setup the error handler.
+</font><font color="#006666">;
+</font><font color="#006666">OnErrorCall</font>(@ErrorHandler())
+ 
+<font color="#006666">; Write to protected memory
+</font><font color="#006666">;
+</font><font color="#006666">PokeS</font>(123, &quot;The quick brown fox jumped over the lazy dog.&quot;)
+ 
+<font color="#006666">; Division by zero
+</font><font color="#006666">;
+</font>a = 0
+a = 1 / a
+ 
+<font color="#006666">; Generate an error manually
+</font><font color="#006666">;
+</font><font color="#006666">RaiseError</font>(<font color="#924B72">#PB_OnError_IllegalInstruction</font>)
+ 
+ 
+<font color="#006666">; This should not be displayed
+</font><font color="#006666">;
+</font><font color="#006666">MessageRequester</font>(&quot;OnError example&quot;, &quot;Execution finished normally.&quot;)
+<b><font color="#006666">End</font></b>
+</font></pre>
+</body></html>

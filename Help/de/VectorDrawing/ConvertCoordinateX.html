@@ -1,0 +1,92 @@
+<html><head><title>ConvertCoordinateX</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ConvertCoordinateX()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis.d = <font color="#006666"><b>ConvertCoordinateX</b></font>(x.d, y.d [, Quelle, Ziel])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Konvertiert einen Punkt von einem Koordinatensystem in ein anderes innerhalb der 
+Vektorzeichnen-Ausgabe. Diese Funktion gibt die X-Koordinate der Umwandlung zurück. 
+Die Y-Koordinate kann mit der <a href="convertcoordinatey.html">ConvertCoordinateY()</a> Funktion ermittelt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>x.d, y.d</i></td>
+<td width="90%"> 
+Gibt die Koordinaten des zu konvertierenden Punktes in Bezug auf das 
+Quell-Koordinatensystem an. 
+
+</td></tr>
+<tr><td><i>Quelle, Ziel (optional)</i></td>
+<td> 
+Geben die Quell- und Ziel-Koordinaten für die Konvertierung an. Jede kann einer 
+der folgenden Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Coordinate_Device</font>: Das Koordinatensystem der Ausgabe-Einheit
+  <font color="#924B72">#PB_Coordinate_Output</font>: Das Koordinatensystem, wie es mit der Zeichenausgabe-Funktion erstellt wurde
+  <font color="#924B72">#PB_Coordinate_User</font>  : Das Koordinatensystem für Punkte im Zeichenpfad
+  <font color="#924B72">#PB_Coordinate_Source</font>: Das Koordinatensystem für die Vektorzeichnen-Quelle
+</font></pre>
+Die Standard-Konvertierung erfolgt von <font color="#924B72">#PB_Coordinate_User</font> in <font color="#924B72">#PB_Coordinate_Output</font>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt die X-Koordinate des Punktes im Ziel-Koordinatensystem zurück. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Siehe den <a href="../vectordrawing/index.html">Vektorzeichnen Überblick</a> für eine Einführung in die 
+verschiedenen Koordinatensysteme. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Diese Beispiel zeichnet einen Punkt an der Mausposition, selbst in einem veränderten</font>
+  <font color="#006666">; Koordinatensystem - durch Abbilden (&quot;mapping&quot;) der Koordinaten vom Gerätesystem </font>
+  <font color="#006666">; (&quot;device&quot;, in Pixel) das Benutzersystem (&quot;user&quot;, in Punkten)</font>
+  <font color="#006666">;</font>
+  <b><font color="#006666">If</font></b> <font color="#006666">OpenWindow</font>(0, 0, 0, 400, 200, &quot;VectorDrawing&quot;, <font color="#924B72">#PB_Window_SystemMenu</font> | <font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">    CanvasGadget</font>(0, 0, 0, 400, 200)   
+    
+    <b><font color="#006666">Repeat</font></b>
+      Event =<font color="#006666"> WaitWindowEvent</font>()
+      
+      <b><font color="#006666">If</font></b> Event = <font color="#924B72">#PB_Event_Gadget</font> <b><font color="#006666">And</font></b> <font color="#006666">EventGadget</font>() = 0 <b><font color="#006666">And</font></b> <font color="#006666">EventType</font>() = <font color="#924B72">#PB_EventType_LeftButtonDown</font>
+        
+        <b><font color="#006666">If</font></b> <font color="#006666">StartVectorDrawing</font>(<font color="#006666">CanvasVectorOutput</font>(0, <font color="#924B72">#PB_Unit_Point</font>))
+<font color="#006666">          RotateCoordinates</font>(0, 0, 30)
+          
+          CanvasX =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseX</font>)
+          CanvasY =<font color="#006666"> GetGadgetAttribute</font>(0, <font color="#924B72">#PB_Canvas_MouseY</font>)
+          
+          DrawingX =<font color="#006666"> ConvertCoordinateX</font>(CanvasX, CanvasY, <font color="#924B72">#PB_Coordinate_Device</font>, <font color="#924B72">#PB_Coordinate_User</font>)
+          DrawingY =<font color="#006666"> ConvertCoordinateY</font>(CanvasX, CanvasY, <font color="#924B72">#PB_Coordinate_Device</font>, <font color="#924B72">#PB_Coordinate_User</font>)
+          
+<font color="#006666">          AddPathCircle</font>(DrawingX, DrawingY, 10)
+<font color="#006666">          VectorSourceColor</font>(<font color="#006666">RGBA</font>(<font color="#006666">Random</font>(255),<font color="#006666"> Random</font>(255),<font color="#006666"> Random</font>(255), 255))
+<font color="#006666">          FillPath</font>()
+        
+<font color="#006666">          StopVectorDrawing</font>()
+        <b><font color="#006666">EndIf</font></b>
+        
+      <b><font color="#006666">EndIf</font></b>
+      
+    <b><font color="#006666">Until</font></b> Event = <font color="#924B72">#PB_Event_CloseWindow</font>
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="resetcoordinates.html">ResetCoordinates()</a>, <a href="translatecoordinates.html">TranslateCoordinates()</a>, <a href="scalecoordinates.html">ScaleCoordinates()</a>, <a href="rotatecoordinates.html">RotateCoordinates()</a>, 
+<a href="skewcoordinates.html">SkewCoordinates()</a>, <a href="flipcoordinatesx.html">FlipCoordinatesX()</a>, <a href="flipcoordinatesy.html">FlipCoordinatesY()</a>, <a href="convertcoordinatey.html">ConvertCoordinateY()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=closepath.html>ClosePath()</a> - <a href=index.html>VectorDrawing Inhaltsverzeichnis</a> - <a href=convertcoordinatey.html>ConvertCoordinateY()</a> -><br><br>
+
+</body></html>

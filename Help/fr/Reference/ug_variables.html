@@ -1,0 +1,126 @@
+<html><head><title>UserGuide - Variables and Processing of variables</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">UserGuide - Variables and Processing of variables</font></b></p>
+
+<b>A</b> is an integer - but note that you can't declare <a href="../reference/variables.html">variables</a> 
+this way if you use the <a href="../reference/compilerdirectives.html">EnableExplicit</a> directive. 
+Outside of a <a href="../reference/procedures.html">procedure</a> A will exist at Main scope, within 
+a procedure it will become local. 
+<pre><font face="Courier New, Courier, mono" size="2">  A = 0
+</font></pre>
+
+<br>
+<b>B</b> is a long integer, <b>C</b> is a floating-point number, they will be initialized to zero. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> B.l, C.f
+</font></pre>
+
+<br>
+<b>D</b> and <b>E</b> are long integers too. However, they will be initialized to the stated 
+constants. Notice too the alternative syntax of <a href="../reference/define.html">Define</a> used. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.l D = 10, E = 20
+</font></pre>
+
+<br>
+<b>F</b> is a string. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b>.s F
+</font></pre>
+
+<br>
+So is <b>G$</b>, however, if you declare strings this way, you must always use the $ notation. 
+<pre><font face="Courier New, Courier, mono" size="2">  G$ = &quot;Hello, &quot;
+</font></pre>
+
+This won't work. (G becomes a new integer variable and a compiler error occurs). 
+<pre><font face="Courier New, Courier, mono" size="2">  G = &quot;Goodbye, World!&quot;
+</font></pre>
+
+<br>
+<b>H</b> is an <a href="../reference/dim.html">array</a> of 20 strings, array indexing begins at zero. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">H</font>.s(19)
+</font></pre>
+
+Now H is an array of 25 strings. If the array is resized larger, its original contents 
+will be preserved. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">ReDim</font></b> <font color="#006666">H</font>.s(24)
+</font></pre>
+
+<br>
+<b>J</b> will appear at <a href="../reference/global.html">Global</a>, rather than Main, scope. It will 
+appear in all procedures, but maybe a better way would be to use the <a href="../reference/shared.html">Shared</a> 
+keyword inside a procedure on a main scope variable, so that the chances of accidental 
+changes are minimized. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Global</font></b>.i J
+</font></pre>
+
+<br>
+<b>K</b> will be a new, empty, <a href="../reference/newlist.html">list</a> of strings at main scope. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewList</font></b> <font color="#006666">K</font>.s()
+</font></pre>
+
+<br>
+<b>M</b> will be a new, empty, <a href="../reference/newmap.html">map</a> of strings at main scope. 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">NewMap</font></b> <font color="#006666">M</font>.s()
+</font></pre>
+
+<br>
+Note that you can't use the alternative syntax of the <a href="../reference/define.html">Define</a> 
+keyword with <a href="../reference/newlist.html">NewList</a> or <a href="../reference/newmap.html">NewMap</a> 
+though. A compiler error will result. 
+<br>
+<br>
+Within a procedure: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">TestVariables</font>()
+  �� 
+  �� <font color="#006666">; N and P will be local.</font>
+  �� <b><font color="#006666">Define</font></b>.l N
+  �� <b><font color="#006666">Protected</font></b>.l P
+  �� 
+  �� <font color="#006666">; Q will be a static local.</font>
+  �� <b><font color="#006666">Static</font></b>.l Q
+  �� 
+  �� <font color="#006666">; The main scope variable F and the string list K will be available within this procedure.</font>
+  �� <b><font color="#006666">Shared</font></b> F,<font color="#006666"> K</font>()
+  �� 
+  �� <font color="#006666">; The global scope variable J will be available here implicitly.</font>
+  �� 
+  <b><font color="#006666">EndProcedure</font></b>
+</font></pre>
+
+<br>
+Using <a href="../reference/variables.html">operators</a> on variables: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Add two to A.</font>
+  A + 2
+  
+  <font color="#006666">; Bitwise Or with 21 (A will become 23)</font>
+  A | 21
+  
+  <font color="#006666">; Bitwise And with 1 (A will become 1)</font>
+  A &amp; 1
+  
+  <font color="#006666">; Arithmetic shift left (A will become 2, that is 10 in binary).</font>
+  A &lt;&lt; 1
+</font></pre>
+
+<br>
+String concatenation: 
+<pre><font face="Courier New, Courier, mono" size="2">  G$ + &quot;World!&quot;
+</font></pre>
+
+<br>
+Add an element to the K list: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  AddElement</font>(<font color="#006666">K</font>())
+<font color="#006666">  K</font>() = &quot;List element one&quot;
+</font></pre>
+
+<br>
+Add an element to the M map: 
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  M</font>(&quot;one&quot;) = &quot;Map element one&quot;
+</font></pre>
+
+
+<br>
+<p><b>UserGuide Navigation</b></p><blockquote>
+
+<a href="../reference/ug_firststeps.html">< Previous: First steps</a> | <a href="../reference/ug_overview.html">Overview</a> | <a href="../reference/ug_constants.html">Next: Constants ></a> 
+</blockquote>
+</font></body></html>

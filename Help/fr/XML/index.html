@@ -1,0 +1,169 @@
+<html><head><title>XML</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">PureBasic - XML</font></b></p>
+
+<p><b>Généralités</b></p><blockquote>
+
+
+Cette bibliothèque permet de manipuler très 
+facilement les fichiers XML, que ce soit en 
+en lecture ou en écriture. Elle est basée sur 
+<a href="http://expat.sourceforge.net/">expat</a> 
+qui est sous licence MIT consultable 
+<a href="../mainguide/license_expat.html">ici</a>. Expat est déjà 
+utilisée dans de nombreux projets d'envergures 
+(comme Mozilla ou Perl), et est à la fois 
+robuste et rapide. 
+<br>
+<br>
+<b>Important:</b> La licence d'expat est très 
+permissive, et permet son utilisation gratuite 
+dans n'importe quel type de projet (commercial 
+ou non) à partir du moment ou le texte de la 
+licence est fourni avec l'application lors de 
+sa distribution. Donc si vous utilisez cette 
+bibliothèque, vous devez inclure un fichier 
+contenant la licence mentionnée ci-dessus. 
+<br>
+<br>
+Les fonctions d'Expat peuvent être utilisées directement dans PureBasic comme les autres fonctions API. 
+Cependant vous devrez ajouter &quot;pb_&quot; au début des noms de fonctions en plus du caractère soulignement (_) 
+à la fin. Cela permet de profiter des fonctionnalités d'expat qui ne sont pas directement fournies par 
+cette bibliothèque. 
+Les constantes et les structures définies dans 
+expat.h sont aussi directement disponibles. 
+Pour plus de détails sur les fonctions d'expat, 
+consultez la documentation sur 
+<a href="http://expat.sourceforge.net/">http://expat.sourceforge.net/</a> 
+<br>
+<br>
+La bibliothèque supporte partiellement les 
+'Document Type Definitions' DTD et les espaces 
+de noms. Le but est de garder l'ensemble des 
+commandes très simple tout en permettant à 
+cette bibliothèque de manipuler n'importe 
+quel document XML. 
+<br>
+<br>
+Le parser de la bibliothèque expat est un 
+analyseur syntaxique (&quot;parser&quot;) non validant, 
+ce qui signifie qu'il vérifie si les documents 
+parsés comportent des erreurs dans les balises 
+(un document doit être &quot;bien formé&quot; selon la 
+norme XML), mais il ne valide pas le document 
+par rapport à un DTD. En parsant le document 
+cette bibliothèque place les DTDs dans un 
+noeud spécifique de l'arbre XML en lui 
+attribuant le <a href="xmlnodetype.html">type</a> 
+<font color="#924B72">#PB_XML_DTD</font>. Ce noeud contient la balise 
+DOCTYPE complète. De cette manière on peut 
+facilement y accèder et en manipuler le 
+contenu mais on peut aussi l'ignorer si ces 
+informations ne sont pas nécessaires. 
+La balise est simplement recopiée quand le 
+document est exporté ou sauvegardé. 
+<br>
+<br>
+Les espaces de noms ne sont pas résolus lors 
+de l'analyse syntaxique du document (&quot;parsing&quot;). 
+Cela signifie que dans un document utilisant 
+des espaces de noms, ces espaces de noms sont 
+accessibles comme des attributs de noeud 
+normaux, et les noms des noeuds/attributs 
+utilisant les espaces de noms seront visibles 
+en tant que : &quot;namespace:tagname&quot; (i.e 
+&quot;espace_de_noms:balise&quot;). 
+Cela permet à un document utilisant les 
+espaces de noms d'être lu et sauvegardé comme 
+n'importe quel autre document sans détruire 
+sa structure. 
+Pour fonctionner avec des espaces de noms plus 
+simples, les fonctions <a href="resolvexmlnodename.html">ResolveXMLNodeName()</a> et 
+<a href="resolvexmlattributename.html">ResolveXMLAttributeName()</a> sont fournies pour 
+résoudre les conflits éventuels de noms à 
+l'intérieur des documents qui utilisent les 
+espaces de noms. 
+<br>
+<br>
+Le <a href="../reference/ide_debugger.html">débogueur</a> 
+PureBasic permet d'examiner les objets XML 
+pendant l'exécution du programme à l'aide du 
+<a href="../reference/ide_debugtools.html">visualisateur de bibliothèques</a>. 
+<br>
+<br>
+La spécification officielle du XML et des 
+Namespaces XML par le W3C est disponible ici: 
+<br>
+<a href="http://www.w3.org/TR/REC-xml/">Spécification XML</a> <br>
+<a href="http://www.w3.org/TR/REC-xml-names/">Namespaces XML</a> <br>
+<a href="http://www.w3.org/XML/Core/Translations">Traductions de divers documents relatifs au XML</a> <br>
+<br>
+<a href="http://en.wikipedia.org/wiki/Xml">XML sur Wikipedia</a> 
+fournit aussi une bonne introduction au XML. 
+</blockquote><p><b>Sommaire des commandes</b><blockquote>
+<a href="catchxml.html">CatchXML</a><br>
+<a href="childxmlnode.html">ChildXMLNode</a><br>
+<a href="composexml.html">ComposeXML</a><br>
+<a href="copyxmlnode.html">CopyXMLNode</a><br>
+<a href="createxml.html">CreateXML</a><br>
+<a href="createxmlnode.html">CreateXMLNode</a><br>
+<a href="deletexmlnode.html">DeleteXMLNode</a><br>
+<a href="examinexmlattributes.html">ExamineXMLAttributes</a><br>
+<a href="exportxml.html">ExportXML</a><br>
+<a href="exportxmlsize.html">ExportXMLSize</a><br>
+<a href="extractxmlarray.html">ExtractXMLArray</a><br>
+<a href="extractxmllist.html">ExtractXMLList</a><br>
+<a href="extractxmlmap.html">ExtractXMLMap</a><br>
+<a href="extractxmlstructure.html">ExtractXMLStructure</a><br>
+<a href="formatxml.html">FormatXML</a><br>
+<a href="freexml.html">FreeXML</a><br>
+<a href="getxmlattribute.html">GetXMLAttribute</a><br>
+<a href="getxmlencoding.html">GetXMLEncoding</a><br>
+<a href="getxmlnodename.html">GetXMLNodeName</a><br>
+<a href="getxmlnodeoffset.html">GetXMLNodeOffset</a><br>
+<a href="getxmlnodetext.html">GetXMLNodeText</a><br>
+<a href="getxmlstandalone.html">GetXMLStandalone</a><br>
+<a href="insertxmlarray.html">InsertXMLArray</a><br>
+<a href="insertxmllist.html">InsertXMLList</a><br>
+<a href="insertxmlmap.html">InsertXMLMap</a><br>
+<a href="insertxmlstructure.html">InsertXMLStructure</a><br>
+<a href="isxml.html">IsXML</a><br>
+<a href="loadxml.html">LoadXML</a><br>
+<a href="mainxmlnode.html">MainXMLNode</a><br>
+<a href="movexmlnode.html">MoveXMLNode</a><br>
+<a href="nextxmlattribute.html">NextXMLAttribute</a><br>
+<a href="nextxmlnode.html">NextXMLNode</a><br>
+<a href="parentxmlnode.html">ParentXMLNode</a><br>
+<a href="parsexml.html">ParseXML</a><br>
+<a href="previousxmlnode.html">PreviousXMLNode</a><br>
+<a href="removexmlattribute.html">RemoveXMLAttribute</a><br>
+<a href="resolvexmlattributename.html">ResolveXMLAttributeName</a><br>
+<a href="resolvexmlnodename.html">ResolveXMLNodeName</a><br>
+<a href="rootxmlnode.html">RootXMLNode</a><br>
+<a href="savexml.html">SaveXML</a><br>
+<a href="setxmlattribute.html">SetXMLAttribute</a><br>
+<a href="setxmlencoding.html">SetXMLEncoding</a><br>
+<a href="setxmlnodename.html">SetXMLNodeName</a><br>
+<a href="setxmlnodeoffset.html">SetXMLNodeOffset</a><br>
+<a href="setxmlnodetext.html">SetXMLNodeText</a><br>
+<a href="setxmlstandalone.html">SetXMLStandalone</a><br>
+<a href="xmlattributename.html">XMLAttributeName</a><br>
+<a href="xmlattributevalue.html">XMLAttributeValue</a><br>
+<a href="xmlchildcount.html">XMLChildCount</a><br>
+<a href="xmlerror.html">XMLError</a><br>
+<a href="xmlerrorline.html">XMLErrorLine</a><br>
+<a href="xmlerrorposition.html">XMLErrorPosition</a><br>
+<a href="xmlnodefromid.html">XMLNodeFromID</a><br>
+<a href="xmlnodefrompath.html">XMLNodeFromPath</a><br>
+<a href="xmlnodepath.html">XMLNodePath</a><br>
+<a href="xmlnodetype.html">XMLNodeType</a><br>
+<a href="xmlstatus.html">XMLStatus</a><br>
+</blockquote></p>
+
+<p><b>Exemple</b></p><blockquote>
+<a href="../Examples/Xml.pb.html">Xml.pb</a>
+<br><a href="../Examples/Xml_Expat_API.pb.html">Xml_Expat_API.pb</a>
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><a href=../reference/reference.html>Guide de référence - Index</a></center><br><br>
+
+</body></html>

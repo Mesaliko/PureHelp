@@ -1,0 +1,164 @@
+<html><head><title>CreateEntityBody</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CreateEntityBody()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>CreateEntityBody</b></font>(#Entity, Type [, Masse [, Restitution, Friction [, Axe [, TailleX, TailleY, TailleZ ]]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée ou change le type de corps (body) associé à une entité. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Entity</i></td>
+<td width="90%"> 
+L'entité à utiliser. 
+
+</td></tr>
+<tr><td><i>Type</i></td>
+<td> 
+Définit comment le moteur physique gère 
+l'entité: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_None</font>       : Aucun body associé à l'entity (mode par défaut).
+  <font color="#924B72">#PB_Entity_StaticBody</font> : Le body est statique, c'est à dire que le mesh ne peut pas être animé.
+                          Ce mode permet des collisions très précises, car elles sont faites par rapport aux triangles
+                          qui composent le mesh (connu comme la tri-mesh collision). Les collisions entre body static et les autres types de body
+                          (sphere, box etc.) sont très rapides, mais entre deux body static, cela devient très lent.
+                          C'est le type de body parfait pour utiliser une mesh comme un sol ou pour un monde statique.
+  <font color="#924B72">#PB_Entity_PlaneBody</font>  : Un plan 'virtuel' sur l'entity (avec les mêmes dimensions)
+                          est utilisé pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_ConeBody</font>   : Un cône 'virtuel' englobant totalement l'entity (avec les mêmes dimensions)
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_BoxBody</font>    : Une boîte 'virtuelle' englobant totalement l'entity (avec les mêmes dimensions)
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_SphereBody</font> : Une sphère 'virtuelle' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_CylinderBody</font> : Un cylindre 'virtuel' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : Une capsule 'virtuelle' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+  <font color="#924B72">#PB_Entity_ConvexHullBody</font> : Une forme complexe 'virtuelle' déduite du mesh réel gère les collisions contre les autres
+                          entités. Ce mode est plus lent que le mode basic de collision.
+  <font color="#924B72">#PB_Entity_CompoundBody</font>   : Un corps composé 'virtuelle' englobant totalement l'entity
+                          est utilisée pour gérer les collisions entre les autres entités.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Masse (optionnel)</i></td>
+<td> 
+Masse de l'objet. 
+<br>
+<br>
+Ne pas utiliser une valeur trop grande car 
+il pourrait se produire des incohérences 
+physiques (Préférer la valeur 1). 
+
+</td></tr>
+<tr><td><i>Restitution (optionnel)</i></td>
+<td> 
+Coefficient de Restitution de la vitesse 
+de l'objet suite à une collision (Rebond). 
+<br>
+<br>
+En théorie, ce coefficient est égal à la 
+vitesse restituée, divisée par la vitesse 
+initiale. 
+Il est aussi égal à la racine carrée de la 
+hauteur du rebond, divisée par la hauteur 
+du lâché. 
+<br>
+<br>
+Il est généralement compris entre 0 et 1 
+mais s'il est supérieur à 1 ou inférieur à 
+0, la collision produit de l'énergie 
+cinétique et donc de la vitesse (vitesse 
+restituée &gt; vitesse initiale). 
+<br>
+<br>
+Cette valeur peut également être obtenue ou 
+définie via <a href="getentityattribute.html">GetEntityAttribute()</a> et 
+<a href="setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Friction (optionnel)</i></td>
+<td> 
+Force de friction ou de frottement de 
+l'objet. 
+<br>
+<br>
+Attention ce paramètre est proportionnel 
+à la Masse. 
+<br>
+<br>
+Cette valeur peut également être obtenue 
+ou définie via <a href="getentityattribute.html">GetEntityAttribute()</a> et 
+<a href="setentityattribute.html">SetEntityAttribute()</a> 
+
+</td></tr>
+<tr><td><i>Axe (optionnel)</i></td>
+<td> 
+L'axe du corps. 
+<br>
+<br>
+Ne s'applique que sur les types de corps suivants: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_PlaneBody</font>
+  <font color="#924B72">#PB_Entity_CylinderBody</font>
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> 
+</font></pre>
+
+</td></tr>
+<tr><td><i>TailleX, TailleY, TailleZ (optionnel)</i></td>
+<td> 
+Les dimensions de la boîte englobante autour du corps. Ne concerne que le type de corps suivant: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Entity_BoxBody</font>     : TailleX, TailleY, TailleZ sont disponibles.
+  <font color="#924B72">#PB_Entity_SphereBody</font>  : TailleX est disponible.
+  <font color="#924B72">#PB_Entity_ConeBody</font>    : TailleX, TailleY sont disponibles.
+  <font color="#924B72">#PB_Entity_CylinderBody</font>: TailleX, TailleY sont disponibles.
+  <font color="#924B72">#PB_Entity_CapsuleBody</font> : TailleX, TailleY, TailleZ sont disponibles.
+</font></pre>
+
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Pour que les collisions soient gérées par 
+le moteur physique, une entité doit avoir 
+un corps. <br>
+<br>
+De plus, le moteur physique doit être 
+activé à l'aide de la commande 
+<a href="../engine3d/enableworldphysics.html">EnableWorldPhysics()</a>. 
+<br>
+<br>
+En fait, seul le corps est connu du moteur 
+physique lequel fera tous les calculs 
+concernant l'entité, vérifiera sa masse, 
+les forces de frottement (friction) 
+et s'il entre en collision, cela entraînera 
+un mouvement de recul de l'entité 
+(Restitution). 
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="entityangularfactor.html">EntityAngularFactor()</a>, 
+<a href="entitycollide.html">EntityCollide()</a>, 
+<a href="entitycustomparameter.html">EntityCustomParameter()</a>, 
+<a href="entitylinearfactor.html">EntityLinearFactor()</a>, 
+<a href="getentityattribute.html">GetEntityAttribute()</a>, 
+<a href="fetchentitymaterial.html">FetchEntityMaterial()</a>, 
+<a href="setentityattribute.html">SetEntityAttribute()</a>, 
+<a href="setentitymaterial.html">SetEntityMaterial()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=createentity.html>CreateEntity()</a> - <a href=index.html>Entity Index</a> - <a href=detachentityobject.html>DetachEntityObject()</a> -><br><br>
+
+</body></html>

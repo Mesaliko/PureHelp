@@ -1,0 +1,292 @@
+<html><head><title>Pointeurs et accès mémoire</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Pointeurs et accès mémoire</font></b></p>
+
+  <p>&nbsp;</p>
+  <center> 
+  <table WIDTH="96%"  border="1" cellspacing="0" bordercolordark="white" bordercolorlight="black">
+  <caption> <b>Résumé des fonctions:</b> </caption>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Pointeurs"><u>Pointeurs</u></a></td>  
+    <td align="center" vAlign="center" nowrap><a href="#Pointeurs et taille mémoire"><u>Pointeurs et taille mémoire</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Pointeurs et structures"><u>Pointeurs et structures</u></a></td>
+  </tr>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Pointeurs et tableaux"><u>Pointeurs et tableaux</u></a></td>  
+    <td align="center" vAlign="center" nowrap><a href="#Pointeurs et chaînes de caractères"><u>Pointeurs et chaînes de caractères</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Arithmétiques des pointeurs"><u>Arithmétiques des pointeurs</u></a></td>
+</u></a></td>
+  </tr>
+  <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Adresses des variables"><u>Adresses des variables : '@'</u></a></td> 
+    <td align="center" vAlign="center" nowrap><a href="#Adresses des chaines litterales"><u>Adresses des chaines littérales</u></a></td>
+    <td align="center" vAlign="center" nowrap><a href="#Adresses des procédures"><u>Adresses des procédures : '@'</u></a></td>
+  </tr>
+    <tr>
+    <td align="center" vAlign="center" nowrap><a href="#Adresses des labels"><u>Adresses des labels : '?'</u></a></td>
+  </tr>
+    </table>
+  </center>
+  <p>&nbsp;</p>
+
+<a name="Pointeurs"></a>
+
+<p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pointeurs</b></p><blockquote>
+
+<!-- Il y a un bug sur @Section et son indentation, et cette astuce pallie à ça. Mesa -->
+<blockquote>
+  L'utilisation des pointeurs est possible en plaçant une étoile '*' devant le nom d'une <a href="../reference/variables.html">variable</a> 
+  d'une <a href="../reference/newlist.html">liste</a> ou d'une <a href="../reference/newmap.html">map</a>. <br>
+  Un pointeur est un emplacement en mémoire qui stocke une adresse mémoire et qui est généralement associé à une 
+  <a href="../reference/structures.html">structure</a>. 
+  </blockquote>
+
+<blockquote>
+<p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *MonEcran.Ecran =<font color="#006666"> OpenScreen</font>(0,320,200,8,0)
+  mouseX = *MonEcran\SourisX <font color="#006666">; La structure Ecran devant contenir un champ SourisX</font>
+</blockquote>
+</font></pre>
+
+Il existe seulement trois méthodes valides pour fixer la valeur d'un pointeur: <br>
+- Obtenir le résultat par une fonction (voir l'exemple ci-dessous) <br>
+- Copier la valeur d'un autre pointeur <br>
+- Trouver l'adresse d'une variable, procédure ou label (voir ci-dessous) 
+<br>
+<br>
+Note : A l'inverse du C/C++, en PureBasic l' '*' fait <b>partie intégrante</b> du nom de la variable. 
+Aussi ptr et *ptr sont deux variables bien distinctes. <br>
+ptr est une variable (régulière) contenant une valeur, *ptr est une autre variable de type pointeur contenant une adresse. 
+<br>
+
+<a name="Pointeurs et taille mémoire"></a>
+
+<u>Pointeurs et taille mémoire</u> 
+<br>
+<br>
+Comme un pointeur reçoit uniquement une adresse mémoire comme valeur, sa taille en mémoire sera celle qui permettra 
+de représenter une adresse du processeur : <br>
+- Sur un processeur 32-bit, les adresses sont représentées sur 32-bit, par conséquent un pointeur prendra 
+32-bit en mémoire (soit 4 octets comme une variable de type ‘long').  <br>
+- Sur les processeurs 64-bit, les adresses sont représentées sur 64-bit, ce qui implique qu'un pointeur prendra 
+64-bit en mémoire (soit 8 octets comme une variable de type ‘quad').  <br>
+<br>
+C'est pour cette raison qu'un pointeur est une variable dite de type pointeur car son encombrement en mémoire 
+sera lié à la capacité d'adressage mémoire du processeur. <br>
+Il en découle qu'affecter un type natif à un pointeur (*Pointeur.l, *Pointeur.b…) n'a aucun sens puisque l'encombrement 
+mémoire d'un pointeur est imposé par celui d'une adresse et non par celui d'un type. 
+<br>
+<br>
+Note :   <br>
+- A chaque fois qu'une adresse mémoire doit être stockée dans une variable, il faudrait le faire par l'intermédiaire d'un pointeur. 
+Ceci garanti que l'adresse sera correctement représentée lors de la compilation du code que ce soit par un processeur 32-bit 
+comme par un processeur 64-bit par exemple.   <br>
+<br>
+<br>
+<a name="Pointeurs et structures"></a>
+
+<u>Pointeurs et structures</u> 
+<br>
+<br>
+Attacher une structure à un pointeur (par exemple *MonPoint.Point) permet d'accéder au contenu mémoire 
+de chaque membre de la structure avec le caractère \ . 
+
+<blockquote>
+</blockquote><p><b>Exemple:</b> Pointeurs et variables structurées</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> Point1.Point, Point2.Point
+  *PointCourant.Point = @Point1 <font color="#006666">; Déclare le pointeur, l'associe à une structure et l'initialise avec l'adresse de Point1</font>
+  *PointCourant\x = 10          <font color="#006666">; Assigne la valeur 10 à Point1\x</font>
+  *PointCourant.Point = @Point2 <font color="#006666">; Récupère l'adresse de Point2</font>
+  *PointCourant\x = 20          <font color="#006666">; Assigne la valeur 20 à Point2\x</font>
+  <b><font color="#006666">Debug</font></b> Point1\x
+  <b><font color="#006666">Debug</font></b> Point2\x
+</blockquote>
+</font></pre>
+
+<a name="Pointeurs et tableaux"></a>
+
+<u>Pointeurs et tableaux</u> 
+<br>
+<br>
+Attacher un tableau à un pointeur permet d'accéder au contenu mémoire 
+de chaque cellules à travers son adresse. 
+
+<blockquote>
+</blockquote><p><b>Exemple:</b> Pointeurs et tableaux</p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Define</font></b> Point1.Point, Point2.Point <font color="#006666">; 2 Variables de type 'point' (type prédéfini dans PureBasic)</font>
+  <b><font color="#006666">Dim</font></b> *Points.Point(1) <font color="#006666">; Un tableau de 2 pointeurs et le tableau est de type 'Point'</font>
+  *Points(0) = @Point1 <font color="#006666">; Le premier pointeur contient l'adresse de la variable Point1</font>
+  *Points(1) = @Point2 <font color="#006666">; Le second pointeur contient l'adresse de la variable Point2</font>
+
+  *Points(0)\x = 10 <font color="#006666">; Modification de la variable Point1 à travers le pointeur</font>
+  *Points(1)\x = 20 <font color="#006666">; Idem avec Point2</font>
+  
+  <b><font color="#006666">Debug</font></b> Point1\x
+  <b><font color="#006666">Debug</font></b> Point2\x
+</blockquote>
+</font></pre>
+
+Les pointeurs permettent donc de se déplacer, de lire et d'écrire facilement en mémoire. 
+De plus ils permettent aux programmeurs d'accéder à de grandes quantités de données sans coût supplémentaire 
+suite à une duplication de ces données. Copier un pointeur est beaucoup plus rapide. 
+<br>
+<br>
+Les pointeurs sont également disponibles dans les structures, pour plus d'informations, consultez le chapitre sur les <a href="../reference/structures.html">structures</a>. 
+<br>
+<br>
+
+<a name="Pointeurs et chaînes de caractères"></a>
+
+<u>Pointeurs et chaînes de caractères</u> 
+<br>
+<br>
+Toutes les variables ont une taille fixe en mémoire (2 octets pour un Word, 4 octets pour un Long, etc) 
+hormis les chaînes de caractères dont la longueur peut changer, ce qui fait qu'elles sont gérées différemment. 
+<br>
+Ainsi, les champs d'une structure faisant référence à une chaîne de caractères stockent l'adresse mémoire où 
+réside la chaîne de caractères et non la chaîne elle-même: ce sont des pointeurs vers des chaînes de caractères. 
+<br>
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  Texte$ = &quot;Bonjour&quot;
+  *Texte = @Texte$ <font color="#006666">;*Texte a pour valeur l'adresse où réside la chaîne de caractères en mémoire</font>
+  *Pointeur.String = @*Texte <font color="#006666">; *Pointeur pointe sur *Texte</font>
+  <b><font color="#006666">Debug</font></b> *Pointeur\s <font color="#006666">; Lit la chaîne de caractères qui réside à l'adresse écrite en *Pointeur (c-a-d @Texte$)</font>
+</blockquote>
+</font></pre>
+
+<a name="Arithmétiques des pointeurs"></a>
+
+<u>Arithmétiques des pointeurs</u> 
+<br>
+<br>
+Il est possible d'effectuer des opérations arithmétiques sur les pointeurs en s'aidant de la commande <a href="../reference/compilerfunctions.html">SizeOf()</a>. 
+<br>
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <font color="#006666">Tableau</font>.Point(1) <font color="#006666">; tableau de points </font>
+
+  *Pointeur.Point = @Tableau() <font color="#006666">; Récupère l'adresse du tableau</font>
+  *Pointeur\x = 10 <font color="#006666">; Modifie l'élément 0 du tableau </font>
+  *Pointeur\y = 15 
+  
+  *Pointeur +<font color="#006666"> SizeOf</font>(Point) <font color="#006666">; Pointe sur l'élément suivant </font>
+  
+  *Pointeur\x = 7 <font color="#006666">; Modifie l'élément 1 du tableau </font>
+  *Pointeur\y = 9
+
+  <font color="#006666">;Affiche le résultat</font>
+  <b><font color="#006666">For</font></b> i = 0 <b><font color="#006666">To</font></b> 1
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Tableau</font>(i)\x
+    <b><font color="#006666">Debug</font></b> <font color="#006666">Tableau</font>(i)\y
+  <b><font color="#006666">Next</font></b> i
+</blockquote>
+</font></pre>
+
+<br><hr><br>
+<a name="Adresses des variables"></a>
+
+</blockquote>
+<p><b>Adresses des variables : '@'</b></p><blockquote>
+
+
+Pour obtenir l'adresse d'une <a href="../reference/variables.html">variable</a> dans votre code, utilisez le symbole @. La raison la 
+plus fréquente d'utiliser ce système est le transfert d'une variable de type structure à une 
+<a href="../reference/procedures.html">procédure</a>. Il faut passer un pointeur à la procédure car il est impossible de passer directement 
+la structure comme argument. 
+
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> astruct
+    a.w
+    b.l
+    c.w
+  <b><font color="#006666">EndStructure</font></b>
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">SetB</font>(*monpointeur.astruct)
+    *monpointeur\b = 69
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <b><font color="#006666">Define</font></b>.astruct mavariable
+  mavariable\b = 0
+<font color="#006666">  SetB</font>( @mavariable )
+  <b><font color="#006666">Debug</font></b> mavariable\b
+</blockquote>
+</font></pre>
+
+<br><hr><br>
+<a name="Adresses des chaines litterales"></a>
+
+</blockquote>
+<p><b>Adresses des chaînes littérales</b></p><blockquote>
+
+
+Pour obtenir l'adresse d'une chaîne de caractères littérales, 
+utilisez le symbole @ devant elle. Les chaînes constantes sont aussi supportées. 
+
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  *Chaine = @&quot;Test&quot;
+  <b><font color="#006666">Debug</font></b> <font color="#006666">PeekC</font>(*Chaine) <font color="#006666">; Affiche 84, qui est la valeur de la lettre T majuscule 'T'</font>
+</blockquote>
+</font></pre>
+
+<a name="Adresses des procédures"></a>
+
+</blockquote>
+<p><b>Adresses des procédures : '@'</b></p><blockquote>
+
+
+En principe seuls les programmeurs avancés ont à connaître l'adresse d'une procédure. 
+La raison la plus fréquente est de devoir négocier des échanges de bas niveau avec le 
+système d'exploitation. Certains systèmes autorisent la mise en place de callbacks ou 
+points d'ancrage (hooks) permettant au système d'exploitation de dialoguer avec le programme 
+en étendant ainsi les capacités du système d'exploitation. L'adresse d'une <a href="../reference/procedures.html">procédure</a> est 
+accessible d'une manière similaire à une <a href="../reference/variables.html">variable</a>. 
+
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Procedure</font></b> <font color="#006666">WindowCB</font>(WindowID.i, Message.i, wParam.i, lParam.i)
+    <font color="#006666">; C'est ici que le traitement de votre callback sera effectué</font>
+  <b><font color="#006666">EndProcedure</font></b>
+  
+  <font color="#006666">; Un callback spécifique pour Windows permet de traiter les évènements sur les fenêtres</font>
+<font color="#006666">  SetWindowCallback</font>( @WindowCB() )
+</blockquote>
+</font></pre>
+
+<br><hr><br>
+<a name="Adresses des labels"></a>
+
+</blockquote>
+<p><b>Adresses des labels : '?'</b></p><blockquote>
+
+
+Il peut également être utile de connaître l'adresse d'un <a href="../reference/general_rules.html">label</a> dans votre programme. 
+Cela peut être le cas pour accéder au code ou aux données placées à cet endroit ou toute autre bonne raison qui peut vous venir à l'esprit. 
+Pour trouver l'adresse d'un label dans votre programme, placez un '?' devant le nom du label. 
+
+<blockquote>
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Debug</font></b> &quot;Taille du fichier de données = &quot; +<font color="#006666"> Str</font>(?endofmydata - ?mydata)
+  
+  <b><font color="#006666">DataSection</font></b>
+    mydata:
+      <b><font color="#006666">IncludeBinary</font></b> &quot;somefile.bin&quot;
+    endofmydata:
+</blockquote>
+</font></pre>
+
+<br><hr><br>
+</blockquote>
+</font></body></html>

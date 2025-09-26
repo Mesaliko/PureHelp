@@ -1,0 +1,47 @@
+<html><head><title>Shared</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="5">Shared</font></b></p>
+
+<br><b>Syntax</b><blockquote><pre><font face="Courier New, Courier, mono" size="2"><b><font color="#006666">Shared</font></b> &lt;variable&gt; [, ...] 
+</font></pre></blockquote>
+<b>Description</b><br><blockquote>
+
+
+<b><font color="#006666">Shared</font></b> allows a <a href="../reference/variables.html">variable</a>, an <a href="../reference/dim.html">array</a>, a <a href="../reference/newlist.html">list</a> 
+or a <a href="../reference/newmap.html">map</a> to be accessed within a <a href="../reference/procedures.html">procedure</a>. 
+When <b><font color="#006666">Shared</font></b> is used with an array, a list or a map, only the name followed by '()' must be specified. 
+
+</blockquote><p><b>Example:</b> With variable</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  a = 10
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Shared</font></b> a
+    a = 20 
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> a   <font color="#006666">; Will print 20, as the variable has been shared.</font>
+</font></pre>
+
+<br>
+</blockquote><p><b>Example:</b> With array and list</p><blockquote>
+
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Dim</font></b> <b><font color="#006666">Array</font></b>(2)
+  <b><font color="#006666">NewList</font></b> <b><font color="#006666">List</font></b>()
+<font color="#006666">  AddElement</font>(<b><font color="#006666">List</font></b>())
+  
+  <b><font color="#006666">Procedure</font></b> <font color="#006666">Change</font>()
+    <b><font color="#006666">Shared</font></b> <b><font color="#006666">Array</font></b>(), <b><font color="#006666">List</font></b>()
+    <b><font color="#006666">Array</font></b>(0) = 1
+    <b><font color="#006666">List</font></b>() = 2
+  <b><font color="#006666">EndProcedure</font></b> 
+  
+<font color="#006666">  Change</font>()
+  <b><font color="#006666">Debug</font></b> <b><font color="#006666">Array</font></b>(0)  <font color="#006666">; Will print 1, as the array has been shared.</font>
+  <b><font color="#006666">Debug</font></b> <b><font color="#006666">List</font></b>()    <font color="#006666">; Will print 2, as the list has been shared.</font>
+</font></pre>
+</blockquote>
+</font></body></html>

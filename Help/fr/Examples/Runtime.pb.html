@@ -1,0 +1,36 @@
+<html><head><title>Runtime.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Runtime example file
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font>
+<font color="#006666">; Note: this example doesn't make much sens as a standalone file
+</font><font color="#006666">; as the runtime concept is to allow to access any procedure,
+</font><font color="#006666">; variable etc once the program is compiled (for exemple from
+</font><font color="#006666">; an xml file, like in the Dialog library)
+</font>
+
+<b><font color="#006666">Runtime</font></b> <b><font color="#006666">Procedure</font></b> <font color="#006666">RuntimeProcedure</font>()
+  <b><font color="#006666">Debug</font></b> &quot;Runtime procedure&quot;
+<b><font color="#006666">EndProcedure</font></b>
+
+
+<b><font color="#006666">Debug</font></b> &quot;RuntimeProcedure() address: &quot; +<font color="#006666"> GetRuntimeInteger</font>(&quot;RuntimeProcedure()&quot;)
+
+
+RuntimeVariable.i = 128
+<b><font color="#006666">Runtime</font></b> RuntimeVariable
+<b><font color="#006666">Debug</font></b> &quot;RuntimeVariable: &quot; +<font color="#006666"> GetRuntimeInteger</font>(&quot;RuntimeVariable&quot;)
+<font color="#006666">SetRuntimeInteger</font>(&quot;RuntimeVariable&quot;, 256)
+
+<font color="#006666">; The internal variable value has been changed
+</font><font color="#006666">;
+</font><b><font color="#006666">Debug</font></b> &quot;RuntimeVariable: &quot; + RuntimeVariable
+</font></pre>
+</body></html>

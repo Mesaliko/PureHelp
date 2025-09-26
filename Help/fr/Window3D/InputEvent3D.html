@@ -1,0 +1,81 @@
+<html><head><title>InputEvent3D</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">InputEvent3D()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>InputEvent3D</b></font>(SourisX, SourisY, BoutonGaucheSouris, [, Texte$, ToucheSpeciale]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Injecte des événements dans l'interface graphique 3D (GUI). 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>SourisX, SourisY</i></td>
+<td width="90%"> 
+La position de la souris sur l'interface 3D, en pixels. 
+
+</td></tr>
+<tr><td><i>BoutonGaucheSouris</i></td>
+<td> 
+L'état du bouton gauche de la souris 
+<pre><font face="Courier New, Courier, mono" size="2">  0 : Bouton relâché. 
+  1 : Bouton pressé.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Texte$ (optionnel)</i></td>
+<td> 
+Le texte injecté dans l'interface graphique, par exemple pour alimenter un 
+<a href="../gadget3d/stringgadget3d.html">StringGadget3D()</a>. 
+
+</td></tr>
+<tr><td><i>ToucheSpeciale (optionnel)</i></td>
+<td> 
+Touche muette du clavier injectée dans le 
+système de l'interface graphique, par 
+exemple pour gérer le Retour Arrière 
+(Backspace), Entrée ou Retour Chariot 
+(Enter) et autres.<br>
+Les touches spéciales disponibles sont: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Key_Back</font>  : Retour arrière
+  <font color="#924B72">#PB_Key_Delete</font>: Supprimer
+  <font color="#924B72">#PB_Key_Return</font>: Entrée
+  <font color="#924B72">#PB_Key_Up</font>    : Flèche haut
+  <font color="#924B72">#PB_Key_Down</font>  : Flèche bas
+  <font color="#924B72">#PB_Key_Left</font>  : Flèche gauche
+  <font color="#924B72">#PB_Key_Right</font> : Flèche droite
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Cette fonction est nécessaire pour que <a href="windowevent3d.html">WindowEvent3D()</a> fonctionne. 
+<br>
+<br>
+Pour plus de souplesse, les événements ne sont pas obtenus automatiquement à 
+partir de la souris et du clavier, mais injectés à la demande. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Voici une utilisation classique pour renseigner les événements de la souris et du clavier</font>
+  <font color="#006666">;</font>
+<font color="#006666">  InputEvent3D</font>(<font color="#006666">MouseX</font>(),<font color="#006666"> MouseY</font>(),<font color="#006666"> MouseButton</font>(<font color="#924B72">#PB_MouseButton_Left</font>, Input$, 0)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="windowevent3d.html">WindowEvent3D()</a>, <a href="../engine3d/add3darchive.html">Add3DArchive()</a>, <a href="../engine3d/mousepick.html">MousePick()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=hidewindow3d.html>HideWindow3D()</a> - <a href=index.html>Window3D Index</a> - <a href=iswindow3d.html>IsWindow3D()</a> -><br><br>
+
+</body></html>

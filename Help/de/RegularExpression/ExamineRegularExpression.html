@@ -1,0 +1,68 @@
+<html><head><title>ExamineRegularExpression</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">ExamineRegularExpression()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>ExamineRegularExpression</b></font>(#RegularExpression, String$)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Startet das Überprüfen (&quot;matching&quot;) des regulären Ausdrucks gegenüber dem 
+angegebenen String. Einzelne Übereinstimmungen (&quot;matches&quot;) können mit der 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a> Funktion durchlaufen werden. 
+<br>
+Von jeder Übereinstimmung können der passende String, seine Position/Länge und 
+alle Gruppen innerhalb der Übereinstimmung mit der entsprechenden Funktion 
+extrahiert werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#RegularExpression</i></td>
+<td width="90%"> 
+Der zu verwendende reguläre Ausdruck. 
+
+</td></tr>
+<tr><td><i>String$</i></td>
+<td> 
+Der String, auf den der reguläre Ausdruck angewandt werden soll. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Wert ungleich Null zurück, wenn das Überprüfen erfolgreich gestartet 
+wurde. Ob eine aktuelle Übereinstimmung gefunden wurde, kann durch Aufruf von 
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a> ermittelt werden. 
+
+</blockquote><p><b>Beispiel</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">; Dieser Ausdruck wird bei jedem Wort übereinstimmen, das 3 Zeichen beinhaltet,</font>
+  <font color="#006666">; mit einem Kleinbuchstaben beginnt, gefolgt vom Buchstaben 'b' und mit einem</font>
+  <font color="#006666">; Großbuchstaben endet. Zum Beispiel: abC</font>
+  <font color="#006666">; Jede Übereinstimmung wird mit ihrer Position im Original-String ausgegeben.</font>
+  <font color="#006666">;    </font>
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateRegularExpression</font>(0, &quot;[a-z]b[A-Z]&quot;)
+    <b><font color="#006666">If</font></b> <font color="#006666">ExamineRegularExpression</font>(0, &quot;abC ABc zbA abc&quot;)
+      <b><font color="#006666">While</font></b> <font color="#006666">NextRegularExpressionMatch</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;Match: &quot; +<font color="#006666"> RegularExpressionMatchString</font>(0)
+        <b><font color="#006666">Debug</font></b> &quot;    Position: &quot; +<font color="#006666"> Str</font>(<font color="#006666">RegularExpressionMatchPosition</font>(0))
+        <b><font color="#006666">Debug</font></b> &quot;    Length: &quot; +<font color="#006666"> Str</font>(<font color="#006666">RegularExpressionMatchLength</font>(0))
+      <b><font color="#006666">Wend</font></b>
+    <b><font color="#006666">EndIf</font></b>
+  <b><font color="#006666">Else</font></b>
+    <b><font color="#006666">Debug</font></b> <font color="#006666">RegularExpressionError</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="nextregularexpressionmatch.html">NextRegularExpressionMatch()</a>, 
+<a href="regularexpressionmatchstring.html">RegularExpressionMatchString()</a>, <a href="regularexpressionmatchposition.html">RegularExpressionMatchPosition()</a>, <a href="regularexpressionmatchlength.html">RegularExpressionMatchLength()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=createregularexpression.html>CreateRegularExpression()</a> - <a href=index.html>RegularExpression Inhaltsverzeichnis</a> - <a href=extractregularexpression.html>ExtractRegularExpression()</a> -><br><br>
+
+</body></html>

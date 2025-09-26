@@ -1,0 +1,99 @@
+<html><head><title>SkyBox</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SkyBox()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SkyBox</b></font>(NomTexture$ [, CouleurBrouillard, EpaisseurBrouillard, DebutDistanceBrouillard, FinDistanceBrouillard])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Crée une boîte artificielle (cube à 6 faces 
+texturées) située très loin de la caméra pour 
+fermer complètement le monde. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>NomTexture$</i></td>
+<td width="90%"> 
+Le nom de chaque texture doit être nommé 
+selon la règle suivante: 
+<pre><font face="Courier New, Courier, mono" size="2">  NomTexture_BK : Face arrière (BacK)
+  NomTexture_FR : Face avant (FRont)
+  NomTexture_DN : Face du bas (DowN)
+  NomTexture_UP : Face du haut (UP)
+  NomTexture_LF : Face de gauche (LeFt)
+  NomTexture_RT : Face de droite (RighT)
+</font></pre>
+
+</td></tr>
+<tr><td><i>CouleurBrouillard (optionnel)</i></td>
+<td> 
+La couleur du brouillard. 
+<br>
+<br>
+<a href="../2ddrawing/rgb.html">RGB()</a> peut être utilisé pour obtenir une 
+valeur valide.<br>
+Si non spécifié, les paramètres 
+du brouillard seront ceux provenant de la 
+fonction <a href="fog.html">Fog()</a>. 
+
+</td></tr>
+<tr><td><i>EpaisseurBrouillard (optionnel)</i></td>
+<td> 
+L'épaisseur du brouillard. 
+<br>
+<br>
+Si ce paramètre est égal à zéro alors le 
+brouillard est désactivé. 
+
+</td></tr>
+<tr><td><i>DebutDistanceBrouillard (optionnel)</i></td>
+<td> 
+La distance en unité Monde à laquelle le 
+brouillard commence (par rapport à la caméra). 
+
+</td></tr>
+<tr><td><i>FinDistanceBrouillard (optionnel)</i></td>
+<td> 
+La distance en unité Monde à laquelle le 
+brouillard est totalement opaque (par 
+rapport à la caméra). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle en cas de 
+succès, zéro sinon. 
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Les <a href="../texture/index.html">textures</a>  doivent 
+être dans un des chemins précédemment déclarés 
+avec la fonction <a href="add3darchive.html">Add3DArchive()</a>. 
+<br>
+<br>
+Si les textures ne peuvent être chargées, le skybox est créé avec des textures blanches. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  ...
+  <font color="#006666">; Les 6 textures (images) sont réunies dans le fichier zip &quot;skybox.zip&quot;</font>
+<font color="#006666">  Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/skybox.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">  Parse3DScripts</font>() 
+  ...
+  <font color="#006666">; Création de la skybox avec les 6 images qui ont pour nom: stevecube_BK.jpg, stevecube_DN.jpg, etc.)</font>
+<font color="#006666">  SkyBox</font>(&quot;stevecube.jpg&quot;)
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="skydome.html">SkyDome()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=showgui.html>ShowGUI()</a> - <a href=index.html>Engine3D Index</a> - <a href=skydome.html>SkyDome()</a> -><br><br>
+
+</body></html>

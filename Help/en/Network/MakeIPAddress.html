@@ -1,0 +1,50 @@
+<html><head><title>MakeIPAddress</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">MakeIPAddress()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>MakeIPAddress</b></font>(Field0, Field1, Field2, Field3 [, Field4, Field5, Field6, Field7]) </blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the equivalent numeric value of the specified IP address. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Field0, Field1, Field2, Field3</i></td>
+<td width="90%"> 
+The individual fields of the address. 
+Each field can only have a value between 0 and 255. 
+
+</td></tr>
+<tr><td><i>Field4, Field5, Field6, Field7 (optional)</i></td>
+<td> 
+The remaining individual fields for IPv6 address. 
+Each field can only have a value between 0 and 255. 
+When these fields are specified, an IPv6 address is created. When the address is no more needed, it has 
+to be manually freed with <a href="freeip.html">FreeIP()</a>. IPv4 address must not be freed with <a href="freeip.html">FreeIP()</a>. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Return value</b></p><blockquote>
+
+Returns the IP address. 
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+This function is especially useful with: 
+<br>
+<br>
+- <a href="../gadget/ipaddressgadget.html">IPAddressGadget()</a> 
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="ipstring.html">IPString()</a>, <a href="ipaddressfield.html">IPAddressField()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=ipstring.html>IPString()</a> - <a href=index.html>Network Index</a> - <a href=networkclientevent.html>NetworkClientEvent()</a> -><br><br>
+
+</body></html>

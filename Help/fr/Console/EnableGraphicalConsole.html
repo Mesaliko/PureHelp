@@ -1,0 +1,75 @@
+<html><head><title>EnableGraphicalConsole</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">EnableGraphicalConsole()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+<font color="#006666"><b>EnableGraphicalConsole</b></font>(Mode)</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Change la manière d'afficher 
+les caractères dans la console: 
+Texte/Graphique. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>Mode</i></td>
+<td width="90%"> 
+<pre><font face="Courier New, Courier, mono" size="2">  0: Mode texte
+  1: Mode graphique
+</font></pre>
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+Aucune.
+
+
+</blockquote><p><b>Remarques</b></p><blockquote>
+
+Le mode par défaut de la console 
+est le mode texte, ce qui implique 
+que le texte ne peut pas être 
+positionné arbitrairement dans 
+la console. Cependant, les redirections 
+(pipes) fonctionnent correctement, 
+ce qui peut être utile si le programme 
+est destiné à être utilisé dans des 
+scripts. 
+<br>
+<br>
+Quand le mode graphique est activé, 
+les commandes comme <a href="clearconsole.html">ClearConsole()</a> ou 
+<a href="consolelocate.html">ConsoleLocate()</a> sont disponibles, et 
+le texte peut être positionné 
+n'importe où dans la console, ce qui 
+permet de faire des jeux ou des 
+applications console (qui peuvent 
+par exemple être accédées à distance 
+via telnet ou ssh). <br>
+Attention: La redirection (pipes) 
+ne fonctionne pas si la console 
+est en mode graphique. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">OpenConsole</font>()
+<font color="#006666">    EnableGraphicalConsole</font>(1)
+<font color="#006666">    ConsoleLocate</font>(7, 8)
+<font color="#006666">    PrintN</font>(&quot;Appuyez sur [Entree] pour quitter&quot;)
+<font color="#006666">    Input</font>()
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="consolelocate.html">ConsoleLocate()</a>, <a href="consolecolor.html">ConsoleColor()</a>, 
+<a href="clearconsole.html">ClearConsole()</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Windows</Blockquote></p><center><- <a href=consoletitle.html>ConsoleTitle()</a> - <a href=index.html>Console Index</a> - <a href=inkey.html>Inkey()</a> -><br><br>
+
+</body></html>

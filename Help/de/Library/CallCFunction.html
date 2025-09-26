@@ -1,0 +1,63 @@
+<html><head><title>CallCFunction</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">CallCFunction()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>CallCFunction</b></font>(#Library, FunktionsName$ [,Parameter1 [, Parameter2...]])</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Ruft eine Funktion in der angegebenen Library auf - in einer solchen Art, dass die 
+Parameter in der gleichen Weise wie eine normale Funktion der Sprache 'C' behandelt werden. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Library</i></td>
+<td width="90%"> 
+Die Library, von der die Funktion aufgerufen wird. 
+
+</td></tr>
+<tr><td><i>FunktionsName$</i></td>
+<td> 
+Der Name der aufzurufenden Funktion. Der Funktionsname beachtet die Groß- und 
+Kleinschreibung. 
+
+</td></tr>
+<tr><td><i>Parameter1, Parameter2, ...</i></td>
+<td> 
+Die Parameter der Funktion. Die Anzahl der Parameter muss zu den Parametern 
+der aufgerufenen Funktion passen. Die maximale Zahl an unterstützten Parametern liegt bei 20. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt einen Rückgabewert der aufgerufenen Funktion zurück - oder Null, wenn die Library keine 
+Funktion mit dem angegebenen Namen enthält. 
+
+</blockquote><p><b>Anmerkungen</b></p><blockquote>
+
+Wird die Funktion als 'cdecl' beschrieben, dann muss dieser Befehl verwendet werden. 
+Die meisten der unter dem Microsoft Windows OS benutzten DLL's verwenden jedoch nicht 
+diese Form, weshalb <a href="callfunction.html">CallFunction()</a> für die meisten Fälle ausreichend sein sollte. 
+<br>
+Um eine Funktion aufzurufen, welche die 'stdcall' Aufruf-Konvention verwendet, muss die 
+<a href="callfunction.html">CallFunction()</a> Funktion verwendet werden. 
+
+<br>
+<br>
+Hinweis: Diese Funktion ist nicht sehr flexibel und kann nicht mit String/Fließkomma/Double/Quad-Parametern oder 
+String/Fließkomma/Double/Quad-Rückgabewerten umgehen. 
+Die Verwendung von <a href="../reference/prototypes.html">Prototypen</a> ist stattdessen sehr zu empfehlen. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="callfunction.html">CallFunction()</a>, <a href="getfunction.html">GetFunction()</a>, <a href="../reference/prototypes.html">prototypes</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><a href=index.html>Library Inhaltsverzeichnis</a> - <a href=callcfunctionfast.html>CallCFunctionFast()</a> -><br><br>
+
+</body></html>

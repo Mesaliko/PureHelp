@@ -1,0 +1,87 @@
+<html><head><title>SetMeshData</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SetMeshData()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Ergebnis = <font color="#006666"><b>SetMeshData</b></font>(#Mesh, SubMesh, DataArray(), Flags, ErsterIndex, LetzterIndex)</blockquote>
+
+</blockquote>
+<b>Beschreibung</b><br><blockquote>
+
+Legt die internen Mesh-Daten fest, wie Eckpunkte (vertices), Fläche (face), etc. 
+Dynamische Meshes (die mit dem <font color="#924B72">#PB_Mesh_Dynamic</font> Flag erstellt wurden), werden nicht unterstützt. 
+
+</blockquote><p><b>Parameter</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Mesh</i></td>
+<td width="90%"> 
+Das zu verwendende Mesh. 
+
+</td></tr>
+<tr><td><i>SubMesh</i></td>
+<td> 
+Das Sub-Mesh, dessen Daten festgelegt werden sollen. Der Index des ersten Sub-Meshes 
+ist 0 (Haupt-Mesh). 
+
+</td></tr>
+<tr><td><i>DataArray()</i></td>
+<td> 
+Das Array, welches die festzulegenden Daten enthält. Es muss ein Array vom Typ 
+&quot;MeshVertex&quot; oder &quot;MeshFace&quot; sein - abhängig von den angegebenen Flags. 
+
+</td></tr>
+<tr><td><i>Flags</i></td>
+<td> 
+Gibt an, welche Art von Daten gesetzt werden sollen. Dies kann einer der folgenden 
+Werte sein: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_Vertex</font>: DataArray() ist ein Array vom Typ vom &quot;MeshVertex&quot;.
+  <font color="#924B72">#PB_Mesh_Face</font>  : DataArray() ist ein Array vom Typ vom &quot;MeshFace&quot;.
+</font></pre>
+kombiniert mit: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Mesh_UVCoordinate</font> : Setzt die UV-Koordinaten-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+  <font color="#924B72">#PB_Mesh_Normal</font>       : Setzt die Normalen-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+  <font color="#924B72">#PB_Mesh_Color</font>        : Setzt die Farb-Information (nur beim <font color="#924B72">#PB_Mesh_Vertex</font> Flag)
+</font></pre>
+
+Die &quot;MeshVertex&quot; und &quot;MeshFace&quot; Strukturen sind wie folgt definiert: 
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">Structure</font></b> MeshVertex
+    x.f
+    y.f
+    z.f
+    NormalX.f ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_Normal</font> Flag gesetzt ist
+    NormalY.f ;
+    NormalZ.f ;
+    TangentX.f
+    TangentY.f
+    TangentZ.f
+    u.f       ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_UVCoordinate</font> Flag gesetzt ist
+    v.f       ;
+    Color.l   ; nur verwendet, wenn das <font color="#924B72">#PB_Mesh_Color</font> Flag gesetzt ist
+  <b><font color="#006666">EndStructure</font></b>    
+  
+  <b><font color="#006666">Structure</font></b> MeshFace
+    Index.l
+  <b><font color="#006666">EndStructure</font></b>   
+</font></pre>
+
+</td></tr>
+<tr><td><i>ErsterIndex, LetzterIndex</i></td>
+<td> 
+Erster und letzter Index, deren Daten festgelegt werden sollen. 
+
+</td></tr>
+</table>
+</blockquote><p><b>Rückgabewert</b></p><blockquote>
+
+Gibt bei Erfolg einen Wert ungleich Null zurück, und Null bei einem Fehler. 
+
+</blockquote><p><b>Siehe auch</b></p><blockquote>
+
+<a href="getmeshdata.html">GetMeshData()</a> 
+
+</Blockquote><p><b>Unterstützte OS </b><Blockquote>Alle</Blockquote></p><center><- <a href=savemesh.html>SaveMesh()</a> - <a href=index.html>Mesh Inhaltsverzeichnis</a> - <a href=setmeshmaterial.html>SetMeshMaterial()</a> -><br><br>
+
+</body></html>

@@ -1,0 +1,60 @@
+<html><head><title>DrawingBufferPixelFormat</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">DrawingBufferPixelFormat()</font></b></p>
+<p><b>Syntax</b></p><blockquote>
+Result = <font color="#006666"><b>DrawingBufferPixelFormat</b></font>()</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Returns the pixel format of the current output. 
+
+</blockquote><p><b>Parameters</b></p><blockquote>
+None.
+
+
+</blockquote><p><b>Return value</b></p><blockquote>
+
+The result can be a combination (with bitwise or) of the following flags: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_PixelFormat_8Bits</font>      : 1 byte per pixel, palletised
+  <font color="#924B72">#PB_PixelFormat_15Bits</font>     : 2 bytes per pixel 
+  <font color="#924B72">#PB_PixelFormat_16Bits</font>     : 2 bytes per pixel
+  <font color="#924B72">#PB_PixelFormat_24Bits_RGB</font> : 3 bytes per pixel (RRGGBB)
+  <font color="#924B72">#PB_PixelFormat_24Bits_BGR</font> : 3 bytes per pixel (BBGGRR)
+  <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font> : 4 bytes per pixel (RRGGBB)
+  <font color="#924B72">#PB_PixelFormat_32Bits_BGR</font> : 4 bytes per pixel (BBGGRR)
+  <font color="#924B72">#PB_PixelFormat_ReversedY</font>  : The Y-Coordinate of the output is reversed in memory (the bottom row is stored first).
+  <font color="#924B72">#PB_PixelFormat_NoAlpha</font>    : The pixel format is 32-bits but the alpha component is not used.
+</font></pre>
+
+</blockquote><p><b>Remarks</b></p><blockquote>
+
+<a href="drawingbuffer.html">DrawingBuffer()</a> must be called before using this function. 
+
+
+</blockquote><p><b>Example</b></p><blockquote>
+
+The following examples show how to handle the result: 
+
+<pre><font face="Courier New, Courier, mono" size="2">  <b><font color="#006666">If</font></b> <font color="#006666">DrawingBufferPixelFormat</font>() = <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font> | <font color="#924B72">#PB_PixelFormat_ReversedY</font>
+    <font color="#006666">; 32-bit RGB with reversed Y coordinate</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">DrawingBufferPixelFormat</font>() = <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font>
+    <font color="#006666">; 32-bit RGB without reversed Y coordinate</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">DrawingBufferPixelFormat</font>() &amp; <font color="#924B72">#PB_PixelFormat_32Bits_RGB</font>
+    <font color="#006666">; 32-bit RGB, with or without reversed Y coordinate</font>
+  <b><font color="#006666">EndIf</font></b>
+  
+</font></pre>
+
+</blockquote><p><b>See Also</b></p><blockquote>
+
+<a href="startdrawing.html">StartDrawing()</a>, <a href="drawingbufferpitch.html">DrawingBufferPitch()</a> 
+
+</Blockquote><p><b>Supported OS </b><Blockquote>All</Blockquote></p><center><- <a href=drawingbufferpitch.html>DrawingBufferPitch()</a> - <a href=index.html>2DDrawing Index</a> - <a href=drawingfont.html>DrawingFont()</a> -><br><br>
+
+</body></html>

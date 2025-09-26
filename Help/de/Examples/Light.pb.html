@@ -1,0 +1,123 @@
+<html><head><title>Light.pb</title><meta charset=~"utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<pre><font face="Courier New, Courier, mono" size="2">
+<font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+</font><font color="#006666">;   PureBasic - Light
+</font><font color="#006666">;
+</font><font color="#006666">;    (c) Fantaisie Software
+</font><font color="#006666">;
+</font><font color="#006666">; ------------------------------------------------------------
+</font><font color="#006666">;
+
+</font><font color="#924B72">#CameraSpeed</font> = 0.2
+
+<b><font color="#006666">Procedure</font></b>.l <font color="#006666">HSLToRGB</font>(hue.a, saturation.a, lightness.a, alpha=0)
+  <b><font color="#006666">Protected</font></b>.f h=hue *6/256
+  <b><font color="#006666">Protected</font></b>.f s=saturation/255
+  <b><font color="#006666">Protected</font></b>.f l=lightness/255
+  <b><font color="#006666">Protected</font></b>.f c,x,r_,v_,b_,m
+  c=(1-<font color="#006666">Abs</font>(2*l-1))*s
+  x=c*(1-<font color="#006666">Abs</font>(<font color="#006666">Mod</font>(h, 2) -1))
+  <b><font color="#006666">Select</font></b> <font color="#006666">Int</font>(h)
+    <b><font color="#006666">Case</font></b> 0:r_=c:v_=x
+    <b><font color="#006666">Case</font></b> 1:r_=x:v_=c
+    <b><font color="#006666">Case</font></b> 2:v_=c:b_=x
+    <b><font color="#006666">Case</font></b> 3:v_=x:b_=c
+    <b><font color="#006666">Case</font></b> 4:r_=x:b_=c
+    <b><font color="#006666">Case</font></b> 5:r_=c:b_=x
+  <b><font color="#006666">EndSelect</font></b>
+  m=l-c/2
+  <b><font color="#006666">Protected</font></b> r,v,b
+  r=<font color="#006666">Int</font>((r_+m)*255)
+  v=<font color="#006666">Int</font>((v_+m)*255)
+  b=<font color="#006666">Int</font>((b_+m)*255)
+  <b><font color="#006666">ProcedureReturn</font></b> <font color="#006666">RGBA</font>(r,v,b,alpha)
+<b><font color="#006666">EndProcedure</font></b>
+
+<b><font color="#006666">Define</font></b>.f KeyX, KeyY, MouseX, MouseY
+
+<font color="#006666">InitEngine3D</font>()
+
+<font color="#006666">InitSprite</font>()
+<font color="#006666">InitKeyboard</font>()
+<font color="#006666">InitMouse</font>()
+
+<font color="#006666">ExamineDesktops</font>():dx=<font color="#006666">DesktopWidth</font>(0)*0.8:dy=<font color="#006666">DesktopHeight</font>(0)*0.8
+<font color="#006666">OpenWindow</font>(0, 0,0,<font color="#006666"> DesktopUnscaledX</font>(dx),<font color="#006666">DesktopUnscaledY</font>(dy), &quot; Light - [Esc] quit&quot;,<font color="#924B72">#PB_Window_ScreenCentered</font>)
+<font color="#006666">OpenWindowedScreen</font>(<font color="#006666">WindowID</font>(0), 0, 0, dx, dy, 0, 0, 0)
+
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Main&quot;,<font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Textures&quot;, <font color="#924B72">#PB_3DArchive_FileSystem</font>)
+<font color="#006666">Add3DArchive</font>(<font color="#924B72">#PB_Compiler_Home</font> + &quot;examples/3d/Data/Packs/Sinbad.zip&quot;, <font color="#924B72">#PB_3DArchive_Zip</font>)
+<font color="#006666">Parse3DScripts</font>()
+
+<font color="#006666">WorldShadows</font>(<font color="#924B72">#PB_Shadow_TextureAdditive</font>, 50, $888888,2048)
+
+<font color="#006666">; mesh
+</font><font color="#006666">LoadMesh</font>(0, &quot;Sinbad.mesh&quot;)
+<font color="#006666">CreateCylinder</font>(1,10,2,64,1,1)
+
+<font color="#006666">;texture
+</font><font color="#006666">LoadTexture</font>(1, &quot;MRAMOR6X6.jpg&quot;)
+<font color="#006666">LoadTexture</font>(3, &quot;flare.png&quot;)
+
+<font color="#006666">;material
+</font><font color="#006666">CreateMaterial</font>(5,<font color="#006666">TextureID</font>(1))
+<font color="#006666">MaterialShininess</font>(5,64,$ffffff)
+
+<font color="#006666">;entity
+</font><font color="#006666">CreateEntity </font>(0,<font color="#006666"> MeshID</font>(0), 0,0,5,0)
+<font color="#006666">StartEntityAnimation</font>(0, &quot;Dance&quot;)
+<font color="#006666">CreateEntity </font>(1,<font color="#006666"> MeshID</font>(1),<font color="#006666"> MaterialID</font>(5),0,-1,0)
+<font color="#006666">EntityRenderMode</font>(1, 0)
+
+<font color="#006666">;light
+</font><b><font color="#006666">Macro</font></b> <font color="#006666">light</font>(num,color,x,y,z)
+<font color="#006666">  CreateLight</font>(num,color,x,y,z)
+<font color="#006666">  CreateMaterial</font>(num,<font color="#006666"> TextureID</font>(3))
+<font color="#006666">  MaterialBlendingMode</font>(num,<font color="#924B72">#PB_Material_Add</font>)
+<font color="#006666">  SetMaterialColor</font>(num,<font color="#924B72">#PB_Material_SelfIlluminationColor</font>,color)
+<font color="#006666">  SetMaterialColor</font>(num,<font color="#924B72">#PB_Material_DiffuseColor</font>,0)
+<font color="#006666">  CreateBillboardGroup</font>(num,<font color="#006666">MaterialID</font>(num),20,20,x,y,z)
+<font color="#006666">  AddBillboard</font>(num,0,0,0)
+<b><font color="#006666">EndMacro</font></b>
+<font color="#006666">light</font>(0,<font color="#006666">RGB</font>(255,0,0), 10,5,0)
+<font color="#006666">light</font>(1,<font color="#006666">RGB</font>(0,255,0),-10,5,0)
+<font color="#006666">light</font>(2,<font color="#006666">RGB</font>(0,0,255),  0,10,5)
+
+<font color="#006666">AmbientColor</font>($222222)
+
+<font color="#006666">;camera
+</font><font color="#006666">CreateCamera</font>(0, 0, 0, 100, 100)
+<font color="#006666">MoveCamera</font>(0, 0, 5, 20, <font color="#924B72">#PB_Absolute</font>)
+<font color="#006666">CameraLookAt</font>(0,0,5,0)
+
+<b><font color="#006666">Repeat</font></b>
+  <b><font color="#006666">While</font></b> <font color="#006666">WindowEvent</font>():<b><font color="#006666">Wend</font></b>  
+<font color="#006666">  ExamineMouse</font>()
+<font color="#006666">  ExamineKeyboard</font>()
+  
+  MouseX = -<font color="#006666">MouseDeltaX</font>() * 0.05
+  MouseY = -<font color="#006666">MouseDeltaY</font>() * 0.05
+  
+  KeyX = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Right</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Left</font>))*<font color="#924B72">#CameraSpeed</font>
+  Keyy = (<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Down</font>)-<font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Up</font>)-<font color="#006666">MouseWheel</font>()*4)*<font color="#924B72">#CameraSpeed</font>    
+  
+<font color="#006666">  RotateCamera</font>(0, MouseY, MouseX, 0, <font color="#924B72">#PB_Relative</font>)
+<font color="#006666">  MoveCamera  </font>(0, KeyX, 0, KeyY)
+  
+  <font color="#006666">;light color change
+</font>  hue+1
+  <b><font color="#006666">For</font></b> num=0 <b><font color="#006666">To</font></b> 2
+    color=<font color="#006666">HSLToRGB</font>((hue+num*80) &amp; 255,255,128)
+<font color="#006666">    SetLightColor</font>(num,<font color="#924B72">#PB_Light_DiffuseColor</font>,color)
+<font color="#006666">    SetLightColor</font>(num,<font color="#924B72">#PB_Light_SpecularColor</font>,color)
+<font color="#006666">    SetMaterialColor</font>(num,<font color="#924B72">#PB_Material_SelfIlluminationColor</font>,color)
+  <b><font color="#006666">Next</font></b>
+  
+<font color="#006666">  RenderWorld</font>()
+<font color="#006666">  FlipBuffers</font>()
+<b><font color="#006666">Until</font></b> <font color="#006666">KeyboardPushed</font>(<font color="#924B72">#PB_Key_Escape</font>) <b><font color="#006666">Or</font></b> Quit = 1 <b><font color="#006666">Or</font></b> <font color="#006666">MouseButton</font>(3)
+</font></pre>
+</body></html>

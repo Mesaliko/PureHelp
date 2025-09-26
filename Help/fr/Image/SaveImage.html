@@ -1,0 +1,122 @@
+<html><head><title>SaveImage</title><meta charset="utf-8"></head>
+<body bgcolor="#FFFFDF" link="#009999" vlink="#006666" alink="#006666">
+<font face="Arial" size="2"><p align="center"><b><font size="4">SaveImage()</font></b></p>
+<p><b>Syntaxe</b></p><blockquote>
+Resultat = <font color="#006666"><b>SaveImage</b></font>(#Image, NomFichier$ [, ImagePlugin [, Options [, Profondeur]]])</blockquote>
+
+</blockquote>
+<b>Description</b><br><blockquote>
+
+Enregistre une image sur un disque. 
+
+</blockquote><p><b>Arguments</b></p><blockquote>
+<style type="text/css">
+table.parameters { border-spacing: 0px; border-style: none; border-collapse: collapse; }
+table.parameters td { border-width: 1px; padding: 6px; border-style: solid; border-color: gray; vertical-align: top; font-family:Arial; font-size:10pt; }
+</style>
+<table width="90%" class="parameters">
+<tr><td width="10%"><i>#Image</i></td>
+<td width="90%"> 
+L'image à enregistrer. 
+
+</td></tr>
+<tr><td><i>NomFichier$</i></td>
+<td> 
+Le nom du fichier. 
+<br>
+<br>
+Si le nom de fichier ne contient pas de chemin 
+complet alors le chemin est relatif. 
+Voir <a href="../filesystem/getcurrentdirectory.html">répertoire courant</a>. 
+
+</td></tr>
+<tr><td><i>ImagePlugin (optionnel)</i></td>
+<td> 
+Le format de l'image enregistrée: 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_ImagePlugin_BMP</font>      : Enregistre l'image en BMP (défaut).
+  <font color="#924B72">#PB_ImagePlugin_JPEG</font>     : Enregistre l'image en JPEG (<a href="../imageplugin/usejpegimageencoder.html">UseJPEGImageEncoder()</a> doit être utilisé)
+  <font color="#924B72">#PB_ImagePlugin_JPEG2000</font> : Enregistre l'image en JPEG2000 (<a href="../imageplugin/usejpeg2000imageencoder.html">UseJPEG2000ImageEncoder()</a> doit être utilisé)
+  <font color="#924B72">#PB_ImagePlugin_PNG</font>      : Enregistre l'image en PNG  (<a href="../imageplugin/usepngimageencoder.html">UsePNGImageEncoder()</a> doit être utilisé)
+</font></pre>
+
+</td></tr>
+<tr><td><i>Options (optionnel)</i></td>
+<td> 
+N'est utilisé qu'avec les plugin JPEG  et 
+JPEG 2000. Il est possible de régler la 
+qualité d'une image à l'aide d'une valeur 
+allant de 0 (plus mauvaise qualité) à 10 
+(qualité maximale), la qualité par défaut 
+étant fixée à 7 si aucune option n'est 
+spécifiée avec l'encodeur JPEG ou JPEG 2000. 
+<br>
+<br>
+Quand une image est enregistrée en utilisant 
+une palette (1, 4 ou 8), l'option suivante est 
+disponible: 
+<pre><font face="Courier New, Courier, mono" size="2">   <font color="#924B72">#PB_Image_FloydSteinberg</font>: Appliquer un filtre Floyd-Steinberg.
+</font></pre>
+
+Lorsqu'une image 32 bits est enregistrée avec une résolution inférieure (24 bits ou moins), les options suivantes permettent de modifier la couleur utilisée pour remplir la zone transparente : 
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#924B72">#PB_Image_WhiteAlphaBackground</font> : L'image résultante sera blanche si une zone transparente est trouvée (par défaut).
+  <font color="#924B72">#PB_Image_BlackAlphaBackground</font> : L'image résultante sera noire si une zone transparente est trouvée.
+</font></pre>
+
+</td></tr>
+<tr><td><i>Profondeur (optionnel)</i></td>
+<td> 
+La profondeur de couleur de l'image lors de son enregistrement. 
+<br>
+<br>
+Les valeurs valides sont 1, 4, 8, 24 et 32. 
+La valeur par défaut est la profondeur originale 
+de l'image. 
+Pour l'instant, seuls les encodeurs BMP et PNG 
+supportent le mode palettisé (1, 4 ou 8 bits). 
+
+</td></tr>
+</table>
+</blockquote><p><b>Valeur de retour</b></p><blockquote>
+
+Renvoie une valeur non nulle si l'opération a 
+réussi et zéro sinon. 
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2"><font color="#006666">  LoadImage</font>(0, <font color="#924B72">#PB_Compiler_Home</font>+&quot;Examples\Sources\Data\GeeBee2.bmp&quot;) <font color="#006666">; Charge l'image depuis un fichier</font>
+<font color="#006666">  SaveImage</font>(0,<font color="#006666"> GetTemporaryDirectory</font>() + &quot;ok.bmp&quot;) <font color="#006666">; Enregistre</font>
+</font></pre>
+
+</blockquote><p><b>Exemple</b></p><blockquote>
+
+<pre><font face="Courier New, Courier, mono" size="2">  <font color="#006666">;Dessine un rectangle bleu et l'enregistre dans un fichier PNG</font>
+<font color="#006666">  UsePNGImageEncoder</font>()
+  
+  <b><font color="#006666">If</font></b> <font color="#006666">CreateImage</font>(0, 33, 33)
+    <b><font color="#006666">If</font></b> <font color="#006666">StartDrawing</font>(<font color="#006666">ImageOutput</font>(0))
+<font color="#006666">      DrawingMode</font>(<font color="#924B72">#PB_2DDrawing_Transparent</font>)
+<font color="#006666">        Box</font>(0, 0, 33, 33, $FF0000) 
+<font color="#006666">      StopDrawing</font>()
+    <b><font color="#006666">EndIf</font></b>
+    Fichier$ =<font color="#006666"> SaveFileRequester</font>(&quot;Enregistrer sous...&quot;,<font color="#006666"> GetCurrentDirectory</font>(), &quot;*.png|*.png&quot;, 0)
+    <b><font color="#006666">If</font></b> Fichier$
+      <b><font color="#006666">If</font></b> <font color="#006666">GetExtensionPart</font>(Fichier$) = &quot;&quot;
+        Fichier$ + &quot;.png&quot;  <font color="#006666">; Ajouter l'extension de fichier si nécessaire</font>
+      <b><font color="#006666">EndIf</font></b>
+      <b><font color="#006666">If</font></b> <font color="#006666">SaveImage</font>(0, Fichier$, <font color="#924B72">#PB_ImagePlugin_PNG</font>)
+<font color="#006666">        MessageRequester</font>(&quot;Fichier enregistré&quot;, Fichier$)
+      <b><font color="#006666">Else</font></b>
+<font color="#006666">        MessageRequester</font>(&quot;Erreur&quot;, &quot;Échec de l'enregistrement du fichier&quot;)
+      <b><font color="#006666">EndIf</font></b>
+    <b><font color="#006666">EndIf</font></b>
+<font color="#006666">    FreeImage</font>(0)
+  <b><font color="#006666">EndIf</font></b>
+</font></pre>
+
+</blockquote><p><b>Voir aussi</b></p><blockquote>
+
+<a href="imagedepth.html">ImageDepth()</a>, 
+<a href="../imageplugin/index.html">ImagePlugin library</a> 
+
+</Blockquote><p><b>OS Supportés </b><Blockquote>Tous</Blockquote></p><center><- <a href=resizeimage.html>ResizeImage()</a> - <a href=index.html>Image Index</a> - <a href=setimageframe.html>SetImageFrame()</a> -><br><br></blockquote>
+</font></body></html>

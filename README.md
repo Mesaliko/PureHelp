@@ -27,11 +27,11 @@ FRANÇAIS
 PureHelp est un lecteur de fichier d'aide de PureBasic au format HTML.
 C'est un clône du logiciel d'aide proposé par PureBasic sous Windows mais avec beaucoup de fonctionnalité en plus, comme le choix de la police de caractère et surtout de sa taille, ainsi que le choix de la taille des icônes.
 
-Il fonctionne sur tous les Windows depuis WIndows XP.
+Il fonctionne sur tous les Windows depuis Windows XP.
 Il fonctionne aussi sous linux et MacOS.
 
 Il est multilanguage, français et anglais et il est prévu pour l'allemand (traduction à faire).
-Pour les autres langgues, il faudra m'envoyer le fichier langue ad-hoc.
+Pour les autres langues, il faudra m'envoyer le fichier langue ad-hoc.
 
 Vous pourrez intégrer PureHelp au menu Outils de l'IDE de PureBasic et lui assigner un raccourci clavier.
 

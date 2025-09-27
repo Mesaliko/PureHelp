@@ -1,6 +1,8 @@
 # PureHelp
 PureHelp is a PureBasic help file reader in HTML format for PureBasic.
 
+<img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/70ce25b4-d6e8-4118-a2f1-36936ec2445c" />
+
 PureHelp is a PureBasic help file reader in HTML format.
 It's a clone of the help software offered by PureBasic on Windows, but with many additional features, such as the ability to choose the font and especially its size, as well as the ability to choose the icon size.
 

@@ -1216,6 +1216,7 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
           SetGadgetItemImage(gadget, item, ImageID(#im_tree_BookOpen))
         Case 3
           SetGadgetItemImage(gadget, item, ImageID(#im_tree_Books))
+      EndSelect
       CompilerEndSelect
       
     EndProcedure
@@ -3700,9 +3701,9 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
       
     EndProcedure
     
-; IDE Options = PureBasic 6.30 beta 1 (Windows - x64)
-; CursorPosition = 545
-; FirstLine = 530
+; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
+; CursorPosition = 1218
+; FirstLine = 1208
 ; Folding = ------------------
 ; EnableAsm
 ; EnableXP

@@ -25,6 +25,18 @@ UsePNGImageDecoder()
 #H_PrefFile = "PureHelp.prefs"
 #version    = 621
 
+;Raspberry pi doesn't know some pb constants !
+CompilerIf Defined(LANG_ENGLISH, #PB_Constant)
+  #LANG_ENGLISH = 9
+CompilerEndIf
+CompilerIf Defined(LANG_FRENCH, #PB_Constant)
+  #LANG_FRENCH = 12 
+CompilerEndIf
+CompilerIf Defined(LANG_GERMAN, #PB_Constant)
+  #LANG_GERMAN = 7 
+CompilerEndIf
+
+
 ;*********** Main_Form.pbi ************************
 ;- Globals, struct, prototype
 Global WebDisplay
@@ -140,9 +152,9 @@ Declare TreeParentChild(Tree)
 Declare PopUpMenus()
 Declare SendKeys(handle, window$, keys$)
 
-; IDE Options = PureBasic 6.03 LTS (Windows - x86)
-; CursorPosition = 111
-; FirstLine = 109
+; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
+; CursorPosition = 153
+; FirstLine = 121
 ; Folding = -
 ; EnableAsm
 ; EnableXP

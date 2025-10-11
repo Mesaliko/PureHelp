@@ -80,54 +80,54 @@ EndProcedure
 CompilerSelect #PB_Compiler_OS
   CompilerCase #PB_OS_Windows
     ;- .        -Windows
-    
-    ;Not used, Autor: freak
-    Procedure WebGadget_Document(Gadget, *IID)
-      Protected Document = 0
-      Protected Browser.IWebBrowser2
-      Protected DocumentDispatch.IDispatch
-      
-      Browser.IWebBrowser2 = GetWindowLongPtr_(GadgetID(Gadget), #GWL_USERDATA)
-      If Browser
-        If Browser\get_Document(@DocumentDispatch.IDispatch) = #S_OK And DocumentDispatch
-          DocumentDispatch\QueryInterface(*IID, @Document)
-          DocumentDispatch\Release()
-        EndIf
-      EndIf
-      ProcedureReturn Document
-      
-    EndProcedure
-    
-    ;Not used
-    Procedure.s WebGadget_PageText(Gadget, file$ = "")
-      Protected Result$ = ""
-      Protected Document.IHTMLDocument2
-      Protected Body.IHTMLElement
-      Protected bstr_text, Res
-      
-      Document.IHTMLDocument2 = WebGadget_Document(Gadget, ?IID_IHTMLDocument2)
-      If Document
-        If Document\get_body(@Body.IHTMLElement) = #S_OK
-          If Body\get_innerText(@bstr_text) = #S_OK And bstr_text
-            Result$ = PeekS(bstr_text, - 1, #PB_Unicode)
-            SysFreeString_(bstr_text)
-          EndIf
-          Body\Release()
-        EndIf
-        Document\Release()
-      EndIf
-      
-      If file$ = ""
-        file$ = GetTemporaryDirectory() + "tmp.pb"
-      EndIf
-      
-      If CreateFile(0, file$)
-        Res = WriteString(0, Result$)
-        ;TO DO if Res=0 then problem
-        CloseFile(0)
-      EndIf
-      
-    EndProcedure
+;     
+;     ;Not used, Autor: freak
+;     Procedure WebGadget_Document(Gadget, *IID)
+;       Protected Document = 0
+;       Protected Browser.IWebBrowser2
+;       Protected DocumentDispatch.IDispatch
+;       
+;       Browser.IWebBrowser2 = GetWindowLongPtr_(GadgetID(Gadget), #GWL_USERDATA)
+;       If Browser
+;         If Browser\get_Document(@DocumentDispatch.IDispatch) = #S_OK And DocumentDispatch
+;           DocumentDispatch\QueryInterface(*IID, @Document)
+;           DocumentDispatch\Release()
+;         EndIf
+;       EndIf
+;       ProcedureReturn Document
+;       
+;     EndProcedure
+;     
+;     ;Not used
+;     Procedure.s WebGadget_PageText(Gadget, file$ = "")
+;       Protected Result$ = ""
+;       Protected Document.IHTMLDocument2
+;       Protected Body.IHTMLElement
+;       Protected bstr_text, Res
+;       
+;       Document.IHTMLDocument2 = WebGadget_Document(Gadget, ?IID_IHTMLDocument2)
+;       If Document
+;         If Document\get_body(@Body.IHTMLElement) = #S_OK
+;           If Body\get_innerText(@bstr_text) = #S_OK And bstr_text
+;             Result$ = PeekS(bstr_text, - 1, #PB_Unicode)
+;             SysFreeString_(bstr_text)
+;           EndIf
+;           Body\Release()
+;         EndIf
+;         Document\Release()
+;       EndIf
+;       
+;       If file$ = ""
+;         file$ = GetTemporaryDirectory() + "tmp.pb"
+;       EndIf
+;       
+;       If CreateFile(0, file$)
+;         Res = WriteString(0, Result$)
+;         ;TO DO if Res=0 then problem
+;         CloseFile(0)
+;       EndIf
+;       
+;     EndProcedure
     
     ;Don't move this declare anywhere else
     Declare WebEventProc(Object.COMateObject, eventName$, parameterCount)
@@ -1275,10 +1275,9 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
           ;   CompilerCase #PB_OS_MacOS
           
         CompilerDefault
-          Protected Controller.ICoreWebView2Controller = GetGadgetAttribute(#webview, #PB_WebView_ICoreController)
-          Protected Core.ICoreWebView2
-          Controller\get_CoreWebView2(@Core)
-          Core\Stop()
+          ;TODO
+           SetGadgetItemText(#webview, #PB_WebView_HtmlCode, " ")
+
       CompilerEndSelect
       
     EndProcedure
@@ -1294,10 +1293,9 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
           ;   CompilerCase #PB_OS_MacOS
           
         CompilerDefault
-          Protected Controller.ICoreWebView2Controller = GetGadgetAttribute(#webview, #PB_WebView_ICoreController)
-          Protected Core.ICoreWebView2
-          Controller\get_CoreWebView2(@Core)
-          Core\Reload()
+          
+          WebViewExecuteScript(#webview, ~"location.reload(true);")
+          
       CompilerEndSelect
       
     EndProcedure
@@ -2810,34 +2808,34 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
       
     EndProcedure
     
-    ;Not used: Use OS procedure to find a text in a virtual drive, Windows only
-    Procedure Search_InVirtualDrive(vpath.s, find.s)
-      
-      CompilerIf #PB_Compiler_OS = #PB_OS_Windows
-        Protected txt.s = "/c findstr /s /i /m " + find + " " + vpath + "*.html"
-        Protected Virtual, Output$, item$, n
-        
-        Virtual = RunProgram("cmd", txt, vpath, #PB_Program_Open | #PB_Program_Read | #PB_Program_Hide)
-        Output$ = ""
-        If Virtual
-          While ProgramRunning(Virtual)
-            If AvailableProgramOutput(Virtual)
-              Output$ = ReadProgramString(Virtual)
-              If Output$
-                item$ = Output$
-                AddElement(Searched_Items())
-                Searched_Items()\Path = item$
-                AddGadgetItem(#listview_search, - 1, GetFilePart(item$, #PB_FileSystem_NoExtension))
-                SetGadgetItemData(#listview_search, n, n)
-                n + 1
-              EndIf
-            EndIf
-          Wend
-          CloseProgram(Virtual)
-        EndIf
-      CompilerEndIf
-      
-    EndProcedure
+;     ;Not used: Use OS procedure to find a text in a virtual drive, Windows only
+;     Procedure Search_InVirtualDrive(vpath.s, find.s)
+;       
+;       CompilerIf #PB_Compiler_OS = #PB_OS_Windows
+;         Protected txt.s = "/c findstr /s /i /m " + find + " " + vpath + "*.html"
+;         Protected Virtual, Output$, item$, n
+;         
+;         Virtual = RunProgram("cmd", txt, vpath, #PB_Program_Open | #PB_Program_Read | #PB_Program_Hide)
+;         Output$ = ""
+;         If Virtual
+;           While ProgramRunning(Virtual)
+;             If AvailableProgramOutput(Virtual)
+;               Output$ = ReadProgramString(Virtual)
+;               If Output$
+;                 item$ = Output$
+;                 AddElement(Searched_Items())
+;                 Searched_Items()\Path = item$
+;                 AddGadgetItem(#listview_search, - 1, GetFilePart(item$, #PB_FileSystem_NoExtension))
+;                 SetGadgetItemData(#listview_search, n, n)
+;                 n + 1
+;               EndIf
+;             EndIf
+;           Wend
+;           CloseProgram(Virtual)
+;         EndIf
+;       CompilerEndIf
+;       
+;     EndProcedure
     
     ;Search and highlight a text in a webpage, in using jscript
     Procedure SearchInHtml()
@@ -3244,56 +3242,56 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
           
         EndProcedure
         
-        ; Not used, increase zoom
-        Procedure WebGadget_IncreaseZoom(webgadget, percent = 20)
-          CompilerIf #PB_Compiler_Version < 610
-            Protected WebObject.IWebBrowser2, zoom.VARIANT
-            WebObject = GetWindowLongPtr_(GadgetID(webgadget), #GWL_USERDATA)
-            If WebObject
-              WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, 0, @zoom) ; get current zoom level in percent
-              zoom\iVal + percent
-              If zoom\iVal > 1000 : zoom\iVal = 1000 : EndIf
-              WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, @zoom, 0) ; set zoom level
-            EndIf
-          CompilerElse
-            
-          CompilerEndIf
-          
-        EndProcedure
+;         ; Not used, increase zoom
+;         Procedure WebGadget_IncreaseZoom(webgadget, percent = 20)
+;           CompilerIf #PB_Compiler_Version < 610
+;             Protected WebObject.IWebBrowser2, zoom.VARIANT
+;             WebObject = GetWindowLongPtr_(GadgetID(webgadget), #GWL_USERDATA)
+;             If WebObject
+;               WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, 0, @zoom) ; get current zoom level in percent
+;               zoom\iVal + percent
+;               If zoom\iVal > 1000 : zoom\iVal = 1000 : EndIf
+;               WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, @zoom, 0) ; set zoom level
+;             EndIf
+;           CompilerElse
+;             
+;           CompilerEndIf
+;           
+;         EndProcedure
         
-        ; Not used, decrease zoom
-        Procedure WebGadget_DecreaseZoom(webgadget, percent = 20)
-          CompilerIf #PB_Compiler_Version < 610
-            Protected WebObject.IWebBrowser2, zoom.VARIANT
-            WebObject = GetWindowLongPtr_(GadgetID(webgadget), #GWL_USERDATA)
-            If WebObject
-              WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, 0, @zoom) ; get current zoom level in percent
-              zoom\iVal - percent
-              If zoom\iVal < 10 : zoom\iVal = 10 : EndIf
-              WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, @zoom, 0) ; set zoom level
-            EndIf
-          CompilerElse
-            
-          CompilerEndIf
-          
-        EndProcedure
+;         ; Not used, decrease zoom
+;         Procedure WebGadget_DecreaseZoom(webgadget, percent = 20)
+;           CompilerIf #PB_Compiler_Version < 610
+;             Protected WebObject.IWebBrowser2, zoom.VARIANT
+;             WebObject = GetWindowLongPtr_(GadgetID(webgadget), #GWL_USERDATA)
+;             If WebObject
+;               WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, 0, @zoom) ; get current zoom level in percent
+;               zoom\iVal - percent
+;               If zoom\iVal < 10 : zoom\iVal = 10 : EndIf
+;               WebObject\ExecWB(#OLECMDID_OPTICAL_ZOOM, #OLECMDEXECOPT_DONTPROMPTUSER, @zoom, 0) ; set zoom level
+;             EndIf
+;           CompilerElse
+;             
+;           CompilerEndIf
+;           
+;         EndProcedure
         
-        ;Not used, Open the dev tools Window
-        Procedure WebView_OpenDevToolsWindow(WebViewGadget)
-          
-          CompilerIf #PB_Compiler_Version < 610
-          CompilerElse
-            If IsGadget(WebViewGadget) = 0 : ProcedureReturn : EndIf
-            If GadgetType(WebViewGadget) <> #PB_GadgetType_WebView : ProcedureReturn : EndIf
-            
-            Protected Controller.ICoreWebView2Controller
-            Protected Core.ICoreWebView2
-            Controller = GetGadgetAttribute(WebViewGadget, #PB_WebView_ICoreController)
-            Controller\get_CoreWebView2(@Core)
-            Core\OpenDevToolsWindow()
-          CompilerEndIf
-          
-        EndProcedure
+;         ;Not used, Open the dev tools Window
+;         Procedure WebView_OpenDevToolsWindow(WebViewGadget)
+;           
+;           CompilerIf #PB_Compiler_Version < 610
+;           CompilerElse
+;             If IsGadget(WebViewGadget) = 0 : ProcedureReturn : EndIf
+;             If GadgetType(WebViewGadget) <> #PB_GadgetType_WebView : ProcedureReturn : EndIf
+;             
+;             Protected Controller.ICoreWebView2Controller
+;             Protected Core.ICoreWebView2
+;             Controller = GetGadgetAttribute(WebViewGadget, #PB_WebView_ICoreController)
+;             Controller\get_CoreWebView2(@Core)
+;             Core\OpenDevToolsWindow()
+;           CompilerEndIf
+;           
+;         EndProcedure
         
         ;   CompilerCase #PB_OS_Linux
         ;   CompilerCase #PB_OS_MacOS
@@ -3303,47 +3301,37 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
         ;Get the webpage zoom
         Procedure.d WebView_GetZoom(WebView)
           Protected Result.d
-          Protected Controller.ICoreWebView2Controller
           
-          If GadgetType(WebView) = #PB_GadgetType_WebView
-            Controller = GetGadgetAttribute(WebView, #PB_WebView_ICoreController)
-            If Controller
-              Controller\get_ZoomFactor(@Result)
-            EndIf
-          EndIf
-          Result = Result * 100
+          Result =  ValD(GetGadgetText(#text_Zoom))
+          
           ProcedureReturn Result
           
         EndProcedure
         
         ;Set the webpage zoom
         Procedure.i WebView_SetZoom(WebView, zzoom.d = 100)
-          Protected Controller.ICoreWebView2Controller
-          
-          If GadgetType(WebView) = #PB_GadgetType_WebView
-            Controller = GetGadgetAttribute(WebView, #PB_WebView_ICoreController)
-            If Controller
-              Controller\put_ZoomFactor(zzoom / 100)
-            EndIf
-          EndIf
-          
+          Protected zoom0$, zoom$
+          zoom0$=Str(GetGadgetState(#Zoom))
+          zoom$=~"document.body.style.zoom=\""+zoom0$+~"%\""
+          WebViewExecuteScript(#webview, zoom$)
+          SetGadgetText(#text_Zoom,zoom0$)
         EndProcedure
         
         ;Not used, Open the dev tools Window
-        Procedure WebView_OpenDevToolsWindow(WebViewGadget)
-          CompilerIf #PB_Compiler_Version < 610
-          CompilerElse
-            If IsGadget(WebViewGadget) = 0 : ProcedureReturn : EndIf
-            If GadgetType(WebViewGadget) <> #PB_GadgetType_WebView : ProcedureReturn : EndIf
-            
-            Protected Controller.ICoreWebView2Controller
-            Protected Core.ICoreWebView2
-            Controller = GetGadgetAttribute(WebViewGadget, #PB_WebView_ICoreController)
-            Controller\get_CoreWebView2(@Core)
-            Core\OpenDevToolsWindow()
-          CompilerEndIf
-          
-        EndProcedure
+;         Procedure WebView_OpenDevToolsWindow(WebViewGadget)
+;           CompilerIf #PB_Compiler_Version < 610
+;           CompilerElse
+;             If IsGadget(WebViewGadget) = 0 : ProcedureReturn : EndIf
+;             If GadgetType(WebViewGadget) <> #PB_GadgetType_WebView : ProcedureReturn : EndIf
+;             
+;             Protected Controller.ICoreWebView2Controller
+;             Protected Core.ICoreWebView2
+;             Controller = GetGadgetAttribute(WebViewGadget, #PB_WebView_ICoreController)
+;             Controller\get_CoreWebView2(@Core)
+;             Core\OpenDevToolsWindow()
+;           CompilerEndIf
+;           
+;         EndProcedure
         
     CompilerEndSelect
     
@@ -3702,9 +3690,9 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
     EndProcedure
     
 ; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
-; CursorPosition = 1218
-; FirstLine = 1208
-; Folding = ------------------
+; CursorPosition = 3690
+; FirstLine = 3659
+; Folding = ----------------
 ; EnableAsm
 ; EnableXP
 ; CompileSourceDirectory

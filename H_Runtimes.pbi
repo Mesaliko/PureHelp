@@ -33,10 +33,7 @@ Runtime Procedure OnClick_Previous()
       ;   CompilerCase #PB_OS_Linux
       ;   CompilerCase #PB_OS_MacOS
     CompilerDefault
-      Protected Controller.ICoreWebView2Controller = GetGadgetAttribute(#webview, #PB_WebView_ICoreController)
-      Protected Core.ICoreWebView2
-      Controller\get_CoreWebView2(@Core)
-      Core\GoBack()
+       WebViewExecuteScript(#webview, ~"history.back();")
   CompilerEndSelect
   
   r   = PreviousElement(History())
@@ -58,10 +55,7 @@ Runtime Procedure OnClick_Next()
       ;   CompilerCase #PB_OS_Linux
       ;   CompilerCase #PB_OS_MacOS
     CompilerDefault
-      Protected Controller.ICoreWebView2Controller = GetGadgetAttribute(#webview, #PB_WebView_ICoreController)
-      Protected Core.ICoreWebView2
-      Controller\get_CoreWebView2(@Core)
-      Core\GoForward()
+      WebViewExecuteScript(#webview, ~"history.forward();")
   CompilerEndSelect
   
   r   = NextElement(History())
@@ -109,10 +103,7 @@ Runtime Procedure OnClick_Print()
         core\ExecuteScript("window.print()", #Null)
       CompilerEndIf
     CompilerDefault
-      Protected Controller.ICoreWebView2Controller = GetGadgetAttribute(WebDisplay, #PB_WebView_ICoreController)
-      Protected Core.ICoreWebView2
-      Controller\get_CoreWebView2(@Core)
-      core\ExecuteScript("window.print()", #Null)
+      WebViewExecuteScript(#webview, ~"window.print();")
   CompilerEndSelect
   
 EndProcedure
@@ -477,8 +468,9 @@ EndProcedure
 
 
 
-; IDE Options = PureBasic 6.30 beta 1 (Windows - x64)
-; CursorPosition = 1
+; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
+; CursorPosition = 469
+; FirstLine = 437
 ; Folding = ------
 ; EnableXP
 ; DPIAware

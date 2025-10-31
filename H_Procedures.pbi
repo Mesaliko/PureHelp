@@ -26,6 +26,11 @@ Declare Search_Files(Type, Name$)
 Declare Search_Init()
 Declare Init()
 Declare TreeAllItemResetColor()
+
+;Runtime recycled
+Declare OnClick_button_searchlist()
+Declare OnClick_Home()
+
 ;-
 ;- : Web Transform html into brut text
 ;- ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
@@ -3689,9 +3694,9 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
       
     EndProcedure
     
-; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
-; CursorPosition = 3690
-; FirstLine = 3659
+; IDE Options = PureBasic 6.30 beta 4 (Windows - x64)
+; CursorPosition = 32
+; FirstLine = 15
 ; Folding = ----------------
 ; EnableAsm
 ; EnableXP

@@ -8,7 +8,7 @@
 ; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
 ; Author: Mesa and pbsians from the forum : No AI ! ! ! (All is Handmade)
 ;
-; Version: 1.0
+; Version: 1.0.b
 ;
 ; Windows : From Windows XP to Windows 11: Windows XP and Windows 10 tested ok
 ; Linux and MacOS should work, but not tested
@@ -38,7 +38,7 @@
 EnableExplicit
 
 ;- Includes
-;Os specific gaadgets trics (from Hex0r)
+;Os specific gadgets tricks (from Hex0r)
 XIncludeFile "H_OSfixes.pbi"
 
 ;Declare and initialize Structures, Globals, ...
@@ -47,7 +47,7 @@ XIncludeFile "H_Initialization.pbi"
 ;Preferences use the "PureHelp.prefs" file
 XIncludeFile "H_Preferences.pbi"
 
-;Languages module: Translation Fr,En,De
+;Languages module: Translation Fr, En, De
 XIncludeFile "H_Language.pbi"
 
 ;Dialog Gui
@@ -60,7 +60,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 CompilerEndIf
 
 
-;- Constants GUI from Ddialog
+;- Constants GUI from Dialog
 Enumeration ExtraStuff
   ;images toolbar buttons
   #im_image_Maskpanel = #PB_Compiler_EnumerationValue
@@ -133,12 +133,12 @@ EndEnumeration
 ;- Include Misc. procedures
 XIncludeFile "H_Procedures.pbi"
 
-;- Include Runtimes procedures (gadgets' events)
+;- Include Runtimes procedures (gadgets events)
 XIncludeFile "H_Runtimes.pbi"
 
 
 ;-
-;- Entry point Open Gui and lift offfffff !
+;- Entry point, Open Gui and lift offfffff !
 Define i, R, ok
 Define a$ = GetXMLString()
 
@@ -185,9 +185,9 @@ PreferencesUpdate()
 
 
 
-; IDE Options = PureBasic 6.30 beta 2 (Windows - x64)
-; CursorPosition = 35
-; FirstLine = 12
+; IDE Options = PureBasic 6.30 beta 4 (Windows - x64)
+; CursorPosition = 36
+; FirstLine = 6
 ; Folding = -
 ; EnableAsm
 ; EnableXP

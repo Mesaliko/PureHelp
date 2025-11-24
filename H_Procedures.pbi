@@ -26,11 +26,6 @@ Declare Search_Files(Type, Name$)
 Declare Search_Init()
 Declare Init()
 Declare TreeAllItemResetColor()
-
-;Runtime recycled
-Declare OnClick_button_searchlist()
-Declare OnClick_Home()
-
 ;-
 ;- : Web Transform html into brut text
 ;- ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
@@ -764,6 +759,19 @@ Procedure MakeIndexFromHHK(openfile$, savefile$, overwrite = #False)
   EndIf
   
   ProcedureReturn 1
+  
+EndProcedure
+
+Procedure CheckSummary()
+  Protected f$, g$
+  
+  ForEach  contents()
+    f$=contents()\Link
+    If  GetExtensionPart(f$) = ""
+      g$=RemoveString(f$,StringField(f$,CountString(f$,"/"),"/")+"/")+"Blank.html"
+      contents()\Link = g$
+      EndIf
+  Next
   
 EndProcedure
 
@@ -2892,11 +2900,13 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
       
       ;ori$ = GetGadgetItemText(WebDisplay, #PB_Web_HtmlCode)
       f = ReadFile(#PB_Any, CurrentPath, #PB_UTF8 )
-      While Eof(f) = 0
-        ori$ + ReadString(f, #PB_UTF8)
-      Wend
-      CloseFile(f)
-      
+      If f
+        While Eof(f) = 0
+          ori$ + ReadString(f, #PB_UTF8)
+        Wend
+        CloseFile(f)
+      EndIf
+    
       position = FindString(ori$, "<body ", #PB_String_NoCase)
       Result$  = InsertString(ori$, script$, Position)
       SetGadgetItemText(WebDisplay, #PB_Web_HtmlCode, Result$)
@@ -3671,6 +3681,7 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
       
       FillSummary(#tree_summary, CurrentSummary); Fill the treegadgets with the tables of contents
       FillSummary(#tree_summarynoicons, CurrentSummary)
+      CheckSummary()
       SetGadgetState(#tree_summary, 0)
       SetGadgetState(#tree_summarynoicons, 0)
       TreeItemColorInit(); Colors some items
@@ -3695,8 +3706,8 @@ Procedure TreeSetItemIcon(gadget, item, nicon)
     EndProcedure
     
 ; IDE Options = PureBasic 6.30 beta 4 (Windows - x64)
-; CursorPosition = 32
-; FirstLine = 15
+; CursorPosition = 764
+; FirstLine = 764
 ; Folding = ----------------
 ; EnableAsm
 ; EnableXP

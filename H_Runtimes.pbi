@@ -468,9 +468,9 @@ EndProcedure
 
 
 
-; IDE Options = PureBasic 6.30 beta 3 (Windows - x64)
-; CursorPosition = 469
-; FirstLine = 437
+; IDE Options = PureBasic 6.30 beta 4 (Windows - x64)
+; CursorPosition = 212
+; FirstLine = 195
 ; Folding = ------
 ; EnableXP
 ; DPIAware
